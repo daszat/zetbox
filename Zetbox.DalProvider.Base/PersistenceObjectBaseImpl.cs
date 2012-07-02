@@ -116,6 +116,7 @@ namespace Zetbox.DalProvider.Base
 
         public override void SetNew()
         {
+            base.SetNew();
             var oldValue = this._ObjectState;
             NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.New);
             this._ObjectState = DataObjectState.New;

@@ -56,6 +56,7 @@ namespace Zetbox.DalProvider.Memory
 
         public override void SetNew()
         {
+            base.SetNew();
             _objectState = DataObjectState.New;
         }
 

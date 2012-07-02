@@ -87,16 +87,9 @@ namespace Zetbox.API
                 if (Context == null) return Zetbox.API.AccessRights.Full;
                 if (__currentAccessRights == null)
                 {
-                    if (ObjectState == DataObjectState.New)
-                    {
-                        // Newly created objects get full rights
-                        __currentAccessRights = Zetbox.API.AccessRights.Full;
-                    }
-                    else
-                    {
-                        __currentAccessRights = Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
-                    }
-                    __currentAccessRights &= ~Zetbox.API.AccessRights.Create; // exclude create rights - not instance specific
+                    __currentAccessRights = Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
+                    // exclude create rights - not instance specific
+                    __currentAccessRights &= ~Zetbox.API.AccessRights.Create; 
                 }
                 return __currentAccessRights.Value;
             }
@@ -124,7 +117,12 @@ namespace Zetbox.API
         /// </summary>
         public abstract DataObjectState ObjectState { get; }
 
-        public abstract void SetNew();
+        public virtual void SetNew()
+        {
+            // Newly created objects get full rights
+            __currentAccessRights = Zetbox.API.AccessRights.Full;
+        }
+
         public abstract void SetUnmodified();
         public abstract void SetDeleted();
         public abstract void SetUnDeleted();

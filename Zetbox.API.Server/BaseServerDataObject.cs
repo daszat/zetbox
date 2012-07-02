@@ -95,6 +95,7 @@ namespace Zetbox.API.Server
 
         public override void SetNew()
         {
+            base.SetNew();
             if (_ObjectState != DataObjectState.Detached) { throw new InvalidOperationException(String.Format("ObjectState is {0}, but should be Detached", _ObjectState)); }
             SetObjectState(DataObjectState.New);
         }

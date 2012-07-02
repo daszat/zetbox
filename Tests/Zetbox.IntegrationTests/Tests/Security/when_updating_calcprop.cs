@@ -60,6 +60,14 @@ namespace Zetbox.IntegrationTests.Security
             }
 
             [Test]
+            public void should_have_correct_names()
+            {
+                Assert.That(parent.Name, Is.EqualTo("MyParent"));
+                Assert.That(child1.ParentName, Is.EqualTo("MyParent"));
+                Assert.That(child2.ParentName, Is.EqualTo("MyParent"));
+            }
+
+            [Test]
             public void parent_should_change_name()
             {
                 parent.Name = "MyParentChanged";
@@ -94,6 +102,14 @@ namespace Zetbox.IntegrationTests.Security
                 Assert.That(parent.CurrentAccessRights, Is.EqualTo(API.AccessRights.Change | API.AccessRights.Delete));
                 Assert.That(child1.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
                 Assert.That(child2.CurrentAccessRights, Is.EqualTo(API.AccessRights.None));
+            }
+
+            [Test]
+            public void should_have_correct_names()
+            {
+                Assert.That(parent.Name, Is.EqualTo("MyParent"));
+                Assert.That(child1.ParentName, Is.EqualTo("MyParent"));
+                Assert.That(string.IsNullOrEmpty(child2.ParentName), Is.True, child2.ParentName);
             }
 
             [Test]
