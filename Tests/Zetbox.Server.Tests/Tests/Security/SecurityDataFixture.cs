@@ -174,25 +174,28 @@ namespace Zetbox.Server.Tests.Security
 
         public void DeleteData()
         {
-            using (var ctx = scope.Resolve<IZetboxServerContext>())
-            {
-                ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
-                ctx.SubmitChanges();
+            var ctx = scope.Resolve<IZetboxServerContext>();
+            ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
+            ctx.SubmitChanges();
 
-                if (identity1 != null) { var id = ctx.Find<Identity>(identity1.ID); id.Groups.Clear(); ctx.Delete(id); }
-                if (identity2 != null) { var id = ctx.Find<Identity>(identity2.ID); id.Groups.Clear(); ctx.Delete(id); }
-                if (identity3_low != null) { var id = ctx.Find<Identity>(identity3_low.ID); id.Groups.Clear(); ctx.Delete(id); }
+            ctx = scope.Resolve<IZetboxServerContext>();
+            ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); ctx.Delete(obj); });
+            ctx.SubmitChanges();
 
-                identity1 = null;
-                identity2= null;
-                identity3_low = null;
+            ctx = scope.Resolve<IZetboxServerContext>();
+            ctx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));
+            ctx.GetQuery<Kunde>().ForEach(obj => ctx.Delete(obj));
+            ctx.SubmitChanges();
 
-                ctx.GetQuery<Kunde>().ForEach(obj => ctx.Delete(obj));
-                ctx.GetQuery<Auftrag>().ForEach(obj => ctx.Delete(obj));
-                ctx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));
-                ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); ctx.Delete(obj); });
-                ctx.SubmitChanges();
-            }
+            ctx = scope.Resolve<IZetboxServerContext>();
+            if (identity1 != null) { var id = ctx.Find<Identity>(identity1.ID); id.Groups.Clear(); ctx.Delete(id); }
+            if (identity2 != null) { var id = ctx.Find<Identity>(identity2.ID); id.Groups.Clear(); ctx.Delete(id); }
+            if (identity3_low != null) { var id = ctx.Find<Identity>(identity3_low.ID); id.Groups.Clear(); ctx.Delete(id); }
+
+            identity1 = null;
+            identity2= null;
+            identity3_low = null;
+            ctx.SubmitChanges();
         }
 
         public override void TearDown()

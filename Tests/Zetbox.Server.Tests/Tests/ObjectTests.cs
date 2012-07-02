@@ -55,9 +55,11 @@ namespace Zetbox.Server.Tests
             prj2.Name = "flubb";
             var task1 = setupCtx.Create<Task>();
             task1.Projekt = prj2;
+            task1.Name = "Task1";
 
             var task2 = setupCtx.Create<Task>();
             task2.Projekt = prj2;
+            task2.Name = "Task2";
 
             setupCtx.SubmitChanges();
 
@@ -75,8 +77,13 @@ namespace Zetbox.Server.Tests
             var deleteCtx = GetContext();
             deleteCtx.GetQuery<Task>().ForEach(obj => deleteCtx.Delete(obj));
             deleteCtx.SubmitChanges();
+
+            deleteCtx = GetContext();
+            deleteCtx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); obj.Tasks.Clear(); deleteCtx.Delete(obj); });
+            deleteCtx.SubmitChanges();
+            
+            deleteCtx = GetContext();
             deleteCtx.GetQuery<Mitarbeiter>().ForEach(obj => deleteCtx.Delete(obj));
-            deleteCtx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); deleteCtx.Delete(obj); });
             deleteCtx.SubmitChanges();
         }
 

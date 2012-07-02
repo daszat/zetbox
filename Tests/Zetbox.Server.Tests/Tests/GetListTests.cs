@@ -175,7 +175,7 @@ namespace Zetbox.Server.Tests
         {
             var test = (from m in ctx.GetQuery<Zetbox.App.Base.Module>()
                         where
-                            m.Name.StartsWith("K")
+                            m.Name.StartsWith("Z")
                             && m.Namespace.Length > 1
                             && m.Name == "ZetboxBase"
                             && m.Name.EndsWith("e")

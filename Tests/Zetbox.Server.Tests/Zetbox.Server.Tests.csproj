@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="AbstractServerTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Security\when_updating_calcprop.cs" />
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
