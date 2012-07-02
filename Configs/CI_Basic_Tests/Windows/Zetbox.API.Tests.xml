@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- This config is used as test for the alternate config file loading code path -->
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>Zetbox.API.Tests' Configuration</ConfigName>
+  <Server StartServer="false">
+    <ConnectionStrings>
+	  <!-- configuration read teststring -->
+      <Database Name="Zetbox" Schema="MSSQL" Provider="System.Data.SqlClient">Data Source=.\SQLEXPRESS;Initial Catalog=zetbox_test;Integrated Security=True;MultipleActiveResultSets=true;</Database>
+    </ConnectionStrings>
+    <DocumentStore>DocumentStore\Server\</DocumentStore>
+    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <Modules>
+      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
+    </Modules>
+  </Server>
+  <Client StartClient="false" ThrowErrors="true">
+    <DocumentStore>DocumentStore\Client\</DocumentStore>
+    <Modules>
+      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
+    </Modules>
+  </Client>
+  <AssemblySearchPaths>
+    <string>Path1</string>
+    <string>Path2</string>
+  </AssemblySearchPaths>
+</ZetboxConfig>
