@@ -280,12 +280,7 @@ namespace PrepareEnv
                     CopyFolder(source, envConfig.TestsTarget, "*.pdb", CopyMode.Flat);
                 }
 
-                // Delete Fallback assemblies
-                foreach (var fallback in Directory.GetFiles(envConfig.TestsTarget, "Zetbox.Objects*.*"))
-                {
-                    Delete(fallback);
-                }
-
+                // Replace fallback binaries when generated ones are available
                 foreach (var generatedSource in new[] { PathX.Combine(envConfig.BinarySource,"Common", "Core.Generated"),
                     PathX.Combine(envConfig.BinarySource, "Client", "Core.Generated"),
                     PathX.Combine(envConfig.BinarySource, "Server", "EF.Generated"),
