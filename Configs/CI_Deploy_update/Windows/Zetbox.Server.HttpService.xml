@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>zetbox Server Configuration</ConfigName>
+  <ConfigName>zetbox HttpService Configuration</ConfigName>
   <Server StartServer="true">
-    <DocumentStore>DocumentStore\Server\</DocumentStore>
-    <CodeGenWorkingPath>..\CodeGenNext</CodeGenWorkingPath>
-    <CodeGenOutputPath>..\CodeGen</CodeGenOutputPath>
-    <CodeGenBinaryOutputPath>
-      <string>.</string>
-    </CodeGenBinaryOutputPath>
-    <CodeGenArchivePath>..\..\Backup</CodeGenArchivePath>
+    <DocumentStore>..\DocumentStore\Server\</DocumentStore>
     <Modules>
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
       <Module>Zetbox.API.Server.ServerApiModule, Zetbox.API.Server</Module>
@@ -24,16 +18,20 @@
 
       <!-- application specific modules -->
     </Modules>
+    <ClientFilesLocations>
+      <Location Name="Exe">..\Zetbox.WPF.exe</Location>
+      <Location Name="Configs">..\Configs\Zetbox.WPF.xml</Location>
+      <Location Name="Common">..\Common</Location>
+      <Location Name="Client">..\Client</Location>
+    </ClientFilesLocations>
   </Server>
   <AssemblySearchPaths>
-    <string>Common\Core</string>
-    <string>Common\Core.Generated</string>
-    <string>Common\Core.Fallback</string>
-    <string>Server\Core</string>
-    <string>Server\EF</string>
-    <string>Server\EF.Generated</string>
-    <string>Server\EF.Fallback</string>
-    <string>Common\App.Zetbox</string>
-    <string>Server\App.Zetbox</string>
+    <string>..\Common\Core</string>
+    <string>..\Common\Core.Generated</string>
+    <string>..\Server\Core</string>
+    <string>..\Server\EF</string>
+    <string>..\Server\EF.Generated</string>
+    <string>..\Common\App.Zetbox</string>
+    <string>..\Server\App.Zetbox</string>
   </AssemblySearchPaths>
 </ZetboxConfig>
