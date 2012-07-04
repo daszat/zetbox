@@ -704,7 +704,7 @@ namespace Zetbox.Server.SchemaManagement
             {
                 var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
                 var fkName = "fk_" + prop.ObjectClass.Name;
-                var valPropName = prop.Name;
+                var basePropName = prop.Name;
                 var valPropIndexName = prop.Name + "Index";
                 var assocName = prop.GetAssociationName();
                 var refTblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
@@ -713,16 +713,11 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     Log.DebugFormat("{0}", prop.Name);
 
-                    // Check isnull column
-                    // TODO: Support neested CompoundObject
-                    string colName = Construct.NestedColumnName(prop, string.Empty);
-                    CheckColumn(tblName, colName, System.Data.DbType.Boolean, 0, 0, false, null);
-
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
                     // TODO: Support neested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
-                        CheckColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));
+                        CheckColumn(tblName, Construct.NestedColumnName(p.Name, basePropName), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));
                     }
                     if (hasPersistentOrder)
                     {
@@ -865,13 +860,6 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                // Check isnull column
-                var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
-                var colName_IsNull = Construct.NestedColumnName(sprop, prefix);
-                Log.DebugFormat("    {0}", colName_IsNull);
-                CheckColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, new BoolDefaultConstraint() { Value = true });
-
-                // Check other columns
                 CheckColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
             }
         }

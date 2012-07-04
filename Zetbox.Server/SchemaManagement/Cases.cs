@@ -378,26 +378,23 @@ namespace Zetbox.Server.SchemaManagement
         {
             return savedSchema.FindPersistenceObject<Property>(prop.ExportGuid) == null;
         }
-        public void DoNewCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty prop)
+        public void DoNewCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty cprop)
         {
-            Log.InfoFormat("New CompoundObject Property List: {0}", prop.Name);
-            var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
-            string fkName = "fk_" + prop.ObjectClass.Name;
+            Log.InfoFormat("New CompoundObject Property List: {0}", cprop.Name);
+            var tblName = db.GetTableName(cprop.Module.SchemaName, cprop.GetCollectionEntryTable());
+            string fkName = "fk_" + cprop.ObjectClass.Name;
 
             // TODO: Support neested CompoundObject
-            string valPropName = prop.Name;
-            string valPropIndexName = prop.Name + "Index";
-            string assocName = prop.GetAssociationName();
-            bool hasPersistentOrder = prop.HasPersistentOrder;
+            string valPropIndexName = cprop.Name + "Index";
+            string assocName = cprop.GetAssociationName();
+            bool hasPersistentOrder = cprop.HasPersistentOrder;
 
             db.CreateTable(tblName, true);
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false);
 
-            db.CreateColumn(tblName, valPropName, System.Data.DbType.Boolean, 0, 0, false);
-            // TODO: Support neested CompoundObject
-            foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
+            foreach (ValueTypeProperty p in cprop.CompoundObjectDefinition.Properties)
             {
-                db.CreateColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(prop));
+                db.CreateColumn(tblName, Construct.NestedColumnName(p.Name, cprop.Name), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(cprop));
             }
 
             if (hasPersistentOrder)
@@ -2016,26 +2013,14 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty cprop, string prefix)
         {
-            string colName_IsNull = Construct.NestedColumnName(cprop, prefix);
-            Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", cprop.Name, colName_IsNull);
+            string baseColName = Construct.NestedColumnName(cprop, prefix);
+            Log.InfoFormat("New is null column for CompoundObject Property: '{0}'", cprop.Name);
             var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var hasData = db.CheckTableContainsData(tblName);
-            var constr = cprop.IsNullable()
-                ? new DatabaseConstraint[] { new BoolDefaultConstraint() { Value = true } }
-                : new DatabaseConstraint[] { new BoolDefaultConstraint() { Value = false }, new BoolCheckConstraint() { Value = false } };
-            if (!hasData)
-            {
-                db.CreateColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, constr);
-            }
-            else
-            {
-                db.CreateColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, true, constr);
-                Log.ErrorFormat("unable to create new not nullable CompoundObject Property '{0}' when table '{1}' contains data. Created nullable column instead.", cprop.Name, tblName);
-            }
 
             foreach (var valProp in cprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
             {
-                var colName = Construct.NestedColumnName(valProp, colName_IsNull);
+                var colName = Construct.NestedColumnName(valProp, baseColName);
                 Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
                 db.CreateColumn(
                     tblName,
@@ -2043,7 +2028,7 @@ namespace Zetbox.Server.SchemaManagement
                     valProp.GetDbType(),
                     valProp.GetSize(),
                     valProp.GetScale(),
-                    hasData || cprop.IsNullable() || valProp.IsNullable(),
+                    hasData || valProp.IsNullable(),
                     SchemaManager.GetDefaultConstraint(valProp));
             }
 
