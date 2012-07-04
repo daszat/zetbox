@@ -8135,12 +8135,12 @@ namespace Zetbox.App.Test
 public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl()
 : base(null)
 {
-            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(false, this, "Value");
+            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "Value");
 }
 public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
     : base(lazyCtx)
 {
-            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(false, this, "Value");
+            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "Value");
 }
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -8314,17 +8314,11 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
                     {
                         _Value.DetachFromObject(this, "Value");
                     }
-                    if(__newValue == null)
-                    {
-                        _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "Value");
-                    }
-                    else
-                    {
-                        _Value = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
-                        _Value.AttachToObject(this, "Value");
-                    }
+					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
+                    _Value = __newValue;
+                    _Value.AttachToObject(this, "Value");
 
-                    NotifyPropertyChanged("Value", __oldValue, value);
+                    NotifyPropertyChanged("Value", __oldValue, __newValue);
                 }
 				else
 				{
@@ -8364,8 +8358,7 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
             binStream.Read(out this._fk_Parent);
             {
                 // use backing store to avoid notifications
-                Zetbox.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectEfImpl>();
-                this.ValueImpl = tmp ?? new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "Value");
+                this.ValueImpl = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectEfImpl>();
                 this.ValueImpl.AttachToObject(this, "Value");
             }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)

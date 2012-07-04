@@ -59,8 +59,6 @@ namespace Zetbox.Generator.Templates.Properties
                 coImplementationType = string.Format("ICollection<{0}>", coImplementationType);
             }
 
-            bool isNullable = prop.IsNullable();
-
             Call(host, ctx, serializationList,
                 xmlNamespace, overridePropName, backingPropertyName, backingStoreName,
                 coType, coImplementationType);

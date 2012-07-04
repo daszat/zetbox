@@ -38,7 +38,7 @@ namespace Zetbox.DalProvider.Ef.Tests
         [SetUp]
         public void SetUpTestObject()
         {
-            obj = new TestPhoneCompoundObjectEfImpl(false, null, null) { AreaCode = "ABC", Number = "123456" };
+            obj = new TestPhoneCompoundObjectEfImpl(null, null) { AreaCode = "ABC", Number = "123456" };
 
             parent = new TestCustomObjectEfImpl(null);
             attachedObj = (TestPhoneCompoundObjectEfImpl)parent.PhoneNumberOffice;

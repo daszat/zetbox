@@ -33,15 +33,15 @@ namespace Zetbox.App.Test
         public TestCustomObjectEfImpl()
             : base(null)
         {
-            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberMobile");
-            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(false, this, "PhoneNumberOffice");
+            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "PhoneNumberMobile");
+            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "PhoneNumberOffice");
         }
 
         public TestCustomObjectEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberMobile");
-            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(false, this, "PhoneNumberOffice");
+            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "PhoneNumberMobile");
+            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "PhoneNumberOffice");
         }
 
         /// <summary>
@@ -563,17 +563,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     {
                         _PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
                     }
-                    if(__newValue == null)
-                    {
-                        _PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberMobile");
-                    }
-                    else
-                    {
-                        _PhoneNumberMobile = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
-                        _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
-                    }
+					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
+                    _PhoneNumberMobile = __newValue;
+                    _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
 
-                    NotifyPropertyChanged("PhoneNumberMobile", __oldValue, value);
+                    NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
                 }
 				else
 				{
@@ -632,17 +626,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     {
                         _PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
                     }
-                    if(__newValue == null)
-                    {
-                        _PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberOffice");
-                    }
-                    else
-                    {
-                        _PhoneNumberOffice = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
-                        _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
-                    }
+					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
+                    _PhoneNumberOffice = __newValue;
+                    _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
 
-                    NotifyPropertyChanged("PhoneNumberOffice", __oldValue, value);
+                    NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
                 }
 				else
 				{
@@ -1044,14 +1032,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             this._PersonName = binStream.ReadString();
             {
                 // use backing store to avoid notifications
-                Zetbox.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectEfImpl>();
-                this.PhoneNumberMobileImpl = tmp ?? new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberMobile");
+                this.PhoneNumberMobileImpl = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectEfImpl>();
                 this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
             }
             {
                 // use backing store to avoid notifications
-                Zetbox.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectEfImpl>();
-                this.PhoneNumberOfficeImpl = tmp ?? new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberOffice");
+                this.PhoneNumberOfficeImpl = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectEfImpl>();
                 this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
             }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)

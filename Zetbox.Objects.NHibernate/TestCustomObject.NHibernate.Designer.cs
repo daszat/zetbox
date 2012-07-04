@@ -504,16 +504,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 					{ 
 						this.Proxy.PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
 					}
-					if (__newValue == null)
-					{
-						this.Proxy.PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberMobile", null, null);
-					}
-                    else
-                    {
-					    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
-					    this.Proxy.PhoneNumberMobile = __newValue;
-					    this.Proxy.PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
-                    }
+					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
+					this.Proxy.PhoneNumberMobile = __newValue;
+					this.Proxy.PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
 
 					NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
 				}
@@ -561,16 +554,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 					{ 
 						this.Proxy.PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
 					}
-					if (__newValue == null)
-					{
-						this.Proxy.PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberOffice", null, null);
-					}
-                    else
-                    {
-					    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
-					    this.Proxy.PhoneNumberOffice = __newValue;
-					    this.Proxy.PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
-                    }
+					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
+					this.Proxy.PhoneNumberOffice = __newValue;
+					this.Proxy.PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
 
 					NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
 				}
@@ -1014,14 +1000,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             {
                 // use backing store to avoid notifications
                 this.PhoneNumberMobileImpl = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
-                if (this.PhoneNumberMobileImpl != null)
-                    this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
+                this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
             }
             {
                 // use backing store to avoid notifications
                 this.PhoneNumberOfficeImpl = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
-                if (this.PhoneNumberOfficeImpl != null)
-                    this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
+                this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
             }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null

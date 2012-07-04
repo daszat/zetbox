@@ -247,11 +247,6 @@
     <Compile Include="Templates\RelationExtensions.cs" />
     <Compile Include="Templates\EfModel\ModelMslEntityTypeMapping.ComplexProperty.cs" />
     <Compile Include="Templates\EfModel\ModelMslEntityTypeMapping.ScalarProperty.cs" />
-    <Compile Include="Templates\Serialization\CompoundObjectSerialization.Designer.cs">
-      <DependentUpon>CompoundObjectSerialization.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Templates\Serialization\EagerLoadingSerialization.cs" />
     <Compile Include="Templates\Serialization\ObjectReferencePropertySerialization.Designer.cs">
       <DependentUpon>ObjectReferencePropertySerialization.cst</DependentUpon>
@@ -338,10 +333,6 @@
       <LastGenOutput>RelationDebugTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Zetbox.snk" />
-    <None Include="Templates\Serialization\CompoundObjectSerialization.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>CompoundObjectSerialization.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Templates\Serialization\ObjectReferencePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>

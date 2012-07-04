@@ -70,7 +70,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteLine();
 
 
-            this.WriteObjects("        public ", clsName, "(bool isNull, IPersistenceObject parent, string property)");
+            this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property)");
             this.WriteLine();
             this.WriteObjects("            : base(null) // TODO: pass parent's lazyCtx");
             this.WriteLine();
@@ -109,7 +109,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteLine();
 
 
-            this.WriteObjects("        public ", clsName, "(Func<IFrozenContext> lazyCtx, bool isNull, IPersistenceObject parent, string property)");
+            this.WriteObjects("        public ", clsName, "(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)");
             this.WriteLine();
             this.WriteObjects("            : base(lazyCtx)");
             this.WriteLine();

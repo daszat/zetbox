@@ -62,26 +62,25 @@ this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ")
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                // use backing store to avoid notifications\r\n");
 this.WriteObjects("                this.",  backingStoreName , " = ",  streamName , ".ReadCompoundObject<",  backingStoreType , ">();\r\n");
-this.WriteObjects("                if (this.",  backingStoreName , " != null)\r\n");
-this.WriteObjects("                    this.",  backingStoreName , ".AttachToObject(this, \"",  memberName , "\");\r\n");
+this.WriteObjects("                this.",  backingStoreName , ".AttachToObject(this, \"",  memberName , "\");\r\n");
 this.WriteObjects("            }\r\n");
-#line 54 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 53 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else if (direction == SerializerDirection.Export)
     {
 
-#line 58 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 57 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 60 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 59 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else if (direction == SerializerDirection.MergeImport)
     {
 
-#line 64 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 63 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
 this.WriteObjects("                XmlStreamer.FromStream(this.",  backingStoreName , ", ",  streamName , ");\r\n");
 this.WriteObjects("                break;\r\n");
-#line 68 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 67 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else
     {

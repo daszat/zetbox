@@ -7747,16 +7747,9 @@ namespace Zetbox.App.Test
 					{ 
 						_Value.DetachFromObject(this, "Value");
 					}
-					if (__newValue == null)
-					{
-						_Value = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(this, "Value");
-					}
-                    else
-                    {
-					    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl)__newValue.Clone();
-					    _Value = __newValue;
-					    _Value.AttachToObject(this, "Value");
-                    }
+					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl)__newValue.Clone();
+					_Value = __newValue;
+					_Value.AttachToObject(this, "Value");
 
 					NotifyPropertyChanged("Value", __oldValue, __newValue);
 				}
@@ -7796,8 +7789,7 @@ namespace Zetbox.App.Test
             {
                 // use backing store to avoid notifications
                 this.ValueImpl = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl>();
-                if (this.ValueImpl != null)
-                    this.ValueImpl.AttachToObject(this, "Value");
+                this.ValueImpl.AttachToObject(this, "Value");
             }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null

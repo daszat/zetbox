@@ -34,7 +34,7 @@ namespace Zetbox.App.Test
         {
 
         }
-        public TestPhoneCompoundObjectEfImpl(bool isNull, IPersistenceObject parent, string property)
+        public TestPhoneCompoundObjectEfImpl(IPersistenceObject parent, string property)
             : base(null) // TODO: pass parent's lazyCtx
         {
             AttachToObject(parent, property);
@@ -44,7 +44,7 @@ namespace Zetbox.App.Test
         {
 
         }
-        public TestPhoneCompoundObjectEfImpl(Func<IFrozenContext> lazyCtx, bool isNull, IPersistenceObject parent, string property)
+        public TestPhoneCompoundObjectEfImpl(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)
             : base(lazyCtx)
         {
             AttachToObject(parent, property);

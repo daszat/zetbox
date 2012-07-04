@@ -8237,16 +8237,9 @@ namespace Zetbox.App.Test
 					{ 
 						this.Proxy.Value.DetachFromObject(this, "Value");
 					}
-					if (__newValue == null)
-					{
-						this.Proxy.Value = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null);
-					}
-                    else
-                    {
-					    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
-					    this.Proxy.Value = __newValue;
-					    this.Proxy.Value.AttachToObject(this, "Value");
-                    }
+					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
+					this.Proxy.Value = __newValue;
+					this.Proxy.Value.AttachToObject(this, "Value");
 
 					NotifyPropertyChanged("Value", __oldValue, __newValue);
 				}
@@ -8286,8 +8279,7 @@ namespace Zetbox.App.Test
             {
                 // use backing store to avoid notifications
                 this.ValueImpl = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
-                if (this.ValueImpl != null)
-                    this.ValueImpl.AttachToObject(this, "Value");
+                this.ValueImpl.AttachToObject(this, "Value");
             }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null

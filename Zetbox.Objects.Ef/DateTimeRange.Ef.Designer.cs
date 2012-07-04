@@ -34,7 +34,7 @@ namespace Zetbox.App.Base
         {
 
         }
-        public DateTimeRangeEfImpl(bool isNull, IPersistenceObject parent, string property)
+        public DateTimeRangeEfImpl(IPersistenceObject parent, string property)
             : base(null) // TODO: pass parent's lazyCtx
         {
             AttachToObject(parent, property);
@@ -44,7 +44,7 @@ namespace Zetbox.App.Base
         {
 
         }
-        public DateTimeRangeEfImpl(Func<IFrozenContext> lazyCtx, bool isNull, IPersistenceObject parent, string property)
+        public DateTimeRangeEfImpl(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)
             : base(lazyCtx)
         {
             AttachToObject(parent, property);
