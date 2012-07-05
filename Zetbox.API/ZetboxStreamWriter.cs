@@ -385,10 +385,17 @@ namespace Zetbox.API
         /// <param name="val">Value to serialize</param>
         public void Write(ICompoundObject val)
         {
-            if (val == null) throw new ArgumentNullException("val", "CompoundObject cannot be null when serializing");
             TraceCurrentPos();
             SerializerTrace("Writing ICompoundObject {0}", val);
-            val.ToStream(this, null, false);
+            if (val != null)
+            {
+                _dest.Write(true);
+                val.ToStream(this, null, false);
+            }
+            else
+            {
+                _dest.Write(false);
+            }
         }
 
         #endregion

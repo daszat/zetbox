@@ -535,9 +535,18 @@ namespace Zetbox.API
         {
             ICompoundObject result;
             TraceCurrentPos();
-            result = (ICompoundObject)Activator.CreateInstance(t);
-            result.FromStream(this);
-            SerializerTrace("read {0} value: [{1}]", t, result);
+            if (_source.ReadBoolean())
+            {
+                result = (ICompoundObject)Activator.CreateInstance(t);
+                result.FromStream(this);
+                // CompoundObjects cannot have lists
+                SerializerTrace("read {0} value: [{1}]", t, result);
+            }
+            else
+            {
+                result = null;
+                SerializerTrace("read {0} value: [null]", t);
+            }
             return result;
         }
 
