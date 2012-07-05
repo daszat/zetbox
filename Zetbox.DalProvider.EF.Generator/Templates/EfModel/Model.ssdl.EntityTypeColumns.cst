@@ -44,9 +44,6 @@
 		
 		if (p is CompoundObjectProperty)
 		{
-%>		
-    <Property Name="<%= Construct.NestedColumnName(p, prefix) %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Boolean) %>" Nullable="false" />
-<%    
 			ApplyEntityTypeColumnDefs(
 				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.Name),
 				Construct.NestedColumnName(p, prefix),

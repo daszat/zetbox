@@ -2991,12 +2991,8 @@
     <Property Name="fk_MB_Role" Type="int4" />
     <Property Name="Birthday" Type="timestamp" Nullable="true" />
     <Property Name="PersonName" Type="varchar" MaxLength="200" Nullable="false" />
-		
-    <Property Name="PhoneNumberMobile" Type="bool" Nullable="false" />
     <Property Name="PhoneNumberMobile_AreaCode" Type="varchar" MaxLength="50" Nullable="true" />
     <Property Name="PhoneNumberMobile_Number" Type="varchar" MaxLength="50" Nullable="true" />
-		
-    <Property Name="PhoneNumberOffice" Type="bool" Nullable="false" />
     <Property Name="PhoneNumberOffice_AreaCode" Type="varchar" MaxLength="50" Nullable="true" />
     <Property Name="PhoneNumberOffice_Number" Type="varchar" MaxLength="50" Nullable="true" />
   </EntityType>
@@ -7227,8 +7223,6 @@
       </Key>
       <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
       <Property Name="fk_TestCustomObject" Type="int4" Nullable="true" />
-		
-    <Property Name="PhoneNumbersOther" Type="bool" Nullable="false" />
     <Property Name="PhoneNumbersOther_AreaCode" Type="varchar" MaxLength="50" Nullable="true" />
     <Property Name="PhoneNumbersOther_Number" Type="varchar" MaxLength="50" Nullable="true" />
     </EntityType>
