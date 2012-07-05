@@ -276,8 +276,10 @@ namespace PrepareEnv
                     LogAction("copying Binaries from " + source);
                     if (isWildcard && !Directory.Exists(source)) continue;
 
-                    CopyFolder(source, envConfig.TestsTarget, "*.dll", CopyMode.Flat);
+                    CopyFolder(source, envConfig.TestsTarget, "*.dll", CopyMode.Flat); // does not handle sattelite assemblies
+                    CopyFolder(source, envConfig.TestsTarget, "*.dll.config", CopyMode.Flat);
                     CopyFolder(source, envConfig.TestsTarget, "*.pdb", CopyMode.Flat);
+                    CopyFolder(source, envConfig.TestsTarget, "*.mdb", CopyMode.Flat);
                 }
 
                 // Replace fallback binaries when generated ones are available
