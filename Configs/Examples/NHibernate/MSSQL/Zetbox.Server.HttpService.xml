@@ -22,13 +22,6 @@
       <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
       <!-- <Module>Zetbox.API.Server.PerfCounter.ResetOnReadAppender+Module, Zetbox.API.Server</Module> -->
-
-      <!-- Development/Master Server modules -->
-      <Module>Zetbox.Generator.GeneratorModule, Zetbox.Generator</Module>
-      <Module>Zetbox.DalProvider.Memory.Generator.MemoryGeneratorProvider, Zetbox.DalProvider.Memory.Generator</Module>
-      <Module>Zetbox.DalProvider.NHibernate.Generator.NHibernateGeneratorProvider, Zetbox.DalProvider.NHibernate.Generator</Module>
-      <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
-      <Module>Zetbox.DalProvider.Ef.Generator.EfGeneratorProvider, Zetbox.DalProvider.Ef.Generator</Module>
     </Modules>
     <ClientFilesLocations>
       <Location Name="Exe">P:\Zetbox\bin\Debug\Zetbox.WPF.exe</Location>
