@@ -2,7 +2,7 @@
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>zetbox HttpService Configuration</ConfigName>
   <Server StartServer="true">
-    <DocumentStore>..\DocumentStore\Server\</DocumentStore>
+    <DocumentStore>../../DocumentStore/Server/</DocumentStore>
     <Modules>
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
       <Module>Zetbox.API.Server.ServerApiModule, Zetbox.API.Server</Module>
@@ -19,19 +19,19 @@
       <!-- application specific modules -->
     </Modules>
     <ClientFilesLocations>
-      <Location Name="Exe">..\Zetbox.WPF.exe</Location>
-      <Location Name="Configs">..\Configs\Zetbox.WPF.xml</Location>
-      <Location Name="Common">..\Common</Location>
-      <Location Name="Client">..\Client</Location>
+      <Location Name="Exe">../Zetbox.WPF.exe</Location>
+      <Location Name="Configs">../Configs/Zetbox.WPF.xml</Location>
+      <Location Name="Common">../Common</Location>
+      <Location Name="Client">../Client</Location>
     </ClientFilesLocations>
   </Server>
   <AssemblySearchPaths>
-    <string>..\Common\Core</string>
-    <string>..\Common\Core.Generated</string>
-    <string>..\Server\Core</string>
-    <string>..\Server\NH</string>
-    <string>..\Server\NH.Generated</string>
-    <string>..\Common\App.Zetbox</string>
-    <string>..\Server\App.Zetbox</string>
+    <string>../Common/Core</string>
+    <string>../Common/Core.Generated</string>
+    <string>../Server/Core</string>
+    <string>../Server/NH</string>
+    <string>../Server/NH.Generated</string>
+    <string>../Common/App.Zetbox</string>
+    <string>../Server/App.Zetbox</string>
   </AssemblySearchPaths>
 </ZetboxConfig>

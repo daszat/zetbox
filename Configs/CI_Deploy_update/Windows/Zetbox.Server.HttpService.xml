@@ -2,7 +2,7 @@
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>zetbox HttpService Configuration</ConfigName>
   <Server StartServer="true">
-    <DocumentStore>..\DocumentStore\Server\</DocumentStore>
+    <DocumentStore>..\..\DocumentStore\Server\</DocumentStore>
     <Modules>
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
       <Module>Zetbox.API.Server.ServerApiModule, Zetbox.API.Server</Module>
