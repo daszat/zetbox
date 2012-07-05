@@ -15,7 +15,4 @@
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths>
-    <string>../Client/Core.Generated</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>
