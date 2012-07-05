@@ -179,17 +179,7 @@ namespace Zetbox.IntegrationTests
             {
                 var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
-                List<ObjectClass> result = list.ToList();
-                List<ObjectClass> sorted = list.OrderBy(o => o.Name).ToList();
-
-                for (int i = 0; i < result.Count; i++)
-                {
-                    if (result[i].ID != sorted[i].ID)
-                    {
-                        Assert.Fail("List was not sorted");
-                        break;
-                    }
-                }
+                Assert.That(list, Is.Ordered.By("Name"));
             }
         }
 
@@ -200,17 +190,7 @@ namespace Zetbox.IntegrationTests
             {
                 var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.Name == "ZetboxBase").OrderBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
-                List<ObjectClass> result = list.ToList();
-                List<ObjectClass> sorted = list.OrderBy(o => o.Name).ToList();
-
-                for (int i = 0; i < result.Count; i++)
-                {
-                    if (result[i].ID != sorted[i].ID)
-                    {
-                        Assert.Fail("List was not sorted");
-                        break;
-                    }
-                }
+                Assert.That(list, Is.Ordered.By("Name"));
             }
         }
 
@@ -221,17 +201,7 @@ namespace Zetbox.IntegrationTests
             {
                 var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
-                List<ObjectClass> result = list.ToList();
-                List<ObjectClass> sorted = list.OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
-
-                for (int i = 0; i < result.Count; i++)
-                {
-                    if (result[i].ID != sorted[i].ID)
-                    {
-                        Assert.Fail("List was not sorted");
-                        break;
-                    }
-                }
+                Assert.That(list, Is.Ordered.Using((ObjectClass a, ObjectClass b) => a.Module.Name.CompareTo(b.Module.Name) == 0 ? a.Name.CompareTo(b.Name) : a.Module.Name.CompareTo(b.Module.Name)));
             }
         }
 
