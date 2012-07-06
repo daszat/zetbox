@@ -123,14 +123,20 @@
       <Name>Zetbox.Tests.Utilities.PostgreSql</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="env.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
+  -->
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
-  -->
   <PropertyGroup>
     <PostBuildEvent>
 echo *******************************************************************
@@ -139,7 +145,11 @@ echo *******************************************************************
 cd "$(SolutionDir)"
 echo powershell -command ".\gendarmeXML.ps1"
 powershell -command ".\gendarmeXML.ps1"
-type "bin\gendarme.txt"</PostBuildEvent>
+type "bin\gendarme.txt"
+
+IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
+
+</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

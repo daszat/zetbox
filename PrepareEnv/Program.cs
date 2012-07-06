@@ -320,7 +320,8 @@ namespace PrepareEnv
                 case PlatformID.Unix:
                     if (string.IsNullOrEmpty(npgsqlMonoSource))
                     {
-                        throw new InvalidOperationException(string.Format("Missing source path for Mono Npgsql: {0}/Server/Npgsql.Mono", sourcePath));
+                        LogAction(string.Format("Missing source path for Mono Npgsql: {0}/Server/Npgsql.Mono", sourcePath));
+                        return;
                     }
                     Copy(
                         Path.Combine(npgsqlMonoSource, "Npgsql.dll"),
@@ -342,7 +343,8 @@ namespace PrepareEnv
                 case PlatformID.Win32NT:
                     if (string.IsNullOrEmpty(npgsqlMonoSource))
                     {
-                        throw new InvalidOperationException(string.Format("Missing source path for MS Npgsql: {0}/Server/Npgsql.Microsoft", sourcePath));
+                        LogAction(string.Format("Missing source path for MS Npgsql: {0}\\Server\\Npgsql.Microsoft", sourcePath));
+                        return;
                     }
                     Copy(
                         Path.Combine(npgsqlMsSource, "Npgsql.dll"),
@@ -428,7 +430,7 @@ namespace PrepareEnv
         private static void InstallTestsConfigs(EnvConfig envConfig)
         {
             LogTitle("Installing Tests Configs");
-            if (!string.IsNullOrEmpty(envConfig.TestsTarget))
+            if (!string.IsNullOrEmpty(envConfig.TestsTarget) && !string.IsNullOrEmpty(envConfig.ConfigSource))
             {
                 var configTargetDir = Path.Combine(envConfig.TestsTarget, "Configs");
                 // copy all configs
