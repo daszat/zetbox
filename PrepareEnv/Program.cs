@@ -386,25 +386,23 @@ namespace PrepareEnv
                 // copy all configs
                 CopyFolder(envConfig.ConfigSource, configTargetDir);
                 // find all app.configs
-                DeployConfigs(envConfig, configTargetDir);
+                DeployConfigs(configTargetDir, envConfig.BinaryTarget);
             }
         }
 
         /// <summary>
-        /// Deploys all app configs to reside by their proper binaries in the configTargetDir.
+        /// Deploys all app configs to reside by their proper binaries in the assemblyTargetDir.
         /// </summary>
-        /// <param name="envConfig"></param>
-        /// <param name="configTargetDir"></param>
-        private static void DeployConfigs(EnvConfig envConfig, string configTargetDir)
+        private static void DeployConfigs(string configSourceDir, string assemblyTargetDir)
         {
-            foreach (var appConfigFile in Directory.GetFiles(configTargetDir, "*.config"))
+            foreach (var appConfigFile in Directory.GetFiles(configSourceDir, "*.config"))
             {
                 var targetAssemblyFile = Path.GetFileNameWithoutExtension(appConfigFile);
                 if (targetAssemblyFile.EndsWith(".Web", StringComparison.InvariantCultureIgnoreCase))
                 {
                     var wwwRootName = targetAssemblyFile.Substring(0, targetAssemblyFile.Length - 4);
                     // copy to all relevant WwwRoots
-                    foreach (var targetWwwRootPath in FindDirs(wwwRootName, envConfig.BinaryTarget))
+                    foreach (var targetWwwRootPath in FindDirs(wwwRootName, assemblyTargetDir))
                     {
                         var targetFile = Path.Combine(targetWwwRootPath, "Web.config");
                         Copy(appConfigFile, targetFile, true);
@@ -413,7 +411,7 @@ namespace PrepareEnv
                 else
                 {
                     // copy to all relevant executables/dlls
-                    foreach (var targetAssemblyPath in FindFiles(targetAssemblyFile, envConfig.BinaryTarget))
+                    foreach (var targetAssemblyPath in FindFiles(targetAssemblyFile, assemblyTargetDir))
                     {
                         var targetFile = targetAssemblyPath + ".config";
                         Copy(appConfigFile, targetFile, true);
@@ -435,7 +433,7 @@ namespace PrepareEnv
                 var configTargetDir = Path.Combine(envConfig.TestsTarget, "Configs");
                 // copy all configs
                 CopyFolder(envConfig.ConfigSource, configTargetDir);
-                DeployConfigs(envConfig, configTargetDir);
+                DeployConfigs(configTargetDir, envConfig.TestsTarget);
             }
         }
 
