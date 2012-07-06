@@ -177,7 +177,7 @@ namespace Zetbox.IntegrationTests
         {
             using (IZetboxContext ctx = GetContext())
             {
-                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Name).ToList();
+                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Name).ToList().Where(i => i.Name.All(c => char.IsLetterOrDigit(c))).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
                 Assert.That(list, Is.Ordered.By("Name"));
             }
@@ -188,7 +188,7 @@ namespace Zetbox.IntegrationTests
         {
             using (IZetboxContext ctx = GetContext())
             {
-                var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.Name == "ZetboxBase").OrderBy(o => o.Name).ToList();
+                var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.Name == "ZetboxBase").OrderBy(o => o.Name).ToList().Where(i => i.Name.All(c => char.IsLetterOrDigit(c))).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
                 Assert.That(list, Is.Ordered.By("Name"));
             }
@@ -199,7 +199,7 @@ namespace Zetbox.IntegrationTests
         {
             using (IZetboxContext ctx = GetContext())
             {
-                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
+                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList().Where(i => i.Name.All(c => char.IsLetterOrDigit(c))).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
                 Assert.That(list, Is.Ordered.Using((ObjectClass a, ObjectClass b) => a.Module.Name.CompareTo(b.Module.Name) == 0 ? a.Name.CompareTo(b.Name) : a.Module.Name.CompareTo(b.Module.Name)));
             }
