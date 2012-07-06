@@ -21,6 +21,7 @@
       <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
       <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
+      <Module>Zetbox.Unix.Module, Zetbox.Unix</Module>
 
       <!-- Development/Master Server modules -->
       <Module>Zetbox.Generator.XBuildGeneratorModule, Zetbox.Generator</Module>
