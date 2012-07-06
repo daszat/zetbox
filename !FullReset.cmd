@@ -7,7 +7,8 @@ echo ***************************************************************************
 
 IF NOT EXIST Configs\Local XCOPY /S/E Configs\Examples Configs\Local\
 
-%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m CCNet.msbuild
+rem restrict /m to two cores, since msbuild is not able to build the solution with more parallelism
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /m:2 /v:m CCNet.msbuild
 IF ERRORLEVEL 1 GOTO FAIL
 
 bin\Debug\Zetbox.Server.Service.exe -syncidentities
@@ -17,7 +18,8 @@ rem regenerate modules to prove roundtrippability
 call "!Publish.cmd"
 IF ERRORLEVEL 1 GOTO FAIL
 
-%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m Zetbox.Complete.sln
+rem restrict /m to two cores, since msbuild is not able to build the solution with more parallelism
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /m:2 /v:m Zetbox.Complete.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
 GOTO EOF
