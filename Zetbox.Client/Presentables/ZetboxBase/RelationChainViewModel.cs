@@ -106,7 +106,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var lastBType = lastRel != null ? lastRel.B.Type : (ObjectClass)StartingObjectClass.Object;
 
             var qry = DataContext.GetQuery<Relation>()
-                .Where(i => i.A.Type == lastAType || i.A.Type == lastBType || i.B.Type == lastAType || i.B.Type == lastBType);
+                .Where(i => i.A.Type == lastAType || i.A.Type == lastBType || i.B.Type == lastAType || i.B.Type == lastBType)
+                .ToList()
+                .Where(i => !((i.A.Type.ImplementsIChangedBy() && i.A.Navigator != null && i.A.Navigator.Name == "ChangedBy") 
+                           || (i.B.Type.ImplementsIChangedBy() && i.B.Navigator != null && i.B.Navigator.Name == "ChangedBy")))
+                .AsQueryable();
 
             var selTaskVMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,

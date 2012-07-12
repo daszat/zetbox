@@ -1861,7 +1861,12 @@ namespace Zetbox.Server.SchemaManagement
                 }
             }
 
-            var fkCols = objClass.GetRelationEndsWithLocalStorage().Select(r => Construct.ForeignKeyColumnName(r.GetParent().GetOtherEnd(r))).ToList();
+            // do not check fk_ChangedBy since it always changes, even when only recalculations were done.
+            // ACLs MUST never use ChangedBy information
+            var fkCols = objClass.GetRelationEndsWithLocalStorage()
+                .Where(r => !(r.Type.ImplementsIChangedBy() && r.Navigator != null && r.Navigator.Name =="ChangedBy"))
+                .Select(r => Construct.ForeignKeyColumnName(r.GetParent().GetOtherEnd(r)))
+                .ToList();
             db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList, fkCols);
         }
 
