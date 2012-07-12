@@ -963,18 +963,40 @@ BEGIN
 SET NOCOUNT ON", triggerName, FormatSchemaName(tblName));
             sb.AppendLine();
 
+            // optimaziation
+            if (dependingCols != null && dependingCols.Count > 0)
+            {
+                sb.Append(@"	declare @changed_new table (ID int)
+	declare @deleted table (ID int)
+	
+	insert into @changed_new
+	select i.[ID] 
+	from inserted i inner join deleted d on i.[ID] = d.[ID]
+	where ");
+                sb.AppendLine(string.Join(" OR ", dependingCols.Select(c => string.Format("\n		coalesce(d.{0}, -1) <> coalesce(i.{0}, -1)", QuoteIdentifier(c))).ToArray()));
+                sb.AppendLine(@"	union all
+	select i.[ID]
+	from inserted i 
+	where i.[ID] not in(select [ID] from deleted)
+	
+	insert into @deleted
+	select d.[ID] 
+	from deleted d 
+	where d.[ID] not in(select [ID] from inserted)");
+            }
+
             foreach (var tbl in tblList)
             {
                 StringBuilder select = new StringBuilder();
                 if (tbl.Relations.Count == 0)
                 {
                     sb.AppendFormat(@"
-    DELETE FROM {0} WHERE [ID] IN (SELECT [ID] FROM inserted)
-    DELETE FROM {0} WHERE [ID] IN (SELECT [ID] FROM deleted)
+    DELETE FROM {0} WHERE [ID] IN (SELECT [ID] FROM @changed_new)
+    DELETE FROM {0} WHERE [ID] IN (SELECT [ID] FROM @deleted)
     INSERT INTO {0} ([ID], [Identity], [Right]) 
         SELECT [ID], [Identity], [Right]
         FROM {1}
-        WHERE [ID] IN (SELECT [ID] FROM inserted)",
+        WHERE [ID] IN (SELECT [ID] FROM @changed_new)",
                         FormatSchemaName(tbl.TblNameRights),
                         FormatSchemaName(tbl.ViewUnmaterializedName));
                     sb.AppendLine();
@@ -996,13 +1018,14 @@ SET NOCOUNT ON", triggerName, FormatSchemaName(tblName));
                             rel.FKColumnName.Single().ColumnName);
                         idx++;
                     }
+                    select.AppendFormat("\n      WHERE t{0}.[ID] in (select [ID] from {{1}})", idx - 1);
                     string selectFormat = select.ToString();
-                    sb.AppendFormat(@"    DELETE FROM {0} WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted"));
+                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted", "@changed_new"));
                     sb.AppendLine();
-                    sb.AppendFormat(@"    DELETE FROM {0} WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "deleted"));
+                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "deleted", "@deleted"));
                     sb.AppendLine();
-                    sb.AppendFormat(@"    INSERT INTO {0} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2} WHERE [ID] IN ({1})",
-                        FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted"), FormatSchemaName(tbl.ViewUnmaterializedName));
+                    sb.AppendFormat("    INSERT INTO {0} ([ID], [Identity], [Right])\n    SELECT [ID], [Identity], [Right]\n    FROM {2}\n    WHERE [ID] IN ({1})",
+                        FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted", "@changed_new"), FormatSchemaName(tbl.ViewUnmaterializedName));
                     sb.AppendLine();
                     sb.AppendLine();
                 }
