@@ -1049,10 +1049,10 @@ $BODY$BEGIN
             // optimaziation
             if (dependingCols != null && dependingCols.Count > 0)
             {
-                sb.AppendLine(@"  IF TG_OP = 'UPDATE' THEN");
-                sb.Append(@"    IF ");
-                sb.Append(string.Join(" AND ", dependingCols.Select(c => string.Format("OLD.{0} = NEW.{0}", QuoteIdentifier(c))).ToArray()));
-                sb.AppendLine(" THEN");
+                sb.AppendLine("  IF TG_OP = 'UPDATE' THEN");
+                sb.Append("    IF ");
+                sb.Append(string.Join(" AND ", dependingCols.Select(c => string.Format("\n      coalesce(OLD.{0},-1) = coalesce(NEW.{0},-1)", QuoteIdentifier(c))).ToArray()));
+                sb.AppendLine("\n    THEN");
                 sb.AppendLine(@"      RETURN NULL;
     END IF;
   END IF;");
