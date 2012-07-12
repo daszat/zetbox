@@ -706,7 +706,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
+        void ISchemaProvider.CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
             throw new NotSupportedException();
         }

@@ -751,8 +751,14 @@ namespace Zetbox.API.Server
         void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName);
         void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName);
 
-
-        void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList);
+        /// <summary>
+        /// Creates a trigger updating materialized rights views.
+        /// </summary>
+        /// <param name="triggerName"></param>
+        /// <param name="tblName"></param>
+        /// <param name="tblList"></param>
+        /// <param name="dependingCols">List of columns triggering a rights update. Typically a list of fk_ cols.</param>
+        void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols);
         void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls);
         void CreateEmptyRightsViewUnmaterialized(TableRef viewName);
         void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);

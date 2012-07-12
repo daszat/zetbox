@@ -948,7 +948,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 : -1;
         }
 
-        public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
+        public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
             if (tblList == null)
                 throw new ArgumentNullException("tblList");

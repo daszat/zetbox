@@ -1861,7 +1861,8 @@ namespace Zetbox.Server.SchemaManagement
                 }
             }
 
-            db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList);
+            var fkCols = objClass.GetRelationEndsWithLocalStorage().Select(r => Construct.ForeignKeyColumnName(r.GetParent().GetOtherEnd(r))).ToList();
+            db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList, fkCols);
         }
 
         public void DoCreateUpdateRightsTrigger(Relation rel)
@@ -1910,7 +1911,7 @@ namespace Zetbox.Server.SchemaManagement
                 }
             }
 
-            db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList);
+            db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList, new List<string>() { Construct.ForeignKeyColumnName(rel.A), Construct.ForeignKeyColumnName(rel.B) });
         }
         #endregion
 

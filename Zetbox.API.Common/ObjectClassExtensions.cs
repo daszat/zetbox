@@ -298,5 +298,16 @@ namespace Zetbox.App.Extensions
             if (ctx == null) throw new InvalidOperationException("Passed an object without an Context");
             return ctx.TransientState(clsRelationsTransientCacheKey, cls, () => cls.Context.GetQuery<Relation>().Where(r => r.A.Type == cls || r.B.Type == cls).ToList());
         }
+
+        public static List<RelationEnd> GetRelationEndsWithLocalStorage(this ObjectClass cls)
+        {
+            return cls.GetRelations()
+                    .Where(r => (r.A.Type.ID == cls.ID && r.Storage == StorageType.MergeIntoA))
+                    .Select(r => r.A)
+                    .Concat(cls.GetRelations()
+                    .Where(r => (r.B.Type.ID == cls.ID && r.Storage == StorageType.MergeIntoB))
+                    .Select(r => r.B))
+                    .ToList();
+        }
     }
 }

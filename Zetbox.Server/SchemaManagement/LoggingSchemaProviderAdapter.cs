@@ -396,9 +396,9 @@ namespace Zetbox.Server.SchemaManagement
             _provider.CreateIndex(tblName, idxName, unique, clustered, columns);
         }
 
-        public void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
+        public void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
-            _provider.CreateUpdateRightsTrigger(triggerName, tblName, tblList);
+            _provider.CreateUpdateRightsTrigger(triggerName, tblName, tblList, dependingCols);
         }
 
         public void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls)

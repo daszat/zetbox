@@ -1026,7 +1026,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier("ID")));     // 5
         }
 
-        public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
+        public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
             if (String.IsNullOrEmpty(triggerName))
                 throw new ArgumentNullException("triggerName");
@@ -1045,6 +1045,19 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             sb.Append(@"  RETURNS trigger AS
 $BODY$BEGIN
 ");
+
+            // optimaziation
+            if (dependingCols != null && dependingCols.Count > 0)
+            {
+                sb.AppendLine(@"  IF TG_OP = 'UPDATE' THEN");
+                sb.Append(@"    IF ");
+                sb.Append(string.Join(" AND ", dependingCols.Select(c => string.Format("OLD.{0} = NEW.{0}", QuoteIdentifier(c))).ToArray()));
+                sb.AppendLine(" THEN");
+                sb.AppendLine(@"      RETURN NULL;
+    END IF;
+  END IF;");
+            }
+
             foreach (var tbl in tblList)
             {
                 if (tbl.Relations.Count == 0)
