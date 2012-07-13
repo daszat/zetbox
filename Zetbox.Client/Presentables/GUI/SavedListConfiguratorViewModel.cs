@@ -97,6 +97,16 @@ namespace Zetbox.Client.Presentables.GUI
                 {
                     _selectedItem = value;
                     OnPropertyChanged("SelectedItem");
+
+                    Parent.FilterList.ResetUserFilter();
+                    if (_selectedItem != null)
+                    {
+                        foreach (var f in _selectedItem.Object.Filter)
+                        {
+                            var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
+                            Parent.FilterList.AddFilter(FilterModel.FromProperty(FrozenContext, props), true, props);
+                        }
+                    }
                 }
             }
         }
@@ -115,8 +125,6 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        
-
         public void Save()
         {
             string name = string.Empty;
@@ -125,7 +133,7 @@ namespace Zetbox.Client.Presentables.GUI
                 // Create new
                 var dlg = new DialogCreator(DataContext, ViewModelFactory)
                             .AddString("Name");
-                dlg.Show("Name", (p) => { name = p[0] as string; });
+                dlg.Show("Filter name", (p) => { name = p[0] as string; });
                 if (string.IsNullOrEmpty(name)) return;
             }
             else
@@ -164,19 +172,33 @@ namespace Zetbox.Client.Presentables.GUI
                     item = new SavedListConfig();
                     item.Name = name;
                     obj.Configs.Add(item);
-                    if (_configs != null)
-                    {
-                        // Add also to our list
-                        var vmdl = ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, true);
-                        this._configs.Rw.Add(vmdl);
-                        SelectedItem = vmdl;
-                    }
                 }
 
                 // Do the update
+                item.Filter = new List<SavedListConfig.FilterConfig>();
+                foreach (var fvm in Parent.FilterList.FilterListEntryViewModels.Where(f => f.SourceProperties != null))
+                {
+                    item.Filter.Add(new SavedListConfig.FilterConfig() { Properties = fvm.SourceProperties.Select(i => i.ExportGuid).ToArray() });
+                }
 
                 config.Configuration = obj.ToXmlString();
                 ctx.SubmitChanges();
+
+                // Replace saved view model
+                if (_configs != null)
+                {
+                    SavedListConfigViewModel vmdl = this._configs.Rw.SingleOrDefault(i => i.Object.Name == item.Name && i.IsMyOwn);
+                    if (vmdl == null)
+                    {
+                        vmdl = ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, true);
+                        _configs.Rw.Add(vmdl);
+                        SelectedItem = vmdl;
+                    }
+                    else
+                    {
+                        vmdl.Object = item;
+                    }
+                }
             }
         }
 
@@ -195,6 +217,8 @@ namespace Zetbox.Client.Presentables.GUI
 
         public void Reset()
         {
+            SelectedItem = null;
+            Parent.FilterList.ResetUserFilter();
         }
         #endregion
     }
@@ -211,7 +235,23 @@ namespace Zetbox.Client.Presentables.GUI
             this.IsMyOwn = isMyOwn;
         }
 
-        public SavedListConfig Object {get; private set;}
+        private SavedListConfig _object;
+        public SavedListConfig Object
+        {
+            get
+            {
+                return _object;
+            }
+            set
+            {
+                if (_object != value)
+                {
+                    _object = value;
+                    OnPropertyChanged("Object");
+                    OnPropertyChanged("Name");
+                }
+            }
+        }
 
         public new SavedListConfiguratorViewModel Parent
         {

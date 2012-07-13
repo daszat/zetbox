@@ -22,6 +22,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.API;
     using Zetbox.Client.Presentables.FilterViewModels;
     using Zetbox.App.GUI;
+    using Zetbox.App.Base;
 
     [ViewModelDescriptor]
     public class FilterListEntryViewModel : ViewModel
@@ -67,6 +68,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     _isUserFilter = value;
                     OnPropertyChanged("IsUserFilter");
+                }
+            }
+        }
+
+        private IEnumerable<Property> _sourceProperties;
+        public IEnumerable<Property> SourceProperties
+        {
+            get
+            {
+                return _sourceProperties;
+            }
+            set
+            {
+                if (_sourceProperties != value)
+                {
+                    _sourceProperties = value;
+                    OnPropertyChanged("SourceProperties");
                 }
             }
         }

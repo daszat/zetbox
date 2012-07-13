@@ -26,7 +26,8 @@
         <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding ResetCommand}" />
         <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding SaveCommand}" />
         <ComboBox DisplayMemberPath="Name"
-                      ItemsSource="{Binding Configs}"
-                      SelectedValue="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                  IsSynchronizedWithCurrentItem="False"
+                  ItemsSource="{Binding Configs}"
+                  SelectedValue="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
     </DockPanel>
 </UserControl>

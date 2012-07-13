@@ -227,10 +227,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void AddFilter(IFilterModel mdl)
         {
-            AddFilter(mdl, false);
+            AddFilter(mdl, false, null);
         }
-
         public void AddFilter(IFilterModel mdl, bool allowRemove)
+        {
+            AddFilter(mdl, allowRemove, null);
+        }
+        public void AddFilter(IFilterModel mdl, bool allowRemove, IEnumerable<Property> sourceProperties)
         {
             InitializeFilter();
             _filter.Add(mdl);
@@ -244,6 +247,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 
                 var levmdl = FilterListEntryViewModel.Fetch(ViewModelFactory, DataContext, this, vmdl);
                 levmdl.IsUserFilter = allowRemove;
+                levmdl.SourceProperties = sourceProperties;
 
                 // attach change events
                 uimdl.FilterChanged += new EventHandler(delegate(object s, EventArgs a)
@@ -345,13 +349,24 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     {
                         if (props != null)
                         {
-                            AddFilter(FilterModel.FromProperty(FrozenContext, props), true);
+                            AddFilter(FilterModel.FromProperty(FrozenContext, props), true, props);
                             OnUserFilterAdded(props);
                         }
                     });
             dlg.FollowRelationsOne = true;
             dlg.FollowRelationsMany = false; // TODO: Not working yet, linq predicate is wrong
             ViewModelFactory.ShowDialog(dlg);
+        }
+
+        public void ResetUserFilter()
+        {
+            if (_FilterListEntryViewModels != null)
+            {
+                foreach (var f in _FilterListEntryViewModels.Where(i => i.IsUserFilter).ToList())
+                {
+                    RemoveFilter(f.FilterViewModel.Filter);
+                }
+            }
         }
 
         public event UserFilterAddedEventHander UserFilterAdded;
