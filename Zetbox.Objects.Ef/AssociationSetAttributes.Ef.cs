@@ -1313,6 +1313,36 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_LstCfg_has_Type
+    A: ZeroOrMore SavedListConfiguration as LstCfg
+    B: One ObjectClass as Type
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_LstCfg_has_Type",
+    "LstCfg", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.SavedListConfigurationEfImpl),
+    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_LstCfg_of_Owner
+    A: ZeroOrMore SavedListConfiguration as LstCfg
+    B: ZeroOrOne Identity as Owner
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_LstCfg_of_Owner",
+    "LstCfg", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.SavedListConfigurationEfImpl),
+    "Owner", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_MB_Lst_Role_hasOther_TCO_Role
     A: ZeroOrMore Muhblah as MB_Lst_Role
     B: ZeroOrOne TestCustomObject as TCO_Role

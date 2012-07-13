@@ -63,6 +63,7 @@
     <EntitySet Name="RelationEnd" EntityType="Model.RelationEnd" />
     <EntitySet Name="RequiredParent" EntityType="Model.RequiredParent" />
     <EntitySet Name="RequiredParentChild" EntityType="Model.RequiredParentChild" />
+    <EntitySet Name="SavedListConfiguration" EntityType="Model.SavedListConfiguration" />
     <EntitySet Name="SecurityTestChild" EntityType="Model.SecurityTestChild" />
     <EntitySet Name="SecurityTestChild_Rights" EntityType="Model.SecurityTestChild_Rights" />
     <AssociationSet Name="FK_SecurityTestChildren_Rights" Association="Model.FK_SecurityTestChildren_Rights">
@@ -603,6 +604,14 @@
     <AssociationSet Name="FK_Kunde_was_CreatedBy" Association="Model.FK_Kunde_was_CreatedBy" >
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LstCfg_has_Type" Association="Model.FK_LstCfg_has_Type" >
+      <End Role="LstCfg" EntitySet="SavedListConfiguration" />
+      <End Role="Type" EntitySet="DataType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LstCfg_of_Owner" Association="Model.FK_LstCfg_of_Owner" >
+      <End Role="LstCfg" EntitySet="SavedListConfiguration" />
+      <End Role="Owner" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_MB_Lst_Role_hasOther_TCO_Role" Association="Model.FK_MB_Lst_Role_hasOther_TCO_Role" >
       <End Role="MB_Lst_Role" EntitySet="Muhblah" />
@@ -2138,6 +2147,22 @@
                         Relationship="Model.FK_Parent_of_Children"
                         FromRole="Children"
                         ToRole="Parent" />
+  </EntityType>
+  <EntityType Name="SavedListConfiguration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Configuration" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <NavigationProperty Name="OwnerImpl"
+                        Relationship="Model.FK_LstCfg_of_Owner"
+                        FromRole="LstCfg"
+                        ToRole="Owner" />
+    <NavigationProperty Name="TypeImpl"
+                        Relationship="Model.FK_LstCfg_has_Type"
+                        FromRole="LstCfg"
+                        ToRole="Type" />
   </EntityType>
   <EntityType Name="SecurityTestChild">
     <Key>
@@ -4488,6 +4513,22 @@
          Type="Model.Kunde" 
          Multiplicity="*" />
     <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_LstCfg_has_Type" >
+    <End Role="LstCfg"
+         Type="Model.SavedListConfiguration" 
+         Multiplicity="*" />
+    <End Role="Type"
+         Type="Model.ObjectClass" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_LstCfg_of_Owner" >
+    <End Role="LstCfg"
+         Type="Model.SavedListConfiguration" 
+         Multiplicity="*" />
+    <End Role="Owner"
          Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>

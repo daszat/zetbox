@@ -228,6 +228,7 @@
     <Compile Include="RequiredParent.Ef.Designer.cs" />
     <Compile Include="RequiredParentChild.Ef.Designer.cs" />
     <Compile Include="RoleMembership.Ef.Designer.cs" />
+    <Compile Include="SavedListConfiguration.Ef.Designer.cs" />
     <Compile Include="SecurityTestChild.Ef.Designer.cs" />
     <Compile Include="SecurityTestParent.Ef.Designer.cs" />
     <Compile Include="Sequence.Ef.Designer.cs" />

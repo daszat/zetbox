@@ -67,6 +67,7 @@
     <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Schema="base" Table="RelationEnds"/>
     <EntitySet Name="RequiredParent" EntityType="Model.Store.RequiredParent" Schema="test" Table="RequiredParents"/>
     <EntitySet Name="RequiredParentChild" EntityType="Model.Store.RequiredParentChild" Schema="test" Table="RequiredParentChildren"/>
+    <EntitySet Name="SavedListConfiguration" EntityType="Model.Store.SavedListConfiguration" Schema="gui" Table="SavedListConfigurations"/>
     <EntitySet Name="SecurityTestChild" EntityType="Model.Store.SecurityTestChild" Schema="test" Table="SecurityTestChildren"/>
     <EntitySet Name="SecurityTestChild_Rights" EntityType="Model.Store.SecurityTestChild_Rights" Schema="test" Table="SecurityTestChildren_Rights"/>
     <AssociationSet Name="FK_SecurityTestChildren_Rights" Association="Model.Store.FK_SecurityTestChildren_Rights">
@@ -1132,6 +1133,14 @@
     <AssociationSet Name="FK_Kunde_was_CreatedBy" Association="Model.Store.FK_Kunde_was_CreatedBy" >
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LstCfg_has_Type" Association="Model.Store.FK_LstCfg_has_Type" >
+      <End Role="LstCfg" EntitySet="SavedListConfiguration" />
+      <End Role="Type" EntitySet="ObjectClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LstCfg_of_Owner" Association="Model.Store.FK_LstCfg_of_Owner" >
+      <End Role="LstCfg" EntitySet="SavedListConfiguration" />
+      <End Role="Owner" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_MB_Lst_Role_hasOther_TCO_Role" Association="Model.Store.FK_MB_Lst_Role_hasOther_TCO_Role" >
       <End Role="MB_Lst_Role" EntitySet="Muhblah" />
@@ -2734,6 +2743,17 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="SavedListConfiguration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Type" Type="int" />
+    <Property Name="fk_Owner" Type="int" />
+    <Property Name="Configuration" Type="nvarchar" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="SecurityTestChild">
@@ -4991,6 +5011,34 @@
       </Principal>
       <Dependent Role="Kunde">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_LstCfg_has_Type">
+    <End Role="Type" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="LstCfg" Type="Model.Store.SavedListConfiguration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LstCfg">
+        <PropertyRef Name="fk_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_LstCfg_of_Owner">
+    <End Role="Owner" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="LstCfg" Type="Model.Store.SavedListConfiguration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owner">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LstCfg">
+        <PropertyRef Name="fk_Owner" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

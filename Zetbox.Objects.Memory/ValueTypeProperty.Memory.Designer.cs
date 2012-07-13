@@ -49,6 +49,17 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _HasPersistentOrder;
+                if (!_isHasPersistentOrderSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("b62c7fee-bb67-46a6-b481-81554e788aa0"));
+                    if (__p != null) {
+                        _isHasPersistentOrderSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._HasPersistentOrder = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ValueTypeProperty.HasPersistentOrder'");
+                    }
+                }
                 if (OnHasPersistentOrder_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -60,6 +71,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isHasPersistentOrderSet = true;
                 if (_HasPersistentOrder != value)
                 {
                     var __oldValue = _HasPersistentOrder;
@@ -87,6 +99,7 @@ namespace Zetbox.App.Base
             }
         }
         private bool _HasPersistentOrder;
+        private bool _isHasPersistentOrderSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PreSetter;
@@ -106,6 +119,17 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsCalculated;
+                if (!_isIsCalculatedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("2eed845e-887d-4230-8410-0b442ba7724b"));
+                    if (__p != null) {
+                        _isIsCalculatedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._IsCalculated = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ValueTypeProperty.IsCalculated'");
+                    }
+                }
                 if (OnIsCalculated_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -117,6 +141,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsCalculatedSet = true;
                 if (_IsCalculated != value)
                 {
                     var __oldValue = _IsCalculated;
@@ -144,6 +169,7 @@ namespace Zetbox.App.Base
             }
         }
         private bool _IsCalculated;
+        private bool _isIsCalculatedSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.ValueTypeProperty, bool> OnIsCalculated_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ValueTypeProperty, bool> OnIsCalculated_PreSetter;
@@ -163,6 +189,17 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsList;
+                if (!_isIsListSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("b2bd1528-c22f-4e12-b80f-f8234a2c0831"));
+                    if (__p != null) {
+                        _isIsListSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._IsList = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ValueTypeProperty.IsList'");
+                    }
+                }
                 if (OnIsList_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -174,6 +211,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsListSet = true;
                 if (_IsList != value)
                 {
                     var __oldValue = _IsList;
@@ -201,6 +239,7 @@ namespace Zetbox.App.Base
             }
         }
         private bool _IsList;
+        private bool _isIsListSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.ValueTypeProperty, bool> OnIsList_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ValueTypeProperty, bool> OnIsList_PreSetter;
@@ -679,9 +718,6 @@ namespace Zetbox.App.Base
         [EventBasedMethod("OnNotifyCreated_ValueTypeProperty")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("HasPersistentOrder");
-            SetNotInitializedProperty("IsCalculated");
-            SetNotInitializedProperty("IsList");
             base.NotifyCreated();
             if (OnNotifyCreated_ValueTypeProperty != null) OnNotifyCreated_ValueTypeProperty(this);
         }
@@ -705,9 +741,18 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._HasPersistentOrder);
-            binStream.Write(this._IsCalculated);
-            binStream.Write(this._IsList);
+            binStream.Write(this._isHasPersistentOrderSet);
+            if (this._isHasPersistentOrderSet) {
+                binStream.Write(this._HasPersistentOrder);
+            }
+            binStream.Write(this._isIsCalculatedSet);
+            if (this._isIsCalculatedSet) {
+                binStream.Write(this._IsCalculated);
+            }
+            binStream.Write(this._isIsListSet);
+            if (this._isIsListSet) {
+                binStream.Write(this._IsList);
+            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -716,9 +761,18 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._HasPersistentOrder = binStream.ReadBoolean();
-            this._IsCalculated = binStream.ReadBoolean();
-            this._IsList = binStream.ReadBoolean();
+            this._isHasPersistentOrderSet = binStream.ReadBoolean();
+            if (this._isHasPersistentOrderSet) {
+                this._HasPersistentOrder = binStream.ReadBoolean();
+            }
+            this._isIsCalculatedSet = binStream.ReadBoolean();
+            if (this._isIsCalculatedSet) {
+                this._IsCalculated = binStream.ReadBoolean();
+            }
+            this._isIsListSet = binStream.ReadBoolean();
+            if (this._isIsListSet) {
+                this._IsList = binStream.ReadBoolean();
+            }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -732,8 +786,11 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            System.Diagnostics.Debug.Assert(this._isHasPersistentOrderSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isIsCalculatedSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._IsCalculated, xml, "IsCalculated", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isIsListSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._IsList, xml, "IsList", "Zetbox.App.Base");
         }
 
@@ -744,13 +801,19 @@ namespace Zetbox.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Base|HasPersistentOrder":
+                // Import must have default value set
                 this._HasPersistentOrder = XmlStreamer.ReadBoolean(xml);
+                this._isHasPersistentOrderSet = true;
                 break;
             case "Zetbox.App.Base|IsCalculated":
+                // Import must have default value set
                 this._IsCalculated = XmlStreamer.ReadBoolean(xml);
+                this._isIsCalculatedSet = true;
                 break;
             case "Zetbox.App.Base|IsList":
+                // Import must have default value set
                 this._IsList = XmlStreamer.ReadBoolean(xml);
+                this._isIsListSet = true;
                 break;
             }
         }

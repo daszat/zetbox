@@ -477,6 +477,7 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
             // should fetch && remember parent for Kunde_was_Identity_RelationEntry
             // should fetch && remember parent for Kunde_was_Identity_RelationEntry
+            // should fetch && remember parent for SavedListConfiguration_of_Identity_RelationEntry
             // should fetch && remember parent for Method_was_Identity_RelationEntry
             // should fetch && remember parent for Method_was_Identity_RelationEntry
             // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry

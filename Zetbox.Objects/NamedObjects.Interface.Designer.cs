@@ -1830,6 +1830,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("549efe2c-9dc7-4458-a0ff-b7c0710ae84c"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> SavedListConfiguration
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("46da717e-b6e0-4193-8580-8787fc4cf04f"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> SinglePropertyFilterConfiguration
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("0c65fbda-a2ac-475c-af94-ee705381ee08"); }
@@ -2153,6 +2157,25 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Property
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("384208e7-eb27-41f1-ac12-b05822c0a2ad"); }
+                                }
+                            }
+                            public static class SavedListConfiguration_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Configuration
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("2063f89a-89c8-48de-b191-b6dd870072c3"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("98754493-0fcc-4874-adde-cbf27b7a53d2"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Owner
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("776c6c41-d42d-43d0-bff4-e99638a045bf"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Type
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("93775971-e361-4495-8107-3398205589ec"); }
                                 }
                             }
                             public static class Template_Properties

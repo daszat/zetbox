@@ -43,6 +43,9 @@ namespace Zetbox.App.Base
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            _isShowIconInListsSet = Proxy.ID > 0;
+            _isShowIdInListsSet = Proxy.ID > 0;
+            _isShowNameInListsSet = Proxy.ID > 0;
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
@@ -1015,7 +1018,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.ShowIconInLists;
+                var __result = FetchShowIconInListsOrDefault();
                 if (OnShowIconInLists_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -1027,6 +1030,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isShowIconInListsSet = true;
                 if (Proxy.ShowIconInLists != value)
                 {
                     var __oldValue = Proxy.ShowIconInLists;
@@ -1054,6 +1058,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             }
         }
 
+
+        private bool FetchShowIconInListsOrDefault()
+        {
+            var __result = Proxy.ShowIconInLists;
+                if (!_isShowIconInListsSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("d5b0ff20-10c1-40ce-b18e-9846dc5d0b60"));
+                    if (__p != null) {
+                        _isShowIconInListsSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.ShowIconInLists = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.DataType.ShowIconInLists'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isShowIconInListsSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, bool> OnShowIconInLists_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIconInLists_PreSetter;
@@ -1072,7 +1095,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.ShowIdInLists;
+                var __result = FetchShowIdInListsOrDefault();
                 if (OnShowIdInLists_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -1084,6 +1107,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isShowIdInListsSet = true;
                 if (Proxy.ShowIdInLists != value)
                 {
                     var __oldValue = Proxy.ShowIdInLists;
@@ -1111,6 +1135,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             }
         }
 
+
+        private bool FetchShowIdInListsOrDefault()
+        {
+            var __result = Proxy.ShowIdInLists;
+                if (!_isShowIdInListsSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("220925a1-ed82-4b08-a3fa-af31bda7f40e"));
+                    if (__p != null) {
+                        _isShowIdInListsSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.ShowIdInLists = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.DataType.ShowIdInLists'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isShowIdInListsSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, bool> OnShowIdInLists_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, bool> OnShowIdInLists_PreSetter;
@@ -1129,7 +1172,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.ShowNameInLists;
+                var __result = FetchShowNameInListsOrDefault();
                 if (OnShowNameInLists_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -1141,6 +1184,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isShowNameInListsSet = true;
                 if (Proxy.ShowNameInLists != value)
                 {
                     var __oldValue = Proxy.ShowNameInLists;
@@ -1168,6 +1212,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             }
         }
 
+
+        private bool FetchShowNameInListsOrDefault()
+        {
+            var __result = Proxy.ShowNameInLists;
+                if (!_isShowNameInListsSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("60e64ab1-830d-4c20-9d2e-17049738e9c4"));
+                    if (__p != null) {
+                        _isShowNameInListsSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.ShowNameInLists = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.DataType.ShowNameInLists'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isShowNameInListsSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, bool> OnShowNameInLists_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, bool> OnShowNameInLists_PreSetter;
@@ -1758,6 +1821,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
+            FetchShowIconInListsOrDefault();
+            FetchShowIdInListsOrDefault();
+            FetchShowNameInListsOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_DataType != null) OnNotifyPreSave_DataType(this);
         }
@@ -1781,9 +1847,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("RequestedKind");
-            SetNotInitializedProperty("ShowIconInLists");
-            SetNotInitializedProperty("ShowIdInLists");
-            SetNotInitializedProperty("ShowNameInLists");
             base.NotifyCreated();
             if (OnNotifyCreated_DataType != null) OnNotifyCreated_DataType(this);
         }
@@ -1978,9 +2041,18 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 binStream.Write(false);
             }
             binStream.Write(this.Proxy.RequestedKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedKind) : (int?)null);
-            binStream.Write(this.Proxy.ShowIconInLists);
-            binStream.Write(this.Proxy.ShowIdInLists);
-            binStream.Write(this.Proxy.ShowNameInLists);
+            binStream.Write(this._isShowIconInListsSet);
+            if (this._isShowIconInListsSet) {
+                binStream.Write(this.Proxy.ShowIconInLists);
+            }
+            binStream.Write(this._isShowIdInListsSet);
+            if (this._isShowIdInListsSet) {
+                binStream.Write(this.Proxy.ShowIdInLists);
+            }
+            binStream.Write(this._isShowNameInListsSet);
+            if (this._isShowNameInListsSet) {
+                binStream.Write(this.Proxy.ShowNameInLists);
+            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -2053,9 +2125,18 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 }
             }
             binStream.Read(out this._fk_RequestedKind);
-            this.Proxy.ShowIconInLists = binStream.ReadBoolean();
-            this.Proxy.ShowIdInLists = binStream.ReadBoolean();
-            this.Proxy.ShowNameInLists = binStream.ReadBoolean();
+            this._isShowIconInListsSet = binStream.ReadBoolean();
+            if (this._isShowIconInListsSet) {
+                this.Proxy.ShowIconInLists = binStream.ReadBoolean();
+            }
+            this._isShowIdInListsSet = binStream.ReadBoolean();
+            if (this._isShowIdInListsSet) {
+                this.Proxy.ShowIdInLists = binStream.ReadBoolean();
+            }
+            this._isShowNameInListsSet = binStream.ReadBoolean();
+            if (this._isShowNameInListsSet) {
+                this.Proxy.ShowNameInLists = binStream.ReadBoolean();
+            }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -2078,8 +2159,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedKind != null ? this.Proxy.RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isShowIconInListsSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowIconInLists, xml, "ShowIconInLists", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isShowIdInListsSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowIdInLists, xml, "ShowIdInLists", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isShowNameInListsSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowNameInLists, xml, "ShowNameInLists", "Zetbox.App.GUI");
         }
 
@@ -2119,13 +2203,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|ShowIconInLists":
+                // Import must have default value set
                 this.Proxy.ShowIconInLists = XmlStreamer.ReadBoolean(xml);
+                this._isShowIconInListsSet = true;
                 break;
             case "Zetbox.App.GUI|ShowIdInLists":
+                // Import must have default value set
                 this.Proxy.ShowIdInLists = XmlStreamer.ReadBoolean(xml);
+                this._isShowIdInListsSet = true;
                 break;
             case "Zetbox.App.GUI|ShowNameInLists":
+                // Import must have default value set
                 this.Proxy.ShowNameInLists = XmlStreamer.ReadBoolean(xml);
+                this._isShowNameInListsSet = true;
                 break;
             }
         }

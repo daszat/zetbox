@@ -993,6 +993,15 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SavedListConfiguration">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SavedListConfiguration)">
+	    <MappingFragment StoreEntitySet="SavedListConfiguration">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Configuration" ColumnName="Configuration" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SecurityTestChild">
       <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestChild)">
 	    <MappingFragment StoreEntitySet="SecurityTestChild">
@@ -3369,6 +3378,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_LstCfg_has_Type
+    A: ZeroOrMore SavedListConfiguration as LstCfg
+    B: One ObjectClass as Type
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_LstCfg_has_Type"
+                           TypeName="Model.FK_LstCfg_has_Type"
+                           StoreEntitySet="SavedListConfiguration" >
+      <EndProperty Name="Type">
+        <ScalarProperty Name="ID" ColumnName="fk_Type"/>
+      </EndProperty>
+      <EndProperty Name="LstCfg">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Type" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_LstCfg_of_Owner
+    A: ZeroOrMore SavedListConfiguration as LstCfg
+    B: ZeroOrOne Identity as Owner
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_LstCfg_of_Owner"
+                           TypeName="Model.FK_LstCfg_of_Owner"
+                           StoreEntitySet="SavedListConfiguration" >
+      <EndProperty Name="Owner">
+        <ScalarProperty Name="ID" ColumnName="fk_Owner"/>
+      </EndProperty>
+      <EndProperty Name="LstCfg">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Owner" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_MB_Lst_Role_hasOther_TCO_Role

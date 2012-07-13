@@ -225,6 +225,7 @@
     <Compile Include="RequiredParent.Memory.Designer.cs" />
     <Compile Include="RequiredParentChild.Memory.Designer.cs" />
     <Compile Include="RoleMembership.Memory.Designer.cs" />
+    <Compile Include="SavedListConfiguration.Memory.Designer.cs" />
     <Compile Include="SecurityTestChild.Memory.Designer.cs" />
     <Compile Include="SecurityTestParent.Memory.Designer.cs" />
     <Compile Include="Sequence.Memory.Designer.cs" />

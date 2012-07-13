@@ -43,6 +43,9 @@ namespace Zetbox.App.Base
             : base(lazyCtx, proxy) // pass proxy to parent
         {
             this.Proxy = proxy;
+            _isIsSimpleObjectSet = Proxy.ID > 0;
+            _isIsFrozenObjectSet = Proxy.ID > 0;
+            _isIsAbstractSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -393,7 +396,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.IsAbstract;
+                var __result = FetchIsAbstractOrDefault();
                 if (OnIsAbstract_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -405,6 +408,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsAbstractSet = true;
                 if (Proxy.IsAbstract != value)
                 {
                     var __oldValue = Proxy.IsAbstract;
@@ -432,6 +436,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             }
         }
 
+
+        private bool FetchIsAbstractOrDefault()
+        {
+            var __result = Proxy.IsAbstract;
+                if (!_isIsAbstractSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("e9d1402e-3580-4084-8836-c44844683191"));
+                    if (__p != null) {
+                        _isIsAbstractSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.IsAbstract = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.ObjectClass.IsAbstract'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isIsAbstractSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, bool> OnIsAbstract_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, bool> OnIsAbstract_PreSetter;
@@ -450,7 +473,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.IsFrozenObject;
+                var __result = FetchIsFrozenObjectOrDefault();
                 if (OnIsFrozenObject_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -462,6 +485,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsFrozenObjectSet = true;
                 if (Proxy.IsFrozenObject != value)
                 {
                     var __oldValue = Proxy.IsFrozenObject;
@@ -489,6 +513,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             }
         }
 
+
+        private bool FetchIsFrozenObjectOrDefault()
+        {
+            var __result = Proxy.IsFrozenObject;
+                if (!_isIsFrozenObjectSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("13c33710-ea02-4621-ad50-294a1f36b07d"));
+                    if (__p != null) {
+                        _isIsFrozenObjectSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.IsFrozenObject = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.ObjectClass.IsFrozenObject'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isIsFrozenObjectSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, bool> OnIsFrozenObject_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, bool> OnIsFrozenObject_PreSetter;
@@ -507,7 +550,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.IsSimpleObject;
+                var __result = FetchIsSimpleObjectOrDefault();
                 if (OnIsSimpleObject_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -519,6 +562,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsSimpleObjectSet = true;
                 if (Proxy.IsSimpleObject != value)
                 {
                     var __oldValue = Proxy.IsSimpleObject;
@@ -546,6 +590,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             }
         }
 
+
+        private bool FetchIsSimpleObjectOrDefault()
+        {
+            var __result = Proxy.IsSimpleObject;
+                if (!_isIsSimpleObjectSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("edc853d3-0d02-4492-9159-c548c7713e9b"));
+                    if (__p != null) {
+                        _isIsSimpleObjectSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.IsSimpleObject = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.ObjectClass.IsSimpleObject'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isIsSimpleObjectSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, bool> OnIsSimpleObject_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, bool> OnIsSimpleObject_PreSetter;
@@ -1371,6 +1434,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         public override void NotifyPreSave()
         {
             FetchCodeTemplateOrDefault();
+            FetchIsAbstractOrDefault();
+            FetchIsFrozenObjectOrDefault();
+            FetchIsSimpleObjectOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_ObjectClass != null) OnNotifyPreSave_ObjectClass(this);
         }
@@ -1389,9 +1455,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         {
             SetNotInitializedProperty("BaseObjectClass");
             SetNotInitializedProperty("DefaultViewModelDescriptor");
-            SetNotInitializedProperty("IsAbstract");
-            SetNotInitializedProperty("IsFrozenObject");
-            SetNotInitializedProperty("IsSimpleObject");
             SetNotInitializedProperty("TableName");
             _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
@@ -1411,6 +1474,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 ChildrenToDelete.Add(x);
             }
             // should fetch && remember parent for CalculatedObjectReferenceProperty_references_ObjectClass_RelationEntry
+            // should fetch && remember parent for SavedListConfiguration_has_ObjectClass_RelationEntry
             // FK_ObjectClass_has_AccessControlList ZeroOrMore
             foreach(NHibernatePersistenceObject x in AccessControlList) {
                 x.ParentsToDelete.Add(this);
@@ -1488,9 +1552,18 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             binStream.Write(this.Proxy.BaseObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.BaseObjectClass) : (int?)null);
             binStream.Write(this.Proxy.CodeTemplate);
             binStream.Write(this.Proxy.DefaultViewModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultViewModelDescriptor) : (int?)null);
-            binStream.Write(this.Proxy.IsAbstract);
-            binStream.Write(this.Proxy.IsFrozenObject);
-            binStream.Write(this.Proxy.IsSimpleObject);
+            binStream.Write(this._isIsAbstractSet);
+            if (this._isIsAbstractSet) {
+                binStream.Write(this.Proxy.IsAbstract);
+            }
+            binStream.Write(this._isIsFrozenObjectSet);
+            if (this._isIsFrozenObjectSet) {
+                binStream.Write(this.Proxy.IsFrozenObject);
+            }
+            binStream.Write(this._isIsSimpleObjectSet);
+            if (this._isIsSimpleObjectSet) {
+                binStream.Write(this.Proxy.IsSimpleObject);
+            }
             binStream.Write(this.Proxy.TableName);
         }
 
@@ -1503,9 +1576,18 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             binStream.Read(out this._fk_BaseObjectClass);
             this.Proxy.CodeTemplate = binStream.ReadString();
             binStream.Read(out this._fk_DefaultViewModelDescriptor);
-            this.Proxy.IsAbstract = binStream.ReadBoolean();
-            this.Proxy.IsFrozenObject = binStream.ReadBoolean();
-            this.Proxy.IsSimpleObject = binStream.ReadBoolean();
+            this._isIsAbstractSet = binStream.ReadBoolean();
+            if (this._isIsAbstractSet) {
+                this.Proxy.IsAbstract = binStream.ReadBoolean();
+            }
+            this._isIsFrozenObjectSet = binStream.ReadBoolean();
+            if (this._isIsFrozenObjectSet) {
+                this.Proxy.IsFrozenObject = binStream.ReadBoolean();
+            }
+            this._isIsSimpleObjectSet = binStream.ReadBoolean();
+            if (this._isIsSimpleObjectSet) {
+                this.Proxy.IsSimpleObject = binStream.ReadBoolean();
+            }
             this.Proxy.TableName = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -1523,8 +1605,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.BaseObjectClass != null ? this.Proxy.BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CodeTemplate, xml, "CodeTemplate", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultViewModelDescriptor != null ? this.Proxy.DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isIsAbstractSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.IsAbstract, xml, "IsAbstract", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isIsFrozenObjectSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.IsFrozenObject, xml, "IsFrozenObject", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isIsSimpleObjectSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsSimpleObject, xml, "IsSimpleObject", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.TableName, xml, "TableName", "Zetbox.App.Base");
         }
@@ -1545,13 +1630,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 this._fk_guid_DefaultViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.Base|IsAbstract":
+                // Import must have default value set
                 this.Proxy.IsAbstract = XmlStreamer.ReadBoolean(xml);
+                this._isIsAbstractSet = true;
                 break;
             case "Zetbox.App.Base|IsFrozenObject":
+                // Import must have default value set
                 this.Proxy.IsFrozenObject = XmlStreamer.ReadBoolean(xml);
+                this._isIsFrozenObjectSet = true;
                 break;
             case "Zetbox.App.GUI|IsSimpleObject":
+                // Import must have default value set
                 this.Proxy.IsSimpleObject = XmlStreamer.ReadBoolean(xml);
+                this._isIsSimpleObjectSet = true;
                 break;
             case "Zetbox.App.Base|TableName":
                 this.Proxy.TableName = XmlStreamer.ReadString(xml);

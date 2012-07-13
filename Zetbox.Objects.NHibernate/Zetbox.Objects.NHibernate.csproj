@@ -240,6 +240,7 @@
     <Compile Include="RequiredParent.NHibernate.Designer.cs" />
     <Compile Include="RequiredParentChild.NHibernate.Designer.cs" />
     <Compile Include="RoleMembership.NHibernate.Designer.cs" />
+    <Compile Include="SavedListConfiguration.NHibernate.Designer.cs" />
     <Compile Include="SecurityTestChild.NHibernate.Designer.cs" />
     <Compile Include="SecurityTestParent.NHibernate.Designer.cs" />
     <Compile Include="Sequence.NHibernate.Designer.cs" />
