@@ -3,7 +3,7 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
-                  Title="Invoke Method"
+                  Title="{Binding Name}"
                   ResizeMode="CanResize"
                   SizeToContent="WidthAndHeight"
                   MinWidth="300"
