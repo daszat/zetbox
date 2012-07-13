@@ -6,6 +6,7 @@
                                xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                                xmlns:client="clr-namespace:Zetbox.Client.WPF.View"
                                xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                               xmlns:gui="clr-namespace:Zetbox.Client.WPF.View.GUI"
                                xmlns:clientZetboxBase="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
                                xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                                xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
@@ -27,66 +28,71 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <local:InstanceGridBaseDisplay.Resources>
-    <!-- implement workaround for DeferRefresh exception as described on http://stackoverflow.com/questions/3461714/wpf-datagrid-combobox-causes-invalidoperationexception -->
-    <CollectionViewSource x:Key="itemsSource"
+    <local:InstanceGridBaseDisplay.Resources>
+        <!-- implement workaround for DeferRefresh exception as described on http://stackoverflow.com/questions/3461714/wpf-datagrid-combobox-causes-invalidoperationexception -->
+        <CollectionViewSource x:Key="itemsSource"
                           Source="{Binding ProxyInstances}"/>
-  </local:InstanceGridBaseDisplay.Resources>
-  <local:InstanceGridBaseDisplay.CommandBindings>
-    <CommandBinding Command="NavigationCommands.Refresh"
+    </local:InstanceGridBaseDisplay.Resources>
+    <local:InstanceGridBaseDisplay.CommandBindings>
+        <CommandBinding Command="NavigationCommands.Refresh"
                     Executed="RefreshCommand_Executed" />
-  </local:InstanceGridBaseDisplay.CommandBindings>
-  <DockPanel x:Name="ctrlInstanceList">
-    <ContentPresenter DockPanel.Dock="Top"
+    </local:InstanceGridBaseDisplay.CommandBindings>
+    <DockPanel x:Name="ctrlInstanceList">
+        <ContentPresenter DockPanel.Dock="Top"
                   Content="{Binding FilterList}"
                   Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
                   ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
                   Focusable="False"
                   Margin="0 0 0 10"/>
+        <gui:SavedListConfiguratorDisplay DockPanel.Dock="Top"
+                    DataContext="{Binding SavedListConfigurations}"
+                    Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Focusable="False"
+                    Margin="0 0 0 10"/>
 
-    <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
+        <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                              ItemsSource="{Binding Commands}"
                              Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
-      <ctrls:WorkaroundToolBar.Resources>
-        <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
-          <ctrls:CommandButton CommandViewModel="{Binding}"
+            <ctrls:WorkaroundToolBar.Resources>
+                <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
+                    <ctrls:CommandButton CommandViewModel="{Binding}"
                                CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientZetboxBase:InstanceGridDisplay}}}"
                                Style="{StaticResource ImageToolbarButton}" />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
-          <Menu>
-            <Menu.Resources>
-              <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
-                <TextBlock Text="{Binding}"/>
-              </DataTemplate>
-            </Menu.Resources>
-            <MenuItem ItemsSource="{Binding Commands}"
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
+                    <Menu>
+                        <Menu.Resources>
+                            <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </Menu.Resources>
+                        <MenuItem ItemsSource="{Binding Commands}"
                       Header="{Binding Name}"
                       ItemContainerStyle="{StaticResource CommandMenuItem}">
-            </MenuItem>
-          </Menu>
-        </DataTemplate>
-        <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
-        <Style TargetType="Menu">
-          <Setter Property="Margin"
+                        </MenuItem>
+                    </Menu>
+                </DataTemplate>
+                <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
+                <Style TargetType="Menu">
+                    <Setter Property="Margin"
                   Value="0,2,0,0"/>
-          <Setter Property="Background"
+                    <Setter Property="Background"
                   Value="#00000000"/>
-        </Style>
-      </ctrls:WorkaroundToolBar.Resources>
-    </ctrls:WorkaroundToolBar>
+                </Style>
+            </ctrls:WorkaroundToolBar.Resources>
+        </ctrls:WorkaroundToolBar>
 
-    <GroupBox DockPanel.Dock="Top"
+        <GroupBox DockPanel.Dock="Top"
               Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
               Header="Details"
               Margin="0 0 0 10">
-      <ContentPresenter Content="{Binding SelectedDetailItem}"
+            <ContentPresenter Content="{Binding SelectedDetailItem}"
                         tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
                         ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-    </GroupBox>
+        </GroupBox>
 
-    <local:InstanceListHeader DockPanel.Dock="Top" />
-    <ctrls:ZetboxDataGrid x:Name="lst"
+        <local:InstanceListHeader DockPanel.Dock="Top" />
+        <ctrls:ZetboxDataGrid x:Name="lst"
                         BorderThickness="0"
                         ItemsSource="{Binding Source={StaticResource itemsSource}}"
                         CanUserAddRows="{Binding AllowAddNew}"
@@ -96,6 +102,6 @@
                         SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
                         MouseDoubleClick="ItemActivatedHandler"
                         GridViewColumnHeader.Click="ListView_HeaderClick">
-    </ctrls:ZetboxDataGrid>
-  </DockPanel>
+        </ctrls:ZetboxDataGrid>
+    </DockPanel>
 </local:InstanceGridBaseDisplay>

@@ -37,6 +37,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Presentables.FilterViewModels;
     using Zetbox.Client.Presentables.ValueViewModels;
     using ObjectEditor = Zetbox.Client.Presentables.ObjectEditor;
+    using Zetbox.Client.Presentables.GUI;
 
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
@@ -1609,5 +1610,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             get { return false; }
         }
         #endregion
+
+        private SavedListConfiguratorViewModel _savedListConfigurations;
+        public SavedListConfiguratorViewModel SavedListConfigurations
+        {
+            get
+            {
+                if (_savedListConfigurations == null)
+                {
+                    _savedListConfigurations = ViewModelFactory.CreateViewModel<SavedListConfiguratorViewModel.Factory>().Invoke(DataContext, this);
+                }
+                return _savedListConfigurations;
+            }
+        }
     }
 }

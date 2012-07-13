@@ -1,9 +1,8 @@
-﻿<UserControl x:Class="Zetbox.Client.WPF.View.ZetboxBase.FilterListDisplay"
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.GUI.SavedListConfiguratorDisplay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
              xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -23,24 +22,11 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
-
-    <StackPanel>
-        <StackPanel.InputBindings>
-            <KeyBinding Key="Return"
-                  Command="NavigationCommands.Refresh" />
-        </StackPanel.InputBindings>
-        <ItemsControl ItemsSource="{Binding FilterListEntryViewModels}" Focusable="False">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ContentPresenter Content="{Binding}"
-                            ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <ctrls:CommandButton CommandViewModel="{Binding AddFilterCommand}"
-                         Visibility="{Binding AllowUserFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                         HorizontalAlignment="Right"
-                         Style="{StaticResource ImageButton}"
-                         MaxHeight="28"/>
-    </StackPanel>
+    <DockPanel>
+        <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding ResetCommand}" />
+        <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding SaveCommand}" />
+        <ComboBox DisplayMemberPath="Name"
+                      ItemsSource="{Binding Configs}"
+                      SelectedValue="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+    </DockPanel>
 </UserControl>

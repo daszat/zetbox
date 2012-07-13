@@ -103,6 +103,7 @@
     <Compile Include="BaseCustomActionsManager.cs" />
     <Compile Include="CompoundObjectExtensions.cs" />
     <Compile Include="GuiExtensions.cs" />
+    <Compile Include="GUI\SavedListConfig.cs" />
     <Compile Include="IdentityExtensions.cs" />
     <Compile Include="IIdentityResolver.cs" />
     <Compile Include="IMetaDataResolver.cs" />

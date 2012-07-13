@@ -205,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\GUI\SavedListConfiguratorDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ZetboxBase\AccessDeniedDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -601,6 +605,9 @@
     </Compile>
     <Compile Include="View\GUI\NavigationSearchScreenDisplay.xaml.cs">
       <DependentUpon>NavigationSearchScreenDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GUI\SavedListConfiguratorDisplay.xaml.cs">
+      <DependentUpon>SavedListConfiguratorDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\AccessDeniedDisplay.xaml.cs">
       <DependentUpon>AccessDeniedDisplay.xaml</DependentUpon>

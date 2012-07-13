@@ -90,6 +90,7 @@
     <Compile Include="IZetboxService.cs" />
     <Compile Include="IPackageProvider.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="Utils\ReadOnlyCollectionShortcut.cs" />
     <Compile Include="ZetboxStreamWriter.cs" />
     <Compile Include="ZetboxStreamReader.cs" />
     <Compile Include="ServiceControlManager.cs" />
