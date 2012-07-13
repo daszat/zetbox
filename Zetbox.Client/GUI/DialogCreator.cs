@@ -14,20 +14,24 @@ namespace Zetbox.Client.GUI
 
     public class DialogCreator
     {
-        public DialogCreator(IZetboxContext ctx, IViewModelFactory mdlFactory)
+        public DialogCreator(IZetboxContext ctx, IViewModelFactory mdlFactory, IFrozenContext frozenCtx)
         {
             ValueModels = new List<BaseValueViewModel>();
             DataContext = ctx;
             ViewModelFactory = mdlFactory;
+            FrozenCtx = frozenCtx;
         }
 
-        public List<BaseValueViewModel> ValueModels { get; private set; }
         public IZetboxContext DataContext { get; private set; }
         public IViewModelFactory ViewModelFactory { get; private set; }
+        public IFrozenContext FrozenCtx { get; private set; }
 
-        public void Show(string title, Action<object[]> ok)
+        public string Title { get; set; }
+        public List<BaseValueViewModel> ValueModels { get; private set; }
+        
+        public void Show(Action<object[]> ok)
         {
-            var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, title, ValueModels, ok);
+            var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, ValueModels, ok);
             ViewModelFactory.ShowDialog(dlg);
         }
     }
@@ -54,9 +58,11 @@ namespace Zetbox.Client.GUI
             return c;
         }
 
-        public static DialogCreator AddPassword(this DialogCreator c, string label, IFrozenContext frozenCtx)
+        public static DialogCreator AddPassword(this DialogCreator c, string label)
         {
-            return AddString(c, label, Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(frozenCtx));
+            if (c == null) throw new ArgumentNullException("c");
+
+            return AddString(c, label, Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(c.FrozenCtx));
         }
     }
 }

@@ -36,8 +36,8 @@ namespace Zetbox.Client.WPF
     {
         private readonly IUiThreadManager uiThread;
 
-        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
-            : base(container, frozenCtx, cfg, perfCounter)
+        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
+            : base(container, frozenCtx, cfg, perfCounter, dialogFactory)
         {
             this.uiThread = uiThread;
         }

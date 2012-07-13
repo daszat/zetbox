@@ -24,11 +24,12 @@ namespace Zetbox.API.AbstractConsumerTests
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Configuration;
     using Zetbox.Client.Presentables;
+    using Zetbox.Client.GUI;
 
     public class MockedViewModelFactory : ViewModelFactory
     {
-        public MockedViewModelFactory(ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
-            : base(container, frozenCtx, cfg, perfCounter)
+        public MockedViewModelFactory(ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
+            : base(container, frozenCtx, cfg, perfCounter, dialogFactory)
         {
         }
 

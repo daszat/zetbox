@@ -26,6 +26,7 @@ namespace Zetbox.Client
     using Zetbox.API.Common;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
@@ -82,7 +83,7 @@ namespace Zetbox.Client
                 base.Load(builder);
 
                 builder
-                    .Register<BasicAuthCredentialsResolver>(c => new BasicAuthCredentialsResolver(c.Resolve<IViewModelFactory>(), c.Resolve<Func<BaseMemoryContext>>(), c.Resolve<IFrozenContext>()))
+                    .Register<BasicAuthCredentialsResolver>(c => new BasicAuthCredentialsResolver(c.Resolve<IViewModelFactory>(), c.Resolve<Func<BaseMemoryContext>>()))
                     .As<BasicAuthCredentialsResolver>() // for local use
                     .As<ICredentialsResolver>() // for publication
                     .SingleInstance();
@@ -99,19 +100,16 @@ namespace Zetbox.Client
 
         private IViewModelFactory _vmf;
         private Func<BaseMemoryContext> _ctxFactory;
-        private IFrozenContext _frozenCtx;
         private string UserName = null;
         private string Password = null;
 
-        public BasicAuthCredentialsResolver(IViewModelFactory vmf, Func<BaseMemoryContext> ctxFactory, IFrozenContext frozenCtx)
+        public BasicAuthCredentialsResolver(IViewModelFactory vmf, Func<BaseMemoryContext> ctxFactory)
         {
             if (vmf == null) throw new ArgumentNullException("vmf");
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
-            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
             _vmf = vmf;
             _ctxFactory = ctxFactory;
-            _frozenCtx = frozenCtx;
         }
 
         private bool _isEnsuringCredentials = false;
@@ -131,26 +129,16 @@ namespace Zetbox.Client
                     {
                         using (var ctx = _ctxFactory())
                         {
-                            var valueModels = new List<BaseValueViewModel>();
-
-                            var userName = new ClassValueModel<string>(CredentialsResolverResources.UserNameLabel, "", false, false);
-                            valueModels.Add(_vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, userName));
-
-                            var pwd = new ClassValueModel<string>(CredentialsResolverResources.PasswordLabel, "", false, false);
-                            var pwdvm = _vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, pwd);
-                            pwdvm.RequestedKind = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(_frozenCtx);
-                            valueModels.Add(pwdvm);
-
                             var dlgOK = false;
-
-                            var dlg = _vmf.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(ctx, null, CredentialsResolverResources.DialogTitle, valueModels, (p) =>
-                            {
-                                this.UserName = userName.Value;
-                                this.Password = pwd.Value;
-                                dlgOK = true;
-                            });
-
-                            _vmf.ShowDialog(dlg);
+                            _vmf.CreateDialog(CredentialsResolverResources.DialogTitle)
+                                .AddString(CredentialsResolverResources.UserNameLabel)
+                                .AddPassword(CredentialsResolverResources.PasswordLabel)
+                                .Show((p) =>
+                                {
+                                    this.UserName = (string)p[0];
+                                    this.Password = (string)p[1];
+                                    dlgOK = true;
+                                });
 
                             if (!dlgOK)
                             {

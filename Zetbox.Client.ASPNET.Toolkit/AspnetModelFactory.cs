@@ -54,8 +54,8 @@ namespace Zetbox.Client.ASPNET.Toolkit
         : ViewModelFactory
     {
 
-        public AspnetModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
-            : base(container, metaCtx, cfg, perfCounter)
+        public AspnetModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
+            : base(container, metaCtx, cfg, perfCounter, dialogFactory)
         {
 
         }

@@ -107,6 +107,11 @@ namespace Zetbox.Client
                 .Register<DefaultCredentialsResolver>(c => new DefaultCredentialsResolver())
                 .As<ICredentialsResolver>()
                 .SingleInstance();
+
+            moduleBuilder
+                .RegisterType<Zetbox.Client.GUI.DialogCreator>()
+                .AsSelf()
+                .InstancePerDependency();
             
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
         }

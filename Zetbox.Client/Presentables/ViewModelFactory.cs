@@ -39,7 +39,7 @@ namespace Zetbox.Client.Presentables
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
     /// used by the rendering infrastructure to create ViewModels and Views.
     /// </summary>
-    public abstract class ViewModelFactory : Zetbox.Client.Presentables.IViewModelFactory
+    public abstract class ViewModelFactory : IViewModelFactory
     {
         /// <summary>
         /// Gets the Toolkit of the implementation. A constant.
@@ -49,6 +49,7 @@ namespace Zetbox.Client.Presentables
         protected readonly Autofac.ILifetimeScope Container;
         protected readonly IFrozenContext FrozenContext;
         protected readonly ZetboxConfig Configuration;
+        protected readonly Func<DialogCreator> DialogFactory;
 
         private struct VMCacheKey
         {
@@ -82,11 +83,12 @@ namespace Zetbox.Client.Presentables
 
         private readonly Dictionary<VMCacheKey, object> _viewModelFactoryCache;
 
-        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
+        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
         {
             if (container == null) throw new ArgumentNullException("container");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             if (cfg == null) throw new ArgumentNullException("cfg");
+            if (dialogFactory == null) throw new ArgumentNullException("dialogFactory");
 
             this.Container = container;
             this.FrozenContext = frozenCtx;
@@ -94,6 +96,7 @@ namespace Zetbox.Client.Presentables
             this.Managers = new Dictionary<IZetboxContext, IMultipleInstancesManager>();
             this._viewModelFactoryCache = new Dictionary<VMCacheKey, object>();
             this.PerfCounter = perfCounter;
+            this.DialogFactory = dialogFactory;
         }
 
         #region Model Management
@@ -608,6 +611,13 @@ namespace Zetbox.Client.Presentables
         {
             get;
             private set;
+        }
+
+        public DialogCreator CreateDialog(string title)
+        {
+            var result = DialogFactory();
+            result.Title = title;
+            return result;
         }
     }
 }

@@ -131,9 +131,9 @@ namespace Zetbox.Client.Presentables.GUI
             if (SelectedItem == null || !SelectedItem.IsMyOwn)
             {
                 // Create new
-                var dlg = new DialogCreator(DataContext, ViewModelFactory)
-                            .AddString("Name");
-                dlg.Show("Filter name", (p) => { name = p[0] as string; });
+                ViewModelFactory.CreateDialog("Filter name")
+                    .AddString("Name")
+                    .Show((p) => { name = p[0] as string; });
                 if (string.IsNullOrEmpty(name)) return;
             }
             else
@@ -231,7 +231,7 @@ namespace Zetbox.Client.Presentables.GUI
         public SavedListConfigViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, SavedListConfiguratorViewModel parent, SavedListConfig obj, bool isMyOwn)
             : base(appCtx, dataCtx, parent)
         {
-            this.Object = obj;
+            this._object = obj;
             this.IsMyOwn = isMyOwn;
         }
 

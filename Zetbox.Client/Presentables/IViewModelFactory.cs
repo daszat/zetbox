@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API.Client;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
 
     public interface IViewModelFactory : IToolkit
     {
@@ -56,5 +57,7 @@ namespace Zetbox.Client.Presentables
         void OnIMultipleInstancesManagerDisposed(Zetbox.API.IZetboxContext ctx, IMultipleInstancesManager workspace);
 
         IPerfCounter PerfCounter { get; }
+
+        DialogCreator CreateDialog(string title);
     }
 }
