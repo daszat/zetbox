@@ -112,6 +112,8 @@ namespace Zetbox.Client.Models
 
         public abstract object GetUntypedValue();
 
+        public abstract void SetUntypedValue(object val);
+
         public ControlKind RequestedKind { get; private set; }
         #endregion
 
@@ -211,6 +213,11 @@ namespace Zetbox.Client.Models
         public override object GetUntypedValue()
         {
             return this.Value;
+        }
+
+        public override void SetUntypedValue(object val)
+        {
+            this.Value = (TValue)val;
         }
         #endregion
 
@@ -684,6 +691,11 @@ namespace Zetbox.Client.Models
         {
             var val = (int?)base.GetUntypedValue();
             return Enum.GetValues(enumDef.GetDataType()).AsQueryable().OfType<object>().FirstOrDefault(i => (int)i == val);
+        }
+
+        public override void SetUntypedValue(object val)
+        {
+            base.SetUntypedValue(val);
         }
 
         #region IEnumerationValueModel Members

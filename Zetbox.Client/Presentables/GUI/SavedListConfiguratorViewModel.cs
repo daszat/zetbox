@@ -104,7 +104,15 @@ namespace Zetbox.Client.Presentables.GUI
                         foreach (var f in _selectedItem.Object.Filter)
                         {
                             var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
-                            Parent.FilterList.AddFilter(FilterModel.FromProperty(FrozenContext, props), true, props);
+                            var mdl = FilterModel.FromProperty(FrozenContext, props);
+                            int idx = 0;
+                            foreach (var val in f.Values ?? new object[] { })
+                            {
+                                if (idx >= mdl.FilterArguments.Count) break;
+                                mdl.FilterArguments[idx].Value.SetUntypedValue(val);
+                                idx++;
+                            }
+                            Parent.FilterList.AddFilter(mdl, true, props);
                         }
                     }
                 }
@@ -178,7 +186,11 @@ namespace Zetbox.Client.Presentables.GUI
                 item.Filter = new List<SavedListConfig.FilterConfig>();
                 foreach (var fvm in Parent.FilterList.FilterListEntryViewModels.Where(f => f.SourceProperties != null))
                 {
-                    item.Filter.Add(new SavedListConfig.FilterConfig() { Properties = fvm.SourceProperties.Select(i => i.ExportGuid).ToArray() });
+                    item.Filter.Add(new SavedListConfig.FilterConfig() 
+                    { 
+                        Properties = fvm.SourceProperties.Select(i => i.ExportGuid).ToArray(),
+                        Values = fvm.FilterViewModel.Arguments.Select(i => i.UntypedValue).ToArray()
+                    });
                 }
 
                 config.Configuration = obj.ToXmlString();

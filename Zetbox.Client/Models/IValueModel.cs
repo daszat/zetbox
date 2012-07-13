@@ -62,6 +62,12 @@ namespace Zetbox.Client.Models
         object GetUntypedValue();
 
         /// <summary>
+        /// Sets the untyped value
+        /// </summary>
+        /// <param name="val"></param>
+        void SetUntypedValue(object val);
+
+        /// <summary>
         /// DefaultKind override from the underlying Value model.
         /// </summary>
         ControlKind RequestedKind { get; }

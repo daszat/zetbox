@@ -44,6 +44,7 @@ namespace Zetbox.API.Common.GUI
         public class FilterConfig
         {
             public Guid[] Properties { get; set; }
+            public object[] Values { get; set; }
         }
     }
 }

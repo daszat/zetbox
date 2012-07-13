@@ -269,6 +269,8 @@ namespace Zetbox.Client.Models
 
         public abstract object GetUntypedValue();
 
+        public abstract void SetUntypedValue(object val);
+
         public ControlKind RequestedKind { get { return Property.RequestedKind; } }
         #endregion
 
@@ -374,6 +376,11 @@ namespace Zetbox.Client.Models
         public override object GetUntypedValue()
         {
             return this.Value;
+        }
+
+        public override void SetUntypedValue(object val)
+        {
+            this.Value = (TValue)val;
         }
         #endregion
     }
