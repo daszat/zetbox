@@ -723,6 +723,11 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         public override bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             if (!unique && !clustered) return true;
+            if (columns == null || columns.Length == 0)
+            {
+                Log.WarnFormat("Index automatically impossible for {0} without columns", idxName);
+                return false;
+            }
 
             return (int)ExecuteScalar(
                 string.Format("SELECT COUNT(*) FROM (SELECT {0} FROM {1} GROUP BY {0} HAVING COUNT(*) > 1) data",
@@ -733,8 +738,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
-            if (columns == null) throw new ArgumentNullException("columns");
-            if (columns.Length == 0) throw new ArgumentOutOfRangeException("columns");
+            if (columns == null || columns.Length == 0) throw new ArgumentOutOfRangeException("columns", string.Format("Cannot create index {0} without columns", idxName));
 
             string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());
 
