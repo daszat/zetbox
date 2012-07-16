@@ -38,13 +38,23 @@ namespace Zetbox.Client.WPF.Toolkit
         public static readonly string RESOURCE_DICTIONARY_STYLE = "Style";
         public static readonly string RESOURCE_DICTIONARY_VIEW = "VIEW";
 
+        /// <summary>
+        /// Not implemented yet for grids
+        /// http://stackoverflow.com/a/1931423/178517
+        /// </summary>
         public static readonly double WIDTH_CONTENT = double.NaN;
         public static readonly double WIDTH_TINY = 60;
-        public static readonly double WIDTH_SMALL = 120; // MinWidth for most controls is 100 plus some margins
+        /// <summary>
+        /// MinWidth for most controls is 100 plus some margins
+        /// </summary>
+        public static readonly double WIDTH_SMALL = 120; 
         public static readonly double WIDTH_NORMAL = 200;
         public static readonly double WIDTH_LARGE = 300;
         public static readonly double WIDTH_HUGE = 500;
-        public static readonly double WIDTH_STRECH = double.NaN; // Not implemented, using content??
+        /// <summary>
+        /// Not implemented, using content??
+        /// </summary>
+        public static readonly double WIDTH_STRECH = double.NaN; 
 
         /// <summary>
         /// http://stackoverflow.com/questions/980120/finding-control-within-wpf-itemscontrol
