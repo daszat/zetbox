@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-07-16T15:58:41Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-07-16T17:09:56Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-05T18:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-14T21:08:05Z</ZetboxBase:CreatedOn>
@@ -4044,8 +4044,8 @@ public static void isValid_RequestedKind(Property obj, PropertyIsValidEventArgs 
     <ZetboxBase:RelationEnd>f5f26029-73d8-4a8d-8208-a637a4ff3932</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:EnumerationProperty ExportGuid="fc109b87-4d77-4eb8-b744-1cca547fe866">
-    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-07-16T13:58:41.246618Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>GUI, Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-07-16T15:09:56.737163Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_RequestedWidth(Property obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.WidthHint?&gt; e)
 {
