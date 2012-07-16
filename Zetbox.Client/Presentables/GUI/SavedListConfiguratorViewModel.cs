@@ -201,6 +201,7 @@ namespace Zetbox.Client.Presentables.GUI
 
         private void Save(string name)
         {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             using (var ctx = ctxFactory())
             {
                 var config = GetSavedConfig(ctx);
@@ -285,6 +286,7 @@ namespace Zetbox.Client.Presentables.GUI
 
         public void Delete(SavedListConfigViewModel itemToDelete)
         {
+            if (itemToDelete == null) throw new ArgumentNullException("itemToDelete");
             if (ViewModelFactory.GetDecisionFromUser(string.Format(SavedListConfiguratorViewModelResources.DeleteMessage, itemToDelete.Name), SavedListConfiguratorViewModelResources.DeleteTitle) == true)
             {
                 using (var ctx = ctxFactory())
@@ -331,6 +333,8 @@ namespace Zetbox.Client.Presentables.GUI
 
         public void Rename(SavedListConfigViewModel itemToRename)
         {
+            if (itemToRename == null) throw new ArgumentNullException("itemToRename");
+
             string newName = null;
             string oldName = itemToRename.Name;
 
