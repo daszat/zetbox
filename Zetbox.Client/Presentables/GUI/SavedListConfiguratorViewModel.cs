@@ -150,6 +150,29 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
+        private ICommandViewModel _SaveAsCommand = null;
+        public ICommandViewModel SaveAsCommand
+        {
+            get
+            {
+                if (_SaveAsCommand == null)
+                {
+                    _SaveAsCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Save as", "", SaveAs, null, null);
+                }
+                return _SaveAsCommand;
+            }
+        }
+
+        public void SaveAs()
+        {
+            string name = string.Empty;
+            ViewModelFactory.CreateDialog("Filter name")
+                .AddString("Name")
+                .Show((p) => { name = p[0] as string; });
+            if (string.IsNullOrEmpty(name)) return;
+            Save(name);
+        }
+
         public void Save()
         {
             string name = string.Empty;
@@ -167,6 +190,11 @@ namespace Zetbox.Client.Presentables.GUI
                 name = SelectedItem.Name;
             }
 
+            Save(name);
+        }
+
+        private void Save(string name)
+        {
             using (var ctx = ctxFactory())
             {
                 var config = GetSavedConfig(ctx);
@@ -177,8 +205,8 @@ namespace Zetbox.Client.Presentables.GUI
                 item.Filter = new List<SavedListConfig.FilterConfig>();
                 foreach (var fvm in Parent.FilterList.FilterListEntryViewModels.Where(f => f.SourceProperties != null))
                 {
-                    item.Filter.Add(new SavedListConfig.FilterConfig() 
-                    { 
+                    item.Filter.Add(new SavedListConfig.FilterConfig()
+                    {
                         Properties = fvm.SourceProperties.Select(i => i.ExportGuid).ToArray(),
                         Values = fvm.FilterViewModel.Arguments.Select(i => ExtractUntypedValue(i.UntypedValue)).ToArray()
                     });
@@ -430,7 +458,7 @@ namespace Zetbox.Client.Presentables.GUI
                 config.Type = ctx.FindPersistenceObject<ObjectClass>(Parent.DataType.ExportGuid);  // Parent.DataType might be from FrozenContext
             }
             return config;
-        }        
+        }
         #endregion
     }
 

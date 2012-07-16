@@ -24,6 +24,7 @@
     -->
     <DockPanel>
         <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding ResetCommand}" />
+        <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding SaveAsCommand}" />
         <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding SaveCommand}" />
         <ComboBox IsSynchronizedWithCurrentItem="False"
                   ItemsSource="{Binding Configs}"
