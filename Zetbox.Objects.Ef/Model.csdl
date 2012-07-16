@@ -2052,6 +2052,7 @@
                         Relationship="Model.FK_Property_may_request_ControlKind"
                         FromRole="Property"
                         ToRole="ControlKind" />
+    <Property Name="RequestedWidthImpl" Type="Int32" Nullable="true"  />
     <NavigationProperty Name="ValueModelDescriptorImpl"
                         Relationship="Model.FK_Property_has_ValueModelDescriptor"
                         FromRole="Property"

@@ -253,6 +253,7 @@
     <Compile Include="StorageType.Interface.Designer.cs" />
     <Compile Include="TestEnum.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />
+    <Compile Include="WidthHint.Interface.Designer.cs" />
     <Compile Include="AuditEntry.Interface.Designer.cs" />
     <Compile Include="DateTimeRange.Interface.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Interface.Designer.cs" />

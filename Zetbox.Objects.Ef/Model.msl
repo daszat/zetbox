@@ -864,6 +864,7 @@
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Label" ColumnName="Label" />
 <ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.CalculatedObjectReferenceProperty)">

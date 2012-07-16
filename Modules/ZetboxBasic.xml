@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-07-13T10:53:07Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-07-16T15:58:41Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-05T18:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-14T21:08:05Z</ZetboxBase:CreatedOn>
@@ -895,6 +895,17 @@ public static void NotifyDeleting(Visual obj)
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Visuals</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:Enumeration ExportGuid="376054c0-6e97-450e-b7cf-ac6b8e0eb48f">
+    <ZetboxBase:ChangedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A hint fo a requested width</ZetboxBase:Description>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>WidthHint</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:AreFlags>false</ZetboxBase:AreFlags>
+  </ZetboxBase:Enumeration>
   <ZetboxBase:ObjectClass ExportGuid="96297bd7-7182-4446-8aed-23079250f408">
     <ZetboxBase:ChangedOn>2012-04-04T19:26:07.927747Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-05-26T22:08:44Z</ZetboxBase:CreatedOn>
@@ -3962,7 +3973,7 @@ public static void isValid_Predicate(OptionalPredicateFilterConfiguration obj, P
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="dbf93142-1769-4f53-bcbc-71325e1d5ce7">
     <ZetboxBase:CategoryTags>GUI, Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-04T19:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2012-07-16T13:58:41.246618Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_FilterConfiguration(Property obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.PropertyFilterConfiguration&gt; e)
 {
@@ -3990,7 +4001,7 @@ public static void isValid_FilterConfiguration(Property obj, PropertyIsValidEven
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>FilterConfiguration</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>405</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>406</ZetboxBase:Properties_pos>
     <GUI:RequestedKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:RequestedKind>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
@@ -3998,7 +4009,7 @@ public static void isValid_FilterConfiguration(Property obj, PropertyIsValidEven
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="3be58daf-9008-4cc3-a65d-8989909dcd80">
     <ZetboxBase:CategoryTags>GUI, Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-04T19:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2012-07-16T13:58:41.246618Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_RequestedKind(Property obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.ControlKind&gt; e)
 {
@@ -4027,14 +4038,52 @@ public static void isValid_RequestedKind(Property obj, PropertyIsValidEventArgs 
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>RequestedKind</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>403</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>404</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>f5f26029-73d8-4a8d-8208-a637a4ff3932</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:EnumerationProperty ExportGuid="fc109b87-4d77-4eb8-b744-1cca547fe866">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-07-16T13:58:41.246618Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_RequestedWidth(Property obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.WidthHint?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_RequestedWidth(Property obj, PropertyPreSetterEventArgs&lt;Zetbox.App.GUI.WidthHint?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_RequestedWidth(Property obj, PropertyPostSetterEventArgs&lt;Zetbox.App.GUI.WidthHint?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_RequestedWidth(Property obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.RequestedWidth == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-07-16T13:58:41.246618Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Label>Requested width</ZetboxBase:Label>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>RequestedWidth</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>403</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
+  </ZetboxBase:EnumerationProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="84e0996a-081f-4a17-a34d-54cf23991301">
     <ZetboxBase:CategoryTags>GUI, Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-04T19:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2012-07-16T13:58:41.246618Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ValueModelDescriptor(Property obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.ViewModelDescriptor&gt; e)
 {
@@ -4063,7 +4112,7 @@ public static void isValid_ValueModelDescriptor(Property obj, PropertyIsValidEve
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>ValueModelDescriptor</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>404</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>405</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>32fe5f8c-1e3f-4be5-a77f-40e3714dfecc</ZetboxBase:RelationEnd>
@@ -7076,6 +7125,71 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>WPF</ZetboxBase:Name>
     <ZetboxBase:Value>0</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="157eeeb2-e332-4f1b-911a-a18ec778b1cb">
+    <ZetboxBase:ChangedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Default</ZetboxBase:Name>
+    <ZetboxBase:Value>0</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="34233210-9855-4fb0-9d43-844fe38e595b">
+    <ZetboxBase:ChangedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Label>Fit content</ZetboxBase:Label>
+    <ZetboxBase:Name>FitContent</ZetboxBase:Name>
+    <ZetboxBase:Value>1</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="6030c618-c8d7-4eb1-9b3b-4a516e721ea2">
+    <ZetboxBase:ChangedOn>2012-07-16T13:56:46.109033Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>6</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Huge</ZetboxBase:Name>
+    <ZetboxBase:Value>60</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="75b6eafe-d6a9-4d4a-acd7-234baddc0a46">
+    <ZetboxBase:ChangedOn>2012-07-16T13:56:46.109033Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>5</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Large</ZetboxBase:Name>
+    <ZetboxBase:Value>50</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="a78c5d4b-841f-4e24-a1d7-477176bff2d2">
+    <ZetboxBase:ChangedOn>2012-07-16T13:56:46.109033Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>4</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Normal</ZetboxBase:Name>
+    <ZetboxBase:Value>40</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="7730f8b1-670b-40ef-aa0f-3d5d92b217da">
+    <ZetboxBase:ChangedOn>2012-07-16T13:56:46.109033Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>3</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Small</ZetboxBase:Name>
+    <ZetboxBase:Value>30</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="dd4077ab-ebeb-40e9-a84d-1b4a31aa5bff">
+    <ZetboxBase:ChangedOn>2012-07-16T13:56:46.109033Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>7</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Stretch</ZetboxBase:Name>
+    <ZetboxBase:Value>100</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="854cd518-39f0-45e3-ac55-7da0369cda5c">
+    <ZetboxBase:ChangedOn>2012-07-16T13:56:46.109033Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>2</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Tiny</ZetboxBase:Name>
+    <ZetboxBase:Value>20</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:Method ExportGuid="1c141538-b6fc-40a4-adf7-3c4ab438702c">
     <ZetboxBase:ChangedOn>2012-04-04T19:26:07.103536Z</ZetboxBase:ChangedOn>

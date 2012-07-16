@@ -1332,6 +1332,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("3be58daf-9008-4cc3-a65d-8989909dcd80"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> RequestedWidth
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("fc109b87-4d77-4eb8-b744-1cca547fe866"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ValueModelDescriptor
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("84e0996a-081f-4a17-a34d-54cf23991301"); }

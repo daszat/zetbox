@@ -77,6 +77,10 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="RequestedKind" column="`fk_ControlKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
+        <!-- ValueTypeProperty isValue -->
+        <property name="RequestedWidth" 
+                  column="`RequestedWidth`" 
+                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ValueModelDescriptor" column="`fk_ValueModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 

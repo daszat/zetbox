@@ -1467,6 +1467,83 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnRequestedKind_IsValid;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // enumeration property
+   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+        // implement the user-visible interface
+        public Zetbox.App.GUI.WidthHint? RequestedWidth
+        {
+            get
+            {
+				var __value = _RequestedWidth;
+				if(OnRequestedWidth_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Zetbox.App.GUI.WidthHint?>(__value);
+					OnRequestedWidth_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (_RequestedWidth != value)
+                {
+					var __oldValue = _RequestedWidth;
+					var __newValue = value;
+                    if(OnRequestedWidth_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.WidthHint?>(__oldValue, __newValue);
+						OnRequestedWidth_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+					
+                    NotifyPropertyChanging("RequestedWidth", __oldValue, __newValue);
+                    _RequestedWidth = value;
+                    NotifyPropertyChanged("RequestedWidth", __oldValue, __newValue);
+                    if(OnRequestedWidth_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.WidthHint?>(__oldValue, __newValue);
+						OnRequestedWidth_PostSetter(this, e);
+                    }
+                    
+                }
+            }
+        }
+
+        private Zetbox.App.GUI.WidthHint? _RequestedWidth_store;
+        private Zetbox.App.GUI.WidthHint? _RequestedWidth {
+            get { return _RequestedWidth_store; }
+            set {
+                ReportEfPropertyChanging("RequestedWidthImpl");
+                _RequestedWidth_store = value;
+                ReportEfPropertyChanged("RequestedWidthImpl");
+            }
+        }
+        
+        /// <summary>EF sees only this property, for RequestedWidth</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int? RequestedWidthImpl
+        {
+            get
+            {
+                return (int?)this.RequestedWidth;
+            }
+            set
+            {
+                this.RequestedWidth = (Zetbox.App.GUI.WidthHint?)value;
+            }
+        }
+        
+		public static event PropertyGetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.WidthHint?> OnRequestedWidth_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.WidthHint?> OnRequestedWidth_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.WidthHint?> OnRequestedWidth_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnRequestedWidth_IsValid;
+
+        /// <summary>
         /// The ViewModel to use for values of this Property
         /// </summary>
     /*
@@ -1908,6 +1985,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             me.ExportGuid = other.ExportGuid;
             me.Label = other.Label;
             me.Name = other.Name;
+            me.RequestedWidth = other.RequestedWidth;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_DefaultValue = otherImpl._fk_DefaultValue;
@@ -1951,6 +2029,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 case "Name":
                 case "ObjectClass":
                 case "RequestedKind":
+                case "RequestedWidth":
                 case "ValueModelDescriptor":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
@@ -2212,6 +2291,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         (obj, val) => obj.RequestedKind = val,
 						obj => OnRequestedKind_IsValid), 
                     // else
+                    new PropertyDescriptorEfImpl<Property, Zetbox.App.GUI.WidthHint?>(
+                        lazyCtx,
+                        new Guid("fc109b87-4d77-4eb8-b744-1cca547fe866"),
+                        "RequestedWidth",
+                        null,
+                        obj => obj.RequestedWidth,
+                        (obj, val) => obj.RequestedWidth = val,
+						obj => OnRequestedWidth_IsValid), 
+                    // else
                     new PropertyDescriptorEfImpl<Property, Zetbox.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
                         new Guid("84e0996a-081f-4a17-a34d-54cf23991301"),
@@ -2304,6 +2392,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("ObjectClass");
             SetNotInitializedProperty("RequestedKind");
+            SetNotInitializedProperty("RequestedWidth");
             SetNotInitializedProperty("ValueModelDescriptor");
             _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
@@ -2431,6 +2520,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_Property_may_request_ControlKind", "ControlKind").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
+            binStream.Write((int?)((Zetbox.App.Base.Property)this).RequestedWidth);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_Property_has_ValueModelDescriptor", "ValueModelDescriptor").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
@@ -2483,6 +2573,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             binStream.Read(out this._fk_ObjectClass);
             this._Properties_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_RequestedKind);
+            ((Zetbox.App.Base.Property)this).RequestedWidth = (Zetbox.App.GUI.WidthHint?)binStream.ReadNullableInt32();
             binStream.Read(out this._fk_ValueModelDescriptor);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -2512,6 +2603,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Properties_pos, xml, "Properties_pos", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedKind != null ? RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.Property)this).RequestedWidth, xml, "RequestedWidth", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ExportGuid : (Guid?)null, xml, "ValueModelDescriptor", "Zetbox.App.GUI");
         }
 
@@ -2568,6 +2660,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             case "Zetbox.App.GUI|RequestedKind":
                 this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
                 break;
+            case "Zetbox.App.GUI|RequestedWidth":
+                ((Zetbox.App.Base.Property)this).RequestedWidth = (Zetbox.App.GUI.WidthHint?)XmlStreamer.ReadNullableInt32(xml);
+               break;
             case "Zetbox.App.GUI|ValueModelDescriptor":
                 this._fk_guid_ValueModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
                 break;

@@ -102,6 +102,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("fc109b87-4d77-4eb8-b744-1cca547fe866")]
+        Zetbox.App.GUI.WidthHint? RequestedWidth {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The ViewModel to use for values of this Property
         /// </summary>
         [Zetbox.API.DefinitionGuid("84e0996a-081f-4a17-a34d-54cf23991301")]

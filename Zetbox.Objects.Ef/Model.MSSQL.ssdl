@@ -2662,6 +2662,7 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Label" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="RequestedWidth" Type="int" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="PropertyFilterConfiguration">
