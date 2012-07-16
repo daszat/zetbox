@@ -35,16 +35,24 @@ namespace Zetbox.API.Common.GUI
         public SavedListConfig()
         {
             Filter = new List<FilterConfig>();
+            Columns = new List<ColumnConfig>();
         }
 
         public string Name { get; set; }
 
         public List<FilterConfig> Filter { get; set; }
+        public List<ColumnConfig> Columns { get; set; }
 
         public class FilterConfig
         {
             public Guid[] Properties { get; set; }
             public object[] Values { get; set; }
+        }
+
+        public class ColumnConfig
+        {
+            public Guid[] Properties { get; set; }
+            public int Width { get; set; }
         }
     }
 }

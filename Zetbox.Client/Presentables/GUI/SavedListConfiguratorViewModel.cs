@@ -97,24 +97,40 @@ namespace Zetbox.Client.Presentables.GUI
                 {
                     _selectedItem = value;
                     OnPropertyChanged("SelectedItem");
+                    Load();
+                }
+            }
+        }
 
-                    Parent.FilterList.ResetUserFilter();
-                    if (_selectedItem != null)
+        private void Load()
+        {
+            Parent.FilterList.ResetUserFilter();
+            if (_selectedItem != null)
+            {
+                // Filter
+                foreach (var f in _selectedItem.Object.Filter)
+                {
+                    var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
+                    var mdl = FilterModel.FromProperty(FrozenContext, props);
+                    int idx = 0;
+                    foreach (var val in f.Values ?? new object[] { })
                     {
-                        foreach (var f in _selectedItem.Object.Filter)
-                        {
-                            var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
-                            var mdl = FilterModel.FromProperty(FrozenContext, props);
-                            int idx = 0;
-                            foreach (var val in f.Values ?? new object[] { })
-                            {
-                                if (idx >= mdl.FilterArguments.Count) break;
-                                var valueMdl = mdl.FilterArguments[idx].Value;
-                                valueMdl.SetUntypedValue(ResolveUntypedValue(val, valueMdl));
-                                idx++;
-                            }
-                            Parent.FilterList.AddFilter(mdl, true, props);
-                        }
+                        if (idx >= mdl.FilterArguments.Count) break;
+                        var valueMdl = mdl.FilterArguments[idx].Value;
+                        valueMdl.SetUntypedValue(ResolveUntypedValue(val, valueMdl));
+                        idx++;
+                    }
+                    Parent.FilterList.AddFilter(mdl, true, props);
+                }
+
+                // Cols
+                if (_selectedItem.Object.Columns != null && _selectedItem.Object.Columns.Count > 0)
+                {
+                    Parent.DisplayedColumns.Columns.Clear();
+                    foreach (var col in _selectedItem.Object.Columns)
+                    {
+                        var props = col.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToArray();
+                        Parent.DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, props));
                     }
                 }
             }
@@ -191,6 +207,16 @@ namespace Zetbox.Client.Presentables.GUI
                     { 
                         Properties = fvm.SourceProperties.Select(i => i.ExportGuid).ToArray(),
                         Values = fvm.FilterViewModel.Arguments.Select(i => ExtractUntypedValue(i.UntypedValue)).ToArray()
+                    });
+                }
+
+                item.Columns = new List<SavedListConfig.ColumnConfig>();
+                foreach (var col in Parent.DisplayedColumns.Columns)
+                {
+                    item.Columns.Add(new SavedListConfig.ColumnConfig()
+                    {
+                        Properties = col.Properties.Select(i => i.ExportGuid).ToArray(),
+                        Width = 0
                     });
                 }
 
