@@ -169,9 +169,9 @@ namespace Zetbox.Server
         {
             switch (fi.Name.ToLower())
             {
-                case "zetbox.client.wpf.exe":
+                case "zetbox.wpf.exe":
                     return FileType.Exec;
-                case "zetbox.client.wpf.exe.config":
+                case "zetbox.wpf.exe.config":
                     return FileType.AppConfig;
                 default:
                     return FileType.File;
