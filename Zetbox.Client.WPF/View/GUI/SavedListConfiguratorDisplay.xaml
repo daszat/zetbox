@@ -25,9 +25,23 @@
     <DockPanel>
         <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding ResetCommand}" />
         <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding SaveCommand}" />
-        <ComboBox DisplayMemberPath="Name"
-                  IsSynchronizedWithCurrentItem="False"
+        <ComboBox IsSynchronizedWithCurrentItem="False"
                   ItemsSource="{Binding Configs}"
-                  SelectedValue="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                  SelectedValue="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  HorizontalContentAlignment="Stretch"
+                  TextSearch.TextPath="Name"
+                  IsEditable="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <ctrls:CommandButton DockPanel.Dock="Right"
+                                             CommandViewModel="{Binding DeleteCommand}" />
+                        <ctrls:CommandButton DockPanel.Dock="Right"
+                                             CommandViewModel="{Binding RenameCommand}" />
+                        <TextBlock Text="{Binding Name}" Margin="0,0,10,0" />
+                    </DockPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </DockPanel>
 </UserControl>

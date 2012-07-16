@@ -66,8 +66,14 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
+                ApplyColumns();
+                ViewModel.DisplayedColumns.Columns.CollectionChanged += (s, ncc) => ApplyColumns();
             }
+        }
+
+        private void ApplyColumns()
+        {
+            WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
         }
 
         #region IHasViewModel<CompoundListViewModel> Members

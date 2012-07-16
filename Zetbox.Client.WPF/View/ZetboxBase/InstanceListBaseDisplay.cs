@@ -47,17 +47,31 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                ViewModel.PropertyChanged += (s, pce) => { if (pce.PropertyName == "ViewMethod") ApplyViewMethod(); };
+                ViewModel.PropertyChanged += (s, pce) => 
+                {
+                    if (pce.PropertyName == "ViewMethod") ApplyViewMethod();
+                    if (pce.PropertyName == "DisplayedColumns")
+                    {
+                        ViewModel.DisplayedColumns.Columns.CollectionChanged += (sncc, ncc) => ApplyColumns();
+                        ApplyColumns();
+                    }
+                };
+                ViewModel.DisplayedColumns.Columns.CollectionChanged += (s, ncc) => ApplyColumns();
                 ApplyViewMethod();
                 this.ApplyIsBusyBehaviour(ViewModel);
             }
+        }
+
+        private void ApplyColumns()
+        {
+            WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
         }
 
         private void ApplyViewMethod()
         {
             if (ViewModel.ViewMethod == Zetbox.App.GUI.InstanceListViewMethod.Details)
             {
-                WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
+                ApplyColumns();
                 ListView.ItemContainerStyle = Application.Current.Resources["ListViewAsGridViewItemContainerStyle"] as Style;
 
                 SortHelper.ApplyInitialSortTemplates(((GridView)ListView.View).Columns.FirstOrDefault(i => WpfSortHelper.GetSortPropertyName(i) == ViewModel.SortProperty));

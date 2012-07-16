@@ -632,6 +632,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             };
             ViewModelFactory.ShowDialog(dlg);
         }
+
+        public void ResetDisplayedColumns()
+        {
+            _displayedColumns = null;
+            OnPropertyChanged("DisplayedColumns");
+        }
         #endregion
 
         #region Print/Export

@@ -169,35 +169,9 @@ namespace Zetbox.Client.Presentables.GUI
 
             using (var ctx = ctxFactory())
             {
-                var config = ctx.GetQuery<SavedListConfiguration>()
-                    .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
-                    .Where(i => i.Owner == this.CurrentIdentity)
-                    .FirstOrDefault();
-                if(config == null)
-                {
-                    config = ctx.Create<SavedListConfiguration>();
-                    config.Owner = ctx.Find<Identity>(CurrentIdentity.ID);
-                    config.Type = ctx.FindPersistenceObject<ObjectClass>(Parent.DataType.ExportGuid);  // Parent.DataType might be from FrozenContext
-                }
-
-                SavedListConfigurationList obj;
-                try
-                {
-                    obj = !string.IsNullOrEmpty(config.Configuration) ? config.Configuration.FromXmlString<SavedListConfigurationList>() : new SavedListConfigurationList();
-                }
-                catch (Exception ex)
-                {
-                    Logging.Client.Warn("Error during deserializing SavedListConfigurationList, creating a new one", ex);
-                    obj = new SavedListConfigurationList();
-                }
-
-                var item = obj.Configs.FirstOrDefault(i => i.Name == name);
-                if (item == null)
-                {
-                    item = new SavedListConfig();
-                    item.Name = name;
-                    obj.Configs.Add(item);
-                }
+                var config = GetSavedConfig(ctx);
+                var obj = ExtractConfigurationObject(config);
+                var item = ExtractItem(name, obj);
 
                 // Do the update
                 item.Filter = new List<SavedListConfig.FilterConfig>();
@@ -223,21 +197,7 @@ namespace Zetbox.Client.Presentables.GUI
                 config.Configuration = obj.ToXmlString();
                 ctx.SubmitChanges();
 
-                // Replace saved view model
-                if (_configs != null)
-                {
-                    SavedListConfigViewModel vmdl = this._configs.Rw.SingleOrDefault(i => i.Object.Name == item.Name && i.IsMyOwn);
-                    if (vmdl == null)
-                    {
-                        vmdl = ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, true);
-                        _configs.Rw.Add(vmdl);
-                        SelectedItem = vmdl;
-                    }
-                    else
-                    {
-                        vmdl.Object = item;
-                    }
-                }
+                UpdateViewModel(name, item);
             }
         }
 
@@ -258,6 +218,95 @@ namespace Zetbox.Client.Presentables.GUI
         {
             SelectedItem = null;
             Parent.FilterList.ResetUserFilter();
+            Parent.ResetDisplayedColumns();
+        }
+
+        private ICommandViewModel _DeleteCommand = null;
+        public ICommandViewModel DeleteCommand
+        {
+            get
+            {
+                if (_DeleteCommand == null)
+                {
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Delete", "", Delete, () => SelectedItem != null, () => "No item selected");
+                }
+                return _DeleteCommand;
+            }
+        }
+
+        public void Delete()
+        {
+            if (SelectedItem != null)
+            {
+                Delete(SelectedItem);
+            }
+        }
+
+        public void Delete(SavedListConfigViewModel itemToDelete)
+        {
+            if (ViewModelFactory.GetDecisionFromUser(string.Format("Delete item {0}?", itemToDelete.Name), "Are you sure") == true)
+            {
+                using (var ctx = ctxFactory())
+                {
+                    var config = GetSavedConfig(ctx);
+                    var obj = ExtractConfigurationObject(config);
+
+                    var item = obj.Configs.FirstOrDefault(i => i.Name == itemToDelete.Name);
+                    if (item != null)
+                    {
+                        obj.Configs.Remove(item);
+                        config.Configuration = obj.ToXmlString();
+                        ctx.SubmitChanges();
+                        RemoveViewModel(item.Name);
+                    }
+                }
+            }
+        }
+
+        private ICommandViewModel _RenameCommand = null;
+        public ICommandViewModel RenameCommand
+        {
+            get
+            {
+                if (_RenameCommand == null)
+                {
+                    _RenameCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Rename", "", Rename, () => SelectedItem != null, () => "No item selected");
+                }
+                return _RenameCommand;
+            }
+        }
+
+        public void Rename()
+        {
+            if (SelectedItem != null)
+            {
+                Rename(SelectedItem);
+            }
+        }
+
+        public void Rename(SavedListConfigViewModel itemToRename)
+        {
+            string newName = null;
+            string oldName = itemToRename.Name;
+
+            ViewModelFactory.CreateDialog("Filter name")
+                .AddString("Name")
+                .Show((p) => { newName = p[0] as string; });
+            if (string.IsNullOrEmpty(newName)) return;
+
+            using (var ctx = ctxFactory())
+            {
+                var config = GetSavedConfig(ctx);
+                var obj = ExtractConfigurationObject(config);
+                var item = obj.Configs.FirstOrDefault(i => i.Name == oldName);
+                if (item != null)
+                {
+                    item.Name = newName;
+                    config.Configuration = obj.ToXmlString();
+                    ctx.SubmitChanges();
+                    UpdateViewModel(oldName, item);
+                }
+            }
         }
         #endregion
 
@@ -306,6 +355,82 @@ namespace Zetbox.Client.Presentables.GUI
                 return val;
             }
         }
+        protected void UpdateViewModel(string name, SavedListConfig item)
+        {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (item == null) throw new ArgumentNullException("item");
+
+            if (_configs != null)
+            {
+                SavedListConfigViewModel vmdl = this._configs.Rw.SingleOrDefault(i => i.Object.Name == name && i.IsMyOwn);
+                if (vmdl == null)
+                {
+                    vmdl = ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, true);
+                    _configs.Rw.Add(vmdl);
+                    SelectedItem = vmdl;
+                }
+                else
+                {
+                    vmdl.Object = item;
+                }
+            }
+        }
+
+        protected void RemoveViewModel(string name)
+        {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (_configs != null)
+            {
+                SavedListConfigViewModel vmdl = this._configs.Rw.SingleOrDefault(i => i.Object.Name == name && i.IsMyOwn);
+                if (vmdl != null)
+                {
+                    _configs.Rw.Remove(vmdl);
+                    SelectedItem = null;
+                }
+            }
+        }
+
+        protected SavedListConfig ExtractItem(string name, SavedListConfigurationList obj)
+        {
+            var item = obj.Configs.FirstOrDefault(i => i.Name == name);
+            if (item == null)
+            {
+                item = new SavedListConfig();
+                item.Name = name;
+                obj.Configs.Add(item);
+            }
+            return item;
+        }
+
+        protected SavedListConfigurationList ExtractConfigurationObject(SavedListConfiguration config)
+        {
+            SavedListConfigurationList obj;
+            try
+            {
+                obj = !string.IsNullOrEmpty(config.Configuration) ? config.Configuration.FromXmlString<SavedListConfigurationList>() : new SavedListConfigurationList();
+            }
+            catch (Exception ex)
+            {
+                Logging.Client.Warn("Error during deserializing SavedListConfigurationList, creating a new one", ex);
+                obj = new SavedListConfigurationList();
+            }
+            return obj;
+        }
+
+        private SavedListConfiguration GetSavedConfig(IZetboxContext ctx)
+        {
+            var config = ctx.GetQuery<SavedListConfiguration>()
+                .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
+                .Where(i => i.Owner == this.CurrentIdentity)
+                .FirstOrDefault();
+            if (config == null)
+            {
+                config = ctx.Create<SavedListConfiguration>();
+                config.Owner = ctx.Find<Identity>(CurrentIdentity.ID);
+                config.Type = ctx.FindPersistenceObject<ObjectClass>(Parent.DataType.ExportGuid);  // Parent.DataType might be from FrozenContext
+            }
+            return config;
+        }        
         #endregion
     }
 
@@ -352,7 +477,50 @@ namespace Zetbox.Client.Presentables.GUI
             get { return Object.Name; }
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public bool IsMyOwn { get; private set; }
+
+        #region Commands
+        private ICommandViewModel _DeleteCommand = null;
+        public ICommandViewModel DeleteCommand
+        {
+            get
+            {
+                if (_DeleteCommand == null)
+                {
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Delete", "", Delete, null, null);
+                }
+                return _DeleteCommand;
+            }
+        }
+
+        public void Delete()
+        {
+            Parent.Delete(this);
+        }
+
+        private ICommandViewModel _RenameCommand = null;
+        public ICommandViewModel RenameCommand
+        {
+            get
+            {
+                if (_RenameCommand == null)
+                {
+                    _RenameCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Rename", "", Rename, null, null);
+                }
+                return _RenameCommand;
+            }
+        }
+
+        public void Rename()
+        {
+            Parent.Rename(this);
+        }
+        #endregion
     }
 
 }

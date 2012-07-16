@@ -50,10 +50,24 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
+                ViewModel.PropertyChanged += (s, pce) =>
+                {
+                    if (pce.PropertyName == "DisplayedColumns")
+                    {
+                        ViewModel.DisplayedColumns.Columns.CollectionChanged += (sncc, ncc) => ApplyColumns();
+                        ApplyColumns();
+                    }
+                };
+                ViewModel.DisplayedColumns.Columns.CollectionChanged += (s, ncc) => ApplyColumns();
+                ApplyColumns();
                 SortHelper.ApplyInitialSortTemplates(DataGrid.Columns.FirstOrDefault(i => WpfSortHelper.GetSortPropertyName(i) == ViewModel.SortProperty));
                 this.ApplyIsBusyBehaviour(ViewModel);
             }
+        }
+
+        private void ApplyColumns()
+        {
+            WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
         }
 
         protected override void SetHeaderTemplate(DependencyObject header, DataTemplate template)
