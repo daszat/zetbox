@@ -63,7 +63,7 @@ namespace Zetbox.Client.Models
         {
         }
 
-        public ColumnDisplayModel(string header, string name, ControlKind kind, int requestedWidth)
+        public ColumnDisplayModel(string header, string name, ControlKind kind, WidthHint requestedWidth)
             : this(header, name, kind, null, ColumnType.PropertyModel, requestedWidth)
         {
         }
@@ -74,16 +74,16 @@ namespace Zetbox.Client.Models
         }
 
         public ColumnDisplayModel(string header, string name, ControlKind kind, ColumnType type)
-            : this(header, name, kind, null, type, -1)
+            : this(header, name, kind, null, type, WidthHint.Default)
         {
         }
 
         public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind)
-            : this(header, name, kind, gridPreviewKind, ColumnType.PropertyModel, -1)
+            : this(header, name, kind, gridPreviewKind, ColumnType.PropertyModel, WidthHint.Default)
         {
         }
 
-        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type, int requestedWidth)
+        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type, WidthHint requestedWidth)
         {
             this.Header = header;
             this.Name = name;
@@ -98,7 +98,7 @@ namespace Zetbox.Client.Models
         public string Name { get; set; }
         public ControlKind ControlKind { get; set; }
         public ControlKind GridPreEditKind { get; set; }
-        public int RequestedWidth { get; set; }
+        public WidthHint RequestedWidth { get; set; }
         public Property Property { get; set; }
         public App.Base.Property[] Properties { get; set; }
 
@@ -227,7 +227,7 @@ namespace Zetbox.Client.Models
                 Header = m.GetLabel(),
                 Name = m.Name,
                 Type = ColumnDisplayModel.ColumnType.MethodModel,
-                RequestedWidth = ClientExtensions.WIDTH_NORMAL,
+                RequestedWidth = WidthHint.Normal,
             };
         }
 

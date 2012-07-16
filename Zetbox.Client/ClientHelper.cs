@@ -26,6 +26,7 @@ using Zetbox.App.Extensions;
 using Zetbox.API.Utils;
 using Zetbox.Client.Presentables;
 using Autofac;
+using Zetbox.App.GUI;
 
 namespace Zetbox.Client
 {
@@ -51,26 +52,25 @@ namespace Zetbox.Client
             }
         }
 
-        public static readonly int WIDTH_TINY = 60;
-        public static readonly int WIDTH_SMALL = 120; // MinWidth for most controls is 100 plus some margins
-        public static readonly int WIDTH_NORMAL = 200;
-        public static readonly int WIDTH_LARGE = 300;
-        public static readonly int WIDTH_HUGE = 500;
-
-        public static int GetDisplayWidth(this Property p)
+        public static WidthHint GetDisplayWidth(this Property p)
         {
+            if (p.RequestedWidth != null && p.RequestedWidth != Zetbox.App.GUI.WidthHint.Default)
+            {
+                return p.RequestedWidth.Value;
+            }
+
             if (p is StringProperty)
             {
                 var sp = (StringProperty)p;
                 var length = sp.GetMaxLength();
-                if (length >= 1000) return WIDTH_HUGE;
-                if (length >= 500) return WIDTH_LARGE;
-                if (length >= 200) return WIDTH_NORMAL;
-                return WIDTH_SMALL;
+                if (length >= 1000) return WidthHint.Huge;
+                if (length >= 500) return WidthHint.Large;
+                if (length >= 200) return WidthHint.Normal;
+                return WidthHint.Small;
             }
             else if (p is ObjectReferenceProperty)
             {
-                return WIDTH_NORMAL;
+                return WidthHint.Normal;
             }
             else if (p is DateTimeProperty)
             {
@@ -79,22 +79,22 @@ namespace Zetbox.Client
                 {
                     case DateTimeStyles.Date:
                     case DateTimeStyles.Time:
-                        return WIDTH_SMALL;
+                        return WidthHint.Small;
                     default:
-                        return WIDTH_NORMAL;
+                        return WidthHint.Normal;
                 }
             }
             else if (p is CalculatedObjectReferenceProperty)
             {
-                return WIDTH_NORMAL;
+                return WidthHint.Normal;
             }
             else if (p is BoolProperty)
             {
-                return WIDTH_TINY;
+                return WidthHint.Tiny;
             }
             else
             {
-                return WIDTH_SMALL;
+                return WidthHint.Small;
             }
         }
 

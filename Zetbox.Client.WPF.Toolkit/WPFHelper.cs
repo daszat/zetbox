@@ -30,12 +30,21 @@ namespace Zetbox.Client.WPF.Toolkit
     using Zetbox.Client.WPF.CustomControls;
     using Zetbox.Client.WPF.Toolkit;
     using Microsoft.Windows.Controls;
+    using Zetbox.App.GUI;
 
     public static class WPFHelper
     {
         public static readonly string RESOURCE_DICTIONARY_KIND = "Kind";
         public static readonly string RESOURCE_DICTIONARY_STYLE = "Style";
         public static readonly string RESOURCE_DICTIONARY_VIEW = "VIEW";
+
+        public static readonly double WIDTH_CONTENT = double.NaN;
+        public static readonly double WIDTH_TINY = 60;
+        public static readonly double WIDTH_SMALL = 120; // MinWidth for most controls is 100 plus some margins
+        public static readonly double WIDTH_NORMAL = 200;
+        public static readonly double WIDTH_LARGE = 300;
+        public static readonly double WIDTH_HUGE = 500;
+        public static readonly double WIDTH_STRECH = double.NaN; // Not implemented, using content??
 
         /// <summary>
         /// http://stackoverflow.com/questions/980120/finding-control-within-wpf-itemscontrol
@@ -60,6 +69,32 @@ namespace Zetbox.Client.WPF.Toolkit
                 }
             }
             return null;
+        }
+
+        public static double TranslateWidth(WidthHint? w)
+        {
+            if (w == null) return WIDTH_NORMAL;
+            switch (w.Value)
+            {
+                case WidthHint.Default:
+                    return WIDTH_NORMAL;
+                case WidthHint.FitContent:
+                    return WIDTH_CONTENT;
+                case WidthHint.Tiny:
+                    return WIDTH_TINY;
+                case WidthHint.Small:
+                    return WIDTH_SMALL;
+                case WidthHint.Normal:
+                    return WIDTH_NORMAL;
+                case WidthHint.Large:
+                    return WIDTH_LARGE;
+                case WidthHint.Huge:
+                    return WIDTH_HUGE;
+                case WidthHint.Stretch:
+                    return WIDTH_STRECH;
+                default:
+                    return WIDTH_NORMAL;
+            }
         }
 
         public static void RefreshGridView(DataGrid lst, GridDisplayConfiguration cfg, DependencyProperty sortProperty)
@@ -89,7 +124,7 @@ namespace Zetbox.Client.WPF.Toolkit
             {
                 // TODO: use default controls after moving labeling to infrastructure
                 var col = new DataGridTemplateColumn() { Header = desc.Header };
-                if (desc.RequestedWidth > 0) col.Width = desc.RequestedWidth;
+                if (desc.RequestedWidth != App.GUI.WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
 
                 var needEditor = desc.ControlKind != desc.GridPreEditKind;
 
@@ -167,7 +202,7 @@ namespace Zetbox.Client.WPF.Toolkit
             {
                 // TODO: use default controls after moving labeling to infrastructure
                 var col = new GridViewColumn() { Header = desc.Header };
-                if (desc.RequestedWidth > 0) col.Width = desc.RequestedWidth;
+                if (desc.RequestedWidth != WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
 
                 DataTemplate result = new DataTemplate();
                 var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
