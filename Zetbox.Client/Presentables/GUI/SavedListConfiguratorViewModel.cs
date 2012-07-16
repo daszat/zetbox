@@ -109,7 +109,8 @@ namespace Zetbox.Client.Presentables.GUI
                             foreach (var val in f.Values ?? new object[] { })
                             {
                                 if (idx >= mdl.FilterArguments.Count) break;
-                                mdl.FilterArguments[idx].Value.SetUntypedValue(val);
+                                var valueMdl = mdl.FilterArguments[idx].Value;
+                                valueMdl.SetUntypedValue(ResolveUntypedValue(val, valueMdl));
                                 idx++;
                             }
                             Parent.FilterList.AddFilter(mdl, true, props);
@@ -189,7 +190,7 @@ namespace Zetbox.Client.Presentables.GUI
                     item.Filter.Add(new SavedListConfig.FilterConfig() 
                     { 
                         Properties = fvm.SourceProperties.Select(i => i.ExportGuid).ToArray(),
-                        Values = fvm.FilterViewModel.Arguments.Select(i => i.UntypedValue).ToArray()
+                        Values = fvm.FilterViewModel.Arguments.Select(i => ExtractUntypedValue(i.UntypedValue)).ToArray()
                     });
                 }
 
@@ -231,6 +232,53 @@ namespace Zetbox.Client.Presentables.GUI
         {
             SelectedItem = null;
             Parent.FilterList.ResetUserFilter();
+        }
+        #endregion
+
+        #region Helper
+        protected object ResolveUntypedValue(object val, IValueModel mdl)
+        {
+            if (val == null) return null;
+
+            if (mdl is IObjectReferenceValueModel)
+            {
+                var objRefMdl = (IObjectReferenceValueModel)mdl;
+                if (val is Guid)
+                {
+                    return DataContext.FindPersistenceObject(DataContext.GetInterfaceType(objRefMdl.ReferencedClass.GetDataType()), (Guid)val);
+                }
+                else if (val is int)
+                {
+                    return DataContext.FindPersistenceObject(DataContext.GetInterfaceType(objRefMdl.ReferencedClass.GetDataType()), (int)val);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return val;
+            }
+        }
+        protected object ExtractUntypedValue(object val)
+        {
+            if (val is IExportable)
+            {
+                return ((IExportable)val).ExportGuid;
+            }
+            else if (val is IPersistenceObject)
+            {
+                return ((IPersistenceObject)val).ID;
+            }
+            else if (val is Enum)
+            {
+                return (int)val;
+            }
+            else
+            {
+                return val;
+            }
         }
         #endregion
     }
