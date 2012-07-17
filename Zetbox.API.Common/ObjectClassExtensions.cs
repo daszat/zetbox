@@ -246,11 +246,18 @@ namespace Zetbox.App.Extensions
             return false;
         }
 
-        public static IList<Property> GetAllProperties(this ObjectClass cls)
+        public static IList<Property> GetAllProperties(this DataType cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
-            return cls.GetInheritedProperties().Concat(cls.Properties).ToList();
+            if (cls is ObjectClass)
+            {
+                return ((ObjectClass)cls).GetInheritedProperties().Concat(cls.Properties).ToList();
+            }
+            else
+            {
+                return cls.Properties;
+            }
         }
 
         public static IList<Property> GetInheritedProperties(this ObjectClass cls)
@@ -266,11 +273,18 @@ namespace Zetbox.App.Extensions
             return result.ToList();
         }
 
-        public static IList<Method> GetAllMethods(this ObjectClass cls)
+        public static IList<Method> GetAllMethods(this DataType cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
 
-            return cls.GetInheritedMethods().Concat(cls.Methods).ToList();
+            if (cls is ObjectClass)
+            {
+                return ((ObjectClass)cls).GetInheritedMethods().Concat(cls.Methods).ToList();
+            }
+            else
+            {
+                return cls.Methods.ToList();
+            }
         }
 
         public static bool IsAssignableFrom(this DataType self, DataType other)

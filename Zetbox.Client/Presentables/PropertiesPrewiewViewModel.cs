@@ -144,15 +144,7 @@ namespace Zetbox.Client.Presentables
                     {
                         if (!_cache.ContainsKey(key))
                         {
-                            Property prop;
-                            if (_dataType is ObjectClass)
-                            {
-                                prop = ((ObjectClass)_dataType).GetAllProperties().SingleOrDefault(p => p.Name == key);
-                            }
-                            else
-                            {
-                                prop = _dataType.Properties.SingleOrDefault(p => p.Name == key);
-                            }
+                            Property prop = _dataType.GetAllProperties().SingleOrDefault(p => p.Name == key);
                             var objVmdl = DataObjectViewModel.Fetch(_factory, _dataType.Context, null, prop);
                             var result = objVmdl.PropertyModelsByName["RequestedWidth"];
                             prop.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(prop_PropertyChanged);
