@@ -243,7 +243,7 @@ namespace Zetbox.Client.Models
                 Header = m.GetLabel(),
                 Name = m.Name,
                 Type = ColumnDisplayModel.ColumnType.MethodModel,
-                RequestedWidth = WidthHint.Normal,
+                RequestedWidth = WidthHint.Medium,
             };
         }
 

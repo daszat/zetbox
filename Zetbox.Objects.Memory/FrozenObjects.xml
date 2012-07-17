@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-07-17T10:36:29Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-07-17T14:44:20Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-05T18:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T22:03:02Z</ZetboxBase:CreatedOn>
@@ -10586,11 +10586,11 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
     <ZetboxBase:Value>50</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="a78c5d4b-841f-4e24-a1d7-477176bff2d2">
-    <ZetboxBase:ChangedOn>2012-07-16T13:56:46.109033Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2012-07-17T12:44:20.484543Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-07-16T13:55:58.600316Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>4</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Normal</ZetboxBase:Name>
+    <ZetboxBase:Name>Medium</ZetboxBase:Name>
     <ZetboxBase:Value>40</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="7730f8b1-670b-40ef-aa0f-3d5d92b217da">

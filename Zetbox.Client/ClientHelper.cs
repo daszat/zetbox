@@ -65,12 +65,12 @@ namespace Zetbox.Client
                 var length = sp.GetMaxLength();
                 if (length >= 1000) return WidthHint.Huge;
                 if (length >= 500) return WidthHint.Large;
-                if (length >= 200) return WidthHint.Normal;
+                if (length >= 200) return WidthHint.Medium;
                 return WidthHint.Small;
             }
             else if (p is ObjectReferenceProperty)
             {
-                return WidthHint.Normal;
+                return WidthHint.Medium;
             }
             else if (p is DateTimeProperty)
             {
@@ -81,12 +81,12 @@ namespace Zetbox.Client
                     case DateTimeStyles.Time:
                         return WidthHint.Small;
                     default:
-                        return WidthHint.Normal;
+                        return WidthHint.Medium;
                 }
             }
             else if (p is CalculatedObjectReferenceProperty)
             {
-                return WidthHint.Normal;
+                return WidthHint.Medium;
             }
             else if (p is BoolProperty)
             {

@@ -30,6 +30,9 @@ namespace Zetbox.Client.Presentables
             {
                 case "Properties":
                 case "Methods":
+                case "ShowIconInLists":
+                case "ShowIdInLists":
+                case "ShowNameInLists":
                     Reset();
                     break;
             }
@@ -147,6 +150,7 @@ namespace Zetbox.Client.Presentables
                     switch(e.PropertyName)
                     {
                         case "RequestedWidth":
+                        case "DateTimeStyle":
                             _parent.Reset();
                             break;
                     }

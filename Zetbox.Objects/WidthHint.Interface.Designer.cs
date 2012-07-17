@@ -32,7 +32,7 @@ namespace Zetbox.App.GUI
 		/// <summary>
 		/// 
 		/// </summary>
-		Normal = 40,
+		Medium = 40,
 
 		/// <summary>
 		/// 

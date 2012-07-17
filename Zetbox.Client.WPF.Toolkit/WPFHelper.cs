@@ -48,7 +48,7 @@ namespace Zetbox.Client.WPF.Toolkit
         /// MinWidth for most controls is 100 plus some margins
         /// </summary>
         public static readonly double WIDTH_SMALL = 120; 
-        public static readonly double WIDTH_NORMAL = 200;
+        public static readonly double WIDTH_MEDIUM = 200;
         public static readonly double WIDTH_LARGE = 300;
         public static readonly double WIDTH_HUGE = 500;
         /// <summary>
@@ -83,19 +83,19 @@ namespace Zetbox.Client.WPF.Toolkit
 
         public static double TranslateWidth(WidthHint? w)
         {
-            if (w == null) return WIDTH_NORMAL;
+            if (w == null) return WIDTH_MEDIUM;
             switch (w.Value)
             {
                 case WidthHint.Default:
-                    return WIDTH_NORMAL;
+                    return WIDTH_MEDIUM;
                 case WidthHint.FitContent:
                     return WIDTH_CONTENT;
                 case WidthHint.Tiny:
                     return WIDTH_TINY;
                 case WidthHint.Small:
                     return WIDTH_SMALL;
-                case WidthHint.Normal:
-                    return WIDTH_NORMAL;
+                case WidthHint.Medium:
+                    return WIDTH_MEDIUM;
                 case WidthHint.Large:
                     return WIDTH_LARGE;
                 case WidthHint.Huge:
@@ -103,7 +103,7 @@ namespace Zetbox.Client.WPF.Toolkit
                 case WidthHint.Stretch:
                     return WIDTH_STRECH;
                 default:
-                    return WIDTH_NORMAL;
+                    return WIDTH_MEDIUM;
             }
         }
 
