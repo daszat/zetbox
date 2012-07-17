@@ -39,44 +39,20 @@ namespace Zetbox.Client.Presentables
         }
         private DataType _dataType;
 
-        private ReadOnlyProjectedList<Property, DescribedPropertyViewModel> _propertyModels;
-        public IReadOnlyList<DescribedPropertyViewModel> DescribedPropertyModels
+        protected override List<PropertyGroupViewModel> CreatePropertyGroups()
         {
-            get
-            {
-                if (_propertyModels == null)
-                {
-                    _propertyModels = new ReadOnlyProjectedList<Property, DescribedPropertyViewModel>(
-                        _dataType.Properties.OrderBy(p => p.Name).ToList(),
-                        property => ViewModelFactory.CreateViewModel<DescribedPropertyViewModel.Factory>().Invoke(DataContext, this, property),
-                        m => m.DescribedProperty);
-                }
-                return _propertyModels;
-            }
-        }
+            var result = base.CreatePropertyGroups();
 
-        private ReadOnlyProjectedList<Method, DescribedMethodViewModel> _methodModels;
-        public IReadOnlyList<DescribedMethodViewModel> DescribedMethods
-        {
-            get
-            {
-                if (_methodModels == null)
-                {
-                    _methodModels = new ReadOnlyProjectedList<Method, DescribedMethodViewModel>(
-                        _dataType.Methods.OrderBy(m => m.Name).ToList(),
-                        m => ViewModelFactory.CreateViewModel<DescribedMethodViewModel.Factory>().Invoke(DataContext, this, m),
-                        m => m.DescribedMethod);
-                }
-                return _methodModels;
-            }
-        }
+            var singleMdl = result.Single(n => n.Name == "Properties");
+            var preview = ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this);
+            var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", preview);
+            var grpMdl = ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Properties", singleMdl.PropertyModels.Concat(new [] { lblMdl }).ToArray());
 
-        public IEnumerable<DescribedMethodViewModel> DescribedCustomMethods
-        {
-            get
-            {
-                return DescribedMethods.Where(m => !m.IsDefaultMethod);
-            }
+            var idx = result.IndexOf(singleMdl);
+            result.Remove(singleMdl);
+            result.Insert(idx, grpMdl);
+
+            return result;
         }
     }
 }

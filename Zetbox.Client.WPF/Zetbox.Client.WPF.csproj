@@ -225,6 +225,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ZetboxBase\PropertiesPrewiewDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ZetboxBase\PropertySelectionTaskDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -621,6 +625,9 @@
     <Compile Include="View\ZetboxBase\InstanceCollectionBase.cs" />
     <Compile Include="View\ZetboxBase\InstanceListHeader.xaml.cs">
       <DependentUpon>InstanceListHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\PropertiesPrewiewDisplay.xaml.cs">
+      <DependentUpon>PropertiesPrewiewDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\PropertySelectionTaskDialog.xaml.cs">
       <DependentUpon>PropertySelectionTaskDialog.xaml</DependentUpon>
