@@ -126,6 +126,7 @@
     <Compile Include="ANewObjectClass.Ef.Designer.cs" />
     <Compile Include="AnotherTest.Ef.Designer.cs" />
     <Compile Include="Antwort.Ef.Designer.cs" />
+    <Compile Include="AnyReferenceTestObject.Ef.Designer.cs" />
     <Compile Include="Application.Ef.Designer.cs" />
     <Compile Include="Assembly.Ef.Designer.cs" />
     <Compile Include="Auftrag.Ef.Designer.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="YearFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="YearlyCalendarRule.Ef.Designer.cs" />
     <Compile Include="CollectionEntries.Ef.Designer.cs" />
+    <Compile Include="AnyReference.Ef.Designer.cs" />
     <Compile Include="AuditEntry.Ef.Designer.cs" />
     <Compile Include="DateTimeRange.Ef.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Ef.Designer.cs" />

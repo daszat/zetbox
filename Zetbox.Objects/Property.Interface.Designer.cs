@@ -57,6 +57,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// Disables the export. If not set, export is enabled
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("8da249b4-ca2b-403e-903a-d0138b57b64e")]
+        bool? DisableExport {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("dbf93142-1769-4f53-bcbc-71325e1d5ce7")]

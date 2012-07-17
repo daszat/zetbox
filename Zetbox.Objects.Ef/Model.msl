@@ -62,6 +62,19 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AnyReferenceTestObject">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AnyReferenceTestObject)">
+	    <MappingFragment StoreEntitySet="AnyReferenceTestObject">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+<ComplexProperty Name="AnyImpl" TypeName="Model.AnyReference">
+<ScalarProperty Name="ObjClass" ColumnName="Any_ObjClass" />
+<ScalarProperty Name="ObjGuid" ColumnName="Any_ObjGuid" />
+<ScalarProperty Name="ObjID" ColumnName="Any_ObjID" />
+</ComplexProperty>
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Application">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Application)">
 	    <MappingFragment StoreEntitySet="Application">
@@ -861,6 +874,7 @@
 <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Label" ColumnName="Label" />
 <ScalarProperty Name="Name" ColumnName="Name" />

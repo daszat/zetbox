@@ -97,6 +97,7 @@
     <Compile Include="ANewObjectClass.Interface.Designer.cs" />
     <Compile Include="AnotherTest.Interface.Designer.cs" />
     <Compile Include="Antwort.Interface.Designer.cs" />
+    <Compile Include="AnyReferenceTestObject.Interface.Designer.cs" />
     <Compile Include="Application.Interface.Designer.cs" />
     <Compile Include="Assembly.Interface.Designer.cs" />
     <Compile Include="Auftrag.Interface.Designer.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="TestEnum.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />
     <Compile Include="WidthHint.Interface.Designer.cs" />
+    <Compile Include="AnyReference.Interface.Designer.cs" />
     <Compile Include="AuditEntry.Interface.Designer.cs" />
     <Compile Include="DateTimeRange.Interface.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Interface.Designer.cs" />

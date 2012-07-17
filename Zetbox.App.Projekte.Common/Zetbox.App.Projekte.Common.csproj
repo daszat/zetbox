@@ -94,6 +94,7 @@
     <Compile Include="ZetboxBase\ConstraintActions.cs" />
     <Compile Include="ZetboxBase\BoolDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\CompoundObjectParameterActions.cs" />
+    <Compile Include="ZetboxBase\AnyReferenceActions.cs" />
     <Compile Include="ZetboxBase\SequenceActions.cs" />
     <Compile Include="ZetboxBase\DateTimeRangeActions.cs" />
     <Compile Include="ZetboxBase\ValueTypePropertyActions.cs" />

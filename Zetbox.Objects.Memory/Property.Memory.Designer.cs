@@ -678,6 +678,63 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnDescription_IsValid;
 
         /// <summary>
+        /// Disables the export. If not set, export is enabled
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public bool? DisableExport
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _DisableExport;
+                if (OnDisableExport_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnDisableExport_Getter(this, __e);
+                    __result = _DisableExport = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_DisableExport != value)
+                {
+                    var __oldValue = _DisableExport;
+                    var __newValue = value;
+                    if (OnDisableExport_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnDisableExport_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("DisableExport", __oldValue, __newValue);
+                    _DisableExport = __newValue;
+                    NotifyPropertyChanged("DisableExport", __oldValue, __newValue);
+
+                    if (OnDisableExport_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnDisableExport_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("DisableExport");
+				}
+            }
+        }
+        private bool? _DisableExport;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Property, bool?> OnDisableExport_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, bool?> OnDisableExport_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, bool?> OnDisableExport_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnDisableExport_IsValid;
+
+        /// <summary>
         /// Export Guid
         /// </summary>
         // value type property
@@ -1777,6 +1834,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             this.CodeTemplate = otherImpl.CodeTemplate;
             me.CreatedOn = other.CreatedOn;
             me.Description = other.Description;
+            me.DisableExport = other.DisableExport;
             me.ExportGuid = other.ExportGuid;
             me.Label = other.Label;
             me.Name = other.Name;
@@ -1881,6 +1939,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 case "CreatedOn":
                 case "DefaultValue":
                 case "Description":
+                case "DisableExport":
                 case "ExportGuid":
                 case "FilterConfiguration":
                 case "Label":
@@ -2085,6 +2144,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         (obj, val) => obj.Description = val,
 						obj => OnDescription_IsValid), 
                     // else
+                    new PropertyDescriptorMemoryImpl<Property, bool?>(
+                        lazyCtx,
+                        new Guid("8da249b4-ca2b-403e-903a-d0138b57b64e"),
+                        "DisableExport",
+                        null,
+                        obj => obj.DisableExport,
+                        (obj, val) => obj.DisableExport = val,
+						obj => OnDisableExport_IsValid), 
+                    // else
                     new PropertyDescriptorMemoryImpl<Property, Guid>(
                         lazyCtx,
                         new Guid("ca0a099d-3f4c-4604-8303-d751e57041bb"),
@@ -2243,6 +2311,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("DefaultValue");
             SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("DisableExport");
             SetNotInitializedProperty("FilterConfiguration");
             SetNotInitializedProperty("Label");
             SetNotInitializedProperty("Module");
@@ -2311,6 +2380,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             binStream.Write(DefaultValue != null ? DefaultValue.ID : (int?)null);
             binStream.Write(this._Description);
+            binStream.Write(this._DisableExport);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
@@ -2361,6 +2431,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             this._fk_DefaultValue = binStream.ReadNullableInt32();
             this._Description = binStream.ReadString();
+            this._DisableExport = binStream.ReadNullableBoolean();
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
@@ -2395,6 +2466,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._DisableExport, xml, "DisableExport", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(FilterConfiguration != null ? FilterConfiguration.ExportGuid : (Guid?)null, xml, "FilterConfiguration", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Label, xml, "Label", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
@@ -2432,6 +2504,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 break;
             case "Zetbox.App.Base|Description":
                 this._Description = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|DisableExport":
+                this._DisableExport = XmlStreamer.ReadNullableBoolean(xml);
                 break;
             case "Zetbox.App.Base|ExportGuid":
                 // Import must have default value set

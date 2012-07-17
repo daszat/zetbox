@@ -36,6 +36,7 @@ namespace Zetbox.Client.Presentables
     /// <summary>
     /// Proxies a whole IDataObject
     /// </summary>
+    [ViewModelDescriptor]
     public class DataObjectViewModel
         : ViewModel, IDataErrorInfo
     {

@@ -8,6 +8,7 @@
     <EntitySet Name="ANewObjectClass" EntityType="Model.ANewObjectClass" />
     <EntitySet Name="AnotherTest" EntityType="Model.AnotherTest" />
     <EntitySet Name="Antwort" EntityType="Model.Antwort" />
+    <EntitySet Name="AnyReferenceTestObject" EntityType="Model.AnyReferenceTestObject" />
     <EntitySet Name="Application" EntityType="Model.Application" />
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <EntitySet Name="Auftrag" EntityType="Model.Auftrag" />
@@ -1097,6 +1098,16 @@
     <Property Name="FragenNummer" Type="Int32" Nullable="false"  />
     <Property Name="GegebeneAntwort" Type="Int32" Nullable="true"  />
   </EntityType>
+  <EntityType Name="AnyReferenceTestObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="AnyImpl"
+              Type="Model.AnyReference"
+              Nullable="false" />
+    <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="200"  />
+  </EntityType>
   <EntityType Name="Application">
     <Key>
       <PropertyRef Name="ID" />
@@ -2032,6 +2043,7 @@
                         FromRole="Property"
                         ToRole="DefaultValue" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200"  />
+    <Property Name="DisableExport" Type="Boolean" Nullable="true"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="FilterConfigurationImpl"
                         Relationship="Model.FK_Property_Has_PropertyFilterConfiguration"
@@ -5328,6 +5340,11 @@
 
 
   <!-- ComplexTypes for all CompoundObjects -->
+  <ComplexType Name="AnyReference" >
+    <Property Name="ObjClass" Type="Guid" Nullable="true"  />
+    <Property Name="ObjGuid" Type="Guid" Nullable="true"  />
+    <Property Name="ObjID" Type="Int32" Nullable="true"  />
+  </ComplexType>
   <ComplexType Name="AuditEntry" >
     <Property Name="Identity" Type="String" Nullable="true" MaxLength="1000"  />
     <Property Name="MessageFormat" Type="String" Nullable="true" MaxLength="1000"  />

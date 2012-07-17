@@ -54,6 +54,10 @@
                   column="`Description`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="DisableExport" 
+                  column="`DisableExport`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>

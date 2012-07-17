@@ -138,6 +138,7 @@
     <Compile Include="ANewObjectClass.NHibernate.Designer.cs" />
     <Compile Include="AnotherTest.NHibernate.Designer.cs" />
     <Compile Include="Antwort.NHibernate.Designer.cs" />
+    <Compile Include="AnyReferenceTestObject.NHibernate.Designer.cs" />
     <Compile Include="Application.NHibernate.Designer.cs" />
     <Compile Include="Assembly.NHibernate.Designer.cs" />
     <Compile Include="Auftrag.NHibernate.Designer.cs" />
@@ -271,6 +272,7 @@
     <Compile Include="YearFilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="YearlyCalendarRule.NHibernate.Designer.cs" />
     <Compile Include="CollectionEntries.NHibernate.Designer.cs" />
+    <Compile Include="AnyReference.NHibernate.Designer.cs" />
     <Compile Include="AuditEntry.NHibernate.Designer.cs" />
     <Compile Include="DateTimeRange.NHibernate.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.NHibernate.Designer.cs" />

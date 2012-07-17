@@ -112,7 +112,7 @@ namespace Zetbox.App.Extensions
                     Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
                     ReflectMethods(ctx);
-                    CreateInvokeInfosForObjectClasses(ctx);
+                    CreateInvokeInfosForDataTypes(ctx);
 
                     foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
                     {
@@ -207,7 +207,7 @@ namespace Zetbox.App.Extensions
         /// Initializes caches for the provider of the given Context
         /// </summary>
         /// <param name="metaCtx">the context used to access the meta data</param>
-        private void CreateInvokeInfosForObjectClasses(IReadOnlyZetboxContext metaCtx)
+        private void CreateInvokeInfosForDataTypes(IReadOnlyZetboxContext metaCtx)
         {
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
@@ -322,39 +322,39 @@ namespace Zetbox.App.Extensions
             if (dt == null) throw new ArgumentNullException("dt");
 
 
-            if (dt is ObjectClass)
+            // Reflected Methods
+            // New style
+            foreach (var method in GetAllMethods(dt))
             {
-                var objClass = (ObjectClass)dt;
-                // Reflected Methods
-                // New style
-                foreach (var method in GetAllMethods(objClass))
+                foreach (var methodSuffix in new[] { string.Empty, "CanExec", "CanExecReason" })
                 {
-                    foreach (var methodSuffix in new[] { string.Empty, "CanExec", "CanExecReason" })
+                    var key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name + methodSuffix);
+                    if (_reflectedMethods.ContainsKey(key))
                     {
-                        var key = new MethodKey(objClass.Module.Namespace, objClass.Name, method.Name + methodSuffix);
-                        if (_reflectedMethods.ContainsKey(key))
+                        var methodInfos = _reflectedMethods[key];
+
+                        // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                        // or null if not found
+                        EventBasedMethodAttribute attr;
+                        if (string.IsNullOrEmpty(methodSuffix))
+                            attr = FindEventBasedMethodAttribute(method, implType); // The Method
+                        else
+                            attr = FindEventBasedMethodAttribute(method, methodSuffix, implType); // For can execute & reason
+                        if (attr != null)
                         {
-                            var methodInfos = _reflectedMethods[key];
-
-                            // May be null on Methods without events like server side invocatiaons or "embedded" methods
-                            // or null if not found
-                            EventBasedMethodAttribute attr;
-                            if(string.IsNullOrEmpty(methodSuffix))
-                                attr = FindEventBasedMethodAttribute(method, implType); // The Method
-                            else
-                                attr = FindEventBasedMethodAttribute(method, methodSuffix, implType); // For can execute & reason
-                            if (attr != null)
+                            foreach (var mi in methodInfos)
                             {
-                                foreach (var mi in methodInfos)
-                                {
-                                    CreateInvokeInfo(implType, mi, attr.EventName);
-                                }
+                                CreateInvokeInfo(implType, mi, attr.EventName);
                             }
-
-                            _attachedMethods[key] = true;
                         }
+
+                        _attachedMethods[key] = true;
                     }
                 }
+            }
+
+            if (dt is ObjectClass)
+            {
                 CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave");
                 CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave");
                 CreateDefaultMethodInvocations(implType, dt, "NotifyCreated");
@@ -403,18 +403,19 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        private List<Method> GetAllMethods(ObjectClass objClass)
+        private List<Method> GetAllMethods(DataType dt)
         {
-            if (objClass != null)
+            var result = new List<Method>();
+            if (dt != null)
             {
-                var result = GetAllMethods(((ObjectClass)objClass).BaseObjectClass);
-                objClass.Methods.ForEach<Method>(m => result.Add(m));
+                if (dt is ObjectClass)
+                {
+                    result = GetAllMethods(((ObjectClass)dt).BaseObjectClass);
+                }
+                result.AddRange(dt.Methods);
                 return result;
             }
-            else
-            {
-                return new List<Method>();
-            }
+            return result;
         }
 
         private void CreateInvokeInfo(Type implType, MethodInfo clrMethod, string eventName)

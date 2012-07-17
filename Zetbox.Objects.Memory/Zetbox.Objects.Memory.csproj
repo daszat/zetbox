@@ -123,6 +123,7 @@
     <Compile Include="ANewObjectClass.Memory.Designer.cs" />
     <Compile Include="AnotherTest.Memory.Designer.cs" />
     <Compile Include="Antwort.Memory.Designer.cs" />
+    <Compile Include="AnyReferenceTestObject.Memory.Designer.cs" />
     <Compile Include="Application.Memory.Designer.cs" />
     <Compile Include="Assembly.Memory.Designer.cs" />
     <Compile Include="Auftrag.Memory.Designer.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="YearFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="YearlyCalendarRule.Memory.Designer.cs" />
     <Compile Include="CollectionEntries.Memory.Designer.cs" />
+    <Compile Include="AnyReference.Memory.Designer.cs" />
     <Compile Include="AuditEntry.Memory.Designer.cs" />
     <Compile Include="DateTimeRange.Memory.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Memory.Designer.cs" />

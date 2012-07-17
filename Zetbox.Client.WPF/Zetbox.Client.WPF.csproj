@@ -213,6 +213,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ZetboxBase\AnyReferencePropertyEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ZetboxBase\FilterListDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -615,6 +619,9 @@
     </Compile>
     <Compile Include="View\ZetboxBase\AccessDeniedDisplay.xaml.cs">
       <DependentUpon>AccessDeniedDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\AnyReferencePropertyEditor.xaml.cs">
+      <DependentUpon>AnyReferencePropertyEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\FilterListDisplay.xaml.cs">
       <DependentUpon>FilterListDisplay.xaml</DependentUpon>

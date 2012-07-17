@@ -578,7 +578,6 @@ namespace Zetbox.Client.Models
             get;
             private set;
         }
-
         #endregion
     }
 

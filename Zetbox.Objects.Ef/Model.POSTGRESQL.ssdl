@@ -12,6 +12,7 @@
     <EntitySet Name="ANewObjectClass" EntityType="Model.Store.ANewObjectClass" Schema="test" Table="NewObjectClasses"/>
     <EntitySet Name="AnotherTest" EntityType="Model.Store.AnotherTest" Schema="test" Table="AnotherTests"/>
     <EntitySet Name="Antwort" EntityType="Model.Store.Antwort" Schema="test" Table="Antworten"/>
+    <EntitySet Name="AnyReferenceTestObject" EntityType="Model.Store.AnyReferenceTestObject" Schema="test" Table="AnyReferenceTestObjects"/>
     <EntitySet Name="Application" EntityType="Model.Store.Application" Schema="gui" Table="Applications"/>
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Schema="base" Table="Assemblies"/>
     <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Schema="projekte" Table="Auftraege"/>
@@ -1617,6 +1618,17 @@
     <Property Name="GegebeneAntwort" Type="int4" Nullable="true" />
   </EntityType>
 	
+  <EntityType Name="AnyReferenceTestObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Any_ObjClass" Type="uuid" Nullable="true" />
+    <Property Name="Any_ObjGuid" Type="uuid" Nullable="true" />
+    <Property Name="Any_ObjID" Type="int4" Nullable="true" />
+  </EntityType>
+	
   <EntityType Name="Application">
     <Key>
       <PropertyRef Name="ID" />
@@ -2659,6 +2671,7 @@
     <Property Name="CodeTemplate" Type="varchar" MaxLength="1000" Nullable="true" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="200" Nullable="true" />
+    <Property Name="DisableExport" Type="bool" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Label" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />

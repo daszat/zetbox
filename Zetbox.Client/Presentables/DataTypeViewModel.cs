@@ -25,6 +25,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
 
+    [ViewModelDescriptor]
     public class DataTypeViewModel 
         : DataObjectViewModel
     {

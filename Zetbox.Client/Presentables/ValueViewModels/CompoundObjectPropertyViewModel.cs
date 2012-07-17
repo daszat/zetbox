@@ -70,23 +70,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected override void SetValueToModel(CompoundObjectViewModel value)
         {
+            if (value == null) throw new ArgumentNullException("value", "Cannot set a CompoundObject property to null");
+
             _valueCache = value;
             _valueCacheInititalized = true;
-            ValueModel.Value = value != null ? value.Object : null;
+            ValueModel.Value = value.Object;
         }
 
         private void UpdateValueCache()
         {
-            var obj = ValueModel.Value;
-            if (obj == null)
-            {
-                // if it's null, create one
-                // TODO: This may be a subject to change
-                // We still don't know, how to handle nullable CompoundObjects!!!
-                obj = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(ReferencedType.GetDataType()));
-                ValueModel.Value = obj;
-            }
-            _valueCache = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
+            _valueCache = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, ValueModel.Value);
             _valueCacheInititalized = true;
         }
 
@@ -104,6 +97,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     propMdl.IsReadOnly = value;
                 }
             }
+        }
+
+        public override void ClearValue()
+        {
+            ValueModel.Value = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(ReferencedType.GetDataType()));
         }
     }
 }

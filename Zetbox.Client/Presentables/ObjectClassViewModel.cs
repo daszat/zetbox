@@ -27,6 +27,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.Presentables.ZetboxBase;
     using Zetbox.Client.Models;
 
+    [ViewModelDescriptor]
     public class ObjectClassViewModel : DataTypeViewModel
     {
         public new delegate ObjectClassViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass cls);
