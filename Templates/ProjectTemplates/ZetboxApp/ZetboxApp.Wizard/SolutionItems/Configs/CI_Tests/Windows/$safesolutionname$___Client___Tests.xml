@@ -23,10 +23,9 @@
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
       <Module>Zetbox.Tests.Utilities.PostgreSql.UtilityModule, Zetbox.Tests.Utilities.PostgreSql</Module>
 
-      <!-- application specific modules 
-      <Module>$safesolutionname$.Client.CustomClientActionsModule, $safesolutionname$.Client</Module>
-      <Module>$safesolutionname$.Client.Tests.SqueezeModule, $safesolutionname$.Client.Tests</Module>
-      -->
+      <!-- application specific modules -->
+      <Module>$safesolutionname$.Common.CommonModule, $safesolutionname$.Common</Module>
+      <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
     </Modules>
   </Client>
   <AssemblySearchPaths>
