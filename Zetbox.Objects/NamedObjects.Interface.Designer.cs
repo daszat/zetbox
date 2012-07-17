@@ -3485,6 +3485,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("2f6233fe-6fd6-4145-b438-64cc85f89fd8"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_PropertiesPreview
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("dc5982a3-8b8f-44e1-b860-1400a41c4275"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_PropertyGroupKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("d9fb7cec-b71f-48f1-a591-216de253c7d1"); }
@@ -3837,6 +3841,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("94be5252-6aeb-4a0d-b6eb-6f7ae07728e8"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_SavedListConfigViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("0dbfab52-64c2-404d-a612-6df0696131b7"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ModuleEditor_ControlKindHierarchyViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("16c4762d-451a-48f6-a460-b987d63edaa0"); }
@@ -3872,6 +3880,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ParameterInputTaskViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("44ddb453-0e08-40cd-b707-7b66a610a900"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_PropertiesPrewiewViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("bbaeb043-89c8-492e-a586-a822dbe38e3a"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_PropertyGroupViewModel
                 {

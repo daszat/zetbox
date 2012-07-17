@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
@@ -25,6 +26,29 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         public PropertiesPrewiewDisplay()
         {
             InitializeComponent();
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
+            {
+                ViewModel.PropertyChanged += (s, pce) =>
+                {
+                    if (pce.PropertyName == "DisplayedColumns")
+                    {
+                        ViewModel.DisplayedColumns.Columns.CollectionChanged += (sncc, ncc) => ApplyColumns();
+                        ApplyColumns();
+                    }
+                };
+                ViewModel.DisplayedColumns.Columns.CollectionChanged += (s, ncc) => ApplyColumns();
+                ApplyColumns();
+            }
+        }
+
+        private void ApplyColumns()
+        {
+            WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
         }
 
         public PropertiesPrewiewViewModel ViewModel
