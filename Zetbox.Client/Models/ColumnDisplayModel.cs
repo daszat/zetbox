@@ -161,7 +161,7 @@ namespace Zetbox.Client.Models
             return (categoryTags ?? String.Empty).Split(',', ' ').Contains("Summary");
         }
 
-        public void BuildColumns(Zetbox.App.Base.DataType cls, IEnumerable<Property> props, IEnumerable<Method> methods, Mode mode)
+        private void BuildColumns(Zetbox.App.Base.DataType cls, IEnumerable<Property> props, IEnumerable<Method> methods, Mode mode)
         {
             if (cls == null) throw new ArgumentNullException("cls");
             if (props == null) throw new ArgumentNullException("props");
@@ -178,9 +178,25 @@ namespace Zetbox.Client.Models
             );
         }
 
-        public void BuildColumns(Zetbox.App.Base.CompoundObject cls, Mode mode)
+        public void BuildColumns(Zetbox.App.Base.DataType cls, Mode mode, bool showMethods)
         {
-            BuildColumns(cls, cls.Properties, cls.Methods.Where(m => m.IsDisplayable), mode);
+            if (cls is ObjectClass)
+            {
+                BuildColumns((ObjectClass)cls, mode, showMethods);
+            }
+            else if (cls is CompoundObject)
+            {
+                BuildColumns((CompoundObject)cls, mode, showMethods);
+            }
+            else
+            {
+                throw new InvalidOperationException("Unsupported DataType");
+            }
+        }
+
+        public void BuildColumns(Zetbox.App.Base.CompoundObject cls, Mode mode, bool showMethods)
+        {
+            BuildColumns(cls, cls.Properties, showMethods ? cls.Methods.Where(m => m.IsDisplayable) : new Method[] { }, mode);
         }
 
         public void BuildColumns(Zetbox.App.Base.ObjectClass cls, Mode mode, bool showMethods)

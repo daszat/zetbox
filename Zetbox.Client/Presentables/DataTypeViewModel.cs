@@ -43,14 +43,17 @@ namespace Zetbox.Client.Presentables
         {
             var result = base.CreatePropertyGroups();
 
-            var singleMdl = result.Single(n => n.Name == "Properties");
-            var preview = ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType);
-            var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", preview);
-            var grpMdl = ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Properties", singleMdl.PropertyModels.Concat(new [] { lblMdl }).ToArray());
+            if (_dataType is ObjectClass || _dataType is CompoundObject)
+            {
+                var singleMdl = result.Single(n => n.Name == "Properties");
+                var preview = ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType);
+                var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", preview);
+                var grpMdl = ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Properties", singleMdl.PropertyModels.Concat(new[] { lblMdl }).ToArray());
 
-            var idx = result.IndexOf(singleMdl);
-            result.Remove(singleMdl);
-            result.Insert(idx, grpMdl);
+                var idx = result.IndexOf(singleMdl);
+                result.Remove(singleMdl);
+                result.Insert(idx, grpMdl);
+            }
 
             return result;
         }

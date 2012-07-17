@@ -68,19 +68,7 @@ namespace Zetbox.Client.Presentables
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
-            if (_dataType is ObjectClass)
-            {
-                result.BuildColumns((ObjectClass)_dataType, GridDisplayConfiguration.Mode.Editable, true);
-            }
-            else if (_dataType is CompoundObject)
-            {
-                result.BuildColumns((CompoundObject)_dataType, GridDisplayConfiguration.Mode.Editable);
-            }
-            else
-            {
-                // Fallback
-                result.BuildColumns(_dataType, _dataType.Properties, _dataType.Methods, GridDisplayConfiguration.Mode.Editable);
-            }
+            result.BuildColumns(_dataType, GridDisplayConfiguration.Mode.Editable, true);
 
             // Fix column control kinds
             var editKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_EnumerationSelectorKind.Find(FrozenContext);

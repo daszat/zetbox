@@ -154,7 +154,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             var result = new GridDisplayConfiguration();
             GridDisplayConfiguration.Mode mode = GridDisplayConfiguration.Mode.Editable;
 
-            result.BuildColumns(ValueModel.CompoundObjectDefinition, mode);
+            result.BuildColumns(ValueModel.CompoundObjectDefinition, mode, true);
             return result;
         }
 
