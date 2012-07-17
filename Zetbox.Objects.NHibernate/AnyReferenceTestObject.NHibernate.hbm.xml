@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Zetbox.App.Test.AnyReferenceTestObjectNHibernateImpl+AnyReferenceTestObjectProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.AnyReferenceTestObjectNHibernateImpl+AnyReferenceTestObjectProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`AnyReferenceTestObjects`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`AnyReferenceTestObjects_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- CompoundObjectProperty isValue -->
+        <component name="Any" class="Zetbox.App.Base.AnyReferenceNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjClass" 
+                  column="`Any_ObjClass`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjGuid" 
+                  column="`Any_ObjGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjID" 
+                  column="`Any_ObjID`" 
+                  optimistic-lock="false"/>
+        </component>
+        <!-- ValueTypeProperty isValue -->
+        <property name="DisplayName" 
+                  column="`DisplayName`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>
