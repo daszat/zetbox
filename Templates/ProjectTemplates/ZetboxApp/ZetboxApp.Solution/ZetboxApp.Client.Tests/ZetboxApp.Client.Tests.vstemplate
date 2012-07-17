@@ -16,6 +16,7 @@
     <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" OpenInEditor="true">Integration\BasicTests.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true">SetUpFixture.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true">App.config</ProjectItem>
     </Project>
   </TemplateContent>
