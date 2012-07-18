@@ -1624,6 +1624,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="DisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Any_ObjClass" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Any_ObjGuid" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Any_ObjID" Type="int" Nullable="true" />

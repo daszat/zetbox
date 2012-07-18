@@ -1107,6 +1107,7 @@
               Type="Model.AnyReference"
               Nullable="false" />
     <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="200"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
   </EntityType>
   <EntityType Name="Application">
     <Key>

@@ -37,6 +37,10 @@
         <property name="DisplayName" 
                   column="`DisplayName`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
 

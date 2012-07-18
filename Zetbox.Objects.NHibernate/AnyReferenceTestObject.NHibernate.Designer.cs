@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("AnyReferenceTestObject")]
-    public class AnyReferenceTestObjectNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, AnyReferenceTestObject
+    public class AnyReferenceTestObjectNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, AnyReferenceTestObject, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("3a8d152e-b8d1-4439-bfe4-367731218ce9");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -52,6 +52,7 @@ namespace Zetbox.App.Test
                 this.Proxy.Any.AttachToObject(this, "Any");
             }
 
+            _isExportGuidSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -164,6 +165,83 @@ namespace Zetbox.App.Test
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.AnyReferenceTestObject> OnDisplayName_IsValid;
 
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchExportGuidOrDefault();
+                if (OnExportGuid_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Guid>(__result);
+                    OnExportGuid_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isExportGuidSet = true;
+                if (Proxy.ExportGuid != value)
+                {
+                    var __oldValue = Proxy.ExportGuid;
+                    var __newValue = value;
+                    if (OnExportGuid_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    Proxy.ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
+                    if (OnExportGuid_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
+            }
+        }
+
+
+        private Guid FetchExportGuidOrDefault()
+        {
+            var __result = Proxy.ExportGuid;
+                if (!_isExportGuidSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("65839be9-d3b7-4910-9812-c2d44d008c41"));
+                    if (__p != null) {
+                        _isExportGuidSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.ExportGuid = (Guid)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Test.AnyReferenceTestObject.ExportGuid'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isExportGuidSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.AnyReferenceTestObject, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.AnyReferenceTestObject, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.AnyReferenceTestObject, Guid> OnExportGuid_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.AnyReferenceTestObject> OnExportGuid_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(AnyReferenceTestObject);
@@ -177,6 +255,7 @@ namespace Zetbox.App.Test
             var me = (AnyReferenceTestObject)this;
 
             me.DisplayName = other.DisplayName;
+            me.ExportGuid = other.ExportGuid;
             if (me.Any == null && other.Any != null) {
                 me.Any = (Zetbox.App.Base.AnyReference)other.Any.Clone();
             } else if (me.Any != null && other.Any == null) {
@@ -207,6 +286,7 @@ namespace Zetbox.App.Test
             {
                 case "Any":
                 case "DisplayName":
+                case "ExportGuid":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -253,6 +333,15 @@ namespace Zetbox.App.Test
                         obj => obj.DisplayName,
                         (obj, val) => obj.DisplayName = val,
 						obj => OnDisplayName_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<AnyReferenceTestObject, Guid>(
+                        lazyCtx,
+                        new Guid("65839be9-d3b7-4910-9812-c2d44d008c41"),
+                        "ExportGuid",
+                        null,
+                        obj => obj.ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => OnExportGuid_IsValid), 
                     // position columns
                 };
             }
@@ -300,6 +389,7 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyPreSave_AnyReferenceTestObject")]
         public override void NotifyPreSave()
         {
+            FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_AnyReferenceTestObject != null) OnNotifyPreSave_AnyReferenceTestObject(this);
         }
@@ -351,6 +441,8 @@ namespace Zetbox.App.Test
 
             public virtual string DisplayName { get; set; }
 
+            public virtual Guid ExportGuid { get; set; }
+
         }
 
         // make proxy available for the provider
@@ -365,6 +457,10 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this.Any);
             binStream.Write(this.Proxy.DisplayName);
+            binStream.Write(this._isExportGuidSet);
+            if (this._isExportGuidSet) {
+                binStream.Write(this.Proxy.ExportGuid);
+            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -379,12 +475,44 @@ namespace Zetbox.App.Test
                 this.AnyImpl.AttachToObject(this, "Any");
             }
             this.Proxy.DisplayName = binStream.ReadString();
+            this._isExportGuidSet = binStream.ReadBoolean();
+            if (this._isExportGuidSet) {
+                this.Proxy.ExportGuid = binStream.ReadGuid();
+            }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this.Any, xml, "Any", "Zetbox.App.Test");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this.Proxy.DisplayName, xml, "DisplayName", "Zetbox.App.Test");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Test|Any":
+                XmlStreamer.FromStream(this.AnyImpl, xml);
+                break;
+            case "Zetbox.App.Test|DisplayName":
+                this.Proxy.DisplayName = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Test|ExportGuid":
+                // Import must have default value set
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            }
         }
 
         #endregion

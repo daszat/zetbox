@@ -67,6 +67,7 @@
 	    <MappingFragment StoreEntitySet="AnyReferenceTestObject">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ComplexProperty Name="AnyImpl" TypeName="Model.AnyReference">
 <ScalarProperty Name="ObjClass" ColumnName="Any_ObjClass" />
 <ScalarProperty Name="ObjGuid" ColumnName="Any_ObjGuid" />

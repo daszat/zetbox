@@ -11,7 +11,7 @@ namespace Zetbox.App.Test
     /// 
     /// </summary>
     [Zetbox.API.DefinitionGuid("3a8d152e-b8d1-4439-bfe4-367731218ce9")]
-    public interface AnyReferenceTestObject : IDataObject 
+    public interface AnyReferenceTestObject : IDataObject, Zetbox.App.Base.IExportable 
     {
 
         /// <summary>
