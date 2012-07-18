@@ -27,8 +27,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
     public class NotifyingValueProperty
         : Templates.Properties.NotifyingValueProperty
     {
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Templates.Serialization.SerializationMembersList serializationList, string type, string name, string modulenamespace, string backingName, bool isCalculated)
-            : base(_host, ctx, serializationList, type, name, modulenamespace, "Proxy." + name, isCalculated)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Templates.Serialization.SerializationMembersList serializationList, string type, string name, string modulenamespace, string backingName, bool isCalculated, bool disableExport)
+            : base(_host, ctx, serializationList, type, name, modulenamespace, "Proxy." + name, isCalculated, disableExport)
         {
         }
 
@@ -54,7 +54,9 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             if (list != null)
             {
                 Templates.Serialization.SimplePropertySerialization
-                    .AddToSerializers(list, Templates.Serialization.SerializerType.All, modulenamespace, name, type, backingName);
+                    .AddToSerializers(list, 
+                    disableExport ?  Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All, 
+                        modulenamespace, name, type, backingName);
             }
         }
     }

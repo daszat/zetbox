@@ -42,7 +42,7 @@ namespace Zetbox.Generator.Templates.Properties
                 // ID is currently serialized by the infrastructure, so ignore it here
                 new Serialization.SerializationMembersList(),
                 // hardcoded type, name, and namespace
-                "int", "ID", "http://dasz.at/Zetbox", "_ID", false)
+                "int", "ID", "http://dasz.at/Zetbox", "_ID", false, false)
         {
         }
 

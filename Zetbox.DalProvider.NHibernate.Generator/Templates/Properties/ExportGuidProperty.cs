@@ -33,7 +33,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
         }
 
         public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string moduleNamespace, string interfaceName)
-            : base(_host, ctx, serializationList, moduleNamespace, "Guid", "ExportGuid", false, false, false, interfaceName, null, false, null, Guid.Empty, "Guid", "ExportGuid", false)
+            : base(_host, ctx, serializationList, moduleNamespace, "Guid", "ExportGuid", false, false, false, interfaceName, null, false, null, Guid.Empty, "Guid", "ExportGuid", false, false)
         { 
         }
 

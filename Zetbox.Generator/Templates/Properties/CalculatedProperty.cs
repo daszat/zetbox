@@ -39,7 +39,8 @@ namespace Zetbox.Generator.Templates.Properties
                 prop.ObjectClass.GetDataTypeString(), 
                 prop.GetElementTypeString(), 
                 prop.Name, "On" + prop.Name + "_Getter", 
-                prop.ObjectClass is CompoundObject);
+                prop.ObjectClass is CompoundObject,
+                prop.DisableExport == true);
         }
 
         protected virtual string ApplyBackingStorageDefinition()
@@ -60,7 +61,7 @@ namespace Zetbox.Generator.Templates.Properties
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string name)
         {
             if (list != null)
-                list.Add(Serialization.SerializerType.All, modulenamespace, name, referencedType, ApplyResultExpression());
+                list.Add(disableExport ? Serialization.SerializerType.Binary : Serialization.SerializerType.All, modulenamespace, name, referencedType, ApplyResultExpression());
         }
     }
 }

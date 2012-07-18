@@ -23,9 +23,11 @@ namespace Zetbox.Generator.Templates.Serialization
 
     public partial class CollectionSerialization
     {
-        public static void Add(SerializationMembersList list, IZetboxContext ctx, string xmlnamespace, string xmlname, string collectionName, bool orderByValue)
+        public static void Add(SerializationMembersList list, IZetboxContext ctx, string xmlnamespace, string xmlname, string collectionName, bool orderByValue, bool disableExport)
         {
-            list.Add("Serialization.CollectionSerialization", Serialization.SerializerType.All, xmlnamespace, xmlname, collectionName, orderByValue);
+            list.Add("Serialization.CollectionSerialization",
+                disableExport ? Serialization.SerializerType.Binary : Serialization.SerializerType.All, 
+                xmlnamespace, xmlname, collectionName, orderByValue, disableExport);
         }
 
         public virtual bool ShouldSerialize()

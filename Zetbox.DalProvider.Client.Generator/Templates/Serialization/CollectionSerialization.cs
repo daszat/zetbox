@@ -25,8 +25,8 @@ namespace Zetbox.DalProvider.Client.Generator.Templates.Serialization
     public class CollectionSerialization
         : Templates.Serialization.CollectionSerialization
     {
-        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByValue)
-            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue)
+        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByValue, bool disableExport)
+            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue, disableExport)
         {
         }
 

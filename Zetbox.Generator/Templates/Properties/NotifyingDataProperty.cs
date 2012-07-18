@@ -40,7 +40,7 @@ namespace Zetbox.Generator.Templates.Properties
         private Property _prop;
 
         public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
-            : base(_host, ctx, serializationList, prop.GetElementTypeString(), prop.Name, prop.Module.Namespace, "_" + prop.Name, prop.IsCalculated())
+            : base(_host, ctx, serializationList, prop.GetElementTypeString(), prop.Name, prop.Module.Namespace, "_" + prop.Name, prop.IsCalculated(), prop.DisableExport == true)
         {
             _prop = prop;
         }
@@ -152,7 +152,7 @@ namespace Zetbox.Generator.Templates.Properties
                 if (HasDefaultValue)
                 {
                     list.Add("Serialization.SimplePropertyWithDefaultSerialization",
-                        Serialization.SerializerType.All,
+                        disableExport ? Templates.Serialization.SerializerType.Binary : Serialization.SerializerType.All,
                         _prop.Module.Namespace,
                         name,
                         type,
@@ -162,7 +162,7 @@ namespace Zetbox.Generator.Templates.Properties
                 else
                 {
                     list.Add("Serialization.SimplePropertySerialization",
-                        Serialization.SerializerType.All,
+                        disableExport ? Serialization.SerializerType.Binary : Serialization.SerializerType.All,
                         _prop.Module.Namespace,
                         name,
                         type,

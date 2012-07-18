@@ -68,7 +68,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 false /*eagerLoading*/,
                 false /*relDataTypeExportable*/,
                 false /*callGetterSetterEvents*/,
-                prop.IsCalculated());
+                prop.IsCalculated(),
+                prop.DisableExport == true);
 
             Templates.Properties.DelegatingProperty.Call(
                 Host, ctx,

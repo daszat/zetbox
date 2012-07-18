@@ -83,14 +83,15 @@ namespace Zetbox.Generator.Templates.Properties
                 thisInterface, referencedType,
                 referencedCollectionEntry, referencedCollectionEntryImpl,
                 providerCollectionType, underlyingCollectionName, !hasPersistentOrder,
-                moduleNamespace);
+                moduleNamespace,
+                prop.DisableExport == true);
         }
 
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string underlyingCollectionName)
         {
             if (list != null)
             {
-                Serialization.CollectionSerialization.Add(list, ctx, moduleNamespace, name, underlyingCollectionName, orderByValue);
+                Serialization.CollectionSerialization.Add(list, ctx, moduleNamespace, name, underlyingCollectionName, orderByValue, disableExport);
             }
         }
     }

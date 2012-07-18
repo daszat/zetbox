@@ -54,7 +54,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
                 false, 
                 false, // value collection entries are always streamed/exported in-place
                 false,
-                prop.IsCalculated());
+                prop.IsCalculated(),
+                prop.DisableExport == true);
 
             Templates.Properties.DelegatingProperty.Call(
                 Host, ctx,

@@ -30,7 +30,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
             var interfaceType = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
 
             CollectionEntries.ValueCollectionEntryParentReference.Call(Host, ctx,
-                MembersToSerialize, interfaceType, "Parent", prop.Module.Namespace);
+                MembersToSerialize, interfaceType, "Parent", prop.Module.Namespace, prop.DisableExport == true);
 
             Properties.DelegatingProperty.Call(
                 Host, ctx,
@@ -57,7 +57,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
             {
                 Properties.NotifyingValueProperty.Call(
                     Host, ctx, MembersToSerialize,
-                    interfaceType, "Value", vtp.Module.Namespace, vtp.IsCalculated);
+                    interfaceType, "Value", vtp.Module.Namespace, vtp.IsCalculated, vtp.DisableExport == true);
             }
 
             Properties.DelegatingProperty.Call(Host, ctx, "ValueObject", "object", "Value", implementationType);
@@ -72,7 +72,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
         {
             Properties.NotifyingValueProperty.Call(
                 Host, ctx, MembersToSerialize,
-                "int?", "Index", prop.GetCollectionEntryNamespace(), false);
+                "int?", "Index", prop.GetCollectionEntryNamespace(), false, prop.DisableExport == true);
         }
     }
 }

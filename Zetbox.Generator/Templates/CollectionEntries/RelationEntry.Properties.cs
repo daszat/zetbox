@@ -93,7 +93,8 @@ namespace Zetbox.Generator.Templates.CollectionEntries
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,
-                false); // ObjRef with relation cannot be calculated
+                false, // ObjRef with relation cannot be calculated
+                false);
         }
 
         protected virtual void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)

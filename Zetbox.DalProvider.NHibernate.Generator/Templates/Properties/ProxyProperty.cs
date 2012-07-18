@@ -175,12 +175,16 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
                 if (hasDefaultValue)
                 {
                     Templates.Serialization.SimplePropertyWithDefaultSerialization
-                        .AddToSerializers(list, Templates.Serialization.SerializerType.All, moduleNamespace, propertyName, propertyType, "Proxy." + propertyName, isSetFlagName);
+                        .AddToSerializers(list,
+                            disableExport ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All, 
+                            moduleNamespace, propertyName, propertyType, "Proxy." + propertyName, isSetFlagName);
                 }
                 else
                 {
                     Templates.Serialization.SimplePropertySerialization
-                        .AddToSerializers(list, Templates.Serialization.SerializerType.All, moduleNamespace, propertyName, propertyType, "Proxy." + propertyName);
+                        .AddToSerializers(list,
+                            disableExport ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All, 
+                            moduleNamespace, propertyName, propertyType, "Proxy." + propertyName);
                 }
             }
         }

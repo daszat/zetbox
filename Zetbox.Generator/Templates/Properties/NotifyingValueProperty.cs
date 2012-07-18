@@ -27,13 +27,13 @@ namespace Zetbox.Generator.Templates.Properties
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IZetboxContext ctx, Serialization.SerializationMembersList serializationList,
-            string type, string name, string modulenamespace, bool isCalculated)
+            string type, string name, string modulenamespace, bool isCalculated, bool disableExport)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             string backingName = "_" + name;
 
-            Call(host, ctx, serializationList, type, name, modulenamespace, backingName, isCalculated);
+            Call(host, ctx, serializationList, type, name, modulenamespace, backingName, isCalculated, disableExport);
         }
 
         protected virtual void ApplySecurityCheckTemplate()
@@ -55,7 +55,7 @@ namespace Zetbox.Generator.Templates.Properties
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string name)
         {
             if (list != null)
-                list.Add(Serialization.SerializerType.All, modulenamespace, name, type, backingName);
+                list.Add(disableExport ? Serialization.SerializerType.Binary : Serialization.SerializerType.All, modulenamespace, name, type, backingName);
         }
 
         protected virtual void ApplyOnGetTemplate() { }

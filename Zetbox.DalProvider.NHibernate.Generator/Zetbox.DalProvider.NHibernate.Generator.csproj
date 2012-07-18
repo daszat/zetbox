@@ -220,7 +220,6 @@
     <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ObjectClasses\UpdateParentTemplate.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
-    <Compile Include="Templates\Properties\CalculatedProperty.cs" />
     <Compile Include="Templates\Properties\CollectionEntryListProperty.cs">
       <DependentUpon>CollectionEntryListProperty.cst</DependentUpon>
     </Compile>

@@ -93,7 +93,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,
-                false); // ObjRef with relation cannot be calculated
+                false, // ObjRef with relation cannot be calculated
+                false);
         }
     }
 }

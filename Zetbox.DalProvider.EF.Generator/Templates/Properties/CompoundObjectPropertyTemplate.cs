@@ -34,7 +34,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
             {
                 var xmlname = memberName;
 
-                list.Add("Serialization.CompoundObjectSerialization", Templates.Serialization.SerializerType.All,
+                list.Add("Serialization.CompoundObjectSerialization", disableExport ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All,
                     this.xmlNamespace, xmlname, memberType, memberName, backingStoreType, backingStoreName);
             }
         }

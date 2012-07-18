@@ -61,7 +61,7 @@ namespace Zetbox.Generator.Templates.Properties
 
             Call(host, ctx, serializationList,
                 xmlNamespace, overridePropName, backingPropertyName, backingStoreName,
-                coType, coImplementationType);
+                coType, coImplementationType, prop.DisableExport == true);
         }
 
         protected virtual void AddSerialization(
@@ -73,7 +73,7 @@ namespace Zetbox.Generator.Templates.Properties
             {
                 var xmlname = memberName;
 
-                list.Add("Serialization.CompoundObjectSerialization", Serialization.SerializerType.All,
+                list.Add("Serialization.CompoundObjectSerialization", disableExport ? Serialization.SerializerType.Binary : Serialization.SerializerType.All,
                     this.xmlNamespace, xmlname, memberType, memberName, backingStoreType, backingStoreName);
             }
         }

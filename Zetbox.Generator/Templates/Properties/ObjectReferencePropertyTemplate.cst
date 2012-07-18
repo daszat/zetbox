@@ -45,6 +45,7 @@
 <%@ Parameter Name="relDataTypeExportable" Type="bool" %>
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%@ Parameter Name="isCalculated" Type="bool" %>
+<%@ Parameter Name="disableExport" Type="bool" %>
         // BEGIN <%= this.GetType() %> for <%= name %>
         // fkBackingName=<%= fkBackingName %>; fkGuidBackingName=<%= fkGuidBackingName %>;
         // referencedInterface=<%= referencedInterface %>; moduleNamespace=<%= moduleNamespace %>;
@@ -204,7 +205,7 @@
     {
         Properties.NotifyingValueProperty.Call(
             Host, ctx, serializationList,
-            "int?", positionPropertyName, moduleNamespace, false);
+            "int?", positionPropertyName, moduleNamespace, false, disableExport);
     }
 %>
         // END <%= this.GetType() %> for <%= name %>

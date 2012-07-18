@@ -258,7 +258,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 prop.ExportGuid, 
                 prop.GetElementTypeString(), 
                 "Proxy." + prop.Name,
-                prop.IsCalculated());
+                prop.IsCalculated(),
+                prop.DisableExport == true);
         }
 
         protected override void ApplyCollectionEntryListTemplate(ObjectReferenceProperty prop)
@@ -294,7 +295,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
         {
             ApplyNotifyingValueProperty(prop, null);
-            Templates.Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize, Templates.Serialization.SerializerType.All,
+            Templates.Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize,
+                prop.DisableExport == true ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All,
                 prop.Module.Namespace,
                 prop.Name,
                 "Proxy." + prop.Name,

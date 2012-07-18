@@ -43,6 +43,7 @@
 <%@ Parameter Name="backingStoreType" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>
 <%@ Parameter Name="isCalculated" Type="bool" %>
+<%@ Parameter Name="disableExport" Type="bool" %>
 
         // BEGIN <%= this.GetType() %>
         <%= GetModifiers() %> <%= propertyType %> <%= propertyName %>

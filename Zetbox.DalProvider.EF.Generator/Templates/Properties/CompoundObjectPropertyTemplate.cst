@@ -33,6 +33,7 @@
 <%@ Parameter Name="backingStoreName" Type="string" %>
 <%@ Parameter Name="coType" Type="string" %>
 <%@ Parameter Name="coImplementationType" Type="string" %>
+<%@ Parameter Name="disableExport" Type="bool" %>
         // BEGIN <%= this.GetType() %>
         // implement the user-visible interface
         public <%= coType %> <%= propName %>

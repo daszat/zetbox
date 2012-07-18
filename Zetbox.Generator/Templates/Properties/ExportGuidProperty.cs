@@ -36,7 +36,7 @@ namespace Zetbox.Generator.Templates.Properties
 
         public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx,
             Serialization.SerializationMembersList serializationList, string backingName)
-            : base(_host, ctx, serializationList, "Guid", "ExportGuid", String.Empty, backingName, false) // TODO: use proper namespace
+            : base(_host, ctx, serializationList, "Guid", "ExportGuid", String.Empty, backingName, false, false) // TODO: use proper namespace
         {
         }
 

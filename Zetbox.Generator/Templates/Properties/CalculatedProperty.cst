@@ -28,6 +28,7 @@
 <%@ Parameter Name="propertyName" Type="string" %>
 <%@ Parameter Name="getterEventName" Type="string" %>
 <%@ Parameter Name="isCompound" Type="bool" %>
+<%@ Parameter Name="disableExport" Type="bool" %>
         // BEGIN <%= this.GetType() %>
         <%= GetModifiers() %> <%= referencedType %> <%= propertyName %>
         {

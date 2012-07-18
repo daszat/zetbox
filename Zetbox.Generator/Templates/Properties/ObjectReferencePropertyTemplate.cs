@@ -111,14 +111,15 @@ namespace Zetbox.Generator.Templates.Properties
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,
-                false); // ObjRef with relation cannot be calculated
+                false, // ObjRef with relation cannot be calculated
+                false);
         }
 
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string sourceMember, string targetMember, string targetGuidMember)
         {
             if (list != null)
             {
-                if (relDataTypeExportable)
+                if (relDataTypeExportable && !disableExport)
                 {
                     list.Add("Serialization.ObjectReferencePropertySerialization", Serialization.SerializerType.ImportExport, moduleNamespace, name, sourceMember, targetMember, targetGuidMember);
                 }

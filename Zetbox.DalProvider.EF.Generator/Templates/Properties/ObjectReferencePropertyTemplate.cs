@@ -29,7 +29,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
         {
             if (list != null)
             {
-                if (relDataTypeExportable)
+                if (relDataTypeExportable && !disableExport)
                 {
                     list.Add("Serialization.ObjectReferencePropertySerialization",
                         Templates.Serialization.SerializerType.ImportExport, moduleNamespace, name, sourceMember, targetMember, targetGuidMember, clsFullName, assocName, targetRoleName);

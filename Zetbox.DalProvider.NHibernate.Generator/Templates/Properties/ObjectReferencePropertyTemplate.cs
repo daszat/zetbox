@@ -116,6 +116,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,
+                false,
                 false);
         }
 
@@ -125,7 +126,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             {
                 var proxyName = "this.Proxy." + name;
 
-                if (relDataTypeExportable)
+                if (relDataTypeExportable && !disableExport)
                 {
                     list.Add("Serialization.ObjectReferencePropertySerialization", Templates.Serialization.SerializerType.ImportExport, moduleNamespace, name, proxyName, targetMember, targetGuidMember);
                 }

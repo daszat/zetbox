@@ -42,6 +42,7 @@
 <%@ Parameter Name="underlyingCollectionBackingName" Type="string" %>
 <%@ Parameter Name="orderByValue" Type="bool" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
+<%@ Parameter Name="disableExport" Type="bool" %>
 
 <%
 	var eventName = "On" + name + "_PostSetter";

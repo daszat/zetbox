@@ -26,8 +26,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
     public class NotifyingValueProperty
         : Templates.Properties.NotifyingValueProperty
     {
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Templates.Serialization.SerializationMembersList list, string type, string name, string moduleNamespace, string backingName, bool isCalculated)
-            : base(_host, ctx, list, type, name, moduleNamespace, backingName, isCalculated)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Templates.Serialization.SerializationMembersList list, string type, string name, string moduleNamespace, string backingName, bool isCalculated, bool disableExport)
+            : base(_host, ctx, list, type, name, moduleNamespace, backingName, isCalculated, disableExport)
         {
 
         }

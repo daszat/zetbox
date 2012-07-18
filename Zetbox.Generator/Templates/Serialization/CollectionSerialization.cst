@@ -32,6 +32,7 @@
 <%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="collectionName" Type="string" %>
 <%@ Parameter Name="orderByValue" Type="bool" %>
+<%@ Parameter Name="disableExport" Type="bool" %>
 <%
     if (ShouldSerialize())
     {

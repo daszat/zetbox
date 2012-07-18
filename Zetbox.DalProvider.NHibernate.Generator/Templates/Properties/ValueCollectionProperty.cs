@@ -88,7 +88,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
                 name, backingName, backingCollectionType, exposedCollectionInterface,
                 thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryImpl, referencedCollectionEntryProxy,
                 providerCollectionType, underlyingCollectionName, underlyingCollectionBackingName,
-                orderByValue, moduleNamespace);
+                orderByValue, moduleNamespace, prop.DisableExport == true);
         }
 
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string underlyingCollectionName)
@@ -96,7 +96,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             // TODO: XML Namespace
             if (list != null)
             {
-                Templates.Serialization.CollectionSerialization.Add(list, ctx, moduleNamespace, name, underlyingCollectionName, orderByValue);
+                Templates.Serialization.CollectionSerialization.Add(list, ctx, moduleNamespace, name, underlyingCollectionName, orderByValue, disableExport);
             }
         }
     }

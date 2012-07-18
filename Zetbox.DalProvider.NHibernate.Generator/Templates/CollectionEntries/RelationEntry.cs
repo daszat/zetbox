@@ -98,6 +98,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,
+                false,
                 false);
         }
 
