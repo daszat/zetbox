@@ -38,12 +38,11 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void ObjectIsValid(IndexConstraint obj, ObjectIsValidEventArgs e)
         {
-            if (obj.Properties.Count != 0)
+            if (obj.Properties.Count == 0)
             {
                 e.IsValid = false;
                 e.Errors.Add("Cannot have index without Properties.");
             }
-
         }
     }
 }
