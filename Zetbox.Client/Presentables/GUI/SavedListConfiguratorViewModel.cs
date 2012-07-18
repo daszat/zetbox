@@ -44,6 +44,16 @@ namespace Zetbox.Client.Presentables.GUI
             this.ctxFactory = ctxFactory;
         }
 
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var cmds = base.CreateCommands();
+            cmds.Add(SaveCommand);
+            cmds.Add(SaveAsCommand);
+            cmds.Add(RenameCommand);
+            cmds.Add(ResetCommand);
+            return cmds;
+        }
+
         public new InstanceListViewModel Parent
         {
             get
@@ -148,6 +158,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.SaveCommandName,
                         SavedListConfiguratorViewModelResources.SaveCommandTooltip, 
                         Save, null, null);
+                    //_SaveCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save.Find(FrozenContext);
                 }
                 return _SaveCommand;
             }
@@ -164,6 +175,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.SaveAsCommandName,
                         SavedListConfiguratorViewModelResources.SaveAsCommandTooltip, 
                         SaveAs, null, null);
+                    //_SaveCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save.Find(FrozenContext);
                 }
                 return _SaveAsCommand;
             }
@@ -247,6 +259,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.ResetCommandName, 
                         SavedListConfiguratorViewModelResources.ResetCommandTooltip, 
                         Reset, null, null);
+                    _ResetCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext);
                 }
                 return _ResetCommand;
             }
@@ -271,6 +284,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.DeleteCommandTooltip, 
                         Delete, () => SelectedItem != null, 
                         () => SavedListConfiguratorViewModelResources.DeleteCommandReason);
+                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
                 }
                 return _DeleteCommand;
             }
