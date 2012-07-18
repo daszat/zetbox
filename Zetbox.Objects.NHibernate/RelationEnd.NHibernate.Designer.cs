@@ -914,7 +914,7 @@ namespace Zetbox.App.Base
         /// the parent relation
         /// </summary>
         // calculated  property
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.CalculatedProperty
         public Zetbox.App.Base.Relation Parent
         {
             get
@@ -935,7 +935,7 @@ namespace Zetbox.App.Base
         }
         Zetbox.App.Base.Relation Parent_Store;
         private bool _Parent_IsDirty = true; // Always true as it will not be stored in the database (yet)
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+        // END Zetbox.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Relation> OnParent_Getter;
 
         /// <summary>
