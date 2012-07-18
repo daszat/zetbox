@@ -8,7 +8,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Models;
-using Zetbox.App.Base;
+    using Zetbox.App.Base;
 
     [ViewModelDescriptor]
     public class AnyReferencePropertyViewModel : CompoundObjectPropertyViewModel
@@ -44,10 +44,29 @@ using Zetbox.App.Base;
             }
         }
 
+        private bool _allowSelectValue = true;
+        public bool AllowSelectValue
+        {
+            get
+            {
+                return _allowSelectValue;
+            }
+            set
+            {
+                if (_allowSelectValue != value)
+                {
+                    _allowSelectValue = value;
+                    OnPropertyChanged("AllowSelectValue");
+                }
+            }
+        }
+
+        #region Commands
         protected override System.Collections.ObjectModel.ObservableCollection<ICommandViewModel> CreateCommands()
         {
             var cmds = base.CreateCommands();
             cmds.Add(OpenReferenceCommand);
+            cmds.Add(SelectValueCommand);
             cmds.Add(ClearValueCommand);
             return cmds;
         }
@@ -87,9 +106,81 @@ using Zetbox.App.Base;
             }
         }
 
+        public void SelectValue()
+        {
+            var selectClass = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+                DataContext,
+                this,
+                (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass.Find(FrozenContext),
+                null,
+                (chosenClass) =>
+                {
+                    if (chosenClass != null)
+                    {
+                        var cls = (ObjectClass)chosenClass.First().Object;
+                        var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+                            DataContext,
+                            this,
+                            cls,
+                            null,
+                            (chosen) =>
+                            {
+                                if (chosen != null)
+                                {
+                                    Object.SetObject(chosen.First().Object);
+                                    NotifyValueChanged();
+                                }
+                            },
+                            null);
+                        selectionTask.ListViewModel.AllowDelete = false;
+                        selectionTask.ListViewModel.ShowOpenCommand = false;
+                        selectionTask.ListViewModel.AllowAddNew = true;
+
+                        ViewModelFactory.ShowDialog(selectionTask);
+                    }
+                },
+                null);
+            ViewModelFactory.ShowDialog(selectClass);
+        }
+
+        private ICommandViewModel _SelectValueCommand;
+
+        public ICommandViewModel SelectValueCommand
+        {
+            get
+            {
+                if (_SelectValueCommand == null)
+                {
+                    _SelectValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        ObjectReferenceViewModelResources.SelectValueCommand_Name,
+                        ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
+                        () => SelectValue(),
+                        () => AllowSelectValue && !DataContext.IsReadonly && !IsReadOnly,
+                        null);
+                    _SelectValueCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext);
+                }
+                return _SelectValueCommand;
+            }
+        }
+        #endregion
+
+        #region Name
         public override string Name
         {
             get { return ReferencedObject != null ? ReferencedObject.Name : string.Empty; }
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        protected override string FormatValue(CompoundObjectViewModel value)
+        {
+            return Name;
+        }
+        #endregion
     }
 }
