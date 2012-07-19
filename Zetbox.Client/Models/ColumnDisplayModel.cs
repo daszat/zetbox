@@ -64,7 +64,12 @@ namespace Zetbox.Client.Models
         }
 
         public ColumnDisplayModel(string header, string name, ControlKind kind, WidthHint requestedWidth)
-            : this(header, name, kind, null, ColumnType.PropertyModel, requestedWidth)
+            : this(header, name, kind, null, ColumnType.PropertyModel, requestedWidth, null)
+        {
+        }
+
+        public ColumnDisplayModel(string header, string name, ControlKind kind, int requestedWidthAbsoulte)
+            : this(header, name, kind, null, ColumnType.PropertyModel, WidthHint.Default, requestedWidthAbsoulte)
         {
         }
 
@@ -74,16 +79,16 @@ namespace Zetbox.Client.Models
         }
 
         public ColumnDisplayModel(string header, string name, ControlKind kind, ColumnType type)
-            : this(header, name, kind, null, type, WidthHint.Default)
+            : this(header, name, kind, null, type, WidthHint.Default, null)
         {
         }
 
         public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind)
-            : this(header, name, kind, gridPreviewKind, ColumnType.PropertyModel, WidthHint.Default)
+            : this(header, name, kind, gridPreviewKind, ColumnType.PropertyModel, WidthHint.Default, null)
         {
         }
 
-        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type, WidthHint requestedWidth)
+        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type, WidthHint requestedWidth, int? requestedWidthAbsolute)
         {
             this.Header = header;
             this.Name = name;
@@ -91,6 +96,7 @@ namespace Zetbox.Client.Models
             this.GridPreEditKind = gridPreviewKind ?? kind;
             this.Type = type;
             this.RequestedWidth = requestedWidth;
+            this.RequestedWidthAbsolute = requestedWidthAbsolute;
         }
 
         public ColumnType Type { get; set; }
@@ -99,6 +105,7 @@ namespace Zetbox.Client.Models
         public ControlKind ControlKind { get; set; }
         public ControlKind GridPreEditKind { get; set; }
         public WidthHint RequestedWidth { get; set; }
+        public int? RequestedWidthAbsolute { get; set; }
         public Property Property { get; set; }
         public App.Base.Property[] Properties { get; set; }
 

@@ -134,7 +134,8 @@ namespace Zetbox.Client.WPF.Toolkit
             {
                 // TODO: use default controls after moving labeling to infrastructure
                 var col = new DataGridTemplateColumn() { Header = desc.Header };
-                if (desc.RequestedWidth != App.GUI.WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
+                if (desc.RequestedWidthAbsolute != null) col.Width = desc.RequestedWidthAbsolute.Value;
+                else if (desc.RequestedWidth != App.GUI.WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
 
                 var needEditor = desc.ControlKind != desc.GridPreEditKind;
 
@@ -212,7 +213,8 @@ namespace Zetbox.Client.WPF.Toolkit
             {
                 // TODO: use default controls after moving labeling to infrastructure
                 var col = new GridViewColumn() { Header = desc.Header };
-                if (desc.RequestedWidth != WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
+                if (desc.RequestedWidthAbsolute != null) col.Width = desc.RequestedWidthAbsolute.Value;
+                else if (desc.RequestedWidth != WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
 
                 DataTemplate result = new DataTemplate();
                 var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
