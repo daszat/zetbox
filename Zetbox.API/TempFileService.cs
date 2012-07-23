@@ -63,11 +63,17 @@ namespace Zetbox.API
         {
             _rootTempFolder = Path.Combine(Path.GetTempPath(), Path.Combine("zetbox", "tmp"));
             _currentTempFolder = Path.Combine(_rootTempFolder, DateTime.Today.ToString("yyMMdd"));
-            
-            if (!Directory.Exists(_currentTempFolder))
-                Directory.CreateDirectory(_currentTempFolder);
+
+            EnsureTempFolder();
 
             System.Threading.ThreadPool.QueueUserWorkItem(DeleteOldFiles);
+        }
+
+        private void EnsureTempFolder()
+        {
+
+            if (!Directory.Exists(_currentTempFolder))
+                Directory.CreateDirectory(_currentTempFolder);
         }
 
         private void DeleteOldFiles(object state)
@@ -110,6 +116,7 @@ namespace Zetbox.API
                         sb.Append((char)_rand.Next('a', 'z'));
                     }
                     var probe = sb.ToString();
+                    EnsureTempFolder();
                     if (Directory.GetFiles(_currentTempFolder, probe + "*").Length == 0 && !Directory.Exists(Path.Combine(_currentTempFolder, probe)))
                     {
                         string result;
