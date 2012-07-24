@@ -25,7 +25,6 @@ namespace Zetbox.Client.Bootstrapper
     {
         File = 1,
         Exec = 2,
-        AppConfig = 3,
     }
 
     [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/Zetbox/Bootstrapper")]

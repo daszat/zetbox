@@ -30,7 +30,6 @@ namespace Zetbox.Server
     {
         File = 1,
         Exec = 2,
-        AppConfig = 3,
     }
 
     [DataContract(Namespace = "http://dasz.at/Zetbox/Bootstrapper")]
@@ -83,13 +82,13 @@ namespace Zetbox.Server
         {
             var result = new List<FileInfo>();
 
-            foreach (var dir in config.Server.ClientFilesLocations)
+            foreach (var location in config.Server.ClientFilesLocations)
             {
-                Log.InfoFormat("Processing client file location [{0}] ({0})", dir.Name, dir.Value);
+                Log.InfoFormat("Processing client file location [{0}] ({0})", location.Name, location.Value);
 
-                var value = ResolveConfigPath(dir.Value);
+                var value = ResolveConfigPath(location.Value);
 
-                switch (dir.Name)
+                switch (location.Name)
                 {
                     case "Exe":
                         if (File.Exists(value))
@@ -98,6 +97,10 @@ namespace Zetbox.Server
                             var directory = Path.GetFullPath(Path.GetDirectoryName(value));
 
                             result.Add(InspectFile("Exe", directory, Path.GetFileName(value)));
+                            if (location.Start.HasValue && location.Start.Value)
+                            {
+                                result.Last().Type = FileType.Exec;
+                            }
 
                             // need to collect .config too
                             var dotConfig = value + ".config";
@@ -117,12 +120,12 @@ namespace Zetbox.Server
                     default:
                         {
                             var root = Path.GetFullPath(value);
-                            var regex = !string.IsNullOrEmpty(dir.Exclude) ? new Regex(dir.Exclude) : null;
+                            var regex = !string.IsNullOrEmpty(location.Exclude) ? new Regex(location.Exclude) : null;
 
                             foreach (var f in Directory.GetFiles(value, "*.*", SearchOption.AllDirectories))
                             {
                                 if (regex != null && regex.IsMatch(f)) continue;
-                                var fi = InspectFile(dir.Name, root, f);
+                                var fi = InspectFile(location.Name, root, f);
                                 result.Add(fi);
                             }
                         }
@@ -150,7 +153,7 @@ namespace Zetbox.Server
             if (!fi.FullName.StartsWith(root)) throw new InvalidOperationException(String.Format("Aborting because [{0}] is outside the current root [{1}].", fi.FullName, root));
 
             var relPath = Path.Combine(baseDir, RelativePath(root, Path.GetDirectoryName(fi.FullName)));
-            var fileInfo = new FileInfo() { Name = fi.Name, DestPath = relPath, Date = fi.LastWriteTimeUtc, Size = fi.Length, Type = GetFileType(fi) };
+            var fileInfo = new FileInfo() { Name = fi.Name, DestPath = relPath, Date = fi.LastWriteTimeUtc, Size = fi.Length, Type = FileType.File };
             return fileInfo;
         }
 
@@ -163,19 +166,6 @@ namespace Zetbox.Server
                 return String.Empty;
             else
                 return target.Substring(root.Length + 1);
-        }
-
-        private FileType GetFileType(System.IO.FileInfo fi)
-        {
-            switch (fi.Name.ToLower())
-            {
-                case "zetbox.wpf.exe":
-                    return FileType.Exec;
-                case "zetbox.wpf.exe.config":
-                    return FileType.AppConfig;
-                default:
-                    return FileType.File;
-            }
         }
 
         public string GetFilePath(string path)

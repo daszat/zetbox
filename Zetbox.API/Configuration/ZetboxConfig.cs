@@ -244,6 +244,8 @@ namespace Zetbox.API.Configuration
                 public string Name { get; set; }
                 [XmlAttribute("Exclude")]
                 public string Exclude { get; set; }
+                [XmlAttribute("Start")]
+                public bool? Start { get; set; }
                 [XmlText]
                 public string Value { get; set; }
             }
