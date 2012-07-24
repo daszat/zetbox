@@ -97,7 +97,7 @@ namespace Zetbox.Server
                             var directory = Path.GetFullPath(Path.GetDirectoryName(value));
 
                             result.Add(InspectFile("Exe", directory, Path.GetFileName(value)));
-                            if (location.Start.HasValue && location.Start.Value)
+                            if (location.Start)
                             {
                                 result.Last().Type = FileType.Exec;
                             }
