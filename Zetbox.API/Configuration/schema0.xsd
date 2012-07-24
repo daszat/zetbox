@@ -57,6 +57,7 @@
       <xs:extension base="xs:string">
         <xs:attribute name="Name" type="xs:string" />
         <xs:attribute name="Exclude" type="xs:string" />
+        <xs:attribute name="Start" type="xs:boolean" use="optional" />
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

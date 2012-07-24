@@ -14,6 +14,7 @@
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -240,12 +241,19 @@ namespace Zetbox.API.Configuration
             [Serializable]
             public class ClientFilesLocation
             {
+                public ClientFilesLocation()
+                {
+                    Start = false;
+                }
+
                 [XmlAttribute("Name")]
                 public string Name { get; set; }
                 [XmlAttribute("Exclude")]
                 public string Exclude { get; set; }
+
+                [DefaultValue(false)]
                 [XmlAttribute("Start")]
-                public bool? Start { get; set; }
+                public bool Start { get; set; }
                 [XmlText]
                 public string Value { get; set; }
             }
