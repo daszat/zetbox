@@ -1,4 +1,6 @@
 param($installPath, $toolsPath, $package, $project)
+# $installPath is packages\zetboxBasic...\
+# $toolsPath is $installPath\tools\
 
 $zetbox = [System.IO.Path]::Combine($installPath, "..\..\.zetbox\")
 
