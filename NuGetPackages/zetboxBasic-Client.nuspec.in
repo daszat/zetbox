@@ -14,9 +14,8 @@
     <copyright>Copyright © 2012 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="zetboxBasic" version="1.0.$REVNUM$.$DIRTY$" />
-      <dependency id="zetboxBasic-Common" version="1.0.$REVNUM$.$DIRTY$" />
-      <dependency id="PDFsharp-MigraDoc-GDI-dasz" version="1.32.3879.0" />
+      <dependency id="zetboxBasic" version="[1.0.$REVNUM$.$DIRTY$]" />
+      <dependency id="zetboxBasic-Common" version="[1.0.$REVNUM$.$DIRTY$]" />
     </dependencies>
   </metadata>
   <files>
