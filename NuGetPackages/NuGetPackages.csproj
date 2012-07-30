@@ -37,28 +37,20 @@
     </Content>
     <Content Include="Init-zetboxBasic.ps1" />
     <Targets Include="common.targets">
-      <DependentUpon>common.targets.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
     <Targets Include="server.targets">
-      <DependentUpon>server.targets.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
     <Targets Include="client.targets">
-      <DependentUpon>client.targets.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
     <Targets Include="clientwpf.targets">
-      <DependentUpon>clientwpf.targets.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
     <Targets Include="wpf.targets">
-      <DependentUpon>wpf.targets.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
-    <None Include="common.targets.in">
-      <SubType>Designer</SubType>
-    </None>
     <NuSpec Include="zetboxBasic-Tests.nuspec">
       <DependentUpon>zetboxBasic-Tests.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -91,18 +83,6 @@
     <None Include="zetboxBasic-Tests.nuspec.in">
       <SubType>Designer</SubType>
     </None>
-    <None Include="server.targets.in">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="client.targets.in">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="clientwpf.targets.in">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="wpf.targets.in">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="zetboxBasic.nuspec.in" />
     <None Include="zetboxBasic-All.nuspec.in" />
     <None Include="zetboxBasic-EF.nuspec.in">
@@ -119,9 +99,6 @@
     <Content Include="install-references.ps1" />
   </ItemGroup>
   <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MsBuildVersioning.targets" />
-  <Target Name="GitVersionTargets" Inputs="@(Targets)" Outputs="%(Identity).Dummy">
-    <GitVersionFile TemplateFile="@(Targets).in" DestinationFile="@(Targets)" />
-  </Target>
   <Target Name="GitVersionNuSpec" Inputs="@(NuSpec)" Outputs="%(Identity).Dummy">
     <GitVersionFile TemplateFile="@(NuSpec).in" DestinationFile="@(NuSpec)" />
   </Target>
@@ -130,7 +107,7 @@
     <Copy SourceFiles="@(NuSpec)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(Targets)" DestinationFolder="$(OutputPath)" />
   </Target>
-  <Target Name="Build" DependsOnTargets="GitVersionTargets;GitVersionNuSpec;ContentCopy">
+  <Target Name="Build" DependsOnTargets="GitVersionNuSpec;ContentCopy">
   </Target>
   <Target Name="Package" Inputs="@(NuSpec)" Outputs="%(Identity).Dummy" DependsOnTargets="Build">
     <Exec WorkingDirectory="$(OutputPath)" Command="..\$(NuGetCommand) pack @(NuSpec) -prop Configuration=$(Configuration)" />

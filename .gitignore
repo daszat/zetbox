@@ -38,6 +38,5 @@ VersionInfo.Designer.cs
 /packages/WPFToolkit.3.5.50211.1
 /PrepareEnv/Examples/env.xml
 /NuGetPackages/*.nuspec
-/NuGetPackages/*.targets
 /Templates/ProjectTemplates/ZetboxApp/packages/Mono.Security.*
 /Templates/ProjectTemplates/ZetboxApp/packages/Npgsql.*
