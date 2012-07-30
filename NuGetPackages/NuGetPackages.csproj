@@ -63,6 +63,31 @@
       <DependentUpon>zetboxBasic-Tests.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </NuSpec>
+    <NuSpec Include="zetboxBasic-Client.nuspec">
+      <DependentUpon>zetboxBasic-Client.nuspec.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </NuSpec>
+    <NuSpec Include="zetboxBasic-Common.nuspec">
+      <DependentUpon>zetboxBasic-Common.nuspec.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </NuSpec>
+    <NuSpec Include="zetboxBasic-Server.nuspec">
+      <DependentUpon>zetboxBasic-Server.nuspec.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </NuSpec>
+    <NuSpec Include="zetboxBasic-ClientWpf.nuspec">
+      <DependentUpon>zetboxBasic-ClientWpf.nuspec.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </NuSpec>
+    <NuSpec Include="zetboxBasic-WpfExe.nuspec">
+      <DependentUpon>zetboxBasic-WpfExe.nuspec.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </NuSpec>
+    <None Include="zetboxBasic-WpfExe.nuspec.in" />
+    <None Include="zetboxBasic-ClientWpf.nuspec.in" />
+    <None Include="zetboxBasic-Server.nuspec.in" />
+    <None Include="zetboxBasic-Common.nuspec.in" />
+    <None Include="zetboxBasic-Client.nuspec.in" />
     <None Include="zetboxBasic-Tests.nuspec.in">
       <SubType>Designer</SubType>
     </None>
@@ -89,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="install-references.ps1" />
   </ItemGroup>
   <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MsBuildVersioning.targets" />
   <Target Name="GitVersionTargets" Inputs="@(Targets)" Outputs="%(Identity).Dummy">

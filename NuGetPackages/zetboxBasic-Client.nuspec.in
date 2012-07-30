@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>zetboxBasic-Client</id>
+    <version>1.0.$REVNUM$.$DIRTY$</version>
+    <title>zetbox Basic - client components</title>
+    <authors>dasz.at OG</authors>
+    <owners>dasz.at OG</owners>
+    <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+    <projectUrl>http://zetbox.at/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Client components for the zetbox.</description>
+    <releaseNotes>First package.</releaseNotes>
+    <copyright>Copyright © 2012 dasz.at OG</copyright>
+    <tags>Platform Database ORM Applications</tags>
+    <dependencies>
+      <dependency id="zetboxBasic" version="1.0.$REVNUM$.$DIRTY$" />
+      <dependency id="zetboxBasic-Common" version="1.0.$REVNUM$.$DIRTY$" />
+      <dependency id="PDFsharp-MigraDoc-GDI-dasz" version="1.32.3879.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Client\Core\Zetbox.API.Client.dll" target="lib\net35" />
+    <file src="Client\Core\Zetbox.Client.dll" target="lib\net35" />
+
+    <file src="install-references.ps1" target="tools\install.ps1" />
+  </files>
+</package>

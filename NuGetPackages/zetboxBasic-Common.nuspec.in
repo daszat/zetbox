@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>zetboxBasic-Common</id>
+    <version>1.0.$REVNUM$.$DIRTY$</version>
+    <title>zetbox Basic - common components</title>
+    <authors>dasz.at OG</authors>
+    <owners>dasz.at OG</owners>
+    <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+    <projectUrl>http://zetbox.at/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Common components for the zetbox.</description>
+    <releaseNotes>First package.</releaseNotes>
+    <copyright>Copyright © 2012 dasz.at OG</copyright>
+    <tags>Platform Database ORM Applications</tags>
+    <dependencies>
+      <dependency id="zetboxBasic" version="1.0.$REVNUM$.$DIRTY$" />
+      <dependency id="Autofac" version="[2.6.1.841]" />
+      <dependency id="log4net" version="[2.0.0]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Common\Core\Zetbox.API.dll" target="lib\net35" />
+    <file src="Common\Core\Zetbox.API.Common.dll" target="lib\net35" />
+
+    <file src="install-references.ps1" target="tools\install.ps1" />
+  </files>
+</package>
