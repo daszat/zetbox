@@ -86,12 +86,12 @@ using System.Linq.Expressions;
     public abstract class FilterModel
         : IUIFilterModel
     {
-        public static FilterModel FromProperty(IFrozenContext frozenCtx, Property prop)
+        public static FilterModel FromProperty(IZetboxContext ctx, IFrozenContext frozenCtx, Property prop)
         {
-            return FromProperty(frozenCtx, new[] { prop });
+            return FromProperty(ctx, frozenCtx, new[] { prop });
         }
 
-        public static FilterModel FromProperty(IFrozenContext frozenCtx, IEnumerable<Property> props)
+        public static FilterModel FromProperty(IZetboxContext ctx, IFrozenContext frozenCtx, IEnumerable<Property> props)
         {
             var last = props.Last();
             var label = string.Join(", ", props.Select(i => i.GetLabel()).ToArray());
@@ -113,7 +113,7 @@ using System.Linq.Expressions;
             }
             else
             {
-                return SingleValueFilterModel.Create(frozenCtx, label, props);
+                return SingleValueFilterModel.Create(ctx, frozenCtx, label, props);
             }
         }
 
@@ -333,7 +333,7 @@ using System.Linq.Expressions;
             return fmdl;
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, CompoundObject cpObj, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IFilterValueSource predicate, CompoundObject cpObj, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -348,7 +348,7 @@ using System.Linq.Expressions;
                 CompoundObjectDefinition = cpObj,
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
-                new CompoundObjectValueModel(label, "", true, false, requestedArgumentKind, cpObj),
+                new CompoundObjectValueModel(ctx, label, "", true, false, requestedArgumentKind, cpObj),
                 cpObj.DefaultPropertyViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(frozenCtx)));
             return fmdl;            
         }
@@ -420,22 +420,22 @@ using System.Linq.Expressions;
             return fmdl;
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, Property prop)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, Property prop)
         {
-            return Create(frozenCtx, label, new[] { prop });
+            return Create(ctx, frozenCtx, label, new[] { prop });
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IEnumerable<Property> props)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props)
         {
-            return Create(frozenCtx, label, props, null, null);
+            return Create(ctx, frozenCtx, label, props, null, null);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, Property prop, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, Property prop, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
-            return Create(frozenCtx, label, new[] { prop }, requestedKind, requestedArgumentKind);
+            return Create(ctx, frozenCtx, label, new[] { prop }, requestedKind, requestedArgumentKind);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
             var predicate = FilterValueSource.FromProperty(props);
             var last = props.Last();
@@ -469,7 +469,7 @@ using System.Linq.Expressions;
             }
             else if (last is CompoundObjectProperty)
             {
-                return Create(frozenCtx, label, predicate, ((CompoundObjectProperty)last).CompoundObjectDefinition, requestedKind, requestedArgumentKind);
+                return Create(ctx, frozenCtx, label, predicate, ((CompoundObjectProperty)last).CompoundObjectDefinition, requestedKind, requestedArgumentKind);
             }
             else
             {

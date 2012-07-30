@@ -30,7 +30,7 @@ namespace Zetbox.Client.Models
 
     public static class BaseParameterExtensionsThisShouldBeMovedToAZetboxMethod
     {
-        public static IValueModel GetValueModel(this BaseParameter parameter, bool allowNullInput)
+        public static IValueModel GetValueModel(this BaseParameter parameter, IZetboxContext ctx, bool allowNullInput)
         {
             if (parameter == null)
                 throw new ArgumentNullException("parameter");
@@ -72,7 +72,7 @@ namespace Zetbox.Client.Models
             }
             else if (parameter is CompoundObjectParameter && !parameter.IsList)
             {
-                return new CompoundObjectValueModel(lb, parameter.Description, allowNullInput, false, ((CompoundObjectParameter)parameter).CompoundObject);
+                return new CompoundObjectValueModel(ctx, lb, parameter.Description, allowNullInput, false, ((CompoundObjectParameter)parameter).CompoundObject);
             }
             else
             {
@@ -554,8 +554,9 @@ namespace Zetbox.Client.Models
 
     public class CompoundObjectValueModel : ClassValueModel<ICompoundObject>, ICompoundObjectValueModel
     {
-        public CompoundObjectValueModel(string label, string description, bool allowNullInput, bool isReadOnly, CompoundObject def)
+        public CompoundObjectValueModel(IZetboxContext ctx, string label, string description, bool allowNullInput, bool isReadOnly, CompoundObject def)
             : this(
+                ctx,
                 label, 
                 description, 
                 allowNullInput, 
@@ -565,10 +566,14 @@ namespace Zetbox.Client.Models
         {
         }
 
-        public CompoundObjectValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, CompoundObject def)
+        public CompoundObjectValueModel(IZetboxContext ctx, string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, CompoundObject def)
             : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (def == null) throw new ArgumentNullException("def");
+
             this.CompoundObjectDefinition = def;
+            this.Value = ctx.CreateCompoundObject(ctx.GetInterfaceType(def.GetDataType()));
         }
 
         #region IObjectReferenceValueModel Members

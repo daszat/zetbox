@@ -583,13 +583,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     // Add ObjectClass filter expressions
                     foreach (var cfc in t.FilterConfigurations)
                     {
-                        _filterModels.Add(cfc.CreateFilterModel());
+                        _filterModels.Add(cfc.CreateFilterModel(DataContext));
                     }
 
                     // Add Property filter expressions
                     foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                     {
-                        _filterModels.Add(prop.FilterConfiguration.CreateFilterModel());
+                        _filterModels.Add(prop.FilterConfiguration.CreateFilterModel(DataContext));
                     }
                     t = t.BaseObjectClass;
                 }

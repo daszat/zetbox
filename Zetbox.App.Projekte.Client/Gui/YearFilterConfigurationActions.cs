@@ -39,7 +39,7 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.YearFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
+        public static void CreateFilterModel(Zetbox.App.GUI.YearFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             e.Result = YearValueFilterModel.Create(FrozenContext, obj.GetLabel(), FilterValueSource.FromProperty(obj.Property), obj.IsCurrentYearDefault ?? false);
         }

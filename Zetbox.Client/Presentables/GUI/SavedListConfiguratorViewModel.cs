@@ -121,7 +121,7 @@ namespace Zetbox.Client.Presentables.GUI
                 foreach (var f in _selectedItem.Object.Filter)
                 {
                     var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
-                    var mdl = FilterModel.FromProperty(FrozenContext, props);
+                    var mdl = FilterModel.FromProperty(DataContext, FrozenContext, props);
                     int idx = 0;
                     foreach (var val in f.Values ?? new object[] { })
                     {

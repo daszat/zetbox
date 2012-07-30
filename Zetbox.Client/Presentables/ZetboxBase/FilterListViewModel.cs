@@ -175,13 +175,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         // Add ObjectClass filter expressions
                         foreach (var cfc in t.FilterConfigurations)
                         {
-                            AddFilter(cfc.CreateFilterModel());
+                            AddFilter(cfc.CreateFilterModel(DataContext));
                         }
 
                         // Add Property filter expressions
                         foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                         {
-                            AddFilter(prop.FilterConfiguration.CreateFilterModel());
+                            AddFilter(prop.FilterConfiguration.CreateFilterModel(DataContext));
                         }
                         if (t is ObjectClass)
                         {
@@ -349,7 +349,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     {
                         if (props != null)
                         {
-                            AddFilter(FilterModel.FromProperty(FrozenContext, props), true, props);
+                            AddFilter(FilterModel.FromProperty(DataContext, FrozenContext, props), true, props);
                             OnUserFilterAdded(props);
                         }
                     });

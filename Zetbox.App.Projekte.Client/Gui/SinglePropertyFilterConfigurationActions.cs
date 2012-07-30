@@ -32,7 +32,7 @@ namespace Zetbox.App.GUI
     public static class SinglePropertyFilterConfigurationActions
     {
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
+        public static void CreateFilterModel(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = new SingleValueFilterModel();
             mdl.Label = obj.GetLabel();
@@ -42,7 +42,7 @@ namespace Zetbox.App.GUI
             mdl.ViewModelType = obj.ViewModelDescriptor;
             mdl.RequestedKind = obj.RequestedKind;
 
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
             if (obj.Property is StringProperty)
             {
                 mdl.Operator = FilterOperators.Contains;

@@ -924,12 +924,12 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_FilterConfiguration")]
-        public virtual Zetbox.API.IFilterModel CreateFilterModel()
+        public virtual Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_FilterConfiguration != null)
             {
-                OnCreateFilterModel_FilterConfiguration(this, e);
+                OnCreateFilterModel_FilterConfiguration(this, e, ctx);
             }
             else
             {
@@ -937,7 +937,7 @@ namespace Zetbox.App.GUI
             }
             return e.Result;
         }
-        public delegate void CreateFilterModel_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> ret);
+        public delegate void CreateFilterModel_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> ret, Zetbox.API.IZetboxContext ctx);
         public static event CreateFilterModel_Handler<FilterConfiguration> OnCreateFilterModel_FilterConfiguration;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec

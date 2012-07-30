@@ -113,7 +113,7 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public static IValueModel GetDetachedValueModel(this Property prop, bool allowNullInput)
+        public static IValueModel GetDetachedValueModel(this Property prop, IZetboxContext ctx, bool allowNullInput)
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
@@ -175,7 +175,7 @@ namespace Zetbox.Client.Models
             }
             else if (prop is CompoundObjectProperty)
             {
-                return new CompoundObjectValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
+                return new CompoundObjectValueModel(ctx, lb, prop.Description, allowNullInput, false, prop.RequestedKind, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
             }
 
             throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
