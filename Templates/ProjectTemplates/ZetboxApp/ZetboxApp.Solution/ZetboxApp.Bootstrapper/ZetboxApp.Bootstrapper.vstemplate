@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
-    <Name>ZetboxApp.Client</Name>
+    <Name>ZetboxApp.Bootstrapper</Name>
     <Description>A custom Zetbox bootstrapper to customize graphics and defaults.</Description>
     <Icon>ZetboxApp.Bootstrapper.ico</Icon>
     <ProjectType>CSharp</ProjectType>
