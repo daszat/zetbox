@@ -12,5 +12,9 @@ namespace $safeprojectname$
     /// </summary>
     public partial class App : Zetbox.Client.WPF.App
     {
+        protected override string GetConfigFileName()
+        {
+            return "$safeprojectname$.xml";
+        }
     }
 }
