@@ -289,16 +289,19 @@ namespace Zetbox.Generator
                     PreparePublishOutput(outputPath);
                 }
 
-                // source
-                var binaryBasePath = Path.GetFullPath(GetBinaryBasePath(outputPath));
-                // target
-                foreach (var binaryOutputPath in _config.Server.CodeGenBinaryOutputPath.Select(p => Path.GetFullPath(p)))
+                if (_config.Server.CodeGenBinaryOutputPath != null && _config.Server.CodeGenBinaryOutputPath.Length > 0)
                 {
-                    Log.InfoFormat("Deploying binaries from [{0}] to CodeGenBinaryOutputPath [{1}]", binaryBasePath, binaryOutputPath);
-                    DirectoryCopy(binaryBasePath, binaryOutputPath);
+                    // source
+                    var binaryBasePath = Path.GetFullPath(GetBinaryBasePath(outputPath));
+                    // target
+                    foreach (var binaryOutputPath in _config.Server.CodeGenBinaryOutputPath.Select(p => Path.GetFullPath(p)))
+                    {
+                        Log.InfoFormat("Deploying binaries from [{0}] to CodeGenBinaryOutputPath [{1}]", binaryBasePath, binaryOutputPath);
+                        DirectoryCopy(binaryBasePath, binaryOutputPath);
 
-                    // Case #1382: Recompile to regenerate PDB's
-                    // CompileCode(outputPath);
+                        // Case #1382: Recompile to regenerate PDB's
+                        // CompileCode(outputPath);
+                    }
                 }
             }
         }
