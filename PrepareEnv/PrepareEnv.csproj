@@ -71,6 +71,7 @@
     <Compile Include="SchemaProvider\ISchemaProvider.cs" />
     <Compile Include="SchemaProvider\Postgresql.cs" />
     <Compile Include="SchemaProvider\SqlServer.cs" />
+    <None Include="UpdateCodeFromSchema.cmd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Examples\01 DevEnvConfig.xml">
@@ -101,11 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Examples\04 CopyDirsConfig.xml">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Examples\env.xml">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

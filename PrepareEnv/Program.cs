@@ -82,6 +82,9 @@ namespace PrepareEnv
                 InstallTestsBinaries(envConfig);
                 InstallTestsConfigs(envConfig);
 
+                InstallGeneratedBinaries(envConfig);
+                InstallTestsGeneratedBinaries(envConfig);
+
                 EnforceConnectionString(envConfig);
                 EnforceAppServer(envConfig);
 
@@ -369,6 +372,36 @@ namespace PrepareEnv
                 default:
                     LogAction("Unknown platform '{0}'", Environment.OSVersion.Platform);
                     return;
+            }
+        }
+
+        private static void InstallGeneratedBinaries(EnvConfig envConfig)
+        {
+            InstallGeneratedBinaries(envConfig.GeneratedSource, envConfig.BinaryTarget, CopyMode.RestoreHierarchie);
+        }
+
+        private static void InstallTestsGeneratedBinaries(EnvConfig envConfig)
+        {
+            InstallGeneratedBinaries(envConfig.GeneratedSource, envConfig.TestsTarget, CopyMode.Flat);
+        }
+
+        private static void InstallGeneratedBinaries(string source, string target, CopyMode copyMode)
+        {
+            if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(target) || source == target)
+                return;
+
+
+            LogTitle("Installing Generated Binaries");
+
+            var sourcePaths = ExpandPath(source);
+            var isWildcard = sourcePaths.Count() > 1;
+
+            foreach (var sourcePath in sourcePaths)
+            {
+                LogAction("copying Binaries from " + sourcePath);
+                if (isWildcard && !Directory.Exists(sourcePath)) continue;
+
+                CopyFolder(sourcePath, target, null, copyMode);
             }
         }
 
