@@ -142,7 +142,7 @@ namespace Zetbox.Client.Models
         /// <param name="gridPreviewKind">The requested preview kind or null if default should be used</param>
         /// <param name="type">Requested column type</param>
         /// <param name="requestedWidth">Requested list column width</param>
-        /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
+        /// <param name="requestedWidthAbsolute">Requested list column width in absolute toolkit units</param>
         public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type, WidthHint requestedWidth, int? requestedWidthAbsolute)
         {
             this.Header = header;
