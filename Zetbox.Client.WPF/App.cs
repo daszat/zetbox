@@ -118,7 +118,7 @@ namespace Zetbox.Client.WPF
                     string configFilePath;
                     var args = HandleCommandline(e.Args, out configFilePath);
 
-                    var config = ZetboxConfig.FromFile(configFilePath, "Zetbox.WPF.xml");
+                    var config = ZetboxConfig.FromFile(configFilePath, GetConfigFileName());
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                     InitCulture(config);
@@ -146,6 +146,11 @@ namespace Zetbox.Client.WPF
                 // ignore this
                 //ShowExceptionReporter(ex);
             }
+        }
+
+        protected virtual string GetConfigFileName()
+        {
+            return "Zetbox.WPF.xml";
         }
 
         // Move to another method to avoid loading Zetbox.Objects
