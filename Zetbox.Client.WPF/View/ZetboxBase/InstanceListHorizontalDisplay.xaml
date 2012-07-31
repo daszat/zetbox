@@ -55,7 +55,7 @@
 
             <gui:SavedListConfiguratorDisplay DockPanel.Dock="Top"
                     DataContext="{Binding SavedListConfigurations}"
-                    Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Visibility="{Binding Parent.ShowConfig, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Focusable="False"
                     Margin="0 0 0 10"/>
 

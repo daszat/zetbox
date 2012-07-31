@@ -225,6 +225,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        public bool ShowConfig
+        {
+            get
+            {
+                return this.ShowFilter;
+            }
+        }        
+
         /// <summary>
         /// Allow the user to modify the filter collection
         /// </summary>
