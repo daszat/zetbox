@@ -390,6 +390,11 @@ namespace PrepareEnv
             if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(target) || source == target)
                 return;
 
+            if (!Directory.Exists(source))
+            {
+                LogTitle("Skipping Generated Binaries: source ({0}) doesn't exist", source);
+                return;
+            }
 
             LogTitle("Installing Generated Binaries");
 
