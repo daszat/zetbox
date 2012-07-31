@@ -13,14 +13,15 @@
     <ProvideDefaultName>true</ProvideDefaultName>
   </TemplateData>
   <TemplateContent>
-      <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
-        <ProjectItem ReplaceParameters="true" TargetFileName="app.config">app.config</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="false" TargetFileName="SplashScreenImage.png">SplashScreenImage.png</ProjectItem>
-        <ProjectItem ReplaceParameters="false" TargetFileName="AppIcon.ico">AppIcon.ico</ProjectItem>
-      </Project>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="app.config">app.config</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="SplashScreenImage.png">SplashScreenImage.png</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="AppIcon.ico">AppIcon.ico</ProjectItem>
+      <ProjectItem ReplaceParameters="true">packages.config</ProjectItem>
+    </Project>
   </TemplateContent>
   <WizardExtension>
     <Assembly>ZetboxApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>

@@ -13,6 +13,8 @@
     <TargetFrameworkVersion>v$targetframeworkversion$</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ZetboxProjectType>Test</ZetboxProjectType>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +43,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=2.6.1.841, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration, Version=2.6.1.841, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System"/>
     $if$ ($targetframeworkversion$ >= 3.5)<Reference Include="System.Core"/>
     <Reference Include="System.Xml.Linq"/>
@@ -48,12 +63,29 @@
     $endif$$if$ ($targetframeworkversion$ >= 4.0)<Reference Include="Microsoft.CSharp"/>
     $endif$<Reference Include="System.Data"/>
     <Reference Include="System.Xml"/>
-    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
+    <Reference Include="Zetbox.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
+      <HintPath>..\packages\zetboxBasic-Common.1.0.4237.1\lib\net35\Zetbox.API.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zetbox.API.AbstractConsumerTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
+      <HintPath>..\packages\zetboxBasic-Tests.1.0.4237.1\lib\net35\Zetbox.API.AbstractConsumerTests.dll</HintPath>
+    </Reference>
+    <Reference Include="Zetbox.API.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
+      <HintPath>..\packages\zetboxBasic-Common.1.0.4237.1\lib\net35\Zetbox.API.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zetbox.Tests.Utilities.MsSql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
+      <HintPath>..\packages\zetboxBasic-Tests.1.0.4237.1\lib\net35\Zetbox.Tests.Utilities.MsSql.dll</HintPath>
+    </Reference>
+    <Reference Include="Zetbox.Tests.Utilities.PostgreSql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
+      <HintPath>..\packages\zetboxBasic-Tests.1.0.4237.1\lib\net35\Zetbox.Tests.Utilities.PostgreSql.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Integration\BasicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

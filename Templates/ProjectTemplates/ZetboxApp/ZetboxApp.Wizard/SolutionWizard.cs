@@ -126,7 +126,7 @@ namespace ZetboxApp.Wizard
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\common.targets", null);
                 }
-                else if (prjName.EndsWith(".Client"))
+                else if (prjName.EndsWith(".Client") || prjName.EndsWith(".Client.Tests"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\client.targets", null);
                 }
@@ -138,7 +138,7 @@ namespace ZetboxApp.Wizard
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\wpf.targets", null);
                 }
-                else if (prjName.EndsWith(".Server"))
+                else if (prjName.EndsWith(".Server") || prjName.EndsWith(".Server.Tests"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\server.targets", null);
                 }
@@ -181,7 +181,7 @@ namespace ZetboxApp.Wizard
 
             foreach (Project prj in _solution.Projects)
             {
-                VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;      
+                VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;
                 if (prj.Name.EndsWith(".Common"))
                 {
                 }

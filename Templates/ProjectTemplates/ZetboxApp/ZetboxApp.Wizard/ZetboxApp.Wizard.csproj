@@ -107,7 +107,9 @@
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\HttpService___Web.config" />
     <EmbeddedResource Include="SolutionItems\___nuget\nuget.Config" />
     <EmbeddedResource Include="SolutionItems\___nuget\nuget.targets" />
-    <EmbeddedResource Include="SolutionItems\___nuget\packages.config" />
+    <EmbeddedResource Include="SolutionItems\___nuget\packages.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\___zetbox\client.targets">
       <SubType>Designer</SubType>
     </EmbeddedResource>

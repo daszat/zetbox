@@ -18,6 +18,7 @@
       <ProjectItem ReplaceParameters="true" OpenInEditor="true">Integration\BasicTests.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true">SetUpFixture.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true">App.config</ProjectItem>
+      <ProjectItem ReplaceParameters="true">packages.config</ProjectItem>
     </Project>
   </TemplateContent>
   <WizardExtension>
