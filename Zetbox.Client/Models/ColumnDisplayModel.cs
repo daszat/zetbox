@@ -53,41 +53,96 @@ namespace Zetbox.Client.Models
         {
         }
 
+        /// <summary>
+        /// Creates a ColumnDisplayModel
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="name">property name</param>
         public ColumnDisplayModel(string header, string name)
             : this(header, name, null, ColumnType.PropertyModel)
         {
         }
 
+        /// <summary>
+        /// Creates a ColumnDisplayModel
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="name">property name</param>
+        /// <param name="kind">The requested control kind or null if default should be used</param>
         public ColumnDisplayModel(string header, string name, ControlKind kind)
             : this(header, name, kind, ColumnType.PropertyModel)
         {
         }
 
+        /// <summary>
+        /// Creates a ColumnDisplayModel
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="name">property name</param>
+        /// <param name="kind">The requested control kind or null if default should be used</param>
+        /// <param name="requestedWidth">Requested list column width</param>
         public ColumnDisplayModel(string header, string name, ControlKind kind, WidthHint requestedWidth)
             : this(header, name, kind, null, ColumnType.PropertyModel, requestedWidth, null)
         {
         }
 
+        /// <summary>
+        /// Creates a ColumnDisplayModel
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="name">property name</param>
+        /// <param name="kind">The requested control kind or null if default should be used</param>
+        /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
         public ColumnDisplayModel(string header, string name, ControlKind kind, int requestedWidthAbsoulte)
             : this(header, name, kind, null, ColumnType.PropertyModel, WidthHint.Default, requestedWidthAbsoulte)
         {
         }
 
+        /// <summary>
+        /// Creates a ColumnDisplayModel
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="name">property, viewmodels property or method name</param>
+        /// <param name="type">Requested column type</param>
         public ColumnDisplayModel(string header, string name, ColumnType type)
             : this(header, name, null, type)
         {
         }
 
+        /// <summary>
+        /// Creates a ColumnDisplayModel
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="name">property, viewmodels property or method name</param>
+        /// <param name="kind">The requested control kind or null if default should be used</param>
+        /// <param name="type">Requested column type</param>
         public ColumnDisplayModel(string header, string name, ControlKind kind, ColumnType type)
             : this(header, name, kind, null, type, WidthHint.Default, null)
         {
         }
 
+        /// <summary>
+        /// Creates a ColumnDisplayModel
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="name">property name</param>
+        /// <param name="kind">The requested editor kind or null if default should be used</param>
+        /// <param name="gridPreviewKind">The requested preview kind or null if default should be used</param>
         public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind)
             : this(header, name, kind, gridPreviewKind, ColumnType.PropertyModel, WidthHint.Default, null)
         {
         }
 
+        /// <summary>
+        /// Creates a ColumnDisplayModel
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="name">property, viewmodels property or method name</param>
+        /// <param name="kind">The requested editor kind or null if default should be used</param>
+        /// <param name="gridPreviewKind">The requested preview kind or null if default should be used</param>
+        /// <param name="type">Requested column type</param>
+        /// <param name="requestedWidth">Requested list column width</param>
+        /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
         public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type, WidthHint requestedWidth, int? requestedWidthAbsolute)
         {
             this.Header = header;
