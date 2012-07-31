@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Zetbox.Objects">
-      <HintPath>..\bin\Debug\Common\Core.Generated\Zetbox.Objects.dll</HintPath>
+      <HintPath>..\bin\Codegen\bin\Debug\Common\Core.Generated\Zetbox.Objects.dll</HintPath>
       <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
   </ItemGroup>

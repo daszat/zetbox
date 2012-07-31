@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Reference Include="Zetbox.Objects">
-      <HintPath>..\bin\Debug\Common\Core.Generated\Zetbox.Objects.dll</HintPath>
+      <HintPath>..\bin\Codegen\bin\Debug\Common\Core.Generated\Zetbox.Objects.dll</HintPath>
       <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
   </ItemGroup>
