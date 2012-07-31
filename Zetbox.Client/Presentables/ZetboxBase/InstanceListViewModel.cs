@@ -169,10 +169,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 case "EnableAutoFilter":
                 case "RespectRequiredFilter":
-                case "ShowFilter":
                 case "Filter":
                 case "FilterViewModels":
                     OnPropertyChanged(e.PropertyName);
+                    break;
+                case "ShowFilter":
+                    OnPropertyChanged("ShowFilter");
+                    OnPropertyChanged("ShowConfig");
                     break;
             }
         }
