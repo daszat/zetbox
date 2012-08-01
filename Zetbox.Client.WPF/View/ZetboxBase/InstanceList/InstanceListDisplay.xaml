@@ -35,18 +35,20 @@
                       Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
                       ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
                       Focusable="False"
-                      Margin="0 0 0 10"/>
-        <local:InstanceListToolBar DockPanel.Dock="Top" />
+                      Margin="0 0 0 5"/>
+        <local:InstanceListToolBar DockPanel.Dock="Top" 
+                                   Margin="0 0 0 5"/>
         <GroupBox DockPanel.Dock="Top"
               Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
               Header="Details"
-              Margin="0 0 0 10">
+              Margin="0 0 0 5">
             <ContentPresenter Content="{Binding SelectedDetailItem}"
                         tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
                         ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </GroupBox>
 
-        <local:InstanceListHeader DockPanel.Dock="Top" />
+        <local:InstanceListHeader DockPanel.Dock="Top"
+                                  Margin="0 0 0 5"/>
         <ctrls:ZetboxListView x:Name="lst"
                         BorderThickness="0"
                         ItemsSource="{Binding Instances}"

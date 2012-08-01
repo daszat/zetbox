@@ -48,9 +48,11 @@
                   Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
                   ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
                   Focusable="False"
-                  Margin="0 0 0 10"/>
-            <local:InstanceListToolBar DockPanel.Dock="Top" />
-            <local:InstanceListHeader DockPanel.Dock="Top" />
+                  Margin="0 0 0 5"/>
+            <local:InstanceListToolBar DockPanel.Dock="Top" 
+                                       Margin="0 0 0 5"/>
+            <local:InstanceListHeader DockPanel.Dock="Top"
+                                      Margin="0 0 0 5"/>
             <ctrls:ZetboxDataGrid x:Name="lst"
                           Margin="10"
                           BorderThickness="0"

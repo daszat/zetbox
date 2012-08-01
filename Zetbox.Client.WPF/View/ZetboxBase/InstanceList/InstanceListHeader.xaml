@@ -33,8 +33,9 @@
 
         <Grid>
             <Border Background="Yellow" Visibility="{Binding InstancesCountWarning, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <StackPanel Margin="5 0 0 5"
-                  Orientation="Horizontal">
+            <StackPanel Margin="5 0 0 0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
                 <TextBlock Text="{Binding InstancesCountAsText}" />
                 <TextBlock Margin="20 0 0 0"
                    Text="{Binding InstancesCountWarningText}"

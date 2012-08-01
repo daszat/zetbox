@@ -99,6 +99,7 @@
 
       <ContentPresenter Grid.Column="2"
                         Grid.IsSharedSizeScope="True"
+                        Margin="5"
                         Content="{Binding SelectedItem}"
                         ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
     </Grid>
