@@ -159,6 +159,7 @@ namespace PrepareEnv
             }
 
             envConfig.BinarySource = PrepareConfigPath(envConfig.BinarySource);
+            envConfig.GeneratedSource = PrepareConfigPath(envConfig.GeneratedSource);
             envConfig.BinaryTarget = PrepareConfigPath(envConfig.BinaryTarget);
             envConfig.TestsTarget = PrepareConfigPath(envConfig.TestsTarget);
 
