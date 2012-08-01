@@ -6,8 +6,6 @@
                                xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                                xmlns:client="clr-namespace:Zetbox.Client.WPF.View"
                                xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
-                               xmlns:gui="clr-namespace:Zetbox.Client.WPF.View.GUI"
-                               xmlns:clientZetboxBase="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
                                xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                                xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
@@ -44,15 +42,7 @@
                   ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
                   Focusable="False"
                   Margin="0 0 0 10"/>
-        <gui:SavedListConfiguratorDisplay DockPanel.Dock="Top"
-                    DataContext="{Binding SavedListConfigurations}"
-                    Visibility="{Binding Parent.ShowConfig, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Focusable="False"
-                    Margin="0 0 0 10"/>
-
         <local:InstanceListToolBar DockPanel.Dock="Top" />
-
-
         <GroupBox DockPanel.Dock="Top"
               Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
               Header="Details"
@@ -61,7 +51,6 @@
                         tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
                         ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </GroupBox>
-
         <local:InstanceListHeader DockPanel.Dock="Top" />
         <ctrls:ZetboxDataGrid x:Name="lst"
                         BorderThickness="0"

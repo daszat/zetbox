@@ -183,8 +183,22 @@
       </Setter.Value>
     </Setter>
   </Style>
-
-  <!--- Style menus -->
+  <Style x:Key="ImageOnlyToolbarButton"
+         BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+         TargetType="{x:Type ctrls:CommandButton}">
+        <Setter Property="Margin" Value="0,0,7,0" />
+        <Setter Property="Padding" Value="0,0,5,0" />
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                        <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
+                               MaxHeight="16"
+                               MaxWidth="16" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--- Style menus -->
   <Style x:Key="CommandMenuItem"
          TargetType="MenuItem">
     <Setter Property="Command"

@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.GUI;
 
-namespace Zetbox.Client.WPF.View.GUI
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     /// <summary>
     /// No ViewDescriptor -> internal

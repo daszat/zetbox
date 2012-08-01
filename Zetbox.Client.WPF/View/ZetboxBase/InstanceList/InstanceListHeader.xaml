@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
              xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <!--
@@ -23,23 +24,22 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
+    <DockPanel>
+        <local:SavedListConfiguratorDisplay DockPanel.Dock="Right"
+                    DataContext="{Binding SavedListConfigurations}"
+                    Visibility="{Binding Parent.ShowConfig, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Focusable="False"
+                    Width="200"/>
 
-  <DockPanel>
-    <ctrls:CommandButton DockPanel.Dock="Right"
-                         CommandViewModel="{Binding SelectColumnsCommand}"
-                         Visibility="{Binding AllowSelectColumns, Converter={StaticResource BooleanToVisibilityConverter}}"
-                         HorizontalAlignment="Right"
-                         Style="{StaticResource ImageButton}"
-                         MaxHeight="28"/>
-    <Grid>
-      <Border Background="Yellow" Visibility="{Binding InstancesCountWarning, Converter={StaticResource BooleanToVisibilityConverter}}" />
-      <StackPanel Margin="5 0 0 5"
+        <Grid>
+            <Border Background="Yellow" Visibility="{Binding InstancesCountWarning, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <StackPanel Margin="5 0 0 5"
                   Orientation="Horizontal">
-        <TextBlock Text="{Binding InstancesCountAsText}" />
-        <TextBlock Margin="20 0 0 0"
+                <TextBlock Text="{Binding InstancesCountAsText}" />
+                <TextBlock Margin="20 0 0 0"
                    Text="{Binding InstancesCountWarningText}"
                    Visibility="{Binding InstancesCountWarning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-      </StackPanel>
-    </Grid>
-  </DockPanel>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </UserControl>

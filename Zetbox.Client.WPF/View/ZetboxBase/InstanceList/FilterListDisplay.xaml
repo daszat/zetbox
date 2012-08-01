@@ -24,23 +24,16 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <StackPanel>
-        <StackPanel.InputBindings>
+    <ItemsControl ItemsSource="{Binding FilterListEntryViewModels}" Focusable="False">
+        <ItemsControl.InputBindings>
             <KeyBinding Key="Return"
                   Command="NavigationCommands.Refresh" />
-        </StackPanel.InputBindings>
-        <ItemsControl ItemsSource="{Binding FilterListEntryViewModels}" Focusable="False">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ContentPresenter Content="{Binding}"
+        </ItemsControl.InputBindings>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <ContentPresenter Content="{Binding}"
                             ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <ctrls:CommandButton CommandViewModel="{Binding AddFilterCommand}"
-                         Visibility="{Binding AllowUserFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                         HorizontalAlignment="Right"
-                         Style="{StaticResource ImageButton}"
-                         MaxHeight="28"/>
-    </StackPanel>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

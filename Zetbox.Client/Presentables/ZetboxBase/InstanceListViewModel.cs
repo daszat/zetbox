@@ -613,6 +613,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         SelectColumns,
                         () => AllowSelectColumns,
                         null);
+                    _SelectColumnsCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext);
                 }
                 return _SelectColumnsCommand;
             }
