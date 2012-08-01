@@ -62,18 +62,10 @@
 
             <Expander Grid.Column="0"
                       IsExpanded="{Binding ShowItemsList}"
-                      ExpandDirection="Left"
+                      ExpandDirection="Right"
+                      Header="{Binding ItemsLabel}"
                       Expanded="Expander_Expanded"
                       Collapsed="Expander_Collapsed">
-                <Expander.HeaderTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding ItemsLabel}">
-                                    <TextBlock.LayoutTransform>
-                                        <RotateTransform Angle="-90" />
-                                    </TextBlock.LayoutTransform>
-                        </TextBlock>
-                    </DataTemplate>
-                </Expander.HeaderTemplate>
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top"
                                HorizontalAlignment="Center"

@@ -36,7 +36,7 @@
               Background="#E3EFFF"
               BorderBrush="#6593CF"
               BorderThickness="0,1,0,0">
-        <Expander IsExpanded="True">
+        <Expander IsExpanded="True" Header="{Binding DetailsLabel}">
           <ScrollViewer Height="200">
             <ContentPresenter Content="{Binding SelectedItem}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}"

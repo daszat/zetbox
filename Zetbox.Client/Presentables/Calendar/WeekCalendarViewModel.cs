@@ -163,6 +163,11 @@ namespace Zetbox.Client.Presentables.Calendar
             get { return "Wochenkalender"; }
         }
 
+        public string DetailsLabel
+        {
+            get { return "Details"; }
+        }
+
         private Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> _Source = null;
         public Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> Source
         {
