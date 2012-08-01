@@ -33,6 +33,7 @@
   <converter:ImageConverter x:Key="ImageConverter" />
   <converter:SystemDrawingConverter x:Key="SystemDrawingConverter" />
   <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+  <converter:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
   <commands:Converter x:Key="CommandConverter" />
   <converter:ObjectStateToTextConverter x:Key="ObjectStateToTextConverter" />
   <converter:ObjectStateToTextVisibilityConverter x:Key="ObjectStateToTextVisibilityConverter" />
