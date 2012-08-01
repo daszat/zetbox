@@ -57,37 +57,8 @@
                     Focusable="False"
                     Margin="0 0 0 10"/>
 
-            <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                               ItemsSource="{Binding Commands}"
-                               Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <ctrls:WorkaroundToolBar.Resources>
-                    <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
-                        <ctrls:CommandButton CommandViewModel="{Binding}"
-                                 CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientZetboxBase:InstanceGridHorizontalDisplay}}}"
-                                 Style="{StaticResource ImageToolbarButton}" />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
-                        <Menu>
-                            <Menu.Resources>
-                                <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
-                                    <TextBlock Text="{Binding}"/>
-                                </DataTemplate>
-                            </Menu.Resources>
-                            <MenuItem ItemsSource="{Binding Commands}"
-                        Header="{Binding Name}"
-                        ItemContainerStyle="{StaticResource CommandMenuItem}">
-                            </MenuItem>
-                        </Menu>
-                    </DataTemplate>
-                    <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
-                    <Style TargetType="Menu">
-                        <Setter Property="Margin"
-                  Value="0,2,0,0"/>
-                        <Setter Property="Background"
-                  Value="#00000000"/>
-                    </Style>
-                </ctrls:WorkaroundToolBar.Resources>
-            </ctrls:WorkaroundToolBar>
+            <local:InstanceListToolBar DockPanel.Dock="Top" />
+
             <local:InstanceListHeader DockPanel.Dock="Top" />
             <ctrls:ZetboxDataGrid x:Name="lst"
                           Margin="10"

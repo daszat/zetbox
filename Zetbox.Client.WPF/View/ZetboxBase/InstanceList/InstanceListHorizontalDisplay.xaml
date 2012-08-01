@@ -5,8 +5,8 @@
                                xmlns:client="clr-namespace:Zetbox.Client.WPF.View"
                                xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                                xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
-                               xmlns:gui="clr-namespace:Zetbox.Client.WPF.View.GUI"
                                xmlns:clientZetboxBase="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                               xmlns:gui="clr-namespace:Zetbox.Client.WPF.View.GUI"
                                xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                                xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
@@ -52,44 +52,12 @@
                   ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
                   Focusable="False"
                   Margin="0 0 0 10"/>
-
             <gui:SavedListConfiguratorDisplay DockPanel.Dock="Top"
                     DataContext="{Binding SavedListConfigurations}"
                     Visibility="{Binding Parent.ShowConfig, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Focusable="False"
                     Margin="0 0 0 10"/>
-
-            <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                               ItemsSource="{Binding Commands}"
-                               Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <ctrls:WorkaroundToolBar.Resources>
-                    <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
-                        <ctrls:CommandButton CommandViewModel="{Binding}"
-                                 CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientZetboxBase:InstanceListHorizontalDisplay}}}"
-                                 Style="{StaticResource ImageToolbarButton}" />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
-                        <Menu>
-                            <Menu.Resources>
-                                <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
-                                    <TextBlock Text="{Binding}"/>
-                                </DataTemplate>
-                            </Menu.Resources>
-                            <MenuItem ItemsSource="{Binding Commands}"
-                        Header="{Binding Name}"
-                        ItemContainerStyle="{StaticResource CommandMenuItem}">
-                            </MenuItem>
-                        </Menu>
-                    </DataTemplate>
-                    <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
-                    <Style TargetType="Menu">
-                        <Setter Property="Margin"
-                  Value="0,2,0,0"/>
-                        <Setter Property="Background"
-                  Value="#00000000"/>
-                    </Style>
-                </ctrls:WorkaroundToolBar.Resources>
-            </ctrls:WorkaroundToolBar>
+            <local:InstanceListToolBar DockPanel.Dock="Top" />
             <local:InstanceListHeader DockPanel.Dock="Top" />
             <ctrls:ZetboxListView x:Name="lst"
                           Margin="10"

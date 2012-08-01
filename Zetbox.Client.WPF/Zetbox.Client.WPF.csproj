@@ -205,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ZetboxBase\InstanceList\SavedListConfiguratorDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -613,6 +617,9 @@
     </Compile>
     <Compile Include="View\GUI\NavigationSearchScreenDisplay.xaml.cs">
       <DependentUpon>NavigationSearchScreenDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml.cs">
+      <DependentUpon>InstanceListToolBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\InstanceList\SavedListConfiguratorDisplay.xaml.cs">
       <DependentUpon>SavedListConfiguratorDisplay.xaml</DependentUpon>
