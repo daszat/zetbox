@@ -205,7 +205,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\GUI\SavedListConfiguratorDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\SavedListConfiguratorDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,15 +217,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ZetboxBase\FilterListDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\FilterListDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ZetboxBase\FilterListEntryDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\FilterListEntryDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ZetboxBase\InstanceListHeader.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceListHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -339,11 +339,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\InstanceGridHorizontalDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceGridHorizontalDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\InstanceGridDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceGridDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -355,7 +355,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\InstanceListHorizontalDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceListHorizontalDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -457,7 +457,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\InstanceListDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceListDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -614,7 +614,7 @@
     <Compile Include="View\GUI\NavigationSearchScreenDisplay.xaml.cs">
       <DependentUpon>NavigationSearchScreenDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GUI\SavedListConfiguratorDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\SavedListConfiguratorDisplay.xaml.cs">
       <DependentUpon>SavedListConfiguratorDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\AccessDeniedDisplay.xaml.cs">
@@ -623,14 +623,14 @@
     <Compile Include="View\ZetboxBase\AnyReferencePropertyEditor.xaml.cs">
       <DependentUpon>AnyReferencePropertyEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\FilterListDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\FilterListDisplay.xaml.cs">
       <DependentUpon>FilterListDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\FilterListEntryDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\FilterListEntryDisplay.xaml.cs">
       <DependentUpon>FilterListEntryDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\InstanceCollectionBase.cs" />
-    <Compile Include="View\ZetboxBase\InstanceListHeader.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceCollectionBase.cs" />
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListHeader.xaml.cs">
       <DependentUpon>InstanceListHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\PropertiesPrewiewDisplay.xaml.cs">
@@ -720,11 +720,11 @@
     <Compile Include="View\ZetboxBase\ObjectReferenceCollectionGridEditor.xaml.cs">
       <DependentUpon>ObjectReferenceCollectionGridEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\InstanceGridHorizontalDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceGridHorizontalDisplay.xaml.cs">
       <DependentUpon>InstanceGridHorizontalDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\InstanceGridBaseDisplay.cs" />
-    <Compile Include="View\ZetboxBase\InstanceGridDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceGridBaseDisplay.cs" />
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceGridDisplay.xaml.cs">
       <DependentUpon>InstanceGridDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\NullablePasswordTextBoxView.xaml.cs">
@@ -733,8 +733,8 @@
     <Compile Include="View\ZetboxBase\ObjectReferenceDropdownEditor.xaml.cs">
       <DependentUpon>ObjectReferenceDropdownEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\InstanceListBaseDisplay.cs" />
-    <Compile Include="View\ZetboxBase\InstanceListHorizontalDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListBaseDisplay.cs" />
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListHorizontalDisplay.xaml.cs">
       <DependentUpon>InstanceListHorizontalDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\NullableDateTimeValueEditor.xaml.cs">
@@ -792,7 +792,7 @@
     <Compile Include="View\ModuleEditor\WorkspaceDisplay.xaml.cs">
       <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\InstanceListDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListDisplay.xaml.cs">
       <DependentUpon>InstanceListDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GridCells\ReferenceEditor.xaml.cs">
