@@ -47,7 +47,8 @@
         <GroupBox DockPanel.Dock="Top"
               Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
               Header="Details"
-              Margin="0 0 0 5">
+                  Margin="0 0 0 5"
+                  Height="{Binding RequestedDetailHeight, Converter={StaticResource WidthHintConverter}}">
             <ContentPresenter Content="{Binding SelectedDetailItem}"
                         tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
                         ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />

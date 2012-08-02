@@ -1404,7 +1404,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-
         public delegate void DisplayedColumnsCreatedHandler(GridDisplayConfiguration cols);
         public event DisplayedColumnsCreatedHandler DisplayedColumnsCreated;
 
@@ -1430,6 +1429,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             get
             {
                 return AllowUserFilter || AllowSelectColumns;
+            }
+        }
+
+        private WidthHint _requestedDetailHeight = WidthHint.Default;
+        public WidthHint RequestedDetailHeight
+        {
+            get
+            {
+                return _requestedDetailHeight;
+            }
+            set
+            {
+                if (_requestedDetailHeight != value)
+                {
+                    _requestedDetailHeight = value;
+                    OnPropertyChanged("RequestedDetailHeight");
+                }
             }
         }
         #endregion

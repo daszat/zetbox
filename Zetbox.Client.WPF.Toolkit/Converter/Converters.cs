@@ -20,6 +20,8 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using Zetbox.App.GUI;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.Converter
 {
@@ -381,6 +383,26 @@ namespace Zetbox.Client.WPF.Converter
         public object ConvertBack(object value, Type targetType,
                             object parameter, System.Globalization.CultureInfo culture)
         {
+            return Binding.DoNothing;
+        }
+    }
+
+    /// <summary>
+    /// Convert a WidthHint into a DIP count
+    /// </summary>
+    [ValueConversion(typeof(WidthHint), typeof(double))]
+    public class WidthHintConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, CultureInfo culture)
+        {
+            return WPFHelper.TranslateWidth(value as WidthHint?);
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            // Readonly
             return Binding.DoNothing;
         }
     }
