@@ -43,9 +43,11 @@
               Header="Details"
               Margin="0 0 0 5"
                   Height="{Binding RequestedDetailHeight, Converter={StaticResource WidthHintConverter}}">
-            <ContentPresenter Content="{Binding SelectedDetailItem}"
-                        tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
-                        ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ContentPresenter Content="{Binding SelectedDetailItem}"
+                            tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
+                            ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+            </ScrollViewer>
         </GroupBox>
 
         <local:InstanceListHeader DockPanel.Dock="Top"
