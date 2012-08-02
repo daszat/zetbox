@@ -23,7 +23,7 @@
     -->
 
     <DockPanel>
-      <ctrls:CommandButton DockPanel.Dock="Left"
+      <ctrls:CommandButton DockPanel.Dock="Right"
                            CommandViewModel="{Binding RemoveCommand}"
                            Visibility="{Binding IsUserFilter, Converter={StaticResource BooleanToVisibilityHiddenConverter}}"
                            Style="{StaticResource ImageOnlyButton}"

@@ -1,12 +1,8 @@
 ﻿<UserControl x:Class="Zetbox.Client.WPF.View.ZetboxBase.InstanceListToolBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
-             xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client">
 
     <!--
     This file is part of zetbox.
@@ -24,16 +20,17 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
-    
+
     <DockPanel>
-        <ctrls:WorkaroundToolBar DockPanel.Dock="Right">
+        <ctrls:WorkaroundToolBar Visibility="{Binding ShowUtilities, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 DockPanel.Dock="Right">
             <ctrls:CommandButton CommandViewModel="{Binding FilterList.AddFilterCommand}"
                                  Visibility="{Binding AllowUserFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
                                  HorizontalAlignment="Right"
-                                 Style="{StaticResource ImageOnlyToolbarButton}"/>
+                                 Style="{StaticResource ImageOnlyToolbarButton}" />
             <ctrls:CommandButton CommandViewModel="{Binding SelectColumnsCommand}"
                                  Visibility="{Binding AllowSelectColumns, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                 Style="{StaticResource ImageOnlyToolbarButton}"/>
+                                 Style="{StaticResource ImageOnlyToolbarButton}" />
         </ctrls:WorkaroundToolBar>
         <ctrls:WorkaroundToolBar ItemsSource="{Binding Commands}"
                                  Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -47,7 +44,7 @@
                     <Menu>
                         <Menu.Resources>
                             <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
-                                <TextBlock Text="{Binding}"/>
+                                <TextBlock Text="{Binding}" />
                             </DataTemplate>
                         </Menu.Resources>
                         <MenuItem ItemsSource="{Binding Commands}"
@@ -59,9 +56,9 @@
                 <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
                 <Style TargetType="Menu">
                     <Setter Property="Margin"
-                            Value="0,2,0,0"/>
+                            Value="0,2,0,0" />
                     <Setter Property="Background"
-                            Value="#00000000"/>
+                            Value="#00000000" />
                 </Style>
             </ctrls:WorkaroundToolBar.Resources>
         </ctrls:WorkaroundToolBar>

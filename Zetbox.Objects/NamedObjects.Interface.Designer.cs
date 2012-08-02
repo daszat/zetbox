@@ -3952,6 +3952,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("88ce02bf-fc40-4227-a7b5-28f6385efa1b"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_TestModule_InstanceListTestViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("7f6730fe-c856-4ce2-a72c-5503e1162890"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_TimeRecords_Dashboard
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("8023e937-5827-4056-b0c0-ffb5bf061dfd"); }

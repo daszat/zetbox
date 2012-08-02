@@ -184,6 +184,7 @@
     <Compile Include="Presentables\IContextViewModel.cs" />
     <Compile Include="Presentables\ISortableViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
+    <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\AnyReferencePropertyViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\FilterListEntryViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\FilterListEntryViewModelResources.Designer.cs">

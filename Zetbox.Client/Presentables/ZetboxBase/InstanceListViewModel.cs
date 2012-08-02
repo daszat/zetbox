@@ -177,6 +177,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     OnPropertyChanged("ShowFilter");
                     OnPropertyChanged("ShowConfig");
                     break;
+                case "AllowUserFilter":
+                    OnPropertyChanged("AllowUserFilter");
+                    OnPropertyChanged("ShowUtilities");
+                    break;
             }
         }
 
@@ -234,7 +238,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 return this.ShowFilter;
             }
-        }        
+        }
 
         /// <summary>
         /// Allow the user to modify the filter collection
@@ -595,6 +599,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     _allowSelectColumns = value;
                     OnPropertyChanged("AllowSelectColumns");
+                    OnPropertyChanged("ShowUtilities");
                 }
             }
         }
@@ -1415,6 +1420,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Whether or not the Utilities (Filter/Columns) should be shown.
+        /// </summary>
+        public bool ShowUtilities
+        {
+            get
+            {
+                return AllowUserFilter || AllowSelectColumns;
+            }
         }
         #endregion
 
