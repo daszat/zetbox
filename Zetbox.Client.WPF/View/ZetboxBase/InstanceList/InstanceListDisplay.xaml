@@ -7,7 +7,7 @@
                                xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
                                xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                                xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
-                               Focusable="False" >
+                               Focusable="False">
     <!--
     This file is part of zetbox.
 
@@ -27,41 +27,41 @@
 
     <local:InstanceListBaseDisplay.CommandBindings>
         <CommandBinding Command="NavigationCommands.Refresh"
-                    Executed="RefreshCommand_Executed" />
+                        Executed="RefreshCommand_Executed" />
     </local:InstanceListBaseDisplay.CommandBindings>
     <DockPanel x:Name="ctrlInstanceList">
         <ContentPresenter DockPanel.Dock="Top"
-                      Content="{Binding FilterList}"
-                      Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                      ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
-                      Focusable="False"
-                      Margin="0 0 0 5"/>
-        <local:InstanceListToolBar DockPanel.Dock="Top" 
-                                   Margin="0 0 0 5"/>
+                          Content="{Binding FilterList}"
+                          Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                          Focusable="False"
+                          Margin="0 0 0 5" />
+        <local:InstanceListToolBar DockPanel.Dock="Top"
+                                   Margin="0 0 0 5" />
         <GroupBox DockPanel.Dock="Top"
-              Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
-              Header="Details"
-              Margin="0 0 0 5"
+                  Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Header="Details"
+                  Margin="0 0 0 5"
                   Height="{Binding RequestedDetailHeight, Converter={StaticResource WidthHintConverter}}">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ContentPresenter Content="{Binding SelectedDetailItem}"
-                            tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
-                            ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                                  tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
+                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
             </ScrollViewer>
         </GroupBox>
 
         <local:InstanceListHeader DockPanel.Dock="Top"
-                                  Margin="0 0 0 5"/>
+                                  Margin="0 0 0 5" />
         <ctrls:ZetboxListView x:Name="lst"
-                        BorderThickness="0"
-                        ItemsSource="{Binding Instances}"
-                        ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                        ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
-                        SelectedZetboxItems="{Binding SelectedItems}"
-                        SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
-                        KeyboardNavigation.TabNavigation="Continue"
-                        MouseDoubleClick="ItemActivatedHandler"
-                        GridViewColumnHeader.Click="ListView_HeaderClick">
+                              BorderThickness="0"
+                              ItemsSource="{Binding Instances}"
+                              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                              ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
+                              SelectedZetboxItems="{Binding SelectedItems}"
+                              SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
+                              KeyboardNavigation.TabNavigation="Continue"
+                              MouseDoubleClick="ItemActivatedHandler"
+                              GridViewColumnHeader.Click="ListView_HeaderClick">
         </ctrls:ZetboxListView>
     </DockPanel>
 </local:InstanceListBaseDisplay>

@@ -24,126 +24,124 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-
     <!-- Define Default Controls Styles-->
     <Style x:Key="baseTextStyle"
-       TargetType="{x:Type TextBlock}">
+           TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground"
-            Value="{StaticResource MainFontColor}" />
+                Value="{StaticResource MainFontColor}" />
         <Setter Property="FontSize"
-            Value="{StaticResource NormalFontSize}" />
+                Value="{StaticResource NormalFontSize}" />
     </Style>
     <Style x:Key="baseStyle"
-       TargetType="{x:Type Control}">
+           TargetType="{x:Type Control}">
         <Setter Property="FontSize"
-            Value="{StaticResource NormalFontSize}" />
+                Value="{StaticResource NormalFontSize}" />
     </Style>
-
 
     <Style TargetType="TextBlock"
-         BasedOn="{StaticResource baseTextStyle}">
+           BasedOn="{StaticResource baseTextStyle}">
     </Style>
     <Style TargetType="{x:Type view:StringDisplay}"
-         BasedOn="{StaticResource baseTextStyle}">
+           BasedOn="{StaticResource baseTextStyle}">
     </Style>
 
     <Style TargetType="TextBox"
-         BasedOn="{StaticResource baseStyle}">
+           BasedOn="{StaticResource baseStyle}">
         <Setter Property="Foreground"
-            Value="{StaticResource MainFontColor}" />
+                Value="{StaticResource MainFontColor}" />
     </Style>
     <Style TargetType="{x:Type Button}"
-          BasedOn="{StaticResource baseStyle}"></Style>
+           BasedOn="{StaticResource baseStyle}"></Style>
     <Style TargetType="{x:Type Label}"
-         BasedOn="{StaticResource baseStyle}"></Style>
+           BasedOn="{StaticResource baseStyle}"></Style>
     <Style TargetType="{x:Type kevinTxt:InfoTextBox}"
-         BasedOn="{StaticResource baseStyle}"></Style>
+           BasedOn="{StaticResource baseStyle}"></Style>
     <Style TargetType="{x:Type kevinDate:DatePicker}"
-         BasedOn="{StaticResource baseStyle}"></Style>
+           BasedOn="{StaticResource baseStyle}"></Style>
     <Style TargetType="{x:Type wpftk:DatePicker}"
-         BasedOn="{StaticResource baseStyle}"></Style>
+           BasedOn="{StaticResource baseStyle}"></Style>
     <Style TargetType="{x:Type ListView}"
-         BasedOn="{StaticResource baseStyle}"></Style>
+           BasedOn="{StaticResource baseStyle}"></Style>
     <Style TargetType="{x:Type ComboBox}"
-         BasedOn="{StaticResource baseStyle}"></Style>
+           BasedOn="{StaticResource baseStyle}"></Style>
     <Style TargetType="{x:Type CheckBox}"
-         BasedOn="{StaticResource baseStyle}"></Style>
+           BasedOn="{StaticResource baseStyle}"></Style>
     <Style TargetType="{x:Type RadioButton}"
-         BasedOn="{StaticResource baseStyle}"></Style>
+           BasedOn="{StaticResource baseStyle}"></Style>
 
     <Style TargetType="{x:Type TabControl}">
         <Setter Property="Background"
-            Value="{StaticResource MainBackground2}" />
+                Value="{StaticResource MainBackground2}" />
     </Style>
 
     <Style TargetType="{x:Type wpftk:DataGrid}">
         <Setter Property="AlternatingRowBackground"
-            Value="#F8F8F8" />
+                Value="#F8F8F8" />
         <Setter Property="HorizontalGridLinesBrush"
-            Value="LightBlue" />
+                Value="LightBlue" />
         <Setter Property="VerticalGridLinesBrush"
-            Value="LightBlue" />
+                Value="LightBlue" />
         <Setter Property="RowHeaderWidth"
-            Value="25" />
+                Value="25" />
     </Style>
 
     <!-- Define Extra Styles-->
     <Style x:Key="Title"
-         TargetType="TextBlock">
+           TargetType="TextBlock">
         <Setter Property="FontSize"
-            Value="{StaticResource BigFontSize}" />
+                Value="{StaticResource BigFontSize}" />
         <Setter Property="FontWeight"
-            Value="Bold" />
+                Value="Bold" />
         <Setter Property="Foreground"
-            Value="{StaticResource MainColor}" />
+                Value="{StaticResource MainColor}" />
     </Style>
     <Style x:Key="Heading1"
-         TargetType="TextBlock">
+           TargetType="TextBlock">
         <Setter Property="FontSize"
-            Value="{StaticResource LargeFontSize}" />
+                Value="{StaticResource LargeFontSize}" />
         <Setter Property="FontWeight"
-            Value="Bold" />
+                Value="Bold" />
         <Setter Property="Foreground"
-            Value="{StaticResource MainColor}" />
+                Value="{StaticResource MainColor}" />
     </Style>
     <Style x:Key="Heading2"
-         TargetType="TextBlock">
+           TargetType="TextBlock">
         <Setter Property="FontSize"
-            Value="{StaticResource NormalFontSize}" />
+                Value="{StaticResource NormalFontSize}" />
         <Setter Property="FontWeight"
-            Value="Bold" />
+                Value="Bold" />
         <Setter Property="Foreground"
-            Value="{StaticResource MainColor}" />
+                Value="{StaticResource MainColor}" />
     </Style>
     <Style x:Key="Heading3"
-         TargetType="TextBlock">
+           TargetType="TextBlock">
         <Setter Property="FontSize"
-            Value="{StaticResource NormalFontSize}" />
+                Value="{StaticResource NormalFontSize}" />
         <Setter Property="FontWeight"
-            Value="Bold" />
+                Value="Bold" />
         <Setter Property="Foreground"
-            Value="{StaticResource MainColor}" />
+                Value="{StaticResource MainColor}" />
     </Style>
 
     <Style x:Key="Notice"
-         TargetType="TextBlock">
+           TargetType="TextBlock">
         <Setter Property="FontWeight"
-            Value="Bold" />
+                Value="Bold" />
     </Style>
 
     <!-- Style buttons -->
     <Style x:Key="ImageButton"
-         TargetType="{x:Type ctrls:CommandButton}">
+           TargetType="{x:Type ctrls:CommandButton}">
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                   MaxHeight="32"
-                   MaxWidth="32"/>
+                               MaxHeight="32"
+                               MaxWidth="32" />
                         <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                              Margin="5 0 0 0"
-                              VerticalAlignment="Center" />
+                                          Margin="5 0 0 0"
+                                          VerticalAlignment="Center" />
                     </StackPanel>
                 </DataTemplate>
             </Setter.Value>
@@ -151,13 +149,13 @@
     </Style>
 
     <Style x:Key="ImageOnlyButton"
-         TargetType="{x:Type ctrls:CommandButton}">
+           TargetType="{x:Type ctrls:CommandButton}">
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
                     <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                 MaxHeight="32"
-                 MaxWidth="32"/>
+                           MaxHeight="32"
+                           MaxWidth="32" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -166,72 +164,77 @@
     <Style x:Key="ImageToolbarButton"
            BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
            TargetType="{x:Type ctrls:CommandButton}">
-        <Setter Property="Margin" Value="0,0,7,0" />
-        <Setter Property="Padding" Value="0,0,5,0" />
+        <Setter Property="Margin"
+                Value="0,0,7,0" />
+        <Setter Property="Padding"
+                Value="0,0,5,0" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                   MaxHeight="16"
-                   MaxWidth="16" />
+                               MaxHeight="16"
+                               MaxWidth="16" />
                         <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                              Margin="5 0 0 0"
-                              VerticalAlignment="Center" />
+                                          Margin="5 0 0 0"
+                                          VerticalAlignment="Center" />
                     </StackPanel>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
     <Style x:Key="ImageOnlyToolbarButton"
-         BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-         TargetType="{x:Type ctrls:CommandButton}">
-        <Setter Property="Margin" Value="0,0,7,0" />
-        <Setter Property="Padding" Value="0,0,5,0" />
+           BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+           TargetType="{x:Type ctrls:CommandButton}">
+        <Setter Property="Margin"
+                Value="0,0,7,0" />
+        <Setter Property="Padding"
+                Value="0,0,5,0" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
                     <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                               MaxHeight="16"
-                               MaxWidth="16" />
+                           MaxHeight="16"
+                           MaxWidth="16" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
     <!--- Style menus -->
     <Style x:Key="CommandMenuItem"
-         TargetType="MenuItem">
+           TargetType="MenuItem">
         <Setter Property="Command"
-            Value="{Binding Converter={StaticResource CommandConverter}}" />
+                Value="{Binding Converter={StaticResource CommandConverter}}" />
         <Setter Property="Header"
-            Value="{Binding Label}" />
+                Value="{Binding Label}" />
         <Setter Property="ToolTip"
-            Value="{Binding ToolTip}" />
+                Value="{Binding ToolTip}" />
         <Setter Property="Icon"
-            Value="{Binding Icon, Converter={StaticResource ImageCtrlConverter}, ConverterParameter='16,16'}" />
+                Value="{Binding Icon, Converter={StaticResource ImageCtrlConverter}, ConverterParameter='16,16'}" />
     </Style>
 
     <!-- Commands -->
     <DataTemplate DataType="{x:Type client:ContainerCommand}">
-        <Menu Margin="0,2,0,0" Background="#00000000">
+        <Menu Margin="0,2,0,0"
+              Background="#00000000">
             <Menu.Resources>
                 <DataTemplate DataType="{x:Type client:CommandViewModel}">
-                    <TextBlock Text="{Binding}"/>
+                    <TextBlock Text="{Binding}" />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type client:ActionViewModel}">
-                    <TextBlock Text="{Binding}"/>
+                    <TextBlock Text="{Binding}" />
                 </DataTemplate>
             </Menu.Resources>
             <MenuItem ItemsSource="{Binding Commands}"
-                Header="{Binding Name}"
-                ItemContainerStyle="{StaticResource CommandMenuItem}">
+                      Header="{Binding Name}"
+                      ItemContainerStyle="{StaticResource CommandMenuItem}">
             </MenuItem>
         </Menu>
     </DataTemplate>
 
     <!-- from http://stackoverflow.com/questions/780426/link-button-in-wpf by Anderson Imes -->
     <Style x:Key="LinkButton"
-         TargetType="Button">
+           TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -242,102 +245,102 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Foreground"
-            Value="{StaticResource MainColor}" />
+                Value="{StaticResource MainColor}" />
         <Setter Property="Cursor"
-            Value="Hand" />
+                Value="Hand" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver"
-               Value="true">
+                     Value="true">
                 <Setter Property="Foreground"
-                Value="{StaticResource AccentColor1}" />
+                        Value="{StaticResource AccentColor1}" />
             </Trigger>
             <Trigger Property="IsEnabled"
-               Value="false">
+                     Value="false">
                 <Setter Property="Foreground"
-                Value="{StaticResource MainColor}" />
+                        Value="{StaticResource MainColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <!-- Style Girds and lists -->
     <Style x:Key="ListViewItemContainerStyle"
-         TargetType="ListViewItem">
+           TargetType="ListViewItem">
         <Setter Property="Background"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
         <Setter Property="Foreground"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
         <Setter Property="FontStyle"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
         <Setter Property="FontWeight"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
     </Style>
     <Style x:Key="ListBoxItemContainerStyle"
-         TargetType="ListBoxItem">
+           TargetType="ListBoxItem">
         <Setter Property="Background"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
         <Setter Property="Foreground"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
         <Setter Property="FontStyle"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
         <Setter Property="FontWeight"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
     </Style>
 
     <!-- Force GridView content to be streched -->
     <Style x:Key="ListViewAsGridViewItemContainerStyle"
-         TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemContainerStyle}">
+           TargetType="ListViewItem"
+           BasedOn="{StaticResource ListViewItemContainerStyle}">
         <Setter Property="HorizontalContentAlignment"
-            Value="Stretch" />
+                Value="Stretch" />
     </Style>
 
     <Style x:Key="DataGridItemContainerStyle"
-    TargetType="{x:Type wpftk:DataGridRow}">
+           TargetType="{x:Type wpftk:DataGridRow}">
         <Setter Property="Background"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
         <Setter Property="Foreground"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
         <Setter Property="FontStyle"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
         <Setter Property="FontWeight"
-            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
     </Style>
-
 
     <!-- Style DataObject Editor -->
     <Style x:Key="DataObjectEditor_MainPanel"
-         TargetType="Panel">
+           TargetType="Panel">
         <Setter Property="Background"
-            Value="{Binding Highlight, Converter={StaticResource HighlightPanelBackgroundConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightPanelBackgroundConverter}}" />
     </Style>
     <Style x:Key="DataObjectEditor_PropertyPanel"
-         TargetType="Panel">
+           TargetType="Panel">
     </Style>
     <!-- Panel style for all (multiline) summary control of a DataObject -->
     <Style x:Key="DataObjectSummary_Panel"
-         TargetType="Panel">
+           TargetType="Panel">
         <Setter Property="Background"
-            Value="{Binding Highlight, Converter={StaticResource HighlightPanelBackgroundConverter}}" />
+                Value="{Binding Highlight, Converter={StaticResource HighlightPanelBackgroundConverter}}" />
     </Style>
 
     <!-- NavigationBreadCrumb -->
     <Style x:Key="NavigationBreadCrumb">
         <Setter Property="Control.FontWeight"
-            Value="Bold" />
+                Value="Bold" />
         <Setter Property="TextBlock.FontWeight"
-            Value="Bold" />
+                Value="Bold" />
     </Style>
     <Style x:Key="NavigationBreadCrumbLinkButton"
-         BasedOn="{StaticResource LinkButton}"
-         TargetType="Button">
+           BasedOn="{StaticResource LinkButton}"
+           TargetType="Button">
         <Setter Property="FontSize"
-            Value="{StaticResource LargeFontSize}" />
+                Value="{StaticResource LargeFontSize}" />
         <Style.Triggers>
             <Trigger Property="IsEnabled"
-               Value="false">
+                     Value="false">
                 <Setter Property="Foreground"
-                Value="{StaticResource AccentColor1}" />
+                        Value="{StaticResource AccentColor1}" />
                 <Setter Property="FontWeight"
-                Value="Bold" />
+                        Value="Bold" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -345,12 +348,12 @@
     <!-- Data Templates -->
     <DataTemplate x:Key="emptyTemplate">
         <Viewbox Stretch="UniformToFill"
-             StretchDirection="DownOnly">
+                 StretchDirection="DownOnly">
             <Ellipse Height="100"
-               Width="100"
-               StrokeThickness="10"
-               Stroke="{StaticResource AccentColor1}"
-               Fill="White" />
+                     Width="100"
+                     StrokeThickness="10"
+                     Stroke="{StaticResource AccentColor1}"
+                     Fill="White" />
         </Viewbox>
     </DataTemplate>
 
@@ -363,14 +366,14 @@
         <StackPanel Orientation="Horizontal">
             <ContentPresenter Content="{Binding}" />
             <TextBlock Text="^"
-                 Margin="10 0 0 0" />
+                       Margin="10 0 0 0" />
         </StackPanel>
     </DataTemplate>
     <DataTemplate x:Key="GridHeaderTemplateArrowDown">
         <StackPanel Orientation="Horizontal">
             <ContentPresenter Content="{Binding}" />
             <TextBlock Text="v"
-                 Margin="10 0 0 0" />
+                       Margin="10 0 0 0" />
         </StackPanel>
     </DataTemplate>
 
@@ -379,8 +382,8 @@
     </DataTemplate>
     <DataTemplate x:Key="iconCellTemplate">
         <Image Source="{Binding Converter={StaticResource IconConverter}}"
-           Width="14"
-           Height="14" />
+               Width="14"
+               Height="14" />
     </DataTemplate>
     <DataTemplate x:Key="nameCellTemplate">
         <TextBlock Text="{Binding Name}" />
@@ -388,15 +391,20 @@
 
     <!-- default styles for our usecontrols -->
     <Style TargetType="{x:Type ctrls:LabeledView}">
-        <Setter Property="Margin" Value="2,1,2,1" />
-        <Setter Property="MinWidth" Value="100" />
-        <Setter Property="MinHeight" Value="26" />
-        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin"
+                Value="2,1,2,1" />
+        <Setter Property="MinWidth"
+                Value="100" />
+        <Setter Property="MinHeight"
+                Value="26" />
+        <Setter Property="VerticalAlignment"
+                Value="Top" />
     </Style>
 
     <Style TargetType="{x:Type Expander}">
         <Style.Triggers>
-            <Trigger Property="ExpandDirection" Value="Right">
+            <Trigger Property="ExpandDirection"
+                     Value="Right">
                 <Setter Property="HeaderTemplate">
                     <Setter.Value>
                         <DataTemplate>

@@ -4,7 +4,7 @@
                     xmlns:converter="clr-namespace:Zetbox.Client.WPF.Converter;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client">
-  <!--
+    <!--
     This file is part of zetbox.
 
     Zetbox is free software: you can redistribute it and/or modify
@@ -21,66 +21,66 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <converter:FormattingConverter x:Key="FormattingConverter" />
-  <converter:MultiplyingConverter x:Key="MultiplyingConverter" />
-  <converter:DividingConverter x:Key="DividingConverter" />
-  <converter:GetTypeConverter x:Key="GetTypeConverter" />
-  <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />
-  <converter:DebugConverter x:Key="debug" />
-  <converter:HourConverter x:Key="HourConverter" />
-  <converter:InvertedBoolConverter x:Key="InvertedBoolConverter" />
-  <converter:BooleanMultiselectToSelectionModeConverter x:Key="BooleanMultiselectToSelectionModeConverter" />
-  <converter:ImageConverter x:Key="ImageConverter" />
-  <converter:SystemDrawingConverter x:Key="SystemDrawingConverter" />
-  <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-  <converter:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
-  <converter:WidthHintConverter x:Key="WidthHintConverter" />
-  <commands:Converter x:Key="CommandConverter" />
-  <converter:ObjectStateToTextConverter x:Key="ObjectStateToTextConverter" />
-  <converter:ObjectStateToTextVisibilityConverter x:Key="ObjectStateToTextVisibilityConverter" />
-  <converter:LighterShadeConverter x:Key="LighterShadeConverter" />
+    <converter:FormattingConverter x:Key="FormattingConverter" />
+    <converter:MultiplyingConverter x:Key="MultiplyingConverter" />
+    <converter:DividingConverter x:Key="DividingConverter" />
+    <converter:GetTypeConverter x:Key="GetTypeConverter" />
+    <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />
+    <converter:DebugConverter x:Key="debug" />
+    <converter:HourConverter x:Key="HourConverter" />
+    <converter:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    <converter:BooleanMultiselectToSelectionModeConverter x:Key="BooleanMultiselectToSelectionModeConverter" />
+    <converter:ImageConverter x:Key="ImageConverter" />
+    <converter:SystemDrawingConverter x:Key="SystemDrawingConverter" />
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converter:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
+    <converter:WidthHintConverter x:Key="WidthHintConverter" />
+    <commands:Converter x:Key="CommandConverter" />
+    <converter:ObjectStateToTextConverter x:Key="ObjectStateToTextConverter" />
+    <converter:ObjectStateToTextVisibilityConverter x:Key="ObjectStateToTextVisibilityConverter" />
+    <converter:LighterShadeConverter x:Key="LighterShadeConverter" />
 
-  <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
+    <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
 
-  <converter:HorizontalContentAlignmentConverter x:Key="HorizontalContentAlignmentConverter"/>
-  <converter:VerticalContentAlignmentConverter x:Key="VerticalContentAlignmentConverter"/>
-  <converter:EmptyStringToCollapsedConverter x:Key="EmptyStringToCollapsedConverter"/>
-  <converter:EmptyCountToCollapsedConverter x:Key="EmptyCountToCollapsedConverter"/>
-  <converter:FormattingToFontWeightConverter x:Key="FormattingToFontWeightConverter"/>
+    <converter:HorizontalContentAlignmentConverter x:Key="HorizontalContentAlignmentConverter" />
+    <converter:VerticalContentAlignmentConverter x:Key="VerticalContentAlignmentConverter" />
+    <converter:EmptyStringToCollapsedConverter x:Key="EmptyStringToCollapsedConverter" />
+    <converter:EmptyCountToCollapsedConverter x:Key="EmptyCountToCollapsedConverter" />
+    <converter:FormattingToFontWeightConverter x:Key="FormattingToFontWeightConverter" />
 
-  <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
-  <converter:HighlightGridForegroundConverter x:Key="HighlightGridForegroundConverter" />
-  <converter:HighlightGridFontStyleConverter x:Key="HighlightGridFontStyleConverter" />
-  <converter:HighlightGridFontWeightConverter x:Key="HighlightGridFontWeightConverter" />
-  <converter:HighlightPanelBackgroundConverter x:Key="HighlightPanelBackgroundConverter" />
+    <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
+    <converter:HighlightGridForegroundConverter x:Key="HighlightGridForegroundConverter" />
+    <converter:HighlightGridFontStyleConverter x:Key="HighlightGridFontStyleConverter" />
+    <converter:HighlightGridFontWeightConverter x:Key="HighlightGridFontWeightConverter" />
+    <converter:HighlightPanelBackgroundConverter x:Key="HighlightPanelBackgroundConverter" />
 
-  <DataTemplate x:Key="FakeProgressOverlay">
-    <Grid Background="#88888888">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="*" />
-        <RowDefinition />
-        <RowDefinition />
-        <RowDefinition Height="*" />
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
-      <Border Grid.Row="1"
-              Grid.Column="1"
-              Background="#AAAAAAAA"
-              Padding="5"
-              CornerRadius="10"
-              Height="30" >
-        <TextBlock HorizontalAlignment="Center" >Bitte warten...</TextBlock>
-      </Border>
-      <ProgressBar Grid.Row="2"
-                   Grid.Column="1"
-                   Height="30"
-                   Maximum="100"
-                   Value="33"/>
-    </Grid>
-  </DataTemplate>
+    <DataTemplate x:Key="FakeProgressOverlay">
+        <Grid Background="#88888888">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="1"
+                    Grid.Column="1"
+                    Background="#AAAAAAAA"
+                    Padding="5"
+                    CornerRadius="10"
+                    Height="30">
+                <TextBlock HorizontalAlignment="Center">Bitte warten...</TextBlock>
+            </Border>
+            <ProgressBar Grid.Row="2"
+                         Grid.Column="1"
+                         Height="30"
+                         Maximum="100"
+                         Value="33" />
+        </Grid>
+    </DataTemplate>
 
 </ResourceDictionary>
