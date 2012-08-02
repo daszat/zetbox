@@ -559,6 +559,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.DeleteCommandName, 
                         SavedListConfiguratorViewModelResources.DeleteCommandTooltip, 
                         Delete, null, null);
+                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
                 }
                 return _DeleteCommand;
             }
@@ -580,6 +581,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.RenameCommandName, 
                         SavedListConfiguratorViewModelResources.RenameCommandTooltip, 
                         Rename, null, null);
+                    _RenameCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext);
                 }
                 return _RenameCommand;
             }
