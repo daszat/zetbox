@@ -236,7 +236,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return this.ShowFilter;
+                // manually disabled until ColumnDisplayModels can be properly saved and loaded
+                return false;
+                //return this.ShowFilter;
             }
         }
 
