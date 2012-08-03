@@ -511,7 +511,11 @@ namespace Zetbox.Client.Presentables
 
         public string Error
         {
-            get { return String.Join("\n", PropertyModels.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray()); }
+            get
+            {
+                if (Object.CurrentAccessRights.HasNoRights()) return string.Empty;
+                else return string.Join("\n", PropertyModels.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
+            }
         }
 
         public string this[string columnName]
