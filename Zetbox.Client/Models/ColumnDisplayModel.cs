@@ -152,6 +152,7 @@ namespace Zetbox.Client.Models
             this.Type = type;
             this.RequestedWidth = requestedWidth;
             this.RequestedWidthAbsolute = requestedWidthAbsolute;
+            this.Properties = new Property[] { };
         }
 
         public ColumnType Type { get; set; }
