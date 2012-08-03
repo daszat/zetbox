@@ -357,7 +357,8 @@ namespace Zetbox.API.Server
                 // Update IChangedBy 
                 if (obj is Zetbox.App.Base.IChangedBy && state != DataObjectState.Deleted)
                 {
-                    var updateChangedInfo = obj is BaseNotifyingObject && ((BaseNotifyingObject)obj).UpdateChangedInfo;
+                    // if the object is new, ChangedBy/ChangedOn has to be set even if nothing else changed
+                    var updateChangedInfo = obj is BaseNotifyingObject && ((BaseNotifyingObject)obj).UpdateChangedInfo || state == DataObjectState.New;
                     var cb = (Zetbox.App.Base.IChangedBy)obj;
                     if (obj.ObjectState == DataObjectState.New)
                     {
