@@ -102,6 +102,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Birthday", __oldValue, __newValue);
                     Proxy.Birthday = __newValue;
                     NotifyPropertyChanged("Birthday", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnBirthday_PostSetter != null && IsAttached)
                     {
@@ -253,6 +254,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("MubBlah_Nav", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnMubBlah_Nav_PostSetter != null && IsAttached)
                 {
@@ -392,6 +394,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("MuhBlah_One_Nav", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnMuhBlah_One_Nav_PostSetter != null && IsAttached)
                 {
@@ -448,6 +451,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     NotifyPropertyChanging("PersonName", __oldValue, __newValue);
                     Proxy.PersonName = __newValue;
                     NotifyPropertyChanged("PersonName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnPersonName_PostSetter != null && IsAttached)
                     {
@@ -509,6 +513,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 					this.Proxy.PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
 
 					NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 				}
 				else
 				{
@@ -559,6 +564,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 					this.Proxy.PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
 
 					NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 				}
 				else
 				{

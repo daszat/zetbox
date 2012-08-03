@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DateTimeStyle", __oldValue, __newValue);
                     Proxy.DateTimeStyle = __newValue;
                     NotifyPropertyChanged("DateTimeStyle", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDateTimeStyle_PostSetter != null && IsAttached)
                     {

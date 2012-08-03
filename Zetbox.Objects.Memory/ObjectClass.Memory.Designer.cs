@@ -171,6 +171,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnBaseObjectClass_PostSetter != null && IsAttached)
                 {
@@ -308,6 +309,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultViewModelDescriptor", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnDefaultViewModelDescriptor_PostSetter != null && IsAttached)
                 {
@@ -412,6 +414,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                     NotifyPropertyChanging("IsAbstract", __oldValue, __newValue);
                     _IsAbstract = __newValue;
                     NotifyPropertyChanged("IsAbstract", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIsAbstract_PostSetter != null && IsAttached)
                     {
@@ -482,6 +485,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                     NotifyPropertyChanging("IsFrozenObject", __oldValue, __newValue);
                     _IsFrozenObject = __newValue;
                     NotifyPropertyChanged("IsFrozenObject", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIsFrozenObject_PostSetter != null && IsAttached)
                     {
@@ -552,6 +556,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                     NotifyPropertyChanging("IsSimpleObject", __oldValue, __newValue);
                     _IsSimpleObject = __newValue;
                     NotifyPropertyChanged("IsSimpleObject", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIsSimpleObject_PostSetter != null && IsAttached)
                     {
@@ -651,6 +656,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                     NotifyPropertyChanging("TableName", __oldValue, __newValue);
                     _TableName = __newValue;
                     NotifyPropertyChanged("TableName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnTableName_PostSetter != null && IsAttached)
                     {

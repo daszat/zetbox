@@ -79,6 +79,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("MyIntProperty", __oldValue, __newValue);
                     _MyIntProperty = __newValue;
                     NotifyPropertyChanged("MyIntProperty", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnMyIntProperty_PostSetter != null && IsAttached)
                     {
@@ -200,6 +201,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ObjectProp", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -249,6 +251,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     _StringProp = __newValue;
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
@@ -314,6 +317,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("TestEnumProp", __oldValue, __newValue);
                     _TestEnumProp = value;
                     NotifyPropertyChanged("TestEnumProp", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
                     if(OnTestEnumProp_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
@@ -629,6 +633,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 

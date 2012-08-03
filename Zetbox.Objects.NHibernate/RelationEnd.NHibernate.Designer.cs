@@ -139,6 +139,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("AParent", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnAParent_PostSetter != null && IsAttached)
                 {
@@ -249,6 +250,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("BParent", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnBParent_PostSetter != null && IsAttached)
                 {
@@ -343,6 +345,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -400,6 +403,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -512,6 +516,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -569,6 +574,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -646,6 +652,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -722,6 +729,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -779,6 +787,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Multiplicity", __oldValue, __newValue);
                     Proxy.Multiplicity = __newValue;
                     NotifyPropertyChanged("Multiplicity", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnMultiplicity_PostSetter != null && IsAttached)
                     {
@@ -888,6 +897,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Navigator", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnNavigator_PostSetter != null && IsAttached)
                 {
@@ -974,6 +984,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("RoleName", __oldValue, __newValue);
                     Proxy.RoleName = __newValue;
                     NotifyPropertyChanged("RoleName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnRoleName_PostSetter != null && IsAttached)
                     {
@@ -1067,6 +1078,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Type", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnType_PostSetter != null && IsAttached)
                 {

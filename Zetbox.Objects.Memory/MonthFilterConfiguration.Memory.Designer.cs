@@ -73,6 +73,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentMonthDefault", __oldValue, __newValue);
                     _IsCurrentMonthDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentMonthDefault", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIsCurrentMonthDefault_PostSetter != null && IsAttached)
                     {

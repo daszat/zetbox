@@ -234,9 +234,9 @@ namespace Zetbox.API.Server
             {
                 ((IDataObject)obj).NotifyDeleting();
             }
-            
+
             DoDeleteObject(obj);
-         
+
             OnObjectDeleted(obj);
         }
 
@@ -357,12 +357,14 @@ namespace Zetbox.API.Server
                 // Update IChangedBy 
                 if (obj is Zetbox.App.Base.IChangedBy && state != DataObjectState.Deleted)
                 {
+                    var updateChangedInfo = obj is BaseNotifyingObject && ((BaseNotifyingObject)obj).UpdateChangedInfo;
                     var cb = (Zetbox.App.Base.IChangedBy)obj;
                     if (obj.ObjectState == DataObjectState.New)
                     {
                         cb.CreatedOn = now;
                     }
-                    cb.ChangedOn = now;
+                    if (updateChangedInfo)
+                        cb.ChangedOn = now;
 
                     if (this.identityStore != null)
                     {
@@ -375,7 +377,8 @@ namespace Zetbox.API.Server
                         {
                             cb.CreatedBy = localIdentity;
                         }
-                        cb.ChangedBy = localIdentity;
+                        if (updateChangedInfo)
+                            cb.ChangedBy = localIdentity;
                     }
                 }
 

@@ -73,6 +73,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Configuration", __oldValue, __newValue);
                     _Configuration = __newValue;
                     NotifyPropertyChanged("Configuration", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnConfiguration_PostSetter != null && IsAttached)
                     {
@@ -142,6 +143,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -240,6 +242,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Owner", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnOwner_PostSetter != null && IsAttached)
                 {
@@ -332,6 +335,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Type", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnType_PostSetter != null && IsAttached)
                 {

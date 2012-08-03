@@ -49,6 +49,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -82,6 +83,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -191,6 +193,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -261,6 +264,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -438,6 +442,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -471,6 +476,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -580,6 +586,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -650,6 +657,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -827,6 +835,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -860,6 +869,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -969,6 +979,7 @@ namespace at.dasz.DocumentManagement
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -992,6 +1003,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -1069,6 +1081,7 @@ namespace at.dasz.DocumentManagement
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -1092,6 +1105,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -1300,6 +1314,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -1408,6 +1423,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -1477,6 +1493,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -1620,6 +1637,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -1653,6 +1671,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -1762,6 +1781,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -1832,6 +1852,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2009,6 +2030,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -2117,6 +2139,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2186,6 +2209,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2329,6 +2353,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -2437,6 +2462,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2506,6 +2532,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2649,6 +2676,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -2682,6 +2710,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -2791,6 +2820,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2861,6 +2891,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3038,6 +3069,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3071,6 +3103,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3180,6 +3213,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3250,6 +3284,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3427,6 +3462,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3460,6 +3496,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3569,6 +3606,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3592,6 +3630,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3669,6 +3708,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3692,6 +3732,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3900,6 +3941,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3933,6 +3975,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4042,6 +4085,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -4065,6 +4109,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4142,6 +4187,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -4165,6 +4211,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4373,6 +4420,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4406,6 +4454,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4515,6 +4564,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -4538,6 +4588,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4615,6 +4666,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -4638,6 +4690,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4846,6 +4899,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4954,6 +5008,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5023,6 +5078,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5166,6 +5222,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -5274,6 +5331,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5343,6 +5401,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5486,6 +5545,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -5519,6 +5579,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -5628,6 +5689,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5651,6 +5713,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -5728,6 +5791,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5751,6 +5815,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -5959,6 +6024,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -5992,6 +6058,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -6101,6 +6168,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -6171,6 +6239,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -6348,6 +6417,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -6381,6 +6451,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -6490,6 +6561,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -6560,6 +6632,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -6737,6 +6810,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -6845,6 +6919,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -6914,6 +6989,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -7057,6 +7133,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -7165,6 +7242,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -7234,6 +7312,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -7377,6 +7456,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -7475,6 +7555,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Value", __oldValue, __newValue);
                     _Value = __newValue;
                     NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -7633,6 +7714,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -7752,6 +7834,7 @@ namespace Zetbox.App.Test
 					_Value.AttachToObject(this, "Value");
 
 					NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 				}
 				else
 				{

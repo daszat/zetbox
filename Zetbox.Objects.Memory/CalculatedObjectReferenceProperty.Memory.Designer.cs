@@ -141,6 +141,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ReferencedClass", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnReferencedClass_PostSetter != null && IsAttached)
                 {

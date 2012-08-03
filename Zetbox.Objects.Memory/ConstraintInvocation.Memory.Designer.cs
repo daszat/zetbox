@@ -85,6 +85,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -184,6 +185,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Implementor", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnImplementor_PostSetter != null && IsAttached)
                 {
@@ -235,6 +237,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MemberName", __oldValue, __newValue);
                     _MemberName = __newValue;
                     NotifyPropertyChanged("MemberName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnMemberName_PostSetter != null && IsAttached)
                     {

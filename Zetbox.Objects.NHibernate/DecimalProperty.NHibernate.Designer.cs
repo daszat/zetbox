@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Precision", __oldValue, __newValue);
                     Proxy.Precision = __newValue;
                     NotifyPropertyChanged("Precision", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnPrecision_PostSetter != null && IsAttached)
                     {
@@ -141,6 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Scale", __oldValue, __newValue);
                     Proxy.Scale = __newValue;
                     NotifyPropertyChanged("Scale", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnScale_PostSetter != null && IsAttached)
                     {

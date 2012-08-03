@@ -64,6 +64,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -167,6 +168,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -238,6 +240,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -473,6 +476,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -576,6 +580,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -647,6 +652,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -882,6 +888,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -985,6 +992,7 @@ namespace at.dasz.DocumentManagement
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -1015,6 +1023,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -1085,6 +1094,7 @@ namespace at.dasz.DocumentManagement
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -1115,6 +1125,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -1458,6 +1469,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -1527,6 +1539,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -1724,6 +1737,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -1827,6 +1841,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -1898,6 +1913,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2202,6 +2218,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2271,6 +2288,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2537,6 +2555,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2606,6 +2625,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2803,6 +2823,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -2906,6 +2927,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -2977,6 +2999,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3212,6 +3235,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3315,6 +3339,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3386,6 +3411,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3621,6 +3647,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3724,6 +3751,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3754,6 +3782,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -3824,6 +3853,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -3854,6 +3884,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4128,6 +4159,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4231,6 +4263,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -4261,6 +4294,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4331,6 +4365,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -4361,6 +4396,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4635,6 +4671,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4738,6 +4775,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -4768,6 +4806,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -4838,6 +4877,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -4868,6 +4908,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -5211,6 +5252,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5280,6 +5322,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5546,6 +5589,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5615,6 +5659,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5812,6 +5857,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -5915,6 +5961,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -5945,6 +5992,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -6015,6 +6063,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -6045,6 +6094,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -6319,6 +6369,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -6422,6 +6473,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -6493,6 +6545,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -6728,6 +6781,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -6831,6 +6885,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -6902,6 +6957,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -7206,6 +7262,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -7275,6 +7332,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -7541,6 +7599,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -7610,6 +7669,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -7869,6 +7929,7 @@ namespace Zetbox.App.Projekte
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -7909,6 +7970,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Value", __oldValue, __newValue);
                     Proxy.Value = __newValue;
                     NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -8186,6 +8248,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
             }
         }
@@ -8242,6 +8305,7 @@ namespace Zetbox.App.Test
 					this.Proxy.Value.AttachToObject(this, "Value");
 
 					NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 				}
 				else
 				{

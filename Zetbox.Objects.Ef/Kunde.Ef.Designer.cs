@@ -79,6 +79,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Adresse", __oldValue, __newValue);
                     _Adresse = __newValue;
                     NotifyPropertyChanged("Adresse", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnAdresse_PostSetter != null && IsAttached)
                     {
@@ -200,6 +201,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -261,6 +263,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -383,6 +386,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -444,6 +448,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -572,6 +577,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -641,6 +647,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                     NotifyPropertyChanging("Kundenname", __oldValue, __newValue);
                     _Kundenname = __newValue;
                     NotifyPropertyChanged("Kundenname", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnKundenname_PostSetter != null && IsAttached)
                     {
@@ -709,6 +716,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                     NotifyPropertyChanging("Land", __oldValue, __newValue);
                     _Land = __newValue;
                     NotifyPropertyChanged("Land", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnLand_PostSetter != null && IsAttached)
                     {
@@ -777,6 +785,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                     NotifyPropertyChanging("Ort", __oldValue, __newValue);
                     _Ort = __newValue;
                     NotifyPropertyChanged("Ort", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnOrt_PostSetter != null && IsAttached)
                     {
@@ -845,6 +854,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                     NotifyPropertyChanging("PLZ", __oldValue, __newValue);
                     _PLZ = __newValue;
                     NotifyPropertyChanged("PLZ", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnPLZ_PostSetter != null && IsAttached)
                     {
@@ -1172,6 +1182,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 

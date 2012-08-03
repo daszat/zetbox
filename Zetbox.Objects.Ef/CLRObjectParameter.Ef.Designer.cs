@@ -133,6 +133,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Type", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 

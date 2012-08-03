@@ -106,16 +106,20 @@ this.WriteObjects("                    NotifyPropertyChanging(\"",  propertyName
 this.WriteObjects("                    Proxy.",  propertyName , " = __newValue;\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName , "\", __oldValue, __newValue);\r\n");
 #line 75 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-if (isCalculated) { 
+if (!isCalculated) { 
 #line 76 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-this.WriteObjects("			        _",  propertyName , "_IsDirty = false;\r\n");
+this.WriteObjects("                    UpdateChangedInfo = true;\r\n");
 #line 77 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-} 
+} else { 
 #line 78 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-this.WriteObjects("\r\n");
+this.WriteObjects("			        _",  propertyName , "_IsDirty = false;\r\n");
 #line 79 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-if(!isCalculated) ApplyPostSetTemplate(); 
+} 
 #line 80 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+this.WriteObjects("\r\n");
+#line 81 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+if(!isCalculated) ApplyPostSetTemplate(); 
+#line 82 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 this.WriteObjects("                }\r\n");
 this.WriteObjects("				else \r\n");
 this.WriteObjects("				{\r\n");
@@ -123,20 +127,20 @@ this.WriteObjects("					SetInitializedProperty(\"",  propertyName , "\");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 87 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 89 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 if (isCalculated) {  
 
-#line 89 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-this.WriteObjects("		private bool _",  propertyName , "_IsDirty = false;\r\n");
-#line 90 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-} 
 #line 91 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-this.WriteObjects("\r\n");
+this.WriteObjects("		private bool _",  propertyName , "_IsDirty = false;\r\n");
 #line 92 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-ApplyTailTemplate(); 
+} 
 #line 93 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-AddSerialization(serializationList, propertyName, "Proxy." + propertyName); 
+this.WriteObjects("\r\n");
 #line 94 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+ApplyTailTemplate(); 
+#line 95 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+AddSerialization(serializationList, propertyName, "Proxy." + propertyName); 
+#line 96 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

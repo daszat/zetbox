@@ -114,6 +114,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultDisplayKind", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnDefaultDisplayKind_PostSetter != null && IsAttached)
                 {
@@ -206,6 +207,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultEditorKind", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnDefaultEditorKind_PostSetter != null && IsAttached)
                 {
@@ -298,6 +300,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultGridCellDisplayKind", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnDefaultGridCellDisplayKind_PostSetter != null && IsAttached)
                 {
@@ -390,6 +393,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultGridCellEditorKind", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnDefaultGridCellEditorKind_PostSetter != null && IsAttached)
                 {
@@ -482,6 +486,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultGridCellPreEditorKind", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnDefaultGridCellPreEditorKind_PostSetter != null && IsAttached)
                 {
@@ -533,6 +538,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -602,6 +608,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -701,6 +708,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -818,6 +826,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnViewModelRef_PostSetter != null && IsAttached)
                 {

@@ -72,7 +72,9 @@
                     NotifyPropertyChanging("<%= propertyName %>", __oldValue, __newValue);
                     Proxy.<%= propertyName %> = __newValue;
                     NotifyPropertyChanged("<%= propertyName %>", __oldValue, __newValue);
-<% if (isCalculated) { %>
+<% if (!isCalculated) { %>
+                    UpdateChangedInfo = true;
+<% } else { %>
 			        _<%= propertyName %>_IsDirty = false;
 <% } %>
 

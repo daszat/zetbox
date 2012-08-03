@@ -123,6 +123,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -180,6 +181,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -292,6 +294,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -349,6 +352,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -426,6 +430,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -502,6 +507,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Geburtstag", __oldValue, __newValue);
                     Proxy.Geburtstag = __newValue;
                     NotifyPropertyChanged("Geburtstag", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnGeburtstag_PostSetter != null && IsAttached)
                     {
@@ -595,6 +601,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Identity", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnIdentity_PostSetter != null && IsAttached)
                 {
@@ -651,6 +658,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -739,6 +747,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("SVNr", __oldValue, __newValue);
                     Proxy.SVNr = __newValue;
                     NotifyPropertyChanged("SVNr", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnSVNr_PostSetter != null && IsAttached)
                     {
@@ -796,6 +805,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("TelefonNummer", __oldValue, __newValue);
                     Proxy.TelefonNummer = __newValue;
                     NotifyPropertyChanged("TelefonNummer", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnTelefonNummer_PostSetter != null && IsAttached)
                     {

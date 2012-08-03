@@ -85,16 +85,20 @@ this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", 
 this.WriteObjects("                    ",  backingName , " = __newValue;\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
 #line 66 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-if (isCalculated) { 
+if (!isCalculated) { 
 #line 67 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-this.WriteObjects("			        ",  backingName , "_IsDirty = false;\r\n");
+this.WriteObjects("                    UpdateChangedInfo = true;\r\n");
 #line 68 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-} 
+} else { 
 #line 69 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-this.WriteObjects("\r\n");
+this.WriteObjects("			        ",  backingName , "_IsDirty = false;\r\n");
 #line 70 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-if (!isCalculated) ApplyPostSetTemplate(); 
+} 
 #line 71 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
+this.WriteObjects("\r\n");
+#line 72 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
+if (!isCalculated) ApplyPostSetTemplate(); 
+#line 73 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("                }\r\n");
 this.WriteObjects("				else \r\n");
 this.WriteObjects("				{\r\n");
@@ -102,15 +106,15 @@ this.WriteObjects("					SetInitializedProperty(\"",  name , "\");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 78 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-ApplyBackingStoreDefinition(); 
-#line 79 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-ApplyBackingStoreIsDirtyDefinition(); 
 #line 80 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-ApplyTailTemplate(); 
+ApplyBackingStoreDefinition(); 
 #line 81 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-AddSerialization(serializationList, name); 
+ApplyBackingStoreIsDirtyDefinition(); 
 #line 82 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
+ApplyTailTemplate(); 
+#line 83 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
+AddSerialization(serializationList, name); 
+#line 84 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CategoryTags", __oldValue, __newValue);
                     _CategoryTags = __newValue;
                     NotifyPropertyChanged("CategoryTags", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnCategoryTags_PostSetter != null && IsAttached)
                     {
@@ -200,6 +201,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -261,6 +263,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -498,6 +501,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -559,6 +563,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -694,6 +699,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Property", null, null);
                 }
+                UpdateChangedInfo = true;
             }
         }
 
@@ -743,6 +749,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -811,6 +818,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     NotifyPropertyChanging("DisableExport", __oldValue, __newValue);
                     _DisableExport = __newValue;
                     NotifyPropertyChanged("DisableExport", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDisableExport_PostSetter != null && IsAttached)
                     {
@@ -891,6 +899,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -1026,6 +1035,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Property", null, null);
                 }
+                UpdateChangedInfo = true;
             }
         }
 
@@ -1075,6 +1085,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     NotifyPropertyChanging("Label", __oldValue, __newValue);
                     _Label = __newValue;
                     NotifyPropertyChanged("Label", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnLabel_PostSetter != null && IsAttached)
                     {
@@ -1197,6 +1208,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -1246,6 +1258,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -1380,6 +1393,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Properties", null, null);
                 }
+                UpdateChangedInfo = true;
             }
         }
 
@@ -1406,6 +1420,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     NotifyPropertyChanging("Properties_pos", __oldValue, __newValue);
                     _Properties_pos = __newValue;
                     NotifyPropertyChanged("Properties_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -1524,6 +1539,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -1570,6 +1586,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     NotifyPropertyChanging("RequestedWidth", __oldValue, __newValue);
                     _RequestedWidth = value;
                     NotifyPropertyChanged("RequestedWidth", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
                     if(OnRequestedWidth_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.WidthHint?>(__oldValue, __newValue);
@@ -1704,6 +1721,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ValueModelDescriptor", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -2516,6 +2534,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 

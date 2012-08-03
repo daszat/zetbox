@@ -130,6 +130,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Constrained", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnConstrained_PostSetter != null && IsAttached)
                 {
@@ -193,6 +194,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -251,6 +253,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Reason", __oldValue, __newValue);
                     _Reason = __newValue;
                     NotifyPropertyChanged("Reason", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnReason_PostSetter != null && IsAttached)
                     {

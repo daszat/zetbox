@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("EnumValue", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnEnumValue_PostSetter != null && IsAttached)
                 {

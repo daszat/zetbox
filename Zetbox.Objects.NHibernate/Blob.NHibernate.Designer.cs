@@ -123,6 +123,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -180,6 +181,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -292,6 +294,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -349,6 +352,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -426,6 +430,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -502,6 +507,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MimeType", __oldValue, __newValue);
                     Proxy.MimeType = __newValue;
                     NotifyPropertyChanged("MimeType", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnMimeType_PostSetter != null && IsAttached)
                     {
@@ -559,6 +565,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("OriginalName", __oldValue, __newValue);
                     Proxy.OriginalName = __newValue;
                     NotifyPropertyChanged("OriginalName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnOriginalName_PostSetter != null && IsAttached)
                     {
@@ -616,6 +623,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("StoragePath", __oldValue, __newValue);
                     Proxy.StoragePath = __newValue;
                     NotifyPropertyChanged("StoragePath", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnStoragePath_PostSetter != null && IsAttached)
                     {

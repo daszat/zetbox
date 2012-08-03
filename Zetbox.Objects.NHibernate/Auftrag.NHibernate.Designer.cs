@@ -87,6 +87,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Auftragsname", __oldValue, __newValue);
                     Proxy.Auftragsname = __newValue;
                     NotifyPropertyChanged("Auftragsname", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnAuftragsname_PostSetter != null && IsAttached)
                     {
@@ -144,6 +145,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Auftragswert", __oldValue, __newValue);
                     Proxy.Auftragswert = __newValue;
                     NotifyPropertyChanged("Auftragswert", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnAuftragswert_PostSetter != null && IsAttached)
                     {
@@ -237,6 +239,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -294,6 +297,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -406,6 +410,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -463,6 +468,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -540,6 +546,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -652,6 +659,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Kunde", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnKunde_PostSetter != null && IsAttached)
                 {
@@ -746,6 +754,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Mitarbeiter", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnMitarbeiter_PostSetter != null && IsAttached)
                 {
@@ -863,6 +872,7 @@ namespace Zetbox.App.Projekte
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Projekt", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnProjekt_PostSetter != null && IsAttached)
                 {

@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("AreFlags", __oldValue, __newValue);
                     Proxy.AreFlags = __newValue;
                     NotifyPropertyChanged("AreFlags", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnAreFlags_PostSetter != null && IsAttached)
                     {

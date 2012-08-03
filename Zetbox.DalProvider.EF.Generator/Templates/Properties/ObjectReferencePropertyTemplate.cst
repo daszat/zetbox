@@ -153,6 +153,7 @@
                     __newValue.NotifyPropertyChanged("<%= inverseNavigatorName %>", null, null);
                 }
 <% } %>
+                UpdateChangedInfo = true;
             }
         }
 

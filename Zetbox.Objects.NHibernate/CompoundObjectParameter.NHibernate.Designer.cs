@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CompoundObject", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnCompoundObject_PostSetter != null && IsAttached)
                 {

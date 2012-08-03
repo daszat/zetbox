@@ -201,6 +201,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Children", null, null);
                 }
+                UpdateChangedInfo = true;
             }
         }
 
@@ -250,6 +251,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     _StringProp = __newValue;
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
@@ -929,6 +931,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 

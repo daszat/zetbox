@@ -145,6 +145,7 @@ namespace Zetbox.App.GUI
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("FilterConfiguration", null, null);
                 }
+                UpdateChangedInfo = true;
             }
         }
 

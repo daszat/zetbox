@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("From", __oldValue, __newValue);
                     _From = __newValue;
                     NotifyPropertyChanged("From", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnFrom_PostSetter != null && IsAttached)
                     {
@@ -134,6 +135,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Thru", __oldValue, __newValue);
                     _Thru = __newValue;
                     NotifyPropertyChanged("Thru", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnThru_PostSetter != null && IsAttached)
                     {

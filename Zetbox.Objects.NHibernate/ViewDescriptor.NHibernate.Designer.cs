@@ -121,6 +121,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ControlKind", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnControlKind_PostSetter != null && IsAttached)
                 {
@@ -215,6 +216,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ControlRef", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnControlRef_PostSetter != null && IsAttached)
                 {
@@ -274,6 +276,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -386,6 +389,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -475,6 +479,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Toolkit", __oldValue, __newValue);
                     Proxy.Toolkit = __newValue;
                     NotifyPropertyChanged("Toolkit", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnToolkit_PostSetter != null && IsAttached)
                     {

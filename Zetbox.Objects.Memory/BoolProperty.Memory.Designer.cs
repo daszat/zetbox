@@ -114,6 +114,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("FalseIcon", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnFalseIcon_PostSetter != null && IsAttached)
                 {
@@ -165,6 +166,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("FalseLabel", __oldValue, __newValue);
                     _FalseLabel = __newValue;
                     NotifyPropertyChanged("FalseLabel", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnFalseLabel_PostSetter != null && IsAttached)
                     {
@@ -263,6 +265,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("NullIcon", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnNullIcon_PostSetter != null && IsAttached)
                 {
@@ -314,6 +317,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("NullLabel", __oldValue, __newValue);
                     _NullLabel = __newValue;
                     NotifyPropertyChanged("NullLabel", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnNullLabel_PostSetter != null && IsAttached)
                     {
@@ -412,6 +416,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TrueIcon", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnTrueIcon_PostSetter != null && IsAttached)
                 {
@@ -463,6 +468,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("TrueLabel", __oldValue, __newValue);
                     _TrueLabel = __newValue;
                     NotifyPropertyChanged("TrueLabel", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnTrueLabel_PostSetter != null && IsAttached)
                     {

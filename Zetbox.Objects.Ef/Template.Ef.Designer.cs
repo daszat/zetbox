@@ -132,6 +132,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -181,6 +182,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, __newValue);
                     _DisplayedTypeFullName = __newValue;
                     NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDisplayedTypeFullName_PostSetter != null && IsAttached)
                     {
@@ -249,6 +251,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -420,6 +423,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -731,6 +735,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 

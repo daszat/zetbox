@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Date", __oldValue, __newValue);
                     _Date = __newValue;
                     NotifyPropertyChanged("Date", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDate_PostSetter != null && IsAttached)
                     {
@@ -147,6 +148,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Exception", __oldValue, __newValue);
                     _Exception = __newValue;
                     NotifyPropertyChanged("Exception", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnException_PostSetter != null && IsAttached)
                     {
@@ -215,6 +217,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Level", __oldValue, __newValue);
                     _Level = __newValue;
                     NotifyPropertyChanged("Level", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnLevel_PostSetter != null && IsAttached)
                     {
@@ -283,6 +286,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Logger", __oldValue, __newValue);
                     _Logger = __newValue;
                     NotifyPropertyChanged("Logger", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnLogger_PostSetter != null && IsAttached)
                     {
@@ -351,6 +355,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Message", __oldValue, __newValue);
                     _Message = __newValue;
                     NotifyPropertyChanged("Message", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnMessage_PostSetter != null && IsAttached)
                     {
@@ -419,6 +424,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Thread", __oldValue, __newValue);
                     _Thread = __newValue;
                     NotifyPropertyChanged("Thread", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnThread_PostSetter != null && IsAttached)
                     {
@@ -677,6 +683,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 

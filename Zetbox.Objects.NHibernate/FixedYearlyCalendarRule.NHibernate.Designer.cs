@@ -84,6 +84,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("Day", __oldValue, __newValue);
                     Proxy.Day = __newValue;
                     NotifyPropertyChanged("Day", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDay_PostSetter != null && IsAttached)
                     {
@@ -141,6 +142,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("Month", __oldValue, __newValue);
                     Proxy.Month = __newValue;
                     NotifyPropertyChanged("Month", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnMonth_PostSetter != null && IsAttached)
                     {

@@ -114,6 +114,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnDefaultPropertyViewModelDescriptor_PostSetter != null && IsAttached)
                 {

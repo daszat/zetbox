@@ -113,6 +113,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -176,6 +177,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -274,6 +276,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -337,6 +340,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -395,6 +399,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -464,6 +469,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -522,6 +528,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -591,6 +598,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsNullable", __oldValue, __newValue);
                     _IsNullable = __newValue;
                     NotifyPropertyChanged("IsNullable", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIsNullable_PostSetter != null && IsAttached)
                     {
@@ -649,6 +657,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsReturnParameter", __oldValue, __newValue);
                     _IsReturnParameter = __newValue;
                     NotifyPropertyChanged("IsReturnParameter", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIsReturnParameter_PostSetter != null && IsAttached)
                     {
@@ -706,6 +715,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Label", __oldValue, __newValue);
                     _Label = __newValue;
                     NotifyPropertyChanged("Label", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnLabel_PostSetter != null && IsAttached)
                     {
@@ -820,6 +830,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Method", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnMethod_PostSetter != null && IsAttached)
                 {
@@ -848,6 +859,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Parameter_pos", __oldValue, __newValue);
                     _Parameter_pos = __newValue;
                     NotifyPropertyChanged("Parameter_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -901,6 +913,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {

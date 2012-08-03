@@ -73,6 +73,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Destination", __oldValue, __newValue);
                     _Destination = __newValue;
                     NotifyPropertyChanged("Destination", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDestination_PostSetter != null && IsAttached)
                     {
@@ -130,6 +131,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("DestinationRows", __oldValue, __newValue);
                     _DestinationRows = __newValue;
                     NotifyPropertyChanged("DestinationRows", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDestinationRows_PostSetter != null && IsAttached)
                     {
@@ -187,6 +189,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Source", __oldValue, __newValue);
                     _Source = __newValue;
                     NotifyPropertyChanged("Source", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnSource_PostSetter != null && IsAttached)
                     {
@@ -244,6 +247,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("SourceRows", __oldValue, __newValue);
                     _SourceRows = __newValue;
                     NotifyPropertyChanged("SourceRows", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnSourceRows_PostSetter != null && IsAttached)
                     {
@@ -301,6 +305,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Timestamp", __oldValue, __newValue);
                     _Timestamp = __newValue;
                     NotifyPropertyChanged("Timestamp", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnTimestamp_PostSetter != null && IsAttached)
                     {

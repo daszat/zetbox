@@ -136,6 +136,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                     NotifyPropertyChanging("SomeInt", __oldValue, __newValue);
                     _SomeInt = __newValue;
                     NotifyPropertyChanged("SomeInt", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnSomeInt_PostSetter != null && IsAttached)
                     {
@@ -355,6 +356,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 

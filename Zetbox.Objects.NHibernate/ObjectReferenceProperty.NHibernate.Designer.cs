@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("EagerLoading", __oldValue, __newValue);
                     Proxy.EagerLoading = __newValue;
                     NotifyPropertyChanged("EagerLoading", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnEagerLoading_PostSetter != null && IsAttached)
                     {
@@ -141,6 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsInlineEditable", __oldValue, __newValue);
                     Proxy.IsInlineEditable = __newValue;
                     NotifyPropertyChanged("IsInlineEditable", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIsInlineEditable_PostSetter != null && IsAttached)
                     {
@@ -281,6 +283,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RelationEnd", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnRelationEnd_PostSetter != null && IsAttached)
                 {

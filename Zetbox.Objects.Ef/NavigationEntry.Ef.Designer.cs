@@ -132,6 +132,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -193,6 +194,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -319,6 +321,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Color", __oldValue, __newValue);
                     _Color = __newValue;
                     NotifyPropertyChanged("Color", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnColor_PostSetter != null && IsAttached)
                     {
@@ -440,6 +443,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -501,6 +505,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -582,6 +587,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -756,6 +762,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -871,6 +878,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Children", null, null);
                 }
+                UpdateChangedInfo = true;
             }
         }
 
@@ -897,6 +905,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Children_pos", __oldValue, __newValue);
                     _Children_pos = __newValue;
                     NotifyPropertyChanged("Children_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -961,6 +970,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Title", __oldValue, __newValue);
                     _Title = __newValue;
                     NotifyPropertyChanged("Title", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnTitle_PostSetter != null && IsAttached)
                     {
@@ -1083,6 +1093,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ViewModelDescriptor", __oldValue, __newValue);
+                UpdateChangedInfo = true;
             }
         }
 
@@ -1512,6 +1523,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 

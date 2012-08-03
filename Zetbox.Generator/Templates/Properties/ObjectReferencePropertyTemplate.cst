@@ -76,19 +76,14 @@
                 else
                     __value = null;
 
-<%
-                if (callGetterSetterEvents)
-                {
-%>
+<% if (callGetterSetterEvents) {                                                                    %>
                 if (<%= eventName %>_Getter != null)
                 {
                     var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
                     <%= eventName %>_Getter(this, e);
                     __value = (<%= referencedImplementation %>)e.Result;
                 }
-<%
-                }
-%>
+<% }                                                                                                %>
 
                 return __value;
             }
@@ -111,28 +106,19 @@
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
 
-<%
-                if (callGetterSetterEvents)
-                {
-%>
+<% if (callGetterSetterEvents) {                                                                    %>
                 if (<%= eventName %>_PreSetter != null && IsAttached)
                 {
                     var e = new PropertyPreSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PreSetter(this, e);
                     __newValue = (<%= referencedImplementation %>)e.Result;
                 }
-<%
-                }
-%>
+<% }                                                                                                %>
 
                 // next, set the local reference
                 <%= fkBackingName %> = __newValue == null ? (int?)null : __newValue.ID;
 
-<%
-    if (!String.IsNullOrEmpty(inverseNavigatorName))
-    {
-
-%>
+<% if (!String.IsNullOrEmpty(inverseNavigatorName)) {                                               %>
                 // now fixup redundant, inverse references
                 // The inverse navigator will also fire events when changed, so should
                 // only be touched after setting the local value above.
@@ -140,62 +126,38 @@
                 //       before the local value is changed
                 if (__oldValue != null)
                 {
-<%
-        if (inverseNavigatorIsList)
-        {
-            // TODO: check whether __oldValue is loaded before potentially triggering a DB Call
-%>
+<%      if (inverseNavigatorIsList) {                                                               %>
+<%          // TODO: check whether __oldValue is loaded before potentially triggering a DB Call     %>
                     // remove from old list
                     (__oldValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>).RemoveWithoutClearParent(this);
-<%
-        }
-        else
-        {
-%>
+<%      } else {                                                                                    %>
                     // unset old reference
                     __oldValue.<%= inverseNavigatorName %> = null;
-<%
-        }
-%>
+<%      }                                                                                           %>
                 }
 
                 if (__newValue != null)
                 {
-<%
-        if (inverseNavigatorIsList)
-        {
-%>
+<%      if (inverseNavigatorIsList) {                                                               %>
                     // add to new list
                     (__newValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>).AddWithoutSetParent(this);
-<%
-        }
-        else
-        {
-%>
+<%      } else {                                                                                    %>
                     // set new reference
                     __newValue.<%= inverseNavigatorName %> = this;
-<%
-        }
-%>
+<%      }                                                                                           %>
                 }
-<%
-    }
-%>
+<% }                                                                                                %>
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
-<%
-                if (callGetterSetterEvents)
-                {
-%>
+<% if (callGetterSetterEvents) {                                                                    %>
                 if (<%= eventName %>_PostSetter != null && IsAttached)
                 {
                     var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PostSetter(this, e);
                 }
-<%
-                }
-%>
+<% }                                                                                                %>
             }
         }
 <%

@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -141,6 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ImplementorRoleName", __oldValue, __newValue);
                     Proxy.ImplementorRoleName = __newValue;
                     NotifyPropertyChanged("ImplementorRoleName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnImplementorRoleName_PostSetter != null && IsAttached)
                     {
@@ -198,6 +200,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     Proxy.IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -255,6 +258,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ItemRoleName", __oldValue, __newValue);
                     Proxy.ItemRoleName = __newValue;
                     NotifyPropertyChanged("ItemRoleName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnItemRoleName_PostSetter != null && IsAttached)
                     {
@@ -348,6 +352,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ReferencedObjectClass", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnReferencedObjectClass_PostSetter != null && IsAttached)
                 {
@@ -406,6 +411,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Verb", __oldValue, __newValue);
                     Proxy.Verb = __newValue;
                     NotifyPropertyChanged("Verb", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnVerb_PostSetter != null && IsAttached)
                     {

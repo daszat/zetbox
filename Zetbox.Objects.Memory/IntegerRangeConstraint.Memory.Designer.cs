@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Max", __oldValue, __newValue);
                     _Max = __newValue;
                     NotifyPropertyChanged("Max", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnMax_PostSetter != null && IsAttached)
                     {
@@ -130,6 +131,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Min", __oldValue, __newValue);
                     _Min = __newValue;
                     NotifyPropertyChanged("Min", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnMin_PostSetter != null && IsAttached)
                     {

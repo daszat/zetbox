@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IntValue", __oldValue, __newValue);
                     _IntValue = __newValue;
                     NotifyPropertyChanged("IntValue", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnIntValue_PostSetter != null && IsAttached)
                     {

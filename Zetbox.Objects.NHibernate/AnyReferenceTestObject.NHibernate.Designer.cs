@@ -98,6 +98,7 @@ namespace Zetbox.App.Test
 					this.Proxy.Any.AttachToObject(this, "Any");
 
 					NotifyPropertyChanged("Any", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 				}
 				else
 				{
@@ -144,6 +145,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     Proxy.DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -202,6 +204,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {

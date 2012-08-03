@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     Proxy.DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -172,6 +173,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Password", __oldValue, __newValue);
                     Proxy.Password = __newValue;
                     NotifyPropertyChanged("Password", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnPassword_PostSetter != null && IsAttached)
                     {
@@ -229,6 +231,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("UserName", __oldValue, __newValue);
                     Proxy.UserName = __newValue;
                     NotifyPropertyChanged("UserName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnUserName_PostSetter != null && IsAttached)
                     {

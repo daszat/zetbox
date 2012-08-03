@@ -95,6 +95,7 @@ namespace Zetbox.App.Test
                     _Any.AttachToObject(this, "Any");
 
                     NotifyPropertyChanged("Any", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
                 }
 				else
 				{
@@ -144,6 +145,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -224,6 +226,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -452,6 +455,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 

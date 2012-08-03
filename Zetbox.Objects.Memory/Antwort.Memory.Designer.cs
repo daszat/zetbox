@@ -73,6 +73,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Frage", __oldValue, __newValue);
                     _Frage = __newValue;
                     NotifyPropertyChanged("Frage", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnFrage_PostSetter != null && IsAttached)
                     {
@@ -186,6 +187,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Fragebogen", __oldValue, __newValue);
+                UpdateChangedInfo = true;
 
                 if (OnFragebogen_PostSetter != null && IsAttached)
                 {
@@ -214,6 +216,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("gute_Antworten_pos", __oldValue, __newValue);
                     _gute_Antworten_pos = __newValue;
                     NotifyPropertyChanged("gute_Antworten_pos", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                 }
 				else 
@@ -267,6 +270,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("FragenNummer", __oldValue, __newValue);
                     _FragenNummer = __newValue;
                     NotifyPropertyChanged("FragenNummer", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnFragenNummer_PostSetter != null && IsAttached)
                     {
@@ -324,6 +328,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("GegebeneAntwort", __oldValue, __newValue);
                     _GegebeneAntwort = __newValue;
                     NotifyPropertyChanged("GegebeneAntwort", __oldValue, __newValue);
+                    UpdateChangedInfo = true;
 
                     if (OnGegebeneAntwort_PostSetter != null && IsAttached)
                     {
