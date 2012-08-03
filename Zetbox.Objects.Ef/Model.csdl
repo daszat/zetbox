@@ -854,6 +854,14 @@
       <End Role="SearchScreen" EntitySet="NavigationEntry" />
       <End Role="Type" EntitySet="DataType" />
     </AssociationSet>
+    <AssociationSet Name="FK_SecurityTestChild_was_ChangedBy" Association="Model.FK_SecurityTestChild_was_ChangedBy" >
+      <End Role="SecurityTestChild" EntitySet="SecurityTestChild" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SecurityTestChild_was_CreatedBy" Association="Model.FK_SecurityTestChild_was_CreatedBy" >
+      <End Role="SecurityTestChild" EntitySet="SecurityTestChild" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Sequence_has_Data" Association="Model.FK_Sequence_has_Data" >
       <End Role="Sequence" EntitySet="Sequence" />
       <End Role="Data" EntitySet="SequenceData" />
@@ -2183,6 +2191,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedByImpl"
+                        Relationship="Model.FK_SecurityTestChild_was_ChangedBy"
+                        FromRole="SecurityTestChild"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <NavigationProperty Name="CreatedByImpl"
+                        Relationship="Model.FK_SecurityTestChild_was_CreatedBy"
+                        FromRole="SecurityTestChild"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <NavigationProperty Name="IdentityImpl"
                         Relationship="Model.FK_Child_allow_Identity"
                         FromRole="Child"
@@ -5024,6 +5042,22 @@
          Multiplicity="*" />
     <End Role="Type"
          Type="Model.ObjectClass" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SecurityTestChild_was_ChangedBy" >
+    <End Role="SecurityTestChild"
+         Type="Model.SecurityTestChild" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SecurityTestChild_was_CreatedBy" >
+    <End Role="SecurityTestChild"
+         Type="Model.SecurityTestChild" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Sequence_has_Data" >

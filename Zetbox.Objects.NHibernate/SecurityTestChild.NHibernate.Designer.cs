@@ -43,10 +43,350 @@ namespace Zetbox.App.Test
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            _isCreatedOnSet = Proxy.ID > 0;
+            _isChangedOnSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly SecurityTestChildProxy Proxy;
+
+        /// <summary>
+        /// Identity which changed this object
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target not exportable; does call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.Base.Identity ChangedBy
+        {
+            get
+            {
+                Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
+
+                if (OnChangedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
+                    OnChangedBy_Getter(this, e);
+                    __value = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
+                }
+
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.ChangedBy == null)
+				{
+					SetInitializedProperty("ChangedBy");
+                    return;
+				}
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
+                var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ChangedBy");
+                    return;
+				}
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+
+                if (OnChangedBy_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnChangedBy_PreSetter(this, e);
+                    __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.ChangedBy = null;
+                }
+                else
+                {
+                    this.Proxy.ChangedBy = __newValue.Proxy;
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+
+                if (OnChangedBy_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnChangedBy_PostSetter(this, e);
+                }
+            }
+        }
+
+        /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
+        private int? _fk_ChangedBy = null;
+
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnChangedBy_IsValid;
+
+        /// <summary>
+        /// Date and time where this object was changed
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public DateTime ChangedOn
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchChangedOnOrDefault();
+                if (OnChangedOn_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnChangedOn_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isChangedOnSet = true;
+                if (Proxy.ChangedOn != value)
+                {
+                    var __oldValue = Proxy.ChangedOn;
+                    var __newValue = value;
+                    if (OnChangedOn_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnChangedOn_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
+                    Proxy.ChangedOn = __newValue;
+                    NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
+                    if (OnChangedOn_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnChangedOn_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
+            }
+        }
+
+
+        private DateTime FetchChangedOnOrDefault()
+        {
+            var __result = Proxy.ChangedOn;
+                if (!_isChangedOnSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("eddba42c-0383-4d31-a318-49d16e1f8016"));
+                    if (__p != null) {
+                        _isChangedOnSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.ChangedOn = (DateTime)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Test.SecurityTestChild.ChangedOn'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isChangedOnSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnChangedOn_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnChangedOn_IsValid;
+
+        /// <summary>
+        /// Identity which created this object
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target not exportable; does call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.Base.Identity CreatedBy
+        {
+            get
+            {
+                Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
+
+                if (OnCreatedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
+                    OnCreatedBy_Getter(this, e);
+                    __value = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
+                }
+
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.CreatedBy == null)
+				{
+					SetInitializedProperty("CreatedBy");
+                    return;
+				}
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
+                var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("CreatedBy");
+                    return;
+				}
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+
+                if (OnCreatedBy_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnCreatedBy_PreSetter(this, e);
+                    __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.CreatedBy = null;
+                }
+                else
+                {
+                    this.Proxy.CreatedBy = __newValue.Proxy;
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+
+                if (OnCreatedBy_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnCreatedBy_PostSetter(this, e);
+                }
+            }
+        }
+
+        /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
+        private int? _fk_CreatedBy = null;
+
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnCreatedBy_IsValid;
+
+        /// <summary>
+        /// Date and time where this object was created
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public DateTime CreatedOn
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchCreatedOnOrDefault();
+                if (OnCreatedOn_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnCreatedOn_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isCreatedOnSet = true;
+                if (Proxy.CreatedOn != value)
+                {
+                    var __oldValue = Proxy.CreatedOn;
+                    var __newValue = value;
+                    if (OnCreatedOn_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnCreatedOn_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
+                    Proxy.CreatedOn = __newValue;
+                    NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
+                    if (OnCreatedOn_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnCreatedOn_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
+            }
+        }
+
+
+        private DateTime FetchCreatedOnOrDefault()
+        {
+            var __result = Proxy.CreatedOn;
+                if (!_isCreatedOnSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("e688c806-68a1-4078-b586-04c67daca577"));
+                    if (__p != null) {
+                        _isCreatedOnSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.CreatedOn = (DateTime)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Test.SecurityTestChild.CreatedOn'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isCreatedOnSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnCreatedOn_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnCreatedOn_IsValid;
 
         /// <summary>
         /// 
@@ -377,7 +717,11 @@ namespace Zetbox.App.Test
             var otherImpl = (SecurityTestChildNHibernateImpl)obj;
             var me = (SecurityTestChild)this;
 
+            me.ChangedOn = other.ChangedOn;
+            me.CreatedOn = other.CreatedOn;
             me.Name = other.Name;
+            this._fk_ChangedBy = otherImpl._fk_ChangedBy;
+            this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Identity = otherImpl._fk_Identity;
             this._fk_Parent = otherImpl._fk_Parent;
         }
@@ -397,6 +741,24 @@ namespace Zetbox.App.Test
         {
             switch(propertyName)
             {
+                case "ChangedBy":
+                    {
+                        var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
+                        var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)parentObj;
+                        NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+                        this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
+                        NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    }
+                    break;
+                case "CreatedBy":
+                    {
+                        var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
+                        var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)parentObj;
+                        NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+                        this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
+                        NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    }
+                    break;
                 case "Identity":
                     {
                         var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Identity);
@@ -429,6 +791,10 @@ namespace Zetbox.App.Test
             // Do not audit calculated properties
             switch (property)
             {
+                case "ChangedBy":
+                case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
                 case "Identity":
                 case "Name":
                 case "Parent":
@@ -461,6 +827,16 @@ namespace Zetbox.App.Test
 
             // fix direct object references
 
+            if (_fk_ChangedBy.HasValue)
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
+            else
+                this.ChangedBy = null;
+
+            if (_fk_CreatedBy.HasValue)
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
+            else
+                this.CreatedBy = null;
+
             if (_fk_Identity.HasValue)
                 this.Identity = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_Identity.Value));
             else
@@ -484,6 +860,42 @@ namespace Zetbox.App.Test
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorNHibernateImpl<SecurityTestChild, Zetbox.App.Base.Identity>(
+                        lazyCtx,
+                        new Guid("d8f28d99-381c-4f66-ad18-07fa56c17b41"),
+                        "ChangedBy",
+                        null,
+                        obj => obj.ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => OnChangedBy_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<SecurityTestChild, DateTime>(
+                        lazyCtx,
+                        new Guid("eddba42c-0383-4d31-a318-49d16e1f8016"),
+                        "ChangedOn",
+                        null,
+                        obj => obj.ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => OnChangedOn_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<SecurityTestChild, Zetbox.App.Base.Identity>(
+                        lazyCtx,
+                        new Guid("ab1ac0d6-3478-4363-a3ce-d936e3724f4b"),
+                        "CreatedBy",
+                        null,
+                        obj => obj.CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => OnCreatedBy_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<SecurityTestChild, DateTime>(
+                        lazyCtx,
+                        new Guid("e688c806-68a1-4078-b586-04c67daca577"),
+                        "CreatedOn",
+                        null,
+                        obj => obj.CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<SecurityTestChild, Zetbox.App.Base.Identity>(
                         lazyCtx,
@@ -567,6 +979,8 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyPreSave_SecurityTestChild")]
         public override void NotifyPreSave()
         {
+            FetchChangedOnOrDefault();
+            FetchCreatedOnOrDefault();
             FetchParentNameOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_SecurityTestChild != null) OnNotifyPreSave_SecurityTestChild(this);
@@ -584,6 +998,8 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_SecurityTestChild")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Identity");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("Parent");
@@ -609,7 +1025,19 @@ namespace Zetbox.App.Test
                 ((NHibernatePersistenceObject)Parent).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Parent);
             }
+            // FK_SecurityTestChild_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_SecurityTestChild_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
 
+            ChangedBy = null;
+            CreatedBy = null;
             Parent = null;
         }
         public static event ObjectEventHandler<SecurityTestChild> OnNotifyDeleting_SecurityTestChild;
@@ -627,6 +1055,14 @@ namespace Zetbox.App.Test
 
             public virtual Type ZetboxWrapper { get { return typeof(SecurityTestChildNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(SecurityTestChildProxy); } }
+
+            public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy ChangedBy { get; set; }
+
+            public virtual DateTime ChangedOn { get; set; }
+
+            public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy CreatedBy { get; set; }
+
+            public virtual DateTime CreatedOn { get; set; }
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy Identity { get; set; }
 
@@ -664,6 +1100,16 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
+            binStream.Write(this._isChangedOnSet);
+            if (this._isChangedOnSet) {
+                binStream.Write(this.Proxy.ChangedOn);
+            }
+            binStream.Write(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null);
+            binStream.Write(this._isCreatedOnSet);
+            if (this._isCreatedOnSet) {
+                binStream.Write(this.Proxy.CreatedOn);
+            }
             binStream.Write(this.Proxy.Identity != null ? OurContext.GetIdFromProxy(this.Proxy.Identity) : (int?)null);
             binStream.Write(this.Proxy.Name);
             binStream.Write(this.Proxy.Parent != null ? OurContext.GetIdFromProxy(this.Proxy.Parent) : (int?)null);
@@ -676,6 +1122,16 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.Read(out this._fk_ChangedBy);
+            this._isChangedOnSet = binStream.ReadBoolean();
+            if (this._isChangedOnSet) {
+                this.Proxy.ChangedOn = binStream.ReadDateTime();
+            }
+            binStream.Read(out this._fk_CreatedBy);
+            this._isCreatedOnSet = binStream.ReadBoolean();
+            if (this._isCreatedOnSet) {
+                this.Proxy.CreatedOn = binStream.ReadDateTime();
+            }
             binStream.Read(out this._fk_Identity);
             this.Proxy.Name = binStream.ReadString();
             binStream.Read(out this._fk_Parent);

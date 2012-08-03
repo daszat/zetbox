@@ -497,6 +497,8 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for Relation_was_Identity_RelationEntry
             // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
             // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
+            // should fetch && remember parent for SecurityTestChild_was_Identity_RelationEntry
+            // should fetch && remember parent for SecurityTestChild_was_Identity_RelationEntry
             // should fetch && remember parent for Sequence_was_Identity_RelationEntry
             // should fetch && remember parent for Sequence_was_Identity_RelationEntry
             // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry

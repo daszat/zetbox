@@ -3162,6 +3162,22 @@ namespace Zetbox {
                             }
                             public static class SecurityTestChild_Properties
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("d8f28d99-381c-4f66-ad18-07fa56c17b41"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("eddba42c-0383-4d31-a318-49d16e1f8016"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ab1ac0d6-3478-4363-a3ce-d936e3724f4b"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("e688c806-68a1-4078-b586-04c67daca577"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Identity
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("9119f41f-0767-47c0-ae71-5cd3f897b477"); }

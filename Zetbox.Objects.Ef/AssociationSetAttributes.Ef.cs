@@ -2351,6 +2351,36 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_SecurityTestChild_was_ChangedBy
+    A: ZeroOrMore SecurityTestChild as SecurityTestChild
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SecurityTestChild_was_ChangedBy",
+    "SecurityTestChild", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.SecurityTestChildEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SecurityTestChild_was_CreatedBy
+    A: ZeroOrMore SecurityTestChild as SecurityTestChild
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SecurityTestChild_was_CreatedBy",
+    "SecurityTestChild", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.SecurityTestChildEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Sequence_has_Data
     A: One Sequence as Sequence
     B: ZeroOrOne SequenceData as Data

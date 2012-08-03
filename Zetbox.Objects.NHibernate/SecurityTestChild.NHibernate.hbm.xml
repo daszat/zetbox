@@ -6,8 +6,8 @@
            schema="`test`"
            table="`SecurityTestChildren`"
            abstract="false"
-           dynamic-update="false"
-           optimistic-lock="none"
+           dynamic-update="true"
+           optimistic-lock="dirty"
            batch-size="100">
 
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
@@ -18,6 +18,20 @@
         </id>
 
         <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Identity" column="`fk_Identity`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 

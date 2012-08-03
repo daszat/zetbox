@@ -41,6 +41,372 @@ namespace Zetbox.App.Test
         }
 
         /// <summary>
+        /// Identity which changed this object
+        /// </summary>
+    /*
+    Relation: FK_SecurityTestChild_was_ChangedBy
+    A: ZeroOrMore SecurityTestChild as SecurityTestChild
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target not exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.Base.Identity ChangedBy
+        {
+            get { return ChangedByImpl; }
+            set { ChangedByImpl = (Zetbox.App.Base.IdentityEfImpl)value; }
+        }
+
+        private int? _fk_ChangedBy;
+
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_SecurityTestChild_was_ChangedBy", "ChangedBy")]
+        public Zetbox.App.Base.IdentityEfImpl ChangedByImpl
+        {
+            get
+            {
+                Zetbox.App.Base.IdentityEfImpl __value;
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
+                        "Model.FK_SecurityTestChild_was_ChangedBy",
+                        "ChangedBy");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                __value = r.Value;
+                if (OnChangedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
+                    OnChangedBy_Getter(this, e);
+                    __value = (Zetbox.App.Base.IdentityEfImpl)e.Result;
+                }
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
+                        "Model.FK_SecurityTestChild_was_ChangedBy",
+                        "ChangedBy");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Zetbox.App.Base.IdentityEfImpl __oldValue = (Zetbox.App.Base.IdentityEfImpl)r.Value;
+                Zetbox.App.Base.IdentityEfImpl __newValue = (Zetbox.App.Base.IdentityEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+
+                if (OnChangedBy_PreSetter != null)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnChangedBy_PreSetter(this, e);
+                    __newValue = (Zetbox.App.Base.IdentityEfImpl)e.Result;
+                }
+
+                r.Value = (Zetbox.App.Base.IdentityEfImpl)__newValue;
+
+                if (OnChangedBy_PostSetter != null)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnChangedBy_PostSetter(this, e);
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+            }
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnChangedBy_IsValid;
+
+        /// <summary>
+        /// Date and time where this object was changed
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public DateTime ChangedOn
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ChangedOn;
+                if (!_isChangedOnSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("eddba42c-0383-4d31-a318-49d16e1f8016"));
+                    if (__p != null) {
+                        _isChangedOnSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._ChangedOn = (DateTime)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SecurityTestChild.ChangedOn'");
+                    }
+                }
+                if (OnChangedOn_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnChangedOn_Getter(this, __e);
+                    __result = _ChangedOn = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isChangedOnSet = true;
+                if (_ChangedOn != value)
+                {
+                    var __oldValue = _ChangedOn;
+                    var __newValue = value;
+                    if (OnChangedOn_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnChangedOn_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
+                    _ChangedOn = __newValue;
+                    NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
+                    if (OnChangedOn_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnChangedOn_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
+            }
+        }
+        private DateTime _ChangedOn_store;
+        private DateTime _ChangedOn {
+            get { return _ChangedOn_store; }
+            set {
+                ReportEfPropertyChanging("ChangedOn");
+                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                ReportEfPropertyChanged("ChangedOn");
+            }
+        }
+        private bool _isChangedOnSet = false;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnChangedOn_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnChangedOn_IsValid;
+
+        /// <summary>
+        /// Identity which created this object
+        /// </summary>
+    /*
+    Relation: FK_SecurityTestChild_was_CreatedBy
+    A: ZeroOrMore SecurityTestChild as SecurityTestChild
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target not exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.Base.Identity CreatedBy
+        {
+            get { return CreatedByImpl; }
+            set { CreatedByImpl = (Zetbox.App.Base.IdentityEfImpl)value; }
+        }
+
+        private int? _fk_CreatedBy;
+
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_SecurityTestChild_was_CreatedBy", "CreatedBy")]
+        public Zetbox.App.Base.IdentityEfImpl CreatedByImpl
+        {
+            get
+            {
+                Zetbox.App.Base.IdentityEfImpl __value;
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
+                        "Model.FK_SecurityTestChild_was_CreatedBy",
+                        "CreatedBy");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                __value = r.Value;
+                if (OnCreatedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
+                    OnCreatedBy_Getter(this, e);
+                    __value = (Zetbox.App.Base.IdentityEfImpl)e.Result;
+                }
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
+                        "Model.FK_SecurityTestChild_was_CreatedBy",
+                        "CreatedBy");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Zetbox.App.Base.IdentityEfImpl __oldValue = (Zetbox.App.Base.IdentityEfImpl)r.Value;
+                Zetbox.App.Base.IdentityEfImpl __newValue = (Zetbox.App.Base.IdentityEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+
+                if (OnCreatedBy_PreSetter != null)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnCreatedBy_PreSetter(this, e);
+                    __newValue = (Zetbox.App.Base.IdentityEfImpl)e.Result;
+                }
+
+                r.Value = (Zetbox.App.Base.IdentityEfImpl)__newValue;
+
+                if (OnCreatedBy_PostSetter != null)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnCreatedBy_PostSetter(this, e);
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+            }
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnCreatedBy_IsValid;
+
+        /// <summary>
+        /// Date and time where this object was created
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public DateTime CreatedOn
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CreatedOn;
+                if (!_isCreatedOnSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("e688c806-68a1-4078-b586-04c67daca577"));
+                    if (__p != null) {
+                        _isCreatedOnSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._CreatedOn = (DateTime)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SecurityTestChild.CreatedOn'");
+                    }
+                }
+                if (OnCreatedOn_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnCreatedOn_Getter(this, __e);
+                    __result = _CreatedOn = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isCreatedOnSet = true;
+                if (_CreatedOn != value)
+                {
+                    var __oldValue = _CreatedOn;
+                    var __newValue = value;
+                    if (OnCreatedOn_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnCreatedOn_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
+                    _CreatedOn = __newValue;
+                    NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
+                    if (OnCreatedOn_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnCreatedOn_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
+            }
+        }
+        private DateTime _CreatedOn_store;
+        private DateTime _CreatedOn {
+            get { return _CreatedOn_store; }
+            set {
+                ReportEfPropertyChanging("CreatedOn");
+                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                ReportEfPropertyChanged("CreatedOn");
+            }
+        }
+        private bool _isCreatedOnSet = false;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnCreatedOn_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnCreatedOn_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
     /*
@@ -392,7 +758,11 @@ namespace Zetbox.App.Test
             var otherImpl = (SecurityTestChildEfImpl)obj;
             var me = (SecurityTestChild)this;
 
+            me.ChangedOn = other.ChangedOn;
+            me.CreatedOn = other.CreatedOn;
             me.Name = other.Name;
+            this._fk_ChangedBy = otherImpl._fk_ChangedBy;
+            this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Identity = otherImpl._fk_Identity;
             this._fk_Parent = otherImpl._fk_Parent;
         }
@@ -415,6 +785,10 @@ namespace Zetbox.App.Test
             // Do not audit calculated properties
             switch (property)
             {
+                case "ChangedBy":
+                case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
                 case "Identity":
                 case "Name":
                 case "Parent":
@@ -449,6 +823,16 @@ namespace Zetbox.App.Test
 
             // fix direct object references
 
+            if (_fk_ChangedBy.HasValue)
+                ChangedByImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                ChangedByImpl = null;
+
+            if (_fk_CreatedBy.HasValue)
+                CreatedByImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                CreatedByImpl = null;
+
             if (_fk_Identity.HasValue)
                 IdentityImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_Identity.Value);
             else
@@ -472,6 +856,42 @@ namespace Zetbox.App.Test
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorEfImpl<SecurityTestChild, Zetbox.App.Base.Identity>(
+                        lazyCtx,
+                        new Guid("d8f28d99-381c-4f66-ad18-07fa56c17b41"),
+                        "ChangedBy",
+                        null,
+                        obj => obj.ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => OnChangedBy_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<SecurityTestChild, DateTime>(
+                        lazyCtx,
+                        new Guid("eddba42c-0383-4d31-a318-49d16e1f8016"),
+                        "ChangedOn",
+                        null,
+                        obj => obj.ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => OnChangedOn_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<SecurityTestChild, Zetbox.App.Base.Identity>(
+                        lazyCtx,
+                        new Guid("ab1ac0d6-3478-4363-a3ce-d936e3724f4b"),
+                        "CreatedBy",
+                        null,
+                        obj => obj.CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => OnCreatedBy_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<SecurityTestChild, DateTime>(
+                        lazyCtx,
+                        new Guid("e688c806-68a1-4078-b586-04c67daca577"),
+                        "CreatedOn",
+                        null,
+                        obj => obj.CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<SecurityTestChild, Zetbox.App.Base.Identity>(
                         lazyCtx,
@@ -571,6 +991,8 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_SecurityTestChild")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Identity");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("Parent");
@@ -585,6 +1007,8 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SecurityTestChild != null) OnNotifyDeleting_SecurityTestChild(this);
+            ChangedBy = null;
+            CreatedBy = null;
             Parent = null;
         }
         public static event ObjectEventHandler<SecurityTestChild> OnNotifyDeleting_SecurityTestChild;
@@ -665,6 +1089,22 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SecurityTestChild_was_ChangedBy", "ChangedBy").EntityKey;
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+            }
+            binStream.Write(this._isChangedOnSet);
+            if (this._isChangedOnSet) {
+                binStream.Write(this._ChangedOn);
+            }
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SecurityTestChild_was_CreatedBy", "CreatedBy").EntityKey;
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+            }
+            binStream.Write(this._isCreatedOnSet);
+            if (this._isCreatedOnSet) {
+                binStream.Write(this._CreatedOn);
+            }
+            {
                 var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Child_allow_Identity", "Identity").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
@@ -682,6 +1122,16 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.Read(out this._fk_ChangedBy);
+            this._isChangedOnSet = binStream.ReadBoolean();
+            if (this._isChangedOnSet) {
+                this._ChangedOn = binStream.ReadDateTime();
+            }
+            binStream.Read(out this._fk_CreatedBy);
+            this._isCreatedOnSet = binStream.ReadBoolean();
+            if (this._isCreatedOnSet) {
+                this._CreatedOn = binStream.ReadDateTime();
+            }
             binStream.Read(out this._fk_Identity);
             this._Name = binStream.ReadString();
             binStream.Read(out this._fk_Parent);

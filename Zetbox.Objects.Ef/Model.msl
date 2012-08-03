@@ -1022,6 +1022,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestChild)">
 	    <MappingFragment StoreEntitySet="SecurityTestChild">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="ParentName" ColumnName="ParentName" />
 	    </MappingFragment>
@@ -4448,6 +4450,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Type" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SecurityTestChild_was_ChangedBy
+    A: ZeroOrMore SecurityTestChild as SecurityTestChild
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SecurityTestChild_was_ChangedBy"
+                           TypeName="Model.FK_SecurityTestChild_was_ChangedBy"
+                           StoreEntitySet="SecurityTestChild" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="SecurityTestChild">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SecurityTestChild_was_CreatedBy
+    A: ZeroOrMore SecurityTestChild as SecurityTestChild
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SecurityTestChild_was_CreatedBy"
+                           TypeName="Model.FK_SecurityTestChild_was_CreatedBy"
+                           StoreEntitySet="SecurityTestChild" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="SecurityTestChild">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Sequence_has_Data

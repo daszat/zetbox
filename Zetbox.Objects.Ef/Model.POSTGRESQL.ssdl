@@ -1383,6 +1383,14 @@
       <End Role="SearchScreen" EntitySet="NavigationSearchScreen" />
       <End Role="Type" EntitySet="ObjectClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_SecurityTestChild_was_ChangedBy" Association="Model.Store.FK_SecurityTestChild_was_ChangedBy" >
+      <End Role="SecurityTestChild" EntitySet="SecurityTestChild" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SecurityTestChild_was_CreatedBy" Association="Model.Store.FK_SecurityTestChild_was_CreatedBy" >
+      <End Role="SecurityTestChild" EntitySet="SecurityTestChild" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Sequence_has_Data" Association="Model.Store.FK_Sequence_has_Data" >
       <End Role="Sequence" EntitySet="Sequence" />
       <End Role="Data" EntitySet="SequenceData" />
@@ -2778,6 +2786,10 @@
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Identity" Type="int4" />
     <Property Name="fk_Parent" Type="int4" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="ParentName" Type="varchar" MaxLength="200" Nullable="true" />
   </EntityType>
@@ -5894,6 +5906,34 @@
       </Principal>
       <Dependent Role="SearchScreen">
         <PropertyRef Name="fk_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_SecurityTestChild_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="SecurityTestChild" Type="Model.Store.SecurityTestChild" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SecurityTestChild">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_SecurityTestChild_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="SecurityTestChild" Type="Model.Store.SecurityTestChild" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SecurityTestChild">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
