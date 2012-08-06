@@ -127,6 +127,7 @@
     <EmbeddedResource Include="SolutionItems\___zetbox\wpf.targets">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="SolutionItems\__gitattributes" />
     <None Include="TemplateWizard.snk" />
   </ItemGroup>
   <ItemGroup>
