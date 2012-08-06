@@ -49,11 +49,11 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Zetbox.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-WpfExe.1.0.4237.1\lib\net35\Zetbox.API.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-WpfExe.1.0.4272.1\lib\net35\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-WpfExe.1.0.4237.1\lib\net35\Zetbox.Client.WPF.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-WpfExe.1.0.4272.1\lib\net35\Zetbox.Client.WPF.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

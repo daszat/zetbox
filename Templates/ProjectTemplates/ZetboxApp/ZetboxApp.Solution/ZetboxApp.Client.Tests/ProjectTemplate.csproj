@@ -64,21 +64,21 @@
     $endif$<Reference Include="System.Data"/>
     <Reference Include="System.Xml"/>
     <Reference Include="Zetbox.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4237.1\lib\net35\Zetbox.API.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.4272.1\lib\net35\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.AbstractConsumerTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-Tests.1.0.4237.1\lib\net35\Zetbox.API.AbstractConsumerTests.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Tests.1.0.4272.1\lib\net35\Zetbox.API.AbstractConsumerTests.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.API.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4237.1\lib\net35\Zetbox.API.Common.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.4272.1\lib\net35\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Tests.Utilities.MsSql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-Tests.1.0.4237.1\lib\net35\Zetbox.Tests.Utilities.MsSql.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Tests.1.0.4272.1\lib\net35\Zetbox.Tests.Utilities.MsSql.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.Tests.Utilities.PostgreSql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-Tests.1.0.4237.1\lib\net35\Zetbox.Tests.Utilities.PostgreSql.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Tests.1.0.4272.1\lib\net35\Zetbox.Tests.Utilities.PostgreSql.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -53,23 +53,23 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsBase" />
     <Reference Include="Zetbox.API">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4237.1\lib\net35\Zetbox.API.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.4272.1\lib\net35\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Client">
-      <HintPath>..\packages\zetboxBasic-Client.1.0.4237.1\lib\net35\Zetbox.API.Client.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Client.1.0.4272.1\lib\net35\Zetbox.API.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Common">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4237.1\lib\net35\Zetbox.API.Common.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.4272.1\lib\net35\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Client">
-      <HintPath>..\packages\zetboxBasic-Client.1.0.4237.1\lib\net35\Zetbox.Client.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Client.1.0.4272.1\lib\net35\Zetbox.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Client.WPF.Toolkit">
-      <HintPath>..\packages\zetboxBasic-ClientWpf.1.0.4237.1\lib\net35\Zetbox.Client.WPF.Toolkit.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-ClientWpf.1.0.4272.1\lib\net35\Zetbox.Client.WPF.Toolkit.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
