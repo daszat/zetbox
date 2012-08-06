@@ -338,19 +338,18 @@ namespace Zetbox.Client.Models
         }
         #endregion
 
-        public ColumnType Type { get; set; }
+        public ColumnType Type { get; private set; }
         public string Header { get; set; }
-        public string Path { get; set; }
         public ControlKind ControlKind { get; set; }
         public ControlKind GridPreEditKind { get; set; }
         public WidthHint RequestedWidth { get; set; }
         public int? RequestedWidthAbsolute { get; set; }
 
         #region Column Source
-        public Property Property { get; set; }
-        public App.Base.Property[] Properties { get; set; }
-
-        public Method Method { get; set; }
+        public Property Property { get; private set; }
+        public App.Base.Property[] Properties { get; private set; }
+        public Method Method { get; private set; }
+        public string Path { get; private set; }
         #endregion
 
         public override string ToString()
