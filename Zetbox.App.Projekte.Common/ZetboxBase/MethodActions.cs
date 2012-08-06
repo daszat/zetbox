@@ -108,5 +108,15 @@ namespace Zetbox.App.Base
 
             e.Result = sb.ToString();
         }
+
+        [Invocation]
+        public static void GetName(Method obj, MethodReturnEventArgs<string> e)
+        {
+            var cls = obj.ObjectClass as ObjectClass;
+            if (cls != null)
+            {
+                e.Result = string.Format("{0}_Methods.{1}", cls.GetName(), obj.Name);
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Zetbox.App.Base
     /// Metadefinition Object for Methods.
     /// </summary>
     [Zetbox.API.DefinitionGuid("ef79c0b9-55e0-45ad-8233-1ff8f852661f")]
-    public interface Method : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable, Zetbox.App.Base.IModuleMember 
+    public interface Method : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable, Zetbox.App.Base.IModuleMember, Zetbox.App.Base.INamedObject 
     {
 
         /// <summary>
