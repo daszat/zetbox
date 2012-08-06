@@ -165,7 +165,7 @@ namespace Zetbox.Client.Models
             var colMdl = new ColumnDisplayModel()
             {
                 Header = string.Join(", ", p.Select(i => i.GetLabel()).ToArray()),
-                Name = string.Join(".", p.Select(i => i.Name).ToArray()),
+                Path = string.Join(".", p.Select(i => i.Name).ToArray()),
                 Property = last,
                 Properties = p,
                 RequestedWidth = p.Last().GetDisplayWidth(),
@@ -266,9 +266,10 @@ namespace Zetbox.Client.Models
             return new ColumnDisplayModel()
             {
                 Header = m.GetLabel(),
-                Name = m.Name,
+                Path = m.Name,
                 Type = ColumnDisplayModel.ColumnType.MethodModel,
                 RequestedWidth = WidthHint.Medium,
+                Method = m,
             };
         }
         #endregion
@@ -327,7 +328,7 @@ namespace Zetbox.Client.Models
             return new ColumnDisplayModel()
             {
                 Header = header,
-                Name = vmPropPath,
+                Path = vmPropPath,
                 Type = ColumnDisplayModel.ColumnType.ViewModelProperty,
                 RequestedWidth = requestedWidth,
                 RequestedWidthAbsolute = requestedWidthAbsolute,
@@ -339,13 +340,18 @@ namespace Zetbox.Client.Models
 
         public ColumnType Type { get; set; }
         public string Header { get; set; }
-        public string Name { get; set; }
+        public string Path { get; set; }
         public ControlKind ControlKind { get; set; }
         public ControlKind GridPreEditKind { get; set; }
         public WidthHint RequestedWidth { get; set; }
         public int? RequestedWidthAbsolute { get; set; }
+
+        #region Column Source
         public Property Property { get; set; }
         public App.Base.Property[] Properties { get; set; }
+
+        public Method Method { get; set; }
+        #endregion
 
         public override string ToString()
         {
@@ -360,13 +366,13 @@ namespace Zetbox.Client.Models
             switch (this.Type)
             {
                 case ColumnDisplayModel.ColumnType.ViewModelProperty:
-                    var propVal = obj.GetPropertyValue<object>(this.Name);
+                    var propVal = obj.GetPropertyValue<object>(this.Path);
                     val = propVal != null ? propVal.ToString() : string.Empty;
                     break;
                 case ColumnDisplayModel.ColumnType.PropertyModel:
                     DataObjectViewModel objVmdl = obj;
                     IFormattedValueViewModel resultVMdl = null;
-                    foreach (var current in this.Name.Split('.'))
+                    foreach (var current in this.Path.Split('.'))
                     {
                         if (objVmdl == null) break;
 
