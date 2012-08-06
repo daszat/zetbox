@@ -8,9 +8,6 @@
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>..\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>..\CodeGen</CodeGenOutputPath>
-    <CodeGenBinaryOutputPath>
-      <string>.</string>
-    </CodeGenBinaryOutputPath>
     <CodeGenArchivePath>..\Backup</CodeGenArchivePath>
     <Modules>
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>

@@ -34,8 +34,8 @@
       <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
     </Modules>
     <ClientFilesLocations>
-      <Location Name="Exe">bin\Debug\Zetbox.WPF.exe</Location>
-      <Location Name="Configs">Configs\Examples\Zetbox.WPF.xml</Location>
+      <Location Name="Exe" Start="true">bin\Debug\$safesolutionname$.WPF.exe</Location>
+      <Location Name="Configs">Configs\Examples\$safesolutionname$.WPF.xml</Location>
       <Location Name="Common">bin\Debug\Common</Location>
       <Location Name="Client">bin\Debug\Client</Location>
     </ClientFilesLocations>
