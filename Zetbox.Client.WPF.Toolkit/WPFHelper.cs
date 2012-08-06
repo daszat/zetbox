@@ -159,7 +159,7 @@ namespace Zetbox.Client.WPF.Toolkit
                             labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
-                    case ColumnDisplayModel.ColumnType.Property:
+                    case ColumnDisplayModel.ColumnType.ViewModelProperty:
                         if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
                         labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
                         break;
@@ -232,7 +232,7 @@ namespace Zetbox.Client.WPF.Toolkit
                             cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
-                    case ColumnDisplayModel.ColumnType.Property:
+                    case ColumnDisplayModel.ColumnType.ViewModelProperty:
                         cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
                         break;
                 }

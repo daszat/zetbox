@@ -140,7 +140,7 @@ namespace Zetbox.Client.Presentables.GUI
                     foreach (var col in _selectedItem.Object.Columns)
                     {
                         var props = col.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToArray();
-                        Parent.DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, props));
+                        Parent.DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, props));
                     }
                 }
             }

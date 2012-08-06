@@ -37,123 +37,305 @@ namespace Zetbox.Client.Models
             /// <summary>
             /// References a DataObjectViewModel.PropertyModelsByName[] ViewModel
             /// </summary>
-            PropertyModel,
-            /// <summary>
-            /// References a ViewModels property directly
-            /// </summary>
-            Property,
+            PropertyModel = 1,
             /// <summary>
             /// References a DataObjectViewModel.ActionViewModelsByName[] ViewModel
             /// </summary>
-            MethodModel,
+            MethodModel = 2,
+            /// <summary>
+            /// References a ViewModels property directly
+            /// </summary>
+            ViewModelProperty = 3,
         }
 
-        internal ColumnDisplayModel()
-            : this(string.Empty, string.Empty, null, ColumnType.PropertyModel)
+        private ColumnDisplayModel()
         {
         }
 
+        #region Create Properties
         /// <summary>
-        /// Creates a ColumnDisplayModel
+        /// Creates a ColumnDisplayModel for a zetbox object property or property path
         /// </summary>
+        /// <param name="mode">Requested mode (readonly, editable)</param>
         /// <param name="header">Label for the list header</param>
-        /// <param name="name">property name</param>
-        public ColumnDisplayModel(string header, string name)
-            : this(header, name, null, ColumnType.PropertyModel)
+        /// <param name="p">list of properties to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, string header, params Property[] p)
         {
+            var colMdl = Create(mode, p);
+            colMdl.Header = header;
+            return colMdl;
         }
 
         /// <summary>
-        /// Creates a ColumnDisplayModel
+        /// Creates a ColumnDisplayModel for a zetbox object property or property path
         /// </summary>
-        /// <param name="header">Label for the list header</param>
-        /// <param name="name">property name</param>
-        /// <param name="kind">The requested control kind or null if default should be used</param>
-        public ColumnDisplayModel(string header, string name, ControlKind kind)
-            : this(header, name, kind, ColumnType.PropertyModel)
-        {
-        }
-
-        /// <summary>
-        /// Creates a ColumnDisplayModel
-        /// </summary>
-        /// <param name="header">Label for the list header</param>
-        /// <param name="name">property name</param>
-        /// <param name="kind">The requested control kind or null if default should be used</param>
+        /// <param name="mode">Requested mode (readonly, editable)</param>
         /// <param name="requestedWidth">Requested list column width</param>
-        public ColumnDisplayModel(string header, string name, ControlKind kind, WidthHint requestedWidth)
-            : this(header, name, kind, null, ColumnType.PropertyModel, requestedWidth, null)
+        /// <param name="p">list of properties to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, WidthHint requestedWidth, params Property[] p)
         {
+            var colMdl = Create(mode, p);
+            colMdl.RequestedWidth = requestedWidth;
+            return colMdl;
         }
 
         /// <summary>
-        /// Creates a ColumnDisplayModel
+        /// Creates a ColumnDisplayModel for a zetbox object property or property path
         /// </summary>
-        /// <param name="header">Label for the list header</param>
-        /// <param name="name">property name</param>
-        /// <param name="kind">The requested control kind or null if default should be used</param>
+        /// <param name="mode">Requested mode (readonly, editable)</param>
         /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
-        public ColumnDisplayModel(string header, string name, ControlKind kind, int requestedWidthAbsoulte)
-            : this(header, name, kind, null, ColumnType.PropertyModel, WidthHint.Default, requestedWidthAbsoulte)
+        /// <param name="p">list of properties to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, int requestedWidthAbsoulte, params Property[] p)
         {
+            var colMdl = Create(mode, p);
+            colMdl.RequestedWidthAbsolute = requestedWidthAbsoulte;
+            return colMdl;
         }
 
         /// <summary>
-        /// Creates a ColumnDisplayModel
+        /// Creates a ColumnDisplayModel for a zetbox object property or property path
         /// </summary>
+        /// <param name="mode">Requested mode (readonly, editable)</param>
         /// <param name="header">Label for the list header</param>
-        /// <param name="name">property, viewmodels property or method name</param>
-        /// <param name="type">Requested column type</param>
-        public ColumnDisplayModel(string header, string name, ColumnType type)
-            : this(header, name, null, type)
+        /// <param name="requestedWidth">Requested list column width</param>
+        /// <param name="p">list of properties to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, string header, WidthHint requestedWidth, params Property[] p)
         {
+            var colMdl = Create(mode, p);
+            colMdl.Header = header;
+            colMdl.RequestedWidth = requestedWidth;
+            return colMdl;
         }
 
         /// <summary>
-        /// Creates a ColumnDisplayModel
+        /// Creates a ColumnDisplayModel for a zetbox object property or property path
         /// </summary>
+        /// <param name="mode">Requested mode (readonly, editable)</param>
         /// <param name="header">Label for the list header</param>
-        /// <param name="name">property, viewmodels property or method name</param>
-        /// <param name="kind">The requested control kind or null if default should be used</param>
-        /// <param name="type">Requested column type</param>
-        public ColumnDisplayModel(string header, string name, ControlKind kind, ColumnType type)
-            : this(header, name, kind, null, type, WidthHint.Default, null)
+        /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
+        /// <param name="p">list of properties to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, string header, int requestedWidthAbsoulte, params Property[] p)
         {
+            var colMdl = Create(mode, p);
+            colMdl.Header = header;
+            colMdl.RequestedWidthAbsolute = requestedWidthAbsoulte;
+            return colMdl;
         }
 
         /// <summary>
-        /// Creates a ColumnDisplayModel
+        /// Creates a ColumnDisplayModel for a zetbox object property or property path
         /// </summary>
+        /// <param name="mode">Requested mode (readonly, editable)</param>
         /// <param name="header">Label for the list header</param>
-        /// <param name="name">property name</param>
         /// <param name="kind">The requested editor kind or null if default should be used</param>
         /// <param name="gridPreviewKind">The requested preview kind or null if default should be used</param>
-        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind)
-            : this(header, name, kind, gridPreviewKind, ColumnType.PropertyModel, WidthHint.Default, null)
-        {
-        }
-
-        /// <summary>
-        /// Creates a ColumnDisplayModel
-        /// </summary>
-        /// <param name="header">Label for the list header</param>
-        /// <param name="name">property, viewmodels property or method name</param>
-        /// <param name="kind">The requested editor kind or null if default should be used</param>
-        /// <param name="gridPreviewKind">The requested preview kind or null if default should be used</param>
-        /// <param name="type">Requested column type</param>
         /// <param name="requestedWidth">Requested list column width</param>
         /// <param name="requestedWidthAbsolute">Requested list column width in absolute toolkit units</param>
-        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type, WidthHint requestedWidth, int? requestedWidthAbsolute)
+        /// <param name="p">list of properties to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, string header, ControlKind kind, ControlKind gridPreviewKind, WidthHint requestedWidth, int? requestedWidthAbsolute, params Property[] p)
         {
-            this.Header = header;
-            this.Name = name;
-            this.ControlKind = kind;
-            this.GridPreEditKind = gridPreviewKind ?? kind;
-            this.Type = type;
-            this.RequestedWidth = requestedWidth;
-            this.RequestedWidthAbsolute = requestedWidthAbsolute;
-            this.Properties = new Property[] { };
+            var colMdl = Create(mode, p);
+            colMdl.Header = header;
+            colMdl.ControlKind = kind;
+            colMdl.GridPreEditKind = gridPreviewKind ?? kind;
+            colMdl.RequestedWidth = requestedWidth;
+            colMdl.RequestedWidthAbsolute = requestedWidthAbsolute;
+            return colMdl;
         }
+
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a zetbox object property or property path
+        /// </summary>
+        /// <param name="mode">Requested mode (readonly, editable)</param>
+        /// <param name="p">list of properties to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(GridDisplayConfiguration.Mode mode, params Property[] p)
+        {
+            if (p == null) throw new ArgumentNullException("p");
+            if (p.Length == 0) throw new ArgumentOutOfRangeException("p", "At least one property is requiered");
+
+            var last = p.Last();
+
+            var colMdl = new ColumnDisplayModel()
+            {
+                Header = string.Join(", ", p.Select(i => i.GetLabel()).ToArray()),
+                Name = string.Join(".", p.Select(i => i.Name).ToArray()),
+                Property = last,
+                Properties = p,
+                RequestedWidth = p.Last().GetDisplayWidth(),
+                Type = ColumnType.PropertyModel
+            };
+            switch (mode)
+            {
+                case GridDisplayConfiguration.Mode.ReadOnly:
+                    colMdl.ControlKind = last.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
+                    colMdl.GridPreEditKind = last.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
+                    break;
+                case GridDisplayConfiguration.Mode.Editable:
+                    colMdl.ControlKind = last.ValueModelDescriptor.GetDefaultGridCellEditorKind();
+                    colMdl.GridPreEditKind = last.ValueModelDescriptor.GetDefaultGridCellPreEditorKind();
+                    break;
+            }
+            return colMdl;
+        }
+        #endregion
+
+        #region Create Methods
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a zetbox object method
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="m">method to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(string header, Method m)
+        {
+            var colMdl = Create(m);
+            colMdl.Header = header;
+            return colMdl;
+        }
+
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a zetbox object method
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="requestedWidth">Requested list column width</param>
+        /// <param name="m">method to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(string header, WidthHint requestedWidth, Method m)
+        {
+            var colMdl = Create(m);
+            colMdl.Header = header;
+            colMdl.RequestedWidth = requestedWidth;
+            return colMdl;
+        }
+
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a zetbox object method
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
+        /// <param name="m">method to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(string header, int requestedWidthAbsoulte, Method m)
+        {
+            var colMdl = Create(m);
+            colMdl.Header = header;
+            colMdl.RequestedWidthAbsolute = requestedWidthAbsoulte;
+            return colMdl;
+        }
+
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a zetbox object method
+        /// </summary>
+        /// <param name="requestedWidth">Requested list column width</param>
+        /// <param name="m">method to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(WidthHint requestedWidth, Method m)
+        {
+            var colMdl = Create(m);
+            colMdl.RequestedWidth = requestedWidth;
+            return colMdl;
+        }
+
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a zetbox object method
+        /// </summary>
+        /// <param name="requestedWidthAbsoulte">Requested list column width in absolute toolkit units</param>
+        /// <param name="m">method to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(int requestedWidthAbsoulte, Method m)
+        {
+            var colMdl = Create(m);
+            colMdl.RequestedWidthAbsolute = requestedWidthAbsoulte;
+            return colMdl;
+        }
+
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a zetbox object method
+        /// </summary>
+        /// <param name="m">method to build column for</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(Method m)
+        {
+            return new ColumnDisplayModel()
+            {
+                Header = m.GetLabel(),
+                Name = m.Name,
+                Type = ColumnDisplayModel.ColumnType.MethodModel,
+                RequestedWidth = WidthHint.Medium,
+            };
+        }
+        #endregion
+        
+        #region Create ViewModelProperties
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a view model property or path to a property
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="kind">The requested editor kind or null if default should be used</param>
+        /// <param name="vmPropPath">Path to the viewmodels property</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(string header, ControlKind kind, string vmPropPath)
+        {
+            return Create(header, kind, null, WidthHint.Default, null, vmPropPath);
+        }
+
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a view model property or path to a property
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="kind">The requested editor kind or null if default should be used</param>
+        /// <param name="requestedWidth">Requested list column width</param>
+        /// <param name="vmPropPath">Path to the viewmodels property</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(string header, ControlKind kind, WidthHint requestedWidth, string vmPropPath)
+        {
+            return Create(header, kind, null, requestedWidth, null, vmPropPath);
+        }
+
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a view model property or path to a property
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="kind">The requested editor kind or null if default should be used</param>
+        /// <param name="requestedWidthAbsolute">Requested list column width in absolute toolkit units</param>
+        /// <param name="vmPropPath">Path to the viewmodels property</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(string header, ControlKind kind, int? requestedWidthAbsolute, string vmPropPath)
+        {
+            return Create(header, kind, null, WidthHint.Default, requestedWidthAbsolute, vmPropPath);
+        }
+
+        /// <summary>
+        /// Creates a ColumnDisplayModel for a view model property or path to a property
+        /// </summary>
+        /// <param name="header">Label for the list header</param>
+        /// <param name="kind">The requested editor kind or null if default should be used</param>
+        /// <param name="gridPreviewKind">The requested preview kind or null if default should be used</param>
+        /// <param name="requestedWidth">Requested list column width</param>
+        /// <param name="requestedWidthAbsolute">Requested list column width in absolute toolkit units</param>
+        /// <param name="vmPropPath">Path to the viewmodels property</param>
+        /// <returns>a ready configurated ColumnDisplayModel</returns>
+        public static ColumnDisplayModel Create(string header, ControlKind kind, ControlKind gridPreviewKind, WidthHint requestedWidth, int? requestedWidthAbsolute, string vmPropPath)
+        {
+            return new ColumnDisplayModel()
+            {
+                Header = header,
+                Name = vmPropPath,
+                Type = ColumnDisplayModel.ColumnType.ViewModelProperty,
+                RequestedWidth = requestedWidth,
+                RequestedWidthAbsolute = requestedWidthAbsolute,
+                ControlKind = kind,
+                GridPreEditKind = gridPreviewKind ?? kind,
+            };
+        }
+        #endregion
 
         public ColumnType Type { get; set; }
         public string Header { get; set; }
@@ -177,7 +359,7 @@ namespace Zetbox.Client.Models
             string val = null;
             switch (this.Type)
             {
-                case ColumnDisplayModel.ColumnType.Property:
+                case ColumnDisplayModel.ColumnType.ViewModelProperty:
                     var propVal = obj.GetPropertyValue<object>(this.Name);
                     val = propVal != null ? propVal.ToString() : string.Empty;
                     break;
@@ -235,8 +417,8 @@ namespace Zetbox.Client.Models
             ShowName = cls.ShowNameInLists;
 
             this.Columns = new ObservableCollection<ColumnDisplayModel>(
-                props.Select(p => CreateColumnDisplayModel(mode, p))
-                     .Concat(methods.Select(m => GridDisplayConfiguration.CreateColumnDisplayModel(m)))
+                props.Select(p => ColumnDisplayModel.Create(mode, p))
+                     .Concat(methods.Select(m => ColumnDisplayModel.Create(m)))
                      .ToList()
             );
         }
@@ -297,46 +479,6 @@ namespace Zetbox.Client.Models
                 .Where(m => m.IsDisplayable && ContainsSummaryTag(m.CategoryTags));
 
             BuildColumns(cls, props, showMethods ? methods.ToArray() : new Method[0], mode);
-        }
-
-        public static ColumnDisplayModel CreateColumnDisplayModel(Method m)
-        {
-            return new ColumnDisplayModel()
-            {
-                Header = m.GetLabel(),
-                Name = m.Name,
-                Type = ColumnDisplayModel.ColumnType.MethodModel,
-                RequestedWidth = WidthHint.Medium,
-            };
-        }
-
-        public static ColumnDisplayModel CreateColumnDisplayModel(Mode mode, params Property[] p)
-        {
-            if (p == null) throw new ArgumentNullException("p");
-            if (p.Length == 0) throw new ArgumentOutOfRangeException("p", "At least one property is requiered");
-
-            var last = p.Last();
-
-            var colMdl = new ColumnDisplayModel()
-            {
-                Header = string.Join(", ", p.Select(i => i.GetLabel()).ToArray()),
-                Name = string.Join(".", p.Select(i => i.Name).ToArray()),
-                Property = last,
-                Properties = p,
-                RequestedWidth = p.Last().GetDisplayWidth(),
-            };
-            switch (mode)
-            {
-                case Mode.ReadOnly:
-                    colMdl.ControlKind = last.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
-                    colMdl.GridPreEditKind = last.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
-                    break;
-                case Mode.Editable:
-                    colMdl.ControlKind = last.ValueModelDescriptor.GetDefaultGridCellEditorKind();
-                    colMdl.GridPreEditKind = last.ValueModelDescriptor.GetDefaultGridCellPreEditorKind();
-                    break;
-            }
-            return colMdl;
         }
     }
 }

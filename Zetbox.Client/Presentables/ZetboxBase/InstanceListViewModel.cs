@@ -187,7 +187,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         void _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
         {
             if (DisplayedProperties.Any(dp => dp.SequenceEqual(e.Properties))) return;
-            DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Properties.ToArray()));
+            DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, e.Properties.ToArray()));
         }
 
         /// <summary>
@@ -640,7 +640,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (e.Item.IsSelected)
                 {
-                    DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Item.Properties));
+                    DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, e.Item.Properties));
                     ViewMethod = InstanceListViewMethod.Details;
                 }
                 else
