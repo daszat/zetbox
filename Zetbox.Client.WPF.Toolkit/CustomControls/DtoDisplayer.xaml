@@ -23,6 +23,40 @@
     -->
 
     <UserControl.Resources>
+        <DataTemplate x:Key="ExportOverlayTemplate">
+            <DataTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsMouseOver, ElementName=OverlayGrid}"
+                                   Value="true" />
+                        <Condition Binding="{Binding DataContext.IsPrintableRoot}"
+                                   Value="false" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="StackPanel.Visibility"
+                            TargetName="Layer"
+                            Value="Visible" />
+                </MultiDataTrigger>
+            </DataTemplate.Triggers>
+            <Grid x:Name="OverlayGrid" Background="Transparent">
+                <ContentPresenter Content="{Binding}" />
+                <StackPanel x:Name="Layer"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            Visibility="Hidden"
+                            Margin="2">
+                    <ctrls:CommandButton x:Name="GroupPrintButton"
+                                         CommandViewModel="{Binding DataContext.PrintCommand}"
+                                         Style="{StaticResource ImageButton}"
+                                         Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                    <ctrls:CommandButton x:Name="GroupExportButton"
+                                         CommandViewModel="{Binding DataContext.ExportCommand}"
+                                         Visibility="{Binding DataContext.IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                         Style="{StaticResource ImageButton}"
+                                         Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type dto:DtoValueViewModel}">
             <Grid x:Name="DtoValue"
                   Background="{Binding Background}">
@@ -80,46 +114,53 @@
                        Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}" />
         </DataTemplate>
         <DataTemplate DataType="{x:Type dto:DtoTabbedViewModel}">
-            <DockPanel x:Name="DtoTabs">
-                <StackPanel x:Name="Commands"
-                            DockPanel.Dock="Bottom"
-                            Orientation="Horizontal"
-                            Margin="2"
-                            HorizontalAlignment="Right">
-                    <ctrls:CommandButton x:Name="TabPrintButton"
-                                         CommandViewModel="{Binding PrintCommand}"
-                                         Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                         Style="{StaticResource ImageButton}"
-                                         Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
-                </StackPanel>
-                <TextBlock x:Name="Description"
-                           DockPanel.Dock="Bottom"
-                           Margin="3"
-                           Text="{Binding Description}"
-                           Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                           FontSize="12" />
-                <TabControl ItemsSource="{Binding Items}"
-                            SelectedItem="{Binding SelectedItem}"
-                            Background="{Binding Background}"
-                            IsSynchronizedWithCurrentItem="true">
-                    <TabControl.ItemContainerStyle>
-                        <Style>
-                            <Setter Property="TabItem.Background"
-                                    Value="{Binding Background}" />
-                            <Setter Property="TabItem.Padding"
-                                    Value="1" />
-                        </Style>
-                    </TabControl.ItemContainerStyle>
-                    <TabControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Margin="3,0"
-                                       Text="{Binding Title}"
-                                       MinWidth="50"
-                                       FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}" />
-                        </DataTemplate>
-                    </TabControl.ItemTemplate>
-                </TabControl>
-            </DockPanel>
+            <ContentControl ContentTemplate="{StaticResource ExportOverlayTemplate}">
+                <DockPanel x:Name="DtoTabs">
+                    <StackPanel x:Name="Commands"
+                                Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                DockPanel.Dock="Bottom"
+                                Orientation="Horizontal"
+                                Margin="2"
+                                HorizontalAlignment="Right">
+                        <ctrls:CommandButton x:Name="TabPrintButton"
+                                             CommandViewModel="{Binding PrintCommand}"
+                                             Style="{StaticResource ImageButton}"
+                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                        <ctrls:CommandButton x:Name="GroupExportButton"
+                                             CommandViewModel="{Binding ExportCommand}"
+                                             Visibility="{Binding IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                             Style="{StaticResource ImageButton}"
+                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                    </StackPanel>
+                    <TextBlock x:Name="Description"
+                               DockPanel.Dock="Bottom"
+                               Margin="3"
+                               Text="{Binding Description}"
+                               Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                               FontSize="12" />
+                    <TabControl ItemsSource="{Binding Items}"
+                                SelectedItem="{Binding SelectedItem}"
+                                Background="{Binding Background}"
+                                IsSynchronizedWithCurrentItem="true">
+                        <TabControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="TabItem.Background"
+                                        Value="{Binding Background}" />
+                                <Setter Property="TabItem.Padding"
+                                        Value="1" />
+                            </Style>
+                        </TabControl.ItemContainerStyle>
+                        <TabControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="3,0"
+                                           Text="{Binding Title}"
+                                           MinWidth="50"
+                                           FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}" />
+                            </DataTemplate>
+                        </TabControl.ItemTemplate>
+                    </TabControl>
+                </DockPanel>
+            </ContentControl>
         </DataTemplate>
         <DataTemplate DataType="{x:Type dto:DtoCellViewModel}">
             <ContentPresenter x:Name="DtoCell"
@@ -131,7 +172,8 @@
                           Grid.IsSharedSizeScope="true"
                           HorizontalScrollBarVisibility="Auto"
                           VerticalScrollBarVisibility="Auto"
-                          Background="{Binding Background}">
+                          Background="{Binding Background}"
+                          ContentTemplate="{StaticResource ExportOverlayTemplate}">
                 <StackPanel>
                     <TextBlock Text="{Binding Title}"
                                FontWeight="Bold"
@@ -193,12 +235,17 @@
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                     <StackPanel x:Name="Commands"
+                                Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
                                 Orientation="Horizontal"
                                 Margin="2"
                                 HorizontalAlignment="Right">
                         <ctrls:CommandButton x:Name="TablePrintButton"
                                              CommandViewModel="{Binding PrintCommand}"
-                                             Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                             Style="{StaticResource ImageButton}"
+                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                        <ctrls:CommandButton x:Name="GroupExportButton"
+                                             CommandViewModel="{Binding ExportCommand}"
+                                             Visibility="{Binding IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
                                              Style="{StaticResource ImageButton}"
                                              Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
                     </StackPanel>
@@ -206,38 +253,45 @@
             </ScrollViewer>
         </DataTemplate>
         <DataTemplate DataType="{x:Type dto:DtoGroupedViewModel}">
-            <DockPanel x:Name="DtoGroup"
-                       Background="{Binding Background}">
-                <TextBlock x:Name="Title"
-                           DockPanel.Dock="Top"
-                           Margin="3,3,1,3"
-                           FontWeight="Bold"
-                           MinWidth="50"
-                           Text="{Binding Title}"
-                           Background="{Binding Background}"
-                           Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}" />
-                <TextBlock x:Name="Description"
-                           DockPanel.Dock="Bottom"
-                           Margin="3"
-                           Text="{Binding Description}"
-                           Background="{Binding Background}"
-                           Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                           FontSize="12" />
-                <StackPanel x:Name="Commands"
-                            DockPanel.Dock="Bottom"
-                            Orientation="Horizontal"
-                            Margin="2"
-                            HorizontalAlignment="Right">
-                    <ctrls:CommandButton x:Name="GroupPrintButton"
-                                         CommandViewModel="{Binding PrintCommand}"
-                                         Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                         Style="{StaticResource ImageButton}"
-                                         Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
-                </StackPanel>
-                <ItemsControl x:Name="Items"
-                              Margin="3,0"
-                              ItemsSource="{Binding Items}" />
-            </DockPanel>
+            <ContentControl ContentTemplate="{StaticResource ExportOverlayTemplate}">
+                <DockPanel x:Name="DtoGroup"
+                           Background="{Binding Background}">
+                    <TextBlock x:Name="Title"
+                               DockPanel.Dock="Top"
+                               Margin="3,3,1,3"
+                               FontWeight="Bold"
+                               MinWidth="50"
+                               Text="{Binding Title}"
+                               Background="{Binding Background}"
+                               Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}" />
+                    <TextBlock x:Name="Description"
+                               DockPanel.Dock="Bottom"
+                               Margin="3"
+                               Text="{Binding Description}"
+                               Background="{Binding Background}"
+                               Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                               FontSize="12" />
+                    <StackPanel x:Name="Commands"
+                                Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                DockPanel.Dock="Bottom"
+                                Orientation="Horizontal"
+                                Margin="2"
+                                HorizontalAlignment="Right">
+                        <ctrls:CommandButton x:Name="GroupPrintButton"
+                                             CommandViewModel="{Binding PrintCommand}"
+                                             Style="{StaticResource ImageButton}"
+                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                        <ctrls:CommandButton x:Name="GroupExportButton"
+                                             CommandViewModel="{Binding ExportCommand}"
+                                             Visibility="{Binding IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                             Style="{StaticResource ImageButton}"
+                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                    </StackPanel>
+                    <ItemsControl x:Name="Items"
+                                  Margin="3,0"
+                                  ItemsSource="{Binding Items}" />
+                </DockPanel>
+            </ContentControl>
         </DataTemplate>
     </UserControl.Resources>
     <DockPanel>

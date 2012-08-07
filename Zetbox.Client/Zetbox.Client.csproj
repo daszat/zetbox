@@ -163,6 +163,7 @@
     </Compile>
     <Compile Include="Presentables\DocumentManagement\StaticFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DocumentViewModel.cs" />
+    <Compile Include="Presentables\DtoViewModels\DtoExporter.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoBuilder.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoBaseViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoGroupedViewModel.cs" />
