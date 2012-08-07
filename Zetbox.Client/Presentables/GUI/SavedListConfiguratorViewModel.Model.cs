@@ -42,17 +42,29 @@ namespace Zetbox.Client.Presentables.GUI
                 // Filter
                 foreach (var f in _selectedItem.Object.Filter)
                 {
-                    var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
-                    var mdl = FilterModel.FromProperty(DataContext, FrozenContext, props);
-                    int idx = 0;
-                    foreach (var val in f.Values ?? new object[] { })
+                    FilterModel mdl = null;
+                    if (f.IsUserFilter && f.Properties != null)
                     {
-                        if (idx >= mdl.FilterArguments.Count) break;
-                        var valueMdl = mdl.FilterArguments[idx].Value;
-                        valueMdl.SetUntypedValue(ResolveUntypedValue(val, valueMdl));
-                        idx++;
+                        var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
+                        mdl = FilterModel.FromProperty(DataContext, FrozenContext, props);
+                        Parent.FilterList.AddFilter(mdl, true, props);
                     }
-                    Parent.FilterList.AddFilter(mdl, true, props);
+                    else if(!f.IsUserFilter && !string.IsNullOrEmpty(f.Expression))
+                    {
+                        mdl = Parent.FilterList.Filter.FirstOrDefault(i => i.ValueSource.Expression == f.Expression) as FilterModel;
+                    }
+
+                    if (mdl != null)
+                    {
+                        int idx = 0;
+                        foreach (var val in f.Values ?? new object[] { })
+                        {
+                            if (idx >= mdl.FilterArguments.Count) break;
+                            var valueMdl = mdl.FilterArguments[idx].Value;
+                            valueMdl.SetUntypedValue(ResolveUntypedValue(val, valueMdl));
+                            idx++;
+                        }
+                    }
                 }
 
                 // Cols
@@ -101,12 +113,14 @@ namespace Zetbox.Client.Presentables.GUI
 
                 // Do the update
                 item.Filter = new List<SavedListConfig.FilterConfig>();
-                foreach (var fvm in Parent.FilterList.FilterListEntryViewModels.Where(f => f.SourceProperties != null))
+                foreach (var fvm in Parent.FilterList.FilterListEntryViewModels)
                 {
                     item.Filter.Add(new SavedListConfig.FilterConfig()
                     {
-                        Properties = fvm.SourceProperties.Select(i => i.ExportGuid).ToArray(),
-                        Values = fvm.FilterViewModel.Arguments.Select(i => ExtractUntypedValue(i.UntypedValue)).ToArray()
+                        IsUserFilter = fvm.IsUserFilter,
+                        Properties = fvm.SourceProperties != null ? fvm.SourceProperties.Select(i => i.ExportGuid).ToArray() : null,
+                        Values = fvm.FilterViewModel.Arguments.Select(i => ExtractUntypedValue(i.UntypedValue)).ToArray(),
+                        Expression = fvm.FilterViewModel.Filter.ValueSource.Expression,
                     });
                 }
 

@@ -47,6 +47,8 @@ namespace Zetbox.API.Common.GUI
         {
             public Guid[] Properties { get; set; }
             public object[] Values { get; set; }
+            public bool IsUserFilter { get; set; }
+            public string Expression { get; set; }
         }
 
         public class ColumnConfig
