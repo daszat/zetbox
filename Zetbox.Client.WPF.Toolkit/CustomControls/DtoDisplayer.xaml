@@ -22,203 +22,226 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <UserControl.Resources>
-    <DataTemplate DataType="{x:Type dto:DtoValueViewModel}">
-      <Grid x:Name="DtoValue"
-            Background="{Binding Background}" >
-        <Grid.RowDefinitions>
-          <RowDefinition/>
-          <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" SharedSizeGroup="LabelSize"/>
-          <ColumnDefinition Width="Auto" MinWidth="5" SharedSizeGroup="ValueSize"/>
-          <ColumnDefinition Width="Auto" SharedSizeGroup="AlternateRepresentationSize"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock x:Name="Title"
-                   Text="{Binding Title}"
-                   Margin="3,0,5,0"
-                   MinWidth="50"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                   FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}"/>
-        <TextBlock x:Name="Value"
-                   Grid.Column="1"
-                   Margin="3,0,3,0"
-                   Text="{Binding Value}"
-                   HorizontalAlignment="{Binding ValueAlignment, Converter={StaticResource HorizontalContentAlignmentConverter}}"
-                   VerticalAlignment="{Binding ValueAlignment, Converter={StaticResource VerticalContentAlignmentConverter}}"
-                   FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}"/>
-        <TextBlock x:Name="AlternateRepresentation"
-                   Grid.Column="2"
-                   Margin="0,0,3,0"
-                   Text="{Binding AlternateRepresentation}"
-                   HorizontalAlignment="{Binding AlternateRepresentationAlignment, Converter={StaticResource HorizontalContentAlignmentConverter}}"
-                   VerticalAlignment="{Binding AlternateRepresentationAlignment, Converter={StaticResource VerticalContentAlignmentConverter}}"
-                   Visibility="{Binding AlternateRepresentation, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                   FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}"/>
-        <TextBlock x:Name="Description"
-                   Grid.Row="1" Grid.ColumnSpan="3"
-                   Text="{Binding Description}"
-                   Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                   FontSize="12"
-                   FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}"/>
-      </Grid>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type dto:DtoColumnViewModel}">
-      <TextBlock x:Name="Title"
-                 Text="{Binding Title}"
-                 ToolTip="{Binding Description}"
-                 Background="{Binding Background}"
-                 FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}"
-                 Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}"/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type dto:DtoTabbedViewModel}" >
-      <DockPanel x:Name="DtoTabs">
-        <StackPanel x:Name="Commands"
-                    DockPanel.Dock="Bottom"
-                    Orientation="Horizontal"
-                    Margin="2"
-                    HorizontalAlignment="Right">
-          <ctrls:CommandButton x:Name="TabPrintButton"
-                               CommandViewModel="{Binding PrintCommand}"
-                               Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
-                               Style="{StaticResource ImageButton}"
-                               Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
-        </StackPanel>
-        <TextBlock x:Name="Description"
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type dto:DtoValueViewModel}">
+            <Grid x:Name="DtoValue"
+                  Background="{Binding Background}">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"
+                                      SharedSizeGroup="LabelSize" />
+                    <ColumnDefinition Width="Auto"
+                                      MinWidth="5"
+                                      SharedSizeGroup="ValueSize" />
+                    <ColumnDefinition Width="Auto"
+                                      SharedSizeGroup="AlternateRepresentationSize" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="Title"
+                           Text="{Binding Title}"
+                           Margin="3,0,5,0"
+                           MinWidth="50"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                           FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}" />
+                <TextBlock x:Name="Value"
+                           Grid.Column="1"
+                           Margin="3,0,3,0"
+                           Text="{Binding Value}"
+                           HorizontalAlignment="{Binding ValueAlignment, Converter={StaticResource HorizontalContentAlignmentConverter}}"
+                           VerticalAlignment="{Binding ValueAlignment, Converter={StaticResource VerticalContentAlignmentConverter}}"
+                           FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}" />
+                <TextBlock x:Name="AlternateRepresentation"
+                           Grid.Column="2"
+                           Margin="0,0,3,0"
+                           Text="{Binding AlternateRepresentation}"
+                           HorizontalAlignment="{Binding AlternateRepresentationAlignment, Converter={StaticResource HorizontalContentAlignmentConverter}}"
+                           VerticalAlignment="{Binding AlternateRepresentationAlignment, Converter={StaticResource VerticalContentAlignmentConverter}}"
+                           Visibility="{Binding AlternateRepresentation, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                           FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}" />
+                <TextBlock x:Name="Description"
+                           Grid.Row="1"
+                           Grid.ColumnSpan="3"
+                           Text="{Binding Description}"
+                           Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                           FontSize="12"
+                           FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type dto:DtoColumnViewModel}">
+            <TextBlock x:Name="Title"
+                       Text="{Binding Title}"
+                       ToolTip="{Binding Description}"
+                       Background="{Binding Background}"
+                       FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}"
+                       Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type dto:DtoTabbedViewModel}">
+            <DockPanel x:Name="DtoTabs">
+                <StackPanel x:Name="Commands"
+                            DockPanel.Dock="Bottom"
+                            Orientation="Horizontal"
+                            Margin="2"
+                            HorizontalAlignment="Right">
+                    <ctrls:CommandButton x:Name="TabPrintButton"
+                                         CommandViewModel="{Binding PrintCommand}"
+                                         Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                         Style="{StaticResource ImageButton}"
+                                         Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                </StackPanel>
+                <TextBlock x:Name="Description"
                            DockPanel.Dock="Bottom"
                            Margin="3"
                            Text="{Binding Description}"
                            Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
                            FontSize="12" />
-        <TabControl ItemsSource="{Binding Items}"
-                    SelectedItem="{Binding SelectedItem}"
-                    Background="{Binding Background}"
-                    IsSynchronizedWithCurrentItem="true">
-          <TabControl.ItemContainerStyle>
-            <Style>
-              <Setter Property="TabItem.Background" Value="{Binding Background}" />
-              <Setter Property="TabItem.Padding" Value="1" />
-            </Style>
-          </TabControl.ItemContainerStyle>
-          <TabControl.ItemTemplate>
-            <DataTemplate>
-              <TextBlock Margin="3,0"
-                         Text="{Binding Title}"
-                         MinWidth="50"
-                         FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}"/>
-            </DataTemplate>
-          </TabControl.ItemTemplate>
-        </TabControl>
-      </DockPanel>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type dto:DtoCellViewModel}" >
-      <ContentPresenter x:Name="DtoCell" Content="{Binding Value}" Margin="3" />
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type dto:DtoTableViewModel}" >
-      <ScrollViewer x:Name="DtoTable"
-                    Grid.IsSharedSizeScope="true"
-                    HorizontalScrollBarVisibility="Auto" 
-                    VerticalScrollBarVisibility="Auto"
-                    Background="{Binding Background}">
-        <StackPanel>
-          <TextBlock Text="{Binding Title}"
-                     FontWeight="Bold"
-                     Background="{Binding Background}"
-                     Margin="3,3,1,3" />
-          <TextBlock x:Name="Description"
-                     Padding="3"
-                     Text="{Binding Description}"
-                     Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                     Background="{Binding Background}"
-                     FontSize="12" />
-          <!-- once for the column(headers) -->
-          <ItemsControl x:Name="Headers"
-                        ItemsSource="{Binding Columns}"
-                        Background="{Binding Background}"
-                        Visibility="{Binding Columns, Converter={StaticResource EmptyCountToCollapsedConverter}}">
-            <ItemsControl.ItemContainerStyle>
-              <Style>
-                <Setter Property="Grid.Column" Value="{Binding Column}" />
-                <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
-                <Setter Property="TextBlock.Margin" Value="5,0" />
-              </Style>
-            </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemsPanel>
-              <ItemsPanelTemplate>
-                <Grid ShowGridLines="False" DataContextChanged="Grid_DataContextChanged" Initialized="Grid_Initialized" Background="{Binding Background}" />
-              </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-          </ItemsControl>
-          <!-- and once for the cells(data) -->
-          <ItemsControl x:Name="Values"
-                        ItemsSource="{Binding Cells}"
-                        Background="{Binding Background}">
-            <ItemsControl.ItemContainerStyle>
-              <Style>
-                <Setter Property="Grid.Row" Value="{Binding Location.Row}" />
-                <Setter Property="Grid.Column" Value="{Binding Location.Column}" />
-                <Setter Property="Grid.RowSpan" Value="{Binding Location.RowSpan}" />
-                <Setter Property="Grid.ColumnSpan" Value="{Binding Location.ColumnSpan}" />
-              </Style>
-            </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemsPanel>
-              <ItemsPanelTemplate>
-                <Grid ShowGridLines="False" DataContextChanged="Grid_DataContextChanged" Initialized="Grid_Initialized" Background="{Binding Background}" />
-              </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-          </ItemsControl>
-          <StackPanel x:Name="Commands"
-                      Orientation="Horizontal"
-                      Margin="2"
-                      HorizontalAlignment="Right">
-            <ctrls:CommandButton x:Name="TablePrintButton"
-                                 CommandViewModel="{Binding PrintCommand}"
-                                 Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                 Style="{StaticResource ImageButton}"
-                                 Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
-          </StackPanel>
-        </StackPanel>
-      </ScrollViewer>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type dto:DtoGroupedViewModel}" >
-      <DockPanel x:Name="DtoGroup"
-                 Background="{Binding Background}" >
-        <TextBlock x:Name="Title"
-                   DockPanel.Dock="Top"
-                   Margin="3,3,1,3"
-                   FontWeight="Bold"
-                   MinWidth="50"
-                   Text="{Binding Title}"
-                   Background="{Binding Background}"
-                   Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}"/>
-        <TextBlock x:Name="Description"
-                   DockPanel.Dock="Bottom"
-                   Margin="3"
-                   Text="{Binding Description}"
-                   Background="{Binding Background}"
-                   Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                   FontSize="12" />
-        <StackPanel x:Name="Commands"
-                    DockPanel.Dock="Bottom"
-                    Orientation="Horizontal"
-                    Margin="2"
-                    HorizontalAlignment="Right">
-          <ctrls:CommandButton x:Name="GroupPrintButton"
-                               CommandViewModel="{Binding PrintCommand}"
-                               Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
-                               Style="{StaticResource ImageButton}"
-                               Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png"/>
-        </StackPanel>
-        <ItemsControl x:Name="Items"
-                      Margin="3,0"
-                      ItemsSource="{Binding Items}" />
-      </DockPanel>
-    </DataTemplate>
-  </UserControl.Resources>
-  <DockPanel>
-    <ContentPresenter x:Name="DtoDisplayerContent" Content="{Binding}" />
-  </DockPanel>
+                <TabControl ItemsSource="{Binding Items}"
+                            SelectedItem="{Binding SelectedItem}"
+                            Background="{Binding Background}"
+                            IsSynchronizedWithCurrentItem="true">
+                    <TabControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="TabItem.Background"
+                                    Value="{Binding Background}" />
+                            <Setter Property="TabItem.Padding"
+                                    Value="1" />
+                        </Style>
+                    </TabControl.ItemContainerStyle>
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="3,0"
+                                       Text="{Binding Title}"
+                                       MinWidth="50"
+                                       FontWeight="{Binding Formatting, Converter={StaticResource FormattingToFontWeightConverter}}" />
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
+                </TabControl>
+            </DockPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type dto:DtoCellViewModel}">
+            <ContentPresenter x:Name="DtoCell"
+                              Content="{Binding Value}"
+                              Margin="3" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type dto:DtoTableViewModel}">
+            <ScrollViewer x:Name="DtoTable"
+                          Grid.IsSharedSizeScope="true"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto"
+                          Background="{Binding Background}">
+                <StackPanel>
+                    <TextBlock Text="{Binding Title}"
+                               FontWeight="Bold"
+                               Background="{Binding Background}"
+                               Margin="3,3,1,3" />
+                    <TextBlock x:Name="Description"
+                               Padding="3"
+                               Text="{Binding Description}"
+                               Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                               Background="{Binding Background}"
+                               FontSize="12" />
+                    <!-- once for the column(headers) -->
+                    <ItemsControl x:Name="Headers"
+                                  ItemsSource="{Binding Columns}"
+                                  Background="{Binding Background}"
+                                  Visibility="{Binding Columns, Converter={StaticResource EmptyCountToCollapsedConverter}}">
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Grid.Column"
+                                        Value="{Binding Column}" />
+                                <Setter Property="TextBlock.HorizontalAlignment"
+                                        Value="Center" />
+                                <Setter Property="TextBlock.Margin"
+                                        Value="5,0" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid ShowGridLines="False"
+                                      DataContextChanged="Grid_DataContextChanged"
+                                      Initialized="Grid_Initialized"
+                                      Background="{Binding Background}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <!-- and once for the cells(data) -->
+                    <ItemsControl x:Name="Values"
+                                  ItemsSource="{Binding Cells}"
+                                  Background="{Binding Background}">
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Grid.Row"
+                                        Value="{Binding Location.Row}" />
+                                <Setter Property="Grid.Column"
+                                        Value="{Binding Location.Column}" />
+                                <Setter Property="Grid.RowSpan"
+                                        Value="{Binding Location.RowSpan}" />
+                                <Setter Property="Grid.ColumnSpan"
+                                        Value="{Binding Location.ColumnSpan}" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid ShowGridLines="False"
+                                      DataContextChanged="Grid_DataContextChanged"
+                                      Initialized="Grid_Initialized"
+                                      Background="{Binding Background}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <StackPanel x:Name="Commands"
+                                Orientation="Horizontal"
+                                Margin="2"
+                                HorizontalAlignment="Right">
+                        <ctrls:CommandButton x:Name="TablePrintButton"
+                                             CommandViewModel="{Binding PrintCommand}"
+                                             Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                             Style="{StaticResource ImageButton}"
+                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type dto:DtoGroupedViewModel}">
+            <DockPanel x:Name="DtoGroup"
+                       Background="{Binding Background}">
+                <TextBlock x:Name="Title"
+                           DockPanel.Dock="Top"
+                           Margin="3,3,1,3"
+                           FontWeight="Bold"
+                           MinWidth="50"
+                           Text="{Binding Title}"
+                           Background="{Binding Background}"
+                           Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}" />
+                <TextBlock x:Name="Description"
+                           DockPanel.Dock="Bottom"
+                           Margin="3"
+                           Text="{Binding Description}"
+                           Background="{Binding Background}"
+                           Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                           FontSize="12" />
+                <StackPanel x:Name="Commands"
+                            DockPanel.Dock="Bottom"
+                            Orientation="Horizontal"
+                            Margin="2"
+                            HorizontalAlignment="Right">
+                    <ctrls:CommandButton x:Name="GroupPrintButton"
+                                         CommandViewModel="{Binding PrintCommand}"
+                                         Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                         Style="{StaticResource ImageButton}"
+                                         Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                </StackPanel>
+                <ItemsControl x:Name="Items"
+                              Margin="3,0"
+                              ItemsSource="{Binding Items}" />
+            </DockPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <DockPanel>
+        <ContentPresenter x:Name="DtoDisplayerContent"
+                          Content="{Binding}" />
+    </DockPanel>
 </UserControl>
