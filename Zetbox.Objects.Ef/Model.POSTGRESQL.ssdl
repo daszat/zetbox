@@ -1223,6 +1223,10 @@
       <End Role="Module" EntitySet="Module" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_NavEntry_have_RequestedKind" Association="Model.Store.FK_NavEntry_have_RequestedKind" >
+      <End Role="NavEntry" EntitySet="NavigationEntry" />
+      <End Role="RequestedKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_has_Module" Association="Model.Store.FK_NavigationScreen_has_Module" >
       <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="Module" EntitySet="Module" />
@@ -2468,6 +2472,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_RequestedKind" Type="int4" />
     <Property Name="fk_Module" Type="int4" />
     <Property Name="fk_ChangedBy" Type="int4" />
     <Property Name="fk_CreatedBy" Type="int4" />
@@ -5346,6 +5351,20 @@
       </Principal>
       <Dependent Role="Module">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_NavEntry_have_RequestedKind">
+    <End Role="RequestedKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <End Role="NavEntry" Type="Model.Store.NavigationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RequestedKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NavEntry">
+        <PropertyRef Name="fk_RequestedKind" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

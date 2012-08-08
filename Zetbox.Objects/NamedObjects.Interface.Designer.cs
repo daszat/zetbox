@@ -2410,6 +2410,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("0d3e3599-3cf7-4025-8848-597194c3dc2f"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> RequestedKind
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9355f2c4-5b4f-47cc-b767-161548d79478"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Title
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("3d5d6b12-ab8a-4bda-8487-6f987cee1fae"); }
@@ -3933,6 +3937,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_NavigationSearchScreen
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("37578c9c-5c1a-4443-acc0-d809a4866c6f"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_NavigationTabbedScreen
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("2b8eb3dc-46d8-4036-8434-0474555ec012"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_Navigator
                 {

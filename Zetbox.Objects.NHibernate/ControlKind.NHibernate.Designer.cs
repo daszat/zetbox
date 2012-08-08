@@ -755,6 +755,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
             // should fetch && remember parent for DataType_may_request_ControlKind_RelationEntry
             // should fetch && remember parent for FilterConfiguration_has_ControlKind_RelationEntry
+            // should fetch && remember parent for NavigationEntry_have_ControlKind_RelationEntry
             // should fetch && remember parent for ViewModelDescriptor_has_ControlKind_RelationEntry
             // should fetch && remember parent for Property_may_request_ControlKind_RelationEntry
             // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry

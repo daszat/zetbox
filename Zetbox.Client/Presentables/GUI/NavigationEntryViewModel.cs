@@ -73,6 +73,7 @@ namespace Zetbox.Client.Presentables.GUI
 
             _screen = screen;
             _screen.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_screen_PropertyChanged);
+            RequestedKind = _screen.RequestedKind;
         }
 
         void _screen_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

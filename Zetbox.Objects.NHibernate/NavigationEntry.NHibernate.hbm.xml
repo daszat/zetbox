@@ -62,6 +62,9 @@
         <many-to-one name="Parent" column="`fk_Parent`" class="Zetbox.App.GUI.NavigationEntryNHibernateImpl+NavigationEntryProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="Children_pos" column="`fk_Parent_pos`" />
 
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="RequestedKind" column="`fk_RequestedKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
+
         <!-- ValueTypeProperty isValue -->
         <property name="Title" 
                   column="`Title`" 

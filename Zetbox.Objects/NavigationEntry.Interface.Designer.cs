@@ -47,6 +47,15 @@ namespace Zetbox.App.GUI
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("9355f2c4-5b4f-47cc-b767-161548d79478")]
+        Zetbox.App.GUI.ControlKind RequestedKind {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The title of this screen
         /// </summary>
         [Zetbox.API.DefinitionGuid("3d5d6b12-ab8a-4bda-8487-6f987cee1fae")]
