@@ -25,7 +25,7 @@
 
   <ctrls:LabeledContainer Label="{Binding Label}"
                        Required="{Binding Required}">
-    <UniformGrid Columns="3">
+    <UniformGrid Columns="4">
       <ComboBox DisplayMemberPath="Name"
                 IsSynchronizedWithCurrentItem="False"
                 ItemsSource="{Binding Years}"
