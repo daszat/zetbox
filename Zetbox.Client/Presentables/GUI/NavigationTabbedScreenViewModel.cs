@@ -27,7 +27,7 @@ namespace Zetbox.Client.Presentables.GUI
     using Zetbox.Client.Presentables.DtoViewModels;
 
     [ViewModelDescriptor]
-    public abstract class NavigationTabbedScreenViewModel : NavigationScreenViewModel
+    public class NavigationTabbedScreenViewModel : NavigationScreenViewModel
     {
         public new delegate NavigationTabbedScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
@@ -36,6 +36,22 @@ namespace Zetbox.Client.Presentables.GUI
             IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
             : base(appCtx, dataCtx, parent, screen)
         {
+        }
+
+        public IEnumerable<NavigationEntryViewModel> Tabs
+        {
+            get
+            {
+                return base.Children.Where(i => i.IsScreen);
+            }
+        }
+
+        public IEnumerable<NavigationEntryViewModel> ActionEntries
+        {
+            get
+            {
+                return base.Children.Where(i => !i.IsScreen);
+            }
         }
     }
 }

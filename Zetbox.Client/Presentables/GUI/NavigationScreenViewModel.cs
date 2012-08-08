@@ -40,6 +40,11 @@ namespace Zetbox.Client.Presentables.GUI
 
         public new NavigationScreen Screen { get { return (NavigationSearchScreen)base.Screen; } }
 
+        public override bool IsScreen
+        {
+            get { return true; }
+        }
+
         private ICommandViewModel _ExecuteCommand = null;
         public override ICommandViewModel ExecuteCommand
         {

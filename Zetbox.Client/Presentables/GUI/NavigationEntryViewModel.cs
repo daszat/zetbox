@@ -227,7 +227,13 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-
+        /// <summary>
+        /// Indicates that a Nav-Entry can be displayed. A Search screen would return true, a Action would return false
+        /// </summary>
+        public abstract bool IsScreen
+        {
+            get;
+        }
 
         #region ReportProblemCommand
         private ICommandViewModel _ReportProblemCommand = null;

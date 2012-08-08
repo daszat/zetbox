@@ -10,26 +10,58 @@
             Background="{StaticResource MainColor}"
             HorizontalAlignment="Stretch">
         <DockPanel>
-            <ItemsControl DockPanel.Dock="Bottom"
-                          ItemsSource="{Binding AdditionalCommands}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="6"
-                                     IsItemsHost="True" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Command="{Binding Converter={StaticResource CommandConverter}}">
-                            <Button.Content>
-                                <TextBlock TextWrapping="WrapWithOverflow"
-                                           Text="{Binding Name}" />
-                            </Button.Content>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TabControl ItemsSource="{Binding Children}"
+            <StackPanel DockPanel.Dock="Right"
+                        Margin="20,0,0,0">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Width"
+                                Value="140" />
+                        <Setter Property="Height"
+                                Value="90" />
+                        <Setter Property="Margin"
+                                Value="5" />
+                    </Style>
+                </StackPanel.Resources>
+                <ItemsControl ItemsSource="{Binding ActionEntries}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="1"
+                                         IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding ExecuteCommand, Converter={StaticResource CommandConverter}}"
+                                    CommandParameter="{Binding}">
+                                <Button.Content>
+                                    <TextBlock TextWrapping="WrapWithOverflow"
+                                               Text="{Binding Name}" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ItemsControl ItemsSource="{Binding AdditionalCommands}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="1"
+                                         IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding Converter={StaticResource CommandConverter}}">
+                                <Button.Content>
+                                    <TextBlock TextWrapping="WrapWithOverflow"
+                                               Text="{Binding Name}" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            <TabControl ItemsSource="{Binding Tabs}"
                         SelectedIndex="0">
                 <TabControl.ContentTemplate>
                     <DataTemplate>
