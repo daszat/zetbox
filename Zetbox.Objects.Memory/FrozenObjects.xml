@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-08T11:34:48Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-08T13:31:01Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -13264,6 +13264,13 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <ZetboxBase:FullName>Zetbox.Client.Presentables.DtoViewModels.DtoColumnViewModel</ZetboxBase:FullName>
     <ZetboxBase:Parent>8bcc2871-4d0d-4156-a37d-740d53fd9062</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="b12d117a-e105-4716-b268-d704424d7ee6">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2012-08-08T11:31:01.157926Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-08-08T11:31:01.157926Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.DtoViewModels.DtoExporter</ZetboxBase:FullName>
+    <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="4e26a693-079a-4d93-9034-f45b43b74f0e">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2011-10-22T08:32:49.180246Z</ZetboxBase:ChangedOn>
@@ -13581,6 +13588,20 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <ZetboxBase:ChangedOn>2011-10-19T04:20:31.157956Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-10-19T04:20:31.157956Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.GUI.NavigationSearchScreenViewModel+Factory</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="ff3f1090-8049-44d9-b66c-820e3612e1f9">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2012-08-08T11:31:01.157926Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-08-08T11:31:01.157926Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.GUI.NavigationTabbedScreenViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>353304f7-dc53-472a-a800-c9fa64977418</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="ad8af165-5a82-41f6-acd7-55c91c428cdf">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2012-08-08T11:31:01.157926Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-08-08T11:31:01.157926Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.GUI.NavigationTabbedScreenViewModel+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="590f3521-6c03-41d8-835c-ade44a34fdc6">
@@ -18908,6 +18929,12 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelRef>e21ccd03-a53d-436b-90fe-4abc2d8551ac</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="ebc13c2a-0375-46e6-9fc2-a4ee5afc3568">
+    <GUI:DefaultEditorKind>2b8eb3dc-46d8-4036-8434-0474555ec012</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for Tabbed Navigation Screens</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelRef>ff3f1090-8049-44d9-b66c-820e3612e1f9</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="94be5252-6aeb-4a0d-b6eb-6f7ae07728e8">
     <GUI:DefaultEditorKind>90fe1019-7eea-4a90-8c3b-28fa317c9b65</GUI:DefaultEditorKind>
     <GUI:Description>Container for navigating between NavigationScreens. Displays the current position in the screen hierarchy and allows forward/backward stepping in the history.</GUI:Description>
@@ -23102,11 +23129,11 @@ public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System
     <GUI:ViewMethod>2</GUI:ViewMethod>
   </GUI:NavigationSearchScreen>
   <GUI:NavigationScreen ExportGuid="8bc286d2-899a-4348-9c5a-3d4e90f3ff6d">
-    <GUI:ChangedOn>2012-08-08T09:46:07.450036Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2012-08-08T11:31:29.19753Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-10-19T09:06:01.084313Z</GUI:CreatedOn>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:RequestedKind>2b8eb3dc-46d8-4036-8434-0474555ec012</GUI:RequestedKind>
     <GUI:Title>Root</GUI:Title>
+    <GUI:ViewModelDescriptor>ebc13c2a-0375-46e6-9fc2-a4ee5afc3568</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
   <GUI:NavigationScreen ExportGuid="ddaaaa2a-0f6d-42f6-9643-0ad7f111b76a">
     <GUI:ChangedOn>2012-05-16T08:33:24.059969Z</GUI:ChangedOn>

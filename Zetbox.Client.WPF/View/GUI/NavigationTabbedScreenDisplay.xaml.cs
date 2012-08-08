@@ -38,7 +38,7 @@ namespace Zetbox.Client.WPF.View.GUI
     /// Interaction logic for NavigationTabbedScreenDisplay.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class NavigationTabbedScreenDisplay : UserControl, IHasViewModel<NavigationEntryViewModel>
+    public partial class NavigationTabbedScreenDisplay : UserControl, IHasViewModel<NavigationTabbedScreenViewModel>
     {
         public NavigationTabbedScreenDisplay()
         {
@@ -46,11 +46,11 @@ namespace Zetbox.Client.WPF.View.GUI
             InitializeComponent();
         }
 
-        #region IHasViewModel<NavigationScreenViewModel> Members
+        #region IHasViewModel<NavigationTabbedScreenViewModel> Members
 
-        public NavigationEntryViewModel ViewModel
+        public NavigationTabbedScreenViewModel ViewModel
         {
-            get { return (NavigationEntryViewModel)DataContext; }
+            get { return (NavigationTabbedScreenViewModel)DataContext; }
         }
 
         #endregion
