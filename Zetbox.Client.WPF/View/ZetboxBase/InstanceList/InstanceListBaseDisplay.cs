@@ -37,6 +37,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.Presentables.ZetboxBase;
     using Zetbox.Client.WPF.Toolkit;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.Presentables.GUI;
 
     public abstract class InstanceListBaseDisplay : InstanceCollectionBase
     {
@@ -59,9 +60,24 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
                 ViewModel.DisplayedColumns.Columns.CollectionChanged += (s, ncc) => ApplyColumns();
                 ApplyViewMethod();
                 this.ApplyIsBusyBehaviour(ViewModel);
+                ViewModel.SavedListConfigurations.GetColumnInformation += new SavedListConfiguratorViewModel.GetColumnInformationEventHandler(SavedListConfigurations_GetColumnInformation);
             }
         }
 
+        List<SavedListConfiguratorViewModel.ColumnInformation> SavedListConfigurations_GetColumnInformation()
+        {
+            var grid = ListView.View as GridView;
+            if (grid != null)
+            {
+                return grid.Columns
+                    .Select(i => new SavedListConfiguratorViewModel.ColumnInformation() { Path = WPFHelper.GetGridColMemberSourcePath(i), Width = (int)i.ActualWidth }).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+        
         private void ApplyColumns()
         {
             WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);

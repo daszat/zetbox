@@ -91,6 +91,7 @@ namespace Zetbox.Client.Presentables.GUI
                                 continue;
                         }
                         colMdl.Header = col.Header;
+                        colMdl.RequestedWidthAbsolute = col.Width != 0 ? (int?)col.Width : null;
                         if(col.ControlKind!= null)
                             colMdl.ControlKind = FrozenContext.FindPersistenceObject<ControlKind>(col.ControlKind.Value);
                         if (col.GridPreEditKind != null)
@@ -125,19 +126,25 @@ namespace Zetbox.Client.Presentables.GUI
                 }
 
                 item.Columns = new List<SavedListConfig.ColumnConfig>();
-                foreach (var col in Parent.DisplayedColumns.Columns)
+                var colsDict = Parent.DisplayedColumns.Columns.ToDictionary(k => k.Path);
+                foreach (var colInfo in OnGetColumnInformation())
                 {
-                    item.Columns.Add(new SavedListConfig.ColumnConfig()
+                    if (string.IsNullOrEmpty(colInfo.Path)) continue;
+                    ColumnDisplayModel col;
+                    if (colsDict.TryGetValue(colInfo.Path, out col))
                     {
-                        Type = (int)col.Type,
-                        Header = col.Header,
-                        Properties = col.Properties != null && col.Properties.Length > 0 ? col.Properties.Select(i => i.ExportGuid).ToArray() : null,
-                        Method = col.Method != null ? col.Method.ExportGuid : (Guid?)null,
-                        Path = col.Path,
-                        ControlKind = col.ControlKind != null ? col.ControlKind.ExportGuid : (Guid?)null,
-                        GridPreEditKind = col.ControlKind != null ? col.GridPreEditKind.ExportGuid : (Guid?)null,
-                        Width = 0
-                    });
+                        item.Columns.Add(new SavedListConfig.ColumnConfig()
+                        {
+                            Type = (int)col.Type,
+                            Header = col.Header,
+                            Properties = col.Properties != null && col.Properties.Length > 0 ? col.Properties.Select(i => i.ExportGuid).ToArray() : null,
+                            Method = col.Method != null ? col.Method.ExportGuid : (Guid?)null,
+                            Path = col.Path,
+                            ControlKind = col.ControlKind != null ? col.ControlKind.ExportGuid : (Guid?)null,
+                            GridPreEditKind = col.ControlKind != null ? col.GridPreEditKind.ExportGuid : (Guid?)null,
+                            Width = colInfo.Width
+                        });
+                    }
                 }
 
                 config.Configuration = obj.ToXmlString();

@@ -107,6 +107,22 @@ namespace Zetbox.Client.WPF.Toolkit
             }
         }
 
+
+
+        public static string GetGridColMemberSourcePath(DependencyObject obj)
+        {
+            return (string)obj.GetValue(GridColMemberSourcePathProperty);
+        }
+
+        public static void SetGridColMemberSourcePath(DependencyObject obj, string value)
+        {
+            obj.SetValue(GridColMemberSourcePathProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for GridColMemberSourcePath.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty GridColMemberSourcePathProperty =
+            DependencyProperty.RegisterAttached("GridColMemberSourcePath", typeof(string), typeof(WPFHelper));
+
         public static void RefreshGridView(DataGrid lst, GridDisplayConfiguration cfg, DependencyProperty sortProperty)
         {
             lst.Columns.Clear();
@@ -136,6 +152,8 @@ namespace Zetbox.Client.WPF.Toolkit
                 var col = new DataGridTemplateColumn() { Header = desc.Header };
                 if (desc.RequestedWidthAbsolute != null) col.Width = desc.RequestedWidthAbsolute.Value;
                 else if (desc.RequestedWidth != App.GUI.WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
+
+                SetGridColMemberSourcePath(col, desc.Path);
 
                 var needEditor = desc.ControlKind != desc.GridPreEditKind;
 
@@ -215,6 +233,8 @@ namespace Zetbox.Client.WPF.Toolkit
                 var col = new GridViewColumn() { Header = desc.Header };
                 if (desc.RequestedWidthAbsolute != null) col.Width = desc.RequestedWidthAbsolute.Value;
                 else if (desc.RequestedWidth != WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
+
+                SetGridColMemberSourcePath(col, desc.Path);
 
                 DataTemplate result = new DataTemplate();
                 var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));

@@ -40,6 +40,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.WPF.CustomControls;
     using Microsoft.Windows.Controls.Primitives;
+    using Zetbox.Client.Presentables.GUI;
 
     public abstract class InstanceGridBaseDisplay : InstanceCollectionBase
     {
@@ -62,7 +63,15 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
                 ApplyColumns();
                 SortHelper.ApplyInitialSortTemplates(DataGrid.Columns.FirstOrDefault(i => WpfSortHelper.GetSortPropertyName(i) == ViewModel.SortProperty));
                 this.ApplyIsBusyBehaviour(ViewModel);
+                ViewModel.SavedListConfigurations.GetColumnInformation += new SavedListConfiguratorViewModel.GetColumnInformationEventHandler(SavedListConfigurations_GetColumnInformation);
             }
+        }
+
+        List<SavedListConfiguratorViewModel.ColumnInformation> SavedListConfigurations_GetColumnInformation()
+        {
+            return DataGrid.Columns
+                .OrderBy(i => i.DisplayIndex)
+                .Select(i => new SavedListConfiguratorViewModel.ColumnInformation() { Path = WPFHelper.GetGridColMemberSourcePath(i), Width = (int)i.ActualWidth}).ToList();
         }
 
         private void ApplyColumns()

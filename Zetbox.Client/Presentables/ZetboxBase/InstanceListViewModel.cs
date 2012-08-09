@@ -1661,6 +1661,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
         #endregion
 
+        #region SavedListConfigurations
         private SavedListConfiguratorViewModel _savedListConfigurations;
         public SavedListConfiguratorViewModel SavedListConfigurations
         {
@@ -1684,5 +1685,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     break;
             }
         }
+        #endregion
     }
 }

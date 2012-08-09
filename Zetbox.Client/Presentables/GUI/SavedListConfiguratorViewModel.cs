@@ -112,6 +112,26 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
+        public class ColumnInformation
+        {
+            public string Path { get; set; }
+            public int Width { get; set; }
+        }
+
+        public delegate List<ColumnInformation> GetColumnInformationEventHandler();
+        public event GetColumnInformationEventHandler GetColumnInformation;
+
+        protected List<ColumnInformation> OnGetColumnInformation()
+        {
+            List<ColumnInformation> result = null;
+            var temp = GetColumnInformation;
+            if (temp != null)
+            {
+                result = temp();
+            }
+            return result ?? Parent.DisplayedColumns.Columns.Select(i => new ColumnInformation() { Path = i.Path, Width = 0 }).ToList();
+        }
+
         #region Commands
         private ICommandViewModel _SaveCommand = null;
         public ICommandViewModel SaveCommand
