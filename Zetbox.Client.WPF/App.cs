@@ -60,7 +60,7 @@ namespace Zetbox.Client.WPF
         public App()
         {
             this.ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
-            //this.DispatcherUnhandledException += Application_DispatcherUnhandledException;
+            this.DispatcherUnhandledException += Application_DispatcherUnhandledException;
         }
 
         private static ServerDomainManager serverDomain;

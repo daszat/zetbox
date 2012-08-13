@@ -29,12 +29,12 @@
         <!-- Force all grid cells to stretch -->
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment"
-              Value="Stretch" />
+                    Value="Stretch" />
         </Style>
     </local:InstanceListBaseDisplay.Resources>
     <local:InstanceListBaseDisplay.CommandBindings>
         <CommandBinding Command="NavigationCommands.Refresh"
-                    Executed="RefreshCommand_Executed" />
+                        Executed="RefreshCommand_Executed" />
     </local:InstanceListBaseDisplay.CommandBindings>
     <Grid x:Name="ctrlInstanceList">
         <Grid.ColumnDefinitions>
@@ -45,38 +45,42 @@
 
         <DockPanel Grid.Column="0">
             <ContentPresenter DockPanel.Dock="Top"
-                  Content="{Binding FilterList}"
-                  Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
-                  Focusable="False"
-                  Margin="0 0 0 5"/>
-            <local:InstanceListToolBar DockPanel.Dock="Top"
-                                       Margin="0 0 0 5"/>
-            <local:InstanceListHeader DockPanel.Dock="Top"
-                                      Margin="0 0 0 5"/>
-            <ctrls:ZetboxListView x:Name="lst"
-                          Margin="10"
-                          BorderThickness="0"
-                          ItemsSource="{Binding Instances}"
-                          ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
-                          ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                          SelectedZetboxItems="{Binding SelectedItems}"
-                          SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
-                          KeyboardNavigation.TabNavigation="Continue"
-                          MouseDoubleClick="ItemActivatedHandler"
-                          GridViewColumnHeader.Click="ListView_HeaderClick">
-            </ctrls:ZetboxListView>
+                              Content="{Binding FilterList}"
+                              Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                              Focusable="False"
+                              Margin="0 0 0 5" />
+            <Border Style="{StaticResource ItemGroup1BorderStyle}"
+                    Margin="{StaticResource ItemGroup1Margin}">
+                <DockPanel>
+                    <local:InstanceListToolBar DockPanel.Dock="Top"
+                                               Margin="0 0 0 5" />
+                    <local:InstanceListHeader DockPanel.Dock="Top"
+                                              Margin="0 0 0 5" />
+                    <ctrls:ZetboxListView x:Name="lst"
+                                          Margin="10"
+                                          BorderThickness="0"
+                                          ItemsSource="{Binding Instances}"
+                                          ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
+                                          ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                                          SelectedZetboxItems="{Binding SelectedItems}"
+                                          SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
+                                          KeyboardNavigation.TabNavigation="Continue"
+                                          MouseDoubleClick="ItemActivatedHandler"
+                                          GridViewColumnHeader.Click="ListView_HeaderClick" />
+                </DockPanel>
+            </Border>
 
         </DockPanel>
 
         <GridSplitter Grid.Column="1"
-                  HorizontalAlignment="Stretch" />
+                      HorizontalAlignment="Stretch" />
 
         <ContentPresenter Grid.Column="2"
-                      Margin="10"
-                      Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
-                      Content="{Binding SelectedDetailItem}"
-                      tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
-                      ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                          Margin="10"
+                          Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Content="{Binding SelectedDetailItem}"
+                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
     </Grid>
 </local:InstanceListBaseDisplay>

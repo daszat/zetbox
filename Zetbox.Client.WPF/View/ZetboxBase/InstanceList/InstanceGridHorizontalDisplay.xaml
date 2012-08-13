@@ -29,11 +29,11 @@
     <local:InstanceGridBaseDisplay.Resources>
         <!-- implement workaround for DeferRefresh exception as described on http://stackoverflow.com/questions/3461714/wpf-datagrid-combobox-causes-invalidoperationexception -->
         <CollectionViewSource x:Key="itemsSource"
-                          Source="{Binding ProxyInstances}"/>
+                              Source="{Binding ProxyInstances}" />
     </local:InstanceGridBaseDisplay.Resources>
     <local:InstanceGridBaseDisplay.CommandBindings>
         <CommandBinding Command="NavigationCommands.Refresh"
-                    Executed="RefreshCommand_Executed" />
+                        Executed="RefreshCommand_Executed" />
     </local:InstanceGridBaseDisplay.CommandBindings>
     <Grid x:Name="ctrlInstanceList">
         <Grid.ColumnDefinitions>
@@ -44,38 +44,43 @@
 
         <DockPanel Grid.Column="0">
             <ContentPresenter DockPanel.Dock="Top"
-                  Content="{Binding FilterList}"
-                  Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
-                  Focusable="False"
-                  Margin="0 0 0 5"/>
-            <local:InstanceListToolBar DockPanel.Dock="Top" 
-                                       Margin="0 0 0 5"/>
-            <local:InstanceListHeader DockPanel.Dock="Top"
-                                      Margin="0 0 0 5"/>
-            <ctrls:ZetboxDataGrid x:Name="lst"
-                          Margin="10"
-                          BorderThickness="0"
-                          ItemsSource="{Binding Source={StaticResource itemsSource}}"
-                          CanUserAddRows="{Binding AllowAddNew}"
-                          CanUserDeleteRows="{Binding AllowDelete}"
-                          AutoGenerateColumns="False"
-                          SelectedZetboxItems="{Binding SelectedProxies}"
-                          SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
-                          MouseDoubleClick="ItemActivatedHandler"
-                          GridViewColumnHeader.Click="ListView_HeaderClick">
-            </ctrls:ZetboxDataGrid>
+                              Content="{Binding FilterList}"
+                              Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                              Focusable="False"
+                              Margin="0 0 0 5" />
+            <Border Style="{StaticResource ItemGroup1BorderStyle}"
+                    Margin="{StaticResource ItemGroup1Margin}">
+                <DockPanel>
+                    <local:InstanceListToolBar DockPanel.Dock="Top"
+                                               Margin="0 0 0 5" />
+                    <local:InstanceListHeader DockPanel.Dock="Top"
+                                              Margin="0 0 0 5" />
+                    <ctrls:ZetboxDataGrid x:Name="lst"
+                                          Margin="10"
+                                          BorderThickness="0"
+                                          ItemsSource="{Binding Source={StaticResource itemsSource}}"
+                                          CanUserAddRows="{Binding AllowAddNew}"
+                                          CanUserDeleteRows="{Binding AllowDelete}"
+                                          AutoGenerateColumns="False"
+                                          SelectedZetboxItems="{Binding SelectedProxies}"
+                                          SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
+                                          MouseDoubleClick="ItemActivatedHandler"
+                                          GridViewColumnHeader.Click="ListView_HeaderClick">
+                    </ctrls:ZetboxDataGrid>
+                </DockPanel>
+            </Border>
 
         </DockPanel>
 
         <GridSplitter Grid.Column="1"
-                  HorizontalAlignment="Stretch" />
+                      HorizontalAlignment="Stretch" />
 
         <ContentPresenter Grid.Column="2"
-                      Margin="10"
-                      Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
-                      Content="{Binding SelectedDetailItem}"
-                      tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
-                      ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                          Margin="10"
+                          Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Content="{Binding SelectedDetailItem}"
+                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
     </Grid>
 </local:InstanceGridBaseDisplay>

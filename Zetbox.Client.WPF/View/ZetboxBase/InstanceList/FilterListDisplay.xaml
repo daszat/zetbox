@@ -1,12 +1,8 @@
 ﻿<UserControl x:Class="Zetbox.Client.WPF.View.ZetboxBase.FilterListDisplay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
-             xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit">
     <!--
     This file is part of zetbox.
 
@@ -24,8 +20,11 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <Expander Header="{Binding Name}" IsExpanded="True">
-        <ItemsControl ItemsSource="{Binding FilterListEntryViewModels}" Focusable="False"
+    <Expander Style="{StaticResource Item1Expander}"
+              Header="{Binding Name}"
+              IsExpanded="True">
+        <ItemsControl ItemsSource="{Binding FilterListEntryViewModels}"
+                      Focusable="False"
                       Grid.IsSharedSizeScope="True">
             <ItemsControl.InputBindings>
                 <KeyBinding Key="Return"
@@ -34,7 +33,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <ContentPresenter Content="{Binding}"
-                            ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                                      ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

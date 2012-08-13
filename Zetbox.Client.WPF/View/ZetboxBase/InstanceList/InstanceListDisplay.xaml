@@ -36,32 +36,37 @@
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
                           Focusable="False"
                           Margin="0 0 0 5" />
-        <local:InstanceListToolBar DockPanel.Dock="Top"
-                                   Margin="0 0 0 5" />
-        <GroupBox DockPanel.Dock="Top"
-                  Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
-                  Header="Details"
-                  Margin="0 0 0 5"
-                  Height="{Binding RequestedDetailHeight, Converter={StaticResource WidthHintConverter}}">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ContentPresenter Content="{Binding SelectedDetailItem}"
-                                  tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
-                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-            </ScrollViewer>
-        </GroupBox>
+        <Border Style="{StaticResource ItemGroup1BorderStyle}"
+                Margin="{StaticResource ItemGroup1Margin}">
+            <DockPanel>
+                <local:InstanceListToolBar DockPanel.Dock="Top"
+                                           Margin="0 0 0 5" />
+                <GroupBox DockPanel.Dock="Top"
+                          Style="{StaticResource ItemGroup1GroupBox}"
+                          Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Header="Details"
+                          Margin="0 0 0 5"
+                          Height="{Binding RequestedDetailHeight, Converter={StaticResource WidthHintConverter}}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ContentPresenter Content="{Binding SelectedDetailItem}"
+                                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                    </ScrollViewer>
+                </GroupBox>
 
-        <local:InstanceListHeader DockPanel.Dock="Top"
-                                  Margin="0 0 0 5" />
-        <ctrls:ZetboxListView x:Name="lst"
-                              BorderThickness="0"
-                              ItemsSource="{Binding Instances}"
-                              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                              ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
-                              SelectedZetboxItems="{Binding SelectedItems}"
-                              SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
-                              KeyboardNavigation.TabNavigation="Continue"
-                              MouseDoubleClick="ItemActivatedHandler"
-                              GridViewColumnHeader.Click="ListView_HeaderClick">
-        </ctrls:ZetboxListView>
+                <local:InstanceListHeader DockPanel.Dock="Top"
+                                          Margin="0 0 0 5" />
+                <ctrls:ZetboxListView x:Name="lst"
+                                      BorderThickness="0"
+                                      ItemsSource="{Binding Instances}"
+                                      ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                                      ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
+                                      SelectedZetboxItems="{Binding SelectedItems}"
+                                      SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
+                                      KeyboardNavigation.TabNavigation="Continue"
+                                      MouseDoubleClick="ItemActivatedHandler"
+                                      GridViewColumnHeader.Click="ListView_HeaderClick" />
+            </DockPanel>
+        </Border>
     </DockPanel>
 </local:InstanceListBaseDisplay>

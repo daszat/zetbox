@@ -22,45 +22,48 @@
     -->
 
     <DockPanel>
-        <ctrls:WorkaroundToolBar Visibility="{Binding ShowUtilities, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                 DockPanel.Dock="Right">
-            <ctrls:CommandButton CommandViewModel="{Binding FilterList.AddFilterCommand}"
-                                 Visibility="{Binding AllowUserFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                 HorizontalAlignment="Right"
-                                 Style="{StaticResource ImageOnlyToolbarButton}" />
-            <ctrls:CommandButton CommandViewModel="{Binding SelectColumnsCommand}"
-                                 Visibility="{Binding AllowSelectColumns, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                 Style="{StaticResource ImageOnlyToolbarButton}" />
-        </ctrls:WorkaroundToolBar>
-        <ctrls:WorkaroundToolBar ItemsSource="{Binding Commands}"
-                                 Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <ctrls:WorkaroundToolBar.Resources>
-                <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
-                    <ctrls:CommandButton CommandViewModel="{Binding}"
-                                         CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type ctrls:WorkaroundToolBar}}}"
-                                         Style="{StaticResource ImageToolbarButton}" />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
-                    <Menu>
-                        <Menu.Resources>
-                            <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
-                                <TextBlock Text="{Binding}" />
-                            </DataTemplate>
-                        </Menu.Resources>
-                        <MenuItem ItemsSource="{Binding Commands}"
-                                  Header="{Binding Name}"
-                                  ItemContainerStyle="{StaticResource CommandMenuItem}">
-                        </MenuItem>
-                    </Menu>
-                </DataTemplate>
-                <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
-                <Style TargetType="Menu">
-                    <Setter Property="Margin"
-                            Value="0,2,0,0" />
-                    <Setter Property="Background"
-                            Value="#00000000" />
-                </Style>
-            </ctrls:WorkaroundToolBar.Resources>
-        </ctrls:WorkaroundToolBar>
+        <ToolBarTray DockPanel.Dock="Right">
+            <ctrls:WorkaroundToolBar Visibility="{Binding ShowUtilities, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ctrls:CommandButton CommandViewModel="{Binding FilterList.AddFilterCommand}"
+                                     Visibility="{Binding AllowUserFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     HorizontalAlignment="Right"
+                                     Style="{StaticResource ImageOnlyToolbarButton}" />
+                <ctrls:CommandButton CommandViewModel="{Binding SelectColumnsCommand}"
+                                     Visibility="{Binding AllowSelectColumns, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     Style="{StaticResource ImageOnlyToolbarButton}" />
+            </ctrls:WorkaroundToolBar>
+        </ToolBarTray>
+        <ToolBarTray>
+            <ctrls:WorkaroundToolBar ItemsSource="{Binding Commands}"
+                                     Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ctrls:WorkaroundToolBar.Resources>
+                    <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
+                        <ctrls:CommandButton CommandViewModel="{Binding}"
+                                             CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type ctrls:WorkaroundToolBar}}}"
+                                             Style="{StaticResource ImageToolbarButton}" />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
+                        <Menu>
+                            <Menu.Resources>
+                                <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
+                                    <TextBlock Text="{Binding}" />
+                                </DataTemplate>
+                            </Menu.Resources>
+                            <MenuItem ItemsSource="{Binding Commands}"
+                                      Header="{Binding Name}"
+                                      ItemContainerStyle="{StaticResource CommandMenuItem}">
+                            </MenuItem>
+                        </Menu>
+                    </DataTemplate>
+                    <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
+                    <Style TargetType="Menu">
+                        <Setter Property="Margin"
+                                Value="0,2,0,0" />
+                        <Setter Property="Background"
+                                Value="#00000000" />
+                    </Style>
+                </ctrls:WorkaroundToolBar.Resources>
+            </ctrls:WorkaroundToolBar>
+        </ToolBarTray>
     </DockPanel>
 </UserControl>

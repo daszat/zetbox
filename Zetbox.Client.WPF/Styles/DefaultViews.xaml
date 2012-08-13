@@ -382,7 +382,7 @@
                         <TextBox x:Name="PART_EditableTextBox"
                                  Grid.Column="0"
                                  HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Center"
+                                 VerticalAlignment="Stretch"
                                  Focusable="True"
                                  Background="Transparent"
                                  Visibility="Hidden"
