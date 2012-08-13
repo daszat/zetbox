@@ -75,6 +75,18 @@ namespace Zetbox.Client.Presentables.GUI
             _screen.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_screen_PropertyChanged);
         }
 
+        public override ControlKind RequestedKind
+        {
+            get
+            {
+                return _screen.RequestedKind ?? base.RequestedKind;
+            }
+            set
+            {
+                base.RequestedKind = value;
+            }
+        }
+
         void _screen_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -215,7 +227,13 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-
+        /// <summary>
+        /// Indicates that a Nav-Entry can be displayed. A Search screen would return true, a Action would return false
+        /// </summary>
+        public abstract bool IsScreen
+        {
+            get;
+        }
 
         #region ReportProblemCommand
         private ICommandViewModel _ReportProblemCommand = null;

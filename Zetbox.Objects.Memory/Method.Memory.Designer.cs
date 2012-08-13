@@ -1253,6 +1253,70 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_Method")]
+        public virtual string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_Method != null)
+            {
+                OnGetName_Method(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Method.GetName");
+            }
+            return e.Result;
+        }
+        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetName_Handler<Method> OnGetName_Method;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Method> OnGetName_Method_CanExec;
+
+        [EventBasedMethod("OnGetName_Method_CanExec")]
+        public virtual bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_Method_CanExec != null)
+				{
+					OnGetName_Method_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Method> OnGetName_Method_CanExecReason;
+
+        [EventBasedMethod("OnGetName_Method_CanExecReason")]
+        public virtual string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_Method_CanExecReason != null)
+				{
+					OnGetName_Method_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Returns the Return Parameter Meta Object of this Method Meta Object.
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

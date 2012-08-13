@@ -128,7 +128,7 @@ namespace Zetbox.Client.Presentables.DtoViewModels
                         DataContext, this,
                         "Drucken", "Drucken",
                         Print,
-                        () => this.IsPrintableRoot,
+                        null,
                         null);
 
                 }
@@ -140,6 +140,37 @@ namespace Zetbox.Client.Presentables.DtoViewModels
         {
             var printer = new DtoPrinter(_fileOpener, _tmpService);
             printer.PrintAsList(this);
+        }
+
+        private ICommandViewModel _ExportCommand = null;
+        public ICommandViewModel ExportCommand
+        {
+            get
+            {
+                if (_ExportCommand == null)
+                {
+                    _ExportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                        "Export", "Export als Excel", 
+                        Export,
+                        () => IsExportable, 
+                        null);
+                }
+                return _ExportCommand;
+            }
+        }
+
+        public virtual bool IsExportable
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public virtual void Export()
+        {
+            var printer = new DtoExporter(_fileOpener, _tmpService);
+            printer.Export(this);
         }
 
         private bool _isPrintableRoot;

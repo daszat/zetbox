@@ -28,9 +28,11 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"
+                                  SharedSizeGroup="RangeFilterGrp" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"
+                                  SharedSizeGroup="RangeFilterGrp" />
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column="0"
                       IsSynchronizedWithCurrentItem="False"

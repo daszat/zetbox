@@ -47,11 +47,22 @@ namespace Zetbox.API.Common.GUI
         {
             public Guid[] Properties { get; set; }
             public object[] Values { get; set; }
+            public bool IsUserFilter { get; set; }
+            public string Expression { get; set; }
         }
 
         public class ColumnConfig
         {
+            public int Type { get; set; }
+            public string Header { get; set; }
+
             public Guid[] Properties { get; set; }
+            public Guid? Method { get; set; }
+            public string Path { get; set; }
+
+            public Guid? ControlKind { get; set; }
+            public Guid? GridPreEditKind { get; set; }
+
             public int Width { get; set; }
         }
     }

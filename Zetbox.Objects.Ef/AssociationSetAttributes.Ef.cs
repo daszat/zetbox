@@ -1661,6 +1661,21 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_NavEntry_have_RequestedKind
+    A: ZeroOrMore NavigationEntry as NavEntry
+    B: ZeroOrOne ControlKind as RequestedKind
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_NavEntry_have_RequestedKind",
+    "NavEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntryEfImpl),
+    "RequestedKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
+    )]
+
+
+	/*
     Relation: FK_NavigationScreen_accessed_by_Groups
     A: ZeroOrMore NavigationEntry as NavigationScreen
     B: ZeroOrMore Group as Groups

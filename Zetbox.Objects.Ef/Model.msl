@@ -3772,6 +3772,23 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_NavEntry_have_RequestedKind
+    A: ZeroOrMore NavigationEntry as NavEntry
+    B: ZeroOrOne ControlKind as RequestedKind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_NavEntry_have_RequestedKind"
+                           TypeName="Model.FK_NavEntry_have_RequestedKind"
+                           StoreEntitySet="NavigationEntry" >
+      <EndProperty Name="RequestedKind">
+        <ScalarProperty Name="ID" ColumnName="fk_RequestedKind"/>
+      </EndProperty>
+      <EndProperty Name="NavEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_RequestedKind" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_NavigationScreen_has_Module
     A: ZeroOrMore NavigationEntry as NavigationScreen
     B: One Module as Module

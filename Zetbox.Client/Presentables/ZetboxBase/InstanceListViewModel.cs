@@ -187,7 +187,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         void _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
         {
             if (DisplayedProperties.Any(dp => dp.SequenceEqual(e.Properties))) return;
-            DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Properties.ToArray()));
+            DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, e.Properties.ToArray()));
         }
 
         /// <summary>
@@ -236,9 +236,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                // manually disabled until ColumnDisplayModels can be properly saved and loaded
-                return false;
-                //return this.ShowFilter;
+                return this.ShowFilter;
             }
         }
 
@@ -640,7 +638,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (e.Item.IsSelected)
                 {
-                    DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Item.Properties));
+                    DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, e.Item.Properties));
                     ViewMethod = InstanceListViewMethod.Details;
                 }
                 else
@@ -1663,6 +1661,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
         #endregion
 
+        #region SavedListConfigurations
         private SavedListConfiguratorViewModel _savedListConfigurations;
         public SavedListConfiguratorViewModel SavedListConfigurations
         {
@@ -1686,5 +1685,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     break;
             }
         }
+        #endregion
     }
 }

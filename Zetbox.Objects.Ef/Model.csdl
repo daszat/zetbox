@@ -694,6 +694,10 @@
       <End Role="Module" EntitySet="Module" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_NavEntry_have_RequestedKind" Association="Model.FK_NavEntry_have_RequestedKind" >
+      <End Role="NavEntry" EntitySet="NavigationEntry" />
+      <End Role="RequestedKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_has_Module" Association="Model.FK_NavigationScreen_has_Module" >
       <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="Module" EntitySet="Module" />
@@ -1917,6 +1921,10 @@
                         FromRole="Children"
                         ToRole="Parent" />
     <Property Name="Children_pos" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="RequestedKindImpl"
+                        Relationship="Model.FK_NavEntry_have_RequestedKind"
+                        FromRole="NavEntry"
+                        ToRole="RequestedKind" />
     <Property Name="Title" Type="String" Nullable="false" MaxLength="500"  />
     <NavigationProperty Name="ViewModelDescriptorImpl"
                         Relationship="Model.FK_Screen_modeled_by_ViewModelDescriptor"
@@ -4722,6 +4730,14 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_NavEntry_have_RequestedKind" >
+    <End Role="NavEntry"
+         Type="Model.NavigationEntry" 
+         Multiplicity="*" />
+    <End Role="RequestedKind"
+         Type="Model.ControlKind" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_NavigationScreen_has_Module" >

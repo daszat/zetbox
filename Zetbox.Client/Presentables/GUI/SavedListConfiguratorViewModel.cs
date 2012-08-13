@@ -32,7 +32,7 @@ namespace Zetbox.Client.Presentables.GUI
     using Zetbox.App.Base;
 
     // No ViewModelDescriptor -> internal
-    public class SavedListConfiguratorViewModel : ViewModel
+    public partial class SavedListConfiguratorViewModel : ViewModel
     {
         public new delegate SavedListConfiguratorViewModel Factory(IZetboxContext dataCtx, InstanceListViewModel parent);
 
@@ -112,38 +112,24 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
-        private void Load()
+        public class ColumnInformation
         {
-            Parent.FilterList.ResetUserFilter();
-            if (_selectedItem != null)
-            {
-                // Filter
-                foreach (var f in _selectedItem.Object.Filter)
-                {
-                    var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
-                    var mdl = FilterModel.FromProperty(DataContext, FrozenContext, props);
-                    int idx = 0;
-                    foreach (var val in f.Values ?? new object[] { })
-                    {
-                        if (idx >= mdl.FilterArguments.Count) break;
-                        var valueMdl = mdl.FilterArguments[idx].Value;
-                        valueMdl.SetUntypedValue(ResolveUntypedValue(val, valueMdl));
-                        idx++;
-                    }
-                    Parent.FilterList.AddFilter(mdl, true, props);
-                }
+            public string Path { get; set; }
+            public int Width { get; set; }
+        }
 
-                // Cols
-                if (_selectedItem.Object.Columns != null && _selectedItem.Object.Columns.Count > 0)
-                {
-                    Parent.DisplayedColumns.Columns.Clear();
-                    foreach (var col in _selectedItem.Object.Columns)
-                    {
-                        var props = col.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToArray();
-                        Parent.DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, props));
-                    }
-                }
+        public delegate List<ColumnInformation> GetColumnInformationEventHandler();
+        public event GetColumnInformationEventHandler GetColumnInformation;
+
+        protected List<ColumnInformation> OnGetColumnInformation()
+        {
+            List<ColumnInformation> result = null;
+            var temp = GetColumnInformation;
+            if (temp != null)
+            {
+                result = temp();
             }
+            return result ?? Parent.DisplayedColumns.Columns.Select(i => new ColumnInformation() { Path = i.Path, Width = 0 }).ToList();
         }
 
         #region Commands
@@ -209,43 +195,6 @@ namespace Zetbox.Client.Presentables.GUI
             }
 
             Save(name);
-        }
-
-        private void Save(string name)
-        {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            using (var ctx = ctxFactory())
-            {
-                var config = GetSavedConfig(ctx);
-                var obj = ExtractConfigurationObject(config);
-                var item = ExtractItem(name, obj);
-
-                // Do the update
-                item.Filter = new List<SavedListConfig.FilterConfig>();
-                foreach (var fvm in Parent.FilterList.FilterListEntryViewModels.Where(f => f.SourceProperties != null))
-                {
-                    item.Filter.Add(new SavedListConfig.FilterConfig()
-                    {
-                        Properties = fvm.SourceProperties.Select(i => i.ExportGuid).ToArray(),
-                        Values = fvm.FilterViewModel.Arguments.Select(i => ExtractUntypedValue(i.UntypedValue)).ToArray()
-                    });
-                }
-
-                item.Columns = new List<SavedListConfig.ColumnConfig>();
-                foreach (var col in Parent.DisplayedColumns.Columns)
-                {
-                    item.Columns.Add(new SavedListConfig.ColumnConfig()
-                    {
-                        Properties = col.Properties.Select(i => i.ExportGuid).ToArray(),
-                        Width = 0
-                    });
-                }
-
-                config.Configuration = obj.ToXmlString();
-                ctx.SubmitChanges();
-
-                UpdateViewModel(name, item);
-            }
         }
 
         private ICommandViewModel _ResetCommand = null;

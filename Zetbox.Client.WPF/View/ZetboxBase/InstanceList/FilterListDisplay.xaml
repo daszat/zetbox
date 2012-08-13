@@ -25,7 +25,8 @@
     -->
 
     <Expander Header="{Binding Name}" IsExpanded="True">
-        <ItemsControl ItemsSource="{Binding FilterListEntryViewModels}" Focusable="False">
+        <ItemsControl ItemsSource="{Binding FilterListEntryViewModels}" Focusable="False"
+                      Grid.IsSharedSizeScope="True">
             <ItemsControl.InputBindings>
                 <KeyBinding Key="Return"
                             Command="NavigationCommands.Refresh" />

@@ -163,6 +163,7 @@
     </Compile>
     <Compile Include="Presentables\DocumentManagement\StaticFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DocumentViewModel.cs" />
+    <Compile Include="Presentables\DtoViewModels\DtoExporter.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoBuilder.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoBaseViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoGroupedViewModel.cs" />
@@ -171,11 +172,13 @@
     <Compile Include="Presentables\DtoViewModels\DtoTableViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoValueViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationTabbedScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationActionViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationReportScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationSearchScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.cs" />
+    <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.Model.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
