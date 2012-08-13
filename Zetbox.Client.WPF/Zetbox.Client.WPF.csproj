@@ -589,6 +589,7 @@
     </Compile>
     <Compile Include="Styles\Controls.cs" />
     <Compile Include="Styles\Defaults.cs" />
+    <Compile Include="Styles\Margin.cs" />
     <Compile Include="View\Calendar\CalendarAllDay.xaml.cs">
       <DependentUpon>CalendarAllDay.xaml</DependentUpon>
     </Compile>
@@ -956,7 +957,11 @@
   <ItemGroup>
     <Resource Include="Images\DropDown.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\FloppyDisk.png" />
+    <Resource Include="Images\preferences.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\AccessDenied.png" />
   </ItemGroup>

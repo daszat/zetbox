@@ -52,12 +52,12 @@
     <Color x:Key="{x:Static styles:Defaults.TertiaryBorderKey}">#00000000</Color>
 
     <!-- sizes -->
-    <s:Double x:Key="BigFontSize">16</s:Double>
+    <s:Double x:Key="BigFontSize">24</s:Double>
     <s:Double x:Key="LargeFontSize">14</s:Double>
     <s:Double x:Key="NormalFontSize">12</s:Double>
     <s:Double x:Key="SmallFontSize">10</s:Double>
 
-    <s:Double x:Key="BigControlHeight">24</s:Double>
+    <s:Double x:Key="BigControlHeight">30</s:Double>
     <s:Double x:Key="LargeControlHeight">21</s:Double>
     <s:Double x:Key="NormalControlHeight">18</s:Double>
     <s:Double x:Key="SmallControlHeight">15</s:Double>

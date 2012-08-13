@@ -180,6 +180,7 @@
                             BorderBrush="{StaticResource ControlBorder}"
                             BorderThickness="1"
                             Background="{StaticResource ButtonBackground}"
+                            Padding="3,2"
                             TextBlock.Foreground="{StaticResource ButtonForeground}">
                         <ContentPresenter Margin="{TemplateBinding Padding}"
                                           HorizontalAlignment="Center"
@@ -222,6 +223,9 @@
                             <Setter TargetName="Border"
                                     Property="BorderThickness"
                                     Value="2" />
+                            <Setter TargetName="Border"
+                                    Property="Padding"
+                                    Value="2,1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -245,14 +249,20 @@
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                               MaxHeight="32"
-                               MaxWidth="32" />
-                        <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                                          Margin="5 0 0 0"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0"
+                               Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
+                               MaxHeight="{StaticResource SmallControlHeight}"
+                               MaxWidth="{StaticResource SmallControlHeight}" />
+                        <ContentPresenter Grid.Column="1"
+                                          Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
+                                          styles:Margin.Left="{StaticResource ItemMargin}"
                                           VerticalAlignment="Center" />
-                    </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -317,6 +327,16 @@
            TargetType="TextBlock">
         <Setter Property="MinHeight"
                 Value="{StaticResource NormalControlHeight}" />
+    </Style>
+
+    <Style x:Key="zbTitle"
+           TargetType="TextBlock">
+        <Setter Property="FontSize"
+                Value="{StaticResource BigFontSize}" />
+        <Setter Property="FontWeight"
+                Value="Light" />
+        <Setter Property="MinHeight"
+                Value="{StaticResource BigControlHeight}" />
     </Style>
 
     <Style x:Key="zbTextBoxTemplate"

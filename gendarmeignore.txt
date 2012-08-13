@@ -137,6 +137,7 @@ A: Zetbox.App.Projekte.Client
 A: Zetbox.App.Projekte.Server
 # WPF infrastructure doesn't require null check
 T: Zetbox.Client.WPF.Styles.Controls
+T: Zetbox.Client.WPF.Styles.Margin
 # False positives
 M: System.Void Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Add(TInterface)
 M: System.Boolean Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Contains(TInterface)
