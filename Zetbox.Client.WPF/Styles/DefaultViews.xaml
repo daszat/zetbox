@@ -463,10 +463,14 @@
                 Value="{StaticResource NormalControlHeight}" />
         <Setter Property="BorderBrush"
                 Value="{StaticResource ControlBorder}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
     </Style>
 
     <Style TargetType="wpftk:DatePicker">
         <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Padding"
                 Value="0" />
         <Setter Property="BorderBrush"
                 Value="{StaticResource ControlBorder}" />
@@ -1622,16 +1626,27 @@
         <TextBlock Text="{Binding Name}" />
     </DataTemplate>
 
-    <!-- default styles for our usercontrols -->
-    <Style TargetType="{x:Type ctrls:LabeledView}">
+    <Style x:Key="LabeledViewStyle"
+           TargetType="Control">
         <Setter Property="Margin"
-                Value="2,1,2,1" />
+                Value="{StaticResource ItemMargin}" />
         <Setter Property="MinWidth"
                 Value="100" />
         <Setter Property="MinHeight"
                 Value="{StaticResource NormalControlHeight}" />
         <Setter Property="VerticalAlignment"
                 Value="Top" />
+    </Style>
+
+    <!-- default styles for our usercontrols -->
+    <Style TargetType="{x:Type ctrls:LabeledView}"
+           BasedOn="{StaticResource LabeledViewStyle}">
+    </Style>
+    <Style TargetType="{x:Type ctrls:LabeledContainer}"
+           BasedOn="{StaticResource LabeledViewStyle}">
+    </Style>
+    <Style TargetType="{x:Type ctrls:LabeledViewHorizontal}"
+           BasedOn="{StaticResource LabeledViewStyle}">
     </Style>
 
 </ResourceDictionary>

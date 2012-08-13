@@ -2,10 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit"
-             MinWidth="100"
-             MinHeight="{StaticResource NormalControlHeight}"
-             Margin="2,1,2,1"
-             VerticalAlignment="Top"
              x:Name="lbView">
     <!--
     This file is part of zetbox.
