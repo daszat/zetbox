@@ -420,6 +420,8 @@
                 Value="{StaticResource NormalControlHeight}" />
         <Setter Property="AllowDrop"
                 Value="true" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBoxBase">
@@ -429,8 +431,7 @@
                             BorderBrush="{StaticResource ControlBorder}"
                             BorderThickness="1">
                         <ScrollViewer Margin="0"
-                                      x:Name="PART_ContentHost"
-                                      VerticalContentAlignment="Center"/>
+                                      x:Name="PART_ContentHost" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled"
