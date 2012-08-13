@@ -9,7 +9,6 @@
                   Width="520"
                   MinHeight="430"
                   Height="600"
-                  Background="{StaticResource MainBackground2}"
                   xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
     <!--
@@ -31,8 +30,7 @@
 
   <DockPanel Margin="5">
     <TextBlock DockPanel.Dock="Top"
-               Text="{Binding Title}"
-               Style="{StaticResource Title}" />
+               Text="{Binding Title}"/>
     <TextBlock DockPanel.Dock="Top"
                Text="{Binding HelpText}" />
     <ctrls:LabeledView DockPanel.Dock="Top"

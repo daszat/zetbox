@@ -7,7 +7,6 @@
              d:DesignHeight="300"
              d:DesignWidth="300">
     <Border Padding="20"
-            Background="{StaticResource MainColor}"
             HorizontalAlignment="Stretch">
         <DockPanel>
             <StackPanel DockPanel.Dock="Right"

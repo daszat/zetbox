@@ -45,7 +45,7 @@ namespace Zetbox.Client.WPF.Toolkit
             if (_displayer != null)
                 _displayer.IsBusy = true;
 
-            Dispatcher.FromThread(Thread.CurrentThread).BeginInvoke(new Action(() =>
+            //Dispatcher.FromThread(Thread.CurrentThread).BeginInvoke(new Action(() =>
             {
                 try
                 {
@@ -56,7 +56,7 @@ namespace Zetbox.Client.WPF.Toolkit
                     if (_displayer != null)
                         _displayer.IsBusy = false;
                 }
-            }), DispatcherPriority.Background); // prio must be Background to let fakeprogressoverlay be rendered
+            }//), DispatcherPriority.Background); // prio must be Background to let fakeprogressoverlay be rendered
         }
     }
 }

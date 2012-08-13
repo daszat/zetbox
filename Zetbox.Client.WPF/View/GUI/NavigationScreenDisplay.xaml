@@ -35,7 +35,6 @@
                 HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto">
     <Border Padding="20"
-            Background="{StaticResource MainColor}"
             HorizontalAlignment="Center">
       <StackPanel>
         <ItemsControl ItemsSource="{Binding Children}">

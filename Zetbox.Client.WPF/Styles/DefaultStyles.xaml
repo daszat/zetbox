@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF">
     <!--
     This file is part of zetbox.
 
@@ -18,40 +19,53 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <!-- Define Forground Colors -->
-  <SolidColorBrush x:Key="MainFontColor"
-                   Color="#000000" />
-  
-  <SolidColorBrush x:Key="MainColor"
-                   Color="#003C64" />
+    <!-- Nu-Style -->
 
-  <SolidColorBrush x:Key="AccentColor1"
-                   Color="#AA272F" />
-  <SolidColorBrush x:Key="AccentColor2"
-                   Color="#707F87" />
+    <Color x:Key="{x:Static styles:Defaults.MainBackgroundKey}">#FFdddddd</Color>
+    <Color x:Key="{x:Static styles:Defaults.MainForegroundKey}">#FF000000</Color>
+    <!-- company color 1 -->
+    <Color x:Key="{x:Static styles:Defaults.MainAccentKey}">#FF707f87</Color>
+    <Color x:Key="{x:Static styles:Defaults.MainAccentForegroundKey}">#FF000000</Color>
+    <!-- company color 3 -->
+    <Color x:Key="{x:Static styles:Defaults.MainHighlightKey}">#FFAA272F</Color>
+    <Color x:Key="{x:Static styles:Defaults.MainHighlightForegroundKey}">#FFFFFFFF</Color>
+    <Color x:Key="{x:Static styles:Defaults.MainBorderKey}">#FFdddddd</Color>
 
-  <!-- Define Background Colors -->
-  <SolidColorBrush x:Key="MainBackground"
-                   Color="#FFFFFF" />
-  <SolidColorBrush x:Key="MainBackground2"
-                   Color="#EEEEEE" />
+    <Color x:Key="{x:Static styles:Defaults.SecondaryBackgroundKey}">#FFc2e0ff</Color>
+    <Color x:Key="{x:Static styles:Defaults.SecondaryForegroundKey}">#FF000000</Color>
+    <!-- company color 2 -->
+    <Color x:Key="{x:Static styles:Defaults.SecondaryAccentKey}">#FF003C64</Color>
+    <Color x:Key="{x:Static styles:Defaults.SecondaryAccentForegroundKey}">#FFFFFFFF</Color>
+    <!-- company color 3 -->
+    <Color x:Key="{x:Static styles:Defaults.SecondaryHighlightKey}">#FFAA272F</Color>
+    <Color x:Key="{x:Static styles:Defaults.SecondaryHighlightForegroundKey}">#FFFFFFFF</Color>
+    <Color x:Key="{x:Static styles:Defaults.SecondaryBorderKey}">#FFc2e0ff</Color>
 
-  <SolidColorBrush x:Key="AccentBackground1"
-                   Color="#AA272F" />
-  <SolidColorBrush x:Key="AccentBackground2"
-                   Color="#707F87" />
+    <Color x:Key="{x:Static styles:Defaults.TertiaryBackgroundKey}">#FFFFFFFF</Color>
+    <Color x:Key="{x:Static styles:Defaults.TertiaryForegroundKey}">#FF000000</Color>
+    <!-- company color 1 -->
+    <Color x:Key="{x:Static styles:Defaults.TertiaryAccentKey}">#FF707f87</Color>
+    <Color x:Key="{x:Static styles:Defaults.TertiaryAccentForegroundKey}">#FF000000</Color>
+    <!-- company color 3 -->
+    <Color x:Key="{x:Static styles:Defaults.TertiaryHighlightKey}">#FFAA272F</Color>
+    <Color x:Key="{x:Static styles:Defaults.TertiaryHighlightForegroundKey}">#FFFFFFFF</Color>
+    <Color x:Key="{x:Static styles:Defaults.TertiaryBorderKey}">#00000000</Color>
 
-  <!-- Define Inverted Forground Colors -->
-  <SolidColorBrush x:Key="MainColorInverted"
-                   Color="White" />
-  <SolidColorBrush x:Key="AccentColor1Inverted"
-                   Color="White" />
-  <SolidColorBrush x:Key="AccentColor2Inverted"
-                   Color="#003C64" />
+    <!-- sizes -->
+    <s:Double x:Key="BigFontSize">16</s:Double>
+    <s:Double x:Key="LargeFontSize">14</s:Double>
+    <s:Double x:Key="NormalFontSize">12</s:Double>
+    <s:Double x:Key="SmallFontSize">10</s:Double>
 
-  <sys:Double x:Key="BigFontSize">16</sys:Double>
-  <sys:Double x:Key="LargeFontSize">14</sys:Double>
-  <sys:Double x:Key="NormalFontSize">12</sys:Double>
-  <sys:Double x:Key="SmallFontSize">10</sys:Double>
+    <s:Double x:Key="BigControlHeight">24</s:Double>
+    <s:Double x:Key="LargeControlHeight">21</s:Double>
+    <s:Double x:Key="NormalControlHeight">18</s:Double>
+    <s:Double x:Key="SmallControlHeight">15</s:Double>
+
+    <Thickness x:Key="AreaGroup1Margin">2</Thickness>
+    <Thickness x:Key="AreaGroup1Padding">2</Thickness>
+    <Thickness x:Key="ItemGroup1Margin">2</Thickness>
+    <Thickness x:Key="ItemGroup1Padding">2</Thickness>
+    <Thickness x:Key="ItemMargin">2</Thickness>
 
 </ResourceDictionary>

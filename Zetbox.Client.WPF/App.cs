@@ -60,7 +60,7 @@ namespace Zetbox.Client.WPF
         public App()
         {
             this.ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
-            this.DispatcherUnhandledException += Application_DispatcherUnhandledException;
+            //this.DispatcherUnhandledException += Application_DispatcherUnhandledException;
         }
 
         private static ServerDomainManager serverDomain;
@@ -165,52 +165,14 @@ namespace Zetbox.Client.WPF
                 serverDomain = new ServerDomainManager();
                 serverDomain.Start(config);
             }
-            else
-            {
-                StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_NoServerStart);
-            }
-
 
             container = CreateMasterContainer(config);
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
 
-            // Make Gendarme happy
-            var resources = this.Resources;
+            //SplashScreen.DispatchAndWait(() => LoadStyles(SplashScreen.Resources));
 
-            resources.BeginInit();
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/AppResources.xaml", UriKind.Relative) });
-
-            // Create icon converter
-            var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<Func<IZetboxContext>>());
-            resources["IconConverter"] = iconConverter;
-            resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
-
-            // Init all Converter that are not using a Context
-            var templateSelectorFactory = container.Resolve<Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
-            resources["defaultTemplateSelector"] = templateSelectorFactory(null);
-            resources["listItemTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.SingleLineKind");
-            resources["dashBoardTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.DashboardKind");
-
-            // Manually add DefaultStyles and DefaultViews
-            // Otherwise converter are unknown
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultStyles.xaml", UriKind.Relative) });
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
-
-            // Load registrated dictionaries from autofac
-            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
-            {
-                resources.MergedDictionaries.Add(dict);
-            }
-
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) });
-            // Load registrated dictionaries from autofac
-            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
-            {
-                resources.MergedDictionaries.Add(dict);
-            }
-
-            resources.EndInit();
+            var iconConverter = LoadStyles(this.Resources);
 
             // Init credentials explicit
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
@@ -247,6 +209,51 @@ namespace Zetbox.Client.WPF
             // they are needed.
             var launcher = container.Resolve<Launcher>();
             launcher.Show(args);
+        }
+
+        private IconConverter LoadStyles(ResourceDictionary targetResources)
+        {
+            targetResources.BeginInit();
+            targetResources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/AppResources.xaml", UriKind.Relative) });
+
+            // Create icon converter
+            var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<Func<IZetboxContext>>());
+            targetResources["IconConverter"] = iconConverter;
+            targetResources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
+
+            // Init all Converter that are not using a Context
+            var templateSelectorFactory = container.Resolve<Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
+            targetResources["defaultTemplateSelector"] = templateSelectorFactory(null);
+            targetResources["listItemTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.SingleLineKind");
+            targetResources["dashBoardTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.DashboardKind");
+
+            // Manually add DefaultStyles and DefaultViews
+            // Otherwise converter are unknown
+            targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultStyles.xaml", UriKind.Relative) }));
+            targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) }));
+
+            // Load registrated dictionaries from autofac
+            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
+            {
+                targetResources.MergedDictionaries.Add(Freeze(dict));
+            }
+
+            targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) }));
+            // Load registrated dictionaries from autofac
+            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
+            {
+                targetResources.MergedDictionaries.Add(Freeze(dict));
+            }
+
+            targetResources.EndInit();
+            return iconConverter;
+        }
+
+        private static ResourceDictionary Freeze(ResourceDictionary dict)
+        {
+            foreach (var i in dict.OfType<Freezable>())
+                i.Freeze();
+            return dict;
         }
 
         protected virtual void InitializeSplashScreenImageResource()

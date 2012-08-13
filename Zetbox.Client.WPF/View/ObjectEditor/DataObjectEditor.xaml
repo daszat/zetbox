@@ -34,7 +34,7 @@
         <Binding Source="{StaticResource DataObjectViewModelDesignProvider}" />
     </UserControl.DataContext> -->
 
-    <DockPanel Style="{StaticResource DataObjectEditor_MainPanel}">
+    <DockPanel Background="{Binding Highlight, Converter={StaticResource HighlightPanelBackgroundConverter}}">
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                                  ItemsSource="{Binding Actions}">
             <ctrls:WorkaroundToolBar.Resources>
@@ -54,7 +54,7 @@
                        HorizontalAlignment="Center" />
         </DockPanel>
 
-        <Grid Style="{StaticResource DataObjectEditor_PropertyPanel}">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
