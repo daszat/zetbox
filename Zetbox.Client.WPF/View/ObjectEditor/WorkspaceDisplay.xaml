@@ -46,6 +46,7 @@
                                      styles:Margin.Right="{StaticResource ItemMargin}" />
                 <ctrls:CommandButton DockPanel.Dock="Right"
                                      CommandViewModel="{Binding VerifyCommand}"
+                                     styles:Controls.IsSecondary="true"
                                      Style="{StaticResource ImageButton}"
                                      Image="/Zetbox.Client.WPF;component/Images/preferences.png"
                                      Margin="0"
@@ -55,6 +56,7 @@
                                      CommandViewModel="{Binding DeleteCommand}"
                                      CommandParameter="{Binding SelectedItem}"
                                      Visibility="{Binding ElevatedModeCommand.IsElevated, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     styles:Controls.IsSecondary="true"
                                      Style="{StaticResource ImageButton}"
                                      Image="/Zetbox.Client.WPF;component/Images/delete.png"
                                      Margin="0"
@@ -80,8 +82,8 @@
                 </ItemsControl>
                 <ctrls:CommandButton DockPanel.Dock="Right"
                                      CommandViewModel="{Binding AbortCommand}"
-                                     Style="{StaticResource LinkButton}"
-                                     VerticalAlignment="Bottom"
+                                     styles:Controls.IsSecondary="true"
+                                     Style="{StaticResource ImageButton}"
                                      Margin="0"
                                      styles:Margin.Left="{StaticResource ItemMargin}"
                                      styles:Margin.Right="{StaticResource ItemMargin}" />
@@ -113,6 +115,7 @@
                            Visibility="{Binding IsContextModified, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                            VerticalAlignment="Bottom"
                            Margin="0"
+                           TextWrapping="Wrap"
                            styles:Margin.Left="{StaticResource ItemMargin}"
                            styles:Margin.Right="{StaticResource ItemMargin}" />
             </DockPanel>

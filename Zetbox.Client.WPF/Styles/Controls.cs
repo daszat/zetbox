@@ -26,7 +26,7 @@ namespace Zetbox.Client.WPF.Styles
     using System.Windows.Threading;
 
     public static class Controls
-    {     
+    {
         #region HeaderBackground
 
         public static Brush GetHeaderBackground(DependencyObject obj)
@@ -169,6 +169,25 @@ namespace Zetbox.Client.WPF.Styles
         public static readonly DependencyProperty BorderStyleProperty =
             DependencyProperty.RegisterAttached("BorderStyle", typeof(Style), typeof(Controls));
 
+        #endregion
+
+        #region IsSecondary
+
+        public static bool GetIsSecondary(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsSecondaryProperty);
+        }
+
+        public static void SetIsSecondary(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsSecondaryProperty, value);
+        }
+
+        /// <summary>
+        /// Designates a control as secondary. It should be rendered less intense.
+        /// </summary>
+        public static readonly DependencyProperty IsSecondaryProperty =
+            DependencyProperty.RegisterAttached("IsSecondary", typeof(bool), typeof(Controls), new UIPropertyMetadata(false));
         #endregion
     }
 }

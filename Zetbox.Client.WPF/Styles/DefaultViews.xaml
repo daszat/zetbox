@@ -73,6 +73,11 @@
                      Color="{StaticResource {x:Static styles:Defaults.MainHighlightKey}}" />
     <SolidColorBrush x:Key="ButtonPressedForeground"
                      Color="{StaticResource {x:Static styles:Defaults.MainHighlightForegroundKey}}" />
+    
+    <SolidColorBrush x:Key="SecondaryButtonBackground"
+                     Color="{StaticResource {x:Static styles:Defaults.TertiaryBackgroundKey}}" />
+    <SolidColorBrush x:Key="SecondaryButtonForeground"
+                     Color="{StaticResource {x:Static styles:Defaults.TertiaryForegroundKey}}" />
 
     <!-- Area groups -->
     <SolidColorBrush x:Key="AreaGroup1Background"
@@ -173,15 +178,21 @@
                 Value="75" />
         <Setter Property="Padding"
                 Value="{StaticResource ItemGroup1Padding}" />
+
+        <Setter Property="Background"
+                Value="{StaticResource ButtonBackground}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource ButtonForeground}" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ButtonBase">
                     <Border x:Name="Border"
                             BorderBrush="{StaticResource ControlBorder}"
                             BorderThickness="1"
-                            Background="{StaticResource ButtonBackground}"
+                            Background="{TemplateBinding Background}"
                             Padding="3,2"
-                            TextBlock.Foreground="{StaticResource ButtonForeground}">
+                            TextBlock.Foreground="{TemplateBinding Foreground}">
                         <ContentPresenter Margin="{TemplateBinding Padding}"
                                           HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
@@ -227,6 +238,29 @@
                                     Property="Padding"
                                     Value="2,1" />
                         </Trigger>
+                        <Trigger Property="styles:Controls.IsSecondary"
+                                 Value="true">
+                            <Setter TargetName="Border"
+                                    Property="Background"
+                                    Value="{StaticResource SecondaryButtonBackground}" />
+                            <Setter TargetName="Border"
+                                    Property="TextBlock.Foreground"
+                                    Value="{StaticResource SecondaryButtonForeground}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="styles:Controls.IsSecondary"
+                                           Value="true" />
+                                <Condition Property="IsEnabled"
+                                           Value="false" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border"
+                                    Property="Background"
+                                    Value="{StaticResource SecondaryButtonBackground}" />
+                            <Setter TargetName="Border"
+                                    Property="TextBlock.Foreground"
+                                    Value="{StaticResource ControlDisabledForeground}" />
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -321,6 +355,40 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- inspired by http://stackoverflow.com/questions/780426/link-button-in-wpf by Anderson Imes -->
+    <Style x:Key="LinkButton"
+           TargetType="Button">
+
+        <Setter Property="Foreground"
+                Value="Blue" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <TextBlock TextDecorations="Underline"
+                               Padding="{StaticResource ItemMargin}"><ContentPresenter /></TextBlock>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="true">
+                <Setter Property="Foreground"
+                        Value="Red" />
+            </Trigger>
+            <Trigger Property="IsEnabled"
+                     Value="false">
+                <Setter Property="Foreground"
+                        Value="Gray" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="zbTextBlockTemplate"
@@ -1423,32 +1491,6 @@
             </MenuItem>
         </Menu>
     </DataTemplate>
-
-    <!-- from http://stackoverflow.com/questions/780426/link-button-in-wpf by Anderson Imes -->
-    <Style x:Key="LinkButton"
-           TargetType="Button">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <TextBlock x:Name="Underliner">
-            <ContentPresenter />
-                    </TextBlock>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Cursor"
-                Value="Hand" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver"
-                     Value="true">
-                <!-- TODO -->
-            </Trigger>
-            <Trigger Property="IsEnabled"
-                     Value="false">
-                <!-- TODO -->
-            </Trigger>
-        </Style.Triggers>
-    </Style>
 
     <!-- Style Girds and lists -->
     <Style x:Key="ListViewItemContainerStyle"
