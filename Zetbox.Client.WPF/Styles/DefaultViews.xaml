@@ -276,6 +276,9 @@
     <Style TargetType="ctrls:CommandButton"
            BasedOn="{StaticResource zbButtonTemplate}" />
 
+    <Style TargetType="ctrls:DropDownButton"
+           BasedOn="{StaticResource zbButtonTemplate}" />
+
     <Style x:Key="ImageButton"
            BasedOn="{StaticResource zbButtonTemplate}"
            TargetType="{x:Type ctrls:CommandButton}">

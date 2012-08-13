@@ -19,7 +19,7 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
     <DockPanel>
-        <ctrls:DropDownButton>
+        <ctrls:DropDownButton Margin="0">
             <ctrls:DropDownButton.Content>
                 <Image DockPanel.Dock="Left"
                        Width="16"

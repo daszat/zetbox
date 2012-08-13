@@ -28,7 +28,7 @@
                      ItemContainerStyle="{StaticResource CommandMenuItem}"/>
     </ctrls:PropertyEditor.ContextMenu>
     <DockPanel>
-        <ctrls:DropDownButton>
+        <ctrls:DropDownButton  Margin="0">
             <ctrls:DropDownButton.Content>
                 <Image DockPanel.Dock="Left"
                        Width="16"
