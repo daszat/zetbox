@@ -10,8 +10,7 @@
                   commands:SmartRoutedUICommand.IsCommandSink="True"
                   Title="dasLauncher"
                   Height="600"
-                  Width="800"
-                  Background="LightGray">
+                  Width="800">
     <!--
     This file is part of zetbox.
 

@@ -20,63 +20,64 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <UserControl.Resources>
-    <Style TargetType="Button">
-      <Setter Property="Width"
-              Value="140" />
-      <Setter Property="Height"
-              Value="90" />
-      <Setter Property="Margin"
-              Value="5" />
-    </Style>
-  </UserControl.Resources>
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource zbButtonTemplate}"
+               TargetType="Button">
+            <Setter Property="Width"
+                    Value="140" />
+            <Setter Property="Height"
+                    Value="90" />
+            <Setter Property="Margin"
+                    Value="5" />
+        </Style>
+    </UserControl.Resources>
 
-  <ScrollViewer Margin="50"
-                HorizontalScrollBarVisibility="Disabled"
-                VerticalScrollBarVisibility="Auto">
-    <Border Padding="20"
-            HorizontalAlignment="Center">
-      <StackPanel>
-        <ItemsControl ItemsSource="{Binding Children}">
-          <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-              <UniformGrid Columns="6"
-                           IsItemsHost="True" />
-            </ItemsPanelTemplate>
-          </ItemsControl.ItemsPanel>
+    <ScrollViewer Margin="50"
+                  HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto">
+        <Border Padding="20"
+                HorizontalAlignment="Center">
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding Children}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="6"
+                                         IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
 
-          <ItemsControl.ItemTemplate>
-            <DataTemplate>
-              <Button Command="{Binding ExecuteCommand, Converter={StaticResource CommandConverter}}"
-                      CommandParameter="{Binding}">
-                <Button.Content>
-                  <TextBlock TextWrapping="WrapWithOverflow"
-                             Text="{Binding Name}" />
-                </Button.Content>
-              </Button>
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding ExecuteCommand, Converter={StaticResource CommandConverter}}"
+                                    CommandParameter="{Binding}">
+                                <Button.Content>
+                                    <TextBlock TextWrapping="WrapWithOverflow"
+                                               Text="{Binding Name}" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-        <ItemsControl ItemsSource="{Binding AdditionalCommands}">
-          <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-              <UniformGrid Columns="6"
-                           IsItemsHost="True" />
-            </ItemsPanelTemplate>
-          </ItemsControl.ItemsPanel>
-          <ItemsControl.ItemTemplate>
-            <DataTemplate>
-              <Button Command="{Binding Converter={StaticResource CommandConverter}}">
-                <Button.Content>
-                  <TextBlock TextWrapping="WrapWithOverflow"
-                             Text="{Binding Name}" />
-                </Button.Content>
-              </Button>
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
-      </StackPanel>
-    </Border>
-  </ScrollViewer>
+                <ItemsControl ItemsSource="{Binding AdditionalCommands}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="6"
+                                         IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding Converter={StaticResource CommandConverter}}">
+                                <Button.Content>
+                                    <TextBlock TextWrapping="WrapWithOverflow"
+                                               Text="{Binding Name}" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
 </UserControl>

@@ -25,7 +25,7 @@
     <Color x:Key="{x:Static styles:Defaults.MainForegroundKey}">#FF000000</Color>
     <!-- company color 1 -->
     <Color x:Key="{x:Static styles:Defaults.MainAccentKey}">#FF707f87</Color>
-    <Color x:Key="{x:Static styles:Defaults.MainAccentForegroundKey}">#FF000000</Color>
+    <Color x:Key="{x:Static styles:Defaults.MainAccentForegroundKey}">#FFFFFFFF</Color>
     <!-- company color 3 -->
     <Color x:Key="{x:Static styles:Defaults.MainHighlightKey}">#FFAA272F</Color>
     <Color x:Key="{x:Static styles:Defaults.MainHighlightForegroundKey}">#FFFFFFFF</Color>
@@ -45,7 +45,7 @@
     <Color x:Key="{x:Static styles:Defaults.TertiaryForegroundKey}">#FF000000</Color>
     <!-- company color 1 -->
     <Color x:Key="{x:Static styles:Defaults.TertiaryAccentKey}">#FF707f87</Color>
-    <Color x:Key="{x:Static styles:Defaults.TertiaryAccentForegroundKey}">#FF000000</Color>
+    <Color x:Key="{x:Static styles:Defaults.TertiaryAccentForegroundKey}">#FFFFFFFF</Color>
     <!-- company color 3 -->
     <Color x:Key="{x:Static styles:Defaults.TertiaryHighlightKey}">#FFAA272F</Color>
     <Color x:Key="{x:Static styles:Defaults.TertiaryHighlightForegroundKey}">#FFFFFFFF</Color>
