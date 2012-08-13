@@ -27,7 +27,7 @@
                            CommandViewModel="{Binding RemoveCommand}"
                            Visibility="{Binding IsUserFilter, Converter={StaticResource BooleanToVisibilityHiddenConverter}}"
                            Style="{StaticResource ImageOnlyButton}"
-                           MaxHeight="28"/>
+                           MaxHeight="{StaticResource NormalControlHeight}"/>
 
       <ContentPresenter Content="{Binding FilterViewModel}"
                         ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />

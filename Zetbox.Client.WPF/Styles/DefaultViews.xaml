@@ -5,6 +5,7 @@
                     xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
                     xmlns:wpftk="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
+                    xmlns:wpftkp="clr-namespace:Microsoft.Windows.Controls.Primitives;assembly=WPFToolkit"
                     xmlns:kevinTxt="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                     xmlns:kevinDate="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.DateControls;assembly=WPFSamplesLib"
                     xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client">
@@ -73,7 +74,7 @@
                      Color="{StaticResource {x:Static styles:Defaults.MainHighlightKey}}" />
     <SolidColorBrush x:Key="ButtonPressedForeground"
                      Color="{StaticResource {x:Static styles:Defaults.MainHighlightForegroundKey}}" />
-    
+
     <SolidColorBrush x:Key="SecondaryButtonBackground"
                      Color="{StaticResource {x:Static styles:Defaults.TertiaryBackgroundKey}}" />
     <SolidColorBrush x:Key="SecondaryButtonForeground"
@@ -174,8 +175,6 @@
                 Value="true" />
         <Setter Property="MinHeight"
                 Value="{StaticResource NormalControlHeight}" />
-        <Setter Property="MinWidth"
-                Value="75" />
         <Setter Property="Padding"
                 Value="{StaticResource ItemGroup1Padding}" />
 
@@ -430,7 +429,8 @@
                             BorderBrush="{StaticResource ControlBorder}"
                             BorderThickness="1">
                         <ScrollViewer Margin="0"
-                                      x:Name="PART_ContentHost" />
+                                      x:Name="PART_ContentHost"
+                                      VerticalContentAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled"
@@ -452,6 +452,24 @@
 
     <Style TargetType="TextBox"
            BasedOn="{StaticResource zbTextBoxTemplate}" />
+
+    <Style TargetType="kevinTxt:InfoTextBox"
+           BasedOn="{StaticResource zbTextBoxTemplate}">
+    </Style>
+
+    <Style TargetType="wpftkp:DatePickerTextBox">
+        <Setter Property="MinHeight"
+                Value="{StaticResource NormalControlHeight}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource ControlBorder}" />
+    </Style>
+
+    <Style TargetType="wpftk:DatePicker">
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource ControlBorder}" />
+    </Style>
 
     <Style x:Key="zbComboBoxTemplate"
            TargetType="ComboBox">
@@ -1610,7 +1628,7 @@
         <Setter Property="MinWidth"
                 Value="100" />
         <Setter Property="MinHeight"
-                Value="26" />
+                Value="{StaticResource NormalControlHeight}" />
         <Setter Property="VerticalAlignment"
                 Value="Top" />
     </Style>
