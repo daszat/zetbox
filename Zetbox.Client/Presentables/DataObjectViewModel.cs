@@ -408,9 +408,16 @@ namespace Zetbox.Client.Presentables
             if (_nameCache == null)
             {
                 _nameCache = _object.ToString();
-                _longNameCache = String.Format("{0}: {1}",
-                    _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName,
-                    _nameCache);
+                if (string.IsNullOrEmpty(_nameCache))
+                {
+                    _longNameCache = _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName;
+                }
+                else
+                {
+                    _longNameCache = String.Format("{0}: {1}",
+                       _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName,
+                        _nameCache);
+                }
             }
         }
 
