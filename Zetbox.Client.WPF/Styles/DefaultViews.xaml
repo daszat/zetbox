@@ -169,6 +169,8 @@
         <!-- TODO: extract colors into attached properties to allow individual coloring -->
         <Setter Property="Margin"
                 Value="{StaticResource ItemGroup1Margin}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
         <Setter Property="SnapsToDevicePixels"
                 Value="true" />
         <Setter Property="OverridesDefaultStyle"
@@ -188,7 +190,7 @@
                 <ControlTemplate TargetType="ButtonBase">
                     <Border x:Name="Border"
                             BorderBrush="{StaticResource ControlBorder}"
-                            BorderThickness="1"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
                             Padding="3,2"
                             TextBlock.Foreground="{TemplateBinding Foreground}">
@@ -280,6 +282,20 @@
            BasedOn="{StaticResource zbButtonTemplate}">
         <Setter Property="Padding"
                 Value="0" />
+        <Setter Property="Margin"
+                Value="0" />
+        <Setter Property="BorderThickness"
+                Value="1,1,0,1" />
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Image DockPanel.Dock="Left"
+                           Width="16"
+                           Height="16"
+                           Source="/Zetbox.Client.WPF;component/Images/DropDown.png" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="ImageButton"

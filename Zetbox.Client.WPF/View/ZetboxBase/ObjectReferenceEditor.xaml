@@ -27,13 +27,7 @@
                      ItemContainerStyle="{StaticResource CommandMenuItem}"/>
     </ctrls:PropertyEditor.ContextMenu>
     <DockPanel>
-        <ctrls:DropDownButton  Margin="0">
-            <ctrls:DropDownButton.Content>
-                <Image DockPanel.Dock="Left"
-                       Width="16"
-                       Height="16"
-                       Source="/Zetbox.Client.WPF;component/Images/DropDown.png" />
-            </ctrls:DropDownButton.Content>
+        <ctrls:DropDownButton>
             <ctrls:DropDownButton.DropDown>
                 <ContextMenu ItemsSource="{Binding Commands}"
                              ItemContainerStyle="{StaticResource CommandMenuItem}"/>
