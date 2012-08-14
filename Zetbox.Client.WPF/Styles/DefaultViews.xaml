@@ -1494,28 +1494,6 @@
            BasedOn="{StaticResource zbGroupBoxTemplate}">
     </Style>
 
-    <DataTemplate x:Key="ExportOverlayTemplate">
-        <DataTemplate.Triggers>
-            <Trigger Property="UIElement.IsMouseOver"
-                     Value="true">
-                <Setter Property="StackPanel.Visibility"
-                        TargetName="Layer"
-                        Value="Visible" />
-            </Trigger>
-        </DataTemplate.Triggers>
-        <Grid Background="Transparent">
-            <ContentPresenter Content="{Binding}" />
-            <StackPanel x:Name="Layer"
-                        VerticalAlignment="Bottom"
-                        HorizontalAlignment="Right"
-                        Orientation="Horizontal"
-                        Visibility="Hidden">
-                <Button>Print</Button>
-                <Button>Export</Button>
-            </StackPanel>
-        </Grid>
-    </DataTemplate>
-
     <Style x:Key="zbListViewTemplate"
            TargetType="ListView">
         <Setter Property="BorderBrush"
