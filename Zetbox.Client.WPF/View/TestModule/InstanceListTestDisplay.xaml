@@ -23,7 +23,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400" />
-            <ColumnDefinition Width="4" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <ScrollViewer Grid.Column="0"
@@ -138,7 +138,7 @@
             </StackPanel>
         </ScrollViewer>
         <GridSplitter Grid.Column="1"
-                      VerticalAlignment="Stretch" />
+                      ResizeDirection="Columns" />
         <zbBase:InstanceListDisplay Grid.Column="2"
                                     DataContext="{Binding TestList}" />
     </Grid>

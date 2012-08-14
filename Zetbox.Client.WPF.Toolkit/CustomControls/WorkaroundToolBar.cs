@@ -32,7 +32,6 @@ namespace Zetbox.Client.WPF.CustomControls
         public WorkaroundToolBar()
             : base()
         {
-            KeyboardNavigation.SetTabNavigation(this, KeyboardNavigationMode.Continue);
             this.Height = 33; // Fixed height
         }
 

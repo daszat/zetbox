@@ -8,6 +8,7 @@
                   Title="{Binding Name}"
                   Height="600"
                   Width="800"
+                  IsTabStop="False"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
     <!--
     This file is part of zetbox.
@@ -124,7 +125,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="column0"
                                   Width="Auto" />
-                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
@@ -148,7 +149,8 @@
             </Expander>
 
             <GridSplitter Grid.Column="1"
-                          HorizontalAlignment="Stretch" />
+                          x:Name="gridSplitter"
+                          ResizeDirection="Columns" />
 
             <ContentPresenter Grid.Column="2"
                               Grid.IsSharedSizeScope="True"

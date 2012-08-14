@@ -31,10 +31,12 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Count: {0}'}" />
                 <Expander Header="Created at">
-                    <TextBlock Text="{Binding CreatedAt}" Margin="10,0,0,0" />
+                    <TextBlock Text="{Binding CreatedAt}"
+                               Margin="10,0,0,0" />
                 </Expander>
                 <Expander Header="Disposed at">
-                    <TextBlock Text="{Binding DisposedAt}"  Margin="10,0,0,0" />
+                    <TextBlock Text="{Binding DisposedAt}"
+                               Margin="10,0,0,0" />
                 </Expander>
             </StackPanel>
         </DataTemplate>
@@ -46,35 +48,41 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="5px" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Grid.Column="0">
+        <DockPanel Grid.Row="0"
+                   Grid.Column="0">
             <TextBlock DockPanel.Dock="Top"
                        HorizontalAlignment="Center"
                        Text="{Binding ActiveContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Active Contexts: {0}'}" />
-            <ListBox ItemsSource="{Binding ActiveContexts}" 
-                      x:Name="lstActiveContexts" 
-                      IsSynchronizedWithCurrentItem="True"
-                      BorderThickness="0" />
+            <ListBox ItemsSource="{Binding ActiveContexts}"
+                     x:Name="lstActiveContexts"
+                     IsSynchronizedWithCurrentItem="True"
+                     BorderThickness="0" />
         </DockPanel>
-        <ListBox Grid.Row="0" Grid.Column="1" 
-                 DataContext="{Binding ElementName=lstActiveContexts, Path=Items}" 
-                 ItemsSource="{Binding Path=AttachedObjects}" 
+        <ListBox Grid.Row="0"
+                 Grid.Column="1"
+                 DataContext="{Binding ElementName=lstActiveContexts, Path=Items}"
+                 ItemsSource="{Binding Path=AttachedObjects}"
                  IsSynchronizedWithCurrentItem="True" />
-        <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" />
-        <DockPanel Grid.Row="2" Grid.Column="0">
+        <GridSplitter Grid.Row="1"
+                      Grid.ColumnSpan="2"
+                      ResizeDirection="Rows" />
+        <DockPanel Grid.Row="2"
+                   Grid.Column="0">
             <TextBlock DockPanel.Dock="Top"
                        HorizontalAlignment="Center"
                        Text="{Binding DisposedContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Disposed Contexts: {0}'}" />
-            <ListBox ItemsSource="{Binding DisposedContexts}" 
-                      x:Name="lstDisposedContexts" 
-                      IsSynchronizedWithCurrentItem="True"
-                      BorderThickness="0" />
+            <ListBox ItemsSource="{Binding DisposedContexts}"
+                     x:Name="lstDisposedContexts"
+                     IsSynchronizedWithCurrentItem="True"
+                     BorderThickness="0" />
         </DockPanel>
-        <ListBox Grid.Row="2" Grid.Column="1" 
-                 DataContext="{Binding ElementName=lstDisposedContexts, Path=Items}" 
-                 ItemsSource="{Binding Path=AttachedObjects}" 
+        <ListBox Grid.Row="2"
+                 Grid.Column="1"
+                 DataContext="{Binding ElementName=lstDisposedContexts, Path=Items}"
+                 ItemsSource="{Binding Path=AttachedObjects}"
                  IsSynchronizedWithCurrentItem="True">
         </ListBox>
     </Grid>

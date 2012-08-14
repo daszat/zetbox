@@ -55,12 +55,14 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
         private void Expander_Expanded(object sender, RoutedEventArgs e)
         {
             column0.Width = _columnWidth ?? new GridLength(150);
+            if (gridSplitter != null) gridSplitter.IsEnabled = true;
         }
 
         private void Expander_Collapsed(object sender, RoutedEventArgs e)
         {
             _columnWidth = column0.Width;
             column0.Width = GridLength.Auto;
+            gridSplitter.IsEnabled = false;
         }
         #endregion
     }

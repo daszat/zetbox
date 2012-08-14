@@ -1,10 +1,12 @@
 ﻿<ctrls:WindowView x:Class="Zetbox.Client.WPF.View.ModuleEditor.WorkspaceDisplay"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
-    xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
-    commands:SmartRoutedUICommand.IsCommandSink="True"
-    Title="Module Editor Workspace" Height="600" Width="800">
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                  xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
+                  commands:SmartRoutedUICommand.IsCommandSink="True"
+                  Title="Module Editor Workspace"
+                  Height="600"
+                  Width="800">
     <!--
     This file is part of zetbox.
 
@@ -25,30 +27,33 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.Column="0">
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <StackPanel DockPanel.Dock="Top"
+                        Orientation="Horizontal">
                 <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}" />
                 <ctrls:CommandButton CommandViewModel="{Binding EditCurrentModuleCommand}" />
                 <ctrls:CommandButton CommandViewModel="{Binding NewModuleCommand}" />
                 <ctrls:CommandButton CommandViewModel="{Binding ReportProblemCommand}" />
             </StackPanel>
-            <ComboBox DockPanel.Dock="Top" ItemsSource="{Binding ModuleList}" SelectedItem="{Binding CurrentModule}" />
+            <ComboBox DockPanel.Dock="Top"
+                      ItemsSource="{Binding ModuleList}"
+                      SelectedItem="{Binding CurrentModule}" />
             <TreeView x:Name="NavTree"
-                      ItemsSource="{Binding Path=TreeItems}" 
+                      ItemsSource="{Binding Path=TreeItems}"
                       SelectedItemChanged="TreeView_SelectedItemChanged">
             </TreeView>
         </DockPanel>
 
         <GridSplitter Grid.Column="1"
-                          HorizontalAlignment="Stretch" />
+                      ResizeDirection="Columns" />
 
         <ContentPresenter Grid.Column="2"
-                              Grid.IsSharedSizeScope="True"
-                              Content="{Binding SelectedItem}"
-                              ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
+                          Grid.IsSharedSizeScope="True"
+                          Content="{Binding SelectedItem}"
+                          ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
     </Grid>
 </ctrls:WindowView>

@@ -39,7 +39,7 @@
     <Grid x:Name="ctrlInstanceList">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -74,7 +74,7 @@
         </DockPanel>
 
         <GridSplitter Grid.Column="1"
-                      HorizontalAlignment="Stretch" />
+                      ResizeDirection="Columns" />
 
         <ContentPresenter Grid.Column="2"
                           Margin="10"
