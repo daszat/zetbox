@@ -33,8 +33,11 @@
                              ItemContainerStyle="{StaticResource CommandMenuItem}"/>
             </ctrls:DropDownButton.DropDown>
         </ctrls:DropDownButton>
-        <ContentPresenter Content="{Binding Value, Mode=OneWay}"
-                          ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
+        <Border BorderBrush="{StaticResource ControlBorder}"
+                BorderThickness="1">
+            <ContentPresenter Content="{Binding Value, Mode=OneWay}"
+                              ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
+        </Border>
     </DockPanel>
 
 </ctrls:PropertyEditor>

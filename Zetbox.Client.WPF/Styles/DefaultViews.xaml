@@ -461,9 +461,6 @@
                             <Setter TargetName="Border"
                                     Property="Background"
                                     Value="{StaticResource ControlDisabledBackground}" />
-                            <Setter TargetName="Border"
-                                    Property="BorderBrush"
-                                    Value="{StaticResource ControlDisabledBackground}" />
                             <Setter Property="Foreground"
                                     Value="{StaticResource ControlDisabledForeground}" />
                         </Trigger>
@@ -591,11 +588,11 @@
                             </Border>
                         </ToggleButton>
                         <TextBox x:Name="PART_EditableTextBox"
+                                 Style="{StaticResource zbTextBoxTemplate}"
                                  Grid.Column="0"
                                  HorizontalAlignment="Stretch"
                                  VerticalAlignment="Stretch"
                                  Focusable="True"
-                                 Background="Transparent"
                                  Visibility="Hidden"
                                  Margin="0"
                                  MinHeight="{StaticResource NormalControlHeight}"
@@ -636,6 +633,9 @@
                                  Value="false">
                             <Setter Property="Foreground"
                                     Value="{StaticResource ControlDisabledForeground}" />
+                            <Setter TargetName="PART_EditableTextBox"
+                                    Property="IsReadOnly"
+                                    Value="true" />
                         </Trigger>
                         <Trigger Property="IsGrouping"
                                  Value="true">

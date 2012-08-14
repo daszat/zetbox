@@ -1,10 +1,10 @@
 ﻿<ctrls:PropertyEditor x:Class="Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceDropdownEditor"
-                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
-                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
-                     ToolTip="{Binding ToolTip, Mode=OneWay}"
-                     VerticalAlignment="Top">
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                      xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                      ToolTip="{Binding ToolTip, Mode=OneWay}"
+                      VerticalAlignment="Top">
     <!--
     This file is part of zetbox.
 
@@ -24,19 +24,22 @@
 
     <ctrls:PropertyEditor.ContextMenu>
         <ContextMenu ItemsSource="{Binding Commands}"
-                     ItemContainerStyle="{StaticResource CommandMenuItem}"/>
+                     ItemContainerStyle="{StaticResource CommandMenuItem}" />
     </ctrls:PropertyEditor.ContextMenu>
     <DockPanel>
         <ctrls:DropDownButton>
             <ctrls:DropDownButton.DropDown>
                 <ContextMenu ItemsSource="{Binding Commands}"
-                             ItemContainerStyle="{StaticResource CommandMenuItem}"/>
+                             ItemContainerStyle="{StaticResource CommandMenuItem}" />
             </ctrls:DropDownButton.DropDown>
         </ctrls:DropDownButton>
-        <Image Source="{Binding Value, Converter={StaticResource IconConverter}}"
-               Margin="3 0 3 0"
-               Width="14"
-               Height="14" />
+        <Border BorderBrush="{StaticResource ControlBorder}"
+                BorderThickness="1,1,0,1">
+            <Image Source="{Binding Value, Converter={StaticResource IconConverter}}"
+                   Margin="3 0 3 0"
+                   Width="14"
+                   Height="14" />
+        </Border>
         <ComboBox x:Name="cbValue"
                   IsSynchronizedWithCurrentItem="False"
                   IsEditable="True"
