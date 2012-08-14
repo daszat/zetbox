@@ -1446,7 +1446,14 @@
                                                   TextBlock.Foreground="{Binding Path=(styles:Controls.HeaderForeground), RelativeSource={RelativeSource AncestorType={x:Type GroupBox}}}"
                                                   Margin="{StaticResource ItemGroup1Margin}"
                                                   MinHeight="{StaticResource NormalControlHeight}"
-                                                  RecognizesAccessKey="True" />
+                                                  RecognizesAccessKey="True">
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment"
+                                                    Value="Center" />
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
                             </Border>
                             <Border Grid.Row="1"
                                     Background="{TemplateBinding Background}">
@@ -1651,7 +1658,7 @@
         <Setter Property="BorderBrush"
                 Value="{StaticResource ControlBorder}" />
     </Style>
-    
+
     <Style TargetType="ListView"
            BasedOn="{StaticResource zbListViewTemplate}">
     </Style>
