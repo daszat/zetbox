@@ -36,15 +36,16 @@
             <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemDownCommand}" />
         </UniformGrid>
 
-        <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                                 ItemsSource="{Binding Commands}">
-          <ctrls:WorkaroundToolBar.Resources>
-            <DataTemplate DataType="{x:Type client:CommandViewModel}">
-              <ctrls:CommandButton CommandViewModel="{Binding}"
-                                   Style="{StaticResource ImageToolbarButton}" />
-            </DataTemplate>
-          </ctrls:WorkaroundToolBar.Resources>
-        </ctrls:WorkaroundToolBar>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ctrls:WorkaroundToolBar ItemsSource="{Binding Commands}">
+                <ctrls:WorkaroundToolBar.Resources>
+                    <DataTemplate DataType="{x:Type client:CommandViewModel}">
+                        <ctrls:CommandButton CommandViewModel="{Binding}"
+                                             Style="{StaticResource ImageToolbarButton}" />
+                    </DataTemplate>
+                </ctrls:WorkaroundToolBar.Resources>
+            </ctrls:WorkaroundToolBar>
+        </ToolBarTray>
 
         <!-- configured from code, see RefreshGridView() -->
         <ctrls:ZetboxDataGrid x:Name="lst"

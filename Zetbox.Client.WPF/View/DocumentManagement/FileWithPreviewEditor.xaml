@@ -28,16 +28,17 @@
     -->
 
   <DockPanel>
-    <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                             ItemsSource="{Binding Actions}">
-      <ctrls:WorkaroundToolBar.Resources>
-        <DataTemplate DataType="{x:Type client:ActionViewModel}">
-          <ctrls:CommandButton CommandViewModel="{Binding}"
-                               Style="{StaticResource ImageToolbarButton}"/>
-        </DataTemplate>
-      </ctrls:WorkaroundToolBar.Resources>
-    </ctrls:WorkaroundToolBar>
-    <TabControl DockPanel.Dock="Top">
+        <ToolBarTray DockPanel.Dock="Top">
+            <ctrls:WorkaroundToolBar ItemsSource="{Binding Actions}">
+                <ctrls:WorkaroundToolBar.Resources>
+                    <DataTemplate DataType="{x:Type client:ActionViewModel}">
+                        <ctrls:CommandButton CommandViewModel="{Binding}"
+                                             Style="{StaticResource ImageToolbarButton}" />
+                    </DataTemplate>
+                </ctrls:WorkaroundToolBar.Resources>
+            </ctrls:WorkaroundToolBar>
+        </ToolBarTray>
+        <TabControl DockPanel.Dock="Top">
       <TabItem Header="Summary">
         <StackPanel>
           <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Name]}" />

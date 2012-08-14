@@ -1,11 +1,11 @@
 ﻿<ctrls:PropertyEditor x:Class="Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceCollectionEditor"
-                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
-                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
-                     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                     xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
-                     VerticalContentAlignment="Stretch">
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                      xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+                      xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+                      VerticalContentAlignment="Stretch">
     <!--
     This file is part of zetbox.
 
@@ -26,7 +26,7 @@
     <DockPanel>
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                                  ItemsSource="{Binding Commands}">
-          <ctrls:WorkaroundToolBar.Resources>
+            <ctrls:WorkaroundToolBar.Resources>
                 <DataTemplate DataType="{x:Type client:CommandViewModel}">
                     <ctrls:CommandButton CommandViewModel="{Binding}"
                                          Style="{StaticResource ImageToolbarButton}" />
@@ -35,13 +35,13 @@
         </ctrls:WorkaroundToolBar>
         <!-- configured from code, see RefreshGridView() -->
         <ctrls:ZetboxListView x:Name="lst"
-                  ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
-                  MinHeight="50"
-                  SelectedZetboxItems="{Binding SelectedItems}"
-                  MouseDoubleClick="ItemActivatedHandler"
-                  ItemContainerStyle="{StaticResource ListViewAsGridViewItemContainerStyle}"
-                  GridViewColumnHeader.Click="ListView_HeaderClick"
-                  KeyboardNavigation.TabNavigation="Continue">
+                              ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
+                              MinHeight="50"
+                              SelectedZetboxItems="{Binding SelectedItems}"
+                              MouseDoubleClick="ItemActivatedHandler"
+                              ItemContainerStyle="{StaticResource ListViewAsGridViewItemContainerStyle}"
+                              GridViewColumnHeader.Click="ListView_HeaderClick"
+                              KeyboardNavigation.TabNavigation="Continue">
             <ctrls:ZetboxListView.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}"
                              ItemContainerStyle="{StaticResource CommandMenuItem}" />

@@ -22,7 +22,7 @@
     -->
 
     <DockPanel>
-        <ToolBarTray DockPanel.Dock="Right">
+        <ToolBarTray DockPanel.Dock="Right" Margin="0">
             <ctrls:WorkaroundToolBar Visibility="{Binding ShowUtilities, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <ctrls:CommandButton CommandViewModel="{Binding FilterList.AddFilterCommand}"
                                      Visibility="{Binding AllowUserFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -33,7 +33,7 @@
                                      Style="{StaticResource ImageOnlyToolbarButton}" />
             </ctrls:WorkaroundToolBar>
         </ToolBarTray>
-        <ToolBarTray>
+        <ToolBarTray Margin="0">
             <ctrls:WorkaroundToolBar ItemsSource="{Binding Commands}"
                                      Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <ctrls:WorkaroundToolBar.Resources>

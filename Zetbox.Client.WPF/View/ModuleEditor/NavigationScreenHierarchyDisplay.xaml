@@ -25,18 +25,20 @@
     -->
 
     <DockPanel>
-        <ctrls:WorkaroundToolBar DockPanel.Dock="Top">
-            <ctrls:CommandButton CommandViewModel="{Binding NewCommand}"
-                                 Style="{StaticResource ImageToolbarButton}" />
-            <ctrls:CommandButton CommandViewModel="{Binding OpenCommand}"
-                                 CommandParameter="{Binding SelectedItem}"
-                                 Style="{StaticResource ImageToolbarButton}" />
-            <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}"
-                                 Style="{StaticResource ImageToolbarButton}" />
-            <ctrls:CommandButton CommandViewModel="{Binding DeleteCommand}"
-                                 CommandParameter="{Binding SelectedItem}"
-                                 Style="{StaticResource ImageToolbarButton}" />
-        </ctrls:WorkaroundToolBar>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ctrls:WorkaroundToolBar>
+                <ctrls:CommandButton CommandViewModel="{Binding NewCommand}"
+                                     Style="{StaticResource ImageToolbarButton}" />
+                <ctrls:CommandButton CommandViewModel="{Binding OpenCommand}"
+                                     CommandParameter="{Binding SelectedItem}"
+                                     Style="{StaticResource ImageToolbarButton}" />
+                <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}"
+                                     Style="{StaticResource ImageToolbarButton}" />
+                <ctrls:CommandButton CommandViewModel="{Binding DeleteCommand}"
+                                     CommandParameter="{Binding SelectedItem}"
+                                     Style="{StaticResource ImageToolbarButton}" />
+            </ctrls:WorkaroundToolBar>
+        </ToolBarTray>
         <TreeView x:Name="NavTree"
                   ItemsSource="{Binding Path=RootScreens}"
                   MouseDoubleClick="NavTree_MouseDoubleClick"

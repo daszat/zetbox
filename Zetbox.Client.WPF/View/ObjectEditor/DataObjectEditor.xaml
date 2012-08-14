@@ -67,6 +67,7 @@
                 <DataTemplate DataType="{x:Type client:SinglePropertyGroupViewModel}">
                     <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
                                   BorderThickness="0"
+                                  IsTabStop="False"
                                   HorizontalContentAlignment="Stretch">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -84,6 +85,7 @@
                     <ScrollViewer VerticalScrollBarVisibility="Visible">
                         <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
                                       BorderThickness="0"
+                                      IsTabStop="False"
                                       HorizontalContentAlignment="Stretch"
                                       VerticalContentAlignment="Stretch"
                                       VerticalAlignment="Top">

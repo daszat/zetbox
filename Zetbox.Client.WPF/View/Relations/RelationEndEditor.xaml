@@ -44,15 +44,16 @@
                                   Margin="5,0,5,0"
                                   DataContext="{Binding PropertyModelsByName[Navigator], UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
-                <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                                         ItemsSource="{Binding Actions}">
-                    <ctrls:WorkaroundToolBar.Resources>
-                      <DataTemplate DataType="{x:Type client:ActionViewModel}">
-                        <ctrls:CommandButton CommandViewModel="{Binding}"
-                                             Style="{StaticResource ImageToolbarButton}"/>
-                      </DataTemplate>
-                    </ctrls:WorkaroundToolBar.Resources>
-                </ctrls:WorkaroundToolBar>
+                <ToolBarTray DockPanel.Dock="Top">
+                    <ctrls:WorkaroundToolBar ItemsSource="{Binding Actions}">
+                        <ctrls:WorkaroundToolBar.Resources>
+                            <DataTemplate DataType="{x:Type client:ActionViewModel}">
+                                <ctrls:CommandButton CommandViewModel="{Binding}"
+                                                     Style="{StaticResource ImageToolbarButton}" />
+                            </DataTemplate>
+                        </ctrls:WorkaroundToolBar.Resources>
+                    </ctrls:WorkaroundToolBar>
+                </ToolBarTray>
             </DockPanel>
         </GroupBox>
     </DockPanel>

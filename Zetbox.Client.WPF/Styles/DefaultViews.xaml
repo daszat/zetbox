@@ -1494,6 +1494,18 @@
            BasedOn="{StaticResource zbGroupBoxTemplate}">
     </Style>
 
+    <Style x:Key="zbToolBarTrayTemplate"
+           TargetType="ToolBarTray">
+        <Setter Property="Background"
+                Value="{StaticResource AreaGroup1Background}" />
+        <Setter Property="Margin"
+                Value="{StaticResource AreaGroup1Margin}" />
+    </Style>
+
+    <Style TargetType="ToolBarTray"
+           BasedOn="{StaticResource zbToolBarTrayTemplate}">
+    </Style>
+
     <Style x:Key="zbListViewTemplate"
            TargetType="ListView">
         <Setter Property="BorderBrush"
