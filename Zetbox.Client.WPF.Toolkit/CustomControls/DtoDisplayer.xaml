@@ -37,7 +37,8 @@
                             Value="Visible" />
                 </MultiDataTrigger>
             </DataTemplate.Triggers>
-            <Grid x:Name="OverlayGrid" Background="Transparent">
+            <Grid x:Name="OverlayGrid"
+                  Background="Transparent">
                 <ContentPresenter Content="{Binding}" />
                 <StackPanel x:Name="Layer"
                             VerticalAlignment="Bottom"
@@ -174,123 +175,115 @@
                           VerticalScrollBarVisibility="Auto"
                           Background="{Binding Background}"
                           ContentTemplate="{StaticResource ExportOverlayTemplate}">
-                <StackPanel>
-                    <TextBlock Text="{Binding Title}"
-                               FontWeight="Bold"
-                               Background="{Binding Background}"
-                               Margin="3,3,1,3" />
-                    <TextBlock x:Name="Description"
-                               Padding="3"
-                               Text="{Binding Description}"
-                               Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                               Background="{Binding Background}"
-                               FontSize="12" />
-                    <!-- once for the column(headers) -->
-                    <ItemsControl x:Name="Headers"
-                                  ItemsSource="{Binding Columns}"
-                                  Background="{Binding Background}"
-                                  Visibility="{Binding Columns, Converter={StaticResource EmptyCountToCollapsedConverter}}">
-                        <ItemsControl.ItemContainerStyle>
-                            <Style>
-                                <Setter Property="Grid.Column"
-                                        Value="{Binding Column}" />
-                                <Setter Property="TextBlock.HorizontalAlignment"
-                                        Value="Center" />
-                                <Setter Property="TextBlock.Margin"
-                                        Value="5,0" />
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Grid ShowGridLines="False"
-                                      DataContextChanged="Grid_DataContextChanged"
-                                      Initialized="Grid_Initialized"
-                                      Background="{Binding Background}" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                    <!-- and once for the cells(data) -->
-                    <ItemsControl x:Name="Values"
-                                  ItemsSource="{Binding Cells}"
-                                  Background="{Binding Background}">
-                        <ItemsControl.ItemContainerStyle>
-                            <Style>
-                                <Setter Property="Grid.Row"
-                                        Value="{Binding Location.Row}" />
-                                <Setter Property="Grid.Column"
-                                        Value="{Binding Location.Column}" />
-                                <Setter Property="Grid.RowSpan"
-                                        Value="{Binding Location.RowSpan}" />
-                                <Setter Property="Grid.ColumnSpan"
-                                        Value="{Binding Location.ColumnSpan}" />
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Grid ShowGridLines="False"
-                                      DataContextChanged="Grid_DataContextChanged"
-                                      Initialized="Grid_Initialized"
-                                      Background="{Binding Background}" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                    <StackPanel x:Name="Commands"
-                                Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Orientation="Horizontal"
-                                Margin="2"
-                                HorizontalAlignment="Right">
-                        <ctrls:CommandButton x:Name="TablePrintButton"
-                                             CommandViewModel="{Binding PrintCommand}"
-                                             Style="{StaticResource ImageButton}"
-                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
-                        <ctrls:CommandButton x:Name="GroupExportButton"
-                                             CommandViewModel="{Binding ExportCommand}"
-                                             Visibility="{Binding IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                             Style="{StaticResource ImageButton}"
-                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                <GroupBox Header="{Binding Title}">
+                    <StackPanel>
+                        <TextBlock x:Name="Description"
+                                   Padding="3"
+                                   Text="{Binding Description}"
+                                   Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                                   Background="{Binding Background}"
+                                   FontSize="12" />
+                        <!-- once for the column(headers) -->
+                        <ItemsControl x:Name="Headers"
+                                      ItemsSource="{Binding Columns}"
+                                      Background="{Binding Background}"
+                                      Visibility="{Binding Columns, Converter={StaticResource EmptyCountToCollapsedConverter}}">
+                            <ItemsControl.ItemContainerStyle>
+                                <Style>
+                                    <Setter Property="Grid.Column"
+                                            Value="{Binding Column}" />
+                                    <Setter Property="TextBlock.HorizontalAlignment"
+                                            Value="Center" />
+                                    <Setter Property="TextBlock.Margin"
+                                            Value="5,0" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Grid ShowGridLines="False"
+                                          DataContextChanged="Grid_DataContextChanged"
+                                          Initialized="Grid_Initialized"
+                                          Background="{Binding Background}" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <!-- and once for the cells(data) -->
+                        <ItemsControl x:Name="Values"
+                                      ItemsSource="{Binding Cells}"
+                                      Background="{Binding Background}">
+                            <ItemsControl.ItemContainerStyle>
+                                <Style>
+                                    <Setter Property="Grid.Row"
+                                            Value="{Binding Location.Row}" />
+                                    <Setter Property="Grid.Column"
+                                            Value="{Binding Location.Column}" />
+                                    <Setter Property="Grid.RowSpan"
+                                            Value="{Binding Location.RowSpan}" />
+                                    <Setter Property="Grid.ColumnSpan"
+                                            Value="{Binding Location.ColumnSpan}" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Grid ShowGridLines="False"
+                                          DataContextChanged="Grid_DataContextChanged"
+                                          Initialized="Grid_Initialized"
+                                          Background="{Binding Background}" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <StackPanel x:Name="Commands"
+                                    Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Orientation="Horizontal"
+                                    Margin="2"
+                                    HorizontalAlignment="Right">
+                            <ctrls:CommandButton x:Name="TablePrintButton"
+                                                 CommandViewModel="{Binding PrintCommand}"
+                                                 Style="{StaticResource ImageButton}"
+                                                 Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                            <ctrls:CommandButton x:Name="GroupExportButton"
+                                                 CommandViewModel="{Binding ExportCommand}"
+                                                 Visibility="{Binding IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                 Style="{StaticResource ImageButton}"
+                                                 Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+                </GroupBox>
             </ScrollViewer>
         </DataTemplate>
         <DataTemplate DataType="{x:Type dto:DtoGroupedViewModel}">
             <ContentControl ContentTemplate="{StaticResource ExportOverlayTemplate}">
-                <DockPanel x:Name="DtoGroup"
-                           Background="{Binding Background}">
-                    <TextBlock x:Name="Title"
-                               DockPanel.Dock="Top"
-                               Margin="3,3,1,3"
-                               FontWeight="Bold"
-                               MinWidth="50"
-                               Text="{Binding Title}"
-                               Background="{Binding Background}"
-                               Visibility="{Binding Title, Converter={StaticResource EmptyStringToCollapsedConverter}}" />
-                    <TextBlock x:Name="Description"
-                               DockPanel.Dock="Bottom"
-                               Margin="3"
-                               Text="{Binding Description}"
-                               Background="{Binding Background}"
-                               Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                               FontSize="12" />
-                    <StackPanel x:Name="Commands"
-                                Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                DockPanel.Dock="Bottom"
-                                Orientation="Horizontal"
-                                Margin="2"
-                                HorizontalAlignment="Right">
-                        <ctrls:CommandButton x:Name="GroupPrintButton"
-                                             CommandViewModel="{Binding PrintCommand}"
-                                             Style="{StaticResource ImageButton}"
-                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
-                        <ctrls:CommandButton x:Name="GroupExportButton"
-                                             CommandViewModel="{Binding ExportCommand}"
-                                             Visibility="{Binding IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                             Style="{StaticResource ImageButton}"
-                                             Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
-                    </StackPanel>
-                    <ItemsControl x:Name="Items"
-                                  Margin="3,0"
-                                  ItemsSource="{Binding Items}" />
-                </DockPanel>
+                <GroupBox Header="{Binding Title}">
+                    <DockPanel x:Name="DtoGroup"
+                               Background="{Binding Background}">
+                        <TextBlock x:Name="Description"
+                                   DockPanel.Dock="Bottom"
+                                   Margin="3"
+                                   Text="{Binding Description}"
+                                   Background="{Binding Background}"
+                                   Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                                   FontSize="12" />
+                        <StackPanel x:Name="Commands"
+                                    Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    DockPanel.Dock="Bottom"
+                                    Orientation="Horizontal"
+                                    Margin="2"
+                                    HorizontalAlignment="Right">
+                            <ctrls:CommandButton x:Name="GroupPrintButton"
+                                                 CommandViewModel="{Binding PrintCommand}"
+                                                 Style="{StaticResource ImageButton}"
+                                                 Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                            <ctrls:CommandButton x:Name="GroupExportButton"
+                                                 CommandViewModel="{Binding ExportCommand}"
+                                                 Visibility="{Binding IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                 Style="{StaticResource ImageButton}"
+                                                 Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                        </StackPanel>
+                        <ItemsControl x:Name="Items"
+                                      Margin="3,0"
+                                      ItemsSource="{Binding Items}" />
+                    </DockPanel>
+                </GroupBox>
             </ContentControl>
         </DataTemplate>
     </UserControl.Resources>
