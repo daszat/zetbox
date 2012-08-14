@@ -173,7 +173,7 @@ namespace Zetbox.Client.Presentables.FilterViewModels
             }
         }
 
-        private int _yearsShortCount = 15;
+        private int _yearsShortCount = 10;
         public int YearsShortCount
         {
             get

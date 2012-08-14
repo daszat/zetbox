@@ -26,24 +26,19 @@
     <ctrls:LabeledContainer Label="{Binding Label}"
                             Required="{Binding Required}">
         <StackPanel>
-            <!--<ContentPresenter Content="{Binding From, Mode=OneWay}"
-                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
-        <ContentPresenter Content="{Binding To, Mode=OneWay}"
-                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>-->
             <DockPanel>
                 <ComboBox DockPanel.Dock="Left"
-                          Margin="5"
+                          Margin="{StaticResource ItemMargin}"
                           DisplayMemberPath="Name"
                           ItemsSource="{Binding Years}"
                           IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                           SelectedValue="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                           MinWidth="75">
                 </ComboBox>
-                <ItemsControl ItemsSource="{Binding YearsShort}">
+                <ItemsControl ItemsSource="{Binding YearsShort}" HorizontalContentAlignment="Stretch">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="{Binding YearsShortCount}"
-                                         IsItemsHost="True" />
+                            <WrapPanel IsItemsHost="True" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
@@ -51,17 +46,17 @@
                             <ToggleButton IsChecked="{Binding IsSelected}"
                                           Unchecked="btn_OnUncheck"
                                           Content="{Binding Name}"
-                                          Margin="5" />
+                                          Margin="{StaticResource ItemMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </DockPanel>
-            <DockPanel>
+            <WrapPanel>
                 <ToggleButton DockPanel.Dock="Left"
                               Unchecked="btn_OnUncheck"
                               IsChecked="{Binding AllYear.IsSelected}"
                               Content="{Binding AllYear.Name}"
-                              Margin="5" />
+                              Margin="{StaticResource ItemMargin}" />
                 <ItemsControl DockPanel.Dock="Left"
                               ItemsSource="{Binding HalfYearsWithoutEmpty}">
                     <ItemsControl.ItemsPanel>
@@ -75,7 +70,7 @@
                             <ToggleButton Unchecked="btn_OnUncheck"
                                           IsChecked="{Binding IsSelected}"
                                           Content="{Binding Name}"
-                                          Margin="5" />
+                                          Margin="{StaticResource ItemMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -92,7 +87,7 @@
                             <ToggleButton Unchecked="btn_OnUncheck"
                                           IsChecked="{Binding IsSelected}"
                                           Content="{Binding Name}"
-                                          Margin="5" />
+                                          Margin="{StaticResource ItemMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -108,11 +103,11 @@
                             <ToggleButton IsChecked="{Binding IsSelected}"
                                           Unchecked="btn_OnUncheck"
                                           Content="{Binding Name}"
-                                          Margin="5" />
+                                          Margin="{StaticResource ItemMargin}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </DockPanel>
+            </WrapPanel>
         </StackPanel>
     </ctrls:LabeledContainer>
 </UserControl>
