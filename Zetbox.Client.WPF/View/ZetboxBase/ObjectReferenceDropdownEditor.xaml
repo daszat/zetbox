@@ -27,20 +27,23 @@
                      ItemContainerStyle="{StaticResource CommandMenuItem}" />
     </ctrls:PropertyEditor.ContextMenu>
     <DockPanel>
-        <ctrls:DropDownButton>
+        <ctrls:DropDownButton DockPanel.Dock="Left">
             <ctrls:DropDownButton.DropDown>
                 <ContextMenu ItemsSource="{Binding Commands}"
                              ItemContainerStyle="{StaticResource CommandMenuItem}" />
             </ctrls:DropDownButton.DropDown>
         </ctrls:DropDownButton>
-        <Border BorderBrush="{StaticResource ControlBorder}"
+        <Border DockPanel.Dock="Left"
+                Style="{StaticResource ControlBorderStyle}"
+                MouseLeftButtonDown="Border_Click"
                 BorderThickness="1,1,0,1">
             <Image Source="{Binding Value, Converter={StaticResource IconConverter}}"
                    Margin="3 0 3 0"
                    Width="14"
                    Height="14" />
         </Border>
-        <ComboBox x:Name="cbValue"
+        <ComboBox Name="cbValue"
+                  BorderThickness="0,1,1,1"
                   IsSynchronizedWithCurrentItem="False"
                   IsEditable="True"
                   Text="{Binding SearchString, Mode=OneWayToSource}"

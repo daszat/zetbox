@@ -84,5 +84,10 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
                 cbValue.IsDropDownOpen = true;
             }
         }
+
+        private void Border_Click(object sender, RoutedEventArgs e)
+        {
+            cbValue.Focus();
+        }
     }
 }

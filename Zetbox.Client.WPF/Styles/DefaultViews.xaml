@@ -164,6 +164,25 @@
                 Value="{StaticResource ItemGroup1Border}" />
     </Style>
 
+    <Style x:Key="ControlBorderStyle"
+           TargetType="Border">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource ControlBorder}" />
+        <Setter Property="Background"
+                Value="{StaticResource ControlBackground}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled"
+                     Value="false">
+                <Setter Property="Background"
+                        Value="{StaticResource ControlDisabledBackground}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="zbButtonTemplate"
            TargetType="ButtonBase">
         <!-- TODO: extract colors into attached properties to allow individual coloring -->
@@ -444,6 +463,8 @@
                 Value="true" />
         <Setter Property="VerticalContentAlignment"
                 Value="Center" />
+        <Setter Property="BorderThickness"
+                Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBoxBase">
@@ -451,7 +472,7 @@
                             Padding="{TemplateBinding Padding}"
                             Background="{StaticResource ControlBackground}"
                             BorderBrush="{StaticResource ControlBorder}"
-                            BorderThickness="1">
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <ScrollViewer Margin="0"
                                       x:Name="PART_ContentHost" />
                     </Border>
@@ -554,6 +575,8 @@
                 Value="true" />
         <Setter Property="MinHeight"
                 Value="{StaticResource NormalControlHeight}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -577,7 +600,7 @@
                             <Border Name="ContentSite"
                                     Background="{StaticResource ControlBackground}"
                                     BorderBrush="{StaticResource ControlBorder}"
-                                    BorderThickness="1">
+                                    BorderThickness="{TemplateBinding BorderThickness}">
                                 <ContentPresenter Content="{TemplateBinding SelectionBoxItem}"
                                                   ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                                   ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
@@ -590,6 +613,7 @@
                         <TextBox x:Name="PART_EditableTextBox"
                                  Style="{StaticResource zbTextBoxTemplate}"
                                  Grid.Column="0"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
                                  HorizontalAlignment="Stretch"
                                  VerticalAlignment="Stretch"
                                  Focusable="True"

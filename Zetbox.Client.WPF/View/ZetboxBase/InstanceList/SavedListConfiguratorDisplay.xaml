@@ -19,7 +19,7 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
     <DockPanel>
-        <ctrls:DropDownButton>
+        <ctrls:DropDownButton DockPanel.Dock="Left">
             <ctrls:DropDownButton.DropDown>
                 <ContextMenu ItemsSource="{Binding Commands}"
                              ItemContainerStyle="{StaticResource CommandMenuItem}" />
