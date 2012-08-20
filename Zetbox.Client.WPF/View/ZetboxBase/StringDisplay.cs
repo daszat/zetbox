@@ -32,17 +32,12 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.GUI;
     using Zetbox.Client.WPF.CustomControls;
     using Zetbox.Client.WPF.Converter;
-    
+
     public class StringDisplay : TextBlock // Simplyfiy, often used Control
     {
-//    <TextBlock x:Name="txtStringDisplay"
-//               Text="{Binding FormattedValue, Mode=OneWay}"
-//               ToolTip="{Binding ToolTip}" />
-        private static readonly HighlightGridBackgroundConverter _highlightGridBackgroundConverter = new HighlightGridBackgroundConverter();
-        private static readonly HighlightGridForegroundConverter _highlightGridForegroundConverter = new HighlightGridForegroundConverter();
-        private static readonly HighlightGridFontStyleConverter _highlightGridFontStyleConverter = new HighlightGridFontStyleConverter();
-        private static readonly HighlightGridFontWeightConverter _highlightGridFontWeightConverter = new HighlightGridFontWeightConverter();
-
+        //    <TextBlock x:Name="txtStringDisplay"
+        //               Text="{Binding FormattedValue, Mode=OneWay}"
+        //               ToolTip="{Binding ToolTip}" />
 
         public StringDisplay()
         {
@@ -51,42 +46,9 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             // InitializeComponent
             this.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 
-            {
-                var b = new Binding("FormattedValue");
-                b.Mode = BindingMode.OneWay;
-                BindingOperations.SetBinding(this, TextBlock.TextProperty, b);
-            }
-
-            {
-                var b = new Binding("ToolTip");
-                b.Mode = BindingMode.OneWay;
-                BindingOperations.SetBinding(this, TextBlock.ToolTipProperty, b);
-            }
-
-            {
-                var b = new Binding("Highlight");
-                b.Mode = BindingMode.OneWay;
-                b.Converter = _highlightGridBackgroundConverter;
-                BindingOperations.SetBinding(this, TextBlock.BackgroundProperty, b);
-            }
-            {
-                var b = new Binding("Highlight");
-                b.Mode = BindingMode.OneWay;
-                b.Converter = _highlightGridForegroundConverter;
-                BindingOperations.SetBinding(this, TextBlock.ForegroundProperty, b);
-            }
-            {
-                var b = new Binding("Highlight");
-                b.Mode = BindingMode.OneWay;
-                b.Converter = _highlightGridFontStyleConverter;
-                BindingOperations.SetBinding(this, TextBlock.FontStyleProperty, b);
-            }
-            {
-                var b = new Binding("Highlight");
-                b.Mode = BindingMode.OneWay;
-                b.Converter = _highlightGridFontWeightConverter;
-                BindingOperations.SetBinding(this, TextBlock.FontWeightProperty, b);
-            }
+            BindingOperations.SetBinding(this, TextBlock.TextProperty, new Binding("FormattedValue") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, TextBlock.ToolTipProperty, new Binding("ToolTip") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("Highlight") { Mode = BindingMode.OneWay });
         }
     }
 }

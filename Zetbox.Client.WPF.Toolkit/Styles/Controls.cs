@@ -24,6 +24,9 @@ namespace Zetbox.Client.WPF.Styles
     using System.Windows.Controls;
     using System.Windows.Media;
     using System.Windows.Threading;
+    using Zetbox.Client.Presentables;
+    using Zetbox.App.GUI;
+using System.Windows.Data;
 
     public static class Controls
     {
@@ -188,6 +191,118 @@ namespace Zetbox.Client.WPF.Styles
         /// </summary>
         public static readonly DependencyProperty IsSecondaryProperty =
             DependencyProperty.RegisterAttached("IsSecondary", typeof(bool), typeof(Controls), new UIPropertyMetadata(false));
+        #endregion
+
+        #region Highlight
+        public static Highlight GetHighlight(DependencyObject obj)
+        {
+            return (Highlight)obj.GetValue(HighlightProperty);
+        }
+
+        public static void SetHighlight(DependencyObject obj, Highlight value)
+        {
+            obj.SetValue(HighlightProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Highlight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HighlightProperty =
+            DependencyProperty.RegisterAttached("Highlight", typeof(Highlight), typeof(Controls), new PropertyMetadata(highlight_Changed));
+
+        public static void highlight_Changed(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ApplyHighlight(sender, e);
+        }
+
+        public static bool GetStopHighlight(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(StopHighlightProperty);
+        }
+
+        public static void SetStopHighlight(DependencyObject obj, bool value)
+        {
+            obj.SetValue(StopHighlightProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for StopHighlight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StopHighlightProperty =
+            DependencyProperty.RegisterAttached("StopHighlight", typeof(bool), typeof(Controls), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits, stopHighlight_Changed));
+
+        public static void stopHighlight_Changed(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ApplyHighlight(sender, e);
+        }
+
+        private static void ApplyHighlight(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var depObj = sender as DependencyObject;
+            if (depObj == null) return;
+
+            var stop = GetStopHighlight(depObj);
+            var highlight = GetHighlight(depObj);
+
+            if (highlight != null)
+            {
+                if (stop)
+                {
+                    depObj.ClearValue(Control.ForegroundProperty);
+                    depObj.ClearValue(Control.BackgroundProperty);
+                    depObj.ClearValue(Control.FontStyleProperty);
+                    depObj.ClearValue(Control.FontWeightProperty);
+
+                    depObj.ClearValue(TextBlock.ForegroundProperty);
+                    depObj.ClearValue(TextBlock.BackgroundProperty);
+                    depObj.ClearValue(TextBlock.FontStyleProperty);
+                    depObj.ClearValue(TextBlock.FontWeightProperty);
+                }
+                else
+                {
+                    depObj.SetValue(Control.ForegroundProperty, GetHighlightValue(highlight.State, highlight.GridForeground, "GridForeground"));
+                    depObj.SetValue(Control.BackgroundProperty, GetHighlightValue(highlight.State, highlight.GridBackground, "GridBackground"));
+                    depObj.SetValue(Control.FontStyleProperty, GetHighlightValue(highlight.State, ConvertFontStyle(highlight.GridFontStyle), "GridFontStyle"));
+                    depObj.SetValue(Control.FontWeightProperty, GetHighlightValue(highlight.State, ConvertFontWeight(highlight.GridFontStyle), "GridFontWeight"));
+
+                    depObj.SetValue(TextBlock.ForegroundProperty, GetHighlightValue(highlight.State, highlight.GridForeground, "GridForeground"));
+                    depObj.SetValue(TextBlock.BackgroundProperty, GetHighlightValue(highlight.State, highlight.GridBackground, "GridBackground"));
+                    depObj.SetValue(TextBlock.FontStyleProperty, GetHighlightValue(highlight.State, ConvertFontStyle(highlight.GridFontStyle), "GridFontStyle"));
+                    depObj.SetValue(TextBlock.FontWeightProperty, GetHighlightValue(highlight.State, ConvertFontWeight(highlight.GridFontStyle), "GridFontWeight"));
+                }
+            }
+        }
+
+        private static string ConvertFontWeight(System.Drawing.FontStyle fontStyle)
+        {
+            switch (fontStyle)
+            {
+                case System.Drawing.FontStyle.Bold:
+                    return "Bold";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        private static string ConvertFontStyle(System.Drawing.FontStyle fontStyle)
+        {
+            switch (fontStyle)
+            {
+                case System.Drawing.FontStyle.Italic:
+                    return "Italic";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        public static object GetHighlightValue(HighlightState state, string explicitValue, string valueKind)
+        {
+            if (!string.IsNullOrEmpty(explicitValue))
+            {
+                return explicitValue;
+            }
+            else
+            {
+                var resource = System.Windows.Application.Current.TryFindResource(string.Format("HighlightState_{0}_{1}", state.ToString(), valueKind));
+                return resource ?? DependencyProperty.UnsetValue;
+            }
+        }
         #endregion
     }
 }

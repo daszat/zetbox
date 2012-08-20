@@ -4,7 +4,7 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
-                      xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles"
+                      xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
                       xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
                       xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                       ToolTip="{Binding ToolTip}"

@@ -95,12 +95,6 @@ namespace Zetbox.Client.WPF.View
             }
         }
 
-        protected override void OnHighlightChanged()
-        {
-            if (ViewModel.DatePartVisible) SetHighlightValue(txtDate);
-            if (ViewModel.TimePartVisible) SetHighlightValue(txtTime);
-        }
-
         // The DatePicker handles the Enter-KeyDown event, but we have to bubble it to our consumers, 
         // because this will trigger the RefreshCommand (or accept action) in filters (and dialogs)
         private bool _isEnterPressed = false;

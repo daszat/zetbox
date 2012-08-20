@@ -47,10 +47,5 @@ namespace Zetbox.Client.WPF.View
         {
             get { return cb; }
         }
-
-        protected override void SetHighlightValue(FrameworkElement ctrl, DependencyProperty dpProp, Highlight h, Converter.HighlightConverter converter, TypeConverter finalConverter)
-        {
-            if (dpProp != BackgroundProperty) base.SetHighlightValue(ctrl, dpProp, h, converter, finalConverter);
-        }
     }
 }

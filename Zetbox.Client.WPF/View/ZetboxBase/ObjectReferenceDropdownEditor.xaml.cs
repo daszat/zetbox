@@ -70,11 +70,6 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             get { return cbValue; }
         }
 
-        protected override void SetHighlightValue(FrameworkElement ctrl, DependencyProperty dpProp, Highlight h, Converter.HighlightConverter converter, TypeConverter finalConverter)
-        {
-            if (dpProp != BackgroundProperty) base.SetHighlightValue(ctrl, dpProp, h, converter, finalConverter);
-        }
-
         private void cbValue_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)

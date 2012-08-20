@@ -48,12 +48,6 @@
     <converter:EmptyCountToCollapsedConverter x:Key="EmptyCountToCollapsedConverter" />
     <converter:FormattingToFontWeightConverter x:Key="FormattingToFontWeightConverter" />
 
-    <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
-    <converter:HighlightGridForegroundConverter x:Key="HighlightGridForegroundConverter" />
-    <converter:HighlightGridFontStyleConverter x:Key="HighlightGridFontStyleConverter" />
-    <converter:HighlightGridFontWeightConverter x:Key="HighlightGridFontWeightConverter" />
-    <converter:HighlightPanelBackgroundConverter x:Key="HighlightPanelBackgroundConverter" />
-
     <DataTemplate x:Key="FakeProgressOverlay">
         <Grid Background="#88888888">
             <Grid.RowDefinitions>

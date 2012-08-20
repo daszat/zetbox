@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles"
+                    xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
                     xmlns:wpftk="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
@@ -1650,6 +1650,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
     <Style TargetType="GridSplitter"
            BasedOn="{StaticResource zbGridSplitterTemplate}" />
 
@@ -1662,6 +1663,79 @@
     <Style TargetType="ListView"
            BasedOn="{StaticResource zbListViewTemplate}">
     </Style>
+
+    <!-- thanks for the tip: http://www.steelyeyedview.com/2010/03/contentpresenter-gridviewrowpresenter.html -->
+    <Style x:Key="zbListViewItemTemplate"
+           TargetType="ListViewItem">
+        <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Name="Border"
+                            Padding="2"
+                            SnapsToDevicePixels="true"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
+                        <StackPanel>
+                            <GridViewRowPresenter x:Name="gridViewRowPresenter"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            <ContentPresenter x:Name="contentPresenter"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Visibility="Collapsed" />
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- No Columns - no GridViewRowPresenter -->
+                        <Trigger Property="GridView.ColumnCollection"
+                                 Value="{x:Null}">
+                            <Setter TargetName="contentPresenter"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="gridViewRowPresenter"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"
+                                 Value="true">
+                            <Setter Property="Background"
+                                    Value="{StaticResource ItemGroup1Background}" />
+                            <Setter Property="TextBlock.Foreground"
+                                    Value="{StaticResource ItemGroup1Foreground}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource ItemGroup1Border}" />
+                            <Setter Property="styles:Controls.StopHighlight"
+                                    Value="true" />
+                        </Trigger>
+                        <Trigger Property="IsSelected"
+                                 Value="true">
+                            <Setter Property="Background"
+                                    Value="{StaticResource ItemGroup1HeaderBackground}" />
+                            <Setter Property="TextBlock.Foreground"
+                                    Value="{StaticResource ItemGroup1HeaderForeground}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource ItemGroup1Border}" />
+                            <Setter Property="styles:Controls.StopHighlight"
+                                    Value="true" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource ControlDisabledForeground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ListViewItem"
+           BasedOn="{StaticResource zbListViewItemTemplate}" />
 
     <Style TargetType="{x:Type wpftk:DataGrid}">
     </Style>
@@ -1700,27 +1774,16 @@
 
     <!-- Style Girds and lists -->
     <Style x:Key="ListViewItemContainerStyle"
-           TargetType="ListViewItem">
-        <Setter Property="Background"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
-        <Setter Property="Foreground"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
-        <Setter Property="FontStyle"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
-        <Setter Property="FontWeight"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
+           TargetType="ListViewItem"
+           BasedOn="{StaticResource zbListViewItemTemplate}">
+        <Setter Property="styles:Controls.Highlight"
+                Value="{Binding Highlight}" />
     </Style>
 
     <Style x:Key="ListBoxItemContainerStyle"
            TargetType="ListBoxItem">
-        <Setter Property="Background"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
-        <Setter Property="Foreground"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
-        <Setter Property="FontStyle"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
-        <Setter Property="FontWeight"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
+        <Setter Property="styles:Controls.Highlight"
+                Value="{Binding Highlight}" />
     </Style>
 
     <!-- Force GridView content to be streched -->
@@ -1733,14 +1796,8 @@
 
     <Style x:Key="DataGridItemContainerStyle"
            TargetType="{x:Type wpftk:DataGridRow}">
-        <Setter Property="Background"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
-        <Setter Property="Foreground"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
-        <Setter Property="FontStyle"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
-        <Setter Property="FontWeight"
-                Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
+        <Setter Property="styles:Controls.Highlight"
+                Value="{Binding Highlight}" />
     </Style>
 
     <!-- NavigationBreadCrumb -->

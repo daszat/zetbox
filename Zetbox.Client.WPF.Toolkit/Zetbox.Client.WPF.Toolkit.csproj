@@ -104,7 +104,6 @@
     <Compile Include="Converter\EmptyCountToCollapsedConverter.cs" />
     <Compile Include="Converter\EmptyStringToCollapsedConverter.cs" />
     <Compile Include="Converter\FormattingToFontWeightConverter.cs" />
-    <Compile Include="Converter\HighlightConverter.cs" />
     <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Converter\ImageConverter.cs" />
@@ -114,6 +113,9 @@
     <Compile Include="CustomControls\DtoDisplayer.xaml.cs">
       <DependentUpon>DtoDisplayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Styles\Controls.cs" />
+    <Compile Include="Styles\Defaults.cs" />
+    <Compile Include="Styles\Margin.cs" />
     <Compile Include="WpfDelayedTask.cs" />
     <Compile Include="CustomControls\LabeledViewHorizontal.xaml.cs">
       <DependentUpon>LabeledViewHorizontal.xaml</DependentUpon>
