@@ -281,9 +281,9 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
                 if (!IsEnabled) return Highlight.Deactivated;
-                return null;
+                if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
+                return Highlight.None;
             }
         }
 
@@ -310,6 +310,7 @@ namespace Zetbox.Client.Presentables
     public sealed class Highlight
     {
         #region Static Highlight States
+        public static readonly Highlight None = new Highlight(HighlightState.None);
         public static readonly Highlight Good = new Highlight(HighlightState.Good);
         public static readonly Highlight Neutral = new Highlight(HighlightState.Neutral);
         public static readonly Highlight Bad = new Highlight(HighlightState.Bad);

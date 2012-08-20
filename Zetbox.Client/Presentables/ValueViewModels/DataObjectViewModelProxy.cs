@@ -36,7 +36,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return Object != null ? Object.Highlight : null;
+                return Object != null ? Object.Highlight : Highlight.None;
             }
         }
     }

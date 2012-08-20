@@ -123,7 +123,7 @@ namespace Zetbox.Client.Presentables.GUI
                 // Don't call base, since it's readonly, deactivated would be returned
                 // Deactivated on !IsEnabled is OK
                 if (!IsEnabled) return Highlight.Deactivated;
-                return null;
+                return Highlight.None;
             }
         }
 

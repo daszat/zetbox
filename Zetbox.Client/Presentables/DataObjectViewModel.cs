@@ -467,7 +467,7 @@ namespace Zetbox.Client.Presentables
             {
                 if (DataContext.IsElevatedMode) return Highlight.Bad;
                 if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
-                return null;
+                return Highlight.None;
             }
         }
 

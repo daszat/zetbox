@@ -104,8 +104,8 @@
                     <Border Padding="5">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{Binding Path=ElevatedModeCommand.Icon, Converter={StaticResource IconConverter}}"
-                                   MaxHeight="32"
-                                   MaxWidth="32" />
+                                   MaxHeight="{StaticResource SmallControlHeight}"
+                                   MaxWidth="{StaticResource SmallControlHeight}" />
                             <ContentPresenter Content="{Binding Path=ElevatedModeCommand.Label}"
                                               HorizontalAlignment="Center"
                                               VerticalAlignment="Center" />
