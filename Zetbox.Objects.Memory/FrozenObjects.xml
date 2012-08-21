@@ -31990,13 +31990,29 @@ public static void TestMethod(TestObjClass obj, DateTime DateTimeParamForTestMet
     <GUI:Title>Objects</GUI:Title>
     <GUI:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</GUI:Type>
   </GUI:NavigationSearchScreen>
+  <GUI:NavigationScreen ExportGuid="3f3f13b9-de6b-4db4-acf9-409fd7a733fd">
+    <GUI:ChangedOn>2012-08-21T11:33:10.776385Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:33:10.776385Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>15cec5af-b571-415e-80c9-098f8cae24f5</GUI:Parent>
+    <GUI:Children_pos>0</GUI:Children_pos>
+    <GUI:Title>Report 1</GUI:Title>
+  </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="55f7726f-c546-4b3c-8ea2-41861f489f43">
+    <GUI:ChangedOn>2012-08-21T11:33:10.776385Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:33:10.776385Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>15cec5af-b571-415e-80c9-098f8cae24f5</GUI:Parent>
+    <GUI:Children_pos>1</GUI:Children_pos>
+    <GUI:Title>Report 2</GUI:Title>
+  </GUI:NavigationScreen>
   <GUI:NavigationScreen ExportGuid="15cec5af-b571-415e-80c9-098f8cae24f5">
-    <GUI:ChangedOn>2012-08-21T11:05:48.366445Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2012-08-21T11:33:10.776385Z</GUI:ChangedOn>
     <GUI:CreatedOn>2012-08-21T13:05:48.366445Z</GUI:CreatedOn>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Parent>a3ad4e0a-7de0-4d4d-bdd2-160f62e0557a</GUI:Parent>
     <GUI:Children_pos>1</GUI:Children_pos>
-    <GUI:Title>Report</GUI:Title>
+    <GUI:Title>Reports</GUI:Title>
   </GUI:NavigationScreen>
   <GUI:NavigationSearchScreen ExportGuid="a713cc38-30aa-4884-b9c6-1be6efd9dbcd">
     <GUI:ChangedOn>2012-08-21T11:05:48.366445Z</GUI:ChangedOn>
