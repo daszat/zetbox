@@ -84,7 +84,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentMonthDefault", __oldValue, __newValue);
                     Proxy.IsCurrentMonthDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentMonthDefault", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentMonthDefault_PostSetter != null && IsAttached)
                     {
@@ -142,7 +142,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentQuaterDefault", __oldValue, __newValue);
                     Proxy.IsCurrentQuaterDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentQuaterDefault", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentQuaterDefault_PostSetter != null && IsAttached)
                     {
@@ -200,7 +200,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentYearDefault", __oldValue, __newValue);
                     Proxy.IsCurrentYearDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentYearDefault", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentYearDefault_PostSetter != null && IsAttached)
                     {

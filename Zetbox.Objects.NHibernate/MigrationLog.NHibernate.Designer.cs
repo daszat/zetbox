@@ -84,7 +84,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Destination", __oldValue, __newValue);
                     Proxy.Destination = __newValue;
                     NotifyPropertyChanged("Destination", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDestination_PostSetter != null && IsAttached)
                     {
@@ -142,7 +142,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("DestinationRows", __oldValue, __newValue);
                     Proxy.DestinationRows = __newValue;
                     NotifyPropertyChanged("DestinationRows", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDestinationRows_PostSetter != null && IsAttached)
                     {
@@ -200,7 +200,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Source", __oldValue, __newValue);
                     Proxy.Source = __newValue;
                     NotifyPropertyChanged("Source", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSource_PostSetter != null && IsAttached)
                     {
@@ -258,7 +258,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("SourceRows", __oldValue, __newValue);
                     Proxy.SourceRows = __newValue;
                     NotifyPropertyChanged("SourceRows", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSourceRows_PostSetter != null && IsAttached)
                     {
@@ -316,7 +316,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Timestamp", __oldValue, __newValue);
                     Proxy.Timestamp = __newValue;
                     NotifyPropertyChanged("Timestamp", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTimestamp_PostSetter != null && IsAttached)
                     {

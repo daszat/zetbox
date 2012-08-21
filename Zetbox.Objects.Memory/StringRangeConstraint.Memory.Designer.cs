@@ -73,7 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MaxLength", __oldValue, __newValue);
                     _MaxLength = __newValue;
                     NotifyPropertyChanged("MaxLength", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMaxLength_PostSetter != null && IsAttached)
                     {
@@ -131,7 +131,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MinLength", __oldValue, __newValue);
                     _MinLength = __newValue;
                     NotifyPropertyChanged("MinLength", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMinLength_PostSetter != null && IsAttached)
                     {

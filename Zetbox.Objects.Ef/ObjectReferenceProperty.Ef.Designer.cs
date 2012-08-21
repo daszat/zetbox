@@ -79,7 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("EagerLoading", __oldValue, __newValue);
                     _EagerLoading = __newValue;
                     NotifyPropertyChanged("EagerLoading", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnEagerLoading_PostSetter != null && IsAttached)
                     {
@@ -148,7 +148,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsInlineEditable", __oldValue, __newValue);
                     _IsInlineEditable = __newValue;
                     NotifyPropertyChanged("IsInlineEditable", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsInlineEditable_PostSetter != null && IsAttached)
                     {
@@ -333,7 +333,7 @@ namespace Zetbox.App.Base
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Navigator", null, null);
                 }
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 

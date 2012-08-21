@@ -75,7 +75,7 @@
                     <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
 
                     NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
                 }
 				else
 				{

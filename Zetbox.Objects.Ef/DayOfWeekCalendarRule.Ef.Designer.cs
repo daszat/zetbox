@@ -76,7 +76,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("DayOfWeek", __oldValue, __newValue);
                     _DayOfWeek = value;
                     NotifyPropertyChanged("DayOfWeek", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
                     if(OnDayOfWeek_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek>(__oldValue, __newValue);

@@ -73,7 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Precision", __oldValue, __newValue);
                     _Precision = __newValue;
                     NotifyPropertyChanged("Precision", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPrecision_PostSetter != null && IsAttached)
                     {
@@ -131,7 +131,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Scale", __oldValue, __newValue);
                     _Scale = __newValue;
                     NotifyPropertyChanged("Scale", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnScale_PostSetter != null && IsAttached)
                     {

@@ -76,7 +76,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DateTimeStyle", __oldValue, __newValue);
                     _DateTimeStyle = value;
                     NotifyPropertyChanged("DateTimeStyle", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
                     if(OnDateTimeStyle_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__oldValue, __newValue);

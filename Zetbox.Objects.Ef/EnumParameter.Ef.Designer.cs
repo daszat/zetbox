@@ -133,7 +133,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Enumeration", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 

@@ -84,7 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Schema", __oldValue, __newValue);
                     Proxy.Schema = __newValue;
                     NotifyPropertyChanged("Schema", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSchema_PostSetter != null && IsAttached)
                     {
@@ -142,7 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Version", __oldValue, __newValue);
                     Proxy.Version = __newValue;
                     NotifyPropertyChanged("Version", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVersion_PostSetter != null && IsAttached)
                     {

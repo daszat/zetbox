@@ -144,7 +144,7 @@ namespace Zetbox.App.Test
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("NEnds", null, null);
                 }
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -171,7 +171,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("NEnds_pos", __oldValue, __newValue);
                     _NEnds_pos = __newValue;
                     NotifyPropertyChanged("NEnds_pos", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
 				else 
@@ -236,7 +236,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("OtherInt", __oldValue, __newValue);
                     _OtherInt = __newValue;
                     NotifyPropertyChanged("OtherInt", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnOtherInt_PostSetter != null && IsAttached)
                     {
@@ -464,7 +464,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
 				else 

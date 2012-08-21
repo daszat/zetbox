@@ -84,7 +84,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Large", __oldValue, __newValue);
                     Proxy.Large = __newValue;
                     NotifyPropertyChanged("Large", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnLarge_PostSetter != null && IsAttached)
                     {
@@ -142,7 +142,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("NoScale", __oldValue, __newValue);
                     Proxy.NoScale = __newValue;
                     NotifyPropertyChanged("NoScale", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnNoScale_PostSetter != null && IsAttached)
                     {
@@ -200,7 +200,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("SmallDecimal", __oldValue, __newValue);
                     Proxy.SmallDecimal = __newValue;
                     NotifyPropertyChanged("SmallDecimal", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSmallDecimal_PostSetter != null && IsAttached)
                     {

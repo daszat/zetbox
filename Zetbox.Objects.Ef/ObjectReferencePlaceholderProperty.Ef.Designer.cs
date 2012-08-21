@@ -79,7 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     _HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -148,7 +148,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ImplementorRoleName", __oldValue, __newValue);
                     _ImplementorRoleName = __newValue;
                     NotifyPropertyChanged("ImplementorRoleName", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnImplementorRoleName_PostSetter != null && IsAttached)
                     {
@@ -217,7 +217,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -286,7 +286,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ItemRoleName", __oldValue, __newValue);
                     _ItemRoleName = __newValue;
                     NotifyPropertyChanged("ItemRoleName", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnItemRoleName_PostSetter != null && IsAttached)
                     {
@@ -409,7 +409,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ReferencedObjectClass", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -459,7 +459,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Verb", __oldValue, __newValue);
                     _Verb = __newValue;
                     NotifyPropertyChanged("Verb", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVerb_PostSetter != null && IsAttached)
                     {

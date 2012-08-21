@@ -79,7 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
                     _CurrentNumber = __newValue;
                     NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCurrentNumber_PostSetter != null && IsAttached)
                     {
@@ -213,7 +213,7 @@ namespace Zetbox.App.Base
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Data", null, null);
                 }
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -410,7 +410,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
 				else 

@@ -79,7 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ObjClass", __oldValue, __newValue);
                     _ObjClass = __newValue;
                     NotifyPropertyChanged("ObjClass", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnObjClass_PostSetter != null && IsAttached)
                     {
@@ -135,7 +135,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ObjGuid", __oldValue, __newValue);
                     _ObjGuid = __newValue;
                     NotifyPropertyChanged("ObjGuid", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnObjGuid_PostSetter != null && IsAttached)
                     {
@@ -191,7 +191,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ObjID", __oldValue, __newValue);
                     _ObjID = __newValue;
                     NotifyPropertyChanged("ObjID", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnObjID_PostSetter != null && IsAttached)
                     {

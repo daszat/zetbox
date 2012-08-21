@@ -73,7 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
                     _CurrentNumber = __newValue;
                     NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCurrentNumber_PostSetter != null && IsAttached)
                     {
@@ -187,7 +187,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Sequence", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnSequence_PostSetter != null && IsAttached)
                 {

@@ -84,7 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IntValue", __oldValue, __newValue);
                     Proxy.IntValue = __newValue;
                     NotifyPropertyChanged("IntValue", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIntValue_PostSetter != null && IsAttached)
                     {

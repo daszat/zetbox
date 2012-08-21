@@ -84,7 +84,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("DayOfWeek", __oldValue, __newValue);
                     Proxy.DayOfWeek = __newValue;
                     NotifyPropertyChanged("DayOfWeek", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDayOfWeek_PostSetter != null && IsAttached)
                     {

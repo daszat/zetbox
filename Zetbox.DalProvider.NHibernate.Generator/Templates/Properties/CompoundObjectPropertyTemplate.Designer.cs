@@ -88,7 +88,7 @@ this.WriteObjects("					",  backingStoreName , " = __newValue;\r\n");
 this.WriteObjects("					",  backingStoreName , ".AttachToObject(this, \"",  propName , "\");\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("					NotifyPropertyChanged(\"",  propName , "\", __oldValue, __newValue);\r\n");
-this.WriteObjects("                    UpdateChangedInfo = true;\r\n");
+this.WriteObjects("                    if(IsAttached) UpdateChangedInfo = true;\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				else\r\n");
 this.WriteObjects("				{\r\n");

@@ -84,7 +84,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("MyIntProperty", __oldValue, __newValue);
                     Proxy.MyIntProperty = __newValue;
                     NotifyPropertyChanged("MyIntProperty", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMyIntProperty_PostSetter != null && IsAttached)
                     {
@@ -178,7 +178,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ObjectProp", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnObjectProp_PostSetter != null && IsAttached)
                 {
@@ -235,7 +235,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     Proxy.StringProp = __newValue;
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
@@ -293,7 +293,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("TestEnumProp", __oldValue, __newValue);
                     Proxy.TestEnumProp = __newValue;
                     NotifyPropertyChanged("TestEnumProp", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestEnumProp_PostSetter != null && IsAttached)
                     {

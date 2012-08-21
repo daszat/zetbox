@@ -89,7 +89,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Identity", __oldValue, __newValue);
                     _Identity = __newValue;
                     NotifyPropertyChanged("Identity", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIdentity_PostSetter != null && IsAttached)
                     {
@@ -156,7 +156,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MessageFormat", __oldValue, __newValue);
                     _MessageFormat = __newValue;
                     NotifyPropertyChanged("MessageFormat", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMessageFormat_PostSetter != null && IsAttached)
                     {
@@ -223,7 +223,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("NewValue", __oldValue, __newValue);
                     _NewValue = __newValue;
                     NotifyPropertyChanged("NewValue", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnNewValue_PostSetter != null && IsAttached)
                     {
@@ -290,7 +290,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("OldValue", __oldValue, __newValue);
                     _OldValue = __newValue;
                     NotifyPropertyChanged("OldValue", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnOldValue_PostSetter != null && IsAttached)
                     {
@@ -357,7 +357,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("PropertyName", __oldValue, __newValue);
                     _PropertyName = __newValue;
                     NotifyPropertyChanged("PropertyName", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPropertyName_PostSetter != null && IsAttached)
                     {
@@ -439,7 +439,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Timestamp", __oldValue, __newValue);
                     _Timestamp = __newValue;
                     NotifyPropertyChanged("Timestamp", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTimestamp_PostSetter != null && IsAttached)
                     {

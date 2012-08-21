@@ -87,7 +87,7 @@ this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", _
 #line 66 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
 if (!isCalculated) { 
 #line 67 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-this.WriteObjects("                    UpdateChangedInfo = true;\r\n");
+this.WriteObjects("                    if(IsAttached) UpdateChangedInfo = true;\r\n");
 #line 68 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
 } else { 
 #line 69 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"

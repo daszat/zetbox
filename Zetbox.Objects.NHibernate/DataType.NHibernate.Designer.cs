@@ -126,7 +126,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -184,7 +184,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -334,7 +334,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -392,7 +392,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -505,7 +505,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultIcon", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultIcon_PostSetter != null && IsAttached)
                 {
@@ -564,7 +564,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -623,7 +623,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -804,7 +804,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -863,7 +863,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -994,7 +994,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnRequestedKind_PostSetter != null && IsAttached)
                 {
@@ -1054,7 +1054,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                     NotifyPropertyChanging("ShowIconInLists", __oldValue, __newValue);
                     Proxy.ShowIconInLists = __newValue;
                     NotifyPropertyChanged("ShowIconInLists", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowIconInLists_PostSetter != null && IsAttached)
                     {
@@ -1132,7 +1132,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                     NotifyPropertyChanging("ShowIdInLists", __oldValue, __newValue);
                     Proxy.ShowIdInLists = __newValue;
                     NotifyPropertyChanged("ShowIdInLists", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowIdInLists_PostSetter != null && IsAttached)
                     {
@@ -1210,7 +1210,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                     NotifyPropertyChanging("ShowNameInLists", __oldValue, __newValue);
                     Proxy.ShowNameInLists = __newValue;
                     NotifyPropertyChanged("ShowNameInLists", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowNameInLists_PostSetter != null && IsAttached)
                     {

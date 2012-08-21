@@ -73,7 +73,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowAddNew", __oldValue, __newValue);
                     _AllowAddNew = __newValue;
                     NotifyPropertyChanged("AllowAddNew", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowAddNew_PostSetter != null && IsAttached)
                     {
@@ -131,7 +131,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowDelete", __oldValue, __newValue);
                     _AllowDelete = __newValue;
                     NotifyPropertyChanged("AllowDelete", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowDelete_PostSetter != null && IsAttached)
                     {
@@ -189,7 +189,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowSelectColumns", __oldValue, __newValue);
                     _AllowSelectColumns = __newValue;
                     NotifyPropertyChanged("AllowSelectColumns", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowSelectColumns_PostSetter != null && IsAttached)
                     {
@@ -247,7 +247,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowUserFilter", __oldValue, __newValue);
                     _AllowUserFilter = __newValue;
                     NotifyPropertyChanged("AllowUserFilter", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowUserFilter_PostSetter != null && IsAttached)
                     {
@@ -305,7 +305,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("EnableAutoFilter", __oldValue, __newValue);
                     _EnableAutoFilter = __newValue;
                     NotifyPropertyChanged("EnableAutoFilter", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnEnableAutoFilter_PostSetter != null && IsAttached)
                     {
@@ -363,7 +363,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("InitialSort", __oldValue, __newValue);
                     _InitialSort = __newValue;
                     NotifyPropertyChanged("InitialSort", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnInitialSort_PostSetter != null && IsAttached)
                     {
@@ -421,7 +421,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("InitialSortDirection", __oldValue, __newValue);
                     _InitialSortDirection = __newValue;
                     NotifyPropertyChanged("InitialSortDirection", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnInitialSortDirection_PostSetter != null && IsAttached)
                     {
@@ -479,7 +479,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsEditable", __oldValue, __newValue);
                     _IsEditable = __newValue;
                     NotifyPropertyChanged("IsEditable", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsEditable_PostSetter != null && IsAttached)
                     {
@@ -537,7 +537,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsMultiselect", __oldValue, __newValue);
                     _IsMultiselect = __newValue;
                     NotifyPropertyChanged("IsMultiselect", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsMultiselect_PostSetter != null && IsAttached)
                     {
@@ -636,7 +636,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnRequestedEditorKind_PostSetter != null && IsAttached)
                 {
@@ -729,7 +729,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnRequestedWorkspaceKind_PostSetter != null && IsAttached)
                 {
@@ -781,7 +781,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("RespectRequiredFilter", __oldValue, __newValue);
                     _RespectRequiredFilter = __newValue;
                     NotifyPropertyChanged("RespectRequiredFilter", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnRespectRequiredFilter_PostSetter != null && IsAttached)
                     {
@@ -839,7 +839,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ShowFilter", __oldValue, __newValue);
                     _ShowFilter = __newValue;
                     NotifyPropertyChanged("ShowFilter", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowFilter_PostSetter != null && IsAttached)
                     {
@@ -897,7 +897,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ShowMasterDetail", __oldValue, __newValue);
                     _ShowMasterDetail = __newValue;
                     NotifyPropertyChanged("ShowMasterDetail", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowMasterDetail_PostSetter != null && IsAttached)
                     {
@@ -955,7 +955,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ShowOpenCommand", __oldValue, __newValue);
                     _ShowOpenCommand = __newValue;
                     NotifyPropertyChanged("ShowOpenCommand", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowOpenCommand_PostSetter != null && IsAttached)
                     {
@@ -1013,7 +1013,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ShowRefreshCommand", __oldValue, __newValue);
                     _ShowRefreshCommand = __newValue;
                     NotifyPropertyChanged("ShowRefreshCommand", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowRefreshCommand_PostSetter != null && IsAttached)
                     {
@@ -1112,7 +1112,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Type", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnType_PostSetter != null && IsAttached)
                 {
@@ -1164,7 +1164,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ViewMethod", __oldValue, __newValue);
                     _ViewMethod = __newValue;
                     NotifyPropertyChanged("ViewMethod", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnViewMethod_PostSetter != null && IsAttached)
                     {

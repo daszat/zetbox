@@ -129,7 +129,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("OneEnd", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnOneEnd_PostSetter != null && IsAttached)
                 {
@@ -158,7 +158,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("NEnds_pos", __oldValue, __newValue);
                     _NEnds_pos = __newValue;
                     NotifyPropertyChanged("NEnds_pos", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
 				else 
@@ -212,7 +212,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("OtherInt", __oldValue, __newValue);
                     _OtherInt = __newValue;
                     NotifyPropertyChanged("OtherInt", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnOtherInt_PostSetter != null && IsAttached)
                     {

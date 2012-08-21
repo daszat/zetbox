@@ -79,7 +79,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Predicate", __oldValue, __newValue);
                     _Predicate = __newValue;
                     NotifyPropertyChanged("Predicate", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPredicate_PostSetter != null && IsAttached)
                     {

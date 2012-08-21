@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-21T12:24:21Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-21T12:24:21.822223Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -39,6 +39,11 @@ public static void NotifyCreated(Application obj)
 
 [Invocation]
 public static void NotifyDeleting(Application obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Application obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -84,6 +89,11 @@ public static void NotifyDeleting(ControlKind obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(ControlKind obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -125,6 +135,11 @@ public static void NotifyDeleting(DateRangeFilterConfiguration obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(DateRangeFilterConfiguration obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -162,6 +177,11 @@ public static void NotifyCreated(FilterConfiguration obj)
 
 [Invocation]
 public static void NotifyDeleting(FilterConfiguration obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(FilterConfiguration obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -214,6 +234,11 @@ public static void NotifyCreated(Icon obj)
 
 [Invocation]
 public static void NotifyDeleting(Icon obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Icon obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -290,6 +315,11 @@ public static void NotifyDeleting(MonthFilterConfiguration obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(MonthFilterConfiguration obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -328,6 +358,11 @@ public static void NotifyCreated(NavigationAction obj)
 
 [Invocation]
 public static void NotifyDeleting(NavigationAction obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(NavigationAction obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -372,6 +407,11 @@ public static void NotifyDeleting(NavigationEntry obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(NavigationEntry obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
@@ -410,6 +450,11 @@ public static void NotifyCreated(NavigationScreen obj)
 
 [Invocation]
 public static void NotifyDeleting(NavigationScreen obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(NavigationScreen obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -455,6 +500,11 @@ public static void NotifyDeleting(NavigationSearchScreen obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(NavigationSearchScreen obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -494,6 +544,11 @@ public static void NotifyCreated(ObjectClassFilterConfiguration obj)
 
 [Invocation]
 public static void NotifyDeleting(ObjectClassFilterConfiguration obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(ObjectClassFilterConfiguration obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -539,6 +594,11 @@ public static void NotifyDeleting(OptionalPredicateFilterConfiguration obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(OptionalPredicateFilterConfiguration obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -578,6 +638,11 @@ public static void NotifyCreated(PropertyFilterConfiguration obj)
 
 [Invocation]
 public static void NotifyDeleting(PropertyFilterConfiguration obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyFilterConfiguration obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -623,6 +688,11 @@ public static void NotifyDeleting(RangeFilterConfiguration obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(RangeFilterConfiguration obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -641,32 +711,32 @@ public static void NotifyDeleting(RangeFilterConfiguration obj)
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(ListConfiguration obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(SavedListConfiguration obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(ListConfiguration obj)
+public static void NotifyPreSave(SavedListConfiguration obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(ListConfiguration obj)
+public static void NotifyPostSave(SavedListConfiguration obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(ListConfiguration obj)
+public static void NotifyCreated(SavedListConfiguration obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(ListConfiguration obj)
+public static void NotifyDeleting(SavedListConfiguration obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(ListConfiguration obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(SavedListConfiguration obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -712,6 +782,11 @@ public static void NotifyDeleting(SinglePropertyFilterConfiguration obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(SinglePropertyFilterConfiguration obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -750,6 +825,11 @@ public static void NotifyCreated(Template obj)
 
 [Invocation]
 public static void NotifyDeleting(Template obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Template obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -806,6 +886,11 @@ public static void NotifyDeleting(ViewDescriptor obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(ViewDescriptor obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -847,6 +932,11 @@ public static void NotifyDeleting(ViewModelDescriptor obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(ViewModelDescriptor obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -885,6 +975,11 @@ public static void NotifyCreated(Visual obj)
 
 [Invocation]
 public static void NotifyDeleting(Visual obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Visual obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -937,6 +1032,11 @@ public static void NotifyCreated(YearFilterConfiguration obj)
 
 [Invocation]
 public static void NotifyDeleting(YearFilterConfiguration obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -4192,22 +4292,22 @@ public static void isValid_Property(PropertyFilterConfiguration obj, PropertyIsV
     <ZetboxBase:CategoryTags>Configuration</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-07-13T18:47:04.556493Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Configuration(ListConfiguration obj, PropertyGetterEventArgs&lt;string&gt; e)
+public static void get_Configuration(SavedListConfiguration obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Configuration(ListConfiguration obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+public static void preSet_Configuration(SavedListConfiguration obj, PropertyPreSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Configuration(ListConfiguration obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+public static void postSet_Configuration(SavedListConfiguration obj, PropertyPostSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Configuration(ListConfiguration obj, PropertyIsValidEventArgs e)
+public static void isValid_Configuration(SavedListConfiguration obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Configuration == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -4229,22 +4329,22 @@ public static void isValid_Configuration(ListConfiguration obj, PropertyIsValidE
     <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-07-13T18:47:04.556493Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ExportGuid(ListConfiguration obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+public static void get_ExportGuid(SavedListConfiguration obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ExportGuid(ListConfiguration obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+public static void preSet_ExportGuid(SavedListConfiguration obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ExportGuid(ListConfiguration obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+public static void postSet_ExportGuid(SavedListConfiguration obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ExportGuid(ListConfiguration obj, PropertyIsValidEventArgs e)
+public static void isValid_ExportGuid(SavedListConfiguration obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ExportGuid == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -7262,6 +7362,16 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
 public static void GetName(ControlKind obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetNameCanExec(ControlKind obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(ControlKind obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-12-02T19:38:21.844709Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -7298,6 +7408,16 @@ public static void CreateFilterModelCanExecReason(FilterConfiguration obj, Metho
 public static void GetLabel(FilterConfiguration obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetLabelCanExec(FilterConfiguration obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetLabelCanExecReason(FilterConfiguration obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-11-19T19:00:57Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -7309,6 +7429,16 @@ public static void GetLabel(FilterConfiguration obj, MethodReturnEventArgs&lt;st
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetName(Icon obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExec(Icon obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(Icon obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -7324,6 +7454,16 @@ public static void GetName(Icon obj, MethodReturnEventArgs&lt;string&gt; e)
 public static void Open(Icon obj)
 {
 }
+
+[Invocation]
+public static void OpenCanExec(Icon obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void OpenCanExecReason(Icon obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-01-07T21:54:32Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -7337,6 +7477,16 @@ public static void Open(Icon obj)
 public static void Upload(Icon obj)
 {
 }
+
+[Invocation]
+public static void UploadCanExec(Icon obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void UploadCanExecReason(Icon obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-01-07T21:54:32Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -7348,6 +7498,16 @@ public static void Upload(Icon obj)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void ChooseObject(IRenderer obj, MethodReturnEventArgs&lt;Zetbox.API.IDataObject&gt; e, Zetbox.API.IZetboxContext ctx, System.Type objectType)
+{
+}
+
+[Invocation]
+public static void ChooseObjectCanExec(IRenderer obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ChooseObjectCanExecReason(IRenderer obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -7364,6 +7524,16 @@ public static void ChooseObject(IRenderer obj, MethodReturnEventArgs&lt;Zetbox.A
 public static void ShowMessage(IRenderer obj, string message)
 {
 }
+
+[Invocation]
+public static void ShowMessageCanExec(IRenderer obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ShowMessageCanExecReason(IRenderer obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
@@ -7376,6 +7546,16 @@ public static void ShowMessage(IRenderer obj, string message)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void ShowObject(IRenderer obj, Zetbox.API.IDataObject obj)
+{
+}
+
+[Invocation]
+public static void ShowObjectCanExec(IRenderer obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ShowObjectCanExecReason(IRenderer obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -7392,6 +7572,16 @@ public static void ShowObject(IRenderer obj, Zetbox.API.IDataObject obj)
 public static void GetDefaultViewModel(NavigationEntry obj, MethodReturnEventArgs&lt;System.Object&gt; e, Zetbox.API.IZetboxContext dataCtx, System.Object parent)
 {
 }
+
+[Invocation]
+public static void GetDefaultViewModelCanExec(NavigationEntry obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetDefaultViewModelCanExecReason(NavigationEntry obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-10-19T08:52:53.021868Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -7403,6 +7593,16 @@ public static void GetDefaultViewModel(NavigationEntry obj, MethodReturnEventArg
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void PrepareDefault(Template obj, Zetbox.App.Base.ObjectClass cls)
+{
+}
+
+[Invocation]
+public static void PrepareDefaultCanExec(Template obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void PrepareDefaultCanExecReason(Template obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -7417,6 +7617,16 @@ public static void PrepareDefault(Template obj, Zetbox.App.Base.ObjectClass cls)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExec(ViewModelDescriptor obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -16257,6 +16467,11 @@ public static void NotifyDeleting(AbstractModuleMember obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(AbstractModuleMember obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -16294,6 +16509,11 @@ public static void NotifyCreated(AccessControl obj)
 
 [Invocation]
 public static void NotifyDeleting(AccessControl obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(AccessControl obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -16359,6 +16579,11 @@ public static void NotifyDeleting(Assembly obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Assembly obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -16411,6 +16636,11 @@ public static void NotifyDeleting(BaseParameter obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(BaseParameter obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
@@ -16453,6 +16683,11 @@ public static void NotifyDeleting(Blob obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Blob obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -16492,6 +16727,11 @@ public static void NotifyCreated(BoolDefaultValue obj)
 
 [Invocation]
 public static void NotifyDeleting(BoolDefaultValue obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(BoolDefaultValue obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -16538,6 +16778,11 @@ public static void NotifyDeleting(BoolParameter obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(BoolParameter obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -16578,6 +16823,11 @@ public static void NotifyCreated(BoolProperty obj)
 
 [Invocation]
 public static void NotifyDeleting(BoolProperty obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(BoolProperty obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -16623,6 +16873,11 @@ public static void NotifyDeleting(CalculatedObjectReferenceProperty obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(CalculatedObjectReferenceProperty obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -16662,6 +16917,11 @@ public static void NotifyCreated(ClientReadOnlyConstraint obj)
 
 [Invocation]
 public static void NotifyDeleting(ClientReadOnlyConstraint obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(ClientReadOnlyConstraint obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -16708,6 +16968,11 @@ public static void NotifyDeleting(CLRObjectParameter obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(CLRObjectParameter obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -16751,6 +17016,11 @@ public static void NotifyDeleting(CompoundObject obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(CompoundObject obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>8c72dff9-c3b8-417b-a2ef-5f22ffe9dd54</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -16790,6 +17060,11 @@ public static void NotifyCreated(CompoundObjectParameter obj)
 
 [Invocation]
 public static void NotifyDeleting(CompoundObjectParameter obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(CompoundObjectParameter obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -16836,6 +17111,11 @@ public static void NotifyDeleting(CompoundObjectProperty obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(CompoundObjectProperty obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -16877,6 +17157,11 @@ public static void NotifyDeleting(Constraint obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Constraint obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -16914,6 +17199,11 @@ public static void NotifyCreated(ConstraintInvocation obj)
 
 [Invocation]
 public static void NotifyDeleting(ConstraintInvocation obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(ConstraintInvocation obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -16970,6 +17260,11 @@ public static void NotifyDeleting(CurrentDateTimeDefaultValue obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(CurrentDateTimeDefaultValue obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17012,6 +17307,11 @@ public static void NotifyDeleting(CurrentSchema obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(CurrentSchema obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17051,6 +17351,11 @@ public static void NotifyCreated(DataType obj)
 
 [Invocation]
 public static void NotifyDeleting(DataType obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(DataType obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -17097,6 +17402,11 @@ public static void NotifyDeleting(DateTimeParameter obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(DateTimeParameter obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17137,6 +17447,11 @@ public static void NotifyCreated(DateTimeProperty obj)
 
 [Invocation]
 public static void NotifyDeleting(DateTimeProperty obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(DateTimeProperty obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -17213,6 +17528,11 @@ public static void NotifyDeleting(DecimalParameter obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(DecimalParameter obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17256,6 +17576,11 @@ public static void NotifyDeleting(DecimalProperty obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(DecimalProperty obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17293,6 +17618,11 @@ public static void NotifyCreated(DefaultPropertyValue obj)
 
 [Invocation]
 public static void NotifyDeleting(DefaultPropertyValue obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(DefaultPropertyValue obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -17351,6 +17681,11 @@ public static void NotifyDeleting(DoubleParameter obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(DoubleParameter obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17394,6 +17729,11 @@ public static void NotifyDeleting(DoubleProperty obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(DoubleProperty obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17433,6 +17773,11 @@ public static void NotifyCreated(EnumDefaultValue obj)
 
 [Invocation]
 public static void NotifyDeleting(EnumDefaultValue obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(EnumDefaultValue obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -17479,6 +17824,11 @@ public static void NotifyDeleting(Enumeration obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Enumeration obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>8c72dff9-c3b8-417b-a2ef-5f22ffe9dd54</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17518,6 +17868,11 @@ public static void NotifyCreated(EnumerationEntry obj)
 
 [Invocation]
 public static void NotifyDeleting(EnumerationEntry obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(EnumerationEntry obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -17564,6 +17919,11 @@ public static void NotifyDeleting(EnumerationProperty obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(EnumerationProperty obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17603,6 +17963,11 @@ public static void NotifyCreated(EnumParameter obj)
 
 [Invocation]
 public static void NotifyDeleting(EnumParameter obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(EnumParameter obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -17647,6 +18012,11 @@ public static void NotifyDeleting(ExceptionLogEntry obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(ExceptionLogEntry obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17684,6 +18054,11 @@ public static void NotifyCreated(Group obj)
 
 [Invocation]
 public static void NotifyDeleting(Group obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Group obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -17728,6 +18103,11 @@ public static void NotifyDeleting(GroupMembership obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(GroupMembership obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17768,6 +18148,11 @@ public static void NotifyCreated(GuidProperty obj)
 
 [Invocation]
 public static void NotifyDeleting(GuidProperty obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(GuidProperty obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -17831,6 +18216,11 @@ public static void NotifyCreated(Identity obj)
 
 [Invocation]
 public static void NotifyDeleting(Identity obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Identity obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -17915,6 +18305,11 @@ public static void NotifyDeleting(IndexConstraint obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(IndexConstraint obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17957,6 +18352,11 @@ public static void NotifyDeleting(InitOnlyConstraint obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(InitOnlyConstraint obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -17994,6 +18394,11 @@ public static void NotifyCreated(InstanceConstraint obj)
 
 [Invocation]
 public static void NotifyDeleting(InstanceConstraint obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(InstanceConstraint obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18039,6 +18444,11 @@ public static void NotifyDeleting(IntDefaultValue obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(IntDefaultValue obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18078,6 +18488,11 @@ public static void NotifyCreated(IntegerRangeConstraint obj)
 
 [Invocation]
 public static void NotifyDeleting(IntegerRangeConstraint obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(IntegerRangeConstraint obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18124,6 +18539,11 @@ public static void NotifyDeleting(Interface obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Interface obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18164,6 +18584,11 @@ public static void NotifyCreated(IntParameter obj)
 
 [Invocation]
 public static void NotifyDeleting(IntParameter obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(IntParameter obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18210,6 +18635,11 @@ public static void NotifyDeleting(IntProperty obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(IntProperty obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18249,6 +18679,11 @@ public static void NotifyCreated(InvokingConstraint obj)
 
 [Invocation]
 public static void NotifyDeleting(InvokingConstraint obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(InvokingConstraint obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18294,6 +18729,11 @@ public static void NotifyDeleting(IsValidIdentifierConstraint obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(IsValidIdentifierConstraint obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18333,6 +18773,11 @@ public static void NotifyCreated(IsValidNamespaceConstraint obj)
 
 [Invocation]
 public static void NotifyDeleting(IsValidNamespaceConstraint obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(IsValidNamespaceConstraint obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18378,6 +18823,11 @@ public static void NotifyDeleting(Method obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Method obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18420,6 +18870,11 @@ public static void NotifyDeleting(MethodInvocationConstraint obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(MethodInvocationConstraint obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18459,6 +18914,11 @@ public static void NotifyCreated(Module obj)
 
 [Invocation]
 public static void NotifyDeleting(Module obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Module obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18516,6 +18976,11 @@ public static void NotifyDeleting(NewGuidDefaultValue obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(NewGuidDefaultValue obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18555,6 +19020,11 @@ public static void NotifyCreated(NotNullableConstraint obj)
 
 [Invocation]
 public static void NotifyDeleting(NotNullableConstraint obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(NotNullableConstraint obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18601,6 +19071,11 @@ public static void NotifyDeleting(ObjectClass obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(ObjectClass obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18641,6 +19116,11 @@ public static void NotifyCreated(ObjectReferenceParameter obj)
 
 [Invocation]
 public static void NotifyDeleting(ObjectReferenceParameter obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(ObjectReferenceParameter obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18687,6 +19167,11 @@ public static void NotifyDeleting(ObjectReferencePlaceholderProperty obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(ObjectReferencePlaceholderProperty obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18727,6 +19212,11 @@ public static void NotifyCreated(ObjectReferenceProperty obj)
 
 [Invocation]
 public static void NotifyDeleting(ObjectReferenceProperty obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(ObjectReferenceProperty obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18772,6 +19262,11 @@ public static void NotifyDeleting(Property obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Property obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
@@ -18811,6 +19306,11 @@ public static void NotifyCreated(ReadOnlyConstraint obj)
 
 [Invocation]
 public static void NotifyDeleting(ReadOnlyConstraint obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(ReadOnlyConstraint obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18856,6 +19356,11 @@ public static void NotifyDeleting(Relation obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Relation obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>225bfb18-82fc-429d-81ff-e1ba738fdbc7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18894,6 +19399,11 @@ public static void NotifyCreated(RelationEnd obj)
 
 [Invocation]
 public static void NotifyDeleting(RelationEnd obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(RelationEnd obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -18938,6 +19448,11 @@ public static void NotifyDeleting(RoleMembership obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(RoleMembership obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>882ba118-6545-4ba8-83de-0e973a38fc3e</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -18976,6 +19491,11 @@ public static void NotifyCreated(Sequence obj)
 
 [Invocation]
 public static void NotifyDeleting(Sequence obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Sequence obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -19019,6 +19539,11 @@ public static void NotifyDeleting(SequenceData obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(SequenceData obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -19057,6 +19582,11 @@ public static void NotifyCreated(ServiceDescriptor obj)
 
 [Invocation]
 public static void NotifyDeleting(ServiceDescriptor obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(ServiceDescriptor obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -19114,6 +19644,11 @@ public static void NotifyDeleting(StringDefaultValue obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(StringDefaultValue obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -19154,6 +19689,11 @@ public static void NotifyCreated(StringParameter obj)
 
 [Invocation]
 public static void NotifyDeleting(StringParameter obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(StringParameter obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -19200,6 +19740,11 @@ public static void NotifyDeleting(StringProperty obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(StringProperty obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -19242,6 +19787,11 @@ public static void NotifyDeleting(StringRangeConstraint obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(StringRangeConstraint obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -19281,6 +19831,11 @@ public static void NotifyCreated(TypeRef obj)
 
 [Invocation]
 public static void NotifyDeleting(TypeRef obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(TypeRef obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -19327,6 +19882,11 @@ public static void NotifyDeleting(ValueTypeProperty obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(ValueTypeProperty obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
@@ -19366,6 +19926,11 @@ public static void NotifyCreated(ViewReadOnlyConstraint obj)
 
 [Invocation]
 public static void NotifyDeleting(ViewReadOnlyConstraint obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -32248,7 +32813,7 @@ public static void GetObjectCanExecReason(AnyReference obj, MethodReturnEventArg
   <ZetboxBase:Method ExportGuid="0e4a1674-727f-451f-80dc-970b75595a86">
     <ZetboxBase:ChangedOn>2012-07-18T02:51:34.127316Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void SetObject(AnyReference obj, Zetbox.API.IDataObject obj)
+public static void SetObject(AnyReference obj, Zetbox.API.IDataObject newObj)
 {
 }
 
@@ -32275,6 +32840,16 @@ public static void SetObjectCanExecReason(AnyReference obj, MethodReturnEventArg
 public static void RegenerateTypeRefs(Assembly obj, MethodReturnEventArgs&lt;bool&gt; e)
 {
 }
+
+[Invocation]
+public static void RegenerateTypeRefsCanExec(Assembly obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void RegenerateTypeRefsCanExecReason(Assembly obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Regenerates the stored list of TypeRefs from the loaded assembly</ZetboxBase:Description>
@@ -32289,6 +32864,16 @@ public static void RegenerateTypeRefs(Assembly obj, MethodReturnEventArgs&lt;boo
 public static void GetLabel(BaseParameter obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetLabelCanExec(BaseParameter obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetLabelCanExecReason(BaseParameter obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-11-19T18:57:06Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32300,6 +32885,16 @@ public static void GetLabel(BaseParameter obj, MethodReturnEventArgs&lt;string&g
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetParameterType(BaseParameter obj, MethodReturnEventArgs&lt;System.Type&gt; e)
+{
+}
+
+[Invocation]
+public static void GetParameterTypeCanExec(BaseParameter obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetParameterTypeCanExecReason(BaseParameter obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32316,6 +32911,16 @@ public static void GetParameterType(BaseParameter obj, MethodReturnEventArgs&lt;
 public static void GetParameterTypeString(BaseParameter obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetParameterTypeStringCanExec(BaseParameter obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetParameterTypeStringCanExecReason(BaseParameter obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Returns the String representation of this Method-Parameter Meta Object.</ZetboxBase:Description>
@@ -32328,6 +32933,16 @@ public static void GetParameterTypeString(BaseParameter obj, MethodReturnEventAr
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetStream(Blob obj, MethodReturnEventArgs&lt;System.IO.Stream&gt; e)
+{
+}
+
+[Invocation]
+public static void GetStreamCanExec(Blob obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetStreamCanExecReason(Blob obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32344,6 +32959,16 @@ public static void GetStream(Blob obj, MethodReturnEventArgs&lt;System.IO.Stream
 public static void Open(Blob obj)
 {
 }
+
+[Invocation]
+public static void OpenCanExec(Blob obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void OpenCanExecReason(Blob obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-03-09T19:45:00Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Opens the document</ZetboxBase:Description>
@@ -32356,6 +32981,16 @@ public static void Open(Blob obj)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetErrorText(Constraint obj, MethodReturnEventArgs&lt;string&gt; e, System.Object constrainedObject, System.Object constrainedValue)
+{
+}
+
+[Invocation]
+public static void GetErrorTextCanExec(Constraint obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetErrorTextCanExecReason(Constraint obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32372,6 +33007,16 @@ public static void GetErrorText(Constraint obj, MethodReturnEventArgs&lt;string&
 public static void IsValid(Constraint obj, MethodReturnEventArgs&lt;bool&gt; e, System.Object constrainedObject, System.Object constrainedValue)
 {
 }
+
+[Invocation]
+public static void IsValidCanExec(Constraint obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void IsValidCanExecReason(Constraint obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
@@ -32384,6 +33029,16 @@ public static void IsValid(Constraint obj, MethodReturnEventArgs&lt;bool&gt; e, 
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetCodeTemplate(ConstraintInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetCodeTemplateCanExec(ConstraintInvocation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetCodeTemplateCanExecReason(ConstraintInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32399,6 +33054,16 @@ public static void GetCodeTemplate(ConstraintInvocation obj, MethodReturnEventAr
 public static void GetMemberName(ConstraintInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetMemberNameCanExec(ConstraintInvocation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetMemberNameCanExecReason(ConstraintInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-03-25T02:32:08Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -32410,6 +33075,16 @@ public static void GetMemberName(ConstraintInvocation obj, MethodReturnEventArgs
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetDataType(DataType obj, MethodReturnEventArgs&lt;System.Type&gt; e)
+{
+}
+
+[Invocation]
+public static void GetDataTypeCanExec(DataType obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetDataTypeCanExecReason(DataType obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32426,6 +33101,16 @@ public static void GetDataType(DataType obj, MethodReturnEventArgs&lt;System.Typ
 public static void GetDataTypeString(DataType obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetDataTypeStringCanExec(DataType obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetDataTypeStringCanExecReason(DataType obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Returns the String representation of this Datatype Meta Object.</ZetboxBase:Description>
@@ -32438,6 +33123,16 @@ public static void GetDataTypeString(DataType obj, MethodReturnEventArgs&lt;stri
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void ImplementInterfaces(DataType obj)
+{
+}
+
+[Invocation]
+public static void ImplementInterfacesCanExec(DataType obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ImplementInterfacesCanExecReason(DataType obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32454,6 +33149,16 @@ public static void ImplementInterfaces(DataType obj)
 public static void GetDefaultValue(DefaultPropertyValue obj, MethodReturnEventArgs&lt;System.Object&gt; e)
 {
 }
+
+[Invocation]
+public static void GetDefaultValueCanExec(DefaultPropertyValue obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetDefaultValueCanExecReason(DefaultPropertyValue obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>GetDefaultValue</ZetboxBase:Description>
@@ -32466,6 +33171,16 @@ public static void GetDefaultValue(DefaultPropertyValue obj, MethodReturnEventAr
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetEntryByName(Enumeration obj, MethodReturnEventArgs&lt;Zetbox.App.Base.EnumerationEntry&gt; e, string name)
+{
+}
+
+[Invocation]
+public static void GetEntryByNameCanExec(Enumeration obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetEntryByNameCanExecReason(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32481,6 +33196,16 @@ public static void GetEntryByName(Enumeration obj, MethodReturnEventArgs&lt;Zetb
 public static void GetEntryByValue(Enumeration obj, MethodReturnEventArgs&lt;Zetbox.App.Base.EnumerationEntry&gt; e, int val)
 {
 }
+
+[Invocation]
+public static void GetEntryByValueCanExec(Enumeration obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetEntryByValueCanExecReason(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-11-19T18:18:52Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32492,6 +33217,16 @@ public static void GetEntryByValue(Enumeration obj, MethodReturnEventArgs&lt;Zet
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetLabelByName(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e, string name)
+{
+}
+
+[Invocation]
+public static void GetLabelByNameCanExec(Enumeration obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetLabelByNameCanExecReason(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32507,6 +33242,16 @@ public static void GetLabelByName(Enumeration obj, MethodReturnEventArgs&lt;stri
 public static void GetLabelByValue(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e, int val)
 {
 }
+
+[Invocation]
+public static void GetLabelByValueCanExec(Enumeration obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetLabelByValueCanExecReason(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-11-19T18:20:40Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32518,6 +33263,16 @@ public static void GetLabelByValue(Enumeration obj, MethodReturnEventArgs&lt;str
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetLabel(EnumerationEntry obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetLabelCanExec(EnumerationEntry obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetLabelCanExecReason(EnumerationEntry obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32533,6 +33288,16 @@ public static void GetLabel(EnumerationEntry obj, MethodReturnEventArgs&lt;strin
 public static void GetName(Group obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetNameCanExec(Group obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(Group obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-12-02T19:39:12.721796Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32544,6 +33309,16 @@ public static void GetName(Group obj, MethodReturnEventArgs&lt;string&gt; e)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetCodeTemplate(IInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetCodeTemplateCanExec(IInvocation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetCodeTemplateCanExecReason(IInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32559,6 +33334,16 @@ public static void GetCodeTemplate(IInvocation obj, MethodReturnEventArgs&lt;str
 public static void GetMemberName(IInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetMemberNameCanExec(IInvocation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetMemberNameCanExecReason(IInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -32570,6 +33355,16 @@ public static void GetMemberName(IInvocation obj, MethodReturnEventArgs&lt;strin
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetName(INamedObject obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExec(INamedObject obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(INamedObject obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32586,6 +33381,16 @@ public static void GetName(INamedObject obj, MethodReturnEventArgs&lt;string&gt;
 public static void GetErrorText(InstanceConstraint obj, MethodReturnEventArgs&lt;string&gt; e, Zetbox.API.IDataObject constrainedObject)
 {
 }
+
+[Invocation]
+public static void GetErrorTextCanExec(InstanceConstraint obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetErrorTextCanExecReason(InstanceConstraint obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-03-25T00:41:58Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32599,6 +33404,16 @@ public static void GetErrorText(InstanceConstraint obj, MethodReturnEventArgs&lt
 public static void IsValid(InstanceConstraint obj, MethodReturnEventArgs&lt;bool&gt; e, Zetbox.API.IDataObject constrainedObject)
 {
 }
+
+[Invocation]
+public static void IsValidCanExec(InstanceConstraint obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void IsValidCanExecReason(InstanceConstraint obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-03-25T00:43:12Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32610,6 +33425,16 @@ public static void IsValid(InstanceConstraint obj, MethodReturnEventArgs&lt;bool
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetLabel(Method obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetLabelCanExec(Method obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetLabelCanExecReason(Method obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32648,6 +33473,16 @@ public static void GetNameCanExecReason(Method obj, MethodReturnEventArgs&lt;str
 public static void GetReturnParameter(Method obj, MethodReturnEventArgs&lt;Zetbox.App.Base.BaseParameter&gt; e)
 {
 }
+
+[Invocation]
+public static void GetReturnParameterCanExec(Method obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetReturnParameterCanExecReason(Method obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Returns the Return Parameter Meta Object of this Method Meta Object.</ZetboxBase:Description>
@@ -32662,6 +33497,16 @@ public static void GetReturnParameter(Method obj, MethodReturnEventArgs&lt;Zetbo
 public static void GetName(Module obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetNameCanExec(Module obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(Module obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-12-02T19:36:38.202733Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32673,6 +33518,16 @@ public static void GetName(Module obj, MethodReturnEventArgs&lt;string&gt; e)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void CreateMethod(ObjectClass obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Method&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateMethodCanExec(ObjectClass obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateMethodCanExecReason(ObjectClass obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32689,6 +33544,16 @@ public static void CreateMethod(ObjectClass obj, MethodReturnEventArgs&lt;Zetbox
 public static void CreateRelation(ObjectClass obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Relation&gt; e)
 {
 }
+
+[Invocation]
+public static void CreateRelationCanExec(ObjectClass obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateRelationCanExecReason(ObjectClass obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Implements the "Create new Relation" use case</ZetboxBase:Description>
@@ -32701,6 +33566,16 @@ public static void CreateRelation(ObjectClass obj, MethodReturnEventArgs&lt;Zetb
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs&lt;IEnumerable&lt;Zetbox.App.Base.Method&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void GetInheritedMethodsCanExec(ObjectClass obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetInheritedMethodsCanExecReason(ObjectClass obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32717,6 +33592,16 @@ public static void GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs&lt
 public static void GetName(ObjectClass obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetNameCanExec(ObjectClass obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(ObjectClass obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-12-02T19:37:20.785604Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32730,6 +33615,16 @@ public static void GetName(ObjectClass obj, MethodReturnEventArgs&lt;string&gt; 
 public static void GetIsList(ObjectReferenceProperty obj, MethodReturnEventArgs&lt;bool&gt; e)
 {
 }
+
+[Invocation]
+public static void GetIsListCanExec(ObjectReferenceProperty obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetIsListCanExecReason(ObjectReferenceProperty obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-02-11T21:37:39Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32741,6 +33636,16 @@ public static void GetIsList(ObjectReferenceProperty obj, MethodReturnEventArgs&
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetElementTypeString(Property obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetElementTypeStringCanExec(Property obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetElementTypeStringCanExecReason(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32757,6 +33662,16 @@ public static void GetElementTypeString(Property obj, MethodReturnEventArgs&lt;s
 public static void GetLabel(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetLabelCanExec(Property obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetLabelCanExecReason(Property obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-11-19T18:22:30Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32770,6 +33685,16 @@ public static void GetLabel(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 public static void GetName(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetNameCanExec(Property obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(Property obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-12-02T19:40:23.385862Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32781,6 +33706,16 @@ public static void GetName(Property obj, MethodReturnEventArgs&lt;string&gt; e)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetPropertyType(Property obj, MethodReturnEventArgs&lt;System.Type&gt; e)
+{
+}
+
+[Invocation]
+public static void GetPropertyTypeCanExec(Property obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetPropertyTypeCanExecReason(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32797,6 +33732,16 @@ public static void GetPropertyType(Property obj, MethodReturnEventArgs&lt;System
 public static void GetPropertyTypeString(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetPropertyTypeStringCanExec(Property obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetPropertyTypeStringCanExecReason(Property obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Returns the String representation of this Property Meta Object.</ZetboxBase:Description>
@@ -32809,6 +33754,16 @@ public static void GetPropertyTypeString(Property obj, MethodReturnEventArgs&lt;
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetEnd(Relation obj, MethodReturnEventArgs&lt;Zetbox.App.Base.RelationEnd&gt; e, Zetbox.App.Base.ObjectReferenceProperty prop)
+{
+}
+
+[Invocation]
+public static void GetEndCanExec(Relation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetEndCanExecReason(Relation obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32824,6 +33779,16 @@ public static void GetEnd(Relation obj, MethodReturnEventArgs&lt;Zetbox.App.Base
 public static void GetEndFromRole(Relation obj, MethodReturnEventArgs&lt;Zetbox.App.Base.RelationEnd&gt; e, Zetbox.API.RelationEndRole role)
 {
 }
+
+[Invocation]
+public static void GetEndFromRoleCanExec(Relation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetEndFromRoleCanExecReason(Relation obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32835,6 +33800,16 @@ public static void GetEndFromRole(Relation obj, MethodReturnEventArgs&lt;Zetbox.
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetEntryInterfaceType(Relation obj, MethodReturnEventArgs&lt;Zetbox.API.InterfaceType&gt; e)
+{
+}
+
+[Invocation]
+public static void GetEntryInterfaceTypeCanExec(Relation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetEntryInterfaceTypeCanExecReason(Relation obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32850,6 +33825,16 @@ public static void GetEntryInterfaceType(Relation obj, MethodReturnEventArgs&lt;
 public static void GetOtherEnd(Relation obj, MethodReturnEventArgs&lt;Zetbox.App.Base.RelationEnd&gt; e, Zetbox.App.Base.RelationEnd relEnd)
 {
 }
+
+[Invocation]
+public static void GetOtherEndCanExec(Relation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetOtherEndCanExecReason(Relation obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32861,6 +33846,16 @@ public static void GetOtherEnd(Relation obj, MethodReturnEventArgs&lt;Zetbox.App
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetRelationType(Relation obj, MethodReturnEventArgs&lt;Zetbox.API.RelationType&gt; e)
+{
+}
+
+[Invocation]
+public static void GetRelationTypeCanExec(Relation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetRelationTypeCanExecReason(Relation obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32876,6 +33871,16 @@ public static void GetRelationType(Relation obj, MethodReturnEventArgs&lt;Zetbox
 public static void NeedsPositionStorage(Relation obj, MethodReturnEventArgs&lt;bool&gt; e, Zetbox.API.RelationEndRole endRole)
 {
 }
+
+[Invocation]
+public static void NeedsPositionStorageCanExec(Relation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void NeedsPositionStorageCanExecReason(Relation obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32887,6 +33892,16 @@ public static void NeedsPositionStorage(Relation obj, MethodReturnEventArgs&lt;b
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void SwapRelationEnds(Relation obj)
+{
+}
+
+[Invocation]
+public static void SwapRelationEndsCanExec(Relation obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void SwapRelationEndsCanExecReason(Relation obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32902,6 +33917,16 @@ public static void SwapRelationEnds(Relation obj)
 public static void CreateNavigator(RelationEnd obj, MethodReturnEventArgs&lt;Zetbox.App.Base.ObjectReferenceProperty&gt; e)
 {
 }
+
+[Invocation]
+public static void CreateNavigatorCanExec(RelationEnd obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateNavigatorCanExecReason(RelationEnd obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -32915,6 +33940,16 @@ public static void CreateNavigator(RelationEnd obj, MethodReturnEventArgs&lt;Zet
 public static void GetName(Sequence obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void GetNameCanExec(Sequence obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-12-02T19:41:10.032526Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32926,6 +33961,16 @@ public static void GetName(Sequence obj, MethodReturnEventArgs&lt;string&gt; e)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void AsType(TypeRef obj, MethodReturnEventArgs&lt;System.Type&gt; e, bool throwOnError)
+{
+}
+
+[Invocation]
+public static void AsTypeCanExec(TypeRef obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void AsTypeCanExecReason(TypeRef obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32942,6 +33987,16 @@ public static void AsType(TypeRef obj, MethodReturnEventArgs&lt;System.Type&gt; 
 public static void ToTypeName(TypeRef obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
+
+[Invocation]
+public static void ToTypeNameCanExec(TypeRef obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ToTypeNameCanExecReason(TypeRef obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-12-06T23:01:51.547121Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -32953,6 +34008,16 @@ public static void ToTypeName(TypeRef obj, MethodReturnEventArgs&lt;string&gt; e
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void UpdateParent(TypeRef obj)
+{
+}
+
+[Invocation]
+public static void UpdateParentCanExec(TypeRef obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void UpdateParentCanExecReason(TypeRef obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -32967,6 +34032,16 @@ public static void UpdateParent(TypeRef obj)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void UpdateToStringCache(TypeRef obj)
+{
+}
+
+[Invocation]
+public static void UpdateToStringCacheCanExec(TypeRef obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>

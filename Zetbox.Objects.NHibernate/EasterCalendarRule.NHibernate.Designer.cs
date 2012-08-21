@@ -84,7 +84,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("Offset", __oldValue, __newValue);
                     Proxy.Offset = __newValue;
                     NotifyPropertyChanged("Offset", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnOffset_PostSetter != null && IsAttached)
                     {

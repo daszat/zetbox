@@ -124,7 +124,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                     NotifyPropertyChanging("BogenNummer", __oldValue, __newValue);
                     _BogenNummer = __newValue;
                     NotifyPropertyChanged("BogenNummer", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBogenNummer_PostSetter != null && IsAttached)
                     {

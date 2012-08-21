@@ -147,7 +147,7 @@ namespace Zetbox.App.Calendar
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Calendar", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCalendar_PostSetter != null && IsAttached)
                 {
@@ -242,7 +242,7 @@ namespace Zetbox.App.Calendar
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -300,7 +300,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -413,7 +413,7 @@ namespace Zetbox.App.Calendar
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -471,7 +471,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -549,7 +549,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -627,7 +627,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("IsWorkingDay", __oldValue, __newValue);
                     Proxy.IsWorkingDay = __newValue;
                     NotifyPropertyChanged("IsWorkingDay", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsWorkingDay_PostSetter != null && IsAttached)
                     {
@@ -740,7 +740,7 @@ namespace Zetbox.App.Calendar
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -799,7 +799,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -857,7 +857,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("ValidFrom", __oldValue, __newValue);
                     Proxy.ValidFrom = __newValue;
                     NotifyPropertyChanged("ValidFrom", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnValidFrom_PostSetter != null && IsAttached)
                     {
@@ -915,7 +915,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("ValidUntil", __oldValue, __newValue);
                     Proxy.ValidUntil = __newValue;
                     NotifyPropertyChanged("ValidUntil", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnValidUntil_PostSetter != null && IsAttached)
                     {
@@ -973,7 +973,7 @@ namespace Zetbox.App.Calendar
                     NotifyPropertyChanging("WorkingHours", __oldValue, __newValue);
                     Proxy.WorkingHours = __newValue;
                     NotifyPropertyChanged("WorkingHours", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnWorkingHours_PostSetter != null && IsAttached)
                     {

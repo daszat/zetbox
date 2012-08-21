@@ -79,7 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("BoolValue", __oldValue, __newValue);
                     _BoolValue = __newValue;
                     NotifyPropertyChanged("BoolValue", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBoolValue_PostSetter != null && IsAttached)
                     {

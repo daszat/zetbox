@@ -79,7 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Schema", __oldValue, __newValue);
                     _Schema = __newValue;
                     NotifyPropertyChanged("Schema", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSchema_PostSetter != null && IsAttached)
                     {
@@ -148,7 +148,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Version", __oldValue, __newValue);
                     _Version = __newValue;
                     NotifyPropertyChanged("Version", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVersion_PostSetter != null && IsAttached)
                     {
@@ -359,7 +359,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
 				else 

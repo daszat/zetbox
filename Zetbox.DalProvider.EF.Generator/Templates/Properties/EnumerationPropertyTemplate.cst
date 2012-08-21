@@ -92,7 +92,7 @@
                     NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
                     <%= backingName %> = value;
                     NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 <%
 					if(callGetterSetterEvents)
 					{

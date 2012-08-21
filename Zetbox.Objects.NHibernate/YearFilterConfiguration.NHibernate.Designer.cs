@@ -84,7 +84,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentYearDefault", __oldValue, __newValue);
                     Proxy.IsCurrentYearDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentYearDefault", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentYearDefault_PostSetter != null && IsAttached)
                     {

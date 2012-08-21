@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-21T12:24:21Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-21T12:24:21.822223Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -40,6 +40,11 @@ public static void NotifyCreated(Auftrag obj)
 
 [Invocation]
 public static void NotifyDeleting(Auftrag obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Auftrag obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -85,6 +90,11 @@ public static void NotifyDeleting(Kunde obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Kunde obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -124,6 +134,11 @@ public static void NotifyCreated(Mitarbeiter obj)
 
 [Invocation]
 public static void NotifyDeleting(Mitarbeiter obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Mitarbeiter obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -169,6 +184,11 @@ public static void NotifyDeleting(Projekt obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Projekt obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -208,6 +228,11 @@ public static void NotifyCreated(Task obj)
 
 [Invocation]
 public static void NotifyDeleting(Task obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -2173,17 +2198,17 @@ public static void isValid_CreatedOn(Task obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_DatumBis(Task obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_DatumBis(Task obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_DatumBis(Task obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_DatumBis(Task obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_DatumBis(Task obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_DatumBis(Task obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
@@ -2829,6 +2854,16 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
 public static void RechnungErstellen(Auftrag obj)
 {
 }
+
+[Invocation]
+public static void RechnungErstellenCanExec(Auftrag obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void RechnungErstellenCanExecReason(Auftrag obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Testmethode zum Erstellen von Rechnungen mit Word</ZetboxBase:Description>
@@ -2843,6 +2878,16 @@ public static void RechnungErstellen(Auftrag obj)
 public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs&lt;DateTime&gt; e, bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString)
 {
 }
+
+[Invocation]
+public static void TestMethodForParameterCanExec(Mitarbeiter obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void TestMethodForParameterCanExecReason(Mitarbeiter obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
@@ -2855,6 +2900,16 @@ public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs
     <ZetboxBase:ChangedOn>2012-05-17T12:29:28.307352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System.Object&gt; e, string title, Zetbox.App.Base.DateTimeRange range)
+{
+}
+
+[Invocation]
+public static void GetSummaryReportCanExec(Projekt obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -3703,6 +3758,11 @@ public static void NotifyDeleting(ANewObjectClass obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(ANewObjectClass obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -3744,6 +3804,11 @@ public static void NotifyDeleting(AnotherTest obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(AnotherTest obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -3781,6 +3846,11 @@ public static void NotifyCreated(Antwort obj)
 
 [Invocation]
 public static void NotifyDeleting(Antwort obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Antwort obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -3870,6 +3940,11 @@ public static void NotifyDeleting(Company obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Company obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -3907,6 +3982,11 @@ public static void NotifyCreated(Fragebogen obj)
 
 [Invocation]
 public static void NotifyDeleting(Fragebogen obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Fragebogen obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -3962,6 +4042,11 @@ public static void NotifyDeleting(MethodTest obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(MethodTest obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -4000,6 +4085,11 @@ public static void NotifyCreated(Muhblah obj)
 
 [Invocation]
 public static void NotifyDeleting(Muhblah obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(Muhblah obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -4044,6 +4134,11 @@ public static void NotifyDeleting(N_to_M_relations_A obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(N_to_M_relations_A obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -4082,6 +4177,11 @@ public static void NotifyCreated(N_to_M_relations_B obj)
 
 [Invocation]
 public static void NotifyDeleting(N_to_M_relations_B obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(N_to_M_relations_B obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -4126,6 +4226,11 @@ public static void NotifyDeleting(One_to_N_relations_N obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(One_to_N_relations_N obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -4164,6 +4269,11 @@ public static void NotifyCreated(One_to_N_relations_One obj)
 
 [Invocation]
 public static void NotifyDeleting(One_to_N_relations_One obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(One_to_N_relations_One obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -4208,6 +4318,11 @@ public static void NotifyDeleting(OrderedNEnd obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(OrderedNEnd obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -4246,6 +4361,11 @@ public static void NotifyCreated(OrderedOneEnd obj)
 
 [Invocation]
 public static void NotifyDeleting(OrderedOneEnd obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(OrderedOneEnd obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -4290,6 +4410,11 @@ public static void NotifyDeleting(RequiredParent obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(RequiredParent obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -4328,6 +4453,11 @@ public static void NotifyCreated(RequiredParentChild obj)
 
 [Invocation]
 public static void NotifyDeleting(RequiredParentChild obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(RequiredParentChild obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -4462,6 +4592,11 @@ public static void NotifyDeleting(TestCustomObject obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(TestCustomObject obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -4500,6 +4635,11 @@ public static void NotifyCreated(TestDecimal obj)
 
 [Invocation]
 public static void NotifyDeleting(TestDecimal obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(TestDecimal obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -4556,6 +4696,11 @@ public static void NotifyDeleting(TestObjClass obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(TestObjClass obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -4603,6 +4748,11 @@ public static void NotifyCreated(TestStudent obj)
 
 [Invocation]
 public static void NotifyDeleting(TestStudent obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(TestStudent obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -7710,6 +7860,16 @@ public static void isValid_Testbogen(TestStudent obj, PropertyIsValidEventArgs e
 public static void TestMethod(ITestInterface obj, DateTime DateTimeParam)
 {
 }
+
+[Invocation]
+public static void TestMethodCanExec(ITestInterface obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void TestMethodCanExecReason(ITestInterface obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
@@ -7723,6 +7883,16 @@ public static void TestMethod(ITestInterface obj, DateTime DateTimeParam)
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void Group1(MethodTest obj)
+{
+}
+
+[Invocation]
+public static void Group1CanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void Group1CanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -7740,6 +7910,16 @@ public static void Group1(MethodTest obj)
 public static void Group2(MethodTest obj)
 {
 }
+
+[Invocation]
+public static void Group2CanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void Group2CanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2012-02-16T01:24:00.439311Z</ZetboxBase:CreatedOn>
     <GUI:Icon>e685b093-3732-4fee-958b-510474f0cedf</GUI:Icon>
@@ -7753,6 +7933,16 @@ public static void Group2(MethodTest obj)
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void ObjParameter(MethodTest obj, Zetbox.App.Test.MethodTest objParam)
+{
+}
+
+[Invocation]
+public static void ObjParameterCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ObjParameterCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -7770,6 +7960,16 @@ public static void ObjParameter(MethodTest obj, Zetbox.App.Test.MethodTest objPa
 public static void ObjRet(MethodTest obj, MethodReturnEventArgs&lt;Zetbox.App.Test.MethodTest&gt; e)
 {
 }
+
+[Invocation]
+public static void ObjRetCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ObjRetCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2012-02-16T01:25:19.013805Z</ZetboxBase:CreatedOn>
     <GUI:Icon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:Icon>
@@ -7784,6 +7984,16 @@ public static void ObjRet(MethodTest obj, MethodReturnEventArgs&lt;Zetbox.App.Te
 public static void Parameterless(MethodTest obj)
 {
 }
+
+[Invocation]
+public static void ParameterlessCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ParameterlessCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2012-02-16T01:19:36.630222Z</ZetboxBase:CreatedOn>
     <GUI:Icon>d2c90a25-c93b-4f52-a358-199ac0d71248</GUI:Icon>
@@ -7796,6 +8006,16 @@ public static void Parameterless(MethodTest obj)
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void StringParameter(MethodTest obj, string str)
+{
+}
+
+[Invocation]
+public static void StringParameterCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void StringParameterCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -7813,6 +8033,16 @@ public static void StringParameter(MethodTest obj, string str)
 public static void Summary(MethodTest obj)
 {
 }
+
+[Invocation]
+public static void SummaryCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void SummaryCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2012-02-16T01:24:00.439311Z</ZetboxBase:CreatedOn>
     <GUI:Icon>d7d4767f-0b2d-468a-8931-866ce07828cb</GUI:Icon>
@@ -7825,6 +8055,16 @@ public static void Summary(MethodTest obj)
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void TestMethod(TestObjClass obj, DateTime DateTimeParamForTestMethod)
+{
+}
+
+[Invocation]
+public static void TestMethodCanExec(TestObjClass obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>

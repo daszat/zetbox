@@ -79,7 +79,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("TestBool", __oldValue, __newValue);
                     _TestBool = __newValue;
                     NotifyPropertyChanged("TestBool", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestBool_PostSetter != null && IsAttached)
                     {
@@ -320,7 +320,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("MubBlah_List_Nav", null, null);
                 }
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -435,7 +435,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("MuhBlah_One_Nav", null, null);
                 }
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -485,7 +485,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestDateTime", __oldValue, __newValue);
                     _TestDateTime = __newValue;
                     NotifyPropertyChanged("TestDateTime", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestDateTime_PostSetter != null && IsAttached)
                     {
@@ -551,7 +551,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestEnum", __oldValue, __newValue);
                     _TestEnum = value;
                     NotifyPropertyChanged("TestEnum", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
                     if(OnTestEnum_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
@@ -632,7 +632,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     _TestString = __newValue;
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestString_PostSetter != null && IsAttached)
                     {
@@ -935,7 +935,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
 				else 

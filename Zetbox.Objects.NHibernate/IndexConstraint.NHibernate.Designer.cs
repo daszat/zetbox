@@ -86,7 +86,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsUnique", __oldValue, __newValue);
                     Proxy.IsUnique = __newValue;
                     NotifyPropertyChanged("IsUnique", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsUnique_PostSetter != null && IsAttached)
                     {

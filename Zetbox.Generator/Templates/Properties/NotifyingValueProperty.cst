@@ -64,7 +64,7 @@
                     <%= backingName %> = __newValue;
                     NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
 <% if (!isCalculated) { %>
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 <% } else { %>
 			        <%= backingName %>_IsDirty = false;
 <% } %>

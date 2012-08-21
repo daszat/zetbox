@@ -73,7 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DefaultValue", __oldValue, __newValue);
                     _DefaultValue = __newValue;
                     NotifyPropertyChanged("DefaultValue", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDefaultValue_PostSetter != null && IsAttached)
                     {

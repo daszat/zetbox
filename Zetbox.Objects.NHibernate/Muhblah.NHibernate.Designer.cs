@@ -84,7 +84,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("TestBool", __oldValue, __newValue);
                     Proxy.TestBool = __newValue;
                     NotifyPropertyChanged("TestBool", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestBool_PostSetter != null && IsAttached)
                     {
@@ -267,7 +267,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnTestCustomObjects_Nav_PostSetter != null && IsAttached)
                 {
@@ -376,7 +376,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TestCustomObjects_One_Nav", __oldValue, __newValue);
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnTestCustomObjects_One_Nav_PostSetter != null && IsAttached)
                 {
@@ -433,7 +433,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestDateTime", __oldValue, __newValue);
                     Proxy.TestDateTime = __newValue;
                     NotifyPropertyChanged("TestDateTime", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestDateTime_PostSetter != null && IsAttached)
                     {
@@ -491,7 +491,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestEnum", __oldValue, __newValue);
                     Proxy.TestEnum = __newValue;
                     NotifyPropertyChanged("TestEnum", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestEnum_PostSetter != null && IsAttached)
                     {
@@ -549,7 +549,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     Proxy.TestString = __newValue;
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestString_PostSetter != null && IsAttached)
                     {

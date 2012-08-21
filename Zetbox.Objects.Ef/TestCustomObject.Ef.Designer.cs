@@ -83,7 +83,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Birthday", __oldValue, __newValue);
                     _Birthday = __newValue;
                     NotifyPropertyChanged("Birthday", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBirthday_PostSetter != null && IsAttached)
                     {
@@ -274,7 +274,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null);
                 }
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -439,7 +439,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("TestCustomObjects_One_Nav", null, null);
                 }
-                UpdateChangedInfo = true;
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -489,7 +489,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     NotifyPropertyChanging("PersonName", __oldValue, __newValue);
                     _PersonName = __newValue;
                     NotifyPropertyChanged("PersonName", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPersonName_PostSetter != null && IsAttached)
                     {
@@ -572,7 +572,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
 
                     NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
                 }
 				else
 				{
@@ -636,7 +636,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
 
                     NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
                 }
 				else
 				{
@@ -992,7 +992,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
 				else 

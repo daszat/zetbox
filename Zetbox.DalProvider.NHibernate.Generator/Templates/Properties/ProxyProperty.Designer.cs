@@ -108,7 +108,7 @@ this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName 
 #line 75 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 if (!isCalculated) { 
 #line 76 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-this.WriteObjects("                    UpdateChangedInfo = true;\r\n");
+this.WriteObjects("                    if(IsAttached) UpdateChangedInfo = true;\r\n");
 #line 77 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 } else { 
 #line 78 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"

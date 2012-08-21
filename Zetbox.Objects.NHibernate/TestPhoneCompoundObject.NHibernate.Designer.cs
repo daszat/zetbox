@@ -86,7 +86,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("AreaCode", __oldValue, __newValue);
                     _AreaCode = __newValue;
                     NotifyPropertyChanged("AreaCode", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAreaCode_PostSetter != null && IsAttached)
                     {
@@ -142,7 +142,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Number", __oldValue, __newValue);
                     _Number = __newValue;
                     NotifyPropertyChanged("Number", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnNumber_PostSetter != null && IsAttached)
                     {

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-21T12:24:21Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-21T12:24:21.822223Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -42,6 +42,11 @@ public static void NotifyDeleting(Calendar obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Calendar obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -80,6 +85,11 @@ public static void NotifyCreated(CalendarRule obj)
 
 [Invocation]
 public static void NotifyDeleting(CalendarRule obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(CalendarRule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -125,6 +135,11 @@ public static void NotifyDeleting(CommonCalendarRule obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(CommonCalendarRule obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -164,6 +179,11 @@ public static void NotifyCreated(DayOfWeekCalendarRule obj)
 
 [Invocation]
 public static void NotifyDeleting(DayOfWeekCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(DayOfWeekCalendarRule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -209,6 +229,11 @@ public static void NotifyDeleting(EasterCalendarRule obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(EasterCalendarRule obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -251,6 +276,11 @@ public static void NotifyDeleting(FixedYearlyCalendarRule obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(FixedYearlyCalendarRule obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -290,6 +320,11 @@ public static void NotifyCreated(YearlyCalendarRule obj)
 
 [Invocation]
 public static void NotifyDeleting(YearlyCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(YearlyCalendarRule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -1527,6 +1562,16 @@ public static void isValid_Month(FixedYearlyCalendarRule obj, PropertyIsValidEve
 public static void GetOffDays(Calendar obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
 {
 }
+
+[Invocation]
+public static void GetOffDaysCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetOffDaysCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Gets the number of free days between two dates</ZetboxBase:Description>
@@ -1539,6 +1584,16 @@ public static void GetOffDays(Calendar obj, MethodReturnEventArgs&lt;int&gt; e, 
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetWorkingDays(Calendar obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
+{
+}
+
+[Invocation]
+public static void GetWorkingDaysCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetWorkingDaysCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -1555,6 +1610,16 @@ public static void GetWorkingDays(Calendar obj, MethodReturnEventArgs&lt;int&gt;
 public static void GetWorkingHours(Calendar obj, MethodReturnEventArgs&lt;decimal&gt; e, DateTime from, DateTime until)
 {
 }
+
+[Invocation]
+public static void GetWorkingHoursCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetWorkingHoursCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Returns the amount of working hours between two dates</ZetboxBase:Description>
@@ -1568,6 +1633,16 @@ public static void GetWorkingHours(Calendar obj, MethodReturnEventArgs&lt;decima
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void AppliesTo(CalendarRule obj, MethodReturnEventArgs&lt;bool&gt; e, DateTime date)
+{
+}
+
+[Invocation]
+public static void AppliesToCanExec(CalendarRule obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -1979,6 +2054,11 @@ public static void NotifyDeleting(Document obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(Document obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>377176c3-4ff9-4a6f-bfc0-de893bce1c12</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -2019,6 +2099,11 @@ public static void NotifyCreated(DynamicFile obj)
 
 [Invocation]
 public static void NotifyDeleting(DynamicFile obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(DynamicFile obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -2064,6 +2149,11 @@ public static void NotifyDeleting(File obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(File obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
@@ -2102,6 +2192,11 @@ public static void NotifyCreated(FileImportConfiguration obj)
 
 [Invocation]
 public static void NotifyDeleting(FileImportConfiguration obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(FileImportConfiguration obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -2148,6 +2243,11 @@ public static void NotifyDeleting(ImportedFile obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(ImportedFile obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>3aeddad1-a2cf-46b0-af26-6bf6e5f8f6e2</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -2188,6 +2288,11 @@ public static void NotifyCreated(StaticFile obj)
 
 [Invocation]
 public static void NotifyDeleting(StaticFile obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(StaticFile obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -3017,6 +3122,16 @@ public static void isValid_PickupDirectory(FileImportConfiguration obj, Property
 public static void HandleBlobChange(File obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Blob&gt; e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
 {
 }
+
+[Invocation]
+public static void HandleBlobChangeCanExec(File obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void HandleBlobChangeCanExecReason(File obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-03-12T22:28:42Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Handles the change of the current blob</ZetboxBase:Description>
@@ -3030,6 +3145,16 @@ public static void HandleBlobChange(File obj, MethodReturnEventArgs&lt;Zetbox.Ap
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void Open(File obj)
+{
+}
+
+[Invocation]
+public static void OpenCanExec(File obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void OpenCanExecReason(File obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -3047,6 +3172,16 @@ public static void Open(File obj)
 public static void Upload(File obj)
 {
 }
+
+[Invocation]
+public static void UploadCanExec(File obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void UploadCanExecReason(File obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-03-10T22:20:34Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Uploads a new Content</ZetboxBase:Description>
@@ -3060,6 +3195,16 @@ public static void Upload(File obj)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void MakeDocument(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.Document&gt; e)
+{
+}
+
+[Invocation]
+public static void MakeDocumentCanExec(ImportedFile obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void MakeDocumentCanExecReason(ImportedFile obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -3078,6 +3223,16 @@ public static void MakeDocument(ImportedFile obj, MethodReturnEventArgs&lt;at.da
 public static void MakeDynamicFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.DynamicFile&gt; e)
 {
 }
+
+[Invocation]
+public static void MakeDynamicFileCanExec(ImportedFile obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void MakeDynamicFileCanExecReason(ImportedFile obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-11-01T01:04:41.929022Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -3090,6 +3245,16 @@ public static void MakeDynamicFile(ImportedFile obj, MethodReturnEventArgs&lt;at
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void MakeStaticFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.StaticFile&gt; e)
+{
+}
+
+[Invocation]
+public static void MakeStaticFileCanExec(ImportedFile obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -3580,6 +3745,11 @@ public static void NotifyDeleting(MigrationLog obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(MigrationLog obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -3621,6 +3791,11 @@ public static void NotifyDeleting(MigrationProject obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(MigrationProject obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -3658,6 +3833,11 @@ public static void NotifyCreated(SourceColumn obj)
 
 [Invocation]
 public static void NotifyDeleting(SourceColumn obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(SourceColumn obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -3702,6 +3882,11 @@ public static void NotifyDeleting(SourceEnum obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(SourceEnum obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -3742,6 +3927,11 @@ public static void NotifyDeleting(SourceTable obj)
 {
 }
 
+[Invocation]
+public static void ObjectIsValid(SourceTable obj, ObjectIsValidEventArgs e)
+{
+}
+
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
@@ -3779,6 +3969,11 @@ public static void NotifyCreated(StagingDatabase obj)
 
 [Invocation]
 public static void NotifyDeleting(StagingDatabase obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -6948,6 +7143,16 @@ public static void isValid_SourceTables(StagingDatabase obj, PropertyIsValidEven
 public static void CreateMappingReport(MigrationProject obj)
 {
 }
+
+[Invocation]
+public static void CreateMappingReportCanExec(MigrationProject obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateMappingReportCanExecReason(MigrationProject obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-07-09T09:51:28Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Creates a mapping report</ZetboxBase:Description>
@@ -6960,6 +7165,16 @@ public static void CreateMappingReport(MigrationProject obj)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void UpdateFromSourceSchema(MigrationProject obj)
+{
+}
+
+[Invocation]
+public static void UpdateFromSourceSchemaCanExec(MigrationProject obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void UpdateFromSourceSchemaCanExecReason(MigrationProject obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -6977,6 +7192,16 @@ public static void UpdateFromSourceSchema(MigrationProject obj)
 public static void CreateProperty(SourceColumn obj)
 {
 }
+
+[Invocation]
+public static void CreatePropertyCanExec(SourceColumn obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreatePropertyCanExecReason(SourceColumn obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-07-02T10:08:41Z</ZetboxBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -6988,6 +7213,16 @@ public static void CreateProperty(SourceColumn obj)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void CreateMappingReport(SourceTable obj)
+{
+}
+
+[Invocation]
+public static void CreateMappingReportCanExec(SourceTable obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateMappingReportCanExecReason(SourceTable obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -7002,6 +7237,16 @@ public static void CreateMappingReport(SourceTable obj)
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void CreateObjectClass(SourceTable obj)
+{
+}
+
+[Invocation]
+public static void CreateObjectClassCanExec(SourceTable obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>

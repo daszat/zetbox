@@ -84,7 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Max", __oldValue, __newValue);
                     Proxy.Max = __newValue;
                     NotifyPropertyChanged("Max", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMax_PostSetter != null && IsAttached)
                     {
@@ -142,7 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Min", __oldValue, __newValue);
                     Proxy.Min = __newValue;
                     NotifyPropertyChanged("Min", __oldValue, __newValue);
-                    UpdateChangedInfo = true;
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMin_PostSetter != null && IsAttached)
                     {
