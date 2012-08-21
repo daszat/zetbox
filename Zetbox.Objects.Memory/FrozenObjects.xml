@@ -31913,6 +31913,56 @@ public static void TestMethod(TestObjClass obj, DateTime DateTimeParamForTestMet
     <GUI:A>d2376da7-7632-496d-a2c6-ed5bc8545250</GUI:A>
     <GUI:B>5055641c-53a5-484b-b16f-2c203d05484f</GUI:B>
   </GUI:ViewDescriptor_supports_TypeRef_RelationEntry>
+  <GUI:NavigationSearchScreen ExportGuid="8d9b6f62-d5bc-4129-92c6-8e250ddafe43">
+    <GUI:ChangedOn>2012-08-21T11:04:20.471418Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:04:20.471418Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>d8b8974a-f3de-4bba-9ccc-9c663fe86812</GUI:Parent>
+    <GUI:Children_pos>2</GUI:Children_pos>
+    <GUI:Title>DataTypes</GUI:Title>
+    <GUI:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</GUI:Type>
+  </GUI:NavigationSearchScreen>
+  <GUI:NavigationScreen ExportGuid="ccb74e87-324f-454c-b479-b8fc1a15ed30">
+    <GUI:ChangedOn>2012-08-21T11:04:20.471418Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:04:20.471418Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>d8b8974a-f3de-4bba-9ccc-9c663fe86812</GUI:Parent>
+    <GUI:Children_pos>0</GUI:Children_pos>
+    <GUI:Title>Entry 1</GUI:Title>
+  </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="95c5d904-e799-421f-824a-94dee96fc47d">
+    <GUI:ChangedOn>2012-08-21T11:03:12.337521Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:03:12.337521Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>19765517-6d19-4dde-b4ef-80318e7021a7</GUI:Parent>
+    <GUI:Children_pos>0</GUI:Children_pos>
+    <GUI:Title>Entry 1</GUI:Title>
+  </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="faa23c81-b04e-483b-b42d-c2e8087a72ce">
+    <GUI:ChangedOn>2012-08-21T11:04:20.471418Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:04:20.471418Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>d8b8974a-f3de-4bba-9ccc-9c663fe86812</GUI:Parent>
+    <GUI:Children_pos>1</GUI:Children_pos>
+    <GUI:Title>Entry 2</GUI:Title>
+  </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="433c8eb5-0863-4280-8c80-96f987b4da65">
+    <GUI:ChangedOn>2012-08-21T11:03:12.337521Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:03:12.337521Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>19765517-6d19-4dde-b4ef-80318e7021a7</GUI:Parent>
+    <GUI:Children_pos>1</GUI:Children_pos>
+    <GUI:Title>Entry 2</GUI:Title>
+  </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="a3ad4e0a-7de0-4d4d-bdd2-160f62e0557a">
+    <GUI:ChangedOn>2012-08-21T11:06:12.514826Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:05:48.366445Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>8865f4d5-0de0-4eb7-aa61-d42bdfc03a2f</GUI:Parent>
+    <GUI:Children_pos>1</GUI:Children_pos>
+    <GUI:Title>Expenses</GUI:Title>
+    <GUI:ViewModelDescriptor>ebc13c2a-0375-46e6-9fc2-a4ee5afc3568</GUI:ViewModelDescriptor>
+  </GUI:NavigationScreen>
   <GUI:NavigationScreen ExportGuid="37f3840a-2cc5-4d38-9703-07cfda8724db">
     <GUI:ChangedOn>2012-08-02T18:02:21.424417Z</GUI:ChangedOn>
     <GUI:CreatedOn>2012-08-02T20:02:21.424417Z</GUI:CreatedOn>
@@ -31922,11 +31972,92 @@ public static void TestMethod(TestObjClass obj, DateTime DateTimeParamForTestMet
     <GUI:Title>InstanceList Test</GUI:Title>
     <GUI:ViewModelDescriptor>7f6730fe-c856-4ce2-a72c-5503e1162890</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="2c2c8e05-307a-4cbf-a22e-98ba27a32ba5">
+    <GUI:ChangedOn>2012-08-21T11:05:48.366445Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:05:48.366445Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>8865f4d5-0de0-4eb7-aa61-d42bdfc03a2f</GUI:Parent>
+    <GUI:Children_pos>0</GUI:Children_pos>
+    <GUI:Title>Invoices</GUI:Title>
+    <GUI:ViewModelDescriptor>ebc13c2a-0375-46e6-9fc2-a4ee5afc3568</GUI:ViewModelDescriptor>
+  </GUI:NavigationScreen>
+  <GUI:NavigationSearchScreen ExportGuid="4bea55e1-5b77-4e4c-93ee-0c61f9bcb69b">
+    <GUI:ChangedOn>2012-08-21T11:03:12.337521Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:03:12.337521Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>19765517-6d19-4dde-b4ef-80318e7021a7</GUI:Parent>
+    <GUI:Children_pos>2</GUI:Children_pos>
+    <GUI:Title>Objects</GUI:Title>
+    <GUI:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</GUI:Type>
+  </GUI:NavigationSearchScreen>
+  <GUI:NavigationScreen ExportGuid="15cec5af-b571-415e-80c9-098f8cae24f5">
+    <GUI:ChangedOn>2012-08-21T11:05:48.366445Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:05:48.366445Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>a3ad4e0a-7de0-4d4d-bdd2-160f62e0557a</GUI:Parent>
+    <GUI:Children_pos>1</GUI:Children_pos>
+    <GUI:Title>Report</GUI:Title>
+  </GUI:NavigationScreen>
+  <GUI:NavigationSearchScreen ExportGuid="a713cc38-30aa-4884-b9c6-1be6efd9dbcd">
+    <GUI:ChangedOn>2012-08-21T11:05:48.366445Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:05:48.366445Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>a3ad4e0a-7de0-4d4d-bdd2-160f62e0557a</GUI:Parent>
+    <GUI:Children_pos>0</GUI:Children_pos>
+    <GUI:Title>Search 1</GUI:Title>
+    <GUI:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</GUI:Type>
+  </GUI:NavigationSearchScreen>
+  <GUI:NavigationSearchScreen ExportGuid="f419e04e-774c-4513-9fdb-f1ad87c58aa5">
+    <GUI:ChangedOn>2012-08-21T11:05:48.366445Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:05:48.366445Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>2c2c8e05-307a-4cbf-a22e-98ba27a32ba5</GUI:Parent>
+    <GUI:Children_pos>0</GUI:Children_pos>
+    <GUI:Title>Search 1</GUI:Title>
+    <GUI:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</GUI:Type>
+  </GUI:NavigationSearchScreen>
+  <GUI:NavigationSearchScreen ExportGuid="1bdcd7e5-c1f5-496b-a2a0-90dcccb8c9bb">
+    <GUI:ChangedOn>2012-08-21T11:05:48.366445Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:05:48.366445Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>2c2c8e05-307a-4cbf-a22e-98ba27a32ba5</GUI:Parent>
+    <GUI:Children_pos>1</GUI:Children_pos>
+    <GUI:Title>Search 2</GUI:Title>
+    <GUI:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</GUI:Type>
+  </GUI:NavigationSearchScreen>
+  <GUI:NavigationScreen ExportGuid="8865f4d5-0de0-4eb7-aa61-d42bdfc03a2f">
+    <GUI:ChangedOn>2012-08-21T11:02:01.071444Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:02:01.071444Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>c727bd24-60b2-4ea9-901f-4d65672563a1</GUI:Parent>
+    <GUI:Children_pos>3</GUI:Children_pos>
+    <GUI:RequestedKind>3166aeb8-215d-4274-a930-e9de6393edc1</GUI:RequestedKind>
+    <GUI:Title>Tabbed Left Root</GUI:Title>
+    <GUI:ViewModelDescriptor>ebc13c2a-0375-46e6-9fc2-a4ee5afc3568</GUI:ViewModelDescriptor>
+  </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="d8b8974a-f3de-4bba-9ccc-9c663fe86812">
+    <GUI:ChangedOn>2012-08-21T11:02:01.071444Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:02:01.071444Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>c727bd24-60b2-4ea9-901f-4d65672563a1</GUI:Parent>
+    <GUI:Children_pos>2</GUI:Children_pos>
+    <GUI:Title>Tabbed Root</GUI:Title>
+    <GUI:ViewModelDescriptor>ebc13c2a-0375-46e6-9fc2-a4ee5afc3568</GUI:ViewModelDescriptor>
+  </GUI:NavigationScreen>
   <GUI:NavigationScreen ExportGuid="c727bd24-60b2-4ea9-901f-4d65672563a1">
     <GUI:ChangedOn>2012-08-02T18:02:21.424417Z</GUI:ChangedOn>
     <GUI:CreatedOn>2012-08-02T20:02:21.424417Z</GUI:CreatedOn>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Title>Tests</GUI:Title>
+  </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="19765517-6d19-4dde-b4ef-80318e7021a7">
+    <GUI:ChangedOn>2012-08-21T11:02:01.071444Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2012-08-21T13:02:01.071444Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>c727bd24-60b2-4ea9-901f-4d65672563a1</GUI:Parent>
+    <GUI:Children_pos>1</GUI:Children_pos>
+    <GUI:Title>Tree Root</GUI:Title>
+    <GUI:ViewModelDescriptor>dc83a83d-6884-493c-8ea4-9473de8222db</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
   <ZetboxBase:GroupMembership ExportGuid="fc40d608-3ae9-4885-84c3-0726de05cdea">
     <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
