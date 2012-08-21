@@ -102,7 +102,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (DataContext.IsElevatedMode && !IsReadOnly) return Highlight.Bad; // May be true for calculated properties                
                 if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
-                if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
+                if (Parent != null && Parent.Highlight != Highlight.None) return Parent.Highlight;
                 return Highlight.None;
             }
         }

@@ -282,7 +282,7 @@ namespace Zetbox.Client.Presentables
             get
             {
                 if (!IsEnabled) return Highlight.Deactivated;
-                if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
+                if (Parent != null && Parent.Highlight != Highlight.None) return Parent.Highlight;
                 return Highlight.None;
             }
         }
@@ -307,7 +307,7 @@ namespace Zetbox.Client.Presentables
 
     }
 
-    public sealed class Highlight
+    public struct Highlight
     {
         #region Static Highlight States
         public static readonly Highlight None = new Highlight(HighlightState.None);
@@ -328,11 +328,6 @@ namespace Zetbox.Client.Presentables
         public static readonly Highlight Note = new Highlight(HighlightState.Note);
         #endregion
 
-        public Highlight()
-            : this(HighlightState.None)
-        {
-        }
-
         public Highlight(HighlightState state)
             : this(state, null, null, System.Drawing.FontStyle.Regular, null)
         {
@@ -344,6 +339,7 @@ namespace Zetbox.Client.Presentables
         }
 
         public Highlight(HighlightState state, string gridBackground, string gridForeground, System.Drawing.FontStyle gridFontStyle, string panelBackground)
+            : this()
         {
             this.State = state;
             this.GridBackground = gridBackground;
@@ -357,6 +353,63 @@ namespace Zetbox.Client.Presentables
         public string GridForeground { get; private set; }
         public System.Drawing.FontStyle GridFontStyle { get; private set; }
         public string PanelBackground { get; private set; }
+
+        public override int GetHashCode()
+        {
+            return State.GetHashCode() + 
+                (GridBackground ?? string.Empty).GetHashCode() +
+                (GridForeground ?? string.Empty).GetHashCode() +
+                GridFontStyle.GetHashCode() +
+                (PanelBackground ?? string.Empty).GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            // If parameter cannot be cast to ThreeDPoint return false:
+            var b = obj as Highlight?;
+            if (b.HasValue == false)
+            {
+                return false;
+            }
+
+            // Return true if the fields match:
+            return this.State == b.Value.State &&
+                this.GridBackground == b.Value.GridBackground &&
+                this.GridForeground == b.Value.GridForeground &&
+                this.GridFontStyle == b.Value.GridFontStyle &&
+                this.PanelBackground == b.Value.PanelBackground;           
+        }
+
+        public static bool operator==(Highlight a, Highlight b)
+        {
+            // If both are null, or both are same instance, return true.
+            if (System.Object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            // If one is null, but not both, return false.
+            if (((object)a == null) || ((object)b == null))
+            {
+                return false;
+            }
+
+            return a.State == b.State &&
+                a.GridBackground == b.GridBackground &&
+                a.GridForeground == b.GridForeground &&
+                a.GridFontStyle == b.GridFontStyle &&
+                a.PanelBackground == b.PanelBackground;                
+        }
+
+        public static bool operator !=(Highlight a, Highlight b)
+        {
+            return !(a == b);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} ({1}/{2}/{3}/{4})", State, GridBackground, GridForeground, GridFontStyle, PanelBackground);
+        }
     }
 
     internal class DesignerDependencies : IViewModelDependencies

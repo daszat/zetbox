@@ -661,7 +661,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return (Value != null ? Value.Highlight : Highlight.None) ?? base.Highlight;
+                return Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight;
             }
         }
         #endregion
