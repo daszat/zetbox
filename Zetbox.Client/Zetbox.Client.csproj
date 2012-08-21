@@ -172,6 +172,7 @@
     <Compile Include="Presentables\DtoViewModels\DtoTableViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoValueViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationTreeScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationTabbedScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationActionViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationReportScreenViewModel.cs" />

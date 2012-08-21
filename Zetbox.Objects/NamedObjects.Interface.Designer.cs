@@ -3938,9 +3938,17 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("37578c9c-5c1a-4443-acc0-d809a4866c6f"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_NavigationTabbedLeftScreen
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("3166aeb8-215d-4274-a930-e9de6393edc1"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_NavigationTabbedScreen
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("2b8eb3dc-46d8-4036-8434-0474555ec012"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_NavigationTreeScreen
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("5b3cb902-ef6a-4d70-9b85-824a43bfbb8c"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_Navigator
                 {
@@ -4345,6 +4353,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_NavigationTabbedScreenViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("ebc13c2a-0375-46e6-9fc2-a4ee5afc3568"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_NavigationTreeScreenViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("dc83a83d-6884-493c-8ea4-9473de8222db"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_NavigatorViewModel
                 {

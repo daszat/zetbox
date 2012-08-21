@@ -189,6 +189,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\GUI\NavigationTabbedLeftScreenDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\GUI\NavigationTreeScreenDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\GUI\NavigationReportScreenDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -610,6 +618,12 @@
     </Compile>
     <Compile Include="View\Filters\DateRangeFilterEditor.xaml.cs">
       <DependentUpon>DateRangeFilterEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GUI\NavigationTabbedLeftScreenDisplay.xaml.cs">
+      <DependentUpon>NavigationTabbedLeftScreenDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GUI\NavigationTreeScreenDisplay.xaml.cs">
+      <DependentUpon>NavigationTreeScreenDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GUI\NavigationReportScreenDisplay.xaml.cs">
       <DependentUpon>NavigationReportScreenDisplay.xaml</DependentUpon>
