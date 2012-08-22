@@ -18,8 +18,7 @@ rem regenerate modules to prove roundtrippability
 call "!Publish.cmd"
 IF ERRORLEVEL 1 GOTO FAIL
 
-rem restrict /m to two cores, since msbuild is not able to build the solution with more parallelism
-%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /m:2 /v:m Zetbox.Complete.sln
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m Zetbox.Complete.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
 GOTO EOF
