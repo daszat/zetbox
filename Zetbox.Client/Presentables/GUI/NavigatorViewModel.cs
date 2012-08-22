@@ -31,6 +31,7 @@ namespace Zetbox.Client.Presentables.GUI
         public new delegate NavigatorViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen root);
 
         private readonly NavigationEntryViewModel _root;
+        private NavigationEntryViewModel _container;
         private NavigationEntryViewModel _current;
         private readonly ObservableCollection<NavigationEntryViewModel> _history;
         private readonly ReadOnlyObservableCollection<NavigationEntryViewModel> _historyRO;
@@ -41,8 +42,8 @@ namespace Zetbox.Client.Presentables.GUI
         public NavigatorViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, NavigationScreen root)
             : base(dependencies, dataCtx, parent)
         {
-            _current = _root = NavigationEntryViewModel.Fetch(ViewModelFactory, dataCtx, parent, root);
-            _current.Displayer = this;
+            _container = _current = _root = NavigationEntryViewModel.Fetch(ViewModelFactory, dataCtx, parent, root);
+            _container.Displayer = _current.Displayer = this;
 
             _history = new ObservableCollection<NavigationEntryViewModel>() { _current };
             _historyRO = new ReadOnlyObservableCollection<NavigationEntryViewModel>(_history);
@@ -66,6 +67,27 @@ namespace Zetbox.Client.Presentables.GUI
         #endregion
 
         #region Navigational Aides
+
+        /// <summary>
+        /// The top-most container of the CurrentScreen
+        /// </summary>
+        public NavigationEntryViewModel ContainerScreen
+        {
+            get
+            {
+                return _container;
+            }
+
+            private set
+            {
+                if (_container != value)
+                {
+                    _container = value;
+                    _container.Displayer = this;
+                    OnPropertyChanged("ContainerScreen");
+                }
+            }
+        }
 
         /// <summary>
         /// The currently displayed NavigationScreenViewModel.
@@ -103,6 +125,7 @@ namespace Zetbox.Client.Presentables.GUI
         {
             var newLocation = new List<NavigationEntryViewModel>();
             var screen = CurrentScreen;
+
             while (screen != null)
             {
                 newLocation.Add(screen);
@@ -132,6 +155,8 @@ namespace Zetbox.Client.Presentables.GUI
                 _location.Add(newLocation[prefixLength]);
                 prefixLength += 1;
             }
+
+            ContainerScreen = _location.FirstOrDefault(s => s.IsContainer) ?? CurrentScreen;
         }
 
         /// <summary>
@@ -159,7 +184,7 @@ namespace Zetbox.Client.Presentables.GUI
                         NavigatorViewModelResources.HomeCommand_Name,
                         NavigatorViewModelResources.HomeCommand_Tooltip,
                         Home,
-                        () => CurrentScreen != _root, 
+                        () => CurrentScreen != _root,
                         null);
                 }
                 return _HomeCommand;
@@ -184,7 +209,7 @@ namespace Zetbox.Client.Presentables.GUI
                         NavigatorViewModelResources.BackCommand_Name,
                         NavigatorViewModelResources.BackCommand_Tooltip,
                         Back,
-                        () => _history.Count > 1, 
+                        () => _history.Count > 1,
                         null);
                 }
                 return _BackCommand;
@@ -197,7 +222,7 @@ namespace Zetbox.Client.Presentables.GUI
             {
                 // remove "current" screen from history
                 _history.RemoveAt(_history.Count - 1);
-                CurrentScreen = _history.Last();
+                NavigateTo(_history.Last());
                 // remove the back step from history too
                 _history.RemoveAt(_history.Count - 1);
             }
@@ -224,7 +249,17 @@ namespace Zetbox.Client.Presentables.GUI
 
         public void NavigateTo(NavigationEntryViewModel screen)
         {
-            CurrentScreen = screen;
+            if (CurrentScreen != screen)
+            {
+                CurrentScreen = screen;
+                while (screen.ParentScreen != null)
+                {
+                    // change CurrentScreen first, to avoid additional navigations
+                    screen.CurrentScreen = CurrentScreen;
+                    screen.ParentScreen.SelectedEntry = screen;
+                    screen = screen.ParentScreen;
+                }
+            }
         }
 
         #endregion

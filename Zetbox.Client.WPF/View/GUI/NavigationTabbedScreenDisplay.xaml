@@ -62,10 +62,10 @@
                 </ItemsControl>
             </StackPanel>
             <TabControl ItemsSource="{Binding Tabs}"
-                        SelectedIndex="0">
+                        SelectedItem="{Binding SelectedEntry}">
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <ContentPresenter Content="{Binding}"
+                        <ContentPresenter Content="{Binding ContainerScreen}"
                                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
                     </DataTemplate>
                 </TabControl.ContentTemplate>

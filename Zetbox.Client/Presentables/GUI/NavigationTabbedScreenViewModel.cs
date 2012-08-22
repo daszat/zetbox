@@ -38,6 +38,42 @@ namespace Zetbox.Client.Presentables.GUI
         {
         }
 
+        public override bool IsContainer
+        {
+            get { return true; }
+        }
+
+        private NavigationEntryViewModel _selected;
+        public override NavigationEntryViewModel SelectedEntry
+        {
+            get
+            {
+                if (_selected == null && Children.Count > 0)
+                {
+                    _selected = Children.First();
+                    if (_selected != null)
+                        Displayer.NavigateTo(_selected.CurrentScreen);
+                }
+                return _selected;
+            }
+            set
+            {
+                if (_selected != value)
+                {
+                    _selected = value;
+                    OnPropertyChanged("SelectedEntry");
+
+                    if (_selected != null)
+                        Displayer.NavigateTo(_selected.CurrentScreen);
+                }
+            }
+        }
+
+        protected override NavigationEntryViewModel GetInitialScreen()
+        {
+            return Children.FirstOrDefault();
+        }
+
         public IEnumerable<NavigationEntryViewModel> Tabs
         {
             get

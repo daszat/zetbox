@@ -210,7 +210,7 @@ namespace Zetbox.Client.Presentables.GUI
 
         protected virtual List<CommandViewModel> CreateAdditionalCommands()
         {
-            return new List<CommandViewModel>(); 
+            return new List<CommandViewModel>();
         }
 
         public string Color
@@ -233,6 +233,83 @@ namespace Zetbox.Client.Presentables.GUI
         public abstract bool IsScreen
         {
             get;
+        }
+
+        /// <summary>
+        /// Indicates that a navigation entry should stay visible, contains, and "renders" its children itself.
+        /// </summary>
+        /// <remarks>
+        /// Tabbed screens are examples for Containers.
+        /// </remarks>
+        public abstract bool IsContainer { get; }
+
+        /// <summary>
+        /// The currently selected child entry on this NavigationEntry.
+        /// </summary>
+        public abstract NavigationEntryViewModel SelectedEntry
+        {
+            get;
+            set;
+        }
+
+        private NavigationEntryViewModel _current;
+        /// <summary>
+        /// The currently displayed entry in this part of the hierarchy.
+        /// </summary>
+        public NavigationEntryViewModel CurrentScreen
+        {
+            get
+            {
+                if (_current == null)
+                    _current = GetInitialScreen();
+                return _current;
+            }
+            set
+            {
+                if (_current != value)
+                {
+                    _current = value;
+                    UpdateContainer();
+                    OnPropertyChanged("CurrentScreen");
+                }
+            }
+        }
+
+        protected virtual NavigationEntryViewModel GetInitialScreen()
+        {
+            return this;
+        }
+
+        private void UpdateContainer()
+        {
+            // select the top-most container that is within this container, or the current screen
+            ContainerScreen = CurrentScreen
+                .AndParents(s => s.ParentScreen)
+                .TakeWhile(s => s != this.ParentScreen)
+                .Where(s => s.IsContainer)
+                .LastOrDefault()
+                ?? CurrentScreen;
+        }
+
+        private NavigationEntryViewModel _container;
+        /// <summary>
+        /// The top-most container of the CurrentScreen
+        /// </summary>
+        public NavigationEntryViewModel ContainerScreen
+        {
+            get
+            {
+                if (_container == null) UpdateContainer();
+                return _container;
+            }
+            private set
+            {
+                if (_container != value)
+                {
+                    _container = value;
+                    OnPropertyChanged("ContainerScreen");
+                }
+            }
         }
 
         #region ReportProblemCommand

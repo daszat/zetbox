@@ -45,6 +45,23 @@ namespace Zetbox.Client.Presentables.GUI
             get { return true; }
         }
 
+        public override bool IsContainer
+        {
+            get { return false; }
+        }
+
+        public override NavigationEntryViewModel SelectedEntry
+        {
+            get
+            {
+                return null;
+            }
+            set
+            {
+                // intentionally empty
+            }
+        }
+
         private ICommandViewModel _ExecuteCommand = null;
         public override ICommandViewModel ExecuteCommand
         {
