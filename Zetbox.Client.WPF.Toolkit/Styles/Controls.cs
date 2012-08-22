@@ -194,19 +194,19 @@ using System.Windows.Data;
         #endregion
 
         #region Highlight
-        public static Highlight GetHighlight(DependencyObject obj)
+        public static Highlight? GetHighlight(DependencyObject obj)
         {
-            return (Highlight)obj.GetValue(HighlightProperty);
+            return (Highlight?)obj.GetValue(HighlightProperty);
         }
 
-        public static void SetHighlight(DependencyObject obj, Highlight value)
+        public static void SetHighlight(DependencyObject obj, Highlight? value)
         {
             obj.SetValue(HighlightProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Highlight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HighlightProperty =
-            DependencyProperty.RegisterAttached("Highlight", typeof(Highlight), typeof(Controls), new PropertyMetadata(highlight_Changed));
+            DependencyProperty.RegisterAttached("Highlight", typeof(Highlight?), typeof(Controls), new PropertyMetadata(highlight_Changed));
 
         public static void highlight_Changed(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -256,15 +256,15 @@ using System.Windows.Data;
                 }
                 else
                 {
-                    depObj.SetValue(Control.ForegroundProperty, GetHighlightValue(highlight.State, highlight.GridForeground, "GridForeground"));
-                    depObj.SetValue(Control.BackgroundProperty, GetHighlightValue(highlight.State, highlight.GridBackground, "GridBackground"));
-                    depObj.SetValue(Control.FontStyleProperty, GetHighlightValue(highlight.State, ConvertFontStyle(highlight.GridFontStyle), "GridFontStyle"));
-                    depObj.SetValue(Control.FontWeightProperty, GetHighlightValue(highlight.State, ConvertFontWeight(highlight.GridFontStyle), "GridFontWeight"));
+                    depObj.SetValue(Control.ForegroundProperty, GetHighlightValue(highlight.Value.State, highlight.Value.GridForeground, "GridForeground"));
+                    depObj.SetValue(Control.BackgroundProperty, GetHighlightValue(highlight.Value.State, highlight.Value.GridBackground, "GridBackground"));
+                    depObj.SetValue(Control.FontStyleProperty, GetHighlightValue(highlight.Value.State, ConvertFontStyle(highlight.Value.GridFontStyle), "GridFontStyle"));
+                    depObj.SetValue(Control.FontWeightProperty, GetHighlightValue(highlight.Value.State, ConvertFontWeight(highlight.Value.GridFontStyle), "GridFontWeight"));
 
-                    depObj.SetValue(TextBlock.ForegroundProperty, GetHighlightValue(highlight.State, highlight.GridForeground, "GridForeground"));
-                    depObj.SetValue(TextBlock.BackgroundProperty, GetHighlightValue(highlight.State, highlight.GridBackground, "GridBackground"));
-                    depObj.SetValue(TextBlock.FontStyleProperty, GetHighlightValue(highlight.State, ConvertFontStyle(highlight.GridFontStyle), "GridFontStyle"));
-                    depObj.SetValue(TextBlock.FontWeightProperty, GetHighlightValue(highlight.State, ConvertFontWeight(highlight.GridFontStyle), "GridFontWeight"));
+                    depObj.SetValue(TextBlock.ForegroundProperty, GetHighlightValue(highlight.Value.State, highlight.Value.GridForeground, "GridForeground"));
+                    depObj.SetValue(TextBlock.BackgroundProperty, GetHighlightValue(highlight.Value.State, highlight.Value.GridBackground, "GridBackground"));
+                    depObj.SetValue(TextBlock.FontStyleProperty, GetHighlightValue(highlight.Value.State, ConvertFontStyle(highlight.Value.GridFontStyle), "GridFontStyle"));
+                    depObj.SetValue(TextBlock.FontWeightProperty, GetHighlightValue(highlight.Value.State, ConvertFontWeight(highlight.Value.GridFontStyle), "GridFontWeight"));
                 }
             }
         }
