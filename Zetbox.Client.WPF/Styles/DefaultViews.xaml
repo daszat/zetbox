@@ -28,6 +28,7 @@
     <ResourceDictionary.MergedDictionaries>
         <!--<ResourceDictionary Source="DebugColors.xaml" />-->
         <ResourceDictionary Source="DefaultStyles.xaml" />
+        <ResourceDictionary Source="/WPFToolkit;component/DataGrid/Themes/Generic.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- #################################################################
@@ -1664,6 +1665,120 @@
            BasedOn="{StaticResource zbListViewTemplate}">
     </Style>
 
+    <Style x:Key="dataGridTemplate"
+           TargetType="wpftk:DataGrid">
+        <Setter Property="Background"
+                Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="BorderBrush"
+                Value="#FF688CAF" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <!-- This is needed to force DG to have a non-default value.  Otherwise the DGR.DetailsVisibility cannot have a value of VisibleWhenSelected by default. -->
+        <Setter Property="RowDetailsVisibilityMode"
+                Value="VisibleWhenSelected" />
+        <Setter Property="ScrollViewer.CanContentScroll"
+                Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="wpftk:DataGrid">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True"
+                            Padding="{TemplateBinding Padding}">
+                        <ScrollViewer   Focusable="false"
+                                        Name="DG_ScrollViewer">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--Left Column Header Corner -->
+                                        <Button Command="{x:Static wpftk:DataGrid.SelectAllCommand}"
+                                                Width="{Binding RelativeSource={RelativeSource AncestorType=wpftk:DataGrid}, Path=CellsPanelHorizontalOffset}"
+                                                Template="{StaticResource SelectAllButtonTemplate}"
+                                                Focusable="false"
+                                                Margin="0"
+                                                Padding="0"
+                                                Visibility="{Binding RelativeSource={RelativeSource AncestorType=wpftk:DataGrid}, Path=HeadersVisibility, Converter={x:Static wpftk:DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static wpftk:DataGridHeadersVisibility.All}}" />
+                                        <!--Column Headers-->
+                                        <wpftkp:DataGridColumnHeadersPresenter Grid.Column="1"
+                                                                            Name="PART_ColumnHeadersPresenter"
+                                                                            Visibility="{Binding RelativeSource={RelativeSource AncestorType=wpftk:DataGrid}, Path=HeadersVisibility, Converter={x:Static wpftk:DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static wpftk:DataGridHeadersVisibility.Column}}" />
+
+                                        <!--DataGrid content-->
+                                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                                Grid.Row="1"
+                                                                Grid.ColumnSpan="2"
+                                                                CanContentScroll="{TemplateBinding CanContentScroll}" />
+
+                                        <ScrollBar Grid.Row="1"
+                                                   Grid.Column="2"
+                                                   Name="PART_VerticalScrollBar"
+                                                   Orientation="Vertical"
+                                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                                   Value="{Binding Path=VerticalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+
+                                        <Grid Grid.Row="2"
+                                              Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=wpftk:DataGrid}, Path=NonFrozenColumnsViewportHorizontalOffset}" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <ScrollBar Grid.Column="1"
+                                                       Name="PART_HorizontalScrollBar"
+                                                       Orientation="Horizontal"
+                                                       Maximum="{TemplateBinding ScrollableWidth}"
+                                                       ViewportSize="{TemplateBinding ViewportWidth}"
+                                                       Value="{Binding Path=HorizontalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RowHeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Border Width="{StaticResource SmallControlHeight}" BorderThickness="0" Padding="0" Margin="0" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsGrouping"
+                     Value="true">
+                <Setter Property="ScrollViewer.CanContentScroll"
+                        Value="false" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="wpftk:DataGrid"
+           BasedOn="{StaticResource dataGridTemplate}" />
+
+    <Style TargetType="ctrls:ZetboxDataGrid"
+           BasedOn="{StaticResource dataGridTemplate}" />
+
     <!-- thanks for the tip: http://www.steelyeyedview.com/2010/03/contentpresenter-gridviewrowpresenter.html -->
     <Style x:Key="zbListViewItemTemplate"
            TargetType="ListViewItem">
@@ -1737,9 +1852,6 @@
     <Style TargetType="ListViewItem"
            BasedOn="{StaticResource zbListViewItemTemplate}" />
 
-    <Style TargetType="{x:Type wpftk:DataGrid}">
-    </Style>
-
     <!--- Style menus -->
     <Style x:Key="CommandMenuItem"
            TargetType="MenuItem">
@@ -1772,7 +1884,7 @@
         </Menu>
     </DataTemplate>
 
-    <!-- Style Girds and lists -->
+    <!-- Style Grids and lists -->
     <Style x:Key="ListViewItemContainerStyle"
            TargetType="ListViewItem"
            BasedOn="{StaticResource zbListViewItemTemplate}">
@@ -1786,7 +1898,7 @@
                 Value="{Binding Highlight}" />
     </Style>
 
-    <!-- Force GridView content to be streched -->
+    <!-- Force GridView content to be stretched -->
     <Style x:Key="ListViewAsGridViewItemContainerStyle"
            TargetType="ListViewItem"
            BasedOn="{StaticResource ListViewItemContainerStyle}">
