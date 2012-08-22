@@ -44,6 +44,7 @@
                       SelectedItem="{Binding CurrentModule}" />
             <TreeView x:Name="NavTree"
                       ItemsSource="{Binding Path=TreeItems}"
+                      BorderThickness="0"
                       SelectedItemChanged="TreeView_SelectedItemChanged">
             </TreeView>
         </DockPanel>
