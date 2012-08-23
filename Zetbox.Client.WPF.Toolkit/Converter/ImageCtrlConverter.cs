@@ -26,7 +26,7 @@ namespace Zetbox.Client.WPF.Converter
     /// Converts an Zetbox.Icon (ObjectClass, IDataObject, etc) to an Image Control
     /// </summary>
     /// <remarks>
-    /// Used for bind Icons to MenuItems throug a Style. See:
+    /// Used for bind Icons to MenuItems through a Style. See:
     /// http://connect.microsoft.com/VisualStudio/feedback/details/497408/wpf-menuitem-icon-cannot-be-set-via-setter
     /// http://stackoverflow.com/questions/30239/wpf-setting-a-menuitem-icon-in-code
     /// http://stackoverflow.com/questions/1495489/unable-to-set-system-windows-controls-menuitem-icon-thru-a-setter
