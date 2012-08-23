@@ -38,7 +38,7 @@ namespace Zetbox.Client.WPF.View.GUI
     /// Interaction logic for NavigationScreenDisplay.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class NavigationScreenDisplay : UserControl, IHasViewModel<NavigationEntryViewModel>
+    public partial class NavigationScreenDisplay : TracingUserControl, IHasViewModel<NavigationEntryViewModel>
     {
         public NavigationScreenDisplay()
         {

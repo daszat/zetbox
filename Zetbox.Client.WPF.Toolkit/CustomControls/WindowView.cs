@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -26,9 +27,16 @@ namespace Zetbox.Client.WPF.CustomControls
 {
     public class WindowView : Window
     {
+        private Stopwatch _watch;
         public WindowView()
         {
+            _watch = new Stopwatch();
+            _watch.Start();
+            this.Initialized += (s,e) => {
+                Debug.WriteLine(string.Format("Window: Initialised after {0:N2}ms", _watch.ElapsedMilliseconds));
+            };
             this.Loaded += new RoutedEventHandler(WindowView_Loaded);
+            Debug.WriteLine("Window: Constructed");
         }
 
         private bool _closing;
@@ -60,6 +68,8 @@ namespace Zetbox.Client.WPF.CustomControls
 
         void WindowView_Loaded(object sender, RoutedEventArgs e)
         {
+            Debug.WriteLine(string.Format("Window: Loaded after {0:N2}ms", _watch.ElapsedMilliseconds));
+            _watch.Stop();
             if (WindowViewModel != null)
             {
                 WindowViewModel.PropertyChanged += WindowView_PropertyChanged;

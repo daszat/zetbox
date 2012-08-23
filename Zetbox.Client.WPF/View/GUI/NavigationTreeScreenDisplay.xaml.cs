@@ -38,7 +38,7 @@ namespace Zetbox.Client.WPF.View.GUI
     /// Interaction logic for NavigationTabbedScreenDisplay.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class NavigationTreeScreenDisplay : UserControl, IHasViewModel<NavigationTreeScreenViewModel>
+    public partial class NavigationTreeScreenDisplay : TracingUserControl, IHasViewModel<NavigationTreeScreenViewModel>
     {
         public NavigationTreeScreenDisplay()
         {

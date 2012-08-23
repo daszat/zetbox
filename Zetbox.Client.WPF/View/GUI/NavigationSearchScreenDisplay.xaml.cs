@@ -12,30 +12,32 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Zetbox.Client.GUI;
-using Zetbox.Client.Presentables.GUI;
 
 namespace Zetbox.Client.WPF.View.GUI
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.WPF.CustomControls;
+
     /// <summary>
     /// Interaction logic for SearchScreenDisplay.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class NavigationSearchScreenDisplay : UserControl, IHasViewModel<NavigationSearchScreenViewModel>
+    public partial class NavigationSearchScreenDisplay : TracingUserControl, IHasViewModel<NavigationSearchScreenViewModel>
     {
         public NavigationSearchScreenDisplay()
         {
