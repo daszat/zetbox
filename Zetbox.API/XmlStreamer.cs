@@ -13,11 +13,12 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using System.Collections;
+using Zetbox.API.Utils;
 
 namespace Zetbox.API
 {
@@ -56,6 +57,11 @@ namespace Zetbox.API
         {
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
+            if (val.Kind == DateTimeKind.Unspecified)
+            {
+                Logging.Exporter.WarnOnce("Converting DateTimeKind.Unspecified to local while writing XML");
+                val = DateTime.SpecifyKind(val, DateTimeKind.Local);
+            }
             xml.WriteElementString(name, ns, XmlConvert.ToString(val, XmlDateTimeSerializationMode.Utc));
         }
         public static void ToStream(DateTime? val, XmlWriter xml, string name, string ns)
@@ -63,6 +69,11 @@ namespace Zetbox.API
             if (!val.HasValue) return;
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
+            if (val.Value.Kind == DateTimeKind.Unspecified)
+            {
+                Logging.Exporter.WarnOnce("Converting DateTimeKind.Unspecified to local while writing XML");
+                val = DateTime.SpecifyKind(val.Value, DateTimeKind.Local);
+            }
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value, XmlDateTimeSerializationMode.Utc));
         }
 
