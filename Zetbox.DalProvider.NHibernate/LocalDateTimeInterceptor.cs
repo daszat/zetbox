@@ -47,11 +47,10 @@ namespace Zetbox.DalProvider.NHibernate
 
         private void ConvertDateToLocal(object[] state, IType[] types)
         {
-            int index = 0;
-            foreach (IType type in types)
+            for (int index = 0; index < types.Length; index++)
             {
                 if(state[index] == null) continue;
-                if ((type.ReturnedClass == typeof(DateTime)))
+                if ((types[index].ReturnedClass == typeof(DateTime)))
                 {
                     DateTime cur = (DateTime)state[index];
                     switch (cur.Kind)
@@ -66,7 +65,7 @@ namespace Zetbox.DalProvider.NHibernate
                             break;
                     }
                 }
-                else if ((type.ReturnedClass == typeof(DateTime?)))
+                else if ((types[index].ReturnedClass == typeof(DateTime?)))
                 {
                     DateTime? cur = (DateTime?)state[index];
                     if (cur != null)
@@ -84,8 +83,6 @@ namespace Zetbox.DalProvider.NHibernate
                         }
                     }
                 }
-
-                ++index;
             }
         }
     }
