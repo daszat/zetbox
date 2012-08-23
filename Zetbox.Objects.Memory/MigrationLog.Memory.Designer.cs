@@ -296,6 +296,8 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var __oldValue = _Timestamp;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnTimestamp_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);

@@ -372,6 +372,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Timestamp;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnTimestamp_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);

@@ -150,6 +150,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _Bis;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnBis_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -312,6 +314,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -475,6 +479,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -605,6 +611,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _KickOffAm;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnKickOffAm_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -663,6 +671,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _KickOffBis;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnKickOffBis_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -903,6 +913,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 {
                     var __oldValue = _Von;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnVon_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);

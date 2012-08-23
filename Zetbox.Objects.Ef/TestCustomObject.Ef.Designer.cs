@@ -74,6 +74,8 @@ namespace Zetbox.App.Test
                 {
                     var __oldValue = _Birthday;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnBirthday_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -102,7 +104,7 @@ namespace Zetbox.App.Test
             get { return _Birthday_store; }
             set {
                 ReportEfPropertyChanging("Birthday");
-                _Birthday_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _Birthday_store = value;
                 ReportEfPropertyChanged("Birthday");
             }
         }

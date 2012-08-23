@@ -404,6 +404,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 {
                     var __oldValue = _TestDateTime;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnTestDateTime_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);

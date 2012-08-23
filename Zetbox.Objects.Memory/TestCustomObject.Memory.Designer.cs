@@ -68,6 +68,8 @@ namespace Zetbox.App.Test
                 {
                     var __oldValue = _Birthday;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnBirthday_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);

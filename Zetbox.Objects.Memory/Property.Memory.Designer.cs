@@ -226,6 +226,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -485,6 +487,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);

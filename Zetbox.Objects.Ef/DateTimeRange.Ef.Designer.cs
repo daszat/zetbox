@@ -80,6 +80,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _From;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnFrom_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -108,7 +110,7 @@ namespace Zetbox.App.Base
             get { return _From_store; }
             set {
                 ReportEfPropertyChanging("From");
-                _From_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _From_store = value;
                 ReportEfPropertyChanged("From");
             }
         }
@@ -147,6 +149,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Thru;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnThru_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -175,7 +179,7 @@ namespace Zetbox.App.Base
             get { return _Thru_store; }
             set {
                 ReportEfPropertyChanging("Thru");
-                _Thru_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _Thru_store = value;
                 ReportEfPropertyChanged("Thru");
             }
         }

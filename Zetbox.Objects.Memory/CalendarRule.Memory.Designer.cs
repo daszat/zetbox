@@ -277,6 +277,8 @@ namespace Zetbox.App.Calendar
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -440,6 +442,8 @@ namespace Zetbox.App.Calendar
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -792,6 +796,8 @@ namespace Zetbox.App.Calendar
                 {
                     var __oldValue = _ValidFrom;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnValidFrom_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -850,6 +856,8 @@ namespace Zetbox.App.Calendar
                 {
                     var __oldValue = _ValidUntil;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnValidUntil_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);

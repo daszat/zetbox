@@ -346,6 +346,8 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var __oldValue = _Timestamp;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnTimestamp_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -374,7 +376,7 @@ namespace Zetbox.App.SchemaMigration
             get { return _Timestamp_store; }
             set {
                 ReportEfPropertyChanging("Timestamp");
-                _Timestamp_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _Timestamp_store = value;
                 ReportEfPropertyChanged("Timestamp");
             }
         }

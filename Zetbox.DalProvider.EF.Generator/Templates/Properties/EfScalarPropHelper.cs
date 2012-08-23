@@ -50,21 +50,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
             template.WriteLine();
             template.WriteObjects("                ReportEfPropertyChanging(\"", efName, "\");");
             template.WriteLine();
-            if (type == "DateTime")
-            {
-                template.WriteObjects("                ", backingName, "_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;");
-                template.WriteLine();
-            }
-            else if (type == "DateTime?")
-            {
-                template.WriteObjects("                ", backingName, "_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;");
-                template.WriteLine();
-            }
-            else
-            {
-                template.WriteObjects("                ", backingName, "_store = value;");
-                template.WriteLine();
-            }
+            template.WriteObjects("                ", backingName, "_store = value;");
+            template.WriteLine();
             template.WriteObjects("                ReportEfPropertyChanged(\"", efName, "\");");
             template.WriteLine();
             template.WriteObjects("            }");

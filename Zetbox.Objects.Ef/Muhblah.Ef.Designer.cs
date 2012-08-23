@@ -476,6 +476,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 {
                     var __oldValue = _TestDateTime;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnTestDateTime_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -504,7 +506,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             get { return _TestDateTime_store; }
             set {
                 ReportEfPropertyChanging("TestDateTime");
-                _TestDateTime_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _TestDateTime_store = value;
                 ReportEfPropertyChanged("TestDateTime");
             }
         }

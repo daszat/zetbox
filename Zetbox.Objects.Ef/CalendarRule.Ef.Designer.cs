@@ -301,6 +301,8 @@ namespace Zetbox.App.Calendar
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -329,7 +331,7 @@ namespace Zetbox.App.Calendar
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _ChangedOn_store = value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -486,6 +488,8 @@ namespace Zetbox.App.Calendar
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -514,7 +518,7 @@ namespace Zetbox.App.Calendar
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _CreatedOn_store = value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -893,6 +897,8 @@ namespace Zetbox.App.Calendar
                 {
                     var __oldValue = _ValidFrom;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnValidFrom_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -921,7 +927,7 @@ namespace Zetbox.App.Calendar
             get { return _ValidFrom_store; }
             set {
                 ReportEfPropertyChanging("ValidFrom");
-                _ValidFrom_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _ValidFrom_store = value;
                 ReportEfPropertyChanged("ValidFrom");
             }
         }
@@ -962,6 +968,8 @@ namespace Zetbox.App.Calendar
                 {
                     var __oldValue = _ValidUntil;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnValidUntil_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -990,7 +998,7 @@ namespace Zetbox.App.Calendar
             get { return _ValidUntil_store; }
             set {
                 ReportEfPropertyChanging("ValidUntil");
-                _ValidUntil_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _ValidUntil_store = value;
                 ReportEfPropertyChanged("ValidUntil");
             }
         }

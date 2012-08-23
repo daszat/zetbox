@@ -183,6 +183,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _Bis;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnBis_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -211,7 +213,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             get { return _Bis_store; }
             set {
                 ReportEfPropertyChanging("Bis");
-                _Bis_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _Bis_store = value;
                 ReportEfPropertyChanged("Bis");
             }
         }
@@ -367,6 +369,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -395,7 +399,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _ChangedOn_store = value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -552,6 +556,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -580,7 +586,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _CreatedOn_store = value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -704,6 +710,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _KickOffAm;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnKickOffAm_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -732,7 +740,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             get { return _KickOffAm_store; }
             set {
                 ReportEfPropertyChanging("KickOffAm");
-                _KickOffAm_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _KickOffAm_store = value;
                 ReportEfPropertyChanged("KickOffAm");
             }
         }
@@ -773,6 +781,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _KickOffBis;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnKickOffBis_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -801,7 +811,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             get { return _KickOffBis_store; }
             set {
                 ReportEfPropertyChanging("KickOffBis");
-                _KickOffBis_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _KickOffBis_store = value;
                 ReportEfPropertyChanged("KickOffBis");
             }
         }
@@ -1087,6 +1097,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 {
                     var __oldValue = _Von;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnVon_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -1115,7 +1127,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             get { return _Von_store; }
             set {
                 ReportEfPropertyChanging("Von");
-                _Von_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _Von_store = value;
                 ReportEfPropertyChanged("Von");
             }
         }

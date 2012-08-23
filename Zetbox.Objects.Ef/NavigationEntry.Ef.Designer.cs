@@ -185,6 +185,8 @@ namespace Zetbox.App.GUI
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -213,7 +215,7 @@ namespace Zetbox.App.GUI
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _ChangedOn_store = value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -496,6 +498,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -524,7 +528,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _CreatedOn_store = value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }

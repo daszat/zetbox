@@ -70,6 +70,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Date;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnDate_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -98,7 +100,7 @@ namespace Zetbox.App.Base
             get { return _Date_store; }
             set {
                 ReportEfPropertyChanging("Date");
-                _Date_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _Date_store = value;
                 ReportEfPropertyChanged("Date");
             }
         }
