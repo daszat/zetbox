@@ -192,7 +192,7 @@ namespace Zetbox.Generator
 
         private bool CompileCode(string workingPath)
         {
-            using (Log.DebugTraceMethodCall("CompileCode", "Compile Code on STA thread to " + workingPath))
+            using (Log.InfoTraceMethodCall("CompileCode", "Compile Code on STA thread to " + workingPath))
             {
                 var zetboxApiPath = GetApiPath();
 

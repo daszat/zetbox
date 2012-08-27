@@ -108,18 +108,20 @@ namespace Zetbox.App.Extensions
                 if (_initImpls.ContainsKey(implType)) return;
                 try
                 {
-                    Log.InfoFormat("Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name);
-                    Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
-
-                    ReflectMethods(ctx);
-                    CreateInvokeInfosForDataTypes(ctx);
-
-                    foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
+                    using (Log.InfoTraceMethodCallFormat("Init", "Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name))
                     {
-                        Log.Warn(string.Format("Couldn't find any method for Invocation {0}", key));
-                    }
+                        Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
-                    Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
+                        ReflectMethods(ctx);
+                        CreateInvokeInfosForDataTypes(ctx);
+
+                        foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
+                        {
+                            Log.Warn(string.Format("Couldn't find any method for Invocation {0}", key));
+                        }
+
+                        Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
+                    }
                 }
                 finally
                 {

@@ -65,14 +65,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator
         private List<string> CreateMappings(Zetbox.API.IZetboxContext ctx)
         {
             this.RunTemplateWithExtension(ctx, "Mappings.CollectionEntriesHbm", "CollectionEntries", "hbm.xml");
-            foreach (var oc in ctx.GetQuery<ObjectClass>().Where(i => i.BaseObjectClass == null))
-            {
-                this.RunTemplateWithExtension(ctx, "Mappings.ObjectClassHbm", oc.Name, "hbm.xml",
-                    Templates.Mappings.ObjectClassHbm.MakeArgs(ctx, oc, new NameValueCollection() { { "extrasuffix", ExtraSuffix } }));
-            }
+            this.RunTemplateWithExtension(ctx, "Mappings.ClassesHbm", "Classes", "hbm.xml", ExtraSuffix);
 
-            // Mapping files are picked up automatically by the ProjectFile
-            // so we don't need to keep track of them.
+            // Mapping files are picked up automatically by the ProjectFile as EmbeddedResources
+            // so we must not need to keep track of them as Compiles
             return new List<string>();
         }
     }

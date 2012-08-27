@@ -44,15 +44,18 @@ namespace Zetbox.Objects
                 .Register<ISessionFactory>(
                     c => {
                         var zetboxConfig = c.Resolve<ZetboxConfig>();
-                        var result = new Configuration();
-                        var connectionString = zetboxConfig.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
-                        result.Properties["dialect"] = connectionString.DatabaseProvider;
-                        result.Properties["connection.connection_string"] = connectionString.ConnectionString;
-                        result.Properties["max_fetch_depth"] = "1"; // keep SQL statements small
+                        using (Logging.Log.InfoTraceMethodCall("Init NH Session Factory"))
+                        {
+                            var result = new Configuration();
+                            var connectionString = zetboxConfig.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
+                            result.Properties["dialect"] = connectionString.DatabaseProvider;
+                            result.Properties["connection.connection_string"] = connectionString.ConnectionString;
+                            result.Properties["max_fetch_depth"] = "1"; // keep SQL statements small
 
-                        return result
-                            .AddAssembly(typeof(NHibernateModule).Assembly)
-                            .BuildSessionFactory();
+                            return result
+                                .AddAssembly(typeof(NHibernateModule).Assembly)
+                                .BuildSessionFactory();
+                        }
                     })
                 .SingleInstance();
 

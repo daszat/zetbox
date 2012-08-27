@@ -100,6 +100,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Templates\CompoundObjects\Template.cs" />
+    <Compile Include="Templates\Mappings\ClassesHbm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassesHbm.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Mappings\CollectionEntriesHbm.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -109,6 +114,9 @@
       <DependentUpon>CompoundObjectPropertyHbm.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Mappings\ClassesHbm.cs">
+      <DependentUpon>ClassesHbm.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\Mappings\IdGeneratorHbm.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -334,6 +342,10 @@
     <None Include="Templates\Mappings\CompoundObjectPropertyHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectPropertyHbm.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Mappings\ClassesHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ClassesHbm.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Mappings\IdGeneratorHbm.cst">
       <Generator>Arebis Template Processor</Generator>

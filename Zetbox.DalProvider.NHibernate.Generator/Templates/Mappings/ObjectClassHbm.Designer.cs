@@ -56,9 +56,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
         public override void Generate()
         {
 #line 42 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-this.WriteObjects("<?xml version=\"1.0\"?>\r\n");
-this.WriteObjects("<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\" \r\n");
-this.WriteObjects("                   default-cascade=\"save-update\" >\r\n");
 this.WriteObjects("    <class name=\"",  qualifiedImplementationName , "\"\r\n");
 this.WriteObjects("           proxy=\"",  qualifiedImplementationName , "\"\r\n");
 this.WriteObjects("           schema=\"`",  schemaName , "`\"\r\n");
@@ -68,18 +65,18 @@ this.WriteObjects("           dynamic-update=\"",  needsConcurrency ? "true" : "
 this.WriteObjects("           optimistic-lock=\"",  needsConcurrency ? "dirty" : "none" , "\"\r\n");
 this.WriteObjects("           batch-size=\"100\">\r\n");
 this.WriteObjects("\r\n");
-#line 54 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 51 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 IdGeneratorHbm.Call(Host, "id", schemaName, tableName); 
-#line 55 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 52 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        <!-- define the properties -->\r\n");
-#line 57 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 54 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 ApplyPropertyDefinitions(properties); 
-#line 58 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 55 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
-#line 59 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 56 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 if (needsRightsTable) { 
-#line 60 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 57 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("        <!-- map rights -->\r\n");
 this.WriteObjects("        <set name=\"SecurityRightsCollectionImpl\"\r\n");
 this.WriteObjects("             schema=\"`",  schemaName , "`\"\r\n");
@@ -94,16 +91,15 @@ this.WriteObjects("                <property name=\"Right\" column=\"`Right`\" /
 this.WriteObjects("            </composite-element>\r\n");
 this.WriteObjects("        </set>\r\n");
 this.WriteObjects("\r\n");
-#line 74 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 71 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 } 
-#line 75 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 72 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("        <!-- define the subclasses -->\r\n");
-#line 76 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 73 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 ApplyJoinedSubclasses(subClasses); 
-#line 77 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 74 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    </class>\r\n");
-this.WriteObjects("</hibernate-mapping>");
 
         }
 

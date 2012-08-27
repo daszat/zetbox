@@ -40,7 +40,7 @@ namespace Zetbox.DalProvider.Memory
             : base(iftFactory)
         {
             _lazyCtx = lazyCtx;
-            _implTypeFactoryCache = new FuncCache<Type, MemoryImplementationType>(t=>implTypeFactory(t));
+            _implTypeFactoryCache = new FuncCache<Type, MemoryImplementationType>(t => implTypeFactory(t));
             _implTypeFactory = t => _implTypeFactoryCache.Invoke(t);
         }
 
@@ -81,15 +81,29 @@ namespace Zetbox.DalProvider.Memory
             return Activator.CreateInstance(this.ToImplementationType(ifType).Type, _lazyCtx);
         }
 
-        public override ImplementationType ToImplementationType(InterfaceType t)
+        private Dictionary<InterfaceType, ImplementationType> _toImplementationTypeMemo = new Dictionary<InterfaceType, ImplementationType>();
+        public override ImplementationType ToImplementationType(InterfaceType ift)
         {
             // TODO: replace with generated switch factory
-            return GetImplementationType(Type.GetType(t.Type.FullName + "Memory" + Zetbox.API.Helper.ImplementationSuffix + "," + MemoryProvider.GeneratedAssemblyName));
+            ImplementationType result;
+            if (!_toImplementationTypeMemo.TryGetValue(ift, out result))
+            {
+                var typeName = ift.Type.FullName + "Memory" + Zetbox.API.Helper.ImplementationSuffix + "," + MemoryProvider.GeneratedAssemblyName;
+                var t = Type.GetType(typeName);
+                _toImplementationTypeMemo[ift] = result = GetImplementationType(t);
+            }
+            return result;
         }
 
+        private Dictionary<string, InterfaceType> _getInterfaceTypeMemo = new Dictionary<string, InterfaceType>();
         public override InterfaceType GetInterfaceType(string typeName)
         {
-            return IftFactory(Type.GetType(typeName + "," + typeof(Zetbox.App.Base.ObjectClass).Assembly.FullName, true));
+            InterfaceType result;
+            if (!_getInterfaceTypeMemo.TryGetValue(typeName, out result))
+            {
+                _getInterfaceTypeMemo[typeName] = result = IftFactory(Type.GetType(typeName + "," + typeof(Zetbox.App.Base.ObjectClass).Assembly.FullName, true));
+            }
+            return result;
         }
 
         public override ImplementationType GetImplementationType(Type t)
