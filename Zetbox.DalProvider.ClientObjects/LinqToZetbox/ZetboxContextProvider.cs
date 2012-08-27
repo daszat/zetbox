@@ -267,7 +267,7 @@ namespace Zetbox.DalProvider.Client
         private List<T> QueryFromLocalObjects<T>()
         {
             List<T> result = new List<T>();
-            var list = _context.AttachedObjects.AsQueryable().Where(o => o.ObjectState != DataObjectState.Deleted).OfType<T>();
+            var list = _context.AttachedObjects.AsQueryable().Where(o => o != null && o.ObjectState != DataObjectState.Deleted).OfType<T>();
             if (_filter != null) _filter.ForEach(f => list = list.AddFilter(f));
             list.ForEach<T>(result.Add);
             return result;
