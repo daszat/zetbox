@@ -4,11 +4,13 @@
     <Name>ZetboxApp</Name>
     <Author>dasz.at OG</Author>
     <Version>1.0</Version>
-    <Description xml:space="preserve">Empty VSIX Project.</Description>
+    <Description xml:space="preserve">Project and solution templates for zetbox applications.</Description>
     <Locale>1033</Locale>
     <MoreInfoUrl>http://dasz.at</MoreInfoUrl>
     <SupportedProducts>
       <VisualStudio Version="10.0">
+        <Edition>Ultimate</Edition>
+        <Edition>Premium</Edition>
         <Edition>Pro</Edition>
       </VisualStudio>
     </SupportedProducts>

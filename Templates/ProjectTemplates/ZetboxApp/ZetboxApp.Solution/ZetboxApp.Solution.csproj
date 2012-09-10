@@ -147,7 +147,9 @@
     </VSTemplate>
     <None Include="ZetboxApp.Solution.ico" />
     <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.ico" />
-    <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.vstemplate" />
+    <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.vstemplate">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ZetboxApp.Client.Tests\ProjectTemplate.csproj">
       <SubType>Designer</SubType>
     </Content>
