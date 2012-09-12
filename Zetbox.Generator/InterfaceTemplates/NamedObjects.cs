@@ -99,7 +99,11 @@ namespace Zetbox.Generator.InterfaceTemplates
                 }
                 catch (TypeLoadException ex)
                 {
-                    Log.WarnFormat("Skipping rendering for {0}: {1}", objClass, ex.Message);
+                    Log.WarnFormat("TypeLoadException: Skipping rendering for {0}: {1}", objClass, ex.Message);
+                }
+                catch (NotImplementedException ex)
+                {
+                    Log.WarnFormat("NotImplementedException: Skipping rendering for {0}: {1}", objClass, ex.Message);
                 }
 
                 if (instances != null)
