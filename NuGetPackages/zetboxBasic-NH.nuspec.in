@@ -20,5 +20,9 @@
   <files>
     <file src="Server\NH\**" target="zetbox/Server/NH" />
     <file src="Server\NH.Fallback\**" target="zetbox/Server/NH.Fallback" />
+
+    <!-- this is required to avoid being seen as empty package by nuget -->
+    <!-- see #595 and #2590 on the nuget issue tracker                  -->
+    <file src="README.zetbox.txt" target="content" />
   </files>
 </package>

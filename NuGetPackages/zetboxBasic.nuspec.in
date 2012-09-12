@@ -38,5 +38,9 @@
     <file src="Init-zetboxBasic.ps1" target="tools/Init.ps1" />
     <file src="Env.xml" target="tools" />
     <file src="PrepareEnv.exe" target="tools" />
+
+    <!-- this is required to avoid being seen as empty package by nuget -->
+    <!-- see #595 and #2590 on the nuget issue tracker                  -->
+    <file src="README.zetbox.txt" target="content" />
   </files>
 </package>
