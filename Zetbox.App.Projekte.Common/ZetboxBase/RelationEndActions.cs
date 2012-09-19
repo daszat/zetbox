@@ -21,6 +21,7 @@ namespace Zetbox.App.Base
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
 
     [Implementor]
@@ -82,6 +83,74 @@ namespace Zetbox.App.Base
             }
 
             e.Result = nav;
+        }
+
+        [Invocation]
+        public static void isValid_Navigator(RelationEnd obj, PropertyIsValidEventArgs e)
+        {
+            var relEnd = obj;
+            var rel = relEnd.GetParent();
+            if (rel == null)
+            {
+                e.IsValid = false;
+                e.Error = "No Relation assigned to Relation end";
+                return;
+            }
+            var otherEnd = rel.GetOtherEnd(relEnd);
+            var orp = obj.Navigator;
+
+            e.IsValid = true;
+
+            if (orp != null)
+            {
+                if (orp.ObjectClass == null)
+                {
+                    e.IsValid = false;
+                    e.Error = String.Format("Navigator should be attached to {0}", relEnd.Type)
+                }
+                if (orp.ObjectClass != relEnd.Type)
+                {
+                    e.IsValid = false;
+                    e.Error = String.Format("Navigator is attached to {0} but should be attached to {1}",
+                                orp.ObjectClass,
+                                relEnd.Type);
+                }
+
+                switch (otherEnd.Multiplicity)
+                {
+                    case Multiplicity.One:
+                        if(orp.Constraints.OfType<NotNullableConstraint>().Count() == 0)
+                        {
+                            e.IsValid = false;
+                            e.Error = "Navigator should have NotNullableConstraint because Multiplicity of opposite RelationEnd is One";
+                        }
+                        break;
+                    case Multiplicity.ZeroOrMore:
+                        if(orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
+                        {
+                            e.IsValid = false;
+                            e.Error = "Navigator should not have NotNullableConstraint because Multiplicity of opposite RelationEnd is ZeroOrMore";
+                        }
+                        break;
+                    case Multiplicity.ZeroOrOne:
+                        if(orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
+                        {
+                            e.IsValid = false;
+                            e.Error = "Navigator should not have NotNullableConstraint because Multiplicity of opposite RelationEnd is ZeroOrOne";
+                        }
+                        break;
+                }
+            }
+        }
+
+        [Invocation]
+        public static void isValid_HasPersistentOrder(RelationEnd obj, PropertyIsValidEventArgs e)
+        {
+            if (obj.HasPersistentOrder && obj.Multiplicity != Multiplicity.ZeroOrMore)
+            {
+                e.IsValid = false;
+                e.Error = String.Format("Can only require persistent order when multiplicity is ZeroOrMore, but multiplicity is {0}", obj.Multiplicity);
+            }
         }
     }
 }

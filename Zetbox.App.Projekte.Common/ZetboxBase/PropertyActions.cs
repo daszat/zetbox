@@ -64,7 +64,7 @@ namespace Zetbox.App.Base
                 e.Result = typeof(ICollection<>).MakeGenericType(e.Result);
             }
         }
-        
+
         [Invocation]
         public static void GetLabel(Zetbox.App.Base.Property obj, MethodReturnEventArgs<System.String> e)
         {
@@ -136,6 +136,27 @@ namespace Zetbox.App.Base
             {
                 e.Result = string.Format("{0}_Properties.{1}", cls.GetName(), obj.Name);
             }
+        }
+
+        [Invocation]
+        public static void isValid_Name(Property obj, PropertyIsValidEventArgs e)
+        {
+            e.IsValid = true;
+            var dataType = obj.ObjectClass;
+            while (dataType != null)
+            {
+                if (dataType.Properties.Where(p => p != obj && p.Name == obj.Name).Count() > 0)
+                {
+                    e.IsValid = false;
+                }
+
+                var cls = dataType as ObjectClass;
+                if (cls != null)
+                {
+                    dataType = cls.BaseObjectClass;
+                }
+            }
+            e.Error = e.IsValid ? string.Empty : "Propertyname is not unique";
         }
     }
 }

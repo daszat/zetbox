@@ -186,7 +186,7 @@ namespace Zetbox.App.Base
             obj.A = obj.B;
             obj.B = tmp;
 
-            switch(obj.Containment)
+            switch (obj.Containment)
             {
                 case ContainmentSpecification.AContainsB:
                     obj.Containment = ContainmentSpecification.BContainsA;
@@ -196,7 +196,7 @@ namespace Zetbox.App.Base
                     break;
             }
 
-            switch(obj.Storage)
+            switch (obj.Storage)
             {
                 case StorageType.MergeIntoA:
                     obj.Storage = StorageType.MergeIntoB;
@@ -204,6 +204,135 @@ namespace Zetbox.App.Base
                 case StorageType.MergeIntoB:
                     obj.Storage = StorageType.MergeIntoA;
                     break;
+            }
+        }
+
+        [Invocation]
+        public static void isValid_Containment(Relation obj, PropertyIsValidEventArgs e)
+        {
+            var rel = obj;
+            if (rel.A != null && rel.B != null)
+            {
+                if (rel.A.Multiplicity == 0 || rel.B.Multiplicity == 0)
+                {
+                    e.IsValid = false;
+                    e.Error = "Incomplete Relation (A.Multiplicity or B.Multiplicity missing)";
+                }
+
+                var relType = rel.GetRelationType();
+
+                switch (rel.Containment)
+                {
+                    case ContainmentSpecification.AContainsB:
+                        if (relType == RelationType.n_m)
+                        {
+                            e.IsValid = false;
+                            e.Error = "N:M relations cannot be containment relations";
+                        }
+                        else if (relType == RelationType.one_n)
+                        {
+                            e.IsValid = rel.B.Multiplicity.UpperBound() > 1;
+                            if (!e.IsValid) e.Error = "Can only contain the N-side of a 1:N relationship (which is A).";
+                        }
+                        else if (relType == RelationType.one_one)
+                        {
+                            e.IsValid = true;
+                        }
+                        else
+                        {
+                            e.IsValid = false;
+                            e.Error = String.Format("RelationType.{0} not implemented.", relType);
+                        }
+                        break;
+                    case ContainmentSpecification.BContainsA:
+                        if (relType == RelationType.n_m)
+                        {
+                            e.IsValid = false;
+                            e.Error = "N:M relations cannot be containment relations";
+                        }
+                        else if (relType == RelationType.one_n)
+                        {
+                            e.IsValid = rel.A.Multiplicity.UpperBound() > 1;
+                            if (!e.IsValid) e.Error = "Can only contain the N-side of a 1:N relationship (which is B).";
+                        }
+                        else if (relType == RelationType.one_one)
+                        {
+                            e.IsValid = true;
+                        }
+                        else
+                        {
+                            e.IsValid = false;
+                            e.Error = String.Format("RelationType.{0} not implemented.", relType);
+                        }
+                        break;
+                    case ContainmentSpecification.Independent:
+                        e.IsValid = true;
+                        break;
+                    default:
+                        {
+                            e.IsValid = false;
+                            e.Error = String.Format("ContainmentType.{0} not implemented.", rel.Containment);
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                e.IsValid = false;
+                e.Error = "Incomplete Relation (A or B missing)";
+            }
+        }
+
+        [Invocation]
+        public static void isValid_Storage(Relation obj, PropertyIsValidEventArgs e)
+        {
+            var rel = obj;
+            if (rel.A != null && rel.B != null)
+            {
+                if (rel.A.Multiplicity == 0 || rel.B.Multiplicity == 0)
+                {
+                    e.IsValid = false;
+                    e.Error = "Incomplete Relation (Multiplicity is missing)";
+                }
+                switch (rel.Storage)
+                {
+                    case StorageType.MergeIntoA:
+                        e.IsValid = rel.B.Multiplicity.UpperBound() <= 1;
+                        if(!e.IsValid) e.Error = "B side could be more than one. Not able to merge foreign key into A"
+                        break;
+                    case StorageType.MergeIntoB:
+                        e.IsValid = rel.A.Multiplicity.UpperBound() <= 1;
+                        if(!e.IsValid) e.Error = "A side could be more than one. Not able to merge foreign key into B";
+                        break;
+                    case StorageType.Separate:
+                        e.IsValid = rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() > 1;
+                        if(!e.IsValid) 
+                        {
+                            if (rel.A.Multiplicity.UpperBound() <= 1 && rel.B.Multiplicity.UpperBound() <= 1)
+                            {
+                                e.Error = "A side is only one-ary. Please use MergeIntoA or MergeIntoB";
+                            }
+                            else if (rel.A.Multiplicity.UpperBound() <= 1)
+                            {
+                                e.Error ="A side is only one-ary. Please use MergeIntoB";
+                            }
+                            else if (rel.B.Multiplicity.UpperBound() <= 1)
+                            {
+                                e.Error ="B side is only one-ary. Please use MergeIntoA";
+                            }
+                        }
+                        break;
+                    case StorageType.Replicate:
+                    default:
+                        e.IsValid = false;
+                        e.Error = String.Format("StorageType.{0} not implemented.", rel.Storage);
+                        break;
+                }
+            }
+            else
+            {
+                e.IsValid = false;
+                e.Error = 
             }
         }
     }
