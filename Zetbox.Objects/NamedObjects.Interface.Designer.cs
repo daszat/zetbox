@@ -789,10 +789,6 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("356d7770-d2b7-49dc-9549-9b8bc22df953"); }
                                 }
-                                public static TypedGuid<global::Zetbox.App.Base.Method> GetMemberName
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("2553f17a-22a1-4d78-9376-d23186906c9d"); }
-                                }
                             }
                             public static class ConstraintInvocation_Properties
                             {

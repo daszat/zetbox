@@ -298,7 +298,7 @@ namespace Zetbox.App.Base
                 {
                     case StorageType.MergeIntoA:
                         e.IsValid = rel.B.Multiplicity.UpperBound() <= 1;
-                        if(!e.IsValid) e.Error = "B side could be more than one. Not able to merge foreign key into A"
+                        if(!e.IsValid) e.Error = "B side could be more than one. Not able to merge foreign key into A";
                         break;
                     case StorageType.MergeIntoB:
                         e.IsValid = rel.A.Multiplicity.UpperBound() <= 1;
@@ -332,7 +332,7 @@ namespace Zetbox.App.Base
             else
             {
                 e.IsValid = false;
-                e.Error = 
+                e.Error = "Incomplete Relation (A or B missing)";
             }
         }
     }

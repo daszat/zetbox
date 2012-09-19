@@ -33048,29 +33048,6 @@ public static void GetCodeTemplateCanExecReason(ConstraintInvocation obj, Method
     <ZetboxBase:Name>GetCodeTemplate</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>038230c3-ee0b-4a04-b89b-fe342ac8f069</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="2553f17a-22a1-4d78-9376-d23186906c9d">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetMemberName(ConstraintInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-
-[Invocation]
-public static void GetMemberNameCanExec(ConstraintInvocation obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void GetMemberNameCanExecReason(ConstraintInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2010-03-25T02:32:08Z</ZetboxBase:CreatedOn>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>GetMemberName</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>038230c3-ee0b-4a04-b89b-fe342ac8f069</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="826c3b7c-c266-48cf-a715-5e39d675642c">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -33326,29 +33303,6 @@ public static void GetCodeTemplateCanExecReason(IInvocation obj, MethodReturnEve
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>GetCodeTemplate</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>0999effb-c645-45e1-b3c2-5654530d0acb</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="d3e45fcf-6fc8-4e46-bd08-963168332687">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetMemberName(IInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-
-[Invocation]
-public static void GetMemberNameCanExec(IInvocation obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void GetMemberNameCanExecReason(IInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>GetMemberName</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>0999effb-c645-45e1-b3c2-5654530d0acb</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="ded38fac-122d-46a6-8000-9e67e3809b7b">
@@ -34213,17 +34167,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>ReturnValue</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
-  <ZetboxBase:StringParameter ExportGuid="523f331b-e299-4009-a5cc-fef293598535">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.0688Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-03-25T02:32:08Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Returns</ZetboxBase:Description>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>2553f17a-22a1-4d78-9376-d23186906c9d</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>ReturnValue</ZetboxBase:Name>
-  </ZetboxBase:StringParameter>
   <ZetboxBase:CLRObjectParameter ExportGuid="2a95f5c5-bae6-48e6-a4b9-15381fffd615">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.0758Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -34368,17 +34311,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
     <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
     <ZetboxBase:Method>5305b463-31bd-4ee4-af9a-c93d2cd7af31</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>ReturnValue</ZetboxBase:Name>
-  </ZetboxBase:StringParameter>
-  <ZetboxBase:StringParameter ExportGuid="64bf1c54-d302-4ff4-94da-2d76910c8591">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.142804Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Returns</ZetboxBase:Description>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>d3e45fcf-6fc8-4e46-bd08-963168332687</ZetboxBase:Method>
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>ReturnValue</ZetboxBase:Name>
   </ZetboxBase:StringParameter>

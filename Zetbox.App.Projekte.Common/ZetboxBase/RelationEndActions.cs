@@ -106,7 +106,7 @@ namespace Zetbox.App.Base
                 if (orp.ObjectClass == null)
                 {
                     e.IsValid = false;
-                    e.Error = String.Format("Navigator should be attached to {0}", relEnd.Type)
+                    e.Error = String.Format("Navigator should be attached to {0}", relEnd.Type);
                 }
                 if (orp.ObjectClass != relEnd.Type)
                 {
