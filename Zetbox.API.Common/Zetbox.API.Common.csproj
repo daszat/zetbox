@@ -106,6 +106,7 @@
     <Compile Include="GUI\SavedListConfig.cs" />
     <Compile Include="IdentityExtensions.cs" />
     <Compile Include="IIdentityResolver.cs" />
+    <Compile Include="IInvocationExtensions.cs" />
     <Compile Include="IMetaDataResolver.cs" />
     <Compile Include="IRelationListSync.cs" />
     <Compile Include="ZetboxContextExtensions.cs" />
