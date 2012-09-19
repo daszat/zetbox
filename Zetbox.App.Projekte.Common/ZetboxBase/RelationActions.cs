@@ -217,6 +217,7 @@ namespace Zetbox.App.Base
                 {
                     e.IsValid = false;
                     e.Error = "Incomplete Relation (A.Multiplicity or B.Multiplicity missing)";
+                    return;
                 }
 
                 var relType = rel.GetRelationType();
@@ -293,6 +294,7 @@ namespace Zetbox.App.Base
                 {
                     e.IsValid = false;
                     e.Error = "Incomplete Relation (Multiplicity is missing)";
+                    return;
                 }
                 switch (rel.Storage)
                 {
