@@ -135,7 +135,6 @@
     <Compile Include="Gui\ControlKindActions.cs" />
     <Compile Include="Gui\IconActions.cs" />
     <Compile Include="ZetboxBase\ClientReadOnlyConstraintActions.cs" />
-    <Compile Include="ZetboxBase\ConstraintInvocationActions.cs" />
     <Compile Include="ZetboxBase\EnumDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\CurrentDateTimeDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\NewGuidDefaultValueActions.cs" />
@@ -148,7 +147,6 @@
     <Compile Include="ZetboxBase\ObjectClassActions.cs" />
     <Compile Include="ZetboxBase\ReadOnlyConstraintActions.cs" />
     <Compile Include="ZetboxBase\IndexConstraintActions.cs" />
-    <Compile Include="ZetboxBase\InvokingConstraintActions.cs" />
     <Compile Include="ZetboxBase\InitOnlyConstraintActions.cs" />
     <Compile Include="ZetboxBase\ViewReadOnlyConstraintActions.cs" />
     <Compile Include="ZetboxBase\IsValidIdentifierConstraintActions.cs" />

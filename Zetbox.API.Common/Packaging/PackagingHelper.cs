@@ -87,13 +87,6 @@ namespace Zetbox.App.Packaging
                 AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<IndexConstraint_ensures_unique_on_Property_RelationEntry>().Where(i => i.A.Constrained.Module.ID == moduleID || i.B.Module.ID == moduleID).ToList().AsQueryable()
                     .ToList().OrderBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
-                foreach (var invokingConstraint in ctx.GetQuery<InvokingConstraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
-                    .ToList().OrderBy(i => i.ConstrainedProperty.ObjectClass.Name).ThenBy(i => i.ConstrainedProperty.Name).ThenBy(i => ctx.GetInterfaceType(i).Type.Name).ThenBy(i => i.ExportGuid))
-                {
-                    result.Add(invokingConstraint.IsValidInvocation);
-                    result.Add(invokingConstraint.GetErrorTextInvocation);
-                }
-
                 // TODO: Add Module to DefaultPropertyValue - or should that not be changable by other modules?
                 AddMetaObjects(result, () => ctx.GetQuery<DefaultPropertyValue>().Where(i => i.Property.Module.ID == moduleID)
                     .ToList().OrderBy(i => i.Property.ObjectClass.Name).ThenBy(i => i.Property.Name).ThenBy(i => i.ExportGuid));
