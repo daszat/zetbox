@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-21T12:24:21.822223Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-21T12:24:21Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -36020,13 +36020,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>4629cba1-9162-4d9f-a815-0b0ed96f95be</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:InvokingConstraint ExportGuid="f0cc0df8-a600-47e7-9902-2392fd8dc47a">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.832072Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>eed9955a-11a3-4c25-b0bb-e01ecd14b26f</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2010-03-26T02:47:07Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:GetErrorTextInvocation>9e6ac477-91ef-4f62-9dc9-7787c407e6bd</ZetboxBase:GetErrorTextInvocation>
-    <ZetboxBase:IsValidInvocation>f1a71a67-80fe-4c00-9e1e-b8dde0e8c854</ZetboxBase:IsValidInvocation>
-  </ZetboxBase:InvokingConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="2313fdc5-5373-41eb-bc2d-ff2a394c0342">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.836073Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>eed9955a-11a3-4c25-b0bb-e01ecd14b26f</ZetboxBase:ConstrainedProperty>
@@ -36070,13 +36063,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Reason>Module cannot be empty</ZetboxBase:Reason>
   </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:InvokingConstraint ExportGuid="564b873d-8c7f-4d85-936b-4b8d493890f0">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.872075Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>ba4f10fd-f7cf-4237-93a6-734e7e5c6b8a</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2010-03-25T03:43:40Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:GetErrorTextInvocation>b55d8cf3-19ec-4be2-a53a-46bff97d910d</ZetboxBase:GetErrorTextInvocation>
-    <ZetboxBase:IsValidInvocation>df59119f-472f-45d8-9bf3-3f4e4391ec60</ZetboxBase:IsValidInvocation>
-  </ZetboxBase:InvokingConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="36cc4b56-e848-47de-805a-beeb79834b1c">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.875075Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>ba4f10fd-f7cf-4237-93a6-734e7e5c6b8a</ZetboxBase:ConstrainedProperty>
@@ -36145,14 +36131,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>cdbcada8-4deb-4c4f-a7a4-24716b0a0ccd</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:InvokingConstraint ExportGuid="c5856fc7-0f2e-4720-b4a8-d67d42f3eb7d">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.933078Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>6b25eaab-f746-47ec-a91e-f92ec6fccada</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2010-03-26T01:13:58Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Reason>The navigator should be consistent with the defining Relation.</ZetboxBase:Reason>
-    <ZetboxBase:GetErrorTextInvocation>5a0b70cc-db5b-4209-a9f1-e3336bf3aa47</ZetboxBase:GetErrorTextInvocation>
-    <ZetboxBase:IsValidInvocation>7fe3cc9c-0fa9-40da-ba28-f9ac90d67108</ZetboxBase:IsValidInvocation>
-  </ZetboxBase:InvokingConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="c5e2a150-eaae-4fac-8c06-7bb4685fdce2">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.936078Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>b32efbfc-5212-44e7-b25f-f4724b63cbee</ZetboxBase:ConstrainedProperty>
@@ -36605,30 +36583,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:A>eceaaee3-f975-406d-a425-7e5ecdffc153</ZetboxBase:A>
     <ZetboxBase:B>8da6d02c-9d9e-4db8-91ee-24a3fd1c74e1</ZetboxBase:B>
   </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
-  <ZetboxBase:ConstraintInvocation ExportGuid="f1a71a67-80fe-4c00-9e1e-b8dde0e8c854">
-    <ZetboxBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</ZetboxBase:Implementor>
-    <ZetboxBase:MemberName>OnIsValid_Relation_Containment</ZetboxBase:MemberName>
-  </ZetboxBase:ConstraintInvocation>
-  <ZetboxBase:ConstraintInvocation ExportGuid="9e6ac477-91ef-4f62-9dc9-7787c407e6bd">
-    <ZetboxBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</ZetboxBase:Implementor>
-    <ZetboxBase:MemberName>OnGetErrorText_Relation_Containment</ZetboxBase:MemberName>
-  </ZetboxBase:ConstraintInvocation>
-  <ZetboxBase:ConstraintInvocation ExportGuid="df59119f-472f-45d8-9bf3-3f4e4391ec60">
-    <ZetboxBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</ZetboxBase:Implementor>
-    <ZetboxBase:MemberName>OnIsValid_Relation_Storage</ZetboxBase:MemberName>
-  </ZetboxBase:ConstraintInvocation>
-  <ZetboxBase:ConstraintInvocation ExportGuid="b55d8cf3-19ec-4be2-a53a-46bff97d910d">
-    <ZetboxBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</ZetboxBase:Implementor>
-    <ZetboxBase:MemberName>OnGetErrorText_Relation_Storage</ZetboxBase:MemberName>
-  </ZetboxBase:ConstraintInvocation>
-  <ZetboxBase:ConstraintInvocation ExportGuid="7fe3cc9c-0fa9-40da-ba28-f9ac90d67108">
-    <ZetboxBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</ZetboxBase:Implementor>
-    <ZetboxBase:MemberName>OnIsValid_RelationEnd_Navigator</ZetboxBase:MemberName>
-  </ZetboxBase:ConstraintInvocation>
-  <ZetboxBase:ConstraintInvocation ExportGuid="5a0b70cc-db5b-4209-a9f1-e3336bf3aa47">
-    <ZetboxBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</ZetboxBase:Implementor>
-    <ZetboxBase:MemberName>OnGetErrorText_RelationEnd_Navigator</ZetboxBase:MemberName>
-  </ZetboxBase:ConstraintInvocation>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="3005e26f-88b1-494e-911b-5efa2fd3d9b0">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:55.343472Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
