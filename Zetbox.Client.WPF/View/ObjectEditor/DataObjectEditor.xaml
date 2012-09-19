@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
              xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
              xmlns:viewZetboxBase="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
              xmlns:doeview="clr-namespace:Zetbox.Client.WPF.View.ObjectEditor"
              xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client">
@@ -54,6 +55,12 @@
                     SelectedValue="{Binding SelectedPropertyGroup}"
                     HorizontalContentAlignment="Stretch">
             <TabControl.Resources>
+                <DataTemplate DataType="{x:Type client:CustomPropertyGroupViewModel}">
+                    <ContentPresenter Content="{Binding CustomModel}"
+                                      VerticalAlignment="Stretch"
+                                      tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
+                                      ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type client:SinglePropertyGroupViewModel}">
                     <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
                                   BorderThickness="0"

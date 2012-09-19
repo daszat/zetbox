@@ -61,8 +61,7 @@ namespace Zetbox.Client.Presentables
             relListMdl.AddFilter(new ConstantValueFilterModel("A.Type = @0 || B.Type = @0", this.Object));
             relListMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Relation", "Creates a new Relation", CreateRelation, null, null));
 
-            var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Relations", "", relListMdl);
-            var propGrpMdl = ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Relations", new ViewModel[] { lblMdl });
+            var propGrpMdl = ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Relations", new ViewModel[] { relListMdl });
             result.Add(propGrpMdl);
             return result;
         }

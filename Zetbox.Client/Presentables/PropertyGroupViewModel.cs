@@ -164,4 +164,26 @@ namespace Zetbox.Client.Presentables
         {
         }
     }
+
+    public class CustomPropertyGroupViewModel : PropertyGroupViewModel
+    {
+        public new delegate CustomPropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
+
+        public CustomPropertyGroupViewModel(
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            string title,
+            IEnumerable<ViewModel> obj)
+            : base(appCtx, dataCtx, parent, title, obj)
+        {
+        }
+
+        public ViewModel CustomModel
+        {
+            get
+            {
+                return PropertyModels.Single();
+            }
+        }
+
+    }
 }
