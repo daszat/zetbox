@@ -32,6 +32,11 @@ namespace Zetbox.API.Common
                 .As<CachingMetaDataResolver>()
                 .As<IMetaDataResolver>()
                 .SingleInstance();
+
+            builder
+                .RegisterType<InvocationExecutor>()
+                .As<IInvocationExecutor>()
+                .SingleInstance();
         }
     }
 }

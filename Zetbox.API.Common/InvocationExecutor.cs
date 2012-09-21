@@ -8,17 +8,39 @@ namespace Zetbox.API.Common
     using Zetbox.App.Base;
     using Zetbox.API.Utils;
     using System.Reflection;
+    using Autofac;
 
-    public static class IInvocationExtensions
+    public interface IInvocationExecutor
     {
+        void CallInvocation(IInvocation obj, Type prototype, params object[] parameter);
+        TResult CallInvocation<TResult>(IInvocation obj, Type prototype, params object[] parameter);
+        bool CanCallInvocation(IInvocation obj, Type prototype);
+        bool HasValidInvocation(IInvocation obj);
+    }
+
+    public class InvocationExecutor : Zetbox.API.Common.IInvocationExecutor
+    {
+        private IDeploymentRestrictor _restrictor;
+        private ILifetimeScope _scope;
+        public InvocationExecutor(IDeploymentRestrictor restrictor, ILifetimeScope scope)
+        {
+            if (restrictor == null) throw new ArgumentNullException("restrictor");
+            if (scope == null) throw new ArgumentNullException("scope");
+            _restrictor = restrictor;
+            _scope = scope;
+        }
+
         /// <summary>
         /// Checks if a IInvocation is defined. Use this function to check if a Invocation can be called.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static bool HasValidInvocation(this IInvocation obj)
+        public bool HasValidInvocation(IInvocation obj)
         {
-            return obj != null && !string.IsNullOrEmpty(obj.MemberName) && obj.Implementor != null; // TODO: Check DeploymentRestriction
+            return obj != null && 
+                   !string.IsNullOrEmpty(obj.MemberName) && 
+                   obj.Implementor != null && 
+                   _restrictor.IsAcceptableDeploymentRestriction((int)obj.Implementor.Assembly.DeploymentRestrictions);
         }
 
         /// <summary>
@@ -27,7 +49,7 @@ namespace Zetbox.API.Common
         /// <param name="obj"></param>
         /// <param name="prototype"></param>
         /// <returns></returns>
-        public static bool CanCallInvocation(this IInvocation obj, Type prototype)
+        public bool CanCallInvocation(IInvocation obj, Type prototype)
         {
             if (!HasValidInvocation(obj)) return false;
             if (obj == null) throw new ArgumentNullException("obj");
@@ -53,7 +75,7 @@ namespace Zetbox.API.Common
         /// <param name="prototype">A delegate type used as a prototye to look up the correct method</param>
         /// <param name="parameter"></param>
         /// <returns>the result of the invocation</returns>
-        public static TResult CallInvocation<TResult>(this IInvocation obj, Type prototype, params object[] parameter)
+        public TResult CallInvocation<TResult>(IInvocation obj, Type prototype, params object[] parameter)
         {
             if(obj == null) throw new ArgumentNullException("obj");
             if (prototype == null) throw new ArgumentNullException("prototype");
@@ -72,7 +94,16 @@ namespace Zetbox.API.Common
             {
                 throw new InvalidOperationException(string.Format("Method [{0}](object,object) not found in [{1}]", obj.MemberName, obj.Implementor));
             }
-            return (TResult)methodInfo.Invoke(obj, parameter);
+
+            if (methodInfo.IsStatic)
+            {
+                return (TResult)methodInfo.Invoke(null, parameter);
+            }
+            else
+            {
+                var implObj = _scope.Resolve(implementor);
+                return (TResult)methodInfo.Invoke(implObj, parameter);
+            }
         }
 
         /// <summary>
@@ -81,7 +112,7 @@ namespace Zetbox.API.Common
         /// <param name="obj"></param>
         /// <param name="prototype">A delegate type used as a prototye to look up the correct method</param>
         /// <param name="parameter"></param>
-        public static void CallInvocation(this IInvocation obj, Type prototype, params object[] parameter)
+        public void CallInvocation(IInvocation obj, Type prototype, params object[] parameter)
         {
             CallInvocation<object>(obj, prototype, parameter);
         }
