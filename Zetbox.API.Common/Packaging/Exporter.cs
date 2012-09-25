@@ -152,7 +152,7 @@ namespace Zetbox.App.Packaging
                         else if (allData)
                         {
                             Log.InfoFormat("    exporting class {0}", objClass.Name);
-                            foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).Where(obj => obj.GetObjectClass(ctx) == objClass).OrderBy(obj => ((IExportable)obj).ExportGuid))
+                            foreach (var obj in AllExportables(ctx, objClass))
                             {
                                 ExportObject(s, obj, schemaNamespaces);
                             }
@@ -160,9 +160,7 @@ namespace Zetbox.App.Packaging
                         else if (objClass.ImplementsIModuleMember())
                         {
                             Log.InfoFormat("    exporting parts of class {0}", objClass.Name);
-                            foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
-                                .Where(o => o.GetObjectClass(ctx) == objClass)
-                                .Cast<IModuleMember>()
+                            foreach (var obj in AllModuleMembers(ctx, objClass)
                                 .Where(mm => mm.Module != null && ownerModules.Contains(mm.Module.Name))
                                 .Cast<IExportable>()
                                 .OrderBy(obj => obj.ExportGuid)
@@ -213,6 +211,20 @@ namespace Zetbox.App.Packaging
 
                 Log.Info("Export finished");
             }
+        }
+
+        // workaround gendarme spinning in a loop when checking ExportFromContext
+        private static IEnumerable<IModuleMember> AllModuleMembers(IReadOnlyZetboxContext ctx, ObjectClass objClass)
+        {
+            return ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
+                                            .Where(o => o.GetObjectClass(ctx) == objClass)
+                                            .Cast<IModuleMember>();
+        }
+
+        // workaround gendarme spinning in a loop when checking ExportFromContext
+        private static IOrderedEnumerable<IDataObject> AllExportables(IReadOnlyZetboxContext ctx, ObjectClass objClass)
+        {
+            return ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).Where(obj => obj.GetObjectClass(ctx) == objClass).OrderBy(obj => ((IExportable)obj).ExportGuid);
         }
 
         #region Xml/Export private Methods
