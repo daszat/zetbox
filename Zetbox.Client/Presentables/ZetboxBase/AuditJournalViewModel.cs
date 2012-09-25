@@ -62,7 +62,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             private readonly string _timestamp;
             public string Timestamp { get { return _timestamp; } }
             private readonly DateTime _sortKey;
-            public DateTime SortKey { get { return SortKey; } }
+            public DateTime SortKey { get { return _sortKey; } }
 
             public JournalEntryKey(string identity, DateTime timestamp)
             {
