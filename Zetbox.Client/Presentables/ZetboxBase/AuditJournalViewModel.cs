@@ -61,10 +61,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             public string Identity { get { return _identity; } }
             private readonly string _timestamp;
             public string Timestamp { get { return _timestamp; } }
+            private readonly DateTime _sortKey;
+            public DateTime SortKey { get { return SortKey; } }
+
             public JournalEntryKey(string identity, DateTime timestamp)
             {
                 this._identity = identity;
                 this._timestamp = timestamp.ToString();
+                this._sortKey = timestamp;
             }
 
             public override string ToString()
@@ -105,7 +109,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                             return new JournalEntryKey(e.Identity, new DateTime(ts.Year, ts.Month, ts.Day, ts.Hour, ts.Minute, 0));
                         })
                         .Select(g => new KeyValuePair<JournalEntryKey, string>(g.Key, string.Join("\n", g.Select(e => string.Format(e.MessageFormat, e.PropertyName, e.OldValue, e.NewValue)).ToArray())))
-                        .OrderByDescending(p => p.Key.Timestamp)
+                        .OrderByDescending(p => p.Key.SortKey)
                         .ToList();
 
                 }
