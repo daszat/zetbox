@@ -145,18 +145,14 @@ namespace Zetbox.App.Packaging
                     Log.InfoFormat("  exporting module {0}", module.Name);
                     foreach (var objClass in ctx.GetQuery<ObjectClass>().Where(o => o.Module == module).OrderBy(o => o.Name).ToList())
                     {
-                        if (objClass.SubClasses.Count > 0)
-                        {
-                            Log.DebugFormat("    skipping {0}: not a leaf class", objClass.Name);
-                        }
-                        else if (!objClass.AndParents(cls => new[] { cls }, cls => cls.BaseObjectClass).SelectMany(cls => cls.ImplementsInterfaces).Contains(iexpIf))
+                        if (!objClass.AndParents(cls => new[] { cls }, cls => cls.BaseObjectClass).SelectMany(cls => cls.ImplementsInterfaces).Contains(iexpIf))
                         {
                             Log.DebugFormat("    skipping {0}: not exportable", objClass.Name);
                         }
                         else if (allData)
                         {
                             Log.InfoFormat("    exporting class {0}", objClass.Name);
-                            foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
+                            foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).Where(obj => obj.GetObjectClass(ctx) == objClass).OrderBy(obj => ((IExportable)obj).ExportGuid))
                             {
                                 ExportObject(s, obj, schemaNamespaces);
                             }
@@ -165,6 +161,7 @@ namespace Zetbox.App.Packaging
                         {
                             Log.InfoFormat("    exporting parts of class {0}", objClass.Name);
                             foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
+                                .Where(o => o.GetObjectClass(ctx) == objClass)
                                 .Cast<IModuleMember>()
                                 .Where(mm => mm.Module != null && ownerModules.Contains(mm.Module.Name))
                                 .Cast<IExportable>()
