@@ -29,8 +29,5 @@ namespace Zetbox.API.Tests.BinarySerializers
     public sealed class should_work_with_MockedCompoundObjects
         : Zetbox.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<TestCompoundObjectImpl>
     {
-        public should_work_with_MockedCompoundObjects()
-        {
-        }
     }
 }

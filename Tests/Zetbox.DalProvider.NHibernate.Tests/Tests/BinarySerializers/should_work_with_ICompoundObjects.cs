@@ -51,8 +51,5 @@ namespace Zetbox.DalProvider.NHibernate.Tests.BinarySerializers
         : Zetbox.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
         where T : class, ICompoundObject, new()
     {
-        public should_work_with_NHibernateCompoundObjects()
-        {
-        }
     }
 }

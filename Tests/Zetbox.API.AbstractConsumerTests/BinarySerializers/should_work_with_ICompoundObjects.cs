@@ -136,7 +136,6 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
         #endregion
     }
 
-    [TestFixture(typeof(MinimalCompoundObjectTest))]
     public abstract class should_work_with_ICompoundObjects<T> : SerializerTestFixture
         where T : class, ICompoundObject, new()
     {
