@@ -47,5 +47,8 @@ namespace Zetbox.API.Server.Tests.BinarySerializers
     public class should_work_with_BaseServerCompoundObjects
         : Zetbox.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<CompoundObjectMockImpl>
     {
+        public should_work_with_BaseServerCompoundObjects()
+        {
+        }
     }
 }

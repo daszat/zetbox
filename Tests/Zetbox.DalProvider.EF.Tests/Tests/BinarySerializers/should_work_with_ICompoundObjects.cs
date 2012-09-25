@@ -52,5 +52,8 @@ namespace Zetbox.DalProvider.Ef.Tests.BinarySerializers
         : Zetbox.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
         where T : class, ICompoundObject, new()
     {
+        public should_work_with_EFCompoundObjects()
+        {
+        }
     }
 }
