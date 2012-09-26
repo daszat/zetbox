@@ -63,7 +63,7 @@ namespace Zetbox.App.Base
             else if (obj.EveryDayOfWeek.HasValue)
             {
                 // Assuming Monday is the first day of week
-                dt = dt.FirstWeekDay().AddDays((((int)obj.EveryDayOfWeek + 1) % 7)).AddDays(7);
+                dt = dt.FirstWeekDay().AddDays((((int)obj.EveryDayOfWeek - 1) % 7)).AddDays(7);
             }
             else if (obj.EveryDay)
             {
