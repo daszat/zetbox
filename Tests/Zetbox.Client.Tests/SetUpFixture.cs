@@ -32,6 +32,8 @@ namespace Zetbox
         {
             base.SetupBuilder(builder);
 
+            builder.RegisterModule(new Zetbox.DalProvider.Client.ClientProvider());
+
             builder.RegisterType<ZetboxMockFactory>()
                 .As<Zetbox.Client.Mocks.ZetboxMockFactory>()
                 .InstancePerLifetimeScope();
