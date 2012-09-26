@@ -966,6 +966,24 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="RecurrenceRuleTester">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RecurrenceRuleTester)">
+	    <MappingFragment StoreEntitySet="RecurrenceRuleTester">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ComplexProperty Name="RuleImpl" TypeName="Model.RecurrenceRule">
+<ScalarProperty Name="DaysOffset" ColumnName="Rule_DaysOffset" />
+<ScalarProperty Name="EveryDay" ColumnName="Rule_EveryDay" />
+<ScalarProperty Name="EveryDayOfWeekImpl" ColumnName="Rule_EveryDayOfWeek" />
+<ScalarProperty Name="EveryMonth" ColumnName="Rule_EveryMonth" />
+<ScalarProperty Name="EveryQuater" ColumnName="Rule_EveryQuater" />
+<ScalarProperty Name="EveryYear" ColumnName="Rule_EveryYear" />
+<ScalarProperty Name="HoursOffset" ColumnName="Rule_HoursOffset" />
+<ScalarProperty Name="MinutesOffset" ColumnName="Rule_MinutesOffset" />
+<ScalarProperty Name="MonthsOffset" ColumnName="Rule_MonthsOffset" />
+</ComplexProperty>
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Relation">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Relation)">
 	    <MappingFragment StoreEntitySet="Relation">

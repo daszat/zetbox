@@ -4882,4 +4882,64 @@
         <!-- define the subclasses -->
 
     </class>
+    <class name="Zetbox.App.Test.RecurrenceRuleTesterNHibernateImpl+RecurrenceRuleTesterProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.RecurrenceRuleTesterNHibernateImpl+RecurrenceRuleTesterProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`RecurrenceRuleTester`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`RecurrenceRuleTester_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- CompoundObjectProperty isValue -->
+        <component name="Rule" class="Zetbox.App.Base.RecurrenceRuleNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="DaysOffset" 
+                  column="`Rule_DaysOffset`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryDay" 
+                  column="`Rule_EveryDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryDayOfWeek" 
+                  column="`Rule_EveryDayOfWeek`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryMonth" 
+                  column="`Rule_EveryMonth`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryQuater" 
+                  column="`Rule_EveryQuater`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryYear" 
+                  column="`Rule_EveryYear`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="HoursOffset" 
+                  column="`Rule_HoursOffset`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="MinutesOffset" 
+                  column="`Rule_MinutesOffset`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="MonthsOffset" 
+                  column="`Rule_MonthsOffset`" 
+                  optimistic-lock="false"/>
+        </component>
+
+        <!-- define the subclasses -->
+
+    </class>
 </hibernate-mapping>

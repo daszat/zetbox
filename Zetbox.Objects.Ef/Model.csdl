@@ -60,6 +60,7 @@
       <End Role="Projekt_Rights" EntitySet="Projekt_Rights" />
     </AssociationSet>
     <EntitySet Name="Property" EntityType="Model.Property" />
+    <EntitySet Name="RecurrenceRuleTester" EntityType="Model.RecurrenceRuleTester" />
     <EntitySet Name="Relation" EntityType="Model.Relation" />
     <EntitySet Name="RelationEnd" EntityType="Model.RelationEnd" />
     <EntitySet Name="RequiredParent" EntityType="Model.RequiredParent" />
@@ -2086,6 +2087,15 @@
                         Relationship="Model.FK_Property_has_ValueModelDescriptor"
                         FromRole="Property"
                         ToRole="ValueModelDescriptor" />
+  </EntityType>
+  <EntityType Name="RecurrenceRuleTester">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="RuleImpl"
+              Type="Model.RecurrenceRule"
+              Nullable="false" />
   </EntityType>
   <EntityType Name="Relation">
     <Key>
@@ -5408,6 +5418,17 @@
     <Property Name="From" Type="DateTime" Nullable="true"  />
     <Property Name="Thru" Type="DateTime" Nullable="true"  />
     <Property Name="TotalDays" Type="Int32" Nullable="true"  />
+  </ComplexType>
+  <ComplexType Name="RecurrenceRule" >
+    <Property Name="DaysOffset" Type="Double" Nullable="true"  />
+    <Property Name="EveryDay" Type="Boolean" Nullable="false"  />
+    <Property Name="EveryDayOfWeekImpl" Type="Int32" Nullable="true"  />
+    <Property Name="EveryMonth" Type="Boolean" Nullable="false"  />
+    <Property Name="EveryQuater" Type="Boolean" Nullable="false"  />
+    <Property Name="EveryYear" Type="Boolean" Nullable="false"  />
+    <Property Name="HoursOffset" Type="Double" Nullable="true"  />
+    <Property Name="MinutesOffset" Type="Double" Nullable="true"  />
+    <Property Name="MonthsOffset" Type="Int32" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="TestPhoneCompoundObject" >
     <Property Name="AreaCode" Type="String" Nullable="true" MaxLength="50"  />

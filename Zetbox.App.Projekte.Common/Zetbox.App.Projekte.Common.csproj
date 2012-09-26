@@ -85,6 +85,7 @@
     <Compile Include="Gui\NavigationEntryActions.cs" />
     <Compile Include="Gui\ViewDescriptorActions.cs" />
     <Compile Include="Gui\ViewModelDescriptorActions.cs" />
+    <Compile Include="TestModule\RecurrenceRuleTesterActions.cs" />
     <Compile Include="TestModule\SecurityTestParentActions.cs" />
     <Compile Include="TestModule\SecurityTestChildActions.cs" />
     <Compile Include="ZetboxBase\BaseParameterActions.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="ZetboxBase\BoolDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\CompoundObjectParameterActions.cs" />
     <Compile Include="ZetboxBase\AnyReferenceActions.cs" />
+    <Compile Include="ZetboxBase\RecurrenceRuleActions.cs" />
     <Compile Include="ZetboxBase\SequenceActions.cs" />
     <Compile Include="ZetboxBase\DateTimeRangeActions.cs" />
     <Compile Include="ZetboxBase\ValueTypePropertyActions.cs" />

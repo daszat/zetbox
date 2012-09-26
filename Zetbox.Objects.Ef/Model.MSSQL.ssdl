@@ -64,6 +64,7 @@
       <End Role="Projekt_Rights" EntitySet="Projekt_Rights" />
     </AssociationSet>
     <EntitySet Name="Property" EntityType="Model.Store.Property" Schema="base" Table="Properties"/>
+    <EntitySet Name="RecurrenceRuleTester" EntityType="Model.Store.RecurrenceRuleTester" Schema="test" Table="RecurrenceRuleTester"/>
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Schema="base" Table="Relations"/>
     <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Schema="base" Table="RelationEnds"/>
     <EntitySet Name="RequiredParent" EntityType="Model.Store.RequiredParent" Schema="test" Table="RequiredParents"/>
@@ -2712,6 +2713,22 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="RecurrenceRuleTester">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Rule_DaysOffset" Type="float" Nullable="true" />
+    <Property Name="Rule_EveryDay" Type="bit" Nullable="false" />
+    <Property Name="Rule_EveryDayOfWeek" Type="int" Nullable="true" />
+    <Property Name="Rule_EveryMonth" Type="bit" Nullable="false" />
+    <Property Name="Rule_EveryQuater" Type="bit" Nullable="false" />
+    <Property Name="Rule_EveryYear" Type="bit" Nullable="false" />
+    <Property Name="Rule_HoursOffset" Type="float" Nullable="true" />
+    <Property Name="Rule_MinutesOffset" Type="float" Nullable="true" />
+    <Property Name="Rule_MonthsOffset" Type="int" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Relation">

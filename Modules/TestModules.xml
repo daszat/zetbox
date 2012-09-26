@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-08-21T12:24:21.822223Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-09-26T10:42:29Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -4376,6 +4376,52 @@ public static void ObjectIsValid(OrderedOneEnd obj, ObjectIsValidEventArgs e)
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>OrderedOneEnds</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="b6c60adc-19f0-4169-8b78-53d7eaa549f7">
+    <ZetboxBase:ChangedOn>2012-09-26T07:43:38.446767Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-26T07:43:38.446767Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Tests the RecurrenceRule</ZetboxBase:Description>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>RecurrenceRuleTester</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(RecurrenceRuleTester obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(RecurrenceRuleTester obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(RecurrenceRuleTester obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(RecurrenceRuleTester obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(RecurrenceRuleTester obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>RecurrenceRuleTester</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="0d753d7d-b023-43ce-9189-2ea6d03b70a1">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:08.070755Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-08-17T10:37:27.368962Z</ZetboxBase:CreatedOn>
@@ -6131,6 +6177,42 @@ public static void isValid_SomeInt(OrderedOneEnd obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:IntProperty>
+  <ZetboxBase:CompoundObjectProperty ExportGuid="404eda18-44aa-456c-aaa7-c1c45c6b7008">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-09-26T07:44:24.974428Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Rule(RecurrenceRuleTester obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.RecurrenceRule&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Rule(RecurrenceRuleTester obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.RecurrenceRule&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Rule(RecurrenceRuleTester obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.RecurrenceRule&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Rule(RecurrenceRuleTester obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Rule == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-09-26T07:44:24.974428Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Rule</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>b6c60adc-19f0-4169-8b78-53d7eaa549f7</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a63b9f47-18b7-463d-a06b-7b636de9553f</GUI:ValueModelDescriptor>
+    <ZetboxBase:CompoundObjectDefinition>3d4ec88b-fe8e-452e-a71d-03143a75aeb0</ZetboxBase:CompoundObjectDefinition>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:CompoundObjectProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="e452deb2-1f35-4b7c-9adc-1f904dfbfc6d">
     <ZetboxBase:CategoryTags />
     <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
@@ -8051,6 +8133,31 @@ public static void SummaryCanExecReason(MethodTest obj, MethodReturnEventArgs&lt
     <ZetboxBase:Name>Summary</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="6234860c-9ebc-4fea-8480-5aa2ad648adb">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetNext(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime? dt)
+{
+}
+
+[Invocation]
+public static void GetNextCanExec(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNextCanExecReason(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>GetNext</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>b6c60adc-19f0-4169-8b78-53d7eaa549f7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="4d28b129-0786-4add-bddd-ff026c107f5e">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -8118,6 +8225,28 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>str</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="9f62f945-85d9-48a3-a8ea-53503197b444">
+    <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>true</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>6234860c-9ebc-4fea-8480-5aa2ad648adb</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>dt</ZetboxBase:Name>
+    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="e34696e6-2c3a-4e0f-bdf8-3dc756d4d6b9">
+    <ZetboxBase:ChangedOn>2012-09-26T08:26:33.867073Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-26T08:26:33.867073Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>6234860c-9ebc-4fea-8480-5aa2ad648adb</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retval</ZetboxBase:Name>
+    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeParameter>
   <ZetboxBase:DateTimeParameter ExportGuid="1e80ab18-5034-4835-a688-e4ea028a7116">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:01.397819Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>

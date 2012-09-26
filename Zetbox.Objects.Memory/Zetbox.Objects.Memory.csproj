@@ -221,6 +221,7 @@
     <Compile Include="PropertyFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="RangeFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="ReadOnlyConstraint.Memory.Designer.cs" />
+    <Compile Include="RecurrenceRuleTester.Memory.Designer.cs" />
     <Compile Include="Relation.Memory.Designer.cs" />
     <Compile Include="RelationEnd.Memory.Designer.cs" />
     <Compile Include="RequiredParent.Memory.Designer.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="AnyReference.Memory.Designer.cs" />
     <Compile Include="AuditEntry.Memory.Designer.cs" />
     <Compile Include="DateTimeRange.Memory.Designer.cs" />
+    <Compile Include="RecurrenceRule.Memory.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Memory.Designer.cs" />
     <Compile Include="AssemblyInfo.Memory.cs" />
     <Compile Include="Module.Memory.cs" />

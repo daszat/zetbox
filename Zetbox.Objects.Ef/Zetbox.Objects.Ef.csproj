@@ -224,6 +224,7 @@
     <Compile Include="PropertyFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="RangeFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="ReadOnlyConstraint.Ef.Designer.cs" />
+    <Compile Include="RecurrenceRuleTester.Ef.Designer.cs" />
     <Compile Include="Relation.Ef.Designer.cs" />
     <Compile Include="RelationEnd.Ef.Designer.cs" />
     <Compile Include="RequiredParent.Ef.Designer.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="AnyReference.Ef.Designer.cs" />
     <Compile Include="AuditEntry.Ef.Designer.cs" />
     <Compile Include="DateTimeRange.Ef.Designer.cs" />
+    <Compile Include="RecurrenceRule.Ef.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Ef.Designer.cs" />
     <Compile Include="AssemblyInfo.Ef.cs" />
     <Compile Include="Module.Ef.cs" />

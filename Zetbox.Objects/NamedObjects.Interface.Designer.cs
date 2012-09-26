@@ -3339,6 +3339,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("c170405f-c29d-4d87-a4f7-a622185a94d9"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> RecurrenceRuleTester
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("b6c60adc-19f0-4169-8b78-53d7eaa549f7"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> RequiredParent
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("0d753d7d-b023-43ce-9189-2ea6d03b70a1"); }
@@ -3579,6 +3583,24 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> SomeInt
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("1062a9d3-b936-42b8-99ba-2353087cbce1"); }
+                                }
+                            }
+                            public static class RecurrenceRuleTester_Methods
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> GetCurrent
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("654a1fca-f430-46b1-bb44-c704e7849a06"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> GetNext
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("6234860c-9ebc-4fea-8480-5aa2ad648adb"); }
+                                }
+                            }
+                            public static class RecurrenceRuleTester_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Rule
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("404eda18-44aa-456c-aaa7-c1c45c6b7008"); }
                                 }
                             }
                             public static class RequiredParent_Properties
