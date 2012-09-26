@@ -71,7 +71,7 @@ this.WriteObjects("            : base(lazyCtx, proxy) // pass proxy to parent\r\
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            this.Proxy = proxy;\r\n");
 #line 56 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
-ApplyCompoundObjectPropertyInitialisers(); 
+ApplyCompoundObjectPropertyInitialisers("lazyCtx"); 
 #line 57 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyDefaultValueSetFlagInitialisers(); 
 #line 58 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"

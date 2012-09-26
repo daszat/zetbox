@@ -56,15 +56,16 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             }
         }
 
-        public virtual void ApplyCompoundObjectPropertyInitialisers()
+        public virtual void ApplyCompoundObjectPropertyInitialisers(string lazyCtxProperty)
         {
+            var lazyCtxParam = string.IsNullOrEmpty(lazyCtxProperty) ? "null" : lazyCtxProperty;
             foreach (var desc in compoundObjectInitialisers) //.Where(cop => !cop.IsList).OrderBy(cop => cop.Name))
             {
                 this.WriteObjects("            if (", desc.BackingStoreName, " == null)");
                 this.WriteLine();
                 this.WriteObjects("            {");
                 this.WriteLine();
-                this.WriteObjects("                ", desc.BackingStoreName, " = new ", desc.ImplementationTypeName, "(this, \"", desc.PropertyName, "\", null, null);");
+                this.WriteObjects("                ", desc.BackingStoreName, " = new ", desc.ImplementationTypeName, "(this, \"", desc.PropertyName, "\", ", lazyCtxParam,", null);");
                 this.WriteLine();
                 this.WriteObjects("            }");
                 this.WriteLine();

@@ -29,4 +29,5 @@
 <%@ Parameter Name="implementationTypeName" Type="string" %>
 <%@ Parameter Name="propertyName" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>
-            <%= backingStoreName %> = new <%= implementationTypeName %>(this, "<%= propertyName %>");
+<%@ Parameter Name="lazyCtxParam" Type="string" %>
+            <%= backingStoreName %> = new <%= implementationTypeName %>(<%= lazyCtxParam %>, this, "<%= propertyName %>");

@@ -54,7 +54,7 @@
         {
             this.Proxy = proxy;
             AttachToObject(parent, property);
-<% ApplyCompoundObjectPropertyInitialisers(); %>
+<% ApplyCompoundObjectPropertyInitialisers("lazyCtx"); %>
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>

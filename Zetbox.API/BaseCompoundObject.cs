@@ -176,8 +176,19 @@ namespace Zetbox.API
 
         public bool IsAttached { get { return ParentObject != null && ParentObject.IsAttached; } }
 
-        protected DataObjectState ObjectState { get { return ParentObject != null ?  ParentObject.ObjectState:DataObjectState.Detached ; } }
-        protected IFrozenContext FrozenContext { get { return _lazyCtx(); } }
+        protected DataObjectState ObjectState { get { return ParentObject != null ? ParentObject.ObjectState : DataObjectState.Detached; } }
+        private IFrozenContext _frozenContext;
+        protected IFrozenContext FrozenContext
+        {
+            get
+            {
+                if (_frozenContext == null)
+                {
+                    _frozenContext = _lazyCtx();
+                }
+                return _frozenContext;
+            }
+        }
 
         protected override void AuditPropertyChange(string property, object oldValue, object newValue)
         {

@@ -27,7 +27,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects
 
     public partial class Constructors
     {
-        public virtual void ApplyCompoundObjectPropertyInitialisers()
+        public virtual void ApplyCompoundObjectPropertyInitialisers(string lazyCtxProperty)
         {
             foreach (var property in compoundObjectProperties.Where(cop => !cop.IsList).OrderBy(cop => cop.Name))
             {
@@ -35,7 +35,9 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects
                 string typeName = property.GetPropertyTypeString();
                 string implementationTypeName = typeName + ImplementationSuffix;
 
-                this.WriteObjects("            _", propertyName, " = new ", implementationTypeName, "(this, \"", propertyName, "\", null, null);");
+                var lazyCtxParam = string.IsNullOrEmpty(lazyCtxProperty) ? "null" : lazyCtxProperty;
+
+                this.WriteObjects("            _", propertyName, " = new ", implementationTypeName, "(this, \"", propertyName, "\", ", lazyCtxParam, ", null);");
                 this.WriteLine();
             }
         }

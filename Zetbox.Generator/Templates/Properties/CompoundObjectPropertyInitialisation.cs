@@ -26,22 +26,23 @@ namespace Zetbox.Generator.Templates.Properties
 
     public partial class CompoundObjectPropertyInitialisation
     {
-        public static void Call(IGenerationHost _host, IZetboxContext ctx, IEnumerable<CompoundObjectProperty> properties, string implementationSuffix, string implementationPropertySuffix)
+        public static void Call(IGenerationHost _host, IZetboxContext ctx, IEnumerable<CompoundObjectProperty> properties, string implementationSuffix, string implementationPropertySuffix, string lazyCtxProperty)
         {
             foreach (var p in properties.Where(p => !p.IsList).OrderBy(p => p.Name))
             {
-                Call(_host, ctx, p, implementationSuffix, implementationPropertySuffix);
+                Call(_host, ctx, p, implementationSuffix, implementationPropertySuffix, lazyCtxProperty);
             }
         }
 
-        public static void Call(IGenerationHost _host, IZetboxContext ctx, CompoundObjectProperty property, string implementationSuffix, string implementationPropertySuffix)
+        public static void Call(IGenerationHost _host, IZetboxContext ctx, CompoundObjectProperty property, string implementationSuffix, string implementationPropertySuffix, string lazyCtxProperty)
         {
             string propertyName = property.Name;
             string backingStoreName = propertyName + implementationPropertySuffix;
             string typeName = property.GetElementTypeString();
             string implementationTypeName = typeName + implementationSuffix;
+            string lazyCtxParam = string.IsNullOrEmpty(lazyCtxProperty) ? "null" : lazyCtxProperty;
 
-            Call(_host, ctx, implementationTypeName, propertyName, backingStoreName);
+            Call(_host, ctx, implementationTypeName, propertyName, backingStoreName, lazyCtxParam);
         }
     }
 }
