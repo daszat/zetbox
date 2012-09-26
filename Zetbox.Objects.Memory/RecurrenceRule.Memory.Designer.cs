@@ -36,9 +36,9 @@ namespace Zetbox.App.Base
             : base(lazyCtx)
         {
         }
-        public RecurrenceRuleMemoryImpl(IPersistenceObject parent, string property) : this(false, parent, property) {}
-        public RecurrenceRuleMemoryImpl(bool ignore, IPersistenceObject parent, string property)
-            : base(null) // TODO: pass parent's lazyCtx
+        public RecurrenceRuleMemoryImpl(IPersistenceObject parent, string property) : this(null, parent, property) {} // TODO: pass parent's lazyCtx
+        public RecurrenceRuleMemoryImpl(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)
+            : base(lazyCtx)
         {
             AttachToObject(parent, property);
         }

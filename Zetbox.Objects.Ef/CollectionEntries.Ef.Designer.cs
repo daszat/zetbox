@@ -8217,12 +8217,12 @@ namespace Zetbox.App.Test
 public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl()
 : base(null)
 {
-            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "Value");
+            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(null, this, "Value");
 }
 public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
     : base(lazyCtx)
 {
-            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "Value");
+            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(lazyCtx, this, "Value");
 }
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

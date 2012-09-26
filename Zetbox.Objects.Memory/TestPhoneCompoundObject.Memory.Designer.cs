@@ -36,9 +36,9 @@ namespace Zetbox.App.Test
             : base(lazyCtx)
         {
         }
-        public TestPhoneCompoundObjectMemoryImpl(IPersistenceObject parent, string property) : this(false, parent, property) {}
-        public TestPhoneCompoundObjectMemoryImpl(bool ignore, IPersistenceObject parent, string property)
-            : base(null) // TODO: pass parent's lazyCtx
+        public TestPhoneCompoundObjectMemoryImpl(IPersistenceObject parent, string property) : this(null, parent, property) {} // TODO: pass parent's lazyCtx
+        public TestPhoneCompoundObjectMemoryImpl(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)
+            : base(lazyCtx)
         {
             AttachToObject(parent, property);
         }

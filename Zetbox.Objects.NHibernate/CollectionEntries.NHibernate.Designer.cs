@@ -8151,7 +8151,7 @@ namespace Zetbox.App.Test
             this.Proxy = proxy;
             if (this.Proxy.Value == null)
             {
-                this.Proxy.Value = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null);
+                this.Proxy.Value = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", lazyCtx, null);
             }
             else
             {

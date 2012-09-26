@@ -33,13 +33,13 @@ namespace Zetbox.App.Test
         public AnyReferenceTestObjectEfImpl()
             : base(null)
         {
-            AnyImpl = new Zetbox.App.Base.AnyReferenceEfImpl(this, "Any");
+            AnyImpl = new Zetbox.App.Base.AnyReferenceEfImpl(null, this, "Any");
         }
 
         public AnyReferenceTestObjectEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            AnyImpl = new Zetbox.App.Base.AnyReferenceEfImpl(this, "Any");
+            AnyImpl = new Zetbox.App.Base.AnyReferenceEfImpl(lazyCtx, this, "Any");
         }
 
         /// <summary>

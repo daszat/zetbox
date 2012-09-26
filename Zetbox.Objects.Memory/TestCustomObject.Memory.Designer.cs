@@ -30,15 +30,15 @@ namespace Zetbox.App.Test
         public TestCustomObjectMemoryImpl()
             : base(null)
         {
-            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(this, "PhoneNumberMobile");
-            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(this, "PhoneNumberOffice");
+            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(null, this, "PhoneNumberMobile");
+            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(null, this, "PhoneNumberOffice");
         }
 
         public TestCustomObjectMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(this, "PhoneNumberMobile");
-            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(this, "PhoneNumberOffice");
+            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(lazyCtx, this, "PhoneNumberMobile");
+            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(lazyCtx, this, "PhoneNumberOffice");
         }
 
         /// <summary>

@@ -45,7 +45,7 @@ namespace Zetbox.App.Test
             this.Proxy = proxy;
             if (this.Proxy.PhoneNumberMobile == null)
             {
-                this.Proxy.PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberMobile", null, null);
+                this.Proxy.PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberMobile", lazyCtx, null);
             }
             else
             {
@@ -54,7 +54,7 @@ namespace Zetbox.App.Test
 
             if (this.Proxy.PhoneNumberOffice == null)
             {
-                this.Proxy.PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberOffice", null, null);
+                this.Proxy.PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberOffice", lazyCtx, null);
             }
             else
             {

@@ -36,9 +36,9 @@ namespace Zetbox.App.Base
             : base(lazyCtx)
         {
         }
-        public DateTimeRangeMemoryImpl(IPersistenceObject parent, string property) : this(false, parent, property) {}
-        public DateTimeRangeMemoryImpl(bool ignore, IPersistenceObject parent, string property)
-            : base(null) // TODO: pass parent's lazyCtx
+        public DateTimeRangeMemoryImpl(IPersistenceObject parent, string property) : this(null, parent, property) {} // TODO: pass parent's lazyCtx
+        public DateTimeRangeMemoryImpl(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)
+            : base(lazyCtx)
         {
             AttachToObject(parent, property);
         }

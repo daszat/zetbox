@@ -45,7 +45,7 @@ namespace Zetbox.App.Test
             this.Proxy = proxy;
             if (this.Proxy.Rule == null)
             {
-                this.Proxy.Rule = new Zetbox.App.Base.RecurrenceRuleNHibernateImpl(this, "Rule", null, null);
+                this.Proxy.Rule = new Zetbox.App.Base.RecurrenceRuleNHibernateImpl(this, "Rule", lazyCtx, null);
             }
             else
             {

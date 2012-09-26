@@ -36,9 +36,9 @@ namespace Zetbox.App.Base
             : base(lazyCtx)
         {
         }
-        public AnyReferenceMemoryImpl(IPersistenceObject parent, string property) : this(false, parent, property) {}
-        public AnyReferenceMemoryImpl(bool ignore, IPersistenceObject parent, string property)
-            : base(null) // TODO: pass parent's lazyCtx
+        public AnyReferenceMemoryImpl(IPersistenceObject parent, string property) : this(null, parent, property) {} // TODO: pass parent's lazyCtx
+        public AnyReferenceMemoryImpl(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)
+            : base(lazyCtx)
         {
             AttachToObject(parent, property);
         }

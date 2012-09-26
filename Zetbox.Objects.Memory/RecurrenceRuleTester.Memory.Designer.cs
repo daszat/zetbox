@@ -30,13 +30,13 @@ namespace Zetbox.App.Test
         public RecurrenceRuleTesterMemoryImpl()
             : base(null)
         {
-            RuleImpl = new Zetbox.App.Base.RecurrenceRuleMemoryImpl(this, "Rule");
+            RuleImpl = new Zetbox.App.Base.RecurrenceRuleMemoryImpl(null, this, "Rule");
         }
 
         public RecurrenceRuleTesterMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            RuleImpl = new Zetbox.App.Base.RecurrenceRuleMemoryImpl(this, "Rule");
+            RuleImpl = new Zetbox.App.Base.RecurrenceRuleMemoryImpl(lazyCtx, this, "Rule");
         }
 
         /// <summary>

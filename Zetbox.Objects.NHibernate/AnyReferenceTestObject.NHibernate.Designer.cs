@@ -45,7 +45,7 @@ namespace Zetbox.App.Test
             this.Proxy = proxy;
             if (this.Proxy.Any == null)
             {
-                this.Proxy.Any = new Zetbox.App.Base.AnyReferenceNHibernateImpl(this, "Any", null, null);
+                this.Proxy.Any = new Zetbox.App.Base.AnyReferenceNHibernateImpl(this, "Any", lazyCtx, null);
             }
             else
             {
