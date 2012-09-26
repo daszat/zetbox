@@ -25,6 +25,14 @@ namespace Zetbox.Client.Tests
         }
 
         [Test]
+        public void when_empty_should_return_now()
+        {
+            var result = rule.GetCurrent(now);
+
+            Assert.That(result, Is.EqualTo(now));
+        }
+
+        [Test]
         public void when_yearly_current()
         {
             rule.EveryYear = true;
