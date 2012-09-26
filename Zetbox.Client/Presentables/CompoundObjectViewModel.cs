@@ -54,6 +54,7 @@ namespace Zetbox.Client.Presentables
             OnPropertyChanged("PropertyModelsByName");
             OnPropertyChanged("PropertyGroups");
             OnPropertyChanged("PropertyGroupsByName");
+            OnPropertyChanged("Name");
             // all updates done
         }
 
@@ -108,7 +109,12 @@ namespace Zetbox.Client.Presentables
 
         public override string Name
         {
-            get { return ""; }
+            get { return _object.ToString(); }
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }
