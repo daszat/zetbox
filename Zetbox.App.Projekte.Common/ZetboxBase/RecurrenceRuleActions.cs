@@ -27,16 +27,24 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void ToString(RecurrenceRule obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = string.Format("{0}{1}{2}{3}{4} + offset: {5}{6}{7}{8}",
-                obj.EveryYear ? "every year" : "",
-                obj.EveryQuater ? "every quater" : "",
-                obj.EveryMonth ? "every month" : "",
-                obj.EveryDayOfWeek,
-                obj.EveryDay ? "every day" : "",
-                obj.MonthsOffset.HasValue ? obj.MonthsOffset.Value.ToString() + " months " : "",
-                obj.DaysOffset.HasValue ? obj.DaysOffset.Value.ToString() + " days " : "",
-                obj.HoursOffset.HasValue ? obj.HoursOffset.Value.ToString() + " hours " : "",
-                obj.MinutesOffset.HasValue ? obj.MinutesOffset.Value.ToString() + " minutes " : "");
+            var sb = new StringBuilder();
+            if (obj.EveryYear) sb.Append("every year");
+            else if (obj.EveryQuater) sb.Append("every quater");
+            else if (obj.EveryMonth) sb.Append("every month");
+            else if (obj.EveryDayOfWeek.HasValue) sb.Append("every " + obj.EveryDayOfWeek.ToString());
+            else if (obj.EveryDay) sb.Append("every day");
+
+            if (obj.MonthsOffset.HasValue || obj.DaysOffset.HasValue || obj.HoursOffset.HasValue || obj.MinutesOffset.HasValue) sb.Append(" + offset: ");
+
+            if (obj.MonthsOffset.HasValue) sb.Append(obj.MonthsOffset.Value.ToString() + " months ");
+            if (obj.DaysOffset.HasValue) sb.Append(obj.DaysOffset.Value.ToString() + " days ");
+            if (obj.HoursOffset.HasValue) sb.Append(obj.HoursOffset.Value.ToString() + " hours ");
+            if (obj.MinutesOffset.HasValue) sb.Append(obj.MinutesOffset.Value.ToString() + " minutes ");
+            if (sb.Length == 0)
+            {
+                sb.Append("not defined");
+            }
+            e.Result = sb.ToString();
         }
 
         [Invocation]
