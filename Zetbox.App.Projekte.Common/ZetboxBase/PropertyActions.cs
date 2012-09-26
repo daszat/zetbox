@@ -155,6 +155,10 @@ namespace Zetbox.App.Base
                 {
                     dataType = cls.BaseObjectClass;
                 }
+                else
+                {
+                    break;
+                }
             }
             e.Error = e.IsValid ? string.Empty : "Propertyname is not unique";
         }
