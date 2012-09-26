@@ -69,7 +69,7 @@ this.WriteObjects("				return ",  backingStoreName , "; \r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
+this.WriteObjects("                if (this.IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
 this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");

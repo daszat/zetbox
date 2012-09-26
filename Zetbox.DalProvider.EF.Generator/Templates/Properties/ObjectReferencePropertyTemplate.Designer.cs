@@ -132,7 +132,7 @@ this.WriteObjects("                return __value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
+this.WriteObjects("                if (this.IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                EntityReference<",  referencedImplementation , "> r\r\n");
