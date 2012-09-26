@@ -15811,6 +15811,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="a63b9f47-18b7-463d-a06b-7b636de9553f">
     <GUI:DefaultEditorKind>122b23a9-e1ee-4796-ab85-c60527a0060f</GUI:DefaultEditorKind>
+    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
     <GUI:Description>Viewmodel for editing a CompoundObject Property</GUI:Description>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelRef>eed0db75-ec83-4311-903c-a88e942f563c</GUI:ViewModelRef>
