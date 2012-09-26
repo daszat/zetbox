@@ -104,7 +104,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         private void LoadModules()
         {
             var modules = DataContext.GetQuery<Module>().ToList();
-            foreach (var m in modules)
+            foreach (var m in modules.OrderBy(i => i.Name))
             {
                 Modules.Add(ViewModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, this, m));
             }
