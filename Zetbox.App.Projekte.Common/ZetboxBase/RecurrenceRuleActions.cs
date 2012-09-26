@@ -34,9 +34,9 @@ namespace Zetbox.App.Base
                 obj.EveryDayOfWeek,
                 obj.EveryDay ? "every day" : "",
                 obj.MonthsOffset.HasValue ? obj.MonthsOffset.Value.ToString() + " months " : "",
-                obj.DaysOffset.HasValue ? obj.MonthsOffset.Value.ToString() + " days " : "",
-                obj.HoursOffset.HasValue ? obj.MonthsOffset.Value.ToString() + " hours " : "",
-                obj.MinutesOffset.HasValue ? obj.MonthsOffset.Value.ToString() + " minutes " : "");
+                obj.DaysOffset.HasValue ? obj.DaysOffset.Value.ToString() + " days " : "",
+                obj.HoursOffset.HasValue ? obj.HoursOffset.Value.ToString() + " hours " : "",
+                obj.MinutesOffset.HasValue ? obj.MinutesOffset.Value.ToString() + " minutes " : "");
         }
 
         [Invocation]
