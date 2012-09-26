@@ -78,7 +78,7 @@ namespace Zetbox.App.Test
 			}
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if (!object.Equals(this.Proxy.Rule, value))

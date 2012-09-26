@@ -97,7 +97,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -284,7 +284,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -435,7 +435,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DeploymentRestriction != value)
                 {
 					var __oldValue = _DeploymentRestriction;
@@ -701,7 +701,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
@@ -805,7 +805,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.TypeRefEfImpl> r

@@ -235,7 +235,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -422,7 +422,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -692,7 +692,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Projekte.KundeEfImpl> r
@@ -796,7 +796,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Projekte.MitarbeiterEfImpl> r
@@ -900,7 +900,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Projekte.ProjektEfImpl> r

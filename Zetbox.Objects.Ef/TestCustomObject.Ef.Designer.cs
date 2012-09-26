@@ -229,7 +229,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
@@ -394,7 +394,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
@@ -555,7 +555,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 			}
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if (!object.Equals(_PhoneNumberMobile, value))
@@ -619,7 +619,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 			}
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if (!object.Equals(_PhoneNumberOffice, value))

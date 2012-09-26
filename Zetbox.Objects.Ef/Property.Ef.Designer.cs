@@ -166,7 +166,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -468,7 +468,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -656,7 +656,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.DefaultPropertyValueEfImpl> r
@@ -992,7 +992,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.PropertyFilterConfigurationEfImpl> r
@@ -1177,7 +1177,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
@@ -1350,7 +1350,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.DataTypeEfImpl> r
@@ -1508,7 +1508,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
@@ -1575,7 +1575,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_RequestedWidth != value)
                 {
 					var __oldValue = _RequestedWidth;
@@ -1690,7 +1690,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r

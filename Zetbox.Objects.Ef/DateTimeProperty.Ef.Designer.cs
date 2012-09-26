@@ -61,7 +61,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DateTimeStyle != value)
                 {
 					var __oldValue = _DateTimeStyle;

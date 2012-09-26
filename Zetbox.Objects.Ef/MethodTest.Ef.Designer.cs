@@ -154,7 +154,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.MethodTestEfImpl> r

@@ -79,7 +79,7 @@ namespace Zetbox.App.Calendar
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
@@ -232,7 +232,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
@@ -438,7 +438,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
@@ -687,7 +687,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls

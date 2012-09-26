@@ -166,7 +166,7 @@ namespace Zetbox.App.Test
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Projekte.KundeEfImpl> r
@@ -302,7 +302,7 @@ namespace Zetbox.App.Test
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_TestEnumProp != value)
                 {
 					var __oldValue = _TestEnumProp;

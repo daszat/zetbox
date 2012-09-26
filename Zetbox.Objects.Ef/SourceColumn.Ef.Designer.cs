@@ -97,7 +97,7 @@ namespace Zetbox.App.SchemaMigration
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -435,7 +435,7 @@ namespace Zetbox.App.SchemaMigration
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -586,7 +586,7 @@ namespace Zetbox.App.SchemaMigration
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DbType != value)
                 {
 					var __oldValue = _DbType;
@@ -1098,7 +1098,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl> r
@@ -1340,7 +1340,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.SchemaMigration.SourceTableEfImpl> r
@@ -1419,7 +1419,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Status != value)
                 {
 					var __oldValue = _Status;

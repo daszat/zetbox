@@ -475,7 +475,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_InitialSortDirection != value)
                 {
 					var __oldValue = _InitialSortDirection;
@@ -728,7 +728,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
@@ -832,7 +832,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
@@ -1281,7 +1281,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
@@ -1348,7 +1348,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ViewMethod != value)
                 {
 					var __oldValue = _ViewMethod;
