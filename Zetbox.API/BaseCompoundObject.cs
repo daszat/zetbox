@@ -119,7 +119,7 @@ namespace Zetbox.API
         /// </summary>
         /// <param name="xml">XmlWriter to serialize to</param>
         /// <param name="modules">a list of modules to filter the output</param>
-        public void Export(XmlWriter xml, string[] modules)
+        public virtual void Export(XmlWriter xml, string[] modules)
         {
         }
 
@@ -127,7 +127,7 @@ namespace Zetbox.API
         /// Deserialize this Object from a XmlReader
         /// </summary>
         /// <param name="xml">XmlReader to deserialize to.</param>
-        public void MergeImport(XmlReader xml)
+        public virtual void MergeImport(XmlReader xml)
         {
         }
 

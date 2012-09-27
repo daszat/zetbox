@@ -418,6 +418,30 @@ namespace Zetbox.App.Base
                 : baseResult.Concat(result);
         }
 
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.Export(xml, modules);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ObjClass, xml, "ObjClass", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ObjGuid, xml, "ObjGuid", "Zetbox.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+            base.MergeImport(xml);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|ObjClass":
+                this._ObjClass = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.Base|ObjGuid":
+                this._ObjGuid = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
+        }
+
         #endregion
 
     }

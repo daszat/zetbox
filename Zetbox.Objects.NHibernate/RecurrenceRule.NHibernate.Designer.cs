@@ -899,6 +899,70 @@ public class RecurrenceRuleProxy { }
                 : baseResult.Concat(result);
         }
 
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.Export(xml, modules);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._DaysOffset, xml, "DaysOffset", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isEveryDaySet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryDay, xml, "EveryDay", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.RecurrenceRule)this).EveryDayOfWeek, xml, "EveryDayOfWeek", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isEveryMonthSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryMonth, xml, "EveryMonth", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isEveryQuaterSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryQuater, xml, "EveryQuater", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isEveryYearSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryYear, xml, "EveryYear", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._HoursOffset, xml, "HoursOffset", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._MinutesOffset, xml, "MinutesOffset", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._MonthsOffset, xml, "MonthsOffset", "Zetbox.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+            base.MergeImport(xml);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|DaysOffset":
+                this._DaysOffset = XmlStreamer.ReadNullableDouble(xml);
+                break;
+            case "Zetbox.App.Base|EveryDay":
+                // Import must have default value set
+                this._EveryDay = XmlStreamer.ReadBoolean(xml);
+                this._isEveryDaySet = true;
+                break;
+            case "Zetbox.App.Base|EveryDayOfWeek":
+                ((Zetbox.App.Base.RecurrenceRule)this).EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            case "Zetbox.App.Base|EveryMonth":
+                // Import must have default value set
+                this._EveryMonth = XmlStreamer.ReadBoolean(xml);
+                this._isEveryMonthSet = true;
+                break;
+            case "Zetbox.App.Base|EveryQuater":
+                // Import must have default value set
+                this._EveryQuater = XmlStreamer.ReadBoolean(xml);
+                this._isEveryQuaterSet = true;
+                break;
+            case "Zetbox.App.Base|EveryYear":
+                // Import must have default value set
+                this._EveryYear = XmlStreamer.ReadBoolean(xml);
+                this._isEveryYearSet = true;
+                break;
+            case "Zetbox.App.Base|HoursOffset":
+                this._HoursOffset = XmlStreamer.ReadNullableDouble(xml);
+                break;
+            case "Zetbox.App.Base|MinutesOffset":
+                this._MinutesOffset = XmlStreamer.ReadNullableDouble(xml);
+                break;
+            case "Zetbox.App.Base|MonthsOffset":
+                this._MonthsOffset = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
+        }
+
         #endregion
 
     }

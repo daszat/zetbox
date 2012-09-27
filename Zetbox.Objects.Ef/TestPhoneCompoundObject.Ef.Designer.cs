@@ -261,6 +261,30 @@ namespace Zetbox.App.Test
                 : baseResult.Concat(result);
         }
 
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.Export(xml, modules);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this._AreaCode, xml, "AreaCode", "Zetbox.App.Test");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this._Number, xml, "Number", "Zetbox.App.Test");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+            base.MergeImport(xml);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Test|AreaCode":
+                this._AreaCode = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Test|Number":
+                this._Number = XmlStreamer.ReadString(xml);
+                break;
+            }
+        }
+
         #endregion
 
     }

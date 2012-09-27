@@ -323,6 +323,34 @@ namespace Zetbox.App.Base
                 : baseResult.Concat(result);
         }
 
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.Export(xml, modules);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._From, xml, "From", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Thru, xml, "Thru", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._TotalDays, xml, "TotalDays", "Zetbox.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+            base.MergeImport(xml);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|From":
+                this._From = XmlStreamer.ReadNullableDateTime(xml);
+                break;
+            case "Zetbox.App.Base|Thru":
+                this._Thru = XmlStreamer.ReadNullableDateTime(xml);
+                break;
+            case "Zetbox.App.Base|TotalDays":
+                this._TotalDays = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
+        }
+
         #endregion
 
     }

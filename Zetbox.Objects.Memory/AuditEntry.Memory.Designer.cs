@@ -492,6 +492,49 @@ namespace Zetbox.App.Base
                 : baseResult.Concat(result);
         }
 
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.Export(xml, modules);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Identity, xml, "Identity", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._MessageFormat, xml, "MessageFormat", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._NewValue, xml, "NewValue", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._OldValue, xml, "OldValue", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isTimestampSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Timestamp, xml, "Timestamp", "Zetbox.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+            base.MergeImport(xml);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|Identity":
+                this._Identity = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|MessageFormat":
+                this._MessageFormat = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|NewValue":
+                this._NewValue = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|OldValue":
+                this._OldValue = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|PropertyName":
+                this._PropertyName = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|Timestamp":
+                // Import must have default value set
+                this._Timestamp = XmlStreamer.ReadNullableDateTime(xml);
+                this._isTimestampSet = true;
+                break;
+            }
+        }
+
         #endregion
 
     }
