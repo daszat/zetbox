@@ -399,37 +399,6 @@ namespace Zetbox.App.Test
             return baseResult;
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-
-            base.ToStream(xml);
-            XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Zetbox.App.Test");
-            XmlStreamer.ToStream(this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Zetbox");
-            XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Zetbox.App.Test");
-            XmlStreamer.ToStream((int?)this.TestEnumProp, xml, "TestEnumProp", "Zetbox.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            switch (xml.NamespaceURI + "|" + xml.LocalName)
-            {
-                case "Zetbox.App.Test|MyIntProperty":
-                    this._MyIntProperty = XmlStreamer.ReadNullableInt32(xml);
-                    break;
-                case "http://dasz.at/Zetbox|ObjectProp":
-                    this._fk_ObjectProp = XmlStreamer.ReadNullableInt32(xml);
-                    break;
-                case "Zetbox.App.Test|StringProp":
-                    this._StringProp = XmlStreamer.ReadString(xml);
-                    break;
-                case "Zetbox.App.Test|TestEnumProp":
-                    this.TestEnumProp = (Zetbox.App.Test.TestEnum)XmlStreamer.ReadInt32(xml);
-                    break;
-            }
-            return baseResult;
-        }
-
         #endregion
 
         public override Guid ObjectClassID

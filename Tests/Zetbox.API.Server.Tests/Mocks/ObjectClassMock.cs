@@ -320,16 +320,6 @@ namespace Zetbox.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public void ToStream(System.Xml.XmlWriter xml)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            throw new NotImplementedException();
-        }
-
         public void ReloadReferences()
         {
             throw new NotImplementedException();

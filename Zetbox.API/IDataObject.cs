@@ -217,19 +217,6 @@ namespace Zetbox.API
         IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr);
 
         /// <summary>
-        /// Serialize this Object to a XmlWriter
-        /// </summary>
-        /// <param name="xml">XmlWriter to serialize to</param>
-        void ToStream(XmlWriter xml);
-
-        /// <summary>
-        /// Deserialize this Object from a XmlReader
-        /// </summary>
-        /// <param name="xml">XmlReader to deserialize from.</param>
-        /// <returns>Returns a list of objects that were in-place serialized. This ensures that they can be processed like everything else in the stream. May return null to indicate absence of additional objects.</returns>
-        IEnumerable<IPersistenceObject> FromStream(XmlReader xml);
-
-        /// <summary>
         /// Reloads Relations from internal storage into the providers caches.
         /// Should be called after de-serializing and attaching an object graph 
         /// to notify the provider of all references within the graph.
@@ -403,6 +390,19 @@ namespace Zetbox.API
         void ApplyChangesFrom(ICompoundObject other);
 
         Guid CompoundObjectID { get; }
+
+        /// <summary>
+        /// Serialize this Object to a XmlWriter
+        /// </summary>
+        /// <param name="xml">XmlWriter to serialize to</param>
+        /// <param name="modules">a list of modules to filter the output</param>
+        void Export(XmlWriter xml, string[] modules);
+
+        /// <summary>
+        /// Deserialize this Object from a XmlReader
+        /// </summary>
+        /// <param name="xml">XmlReader to deserialize to.</param>
+        void MergeImport(XmlReader xml);
     }
 
     /// <summary>

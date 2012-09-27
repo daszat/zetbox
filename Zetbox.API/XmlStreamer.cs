@@ -257,23 +257,6 @@ namespace Zetbox.API
         #region Collection Entries
         private delegate void CallXmlFunction<T, X>(T obj, X xml);
 
-        public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
-            where T : IStreamable
-        {
-            WriteCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.ToStream(x));
-        }
-
-        public static void FromStreamCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml, string name, string ns)
-            where T : IValueCollectionEntry, IStreamable, new()
-        {
-            if (xml == null) { throw new ArgumentNullException("xml"); }
-            // collection entries do not have sub-lists
-            if (xml.LocalName == name && xml.NamespaceURI == ns)
-            {
-                ReadCollectionEntries<T>(parent, val, xml, (obj, x) => obj.FromStream(x));
-            }
-        }
-
         public static void ExportCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
             where T : IExportableValueCollectionEntryInternal
         {
@@ -356,19 +339,19 @@ namespace Zetbox.API
         #endregion
 
         #region ICompoundObject
-        public static void ToStream(ICompoundObject val, XmlWriter xml, string name, string ns)
+        public static void ExportCompoundObject(ICompoundObject val, XmlWriter xml, string name, string ns)
         {
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
             if (val != null)
             {
                 xml.WriteStartElement(name, ns);
-                val.ToStream(xml);
+                val.Export(xml, new string[] { "*" });
                 xml.WriteEndElement();
             }
         }
 
-        public static void FromStream(ICompoundObject val, XmlReader xml)
+        public static void MergeImportCompoundObject(ICompoundObject val, XmlReader xml)
         {
             if (xml == null) { throw new ArgumentNullException("xml"); }
             if (val == null) { throw new ArgumentNullException("val"); }
@@ -378,7 +361,7 @@ namespace Zetbox.API
                 while (entries.Read())
                 {
                     // compound objects do not have sub-lists
-                    val.FromStream(xml);
+                    val.MergeImport(xml);
                 }
             }
         }

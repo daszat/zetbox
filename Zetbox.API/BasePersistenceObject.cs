@@ -278,28 +278,6 @@ namespace Zetbox.API
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xml"></param>
-        public virtual void ToStream(XmlWriter xml)
-        {
-            if (xml == null)
-                throw new ArgumentNullException("xml");
-        }
-
-        /// <summary>
-        /// Base method for deserializing this Object from XML.
-        /// </summary>
-        /// <param name="xml">Stream to serialize from</param>
-        public virtual IEnumerable<IPersistenceObject> FromStream(XmlReader xml)
-        {
-            if (xml == null)
-                throw new ArgumentNullException("xml");
-
-            return null;
-        }
-
-        /// <summary>
         /// Reloads all references to other objects from the underlying storage. Providers may use this to update internal metadata after deserialisation.
         /// </summary>
         public virtual void ReloadReferences()

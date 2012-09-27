@@ -87,17 +87,6 @@ namespace Zetbox.API.Mocks
             if (xml == null) throw new ArgumentNullException("xml");
         }
 
-        public virtual void ToStream(System.Xml.XmlWriter xml)
-        {
-            if (xml == null) throw new ArgumentNullException("xml");
-        }
-
-        public virtual IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            if (xml == null) throw new ArgumentNullException("xml");
-            return null;
-        }
-
         public void ReloadReferences()
         {
         }

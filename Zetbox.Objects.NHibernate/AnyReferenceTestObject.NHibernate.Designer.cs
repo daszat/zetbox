@@ -495,7 +495,7 @@ namespace Zetbox.App.Test
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this.Any, xml, "Any", "Zetbox.App.Test");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ExportCompoundObject(this.Any, xml, "Any", "Zetbox.App.Test");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this.Proxy.DisplayName, xml, "DisplayName", "Zetbox.App.Test");
         }
 
@@ -505,7 +505,7 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Test|Any":
-                XmlStreamer.FromStream(this.AnyImpl, xml);
+                    XmlStreamer.MergeImportCompoundObject(this.AnyImpl, xml);
                 break;
             case "Zetbox.App.Test|DisplayName":
                 this.Proxy.DisplayName = XmlStreamer.ReadString(xml);

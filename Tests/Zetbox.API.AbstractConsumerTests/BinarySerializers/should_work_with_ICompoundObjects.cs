@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
+using System.Xml;
 
 namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
 {
@@ -61,15 +62,12 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
             return null;
         }
 
-        public virtual void ToStream(System.Xml.XmlWriter xml)
+        public void Export(XmlWriter xml, string[] modules)
         {
-            if (xml == null) throw new ArgumentNullException("xml");
         }
-
-        public IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
+        
+        public void MergeImport(XmlReader xml)
         {
-            if (xml == null) throw new ArgumentNullException("xml");
-            return null;
         }
 
         public void ReloadReferences()

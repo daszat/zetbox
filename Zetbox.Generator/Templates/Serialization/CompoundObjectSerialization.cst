@@ -54,14 +54,14 @@
     else if (direction == SerializerDirection.Export)
     {
 %>
-            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ExportCompoundObject(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
     }
     else if (direction == SerializerDirection.MergeImport)
     {
 %>
             case "<%= xmlnamespace %>|<%= xmlname %>":
-                XmlStreamer.FromStream(this.<%= backingStoreName %>, <%= streamName %>);
+                XmlStreamer.MergeImportCompoundObject(this.<%= backingStoreName %>, <%= streamName %>);
                 break;
 <%
     }
