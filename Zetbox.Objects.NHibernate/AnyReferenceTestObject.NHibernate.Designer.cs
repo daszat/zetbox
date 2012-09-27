@@ -505,7 +505,7 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Test|Any":
-                    XmlStreamer.MergeImportCompoundObject(this.AnyImpl, xml);
+                XmlStreamer.MergeImportCompoundObject(this.AnyImpl, xml);
                 break;
             case "Zetbox.App.Test|DisplayName":
                 this.Proxy.DisplayName = XmlStreamer.ReadString(xml);
