@@ -35,6 +35,7 @@
         </ctrls:DropDownButton>
         <Border DockPanel.Dock="Left"
                 Style="{StaticResource ControlBorderStyle}"
+                IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                 MouseLeftButtonDown="Border_Click"
                 BorderThickness="1,1,0,1">
             <Image Source="{Binding Value, Converter={StaticResource IconConverter}}"
