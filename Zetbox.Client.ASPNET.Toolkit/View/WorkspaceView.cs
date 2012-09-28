@@ -98,7 +98,7 @@ namespace Zetbox.Client.ASPNET.Toolkit.View
                 var litText = (Literal)e.Item.FindControl("litText");
                 var container = (IAttributeAccessor)e.Item.FindControl("container");
 
-                litText.Text = data.LongName;
+                litText.Text = data.Name;
                 container.SetAttribute("onclick", string.Format("javascript: $find('{0}').SetObjectVisible({1});", containerCtrl.ClientID, e.Item.ItemIndex));
             }
         }

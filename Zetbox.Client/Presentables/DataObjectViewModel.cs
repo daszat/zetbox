@@ -320,16 +320,6 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        private string _longNameCache;
-        public string LongName
-        {
-            get
-            {
-                InitialiseToStringCache();
-                return _longNameCache;
-            }
-        }
-
         public override string ToString()
         {
             return Name;
@@ -408,25 +398,13 @@ namespace Zetbox.Client.Presentables
             if (_nameCache == null)
             {
                 _nameCache = _object.ToString();
-                if (string.IsNullOrEmpty(_nameCache))
-                {
-                    _longNameCache = _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName;
-                }
-                else
-                {
-                    _longNameCache = String.Format("{0}: {1}",
-                       _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName,
-                        _nameCache);
-                }
             }
         }
 
         protected void UpdateToStringCache()
         {
             _nameCache = null;
-            _longNameCache = null;
             OnPropertyChanged("Name");
-            OnPropertyChanged("LongName");
         }
 
         private Icon _iconCache = null;

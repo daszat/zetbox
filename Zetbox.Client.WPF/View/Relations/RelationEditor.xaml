@@ -41,7 +41,7 @@
                    Margin="4,2,2,2"
                    Width="14"
                    Height="14" />
-            <TextBlock Text="{Binding LongName}"
+            <TextBlock Text="{Binding Name}"
                        HorizontalAlignment="Center"
                        FontWeight="Bold" />
         </DockPanel>

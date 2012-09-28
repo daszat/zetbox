@@ -94,7 +94,7 @@ namespace Zetbox.Client.ASPNET.Toolkit.View
         {
             base.OnPreRender(e);
 
-            lbItemCtrl.Text = Model.Value != null ? Model.Value.LongName : String.Empty;
+            lbItemCtrl.Text = Model.Value != null ? Model.Value.Name : String.Empty;
 
             btnNewCtrl.Attributes.Add("onclick", string.Format("javascript: Zetbox.JavascriptRenderer.showObject(Zetbox.JavascriptRenderer.newObject({0}));",
                 Model.ReferencedClass.GetDescribedInterfaceType().ToJSON()));
