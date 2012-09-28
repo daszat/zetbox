@@ -515,8 +515,94 @@
     <Style TargetType="TextBox"
            BasedOn="{StaticResource zbTextBoxTemplate}" />
 
+    <Storyboard x:Key="enterGotFocus"
+                TargetName="Message"
+                TargetProperty="Opacity">
+        <DoubleAnimation Duration="0:0:0.3"
+                         To=".33" />
+    </Storyboard>
+    <Storyboard x:Key="exitGotFocus"
+                TargetName="Message"
+                TargetProperty="Opacity">
+        <DoubleAnimation Duration="0:0:0.4" />
+    </Storyboard>
+
+    <Storyboard x:Key="enterHasText"
+                TargetProperty="Opacity"
+                TargetName="Message">
+        <DoubleAnimation Duration="0:0:0.3"
+                         From=".33"
+                         To="0" />
+    </Storyboard>
+    <Storyboard x:Key="exitHasText"
+                TargetName="Message"
+                TargetProperty="Opacity">
+        <DoubleAnimation Duration="0:0:0.4" />
+    </Storyboard>
+    
     <Style TargetType="kevinTxt:InfoTextBox"
            BasedOn="{StaticResource zbTextBoxTemplate}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type kevinTxt:InfoTextBox}">
+                    <Border Name="Border"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            TextBlock.Foreground="{TemplateBinding Foreground}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <ScrollViewer Margin="0"
+                                          x:Name="PART_ContentHost" />
+                            <TextBlock Text="{TemplateBinding TextBoxInfo}"
+                                       x:Name="Message"
+                                       Foreground="Navy"
+                                       IsHitTestVisible="False"
+                                       FontStyle="Italic"
+                                       Opacity="0.67"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="3 0 3 0" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="Border"
+                                    Property="Background"
+                                    Value="{StaticResource ControlDisabledBackground}" />
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource ControlDisabledForeground}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasText"
+                                           Value="False" />
+                                <Condition Property="IsFocused"
+                                           Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource enterGotFocus}" />
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource exitGotFocus}" />
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+
+                        <Trigger Property="HasText"
+                                 Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource enterHasText}" />
+                            </Trigger.EnterActions>
+
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource exitHasText}" />
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="wpftkp:DatePickerTextBox">
