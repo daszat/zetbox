@@ -43,7 +43,7 @@
                                              Style="{StaticResource ImageToolbarButton}" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
-                        <Menu>
+                        <Menu Style="{StaticResource ToolbarMenu}">
                             <Menu.Resources>
                                 <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
                                     <TextBlock Text="{Binding}" />
@@ -55,13 +55,6 @@
                             </MenuItem>
                         </Menu>
                     </DataTemplate>
-                    <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
-                    <Style TargetType="Menu">
-                        <Setter Property="Margin"
-                                Value="0,2,0,0" />
-                        <Setter Property="Background"
-                                Value="#00000000" />
-                    </Style>
                 </ctrls:WorkaroundToolBar.Resources>
             </ctrls:WorkaroundToolBar>
         </ToolBarTray>

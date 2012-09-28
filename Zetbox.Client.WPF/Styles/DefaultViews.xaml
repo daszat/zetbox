@@ -411,6 +411,17 @@
         </Setter>
     </Style>
 
+    <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
+    <Style x:Key="ToolbarMenu"
+           TargetType="{x:Type Menu}">
+        <Setter Property="Margin"
+                Value="0,2,0,0" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="Background"
+                Value="#00000000" />
+    </Style>
+
     <!-- inspired by http://stackoverflow.com/questions/780426/link-button-in-wpf by Anderson Imes -->
     <Style x:Key="LinkButton"
            TargetType="Button">
