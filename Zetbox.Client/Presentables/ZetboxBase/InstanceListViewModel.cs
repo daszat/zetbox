@@ -1184,6 +1184,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         ViewModelFactory.ShowModel(item, true);
                     }
                 }
+                OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext) as ObjectEditor.WorkspaceViewModel, objects);
             }
             else
             {
