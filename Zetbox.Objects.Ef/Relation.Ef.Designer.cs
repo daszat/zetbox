@@ -1864,7 +1864,6 @@ namespace Zetbox.App.Base
             SetNotInitializedProperty("A");
             SetNotInitializedProperty("B");
             SetNotInitializedProperty("ChangedBy");
-            SetNotInitializedProperty("Containment");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");

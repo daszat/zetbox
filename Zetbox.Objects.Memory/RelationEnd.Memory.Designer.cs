@@ -668,6 +668,17 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _HasPersistentOrder;
+                if (!_isHasPersistentOrderSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("edd8d122-7b58-4bbb-bf00-33caa8b69cc2"));
+                    if (__p != null) {
+                        _isHasPersistentOrderSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._HasPersistentOrder = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'RelationEnd.HasPersistentOrder'");
+                    }
+                }
                 if (OnHasPersistentOrder_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -679,6 +690,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isHasPersistentOrderSet = true;
                 if (_HasPersistentOrder != value)
                 {
                     var __oldValue = _HasPersistentOrder;
@@ -707,6 +719,7 @@ namespace Zetbox.App.Base
             }
         }
         private bool _HasPersistentOrder;
+        private bool _isHasPersistentOrderSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, bool> OnHasPersistentOrder_PreSetter;
@@ -1498,7 +1511,6 @@ namespace Zetbox.App.Base
             SetNotInitializedProperty("BParent");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
-            SetNotInitializedProperty("HasPersistentOrder");
             SetNotInitializedProperty("Multiplicity");
             SetNotInitializedProperty("Navigator");
             SetNotInitializedProperty("RoleName");
@@ -1546,7 +1558,10 @@ namespace Zetbox.App.Base
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(this._HasPersistentOrder);
+            binStream.Write(this._isHasPersistentOrderSet);
+            if (this._isHasPersistentOrderSet) {
+                binStream.Write(this._HasPersistentOrder);
+            }
             binStream.Write((int?)((Zetbox.App.Base.RelationEnd)this).Multiplicity);
             binStream.Write(Navigator != null ? Navigator.ID : (int?)null);
             binStream.Write(this._RoleName);
@@ -1575,7 +1590,10 @@ namespace Zetbox.App.Base
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
-            this._HasPersistentOrder = binStream.ReadBoolean();
+            this._isHasPersistentOrderSet = binStream.ReadBoolean();
+            if (this._isHasPersistentOrderSet) {
+                this._HasPersistentOrder = binStream.ReadBoolean();
+            }
             ((Zetbox.App.Base.RelationEnd)this).Multiplicity = (Zetbox.App.Base.Multiplicity)binStream.ReadNullableInt32();
             this._fk_Navigator = binStream.ReadNullableInt32();
             this._RoleName = binStream.ReadString();
@@ -1599,6 +1617,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isHasPersistentOrderSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.RelationEnd)this).Multiplicity, xml, "Multiplicity", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Navigator != null ? Navigator.ExportGuid : (Guid?)null, xml, "Navigator", "Zetbox.App.Base");
@@ -1633,7 +1652,9 @@ namespace Zetbox.App.Base
                 this._isExportGuidSet = true;
                 break;
             case "Zetbox.App.Base|HasPersistentOrder":
+                // Import must have default value set
                 this._HasPersistentOrder = XmlStreamer.ReadBoolean(xml);
+                this._isHasPersistentOrderSet = true;
                 break;
             case "Zetbox.App.Base|Multiplicity":
                 ((Zetbox.App.Base.RelationEnd)this).Multiplicity = (Zetbox.App.Base.Multiplicity)XmlStreamer.ReadNullableInt32(xml);

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-09-26T10:42:29Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-09-28T11:48:49Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -40555,8 +40555,8 @@ public static void isValid_Property(DefaultPropertyValue obj, PropertyIsValidEve
     <ZetboxBase:RelationEnd>b85a51bb-72d7-419a-8177-d2dbb1dd41de</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d072423b-f723-4342-8111-79fb563c8ab4">
-    <ZetboxBase:CategoryTags />
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-09-28T09:48:49.150955Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_EnumValue(EnumDefaultValue obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.EnumerationEntry&gt; e)
 {
@@ -40581,6 +40581,7 @@ public static void isValid_EnumValue(EnumDefaultValue obj, PropertyIsValidEventA
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-09-21T07:01:22Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Label>Enum value</ZetboxBase:Label>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>EnumValue</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>4f35c5da-924c-4114-a011-4d736faa3ae2</ZetboxBase:ObjectClass>
@@ -43788,6 +43789,7 @@ public static void isValid_EagerLoading(ObjectReferenceProperty obj, PropertyIsV
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>09e57d21-643c-45ac-9419-c73742681f07</ZetboxBase:DefaultValue>
     <ZetboxBase:Description>Whether or not this reference should be loaded eagerly</ZetboxBase:Description>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>EagerLoading</ZetboxBase:Name>
@@ -44908,6 +44910,7 @@ public static void isValid_Containment(Relation obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-03-12T19:14:58Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>9df555be-639e-4f98-9c1a-bc07115e47b4</ZetboxBase:DefaultValue>
     <ZetboxBase:Description>The ContainmentSpecification of this Relation.</ZetboxBase:Description>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Containment</ZetboxBase:Name>
@@ -45464,6 +45467,7 @@ public static void isValid_HasPersistentOrder(RelationEnd obj, PropertyIsValidEv
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>aed8de77-a9b0-4a14-bdb7-32ccf906efd1</ZetboxBase:DefaultValue>
     <ZetboxBase:Description>Is true, if this RelationEnd persists the order of its elements</ZetboxBase:Description>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>HasPersistentOrder</ZetboxBase:Name>
@@ -49516,11 +49520,11 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="8ed37905-2837-48b3-81f1-56143651e14c">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.835041Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2012-09-28T09:47:24.2671Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-12T19:01:52Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>B is an integral part of A.</ZetboxBase:Description>
     <ZetboxBase:Enumeration>89eea80f-b5fd-4972-9163-9bbfef61c747</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:EnumerationEntries_pos>101</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>AContainsB</ZetboxBase:Name>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
@@ -53904,6 +53908,12 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:Property>13c33710-ea02-4621-ad50-294a1f36b07d</ZetboxBase:Property>
     <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
   </ZetboxBase:BoolDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="09e57d21-643c-45ac-9419-c73742681f07">
+    <ZetboxBase:ChangedOn>2012-09-28T09:40:25.432144Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-28T09:40:25.432144Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>373f0036-42d6-41e2-a2a4-74462537f426</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="f2eb3e40-7689-413b-ae77-3bc0f5706887">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:56.973566Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
@@ -53948,6 +53958,12 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>4629cba1-9162-4d9f-a815-0b0ed96f95be</ZetboxBase:Property>
   </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:EnumDefaultValue ExportGuid="9df555be-639e-4f98-9c1a-bc07115e47b4">
+    <ZetboxBase:ChangedOn>2012-09-28T09:47:49.61855Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-28T09:47:49.61855Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>eed9955a-11a3-4c25-b0bb-e01ecd14b26f</ZetboxBase:Property>
+    <ZetboxBase:EnumValue>a14867d0-49ab-4fa5-8f77-8da8b6de6ea0</ZetboxBase:EnumValue>
+  </ZetboxBase:EnumDefaultValue>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="34a3f143-fdd5-437d-9eed-20ac0ed7a1ad">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:57.103573Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
@@ -53973,6 +53989,12 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>4bbe4a44-dc99-4455-9c03-ae78903fcee2</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="aed8de77-a9b0-4a14-bdb7-32ccf906efd1">
+    <ZetboxBase:ChangedOn>2012-09-28T09:45:33.213748Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-28T09:45:33.213748Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>edd8d122-7b58-4bbb-bf00-33caa8b69cc2</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="fd64f8d2-c567-4b58-b8d1-07b99a6084c1">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:57.263582Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>

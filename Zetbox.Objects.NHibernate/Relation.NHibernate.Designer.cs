@@ -46,6 +46,7 @@ namespace Zetbox.App.Base
             _isCreatedOnSet = Proxy.ID > 0;
             _isChangedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
+            _isContainmentSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -455,7 +456,7 @@ namespace Zetbox.App.Base
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.Containment;
+                var __result = FetchContainmentOrDefault();
                 if (OnContainment_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__result);
@@ -467,6 +468,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isContainmentSet = true;
                 if (Proxy.Containment != value)
                 {
                     var __oldValue = Proxy.Containment;
@@ -495,6 +497,25 @@ namespace Zetbox.App.Base
             }
         }
 
+
+        private Zetbox.App.Base.ContainmentSpecification FetchContainmentOrDefault()
+        {
+            var __result = Proxy.Containment;
+                if (!_isContainmentSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("eed9955a-11a3-4c25-b0bb-e01ecd14b26f"));
+                    if (__p != null) {
+                        _isContainmentSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.Containment = (Zetbox.App.Base.ContainmentSpecification)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.Relation.Containment'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isContainmentSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_PreSetter;
@@ -1796,6 +1817,7 @@ namespace Zetbox.App.Base
         public override void NotifyPreSave()
         {
             FetchChangedOnOrDefault();
+            FetchContainmentOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
@@ -1817,7 +1839,6 @@ namespace Zetbox.App.Base
             SetNotInitializedProperty("A");
             SetNotInitializedProperty("B");
             SetNotInitializedProperty("ChangedBy");
-            SetNotInitializedProperty("Containment");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");

@@ -43,6 +43,7 @@ namespace Zetbox.App.Base
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            _isHasPersistentOrderSet = Proxy.ID > 0;
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
@@ -704,7 +705,7 @@ namespace Zetbox.App.Base
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.HasPersistentOrder;
+                var __result = FetchHasPersistentOrderOrDefault();
                 if (OnHasPersistentOrder_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -716,6 +717,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isHasPersistentOrderSet = true;
                 if (Proxy.HasPersistentOrder != value)
                 {
                     var __oldValue = Proxy.HasPersistentOrder;
@@ -744,6 +746,25 @@ namespace Zetbox.App.Base
             }
         }
 
+
+        private bool FetchHasPersistentOrderOrDefault()
+        {
+            var __result = Proxy.HasPersistentOrder;
+                if (!_isHasPersistentOrderSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("edd8d122-7b58-4bbb-bf00-33caa8b69cc2"));
+                    if (__p != null) {
+                        _isHasPersistentOrderSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.HasPersistentOrder = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.RelationEnd.HasPersistentOrder'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isHasPersistentOrderSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, bool> OnHasPersistentOrder_PreSetter;
@@ -1523,6 +1544,7 @@ namespace Zetbox.App.Base
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
+            FetchHasPersistentOrderOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_RelationEnd != null) OnNotifyPreSave_RelationEnd(this);
         }
@@ -1543,7 +1565,6 @@ namespace Zetbox.App.Base
             SetNotInitializedProperty("BParent");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
-            SetNotInitializedProperty("HasPersistentOrder");
             SetNotInitializedProperty("Multiplicity");
             SetNotInitializedProperty("Navigator");
             SetNotInitializedProperty("RoleName");
@@ -1665,7 +1686,10 @@ namespace Zetbox.App.Base
             if (this._isExportGuidSet) {
                 binStream.Write(this.Proxy.ExportGuid);
             }
-            binStream.Write(this.Proxy.HasPersistentOrder);
+            binStream.Write(this._isHasPersistentOrderSet);
+            if (this._isHasPersistentOrderSet) {
+                binStream.Write(this.Proxy.HasPersistentOrder);
+            }
             binStream.Write((int?)Proxy.Multiplicity);
             binStream.Write(this.Proxy.Navigator != null ? OurContext.GetIdFromProxy(this.Proxy.Navigator) : (int?)null);
             binStream.Write(this.Proxy.RoleName);
@@ -1694,7 +1718,10 @@ namespace Zetbox.App.Base
             if (this._isExportGuidSet) {
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
-            this.Proxy.HasPersistentOrder = binStream.ReadBoolean();
+            this._isHasPersistentOrderSet = binStream.ReadBoolean();
+            if (this._isHasPersistentOrderSet) {
+                this.Proxy.HasPersistentOrder = binStream.ReadBoolean();
+            }
             Proxy.Multiplicity = (Zetbox.App.Base.Multiplicity)binStream.ReadNullableInt32();
             binStream.Read(out this._fk_Navigator);
             this.Proxy.RoleName = binStream.ReadString();
@@ -1718,6 +1745,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isHasPersistentOrderSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.HasPersistentOrder, xml, "HasPersistentOrder", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)Proxy.Multiplicity, xml, "Multiplicity", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Navigator != null ? this.Proxy.Navigator.ExportGuid : (Guid?)null, xml, "Navigator", "Zetbox.App.Base");
@@ -1752,7 +1780,9 @@ namespace Zetbox.App.Base
                 this._isExportGuidSet = true;
                 break;
             case "Zetbox.App.Base|HasPersistentOrder":
+                // Import must have default value set
                 this.Proxy.HasPersistentOrder = XmlStreamer.ReadBoolean(xml);
+                this._isHasPersistentOrderSet = true;
                 break;
             case "Zetbox.App.Base|Multiplicity":
                 Proxy.Multiplicity = (Zetbox.App.Base.Multiplicity)XmlStreamer.ReadNullableInt32(xml);

@@ -43,6 +43,7 @@ namespace Zetbox.App.Base
             : base(lazyCtx, proxy) // pass proxy to parent
         {
             this.Proxy = proxy;
+            _isEagerLoadingSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -59,7 +60,7 @@ namespace Zetbox.App.Base
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.EagerLoading;
+                var __result = FetchEagerLoadingOrDefault();
                 if (OnEagerLoading_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -71,6 +72,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isEagerLoadingSet = true;
                 if (Proxy.EagerLoading != value)
                 {
                     var __oldValue = Proxy.EagerLoading;
@@ -99,6 +101,25 @@ namespace Zetbox.App.Base
             }
         }
 
+
+        private bool FetchEagerLoadingOrDefault()
+        {
+            var __result = Proxy.EagerLoading;
+                if (!_isEagerLoadingSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("373f0036-42d6-41e2-a2a4-74462537f426"));
+                    if (__p != null) {
+                        _isEagerLoadingSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.EagerLoading = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.ObjectReferenceProperty.EagerLoading'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isEagerLoadingSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PreSetter;
@@ -872,6 +893,7 @@ namespace Zetbox.App.Base
         [EventBasedMethod("OnNotifyPreSave_ObjectReferenceProperty")]
         public override void NotifyPreSave()
         {
+            FetchEagerLoadingOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_ObjectReferenceProperty != null) OnNotifyPreSave_ObjectReferenceProperty(this);
         }
@@ -888,7 +910,6 @@ namespace Zetbox.App.Base
         [EventBasedMethod("OnNotifyCreated_ObjectReferenceProperty")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("EagerLoading");
             SetNotInitializedProperty("IsInlineEditable");
             SetNotInitializedProperty("RelationEnd");
             base.NotifyCreated();
@@ -945,7 +966,10 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this.Proxy.EagerLoading);
+            binStream.Write(this._isEagerLoadingSet);
+            if (this._isEagerLoadingSet) {
+                binStream.Write(this.Proxy.EagerLoading);
+            }
             binStream.Write(this.Proxy.IsInlineEditable);
             binStream.Write(this.Proxy.RelationEnd != null ? OurContext.GetIdFromProxy(this.Proxy.RelationEnd) : (int?)null);
         }
@@ -956,7 +980,10 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this.Proxy.EagerLoading = binStream.ReadBoolean();
+            this._isEagerLoadingSet = binStream.ReadBoolean();
+            if (this._isEagerLoadingSet) {
+                this.Proxy.EagerLoading = binStream.ReadBoolean();
+            }
             this.Proxy.IsInlineEditable = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_RelationEnd);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -972,6 +999,7 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            System.Diagnostics.Debug.Assert(this._isEagerLoadingSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.EagerLoading, xml, "EagerLoading", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsInlineEditable, xml, "IsInlineEditable", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.RelationEnd != null ? this.Proxy.RelationEnd.ExportGuid : (Guid?)null, xml, "RelationEnd", "Zetbox.App.Base");
@@ -984,7 +1012,9 @@ namespace Zetbox.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Base|EagerLoading":
+                // Import must have default value set
                 this.Proxy.EagerLoading = XmlStreamer.ReadBoolean(xml);
+                this._isEagerLoadingSet = true;
                 break;
             case "Zetbox.App.GUI|IsInlineEditable":
                 this.Proxy.IsInlineEditable = XmlStreamer.ReadNullableBoolean(xml);
