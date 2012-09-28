@@ -11,6 +11,8 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [CLSCompliant(false)]
     public class DataTypeGraph : BidirectionalGraph<DataTypeGraphModel, IEdge<DataTypeGraphModel>>
@@ -88,6 +90,25 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         #endregion
 
         #region DataTypes
+        private ClassValueModel<string> _filterMdl;
+        private ViewModel _filter;
+        public ViewModel Filter
+        {
+            get
+            {
+                if (_filter == null)
+                {
+                    _filterMdl = new ClassValueModel<string>(
+                        "Filter",
+                        "",
+                        true, false);
+                    _filterMdl.PropertyChanged += (s, e) => { if (e.PropertyName == "Value") OnPropertyChanged("DataTypeViewModels"); };
+                    _filter = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, _filterMdl);
+                }
+                return _filter;
+            }
+        }
+
         private ReadOnlyProjectedList<DataType, DataTypeGraphModel> _DataTypeViewModels = null;
         public IEnumerable<DataTypeGraphModel> DataTypeViewModels
         {
@@ -99,7 +120,15 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, this, i),
                         i => i.DataType);
                 }
-                return _DataTypeViewModels;
+                if (_filterMdl != null && !string.IsNullOrEmpty(_filterMdl.Value))
+                {
+                    var str = _filterMdl.Value.ToLowerInvariant();
+                    return _DataTypeViewModels.Where(i => i.Name.ToLowerInvariant().Contains(str));
+                }
+                else
+                {
+                    return _DataTypeViewModels;
+                }
             }
         }
 
