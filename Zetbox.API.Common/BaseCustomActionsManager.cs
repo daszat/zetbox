@@ -195,6 +195,10 @@ namespace Zetbox.App.Extensions
                         }
                     }
                 }
+                catch (FileNotFoundException ex)
+                {
+                    Log.Warn(String.Format("Error while processing Assembly [{0}]. FileNotFound: {1}. Ignoring and continuing.", assembly.Name, ex.FileName));
+                }
                 catch (Exception ex)
                 {
                     Log.Warn(String.Format("Error while processing Assembly [{0}]. Ignoring and continuing.", assembly.Name), ex);
