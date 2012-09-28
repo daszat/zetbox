@@ -220,6 +220,10 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
+                    // Diagram
+                    var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, this, CurrentModule);
+                    lst.Add(diagMdl);
+
                     _TreeItems = new ReadOnlyObservableCollection<ViewModel>(lst);
                 }
                 return _TreeItems;

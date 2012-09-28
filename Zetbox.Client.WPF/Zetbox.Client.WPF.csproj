@@ -86,9 +86,24 @@
     <Reference Include="Autofac.Configuration">
       <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.Configuration.dll</HintPath>
     </Reference>
+    <Reference Include="GraphSharp">
+      <HintPath>..\packages\GraphSharp.1.0.2.0\lib\net35\GraphSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphSharp.Controls">
+      <HintPath>..\packages\GraphSharp.1.0.2.0\lib\net35\GraphSharp.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="QuickGraph">
+      <HintPath>..\packages\QuickGraph.3.3.51106.0\lib\net35\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Data">
+      <HintPath>..\packages\QuickGraph.3.3.51106.0\lib\net35\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz">
+      <HintPath>..\packages\QuickGraph.3.3.51106.0\lib\net35\QuickGraph.Graphviz.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -206,6 +221,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\GUI\NavigationTabbedScreenDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModuleEditor\DiagramDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModuleEditor\GraphTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -633,6 +656,12 @@
     </Compile>
     <Compile Include="View\GUI\NavigationTabbedScreenDisplay.xaml.cs">
       <DependentUpon>NavigationTabbedScreenDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModuleEditor\Converter\EdgeRouteToLabelConverter.cs" />
+    <Compile Include="View\ModuleEditor\Converter\EdgeRouteToPathConverter.cs" />
+    <Compile Include="View\ModuleEditor\Converter\GraphConverterHelper.cs" />
+    <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
+      <DependentUpon>DiagramDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TestModule\InstanceListTestDisplay.xaml.cs">
       <DependentUpon>InstanceListTestDisplay.xaml</DependentUpon>
