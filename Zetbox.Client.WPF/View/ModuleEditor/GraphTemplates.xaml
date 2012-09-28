@@ -29,7 +29,6 @@
                                 <TextBlock Text="{Binding Name}"
                                            Margin="5,0,0,0" />
                             </DockPanel>
-                            <Separator />
                             <Expander Header="Methods">
                                 <ItemsControl ItemsSource="{Binding DescribedCustomMethods}">
                                     <ItemsControl.ItemTemplate>
@@ -44,7 +43,6 @@
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                             </Expander>
-                            <Separator />
                             <Expander Header="Properties">
                                 <ItemsControl ItemsSource="{Binding DescribedPropertyModels}">
                                     <ItemsControl.ItemTemplate>

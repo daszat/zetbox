@@ -196,6 +196,7 @@
     </Compile>
     <Compile Include="Presentables\IContextViewModel.cs" />
     <Compile Include="Presentables\ISortableViewModel.cs" />
+    <Compile Include="Presentables\ModuleEditor\DataTypeViewModels.cs" />
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
     <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />

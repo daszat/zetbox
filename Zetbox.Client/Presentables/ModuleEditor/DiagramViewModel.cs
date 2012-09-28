@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Zetbox.API;
-using Zetbox.App.Base;
-using QuickGraph;
-using Zetbox.API.Configuration;
-using Zetbox.API.Utils;
-using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
-
+﻿
 namespace Zetbox.Client.Presentables.ModuleEditor
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using QuickGraph;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+
     [CLSCompliant(false)]
     public class DataTypeGraph : BidirectionalGraph<DataTypeGraphModel, IEdge<DataTypeGraphModel>>
     {
@@ -23,84 +24,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             : base(allowParallelEdges, vertexCapacity) { }
     }
 
-    public class DataTypeGraphModel : Presentables.DataTypeViewModel
-    {
-        public new delegate DataTypeGraphModel Factory(IZetboxContext dataCtx, DiagramViewModel parent, DataType obj);
-
-        private DiagramViewModel _diagMdl;
-        protected readonly Func<IZetboxContext> ctxFactory;
-
-        public DataTypeGraphModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, DiagramViewModel parent,
-            DataType obj, Func<IZetboxContext> ctxFactory)
-            : base(appCtx, dataCtx, parent, obj)
-        {
-            this._diagMdl = parent;
-            this.ctxFactory = ctxFactory;
-            this.DataType = obj;
-        }
-
-        public DataType DataType { get; private set; }
-
-        private bool _isChecked = false;
-        public bool IsChecked
-        {
-            get
-            {
-                return _isChecked;
-            }
-            set
-            {
-                SetChecked(value, true);
-            }
-        }
-
-        internal void SetChecked(bool chk, bool recreateGraph)
-        {
-            if (_isChecked != chk)
-            {
-                _isChecked = chk;
-                if (recreateGraph) _diagMdl.RecreateGraph();
-                OnPropertyChanged("IsChecked");
-            }
-        }
-
-        private bool _isGraphChecked = false;
-        public bool IsGraphChecked
-        {
-            get
-            {
-                return _isGraphChecked;
-            }
-            set
-            {
-                if (_isGraphChecked != value)
-                {
-                    _isGraphChecked = value;
-                    OnPropertyChanged("IsGraphChecked");
-                }
-            }
-        }
-
-        private ICommandViewModel _open = null;
-        public ICommandViewModel Open
-        {
-            get
-            {
-                if (_open == null)
-                {
-                    _open = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, this, "Open", "Opens the current DataType", () =>
-                        {
-                            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory(), null);
-                            newWorkspace.ShowForeignModel(this);
-                            ViewModelFactory.ShowModel(newWorkspace, true);
-                        }, null, null);
-                }
-
-                return _open;
-            }
-        }
-    }
+    
 
     public class DiagramViewModel : ViewModel
     {

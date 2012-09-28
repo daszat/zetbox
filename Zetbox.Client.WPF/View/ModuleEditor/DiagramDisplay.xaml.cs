@@ -49,5 +49,30 @@ namespace Zetbox.Client.WPF.View.ModuleEditor
     }
 
     [CLSCompliant(false)]
-    public class DataTypeGraphLayout : GraphLayout<DataTypeGraphModel, IEdge<DataTypeGraphModel>, DataTypeGraph> { }
+    public class DataTypeGraphLayout : GraphLayout<DataTypeGraphModel, IEdge<DataTypeGraphModel>, DataTypeGraph>
+    {
+        public DataTypeGraphLayout()
+        {
+            this.DestructionTransition = null;
+            this.CreationTransition = null;
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            switch (e.Property.Name)
+            {
+                case "LayoutParameters":
+                    var treeParam = this.LayoutParameters as GraphSharp.Algorithms.Layout.Simple.Tree.SimpleTreeLayoutParameters;
+                    if (treeParam != null)
+                    {
+                        treeParam.Direction = GraphSharp.Algorithms.Layout.LayoutDirection.TopToBottom;
+                        treeParam.VertexGap = 100;
+                        treeParam.LayerGap = 100;
+                    }
+                    break;
+            }
+        }
+    }
 }
