@@ -22,11 +22,11 @@ namespace Zetbox.Client.WPF.Styles
     using System.Text;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Data;
     using System.Windows.Media;
     using System.Windows.Threading;
-    using Zetbox.Client.Presentables;
     using Zetbox.App.GUI;
-using System.Windows.Data;
+    using Zetbox.Client.Presentables;
 
     public static class Controls
     {
@@ -291,11 +291,12 @@ using System.Windows.Data;
             }
         }
 
+        private static BrushConverter _brushConverter = new BrushConverter();
         public static object GetHighlightValue(HighlightState state, string explicitValue, string valueKind)
         {
             if (!string.IsNullOrEmpty(explicitValue))
             {
-                return explicitValue;
+                return _brushConverter.ConvertFromString(explicitValue);
             }
             else
             {
