@@ -24,37 +24,44 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ctrls:WorkaroundToolBar>
+                <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}"
+                                     Style="{StaticResource ImageToolbarButton}" />
+                <ctrls:CommandButton CommandViewModel="{Binding EditCurrentModuleCommand}"
+                                     Style="{StaticResource ImageToolbarButton}" />
+                <ctrls:CommandButton CommandViewModel="{Binding NewModuleCommand}"
+                                     Style="{StaticResource ImageToolbarButton}" />
+                <ctrls:CommandButton CommandViewModel="{Binding ReportProblemCommand}"
+                                     Style="{StaticResource ImageToolbarButton}" />
+            </ctrls:WorkaroundToolBar>
+        </ToolBarTray>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <DockPanel Grid.Column="0">
-            <StackPanel DockPanel.Dock="Top"
-                        Orientation="Horizontal">
-                <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}" />
-                <ctrls:CommandButton CommandViewModel="{Binding EditCurrentModuleCommand}" />
-                <ctrls:CommandButton CommandViewModel="{Binding NewModuleCommand}" />
-                <ctrls:CommandButton CommandViewModel="{Binding ReportProblemCommand}" />
-            </StackPanel>
-            <ComboBox DockPanel.Dock="Top"
-                      ItemsSource="{Binding ModuleList}"
-                      SelectedItem="{Binding CurrentModule}" />
-            <TreeView x:Name="NavTree"
-                      ItemsSource="{Binding Path=TreeItems}"
-                      BorderThickness="0"
-                      SelectedItemChanged="TreeView_SelectedItemChanged">
-            </TreeView>
-        </DockPanel>
+            <DockPanel Grid.Column="0">
+                <ComboBox DockPanel.Dock="Top"
+                          ItemsSource="{Binding ModuleList}"
+                          SelectedItem="{Binding CurrentModule}" />
+                <TreeView x:Name="NavTree"
+                          ItemsSource="{Binding Path=TreeItems}"
+                          BorderThickness="0"
+                          SelectedItemChanged="TreeView_SelectedItemChanged">
+                </TreeView>
+            </DockPanel>
 
-        <GridSplitter Grid.Column="1"
-                      ResizeDirection="Columns" />
+            <GridSplitter Grid.Column="1"
+                          ResizeDirection="Columns" />
 
-        <ContentPresenter Grid.Column="2"
-                          Grid.IsSharedSizeScope="True"
-                          Content="{Binding SelectedItem}"
-                          ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
-    </Grid>
+            <ContentPresenter Grid.Column="2"
+                              Grid.IsSharedSizeScope="True"
+                              Content="{Binding SelectedItem}"
+                              ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
+        </Grid>
+    </DockPanel>
 </ctrls:WindowView>
