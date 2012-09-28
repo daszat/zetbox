@@ -128,7 +128,6 @@
     <Compile Include="ZetboxBase\DataTypeActions.cs" />
     <Compile Include="ZetboxBase\DecimalParameterActions.cs" />
     <Compile Include="ZetboxBase\ToStringHelper.cs" />
-    <Compile Include="CustomCommonActions_ZetboxBase.Constraints.cs" />
     <Compile Include="CustomCommonActionsModule.cs" />
     <Compile Include="DocumentManagement\DocumentActions.cs" />
     <Compile Include="DocumentManagement\StaticFileActions.cs" />
