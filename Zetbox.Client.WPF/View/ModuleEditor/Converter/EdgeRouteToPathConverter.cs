@@ -50,45 +50,33 @@ namespace Zetbox.Client.WPF.View.ModuleEditor.Converter
             };
 
             //get the route informations
-            Point[] routeInformation = (values[8] != DependencyProperty.UnsetValue ? (Point[])values[8] : null);
             object tag = values[9];
             #endregion
-            bool hasRouteInfo = routeInformation != null && routeInformation.Length > 0;
 
             //
             // Create the path
             //
-            Point p1 = GraphConverterHelper.CalculateAttachPoint(sourcePos, sourceSize, (hasRouteInfo ? routeInformation[0] : targetPos));
-            Point p2 = GraphConverterHelper.CalculateAttachPoint(targetPos, targetSize, (hasRouteInfo ? routeInformation[routeInformation.Length - 1] : sourcePos));
-
-
-            PathSegment[] segments = new PathSegment[1 + (hasRouteInfo ? routeInformation.Length : 0)];
-            if (hasRouteInfo)
-                //append route points
-                for (int i = 0; i < routeInformation.Length; i++)
-                    segments[i] = new LineSegment(routeInformation[i], true);
-
-
-            segments[segments.Length - 1] = new LineSegment(p2, true);
+            Point p1 = GraphConverterHelper.CalculateAttachPoint(sourcePos, sourceSize, targetPos);
+            Point p2 = GraphConverterHelper.CalculateAttachPoint(targetPos, targetSize, sourcePos);
+            var length = (p2 - p1).Length;
 
             PathFigureCollection pfc = new PathFigureCollection(2);
-            pfc.Add(new PathFigure(p1, segments, false));
 
             if (tag is DiagramViewModel.InheritanceEdge)
             {
-                Point pFirst = (hasRouteInfo && routeInformation.Count() > 0 ? routeInformation[1] : p2);
+                Point pFirst = p2;
                 Vector v = pFirst - p1;
                 v = v / v.Length * 10;
                 Vector n = new Vector(-v.Y, v.X) * 0.6;
-                pfc.Add(new PathFigure(p1,
-                                         new PathSegment[] {
-                                                        new LineSegment(p1 + v - n, true),
-                                                        new LineSegment(p1 + v + n, true)}, true));
+
+                pfc.Add(new PathFigure(p1, new[] { new LineSegment(p2, true) }, false));
+                pfc.Add(new PathFigure(p1, new[] { new LineSegment(p1 + v - n, true),
+                                                   new LineSegment(p1 + v + n, true)}, true));
             }
             else if (tag is DiagramViewModel.RelationEdge)
             {
-                Point pFirst = (hasRouteInfo && routeInformation.Count() > 0 ? routeInformation[1] : p2);
-                Point pLast = (hasRouteInfo ? routeInformation[routeInformation.Length - 1] : p1);
+                Point pFirst = p2;
+                Point pLast = p1;
 
                 Vector vFirst = pFirst - p1;
                 vFirst = vFirst / vFirst.Length * 10;
@@ -98,30 +86,30 @@ namespace Zetbox.Client.WPF.View.ModuleEditor.Converter
                 vLast = vLast / vLast.Length * 10;
                 Vector nLast = new Vector(-vLast.Y, vLast.X) * 0.6;
 
-                pfc.Add(new PathFigure(p1,
-                                         new PathSegment[] {
-                                                        new LineSegment(p1 + vFirst - nFirst, true),
-                                                        new LineSegment(p1 + vFirst + nFirst, true)}, true));
-                pfc.Add(new PathFigure(p2,
-                                         new PathSegment[] {
-                                                        new LineSegment(p2 + vLast - nLast, true),
-                                                        new LineSegment(p2 + vLast + nLast, true)}, true));
-
                 var rel = ((DiagramViewModel.RelationEdge)tag).Rel;
+                pfc.Add(new PathFigure(p1 + (rel.A.Multiplicity.UpperBound() > 1 ? vFirst * 2 : vFirst),
+                    new[] { new ArcSegment(p2 + (rel.B.Multiplicity.UpperBound() > 1 ? vLast * 2: vLast), 
+                            new Size(length, length), 0, false, SweepDirection.Clockwise, true) }, false));
+
+                pfc.Add(new PathFigure(p1,
+                                         new[] { new LineSegment(p1 + vFirst - nFirst, true),
+                                                 new LineSegment(p1 + vFirst + nFirst, true)}, true));
+                pfc.Add(new PathFigure(p2,
+                                         new[] { new LineSegment(p2 + vLast - nLast, true),
+                                                 new LineSegment(p2 + vLast + nLast, true)}, true));
+
                 if (rel.A.Multiplicity.UpperBound() > 1)
                 {
                     pfc.Add(new PathFigure(p1 + vFirst,
-                                             new PathSegment[] {
-                                                        new LineSegment(p1 + (vFirst*2) - nFirst, true),
-                                                        new LineSegment(p1 + (vFirst*2) + nFirst, true)}, true));
+                                             new[] { new LineSegment(p1 + (vFirst*2) - nFirst, true),
+                                                     new LineSegment(p1 + (vFirst*2) + nFirst, true)}, true));
                 }
 
                 if (rel.B.Multiplicity.UpperBound() > 1)
                 {
                     pfc.Add(new PathFigure(p2 + vLast,
-                                             new PathSegment[] {
-                                                        new LineSegment(p2 + (vLast*2) - nLast, true),
-                                                        new LineSegment(p2 + (vLast*2) + nLast, true)}, true));
+                                             new[] { new LineSegment(p2 + (vLast*2) - nLast, true),
+                                                     new LineSegment(p2 + (vLast*2) + nLast, true)}, true));
                 }
             }
 
