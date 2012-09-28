@@ -18,5 +18,6 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <TextBlock Text="{Binding Value, Mode=OneWay}" />
+    <TextBlock Text="{Binding Value, Mode=OneWay}"
+               VerticalAlignment="Center" />
 </UserControl>
