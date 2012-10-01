@@ -102,8 +102,6 @@ this.WriteObjects("                    && !c.IsLoaded)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    c.Load();\r\n");
 this.WriteObjects("                }\r\n");
-this.WriteObjects("                // TODO: Remove this\r\n");
-this.WriteObjects("                c.ForEach(i => i.AttachToContext(Context, null));\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");

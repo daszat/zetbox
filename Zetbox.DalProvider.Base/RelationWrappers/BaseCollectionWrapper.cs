@@ -104,8 +104,6 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         /// <param name="entry">the new entry</param>
         protected virtual void OnEntryAdding(TEntry entry)
         {
-            // TODO: Remove this
-            entry.AttachToContext(ParentObject.Context, null);
         }
 
         /// <summary>

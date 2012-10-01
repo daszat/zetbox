@@ -151,12 +151,6 @@ namespace Zetbox.Generator.Templates.ObjectClasses
             ApplyChangesFromMethod.Call(Host, ctx, DataType, GetTypeName());
         }
 
-        protected override void ApplyAttachToContextMethod()
-        {
-            base.ApplyAttachToContextMethod();
-            ObjectClasses.AttachToContextTemplate.Call(Host, ctx, ObjectClass);
-        }
-
         protected override void ApplySetNewMethod()
         {
             base.ApplyAttachToContextMethod();

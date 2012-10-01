@@ -84,8 +84,6 @@
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
 <% if (callGetterSetterEvents) { %>
                 if (<%= eventName %>_Getter != null)
