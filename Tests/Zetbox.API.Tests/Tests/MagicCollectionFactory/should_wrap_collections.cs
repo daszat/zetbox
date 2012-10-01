@@ -12,18 +12,43 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using NUnit.Framework;
 
 namespace Zetbox.API.Tests.MagicCollectionFactory
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class should_wrap_collections : AbstractApiTestFixture
     {
+        #region Basic tests to check Type-comparisons
+        // mostly used to improve understanding of the new API with regards to co- and contra variance
+
+        [TestCase(typeof(IEnumerable<object>), typeof(List<string>))]
+        public void infra_a_isAssignableFrom_b(Type a, Type b)
+        {
+            Assert.That(a.IsAssignableFrom(b));
+        }
+
+        [TestCase(typeof(IEnumerable<object>), typeof(List<string>))]
+        public void infra_a_isInstanceOfType_b(Type a, Type b)
+        {
+            object bInstance = Activator.CreateInstance(b);
+            Assert.That(a.IsInstanceOfType(bInstance));
+        }
+
+        [TestCase(typeof(List<string>), typeof(IEnumerable<object>))]
+        public void infra_a_isNotSubclassOf_b(Type a, Type b)
+        {
+            Assert.That(!a.IsSubclassOf(b));
+        }
+
+        #endregion
+
         [Test]
         public void from_string_to_object()
         {
@@ -52,6 +77,5 @@ namespace Zetbox.API.Tests.MagicCollectionFactory
             Assert.That(wrappedList, Is.EquivalentTo(baseList));
             Assert.That(baseList, Is.EquivalentTo(new[] { "a", "b", "c" }));
         }
-
     }
 }
