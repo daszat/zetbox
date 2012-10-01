@@ -19,8 +19,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Tests\Zetbox.Tests.Utilities.*.dll" target="lib\net35" />
-    <file src="Tests\Zetbox.API.AbstractConsumerTests.dll" target="lib\net35" />
+    <file src="Tests\Zetbox.Tests.Utilities.*.dll" target="lib\net40" />
+    <file src="Tests\Zetbox.API.AbstractConsumerTests.dll" target="lib\net40" />
 
     <!-- Don't use this here, as tests always need a local copy! -->
     <!-- <file src="install-references.ps1" target="tools\install.ps1" /> -->

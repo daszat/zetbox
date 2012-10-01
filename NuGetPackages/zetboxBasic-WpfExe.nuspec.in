@@ -18,8 +18,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Common\Core\Zetbox.API.dll" target="lib\net35" />
-    <file src="Zetbox.Client.WPF.dll" target="lib\net35" />
+    <file src="Common\Core\Zetbox.API.dll" target="lib\net40" />
+    <file src="Zetbox.Client.WPF.dll" target="lib\net40" />
 
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>

@@ -19,8 +19,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Client\Core\Zetbox.API.Client.dll" target="lib\net35" />
-    <file src="Client\Core\Zetbox.Client.dll" target="lib\net35" />
+    <file src="Client\Core\Zetbox.API.Client.dll" target="lib\net40" />
+    <file src="Client\Core\Zetbox.Client.dll" target="lib\net40" />
 
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>

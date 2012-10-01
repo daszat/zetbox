@@ -57,7 +57,7 @@ namespace Zetbox.DalProvider.Memory.Generator.Templates
         {
             base.ApplyAdditionalItemGroups();
             this.WriteLine(@"  <ItemGroup>");
-            this.WriteLine(@"    <EmbeddedResource Include=""FrozenObjects.xml""/>");
+            this.WriteLine(@"    <EmbeddedResource Include=""FrozenObjects.xml"" />");
             this.WriteLine(@"  </ItemGroup>");
         }
 

@@ -19,7 +19,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Server\Core\Zetbox.API.Server.dll" target="lib\net35" />
+    <file src="Server\Core\Zetbox.API.Server.dll" target="lib\net40" />
 
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>
