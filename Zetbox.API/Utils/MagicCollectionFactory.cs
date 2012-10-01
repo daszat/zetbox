@@ -67,22 +67,22 @@ namespace Zetbox.API.Utils
 
             var collectionType = collection.GetType();
 
-            if (typeof(ICollection<T>).IsAssignableFrom(collectionType))
+            if (typeof(ICollection<T>).IsInstanceOfType(collectionType))
             {
                 return (ICollection<T>)collection;
             }
-            else if (typeof(IList<T>).IsAssignableFrom(collectionType))
+            else if (typeof(IList<T>).IsInstanceOfType(collectionType))
             {
                 return (IList<T>)collection;
             }
-            else if (typeof(IEnumerable<T>).IsAssignableFrom(collectionType))
+            else if (typeof(IEnumerable<T>).IsInstanceOfType(collectionType))
             {
                 // TODO: implement a non-synchronized version for here
                 return new SynchronizedReadOnlyCollection<T>(new object(), (IEnumerable<T>)collection);
             }
             else
             {
-                var elementTypes = collection.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
+                var elementTypes = collection.GetType().FindElementTypes().Where(t => typeof(T).IsInstanceOfType(t)).ToArray();
 
                 if (elementTypes.Contains(typeof(T)))
                 {
@@ -97,20 +97,20 @@ namespace Zetbox.API.Utils
                 {
                     var elementType = elementTypes.Single();
                     var sourceListType = typeof(IList<>).MakeGenericType(elementType);
-                    if (sourceListType.IsAssignableFrom(collectionType))
+                    if (sourceListType.IsInstanceOfType(collectionType))
                     {
                         return (ICollection<T>)WrapListAsCollectionReflectionHelper(elementType, typeof(T), collection);
                     }
                     else
                     {
                         var sourceCollectionType = typeof(ICollection<>).MakeGenericType(elementType);
-                        if (sourceCollectionType.IsAssignableFrom(collectionType))
+                        if (sourceCollectionType.IsInstanceOfType(collectionType))
                         {
                             return (ICollection<T>)WrapAsCollectionReflectionHelper(elementType, typeof(T), collection);
                         }
                     }
                 }
-                else if (typeof(IList).IsAssignableFrom(collectionType))
+                else if (typeof(IList).IsInstanceOfType(collectionType))
                 {
                     return new CastingListWrapper<T>((IList)collection);
                 }
@@ -147,13 +147,13 @@ namespace Zetbox.API.Utils
 
             var listType = potentialList.GetType();
 
-            if (typeof(IList<T>).IsAssignableFrom(listType))
+            if (typeof(IList<T>).IsInstanceOfType(listType))
             {
                 return (IList<T>)potentialList;
             }
-            else if (typeof(IList).IsAssignableFrom(listType))
+            else if (typeof(IList).IsInstanceOfType(listType))
             {
-                var elementTypes = potentialList.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
+                var elementTypes = potentialList.GetType().FindElementTypes().Where(t => typeof(T).IsInstanceOfType(t)).ToArray();
 
                 if (elementTypes.Contains(typeof(T)))
                 {
@@ -174,7 +174,7 @@ namespace Zetbox.API.Utils
                 }
             }
 
-            if (typeof(IPersistenceObject).IsAssignableFrom(typeof(T)))
+            if (typeof(IPersistenceObject).IsInstanceOfType(typeof(T)))
             {
                 try
                 {
@@ -188,7 +188,7 @@ namespace Zetbox.API.Utils
                 }
             }
 
-            if (typeof(ISortKey<int>).IsAssignableFrom(typeof(T)))
+            if (typeof(ISortKey<int>).IsInstanceOfType(typeof(T)))
             {
                 try
                 {
