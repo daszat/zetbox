@@ -15,6 +15,7 @@ M: System.Boolean Zetbox.API.Utils.OptionSet::GetOptionParts(System.String,Syste
 # false positive, the referenced object changes beneath the access
 M: System.Collections.ObjectModel.ReadOnlyObservableCollection`1<Zetbox.Client.Presentables.ViewModel> Zetbox.Client.Presentables.ModuleEditor.WorkspaceViewModel::get_TreeItems()
 M: System.Void Zetbox.App.SchemaMigration.MigrationProjectMappingReport::RenderFirstPage()
+M: System.Linq.Expressions.Expression System.Linq.Dynamic.ExpressionParser::ParseComparison()
 # meh
 M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.AssociationSetAttributes::Generate()
 M: System.Void Zetbox.Client.Presentables.GUI.NavigationSearchScreenViewModel::InitializeListViewModel(Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel)

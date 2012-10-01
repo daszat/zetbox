@@ -188,6 +188,8 @@ namespace Zetbox.API
 
         public override void PutBlob(Guid guid, string filename, Stream blob)
         {
+            if (blob == null) throw new ArgumentNullException("blob");
+
             string destName;
             if(!string.IsNullOrEmpty(filename))
             {
