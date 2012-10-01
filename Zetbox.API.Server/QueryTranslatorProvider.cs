@@ -469,7 +469,7 @@ namespace Zetbox.API.Server
         /// </summary>
         protected virtual Type TranslateType(Type type)
         {
-            return (type.IsIPersistenceObject() || type.IsICompoundObject())
+            return ((type.IsIPersistenceObject() && type != typeof(IPersistenceObject)) || type.IsICompoundObject())
                 ? Ctx.ToImplementationType(IftFactory(type)).Type
                 : type.IsGenericType
                     ? type.GetGenericTypeDefinition().MakeGenericType(type.GetGenericArguments().Select(arg => TranslateType(arg)).ToArray())
