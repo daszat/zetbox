@@ -86,8 +86,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDefaultDisplayKind_Getter != null)
                 {
@@ -191,8 +189,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDefaultEditorKind_Getter != null)
                 {
@@ -296,8 +292,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDefaultGridCellDisplayKind_Getter != null)
                 {
@@ -401,8 +395,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDefaultGridCellEditorKind_Getter != null)
                 {
@@ -506,8 +498,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDefaultGridCellPreEditorKind_Getter != null)
                 {
@@ -762,8 +752,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -863,8 +851,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -918,8 +904,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnViewModelRef_Getter != null)
                 {
@@ -1062,11 +1046,6 @@ namespace Zetbox.App.GUI
             this._fk_DefaultGridCellPreEditorKind = otherImpl._fk_DefaultGridCellPreEditorKind;
             this._fk_Module = otherImpl._fk_Module;
             this._fk_ViewModelRef = otherImpl._fk_ViewModelRef;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

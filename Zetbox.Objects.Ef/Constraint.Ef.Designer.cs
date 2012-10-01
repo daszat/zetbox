@@ -85,8 +85,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -274,8 +272,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnConstrainedProperty_Getter != null)
                 {
@@ -390,8 +386,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -831,11 +825,6 @@ namespace Zetbox.App.Base
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_ConstrainedProperty = otherImpl._fk_ConstrainedProperty;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

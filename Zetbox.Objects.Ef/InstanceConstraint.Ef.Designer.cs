@@ -86,8 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnConstrained_Getter != null)
                 {
@@ -451,11 +449,6 @@ namespace Zetbox.App.Base
             me.ExportGuid = other.ExportGuid;
             me.Reason = other.Reason;
             this._fk_Constrained = otherImpl._fk_Constrained;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

@@ -237,12 +237,6 @@ namespace Zetbox.App.Test
             me.Name = other.Name;
             this._fk_Parent = otherImpl._fk_Parent;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

@@ -799,11 +799,6 @@ namespace at.dasz.DocumentManagement
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

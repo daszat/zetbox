@@ -503,12 +503,6 @@ namespace Zetbox.App.Base
 
             this._fk_ReferencedClass = otherImpl._fk_ReferencedClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

@@ -1206,12 +1206,6 @@ namespace Zetbox.App.Base
             this.Parameter_pos = otherImpl.Parameter_pos;
             this._fk_Method = otherImpl._fk_Method;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

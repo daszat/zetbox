@@ -85,8 +85,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -274,8 +272,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -333,8 +329,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -522,8 +516,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDefaultIcon_Getter != null)
                 {
@@ -774,8 +766,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -829,8 +819,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -889,8 +877,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -1063,8 +1049,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -1123,8 +1107,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnRequestedKind_Getter != null)
                 {
@@ -1644,11 +1626,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             this._fk_DefaultIcon = otherImpl._fk_DefaultIcon;
             this._fk_Module = otherImpl._fk_Module;
             this._fk_RequestedKind = otherImpl._fk_RequestedKind;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

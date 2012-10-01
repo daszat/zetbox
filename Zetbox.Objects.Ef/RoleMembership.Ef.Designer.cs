@@ -82,8 +82,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -103,11 +101,6 @@ namespace Zetbox.App.Base
             var otherImpl = (RoleMembershipEfImpl)obj;
             var me = (RoleMembership)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

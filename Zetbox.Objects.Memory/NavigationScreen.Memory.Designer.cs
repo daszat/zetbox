@@ -113,11 +113,6 @@ namespace Zetbox.App.GUI
             var me = (NavigationScreen)this;
 
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

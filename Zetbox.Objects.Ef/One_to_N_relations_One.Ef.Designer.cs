@@ -155,8 +155,6 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -180,11 +178,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             var me = (One_to_N_relations_One)this;
 
             me.Name = other.Name;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

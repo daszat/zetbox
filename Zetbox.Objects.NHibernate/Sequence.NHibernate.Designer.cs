@@ -936,12 +936,6 @@ namespace Zetbox.App.Base
             this._fk_Data = otherImpl._fk_Data;
             this._fk_Module = otherImpl._fk_Module;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

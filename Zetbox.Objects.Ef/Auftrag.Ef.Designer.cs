@@ -223,8 +223,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -411,8 +409,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -682,8 +678,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnKunde_Getter != null)
                 {
@@ -787,8 +781,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnMitarbeiter_Getter != null)
                 {
@@ -892,8 +884,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnProjekt_Getter != null)
                 {
@@ -1048,11 +1038,6 @@ namespace Zetbox.App.Projekte
             this._fk_Kunde = otherImpl._fk_Kunde;
             this._fk_Mitarbeiter = otherImpl._fk_Mitarbeiter;
             this._fk_Projekt = otherImpl._fk_Projekt;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

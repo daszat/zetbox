@@ -85,8 +85,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -342,8 +340,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -600,8 +596,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDestinationObjectClass_Getter != null)
                 {
@@ -856,8 +850,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -914,8 +906,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnStagingDatabase_Getter != null)
                 {
@@ -1212,11 +1202,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_DestinationObjectClass = otherImpl._fk_DestinationObjectClass;
             this._fk_StagingDatabase = otherImpl._fk_StagingDatabase;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

@@ -182,8 +182,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -256,8 +254,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -603,8 +599,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -677,8 +671,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -1021,8 +1013,6 @@ namespace at.dasz.DocumentManagement
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -1137,8 +1127,6 @@ namespace at.dasz.DocumentManagement
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -1501,8 +1489,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -1574,8 +1560,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -1884,8 +1868,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -1958,8 +1940,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -2256,8 +2236,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -2329,8 +2307,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -2593,8 +2569,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -2666,8 +2640,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -2976,8 +2948,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -3050,8 +3020,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -3397,8 +3365,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -3471,8 +3437,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -3815,8 +3779,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -3931,8 +3893,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -4341,8 +4301,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -4457,8 +4415,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -4867,8 +4823,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -4983,8 +4937,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -5350,8 +5302,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -5423,8 +5373,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -5687,8 +5635,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -5760,8 +5706,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -6070,8 +6014,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -6186,8 +6128,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -6599,8 +6539,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -6673,8 +6611,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -7020,8 +6956,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -7094,8 +7028,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -7392,8 +7324,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -7465,8 +7395,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -7729,8 +7657,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -7802,8 +7728,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -8035,8 +7959,6 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }
@@ -8337,8 +8259,6 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 return __value;
             }

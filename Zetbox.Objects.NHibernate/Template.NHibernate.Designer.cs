@@ -461,12 +461,6 @@ namespace Zetbox.App.GUI
             this._fk_DisplayedTypeAssembly = otherImpl._fk_DisplayedTypeAssembly;
             this._fk_VisualTree = otherImpl._fk_VisualTree;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

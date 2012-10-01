@@ -154,8 +154,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnOneSide_Getter != null)
                 {
@@ -239,11 +237,6 @@ namespace Zetbox.App.Test
 
             me.Name = other.Name;
             this._fk_OneSide = otherImpl._fk_OneSide;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

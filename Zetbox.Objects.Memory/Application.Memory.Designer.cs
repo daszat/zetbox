@@ -856,11 +856,6 @@ namespace Zetbox.App.GUI
             this._fk_RootScreen = otherImpl._fk_RootScreen;
             this._fk_WorkspaceViewModel = otherImpl._fk_WorkspaceViewModel;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

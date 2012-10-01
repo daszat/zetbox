@@ -824,11 +824,6 @@ namespace Zetbox.App.Base
             this._fk_NullIcon = otherImpl._fk_NullIcon;
             this._fk_TrueIcon = otherImpl._fk_TrueIcon;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

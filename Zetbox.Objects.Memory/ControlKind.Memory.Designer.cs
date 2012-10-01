@@ -490,11 +490,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             this._fk_Module = otherImpl._fk_Module;
             this._fk_Parent = otherImpl._fk_Parent;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

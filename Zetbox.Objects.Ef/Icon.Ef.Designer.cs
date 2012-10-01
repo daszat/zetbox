@@ -86,8 +86,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnBlob_Getter != null)
                 {
@@ -342,8 +340,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -607,11 +603,6 @@ namespace Zetbox.App.GUI
             me.IconFile = other.IconFile;
             this._fk_Blob = otherImpl._fk_Blob;
             this._fk_Module = otherImpl._fk_Module;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

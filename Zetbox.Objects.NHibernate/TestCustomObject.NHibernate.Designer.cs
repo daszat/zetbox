@@ -649,14 +649,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
             this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-            if (_PhoneNumbersOther != null)
-                this.Proxy.PhoneNumbersOther.ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));
-        }
         public override void SetNew()
         {
             base.SetNew();

@@ -806,11 +806,6 @@ namespace Zetbox.App.Projekte
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Projekt = otherImpl._fk_Projekt;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

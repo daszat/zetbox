@@ -86,8 +86,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnObjectClass_Getter != null)
                 {
@@ -296,11 +294,6 @@ namespace Zetbox.App.GUI
             var me = (ObjectClassFilterConfiguration)this;
 
             this._fk_ObjectClass = otherImpl._fk_ObjectClass;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

@@ -151,8 +151,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -313,11 +311,6 @@ namespace Zetbox.App.Base
             me.DisplayName = other.DisplayName;
             me.Password = other.Password;
             me.UserName = other.UserName;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

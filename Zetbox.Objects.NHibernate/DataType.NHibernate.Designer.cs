@@ -1468,12 +1468,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             this._fk_Module = otherImpl._fk_Module;
             this._fk_RequestedKind = otherImpl._fk_RequestedKind;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

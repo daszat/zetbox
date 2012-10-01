@@ -82,8 +82,6 @@ namespace at.dasz.DocumentManagement
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -290,11 +288,6 @@ namespace at.dasz.DocumentManagement
             var otherImpl = (DocumentEfImpl)obj;
             var me = (Document)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

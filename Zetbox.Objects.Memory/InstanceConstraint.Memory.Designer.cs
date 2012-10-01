@@ -419,11 +419,6 @@ namespace Zetbox.App.Base
             me.Reason = other.Reason;
             this._fk_Constrained = otherImpl._fk_Constrained;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

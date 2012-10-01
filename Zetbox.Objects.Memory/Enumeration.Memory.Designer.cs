@@ -594,11 +594,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
 
             me.AreFlags = other.AreFlags;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

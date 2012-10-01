@@ -86,8 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDefaultPropertyViewModelDescriptor_Getter != null)
                 {
@@ -346,11 +344,6 @@ namespace Zetbox.App.Base
             var me = (CompoundObject)this;
 
             this._fk_DefaultPropertyViewModelDescriptor = otherImpl._fk_DefaultPropertyViewModelDescriptor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

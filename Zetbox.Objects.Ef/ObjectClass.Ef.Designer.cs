@@ -86,8 +86,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -144,8 +142,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnBaseObjectClass_Getter != null)
                 {
@@ -317,8 +313,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDefaultViewModelDescriptor_Getter != null)
                 {
@@ -422,8 +416,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -726,8 +718,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -1269,11 +1259,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             me.TableName = other.TableName;
             this._fk_BaseObjectClass = otherImpl._fk_BaseObjectClass;
             this._fk_DefaultViewModelDescriptor = otherImpl._fk_DefaultViewModelDescriptor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

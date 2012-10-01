@@ -1384,12 +1384,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             this._fk_References = otherImpl._fk_References;
             this._fk_SourceTable = otherImpl._fk_SourceTable;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

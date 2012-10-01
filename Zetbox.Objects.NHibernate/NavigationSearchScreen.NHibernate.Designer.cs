@@ -1297,12 +1297,6 @@ namespace Zetbox.App.GUI
             this._fk_RequestedWorkspaceKind = otherImpl._fk_RequestedWorkspaceKind;
             this._fk_Type = otherImpl._fk_Type;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

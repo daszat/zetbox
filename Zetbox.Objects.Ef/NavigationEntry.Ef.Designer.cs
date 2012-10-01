@@ -85,8 +85,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -274,8 +272,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -400,8 +396,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -667,8 +661,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -723,8 +715,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -828,8 +818,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnParent_Getter != null)
                 {
@@ -987,8 +975,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnRequestedKind_Getter != null)
                 {
@@ -1161,8 +1147,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnViewModelDescriptor_Getter != null)
                 {
@@ -1308,11 +1292,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             this._fk_Parent = otherImpl._fk_Parent;
             this._fk_RequestedKind = otherImpl._fk_RequestedKind;
             this._fk_ViewModelDescriptor = otherImpl._fk_ViewModelDescriptor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

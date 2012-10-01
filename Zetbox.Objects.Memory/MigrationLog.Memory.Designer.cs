@@ -347,11 +347,6 @@ namespace Zetbox.App.SchemaMigration
             me.SourceRows = other.SourceRows;
             me.Timestamp = other.Timestamp;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

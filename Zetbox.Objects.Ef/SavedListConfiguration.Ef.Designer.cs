@@ -236,8 +236,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnOwner_Getter != null)
                 {
@@ -341,8 +339,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnType_Getter != null)
                 {
@@ -416,11 +412,6 @@ namespace Zetbox.App.GUI
             me.ExportGuid = other.ExportGuid;
             this._fk_Owner = otherImpl._fk_Owner;
             this._fk_Type = otherImpl._fk_Type;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

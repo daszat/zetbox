@@ -86,8 +86,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnControlKind_Getter != null)
                 {
@@ -191,8 +189,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnControlRef_Getter != null)
                 {
@@ -378,8 +374,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -479,8 +473,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -584,11 +576,6 @@ namespace Zetbox.App.GUI
             this._fk_ControlKind = otherImpl._fk_ControlKind;
             this._fk_ControlRef = otherImpl._fk_ControlRef;
             this._fk_Module = otherImpl._fk_Module;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

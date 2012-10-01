@@ -113,11 +113,6 @@ namespace Zetbox.App.Base
             var me = (CurrentDateTimeDefaultValue)this;
 
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

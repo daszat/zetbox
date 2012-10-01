@@ -1063,11 +1063,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             this._fk_DestinationObjectClass = otherImpl._fk_DestinationObjectClass;
             this._fk_StagingDatabase = otherImpl._fk_StagingDatabase;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

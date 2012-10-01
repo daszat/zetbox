@@ -85,8 +85,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDisplayedTypeAssembly_Getter != null)
                 {
@@ -324,8 +322,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -378,8 +374,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnVisualTree_Getter != null)
                 {
@@ -516,11 +510,6 @@ namespace Zetbox.App.GUI
             me.DisplayName = other.DisplayName;
             this._fk_DisplayedTypeAssembly = otherImpl._fk_DisplayedTypeAssembly;
             this._fk_VisualTree = otherImpl._fk_VisualTree;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

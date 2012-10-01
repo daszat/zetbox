@@ -630,11 +630,6 @@ namespace Zetbox.App.Base
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Property = otherImpl._fk_Property;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

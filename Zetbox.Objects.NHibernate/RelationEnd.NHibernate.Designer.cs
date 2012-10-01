@@ -1211,12 +1211,6 @@ namespace Zetbox.App.Base
             this._fk_Navigator = otherImpl._fk_Navigator;
             this._fk_Type = otherImpl._fk_Type;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

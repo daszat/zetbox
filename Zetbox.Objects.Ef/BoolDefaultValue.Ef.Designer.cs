@@ -186,11 +186,6 @@ namespace Zetbox.App.Base
 
             me.BoolValue = other.BoolValue;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-        }
         public override void SetNew()
         {
             base.SetNew();

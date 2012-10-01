@@ -126,7 +126,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="MemoryGeneratorStructure.cd" />
+    <None Include="MemoryGeneratorStructure.cd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Templates\ObjectClasses\ApplyChangesFromMethod.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ApplyChangesFromMethod.Designer.cs</LastGenOutput>

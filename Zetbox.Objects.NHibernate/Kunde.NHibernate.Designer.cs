@@ -827,14 +827,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-            if (_EMails != null)
-                this.Proxy.EMails.ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));
-        }
         public override void SetNew()
         {
             base.SetNew();

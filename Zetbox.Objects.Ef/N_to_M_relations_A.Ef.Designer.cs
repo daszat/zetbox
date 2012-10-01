@@ -82,8 +82,6 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -173,11 +171,6 @@ namespace Zetbox.App.Test
             var me = (N_to_M_relations_A)this;
 
             me.Name = other.Name;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

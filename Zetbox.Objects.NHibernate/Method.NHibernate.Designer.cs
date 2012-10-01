@@ -1465,12 +1465,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
             this._fk_Module = otherImpl._fk_Module;
             this._fk_ObjectClass = otherImpl._fk_ObjectClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

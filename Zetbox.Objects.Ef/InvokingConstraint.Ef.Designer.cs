@@ -86,8 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnGetErrorTextInvocation_Getter != null)
                 {
@@ -191,8 +189,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnIsValidInvocation_Getter != null)
                 {
@@ -390,11 +386,6 @@ namespace Zetbox.App.Base
 
             this._fk_GetErrorTextInvocation = otherImpl._fk_GetErrorTextInvocation;
             this._fk_IsValidInvocation = otherImpl._fk_IsValidInvocation;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

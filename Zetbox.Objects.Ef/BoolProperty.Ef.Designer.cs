@@ -86,8 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnFalseIcon_Getter != null)
                 {
@@ -260,8 +258,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnNullIcon_Getter != null)
                 {
@@ -434,8 +430,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnTrueIcon_Getter != null)
                 {
@@ -895,11 +889,6 @@ namespace Zetbox.App.Base
             this._fk_FalseIcon = otherImpl._fk_FalseIcon;
             this._fk_NullIcon = otherImpl._fk_NullIcon;
             this._fk_TrueIcon = otherImpl._fk_TrueIcon;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

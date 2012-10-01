@@ -494,12 +494,6 @@ namespace Zetbox.App.Base
             me.Precision = other.Precision;
             me.Scale = other.Scale;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

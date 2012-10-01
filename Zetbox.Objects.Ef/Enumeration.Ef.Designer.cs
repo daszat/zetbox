@@ -155,8 +155,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -624,11 +622,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             var me = (Enumeration)this;
 
             me.AreFlags = other.AreFlags;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

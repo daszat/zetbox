@@ -613,13 +613,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
             this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            if (_PhoneNumbersOtherCollection != null)
-                _PhoneNumbersOtherCollection.ForEach<IPersistenceObject>(i => ctx.Attach(i));
-        }
         public override void SetNew()
         {
             base.SetNew();

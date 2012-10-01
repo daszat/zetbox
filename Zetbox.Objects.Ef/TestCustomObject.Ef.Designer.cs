@@ -161,8 +161,6 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -218,8 +216,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnMubBlah_Nav_Getter != null)
                 {
@@ -331,8 +327,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -385,8 +379,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     r.Load();
                 }
-                // TODO: Remove this
-                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnMuhBlah_One_Nav_Getter != null)
                 {
@@ -691,8 +683,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     c.Load();
                 }
-                // TODO: Remove this
-                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -731,13 +721,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
             this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            if (_PhoneNumbersOther != null)
-                PhoneNumbersOtherImpl.ForEach<IPersistenceObject>(i => ctx.Attach(i));
         }
         public override void SetNew()
         {

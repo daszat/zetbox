@@ -763,12 +763,6 @@ namespace Zetbox.App.SchemaMigration
             this._fk_DestinationValue = otherImpl._fk_DestinationValue;
             this._fk_SourceColumn = otherImpl._fk_SourceColumn;
         }
-
-        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
-        {
-            base.AttachToContext(ctx, lazyFrozenContext);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();
