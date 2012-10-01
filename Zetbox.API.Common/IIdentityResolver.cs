@@ -91,7 +91,7 @@ namespace Zetbox.API.Common
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             string id = name.ToLower();
 
-            Identity result;
+            Identity result = null;
 
             if (cache.ContainsKey(id))
             {
@@ -99,8 +99,14 @@ namespace Zetbox.API.Common
             }
             else
             {
-                result = cache[id] = ResolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
-
+                try
+                {
+                    result = cache[id] = ResolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.Warn("Exception while resolving Identity", ex);
+                }
                 if (result == null)
                 {
                     Logging.Log.WarnFormat("Unable to resolve Identity {0}", name);
