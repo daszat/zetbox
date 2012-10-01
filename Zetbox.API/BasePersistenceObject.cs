@@ -31,14 +31,15 @@ namespace Zetbox.API
     public abstract class BasePersistenceObject
         : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo, ICustomTypeDescriptor, ISortKey<int>
     {
-        // TODO 4.0: replace Func<> with Lazy<>
-        // http://www.davidhayden.me/2010/01/auto-factories-in-autofac-for-lazy-instantiation-lazydependencymodule.html
+        // TODO: Revomve this
         protected BasePersistenceObject(Func<IFrozenContext> lazyCtx)
         {
             _lazyCtx = lazyCtx;
         }
 
-        private readonly Func<IFrozenContext> _lazyCtx;
+        // TODO 4.0: replace Func<> with Lazy<>
+        // http://www.davidhayden.me/2010/01/auto-factories-in-autofac-for-lazy-instantiation-lazydependencymodule.html
+        private Func<IFrozenContext> _lazyCtx;
         private IFrozenContext _frozenContext;
         protected IFrozenContext FrozenContext
         {
@@ -131,8 +132,12 @@ namespace Zetbox.API
         /// Attach this Object to a Context. This Method is called by the Context.
         /// </summary>
         /// <param name="ctx">Context to attach this Object to.</param>
-        public virtual void AttachToContext(IZetboxContext ctx)
+        /// <param name="lazyFrozenContext">lazyFrozenContext to attach to the object</param>
+        public virtual void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
+            if (lazyFrozenContext != null)
+                _lazyCtx = lazyFrozenContext;
+
             if (this.Context != null && this.Context != ctx)
                 throw new WrongZetboxContextException("Object cannot be attached to a new Context while attached to another Context.");
 
