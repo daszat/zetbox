@@ -58,7 +58,10 @@ namespace Zetbox.App.Base
         public static void GetPropertyTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
-            PropertyActions.DecorateParameterType(obj, e, false, obj.GetIsList(), obj.RelationEnd.Parent.GetOtherEnd(obj.RelationEnd).HasPersistentOrder);
+            if (obj.RelationEnd != null)
+            {
+                PropertyActions.DecorateParameterType(obj, e, false, obj.GetIsList(), obj.RelationEnd.Parent.GetOtherEnd(obj.RelationEnd).HasPersistentOrder);
+            }
         }
 
         [Invocation]
