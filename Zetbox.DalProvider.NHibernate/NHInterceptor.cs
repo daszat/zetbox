@@ -38,6 +38,10 @@ namespace Zetbox.DalProvider.NHibernate
 
         public override bool OnLoad(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {
+            if (entity is IPersistenceObject)
+            {
+                ((IPersistenceObject)entity).AttachToContext(_parent, _lazyContext);
+            }
             ConvertDateToLocal(state, types);
             return true;
         }
