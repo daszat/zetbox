@@ -22,6 +22,7 @@ namespace Zetbox.Client.Models
     using System.ComponentModel;
     using System.Linq;
     using System.Linq.Dynamic;
+    using System.Linq.Expressions;
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
@@ -29,7 +30,6 @@ namespace Zetbox.Client.Models
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
     using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
-using System.Linq.Expressions;
 
     public class FilterEvaluator
     {
@@ -166,7 +166,7 @@ using System.Linq.Expressions;
             var p = GetPredicate();
             if (!string.IsNullOrEmpty(p))
             {
-                return DynamicExpression.ParseLambda(src.ElementType, typeof(bool), p, FilterArgumentValues);
+                return System.Linq.Dynamic.DynamicExpression.ParseLambda(src.ElementType, typeof(bool), p, FilterArgumentValues);
             }
             else
             {
@@ -1009,7 +1009,7 @@ using System.Linq.Expressions;
         public LambdaExpression GetExpression(IQueryable src)
         {
             if (src == null) throw new ArgumentNullException("src");
-            return DynamicExpression.ParseLambda(src.ElementType, typeof(bool), predicate);
+            return System.Linq.Dynamic.DynamicExpression.ParseLambda(src.ElementType, typeof(bool), predicate);
         }
 
         public IEnumerable GetResult(IEnumerable src)
