@@ -89,13 +89,7 @@ namespace Zetbox.API
 
             // Attach & set Objectstate to Unmodified
             objects.Add(obj);
-            // TODO: Since providers are not required to use BasePersistenceObject
-            // this doesn't work. Improve IDataObject interface to contain this too?
-            //((BasePersistenceObject)obj).SetUnmodified();
-
-            // Call Objects Attach Method to ensure, that every Child Object is also attached
             obj.AttachToContext(this, lazyCtx);
-
             return obj;
         }
 
@@ -114,14 +108,7 @@ namespace Zetbox.API
 
             // Attach & set Objectstate to Unmodified
             objects.Add(obj);
-            // TODO: Since providers are not required to use BasePersistenceObject
-            // this doesn't work. Improve IDataObject interface to contain this too?
-            //((BasePersistenceObject)obj).SetUnmodified();
-
-
             ((BasePersistenceObject)obj).SetNew();
-
-            // Call Objects Attach Method to ensure, that every Child Object is also attached
             obj.AttachToContext(this, lazyCtx);
         }
 

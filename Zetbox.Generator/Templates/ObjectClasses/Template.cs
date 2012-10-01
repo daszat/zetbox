@@ -153,7 +153,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         protected override void ApplySetNewMethod()
         {
-            base.ApplyAttachToContextMethod();
+            base.ApplySetNewMethod();
 
             this.WriteLine("        public override void SetNew()");
             this.WriteLine("        {");

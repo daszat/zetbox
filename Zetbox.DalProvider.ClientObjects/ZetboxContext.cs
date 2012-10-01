@@ -450,8 +450,6 @@ namespace Zetbox.DalProvider.Client
             // Attach & set Objectstate to Unmodified
             _objects.Add(obj);
             ((IClientObject)obj).SetUnmodified();
-
-            // Call Objects Attach Method to ensure, that every Child Object is also attached
             obj.AttachToContext(this, _lazyCtx);
 
             OnChanged();
@@ -487,8 +485,6 @@ namespace Zetbox.DalProvider.Client
             // Attach & set Objectstate to Unmodified
             _objects.Add(obj);
             ((IClientObject)obj).SetNew();
-
-            // Call Objects Attach Method to ensure, that every Child Object is also attached
             obj.AttachToContext(this, _lazyCtx);
 
             OnChanged();

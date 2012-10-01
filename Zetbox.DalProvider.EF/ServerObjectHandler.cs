@@ -109,8 +109,6 @@ namespace Zetbox.DalProvider.Ef
             {
                 c.Load();
             }
-            // TODO: Revomve this
-            c.Cast<IRelationEntry>().ForEach(i => i.AttachToContext(parent.Context, null));
             return c.Cast<IRelationEntry>();
         }
     }

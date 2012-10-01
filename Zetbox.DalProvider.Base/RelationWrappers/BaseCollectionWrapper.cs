@@ -70,13 +70,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         /// </summary>
         protected virtual TEntry GetEntryOrDefault(TItem item)
         {
-            var result = Collection.FirstOrDefault(e => Object.Equals(ItemFromEntry(e), item));
-            if (result != null && ParentObject.Context != null)
-            {
-                // TODO: Revomve this
-                result.AttachToContext(ParentObject.Context, null);
-            }
-            return result;
+            return Collection.FirstOrDefault(e => Object.Equals(ItemFromEntry(e), item));
         }
 
         /// <summary>

@@ -31,7 +31,7 @@ namespace Zetbox.API
     public abstract class BasePersistenceObject
         : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo, ICustomTypeDescriptor, ISortKey<int>
     {
-        // TODO: Revomve this
+        // TODO: Remove this
         protected BasePersistenceObject(Func<IFrozenContext> lazyCtx)
         {
             _lazyCtx = lazyCtx;

@@ -141,7 +141,6 @@ namespace Zetbox.API.Server
 
             CheckCreateRights(obj);
 
-            // call Attach on Subitems
             obj.AttachToContext(this, lazyCtx);
 
             OnChanged();
@@ -173,7 +172,6 @@ namespace Zetbox.API.Server
 
             ((BaseServerPersistenceObject)obj).SetNew();
 
-            // call Attach on Subitems
             obj.AttachToContext(this, lazyCtx);
 
             OnChanged();

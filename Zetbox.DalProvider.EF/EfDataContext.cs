@@ -289,13 +289,6 @@ namespace Zetbox.DalProvider.Ef
                     .Select(e => e.Entity)
                     .OfType<IPersistenceObject>()
                     .ToList();
-                foreach (var obj in result)
-                {
-                    // Attach entities if the where loaded by EF
-                    // TODO: Revomve this
-                    if (obj.Context == null) 
-                        obj.AttachToContext(this, lazyCtx);
-                }
                 return result;
             }
         }
@@ -571,14 +564,8 @@ namespace Zetbox.DalProvider.Ef
             CheckDisposed();
             try
             {
-                var result = AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
                     ?? GetQuery<T>().First(o => o.ID == ID);
-                // Some objects are loaded by EF another way, I dind't find.
-                // So the objects was not attached to this context
-                // Fix this.
-                // TODO: Revomve this
-                if (result.Context == null) result.AttachToContext(this, lazyCtx);
-                return result;
             }
             catch (InvalidOperationException)
             {
@@ -635,14 +622,8 @@ namespace Zetbox.DalProvider.Ef
             CheckDisposed();
             try
             {
-                var result = AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
                     ?? GetPersistenceObjectQuery<T>().First(o => o.ID == ID);
-                // Some objects are loaded by EF another way, I dind't find.
-                // So the objects was not attached to this context
-                // Fix this.
-                // TODO: Revomve this
-                if (result.Context == null) result.AttachToContext(this, lazyCtx);
-                return result;
             }
             catch (InvalidOperationException)
             {
@@ -700,10 +681,6 @@ namespace Zetbox.DalProvider.Ef
                 string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(iftFactory(typeof(T))));
                 result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
             }
-
-            // TODO: Revomve this
-            if (result != null && result.Context == null)
-                result.AttachToContext(this, lazyCtx);
             return result;
         }
 
@@ -755,12 +732,6 @@ namespace Zetbox.DalProvider.Ef
                 var tmp = SelectByExportGuid<T>(guidStrings.Skip(offset).Take(100).ToArray());
                 result = result == null ? tmp : result.Concat(tmp);
                 offset += 100;
-            }
-
-            // TODO: Revomve this
-            foreach (IPersistenceObject obj in result)
-            {
-                obj.AttachToContext(this, lazyCtx);
             }
 
             return result;
