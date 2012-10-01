@@ -56,20 +56,21 @@ namespace Zetbox.DalProvider.NHibernate
             Func<IFrozenContext> lazyCtx,
             InterfaceType.Factory iftFactory,
             NHibernateImplementationType.Factory implTypeFactory,
-            global::NHibernate.ISession nhSession,
+            global::NHibernate.ISessionFactory nhSessionFactory,
             INHibernateImplementationTypeChecker implChecker,
             IPerfCounter perfCounter)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             _implTypeFactory = implTypeFactory;
-            _nhSession = nhSession;
             _implChecker = implChecker;
 
             _attachedObjects = new ContextCache<int>(this, item => item.ID);
             _attachedObjectsByProxy = new ContextCache<IProxyObject>(this, item => ((NHibernatePersistenceObject)item).NHibernateProxy);
 
             _perfCounter = perfCounter;
+
+            _nhSession = nhSessionFactory.OpenSession(new NHInterceptor(this, lazyCtx));
         }
 
         public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Tproxy>()

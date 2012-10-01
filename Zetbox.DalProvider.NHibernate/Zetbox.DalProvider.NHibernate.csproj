@@ -80,7 +80,7 @@
   <ItemGroup>
     <Compile Include="IPerCounter.cs" />
     <Compile Include="IProxyObject.cs" />
-    <Compile Include="LocalDateTimeInterceptor.cs" />
+    <Compile Include="NHInterceptor.cs" />
     <Compile Include="NHibernateQueryTranslatorProvider.cs" />
     <Compile Include="NHibernateRelationWrappers.cs" />
     <Compile Include="NHibernateServerCollectionHandler.cs" />

@@ -90,6 +90,8 @@ namespace Zetbox.DalProvider.Ef
             _implTypeFactory = implTypeFactory;
             _perfCounter = perfCounter;
 
+            _ctx.ObjectMaterialized += new ObjectMaterializedEventHandler(_ctx_ObjectMaterialized);
+
             try
             {
                 // First access to EF throws a null ref excetion - TODO: Investigate why
@@ -99,6 +101,14 @@ namespace Zetbox.DalProvider.Ef
             catch(Exception ex)
             {
                 Logging.Server.Warn("EF throws an exception during initialization, continue. TODO: Investigate why", ex);
+            }
+        }
+
+        void _ctx_ObjectMaterialized(object sender, ObjectMaterializedEventArgs e)
+        {
+            if (e.Entity is IPersistenceObject)
+            {
+                ((IPersistenceObject)e.Entity).AttachToContext(this, lazyCtx);
             }
         }
 

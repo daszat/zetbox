@@ -67,7 +67,7 @@ namespace Zetbox.DalProvider.NHibernate
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
-                        c.Resolve<global::NHibernate.ISession>(),
+                        c.Resolve<global::NHibernate.ISessionFactory>(),
                         c.Resolve<INHibernateImplementationTypeChecker>(),
                         c.Resolve<IPerfCounter>()
                         );
@@ -98,7 +98,7 @@ namespace Zetbox.DalProvider.NHibernate
                 .As(typeof(IServerObjectHandlerFactory));
 
             moduleBuilder
-                .RegisterType<LocalDateTimeInterceptor>()
+                .RegisterType<NHInterceptor>()
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 
@@ -121,7 +121,7 @@ namespace Zetbox.DalProvider.NHibernate
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
-                        c.Resolve<global::NHibernate.ISession>(),
+                        c.Resolve<global::NHibernate.ISessionFactory>(),
                         c.Resolve<INHibernateImplementationTypeChecker>(),
                         c.Resolve<IPerfCounter>()
                         );

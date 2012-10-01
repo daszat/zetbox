@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using NHibernate;
 using NHibernate.Type;
+using Zetbox.API;
 
 namespace Zetbox.DalProvider.NHibernate
 {
@@ -25,8 +26,16 @@ namespace Zetbox.DalProvider.NHibernate
     /// Convert all DateTimes from/to the database into local time.
     /// </summary>
     /// <remarks>Based on Dan Morphi's http://www.milkcarton.com/blog/2007/01/19/NHibernate+DateTime+And+UTC.aspx </remarks>
-    public class LocalDateTimeInterceptor : EmptyInterceptor
+    public class NHInterceptor : EmptyInterceptor
     {
+        private readonly IZetboxContext _parent;
+        private readonly Func<IFrozenContext> _lazyContext;
+        public NHInterceptor(IZetboxContext parent, Func<IFrozenContext> lazyContext)
+        {
+            _parent = parent;
+            _lazyContext = lazyContext;
+        }
+
         public override bool OnLoad(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {
             ConvertDateToLocal(state, types);
