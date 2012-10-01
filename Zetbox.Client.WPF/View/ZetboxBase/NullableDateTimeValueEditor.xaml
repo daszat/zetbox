@@ -6,7 +6,6 @@
                       xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                       xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
                       xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
-                      xmlns:ms="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
                       ToolTip="{Binding ToolTip}"
                       MinWidth="1"
                       HorizontalAlignment="Left"
@@ -38,7 +37,7 @@
                  KeyboardNavigation.TabIndex="1"
                  Visibility="{Binding TimePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-        <ms:DatePicker x:Name="txtDate"
+        <DatePicker x:Name="txtDate"
                        Text="{Binding DatePartString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                        Visibility="{Binding DatePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                        IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"

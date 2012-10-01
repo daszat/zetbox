@@ -22,12 +22,13 @@ namespace Zetbox.Client.WPF.CustomControls
     using System.Linq;
     using System.Text;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Data;
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.Client.WPF.Toolkit;
 
-    public class ZetboxDataGrid : Microsoft.Windows.Controls.DataGrid
+    public class ZetboxDataGrid : DataGrid
     {
         public ZetboxDataGrid()
         {
@@ -39,22 +40,22 @@ namespace Zetbox.Client.WPF.CustomControls
         bool isNewItemForContinueEdit = false;
         bool isNewItemInitialized = false;
 
-        protected override void OnCellEditEnding(Microsoft.Windows.Controls.DataGridCellEditEndingEventArgs e)
+        protected override void OnCellEditEnding(DataGridCellEditEndingEventArgs e)
         {
-            continueEdit = e.EditAction == Microsoft.Windows.Controls.DataGridEditAction.Commit;
+            continueEdit = e.EditAction == DataGridEditAction.Commit;
             Logging.Client.DebugFormat("OnCellEditEnding(EditAction = {0})", e.EditAction);
             Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnCellEditEnding(e);
         }
 
-        protected override void OnBeginningEdit(Microsoft.Windows.Controls.DataGridBeginningEditEventArgs e)
+        protected override void OnBeginningEdit(DataGridBeginningEditEventArgs e)
         {
             Logging.Client.DebugFormat("OnBeginningEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
             Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnBeginningEdit(e);
         }
 
-        protected override void OnInitializingNewItem(Microsoft.Windows.Controls.InitializingNewItemEventArgs e)
+        protected override void OnInitializingNewItem(InitializingNewItemEventArgs e)
         {
             Logging.Client.DebugFormat("OnInitializingNewItem(NewItem.Type = {0})", e.NewItem.GetType().Name);
             Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
@@ -62,7 +63,7 @@ namespace Zetbox.Client.WPF.CustomControls
             base.OnInitializingNewItem(e);
         }
 
-        protected override void OnPreparingCellForEdit(Microsoft.Windows.Controls.DataGridPreparingCellForEditEventArgs e)
+        protected override void OnPreparingCellForEdit(DataGridPreparingCellForEditEventArgs e)
         {
             Logging.Client.DebugFormat("OnPreparingCellForEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
             Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
@@ -74,7 +75,7 @@ namespace Zetbox.Client.WPF.CustomControls
             }
         }
 
-        protected override void OnRowEditEnding(Microsoft.Windows.Controls.DataGridRowEditEndingEventArgs e)
+        protected override void OnRowEditEnding(DataGridRowEditEndingEventArgs e)
         {
             Logging.Client.DebugFormat("OnRowEditEnding(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
             Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
@@ -188,7 +189,7 @@ namespace Zetbox.Client.WPF.CustomControls
                 isNewItemInitialized = false;
                 Logging.Client.Debug("    OnSelectionChanged commits edit to trigger new row");
                 Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
-                CommitEdit(Microsoft.Windows.Controls.DataGridEditingUnit.Row, false);
+                CommitEdit(DataGridEditingUnit.Row, false);
                 Logging.Client.Debug("    OnSelectionChanged begins edit for real");
                 Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                 BeginEdit(); // to continue editing                            ^^^^^ didn't help

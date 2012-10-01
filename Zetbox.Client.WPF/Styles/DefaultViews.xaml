@@ -4,11 +4,10 @@
                     xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
-                    xmlns:wpftk="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
-                    xmlns:wpftkp="clr-namespace:Microsoft.Windows.Controls.Primitives;assembly=WPFToolkit"
                     xmlns:kevinTxt="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                     xmlns:kevinDate="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.DateControls;assembly=WPFSamplesLib"
-                    xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client">
+                    xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+                    xmlns:swcp="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework">
     <!--
     This file is part of zetbox.
 
@@ -500,7 +499,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="TextBoxBase">
                     <Border Name="Border"
-                            Padding="{TemplateBinding Padding}"                            
+                            Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
                             TextBlock.Foreground="{TemplateBinding Foreground}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -550,7 +549,7 @@
                 TargetProperty="Opacity">
         <DoubleAnimation Duration="0:0:0.4" />
     </Storyboard>
-    
+
     <Style TargetType="kevinTxt:InfoTextBox"
            BasedOn="{StaticResource zbTextBoxTemplate}">
         <Setter Property="Template">
@@ -616,7 +615,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="wpftkp:DatePickerTextBox">
+    <Style TargetType="swcp:DatePickerTextBox">
         <Setter Property="MinHeight"
                 Value="{StaticResource NormalControlHeight}" />
         <Setter Property="BorderBrush"
@@ -625,7 +624,7 @@
                 Value="1" />
     </Style>
 
-    <Style TargetType="wpftk:DatePicker">
+    <Style TargetType="DatePicker">
         <Setter Property="BorderThickness"
                 Value="0" />
         <Setter Property="Padding"
@@ -1767,7 +1766,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style TargetType="GridSplitter"
            BasedOn="{StaticResource zbGridSplitterTemplate}" />
 
@@ -1782,7 +1781,7 @@
     </Style>
 
     <Style x:Key="dataGridTemplate"
-           TargetType="wpftk:DataGrid">
+           TargetType="DataGrid">
         <Setter Property="Background"
                 Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
         <Setter Property="Foreground"
@@ -1798,7 +1797,7 @@
                 Value="true" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="wpftk:DataGrid">
+                <ControlTemplate TargetType="DataGrid">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -1822,17 +1821,17 @@
                                         </Grid.ColumnDefinitions>
 
                                         <!--Left Column Header Corner -->
-                                        <Button Command="{x:Static wpftk:DataGrid.SelectAllCommand}"
-                                                Width="{Binding RelativeSource={RelativeSource AncestorType=wpftk:DataGrid}, Path=CellsPanelHorizontalOffset}"
+                                        <Button Command="{x:Static DataGrid.SelectAllCommand}"
+                                                Width="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=CellsPanelHorizontalOffset}"
                                                 Template="{StaticResource SelectAllButtonTemplate}"
                                                 Focusable="false"
                                                 Margin="0"
                                                 Padding="0"
-                                                Visibility="{Binding RelativeSource={RelativeSource AncestorType=wpftk:DataGrid}, Path=HeadersVisibility, Converter={x:Static wpftk:DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static wpftk:DataGridHeadersVisibility.All}}" />
+                                                Visibility="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.All}}" />
                                         <!--Column Headers-->
-                                        <wpftkp:DataGridColumnHeadersPresenter Grid.Column="1"
-                                                                            Name="PART_ColumnHeadersPresenter"
-                                                                            Visibility="{Binding RelativeSource={RelativeSource AncestorType=wpftk:DataGrid}, Path=HeadersVisibility, Converter={x:Static wpftk:DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static wpftk:DataGridHeadersVisibility.Column}}" />
+                                        <swcp:DataGridColumnHeadersPresenter Grid.Column="1"
+                                                                             Name="PART_ColumnHeadersPresenter"
+                                                                             Visibility="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Column}}" />
 
                                         <!--DataGrid content-->
                                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
@@ -1852,7 +1851,7 @@
                                         <Grid Grid.Row="2"
                                               Grid.Column="1">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=wpftk:DataGrid}, Path=NonFrozenColumnsViewportHorizontalOffset}" />
+                                                <ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=NonFrozenColumnsViewportHorizontalOffset}" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <ScrollBar Grid.Column="1"
@@ -1876,7 +1875,10 @@
         <Setter Property="RowHeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Border Width="{StaticResource SmallControlHeight}" BorderThickness="0" Padding="0" Margin="0" />
+                    <Border Width="{StaticResource SmallControlHeight}"
+                            BorderThickness="0"
+                            Padding="0"
+                            Margin="0" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -1889,7 +1891,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="wpftk:DataGrid"
+    <Style TargetType="DataGrid"
            BasedOn="{StaticResource dataGridTemplate}" />
 
     <Style TargetType="ctrls:ZetboxDataGrid"
@@ -2023,7 +2025,7 @@
     </Style>
 
     <Style x:Key="DataGridItemContainerStyle"
-           TargetType="{x:Type wpftk:DataGridRow}">
+           TargetType="{x:Type DataGridRow}">
         <Setter Property="styles:Controls.Highlight"
                 Value="{Binding Highlight}" />
     </Style>

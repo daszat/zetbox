@@ -29,7 +29,6 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.WPF.CustomControls;
-using Microsoft.Windows.Controls;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {

@@ -36,7 +36,6 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ZetboxBase;
-    using Microsoft.Windows.Controls;
     using Zetbox.Client.WPF.CustomControls;
 
     /// <summary>

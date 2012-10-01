@@ -25,12 +25,11 @@ namespace Zetbox.Client.WPF.Toolkit
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media;
+    using Zetbox.App.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.CustomControls;
     using Zetbox.Client.WPF.Toolkit;
-    using Microsoft.Windows.Controls;
-    using Zetbox.App.GUI;
 
     public static class WPFHelper
     {
@@ -47,14 +46,14 @@ namespace Zetbox.Client.WPF.Toolkit
         /// <summary>
         /// MinWidth for most controls is 100 plus some margins
         /// </summary>
-        public static readonly double WIDTH_SMALL = 120; 
+        public static readonly double WIDTH_SMALL = 120;
         public static readonly double WIDTH_MEDIUM = 200;
         public static readonly double WIDTH_LARGE = 300;
         public static readonly double WIDTH_HUGE = 500;
         /// <summary>
         /// Not implemented, using content??
         /// </summary>
-        public static readonly double WIDTH_STRECH = double.NaN; 
+        public static readonly double WIDTH_STRECH = double.NaN;
 
         /// <summary>
         /// http://stackoverflow.com/questions/980120/finding-control-within-wpf-itemscontrol

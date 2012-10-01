@@ -21,6 +21,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using System.Text;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
     using System.Windows.Data;
     using System.Windows.Documents;
     using System.Windows.Input;
@@ -34,13 +35,11 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
-    using Zetbox.Client.Presentables.ZetboxBase;
-    using Microsoft.Windows.Controls;
-    using Zetbox.Client.WPF.Toolkit;
-    using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.Client.WPF.CustomControls;
-    using Microsoft.Windows.Controls.Primitives;
     using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     public abstract class InstanceGridBaseDisplay : InstanceCollectionBase
     {
@@ -71,7 +70,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             return DataGrid.Columns
                 .OrderBy(i => i.DisplayIndex)
-                .Select(i => new SavedListConfiguratorViewModel.ColumnInformation() { Path = WPFHelper.GetGridColMemberSourcePath(i), Width = (int)i.ActualWidth}).ToList();
+                .Select(i => new SavedListConfiguratorViewModel.ColumnInformation() { Path = WPFHelper.GetGridColMemberSourcePath(i), Width = (int)i.ActualWidth }).ToList();
         }
 
         private void ApplyColumns()

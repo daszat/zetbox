@@ -31,9 +31,8 @@ namespace Zetbox.Client.WPF.View
     using System.Windows.Shapes;
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.Client.WPF.View.ZetboxBase;
     using Zetbox.Client.WPF.CustomControls;
-    using Microsoft.Windows.Controls;
+    using Zetbox.Client.WPF.View.ZetboxBase;
 
     /// <summary>
     /// Interaction logic for NullableDateTimeValueEditor.xaml

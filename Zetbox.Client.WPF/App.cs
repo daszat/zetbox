@@ -137,7 +137,7 @@ namespace Zetbox.Client.WPF
             // Therefore, we have to replace the underlying ResourceManager.
             try
             {
-                var srType = typeof(Microsoft.Windows.Controls.DatePicker).Assembly.GetTypes().Single(t => t.Name == "SR");
+                var srType = typeof(DatePicker).Assembly.GetTypes().Single(t => t.Name == "SR");
                 var resourceManagerField = srType.GetField("_resourceManager", BindingFlags.Static | BindingFlags.NonPublic);
                 resourceManagerField.SetValue(null, WpfToolkitResources.ResourceManager);
             }
