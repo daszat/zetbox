@@ -12,7 +12,6 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using Zetbox.API;
 
 namespace Zetbox.API.Utils
 {
@@ -23,6 +22,7 @@ namespace Zetbox.API.Utils
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using Zetbox.API;
 
     public static class MagicCollectionFactory
     {
@@ -66,23 +66,24 @@ namespace Zetbox.API.Utils
             if (collection == null) { throw new ArgumentNullException("collection"); }
 
             var collectionType = collection.GetType();
+            var implementedInterfaces = collectionType.GetInterfaces();
 
-            if (typeof(ICollection<T>).IsInstanceOfType(collectionType))
+            if (implementedInterfaces.Contains(typeof(ICollection<T>)))
             {
                 return (ICollection<T>)collection;
             }
-            else if (typeof(IList<T>).IsInstanceOfType(collectionType))
+            else if (implementedInterfaces.Contains(typeof(IList<T>)))
             {
                 return (IList<T>)collection;
             }
-            else if (typeof(IEnumerable<T>).IsInstanceOfType(collectionType))
+            else if (implementedInterfaces.Contains(typeof(IEnumerable<T>)))
             {
                 // TODO: implement a non-synchronized version for here
                 return new SynchronizedReadOnlyCollection<T>(new object(), (IEnumerable<T>)collection);
             }
             else
             {
-                var elementTypes = collection.GetType().FindElementTypes().Where(t => typeof(T).IsInstanceOfType(t)).ToArray();
+                var elementTypes = collection.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
 
                 if (elementTypes.Contains(typeof(T)))
                 {
@@ -97,26 +98,26 @@ namespace Zetbox.API.Utils
                 {
                     var elementType = elementTypes.Single();
                     var sourceListType = typeof(IList<>).MakeGenericType(elementType);
-                    if (sourceListType.IsInstanceOfType(collectionType))
+                    if (implementedInterfaces.Contains(sourceListType))
                     {
                         return (ICollection<T>)WrapListAsCollectionReflectionHelper(elementType, typeof(T), collection);
                     }
                     else
                     {
                         var sourceCollectionType = typeof(ICollection<>).MakeGenericType(elementType);
-                        if (sourceCollectionType.IsInstanceOfType(collectionType))
+                        if (implementedInterfaces.Contains(sourceCollectionType))
                         {
                             return (ICollection<T>)WrapAsCollectionReflectionHelper(elementType, typeof(T), collection);
                         }
                     }
                 }
-                else if (typeof(IList).IsInstanceOfType(collectionType))
+                else if (implementedInterfaces.Contains(typeof(IList)))
                 {
                     return new CastingListWrapper<T>((IList)collection);
                 }
             }
 
-            throw new ArgumentException(String.Format("Unable to determine CollectionWrapper for {0}", collection.GetType().FullName), "collection");
+            throw new ArgumentException(String.Format("Unable to determine CollectionWrapper for {0}", collectionType.FullName), "collection");
         }
 
         public static IList<TResult> WrapAsListHelper<TFrom, TResult>(IList<TFrom> list)
@@ -146,14 +147,15 @@ namespace Zetbox.API.Utils
             if (potentialList == null) { throw new ArgumentNullException("potentialList"); }
 
             var listType = potentialList.GetType();
+            var implementedInterfaces = listType.GetInterfaces();
 
-            if (typeof(IList<T>).IsInstanceOfType(listType))
+            if (implementedInterfaces.Contains(typeof(IList<T>)))
             {
                 return (IList<T>)potentialList;
             }
-            else if (typeof(IList).IsInstanceOfType(listType))
+            else if (implementedInterfaces.Contains(typeof(IList)))
             {
-                var elementTypes = potentialList.GetType().FindElementTypes().Where(t => typeof(T).IsInstanceOfType(t)).ToArray();
+                var elementTypes = listType.FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
 
                 if (elementTypes.Contains(typeof(T)))
                 {
@@ -174,7 +176,7 @@ namespace Zetbox.API.Utils
                 }
             }
 
-            if (typeof(IPersistenceObject).IsInstanceOfType(typeof(T)))
+            if (typeof(T).GetInterfaces().Contains(typeof(IPersistenceObject)))
             {
                 try
                 {
@@ -188,7 +190,7 @@ namespace Zetbox.API.Utils
                 }
             }
 
-            if (typeof(ISortKey<int>).IsInstanceOfType(typeof(T)))
+            if (typeof(T).GetInterfaces().Contains(typeof(ISortKey<int>)))
             {
                 try
                 {
@@ -202,7 +204,7 @@ namespace Zetbox.API.Utils
                 }
             }
 
-            throw new ArgumentException(String.Format("Unable to determine ListWrapper for {0}", potentialList.GetType().FullName), "potentialList");
+            throw new ArgumentException(String.Format("Unable to determine ListWrapper for {0}", listType.FullName), "potentialList");
         }
 
         /// <summary>
