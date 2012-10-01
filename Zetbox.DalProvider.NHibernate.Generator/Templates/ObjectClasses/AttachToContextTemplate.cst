@@ -28,9 +28,9 @@
 <%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
             var nhCtx = (NHibernateContext)ctx;
 <% foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name)) { %>
             if (_<%= prop.Name %> != null)

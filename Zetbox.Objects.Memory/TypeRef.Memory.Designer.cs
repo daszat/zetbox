@@ -1103,9 +1103,9 @@ namespace Zetbox.App.Base
             this._fk_Parent = otherImpl._fk_Parent;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

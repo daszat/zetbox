@@ -145,9 +145,9 @@ namespace Zetbox.App.Base
             this._fk_Group = otherImpl._fk_Group;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

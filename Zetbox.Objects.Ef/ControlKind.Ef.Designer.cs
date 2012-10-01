@@ -86,7 +86,8 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
+                // TODO: Remove this
+                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -225,7 +226,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -398,7 +400,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnParent_Getter != null)
                 {
@@ -550,9 +553,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             this._fk_Parent = otherImpl._fk_Parent;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

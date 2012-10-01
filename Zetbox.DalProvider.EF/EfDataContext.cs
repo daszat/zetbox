@@ -282,8 +282,9 @@ namespace Zetbox.DalProvider.Ef
                 foreach (var obj in result)
                 {
                     // Attach entities if the where loaded by EF
+                    // TODO: Revomve this
                     if (obj.Context == null) 
-                        obj.AttachToContext(this);
+                        obj.AttachToContext(this, lazyCtx);
                 }
                 return result;
             }
@@ -565,7 +566,8 @@ namespace Zetbox.DalProvider.Ef
                 // Some objects are loaded by EF another way, I dind't find.
                 // So the objects was not attached to this context
                 // Fix this.
-                if (result.Context == null) result.AttachToContext(this);
+                // TODO: Revomve this
+                if (result.Context == null) result.AttachToContext(this, lazyCtx);
                 return result;
             }
             catch (InvalidOperationException)
@@ -628,7 +630,8 @@ namespace Zetbox.DalProvider.Ef
                 // Some objects are loaded by EF another way, I dind't find.
                 // So the objects was not attached to this context
                 // Fix this.
-                if (result.Context == null) result.AttachToContext(this);
+                // TODO: Revomve this
+                if (result.Context == null) result.AttachToContext(this, lazyCtx);
                 return result;
             }
             catch (InvalidOperationException)
@@ -688,8 +691,9 @@ namespace Zetbox.DalProvider.Ef
                 result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
             }
 
+            // TODO: Revomve this
             if (result != null && result.Context == null)
-                result.AttachToContext(this);
+                result.AttachToContext(this, lazyCtx);
             return result;
         }
 
@@ -743,9 +747,10 @@ namespace Zetbox.DalProvider.Ef
                 offset += 100;
             }
 
+            // TODO: Revomve this
             foreach (IPersistenceObject obj in result)
             {
-                obj.AttachToContext(this);
+                obj.AttachToContext(this, lazyCtx);
             }
 
             return result;

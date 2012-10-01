@@ -213,7 +213,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
             }
         }
 
-        public void AttachToContext(IZetboxContext ctx)
+        public void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
             OnCollectionResetting();
             collection = new List<T>(collection.Select(i => ctx.Attach(i)).Cast<T>());

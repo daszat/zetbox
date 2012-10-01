@@ -143,7 +143,8 @@ namespace Zetbox.API.Server
 
                     if (result != null && result is IPersistenceObject)
                     {
-                        ((IPersistenceObject)result).AttachToContext(Ctx);
+                        // TODO: Remove this
+                        ((IPersistenceObject)result).AttachToContext(Ctx, null);
                     }
                     return result;
                 }
@@ -183,7 +184,8 @@ namespace Zetbox.API.Server
                     foreach (object item in newQuery)
                     {
                         var wrappedItem = (T)WrapResult(item);
-                        if (wrappedItem is IPersistenceObject) ((IPersistenceObject)wrappedItem).AttachToContext(Ctx);
+                        // TODO: Remove this
+                        if (wrappedItem is IPersistenceObject) ((IPersistenceObject)wrappedItem).AttachToContext(Ctx, null);
                         result.Add(wrappedItem);
                     }
                     objectCount = result.Count;

@@ -151,9 +151,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             me.Name = other.Name;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

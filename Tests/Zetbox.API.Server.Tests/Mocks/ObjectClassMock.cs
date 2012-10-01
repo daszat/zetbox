@@ -261,7 +261,7 @@ namespace Zetbox.API.Server.Mocks
             if (PropertyChangedWithValue != null) PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
-        public void AttachToContext(IZetboxContext ctx)
+        public void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
             throw new NotImplementedException();
         }

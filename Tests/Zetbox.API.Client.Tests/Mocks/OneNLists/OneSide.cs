@@ -154,7 +154,7 @@ namespace Zetbox.API.Client.Mocks.OneNLists
             throw new NotImplementedException();
         }
 
-        public void AttachToContext(IZetboxContext ctx)
+        public void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
             throw new NotImplementedException();
         }

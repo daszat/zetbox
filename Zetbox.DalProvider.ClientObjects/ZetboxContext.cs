@@ -452,7 +452,7 @@ namespace Zetbox.DalProvider.Client
             ((IClientObject)obj).SetUnmodified();
 
             // Call Objects Attach Method to ensure, that every Child Object is also attached
-            obj.AttachToContext(this);
+            obj.AttachToContext(this, _lazyCtx);
 
             OnChanged();
 
@@ -489,7 +489,7 @@ namespace Zetbox.DalProvider.Client
             ((IClientObject)obj).SetNew();
 
             // Call Objects Attach Method to ensure, that every Child Object is also attached
-            obj.AttachToContext(this);
+            obj.AttachToContext(this, _lazyCtx);
 
             OnChanged();
         }

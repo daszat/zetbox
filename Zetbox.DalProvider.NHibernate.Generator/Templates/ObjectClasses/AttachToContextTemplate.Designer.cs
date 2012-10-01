@@ -35,9 +35,9 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
 #line 30 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("        public override void AttachToContext(IZetboxContext ctx)\r\n");
+this.WriteObjects("        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)\r\n");
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            base.AttachToContext(ctx);\r\n");
+this.WriteObjects("            base.AttachToContext(ctx, lazyFrozenContext);\r\n");
 this.WriteObjects("            var nhCtx = (NHibernateContext)ctx;\r\n");
 #line 35 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name)) { 

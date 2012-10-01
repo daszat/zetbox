@@ -1178,9 +1178,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             this._fk_DefaultViewModelDescriptor = otherImpl._fk_DefaultViewModelDescriptor;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
             var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()

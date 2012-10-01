@@ -125,9 +125,9 @@ namespace Zetbox.DalProvider.Base
             NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.New);
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
             if (ctx.ContainsObject(ctx.GetInterfaceType(this), this.ID) == null)
             {
                 // Object is not in this Context present

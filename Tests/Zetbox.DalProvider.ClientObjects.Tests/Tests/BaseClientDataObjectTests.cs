@@ -166,7 +166,7 @@ namespace Zetbox.DalProvider.Client.Tests
             obj.SetPrivatePropertyValue<int>("ID", 10);
             using (IZetboxContext ctx = GetContext())
             {
-                obj.AttachToContext(ctx);
+                obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
                 Assert.That(PropertyChangedCalled, Is.True);
@@ -180,7 +180,7 @@ namespace Zetbox.DalProvider.Client.Tests
             using (IZetboxContext ctx = GetContext())
             {
                 obj.SetPrivatePropertyValue<int>("ID", -1);
-                obj.AttachToContext(ctx);
+                obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
                 Assert.That(PropertyChangedCalled, Is.True);
@@ -195,7 +195,7 @@ namespace Zetbox.DalProvider.Client.Tests
             using (IZetboxContext ctx = GetContext())
             {
                 obj.SetPrivatePropertyValue<int>("ID", Helper.INVALIDID);
-                obj.AttachToContext(ctx);
+                obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
                 Assert.That(PropertyChangedCalled, Is.False);
@@ -209,11 +209,11 @@ namespace Zetbox.DalProvider.Client.Tests
             obj.SetPrivatePropertyValue<int>("ID", 10);
             using (IZetboxContext ctx = GetContext())
             {
-                obj.AttachToContext(ctx);
+                obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
 
-                obj.AttachToContext(ctx);
+                obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
                 Assert.That(obj.Context, Is.Not.Null);
             }
         }

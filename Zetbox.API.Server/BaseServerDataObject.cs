@@ -132,7 +132,7 @@ namespace Zetbox.API.Server
             SetObjectState(DataObjectState.Modified);
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
             // avoid double-attaches
             if (this.Context != null && this.Context == ctx)
@@ -152,7 +152,7 @@ namespace Zetbox.API.Server
             if (ObjectState == DataObjectState.Detached)
                 SetObjectState(DataObjectState.Unmodified);
 
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
 
         public override void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)

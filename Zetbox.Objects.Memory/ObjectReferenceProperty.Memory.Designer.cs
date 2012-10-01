@@ -696,9 +696,9 @@ namespace Zetbox.App.Base
             this._fk_RelationEnd = otherImpl._fk_RelationEnd;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

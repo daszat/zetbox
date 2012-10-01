@@ -36,6 +36,7 @@ namespace Zetbox.API
         protected readonly FuncCache<Type, InterfaceType> iftFactoryCache;
         private readonly InterfaceType.Factory _iftFactory;
         protected InterfaceType.Factory IftFactory { get { return _iftFactory; } }
+        protected readonly Func<IFrozenContext> lazyCtx;
 
         /// <summary>Empty stand-in for object classes without instances.</summary>
         /// <remarks>Used by GetPersistenceObjectQuery()</remarks>
@@ -55,12 +56,13 @@ namespace Zetbox.API
         /// <summary>
         /// Initializes a new instance of the BaseMemoryContext class, using the specified assemblies for interfaces and implementation.
         /// </summary>
-        protected BaseMemoryContext(InterfaceType.Factory iftFactory)
+        protected BaseMemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx)
         {
             this.objects = new ContextCache<int>(this, item => item.ID);
             this.iftFactoryCache = new FuncCache<Type, InterfaceType>(t => iftFactory(t));
             this._iftFactory = t => iftFactoryCache.Invoke(t);
             ZetboxContextDebuggerSingleton.Created(this);
+            this.lazyCtx = lazyCtx;
         }
 
         /// <inheritdoc />
@@ -92,7 +94,7 @@ namespace Zetbox.API
             //((BasePersistenceObject)obj).SetUnmodified();
 
             // Call Objects Attach Method to ensure, that every Child Object is also attached
-            obj.AttachToContext(this);
+            obj.AttachToContext(this, lazyCtx);
 
             return obj;
         }
@@ -120,7 +122,7 @@ namespace Zetbox.API
             ((BasePersistenceObject)obj).SetNew();
 
             // Call Objects Attach Method to ensure, that every Child Object is also attached
-            obj.AttachToContext(this);
+            obj.AttachToContext(this, lazyCtx);
         }
 
         /// <inheritdoc />

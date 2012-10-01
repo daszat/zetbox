@@ -85,7 +85,8 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -273,7 +274,8 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
+                // TODO: Remove this
+                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -331,7 +333,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -519,7 +522,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnDefaultIcon_Getter != null)
                 {
@@ -770,7 +774,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
+                // TODO: Remove this
+                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -824,7 +829,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
+                // TODO: Remove this
+                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -883,7 +889,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -1056,7 +1063,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
+                // TODO: Remove this
+                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -1115,7 +1123,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnRequestedKind_Getter != null)
                 {
@@ -1637,9 +1646,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             this._fk_RequestedKind = otherImpl._fk_RequestedKind;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

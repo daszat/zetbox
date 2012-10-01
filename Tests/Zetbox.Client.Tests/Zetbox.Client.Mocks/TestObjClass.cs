@@ -295,9 +295,9 @@ namespace Zetbox.App.Test
             this._fk_ObjectProp = otherImpl._fk_ObjectProp;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
 
         // tail template

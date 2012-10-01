@@ -186,9 +186,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             me.BogenNummer = other.BogenNummer;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

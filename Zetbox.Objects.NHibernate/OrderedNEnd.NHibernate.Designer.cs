@@ -269,9 +269,9 @@ namespace Zetbox.App.Test
             this._fk_OneEnd = otherImpl._fk_OneEnd;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
             var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()

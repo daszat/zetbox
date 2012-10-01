@@ -63,9 +63,9 @@ namespace Zetbox.API.Server.Mocks
         public override bool IsAttached { get { return _IsAttached; } }
         private bool _IsAttached = false;
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
             _IsAttached = true;
         }
 

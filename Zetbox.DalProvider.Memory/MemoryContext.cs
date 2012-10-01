@@ -32,14 +32,12 @@ namespace Zetbox.DalProvider.Memory
         // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.DalProvider.Memory");
 
         // private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
-        private readonly Func<IFrozenContext> _lazyCtx;
         private readonly FuncCache<Type, MemoryImplementationType> _implTypeFactoryCache;
         private readonly MemoryImplementationType.MemoryFactory _implTypeFactory;
 
         public MemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory)
-            : base(iftFactory)
+            : base(iftFactory, lazyCtx)
         {
-            _lazyCtx = lazyCtx;
             _implTypeFactoryCache = new FuncCache<Type, MemoryImplementationType>(t => implTypeFactory(t));
             _implTypeFactory = t => _implTypeFactoryCache.Invoke(t);
         }
@@ -78,7 +76,7 @@ namespace Zetbox.DalProvider.Memory
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
             // TODO: replace with generated switch factory
-            return Activator.CreateInstance(this.ToImplementationType(ifType).Type, _lazyCtx);
+            return Activator.CreateInstance(this.ToImplementationType(ifType).Type, lazyCtx);
         }
 
         private Dictionary<InterfaceType, ImplementationType> _toImplementationTypeMemo = new Dictionary<InterfaceType, ImplementationType>();

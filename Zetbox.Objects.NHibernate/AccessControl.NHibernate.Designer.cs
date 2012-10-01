@@ -882,9 +882,9 @@ namespace Zetbox.App.Base
             this._fk_ObjectClass = otherImpl._fk_ObjectClass;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
             var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()

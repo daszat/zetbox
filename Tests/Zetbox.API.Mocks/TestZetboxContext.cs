@@ -54,7 +54,7 @@ namespace Zetbox.API.Mocks
 
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
-            obj.AttachToContext(this);
+            obj.AttachToContext(this, null);
             return obj;
         }
 

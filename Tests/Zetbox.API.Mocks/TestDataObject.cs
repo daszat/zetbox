@@ -153,7 +153,7 @@ namespace Zetbox.API.Mocks
                 return _context;
             }
         }
-        public void AttachToContext(IZetboxContext ctx)
+        public void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
             _context = ctx;
         }

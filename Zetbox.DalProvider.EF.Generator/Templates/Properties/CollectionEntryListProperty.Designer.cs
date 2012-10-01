@@ -133,18 +133,19 @@ this.WriteObjects("                    && !c.IsLoaded)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    c.Load();\r\n");
 this.WriteObjects("                }\r\n");
-this.WriteObjects("                c.ForEach(i => i.AttachToContext(Context));\r\n");
+this.WriteObjects("                // TODO: Remove this\r\n");
+this.WriteObjects("                c.ForEach(i => i.AttachToContext(Context, null));\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , ", EntityCollection<",  ceName , ">> ",  wrapperName , ";\r\n");
-#line 133 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-if (eagerLoading) { 
 #line 134 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
+if (eagerLoading) { 
 #line 135 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-} 
+this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
 #line 136 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+} 
+#line 137 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

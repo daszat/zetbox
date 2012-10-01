@@ -844,9 +844,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Stagin
             this._fk_MigrationProject = otherImpl._fk_MigrationProject;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

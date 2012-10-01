@@ -287,7 +287,8 @@ namespace Zetbox.API
         /// Attach this object to a context. This method is called by the context.
         /// </summary>
         /// <param name="ctx">Context to attach this object to.</param>
-        void AttachToContext(IZetboxContext ctx);
+        /// <param name="lazyFrozenContext">lazyFrozenContext to attach to the object</param>
+        void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext);
 
         /// <summary>
         /// Detach this Object from a Context. This method is called by the context.

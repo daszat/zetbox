@@ -154,7 +154,8 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -397,7 +398,8 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -736,7 +738,8 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnIcon_Getter != null)
                 {
@@ -1047,7 +1050,8 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -1220,7 +1224,8 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                // TODO: Remove this
+                if (r.Value != null) r.Value.AttachToContext(this.Context, null);
                 __value = r.Value;
                 if (OnObjectClass_Getter != null)
                 {
@@ -1336,7 +1341,8 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
+                // TODO: Remove this
+                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -1389,7 +1395,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
+                // TODO: Remove this
+                c.ForEach(i => i.AttachToContext(Context, null));
                 return c;
             }
         }
@@ -1617,9 +1624,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
             this._fk_ObjectClass = otherImpl._fk_ObjectClass;
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
         public override void SetNew()
         {

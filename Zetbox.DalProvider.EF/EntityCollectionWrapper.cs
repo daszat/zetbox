@@ -56,6 +56,7 @@ namespace Zetbox.DalProvider.Ef
         /// <param baseDir="itemChangedNotifier">an action called to notify the modified item after a change has happened</param>
         public EntityCollectionWrapper(IZetboxContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, Action<TImpl> itemChangingNotifier, Action<TImpl> itemChangedNotifier)
         {
+            // TODO: Revomve this
             // TODO: when can the ctx be legally null? 
             // if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
@@ -69,11 +70,12 @@ namespace Zetbox.DalProvider.Ef
             _itemChangedNotifier = itemChangedNotifier;
 
             // TODO: remove "if", see above
+            // TODO: Revomve this
             if (ctx != null)
             {
                 foreach (IPersistenceObject obj in underlyingCollection)
                 {
-                    obj.AttachToContext(ctx);
+                    obj.AttachToContext(ctx, null);
                 }
             }
         }

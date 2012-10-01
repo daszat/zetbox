@@ -44,7 +44,7 @@ namespace Zetbox.API.Tests
         {
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(true));
             ((TestDataObjectImpl)obj).ID = 1;
-            obj.AttachToContext(scope.Resolve<IZetboxContext>());
+            obj.AttachToContext(scope.Resolve<IZetboxContext>(), scope.Resolve<Func<IFrozenContext>>());
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(false));
         }
 
@@ -53,7 +53,7 @@ namespace Zetbox.API.Tests
         {
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(false));
             ((TestDataObjectImpl)obj).ID = 1;
-            obj.AttachToContext(scope.Resolve<IZetboxContext>());
+            obj.AttachToContext(scope.Resolve<IZetboxContext>(), scope.Resolve<Func<IFrozenContext>>());
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(true));
         }
 

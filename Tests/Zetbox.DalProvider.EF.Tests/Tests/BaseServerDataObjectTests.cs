@@ -153,7 +153,7 @@ namespace Zetbox.DalProvider.Ef.Tests
             Assert.That(local_obj.Context, Is.Null);
             using (IZetboxContext ctx = GetContext())
             {
-                local_obj.AttachToContext(ctx);
+                local_obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
                 Assert.That(local_obj.Context, Is.Not.Null);
                 Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
             }
@@ -167,12 +167,12 @@ namespace Zetbox.DalProvider.Ef.Tests
             Assert.That(local_obj.Context, Is.Null);
             using (IZetboxContext ctx = GetContext())
             {
-                local_obj.AttachToContext(ctx);
+                local_obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
                 Assert.That(local_obj.Context, Is.Not.Null);
                 Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
                 using (IZetboxContext ctx2 = GetContext())
                 {
-                    local_obj.AttachToContext(ctx2);
+                    local_obj.AttachToContext(ctx2, scope.Resolve<Func<IFrozenContext>>());
                     Assert.That(local_obj.Context, Is.Not.Null);
                     Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
                 }
