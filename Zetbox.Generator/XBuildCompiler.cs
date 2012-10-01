@@ -22,8 +22,6 @@ namespace Zetbox.Generator
     using System.Text;
     using Autofac;
     using Zetbox.API;
-    using Microsoft.Build.BuildEngine;
-    using Microsoft.Build.Framework;
     
     public class XBuildCompiler : Compiler
     {
@@ -34,18 +32,13 @@ namespace Zetbox.Generator
         {
         }
 
-        protected override void RegisterConsoleLogger(Engine engine, string workingPath)
-        {
-            engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Normal));
-        }
-
-        protected override bool CompileSingle(Engine engine, AbstractBaseGenerator gen, string workingPath, string target)
+        protected override bool CompileSingle(AbstractBaseGenerator gen, Dictionary<string, string> buildProps, string workingPath, string target)
         {
             try
             {
                 using (log4net.NDC.Push("Compiling " + gen.Description))
                 {
-                    var props = String.Join(";", engine.GlobalProperties.OfType<BuildProperty>().Select(prop => String.Format("{0}={1}", prop.Name, prop.Value)).ToArray());
+                    var props = String.Join(";", buildProps.Select(prop => String.Format("{0}={1}", prop.Key, prop.Value)).ToArray());
                     var args = String.Format("\"/p:{0}\" {1}", props, Helper.PathCombine(workingPath, gen.TargetNameSpace, gen.ProjectFileName));
 
                     var pi = new ProcessStartInfo("xbuild", args);

@@ -28,8 +28,7 @@ namespace Zetbox.Generator
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
-    using Microsoft.Build.BuildEngine;
-    using Microsoft.Build.Framework;
+    using Microsoft.Build.Execution;
 
     public abstract class Compiler
     {
@@ -46,9 +45,7 @@ namespace Zetbox.Generator
             _config = _container.Resolve<ZetboxConfig>();
         }
 
-        protected abstract void RegisterConsoleLogger(Engine engine, string workingPath);
-
-        protected abstract bool CompileSingle(Engine engine, AbstractBaseGenerator gen, string workingPath, string target);
+        protected abstract bool CompileSingle(AbstractBaseGenerator gen, Dictionary<string, string> buildProps, string workingPath, string target);
 
         public void GenerateCode()
         {
@@ -208,19 +205,12 @@ namespace Zetbox.Generator
 
                 Directory.CreateDirectory(binPath);
 
-                var engine = new Engine(ToolsetDefinitionLocations.Registry);
-                engine.RegisterLogger(new Log4NetLogger());
-                RegisterConsoleLogger(engine, workingPath);
-
-                engine.GlobalProperties.SetProperty("Configuration", GetConfiguration());
-                engine.GlobalProperties.SetProperty("OutputPathOverride", binPath);
-                engine.GlobalProperties.SetProperty("ZetboxAPIPathOverride", zetboxApiPath);
-
-                Log.Info("Dumping engine Properties");
-                foreach (BuildProperty prop in engine.GlobalProperties)
+                var buildProps = new Dictionary<string, string>()
                 {
-                    Log.InfoFormat("{0} = {1}", prop.Name, prop.Value);
-                }
+                    { "Configuration", GetConfiguration() },
+                    { "OutputPathOverride", binPath },
+                    { "ZetboxAPIPathOverride", zetboxApiPath },
+                };
 
                 try
                 {
@@ -232,7 +222,7 @@ namespace Zetbox.Generator
                     {
                         foreach (var gen in gens)
                         {
-                            result &= CompileSingle(engine, gen, workingPath, null);
+                            result &= CompileSingle(gen, buildProps, workingPath, "Build");
                         }
                     }
 
@@ -247,7 +237,7 @@ namespace Zetbox.Generator
                         {
                             foreach (var target in gen.AdditionalTargets)
                             {
-                                result &= CompileSingle(engine, gen, workingPath, target);
+                                result &= CompileSingle(gen, buildProps, workingPath, target);
                             }
                         }
                     }
@@ -256,8 +246,6 @@ namespace Zetbox.Generator
                 }
                 finally
                 {
-                    // close all logfiles
-                    engine.UnregisterAllLoggers();
                 }
             }
         }
