@@ -74,7 +74,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                 Type type = Type.GetTypeFromCLSID(g, false);
                 if (type == null)
                 {
-                    Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - could not load COM Object, Type.GetTypeFromCLSID(" + g + ") returend false");
+                    Logging.Log.WarnOnce(string.Format("Unable to initialize IPreviewHandler - could not load COM Object, Type.GetTypeFromCLSID({0}) returend false", g));
                     return;
                 }
                 object comObj = Activator.CreateInstance(type);
