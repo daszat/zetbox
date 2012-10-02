@@ -23,11 +23,15 @@ namespace Zetbox.Client.WPF
     using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
     using System.Windows.Input;
     using System.Windows.Markup;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
     using System.Windows.Threading;
     using Autofac;
     using Autofac.Features.Metadata;
+    using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Configuration;
@@ -35,9 +39,6 @@ namespace Zetbox.Client.WPF
     using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.Converter;
     using Zetbox.Client.WPF.Toolkit;
-    using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -132,6 +133,24 @@ namespace Zetbox.Client.WPF
                 // unable to start, exit
                 System.Environment.Exit(1);
             }
+
+            EventManager.RegisterClassHandler(typeof(DatePicker),
+                DatePicker.LoadedEvent,
+                new RoutedEventHandler(DatePicker_Loaded));
+        }
+
+        void DatePicker_Loaded(object sender, RoutedEventArgs e)
+        {
+            var dp = sender as DatePicker;
+            if (dp == null) return;
+
+            var tb = WPFHelper.FindVisualChild<DatePickerTextBox>(dp);
+            if (tb == null) return;
+
+            var wm = tb.Template.FindName("PART_Watermark", tb) as ContentControl;
+            if (wm == null) return;
+
+            wm.Content = WpfToolkitResources.DatePicker_WatermarkText;
         }
 
         protected virtual string GetConfigFileName()
