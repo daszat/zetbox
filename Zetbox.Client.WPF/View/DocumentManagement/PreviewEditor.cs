@@ -75,15 +75,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                         bmpImg.StreamSource = blob.GetStream();
                         bmpImg.EndInit();
 
-                        var zoomCtrl = new ZoomBorder();
-                        zoomCtrl.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-                        zoomCtrl.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-
-                        var imgCtrl = new Image() { Source = bmpImg };
-
-                        zoomCtrl.Child = imgCtrl;
-                        PreviewControl.Content = zoomCtrl;
-
+                        PreviewControl.Content = new ZoomBorder() { Child = new Image() { Source = bmpImg } };
                         return;
                     }
                     catch (NotSupportedException)
