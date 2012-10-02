@@ -27,7 +27,6 @@
     <ResourceDictionary.MergedDictionaries>
         <!--<ResourceDictionary Source="DebugColors.xaml" />-->
         <ResourceDictionary Source="DefaultStyles.xaml" />
-        <ResourceDictionary Source="/WPFToolkit;component/DataGrid/Themes/Generic.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- #################################################################
