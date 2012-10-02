@@ -91,17 +91,6 @@ namespace Zetbox.DalProvider.Ef
             _perfCounter = perfCounter;
 
             _ctx.ObjectMaterialized += new ObjectMaterializedEventHandler(_ctx_ObjectMaterialized);
-
-            try
-            {
-                // First access to EF throws a null ref excetion - TODO: Investigate why
-                var objectQuery = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(GetInterfaceType(typeof(Identity))) + "]");
-                Logging.Server.DebugFormat("There are {0} identities", objectQuery.Count());
-            }
-            catch(Exception ex)
-            {
-                Logging.Server.Warn("EF throws an exception during initialization, continue. TODO: Investigate why", ex);
-            }
         }
 
         void _ctx_ObjectMaterialized(object sender, ObjectMaterializedEventArgs e)
