@@ -51,53 +51,71 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
             Guid g = new Guid(CLSID);
             string[] exts = fileName.Split('.');
             string ext = exts[exts.Length - 1];
-            using (RegistryKey hk = Registry.ClassesRoot.OpenSubKey(string.Format(@".{0}\ShellEx\{1:B}", ext, g)))
+            var regKey = string.Format(@".{0}\ShellEx\{1:B}", ext, g);
+            using (RegistryKey hk = Registry.ClassesRoot.OpenSubKey(regKey))
             {
-                if (hk != null)
+                if (hk == null)
                 {
-                    g = new Guid(hk.GetValue("").ToString());
+                    Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - Registry Key not found: " + regKey);
+                    return;
+                }
+                var objValue = hk.GetValue("");
+                if (objValue == null)
+                {
+                    Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - no handler registrated in Registry");
+                    return;
+                }
+                if (!Guid.TryParse(objValue.ToString(), out g))
+                {
+                    Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - cannot parse guid from registry: " + objValue);
+                    return;
+                }
 
-                    Type type = Type.GetTypeFromCLSID(g, true);
-                    object comObj = Activator.CreateInstance(type);
+                Type type = Type.GetTypeFromCLSID(g, false);
+                if (type == null)
+                {
+                    Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - could not load COM Object, Type.GetTypeFromCLSID(" + g + ") returend false");
+                    return;
+                }
+                object comObj = Activator.CreateInstance(type);
 
-                    IInitializeWithFile fileInit = comObj as IInitializeWithFile;
-                    IInitializeWithStream streamInit = comObj as IInitializeWithStream;
+                IInitializeWithFile fileInit = comObj as IInitializeWithFile;
+                IInitializeWithStream streamInit = comObj as IInitializeWithStream;
 
-                    bool isInitialized = false;
-                    try
+                bool isInitialized = false;
+                try
+                {
+                    if (fileInit != null)
                     {
-                        if (fileInit != null)
-                        {
-                            fileInit.Initialize(fileName, 0);
-                            isInitialized = true;
-                        }
-                        else if (streamInit != null)
-                        {
-                            stream = new COMStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read));
-                            streamInit.Initialize((IStream)stream, 0);
-                            isInitialized = true;
-                        }
+                        fileInit.Initialize(fileName, 0);
+                        isInitialized = true;
                     }
-                    catch (Exception ex)
+                    else if (streamInit != null)
                     {
-                        Logging.Log.Warn("Unable to initialize IPreviewHandler", ex);
+                        stream = new COMStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read));
+                        streamInit.Initialize((IStream)stream, 0);
+                        isInitialized = true;
                     }
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.Warn("Unable to initialize IPreviewHandler", ex);
+                }
 
-                    pHandler = comObj as IPreviewHandler;
-                    if (isInitialized && pHandler != null)
-                    {
-                        RECT r = new RECT(viewRect);
+                pHandler = comObj as IPreviewHandler;
+                if (isInitialized && pHandler != null)
+                {
+                    RECT r = new RECT(viewRect);
 
-                        pHandler.SetWindow(handler, ref r);
-                        pHandler.SetRect(ref r);
+                    pHandler.SetWindow(handler, ref r);
+                    pHandler.SetRect(ref r);
 
-                        pHandler.DoPreview();
-                    }
-                    else
-                    {
-                        Marshal.FinalReleaseComObject(comObj);
-                        Release();
-                    }
+                    pHandler.DoPreview();
+                }
+                else
+                {
+                    Marshal.FinalReleaseComObject(comObj);
+                    Release();
                 }
             }
         }
