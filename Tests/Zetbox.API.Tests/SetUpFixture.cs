@@ -35,6 +35,7 @@ namespace Zetbox.API
             builder
                 .RegisterType<Mocks.TestZetboxContext>()
                 .As<IZetboxContext>()
+                .As<IFrozenContext>()
                 .InstancePerDependency();
         }
 

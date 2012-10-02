@@ -42,7 +42,7 @@ namespace Zetbox.API.Mocks
         }
     }
 
-    public class TestZetboxContext : IZetboxContext, IZetboxContextInternals
+    public class TestZetboxContext : IZetboxContext, IZetboxContextInternals, IFrozenContext
     {
         private readonly InterfaceType.Factory _iftFactory;
         public TestZetboxContext(InterfaceType.Factory iftFactory)
