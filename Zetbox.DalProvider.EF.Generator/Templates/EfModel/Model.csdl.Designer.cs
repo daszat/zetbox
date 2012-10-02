@@ -69,14 +69,14 @@ foreach (var rel in ctx.GetRelationsWithSeparateStorage())
         string assocNameB = rel.GetRelationAssociationName(RelationEndRole.B);
 
 #line 62 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  entityName , "\" EntityType=\"Model.",  entityName , "\" />\r\n");
+this.WriteObjects("    <EntitySet Name=\"",  entityName , "EfImpl\" EntityType=\"Model.",  entityName , "EfImpl\" />\r\n");
 this.WriteObjects("    <AssociationSet Name=\"",  assocNameA , "\" Association=\"Model.",  assocNameA , "\" >\r\n");
 this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.GetRootClass().Name , "EfImpl\" />\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "EfImpl\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("    <AssociationSet Name=\"",  assocNameB , "\" Association=\"Model.",  assocNameB , "\" >\r\n");
 this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.GetRootClass().Name , "EfImpl\" />\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "EfImpl\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 #line 72 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 }
@@ -95,10 +95,10 @@ foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         string entityName = prop.GetCollectionEntryClassName();
 
 #line 86 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  entityName , "\" EntityType=\"Model.",  entityName , "\" />\r\n");
+this.WriteObjects("    <EntitySet Name=\"",  entityName , "EfImpl\" EntityType=\"Model.",  entityName , "EfImpl\" />\r\n");
 this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.",  assocName , "\" >\r\n");
 this.WriteObjects("      <End Role=\"",  prop.ObjectClass.Name , "\" EntitySet=\"",  ((ObjectClass)prop.ObjectClass).GetRootClass().Name , "EfImpl\" />\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "EfImpl\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 #line 92 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 }
@@ -117,10 +117,10 @@ foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         string entityName = prop.GetCollectionEntryClassName();
 
 #line 106 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  entityName , "\" EntityType=\"Model.",  entityName , "\" />\r\n");
+this.WriteObjects("    <EntitySet Name=\"",  entityName , "EfImpl\" EntityType=\"Model.",  entityName , "EfImpl\" />\r\n");
 this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.",  assocName , "\" >\r\n");
 this.WriteObjects("      <End Role=\"",  prop.ObjectClass.Name , "\" EntitySet=\"",  ((ObjectClass)prop.ObjectClass).GetRootClass().Name , "EfImpl\" />\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "EfImpl\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 #line 112 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 }
@@ -237,7 +237,7 @@ RelationDebugTemplate.Call(Host, ctx, rel);
 
 #line 211 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 this.WriteObjects("  -->\r\n");
-this.WriteObjects("  <EntityType Name=\"",  rel.GetRelationClassName() , "\" >\r\n");
+this.WriteObjects("  <EntityType Name=\"",  rel.GetRelationClassName() , "EfImpl\" >\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
@@ -291,7 +291,7 @@ this.WriteObjects("    <End Role=\"",  rel.A.RoleName , "\"\r\n");
 this.WriteObjects("         Type=\"Model.",  rel.A.Type.Name , "EfImpl\" \r\n");
 this.WriteObjects("         Multiplicity=\"0..1\" />\r\n");
 this.WriteObjects("    <End Role=\"CollectionEntry\"\r\n");
-this.WriteObjects("         Type=\"Model.",  rel.GetRelationClassName() , "\"\r\n");
+this.WriteObjects("         Type=\"Model.",  rel.GetRelationClassName() , "EfImpl\"\r\n");
 this.WriteObjects("         Multiplicity=\"*\" />\r\n");
 this.WriteObjects("  </Association>\r\n");
 this.WriteObjects("  <Association Name=\"",  rel.GetRelationAssociationName(RelationEndRole.B) , "\" >\r\n");
@@ -299,7 +299,7 @@ this.WriteObjects("    <End Role=\"",  rel.B.RoleName , "\"\r\n");
 this.WriteObjects("         Type=\"Model.",  rel.B.Type.Name , "EfImpl\" \r\n");
 this.WriteObjects("         Multiplicity=\"0..1\" />\r\n");
 this.WriteObjects("    <End Role=\"CollectionEntry\"\r\n");
-this.WriteObjects("         Type=\"Model.",  rel.GetRelationClassName() , "\"\r\n");
+this.WriteObjects("         Type=\"Model.",  rel.GetRelationClassName() , "EfImpl\"\r\n");
 this.WriteObjects("         Multiplicity=\"*\" />\r\n");
 this.WriteObjects("  </Association>\r\n");
 this.WriteObjects("  \r\n");
@@ -321,7 +321,7 @@ foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
 
 #line 286 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 this.WriteObjects("  <!-- ",  prop.ObjectClass.Name , ".",  prop.Name , " -->\r\n");
-this.WriteObjects("  <EntityType Name=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
+this.WriteObjects("  <EntityType Name=\"",  prop.GetCollectionEntryClassName() , "EfImpl\" >\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
@@ -350,7 +350,7 @@ this.WriteObjects("    <End Role=\"",  prop.ObjectClass.Name , "\"\r\n");
 this.WriteObjects("         Type=\"Model.",  prop.ObjectClass.Name , "EfImpl\" \r\n");
 this.WriteObjects("         Multiplicity=\"0..1\" />\r\n");
 this.WriteObjects("    <End Role=\"CollectionEntry\"\r\n");
-this.WriteObjects("         Type=\"Model.",  prop.GetCollectionEntryClassName() , "\" \r\n");
+this.WriteObjects("         Type=\"Model.",  prop.GetCollectionEntryClassName() , "EfImpl\" \r\n");
 this.WriteObjects("         Multiplicity=\"*\" />\r\n");
 this.WriteObjects("  </Association>\r\n");
 #line 318 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
@@ -370,7 +370,7 @@ foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 
 #line 331 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 this.WriteObjects("  <!-- ",  prop.ObjectClass.Name , ".",  prop.Name , " -->\r\n");
-this.WriteObjects("  <EntityType Name=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
+this.WriteObjects("  <EntityType Name=\"",  prop.GetCollectionEntryClassName() , "EfImpl\" >\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
@@ -401,7 +401,7 @@ this.WriteObjects("    <End Role=\"",  prop.ObjectClass.Name , "\"\r\n");
 this.WriteObjects("         Type=\"Model.",  prop.ObjectClass.Name , "EfImpl\" \r\n");
 this.WriteObjects("         Multiplicity=\"0..1\" />\r\n");
 this.WriteObjects("    <End Role=\"CollectionEntry\"\r\n");
-this.WriteObjects("         Type=\"Model.",  prop.GetCollectionEntryClassName() , "\" \r\n");
+this.WriteObjects("         Type=\"Model.",  prop.GetCollectionEntryClassName() , "EfImpl\" \r\n");
 this.WriteObjects("         Multiplicity=\"*\" />\r\n");
 this.WriteObjects("  </Association>\r\n");
 #line 365 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"

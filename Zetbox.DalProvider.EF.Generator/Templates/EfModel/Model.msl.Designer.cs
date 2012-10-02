@@ -93,8 +93,8 @@ RelationDebugTemplate.Call(Host, ctx, rel);
 
 #line 82 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    -->\r\n");
-this.WriteObjects("    <EntitySetMapping Name=\"",  rel.GetRelationClassName() , "\">\r\n");
-this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  rel.GetRelationClassName() , ")\">\r\n");
+this.WriteObjects("    <EntitySetMapping Name=\"",  rel.GetRelationClassName() , "EfImpl\">\r\n");
+this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  rel.GetRelationClassName() , "EfImpl)\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  rel.GetRelationClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 #line 88 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
@@ -211,8 +211,8 @@ foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
     { 
 
 #line 192 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
-this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  prop.GetCollectionEntryClassName() , ")\">\r\n");
+this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClassName() , "EfImpl\">\r\n");
+this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  prop.GetCollectionEntryClassName() , "EfImpl)\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"Value\" ColumnName=\"",  prop.Name , "\" />\r\n");
@@ -256,8 +256,8 @@ foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
     { 
 
 #line 233 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
-this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  prop.GetCollectionEntryClassName() , ")\">\r\n");
+this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClassName() , "EfImpl\">\r\n");
+this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  prop.GetCollectionEntryClassName() , "EfImpl)\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 this.WriteObjects("          ");

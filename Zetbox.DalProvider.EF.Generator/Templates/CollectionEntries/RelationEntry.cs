@@ -38,7 +38,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
         protected override void ApplyClassAttributeTemplate()
         {
             base.ApplyClassAttributeTemplate();
-            this.WriteObjects(@"    [EdmEntityType(NamespaceName=""Model"", Name=""", rel.GetRelationClassName(), @""")]");
+            this.WriteObjects(@"    [EdmEntityType(NamespaceName=""Model"", Name=""", rel.GetRelationClassName(), @"EfImpl"")]");
             this.WriteLine();
         }
 

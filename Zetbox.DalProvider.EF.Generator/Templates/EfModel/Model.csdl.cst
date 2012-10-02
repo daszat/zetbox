@@ -59,14 +59,14 @@
         string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
         string assocNameB = rel.GetRelationAssociationName(RelationEndRole.B);
 %>
-    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+    <EntitySet Name="<%= entityName %>EfImpl" EntityType="Model.<%= entityName %>EfImpl" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.<%= assocNameA %>" >
       <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().Name %>EfImpl" />
-      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>EfImpl" />
     </AssociationSet>
     <AssociationSet Name="<%= assocNameB %>" Association="Model.<%= assocNameB %>" >
       <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().Name %>EfImpl" />
-      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>EfImpl" />
     </AssociationSet>
 <%
     }
@@ -83,10 +83,10 @@
         string assocName = prop.GetAssociationName();
         string entityName = prop.GetCollectionEntryClassName();
 %>
-    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+    <EntitySet Name="<%= entityName %>EfImpl" EntityType="Model.<%= entityName %>EfImpl" />
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
       <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>EfImpl" />
-      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>EfImpl" />
     </AssociationSet>
 <%
     }
@@ -103,10 +103,10 @@
         string assocName = prop.GetAssociationName();
         string entityName = prop.GetCollectionEntryClassName();
 %>
-    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+    <EntitySet Name="<%= entityName %>EfImpl" EntityType="Model.<%= entityName %>EfImpl" />
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
       <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>EfImpl" />
-      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>EfImpl" />
     </AssociationSet>
 <%
     }
@@ -209,7 +209,7 @@
     RelationDebugTemplate.Call(Host, ctx, rel);
 %>
   -->
-  <EntityType Name="<%= rel.GetRelationClassName() %>" >
+  <EntityType Name="<%= rel.GetRelationClassName() %>EfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -256,7 +256,7 @@
          Type="Model.<%= rel.A.Type.Name %>EfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.<%= rel.GetRelationClassName() %>"
+         Type="Model.<%= rel.GetRelationClassName() %>EfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>" >
@@ -264,7 +264,7 @@
          Type="Model.<%= rel.B.Type.Name %>EfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.<%= rel.GetRelationClassName() %>"
+         Type="Model.<%= rel.GetRelationClassName() %>EfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -284,7 +284,7 @@
 
 %>
   <!-- <%= prop.ObjectClass.Name %>.<%= prop.Name %> -->
-  <EntityType Name="<%= prop.GetCollectionEntryClassName() %>" >
+  <EntityType Name="<%= prop.GetCollectionEntryClassName() %>EfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -311,7 +311,7 @@
          Type="Model.<%= prop.ObjectClass.Name %>EfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
+         Type="Model.<%= prop.GetCollectionEntryClassName() %>EfImpl" 
          Multiplicity="*" />
   </Association>
 <%
@@ -329,7 +329,7 @@
 
 %>
   <!-- <%= prop.ObjectClass.Name %>.<%= prop.Name %> -->
-  <EntityType Name="<%= prop.GetCollectionEntryClassName() %>" >
+  <EntityType Name="<%= prop.GetCollectionEntryClassName() %>EfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -358,7 +358,7 @@
          Type="Model.<%= prop.ObjectClass.Name %>EfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
+         Type="Model.<%= prop.GetCollectionEntryClassName() %>EfImpl" 
          Multiplicity="*" />
   </Association>
 <%

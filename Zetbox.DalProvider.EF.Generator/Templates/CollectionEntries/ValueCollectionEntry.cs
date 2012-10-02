@@ -76,7 +76,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
         {
             base.ApplyClassAttributeTemplate();
             this.WriteObjects(@"    [EdmEntityType(NamespaceName=""Model"", Name=""",
-                prop.GetCollectionEntryClassName(), @""")]");
+                prop.GetCollectionEntryClassName(), @"EfImpl"")]");
             this.WriteLine();
         }
     }

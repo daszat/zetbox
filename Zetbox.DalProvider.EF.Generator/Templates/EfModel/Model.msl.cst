@@ -80,8 +80,8 @@
     RelationDebugTemplate.Call(Host, ctx, rel);
 %>
     -->
-    <EntitySetMapping Name="<%= rel.GetRelationClassName() %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetRelationClassName() %>)">
+    <EntitySetMapping Name="<%= rel.GetRelationClassName() %>EfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetRelationClassName() %>EfImpl)">
         <MappingFragment StoreEntitySet="<%= rel.GetRelationClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
 <% 
@@ -189,8 +189,8 @@
         .ThenBy(p => p.Name))
     { 
 %>
-    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
+    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>EfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>EfImpl)">
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Value" ColumnName="<%= prop.Name %>" />
@@ -230,8 +230,8 @@
         .ThenBy(p => p.Name))
     { 
 %>
-    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
+    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>EfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>EfImpl)">
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <% ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "Value", string.Empty); %>
