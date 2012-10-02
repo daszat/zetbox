@@ -81,7 +81,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public ObjectListViewModel ViewModel
         {
-            get { return (ObjectListViewModel)DataContext; }
+            get { return (ObjectListViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

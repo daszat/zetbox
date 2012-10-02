@@ -29,6 +29,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.SchemaMigration;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 using Zetbox.Client.WPF.View.ZetboxBase;
 
 namespace Zetbox.Client.WPF.View.SchemaMigration
@@ -49,7 +50,7 @@ namespace Zetbox.Client.WPF.View.SchemaMigration
 
         public DestinationPropertyViewModel ViewModel
         {
-            get { return (DestinationPropertyViewModel)DataContext; }
+            get { return (DestinationPropertyViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

@@ -114,7 +114,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public ObjectCollectionViewModel ViewModel
         {
-            get { return (ObjectCollectionViewModel)DataContext; }
+            get { return (ObjectCollectionViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

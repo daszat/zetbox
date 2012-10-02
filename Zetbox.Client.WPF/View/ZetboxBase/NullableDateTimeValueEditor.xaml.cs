@@ -32,6 +32,7 @@ namespace Zetbox.Client.WPF.View
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
     using Zetbox.Client.WPF.View.ZetboxBase;
 
     /// <summary>
@@ -80,7 +81,7 @@ namespace Zetbox.Client.WPF.View
 
         public NullableDateTimePropertyViewModel ViewModel
         {
-            get { return (NullableDateTimePropertyViewModel)DataContext; }
+            get { return (NullableDateTimePropertyViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

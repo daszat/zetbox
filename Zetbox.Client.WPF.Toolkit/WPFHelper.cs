@@ -106,7 +106,22 @@ namespace Zetbox.Client.WPF.Toolkit
             }
         }
 
-
+        /// <summary>
+        /// See http://social.msdn.microsoft.com/Forums/en-US/wpf/thread/e6643abc-4457-44aa-a3ee-dd389c88bd86/ and https://connect.microsoft.com/VisualStudio/feedback/details/619658/wpf-virtualized-control-disconnecteditem-reference-when-datacontext-switch
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <returns></returns>
+        public static object SanitizeDataContext(object dc)
+        {
+            if (dc != null && dc.GetType().FullName.Equals("MS.Internal.NamedObject"))
+            {
+                return null;
+            }
+            else
+            {
+                return dc;
+            }
+        }
 
         public static string GetGridColMemberSourcePath(DependencyObject obj)
         {

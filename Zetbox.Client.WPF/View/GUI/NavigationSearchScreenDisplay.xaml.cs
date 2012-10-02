@@ -32,6 +32,7 @@ namespace Zetbox.Client.WPF.View.GUI
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables.GUI;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for SearchScreenDisplay.xaml
@@ -49,7 +50,7 @@ namespace Zetbox.Client.WPF.View.GUI
 
         public NavigationSearchScreenViewModel ViewModel
         {
-            get { return (NavigationSearchScreenViewModel)DataContext; }
+            get { return (NavigationSearchScreenViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

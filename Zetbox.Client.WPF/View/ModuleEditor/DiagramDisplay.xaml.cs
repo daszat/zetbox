@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,11 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Zetbox.Client.GUI;
-using System.ComponentModel;
-using Zetbox.Client.Presentables.ModuleEditor;
 using GraphSharp.Controls;
 using QuickGraph;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables.ModuleEditor;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ModuleEditor
 {
@@ -32,7 +33,7 @@ namespace Zetbox.Client.WPF.View.ModuleEditor
 
         public DiagramViewModel ViewModel
         {
-            get { return (DiagramViewModel)DataContext; }
+            get { return (DiagramViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         private void PrintButton_Click(object sender, RoutedEventArgs e)

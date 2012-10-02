@@ -28,6 +28,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
@@ -45,7 +46,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public ViewModel ViewModel
         {
-            get { return (ViewModel)DataContext; }
+            get { return (ViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

@@ -30,6 +30,7 @@ using Zetbox.App.Base;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.GUI;
 using Zetbox.Client.Presentables.ModuleEditor;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ModuleEditor
 {
@@ -47,7 +48,7 @@ namespace Zetbox.Client.WPF.View.ModuleEditor
 
         public NavigationScreenHierarchyViewModel ViewModel
         {
-            get { return (NavigationScreenHierarchyViewModel)DataContext; }
+            get { return (NavigationScreenHierarchyViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         private void NavTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

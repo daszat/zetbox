@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.GUI;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
@@ -28,7 +29,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public SavedListConfiguratorViewModel ViewModel
         {
-            get { return (SavedListConfiguratorViewModel)DataContext; }
+            get { return (SavedListConfiguratorViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

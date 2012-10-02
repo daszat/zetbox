@@ -27,6 +27,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.ZetboxBase;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
@@ -43,7 +44,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public FilterListViewModel ViewModel
         {
-            get { return (FilterListViewModel)DataContext; }
+            get { return (FilterListViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

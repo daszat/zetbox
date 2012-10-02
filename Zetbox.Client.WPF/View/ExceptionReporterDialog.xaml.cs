@@ -24,9 +24,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Zetbox.Client.WPF.CustomControls;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
+using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View
 {
@@ -43,7 +44,7 @@ namespace Zetbox.Client.WPF.View
 
         public ExceptionReporterViewModel ViewModel
         {
-            get { return (ExceptionReporterViewModel)DataContext; }
+            get { return (ExceptionReporterViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

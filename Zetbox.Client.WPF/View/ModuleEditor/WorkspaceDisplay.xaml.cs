@@ -28,6 +28,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.ModuleEditor;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ModuleEditor
 {
@@ -53,7 +54,7 @@ namespace Zetbox.Client.WPF.View.ModuleEditor
 
         public WorkspaceViewModel ViewModel
         {
-            get { return (WorkspaceViewModel)DataContext; }
+            get { return (WorkspaceViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

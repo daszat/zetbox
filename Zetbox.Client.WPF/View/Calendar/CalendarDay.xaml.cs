@@ -29,6 +29,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.Calendar;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.Calendar
 {
@@ -90,7 +91,7 @@ namespace Zetbox.Client.WPF.View.Calendar
 
         public DayCalendarViewModel ViewModel
         {
-            get { return (DayCalendarViewModel)DataContext; }
+            get { return (DayCalendarViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

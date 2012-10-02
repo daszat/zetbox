@@ -30,6 +30,7 @@ using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.ValueViewModels;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
@@ -48,7 +49,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public ObjectReferenceViewModel ViewModel
         {
-            get { return (ObjectReferenceViewModel)DataContext; }
+            get { return (ObjectReferenceViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

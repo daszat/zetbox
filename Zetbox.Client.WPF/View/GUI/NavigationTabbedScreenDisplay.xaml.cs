@@ -50,7 +50,7 @@ namespace Zetbox.Client.WPF.View.GUI
 
         public NavigationTabbedScreenViewModel ViewModel
         {
-            get { return (NavigationTabbedScreenViewModel)DataContext; }
+            get { return (NavigationTabbedScreenViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

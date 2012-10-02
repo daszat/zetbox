@@ -16,11 +16,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Controls;
 using System.Windows;
-using Zetbox.Client.Presentables.DocumentManagement;
-using Zetbox.Client.GUI;
+using System.Windows.Controls;
 using Zetbox.API.Utils;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables.DocumentManagement;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
@@ -32,7 +33,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
 
         public FileViewModel ViewModel
         {
-            get { return (FileViewModel)DataContext; }
+            get { return (FileViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         protected abstract ContentPresenter PreviewControl { get; }

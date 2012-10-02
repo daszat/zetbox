@@ -31,6 +31,7 @@ namespace Zetbox.Client.WPF.View
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for ErrorListView.xaml
@@ -47,7 +48,7 @@ namespace Zetbox.Client.WPF.View
 
         public ErrorListViewModel ViewModel
         {
-            get { return (ErrorListViewModel)DataContext; }
+            get { return (ErrorListViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

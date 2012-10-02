@@ -50,7 +50,7 @@ namespace Zetbox.Client.WPF.View.GUI
 
         public NavigationTreeScreenViewModel ViewModel
         {
-            get { return (NavigationTreeScreenViewModel)DataContext; }
+            get { return (NavigationTreeScreenViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

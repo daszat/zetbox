@@ -32,6 +32,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for CompoundObjectPropertyEditor.xaml
@@ -49,7 +50,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public CompoundObjectPropertyViewModel ViewModel
         {
-            get { return (CompoundObjectPropertyViewModel)DataContext; }
+            get { return (CompoundObjectPropertyViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

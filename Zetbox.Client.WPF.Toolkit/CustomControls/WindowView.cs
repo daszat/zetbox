@@ -32,7 +32,8 @@ namespace Zetbox.Client.WPF.CustomControls
         {
             _watch = new Stopwatch();
             _watch.Start();
-            this.Initialized += (s,e) => {
+            this.Initialized += (s, e) =>
+            {
                 Debug.WriteLine(string.Format("Window: Initialised after {0:N2}ms", _watch.ElapsedMilliseconds));
             };
             this.Loaded += new RoutedEventHandler(WindowView_Loaded);
@@ -87,13 +88,7 @@ namespace Zetbox.Client.WPF.CustomControls
             }
         }
 
-        private WindowViewModel WindowViewModel
-        {
-            get
-            {
-                return DataContext as WindowViewModel;
-            }
-        }
+        private WindowViewModel WindowViewModel { get { return DataContext as WindowViewModel; } }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {

@@ -28,6 +28,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
@@ -47,7 +48,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public IValueInputTaskViewModel ViewModel
         {
-            get { return (IValueInputTaskViewModel)DataContext; }
+            get { return (IValueInputTaskViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

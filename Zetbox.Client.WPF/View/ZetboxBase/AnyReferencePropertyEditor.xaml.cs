@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.ZetboxBase;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
@@ -30,7 +31,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public AnyReferencePropertyViewModel ViewModel
         {
-            get { return (AnyReferencePropertyViewModel)DataContext; }
+            get { return (AnyReferencePropertyViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         protected override FrameworkElement MainControl

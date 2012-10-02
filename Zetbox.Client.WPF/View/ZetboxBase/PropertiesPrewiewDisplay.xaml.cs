@@ -53,7 +53,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public PropertiesPrewiewViewModel ViewModel
         {
-            get { return (PropertiesPrewiewViewModel)DataContext; }
+            get { return (PropertiesPrewiewViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

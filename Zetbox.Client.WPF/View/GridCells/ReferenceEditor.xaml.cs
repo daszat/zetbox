@@ -29,6 +29,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.ValueViewModels;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.GridCells
 {
@@ -47,7 +48,7 @@ namespace Zetbox.Client.WPF.View.GridCells
 
         public ObjectReferenceViewModel ViewModel
         {
-            get { return (ObjectReferenceViewModel)DataContext; }
+            get { return (ObjectReferenceViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

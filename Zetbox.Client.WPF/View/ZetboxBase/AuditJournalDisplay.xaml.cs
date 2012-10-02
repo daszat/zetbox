@@ -32,6 +32,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for AuditJournalView.xaml
@@ -46,7 +47,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public AuditJournalViewModel ViewModel
         {
-            get { return (AuditJournalViewModel)DataContext; }
+            get { return (AuditJournalViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         protected override FrameworkElement MainControl

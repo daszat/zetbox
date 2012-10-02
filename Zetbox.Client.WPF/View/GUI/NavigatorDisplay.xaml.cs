@@ -31,6 +31,7 @@ namespace Zetbox.Client.WPF.View.GUI
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables.GUI;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for NavigatorDisplay.xaml
@@ -53,7 +54,7 @@ namespace Zetbox.Client.WPF.View.GUI
 
         public NavigatorViewModel ViewModel
         {
-            get { return (NavigatorViewModel)DataContext; }
+            get { return (NavigatorViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

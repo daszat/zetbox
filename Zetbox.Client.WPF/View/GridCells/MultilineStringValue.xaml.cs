@@ -30,6 +30,7 @@ using Zetbox.App.GUI;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.ValueViewModels;
+using Zetbox.Client.WPF.Toolkit;
 
 
 namespace Zetbox.Client.WPF.View.GridCells
@@ -50,7 +51,7 @@ namespace Zetbox.Client.WPF.View.GridCells
 
         public MultiLineStringValueViewModel ViewModel
         {
-            get { return (MultiLineStringValueViewModel)DataContext; }
+            get { return (MultiLineStringValueViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

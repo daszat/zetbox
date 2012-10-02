@@ -30,6 +30,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.Relations;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.Relations
 {
@@ -47,7 +48,7 @@ namespace Zetbox.Client.WPF.View.Relations
 
         public RelationViewModel ViewModel
         {
-            get { return (RelationViewModel)DataContext; }
+            get { return (RelationViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 

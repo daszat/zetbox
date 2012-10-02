@@ -27,6 +27,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.GUI;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.GUI
 {
@@ -43,7 +44,7 @@ namespace Zetbox.Client.WPF.View.GUI
 
         public NavigationReportScreenViewModel ViewModel
         {
-            get { return (NavigationReportScreenViewModel)DataContext; }
+            get { return (NavigationReportScreenViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

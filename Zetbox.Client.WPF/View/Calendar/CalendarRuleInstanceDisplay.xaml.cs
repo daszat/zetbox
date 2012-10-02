@@ -27,6 +27,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.Calendar;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.Calendar
 {
@@ -43,7 +44,7 @@ namespace Zetbox.Client.WPF.View.Calendar
 
         public CalendarRuleInstanceViewModel ViewModel
         {
-            get { return (CalendarRuleInstanceViewModel)DataContext; }
+            get { return (CalendarRuleInstanceViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

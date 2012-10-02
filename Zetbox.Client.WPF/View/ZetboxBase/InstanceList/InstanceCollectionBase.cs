@@ -89,7 +89,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public InstanceListViewModel ViewModel
         {
-            get { return (InstanceListViewModel)DataContext; }
+            get { return (InstanceListViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

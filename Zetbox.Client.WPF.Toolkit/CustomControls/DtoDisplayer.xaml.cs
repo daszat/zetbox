@@ -29,6 +29,7 @@ namespace Zetbox.Client.WPF.CustomControls
     using System.Windows.Navigation;
     using System.Windows.Shapes;
     using Zetbox.Client.Presentables.DtoViewModels;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for DtoDisplayer.xaml
@@ -43,7 +44,7 @@ namespace Zetbox.Client.WPF.CustomControls
         public void Grid_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var grid = sender as Grid;
-            if (grid != null)
+            if (grid != null && WPFHelper.SanitizeDataContext(e.NewValue) != null)
                 InitGrid(grid, e.NewValue as DtoTableViewModel);
         }
 

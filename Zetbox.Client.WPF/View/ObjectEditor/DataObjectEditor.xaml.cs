@@ -29,6 +29,7 @@ using System.Windows.Shapes;
 
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ObjectEditor
 {
@@ -46,7 +47,7 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
 
         public DataObjectViewModel ViewModel
         {
-            get { return (DataObjectViewModel)DataContext; }
+            get { return (DataObjectViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

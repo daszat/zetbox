@@ -29,6 +29,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
@@ -46,7 +47,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public CommandViewModel ViewModel
         {
-            get { return (CommandViewModel)DataContext; }
+            get { return (CommandViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         protected override FrameworkElement MainControl

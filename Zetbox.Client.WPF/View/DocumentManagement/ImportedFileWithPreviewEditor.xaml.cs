@@ -28,6 +28,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.DocumentManagement;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
@@ -50,7 +51,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
 
         public new ImportedFileViewModel ViewModel
         {
-            get { return (ImportedFileViewModel)DataContext; }
+            get { return (ImportedFileViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

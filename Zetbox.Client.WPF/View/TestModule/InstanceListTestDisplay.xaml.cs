@@ -27,6 +27,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.TestModule;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.TestModule
 {
@@ -43,7 +44,7 @@ namespace Zetbox.Client.WPF.View.TestModule
 
         public InstanceListTestViewModel ViewModel
         {
-            get { return (InstanceListTestViewModel)DataContext; }
+            get { return (InstanceListTestViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

@@ -32,6 +32,7 @@ namespace Zetbox.Client.WPF.CustomControls
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for LabeledViewHorizontal.xaml
@@ -57,7 +58,7 @@ namespace Zetbox.Client.WPF.CustomControls
 
         public ILabeledViewModel ViewModel
         {
-            get { return (ILabeledViewModel)DataContext; }
+            get { return (ILabeledViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

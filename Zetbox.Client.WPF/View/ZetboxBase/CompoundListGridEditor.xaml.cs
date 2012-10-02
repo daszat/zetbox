@@ -79,7 +79,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public CompoundListViewModel ViewModel
         {
-            get { return (CompoundListViewModel)DataContext; }
+            get { return (CompoundListViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

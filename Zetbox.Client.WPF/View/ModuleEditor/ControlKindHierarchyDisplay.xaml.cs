@@ -29,6 +29,7 @@ using System.Windows.Shapes;
 using Zetbox.App.Base;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.ModuleEditor;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ModuleEditor
 {
@@ -46,7 +47,7 @@ namespace Zetbox.Client.WPF.View.ModuleEditor
 
         public ControlKindHierarchyViewModel ViewModel
         {
-            get { return (ControlKindHierarchyViewModel)DataContext; }
+            get { return (ControlKindHierarchyViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         private void NavTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

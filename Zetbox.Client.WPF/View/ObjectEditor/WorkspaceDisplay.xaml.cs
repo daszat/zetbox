@@ -47,7 +47,7 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
 
         public WorkspaceViewModel ViewModel
         {
-            get { return (WorkspaceViewModel)this.DataContext; }
+            get { return (WorkspaceViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #region Expander

@@ -32,6 +32,7 @@ namespace Zetbox.Client.WPF.View.GUI
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.GUI;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for SelectionDialog.xaml
@@ -49,7 +50,7 @@ namespace Zetbox.Client.WPF.View.GUI
 
         public MultiLineEditorDialogViewModel ViewModel
         {
-            get { return (MultiLineEditorDialogViewModel)DataContext; }
+            get { return (MultiLineEditorDialogViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion
