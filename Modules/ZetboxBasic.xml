@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-09-28T11:48:49Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-10-02T16:00:00Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -37503,11 +37503,11 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:Name>GraphSharp.Controls, Version=1.0.3749.24774, Culture=neutral, PublicKeyToken=fb51f9bd644470e2</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="59dbd4ab-f5d2-455f-8181-acffe0fcec0b">
-    <ZetboxBase:ChangedOn>2011-08-06T04:30:47.718239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2012-10-02T14:00:00Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>0</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</ZetboxBase:Name>
+    <ZetboxBase:Name>mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="d36e5e43-8b71-429f-b85e-02d2f61f7412">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:08.966049Z</ZetboxBase:ChangedOn>
