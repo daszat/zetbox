@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Abstract base class for read only constraints
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ReadOnlyConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="ReadOnlyConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ReadOnlyConstraint")]
     public abstract class ReadOnlyConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, ReadOnlyConstraint
     {

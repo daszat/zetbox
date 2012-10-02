@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Navigation screen for searching objects
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NavigationSearchScreen")]
+    [EdmEntityType(NamespaceName="Model", Name="NavigationSearchScreenEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NavigationSearchScreen")]
     public class NavigationSearchScreenEfImpl : Zetbox.App.GUI.NavigationScreenEfImpl, NavigationSearchScreen
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Filter configuration for filtering on an instance with an user selectable, optional and constant predicate
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="OptionalPredicateFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="OptionalPredicateFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("OptionalPredicateFilterConfiguration")]
     public class OptionalPredicateFilterConfigurationEfImpl : Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl, OptionalPredicateFilterConfiguration
     {

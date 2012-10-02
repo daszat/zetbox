@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="RoleMembership")]
+    [EdmEntityType(NamespaceName="Model", Name="RoleMembershipEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RoleMembership")]
     public class RoleMembershipEfImpl : Zetbox.App.Base.AccessControlEfImpl, RoleMembership
     {

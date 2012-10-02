@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for CLR Object Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CLRObjectParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="CLRObjectParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CLRObjectParameter")]
     public class CLRObjectParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, CLRObjectParameter
     {

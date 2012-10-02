@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Base Metadefinition Object for Objectclasses, Interfaces, CompoundObjects and Enumerations.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DataType")]
+    [EdmEntityType(NamespaceName="Model", Name="DataTypeEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DataType")]
     public abstract class DataTypeEfImpl : BaseServerDataObject_EntityFramework, DataType, Zetbox.API.IExportableInternal
     {

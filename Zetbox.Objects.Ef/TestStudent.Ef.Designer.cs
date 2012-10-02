@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="TestStudent")]
+    [EdmEntityType(NamespaceName="Model", Name="TestStudentEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TestStudent")]
     public class TestStudentEfImpl : BaseServerDataObject_EntityFramework, TestStudent
     {

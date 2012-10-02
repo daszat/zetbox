@@ -22,7 +22,7 @@ namespace Zetbox.App.Calendar
     /// <summary>
     /// This rule applies every year. This class is abstract.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="YearlyCalendarRule")]
+    [EdmEntityType(NamespaceName="Model", Name="YearlyCalendarRuleEfImpl")]
     [System.Diagnostics.DebuggerDisplay("YearlyCalendarRule")]
     public abstract class YearlyCalendarRuleEfImpl : Zetbox.App.Calendar.CalendarRuleEfImpl, YearlyCalendarRule
     {

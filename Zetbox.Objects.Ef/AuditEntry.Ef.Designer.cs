@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// A single entry in the auditing table of a class
     /// </summary>
-    [EdmComplexType(NamespaceName="Model", Name="AuditEntry")]
+    [EdmComplexType(NamespaceName="Model", Name="AuditEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("AuditEntry")]
     public class AuditEntryEfImpl : BaseServerCompoundObject_EntityFramework, AuditEntry, ICompoundObject
     {

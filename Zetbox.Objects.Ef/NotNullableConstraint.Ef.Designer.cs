@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NotNullableConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="NotNullableConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NotNullableConstraint")]
     public class NotNullableConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, NotNullableConstraint
     {

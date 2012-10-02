@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for ValueType Properties. This class is abstract.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ValueTypeProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="ValueTypePropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ValueTypeProperty")]
     public abstract class ValueTypePropertyEfImpl : Zetbox.App.Base.PropertyEfImpl, ValueTypeProperty
     {

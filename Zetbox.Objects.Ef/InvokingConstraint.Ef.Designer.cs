@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="InvokingConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="InvokingConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("InvokingConstraint")]
     public class InvokingConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, InvokingConstraint
     {

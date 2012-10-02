@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Methods.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Method")]
+    [EdmEntityType(NamespaceName="Model", Name="MethodEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Method")]
     public class MethodEfImpl : BaseServerDataObject_EntityFramework, Method, Zetbox.API.IExportableInternal
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Describes the currently loaded physical database schema
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CurrentSchema")]
+    [EdmEntityType(NamespaceName="Model", Name="CurrentSchemaEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CurrentSchema")]
     public class CurrentSchemaEfImpl : BaseServerDataObject_EntityFramework, CurrentSchema
     {

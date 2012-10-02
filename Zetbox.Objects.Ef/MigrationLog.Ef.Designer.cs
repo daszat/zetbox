@@ -22,7 +22,7 @@ namespace Zetbox.App.SchemaMigration
     /// <summary>
     /// A log of all migration operations
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="MigrationLog")]
+    [EdmEntityType(NamespaceName="Model", Name="MigrationLogEfImpl")]
     [System.Diagnostics.DebuggerDisplay("MigrationLog")]
     public class MigrationLogEfImpl : BaseServerDataObject_EntityFramework, MigrationLog
     {

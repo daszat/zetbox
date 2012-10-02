@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// The One-Side of the classes for the One_to_N_relations Tests
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="One_to_N_relations_One")]
+    [EdmEntityType(NamespaceName="Model", Name="One_to_N_relations_OneEfImpl")]
     [System.Diagnostics.DebuggerDisplay("One_to_N_relations_One")]
     public class One_to_N_relations_OneEfImpl : BaseServerDataObject_EntityFramework, One_to_N_relations_One
     {

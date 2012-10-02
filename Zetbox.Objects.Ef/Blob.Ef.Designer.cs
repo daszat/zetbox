@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Represents a Document
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Blob")]
+    [EdmEntityType(NamespaceName="Model", Name="BlobEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Blob")]
     public class BlobEfImpl : BaseServerDataObject_EntityFramework, Blob, Zetbox.API.IExportableInternal
     {

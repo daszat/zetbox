@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Modules.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Module")]
+    [EdmEntityType(NamespaceName="Model", Name="ModuleEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Module")]
     public class ModuleEfImpl : BaseServerDataObject_EntityFramework, Module, Zetbox.API.IExportableInternal
     {

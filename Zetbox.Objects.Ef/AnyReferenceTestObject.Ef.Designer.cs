@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="AnyReferenceTestObject")]
+    [EdmEntityType(NamespaceName="Model", Name="AnyReferenceTestObjectEfImpl")]
     [System.Diagnostics.DebuggerDisplay("AnyReferenceTestObject")]
     public class AnyReferenceTestObjectEfImpl : BaseServerDataObject_EntityFramework, AnyReferenceTestObject, Zetbox.API.IExportableInternal
     {

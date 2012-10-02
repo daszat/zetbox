@@ -22,7 +22,7 @@ namespace Zetbox.App.Calendar
     /// <summary>
     /// This rule applies every year, n days relative to easter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="EasterCalendarRule")]
+    [EdmEntityType(NamespaceName="Model", Name="EasterCalendarRuleEfImpl")]
     [System.Diagnostics.DebuggerDisplay("EasterCalendarRule")]
     public class EasterCalendarRuleEfImpl : Zetbox.App.Calendar.YearlyCalendarRuleEfImpl, EasterCalendarRule
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Decimal Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DecimalProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="DecimalPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DecimalProperty")]
     public class DecimalPropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, DecimalProperty
     {

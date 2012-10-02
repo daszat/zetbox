@@ -22,7 +22,7 @@ namespace Zetbox.App.SchemaMigration
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="StagingDatabase")]
+    [EdmEntityType(NamespaceName="Model", Name="StagingDatabaseEfImpl")]
     [System.Diagnostics.DebuggerDisplay("StagingDatabase")]
     public class StagingDatabaseEfImpl : BaseServerDataObject_EntityFramework, StagingDatabase, Zetbox.API.IExportableInternal
     {

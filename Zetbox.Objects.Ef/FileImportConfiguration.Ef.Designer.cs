@@ -22,7 +22,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="FileImportConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="FileImportConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("FileImportConfiguration")]
     public class FileImportConfigurationEfImpl : BaseServerDataObject_EntityFramework, FileImportConfiguration, Zetbox.API.IExportableInternal
     {

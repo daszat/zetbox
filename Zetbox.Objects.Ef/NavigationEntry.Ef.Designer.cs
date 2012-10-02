@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Abstract base class for Navigation Entries
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NavigationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="NavigationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NavigationEntry")]
     public abstract class NavigationEntryEfImpl : BaseServerDataObject_EntityFramework, NavigationEntry, Zetbox.API.IExportableInternal
     {

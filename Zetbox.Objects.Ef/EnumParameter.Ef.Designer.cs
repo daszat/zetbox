@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Enum Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="EnumParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="EnumParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("EnumParameter")]
     public class EnumParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, EnumParameter
     {

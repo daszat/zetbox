@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for ObjectClasses.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ObjectClass")]
+    [EdmEntityType(NamespaceName="Model", Name="ObjectClassEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ObjectClass")]
     public class ObjectClassEfImpl : Zetbox.App.Base.DataTypeEfImpl, ObjectClass
     {

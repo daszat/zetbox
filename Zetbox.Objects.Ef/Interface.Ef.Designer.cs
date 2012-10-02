@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Interfaces.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Interface")]
+    [EdmEntityType(NamespaceName="Model", Name="InterfaceEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Interface")]
     public class InterfaceEfImpl : Zetbox.App.Base.DataTypeEfImpl, Interface
     {

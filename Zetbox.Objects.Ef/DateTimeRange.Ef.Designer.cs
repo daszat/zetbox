@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// A from and until DateTime Value
     /// </summary>
-    [EdmComplexType(NamespaceName="Model", Name="DateTimeRange")]
+    [EdmComplexType(NamespaceName="Model", Name="DateTimeRangeEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DateTimeRange")]
     public class DateTimeRangeEfImpl : BaseServerCompoundObject_EntityFramework, DateTimeRange, ICompoundObject
     {

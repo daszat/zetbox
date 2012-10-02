@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Represents a Zetbox Application
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Application")]
+    [EdmEntityType(NamespaceName="Model", Name="ApplicationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Application")]
     public class ApplicationEfImpl : BaseServerDataObject_EntityFramework, Application, Zetbox.API.IExportableInternal
     {

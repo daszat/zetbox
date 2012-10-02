@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Abstract base class for Property Filter
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="PropertyFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="PropertyFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("PropertyFilterConfiguration")]
     public abstract class PropertyFilterConfigurationEfImpl : Zetbox.App.GUI.FilterConfigurationEfImpl, PropertyFilterConfiguration
     {

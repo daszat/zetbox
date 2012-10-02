@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IndexConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="IndexConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IndexConstraint")]
     public class IndexConstraintEfImpl : Zetbox.App.Base.InstanceConstraintEfImpl, IndexConstraint
     {

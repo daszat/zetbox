@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmComplexType(NamespaceName="Model", Name="TestPhoneCompoundObject")]
+    [EdmComplexType(NamespaceName="Model", Name="TestPhoneCompoundObjectEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TestPhoneCompoundObject")]
     public class TestPhoneCompoundObjectEfImpl : BaseServerCompoundObject_EntityFramework, ICompoundObject, TestPhoneCompoundObject
     {

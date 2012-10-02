@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Creates a new Guid
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NewGuidDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="NewGuidDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NewGuidDefaultValue")]
     public class NewGuidDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, NewGuidDefaultValue
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// A configuration object for instance lists
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SavedListConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="SavedListConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SavedListConfiguration")]
     public class SavedListConfigurationEfImpl : BaseServerDataObject_EntityFramework, SavedListConfiguration, Zetbox.API.IExportableInternal
     {

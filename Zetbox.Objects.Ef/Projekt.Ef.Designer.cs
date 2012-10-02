@@ -22,7 +22,7 @@ namespace Zetbox.App.Projekte
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Projekt")]
+    [EdmEntityType(NamespaceName="Model", Name="ProjektEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Projekt")]
     public class ProjektEfImpl : BaseServerDataObject_EntityFramework, Projekt, Zetbox.API.IExportableInternal
     {

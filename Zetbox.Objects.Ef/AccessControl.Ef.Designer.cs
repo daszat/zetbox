@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="AccessControl")]
+    [EdmEntityType(NamespaceName="Model", Name="AccessControlEfImpl")]
     [System.Diagnostics.DebuggerDisplay("AccessControl")]
     public class AccessControlEfImpl : BaseServerDataObject_EntityFramework, AccessControl, Zetbox.API.IExportableInternal
     {

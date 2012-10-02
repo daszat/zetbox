@@ -22,7 +22,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Abstract Baseclass for File Types
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="File")]
+    [EdmEntityType(NamespaceName="Model", Name="FileEfImpl")]
     [System.Diagnostics.DebuggerDisplay("File")]
     public abstract class FileEfImpl : BaseServerDataObject_EntityFramework, File, Zetbox.API.IExportableInternal
     {

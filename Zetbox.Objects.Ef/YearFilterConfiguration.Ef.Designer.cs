@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="YearFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="YearFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("YearFilterConfiguration")]
     public class YearFilterConfigurationEfImpl : Zetbox.App.GUI.PropertyFilterConfigurationEfImpl, YearFilterConfiguration
     {

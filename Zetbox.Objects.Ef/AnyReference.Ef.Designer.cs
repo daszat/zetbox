@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// A reference to any Object Class
     /// </summary>
-    [EdmComplexType(NamespaceName="Model", Name="AnyReference")]
+    [EdmComplexType(NamespaceName="Model", Name="AnyReferenceEfImpl")]
     [System.Diagnostics.DebuggerDisplay("AnyReference")]
     public class AnyReferenceEfImpl : BaseServerCompoundObject_EntityFramework, AnyReference, ICompoundObject
     {

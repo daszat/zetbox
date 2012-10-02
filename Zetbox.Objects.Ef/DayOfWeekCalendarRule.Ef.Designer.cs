@@ -22,7 +22,7 @@ namespace Zetbox.App.Calendar
     /// <summary>
     /// This rule applies every day of week
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DayOfWeekCalendarRule")]
+    [EdmEntityType(NamespaceName="Model", Name="DayOfWeekCalendarRuleEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DayOfWeekCalendarRule")]
     public class DayOfWeekCalendarRuleEfImpl : Zetbox.App.Calendar.CalendarRuleEfImpl, DayOfWeekCalendarRule
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// A recurrence rule
     /// </summary>
-    [EdmComplexType(NamespaceName="Model", Name="RecurrenceRule")]
+    [EdmComplexType(NamespaceName="Model", Name="RecurrenceRuleEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RecurrenceRule")]
     public class RecurrenceRuleEfImpl : BaseServerCompoundObject_EntityFramework, ICompoundObject, RecurrenceRule
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// The item can only be set during initialization
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="InitOnlyConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="InitOnlyConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("InitOnlyConstraint")]
     public class InitOnlyConstraintEfImpl : Zetbox.App.Base.ReadOnlyConstraintEfImpl, InitOnlyConstraint
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Bool Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="BoolProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="BoolPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("BoolProperty")]
     public class BoolPropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, BoolProperty
     {

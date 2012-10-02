@@ -22,7 +22,7 @@ namespace Zetbox.App.Projekte
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Kunde")]
+    [EdmEntityType(NamespaceName="Model", Name="KundeEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Kunde")]
     public class KundeEfImpl : BaseServerDataObject_EntityFramework, Kunde, Zetbox.API.IExportableInternal
     {

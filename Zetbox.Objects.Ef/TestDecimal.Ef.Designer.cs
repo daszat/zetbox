@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// Testclass for Decimal DataType
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="TestDecimal")]
+    [EdmEntityType(NamespaceName="Model", Name="TestDecimalEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TestDecimal")]
     public class TestDecimalEfImpl : BaseServerDataObject_EntityFramework, TestDecimal
     {

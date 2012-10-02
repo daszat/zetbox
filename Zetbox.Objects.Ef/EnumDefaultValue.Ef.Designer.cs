@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Sets an enumeration property with an configured default value
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="EnumDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="EnumDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("EnumDefaultValue")]
     public class EnumDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, EnumDefaultValue
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Decimal Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DecimalParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="DecimalParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DecimalParameter")]
     public class DecimalParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, DecimalParameter
     {

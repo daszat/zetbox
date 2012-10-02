@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// a object reference that is calculated from the contents of the containing class
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CalculatedObjectReferenceProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="CalculatedObjectReferencePropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty")]
     public class CalculatedObjectReferencePropertyEfImpl : Zetbox.App.Base.PropertyEfImpl, CalculatedObjectReferenceProperty
     {

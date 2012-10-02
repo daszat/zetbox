@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Icon")]
+    [EdmEntityType(NamespaceName="Model", Name="IconEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Icon")]
     public class IconEfImpl : BaseServerDataObject_EntityFramework, Icon, Zetbox.API.IExportableInternal
     {

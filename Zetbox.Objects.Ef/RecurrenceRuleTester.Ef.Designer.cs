@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// Tests the RecurrenceRule
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="RecurrenceRuleTester")]
+    [EdmEntityType(NamespaceName="Model", Name="RecurrenceRuleTesterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RecurrenceRuleTester")]
     public class RecurrenceRuleTesterEfImpl : BaseServerDataObject_EntityFramework, RecurrenceRuleTester
     {

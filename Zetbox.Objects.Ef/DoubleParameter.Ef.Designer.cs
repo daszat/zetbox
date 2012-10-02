@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Double Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DoubleParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="DoubleParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DoubleParameter")]
     public class DoubleParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, DoubleParameter
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="InstanceConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="InstanceConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("InstanceConstraint")]
     public class InstanceConstraintEfImpl : BaseServerDataObject_EntityFramework, InstanceConstraint, Zetbox.API.IExportableInternal
     {

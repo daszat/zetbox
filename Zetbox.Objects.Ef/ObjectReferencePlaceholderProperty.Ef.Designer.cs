@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// A placeholder for data object references in interfaces
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ObjectReferencePlaceholderProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="ObjectReferencePlaceholderPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ObjectReferencePlaceholderProperty")]
     public class ObjectReferencePlaceholderPropertyEfImpl : Zetbox.App.Base.PropertyEfImpl, ObjectReferencePlaceholderProperty
     {

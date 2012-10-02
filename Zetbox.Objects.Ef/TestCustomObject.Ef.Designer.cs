@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="TestCustomObject")]
+    [EdmEntityType(NamespaceName="Model", Name="TestCustomObjectEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TestCustomObject")]
     public class TestCustomObjectEfImpl : BaseServerDataObject_EntityFramework, TestCustomObject
     {

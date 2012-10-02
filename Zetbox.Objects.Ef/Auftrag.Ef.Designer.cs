@@ -22,7 +22,7 @@ namespace Zetbox.App.Projekte
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Auftrag")]
+    [EdmEntityType(NamespaceName="Model", Name="AuftragEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Auftrag")]
     public class AuftragEfImpl : BaseServerDataObject_EntityFramework, Auftrag, Zetbox.API.IExportableInternal
     {

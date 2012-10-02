@@ -22,7 +22,7 @@ namespace Zetbox.App.Projekte
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Task")]
+    [EdmEntityType(NamespaceName="Model", Name="TaskEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Task")]
     public class TaskEfImpl : BaseServerDataObject_EntityFramework, Task, Zetbox.API.IExportableInternal
     {

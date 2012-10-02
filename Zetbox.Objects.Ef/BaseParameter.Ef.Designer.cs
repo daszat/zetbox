@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Parameter. This class is abstract.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="BaseParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="BaseParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("BaseParameter")]
     public abstract class BaseParameterEfImpl : BaseServerDataObject_EntityFramework, BaseParameter, Zetbox.API.IExportableInternal
     {

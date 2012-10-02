@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Represents an Identity
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Identity")]
+    [EdmEntityType(NamespaceName="Model", Name="IdentityEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Identity")]
     public class IdentityEfImpl : BaseServerDataObject_EntityFramework, Identity
     {

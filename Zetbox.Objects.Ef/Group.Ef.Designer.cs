@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Group")]
+    [EdmEntityType(NamespaceName="Model", Name="GroupEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Group")]
     public class GroupEfImpl : BaseServerDataObject_EntityFramework, Group, Zetbox.API.IExportableInternal
     {

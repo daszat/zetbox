@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Sets an boolean property with an configured default value
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="BoolDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="BoolDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("BoolDefaultValue")]
     public class BoolDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, BoolDefaultValue
     {

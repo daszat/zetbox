@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SequenceData")]
+    [EdmEntityType(NamespaceName="Model", Name="SequenceDataEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SequenceData")]
     public class SequenceDataEfImpl : BaseServerDataObject_EntityFramework, SequenceData
     {

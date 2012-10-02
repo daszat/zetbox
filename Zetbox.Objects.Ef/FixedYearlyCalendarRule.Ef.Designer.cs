@@ -22,7 +22,7 @@ namespace Zetbox.App.Calendar
     /// <summary>
     /// This rule applies every year on the same date
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="FixedYearlyCalendarRule")]
+    [EdmEntityType(NamespaceName="Model", Name="FixedYearlyCalendarRuleEfImpl")]
     [System.Diagnostics.DebuggerDisplay("FixedYearlyCalendarRule")]
     public class FixedYearlyCalendarRuleEfImpl : Zetbox.App.Calendar.YearlyCalendarRuleEfImpl, FixedYearlyCalendarRule
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.SchemaMigration
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SourceTable")]
+    [EdmEntityType(NamespaceName="Model", Name="SourceTableEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SourceTable")]
     public class SourceTableEfImpl : BaseServerDataObject_EntityFramework, SourceTable, Zetbox.API.IExportableInternal
     {

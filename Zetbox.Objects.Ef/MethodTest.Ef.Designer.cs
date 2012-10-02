@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// Test class for methods
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="MethodTest")]
+    [EdmEntityType(NamespaceName="Model", Name="MethodTestEfImpl")]
     [System.Diagnostics.DebuggerDisplay("MethodTest")]
     public class MethodTestEfImpl : BaseServerDataObject_EntityFramework, MethodTest
     {

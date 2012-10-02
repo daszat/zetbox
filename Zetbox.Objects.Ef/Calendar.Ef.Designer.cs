@@ -22,7 +22,7 @@ namespace Zetbox.App.Calendar
     /// <summary>
     /// A Calendar describing recurrent working hours
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Calendar")]
+    [EdmEntityType(NamespaceName="Model", Name="CalendarEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Calendar")]
     public class CalendarEfImpl : BaseServerDataObject_EntityFramework, Calendar, Zetbox.API.IExportableInternal
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for ObjectReference Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ObjectReferenceProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="ObjectReferencePropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty")]
     public class ObjectReferencePropertyEfImpl : Zetbox.App.Base.PropertyEfImpl, ObjectReferenceProperty
     {

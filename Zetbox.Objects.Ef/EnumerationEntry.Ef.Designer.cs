@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for an Enumeration Entry.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="EnumerationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="EnumerationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("EnumerationEntry")]
     public class EnumerationEntryEfImpl : BaseServerDataObject_EntityFramework, EnumerationEntry, Zetbox.API.IExportableInternal
     {

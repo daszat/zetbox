@@ -22,7 +22,7 @@ namespace Zetbox.App.Calendar
     /// <summary>
     /// This rule applies every day
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CommonCalendarRule")]
+    [EdmEntityType(NamespaceName="Model", Name="CommonCalendarRuleEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CommonCalendarRule")]
     public class CommonCalendarRuleEfImpl : Zetbox.App.Calendar.CalendarRuleEfImpl, CommonCalendarRule
     {

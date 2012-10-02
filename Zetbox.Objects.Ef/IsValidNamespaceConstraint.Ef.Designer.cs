@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IsValidNamespaceConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="IsValidNamespaceConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IsValidNamespaceConstraint")]
     public class IsValidNamespaceConstraintEfImpl : Zetbox.App.Base.IsValidIdentifierConstraintEfImpl, IsValidNamespaceConstraint
     {

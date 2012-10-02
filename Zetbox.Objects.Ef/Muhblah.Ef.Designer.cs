@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Muhblah")]
+    [EdmEntityType(NamespaceName="Model", Name="MuhblahEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Muhblah")]
     public class MuhblahEfImpl : BaseServerDataObject_EntityFramework, Muhblah
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Enumerations.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Enumeration")]
+    [EdmEntityType(NamespaceName="Model", Name="EnumerationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Enumeration")]
     public class EnumerationEfImpl : Zetbox.App.Base.DataTypeEfImpl, Enumeration
     {

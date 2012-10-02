@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ViewModelDescriptor")]
+    [EdmEntityType(NamespaceName="Model", Name="ViewModelDescriptorEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor")]
     public class ViewModelDescriptorEfImpl : BaseServerDataObject_EntityFramework, ViewModelDescriptor, Zetbox.API.IExportableInternal
     {

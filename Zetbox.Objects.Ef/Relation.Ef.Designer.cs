@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Describes a Relation between two Object Classes
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Relation")]
+    [EdmEntityType(NamespaceName="Model", Name="RelationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Relation")]
     public class RelationEfImpl : BaseServerDataObject_EntityFramework, Relation, Zetbox.API.IExportableInternal
     {

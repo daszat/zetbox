@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// Testclass for the required_parent tests: parent
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="RequiredParent")]
+    [EdmEntityType(NamespaceName="Model", Name="RequiredParentEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RequiredParent")]
     public class RequiredParentEfImpl : BaseServerDataObject_EntityFramework, RequiredParent
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for DateTime Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DateTimeParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="DateTimeParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DateTimeParameter")]
     public class DateTimeParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, DateTimeParameter
     {

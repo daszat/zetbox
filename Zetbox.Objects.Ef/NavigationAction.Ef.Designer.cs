@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NavigationAction")]
+    [EdmEntityType(NamespaceName="Model", Name="NavigationActionEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NavigationAction")]
     public class NavigationActionEfImpl : Zetbox.App.GUI.NavigationEntryEfImpl, NavigationAction
     {

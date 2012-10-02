@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Compound Object Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CompoundObjectProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="CompoundObjectPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CompoundObjectProperty")]
     public class CompoundObjectPropertyEfImpl : Zetbox.App.Base.PropertyEfImpl, CompoundObjectProperty
     {

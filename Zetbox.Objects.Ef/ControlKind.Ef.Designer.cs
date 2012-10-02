@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// The ControlKind specifies the toolkit-independent kind or type of control that should display a given Presentable.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ControlKind")]
+    [EdmEntityType(NamespaceName="Model", Name="ControlKindEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ControlKind")]
     public class ControlKindEfImpl : BaseServerDataObject_EntityFramework, ControlKind, Zetbox.API.IExportableInternal
     {

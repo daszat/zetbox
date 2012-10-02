@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Properties. This class is abstract.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Property")]
+    [EdmEntityType(NamespaceName="Model", Name="PropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Property")]
     public abstract class PropertyEfImpl : BaseServerDataObject_EntityFramework, Property, Zetbox.API.IExportableInternal
     {

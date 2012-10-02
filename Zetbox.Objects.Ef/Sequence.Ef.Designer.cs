@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Provides the definition of a database sequence
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Sequence")]
+    [EdmEntityType(NamespaceName="Model", Name="SequenceEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Sequence")]
     public class SequenceEfImpl : BaseServerDataObject_EntityFramework, Sequence, Zetbox.API.IExportableInternal
     {

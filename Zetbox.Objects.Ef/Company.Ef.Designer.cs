@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// Describes a Company
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Company")]
+    [EdmEntityType(NamespaceName="Model", Name="CompanyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Company")]
     public class CompanyEfImpl : BaseServerDataObject_EntityFramework, Company
     {

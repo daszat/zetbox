@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Object Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ObjectReferenceParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="ObjectReferenceParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceParameter")]
     public class ObjectReferenceParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, ObjectReferenceParameter
     {

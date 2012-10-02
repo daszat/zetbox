@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Descriptor Object for Zetbox Services
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ServiceDescriptor")]
+    [EdmEntityType(NamespaceName="Model", Name="ServiceDescriptorEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ServiceDescriptor")]
     public class ServiceDescriptorEfImpl : BaseServerDataObject_EntityFramework, ServiceDescriptor, Zetbox.API.IExportableInternal
     {

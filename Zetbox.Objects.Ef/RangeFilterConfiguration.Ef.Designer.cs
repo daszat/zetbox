@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Filter configuration for filtering on a range of a Property 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="RangeFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="RangeFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RangeFilterConfiguration")]
     public class RangeFilterConfigurationEfImpl : Zetbox.App.GUI.PropertyFilterConfigurationEfImpl, RangeFilterConfiguration
     {

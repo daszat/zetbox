@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for a CompoundObject Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CompoundObjectParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="CompoundObjectParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CompoundObjectParameter")]
     public class CompoundObjectParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, CompoundObjectParameter
     {

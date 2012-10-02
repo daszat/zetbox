@@ -22,7 +22,7 @@ namespace Zetbox.App.SchemaMigration
     /// <summary>
     /// Defines a Schema Migration Project
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="MigrationProject")]
+    [EdmEntityType(NamespaceName="Model", Name="MigrationProjectEfImpl")]
     [System.Diagnostics.DebuggerDisplay("MigrationProject")]
     public class MigrationProjectEfImpl : BaseServerDataObject_EntityFramework, MigrationProject, Zetbox.API.IExportableInternal
     {

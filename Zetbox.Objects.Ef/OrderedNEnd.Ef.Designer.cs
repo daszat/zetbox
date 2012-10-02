@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// A test class for persistently ordered 1:N relations
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="OrderedNEnd")]
+    [EdmEntityType(NamespaceName="Model", Name="OrderedNEndEfImpl")]
     [System.Diagnostics.DebuggerDisplay("OrderedNEnd")]
     public class OrderedNEndEfImpl : BaseServerDataObject_EntityFramework, OrderedNEnd
     {

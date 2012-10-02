@@ -18,7 +18,7 @@ using Zetbox.DalProvider.Ef;
 namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl")]
     public class CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyEfImpl>, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -435,7 +435,7 @@ namespace Zetbox.App.Base
 namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="DataType_implements_Interface_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="DataType_implements_Interface_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DataType_implements_Interface_RelationEntryEfImpl")]
     public class DataType_implements_Interface_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.DataType, Zetbox.App.Base.DataTypeEfImpl, Zetbox.App.Base.Interface, Zetbox.App.Base.InterfaceEfImpl>, DataType_implements_Interface_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -849,7 +849,7 @@ namespace Zetbox.App.Base
 namespace at.dasz.DocumentManagement
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="Document_has_Blob_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="Document_has_Blob_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntryEfImpl")]
     public class Document_has_Blob_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentEfImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobEfImpl>, Document_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -1371,7 +1371,7 @@ namespace at.dasz.DocumentManagement
 namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="Identity_memberOf_Group_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="Identity_memberOf_Group_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Identity_memberOf_Group_RelationEntryEfImpl")]
     public class Identity_memberOf_Group_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityEfImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupEfImpl>, Identity_memberOf_Group_RelationEntry
     {
@@ -1704,7 +1704,7 @@ namespace Zetbox.App.Base
 namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="IndexConstraint_ensures_unique_on_Property_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl")]
     public class IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.IndexConstraintEfImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyEfImpl>, IndexConstraint_ensures_unique_on_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -2118,7 +2118,7 @@ namespace Zetbox.App.Base
 namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="Muhblah_has_TestCustomObject_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="Muhblah_has_TestCustomObject_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Muhblah_has_TestCustomObject_RelationEntryEfImpl")]
     public class Muhblah_has_TestCustomObject_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Test.Muhblah, Zetbox.App.Test.MuhblahEfImpl, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectEfImpl>, Muhblah_has_TestCustomObject_RelationEntry
     {
@@ -2451,7 +2451,7 @@ namespace Zetbox.App.Test
 namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl")]
     public class N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_AEfImpl, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_BEfImpl>, N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry
     {
@@ -2784,7 +2784,7 @@ namespace Zetbox.App.Test
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="NavigationEntry_accessed_by_Group_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="NavigationEntry_accessed_by_Group_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryEfImpl")]
     public class NavigationEntry_accessed_by_Group_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryEfImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupEfImpl>, NavigationEntry_accessed_by_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -3201,7 +3201,7 @@ namespace Zetbox.App.GUI
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="ObjectReferenceProperty_shows_Method_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="ObjectReferenceProperty_shows_Method_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty_shows_Method_RelationEntryEfImpl")]
     public class ObjectReferenceProperty_shows_Method_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.ObjectReferencePropertyEfImpl, Zetbox.App.Base.Method, Zetbox.App.Base.MethodEfImpl>, ObjectReferenceProperty_shows_Method_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -3615,7 +3615,7 @@ namespace Zetbox.App.GUI
 namespace Zetbox.App.Projekte
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="Projekt_haben_Mitarbeiter_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="Projekt_haben_Mitarbeiter_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntryEfImpl")]
     public class Projekt_haben_Mitarbeiter_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektEfImpl, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.MitarbeiterEfImpl>, Projekt_haben_Mitarbeiter_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -4137,7 +4137,7 @@ namespace Zetbox.App.Projekte
 namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="RoleMembership_resolves_Relation_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="RoleMembership_resolves_Relation_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RoleMembership_resolves_Relation_RelationEntryEfImpl")]
     public class RoleMembership_resolves_Relation_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.RoleMembershipEfImpl, Zetbox.App.Base.Relation, Zetbox.App.Base.RelationEfImpl>, RoleMembership_resolves_Relation_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -4659,7 +4659,7 @@ namespace Zetbox.App.Base
 namespace Zetbox.App.SchemaMigration
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="SourceColumn_created_Property_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="SourceColumn_created_Property_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryEfImpl")]
     public class SourceColumn_created_Property_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnEfImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyEfImpl>, SourceColumn_created_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -5184,7 +5184,7 @@ namespace Zetbox.App.SchemaMigration
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="Template_hasMenu_Visual_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="Template_hasMenu_Visual_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Template_hasMenu_Visual_RelationEntryEfImpl")]
     public class Template_hasMenu_Visual_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.Template, Zetbox.App.GUI.TemplateEfImpl, Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl>, Template_hasMenu_Visual_RelationEntry
     {
@@ -5517,7 +5517,7 @@ namespace Zetbox.App.GUI
 namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="TestStudent_füllt_aus_Fragebogen_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl")]
     public class TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Test.TestStudent, Zetbox.App.Test.TestStudentEfImpl, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.FragebogenEfImpl>, TestStudent_füllt_aus_Fragebogen_RelationEntry
     {
@@ -5850,7 +5850,7 @@ namespace Zetbox.App.Test
 namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl")]
     public class TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl>, TypeRef_hasGenericArguments_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -6375,7 +6375,7 @@ namespace Zetbox.App.Base
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="ViewDescriptor_supports_TypeRef_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="ViewDescriptor_supports_TypeRef_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryEfImpl")]
     public class ViewDescriptor_supports_TypeRef_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorEfImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl>, ViewDescriptor_supports_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -6792,7 +6792,7 @@ namespace Zetbox.App.GUI
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl")]
     public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ViewModelDescriptorEfImpl, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindEfImpl>, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
@@ -7206,7 +7206,7 @@ namespace Zetbox.App.GUI
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="Visual_contains_Visual_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="Visual_contains_Visual_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Visual_contains_Visual_RelationEntryEfImpl")]
     public class Visual_contains_Visual_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl, Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl>, Visual_contains_Visual_RelationEntry
     {
@@ -7539,7 +7539,7 @@ namespace Zetbox.App.GUI
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="Visual_hasContextMenu_Visual_RelationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="Visual_hasContextMenu_Visual_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Visual_hasContextMenu_Visual_RelationEntryEfImpl")]
     public class Visual_hasContextMenu_Visual_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl, Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl>, Visual_hasContextMenu_Visual_RelationEntry
     {
@@ -7872,7 +7872,7 @@ namespace Zetbox.App.GUI
 namespace Zetbox.App.Projekte
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
-    [EdmEntityType(NamespaceName="Model", Name="Kunde_EMails_CollectionEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="Kunde_EMails_CollectionEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntryEfImpl")]
     public class Kunde_EMails_CollectionEntryEfImpl : Zetbox.DalProvider.Ef.ValueCollectionEntryEfImpl<Zetbox.App.Projekte.Kunde, Zetbox.App.Projekte.KundeEfImpl, string>, Kunde_EMails_CollectionEntry, Zetbox.API.IExportableValueCollectionEntryInternal
     {
@@ -8170,7 +8170,7 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
 namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
-    [EdmEntityType(NamespaceName="Model", Name="TestCustomObject_PhoneNumbersOther_CollectionEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl")]
     public class TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl : Zetbox.DalProvider.Ef.CompoundCollectionEntryEfImpl<Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectEfImpl, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestPhoneCompoundObjectEfImpl>, TestCustomObject_PhoneNumbersOther_CollectionEntry
     {

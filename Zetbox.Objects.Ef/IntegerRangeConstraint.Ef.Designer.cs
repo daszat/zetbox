@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IntegerRangeConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="IntegerRangeConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IntegerRangeConstraint")]
     public class IntegerRangeConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, IntegerRangeConstraint
     {

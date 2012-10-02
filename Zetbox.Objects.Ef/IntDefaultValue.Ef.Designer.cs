@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Sets an integer property with the configured default value
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IntDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="IntDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IntDefaultValue")]
     public class IntDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, IntDefaultValue
     {

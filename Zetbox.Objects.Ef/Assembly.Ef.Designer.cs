@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Assembly")]
+    [EdmEntityType(NamespaceName="Model", Name="AssemblyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Assembly")]
     public class AssemblyEfImpl : BaseServerDataObject_EntityFramework, Assembly, Zetbox.API.IExportableInternal
     {

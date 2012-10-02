@@ -22,7 +22,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Document with revisions
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Document")]
+    [EdmEntityType(NamespaceName="Model", Name="DocumentEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Document")]
     public class DocumentEfImpl : at.dasz.DocumentManagement.FileEfImpl, Document
     {

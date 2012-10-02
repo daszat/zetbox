@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Fragebogen")]
+    [EdmEntityType(NamespaceName="Model", Name="FragebogenEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Fragebogen")]
     public class FragebogenEfImpl : BaseServerDataObject_EntityFramework, Fragebogen
     {

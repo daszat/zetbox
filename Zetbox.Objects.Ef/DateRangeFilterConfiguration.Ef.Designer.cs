@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DateRangeFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="DateRangeFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DateRangeFilterConfiguration")]
     public class DateRangeFilterConfigurationEfImpl : Zetbox.App.GUI.PropertyFilterConfigurationEfImpl, DateRangeFilterConfiguration
     {

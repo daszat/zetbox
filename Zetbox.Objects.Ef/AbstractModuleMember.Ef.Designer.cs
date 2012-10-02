@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Abstract base class for classes (and their instances) belonging to a Module
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="AbstractModuleMember")]
+    [EdmEntityType(NamespaceName="Model", Name="AbstractModuleMemberEfImpl")]
     [System.Diagnostics.DebuggerDisplay("AbstractModuleMember")]
     public class AbstractModuleMemberEfImpl : BaseServerDataObject_EntityFramework, AbstractModuleMember, Zetbox.API.IExportableInternal
     {

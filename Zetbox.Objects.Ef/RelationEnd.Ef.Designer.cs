@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Describes one end of a relation between two object classes
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="RelationEnd")]
+    [EdmEntityType(NamespaceName="Model", Name="RelationEndEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RelationEnd")]
     public class RelationEndEfImpl : BaseServerDataObject_EntityFramework, RelationEnd, Zetbox.API.IExportableInternal
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DefaultPropertyValue")]
+    [EdmEntityType(NamespaceName="Model", Name="DefaultPropertyValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DefaultPropertyValue")]
     public abstract class DefaultPropertyValueEfImpl : BaseServerDataObject_EntityFramework, DefaultPropertyValue, Zetbox.API.IExportableInternal
     {

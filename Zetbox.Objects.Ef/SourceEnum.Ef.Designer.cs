@@ -22,7 +22,7 @@ namespace Zetbox.App.SchemaMigration
     /// <summary>
     /// Mapps an Enum
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SourceEnum")]
+    [EdmEntityType(NamespaceName="Model", Name="SourceEnumEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SourceEnum")]
     public class SourceEnumEfImpl : BaseServerDataObject_EntityFramework, SourceEnum, Zetbox.API.IExportableInternal
     {

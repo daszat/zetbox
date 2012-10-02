@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Filter configuration for filtering on a single value of a Property 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SinglePropertyFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="SinglePropertyFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SinglePropertyFilterConfiguration")]
     public class SinglePropertyFilterConfigurationEfImpl : Zetbox.App.GUI.PropertyFilterConfigurationEfImpl, SinglePropertyFilterConfiguration
     {

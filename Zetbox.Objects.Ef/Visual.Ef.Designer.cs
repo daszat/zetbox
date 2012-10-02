@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Visual")]
+    [EdmEntityType(NamespaceName="Model", Name="VisualEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Visual")]
     public class VisualEfImpl : BaseServerDataObject_EntityFramework, Visual
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Enumeration Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="EnumerationProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="EnumerationPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("EnumerationProperty")]
     public class EnumerationPropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, EnumerationProperty
     {

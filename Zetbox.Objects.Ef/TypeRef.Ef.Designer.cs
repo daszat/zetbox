@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="TypeRef")]
+    [EdmEntityType(NamespaceName="Model", Name="TypeRefEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
     public class TypeRefEfImpl : BaseServerDataObject_EntityFramework, TypeRef, Zetbox.API.IExportableInternal
     {

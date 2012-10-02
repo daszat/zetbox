@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Sets an string property with the configured default value
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="StringDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="StringDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("StringDefaultValue")]
     public class StringDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, StringDefaultValue
     {

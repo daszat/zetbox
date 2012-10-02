@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Int Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IntParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="IntParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IntParameter")]
     public class IntParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, IntParameter
     {

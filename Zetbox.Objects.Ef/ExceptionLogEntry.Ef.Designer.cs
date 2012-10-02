@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Logentry for exceptions
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ExceptionLogEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="ExceptionLogEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ExceptionLogEntry")]
     public class ExceptionLogEntryEfImpl : BaseServerDataObject_EntityFramework, ExceptionLogEntry
     {

@@ -3,8 +3,8 @@
   <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
     
     <!-- EntitySetMappings for classes -->
-    <EntitySetMapping Name="AbstractModuleMember">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.AbstractModuleMember)">
+    <EntitySetMapping Name="AbstractModuleMemberEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AbstractModuleMemberEfImpl)">
 	    <MappingFragment StoreEntitySet="AbstractModuleMember">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -13,8 +13,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AccessControl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.AccessControl)">
+    <EntitySetMapping Name="AccessControlEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AccessControlEfImpl)">
 	    <MappingFragment StoreEntitySet="AccessControl">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -25,34 +25,34 @@
 <ScalarProperty Name="RightsImpl" ColumnName="Rights" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.GroupMembership)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GroupMembershipEfImpl)">
 	    <MappingFragment StoreEntitySet="GroupMembership">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RoleMembership)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RoleMembershipEfImpl)">
 	    <MappingFragment StoreEntitySet="RoleMembership">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ANewObjectClass">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ANewObjectClass)">
+    <EntitySetMapping Name="ANewObjectClassEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ANewObjectClassEfImpl)">
 	    <MappingFragment StoreEntitySet="ANewObjectClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="TestString" ColumnName="TestString" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AnotherTest">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.AnotherTest)">
+    <EntitySetMapping Name="AnotherTestEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AnotherTestEfImpl)">
 	    <MappingFragment StoreEntitySet="AnotherTest">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Antwort">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Antwort)">
+    <EntitySetMapping Name="AntwortEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AntwortEfImpl)">
 	    <MappingFragment StoreEntitySet="Antwort">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="gute_Antworten_pos" ColumnName="fk_Ein_Fragebogen_pos" />
@@ -62,13 +62,13 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AnyReferenceTestObject">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.AnyReferenceTestObject)">
+    <EntitySetMapping Name="AnyReferenceTestObjectEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AnyReferenceTestObjectEfImpl)">
 	    <MappingFragment StoreEntitySet="AnyReferenceTestObject">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ComplexProperty Name="AnyImpl" TypeName="Model.AnyReference">
+<ComplexProperty Name="AnyImpl" TypeName="Model.AnyReferenceEfImpl">
 <ScalarProperty Name="ObjClass" ColumnName="Any_ObjClass" />
 <ScalarProperty Name="ObjGuid" ColumnName="Any_ObjGuid" />
 <ScalarProperty Name="ObjID" ColumnName="Any_ObjID" />
@@ -76,8 +76,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Application">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Application)">
+    <EntitySetMapping Name="ApplicationEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ApplicationEfImpl)">
 	    <MappingFragment StoreEntitySet="Application">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -88,8 +88,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Assembly">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Assembly)">
+    <EntitySetMapping Name="AssemblyEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AssemblyEfImpl)">
 	    <MappingFragment StoreEntitySet="Assembly">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -100,8 +100,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Auftrag">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Auftrag)">
+    <EntitySetMapping Name="AuftragEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AuftragEfImpl)">
 	    <MappingFragment StoreEntitySet="Auftrag">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Auftragsname" ColumnName="Auftragsname" />
@@ -130,8 +130,8 @@
         <ScalarProperty Name="Identity" ColumnName="Identity" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="BaseParameter">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
+    <EntitySetMapping Name="BaseParameterEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
@@ -146,60 +146,60 @@
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="BoolParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CLRObjectParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CLRObjectParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="CLRObjectParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObjectParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObjectParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="CompoundObjectParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimeParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimeParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="DateTimeParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DateTimeStyleImpl" ColumnName="DateTimeStyle" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DecimalParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DecimalParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="DecimalParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="DoubleParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="EnumParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IntParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="IntParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="ObjectReferenceParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringParameter)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringParameterEfImpl)">
 	    <MappingFragment StoreEntitySet="StringParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Blob">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Blob)">
+    <EntitySetMapping Name="BlobEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BlobEfImpl)">
 	    <MappingFragment StoreEntitySet="Blob">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -211,8 +211,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Calendar">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Calendar)">
+    <EntitySetMapping Name="CalendarEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CalendarEfImpl)">
 	    <MappingFragment StoreEntitySet="Calendar">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -222,8 +222,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CalendarRule">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CalendarRule)">
+    <EntitySetMapping Name="CalendarRuleEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CalendarRuleEfImpl)">
 	    <MappingFragment StoreEntitySet="CalendarRule">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -236,29 +236,29 @@
 <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CommonCalendarRule)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CommonCalendarRuleEfImpl)">
 	    <MappingFragment StoreEntitySet="CommonCalendarRule">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DayOfWeekCalendarRule)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DayOfWeekCalendarRuleEfImpl)">
 	    <MappingFragment StoreEntitySet="DayOfWeekCalendarRule">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DayOfWeekImpl" ColumnName="DayOfWeek" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.YearlyCalendarRule)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.YearlyCalendarRuleEfImpl)">
 	    <MappingFragment StoreEntitySet="YearlyCalendarRule">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EasterCalendarRule)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EasterCalendarRuleEfImpl)">
 	    <MappingFragment StoreEntitySet="EasterCalendarRule">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Offset" ColumnName="Offset" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.FixedYearlyCalendarRule)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FixedYearlyCalendarRuleEfImpl)">
 	    <MappingFragment StoreEntitySet="FixedYearlyCalendarRule">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Day" ColumnName="Day" />
@@ -266,16 +266,16 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Company">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Company)">
+    <EntitySetMapping Name="CompanyEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CompanyEfImpl)">
 	    <MappingFragment StoreEntitySet="Company">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Constraint">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Constraint)">
+    <EntitySetMapping Name="ConstraintEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -284,59 +284,59 @@
 <ScalarProperty Name="Reason" ColumnName="Reason" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntegerRangeConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IntegerRangeConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="IntegerRangeConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Max" ColumnName="Max" />
 <ScalarProperty Name="Min" ColumnName="Min" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.InvokingConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.InvokingConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="InvokingConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IsValidIdentifierConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IsValidIdentifierConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="IsValidIdentifierConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IsValidNamespaceConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IsValidNamespaceConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="IsValidNamespaceConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocationConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocationConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="MethodInvocationConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NotNullableConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NotNullableConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="NotNullableConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ReadOnlyConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ReadOnlyConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="ReadOnlyConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ClientReadOnlyConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ClientReadOnlyConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="ClientReadOnlyConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.InitOnlyConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.InitOnlyConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="InitOnlyConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewReadOnlyConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewReadOnlyConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="ViewReadOnlyConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringRangeConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringRangeConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="StringRangeConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="MaxLength" ColumnName="MaxLength" />
@@ -344,8 +344,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ConstraintInvocation">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ConstraintInvocation)">
+    <EntitySetMapping Name="ConstraintInvocationEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ConstraintInvocationEfImpl)">
 	    <MappingFragment StoreEntitySet="ConstraintInvocation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -353,8 +353,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ControlKind">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ControlKind)">
+    <EntitySetMapping Name="ControlKindEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ControlKindEfImpl)">
 	    <MappingFragment StoreEntitySet="ControlKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -362,8 +362,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CurrentSchema">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentSchema)">
+    <EntitySetMapping Name="CurrentSchemaEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentSchemaEfImpl)">
 	    <MappingFragment StoreEntitySet="CurrentSchema">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Schema" ColumnName="Schema" />
@@ -371,8 +371,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DataType">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DataType)">
+    <EntitySetMapping Name="DataTypeEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DataTypeEfImpl)">
 	    <MappingFragment StoreEntitySet="DataType">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -385,23 +385,23 @@
 <ScalarProperty Name="ShowNameInLists" ColumnName="ShowNameInLists" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObject)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObjectEfImpl)">
 	    <MappingFragment StoreEntitySet="CompoundObject">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Enumeration)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEfImpl)">
 	    <MappingFragment StoreEntitySet="Enumeration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="AreFlags" ColumnName="AreFlags" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Interface)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.InterfaceEfImpl)">
 	    <MappingFragment StoreEntitySet="Interface">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClassEfImpl)">
 	    <MappingFragment StoreEntitySet="ObjectClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -412,8 +412,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DefaultPropertyValue">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DefaultPropertyValue)">
+    <EntitySetMapping Name="DefaultPropertyValueEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DefaultPropertyValueEfImpl)">
 	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -421,42 +421,42 @@
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolDefaultValue)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolDefaultValueEfImpl)">
 	    <MappingFragment StoreEntitySet="BoolDefaultValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="BoolValue" ColumnName="BoolValue" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentDateTimeDefaultValue)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentDateTimeDefaultValueEfImpl)">
 	    <MappingFragment StoreEntitySet="CurrentDateTimeDefaultValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumDefaultValue)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumDefaultValueEfImpl)">
 	    <MappingFragment StoreEntitySet="EnumDefaultValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntDefaultValue)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IntDefaultValueEfImpl)">
 	    <MappingFragment StoreEntitySet="IntDefaultValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="IntValue" ColumnName="IntValue" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NewGuidDefaultValue)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NewGuidDefaultValueEfImpl)">
 	    <MappingFragment StoreEntitySet="NewGuidDefaultValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringDefaultValue)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringDefaultValueEfImpl)">
 	    <MappingFragment StoreEntitySet="StringDefaultValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EnumerationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEntry)">
+    <EntitySetMapping Name="EnumerationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEntryEfImpl)">
 	    <MappingFragment StoreEntitySet="EnumerationEntry">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="EnumerationEntries_pos" ColumnName="fk_Enumeration_pos" />
@@ -470,8 +470,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ExceptionLogEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ExceptionLogEntry)">
+    <EntitySetMapping Name="ExceptionLogEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ExceptionLogEntryEfImpl)">
 	    <MappingFragment StoreEntitySet="ExceptionLogEntry">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -483,8 +483,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="File">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.File)">
+    <EntitySetMapping Name="FileEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FileEfImpl)">
 	    <MappingFragment StoreEntitySet="File">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -493,29 +493,29 @@
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Document)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DocumentEfImpl)">
 	    <MappingFragment StoreEntitySet="Document">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DynamicFile)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DynamicFileEfImpl)">
 	    <MappingFragment StoreEntitySet="DynamicFile">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ImportedFile)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ImportedFileEfImpl)">
 	    <MappingFragment StoreEntitySet="ImportedFile">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StaticFile)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StaticFileEfImpl)">
 	    <MappingFragment StoreEntitySet="StaticFile">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FileImportConfiguration">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.FileImportConfiguration)">
+    <EntitySetMapping Name="FileImportConfigurationEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FileImportConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="FileImportConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -526,8 +526,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FilterConfiguration">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.FilterConfiguration)">
+    <EntitySetMapping Name="FilterConfigurationEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FilterConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -538,23 +538,23 @@
 <ScalarProperty Name="Required" ColumnName="Required" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClassFilterConfiguration)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClassFilterConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="ObjectClassFilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.OptionalPredicateFilterConfiguration)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.OptionalPredicateFilterConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="OptionalPredicateFilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Predicate" ColumnName="Predicate" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.PropertyFilterConfiguration)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PropertyFilterConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="PropertyFilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DateRangeFilterConfiguration)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DateRangeFilterConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="DateRangeFilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="IsCurrentMonthDefault" ColumnName="IsCurrentMonthDefault" />
@@ -562,39 +562,39 @@
 <ScalarProperty Name="IsCurrentYearDefault" ColumnName="IsCurrentYearDefault" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MonthFilterConfiguration)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MonthFilterConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="MonthFilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="IsCurrentMonthDefault" ColumnName="IsCurrentMonthDefault" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RangeFilterConfiguration)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RangeFilterConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="RangeFilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SinglePropertyFilterConfiguration)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SinglePropertyFilterConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="SinglePropertyFilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.YearFilterConfiguration)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.YearFilterConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="YearFilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="IsCurrentYearDefault" ColumnName="IsCurrentYearDefault" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Fragebogen">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Fragebogen)">
+    <EntitySetMapping Name="FragebogenEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FragebogenEfImpl)">
 	    <MappingFragment StoreEntitySet="Fragebogen">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="BogenNummer" ColumnName="BogenNummer" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Group">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Group)">
+    <EntitySetMapping Name="GroupEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GroupEfImpl)">
 	    <MappingFragment StoreEntitySet="Group">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -602,8 +602,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Icon">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Icon)">
+    <EntitySetMapping Name="IconEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IconEfImpl)">
 	    <MappingFragment StoreEntitySet="Icon">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -611,8 +611,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Identity">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Identity)">
+    <EntitySetMapping Name="IdentityEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IdentityEfImpl)">
 	    <MappingFragment StoreEntitySet="Identity">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -621,23 +621,23 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="InstanceConstraint">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.InstanceConstraint)">
+    <EntitySetMapping Name="InstanceConstraintEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.InstanceConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="InstanceConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Reason" ColumnName="Reason" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IndexConstraint)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IndexConstraintEfImpl)">
 	    <MappingFragment StoreEntitySet="IndexConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="IsUnique" ColumnName="IsUnique" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Kunde">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde)">
+    <EntitySetMapping Name="KundeEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.KundeEfImpl)">
 	    <MappingFragment StoreEntitySet="Kunde">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Adresse" ColumnName="Adresse" />
@@ -651,8 +651,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Method">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Method)">
+    <EntitySetMapping Name="MethodEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodEfImpl)">
 	    <MappingFragment StoreEntitySet="Method">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
@@ -668,16 +668,16 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MethodTest">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodTest)">
+    <EntitySetMapping Name="MethodTestEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodTestEfImpl)">
 	    <MappingFragment StoreEntitySet="MethodTest">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="StringProp" ColumnName="StringProp" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MigrationLog">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MigrationLog)">
+    <EntitySetMapping Name="MigrationLogEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MigrationLogEfImpl)">
 	    <MappingFragment StoreEntitySet="MigrationLog">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Destination" ColumnName="Destination" />
@@ -688,8 +688,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MigrationProject">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MigrationProject)">
+    <EntitySetMapping Name="MigrationProjectEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MigrationProjectEfImpl)">
 	    <MappingFragment StoreEntitySet="MigrationProject">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -699,8 +699,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Mitarbeiter">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">
+    <EntitySetMapping Name="MitarbeiterEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MitarbeiterEfImpl)">
 	    <MappingFragment StoreEntitySet="Mitarbeiter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -713,8 +713,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Module">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Module)">
+    <EntitySetMapping Name="ModuleEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ModuleEfImpl)">
 	    <MappingFragment StoreEntitySet="Module">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -727,8 +727,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Muhblah">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Muhblah)">
+    <EntitySetMapping Name="MuhblahEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MuhblahEfImpl)">
 	    <MappingFragment StoreEntitySet="Muhblah">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="TestBool" ColumnName="TestBool" />
@@ -738,24 +738,24 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="N_to_M_relations_A">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.N_to_M_relations_A)">
+    <EntitySetMapping Name="N_to_M_relations_AEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.N_to_M_relations_AEfImpl)">
 	    <MappingFragment StoreEntitySet="N_to_M_relations_A">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="N_to_M_relations_B">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.N_to_M_relations_B)">
+    <EntitySetMapping Name="N_to_M_relations_BEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.N_to_M_relations_BEfImpl)">
 	    <MappingFragment StoreEntitySet="N_to_M_relations_B">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NavigationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationEntry)">
+    <EntitySetMapping Name="NavigationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationEntryEfImpl)">
 	    <MappingFragment StoreEntitySet="NavigationEntry">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Children_pos" ColumnName="fk_Parent_pos" />
@@ -766,17 +766,17 @@
 <ScalarProperty Name="Title" ColumnName="Title" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationAction)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationActionEfImpl)">
 	    <MappingFragment StoreEntitySet="NavigationAction">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationScreen)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationScreenEfImpl)">
 	    <MappingFragment StoreEntitySet="NavigationScreen">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationSearchScreen)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationSearchScreenEfImpl)">
 	    <MappingFragment StoreEntitySet="NavigationSearchScreen">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="AllowAddNew" ColumnName="AllowAddNew" />
@@ -797,24 +797,24 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="One_to_N_relations_N">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.One_to_N_relations_N)">
+    <EntitySetMapping Name="One_to_N_relations_NEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.One_to_N_relations_NEfImpl)">
 	    <MappingFragment StoreEntitySet="One_to_N_relations_N">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="One_to_N_relations_One">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.One_to_N_relations_One)">
+    <EntitySetMapping Name="One_to_N_relations_OneEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.One_to_N_relations_OneEfImpl)">
 	    <MappingFragment StoreEntitySet="One_to_N_relations_One">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrderedNEnd">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.OrderedNEnd)">
+    <EntitySetMapping Name="OrderedNEndEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.OrderedNEndEfImpl)">
 	    <MappingFragment StoreEntitySet="OrderedNEnd">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="NEnds_pos" ColumnName="fk_OneEnd_pos" />
@@ -822,16 +822,16 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrderedOneEnd">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.OrderedOneEnd)">
+    <EntitySetMapping Name="OrderedOneEndEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.OrderedOneEndEfImpl)">
 	    <MappingFragment StoreEntitySet="OrderedOneEnd">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="SomeInt" ColumnName="SomeInt" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Projekt">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt)">
+    <EntitySetMapping Name="ProjektEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ProjektEfImpl)">
 	    <MappingFragment StoreEntitySet="Projekt">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="AufwandGes" ColumnName="AufwandGes" />
@@ -865,8 +865,8 @@
         <ScalarProperty Name="Identity" ColumnName="Identity" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="Property">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
+    <EntitySetMapping Name="PropertyEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
@@ -882,19 +882,19 @@
 <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CalculatedObjectReferenceProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CalculatedObjectReferencePropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="CalculatedObjectReferenceProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObjectProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObjectPropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="CompoundObjectProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferencePlaceholderProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferencePlaceholderPropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="ObjectReferencePlaceholderProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
@@ -904,14 +904,14 @@
 <ScalarProperty Name="Verb" ColumnName="Verb" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferencePropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="ObjectReferenceProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="EagerLoading" ColumnName="EagerLoading" />
 <ScalarProperty Name="IsInlineEditable" ColumnName="IsInlineEditable" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ValueTypeProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ValueTypePropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="ValueTypeProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
@@ -919,7 +919,7 @@
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolPropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="BoolProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="FalseLabel" ColumnName="FalseLabel" />
@@ -927,50 +927,50 @@
 <ScalarProperty Name="TrueLabel" ColumnName="TrueLabel" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimeProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimePropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="DateTimeProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DateTimeStyleImpl" ColumnName="DateTimeStyle" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DecimalProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DecimalPropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="DecimalProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Precision" ColumnName="Precision" />
 <ScalarProperty Name="Scale" ColumnName="Scale" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DoublePropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="DoubleProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationPropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="EnumerationProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.GuidProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GuidPropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="GuidProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IntPropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="IntProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringProperty)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringPropertyEfImpl)">
 	    <MappingFragment StoreEntitySet="StringProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RecurrenceRuleTester">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RecurrenceRuleTester)">
+    <EntitySetMapping Name="RecurrenceRuleTesterEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RecurrenceRuleTesterEfImpl)">
 	    <MappingFragment StoreEntitySet="RecurrenceRuleTester">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ComplexProperty Name="RuleImpl" TypeName="Model.RecurrenceRule">
+<ComplexProperty Name="RuleImpl" TypeName="Model.RecurrenceRuleEfImpl">
 <ScalarProperty Name="DaysOffset" ColumnName="Rule_DaysOffset" />
 <ScalarProperty Name="EveryDay" ColumnName="Rule_EveryDay" />
 <ScalarProperty Name="EveryDayOfWeekImpl" ColumnName="Rule_EveryDayOfWeek" />
@@ -984,8 +984,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Relation">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Relation)">
+    <EntitySetMapping Name="RelationEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEfImpl)">
 	    <MappingFragment StoreEntitySet="Relation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -998,8 +998,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RelationEnd">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEnd)">
+    <EntitySetMapping Name="RelationEndEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEndEfImpl)">
 	    <MappingFragment StoreEntitySet="RelationEnd">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -1011,24 +1011,24 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RequiredParent">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RequiredParent)">
+    <EntitySetMapping Name="RequiredParentEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RequiredParentEfImpl)">
 	    <MappingFragment StoreEntitySet="RequiredParent">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RequiredParentChild">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RequiredParentChild)">
+    <EntitySetMapping Name="RequiredParentChildEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RequiredParentChildEfImpl)">
 	    <MappingFragment StoreEntitySet="RequiredParentChild">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SavedListConfiguration">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SavedListConfiguration)">
+    <EntitySetMapping Name="SavedListConfigurationEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SavedListConfigurationEfImpl)">
 	    <MappingFragment StoreEntitySet="SavedListConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Configuration" ColumnName="Configuration" />
@@ -1036,8 +1036,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SecurityTestChild">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestChild)">
+    <EntitySetMapping Name="SecurityTestChildEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestChildEfImpl)">
 	    <MappingFragment StoreEntitySet="SecurityTestChild">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -1065,16 +1065,16 @@
         <ScalarProperty Name="Identity" ColumnName="Identity" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="SecurityTestParent">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestParent)">
+    <EntitySetMapping Name="SecurityTestParentEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestParentEfImpl)">
 	    <MappingFragment StoreEntitySet="SecurityTestParent">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Sequence">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Sequence)">
+    <EntitySetMapping Name="SequenceEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SequenceEfImpl)">
 	    <MappingFragment StoreEntitySet="Sequence">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -1086,16 +1086,16 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SequenceData">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SequenceData)">
+    <EntitySetMapping Name="SequenceDataEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SequenceDataEfImpl)">
 	    <MappingFragment StoreEntitySet="SequenceData">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="CurrentNumber" ColumnName="CurrentNumber" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ServiceDescriptor">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ServiceDescriptor)">
+    <EntitySetMapping Name="ServiceDescriptorEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ServiceDescriptorEfImpl)">
 	    <MappingFragment StoreEntitySet="ServiceDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -1106,8 +1106,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SourceColumn">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceColumn)">
+    <EntitySetMapping Name="SourceColumnEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceColumnEfImpl)">
 	    <MappingFragment StoreEntitySet="SourceColumn">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -1124,8 +1124,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SourceEnum">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceEnum)">
+    <EntitySetMapping Name="SourceEnumEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceEnumEfImpl)">
 	    <MappingFragment StoreEntitySet="SourceEnum">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -1135,8 +1135,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SourceTable">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceTable)">
+    <EntitySetMapping Name="SourceTableEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceTableEfImpl)">
 	    <MappingFragment StoreEntitySet="SourceTable">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -1149,8 +1149,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="StagingDatabase">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StagingDatabase)">
+    <EntitySetMapping Name="StagingDatabaseEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StagingDatabaseEfImpl)">
 	    <MappingFragment StoreEntitySet="StagingDatabase">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -1163,8 +1163,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Task">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Task)">
+    <EntitySetMapping Name="TaskEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TaskEfImpl)">
 	    <MappingFragment StoreEntitySet="Task">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Aufwand" ColumnName="Aufwand" />
@@ -1195,8 +1195,8 @@
         <ScalarProperty Name="Identity" ColumnName="Identity" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="Template">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Template)">
+    <EntitySetMapping Name="TemplateEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TemplateEfImpl)">
 	    <MappingFragment StoreEntitySet="Template">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DisplayedTypeFullName" ColumnName="DisplayedTypeFullName" />
@@ -1204,25 +1204,25 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TestCustomObject">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject)">
+    <EntitySetMapping Name="TestCustomObjectEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObjectEfImpl)">
 	    <MappingFragment StoreEntitySet="TestCustomObject">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
-<ComplexProperty Name="PhoneNumberMobileImpl" TypeName="Model.TestPhoneCompoundObject">
+<ComplexProperty Name="PhoneNumberMobileImpl" TypeName="Model.TestPhoneCompoundObjectEfImpl">
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
 </ComplexProperty>
-<ComplexProperty Name="PhoneNumberOfficeImpl" TypeName="Model.TestPhoneCompoundObject">
+<ComplexProperty Name="PhoneNumberOfficeImpl" TypeName="Model.TestPhoneCompoundObjectEfImpl">
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
 </ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TestDecimal">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TestDecimal)">
+    <EntitySetMapping Name="TestDecimalEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestDecimalEfImpl)">
 	    <MappingFragment StoreEntitySet="TestDecimal">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Large" ColumnName="Large" />
@@ -1231,8 +1231,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TestObjClass">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TestObjClass)">
+    <EntitySetMapping Name="TestObjClassEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestObjClassEfImpl)">
 	    <MappingFragment StoreEntitySet="TestObjClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
@@ -1241,16 +1241,16 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TestStudent">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TestStudent)">
+    <EntitySetMapping Name="TestStudentEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestStudentEfImpl)">
 	    <MappingFragment StoreEntitySet="TestStudent">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TypeRef">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef)">
+    <EntitySetMapping Name="TypeRefEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRefEfImpl)">
 	    <MappingFragment StoreEntitySet="TypeRef">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -1262,8 +1262,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ViewDescriptor">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
+    <EntitySetMapping Name="ViewDescriptorEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptorEfImpl)">
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1271,8 +1271,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ViewModelDescriptor">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewModelDescriptor)">
+    <EntitySetMapping Name="ViewModelDescriptorEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewModelDescriptorEfImpl)">
 	    <MappingFragment StoreEntitySet="ViewModelDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1280,8 +1280,8 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Visual">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual)">
+    <EntitySetMapping Name="VisualEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.VisualEfImpl)">
 	    <MappingFragment StoreEntitySet="Visual">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1297,8 +1297,8 @@
     B: ZeroOrMore N_to_M_relations_B as BSide
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry)">
+    <EntitySetMapping Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
@@ -1335,8 +1335,8 @@
     B: ZeroOrMore Property as InputProperties
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry)">
+    <EntitySetMapping Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1374,8 +1374,8 @@
     B: ZeroOrMore Interface as ImplementedInterfaces
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="DataType_implements_Interface_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DataType_implements_Interface_RelationEntry)">
+    <EntitySetMapping Name="DataType_implements_Interface_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DataType_implements_Interface_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="DataType_implements_Interface_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1413,8 +1413,8 @@
     B: ZeroOrMore Blob as Revisions
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Document_has_Blob_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Document_has_Blob_RelationEntry)">
+    <EntitySetMapping Name="Document_has_Blob_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Document_has_Blob_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="Document_has_Blob_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1454,8 +1454,8 @@
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Identity_memberOf_Group_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Identity_memberOf_Group_RelationEntry)">
+    <EntitySetMapping Name="Identity_memberOf_Group_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Identity_memberOf_Group_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="Identity_memberOf_Group_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
@@ -1492,8 +1492,8 @@
     B: ZeroOrMore TestCustomObject as TCO_ManyList_Role
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Muhblah_has_TestCustomObject_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Muhblah_has_TestCustomObject_RelationEntry)">
+    <EntitySetMapping Name="Muhblah_has_TestCustomObject_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Muhblah_has_TestCustomObject_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="Muhblah_has_TestCustomObject_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
@@ -1530,8 +1530,8 @@
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="NavigationEntry_accessed_by_Group_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationEntry_accessed_by_Group_RelationEntry)">
+    <EntitySetMapping Name="NavigationEntry_accessed_by_Group_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationEntry_accessed_by_Group_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="NavigationEntry_accessed_by_Group_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1569,8 +1569,8 @@
     B: ZeroOrMore Method as Methods
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="ObjectReferenceProperty_shows_Method_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty_shows_Method_RelationEntry)">
+    <EntitySetMapping Name="ObjectReferenceProperty_shows_Method_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="ObjectReferenceProperty_shows_Method_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1608,8 +1608,8 @@
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry)">
+    <EntitySetMapping Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1647,8 +1647,8 @@
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Projekt_haben_Mitarbeiter_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_haben_Mitarbeiter_RelationEntry)">
+    <EntitySetMapping Name="Projekt_haben_Mitarbeiter_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_haben_Mitarbeiter_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="Projekt_haben_Mitarbeiter_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1688,8 +1688,8 @@
     B: ZeroOrMore Relation as Relations
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="RoleMembership_resolves_Relation_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RoleMembership_resolves_Relation_RelationEntry)">
+    <EntitySetMapping Name="RoleMembership_resolves_Relation_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RoleMembership_resolves_Relation_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="RoleMembership_resolves_Relation_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1729,8 +1729,8 @@
     B: ZeroOrMore Property as Property
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="SourceColumn_created_Property_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceColumn_created_Property_RelationEntry)">
+    <EntitySetMapping Name="SourceColumn_created_Property_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceColumn_created_Property_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="SourceColumn_created_Property_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1770,8 +1770,8 @@
     B: ZeroOrMore Fragebogen as Testbogen
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="TestStudent_füllt_aus_Fragebogen_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TestStudent_füllt_aus_Fragebogen_RelationEntry)">
+    <EntitySetMapping Name="TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
@@ -1808,8 +1808,8 @@
     B: ZeroOrMore Visual as Menu
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Template_hasMenu_Visual_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Template_hasMenu_Visual_RelationEntry)">
+    <EntitySetMapping Name="Template_hasMenu_Visual_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Template_hasMenu_Visual_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="Template_hasMenu_Visual_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
@@ -1846,8 +1846,8 @@
     B: ZeroOrMore TypeRef as GenericArguments
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef_hasGenericArguments_TypeRef_RelationEntry)">
+    <EntitySetMapping Name="TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1887,8 +1887,8 @@
     B: ZeroOrMore Property as Properties
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="IndexConstraint_ensures_unique_on_Property_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IndexConstraint_ensures_unique_on_Property_RelationEntry)">
+    <EntitySetMapping Name="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1926,8 +1926,8 @@
     B: ZeroOrMore TypeRef as ViewModelTypeRefs
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="ViewDescriptor_supports_TypeRef_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor_supports_TypeRef_RelationEntry)">
+    <EntitySetMapping Name="ViewDescriptor_supports_TypeRef_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="ViewDescriptor_supports_TypeRef_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1965,8 +1965,8 @@
     B: ZeroOrMore Visual as Children
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Visual_contains_Visual_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual_contains_Visual_RelationEntry)">
+    <EntitySetMapping Name="Visual_contains_Visual_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual_contains_Visual_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="Visual_contains_Visual_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
@@ -2003,8 +2003,8 @@
     B: ZeroOrMore Visual as ContextMenu
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Visual_hasContextMenu_Visual_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual_hasContextMenu_Visual_RelationEntry)">
+    <EntitySetMapping Name="Visual_hasContextMenu_Visual_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual_hasContextMenu_Visual_RelationEntryEfImpl)">
         <MappingFragment StoreEntitySet="Visual_hasContextMenu_Visual_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
@@ -5185,8 +5185,8 @@
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for object-value CollectionEntrys -->
-    <EntitySetMapping Name="Kunde_EMails_CollectionEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde_EMails_CollectionEntry)">
+    <EntitySetMapping Name="Kunde_EMails_CollectionEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde_EMails_CollectionEntryEfImpl)">
         <MappingFragment StoreEntitySet="Kunde_EMails_CollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Value" ColumnName="EMails" />
@@ -5206,11 +5206,11 @@
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->
-    <EntitySetMapping Name="TestCustomObject_PhoneNumbersOther_CollectionEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject_PhoneNumbersOther_CollectionEntry)">
+    <EntitySetMapping Name="TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl)">
         <MappingFragment StoreEntitySet="TestCustomObject_PhoneNumbersOther_CollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ComplexProperty Name="ValueImpl" TypeName="Model.TestPhoneCompoundObject">
+          <ComplexProperty Name="ValueImpl" TypeName="Model.TestPhoneCompoundObjectEfImpl">
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumbersOther_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumbersOther_Number" />
 </ComplexProperty>

@@ -22,7 +22,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// File with changeable content
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DynamicFile")]
+    [EdmEntityType(NamespaceName="Model", Name="DynamicFileEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DynamicFile")]
     public class DynamicFileEfImpl : at.dasz.DocumentManagement.FileEfImpl, DynamicFile
     {

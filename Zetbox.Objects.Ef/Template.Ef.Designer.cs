@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Template")]
+    [EdmEntityType(NamespaceName="Model", Name="TemplateEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Template")]
     public class TemplateEfImpl : BaseServerDataObject_EntityFramework, Template
     {

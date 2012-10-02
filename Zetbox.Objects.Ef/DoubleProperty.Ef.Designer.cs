@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Double Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DoubleProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="DoublePropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DoubleProperty")]
     public class DoublePropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, DoubleProperty
     {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SecurityTestChild")]
+    [EdmEntityType(NamespaceName="Model", Name="SecurityTestChildEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SecurityTestChild")]
     public class SecurityTestChildEfImpl : BaseServerDataObject_EntityFramework, SecurityTestChild
     {

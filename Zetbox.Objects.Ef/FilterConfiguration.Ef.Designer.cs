@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="FilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="FilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("FilterConfiguration")]
     public abstract class FilterConfigurationEfImpl : BaseServerDataObject_EntityFramework, FilterConfiguration, Zetbox.API.IExportableInternal
     {

@@ -22,7 +22,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Files beeing imported by the import service.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ImportedFile")]
+    [EdmEntityType(NamespaceName="Model", Name="ImportedFileEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ImportedFile")]
     public class ImportedFileEfImpl : at.dasz.DocumentManagement.FileEfImpl, ImportedFile
     {

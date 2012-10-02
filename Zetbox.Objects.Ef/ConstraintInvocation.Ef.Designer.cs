@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ConstraintInvocation")]
+    [EdmEntityType(NamespaceName="Model", Name="ConstraintInvocationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ConstraintInvocation")]
     public class ConstraintInvocationEfImpl : BaseServerDataObject_EntityFramework, ConstraintInvocation, Zetbox.API.IExportableInternal
     {
