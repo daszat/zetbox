@@ -44,13 +44,9 @@ namespace Zetbox.Client.WPF.View
         public NullableDateTimeValueEditor()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-
             InitializeComponent();
-
-            txtDate.GotKeyboardFocus += (s, e) => ViewModel.Focus();
-            txtDate.LostKeyboardFocus += (s, e) => ViewModel.Blur();
-            txtTime.GotKeyboardFocus += (s, e) => ViewModel.Focus();
-            txtTime.LostKeyboardFocus += (s, e) => ViewModel.Blur();
+            SetupFocusManagement(txtDate, () => ViewModel);
+            SetupFocusManagement(txtTime, () => ViewModel);
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)

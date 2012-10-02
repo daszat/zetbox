@@ -40,13 +40,12 @@ namespace Zetbox.Client.WPF.View
     /// </summary>
     public partial class NullablePropertyTextBoxView : PropertyEditor, IHasViewModel<BaseValueViewModel>, IHasViewModel<IFormattedValueViewModel>
     {
+
         public NullablePropertyTextBoxView()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
-
-            txtNullablePropertyTextBoxView.GotKeyboardFocus += (s, e) => ViewModel.Focus();
-            txtNullablePropertyTextBoxView.LostKeyboardFocus += (s, e) => ViewModel.Blur();
+            SetupFocusManagement(txtNullablePropertyTextBoxView, () => ViewModel);
         }
 
         #region IHasViewModel<BaseValueViewModel> Members

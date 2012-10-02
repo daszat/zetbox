@@ -88,7 +88,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     /// </summary>
     public interface IFormattedValueViewModel : IValueViewModel
     {
+        /// <summary>
+        /// Notify the view model of receiving the focus.
+        /// </summary>
         void Focus();
+        /// <summary>
+        /// Notify the view model of losing the focus.
+        /// </summary>
         void Blur();
 
         string FormattedValue { get; set; }

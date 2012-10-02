@@ -30,6 +30,7 @@ namespace Zetbox.Client.WPF.CustomControls
     using System.Windows.Input;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.Converter;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties
@@ -84,5 +85,41 @@ namespace Zetbox.Client.WPF.CustomControls
                 }
             }
         }
+
+        #region Focus Management for BaseValueViewModels
+
+        /// <summary>
+        /// Use this method to *properly* implement Focusmanagement for .NET 4.0. This contains hacks to make that work, so nobody else has do pull his/her hair out.
+        /// </summary>
+        /// <param name="element">the FrameworkElement whose keyboard focus should be managed</param>
+        /// <param name="vmGetter">a functor yielding the current BaseValueViewModel whose focus is tied to this view</param>
+        protected void SetupFocusManagement(FrameworkElement element, Func<BaseValueViewModel> vmGetter)
+        {
+            element.GotKeyboardFocus += (s, e) => FocusViewModel(element, vmGetter);
+            element.LostKeyboardFocus += (s, e) => BlurViewModel(element);
+            // when the control is unbound, DataContextChanged is fired BEFORE LostKeyboardFocus
+            // therefore we need to conditionally blur the ViewModel
+            element.DataContextChanged += (s, e) => BlurViewModel(element);
+        }
+
+        private Dictionary<FrameworkElement, BaseValueViewModel> _focusedModel = new Dictionary<FrameworkElement, BaseValueViewModel>();
+
+        private void FocusViewModel(FrameworkElement element, Func<BaseValueViewModel> vmGetter)
+        {
+            _focusedModel[element] = vmGetter();
+            _focusedModel[element].Focus();
+        }
+
+        private void BlurViewModel(FrameworkElement element)
+        {
+            BaseValueViewModel vm;
+            if (_focusedModel.TryGetValue(element, out vm))
+            {
+                try { vm.Blur(); }
+                finally { _focusedModel.Remove(element); }
+            }
+        }
+
+        #endregion
     }
 }

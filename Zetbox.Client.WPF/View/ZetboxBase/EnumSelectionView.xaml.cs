@@ -44,9 +44,7 @@ namespace Zetbox.Client.WPF.View
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
-
-            cb.GotKeyboardFocus += (s, e) => ViewModel.Focus();
-            cb.LostKeyboardFocus += (s, e) => ViewModel.Blur();
+            SetupFocusManagement(cb, () => ViewModel);
         }
 
         #region IHasViewModel<EnumerationPropertyModel> Members
