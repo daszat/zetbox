@@ -86,7 +86,6 @@
     <Compile Include="CompoundCollectionEntryEfImpl.cs" />
     <Compile Include="ValueCollectionEntryEfImpl.cs" />
     <Compile Include="EfProvider.cs" />
-    <Compile Include="EfSerializer.cs" />
     <Compile Include="EfValueCollectionWrapper.cs" />
     <Compile Include="EntityCollectionWrapper.cs" />
     <Compile Include="EfDataContext.cs" />
