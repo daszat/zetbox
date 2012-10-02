@@ -44,7 +44,7 @@ foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 
 #line 40 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-this.WriteObjects("    <EntitySetMapping Name=\"",  cls.Name , "\">\r\n");
+this.WriteObjects("    <EntitySetMapping Name=\"",  cls.Name , "EfImpl\">\r\n");
 #line 41 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 ApplyEntityTypeMapping(cls); 
 #line 42 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"

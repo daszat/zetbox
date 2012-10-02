@@ -110,7 +110,7 @@
 			// Nullable Complex types are not supported by EF
 %>
     <Property Name="<%= p.Name + ImplementationPropertySuffix %>"
-              Type="Model.<%= prop.CompoundObjectDefinition.Name %>"
+              Type="Model.<%= prop.CompoundObjectDefinition.Name %>EfImpl"
               Nullable="false" />
 <%
 			}

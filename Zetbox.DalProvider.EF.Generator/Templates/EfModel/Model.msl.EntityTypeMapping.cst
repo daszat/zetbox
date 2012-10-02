@@ -29,7 +29,7 @@
 <%@ Import Namespace="Zetbox.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= cls.Name %>)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= cls.Name %>EfImpl)">
 	    <MappingFragment StoreEntitySet="<%= cls.Name %>">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <%

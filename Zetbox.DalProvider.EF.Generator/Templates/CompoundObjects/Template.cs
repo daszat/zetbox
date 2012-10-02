@@ -35,7 +35,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
 
         protected override void ApplyClassAttributeTemplate()
         {
-            WriteLine("    [EdmComplexType(NamespaceName=\"Model\", Name=\"{0}\")]", this.CompoundObjectType.Name);
+            WriteLine("    [EdmComplexType(NamespaceName=\"Model\", Name=\"{0}EfImpl\")]", this.CompoundObjectType.Name);
         }
 
         /// <returns>The base class to inherit from.</returns>

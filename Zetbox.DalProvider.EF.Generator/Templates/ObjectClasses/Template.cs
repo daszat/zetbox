@@ -39,7 +39,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         protected override void ApplyClassAttributeTemplate()
         {
-            WriteLine("    [EdmEntityType(NamespaceName=\"Model\", Name=\"{0}\")]", this.DataType.Name);
+            WriteLine("    [EdmEntityType(NamespaceName=\"Model\", Name=\"{0}EfImpl\")]", this.DataType.Name);
         }
 
         protected override string GetBaseClass()

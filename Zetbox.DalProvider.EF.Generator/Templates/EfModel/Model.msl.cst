@@ -37,7 +37,7 @@
     foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 %>
-    <EntitySetMapping Name="<%= cls.Name %>">
+    <EntitySetMapping Name="<%= cls.Name %>EfImpl">
 <% ApplyEntityTypeMapping(cls); %>
     </EntitySetMapping>
 <%

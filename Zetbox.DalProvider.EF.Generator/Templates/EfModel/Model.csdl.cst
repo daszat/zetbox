@@ -37,14 +37,14 @@
     foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 %>
-    <EntitySet Name="<%= cls.Name %>" EntityType="Model.<%= cls.Name %>" />
+    <EntitySet Name="<%= cls.Name %>EfImpl" EntityType="Model.<%= cls.Name %>EfImpl" />
 <%  
 		if (cls.NeedsRightsTable())
 		{
 %>
     <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.<%= Construct.SecurityRulesClassName(cls) %>" />
     <AssociationSet Name="<%= Construct.SecurityRulesFKName(cls) %>" Association="Model.<%= Construct.SecurityRulesFKName(cls) %>">
-      <End Role="<%= cls.Name %>" EntitySet="<%= cls.Name %>" />
+      <End Role="<%= cls.Name %>" EntitySet="<%= cls.Name %>EfImpl" />
       <End Role="<%= Construct.SecurityRulesClassName(cls) %>" EntitySet="<%= Construct.SecurityRulesClassName(cls) %>" />
     </AssociationSet>
 <%	
@@ -61,11 +61,11 @@
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.<%= assocNameA %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().Name %>" />
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().Name %>EfImpl" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
     <AssociationSet Name="<%= assocNameB %>" Association="Model.<%= assocNameB %>" >
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().Name %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().Name %>EfImpl" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
 <%
@@ -85,7 +85,7 @@
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
-      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>" />
+      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>EfImpl" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
 <%
@@ -105,7 +105,7 @@
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
-      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>" />
+      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>EfImpl" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
 <%
@@ -119,8 +119,8 @@
         string assocName = rel.GetAssociationName();
 %>
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().Name %>" />
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().Name %>" />
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().Name %>EfImpl" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().Name %>EfImpl" />
     </AssociationSet>
 <%
     }
@@ -141,7 +141,7 @@
     foreach (var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 %>
-  <EntityType Name="<%= cls.Name %>"<%= GetAbstractModifier(cls) %>>
+  <EntityType Name="<%= cls.Name %>EfImpl"<%= GetAbstractModifier(cls) %>>
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -170,7 +170,7 @@
     <Property Name="Right" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
-    <End Role="<%= cls.Name %>" Type="Model.<%= cls.Name %>" Multiplicity="1" />
+    <End Role="<%= cls.Name %>" Type="Model.<%= cls.Name %>EfImpl" Multiplicity="1" />
     <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
     <ReferentialConstraint>
 	  <Principal Role="<%= cls.Name %>">
@@ -191,7 +191,7 @@
     foreach (var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
     {
 %>
-  <EntityType Name="<%= cls.Name %>" BaseType="Model.<%= cls.BaseObjectClass.Name %>"<%= GetAbstractModifier(cls) %>>
+  <EntityType Name="<%= cls.Name %>EfImpl" BaseType="Model.<%= cls.BaseObjectClass.Name %>EfImpl"<%= GetAbstractModifier(cls) %>>
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </EntityType>
 <%
@@ -253,7 +253,7 @@
   </EntityType>
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.A) %>" >
     <End Role="<%= rel.A.RoleName %>"
-         Type="Model.<%= rel.A.Type.Name %>" 
+         Type="Model.<%= rel.A.Type.Name %>EfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.<%= rel.GetRelationClassName() %>"
@@ -261,7 +261,7 @@
   </Association>
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>" >
     <End Role="<%= rel.B.RoleName %>"
-         Type="Model.<%= rel.B.Type.Name %>" 
+         Type="Model.<%= rel.B.Type.Name %>EfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.<%= rel.GetRelationClassName() %>"
@@ -308,7 +308,7 @@
   </EntityType>
   <Association Name="<%= prop.GetAssociationName() %>" >
     <End Role="<%= prop.ObjectClass.Name %>"
-         Type="Model.<%= prop.ObjectClass.Name %>" 
+         Type="Model.<%= prop.ObjectClass.Name %>EfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
@@ -342,7 +342,7 @@
                         ToRole="<%= prop.ObjectClass.Name %>" />
     <!-- B -->
     <Property Name="Value<%= ImplementationPropertySuffix %>"
-              Type="Model.<%= prop.CompoundObjectDefinition.Name %>"
+              Type="Model.<%= prop.CompoundObjectDefinition.Name %>EfImpl"
               Nullable="false" />
 <%
         if (prop.HasPersistentOrder)
@@ -355,7 +355,7 @@
   </EntityType>
   <Association Name="<%= prop.GetAssociationName() %>" >
     <End Role="<%= prop.ObjectClass.Name %>"
-         Type="Model.<%= prop.ObjectClass.Name %>" 
+         Type="Model.<%= prop.ObjectClass.Name %>EfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
@@ -372,10 +372,10 @@
 %>
   <Association Name="<%= rel.GetAssociationName() %>" >
     <End Role="<%= rel.A.RoleName %>"
-         Type="Model.<%= rel.A.Type.Name %>" 
+         Type="Model.<%= rel.A.Type.Name %>EfImpl" 
          Multiplicity="<%= rel.A.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
     <End Role="<%= rel.B.RoleName %>"
-         Type="Model.<%= rel.B.Type.Name %>" 
+         Type="Model.<%= rel.B.Type.Name %>EfImpl" 
          Multiplicity="<%= rel.B.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
   </Association>
 <%
@@ -388,7 +388,7 @@
     foreach (var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.Name))
     {
 %>
-  <ComplexType Name="<%= cls.Name %>" >
+  <ComplexType Name="<%= cls.Name %>EfImpl" >
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </ComplexType>
 <%    }

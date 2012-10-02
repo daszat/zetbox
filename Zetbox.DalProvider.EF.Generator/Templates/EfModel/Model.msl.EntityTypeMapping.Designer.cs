@@ -36,7 +36,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
         public override void Generate()
         {
 #line 32 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.EntityTypeMapping.cst"
-this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  cls.Name , ")\">\r\n");
+this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  cls.Name , "EfImpl)\">\r\n");
 this.WriteObjects("	    <MappingFragment StoreEntitySet=\"",  cls.Name , "\">\r\n");
 this.WriteObjects("	      <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 #line 36 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.EntityTypeMapping.cst"

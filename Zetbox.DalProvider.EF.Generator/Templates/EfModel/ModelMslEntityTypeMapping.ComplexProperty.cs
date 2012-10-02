@@ -48,7 +48,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
         public override void Generate()
         {
-            this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}\">",
+            this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}EfImpl\">",
                 propertyName,
                 ImplementationPropertySuffix,
                 prop.CompoundObjectDefinition.Name
