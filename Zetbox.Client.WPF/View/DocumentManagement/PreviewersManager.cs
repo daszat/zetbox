@@ -93,7 +93,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                     else if (streamInit != null)
                     {
                         stream = new COMStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read));
-                        streamInit.Initialize((IStream)stream, 0);
+                        streamInit.Initialize((IStream)stream, 0); // 0 = STGM_READ
                         isInitialized = true;
                     }
                 }
@@ -249,10 +249,10 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
         {
             int count = this._stream.Read(pv, 0, cb);
 
-            // destination expects an ULONG, therefore we must guard against negative values
-            if (pcbRead != IntPtr.Zero && count >= 0)
+            // destination expects an ULONG (32 bit?), therefore we must guard against negative values
+            if (pcbRead != IntPtr.Zero)
             {
-                Marshal.WriteInt64(pcbRead, count);
+                Marshal.WriteInt32(pcbRead, count >= 0 ? count : 0);
             }
         }
 
@@ -280,7 +280,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
         public void Stat(out System.Runtime.InteropServices.ComTypes.STATSTG pstatstg, int grfStatFlag)
         {
             pstatstg = new System.Runtime.InteropServices.ComTypes.STATSTG();
-            pstatstg.type = 2;
+            pstatstg.type = 2; // STGTY_STREAM
             pstatstg.cbSize = this._stream.Length;
             pstatstg.grfMode = 0;
             if (this._stream.CanRead && this._stream.CanWrite)
