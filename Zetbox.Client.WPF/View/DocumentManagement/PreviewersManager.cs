@@ -29,8 +29,16 @@ using Zetbox.API.Utils;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
+    // Some more infos: http://www.brad-smith.info/blog/archives/183
     class PreviewersManager : IDisposable
     {
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode, PreserveSig = false)]
+        static extern void SHCreateItemFromParsingName(
+            [In][MarshalAs(UnmanagedType.LPWStr)] string pszPath,
+            [In] IntPtr pbc, [In][MarshalAs(UnmanagedType.LPStruct)] Guid riid,
+            [Out][MarshalAs(UnmanagedType.Interface, IidParameterIndex = 2)] out IShellItem ppv
+        );
+
         private IPreviewHandler pHandler;
         private COMStream stream;
 
@@ -47,47 +55,48 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
         {
             Release();
 
-            string CLSID = "8895b1c6-b41f-4c1c-a562-0d564250836f";
-            Guid g = new Guid(CLSID);
-            string[] exts = fileName.Split('.');
-            string ext = exts[exts.Length - 1];
-            var regKey = string.Format(@".{0}\ShellEx\{1:B}", ext, g);
-            using (RegistryKey hk = Registry.ClassesRoot.OpenSubKey(regKey))
+            try
             {
-                if (hk == null)
+                string CLSID = "8895b1c6-b41f-4c1c-a562-0d564250836f";
+                Guid g = new Guid(CLSID);
+                string[] exts = fileName.Split('.');
+                string ext = exts[exts.Length - 1];
+                var regKey = string.Format(@".{0}\ShellEx\{1:B}", ext, g);
+                using (RegistryKey hk = Registry.ClassesRoot.OpenSubKey(regKey))
                 {
-                    Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - Registry Key not found: " + regKey);
-                    return;
-                }
-                var objValue = hk.GetValue("");
-                if (objValue == null)
-                {
-                    Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - no handler registrated in Registry");
-                    return;
-                }
-                if (!Guid.TryParse(objValue.ToString(), out g))
-                {
-                    Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - cannot parse guid from registry: " + objValue);
-                    return;
-                }
+                    if (hk == null)
+                    {
+                        Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - Registry Key not found: " + regKey);
+                        return;
+                    }
+                    var objValue = hk.GetValue("");
+                    if (objValue == null)
+                    {
+                        Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - no handler registrated in Registry");
+                        return;
+                    }
+                    if (!Guid.TryParse(objValue.ToString(), out g))
+                    {
+                        Logging.Log.WarnOnce("Unable to initialize IPreviewHandler - cannot parse guid from registry: " + objValue);
+                        return;
+                    }
 
-                Type type = Type.GetTypeFromCLSID(g, false);
-                if (type == null)
-                {
-                    Logging.Log.WarnOnce(string.Format("Unable to initialize IPreviewHandler - could not load COM Object, Type.GetTypeFromCLSID({0}) returend false", g));
-                    return;
-                }
-                object comObj = Activator.CreateInstance(type);
+                    Type type = Type.GetTypeFromCLSID(g, false);
+                    if (type == null)
+                    {
+                        Logging.Log.WarnOnce(string.Format("Unable to initialize IPreviewHandler - could not load COM Object, Type.GetTypeFromCLSID({0}) returend false", g));
+                        return;
+                    }
+                    object comObj = Activator.CreateInstance(type);
 
-                IInitializeWithFile fileInit = comObj as IInitializeWithFile;
-                IInitializeWithStream streamInit = comObj as IInitializeWithStream;
+                    IInitializeWithFile fileInit = comObj as IInitializeWithFile;
+                    IInitializeWithStream streamInit = comObj as IInitializeWithStream;
+                    IInitializeWithItem itemInit = comObj as IInitializeWithItem;
 
-                bool isInitialized = false;
-                try
-                {
+                    bool isInitialized = false;
                     if (fileInit != null)
                     {
-                        fileInit.Initialize(fileName, 0);
+                        fileInit.Initialize(fileName, 0); // 0 = STGM_READ
                         isInitialized = true;
                     }
                     else if (streamInit != null)
@@ -96,27 +105,34 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                         streamInit.Initialize((IStream)stream, 0); // 0 = STGM_READ
                         isInitialized = true;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logging.Log.Warn("Unable to initialize IPreviewHandler", ex);
-                }
+                    else if (itemInit != null)
+                    {
+                        IShellItem shellItem;
+                        SHCreateItemFromParsingName(fileName, IntPtr.Zero, typeof(IShellItem).GUID, out shellItem);
+                        itemInit.Initialize(shellItem, 0); // 0 = STGM_READ
+                        isInitialized = true;
+                    }
 
-                pHandler = comObj as IPreviewHandler;
-                if (isInitialized && pHandler != null)
-                {
-                    RECT r = new RECT(viewRect);
+                    pHandler = comObj as IPreviewHandler;
+                    if (isInitialized && pHandler != null)
+                    {
+                        RECT r = new RECT(viewRect);
 
-                    pHandler.SetWindow(handler, ref r);
-                    pHandler.SetRect(ref r);
+                        pHandler.SetWindow(handler, ref r);
+                        pHandler.SetRect(ref r);
 
-                    pHandler.DoPreview();
+                        pHandler.DoPreview();
+                    }
+                    else
+                    {
+                        Release();
+                    }
                 }
-                else
-                {
-                    Marshal.FinalReleaseComObject(comObj);
-                    Release();
-                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.Warn("Unable to initialize IPreviewHandler", ex);
+                Release();
             }
         }
 
@@ -182,6 +198,45 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
     interface IInitializeWithStream
     {
         void Initialize(IStream pstream, uint grfMode);
+    }
+
+    [ComImport]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("7F73BE3F-FB79-493C-A6C7-7EE14E245841")]
+    interface IInitializeWithItem
+    {
+        void Initialize(IShellItem pstream, uint grfMode);
+    }
+
+    enum SIGDN : uint
+    {
+        NORMALDISPLAY = 0,
+        PARENTRELATIVEPARSING = 0x80018001,
+        PARENTRELATIVEFORADDRESSBAR = 0x8001c001,
+        DESKTOPABSOLUTEPARSING = 0x80028000,
+        PARENTRELATIVEEDITING = 0x80031001,
+        DESKTOPABSOLUTEEDITING = 0x8004c000,
+        FILESYSPATH = 0x80058000,
+        URL = 0x80068000
+    }
+
+    [ComImport]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("43826d1e-e718-42ee-bc55-a1e261c37bfe")]
+    interface IShellItem
+    {
+        void BindToHandler(IntPtr pbc,
+            [MarshalAs(UnmanagedType.LPStruct)]Guid bhid,
+            [MarshalAs(UnmanagedType.LPStruct)]Guid riid,
+            out IntPtr ppv);
+
+        void GetParent(out IShellItem ppsi);
+
+        void GetDisplayName(SIGDN sigdnName, out IntPtr ppszName);
+
+        void GetAttributes(uint sfgaoMask, out uint psfgaoAttribs);
+
+        void Compare(IShellItem psi, uint hint, out int piOrder);
     }
 
     [StructLayout(LayoutKind.Sequential)]
