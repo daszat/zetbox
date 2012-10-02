@@ -13,15 +13,14 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using Zetbox.API.Utils;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.DocumentManagement;
 using Zetbox.Client.WPF.Toolkit;
+using System.Windows.Media.Imaging;
+using Zetbox.Client.WPF.CustomControls;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
@@ -62,26 +61,52 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
         WPFPreviewControl vistaPreview;
         protected void PreviewDocument()
         {
-            if (ViewModel.File.Blob != null)
+            try
             {
-                if (vistaPreview == null)
+                var blob = ViewModel.File.Blob;
+                if (blob != null)
                 {
-                    vistaPreview = new WPFPreviewControl();
+                    var fi = ViewModel.File.Context.GetFileInfo(blob.ID);
+
+                    try
+                    {
+                        var bmpImg = new BitmapImage();
+                        bmpImg.BeginInit();
+                        bmpImg.StreamSource = blob.GetStream();
+                        bmpImg.EndInit();
+
+                        var zoomCtrl = new ZoomBorder();
+                        zoomCtrl.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                        zoomCtrl.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+
+                        var imgCtrl = new Image() { Source = bmpImg };
+
+                        zoomCtrl.Child = imgCtrl;
+                        PreviewControl.Content = zoomCtrl;
+
+                        return;
+                    }
+                    catch (NotSupportedException)
+                    {
+                        // No image, try the Vista-Preview
+                    }
+
+                    if (vistaPreview == null)
+                    {
+                        vistaPreview = new WPFPreviewControl();
+                    }
+                    PreviewControl.Content = vistaPreview;
+                    vistaPreview.PreviewFilePath = fi.FullName;
                 }
-                PreviewControl.Content = vistaPreview;
-                try
+                else
                 {
-                    vistaPreview.PreviewFilePath = ViewModel.File.Context.GetFileInfo(ViewModel.File.Blob.ID).FullName;
-                }
-                catch (Exception ex)
-                {
-                    Logging.Client.Error("Setting PreviewFilePath", ex);
-                    PreviewControl.Content = new TextBlock() { Text = ex.Message };
+                    PreviewControl.Content = null;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                PreviewControl.Content = null;
+                Logging.Client.Error("Setting PreviewFilePath", ex);
+                PreviewControl.Content = new TextBlock() { Text = ex.Message };
             }
         }
     }

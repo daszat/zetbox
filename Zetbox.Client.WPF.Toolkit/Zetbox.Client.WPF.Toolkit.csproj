@@ -107,6 +107,7 @@
       <DependentUpon>DtoDisplayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\TracingUserControl.cs" />
+    <Compile Include="CustomControls\ZoomBorder.cs" />
     <Compile Include="Styles\Controls.cs" />
     <Compile Include="Styles\Defaults.cs" />
     <Compile Include="Styles\Margin.cs" />
