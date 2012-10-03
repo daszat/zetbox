@@ -356,9 +356,19 @@ namespace Zetbox.Server
 
                     using (IZetboxContext ctx = _ctxFactory())
                     {
-                        return _sohFactory
+                        var result = _sohFactory
                             .GetServerDocumentHandler()
                             .GetBlobStream(version, ctx, ID);
+
+                        if (result == null)
+                        {
+                            Logging.Facade.Debug("GetBlobStream returns null");
+                        }
+                        else
+                        {
+                            Logging.Facade.DebugFormat("GetBlobStream returns {0} of {1} bytes.", result.GetType().FullName, result.Length);
+                        }
+                        return result;
                     }
                 }
                 catch (Exception ex)
@@ -390,10 +400,14 @@ namespace Zetbox.Server
                         var result = _sohFactory
                             .GetServerDocumentHandler()
                             .SetBlobStream(blob.Version, ctx, blob.Stream, blob.FileName, blob.MimeType);
-                        BlobResponse resp = new BlobResponse();
-                        resp.ID = result.ID;
-                        resp.BlobInstance = SendObjects(new IDataObject[] { result }, true);
-                        return resp;
+
+                        Logging.Facade.DebugFormat("SetBlobStream created Blob with ID=#.", result.ID);
+
+                        return new BlobResponse()
+                        {
+                            ID = result.ID,
+                            BlobInstance = SendObjects(new IDataObject[] { result }, true)
+                        };
                     }
                 }
                 catch (Exception ex)
