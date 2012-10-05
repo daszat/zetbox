@@ -73,6 +73,7 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
             ctx.SubmitChanges();
         }
 
+        [Test]
         public void should_content_be_the_original_content()
         {
             var blob = ctx.Find<Blob>(blob_id);
