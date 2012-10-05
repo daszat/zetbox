@@ -622,7 +622,9 @@ namespace Zetbox.API
                 if (obj == null) { throw new ArgumentNullException("obj"); }
 
                 XmlSerializer xml = new XmlSerializer(obj.GetType());
-                xml.Serialize(new StreamWriter(s), obj);
+                var sw = new StreamWriter(s);
+                xml.Serialize(sw, obj);
+                sw.Flush();
             }
         }
 

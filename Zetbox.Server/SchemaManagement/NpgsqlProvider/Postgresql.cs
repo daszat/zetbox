@@ -1519,94 +1519,97 @@ END$BODY$
             try
             {
                 bulkCopy.Start();
-                var dst = new StreamWriter(bulkCopy.CopyStream, new System.Text.UTF8Encoding(false)); // explicitly use Npgsql's default encoding, without BOM
-                // normal windows newline confuses npgsql
-                dst.NewLine = "\n";
-
-                while (source.Read())
+                 // explicitly use Npgsql's default encoding, without BOM
+                using (var dst = new StreamWriter(bulkCopy.CopyStream, new System.Text.UTF8Encoding(false)))
                 {
-                    var vals = new string[cols.Length];
+                    // normal windows newline confuses npgsql
+                    dst.NewLine = "\n";
 
-                    for (int srcIdx = 0; srcIdx < cols.Length; srcIdx++)
+                    while (source.Read())
                     {
-                        object val = null;
-                        if (source.IsDBNull(srcIdx) || (val = source.GetValue(srcIdx)) == null)
+                        var vals = new string[cols.Length];
+
+                        for (int srcIdx = 0; srcIdx < cols.Length; srcIdx++)
                         {
-                            vals[srcIdx] = COPY_NULL;
-                        }
-                        else
-                        {
-                            var date = val as DateTime?;
-                            if (date != null)
+                            object val = null;
+                            if (source.IsDBNull(srcIdx) || (val = source.GetValue(srcIdx)) == null)
                             {
-                                vals[srcIdx] = date.Value.ToString("s", CultureInfo.InvariantCulture);
+                                vals[srcIdx] = COPY_NULL;
                             }
                             else
                             {
-                                var dec = val as decimal?;
-                                if (dec != null)
+                                var date = val as DateTime?;
+                                if (date != null)
                                 {
-                                    vals[srcIdx] = dec.Value.ToString(CultureInfo.InvariantCulture);
+                                    vals[srcIdx] = date.Value.ToString("s", CultureInfo.InvariantCulture);
                                 }
                                 else
                                 {
-                                    var dbl = val as double?;
-                                    if (dbl != null)
+                                    var dec = val as decimal?;
+                                    if (dec != null)
                                     {
-                                        vals[srcIdx] = dbl.Value.ToString(CultureInfo.InvariantCulture);
+                                        vals[srcIdx] = dec.Value.ToString(CultureInfo.InvariantCulture);
                                     }
                                     else
                                     {
-                                        var flt = val as float?;
-                                        if (flt != null)
+                                        var dbl = val as double?;
+                                        if (dbl != null)
                                         {
-                                            vals[srcIdx] = flt.Value.ToString(CultureInfo.InvariantCulture);
+                                            vals[srcIdx] = dbl.Value.ToString(CultureInfo.InvariantCulture);
                                         }
                                         else
                                         {
-                                            var lng = val as long?;
-                                            if (lng != null)
+                                            var flt = val as float?;
+                                            if (flt != null)
                                             {
-                                                vals[srcIdx] = lng.Value.ToString(CultureInfo.InvariantCulture);
+                                                vals[srcIdx] = flt.Value.ToString(CultureInfo.InvariantCulture);
                                             }
                                             else
                                             {
-                                                var integ = val as int?;
-                                                if (integ != null)
+                                                var lng = val as long?;
+                                                if (lng != null)
                                                 {
-                                                    vals[srcIdx] = integ.Value.ToString(CultureInfo.InvariantCulture);
+                                                    vals[srcIdx] = lng.Value.ToString(CultureInfo.InvariantCulture);
                                                 }
                                                 else
                                                 {
-                                                    var shrt = val as short?;
-                                                    if (shrt != null)
+                                                    var integ = val as int?;
+                                                    if (integ != null)
                                                     {
-                                                        vals[srcIdx] = shrt.Value.ToString(CultureInfo.InvariantCulture);
+                                                        vals[srcIdx] = integ.Value.ToString(CultureInfo.InvariantCulture);
                                                     }
                                                     else
                                                     {
-                                                        var boolean = val as bool?;
-                                                        if (boolean != null)
+                                                        var shrt = val as short?;
+                                                        if (shrt != null)
                                                         {
-                                                            vals[srcIdx] = boolean.Value.ToString(CultureInfo.InvariantCulture);
+                                                            vals[srcIdx] = shrt.Value.ToString(CultureInfo.InvariantCulture);
                                                         }
                                                         else
                                                         {
-                                                            var str = val as string;
-                                                            if (str != null)
+                                                            var boolean = val as bool?;
+                                                            if (boolean != null)
                                                             {
-                                                                vals[srcIdx] = str;
+                                                                vals[srcIdx] = boolean.Value.ToString(CultureInfo.InvariantCulture);
                                                             }
                                                             else
                                                             {
-                                                                // error out
-                                                                var strVal = val.ToString();
-                                                                if (strVal.Length > 100)
+                                                                var str = val as string;
+                                                                if (str != null)
                                                                 {
-                                                                    str = str.Substring(0, 100);
-                                                                    str += " ...";
+                                                                    vals[srcIdx] = str;
                                                                 }
-                                                                throw new NotSupportedException(String.Format("Cannot transform [{0}] of Type [{1}] for WriteTableData", strVal, val.GetType()));
+                                                                else
+                                                                {
+                                                                    // error out
+                                                                    var strVal = val.ToString();
+                                                                    if (strVal.Length > 100)
+                                                                    {
+                                                                        str = str.Substring(0, 100);
+                                                                        str += " ...";
+                                                                    }
+                                                                    throw new NotSupportedException(String.Format("Cannot transform [{0}] of Type [{1}] for WriteTableData", strVal, val.GetType()));
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -1615,16 +1618,15 @@ END$BODY$
                                         }
                                     }
                                 }
-                            }
 
-                            vals[srcIdx] = CopyEscape(vals[srcIdx]);
+                                vals[srcIdx] = CopyEscape(vals[srcIdx]);
+                            }
                         }
+                        string line = String.Join(COPY_SEPARATOR, vals);
+                        _copyLog.Debug(line);
+                        dst.WriteLine(line);
                     }
-                    string line = String.Join(COPY_SEPARATOR, vals);
-                    _copyLog.Debug(line);
-                    dst.WriteLine(line);
                 }
-                dst.Close();
                 bulkCopy.End();
             }
             catch (Exception ex)

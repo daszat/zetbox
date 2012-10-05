@@ -57,8 +57,8 @@ namespace Zetbox.Client.Presentables.DtoViewModels
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Major <= 5) // assuming Windox XP or lower
                 sw = new StreamWriter(tmpFile, false, Encoding.Default);
             else
-                sw = new StreamWriter(tmpFile, false, Encoding.UTF8);
-            using (sw) // use this constructor to ensure BOM
+                sw = new StreamWriter(tmpFile, false, Encoding.UTF8); // use this constructor to ensure BOM
+            using (sw)
             {
                 // Header
                 sw.WriteLine(string.Join(";",

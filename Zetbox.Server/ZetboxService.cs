@@ -216,6 +216,7 @@ namespace Zetbox.Server
             sw.Write(false);
             sw.Write(false);
             sw.Write(false);
+            sw.Flush();
 
             Logging.Facade.DebugFormat("Sending {0} Objects with {1} with AuxObjects and EagerLoadLists = {2}", sentObjects.Count, auxObjects.Count, eagerLoadLists);
 

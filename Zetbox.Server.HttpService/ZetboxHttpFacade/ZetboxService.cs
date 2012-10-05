@@ -282,6 +282,7 @@ namespace Zetbox.Server.HttpService
             using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
             {
                 writer.Write(result);
+                writer.Flush();
             }
         }
     }

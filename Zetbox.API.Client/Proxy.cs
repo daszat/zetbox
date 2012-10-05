@@ -234,6 +234,7 @@ namespace Zetbox.API.Client
                 obj.ToStream(sw, new HashSet<IStreamable>(), false);
             }
             sw.Write(false);
+            sw.Flush();
         }
 
         private IEnumerable<IStreamable> ReceiveObjects(IZetboxContext ctx, ZetboxStreamReader sr, out List<IStreamable> auxObjects)
