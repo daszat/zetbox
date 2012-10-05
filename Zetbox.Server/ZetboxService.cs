@@ -394,6 +394,27 @@ namespace Zetbox.Server
                 try
                 {
                     DebugLogIdentity();
+                    if (Logging.Facade.IsDebugEnabled)
+                    {
+                        long length = -1;
+                        try { length = blob.Stream.Length; }
+                        catch (NotSupportedException)
+                        {
+                            // ignore missing support for accessing the stream's length
+                            length = -2;
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Facade.Debug(string.Format("SetBlobStream failed to access {0}.Length", blob.Stream.GetType()), ex);
+                            length = -3;
+                        }
+
+                        Logging.Facade.DebugFormat("SetBlobStream started with BlobMessage ( FileName='{0}', MimeType='{1}', Stream='{2}' of length={3} )",
+                            blob.FileName,
+                            blob.MimeType,
+                            blob.Stream.GetType().FullName,
+                            length);
+                    }
 
                     using (IZetboxContext ctx = _ctxFactory())
                     {
@@ -401,8 +422,11 @@ namespace Zetbox.Server
                             .GetServerDocumentHandler()
                             .SetBlobStream(blob.Version, ctx, blob.Stream, blob.FileName, blob.MimeType);
 
-                        Logging.Facade.DebugFormat("SetBlobStream created Blob with ID=#.", result.ID);
-
+                        if (Logging.Facade.IsDebugEnabled)
+                        {
+                            using (var stream = result.GetStream())
+                                Logging.Facade.DebugFormat("SetBlobStream created Blob with ID=#{0}, length={1}.", result.ID, stream.Length);
+                        }
                         return new BlobResponse()
                         {
                             ID = result.ID,
