@@ -202,7 +202,7 @@ namespace Zetbox.API
             using (var fs = File.OpenWrite(destName))
             {
                 fs.SetLength(0);
-                blob.CopyTo(fs);
+                blob.CopyAllTo(fs);
             }
         }
 

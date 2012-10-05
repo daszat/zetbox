@@ -918,7 +918,7 @@ namespace Zetbox.DalProvider.Client
                 using (var file = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
                     file.SetLength(0);
-                    stream.CopyTo(file);
+                    stream.CopyAllTo(file);
                 }
                 File.SetAttributes(path, FileAttributes.ReadOnly);
             }

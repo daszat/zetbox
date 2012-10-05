@@ -208,7 +208,7 @@ namespace Zetbox.API.Client
                 using (var stream = response.GetResponseStream())
                 {
                     var result = new MemoryStream();
-                    stream.CopyTo(result);
+                    stream.CopyAllTo(result);
                     return result;
                 }
             }
@@ -232,7 +232,7 @@ namespace Zetbox.API.Client
                 reqWriter.Write(request.Version);
                 reqWriter.Write(request.FileName);
                 reqWriter.Write(request.MimeType);
-                request.Stream.CopyTo(upload);
+                request.Stream.CopyAllTo(upload);
                 reqWriter.Write(upload.ToArray());
                 reqWriter.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
             }

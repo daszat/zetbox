@@ -633,7 +633,8 @@ namespace Zetbox.API.Server
             using (var file = File.Open(path, FileMode.Create, FileAccess.Write))
             {
                 file.SetLength(0);
-                s.CopyTo(file);
+                s.CopyAllTo(file);
+                Logging.Log.DebugFormat("Wrote '{0}' bytes to disk", file.Length);
             }
             File.SetAttributes(path, FileAttributes.ReadOnly);
             return storagePath;

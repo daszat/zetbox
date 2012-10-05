@@ -74,7 +74,7 @@ namespace Zetbox.Generator
             using (var snkDest = File.Open(Path.Combine(CodeBasePath, "Zetbox.Objects.snk"), FileMode.Create))
             {
                 snkDest.SetLength(0);
-                snkSrc.CopyTo(snkDest);
+                snkSrc.CopyAllTo(snkDest);
             }
         }
 

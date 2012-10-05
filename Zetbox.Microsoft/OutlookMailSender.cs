@@ -90,7 +90,7 @@ using Zetbox.Client.Presentables;
                     var tmpFile = _tmpService.Create(a.Name);
                     using (var fs = File.OpenWrite(tmpFile))
                     {
-                        a.ContentStream.CopyTo(fs);
+                        a.ContentStream.CopyAllTo(fs);
                     }
                     var olAttachment = mail.Attachments.Add(tmpFile, Type.Missing, Type.Missing, a.Name);
                 }

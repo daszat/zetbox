@@ -151,7 +151,7 @@ namespace Zetbox.API
             }
         }
 
-        public static void CopyTo(this System.IO.Stream src, System.IO.Stream dest)
+        public static void CopyAllTo(this System.IO.Stream src, System.IO.Stream dest)
         {
             if (src == null) throw new ArgumentNullException("src");
             if (dest == null) throw new ArgumentNullException("dest");

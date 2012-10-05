@@ -168,7 +168,7 @@ namespace Zetbox.Server.HttpService
                             var result = service.GetBlobStream(version, ID);
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
-                            result.CopyTo(context.Response.OutputStream);
+                            result.CopyAllTo(context.Response.OutputStream);
                             break;
                         }
                     case "SetBlobStream": // BlobResponse SetBlobStream(BlobMessage blob)
@@ -192,7 +192,7 @@ namespace Zetbox.Server.HttpService
                             using (var dataStream = new MemoryStream())
                             {
                                 writer.Write(result.ID);
-                                result.BlobInstance.CopyTo(dataStream);
+                                result.BlobInstance.CopyAllTo(dataStream);
                                 writer.Write(dataStream.ToArray());
                             }
                             break;
