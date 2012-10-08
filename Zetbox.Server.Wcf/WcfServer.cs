@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.Server
+namespace Zetbox.Server.Wcf
 {
     using System;
     using System.Collections.Generic;
@@ -97,7 +97,7 @@ namespace Zetbox.Server
         {
             if (config == null) throw new ArgumentNullException("config");
 
-            if (config.AdditionalCommandlineOptions.ContainsKey(ServerModule.NoWcfKey))
+            if (config.AdditionalCommandlineOptions.ContainsKey(WcfModule.NoWcfKey))
             {
                 Log.Info("Not starting embedded WCF Server. As requested by -nowcf.");
             }

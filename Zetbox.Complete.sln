@@ -234,6 +234,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetPackages", "NuGetPacka
 		{39C24036-DD89-40C7-8196-1E7D3A817D5E} = {39C24036-DD89-40C7-8196-1E7D3A817D5E}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server.Wcf", "Zetbox.Server.Wcf\Zetbox.Server.Wcf.csproj", "{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -1569,6 +1571,30 @@ Global
 		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Release|x86.ActiveCfg = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Linux.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Linux.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Linux.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Linux.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Linux.Debug|x86.ActiveCfg = Debug|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Minimal|.NET.ActiveCfg = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Minimal|Any CPU.ActiveCfg = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Minimal|Any CPU.Build.0 = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Minimal|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Minimal|Mixed Platforms.Build.0 = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Minimal|x86.ActiveCfg = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Release|.NET.ActiveCfg = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
