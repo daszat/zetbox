@@ -18,6 +18,7 @@ VersionInfo.Designer.cs
 /Zetbox.Server.HttpService/Logs/SchemaReport.log
 
 # Only commit repositories.config. The rest of /packages is only a local cache
+!/packages/MSBuildVersioning.1.0.36.0/*
 !/packages/repositories.config
 /packages/*
 
