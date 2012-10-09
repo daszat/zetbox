@@ -44,6 +44,16 @@ namespace Zetbox.Server
                 .InstancePerLifetimeScope();
 
             builder
+                .RegisterType<ZetboxService>()
+                .As<ZetboxService>() // registration for WCF
+                .As<IZetboxService>() // registration for ZetboxServiceFacade
+                .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<BootstrapperService>()
+                .InstancePerLifetimeScope();
+
+            builder
                 .RegisterModule(new SchemaManagement.SchemaModule());
 
 #if !MONO

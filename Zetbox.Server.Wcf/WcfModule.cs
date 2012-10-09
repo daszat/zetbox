@@ -34,16 +34,6 @@ namespace Zetbox.Server.Wcf
             base.Load(builder);
 
             builder
-                .RegisterType<ZetboxService>()
-                .As<ZetboxService>() // registration for WCF
-                .As<IZetboxService>() // registration for ZetboxServiceFacade
-                .InstancePerLifetimeScope();
-
-            builder
-                .RegisterType<BootstrapperService>()
-                .InstancePerLifetimeScope();
-
-            builder
                 .RegisterType<WcfAppDomainInitializer>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
