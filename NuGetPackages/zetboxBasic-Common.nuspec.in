@@ -15,7 +15,7 @@
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
       <dependency id="zetboxBasic" version="[1.0.$REVNUM$.$DIRTY$]" />
-      <dependency id="Autofac" version="[2.6.1.841]" />
+      <dependency id="Autofac" version="[2.6.3.862]" />
       <dependency id="log4net" version="[2.0.0]" />
     </dependencies>
   </metadata>
