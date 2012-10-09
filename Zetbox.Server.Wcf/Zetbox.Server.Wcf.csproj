@@ -63,6 +63,7 @@
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="WcfAppDomainInitializer.cs" />
     <Compile Include="WcfModule.cs" />
     <Compile Include="WcfNamespaceReservation.cs" />
     <Compile Include="WcfServer.cs" />

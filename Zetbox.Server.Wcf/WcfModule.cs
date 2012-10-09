@@ -44,6 +44,11 @@ namespace Zetbox.Server.Wcf
                 .InstancePerLifetimeScope();
 
             builder
+                .RegisterType<WcfAppDomainInitializer>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder
                 .RegisterType<WcfServer>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
