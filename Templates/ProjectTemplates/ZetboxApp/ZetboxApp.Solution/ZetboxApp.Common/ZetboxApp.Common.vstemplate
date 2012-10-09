@@ -5,7 +5,7 @@
     <Description>This assembly contains business logic that can run on the server as well as on the client.</Description>
     <Icon>ZetboxApp.Common.ico</Icon>
     <ProjectType>CSharp</ProjectType>
-    <RequiredFrameworkVersion>3.5</RequiredFrameworkVersion>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
     <SortOrder>1000</SortOrder>
     <TemplateID>e22105d3-c469-4e53-ae50-1e0e5497c6eb</TemplateID>
     <CreateNewFolder>true</CreateNewFolder>

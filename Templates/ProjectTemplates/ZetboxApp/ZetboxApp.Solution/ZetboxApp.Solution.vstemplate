@@ -5,6 +5,7 @@
     <Description>A solution template for Zetbox Applications</Description>
     <Icon>ZetboxApp.Solution.ico</Icon>
     <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>false</CreateNewFolder>
     <DefaultName>ZetboxApp</DefaultName>

@@ -5,7 +5,7 @@
     <Description>This assembly contains a WPF launcher.</Description>
     <Icon>ZetboxApp.WPF.ico</Icon>
     <ProjectType>CSharp</ProjectType>
-    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
     <SortOrder>1000</SortOrder>
     <TemplateID>2a4107b2-cff3-40cd-ad69-bbea63e05be8</TemplateID>
     <CreateNewFolder>true</CreateNewFolder>

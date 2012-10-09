@@ -5,7 +5,7 @@
     <Description>A custom Zetbox bootstrapper to customize graphics and defaults.</Description>
     <Icon>ZetboxApp.Bootstrapper.ico</Icon>
     <ProjectType>CSharp</ProjectType>
-    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
     <SortOrder>1000</SortOrder>
     <TemplateID>fb6879d0-c15c-4743-ae45-e1f1e6d8c90c</TemplateID>
     <CreateNewFolder>true</CreateNewFolder>

@@ -5,7 +5,7 @@
     <Description>This assembly contains client-side business logic for this Zetbox application</Description>
     <Icon>ZetboxApp.Client.ico</Icon>
     <ProjectType>CSharp</ProjectType>
-    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
     <SortOrder>1000</SortOrder>
     <TemplateID>fb6879d0-c15c-4743-ae45-e1f1e6d8c90c</TemplateID>
     <CreateNewFolder>true</CreateNewFolder>
