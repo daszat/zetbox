@@ -28,6 +28,7 @@ namespace Zetbox.App.Extensions
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
@@ -44,9 +45,9 @@ namespace Zetbox.App.Extensions
 
         private struct MethodKey
         {
-            public MethodKey(string @namespace, string typeName, string methodName)
+            public MethodKey(string @namespace, string typeName, string methodName, Type[] paramTypes)
             {
-                key = string.Format("{0}.{1}Actions.{2}", @namespace, typeName, methodName);
+                key = string.Format("{0}.{1}Actions.{2}({3})", @namespace, typeName, methodName, string.Join(", ", paramTypes.Select(t => t.FullName)));
             }
 
             private string key;
@@ -163,7 +164,7 @@ namespace Zetbox.App.Extensions
                             {
                                 if (m.GetCustomAttributes(typeof(Invocation), false).Length != 0)
                                 {
-                                    var key = new MethodKey(t.Namespace, t.Name.Substring(0, t.Name.Length - "Actions".Length), m.Name);
+                                    var key = new MethodKey(t.Namespace, t.Name.Substring(0, t.Name.Length - "Actions".Length), m.Name, m.GetParameters().Select(p => p.ParameterType).ToArray());
                                     if (_reflectedMethods.ContainsKey(key))
                                     {
                                         _reflectedMethods[key].Add(m);
@@ -328,20 +329,43 @@ namespace Zetbox.App.Extensions
             // New style
             foreach (var method in GetAllMethods(dt))
             {
-                foreach (var methodSuffix in new[] { string.Empty, "CanExec", "CanExecReason" })
+                Type[] paramTypes = method.Parameter
+                    .Where(p => !p.IsReturnParameter)
+                    .Select(p => p.GuessParameterType())
+                    .ToArray();
+
+                var key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name, paramTypes);
+                if (_reflectedMethods.ContainsKey(key))
                 {
-                    var key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name + methodSuffix);
+                    var methodInfos = _reflectedMethods[key];
+
+                    // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                    // or null if not found
+                    var attr = FindEventBasedMethodAttribute(method, implType); // The Method
+                    if (attr != null)
+                    {
+                        foreach (var mi in methodInfos)
+                        {
+                            CreateInvokeInfo(implType, mi, attr.EventName);
+                        }
+                    }
+
+                    _attachedMethods[key] = true;
+                }
+
+                foreach (var data in new[] {
+                    new { Suffix = "CanExec", ReturnType = typeof(MethodReturnEventArgs<bool>) },
+                    new { Suffix = "CanExecReason", ReturnType = typeof(MethodReturnEventArgs<string>) }
+                })
+                {
+                    key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name + data.Suffix, new[] { dt.GetDataType(), data.ReturnType });
                     if (_reflectedMethods.ContainsKey(key))
                     {
                         var methodInfos = _reflectedMethods[key];
 
                         // May be null on Methods without events like server side invocatiaons or "embedded" methods
                         // or null if not found
-                        EventBasedMethodAttribute attr;
-                        if (string.IsNullOrEmpty(methodSuffix))
-                            attr = FindEventBasedMethodAttribute(method, implType); // The Method
-                        else
-                            attr = FindEventBasedMethodAttribute(method, methodSuffix, implType); // For can execute & reason
+                        var attr = FindEventBasedMethodAttribute(method, data.Suffix, implType);
                         if (attr != null)
                         {
                             foreach (var mi in methodInfos)
@@ -357,29 +381,29 @@ namespace Zetbox.App.Extensions
 
             if (dt is ObjectClass)
             {
-                CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave");
-                CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave");
-                CreateDefaultMethodInvocations(implType, dt, "NotifyCreated");
-                CreateDefaultMethodInvocations(implType, dt, "NotifyDeleting");
+                CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave", new[] { dt.GetDataType() });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave", new[] { dt.GetDataType() });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyCreated", new[] { dt.GetDataType() });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyDeleting", new[] { dt.GetDataType() });
             }
 
-            CreateDefaultMethodInvocations(implType, dt, "ToString");
-            CreateDefaultMethodInvocations(implType, dt, "ObjectIsValid");
+            CreateDefaultMethodInvocations(implType, dt, "ToString", new[] { dt.GetDataType(), typeof(MethodReturnEventArgs<string>) });
+            CreateDefaultMethodInvocations(implType, dt, "ObjectIsValid", new[] { dt.GetDataType(), typeof(ObjectIsValidEventArgs) });
 
             // Reflected Properties
             // New style
             foreach (Property prop in dt.Properties)
             {
-                CreatePropertyInvocations(implType, prop, "get_", "Getter");
-                CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter");
-                CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter");
-                CreatePropertyInvocations(implType, prop, "isValid_", "IsValid");
+                CreatePropertyInvocations(implType, prop, "get_", "Getter", new[] { dt.GetDataType(), typeof(PropertyGetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
+                CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter", new[] { dt.GetDataType(), typeof(PropertyPreSetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
+                CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter", new[] { dt.GetDataType(), typeof(PropertyPostSetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
+                CreatePropertyInvocations(implType, prop, "isValid_", "IsValid", new[] { dt.GetDataType(), typeof(PropertyIsValidEventArgs) });
             }
         }
 
-        private void CreateDefaultMethodInvocations(Type implType, DataType dt, string methodName)
+        private void CreateDefaultMethodInvocations(Type implType, DataType dt, string methodName, Type[] paramTypes)
         {
-            var key = new MethodKey(dt.Module.Namespace, dt.Name, methodName);
+            var key = new MethodKey(dt.Module.Namespace, dt.Name, methodName, paramTypes);
             if (_reflectedMethods.ContainsKey(key))
             {
                 var methodInfos = _reflectedMethods[key];
@@ -391,9 +415,9 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        private void CreatePropertyInvocations(Type implType, Property prop, string methodPrefix, string invocationType)
+        private void CreatePropertyInvocations(Type implType, Property prop, string methodPrefix, string invocationType, Type[] paramTypes)
         {
-            var key = new MethodKey(prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, string.Format("{0}{1}", methodPrefix, prop.Name));
+            var key = new MethodKey(prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, string.Format("{0}{1}", methodPrefix, prop.Name), paramTypes);
             if (_reflectedMethods.ContainsKey(key))
             {
                 var methodInfos = _reflectedMethods[key];
