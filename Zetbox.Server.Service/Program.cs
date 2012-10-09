@@ -23,7 +23,6 @@ namespace Zetbox.Server.Service
     using System.Text;
     using Autofac;
     using Autofac.Configuration;
-    using Autofac.Integration.Wcf;
     using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
@@ -131,7 +130,6 @@ namespace Zetbox.Server.Service
 
             var container = builder.Build();
             Zetbox.Server.Helper.InitializeAppDomain(container);
-            AutofacServiceHostFactory.Container = container;
             return container;
         }
 

@@ -19,17 +19,16 @@ namespace Zetbox.Server.HttpService
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Web;
     using System.Web.Security;
     using System.Web.SessionState;
     using Autofac;
     using Autofac.Configuration;
-    using Autofac.Integration.Wcf;
     using Autofac.Integration.Web;
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using System.Text.RegularExpressions;
 
     public class Global : System.Web.HttpApplication, IContainerProviderAccessor
     {
@@ -57,7 +56,6 @@ namespace Zetbox.Server.HttpService
 
             Zetbox.Server.Helper.InitializeAppDomain(container);
 
-            AutofacHostFactory.Container = container;
             _containerProvider = new ContainerProvider(container);
         }
 
