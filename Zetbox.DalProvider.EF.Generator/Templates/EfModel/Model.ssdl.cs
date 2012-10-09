@@ -33,20 +33,30 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
         {
             get
             {
-                if(_int32DbType == null)
-                    _int32DbType = schemaProvider.DbTypeToNative(DbType.Int32);
+                InitInt32Type();
                 return _int32DbType;
             }
+        }
+
+        private void InitInt32Type()
+        {
+            if (_int32DbType == null)
+                _int32DbType = schemaProvider.DbTypeToNative(DbType.Int32);
         }
         private string _guid32DbType;
         protected string guid32DbType
         {
             get
             {
-                if(_guid32DbType == null)
-                    _guid32DbType = schemaProvider.DbTypeToNative(DbType.Guid);
+                InitGuidType();
                 return _guid32DbType;
             }
+        }
+
+        private void InitGuidType()
+        {
+            if (_guid32DbType == null)
+                _guid32DbType = schemaProvider.DbTypeToNative(DbType.Guid);
         }
 
         // ContextBound Objects are not allowed to have Generic Methods
