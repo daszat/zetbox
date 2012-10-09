@@ -119,39 +119,41 @@ namespace Zetbox.Client.Models
                 throw new ArgumentNullException("prop");
 
             var lb = prop.GetLabel();
+            var description = prop.Description;
+            var rk = prop.RequestedKind;
 
             if (prop is IntProperty)
             {
-                return new NullableStructValueModel<int>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new NullableStructValueModel<int>(lb, description, allowNullInput, false, rk);
             }
             else if (prop is BoolProperty)
             {
-                return new BoolValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new BoolValueModel(lb, description, allowNullInput, false, rk);
             }
             else if (prop is DoubleProperty)
             {
-                return new NullableStructValueModel<double>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new NullableStructValueModel<double>(lb, description, allowNullInput, false, rk);
             }
             else if (prop is DecimalProperty)
             {
-                return new DecimalValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new DecimalValueModel(lb, description, allowNullInput, false, rk);
             }
             else if (prop is GuidProperty)
             {
-                return new NullableStructValueModel<Guid>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new NullableStructValueModel<Guid>(lb, description, allowNullInput, false, rk);
             }
             else if (prop is DateTimeProperty)
             {
                 var dtp = (DateTimeProperty)prop;
-                return new DateTimeValueModel(lb, prop.Description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime, prop.RequestedKind);
+                return new DateTimeValueModel(lb, description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime, rk);
             }
             else if (prop is EnumerationProperty)
             {
-                return new EnumerationValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind, ((EnumerationProperty)prop).Enumeration);
+                return new EnumerationValueModel(lb, description, allowNullInput, false, rk, ((EnumerationProperty)prop).Enumeration);
             }
             else if (prop is StringProperty)
             {
-                return new ClassValueModel<string>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new ClassValueModel<string>(lb, description, allowNullInput, false, rk);
             }
             else if (prop is ObjectReferenceProperty)
             {
@@ -170,12 +172,12 @@ namespace Zetbox.Client.Models
                 }
                 else
                 {
-                    return new ObjectReferenceValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind, objRefProp.GetReferencedObjectClass());
+                    return new ObjectReferenceValueModel(lb, description, allowNullInput, false, rk, objRefProp.GetReferencedObjectClass());
                 }
             }
             else if (prop is CompoundObjectProperty)
             {
-                return new CompoundObjectValueModel(ctx, lb, prop.Description, allowNullInput, false, prop.RequestedKind, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
+                return new CompoundObjectValueModel(ctx, lb, description, allowNullInput, false, rk, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
             }
 
             throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));

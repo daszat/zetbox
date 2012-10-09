@@ -263,6 +263,7 @@ namespace Zetbox.Client.Models
         /// <returns>a ready configurated ColumnDisplayModel</returns>
         public static ColumnDisplayModel Create(Method m)
         {
+            if (m == null) throw new ArgumentNullException("m");
             return new ColumnDisplayModel()
             {
                 Header = m.GetLabel(),
@@ -446,6 +447,8 @@ namespace Zetbox.Client.Models
 
         public void BuildColumns(Zetbox.App.Base.CompoundObject cls, Mode mode, bool showMethods)
         {
+            if (cls == null) throw new ArgumentNullException("cls");
+
             BuildColumns(cls, cls.Properties, showMethods ? cls.Methods.Where(m => m.IsDisplayable) : new Method[] { }, mode);
         }
 

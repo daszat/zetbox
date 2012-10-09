@@ -54,6 +54,8 @@ namespace Zetbox.Client
 
         public static WidthHint GetDisplayWidth(this Property p)
         {
+            if(p == null) throw new ArgumentNullException("p");
+
             if (p.RequestedWidth != null && p.RequestedWidth != Zetbox.App.GUI.WidthHint.Default)
             {
                 return p.RequestedWidth.Value;

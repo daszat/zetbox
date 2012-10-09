@@ -36,7 +36,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             string implementationSuffix,
             bool needsConcurrency)
         {
-            if (_host == null) { throw new ArgumentNullException("_host"); }
+            if (_host == null) throw new ArgumentNullException("_host");
+            if (prop == null) throw new ArgumentNullException("prop");
 
             // shortcut unmapped properties
             if (prop.IsCalculated)

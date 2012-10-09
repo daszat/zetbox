@@ -206,22 +206,23 @@ namespace Zetbox.Server.SchemaManagement
         public static DefaultConstraint GetDefaultConstraint(Property prop)
         {
             if (prop == null) throw new ArgumentNullException("prop");
-            if (prop.DefaultValue is Zetbox.App.Base.NewGuidDefaultValue)
+            var defValue = prop.DefaultValue;
+            if (defValue is Zetbox.App.Base.NewGuidDefaultValue)
             {
                 return new NewGuidDefaultConstraint();
             }
-            else if (prop.DefaultValue is Zetbox.App.Base.CurrentDateTimeDefaultValue)
+            else if (defValue is Zetbox.App.Base.CurrentDateTimeDefaultValue)
             {
                 var dtProp = (DateTimeProperty)prop;
                 return new DateTimeDefaultConstraint() { Precision = dtProp.DateTimeStyle == DateTimeStyles.Date ? DateTimeDefaultConstraintPrecision.Date : DateTimeDefaultConstraintPrecision.Time };
             }
-            else if (prop.DefaultValue is Zetbox.App.Base.BoolDefaultValue)
+            else if (defValue is Zetbox.App.Base.BoolDefaultValue)
             {
-                return new BoolDefaultConstraint() { Value = ((Zetbox.App.Base.BoolDefaultValue)prop.DefaultValue).BoolValue };
+                return new BoolDefaultConstraint() { Value = ((Zetbox.App.Base.BoolDefaultValue)defValue).BoolValue };
             }
-            else if (prop.DefaultValue is Zetbox.App.Base.IntDefaultValue)
+            else if (defValue is Zetbox.App.Base.IntDefaultValue)
             {
-                return new IntDefaultConstraint() { Value = ((Zetbox.App.Base.IntDefaultValue)prop.DefaultValue).IntValue };
+                return new IntDefaultConstraint() { Value = ((Zetbox.App.Base.IntDefaultValue)defValue).IntValue };
             }
             else
             {

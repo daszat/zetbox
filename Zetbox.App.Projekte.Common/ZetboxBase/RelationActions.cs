@@ -31,13 +31,16 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void ToString(Relation obj, MethodReturnEventArgs<string> e)
         {
-            if (obj.A == null ||
-                obj.B == null ||
-                obj.A.Type == null ||
-                obj.B.Type == null)
+            if (obj == null) { e.Result = ""; return; }
+            var a = obj.A;
+            var b = obj.B;
+            if (a == null ||
+                b == null ||
+                a.Type == null ||
+                b.Type == null)
             {
                 e.Result = "incomplete relation:";
-                if (obj.A == null)
+                if (a == null)
                 {
                     e.Result += " A missing";
                 }
@@ -46,7 +49,7 @@ namespace Zetbox.App.Base
                     e.Result += " A.Type missing";
                 }
 
-                if (obj.B == null)
+                if (b == null)
                 {
                     e.Result += " B missing";
                 }
@@ -57,13 +60,13 @@ namespace Zetbox.App.Base
             }
             else
             {
-                string aDesc = (obj.A.RoleName ?? String.Empty).Equals(obj.A.Type.Name)
-                    ? obj.A.RoleName
-                    : String.Format("{0}({1})", obj.A.RoleName, obj.A.Type.Name);
+                string aDesc = (a.RoleName ?? String.Empty).Equals(a.Type.Name)
+                    ? a.RoleName
+                    : String.Format("{0}({1})", a.RoleName, a.Type.Name);
 
-                string bDesc = (obj.B.RoleName ?? String.Empty).Equals(obj.B.Type.Name)
-                    ? obj.B.RoleName
-                    : String.Format("{0}({1})", obj.B.RoleName, obj.B.Type.Name);
+                string bDesc = (b.RoleName ?? String.Empty).Equals(b.Type.Name)
+                    ? b.RoleName
+                    : String.Format("{0}({1})", b.RoleName, b.Type.Name);
 
                 e.Result = String.Format("Relation: {0} {1} {2}",
                     aDesc,
@@ -127,16 +130,19 @@ namespace Zetbox.App.Base
                 throw new ArgumentNullException("rel", "rel.B is null");
             }
 
-            if ((rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() > 1)
-                || (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() == 1))
+            var aUpper = rel.A.Multiplicity.UpperBound();
+            var bUpper = rel.B.Multiplicity.UpperBound();
+
+            if ((aUpper == 1 && bUpper > 1)
+                || (aUpper > 1 && bUpper == 1))
             {
                 e.Result = RelationType.one_n;
             }
-            else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() > 1)
+            else if (aUpper > 1 && bUpper > 1)
             {
                 e.Result = RelationType.n_m;
             }
-            else if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() == 1)
+            else if (aUpper == 1 && bUpper == 1)
             {
                 e.Result = RelationType.one_one;
             }
@@ -296,31 +302,34 @@ namespace Zetbox.App.Base
                     e.Error = "Incomplete Relation (Multiplicity is missing)";
                     return;
                 }
+                var aUpper = rel.A.Multiplicity.UpperBound();
+                var bUpper = rel.B.Multiplicity.UpperBound();
+
                 switch (rel.Storage)
                 {
                     case StorageType.MergeIntoA:
-                        e.IsValid = rel.B.Multiplicity.UpperBound() <= 1;
-                        if(!e.IsValid) e.Error = "B side could be more than one. Not able to merge foreign key into A";
+                        e.IsValid = bUpper <= 1;
+                        if (!e.IsValid) e.Error = "B side could be more than one. Not able to merge foreign key into A";
                         break;
                     case StorageType.MergeIntoB:
-                        e.IsValid = rel.A.Multiplicity.UpperBound() <= 1;
-                        if(!e.IsValid) e.Error = "A side could be more than one. Not able to merge foreign key into B";
+                        e.IsValid = aUpper <= 1;
+                        if (!e.IsValid) e.Error = "A side could be more than one. Not able to merge foreign key into B";
                         break;
                     case StorageType.Separate:
-                        e.IsValid = rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() > 1;
-                        if(!e.IsValid) 
+                        e.IsValid = aUpper > 1 && bUpper > 1;
+                        if (!e.IsValid)
                         {
-                            if (rel.A.Multiplicity.UpperBound() <= 1 && rel.B.Multiplicity.UpperBound() <= 1)
+                            if (aUpper <= 1 && bUpper <= 1)
                             {
                                 e.Error = "A side is only one-ary. Please use MergeIntoA or MergeIntoB";
                             }
-                            else if (rel.A.Multiplicity.UpperBound() <= 1)
+                            else if (aUpper <= 1)
                             {
-                                e.Error ="A side is only one-ary. Please use MergeIntoB";
+                                e.Error = "A side is only one-ary. Please use MergeIntoB";
                             }
-                            else if (rel.B.Multiplicity.UpperBound() <= 1)
+                            else if (bUpper <= 1)
                             {
-                                e.Error ="B side is only one-ary. Please use MergeIntoA";
+                                e.Error = "B side is only one-ary. Please use MergeIntoA";
                             }
                         }
                         break;

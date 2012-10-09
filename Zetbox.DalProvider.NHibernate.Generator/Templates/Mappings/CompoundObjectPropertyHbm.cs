@@ -37,7 +37,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             bool forceDefinition,
             string implementationSuffix)
         {
-            if (_host == null) { throw new ArgumentNullException("_host"); }
+            if (_host == null) throw new ArgumentNullException("_host");
+            if (prop == null) throw new ArgumentNullException("prop");
+            if (prop.CompoundObjectDefinition == null) throw new ArgumentException("CompoundObjectProperty has no definition", "prop");
+            if (prop.CompoundObjectDefinition.Module == null) throw new ArgumentException("CompoundObjectProperty.CompoundObjectDefinition has no module", "prop");
 
             // shortcut unmapped properties
             //if (prop.IsCalculated)

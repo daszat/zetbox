@@ -158,40 +158,41 @@ namespace Zetbox.Client.Presentables
         public TModelFactory CreateViewModel<TModelFactory>(BaseParameter param) where TModelFactory : class
         {
             if (param == null) { throw new ArgumentNullException("param"); }
+            var isList = param.IsList;
             Type t;
-            if (param is BoolParameter && !param.IsList)
+            if (param is BoolParameter && !isList)
             {
                 t = typeof(NullableBoolPropertyViewModel);
             }
-            else if (param is DateTimeParameter && !param.IsList)
+            else if (param is DateTimeParameter && !isList)
             {
                 t = typeof(NullableDateTimePropertyViewModel);
             }
-            else if (param is DoubleParameter && !param.IsList)
+            else if (param is DoubleParameter && !isList)
             {
                 t = typeof(NullableStructValueViewModel<double>);
             }
-            else if (param is IntParameter && !param.IsList)
+            else if (param is IntParameter && !isList)
             {
                 t = typeof(NullableStructValueViewModel<int>);
             }
-            else if (param is DecimalParameter && !param.IsList)
+            else if (param is DecimalParameter && !isList)
             {
                 t = typeof(NullableDecimalPropertyViewModel);
             }
-            else if (param is StringParameter && !param.IsList)
+            else if (param is StringParameter && !isList)
             {
                 t = typeof(ClassValueViewModel<string>);
             }
-            else if (param is ObjectReferenceParameter && !param.IsList)
+            else if (param is ObjectReferenceParameter && !isList)
             {
                 t = typeof(ObjectReferenceViewModel);
             }
-            else if (param is EnumParameter && !param.IsList)
+            else if (param is EnumParameter && !isList)
             {
                 t = typeof(EnumerationValueViewModel);
             }
-            else if (param is CompoundObjectParameter && !param.IsList)
+            else if (param is CompoundObjectParameter && !isList)
             {
                 var compObj = ((CompoundObjectParameter)param).CompoundObject;
                 if (compObj.DefaultPropertyViewModelDescriptor != null)

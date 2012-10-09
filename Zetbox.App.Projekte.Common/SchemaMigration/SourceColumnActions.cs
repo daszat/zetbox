@@ -34,11 +34,13 @@ namespace Zetbox.App.SchemaMigration
         [Invocation]
         public static void CreateProperty(Zetbox.App.SchemaMigration.SourceColumn obj)
         {
-            if (obj.SourceTable == null) throw new InvalidOperationException("Not attached to a source table");
-            if (obj.SourceTable.DestinationObjectClass == null) throw new InvalidOperationException("Source table has no destination object class");
-            if (obj.SourceTable.StagingDatabase == null) throw new InvalidOperationException("Not attached to a staging database");
-            if (obj.SourceTable.StagingDatabase.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
-            if (obj.SourceTable.StagingDatabase.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
+            if (obj == null) throw new ArgumentNullException("obj");
+            var srcTbl = obj.SourceTable;
+            if (srcTbl == null) throw new InvalidOperationException("Not attached to a source table");
+            if (srcTbl.DestinationObjectClass == null) throw new InvalidOperationException("Source table has no destination object class");
+            if (srcTbl.StagingDatabase == null) throw new InvalidOperationException("Not attached to a staging database");
+            if (srcTbl.StagingDatabase.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
+            if (srcTbl.StagingDatabase.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
             if (obj.DestinationProperty.Count > 0) throw new InvalidOperationException("there is already a destination object property");
 
             Property p = null;
@@ -111,8 +113,8 @@ namespace Zetbox.App.SchemaMigration
             obj.DestinationProperty.Add(p);
             p.Name = obj.Name;
             p.Description = obj.Description;
-            p.ObjectClass = obj.SourceTable.DestinationObjectClass;
-            p.Module = obj.SourceTable.StagingDatabase.MigrationProject.DestinationModule;
+            p.ObjectClass = srcTbl.DestinationObjectClass;
+            p.Module = srcTbl.StagingDatabase.MigrationProject.DestinationModule;
         }
     }
 }

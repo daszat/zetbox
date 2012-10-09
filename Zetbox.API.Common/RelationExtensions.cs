@@ -121,17 +121,19 @@ namespace Zetbox.App.Extensions
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
-            if (rel.Storage == StorageType.Replicate)
+            var storage = rel.Storage;
+
+            if (storage == StorageType.Replicate)
                 throw new NotImplementedException();
 
-            RelationType type = rel.GetRelationType();
+            var type = rel.GetRelationType();
             // n:m has no storage on A or B
             return
-                   (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
-                || (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
-                || (type == RelationType.one_one && rel.Storage == StorageType.Replicate)
-                || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
-                || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B);
+                   (type == RelationType.one_n && storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+                || (type == RelationType.one_n && storage == StorageType.MergeIntoB && role == RelationEndRole.B)
+                || (type == RelationType.one_one && storage == StorageType.Replicate)
+                || (type == RelationType.one_one && storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+                || (type == RelationType.one_one && storage == StorageType.MergeIntoB && role == RelationEndRole.B);
         }
     }
 }

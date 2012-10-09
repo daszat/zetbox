@@ -20,6 +20,13 @@ M: System.Linq.Expressions.Expression System.Linq.Dynamic.ExpressionParser::Pars
 M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.AssociationSetAttributes::Generate()
 M: System.Void Zetbox.Client.Presentables.GUI.NavigationSearchScreenViewModel::InitializeListViewModel(Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel)
 M: Zetbox.Client.Presentables.DtoViewModels.DtoTableViewModel Zetbox.Client.Presentables.DtoViewModels.DtoBuilder::BuildTableFrom(System.Object,System.Reflection.PropertyInfo,System.Object,Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel)
+# Ignore generator for now - complicated
+M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelMsl::Generate()
+M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelSsdl::Generate()
+M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdl::Generate()
+M: System.Void Zetbox.DalProvider.Memory.Generator.Templates.ObjectClasses.ApplyChangesFromMethod::Generate()
+M: System.Void Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.ApplyChangesFromMethod::Generate()
+M: System.Void Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry::ApplyReloadReferenceBody()
 
 R: Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule
 # This method has a parameter whose type is more specialized than necessary. This can make it difficult to reuse the method in other contexts.

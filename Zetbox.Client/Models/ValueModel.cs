@@ -36,43 +36,45 @@ namespace Zetbox.Client.Models
                 throw new ArgumentNullException("parameter");
 
             var lb = parameter.GetLabel();
+            var description = parameter.Description;
+            var isList = parameter.IsList;
 
-            if (parameter is BoolParameter && !parameter.IsList)
+            if (parameter is BoolParameter && !isList)
             {
-                return new BoolValueModel(lb, parameter.Description, allowNullInput, false);
+                return new BoolValueModel(lb, description, allowNullInput, false);
             }
-            else if (parameter is DateTimeParameter && !parameter.IsList)
+            else if (parameter is DateTimeParameter && !isList)
             {
                 var dtp = (DateTimeParameter)parameter;
-                return new DateTimeValueModel(lb, parameter.Description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime);
+                return new DateTimeValueModel(lb, description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime);
             }
-            else if (parameter is DoubleParameter && !parameter.IsList)
+            else if (parameter is DoubleParameter && !isList)
             {
-                return new NullableStructValueModel<double>(lb, parameter.Description, allowNullInput, false);
+                return new NullableStructValueModel<double>(lb, description, allowNullInput, false);
             }
-            else if (parameter is IntParameter && !parameter.IsList)
+            else if (parameter is IntParameter && !isList)
             {
-                return new NullableStructValueModel<int>(lb, parameter.Description, allowNullInput, false);
+                return new NullableStructValueModel<int>(lb, description, allowNullInput, false);
             }
-            else if (parameter is DecimalParameter && !parameter.IsList)
+            else if (parameter is DecimalParameter && !isList)
             {
-                return new DecimalValueModel(lb, parameter.Description, allowNullInput, false);
+                return new DecimalValueModel(lb, description, allowNullInput, false);
             }
-            else if (parameter is StringParameter && !parameter.IsList)
+            else if (parameter is StringParameter && !isList)
             {
-                return new ClassValueModel<string>(lb, parameter.Description, allowNullInput, false);
+                return new ClassValueModel<string>(lb, description, allowNullInput, false);
             }
-            else if (parameter is ObjectReferenceParameter && !parameter.IsList)
+            else if (parameter is ObjectReferenceParameter && !isList)
             {
-                return new ObjectReferenceValueModel(lb, parameter.Description, allowNullInput, false, ((ObjectReferenceParameter)parameter).ObjectClass);
+                return new ObjectReferenceValueModel(lb, description, allowNullInput, false, ((ObjectReferenceParameter)parameter).ObjectClass);
             }
-            else if (parameter is EnumParameter && !parameter.IsList)
+            else if (parameter is EnumParameter && !isList)
             {
-                return new EnumerationValueModel(lb, parameter.Description, allowNullInput, false, ((EnumParameter)parameter).Enumeration);
+                return new EnumerationValueModel(lb, description, allowNullInput, false, ((EnumParameter)parameter).Enumeration);
             }
-            else if (parameter is CompoundObjectParameter && !parameter.IsList)
+            else if (parameter is CompoundObjectParameter && !isList)
             {
-                return new CompoundObjectValueModel(ctx, lb, parameter.Description, allowNullInput, false, ((CompoundObjectParameter)parameter).CompoundObject);
+                return new CompoundObjectValueModel(ctx, lb, description, allowNullInput, false, ((CompoundObjectParameter)parameter).CompoundObject);
             }
             else
             {
@@ -560,8 +562,8 @@ namespace Zetbox.Client.Models
                 label, 
                 description, 
                 allowNullInput, 
-                isReadOnly, 
-                def.RequestedKind ?? (def.DefaultPropertyViewModelDescriptor != null ? def.DefaultPropertyViewModelDescriptor.DefaultEditorKind : null), 
+                isReadOnly,
+                def != null ? (def.RequestedKind ?? (def.DefaultPropertyViewModelDescriptor != null ? def.DefaultPropertyViewModelDescriptor.DefaultEditorKind : null)) : null, 
                 def)
         {
         }
