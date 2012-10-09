@@ -20,9 +20,9 @@ namespace Zetbox.Server
     using System.Linq;
     using System.ServiceModel;
     using System.Text;
-
-    using Zetbox.API.Utils;
+    using Autofac;
     using Zetbox.API;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// Server Helper
@@ -60,6 +60,17 @@ namespace Zetbox.Server
 #else
                 throw new FaultException("An error ocurred while processing this request.");
 #endif
+            }
+        }
+
+        /// <summary>
+        /// Call all registered IAppDomainInitializer implementors.
+        /// </summary>
+        public static void InitializeAppDomain(IContainer container)
+        {
+            foreach (var initializer in container.Resolve<IEnumerable<IAppDomainInitializer>>())
+            {
+                initializer.Initialize(container);
             }
         }
     }

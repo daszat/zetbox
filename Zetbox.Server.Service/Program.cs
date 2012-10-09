@@ -130,6 +130,7 @@ namespace Zetbox.Server.Service
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
 
             var container = builder.Build();
+            Zetbox.Server.Helper.InitializeAppDomain(container);
             AutofacServiceHostFactory.Container = container;
             return container;
         }
