@@ -151,22 +151,21 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override void ApplyReloadReferenceBody()
         {
-            string referencedInterface = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
-            var cls = prop.ObjectClass as ObjectClass;
+            var dt = prop.ObjectClass;
+            if (dt == null)
+            {
+                Logging.Log.ErrorFormat("tried to create ReloadReferenceBody for unattached property: [{0}]", prop.Name);
+                return;
+            }
+            string referencedInterface = dt.Module.Namespace + "." + dt.Name;
+            var cls = dt as ObjectClass;
             if (cls == null)
             {
-                if (prop.ObjectClass == null)
-                {
-                    Logging.Log.ErrorFormat("tried to create ReloadReferenceBody for unattached property: [{0}]", prop.Name);
-                }
-                else
-                {
-                    Logging.Log.ErrorFormat("tried to create ReloadReferenceBody for property [{0}] attached to non-ObjectClass: [{1}]", prop.Name, prop.ObjectClass);
-                }
+                Logging.Log.ErrorFormat("tried to create ReloadReferenceBody for property [{0}] attached to non-ObjectClass: [{1}]", prop.Name, dt);
             }
             else
             {
-                string referencedImplementation = Mappings.ObjectClassHbm.GetWrapperTypeReference(prop.ObjectClass as ObjectClass, this.Settings);
+                string referencedImplementation = Mappings.ObjectClassHbm.GetWrapperTypeReference(cls, this.Settings);
                 // value collections are always exported / serialized inline. no need for parent guid
                 ObjectClasses.ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, "Parent", "Parent", "_fk_Parent", null, false);
             }

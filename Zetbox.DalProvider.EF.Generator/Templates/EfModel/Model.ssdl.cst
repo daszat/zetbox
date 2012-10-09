@@ -30,6 +30,12 @@
 <%@ Import Namespace="Zetbox.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="schemaProvider" Type="ISchemaProvider" %>
+
+<%
+            var int32DbType = schemaProvider.DbTypeToNative(DbType.Int32);
+            var guid32DbType = schemaProvider.DbTypeToNative(DbType.Guid);
+%>
+
 <?xml version="1.0" encoding="utf-8"?>
 <Schema xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl"
         Namespace="Model.Store"
@@ -42,15 +48,16 @@
 <%	
 	foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
 	{
+        var clsName = cls.Name;
 %>
-    <EntitySet Name="<%= cls.Name %>" EntityType="Model.Store.<%= cls.Name %>" Schema="<%= cls.Module.SchemaName %>" Table="<%= cls.TableName %>"/>
+    <EntitySet Name="<%= clsName %>" EntityType="Model.Store.<%= clsName %>" Schema="<%= cls.Module.SchemaName %>" Table="<%= cls.TableName %>"/>
 <%	
 		if (cls.NeedsRightsTable())
 		{
 %>
     <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Schema="<%= cls.Module.SchemaName %>" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
     <AssociationSet Name="<%= Construct.SecurityRulesFKName(cls) %>" Association="Model.Store.<%= Construct.SecurityRulesFKName(cls) %>">
-      <End Role="<%= cls.Name %>" EntitySet="<%= cls.Name %>" />
+      <End Role="<%= clsName %>" EntitySet="<%= clsName %>" />
       <End Role="<%= Construct.SecurityRulesClassName(cls) %>" EntitySet="<%= Construct.SecurityRulesClassName(cls) %>" />
     </AssociationSet>
 <%	
@@ -63,8 +70,9 @@
 	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
+        var clsName = cls.Name;
 %>
-    <EntitySet Name="<%= cls.Name %>" EntityType="Model.Store.<%= cls.Name %>" Schema="<%= cls.Module.SchemaName %>" Table="<%= cls.TableName %>"/>
+    <EntitySet Name="<%= clsName %>" EntityType="Model.Store.<%= clsName %>" Schema="<%= cls.Module.SchemaName %>" Table="<%= cls.TableName %>"/>
     <!-- inherits from <%= info.ParentEntitySetName %> -->
     <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
       <End Role="<%= info.ParentRoleName %>" EntitySet="<%= info.ParentEntitySetName %>" />
@@ -83,6 +91,8 @@
 		string esName = rel.GetRelationClassName();
 		string esSchemaName = rel.Module.SchemaName;
 		string esTableName = rel.GetRelationTableName();
+        var a = rel.A;
+        var b = rel.B;
 		
 %>
     <!-- 
@@ -92,12 +102,12 @@
     -->
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Schema="<%= esSchemaName %>" Table="<%= esTableName %>" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.Store.<%= assocNameA %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.Name %>" />
+      <End Role="<%= a.RoleName %>" EntitySet="<%= a.Type.Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
     </AssociationSet>
     <AssociationSet Name="<%= assocNameB %>" Association="Model.Store.<%= assocNameB %>" >
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.Name %>" />
+      <End Role="<%= b.RoleName %>" EntitySet="<%= b.Type.Name %>" />
     </AssociationSet>
     
 <%
@@ -110,11 +120,12 @@
 	foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
 	{
 		string assocName = rel.GetAssociationName();
-		
+		var a = rel.A;
+        var b = rel.B;
 %>
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.Name %>" />
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.Name %>" />
+      <End Role="<%= a.RoleName %>" EntitySet="<%= a.Type.Name %>" />
+      <End Role="<%= b.RoleName %>" EntitySet="<%= b.Type.Name %>" />
     </AssociationSet>
 <%
 	}
@@ -130,10 +141,11 @@
 	{
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
+        var propClsName = prop.ObjectClass.Name;
 %>
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Schema="<%= prop.Module.SchemaName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
-      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= prop.ObjectClass.Name %>" />
+      <End Role="<%= propClsName %>" EntitySet="<%= propClsName %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
     </AssociationSet>
     
@@ -151,10 +163,11 @@
 	{
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
+        var propClsName = prop.ObjectClass.Name;
 %>
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Schema="<%= prop.Module.SchemaName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
-      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= prop.ObjectClass.Name %>" />
+      <End Role="<%= propClsName %>" EntitySet="<%= propClsName %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
     </AssociationSet>
     
@@ -170,12 +183,13 @@
 	foreach(var cls in ctx.GetQuery<ObjectClass>()
 		.OrderBy(cls => cls.Name))
 	{
+        var clsName = cls.Name;
 %>	
-  <EntityType Name="<%= cls.Name %>">
+  <EntityType Name="<%= clsName %>">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : String.Empty %>/>
+    <Property Name="ID" Type="<%= int32DbType %>" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : String.Empty %>/>
 <%
 		ApplyEntityTypeColumnDefs(cls);
 %>
@@ -189,15 +203,15 @@
         <PropertyRef Name="ID" />
         <PropertyRef Name="Identity" />
       </Key>
-      <Property Name="ID" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="false" />
-      <Property Name="Identity" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="false" />
-      <Property Name="Right" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="false" />
+      <Property Name="ID" Type="<%= int32DbType %>" Nullable="false" />
+      <Property Name="Identity" Type="<%= int32DbType %>" Nullable="false" />
+      <Property Name="Right" Type="<%= int32DbType %>" Nullable="false" />
     </EntityType>
     <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
-      <End Role="<%= cls.Name %>" Type="Model.Store.<%= cls.Name %>" Multiplicity="1" />
+      <End Role="<%= clsName %>" Type="Model.Store.<%= cls.Name %>" Multiplicity="1" />
       <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
       <ReferentialConstraint>
-        <Principal Role="<%= cls.Name %>">
+        <Principal Role="<%= clsName %>">
           <PropertyRef Name="ID" />
         </Principal>
         <Dependent Role="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -218,35 +232,37 @@
 		string ceName = rel.GetRelationClassName();
 		string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
 		string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+        var a = rel.A;
+        var b = rel.B;
 %>	
   <EntityType Name="<%= ceName %>">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="<%= int32DbType %>" Nullable="false" StoreGeneratedPattern="Identity" />
 <% 
-		if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
+		if (a.Type.ImplementsIExportable() && b.Type.ImplementsIExportable())
 		{
 %>
-	<Property Name="ExportGuid" Type="<%= schemaProvider.DbTypeToNative(DbType.Guid) %>" Nullable="false" />
+	<Property Name="ExportGuid" Type="<%= guid32DbType %>" Nullable="false" />
 <%	
 		}
 %>
-    <Property Name="<%= fkAName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
+    <Property Name="<%= fkAName %>" Type="<%= int32DbType %>" Nullable="true" />
 <%
 		if (rel.NeedsPositionStorage(RelationEndRole.A))
 		{
 %>
-    <Property Name="<%= fkAName %><%= Zetbox.API.Helper.PositionSuffix %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
+    <Property Name="<%= fkAName %><%= Zetbox.API.Helper.PositionSuffix %>" Type="<%= int32DbType %>" Nullable="true" />
 <%
 		}
 %>
-    <Property Name="<%= fkBName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
+    <Property Name="<%= fkBName %>" Type="<%= int32DbType %>" Nullable="true" />
 <%
 		if (rel.NeedsPositionStorage(RelationEndRole.B))
 		{
 %>
-    <Property Name="<%= fkBName %><%= Zetbox.API.Helper.PositionSuffix %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
+    <Property Name="<%= fkBName %><%= Zetbox.API.Helper.PositionSuffix %>" Type="<%= int32DbType %>" Nullable="true" />
 <%
 		}
 %>
@@ -254,10 +270,10 @@
 
   <!-- A to CollectionEntry -->
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.A) %>">
-    <End Role="<%= rel.A.RoleName %>" Type="Model.Store.<%= rel.A.Type.Name %>" Multiplicity="0..1" />
+    <End Role="<%= a.RoleName %>" Type="Model.Store.<%= a.Type.Name %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="<%= rel.A.RoleName %>">
+      <Principal Role="<%= a.RoleName %>">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
@@ -268,10 +284,10 @@
 
   <!-- B to CollectionEntry -->
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>">
-    <End Role="<%= rel.B.RoleName %>" Type="Model.Store.<%= rel.B.Type.Name %>" Multiplicity="0..1" />
+    <End Role="<%= b.RoleName %>" Type="Model.Store.<%= b.Type.Name %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="<%= rel.B.RoleName %>">
+      <Principal Role="<%= b.RoleName %>">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
@@ -382,14 +398,14 @@
       <Key>
         <PropertyRef Name="ID" />
       </Key>
-      <Property Name="ID" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="false" StoreGeneratedPattern="Identity" />
-      <Property Name="fk_<%= containerTypeName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
+      <Property Name="ID" Type="<%= int32DbType %>" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_<%= containerTypeName %>" Type="<%= int32DbType %>" Nullable="true" />
       <Property Name="<%= prop.Name %>" Type="<%= itemTypeName %>" <%= constraint %>/>
 <%
 		if (prop.HasPersistentOrder)
 		{
 %>
-    <Property Name="<%= prop.Name %>Index" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
+    <Property Name="<%= prop.Name %>Index" Type="<%= int32DbType %>" Nullable="true" />
 <%
 		}
 %>
@@ -433,8 +449,8 @@
       <Key>
         <PropertyRef Name="ID" />
       </Key>
-      <Property Name="ID" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="false" StoreGeneratedPattern="Identity" />
-      <Property Name="fk_<%= containerTypeName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
+      <Property Name="ID" Type="<%= int32DbType %>" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_<%= containerTypeName %>" Type="<%= int32DbType %>" Nullable="true" />
 <%
 		ApplyEntityTypeColumnDefs(prop);
 %>
@@ -442,7 +458,7 @@
 		if (prop.HasPersistentOrder)
 		{
 %>
-    <Property Name="<%= prop.Name %>Index" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
+    <Property Name="<%= prop.Name %>Index" Type="<%= int32DbType %>" Nullable="true" />
 <%
 		}
 %>
@@ -467,11 +483,11 @@
 	}
 %>
 	<Function Name="GetContinuousSequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="seqNumber" Type="<%= schemaProvider.DbTypeToNative(DbType.Guid) %>" Mode="In" />
-		  <Parameter Name="result" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Mode="Out" />
+          <Parameter Name="seqNumber" Type="<%= guid32DbType %>" Mode="In" />
+		  <Parameter Name="result" Type="<%= int32DbType %>" Mode="Out" />
     </Function>
     <Function Name="GetSequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-        <Parameter Name="seqNumber" Type="<%= schemaProvider.DbTypeToNative(DbType.Guid) %>" Mode="In" />
-		<Parameter Name="result" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Mode="Out" />
+        <Parameter Name="seqNumber" Type="<%= guid32DbType %>" Mode="In" />
+		<Parameter Name="result" Type="<%= int32DbType %>" Mode="Out" />
     </Function>
 </Schema>

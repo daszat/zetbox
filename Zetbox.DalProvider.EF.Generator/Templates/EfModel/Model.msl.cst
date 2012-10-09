@@ -36,8 +36,9 @@
 <%
     foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
+        var clsName = cls.Name;
 %>
-    <EntitySetMapping Name="<%= cls.Name %>EfImpl">
+    <EntitySetMapping Name="<%= clsName %>EfImpl">
 <% ApplyEntityTypeMapping(cls); %>
     </EntitySetMapping>
 <%
@@ -54,7 +55,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="<%= Construct.SecurityRulesFKName(cls) %>" TypeName="Model.<%= Construct.SecurityRulesFKName(cls) %>" StoreEntitySet="<%= Construct.SecurityRulesClassName(cls) %>">
-      <EndProperty Name="<%= cls.Name %>">
+      <EndProperty Name="<%= clsName %>">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <EndProperty Name="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -188,6 +189,7 @@
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     { 
+        var propClsName = prop.ObjectClass.Name;
 %>
     <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>EfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>EfImpl)">
@@ -209,12 +211,12 @@
                            TypeName="Model.<%= prop.GetAssociationName() %>"
                            StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= prop.ObjectClass.Name %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.Name %>"/>
+        <ScalarProperty Name="ID" ColumnName="fk_<%= propClsName %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= prop.ObjectClass.Name %>" IsNull="false"/>
+      <Condition ColumnName="fk_<%= propClsName %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }
@@ -229,6 +231,7 @@
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     { 
+        var propClsName = prop.ObjectClass.Name;
 %>
     <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>EfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>EfImpl)">
@@ -250,12 +253,12 @@
                            TypeName="Model.<%= prop.GetAssociationName() %>"
                            StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= prop.ObjectClass.Name %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.Name %>"/>
+        <ScalarProperty Name="ID" ColumnName="fk_<%= propClsName %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= prop.ObjectClass.Name %>" IsNull="false"/>
+      <Condition ColumnName="fk_<%= propClsName %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }
