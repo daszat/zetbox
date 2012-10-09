@@ -30,12 +30,6 @@
 <%@ Import Namespace="Zetbox.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="schemaProvider" Type="ISchemaProvider" %>
-
-<%
-            var int32DbType = schemaProvider.DbTypeToNative(DbType.Int32);
-            var guid32DbType = schemaProvider.DbTypeToNative(DbType.Guid);
-%>
-
 <?xml version="1.0" encoding="utf-8"?>
 <Schema xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl"
         Namespace="Model.Store"

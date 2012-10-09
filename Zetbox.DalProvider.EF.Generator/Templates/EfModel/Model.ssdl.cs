@@ -24,9 +24,31 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using System.Collections;
+    using System.Data;
 
     public partial class ModelSsdl
     {
+        private string _int32DbType;
+        protected string int32DbType
+        {
+            get
+            {
+                if(_int32DbType == null)
+                    _int32DbType = schemaProvider.DbTypeToNative(DbType.Int32);
+                return _int32DbType;
+            }
+        }
+        private string _guid32DbType;
+        protected string guid32DbType
+        {
+            get
+            {
+                if(_guid32DbType == null)
+                    _guid32DbType = schemaProvider.DbTypeToNative(DbType.Guid);
+                return _guid32DbType;
+            }
+        }
+
         // ContextBound Objects are not allowed to have Generic Methods
         // See MSDN: http://msdn.microsoft.com/en-us/library/system.contextboundobject.aspx
         private static class ModelSsdlHelper
