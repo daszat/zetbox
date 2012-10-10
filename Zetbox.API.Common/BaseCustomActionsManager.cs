@@ -339,7 +339,7 @@ namespace Zetbox.App.Extensions
                 {
                     var methodInfos = _reflectedMethods[key];
 
-                    // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                    // May be null on Methods without events like server side invocations or "embedded" methods
                     // or null if not found
                     var attr = FindEventBasedMethodAttribute(method, implType); // The Method
                     if (attr != null)
@@ -363,7 +363,7 @@ namespace Zetbox.App.Extensions
                     {
                         var methodInfos = _reflectedMethods[key];
 
-                        // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                        // May be null on Methods without events like server side invocations or "embedded" methods
                         // or null if not found
                         var attr = FindEventBasedMethodAttribute(method, data.Suffix, implType);
                         if (attr != null)
