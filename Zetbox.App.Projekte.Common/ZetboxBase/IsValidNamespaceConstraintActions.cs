@@ -25,7 +25,7 @@ namespace Zetbox.App.Base
     {
         [Invocation]
         public static void IsValid(
-                   IsValidIdentifierConstraint obj,
+                   IsValidNamespaceConstraint obj,
                    MethodReturnEventArgs<bool> e,
                    object constrainedObjectParam,
                    object constrainedValueParam)
