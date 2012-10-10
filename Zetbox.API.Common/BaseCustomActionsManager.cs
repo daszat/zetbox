@@ -330,9 +330,15 @@ namespace Zetbox.App.Extensions
             // New style
             foreach (var method in GetAllMethods(dt))
             {
-                Type[] paramTypes = method.Parameter
-                    .Where(p => !p.IsReturnParameter)
-                    .Select(p => p.GuessParameterType())
+                var returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
+                var infrastructureParameters = returnParam == null
+                    ? new Type[] { dtType }
+                    : new Type[] { dtType, typeof(MethodReturnEventArgs<>).MakeGenericType(returnParam.GuessParameterType()) };
+
+                Type[] paramTypes = infrastructureParameters
+                    .Concat(method.Parameter
+                        .Where(p => !p.IsReturnParameter)
+                        .Select(p => p.GuessParameterType()))
                     .ToArray();
 
                 var key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name, paramTypes);
@@ -359,7 +365,7 @@ namespace Zetbox.App.Extensions
                     new { Suffix = "CanExecReason", ReturnType = typeof(MethodReturnEventArgs<string>) }
                 })
                 {
-                    key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name + data.Suffix, new[] { dt.GetDataType(), data.ReturnType });
+                    key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name + data.Suffix, new[] { dtType, data.ReturnType });
                     if (_reflectedMethods.ContainsKey(key))
                     {
                         var methodInfos = _reflectedMethods[key];
@@ -395,10 +401,28 @@ namespace Zetbox.App.Extensions
             // New style
             foreach (Property prop in dt.Properties)
             {
-                CreatePropertyInvocations(implType, prop, "get_", "Getter", new[] { dtType, typeof(PropertyGetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
-                CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter", new[] { dtType, typeof(PropertyPreSetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
-                CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter", new[] { dtType, typeof(PropertyPostSetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
-                CreatePropertyInvocations(implType, prop, "isValid_", "IsValid", new[] { dtType, typeof(PropertyIsValidEventArgs) });
+                if (!prop.GetIsList())
+                {
+                    CreatePropertyInvocations(implType, prop, "get_", "Getter",
+                        new[] { dtType, typeof(PropertyGetterEventArgs<>).MakeGenericType(dtType.GetPropertyType(prop.Name)) });
+                }
+
+                if (!prop.IsCalculated() && !prop.GetIsList())
+                {
+                    CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter",
+                        new[] { dtType, typeof(PropertyPreSetterEventArgs<>).MakeGenericType(dtType.GetPropertyType(prop.Name)) });
+                    CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter",
+                        new[] { dtType, typeof(PropertyPostSetterEventArgs<>).MakeGenericType(dtType.GetPropertyType(prop.Name)) });
+                }
+
+                if (prop.GetIsList())
+                {
+                    // change notification
+                    CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter", new[] { dtType });
+                }
+
+                CreatePropertyInvocations(implType, prop, "isValid_", "IsValid",
+                    new[] { dtType, typeof(PropertyIsValidEventArgs) });
             }
         }
 
