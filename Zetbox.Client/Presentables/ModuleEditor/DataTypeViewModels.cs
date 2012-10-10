@@ -293,16 +293,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         {
             get
             {
-                if (_prop is ValueTypeProperty)
-                {
-                    return ((ValueTypeProperty)_prop).IsList;
-                }
-                else if (_prop is ObjectReferenceProperty)
-                {
-                    var orp = (ObjectReferenceProperty)_prop;
-                    return orp.GetIsList();
-                }
-                return false;
+                return _prop.GetIsList();
             }
         }
     }
