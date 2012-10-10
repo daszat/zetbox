@@ -224,10 +224,10 @@ namespace Zetbox.Client.Presentables
         {
             switch(cat)
             {
-                case "Main": return "1|Main";
-                case "Summary": return "2|Summary";
-                case "Meta": return "4|Meta";
+                case "Summary": return "1|Summary";
+                case "Main": return "2|Main";
                 default: return "3|" + cat;
+                case "Meta": return "4|Meta";
             }
         }
 

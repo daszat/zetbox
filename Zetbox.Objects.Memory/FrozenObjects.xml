@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-10-02T16:00:00Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-10-10T17:18:37Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -430,8 +430,8 @@ public static void isValid_CalendarRules(Calendar obj, PropertyIsValidEventArgs 
     <ZetboxBase:RelationEnd>d619fde9-88e3-498f-8fab-8fd911c75df5</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="34eb524b-3f24-4972-b0e5-a64c9f27838a">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -466,8 +466,8 @@ public static void isValid_ChangedBy(Calendar obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>65d43216-e7b9-4b2e-a46c-773cdbeffdb4</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="486810c7-c031-4c86-ad86-7b88530008ca">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -539,8 +539,8 @@ public static void isValid_ChildCalendar(Calendar obj, PropertyIsValidEventArgs 
     <ZetboxBase:RelationEnd>f10baa2b-8830-45ba-9963-55ed2f1f5f22</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d567d5a4-3be0-44f1-af91-046180218a38">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -575,8 +575,8 @@ public static void isValid_CreatedBy(Calendar obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>11cb72c4-a1f7-4edd-a559-ebe0f35906ad</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="b81a61fa-b991-4928-8390-d529abc42e72">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -613,8 +613,8 @@ public static void isValid_CreatedOn(Calendar obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="45599fa5-a838-4a1e-b9f1-4031dea7f4e7">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Calendar obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -759,8 +759,8 @@ public static void isValid_Calendar(CalendarRule obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>fc15df76-5917-4d75-a0fe-b428b4182eb9</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="a14bfc87-c65e-4111-8245-3fbb31189392">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(CalendarRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -795,8 +795,8 @@ public static void isValid_ChangedBy(CalendarRule obj, PropertyIsValidEventArgs 
     <ZetboxBase:RelationEnd>19235245-bfc1-4f30-bdf0-498441fab71c</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="ddab18cc-3278-4ac5-8a76-25d23b1cb7be">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -833,8 +833,8 @@ public static void isValid_ChangedOn(CalendarRule obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="0556d238-5f1e-4f01-b7b1-13f562726942">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(CalendarRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -869,8 +869,8 @@ public static void isValid_CreatedBy(CalendarRule obj, PropertyIsValidEventArgs 
     <ZetboxBase:RelationEnd>184f61f1-02b5-4d4d-8169-fc0a3fabe2f7</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="d61d2a16-f80d-449f-9850-0301a43fdc71">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -907,8 +907,8 @@ public static void isValid_CreatedOn(CalendarRule obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="c730faff-a917-4f89-9a49-b65374cb4de1">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(CalendarRule obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -2391,8 +2391,8 @@ public static void isValid_Blob(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>803db64f-de2c-4a61-8667-d90a37a25f51</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="c22516f3-b897-4827-a025-27d1515aadcd">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(File obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -2427,8 +2427,8 @@ public static void isValid_ChangedBy(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>39b7e8da-46a9-4f37-b5a4-112f5d52bc06</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="c144678d-632d-4a83-8041-280d674f4453">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(File obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -2465,8 +2465,8 @@ public static void isValid_ChangedOn(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="dc8da15a-a432-43fd-b93f-9b3530ce3144">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(File obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -2501,8 +2501,8 @@ public static void isValid_CreatedBy(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>560e61b8-2ad6-453d-8ca9-464c489062da</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="e1892507-375b-4b52-ab20-16095dfc3514">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(File obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -2539,8 +2539,8 @@ public static void isValid_CreatedOn(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="91566b41-879d-4e72-b48b-9677cc156649">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(File obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -2614,8 +2614,8 @@ public static void isValid_Name(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="533d8049-92ac-4100-b94f-661e5dbf5c74">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(FileImportConfiguration obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -2650,8 +2650,8 @@ public static void isValid_ChangedBy(FileImportConfiguration obj, PropertyIsVali
     <ZetboxBase:RelationEnd>4a9de59f-e6ce-48eb-8dfd-222ae67f3c48</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="4dfd754a-6c10-4fb0-851d-b11e05a55abc">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(FileImportConfiguration obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -2688,8 +2688,8 @@ public static void isValid_ChangedOn(FileImportConfiguration obj, PropertyIsVali
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="afb941f3-1f6a-427a-9d45-f04b1a8440b1">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(FileImportConfiguration obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -2724,8 +2724,8 @@ public static void isValid_CreatedBy(FileImportConfiguration obj, PropertyIsVali
     <ZetboxBase:RelationEnd>8154a006-f2cf-4a5e-94fd-41123b2ac98e</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="66be2bc9-c3a2-4411-9a53-6e07548d10ab">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(FileImportConfiguration obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -2762,8 +2762,8 @@ public static void isValid_CreatedOn(FileImportConfiguration obj, PropertyIsVali
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="1034a145-8bfa-470f-8345-555b9c5087cb">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(FileImportConfiguration obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -4723,8 +4723,8 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:B>9c7c4532-2624-4b37-8f77-1ef06a6d174b</ZetboxBase:B>
   </ZetboxBase:DataType_implements_Interface_RelationEntry>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="3a6ec182-98d9-472d-99a1-d1db671ccbb2">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Application obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -4759,8 +4759,8 @@ public static void isValid_ChangedBy(Application obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>890f8d2a-0856-4be8-8e74-e1aa2df3b527</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="fc8b67d5-ab20-41bd-93f5-3833b72a51d4">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Application obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -4797,8 +4797,8 @@ public static void isValid_ChangedOn(Application obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="61e96002-da83-40a1-85cd-825044ba4605">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Application obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -4833,8 +4833,8 @@ public static void isValid_CreatedBy(Application obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>c9c3cbff-dd47-4031-abfb-10d3aa950c30</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="2bc68e86-956a-4f34-b875-6d99eea35129">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Application obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -4907,8 +4907,8 @@ public static void isValid_Description(Application obj, PropertyIsValidEventArgs
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="533c27c0-9fac-44e9-a7a1-60c10cf35bdc">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Application obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -5086,8 +5086,8 @@ public static void isValid_WorkspaceViewModel(Application obj, PropertyIsValidEv
     <ZetboxBase:RelationEnd>006764be-2aae-468d-a90e-aed472c977b9</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="784846d0-2eea-4966-b63d-72a0f13b418b">
-    <ZetboxBase:CategoryTags>Summary,Bool</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T12:09:02.008812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:18:37.21259Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_FalseIcon(BoolProperty obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.Icon&gt; e)
 {
@@ -5121,8 +5121,8 @@ public static void isValid_FalseIcon(BoolProperty obj, PropertyIsValidEventArgs 
     <ZetboxBase:RelationEnd>f60d8c66-e72f-4548-a41b-126a1804694a</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="62454172-467d-4c8e-8f1a-a959946d3fdb">
-    <ZetboxBase:CategoryTags>Summary,Bool</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T12:09:02.008812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:18:37.21259Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_NullIcon(BoolProperty obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.Icon&gt; e)
 {
@@ -5156,8 +5156,8 @@ public static void isValid_NullIcon(BoolProperty obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>dca61286-6a72-4e9d-8276-38f61089ea6b</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="bb8fd69f-437a-45d5-a169-64c9586bfc1d">
-    <ZetboxBase:CategoryTags>Summary,Bool</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T12:09:02.008812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:18:37.21259Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_TrueIcon(BoolProperty obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.Icon&gt; e)
 {
@@ -5628,8 +5628,8 @@ public static void isValid_IsCurrentYearDefault(DateRangeFilterConfiguration obj
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:BoolProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="af2483a8-8ded-4a98-8df1-ee89d4bb7723">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(FilterConfiguration obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -5664,8 +5664,8 @@ public static void isValid_ChangedBy(FilterConfiguration obj, PropertyIsValidEve
     <ZetboxBase:RelationEnd>315e41e6-e854-43ea-97f6-a091c801967b</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="a3fbe0af-79e9-4117-9c95-6676938b40b2">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(FilterConfiguration obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -5702,8 +5702,8 @@ public static void isValid_ChangedOn(FilterConfiguration obj, PropertyIsValidEve
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="c5fce446-a10d-4d7b-a006-77efd93615ae">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(FilterConfiguration obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -5738,8 +5738,8 @@ public static void isValid_CreatedBy(FilterConfiguration obj, PropertyIsValidEve
     <ZetboxBase:RelationEnd>f8eaed05-6b6c-43d5-85e6-58e01e840690</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="38b9d11b-926d-438d-b06d-f35dd6592055">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(FilterConfiguration obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -5776,8 +5776,8 @@ public static void isValid_CreatedOn(FilterConfiguration obj, PropertyIsValidEve
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="569d3c7a-69e7-4eb2-818c-5990bd6e02d9">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(FilterConfiguration obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -6323,8 +6323,8 @@ public static void isValid_IsCurrentMonthDefault(MonthFilterConfiguration obj, P
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:BoolProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="5a54e4f1-4118-4cc7-b8a1-e2f25a9ac9df">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(NavigationEntry obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -6359,8 +6359,8 @@ public static void isValid_ChangedBy(NavigationEntry obj, PropertyIsValidEventAr
     <ZetboxBase:RelationEnd>aeeb8709-32f5-491a-9d7f-210242e399ba</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="3fb6b366-facc-44e1-aadb-0b6417e4b53e">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(NavigationEntry obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -6469,8 +6469,8 @@ public static void isValid_Color(NavigationEntry obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="f688a7e1-6833-4e78-ac7d-4dfd74242867">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(NavigationEntry obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -6505,8 +6505,8 @@ public static void isValid_CreatedBy(NavigationEntry obj, PropertyIsValidEventAr
     <ZetboxBase:RelationEnd>92fc82fe-d590-491a-a3d1-bb16e6c635c6</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="22b4d7f0-40cb-40a7-a421-2fffa59ccb94">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(NavigationEntry obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -6543,8 +6543,8 @@ public static void isValid_CreatedOn(NavigationEntry obj, PropertyIsValidEventAr
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="9c987946-8816-48a6-bd21-b1120c3a78b4">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(NavigationEntry obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -7917,8 +7917,8 @@ public static void isValid_Configuration(SavedListConfiguration obj, PropertyIsV
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="98754493-0fcc-4874-adde-cbf27b7a53d2">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-07-13T18:47:04.556493Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(SavedListConfiguration obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -8639,8 +8639,8 @@ public static void isValid_Description(ViewModelDescriptor obj, PropertyIsValidE
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="77ce1e5b-f244-4279-af13-b3e75b55f933">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(ViewModelDescriptor obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -20041,8 +20041,8 @@ public static void isValid_Auftragswert(Auftrag obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DoubleProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d4f4c039-5e30-4ec4-a3b9-c0a7b1dbcf49">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Auftrag obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -20077,8 +20077,8 @@ public static void isValid_ChangedBy(Auftrag obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>839fcbcf-aa82-4a6c-9c5b-0ad505f22e9f</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="555ea249-ed09-4b17-8a48-7f3bc3d682f8">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Auftrag obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -20115,8 +20115,8 @@ public static void isValid_ChangedOn(Auftrag obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="dc10da4b-f23f-4fad-8a44-a733f27bd21f">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Auftrag obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -20151,8 +20151,8 @@ public static void isValid_CreatedBy(Auftrag obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>7a08cd44-68e0-4abf-bd69-0676c870bfa7</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="95d413ad-0815-4fd0-89e4-455c6f6e0321">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Auftrag obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -20189,8 +20189,8 @@ public static void isValid_CreatedOn(Auftrag obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="9e6faf9c-4636-403b-94fa-98c789806793">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Auftrag obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -20368,8 +20368,8 @@ public static void isValid_Adresse(Kunde obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d2148600-ebba-4782-8379-a8b03a31362b">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Kunde obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -20404,8 +20404,8 @@ public static void isValid_ChangedBy(Kunde obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>774cd010-70e6-4fed-9d03-90b8609386ff</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="028ff0b0-1beb-486d-b400-bfe3cdf73c5f">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Kunde obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -20442,8 +20442,8 @@ public static void isValid_ChangedOn(Kunde obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="acc46d95-0f07-40cd-b2b1-79d093d6e7b4">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Kunde obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -20478,8 +20478,8 @@ public static void isValid_CreatedBy(Kunde obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>5924cc9e-23b1-4e99-9527-57406fd42300</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="1c23561e-07d4-4363-8ceb-3b13f3125634">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Kunde obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -20552,8 +20552,8 @@ public static void isValid_EMails(Kunde obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>true</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="01f74ef3-9369-4e29-a811-293fc27f7c27">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Kunde obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -20734,8 +20734,8 @@ public static void isValid_PLZ(Kunde obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="08945d72-d667-40b0-9993-05f2d8df0d0f">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Mitarbeiter obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -20770,8 +20770,8 @@ public static void isValid_ChangedBy(Mitarbeiter obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>3bf0be50-3b2e-42fd-8934-2a7efb1330a9</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="45650670-a031-4f4b-8ac9-adb825b3a255">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Mitarbeiter obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -20808,8 +20808,8 @@ public static void isValid_ChangedOn(Mitarbeiter obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="4d49fec0-85be-4302-b88b-57005b0a9dd7">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Mitarbeiter obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -20844,8 +20844,8 @@ public static void isValid_CreatedBy(Mitarbeiter obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>34e2f09c-a513-4795-9e98-1e0b9a11434c</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="ced272ca-9998-49a9-8056-b1efe012909c">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Mitarbeiter obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -20882,8 +20882,8 @@ public static void isValid_CreatedOn(Mitarbeiter obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="fc57ee0f-1ba5-445c-9007-a5ec1507cf39">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Mitarbeiter obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -21250,8 +21250,8 @@ public static void isValid_Bis(Projekt obj, PropertyIsValidEventArgs e)
     <ZetboxBase:DateTimeStyle>2</ZetboxBase:DateTimeStyle>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="2fe9d894-c359-412f-b787-d3ed3a26a0a2">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Projekt obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -21286,8 +21286,8 @@ public static void isValid_ChangedBy(Projekt obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>2ae262cf-f1bc-4581-b92e-7631436f82b9</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="d1f821b0-5991-44a7-9c4d-8be66834ea9c">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Projekt obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -21324,8 +21324,8 @@ public static void isValid_ChangedOn(Projekt obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="fbe34f93-21ec-470a-b9d4-6e4664729466">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Projekt obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -21360,8 +21360,8 @@ public static void isValid_CreatedBy(Projekt obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>9f778c92-3484-4f71-9d0b-baf0c02e14f4</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="7119febf-e750-411f-a4f2-5a2181e45dc7">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Projekt obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -21398,8 +21398,8 @@ public static void isValid_CreatedOn(Projekt obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="df36d615-9f6e-4075-ae1c-8c5cd8a4ef91">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-24T11:15:58.756492Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Projekt obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -21732,8 +21732,8 @@ public static void isValid_Aufwand(Task obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DoubleProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="3b21f893-b3d5-4074-99ef-bc8eb2afb240">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Task obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -21768,8 +21768,8 @@ public static void isValid_ChangedBy(Task obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>bdc64bdd-fdd9-43ea-995b-5f7ecb40c651</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="3d472d60-ab48-4957-b4c4-8a16bf2f8484">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Task obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -21806,8 +21806,8 @@ public static void isValid_ChangedOn(Task obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="64585678-f5fe-4e4e-b2a6-7f67f5444972">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Task obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -21842,8 +21842,8 @@ public static void isValid_CreatedBy(Task obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>586b6bc5-83cd-4e5e-85f4-73a245fec290</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="10f730ed-fade-456d-89a4-f2ab99526705">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Task obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -21954,8 +21954,8 @@ public static void isValid_DatumVon(Task obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="1c8414ef-f164-4f7e-a7bf-5fca894aa4f4">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Task obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -23975,8 +23975,8 @@ public static void isValid_Timestamp(MigrationLog obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="339fa8af-5760-4e31-a112-5aa29e7a0d28">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(MigrationProject obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -24011,8 +24011,8 @@ public static void isValid_ChangedBy(MigrationProject obj, PropertyIsValidEventA
     <ZetboxBase:RelationEnd>5c0ed4b3-4883-4453-908e-8b7a9bcf3989</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="133f7c7e-fcf4-4e90-b6e9-f3500dfcf1b9">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(MigrationProject obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -24049,8 +24049,8 @@ public static void isValid_ChangedOn(MigrationProject obj, PropertyIsValidEventA
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="e11cb99e-3e4b-4c96-ba62-42b6a66618f3">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(MigrationProject obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -24085,8 +24085,8 @@ public static void isValid_CreatedBy(MigrationProject obj, PropertyIsValidEventA
     <ZetboxBase:RelationEnd>463e5d7c-dcef-4e3e-af5e-35abb1fcf841</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="51ceaa28-d616-464b-8c6b-aadf7461aa4d">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(MigrationProject obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -24194,8 +24194,8 @@ public static void isValid_DestinationModule(MigrationProject obj, PropertyIsVal
     <ZetboxBase:RelationEnd>421f2a45-6526-4b52-87ec-e26d9cb7cf5c</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:GuidProperty ExportGuid="0851878a-0753-425e-a053-c4642ce3f28b">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(MigrationProject obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -24267,8 +24267,8 @@ public static void isValid_StagingDatabases(MigrationProject obj, PropertyIsVali
     <ZetboxBase:RelationEnd>d39a686a-30f9-45b2-bc89-bb0161271fd4</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="4f2f1af0-f33b-4d98-89bb-2a386e11a29a">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(SourceColumn obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -24303,8 +24303,8 @@ public static void isValid_ChangedBy(SourceColumn obj, PropertyIsValidEventArgs 
     <ZetboxBase:RelationEnd>2012716a-bcad-4740-a8fe-063b88e4d87f</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="ddd4df6a-e085-45fe-b900-f3995dcb1845">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(SourceColumn obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -24341,8 +24341,8 @@ public static void isValid_ChangedOn(SourceColumn obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:StringProperty ExportGuid="66bcca34-2297-4e06-84e8-ff19c5d4af35">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Comment(SourceColumn obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -24377,8 +24377,8 @@ public static void isValid_Comment(SourceColumn obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:BoolProperty ExportGuid="09607800-4b5c-4d8a-a0cf-b508986c2f17">
-    <ZetboxBase:CategoryTags>Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CompareNulls(SourceColumn obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
@@ -24418,8 +24418,8 @@ public static void isValid_CompareNulls(SourceColumn obj, PropertyIsValidEventAr
     <ZetboxBase:TrueLabel>Compare nulls as equal</ZetboxBase:TrueLabel>
   </ZetboxBase:BoolProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="6c0d8f0c-2937-4d6a-972a-299c085e8b5d">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(SourceColumn obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -24454,8 +24454,8 @@ public static void isValid_CreatedBy(SourceColumn obj, PropertyIsValidEventArgs 
     <ZetboxBase:RelationEnd>265582fb-c908-400b-ac73-d145237ee7b5</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="bb5f31d0-072d-45ec-a455-0234ccc31867">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(SourceColumn obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -24492,8 +24492,8 @@ public static void isValid_CreatedOn(SourceColumn obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:EnumerationProperty ExportGuid="78873431-d503-4192-b658-5c5bc6442180">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_DbType(SourceColumn obj, PropertyGetterEventArgs&lt;Zetbox.App.SchemaMigration.ColumnType&gt; e)
 {
@@ -24529,8 +24529,8 @@ public static void isValid_DbType(SourceColumn obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
   </ZetboxBase:EnumerationProperty>
   <ZetboxBase:StringProperty ExportGuid="6273444e-5309-4481-8d2a-99a7a8a1b059">
-    <ZetboxBase:CategoryTags>Summary,Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Description(SourceColumn obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -24565,8 +24565,8 @@ public static void isValid_Description(SourceColumn obj, PropertyIsValidEventArg
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="38dce431-bb65-44c5-b67a-1f28202e51d9">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_DestinationProperty(SourceColumn obj, PropertyGetterEventArgs&lt;IList&lt;Zetbox.App.Base.Property&gt;&gt; e)
 {
@@ -24636,8 +24636,8 @@ public static void isValid_EnumEntries(SourceColumn obj, PropertyIsValidEventArg
     <ZetboxBase:RelationEnd>e1cb6987-b154-4f82-b670-50674ffaeacb</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:GuidProperty ExportGuid="52ba9fcd-dbeb-42da-9146-6f40976c1c83">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(SourceColumn obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -24674,8 +24674,8 @@ public static void isValid_ExportGuid(SourceColumn obj, PropertyIsValidEventArgs
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
   <ZetboxBase:BoolProperty ExportGuid="817ccb79-7051-4b09-8386-941a21575bfc">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_IsNullable(SourceColumn obj, PropertyGetterEventArgs&lt;bool?&gt; e)
 {
@@ -24710,8 +24710,8 @@ public static void isValid_IsNullable(SourceColumn obj, PropertyIsValidEventArgs
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:BoolProperty>
   <ZetboxBase:StringProperty ExportGuid="a27f7d36-fd56-4271-bac0-88e22bc65027">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Name(SourceColumn obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -24747,8 +24747,8 @@ public static void isValid_Name(SourceColumn obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="4d6faa25-d610-4e23-b12f-7ee4c78da70b">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_References(SourceColumn obj, PropertyGetterEventArgs&lt;Zetbox.App.SchemaMigration.SourceColumn&gt; e)
 {
@@ -24782,8 +24782,8 @@ public static void isValid_References(SourceColumn obj, PropertyIsValidEventArgs
     <ZetboxBase:RelationEnd>ab698b15-8cec-46fd-9088-7b3aafecc127</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="71bed80f-57ec-4038-a9a4-9aabc0c2f60d">
-    <ZetboxBase:CategoryTags>Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Referers(SourceColumn obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.SchemaMigration.SourceColumn&gt;&gt; e)
 {
@@ -24817,8 +24817,8 @@ public static void isValid_Referers(SourceColumn obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>17b6351f-c411-4c3b-8952-a35498ab1967</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:IntProperty ExportGuid="5a1dc7f1-7743-4603-9b65-1b31ca17d55d">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Size(SourceColumn obj, PropertyGetterEventArgs&lt;int?&gt; e)
 {
@@ -24853,8 +24853,8 @@ public static void isValid_Size(SourceColumn obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:IntProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d1dca069-f6b5-4da1-beee-a51853c109ba">
-    <ZetboxBase:CategoryTags>Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_SourceTable(SourceColumn obj, PropertyGetterEventArgs&lt;Zetbox.App.SchemaMigration.SourceTable&gt; e)
 {
@@ -24889,8 +24889,8 @@ public static void isValid_SourceTable(SourceColumn obj, PropertyIsValidEventArg
     <ZetboxBase:RelationEnd>31adfb37-3de8-40a2-b380-41714878d532</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:EnumerationProperty ExportGuid="bba3aa19-0097-4692-b649-d51fbc626182">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Status(SourceColumn obj, PropertyGetterEventArgs&lt;Zetbox.App.SchemaMigration.MappingStatus?&gt; e)
 {
@@ -24926,8 +24926,8 @@ public static void isValid_Status(SourceColumn obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
   </ZetboxBase:EnumerationProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="55366c31-0051-4be7-a3ac-66e783f68780">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(SourceEnum obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -24962,8 +24962,8 @@ public static void isValid_ChangedBy(SourceEnum obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>4965c747-9d8f-49ef-be47-88986f2d5aee</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="9fefd927-1080-44d0-80ae-8afacf6620d3">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(SourceEnum obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -25000,8 +25000,8 @@ public static void isValid_ChangedOn(SourceEnum obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="ab0d1cc0-622f-49d9-8dfa-d9461e50b4d6">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(SourceEnum obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -25036,8 +25036,8 @@ public static void isValid_CreatedBy(SourceEnum obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>a40f668b-833e-4df9-8177-5648193f1419</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="4b5066bd-3dac-4520-87f0-4548f3bff8e4">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(SourceEnum obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -25109,8 +25109,8 @@ public static void isValid_DestinationValue(SourceEnum obj, PropertyIsValidEvent
     <ZetboxBase:RelationEnd>069efe3d-ec49-400a-9725-28ead726b0e5</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:GuidProperty ExportGuid="ecac7622-18c7-4364-b109-c390cb911ce5">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(SourceEnum obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -25218,8 +25218,8 @@ public static void isValid_SourceValue(SourceEnum obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="1156b3eb-af9b-4a44-8ed3-e64fa3fbb251">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(SourceTable obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -25254,8 +25254,8 @@ public static void isValid_ChangedBy(SourceTable obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>f54977fd-ed7f-4ed6-8ee7-4f3040ae0e96</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="42040e80-e6a4-4d19-959f-033080669059">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(SourceTable obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -25292,8 +25292,8 @@ public static void isValid_ChangedOn(SourceTable obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:StringProperty ExportGuid="86a05242-c667-4181-a7a7-1d50d20f9d0f">
-    <ZetboxBase:CategoryTags>Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Comment(SourceTable obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -25328,8 +25328,8 @@ public static void isValid_Comment(SourceTable obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="c32e650b-4c12-4eeb-9f93-46df426e38de">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(SourceTable obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -25364,8 +25364,8 @@ public static void isValid_CreatedBy(SourceTable obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>567d24e4-4d6e-4718-8ecc-15263442c3c1</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="0a19a3eb-ffa2-4eef-861f-824cc327ab27">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(SourceTable obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -25402,8 +25402,8 @@ public static void isValid_CreatedOn(SourceTable obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:StringProperty ExportGuid="8b93e1d4-1e2a-44a8-91c3-0c71541934c6">
-    <ZetboxBase:CategoryTags>Summary,Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Description(SourceTable obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -25438,8 +25438,8 @@ public static void isValid_Description(SourceTable obj, PropertyIsValidEventArgs
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="ec638748-894e-4e61-b618-7d8fbacec2fe">
-    <ZetboxBase:CategoryTags>Summary,Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_DestinationObjectClass(SourceTable obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.ObjectClass&gt; e)
 {
@@ -25473,8 +25473,8 @@ public static void isValid_DestinationObjectClass(SourceTable obj, PropertyIsVal
     <ZetboxBase:RelationEnd>a1e16189-c6f6-4aab-9b91-d2cb29a48967</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:GuidProperty ExportGuid="7f6f277e-78fa-4955-925c-554a6cfd466a">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(SourceTable obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -25511,8 +25511,8 @@ public static void isValid_ExportGuid(SourceTable obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
   <ZetboxBase:StringProperty ExportGuid="f01c1095-cf9b-41f5-b89c-532a86a78cc5">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Name(SourceTable obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -25584,8 +25584,8 @@ public static void isValid_SourceColumn(SourceTable obj, PropertyIsValidEventArg
     <ZetboxBase:RelationEnd>cf599726-8c8a-4f14-9b58-7b769ada3968</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d57c1138-b611-44b6-bd30-9b6d6a91cbed">
-    <ZetboxBase:CategoryTags>Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_StagingDatabase(SourceTable obj, PropertyGetterEventArgs&lt;Zetbox.App.SchemaMigration.StagingDatabase&gt; e)
 {
@@ -25620,8 +25620,8 @@ public static void isValid_StagingDatabase(SourceTable obj, PropertyIsValidEvent
     <ZetboxBase:RelationEnd>d9a98c55-2058-4e50-a0aa-e0b8cd0dd28c</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:EnumerationProperty ExportGuid="6029f896-82fd-4372-8cfd-76ca7e31ebf6">
-    <ZetboxBase:CategoryTags>Summary,Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Status(SourceTable obj, PropertyGetterEventArgs&lt;Zetbox.App.SchemaMigration.MappingStatus?&gt; e)
 {
@@ -25657,8 +25657,8 @@ public static void isValid_Status(SourceTable obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
   </ZetboxBase:EnumerationProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="ee3476a8-1715-4dc2-a2b2-13e4a2a27e10">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(StagingDatabase obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -25693,8 +25693,8 @@ public static void isValid_ChangedBy(StagingDatabase obj, PropertyIsValidEventAr
     <ZetboxBase:RelationEnd>86e10aa2-2400-45bb-a0ea-52d92586c735</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="16652536-fb87-4b1b-866e-ec2fb68a8ae2">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(StagingDatabase obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -25768,8 +25768,8 @@ public static void isValid_ConnectionStringKey(StagingDatabase obj, PropertyIsVa
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="9db15b1e-a55e-444c-9fa7-9dd66d9b13f6">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(StagingDatabase obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -25804,8 +25804,8 @@ public static void isValid_CreatedBy(StagingDatabase obj, PropertyIsValidEventAr
     <ZetboxBase:RelationEnd>086efb1d-428b-45af-8b84-52e61f049c7d</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="d402f8a4-dc92-4041-a295-50257057e656">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(StagingDatabase obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -25878,8 +25878,8 @@ public static void isValid_Description(StagingDatabase obj, PropertyIsValidEvent
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="6bc56e55-16c4-4c94-8c20-12861844e053">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(StagingDatabase obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -28901,8 +28901,8 @@ public static void isValid_DisplayName(AnyReferenceTestObject obj, PropertyIsVal
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="65839be9-d3b7-4910-9812-c2d44d008c41">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-07-18T19:41:43.085769Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(AnyReferenceTestObject obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -30185,8 +30185,8 @@ public static void isValid_Parent(RequiredParentChild obj, PropertyIsValidEventA
     <ZetboxBase:RelationEnd>17100244-eeb7-44d8-8c82-c80a08f6d830</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d8f28d99-381c-4f66-ad18-07fa56c17b41">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T11:54:45.292812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(SecurityTestChild obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -30221,8 +30221,8 @@ public static void isValid_ChangedBy(SecurityTestChild obj, PropertyIsValidEvent
     <ZetboxBase:RelationEnd>aed5b642-97d4-4e1d-be2a-af085e96e96e</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="eddba42c-0383-4d31-a318-49d16e1f8016">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T11:54:45.292812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(SecurityTestChild obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -30259,8 +30259,8 @@ public static void isValid_ChangedOn(SecurityTestChild obj, PropertyIsValidEvent
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="ab1ac0d6-3478-4363-a3ce-d936e3724f4b">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T11:54:45.292812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(SecurityTestChild obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -30295,8 +30295,8 @@ public static void isValid_CreatedBy(SecurityTestChild obj, PropertyIsValidEvent
     <ZetboxBase:RelationEnd>57e1c9cc-2c17-4bdf-a35e-1d70e2808e68</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="e688c806-68a1-4078-b586-04c67daca577">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T11:54:45.292812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(SecurityTestChild obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -36337,8 +36337,8 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
   </ZetboxBase:DataType_implements_Interface_RelationEntry>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="a8914567-8d6d-45d6-81a0-99b86f16da5b">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(AbstractModuleMember obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -36373,8 +36373,8 @@ public static void isValid_ChangedBy(AbstractModuleMember obj, PropertyIsValidEv
     <ZetboxBase:RelationEnd>2fab0829-4d1a-47e8-b347-42b114b7a882</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="e97d5203-ee5e-403e-aa96-2453150fea67">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(AbstractModuleMember obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -36411,8 +36411,8 @@ public static void isValid_ChangedOn(AbstractModuleMember obj, PropertyIsValidEv
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="b157f222-4a23-4ef6-9454-68e87168d0dc">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(AbstractModuleMember obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -36447,8 +36447,8 @@ public static void isValid_CreatedBy(AbstractModuleMember obj, PropertyIsValidEv
     <ZetboxBase:RelationEnd>552f2ee4-cd52-4eb6-bd55-e5426fd15664</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="dd92e8c6-6a54-4f25-b8ca-3b7900c8ea71">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(AbstractModuleMember obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -36485,8 +36485,8 @@ public static void isValid_CreatedOn(AbstractModuleMember obj, PropertyIsValidEv
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="a81fffa3-a110-4a81-bc00-c7055b4f11fe">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(AbstractModuleMember obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -36558,8 +36558,8 @@ public static void isValid_Module(AbstractModuleMember obj, PropertyIsValidEvent
     <ZetboxBase:RelationEnd>2b0b81b8-3cd6-4c07-8d27-d7f1003f5b44</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="c8d556ec-a0b9-4491-95ee-91a1f2018faa">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(AccessControl obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -36594,8 +36594,8 @@ public static void isValid_ChangedBy(AccessControl obj, PropertyIsValidEventArgs
     <ZetboxBase:RelationEnd>e0c26d39-1931-4775-ab59-1d5869b21202</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="f4b0c109-cc3f-4e19-bb83-64c111cf033c">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(AccessControl obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -36632,8 +36632,8 @@ public static void isValid_ChangedOn(AccessControl obj, PropertyIsValidEventArgs
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="823a4364-94ba-478e-94d3-9591b9c2f9cf">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(AccessControl obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -36668,8 +36668,8 @@ public static void isValid_CreatedBy(AccessControl obj, PropertyIsValidEventArgs
     <ZetboxBase:RelationEnd>08fff4d6-7440-44b3-8fc6-4562c4d991d3</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="602524ad-2be2-4350-9195-015bc8ac4c8b">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(AccessControl obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -36742,8 +36742,8 @@ public static void isValid_Description(AccessControl obj, PropertyIsValidEventAr
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="6f7351e4-a2e3-487a-be50-05a8089e1080">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(AccessControl obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -37033,8 +37033,8 @@ public static void isValid_ObjID(AnyReference obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:IntProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="cb31759a-597a-4277-a963-c914a07312e7">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Assembly obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -37069,8 +37069,8 @@ public static void isValid_ChangedBy(Assembly obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>5a5ea63c-25a5-4234-9041-aabc539e8f24</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="5e74f538-9961-4b5c-a770-b92b75fb898a">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Assembly obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -37107,8 +37107,8 @@ public static void isValid_ChangedOn(Assembly obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="819fd217-def6-49d1-8239-bbc7451e95f6">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Assembly obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -37143,8 +37143,8 @@ public static void isValid_CreatedBy(Assembly obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>338acae8-7998-42c9-9cc4-5d47f66ead5b</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="c6350562-d385-41b5-afc9-89024a38ceba">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Assembly obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -37219,8 +37219,8 @@ public static void isValid_DeploymentRestrictions(Assembly obj, PropertyIsValidE
     <ZetboxBase:Enumeration>2b0b1986-0337-4d90-ad59-bc9d1ad82b2b</ZetboxBase:Enumeration>
   </ZetboxBase:EnumerationProperty>
   <ZetboxBase:GuidProperty ExportGuid="9c1ddbcf-24b9-47cb-a27d-043fc47e4002">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-02T17:57:32.714549Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Assembly obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -37553,8 +37553,8 @@ public static void isValid_Timestamp(AuditEntry obj, PropertyIsValidEventArgs e)
     <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="61674c10-27f2-4e65-9907-708236b7b749">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(BaseParameter obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -37589,8 +37589,8 @@ public static void isValid_ChangedBy(BaseParameter obj, PropertyIsValidEventArgs
     <ZetboxBase:RelationEnd>db734b3a-f03b-42d9-986a-d856179ee412</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="31b82f61-35b1-403f-9626-d2c5ddfc20bb">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(BaseParameter obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -37627,8 +37627,8 @@ public static void isValid_ChangedOn(BaseParameter obj, PropertyIsValidEventArgs
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="2a07ada5-3de0-48da-af26-4543533d230e">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(BaseParameter obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -37663,8 +37663,8 @@ public static void isValid_CreatedBy(BaseParameter obj, PropertyIsValidEventArgs
     <ZetboxBase:RelationEnd>699d2d80-2e1b-49d8-a9d0-7b4efffddd81</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="e60db4c6-1eb9-4e21-a16d-047265b589b6">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(BaseParameter obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -37738,8 +37738,8 @@ public static void isValid_Description(BaseParameter obj, PropertyIsValidEventAr
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="74265fbf-2340-4828-82fa-cff4a0d18ffa">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(BaseParameter obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -37997,8 +37997,8 @@ public static void isValid_Name(BaseParameter obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="ba5667b5-4306-42cb-8833-45932490ffe0">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Blob obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -38033,8 +38033,8 @@ public static void isValid_ChangedBy(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>a2c8d70d-56f3-4617-a261-af7d4a8a7695</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="bd06a19d-16a6-4234-a1cd-79d09e317d92">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Blob obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -38071,8 +38071,8 @@ public static void isValid_ChangedOn(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="1125d9cf-dcc5-4e70-9a3b-308b2f84ddb6">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Blob obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -38107,8 +38107,8 @@ public static void isValid_CreatedBy(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>89e9d9d8-e041-4b67-b211-dca51fac90cd</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="9cc23a89-9bc3-4feb-bc56-82c696be80ba">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Blob obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -38145,8 +38145,8 @@ public static void isValid_CreatedOn(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="0e39b312-faa7-4ee4-92a4-41773ccbd394">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Blob obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -38332,8 +38332,8 @@ public static void isValid_BoolValue(BoolDefaultValue obj, PropertyIsValidEventA
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:BoolProperty>
   <ZetboxBase:StringProperty ExportGuid="09381f52-98e2-4dea-9855-7358e5f9cdae">
-    <ZetboxBase:CategoryTags>Summary,Bool</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T12:09:02.008812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:18:37.21259Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_FalseLabel(BoolProperty obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -38369,8 +38369,8 @@ public static void isValid_FalseLabel(BoolProperty obj, PropertyIsValidEventArgs
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:StringProperty ExportGuid="55fae41e-499d-40e3-b386-9839ec8b1d0a">
-    <ZetboxBase:CategoryTags>Summary,Bool</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T12:09:02.008812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:18:37.21259Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_NullLabel(BoolProperty obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -38406,8 +38406,8 @@ public static void isValid_NullLabel(BoolProperty obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:StringProperty ExportGuid="f7da0495-3d3f-48c5-8fba-95a317ca7949">
-    <ZetboxBase:CategoryTags>Summary,Bool</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T12:09:02.008812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:18:37.21259Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_TrueLabel(BoolProperty obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -38732,8 +38732,8 @@ public static void isValid_IsList(CompoundObjectProperty obj, PropertyIsValidEve
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:BoolProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="b7d3d6d2-6c34-4599-846d-2df3dbf8eda8">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Constraint obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -38768,8 +38768,8 @@ public static void isValid_ChangedBy(Constraint obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>a3d3abb1-a7c4-4016-a39c-1b8f58f8e817</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="90d7ec21-a775-46f0-8a30-ef25088dd5eb">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Constraint obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -38842,8 +38842,8 @@ public static void isValid_ConstrainedProperty(Constraint obj, PropertyIsValidEv
     <ZetboxBase:RelationEnd>f6124a61-40a3-4c73-b102-c7b379d9b1ac</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="51cb0dfc-4156-4dcf-a409-57d0029b4cbb">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Constraint obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -38878,8 +38878,8 @@ public static void isValid_CreatedBy(Constraint obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>2d73cee0-af44-450b-b976-1596d3a66085</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="a24ba1ea-4ad5-4ffd-bf24-c0f2df4b8e0c">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Constraint obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -38916,8 +38916,8 @@ public static void isValid_CreatedOn(Constraint obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="8da6d02c-9d9e-4db8-91ee-24a3fd1c74e1">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Constraint obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -38991,8 +38991,8 @@ public static void isValid_Reason(Constraint obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="06d4a536-d9c4-487f-9861-ac15429e42de">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(ConstraintInvocation obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -39102,8 +39102,8 @@ public static void isValid_MemberName(ConstraintInvocation obj, PropertyIsValidE
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="758d8eba-b458-4cd4-98a8-e08713912654">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(ControlKind obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -39214,8 +39214,8 @@ public static void isValid_Version(CurrentSchema obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:IntProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="c007156e-5bb3-4c4e-8cb3-5823892a893b">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(DataType obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -39250,8 +39250,8 @@ public static void isValid_ChangedBy(DataType obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>3be6251c-e5ea-4c64-be01-4553c69945b3</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="1bd4a5bc-ef42-4bc0-bf5e-162dea22d91e">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(DataType obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -39323,8 +39323,8 @@ public static void isValid_Constraints(DataType obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>fe89dab9-1adc-4c13-adea-00671ccccbca</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="5c2ec701-9e7e-4340-a463-4fc2b8204f5d">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(DataType obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -39359,8 +39359,8 @@ public static void isValid_CreatedBy(DataType obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>113d1e31-356d-4903-8081-18f3f74daa28</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="6ab4d1f6-1989-489b-a733-1c449fad773d">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(DataType obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -39434,8 +39434,8 @@ public static void isValid_Description(DataType obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="1fdb011e-2098-4077-b5e9-dd2eeafa727c">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(DataType obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -39920,8 +39920,8 @@ public static void isValid_Scale(DecimalProperty obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:IntProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="c33da8b7-beba-43e5-a9e8-a8d51c6a3443">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(DefaultPropertyValue obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -39956,8 +39956,8 @@ public static void isValid_ChangedBy(DefaultPropertyValue obj, PropertyIsValidEv
     <ZetboxBase:RelationEnd>7d52da1c-d887-4fe4-9284-dae8e5212a9c</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="0f199917-c51d-4f4e-9c59-663a274c79a0">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(DefaultPropertyValue obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -39994,8 +39994,8 @@ public static void isValid_ChangedOn(DefaultPropertyValue obj, PropertyIsValidEv
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="68c4fa75-42bd-4d51-b74d-a074ea17e242">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(DefaultPropertyValue obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -40030,8 +40030,8 @@ public static void isValid_CreatedBy(DefaultPropertyValue obj, PropertyIsValidEv
     <ZetboxBase:RelationEnd>2b586c00-ba68-472f-972b-9362bf78666d</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="4ace0c4f-58d7-4656-b263-9adae69a6b06">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(DefaultPropertyValue obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -40068,8 +40068,8 @@ public static void isValid_CreatedOn(DefaultPropertyValue obj, PropertyIsValidEv
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="e672de1a-e0f4-4613-9d1f-121ba543c2ec">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(DefaultPropertyValue obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -40252,8 +40252,8 @@ public static void isValid_EnumerationEntries(Enumeration obj, PropertyIsValidEv
     <ZetboxBase:RelationEnd>0bebb013-39f8-4689-83b8-43c0b47f682a</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="6f71765b-503a-4ad3-a07b-cea9f2930a84">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(EnumerationEntry obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -40288,8 +40288,8 @@ public static void isValid_ChangedBy(EnumerationEntry obj, PropertyIsValidEventA
     <ZetboxBase:RelationEnd>19532a6a-f5c8-486c-86a7-ee405a4a6ab4</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="2a1f2193-427f-497b-9f24-8154d789b77b">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(EnumerationEntry obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -40326,8 +40326,8 @@ public static void isValid_ChangedOn(EnumerationEntry obj, PropertyIsValidEventA
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d8f94106-ec4f-4604-aaff-8e2f5b4019ba">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(EnumerationEntry obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -40362,8 +40362,8 @@ public static void isValid_CreatedBy(EnumerationEntry obj, PropertyIsValidEventA
     <ZetboxBase:RelationEnd>f766e9e6-05de-4e3a-a62f-7ac557293aa5</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="e0091bc7-656a-46fd-a1ff-b542b10a4472">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(EnumerationEntry obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -40400,8 +40400,8 @@ public static void isValid_CreatedOn(EnumerationEntry obj, PropertyIsValidEventA
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:StringProperty ExportGuid="3366c523-0593-4a29-978f-5ac8a4f15eca">
-    <ZetboxBase:CategoryTags>Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Description(EnumerationEntry obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -40473,8 +40473,8 @@ public static void isValid_Enumeration(EnumerationEntry obj, PropertyIsValidEven
     <ZetboxBase:RelationEnd>cbeccf82-4509-4036-a785-5400e4675945</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:GuidProperty ExportGuid="9cee8923-5189-4e1e-b752-a87be1968491">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(EnumerationEntry obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -40511,8 +40511,8 @@ public static void isValid_ExportGuid(EnumerationEntry obj, PropertyIsValidEvent
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
   <ZetboxBase:StringProperty ExportGuid="feb0b203-5f83-4b9b-848c-a3e4ee895055">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Label(EnumerationEntry obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -40547,8 +40547,8 @@ public static void isValid_Label(EnumerationEntry obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:StringProperty ExportGuid="1c1e497b-294f-442e-8793-478b298d4aba">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Name(EnumerationEntry obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -40584,8 +40584,8 @@ public static void isValid_Name(EnumerationEntry obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:IntProperty ExportGuid="2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa">
-    <ZetboxBase:CategoryTags>Summary, Information</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Value(EnumerationEntry obj, PropertyGetterEventArgs&lt;int&gt; e)
 {
@@ -40909,8 +40909,8 @@ public static void isValid_Thread(ExceptionLogEntry obj, PropertyIsValidEventArg
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="c776e87f-2b95-466e-848e-0ce195f4bd73">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Group obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -41129,8 +41129,8 @@ public static void isValid_AuditJournal(IAuditable obj, PropertyIsValidEventArgs
     <ZetboxBase:IsList>true</ZetboxBase:IsList>
   </ZetboxBase:CompoundObjectProperty>
   <ZetboxBase:ObjectReferencePlaceholderProperty ExportGuid="ca0d65eb-05e2-40a6-9fb2-cdee91f1dd2d">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(IChangedBy obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -41168,8 +41168,8 @@ public static void isValid_ChangedBy(IChangedBy obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Verb>was</ZetboxBase:Verb>
   </ZetboxBase:ObjectReferencePlaceholderProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="76be9590-f9ce-412a-bdda-882527203ffc">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(IChangedBy obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -41206,8 +41206,8 @@ public static void isValid_ChangedOn(IChangedBy obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferencePlaceholderProperty ExportGuid="2b628a47-48d6-4611-9fd7-8535bbd30b75">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(IChangedBy obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -41245,8 +41245,8 @@ public static void isValid_CreatedBy(IChangedBy obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Verb>was</ZetboxBase:Verb>
   </ZetboxBase:ObjectReferencePlaceholderProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="906415f6-3e1b-45ea-849f-26b269b3f0ea">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(IChangedBy obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -41283,8 +41283,8 @@ public static void isValid_CreatedOn(IChangedBy obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="6ce563d7-28e8-4806-bdd1-84c220a6c3ca">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Icon obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -41468,8 +41468,8 @@ public static void isValid_UserName(Identity obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="59ce9855-9e67-455f-b6fa-636c47da5ae2">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(IExportable obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -41725,8 +41725,8 @@ public static void isValid_Constrained(InstanceConstraint obj, PropertyIsValidEv
     <ZetboxBase:RelationEnd>fb802749-720c-4c1d-b5f5-85571046bbbe</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:GuidProperty ExportGuid="8ef28076-900c-4294-920c-5d0d91e925bb">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(InstanceConstraint obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -42016,8 +42016,8 @@ public static void isValid_CategoryTags(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="2a7c5b69-437a-46f5-8d9f-b055c81ebada">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Method obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -42052,8 +42052,8 @@ public static void isValid_ChangedBy(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>f6c4936e-6f53-4a22-a16c-a76f57b6078d</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="3df96dd2-8cfa-4b37-bf19-792d8c3fc90d">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Method obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -42129,8 +42129,8 @@ public static void isValid_CodeTemplate(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="b1c88012-ceb1-48b2-812b-454a1d5205cb">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Method obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -42165,8 +42165,8 @@ public static void isValid_CreatedBy(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>dc5208f8-a082-4325-872e-9dd48e5afb7f</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="4bfb09a2-bcd3-4983-b57d-d1bfcf15a343">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Method obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -42240,8 +42240,8 @@ public static void isValid_Description(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="842eb3fc-3c8f-47d6-a59f-225c75ec2439">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Method obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -42499,8 +42499,8 @@ public static void isValid_Parameter(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>0eae7cbd-7fbe-4ad7-82cd-319e7809587b</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d1cad06b-040e-417c-8e43-67fa2e861649">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Module obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -42535,8 +42535,8 @@ public static void isValid_ChangedBy(Module obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>c02cecfe-1224-4817-b5b0-a9bbaa1f170b</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="75aedd67-e42d-461d-9263-c301d15b54f0">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Module obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -42573,8 +42573,8 @@ public static void isValid_ChangedOn(Module obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="7b76322d-c8cd-4845-9cb4-b77f572692be">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Module obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -42609,8 +42609,8 @@ public static void isValid_CreatedBy(Module obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>78be613a-4c25-475d-a608-6b171a22fa1e</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="c6370ff5-115a-441d-a688-28297c9e46f8">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Module obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -42684,8 +42684,8 @@ public static void isValid_Description(Module obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="75e3db82-220c-474e-973a-ceb65fd8386d">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Module obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -43461,8 +43461,8 @@ public static void isValid_CategoryTags(Property obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="f96e3f68-a293-4ed9-ba3a-2b172847fb46">
-    <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T11:58:33.975812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:17:31.994859Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Property obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -43497,8 +43497,8 @@ public static void isValid_ChangedBy(Property obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>31100858-be4d-4ba9-a123-6d34c13e3c03</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="d828264c-7c90-4050-a03d-3ea1829ce9d9">
-    <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T11:58:33.975812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:17:31.994859Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Property obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -43536,7 +43536,7 @@ public static void isValid_ChangedOn(Property obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:StringProperty ExportGuid="7b528b52-52bd-4af0-bcd1-d63cd73a65bd">
     <ZetboxBase:CategoryTags>CodeTemplate</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2012-10-10T15:17:31.994859Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CodeTemplate(Property obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -43566,7 +43566,7 @@ public static void isValid_CodeTemplate(Property obj, PropertyIsValidEventArgs e
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>CodeTemplate</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>1502</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>408</ZetboxBase:Properties_pos>
     <GUI:RequestedKind>b8391867-7c76-40fe-b387-96ab5597fd0d</GUI:RequestedKind>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
@@ -43610,8 +43610,8 @@ public static void isValid_Constraints(Property obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>2ce1f1f8-c515-445c-ab65-8c9bafef2f4f</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="6b965c5e-31b9-4fa9-a5f0-7ea6c8b8e976">
-    <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T11:58:33.975812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:17:31.994859Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Property obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -43646,8 +43646,8 @@ public static void isValid_CreatedBy(Property obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>f771dc1c-cd77-479b-9d6d-746046e78c21</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="767fbab2-f9b4-41a9-9218-f60e0624b64f">
-    <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-08-03T11:58:33.975812Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:17:31.994859Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Property obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -43799,8 +43799,8 @@ public static void isValid_DisableExport(Property obj, PropertyIsValidEventArgs 
     <ZetboxBase:TrueLabel>Suppress value export</ZetboxBase:TrueLabel>
   </ZetboxBase:BoolProperty>
   <ZetboxBase:GuidProperty ExportGuid="ca0a099d-3f4c-4604-8303-d751e57041bb">
-    <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-07-18T01:03:12.223245Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:17:31.994859Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Property obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -43830,7 +43830,7 @@ public static void isValid_ExportGuid(Property obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>ExportGuid</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>408</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>409</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -44397,8 +44397,8 @@ public static void isValid_B(Relation obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>148a4638-801e-4fe8-ac83-cea08114076e</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d90031ab-e77d-44d9-acc9-4407c8e8d6fc">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Relation obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -44433,8 +44433,8 @@ public static void isValid_ChangedBy(Relation obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>c8e77b54-e757-4090-b9de-e3995a6468fc</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="4629cba1-9162-4d9f-a815-0b0ed96f95be">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Relation obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -44510,8 +44510,8 @@ public static void isValid_Containment(Relation obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Enumeration>89eea80f-b5fd-4972-9163-9bbfef61c747</ZetboxBase:Enumeration>
   </ZetboxBase:EnumerationProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="0cd2b922-99a8-4f36-ab52-0bed4ef08a93">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Relation obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -44546,8 +44546,8 @@ public static void isValid_CreatedBy(Relation obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>a3caff8f-f15d-4347-9131-11d6b68faf24</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="a28faa39-5563-4e2d-b9d9-278ac7dd2200">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Relation obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -44842,8 +44842,8 @@ public static void isValid_BParent(RelationEnd obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>944c5542-0371-4839-b66c-7f15ba291f7e</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="c399fef1-ad60-47a1-9639-76cec4ee8ca2">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(RelationEnd obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -44878,8 +44878,8 @@ public static void isValid_ChangedBy(RelationEnd obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>7c6894ec-2807-43c7-8cd0-1a651b9d5664</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="7bd41ad1-05c8-4822-a620-0883eb62516d">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(RelationEnd obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -44916,8 +44916,8 @@ public static void isValid_ChangedOn(RelationEnd obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="21b529c8-f295-4950-be49-a17c88ce6d8d">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(RelationEnd obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -44952,8 +44952,8 @@ public static void isValid_CreatedBy(RelationEnd obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>9c2d6c56-7aa1-4d1e-9c91-fd2fa76badd4</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="ea92fd80-01b6-49b9-8426-77257b2bd37b">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(RelationEnd obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -45283,8 +45283,8 @@ public static void isValid_Relations(RoleMembership obj, PropertyIsValidEventArg
     <ZetboxBase:RelationEnd>6f145ef1-b514-4e6f-a6a8-67187b37c98d</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="77650ba6-bbbf-468b-9f8d-78ecd3fb0082">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-20T08:08:07.826961Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Sequence obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -45319,8 +45319,8 @@ public static void isValid_ChangedBy(Sequence obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>f438a7f0-9a0f-48b3-b9cd-a0527c19bd0c</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="848cbb55-071f-4fc7-a9ef-75d5335cf2d7">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-20T08:08:07.826961Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Sequence obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -45357,8 +45357,8 @@ public static void isValid_ChangedOn(Sequence obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="25398df8-0005-4143-bc94-2c363d18ba40">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-20T08:08:07.826961Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Sequence obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -45393,8 +45393,8 @@ public static void isValid_CreatedBy(Sequence obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>97c2088b-831d-4158-ae56-45115a6219b7</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="542c6ac2-7e06-4b29-b2af-273863cd177b">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-20T08:08:07.826961Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Sequence obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -45502,8 +45502,8 @@ public static void isValid_Description(Sequence obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="97795b28-a750-456b-880c-210b0564462e">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-20T08:08:07.826961Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Sequence obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -45721,8 +45721,8 @@ public static void isValid_Sequence(SequenceData obj, PropertyIsValidEventArgs e
     <ZetboxBase:RelationEnd>f40435ec-1d89-4548-8bb5-f9cc90807fde</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="fd0c9acd-7148-4148-85fd-1725eb67ae2a">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(ServiceDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -45757,8 +45757,8 @@ public static void isValid_ChangedBy(ServiceDescriptor obj, PropertyIsValidEvent
     <ZetboxBase:RelationEnd>ec209690-c29e-4809-aa24-e84e9b690c17</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="9052e01a-1c9a-4c3b-8921-c27d21ec9957">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(ServiceDescriptor obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -45795,8 +45795,8 @@ public static void isValid_ChangedOn(ServiceDescriptor obj, PropertyIsValidEvent
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="a9513975-0033-4704-881f-dd7fef4ea0fa">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(ServiceDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -45831,8 +45831,8 @@ public static void isValid_CreatedBy(ServiceDescriptor obj, PropertyIsValidEvent
     <ZetboxBase:RelationEnd>11b6283d-b1f3-4662-83a8-ff696eae9d8b</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="39ecc961-645e-4323-aef4-30420f601a93">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(ServiceDescriptor obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -45943,8 +45943,8 @@ public static void isValid_Description(ServiceDescriptor obj, PropertyIsValidEve
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="93a1fd7b-b7ba-475a-a9bd-7ddaeb1ccc14">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(ServiceDescriptor obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -46200,8 +46200,8 @@ public static void isValid_Assembly(TypeRef obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>baccac38-3234-47a4-b036-37fda4a6bd06</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="eaca4d2e-f9e9-4328-92fc-20ba96f59933">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(TypeRef obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -46236,8 +46236,8 @@ public static void isValid_ChangedBy(TypeRef obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>4708129f-7865-4247-8769-9402f09c1a13</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="e6dcca07-a7f3-4ca7-9763-95e1124ffb25">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(TypeRef obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -46274,8 +46274,8 @@ public static void isValid_ChangedOn(TypeRef obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="8e862e5e-bc66-479a-9482-edd3a3355db3">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(TypeRef obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -46310,8 +46310,8 @@ public static void isValid_CreatedBy(TypeRef obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>01c1d1d6-5642-444a-b637-f479fb9f03c7</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="d769345e-341e-488d-90c3-821a8b35b4f7">
-    <ZetboxBase:CategoryTags>Changed</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(TypeRef obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -46385,8 +46385,8 @@ public static void isValid_Deleted(TypeRef obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:BoolProperty>
   <ZetboxBase:GuidProperty ExportGuid="48430be7-e17f-48ad-ac8b-7f9cb5341318">
-    <ZetboxBase:CategoryTags>Export</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(TypeRef obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
