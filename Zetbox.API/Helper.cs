@@ -1254,6 +1254,30 @@ namespace Zetbox.API
             }
             return result;
         }
+
+        /// <summary>
+        /// Yield all elements that can be reached by recursively applying the childrenSelector.
+        /// </summary>
+        /// <typeparam name="T">type of elements</typeparam>
+        /// <param name="obj">root node</param>
+        /// <param name="childrenSelector">transform a node into a list of child nodes</param>
+        /// <returns>A lazily evaluated enumeration of obj and all children</returns>
+        public static IEnumerable<T> AndChildren<T>(this T obj, Func<T, IEnumerable<T>> childrenSelector)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (childrenSelector == null) throw new ArgumentNullException("parentsSelector");
+
+            yield return obj;
+
+            var parents = childrenSelector(obj);
+            foreach (var p in parents)
+            {
+                foreach (var o in p.AndChildren(childrenSelector))
+                {
+                    yield return o;
+                }
+            }
+        }
     }
 
     public static class FileExtensions
