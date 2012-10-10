@@ -323,5 +323,27 @@ namespace Zetbox.App.Extensions
                     .Select(r => r.B))
                     .ToList();
         }
+
+        public static Type GetPropertyType(this Type type, string propertyName)
+        {
+            foreach (var t in type.AndChildren(t =>
+                t.BaseType == null
+                    ? t.GetInterfaces()
+                    : t.GetInterfaces().Concat(new[] { t.BaseType }))
+                )
+            {
+                var property = t.GetProperty(propertyName);
+                if (property != null)
+                {
+                    return property.PropertyType;
+                }
+            }
+            return null;
+        }
+
+        public static Type GetPropertyType(this Type t, Property property)
+        {
+            return GetPropertyType(t, property.Name);
+        }
     }
 }
