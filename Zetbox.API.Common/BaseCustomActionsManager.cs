@@ -323,7 +323,7 @@ namespace Zetbox.App.Extensions
         {
             if (implType == null) throw new ArgumentNullException("implType");
             if (dt == null) throw new ArgumentNullException("dt");
-            var dtType = Type.GetType(string.Format("{0}.{1}", dt.Module.Namespace, dt.Name), false);
+            var dtType = Type.GetType(string.Format("{0}.{1}, {2}", dt.Module.Namespace, dt.Name, Helper.InterfaceAssembly), false);
             if (dtType == null) throw new ArgumentOutOfRangeException("dt", string.Format("Cannot find type '{0}'", string.Format("{0}.{1}", dt.Module.Namespace, dt.Name)));
 
             // Reflected Methods
