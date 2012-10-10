@@ -326,6 +326,7 @@ namespace Zetbox.App.Extensions
 
         public static Type GetPropertyType(this Type type, string propertyName)
         {
+            if (type == null) throw new ArgumentNullException("type");
             foreach (var t in type.AndChildren(t =>
                 t.BaseType == null
                     ? t.GetInterfaces()
@@ -343,6 +344,7 @@ namespace Zetbox.App.Extensions
 
         public static Type GetPropertyType(this Type t, Property property)
         {
+            if (property == null) throw new ArgumentNullException("property");
             return GetPropertyType(t, property.Name);
         }
     }
