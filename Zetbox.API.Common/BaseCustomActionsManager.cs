@@ -323,7 +323,8 @@ namespace Zetbox.App.Extensions
         {
             if (implType == null) throw new ArgumentNullException("implType");
             if (dt == null) throw new ArgumentNullException("dt");
-
+            var dtType = Type.GetType(string.Format("{0}.{1}", dt.Module.Namespace, dt.Name), false);
+            if (dtType == null) throw new ArgumentOutOfRangeException("dt", string.Format("Cannot find type '{0}'", string.Format("{0}.{1}", dt.Module.Namespace, dt.Name)));
 
             // Reflected Methods
             // New style
@@ -381,23 +382,23 @@ namespace Zetbox.App.Extensions
 
             if (dt is ObjectClass)
             {
-                CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave", new[] { dt.GetDataType() });
-                CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave", new[] { dt.GetDataType() });
-                CreateDefaultMethodInvocations(implType, dt, "NotifyCreated", new[] { dt.GetDataType() });
-                CreateDefaultMethodInvocations(implType, dt, "NotifyDeleting", new[] { dt.GetDataType() });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave", new[] { dtType });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave", new[] { dtType });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyCreated", new[] { dtType });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyDeleting", new[] { dtType });
             }
 
-            CreateDefaultMethodInvocations(implType, dt, "ToString", new[] { dt.GetDataType(), typeof(MethodReturnEventArgs<string>) });
-            CreateDefaultMethodInvocations(implType, dt, "ObjectIsValid", new[] { dt.GetDataType(), typeof(ObjectIsValidEventArgs) });
+            CreateDefaultMethodInvocations(implType, dt, "ToString", new[] { dtType, typeof(MethodReturnEventArgs<string>) });
+            CreateDefaultMethodInvocations(implType, dt, "ObjectIsValid", new[] { dtType, typeof(ObjectIsValidEventArgs) });
 
             // Reflected Properties
             // New style
             foreach (Property prop in dt.Properties)
             {
-                CreatePropertyInvocations(implType, prop, "get_", "Getter", new[] { dt.GetDataType(), typeof(PropertyGetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
-                CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter", new[] { dt.GetDataType(), typeof(PropertyPreSetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
-                CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter", new[] { dt.GetDataType(), typeof(PropertyPostSetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
-                CreatePropertyInvocations(implType, prop, "isValid_", "IsValid", new[] { dt.GetDataType(), typeof(PropertyIsValidEventArgs) });
+                CreatePropertyInvocations(implType, prop, "get_", "Getter", new[] { dtType, typeof(PropertyGetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
+                CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter", new[] { dtType, typeof(PropertyPreSetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
+                CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter", new[] { dtType, typeof(PropertyPostSetterEventArgs<>).MakeGenericType(prop.GetPropertyType()) });
+                CreatePropertyInvocations(implType, prop, "isValid_", "IsValid", new[] { dtType, typeof(PropertyIsValidEventArgs) });
             }
         }
 
