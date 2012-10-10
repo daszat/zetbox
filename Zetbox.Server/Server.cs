@@ -283,6 +283,15 @@ namespace Zetbox.Server
 
                 var ctx = subContainer.Resolve<IZetboxServerContext>();
 
+                foreach (var prop in ctx.GetQuery<Property>().Where(p => p.CategoryTags != null))
+                {
+                    prop.CategoryTags = prop.CategoryTags
+                        .Replace("Changed", "Meta")
+                        .Replace("Export", "Meta")
+                        .Replace("Information", "Main")
+                        .Trim();
+                }
+
                 //foreach (var prj in ctx.GetQuery<Zetbox.App.SchemaMigration.MigrationProject>())
                 //{
                 //    prj.UpdateFromSourceSchema();
