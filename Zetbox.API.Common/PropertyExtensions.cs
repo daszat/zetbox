@@ -87,7 +87,7 @@ namespace Zetbox.App.Extensions
         {
             return (p is ValueTypeProperty && ((ValueTypeProperty)p).IsCalculated)
                 || (p is CalculatedObjectReferenceProperty)
-                || (p is CompoundObjectProperty && false /* ((CompoundObjectProperty)p).IsCalculated*/ ); 
+                || (p is CompoundObjectProperty && false /* ((CompoundObjectProperty)p).IsCalculated*/ );
         }
 
         public static bool HasLengthConstraint(this StringProperty prop)
@@ -123,6 +123,29 @@ namespace Zetbox.App.Extensions
             StringRangeConstraint constraint = prop.GetLengthConstraint();
             // create unconstrained maxLength if no constrain is specified
             return constraint == null ? Zetbox.API.Helper.DefaultStringPropertyLength : (constraint.MaxLength ?? int.MaxValue);
+        }
+
+        public static bool GetIsList(this Property prop)
+        {
+            if (prop is ValueTypeProperty)
+            {
+                return ((ValueTypeProperty)prop).IsList;
+            }
+            else if (prop is ObjectReferenceProperty)
+            {
+                var orp = (ObjectReferenceProperty)prop;
+                RelationEnd relEnd = orp.RelationEnd;
+                Relation rel = relEnd.GetParent();
+                RelationEnd otherEnd = rel.A == relEnd ? rel.B : rel.A;
+
+                return otherEnd.Multiplicity.UpperBound() > 1;
+            }
+            else if (prop is CompoundObjectProperty)
+            {
+                var cop = (CompoundObjectProperty)prop;
+                return cop.IsList;
+            }
+            return false;
         }
     }
 }
