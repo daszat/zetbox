@@ -194,28 +194,41 @@ namespace Zetbox.Client.Presentables
         protected virtual List<PropertyGroupViewModel> CreatePropertyGroups()
         {
             FetchPropertyModels();
+            var isAdmin = CurrentIdentity != null ? CurrentIdentity.IsAdmininistrator() : false;
             return _propertyList
                         .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? Properties.Resources.Uncategorised : p.CategoryTags)
-                                            .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                                            .Select(s => new { Category = s, Property = p }))
-                        .GroupBy(x => x.Category, x => x.Property)
+                                            .Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(s => new { Category = s.Trim(), SortKey = GetCategorySortKey(s.Trim()), Property = p }))
+                        .Where(x => isAdmin || x.Category != "Hidden")
+                        .GroupBy(x => x.SortKey, x => x)
                         .OrderBy(group => group.Key)
-                        .Select<IGrouping<string, Property>, PropertyGroupViewModel>(group =>
+                        .Select(group =>
                         {
-                            var lst = group.Select(p => _propertyModels[p]).Cast<ViewModel>().ToList();
+                            var lst = group.Select(p => _propertyModels[p.Property]).Cast<ViewModel>().ToList();
 
                             if (lst.Count == 1)
                             {
-                                return ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, group.Key, lst);
+                                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
+                                    DataContext, this, group.First().Category, lst);
                             }
                             else
                             {
-                                return ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, group.Key, lst);
+                                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
+                                    DataContext, this, group.First().Category, lst);
                             }
                         })
                         .ToList();
+        }
+
+        private string GetCategorySortKey(string cat)
+        {
+            switch(cat)
+            {
+                case "Main": return "1|Main";
+                case "Summary": return "2|Summary";
+                case "Meta": return "4|Meta";
+                default: return "3|" + cat;
+            }
         }
 
         public LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel> PropertyGroupsByName
@@ -233,7 +246,9 @@ namespace Zetbox.Client.Presentables
             {
                 if (_selectedPropertyGroup == null && PropertyGroups.Count > 0)
                 {
-                    _selectedPropertyGroup = PropertyGroupsByName.ContainsKey("Summary") ? PropertyGroupsByName["Summary"] : PropertyGroups.FirstOrDefault();
+                    var main = PropertyGroupsByName.ContainsKey("Main") ? PropertyGroupsByName["Main"] : null;
+                    var summary = PropertyGroupsByName.ContainsKey("Summary") ? PropertyGroupsByName["Summary"] : null;
+                    _selectedPropertyGroup = main ?? summary ?? PropertyGroups.FirstOrDefault();
                 }
                 return _selectedPropertyGroup;
             }
