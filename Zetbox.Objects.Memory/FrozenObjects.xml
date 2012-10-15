@@ -19043,6 +19043,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="b255299f-0e90-42f6-a752-2619c058ccf2">
     <GUI:DefaultEditorKind>c87f7018-72b8-4f9a-8c10-9e0b6d10a77d</GUI:DefaultEditorKind>
+    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
     <GUI:Description>ViewModel for editing a CompoundObject list</GUI:Description>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelRef>df3c028d-515a-4d50-9e5c-355d44a7abb7</GUI:ViewModelRef>
@@ -59539,12 +59540,14 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="67a49c49-b890-4d35-a8db-1f8e43bfc7df">
     <GUI:DefaultEditorKind>4f6779a0-46f6-48a0-8880-fc491164d04a</GUI:DefaultEditorKind>
+    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
     <GUI:Description>A collection of IDataObjects</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>6f7db4f6-a898-4b87-9c46-ff4400e23d47</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="9fce01fe-fd6d-4e21-8b55-08d5e38aea36">
     <GUI:DefaultEditorKind>9731f312-8ce4-4c2d-8d95-1923256dc9b8</GUI:DefaultEditorKind>
+    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
     <GUI:Description>A list of IDataObjects</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>85be3823-e778-4829-b214-69154c1e6164</GUI:ViewModelRef>
