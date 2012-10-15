@@ -63,7 +63,6 @@ namespace Zetbox.Client.Forms
         protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
         {
             var control = (IFormsView)view;
-            control.SetRenderer(_renderer);
             control.SetDataContext(mdl);
             if (asDialog)
             {
@@ -76,8 +75,6 @@ namespace Zetbox.Client.Forms
                     control.Activate();
             }
         }
-
-        private Renderer _renderer = new Renderer();
 
         public override void CreateTimer(TimeSpan tickLength, Action action)
         {

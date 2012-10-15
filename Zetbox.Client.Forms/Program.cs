@@ -36,7 +36,7 @@ namespace Zetbox.Client.Forms
         [STAThread]
         static void Main()
         {
-            var config = ZetboxConfig.FromFile(null, "DefaultFormsConfig.xml");
+            var config = ZetboxConfig.FromFile(null, "Zetbox.Forms.xml");
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);

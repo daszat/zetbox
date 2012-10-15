@@ -12,21 +12,29 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-using Zetbox.Client.Presentables;
 
 namespace Zetbox.Client.Forms
 {
-    internal interface IFormsView
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.Client.Presentables;
+
+    public class FormsModule : Module
     {
-        void SetDataContext(INotifyPropertyChanged mdl);
-        void Activate();
-        void Show();
-        void ShowDialog();
+        protected override void Load(ContainerBuilder builder)
+        {
+            base.Load(builder);
+
+            builder
+                .RegisterType<FormsModelFactory>()
+                .As<IViewModelFactory>()
+                .As<IToolkit>()
+                .SingleInstance();
+        }
     }
 }
