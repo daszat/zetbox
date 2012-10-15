@@ -80,7 +80,8 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         
         private void ApplyColumns()
         {
-            WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
+            if(ViewModel != null && ListView != null)
+                WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
         }
 
         private void ApplyViewMethod()
