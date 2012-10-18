@@ -361,10 +361,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\SingleLineDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ZetboxBase\ObjectReferenceListGridEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -420,12 +416,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ZetboxBase\ObjectReferenceListEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\DataObjectLineDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -665,6 +655,7 @@
     <Compile Include="View\TestModule\InstanceListTestDisplay.xaml.cs">
       <DependentUpon>InstanceListTestDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZetboxBase\DataObjectLineDisplay.cs" />
     <Compile Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml.cs">
       <DependentUpon>InstanceListToolBar.xaml</DependentUpon>
     </Compile>
@@ -693,6 +684,7 @@
     <Compile Include="View\ZetboxBase\PropertySelectionTaskDialog.xaml.cs">
       <DependentUpon>PropertySelectionTaskDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZetboxBase\SingleLineDisplay.cs" />
     <Compile Include="View\ZetboxBase\StringDisplay.cs" />
     <Compile Include="WpfToolkitResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -765,9 +757,6 @@
     <Compile Include="View\ZetboxBase\CompoundListGridEditor.xaml.cs">
       <DependentUpon>CompoundListGridEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\SingleLineDisplay.xaml.cs">
-      <DependentUpon>SingleLineDisplay.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ZetboxBase\ObjectReferenceListGridEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListGridEditor.xaml</DependentUpon>
     </Compile>
@@ -809,9 +798,6 @@
     </Compile>
     <Compile Include="View\ZetboxBase\ObjectReferenceListEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\DataObjectLineDisplay.xaml.cs">
-      <DependentUpon>DataObjectLineDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\EnumSelectionView.xaml.cs">
       <DependentUpon>EnumSelectionView.xaml</DependentUpon>
