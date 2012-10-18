@@ -104,7 +104,7 @@
 
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="{x:Type client:ViewModel}">
-                                    <ctrls:LabeledView />
+                                    <ctrls:LabeledView MaxHeight="300" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
