@@ -25,6 +25,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
         }
 
+        public int ID { get { return Object != null ? Object.ID : -1; } }
+
         public DataObjectViewModel Object { get; set; }
 
         public App.GUI.Icon Icon
