@@ -25,7 +25,8 @@
 
     <DockPanel>
         <UniformGrid DockPanel.Dock="Left"
-                     Rows="2">
+                     Rows="2"
+                     VerticalAlignment="Top">
             <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemUpCommand}" />
             <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemDownCommand}" />
         </UniformGrid>
