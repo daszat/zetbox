@@ -30,6 +30,7 @@ namespace Zetbox.Client.Models
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
     using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
+    using System.Text.RegularExpressions;
 
     public class FilterEvaluator
     {
@@ -528,7 +529,8 @@ namespace Zetbox.Client.Models
         protected string[] GetStringParts()
         {
             var str = (string)FilterArgument.Value.GetUntypedValue();
-            return str.Split(',', ' ', ';').Select(i => i.Trim()).Where(i => !string.IsNullOrEmpty(i)).ToArray();
+            string pattern = @"(?<match>[^\s,;""]+)|\""(?<match>[^""]*)"""; 
+            return Regex.Matches(str, pattern).Cast<Match>().Select(m => m.Groups["match"].Value).ToArray();
         }
     }
 
