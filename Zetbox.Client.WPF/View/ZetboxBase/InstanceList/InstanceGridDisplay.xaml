@@ -70,8 +70,6 @@
                                       SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
                                       MouseDoubleClick="ItemActivatedHandler"
                                       GridViewColumnHeader.Click="ListView_HeaderClick" />
-                <DockPanel>
-                </DockPanel>
             </DockPanel>
         </Border>
     </DockPanel>
