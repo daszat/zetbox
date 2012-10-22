@@ -229,6 +229,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{81AEBE
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.WPF", "Zetbox.WPF\Zetbox.WPF.csproj", "{B548883F-2042-4ECD-B5DD-6493B30C458B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A736E13F-D349-4CE5-A397-8438F58D0B9D} = {A736E13F-D349-4CE5-A397-8438F58D0B9D}
+		{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B} = {D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetPackages", "NuGetPackages\NuGetPackages.csproj", "{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}"
 	ProjectSection(ProjectDependencies) = postProject

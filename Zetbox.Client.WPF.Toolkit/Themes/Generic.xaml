@@ -1,0 +1,119 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls"
+                    xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit">
+<!--
+    This file is part of zetbox.
+
+    Zetbox is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    Zetbox is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+    -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <Style TargetType="{x:Type ctrls:LabeledView}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrls:LabeledView}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="{Binding Path=LabelMinWidth, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
+                                              Width="{Binding Path=LabelWidth, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
+                                              SharedSizeGroup="{Binding Path=LabelSharedSizeGroup, RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={x:Static RelativeSource.TemplatedParent}}">
+                            <TextBlock Text="{Binding Label, Mode=OneWay}"
+                                       ToolTip="{Binding ToolTip, Mode=OneWay}" />
+                            <TextBlock Text="*"
+                                       Margin="2,0,0,0"
+                                       Foreground="Red"
+                                       FontWeight="Bold"
+                                       Visibility="{Binding Required, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        </StackPanel>
+
+                        <ContentPresenter Grid.Column="1"
+                                          x:Name="PART_ContentPresenter"
+                                          Margin="5,0,0,0"
+                                          VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
+                                          Content="{Binding Model, Mode=OneWay}"
+                                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ctrls:LabeledContainer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrls:LabeledContainer}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="{Binding LabelMinWidth, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
+                                              Width="{Binding LabelWidth, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
+                                              SharedSizeGroup="{Binding LabelSharedSizeGroup, RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    Margin="0,3,0,0">
+                            <TextBlock Grid.Column="0"
+                                       Text="{Binding Label, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
+                                       ToolTip="{Binding ToolTip, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                            <TextBlock Text="*"
+                                       Margin="2,0,0,0"
+                                       Foreground="Red"
+                                       FontWeight="Bold"
+                                       Visibility="{Binding Required, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        </StackPanel>
+
+                        <ContentPresenter Grid.Column="1"
+                                          Margin="5,0,0,0"
+                                          Content="{Binding LabeledContent, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ctrls:LabeledViewHorizontal}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrls:LabeledViewHorizontal}">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Top">
+                            <TextBlock Text="{Binding Label, Mode=OneWay}"
+                                       ToolTip="{Binding ToolTip, Mode=OneWay}" />
+                            <TextBlock Text="*"
+                                       Margin="2,0,0,0"
+                                       Foreground="Red"
+                                       FontWeight="Bold"
+                                       Visibility="{Binding Required, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        </StackPanel>
+
+                        <ContentPresenter Grid.Row="1"
+                                          x:Name="PART_ContentPresenter"
+                                          Margin="0,5,0,0"
+                                          Content="{Binding Model, Mode=OneWay}"
+                                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

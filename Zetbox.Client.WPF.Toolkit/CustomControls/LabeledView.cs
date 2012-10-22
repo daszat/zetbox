@@ -1,55 +1,33 @@
-// This file is part of zetbox.
-//
-// Zetbox is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as
-// published by the Free Software Foundation, either version 3 of
-// the License, or (at your option) any later version.
-//
-// Zetbox is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-
+﻿
 namespace Zetbox.Client.WPF.CustomControls
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Documents;
-    using System.Windows.Input;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-    using System.Windows.Navigation;
-    using System.Windows.Shapes;
-    using Zetbox.Client.GUI;
+    using System.Windows;
+    using System.ComponentModel;
     using Zetbox.Client.Presentables;
-    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.GUI;
     using Zetbox.Client.WPF.Toolkit;
 
-    /// <summary>
-    /// Interaction logic for LabeledView.xaml
-    /// </summary>
-    public partial class LabeledView : UserControl, IHasViewModel<ILabeledViewModel>
+    public class LabeledView : Control, IHasViewModel<ILabeledViewModel>
     {
         static LabeledView()
         {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(LabeledView), new FrameworkPropertyMetadata(typeof(LabeledView)));
             UserControl.VerticalContentAlignmentProperty.OverrideMetadata(
                 typeof(LabeledView),
                 new FrameworkPropertyMetadata(VerticalAlignment.Center));
         }
 
-        public LabeledView()
+        public override void OnApplyTemplate()
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
+            base.OnApplyTemplate();
+
+            var presenter = (ContentPresenter)GetTemplateChild("PART_ContentPresenter");
+            presenter.ContentTemplateSelector = (DataTemplateSelector)FindResource("defaultTemplateSelector");
         }
 
         [TypeConverter(typeof(LengthConverter))]

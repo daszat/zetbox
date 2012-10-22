@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -12,36 +12,33 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Zetbox.Client.GUI;
-using Zetbox.Client.Presentables;
-using System.ComponentModel;
-using System.Windows.Markup;
 
 namespace Zetbox.Client.WPF.CustomControls
 {
-    /// <summary>
-    /// Interaction logic for LabeledView.xaml
-    /// </summary>
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using System.ComponentModel;
+    using System.Windows.Markup;
+
     [ContentProperty("LabeledContent")]
-    public partial class LabeledContainer : UserControl
+    public class LabeledContainer : ContentControl
     {
-        public LabeledContainer()
+        static LabeledContainer()
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(LabeledContainer), new FrameworkPropertyMetadata(typeof(LabeledContainer)));
         }
 
         [TypeConverter(typeof(LengthConverter))]
@@ -113,6 +110,5 @@ namespace Zetbox.Client.WPF.CustomControls
         // Using a DependencyProperty as the backing store for Required.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RequiredProperty =
             DependencyProperty.Register("Required", typeof(bool), typeof(LabeledContainer), new UIPropertyMetadata(false));
-
     }
 }
