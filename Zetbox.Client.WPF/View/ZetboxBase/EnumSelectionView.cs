@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -28,31 +28,53 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ValueViewModels;
 using Zetbox.Client.WPF.CustomControls;
 using Zetbox.Client.WPF.Toolkit;
+using Zetbox.Client.WPF.View.ZetboxBase;
 
-namespace Zetbox.Client.WPF.View.ZetboxBase
+namespace Zetbox.Client.WPF.View
 {
-    /// <summary>
-    /// Interaction logic for ActionView.xaml
-    /// </summary>
-    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class CommandDisplay : PropertyEditor, IHasViewModel<CommandViewModel>
+
+    public class EnumSelectionView : PropertyEditor, IHasViewModel<EnumerationValueViewModel>
     {
-        public CommandDisplay()
+        static EnumSelectionView()
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(EnumSelectionView), new FrameworkPropertyMetadata(typeof(EnumSelectionView)));
         }
 
-        public CommandViewModel ViewModel
+        ComboBox cb;
+
+        public override void OnApplyTemplate()
         {
-            get { return (CommandViewModel)WPFHelper.SanitizeDataContext(DataContext); }
+            base.OnApplyTemplate();
+
+            cb = (ComboBox)GetTemplateChild("PART_cb");
+            cb.KeyDown += cbValue_KeyDown;
+            SetupFocusManagement(cb, () => ViewModel);
         }
+
+        #region IHasViewModel<EnumerationPropertyModel> Members
+
+        public EnumerationValueViewModel ViewModel
+        {
+            get { return (EnumerationValueViewModel)WPFHelper.SanitizeDataContext(DataContext); }
+        }
+
+        #endregion
 
         protected override FrameworkElement MainControl
         {
-            get { return cmd; }
+            get { return (FrameworkElement)GetTemplateChild("PART_cb"); }
+        }
+
+        private void cbValue_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = true;
+                ViewModel.FormattedValue = cb.Text;
+            }
         }
     }
 }

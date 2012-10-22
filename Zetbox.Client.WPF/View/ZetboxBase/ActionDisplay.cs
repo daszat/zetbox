@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -40,10 +40,14 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     {
         public ActionDisplay()
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
-
             this.Loaded += new RoutedEventHandler(ActionDisplay_Loaded);
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            this.Style = (Style)FindResource("zbButtonTemplate");
+            BindingOperations.SetBinding(this, CommandButton.CommandViewModelProperty, new Binding() {  });
         }
 
         // unset IsTabStop on the GridCell containing us.

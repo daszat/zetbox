@@ -244,6 +244,7 @@ namespace Zetbox.Client.WPF
             }
 
             targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) }));
+            targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/CustomControls.xaml", UriKind.Relative) }));
             // Load registrated dictionaries from autofac
             foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
             {

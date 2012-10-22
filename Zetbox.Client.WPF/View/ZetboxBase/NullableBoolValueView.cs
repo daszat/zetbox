@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -36,15 +36,14 @@ namespace Zetbox.Client.WPF.View
     /// </summary>
     public partial class NullableBoolValueView : PropertyEditor
     {
-        public NullableBoolValueView()
+        static NullableBoolValueView()
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NullableBoolValueView), new FrameworkPropertyMetadata(typeof(NullableBoolValueView)));
         }
 
         protected override FrameworkElement MainControl
         {
-            get { return cb; }
+            get { return (FrameworkElement)GetTemplateChild("PART_cb"); }
         }
     }
 }

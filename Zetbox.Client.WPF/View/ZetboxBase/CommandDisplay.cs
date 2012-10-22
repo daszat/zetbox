@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -27,63 +27,32 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
-using Zetbox.Client.Models;
 using Zetbox.Client.Presentables;
-using Zetbox.Client.Presentables.ValueViewModels;
 using Zetbox.Client.WPF.CustomControls;
 using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     /// <summary>
-    /// Interaction logic for ObjectReferenceEditor.xaml
+    /// Interaction logic for ActionView.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class ObjectReferenceDropdownEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>
+    public partial class CommandDisplay : PropertyEditor, IHasViewModel<CommandViewModel>
     {
-        public ObjectReferenceDropdownEditor()
+        public override void OnApplyTemplate()
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
+            base.OnApplyTemplate();
+            BindingOperations.SetBinding(this, CommandButton.CommandViewModelProperty, new Binding() { });
         }
 
-
-        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        public CommandViewModel ViewModel
         {
-            base.OnPropertyChanged(e);
-            //if (e.Property == FrameworkElement.DataContextProperty)
-            //{
-            //    RefreshGridView();
-            //}
+            get { return (CommandViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
-
-        #region IHasViewModel<ObjectReferenceViewModel> Members
-
-        public ObjectReferenceViewModel ViewModel
-        {
-            get { return (ObjectReferenceViewModel)WPFHelper.SanitizeDataContext(DataContext); }
-        }
-
-        #endregion
 
         protected override FrameworkElement MainControl
         {
-            get { return cbValue; }
-        }
-
-        private void cbValue_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                e.Handled = true;
-                ViewModel.ResetPossibleValues();
-                cbValue.IsDropDownOpen = true;
-            }
-        }
-
-        private void Border_Click(object sender, RoutedEventArgs e)
-        {
-            cbValue.Focus();
+            get { return this; }
         }
     }
 }

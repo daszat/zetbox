@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -27,38 +27,50 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
+using Zetbox.Client.Models;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.ValueViewModels;
 using Zetbox.Client.WPF.CustomControls;
 using Zetbox.Client.WPF.Toolkit;
-using Zetbox.Client.WPF.View.ZetboxBase;
 
-namespace Zetbox.Client.WPF.View
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     /// <summary>
-    /// Interaction logic for EnumSelectionView.xaml
+    /// Interaction logic for ObjectReferenceEditor.xaml
     /// </summary>
-    public partial class EnumSelectionView : PropertyEditor, IHasViewModel<EnumerationValueViewModel>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public partial class ObjectReferenceDropdownEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>
     {
-        public EnumSelectionView()
+        static ObjectReferenceDropdownEditor()
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
-            SetupFocusManagement(cb, () => ViewModel);
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ObjectReferenceDropdownEditor), new FrameworkPropertyMetadata(typeof(ObjectReferenceDropdownEditor)));
         }
 
-        #region IHasViewModel<EnumerationPropertyModel> Members
+        ComboBox cbValue;
 
-        public EnumerationValueViewModel ViewModel
+        public override void OnApplyTemplate()
         {
-            get { return (EnumerationValueViewModel)WPFHelper.SanitizeDataContext(DataContext); }
+            base.OnApplyTemplate();
+
+            cbValue = (ComboBox)GetTemplateChild("PART_cbValue");
+            cbValue.KeyDown += cbValue_KeyDown;
+
+            var imageBorder = (Border)GetTemplateChild("PART_ImageBorder");
+            imageBorder.MouseLeftButtonDown += Border_Click;
+        }
+
+        #region IHasViewModel<ObjectReferenceViewModel> Members
+
+        public ObjectReferenceViewModel ViewModel
+        {
+            get { return (ObjectReferenceViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion
 
         protected override FrameworkElement MainControl
         {
-            get { return cb; }
+            get { return (ComboBox)GetTemplateChild("PART_cbValue"); }
         }
 
         private void cbValue_KeyDown(object sender, KeyEventArgs e)
@@ -66,8 +78,14 @@ namespace Zetbox.Client.WPF.View
             if (e.Key == Key.Enter)
             {
                 e.Handled = true;
-                ViewModel.FormattedValue = cb.Text;
+                ViewModel.ResetPossibleValues();
+                cbValue.IsDropDownOpen = true;
             }
+        }
+
+        private void Border_Click(object sender, RoutedEventArgs e)
+        {
+            cbValue.Focus();
         }
     }
 }

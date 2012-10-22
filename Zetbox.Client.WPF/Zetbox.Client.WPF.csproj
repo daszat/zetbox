@@ -153,9 +153,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Styles\CustomControls.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CacheDebuggerDisplay.xaml">
       <SubType>Designer</SubType>
@@ -337,12 +337,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\ActionDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ZetboxBase\AuditJournalDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -350,10 +344,6 @@
     <Page Include="View\ZetboxBase\CompoundObjectPropertyEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\CommandDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -382,10 +372,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ZetboxBase\NullablePasswordTextBoxView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\ObjectReferenceDropdownEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -420,18 +406,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ZetboxBase\ObjectReferenceListEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\EnumSelectionView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\NullableBoolValueView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -653,7 +627,10 @@
     <Compile Include="View\TestModule\InstanceListTestDisplay.xaml.cs">
       <DependentUpon>InstanceListTestDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZetboxBase\ActionDisplay.cs" />
+    <Compile Include="View\ZetboxBase\CommandDisplay.cs" />
     <Compile Include="View\ZetboxBase\DataObjectLineDisplay.cs" />
+    <Compile Include="View\ZetboxBase\EnumSelectionView.cs" />
     <Compile Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml.cs">
       <DependentUpon>InstanceListToolBar.xaml</DependentUpon>
     </Compile>
@@ -676,7 +653,9 @@
     <Compile Include="View\ZetboxBase\InstanceList\InstanceListHeader.xaml.cs">
       <DependentUpon>InstanceListHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZetboxBase\NullableBoolValueView.cs" />
     <Compile Include="View\ZetboxBase\NullablePropertyTextBoxView.cs" />
+    <Compile Include="View\ZetboxBase\ObjectReferenceDropdownEditor.cs" />
     <Compile Include="View\ZetboxBase\PropertiesPrewiewDisplay.xaml.cs">
       <DependentUpon>PropertiesPrewiewDisplay.xaml</DependentUpon>
     </Compile>
@@ -738,17 +717,11 @@
     <Compile Include="View\GUI\NavigatorDisplay.xaml.cs">
       <DependentUpon>NavigatorDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\ActionDisplay.xaml.cs">
-      <DependentUpon>ActionDisplay.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ZetboxBase\AuditJournalDisplay.xaml.cs">
       <DependentUpon>AuditJournalDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\CommandDisplay.xaml.cs">
-      <DependentUpon>CommandDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\CommandLinkDisplay.xaml.cs">
       <DependentUpon>CommandLinkDisplay.xaml</DependentUpon>
@@ -772,9 +745,6 @@
     <Compile Include="View\ZetboxBase\NullablePasswordTextBoxView.xaml.cs">
       <DependentUpon>NullablePasswordTextBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\ObjectReferenceDropdownEditor.xaml.cs">
-      <DependentUpon>ObjectReferenceDropdownEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ZetboxBase\InstanceList\InstanceListBaseDisplay.cs" />
     <Compile Include="View\ZetboxBase\InstanceList\InstanceListHorizontalDisplay.xaml.cs">
       <DependentUpon>InstanceListHorizontalDisplay.xaml</DependentUpon>
@@ -797,12 +767,6 @@
     </Compile>
     <Compile Include="View\ZetboxBase\ObjectReferenceListEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\EnumSelectionView.xaml.cs">
-      <DependentUpon>EnumSelectionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\NullableBoolValueView.xaml.cs">
-      <DependentUpon>NullableBoolValueView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\ObjectReferenceEditor.xaml.cs">
       <DependentUpon>ObjectReferenceEditor.xaml</DependentUpon>
