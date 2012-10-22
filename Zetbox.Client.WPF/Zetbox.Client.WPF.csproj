@@ -153,6 +153,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\CacheDebuggerDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -433,12 +437,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\NullablePropertyTextBoxView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ZetboxBase\ObjectReferenceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -678,6 +676,7 @@
     <Compile Include="View\ZetboxBase\InstanceList\InstanceListHeader.xaml.cs">
       <DependentUpon>InstanceListHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZetboxBase\NullablePropertyTextBoxView.cs" />
     <Compile Include="View\ZetboxBase\PropertiesPrewiewDisplay.xaml.cs">
       <DependentUpon>PropertiesPrewiewDisplay.xaml</DependentUpon>
     </Compile>
@@ -804,9 +803,6 @@
     </Compile>
     <Compile Include="View\ZetboxBase\NullableBoolValueView.xaml.cs">
       <DependentUpon>NullableBoolValueView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\NullablePropertyTextBoxView.xaml.cs">
-      <DependentUpon>NullablePropertyTextBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\ObjectReferenceEditor.xaml.cs">
       <DependentUpon>ObjectReferenceEditor.xaml</DependentUpon>
