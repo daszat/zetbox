@@ -52,6 +52,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 // could be e.g. a calculated object ref property
                 _allowClear = false;
                 _allowCreateNewItem = false;
+                _allowCreateNewItemOnSelect = false;
                 _allowDelete = false;
                 _allowSelectValue = false;
             }
@@ -60,6 +61,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 // could be e.g. a filter
                 _allowClear = true;
                 _allowCreateNewItem = false;
+                _allowCreateNewItemOnSelect = false;
                 _allowDelete = false;
                 _allowSelectValue = true;
             }
@@ -72,6 +74,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     if (relType == RelationType.one_n && rel.Containment == ContainmentSpecification.Independent)
                     {
                         _allowCreateNewItem = false; // search first
+                        _allowCreateNewItemOnSelect = true;
                     }
                     else if (relType == RelationType.one_one)
                     {
@@ -83,6 +86,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         else
                         {
                             _allowCreateNewItem = false; // possibility to change parent, but do not create a new one
+                            _allowCreateNewItemOnSelect = false;
                         }
                     }
                 }
@@ -130,6 +134,22 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     _allowSelectValue = value;
                     OnPropertyChanged("AllowSelectValue");
+                }
+            }
+        }
+        private bool _allowCreateNewItemOnSelect = true;
+        public bool AllowCreateNewItemOnSelect
+        {
+            get
+            {
+                return _allowCreateNewItemOnSelect;
+            }
+            set
+            {
+                if (_allowCreateNewItemOnSelect != value)
+                {
+                    _allowCreateNewItemOnSelect = value;
+                    OnPropertyChanged("AllowCreateNewItemOnSelect");
                 }
             }
         }
@@ -325,7 +345,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 null);
             selectionTask.ListViewModel.AllowDelete = false;
             selectionTask.ListViewModel.ShowOpenCommand = false;
-            selectionTask.ListViewModel.AllowAddNew = true;
+            selectionTask.ListViewModel.AllowAddNew = AllowCreateNewItemOnSelect;
 
             ViewModelFactory.ShowDialog(selectionTask);
         }
@@ -554,7 +574,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             foreach (FilterModel f in _filterModels)
             {
-                var valMdl = f.FilterArgument.Value as ClassValueModel<string>;
+                var valMdl = f.FilterArguments.First().Value as ClassValueModel<string>;
                 if (valMdl != null)
                 {
                     valMdl.Value = SearchString;
