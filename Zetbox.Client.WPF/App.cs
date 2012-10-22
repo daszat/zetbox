@@ -274,7 +274,7 @@ namespace Zetbox.Client.WPF
         void FocusFixLoaded(object sender, RoutedEventArgs e)
         {
             var element = e.Source as FrameworkElement;
-            element.Dispatcher.Invoke(new Action(() =>
+            element.Dispatcher.BeginInvoke(new Action(() =>
             {
                 var firstTxt = element.FindVisualChild<InfoTextBox>();
                 if (firstTxt != null)
