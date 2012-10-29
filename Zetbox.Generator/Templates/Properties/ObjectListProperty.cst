@@ -81,18 +81,17 @@
                         serverList = <%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList();
                         <%= idsListName %> = null; // allow id list to be garbage collected
                     });
-                    <%= taskName %>.Wait();
                 }
                 else
                 {
-                    <%= taskName %> = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>");
+                    <%= taskName %> = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>")
                         .OnResult(t =>
                         {
                             serverList = t.Result;
                         });
                 }
 <% } else { %>
-                <%= taskName %> = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>");
+                <%= taskName %> = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>")
                     .OnResult(t =>
                     {
                         serverList = t.Result;
@@ -105,7 +104,6 @@
                 {
                     serverList = new List<<%= referencedInterface %>>();
                 });
-                <%= taskName %>.Wait();
             }
     
             <%= taskName %>.OnResult(t =>
