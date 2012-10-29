@@ -48,15 +48,26 @@ namespace Zetbox.App.Base
 			{
 				if (_Relations == null)
 				{
-					Context.FetchRelation<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
-					_Relations 
-						= new ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchRelationsAsync().Wait();
 				}
 				return (IList<Zetbox.App.Base.Relation>)_Relations;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchRelationsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchRelationsAsync()
+        {
+            if (_triggerFetchRelationsTask != null) return _triggerFetchRelationsTask;
+			_triggerFetchRelationsTask = Context.FetchRelationAsync<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
+			_triggerFetchRelationsTask.OnResult(r => 
+            {
+                _Relations 
+				= new ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchRelationsTask;
+        }
 
 		private ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>> _Relations;
 

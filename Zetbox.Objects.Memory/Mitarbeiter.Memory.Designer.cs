@@ -659,15 +659,26 @@ namespace Zetbox.App.Projekte
 			{
 				if (_Projekte == null)
 				{
-					Context.FetchRelation<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.B, this);
-					_Projekte 
-						= new ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterBSideCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchProjekteAsync().Wait();
 				}
 				return (IList<Zetbox.App.Projekte.Projekt>)_Projekte;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchProjekteTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchProjekteAsync()
+        {
+            if (_triggerFetchProjekteTask != null) return _triggerFetchProjekteTask;
+			_triggerFetchProjekteTask = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.B, this);
+			_triggerFetchProjekteTask.OnResult(r => 
+            {
+                _Projekte 
+				= new ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterBSideCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchProjekteTask;
+        }
 
 		private ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>> _Projekte;
 

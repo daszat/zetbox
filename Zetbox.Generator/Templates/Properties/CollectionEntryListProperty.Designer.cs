@@ -56,7 +56,10 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 41 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 42 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+string taskName = "_triggerFetch" + name + "Task";
+
+#line 44 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedInterface , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
@@ -64,42 +67,54 @@ this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				if (",  backingName , " == null)\r\n");
 this.WriteObjects("				{\r\n");
-#line 49 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-// eagerly loaded relation already has the objects loaded
-	if (!eagerLoading)
-	{
-
-#line 53 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("					Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
-#line 55 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-}
-	else
-	{
-
-#line 59 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("					if (!",  name , "_was_eagerLoaded) Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
-#line 61 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-}
-
-#line 63 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("					",  backingName , " \r\n");
-this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">>(\r\n");
-this.WriteObjects("							this, \r\n");
-this.WriteObjects("							new RelationshipFilter",  role , "SideCollection<",  entryType , ">(this.Context, this));\r\n");
+this.WriteObjects("                    TriggerFetch",  name , "Async().Wait();\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				return (",  exposedCollectionInterface , "<",  referencedInterface , ">)",  backingName , ";\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
+this.WriteObjects("        \r\n");
+this.WriteObjects("        Zetbox.API.Async.ZbTask ",  taskName , ";\r\n");
+this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            if (",  taskName , " != null) return ",  taskName , ";\r\n");
+#line 62 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+// eagerly loaded relation already has the objects loaded
+	if (!eagerLoading)
+	{
+
+#line 66 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+this.WriteObjects("			",  taskName , " = Context.FetchRelationAsync<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
+#line 68 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+}
+	else
+	{
+
+#line 72 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+this.WriteObjects("			if (!",  name , "_was_eagerLoaded) ",  taskName , " = Context.FetchRelationAsync<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
+this.WriteObjects("            else ",  taskName , " = new Zetbox.API.Async.ZbTask(null, () => { });\r\n");
+#line 75 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+}
+
+#line 77 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+this.WriteObjects("			",  taskName , ".OnResult(r => \r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                ",  backingName , " \r\n");
+this.WriteObjects("				= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">>(\r\n");
+this.WriteObjects("					this, \r\n");
+this.WriteObjects("					new RelationshipFilter",  role , "SideCollection<",  entryType , ">(this.Context, this));\r\n");
+this.WriteObjects("            });\r\n");
+this.WriteObjects("            return ",  taskName , ";\r\n");
+this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">> ",  backingName , ";\r\n");
-#line 74 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 89 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 if (eagerLoading)
 	{
 
-#line 76 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 91 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("		\r\n");
 this.WriteObjects("		private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 79 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 94 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
         AddSerialization(serializationList, name, eagerLoading);
 

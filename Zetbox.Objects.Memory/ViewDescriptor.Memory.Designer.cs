@@ -398,15 +398,27 @@ namespace Zetbox.App.GUI
 			{
 				if (_SupportedViewModels == null)
 				{
-					if (!SupportedViewModels_was_eagerLoaded) Context.FetchRelation<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(new Guid("786dae2f-cb6e-454d-93fd-192541df928d"), RelationEndRole.A, this);
-					_SupportedViewModels 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchSupportedViewModelsAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Base.TypeRef>)_SupportedViewModels;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchSupportedViewModelsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchSupportedViewModelsAsync()
+        {
+            if (_triggerFetchSupportedViewModelsTask != null) return _triggerFetchSupportedViewModelsTask;
+			if (!SupportedViewModels_was_eagerLoaded) _triggerFetchSupportedViewModelsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(new Guid("786dae2f-cb6e-454d-93fd-192541df928d"), RelationEndRole.A, this);
+            else _triggerFetchSupportedViewModelsTask = new Zetbox.API.Async.ZbTask(null, () => { });
+			_triggerFetchSupportedViewModelsTask.OnResult(r => 
+            {
+                _SupportedViewModels 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchSupportedViewModelsTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>> _SupportedViewModels;
 		

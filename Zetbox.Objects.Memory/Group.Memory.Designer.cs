@@ -119,15 +119,26 @@ namespace Zetbox.App.Base
 			{
 				if (_Member == null)
 				{
-					Context.FetchRelation<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
-					_Member 
-						= new ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterBSideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchMemberAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Base.Identity>)_Member;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchMemberTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchMemberAsync()
+        {
+            if (_triggerFetchMemberTask != null) return _triggerFetchMemberTask;
+			_triggerFetchMemberTask = Context.FetchRelationAsync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
+			_triggerFetchMemberTask.OnResult(r => 
+            {
+                _Member 
+				= new ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterBSideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchMemberTask;
+        }
 
 		private ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Member;
 

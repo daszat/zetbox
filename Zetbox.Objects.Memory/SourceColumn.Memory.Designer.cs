@@ -623,15 +623,27 @@ namespace Zetbox.App.SchemaMigration
 			{
 				if (_DestinationProperty == null)
 				{
-					if (!DestinationProperty_was_eagerLoaded) Context.FetchRelation<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
-					_DestinationProperty 
-						= new ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchDestinationPropertyAsync().Wait();
 				}
 				return (IList<Zetbox.App.Base.Property>)_DestinationProperty;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchDestinationPropertyTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchDestinationPropertyAsync()
+        {
+            if (_triggerFetchDestinationPropertyTask != null) return _triggerFetchDestinationPropertyTask;
+			if (!DestinationProperty_was_eagerLoaded) _triggerFetchDestinationPropertyTask = Context.FetchRelationAsync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
+            else _triggerFetchDestinationPropertyTask = new Zetbox.API.Async.ZbTask(null, () => { });
+			_triggerFetchDestinationPropertyTask.OnResult(r => 
+            {
+                _DestinationProperty 
+				= new ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchDestinationPropertyTask;
+        }
 
 		private ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>> _DestinationProperty;
 		

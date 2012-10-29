@@ -48,15 +48,26 @@ namespace Zetbox.App.GUI
 			{
 				if (_Children == null)
 				{
-					Context.FetchRelation<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(new Guid("4d4e1ffd-f362-40e2-9fe1-0711ded83241"), RelationEndRole.A, this);
-					_Children 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchChildrenAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_Children;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+			_triggerFetchChildrenTask = Context.FetchRelationAsync<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(new Guid("4d4e1ffd-f362-40e2-9fe1-0711ded83241"), RelationEndRole.A, this);
+			_triggerFetchChildrenTask.OnResult(r => 
+            {
+                _Children 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchChildrenTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>> _Children;
 
@@ -73,15 +84,26 @@ namespace Zetbox.App.GUI
 			{
 				if (_ContextMenu == null)
 				{
-					Context.FetchRelation<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(new Guid("358c14b9-fef5-495d-8d44-04e84186830e"), RelationEndRole.A, this);
-					_ContextMenu 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchContextMenuAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_ContextMenu;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchContextMenuTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchContextMenuAsync()
+        {
+            if (_triggerFetchContextMenuTask != null) return _triggerFetchContextMenuTask;
+			_triggerFetchContextMenuTask = Context.FetchRelationAsync<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(new Guid("358c14b9-fef5-495d-8d44-04e84186830e"), RelationEndRole.A, this);
+			_triggerFetchContextMenuTask.OnResult(r => 
+            {
+                _ContextMenu 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchContextMenuTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>> _ContextMenu;
 

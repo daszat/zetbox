@@ -48,15 +48,26 @@ namespace at.dasz.DocumentManagement
 			{
 				if (_Revisions == null)
 				{
-					Context.FetchRelation<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
-					_Revisions 
-						= new ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchRevisionsAsync().Wait();
 				}
 				return (IList<Zetbox.App.Base.Blob>)_Revisions;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchRevisionsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
+        {
+            if (_triggerFetchRevisionsTask != null) return _triggerFetchRevisionsTask;
+			_triggerFetchRevisionsTask = Context.FetchRelationAsync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
+			_triggerFetchRevisionsTask.OnResult(r => 
+            {
+                _Revisions 
+				= new ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchRevisionsTask;
+        }
 
 		private ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>> _Revisions;
 

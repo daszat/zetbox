@@ -658,15 +658,27 @@ namespace Zetbox.App.Base
 			{
 				if (_GenericArguments == null)
 				{
-					if (!GenericArguments_was_eagerLoaded) Context.FetchRelation<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71"), RelationEndRole.A, this);
-					_GenericArguments 
-						= new ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchGenericArgumentsAsync().Wait();
 				}
 				return (IList<Zetbox.App.Base.TypeRef>)_GenericArguments;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchGenericArgumentsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchGenericArgumentsAsync()
+        {
+            if (_triggerFetchGenericArgumentsTask != null) return _triggerFetchGenericArgumentsTask;
+			if (!GenericArguments_was_eagerLoaded) _triggerFetchGenericArgumentsTask = Context.FetchRelationAsync<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71"), RelationEndRole.A, this);
+            else _triggerFetchGenericArgumentsTask = new Zetbox.API.Async.ZbTask(null, () => { });
+			_triggerFetchGenericArgumentsTask.OnResult(r => 
+            {
+                _GenericArguments 
+				= new ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchGenericArgumentsTask;
+        }
 
 		private ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>> _GenericArguments;
 		

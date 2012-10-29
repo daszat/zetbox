@@ -38,6 +38,9 @@
 <%@ Parameter Name="relId" Type="Guid" %>
 <%@ Parameter Name="role" Type="RelationEndRole" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
+<%
+    string taskName = "_triggerFetch" + name + "Task";
+%>
    		// <%= this.GetType() %>
 		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
 		{
@@ -45,29 +48,41 @@
 			{
 				if (<%= backingName %> == null)
 				{
+                    TriggerFetch<%= name %>Async().Wait();
+				}
+				return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
+			}
+		}
+        
+        Zetbox.API.Async.ZbTask <%= taskName %>;
+        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        {
+            if (<%= taskName %> != null) return <%= taskName %>;
 <%
 	// eagerly loaded relation already has the objects loaded
 	if (!eagerLoading)
 	{
 %>
-					Context.FetchRelation<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
+			<%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
 <%
 	}
 	else
 	{
 %>
-					if (!<%= name %>_was_eagerLoaded) Context.FetchRelation<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
+			if (!<%= name %>_was_eagerLoaded) <%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
+            else <%= taskName %> = new Zetbox.API.Async.ZbTask(null, () => { });
 <%
 	}
 %>
-					<%= backingName %> 
-						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
-							this, 
-							new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
-				}
-				return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
-			}
-		}
+			<%= taskName %>.OnResult(r => 
+            {
+                <%= backingName %> 
+				= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
+					this, 
+					new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
+            });
+            return <%= taskName %>;
+        }
 
 		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>> <%= backingName %>;
 <%

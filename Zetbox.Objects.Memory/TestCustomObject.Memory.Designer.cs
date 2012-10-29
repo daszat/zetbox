@@ -280,15 +280,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 			{
 				if (_MuhBlah_ManyList_Nav == null)
 				{
-					Context.FetchRelation<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
-					_MuhBlah_ManyList_Nav 
-						= new ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterBSideCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchMuhBlah_ManyList_NavAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Test.Muhblah>)_MuhBlah_ManyList_Nav;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchMuhBlah_ManyList_NavTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchMuhBlah_ManyList_NavAsync()
+        {
+            if (_triggerFetchMuhBlah_ManyList_NavTask != null) return _triggerFetchMuhBlah_ManyList_NavTask;
+			_triggerFetchMuhBlah_ManyList_NavTask = Context.FetchRelationAsync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
+			_triggerFetchMuhBlah_ManyList_NavTask.OnResult(r => 
+            {
+                _MuhBlah_ManyList_Nav 
+				= new ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterBSideCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchMuhBlah_ManyList_NavTask;
+        }
 
 		private ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>> _MuhBlah_ManyList_Nav;
 

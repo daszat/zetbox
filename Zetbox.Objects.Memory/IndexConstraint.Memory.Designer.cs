@@ -119,15 +119,26 @@ namespace Zetbox.App.Base
 			{
 				if (_Properties == null)
 				{
-					Context.FetchRelation<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
-					_Properties 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchPropertiesAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Base.Property>)_Properties;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchPropertiesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
+        {
+            if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
+			_triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
+			_triggerFetchPropertiesTask.OnResult(r => 
+            {
+                _Properties 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchPropertiesTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>> _Properties;
 

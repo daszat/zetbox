@@ -179,15 +179,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
 			{
 				if (_Student == null)
 				{
-					Context.FetchRelation<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
-					_Student 
-						= new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterBSideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchStudentAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Test.TestStudent>)_Student;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchStudentTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
+        {
+            if (_triggerFetchStudentTask != null) return _triggerFetchStudentTask;
+			_triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
+			_triggerFetchStudentTask.OnResult(r => 
+            {
+                _Student 
+				= new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterBSideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchStudentTask;
+        }
 
 		private ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Student;
 

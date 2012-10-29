@@ -567,15 +567,27 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 			{
 				if (_Groups == null)
 				{
-					if (!Groups_was_eagerLoaded) Context.FetchRelation<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
-					_Groups 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchGroupsAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Base.Group>)_Groups;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchGroupsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
+        {
+            if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
+			if (!Groups_was_eagerLoaded) _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
+            else _triggerFetchGroupsTask = new Zetbox.API.Async.ZbTask(null, () => { });
+			_triggerFetchGroupsTask.OnResult(r => 
+            {
+                _Groups 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchGroupsTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>> _Groups;
 		

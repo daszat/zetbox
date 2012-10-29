@@ -673,15 +673,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 			{
 				if (_ImplementsInterfaces == null)
 				{
-					Context.FetchRelation<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>(new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3"), RelationEndRole.A, this);
-					_ImplementsInterfaces 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchImplementsInterfacesAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Base.Interface>)_ImplementsInterfaces;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchImplementsInterfacesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchImplementsInterfacesAsync()
+        {
+            if (_triggerFetchImplementsInterfacesTask != null) return _triggerFetchImplementsInterfacesTask;
+			_triggerFetchImplementsInterfacesTask = Context.FetchRelationAsync<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>(new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3"), RelationEndRole.A, this);
+			_triggerFetchImplementsInterfacesTask.OnResult(r => 
+            {
+                _ImplementsInterfaces 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchImplementsInterfacesTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>> _ImplementsInterfaces;
 
