@@ -653,25 +653,44 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_EnumEntries == null)
                 {
-                    List<Zetbox.App.SchemaMigration.SourceEnum> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.SchemaMigration.SourceEnum>(this, "EnumEntries");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.SchemaMigration.SourceEnum>();
-                    }
-    
-                    _EnumEntries = new OneNRelationList<Zetbox.App.SchemaMigration.SourceEnum>(
-                        "SourceColumn",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("EnumEntries", null, null); if(OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); },
-                        serverList);
+                    TriggerFetchEnumEntriesAsync().Wait();
                 }
                 return _EnumEntries;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchEnumEntriesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumEntriesAsync()
+        {
+            if (_triggerFetchEnumEntriesTask != null) return _triggerFetchEnumEntriesTask;
+
+            List<Zetbox.App.SchemaMigration.SourceEnum> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchEnumEntriesTask = Context.GetListOfAsync<Zetbox.App.SchemaMigration.SourceEnum>(this, "EnumEntries")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchEnumEntriesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.SchemaMigration.SourceEnum>();
+                });
+            }
+    
+            _triggerFetchEnumEntriesTask.OnResult(t =>
+            {
+                _EnumEntries = new OneNRelationList<Zetbox.App.SchemaMigration.SourceEnum>(
+                    "SourceColumn",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("EnumEntries", null, null); if(OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchEnumEntriesTask;    
         }
     
         private OneNRelationList<Zetbox.App.SchemaMigration.SourceEnum> _EnumEntries;
@@ -990,25 +1009,44 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             {
                 if (_Referers == null)
                 {
-                    List<Zetbox.App.SchemaMigration.SourceColumn> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.SchemaMigration.SourceColumn>(this, "Referers");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.SchemaMigration.SourceColumn>();
-                    }
-    
-                    _Referers = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
-                        "References",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("Referers", null, null); if(OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); },
-                        serverList);
+                    TriggerFetchReferersAsync().Wait();
                 }
                 return _Referers;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchReferersTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchReferersAsync()
+        {
+            if (_triggerFetchReferersTask != null) return _triggerFetchReferersTask;
+
+            List<Zetbox.App.SchemaMigration.SourceColumn> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchReferersTask = Context.GetListOfAsync<Zetbox.App.SchemaMigration.SourceColumn>(this, "Referers")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchReferersTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.SchemaMigration.SourceColumn>();
+                });
+            }
+    
+            _triggerFetchReferersTask.OnResult(t =>
+            {
+                _Referers = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
+                    "References",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("Referers", null, null); if(OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchReferersTask;    
         }
     
         private OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn> _Referers;

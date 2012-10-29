@@ -51,25 +51,44 @@ namespace Zetbox.App.Test
             {
                 if (_Children == null)
                 {
-                    List<Zetbox.App.Test.MethodTest> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Test.MethodTest>(this, "Children");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Test.MethodTest>();
-                    }
-    
-                    _Children = new OneNRelationList<Zetbox.App.Test.MethodTest>(
-                        "Parent",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
-                        serverList);
+                    TriggerFetchChildrenAsync().Wait();
                 }
                 return _Children;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+
+            List<Zetbox.App.Test.MethodTest> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchChildrenTask = Context.GetListOfAsync<Zetbox.App.Test.MethodTest>(this, "Children")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchChildrenTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Test.MethodTest>();
+                });
+            }
+    
+            _triggerFetchChildrenTask.OnResult(t =>
+            {
+                _Children = new OneNRelationList<Zetbox.App.Test.MethodTest>(
+                    "Parent",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchChildrenTask;    
         }
     
         private OneNRelationList<Zetbox.App.Test.MethodTest> _Children;

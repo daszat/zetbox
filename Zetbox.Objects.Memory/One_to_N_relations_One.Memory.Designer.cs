@@ -109,25 +109,44 @@ namespace Zetbox.App.Test
             {
                 if (_NSide == null)
                 {
-                    List<Zetbox.App.Test.One_to_N_relations_N> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Test.One_to_N_relations_N>(this, "NSide");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Test.One_to_N_relations_N>();
-                    }
-    
-                    _NSide = new OneNRelationList<Zetbox.App.Test.One_to_N_relations_N>(
-                        "OneSide",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("NSide", null, null); if(OnNSide_PostSetter != null && IsAttached) OnNSide_PostSetter(this); },
-                        serverList);
+                    TriggerFetchNSideAsync().Wait();
                 }
                 return _NSide;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchNSideTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchNSideAsync()
+        {
+            if (_triggerFetchNSideTask != null) return _triggerFetchNSideTask;
+
+            List<Zetbox.App.Test.One_to_N_relations_N> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchNSideTask = Context.GetListOfAsync<Zetbox.App.Test.One_to_N_relations_N>(this, "NSide")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchNSideTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Test.One_to_N_relations_N>();
+                });
+            }
+    
+            _triggerFetchNSideTask.OnResult(t =>
+            {
+                _NSide = new OneNRelationList<Zetbox.App.Test.One_to_N_relations_N>(
+                    "OneSide",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("NSide", null, null); if(OnNSide_PostSetter != null && IsAttached) OnNSide_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchNSideTask;    
         }
     
         private OneNRelationList<Zetbox.App.Test.One_to_N_relations_N> _NSide;

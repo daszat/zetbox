@@ -51,25 +51,44 @@ namespace Zetbox.App.GUI
             {
                 if (_ChildControlKinds == null)
                 {
-                    List<Zetbox.App.GUI.ControlKind> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.GUI.ControlKind>(this, "ChildControlKinds");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.GUI.ControlKind>();
-                    }
-    
-                    _ChildControlKinds = new OneNRelationList<Zetbox.App.GUI.ControlKind>(
-                        "Parent",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("ChildControlKinds", null, null); if(OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); },
-                        serverList);
+                    TriggerFetchChildControlKindsAsync().Wait();
                 }
                 return _ChildControlKinds;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchChildControlKindsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchChildControlKindsAsync()
+        {
+            if (_triggerFetchChildControlKindsTask != null) return _triggerFetchChildControlKindsTask;
+
+            List<Zetbox.App.GUI.ControlKind> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchChildControlKindsTask = Context.GetListOfAsync<Zetbox.App.GUI.ControlKind>(this, "ChildControlKinds")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchChildControlKindsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.GUI.ControlKind>();
+                });
+            }
+    
+            _triggerFetchChildControlKindsTask.OnResult(t =>
+            {
+                _ChildControlKinds = new OneNRelationList<Zetbox.App.GUI.ControlKind>(
+                    "Parent",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("ChildControlKinds", null, null); if(OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchChildControlKindsTask;    
         }
     
         private OneNRelationList<Zetbox.App.GUI.ControlKind> _ChildControlKinds;

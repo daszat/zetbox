@@ -216,33 +216,55 @@ namespace Zetbox.App.Base
             {
                 if (_Constraints == null)
                 {
-                    List<Zetbox.App.Base.InstanceConstraint> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        if (ConstraintsIds != null)
-                        {
-                            serverList = ConstraintsIds.Select(id => Context.Find<Zetbox.App.Base.InstanceConstraint>(id)).ToList();
-                            ConstraintsIds = null; // allow id list to be garbage collected
-                        }
-                        else
-                        {
-                            serverList = Context.GetListOf<Zetbox.App.Base.InstanceConstraint>(this, "Constraints");
-                        }
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Base.InstanceConstraint>();
-                    }
-    
-                    _Constraints = new OneNRelationList<Zetbox.App.Base.InstanceConstraint>(
-                        "Constrained",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("Constraints", null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
-                        serverList);
+                    TriggerFetchConstraintsAsync().Wait();
                 }
                 return _Constraints;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchConstraintsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchConstraintsAsync()
+        {
+            if (_triggerFetchConstraintsTask != null) return _triggerFetchConstraintsTask;
+
+            List<Zetbox.App.Base.InstanceConstraint> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                if (ConstraintsIds != null)
+                {
+                    _triggerFetchConstraintsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                    {
+                        serverList = ConstraintsIds.Select(id => Context.Find<Zetbox.App.Base.InstanceConstraint>(id)).ToList();
+                        ConstraintsIds = null; // allow id list to be garbage collected
+                    });
+                }
+                else
+                {
+                    _triggerFetchConstraintsTask = Context.GetListOfAsync<Zetbox.App.Base.InstanceConstraint>(this, "Constraints")
+                        .OnResult(t =>
+                        {
+                            serverList = t.Result;
+                        });
+                }
+            }
+            else
+            {
+                _triggerFetchConstraintsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Base.InstanceConstraint>();
+                });
+            }
+    
+            _triggerFetchConstraintsTask.OnResult(t =>
+            {
+                _Constraints = new OneNRelationList<Zetbox.App.Base.InstanceConstraint>(
+                    "Constrained",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("Constraints", null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchConstraintsTask;    
         }
     
         private OneNRelationList<Zetbox.App.Base.InstanceConstraint> _Constraints;
@@ -679,33 +701,55 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             {
                 if (_Methods == null)
                 {
-                    List<Zetbox.App.Base.Method> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        if (MethodsIds != null)
-                        {
-                            serverList = MethodsIds.Select(id => Context.Find<Zetbox.App.Base.Method>(id)).ToList();
-                            MethodsIds = null; // allow id list to be garbage collected
-                        }
-                        else
-                        {
-                            serverList = Context.GetListOf<Zetbox.App.Base.Method>(this, "Methods");
-                        }
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Base.Method>();
-                    }
-    
-                    _Methods = new OneNRelationList<Zetbox.App.Base.Method>(
-                        "ObjectClass",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); },
-                        serverList);
+                    TriggerFetchMethodsAsync().Wait();
                 }
                 return _Methods;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchMethodsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
+        {
+            if (_triggerFetchMethodsTask != null) return _triggerFetchMethodsTask;
+
+            List<Zetbox.App.Base.Method> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                if (MethodsIds != null)
+                {
+                    _triggerFetchMethodsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                    {
+                        serverList = MethodsIds.Select(id => Context.Find<Zetbox.App.Base.Method>(id)).ToList();
+                        MethodsIds = null; // allow id list to be garbage collected
+                    });
+                }
+                else
+                {
+                    _triggerFetchMethodsTask = Context.GetListOfAsync<Zetbox.App.Base.Method>(this, "Methods")
+                        .OnResult(t =>
+                        {
+                            serverList = t.Result;
+                        });
+                }
+            }
+            else
+            {
+                _triggerFetchMethodsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Base.Method>();
+                });
+            }
+    
+            _triggerFetchMethodsTask.OnResult(t =>
+            {
+                _Methods = new OneNRelationList<Zetbox.App.Base.Method>(
+                    "ObjectClass",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchMethodsTask;    
         }
     
         private OneNRelationList<Zetbox.App.Base.Method> _Methods;
@@ -881,33 +925,55 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             {
                 if (_Properties == null)
                 {
-                    List<Zetbox.App.Base.Property> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        if (PropertiesIds != null)
-                        {
-                            serverList = PropertiesIds.Select(id => Context.Find<Zetbox.App.Base.Property>(id)).ToList();
-                            PropertiesIds = null; // allow id list to be garbage collected
-                        }
-                        else
-                        {
-                            serverList = Context.GetListOf<Zetbox.App.Base.Property>(this, "Properties");
-                        }
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Base.Property>();
-                    }
-    
-                    _Properties = new OneNRelationList<Zetbox.App.Base.Property>(
-                        "ObjectClass",
-                        "Properties_pos",
-                        this,
-                        () => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); },
-                        serverList);
+                    TriggerFetchPropertiesAsync().Wait();
                 }
                 return _Properties;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchPropertiesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
+        {
+            if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
+
+            List<Zetbox.App.Base.Property> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                if (PropertiesIds != null)
+                {
+                    _triggerFetchPropertiesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                    {
+                        serverList = PropertiesIds.Select(id => Context.Find<Zetbox.App.Base.Property>(id)).ToList();
+                        PropertiesIds = null; // allow id list to be garbage collected
+                    });
+                }
+                else
+                {
+                    _triggerFetchPropertiesTask = Context.GetListOfAsync<Zetbox.App.Base.Property>(this, "Properties")
+                        .OnResult(t =>
+                        {
+                            serverList = t.Result;
+                        });
+                }
+            }
+            else
+            {
+                _triggerFetchPropertiesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Base.Property>();
+                });
+            }
+    
+            _triggerFetchPropertiesTask.OnResult(t =>
+            {
+                _Properties = new OneNRelationList<Zetbox.App.Base.Property>(
+                    "ObjectClass",
+                    "Properties_pos",
+                    this,
+                    () => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchPropertiesTask;    
         }
     
         private OneNRelationList<Zetbox.App.Base.Property> _Properties;

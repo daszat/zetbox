@@ -793,25 +793,44 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_SourceTables == null)
                 {
-                    List<Zetbox.App.SchemaMigration.SourceTable> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.SchemaMigration.SourceTable>(this, "SourceTables");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.SchemaMigration.SourceTable>();
-                    }
-    
-                    _SourceTables = new OneNRelationList<Zetbox.App.SchemaMigration.SourceTable>(
-                        "StagingDatabase",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("SourceTables", null, null); if(OnSourceTables_PostSetter != null && IsAttached) OnSourceTables_PostSetter(this); },
-                        serverList);
+                    TriggerFetchSourceTablesAsync().Wait();
                 }
                 return _SourceTables;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchSourceTablesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchSourceTablesAsync()
+        {
+            if (_triggerFetchSourceTablesTask != null) return _triggerFetchSourceTablesTask;
+
+            List<Zetbox.App.SchemaMigration.SourceTable> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchSourceTablesTask = Context.GetListOfAsync<Zetbox.App.SchemaMigration.SourceTable>(this, "SourceTables")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchSourceTablesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.SchemaMigration.SourceTable>();
+                });
+            }
+    
+            _triggerFetchSourceTablesTask.OnResult(t =>
+            {
+                _SourceTables = new OneNRelationList<Zetbox.App.SchemaMigration.SourceTable>(
+                    "StagingDatabase",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("SourceTables", null, null); if(OnSourceTables_PostSetter != null && IsAttached) OnSourceTables_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchSourceTablesTask;    
         }
     
         private OneNRelationList<Zetbox.App.SchemaMigration.SourceTable> _SourceTables;

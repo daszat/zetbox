@@ -160,25 +160,44 @@ namespace Zetbox.App.Calendar
             {
                 if (_CalendarRules == null)
                 {
-                    List<Zetbox.App.Calendar.CalendarRule> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Calendar.CalendarRule>(this, "CalendarRules");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Calendar.CalendarRule>();
-                    }
-    
-                    _CalendarRules = new OneNRelationList<Zetbox.App.Calendar.CalendarRule>(
-                        "Calendar",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("CalendarRules", null, null); if(OnCalendarRules_PostSetter != null && IsAttached) OnCalendarRules_PostSetter(this); },
-                        serverList);
+                    TriggerFetchCalendarRulesAsync().Wait();
                 }
                 return _CalendarRules;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchCalendarRulesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchCalendarRulesAsync()
+        {
+            if (_triggerFetchCalendarRulesTask != null) return _triggerFetchCalendarRulesTask;
+
+            List<Zetbox.App.Calendar.CalendarRule> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchCalendarRulesTask = Context.GetListOfAsync<Zetbox.App.Calendar.CalendarRule>(this, "CalendarRules")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchCalendarRulesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Calendar.CalendarRule>();
+                });
+            }
+    
+            _triggerFetchCalendarRulesTask.OnResult(t =>
+            {
+                _CalendarRules = new OneNRelationList<Zetbox.App.Calendar.CalendarRule>(
+                    "Calendar",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("CalendarRules", null, null); if(OnCalendarRules_PostSetter != null && IsAttached) OnCalendarRules_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchCalendarRulesTask;    
         }
     
         private OneNRelationList<Zetbox.App.Calendar.CalendarRule> _CalendarRules;
@@ -366,25 +385,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
             {
                 if (_ChildCalendar == null)
                 {
-                    List<Zetbox.App.Calendar.Calendar> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Calendar.Calendar>(this, "ChildCalendar");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Calendar.Calendar>();
-                    }
-    
-                    _ChildCalendar = new OneNRelationList<Zetbox.App.Calendar.Calendar>(
-                        "BaseCalendar",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("ChildCalendar", null, null); if(OnChildCalendar_PostSetter != null && IsAttached) OnChildCalendar_PostSetter(this); },
-                        serverList);
+                    TriggerFetchChildCalendarAsync().Wait();
                 }
                 return _ChildCalendar;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchChildCalendarTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchChildCalendarAsync()
+        {
+            if (_triggerFetchChildCalendarTask != null) return _triggerFetchChildCalendarTask;
+
+            List<Zetbox.App.Calendar.Calendar> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchChildCalendarTask = Context.GetListOfAsync<Zetbox.App.Calendar.Calendar>(this, "ChildCalendar")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchChildCalendarTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Calendar.Calendar>();
+                });
+            }
+    
+            _triggerFetchChildCalendarTask.OnResult(t =>
+            {
+                _ChildCalendar = new OneNRelationList<Zetbox.App.Calendar.Calendar>(
+                    "BaseCalendar",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("ChildCalendar", null, null); if(OnChildCalendar_PostSetter != null && IsAttached) OnChildCalendar_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchChildCalendarTask;    
         }
     
         private OneNRelationList<Zetbox.App.Calendar.Calendar> _ChildCalendar;

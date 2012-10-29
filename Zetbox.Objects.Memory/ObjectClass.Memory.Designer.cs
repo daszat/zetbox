@@ -51,25 +51,44 @@ namespace Zetbox.App.Base
             {
                 if (_AccessControlList == null)
                 {
-                    List<Zetbox.App.Base.AccessControl> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Base.AccessControl>(this, "AccessControlList");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Base.AccessControl>();
-                    }
-    
-                    _AccessControlList = new OneNRelationList<Zetbox.App.Base.AccessControl>(
-                        "ObjectClass",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("AccessControlList", null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
-                        serverList);
+                    TriggerFetchAccessControlListAsync().Wait();
                 }
                 return _AccessControlList;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchAccessControlListTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchAccessControlListAsync()
+        {
+            if (_triggerFetchAccessControlListTask != null) return _triggerFetchAccessControlListTask;
+
+            List<Zetbox.App.Base.AccessControl> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchAccessControlListTask = Context.GetListOfAsync<Zetbox.App.Base.AccessControl>(this, "AccessControlList")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchAccessControlListTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Base.AccessControl>();
+                });
+            }
+    
+            _triggerFetchAccessControlListTask.OnResult(t =>
+            {
+                _AccessControlList = new OneNRelationList<Zetbox.App.Base.AccessControl>(
+                    "ObjectClass",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("AccessControlList", null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchAccessControlListTask;    
         }
     
         private OneNRelationList<Zetbox.App.Base.AccessControl> _AccessControlList;
@@ -339,25 +358,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             {
                 if (_FilterConfigurations == null)
                 {
-                    List<Zetbox.App.GUI.ObjectClassFilterConfiguration> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.GUI.ObjectClassFilterConfiguration>(this, "FilterConfigurations");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.GUI.ObjectClassFilterConfiguration>();
-                    }
-    
-                    _FilterConfigurations = new OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration>(
-                        "ObjectClass",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
-                        serverList);
+                    TriggerFetchFilterConfigurationsAsync().Wait();
                 }
                 return _FilterConfigurations;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchFilterConfigurationsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchFilterConfigurationsAsync()
+        {
+            if (_triggerFetchFilterConfigurationsTask != null) return _triggerFetchFilterConfigurationsTask;
+
+            List<Zetbox.App.GUI.ObjectClassFilterConfiguration> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchFilterConfigurationsTask = Context.GetListOfAsync<Zetbox.App.GUI.ObjectClassFilterConfiguration>(this, "FilterConfigurations")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchFilterConfigurationsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.GUI.ObjectClassFilterConfiguration>();
+                });
+            }
+    
+            _triggerFetchFilterConfigurationsTask.OnResult(t =>
+            {
+                _FilterConfigurations = new OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration>(
+                    "ObjectClass",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchFilterConfigurationsTask;    
         }
     
         private OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration> _FilterConfigurations;
@@ -593,25 +631,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             {
                 if (_SubClasses == null)
                 {
-                    List<Zetbox.App.Base.ObjectClass> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Base.ObjectClass>(this, "SubClasses");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Base.ObjectClass>();
-                    }
-    
-                    _SubClasses = new OneNRelationList<Zetbox.App.Base.ObjectClass>(
-                        "BaseObjectClass",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("SubClasses", null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
-                        serverList);
+                    TriggerFetchSubClassesAsync().Wait();
                 }
                 return _SubClasses;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchSubClassesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchSubClassesAsync()
+        {
+            if (_triggerFetchSubClassesTask != null) return _triggerFetchSubClassesTask;
+
+            List<Zetbox.App.Base.ObjectClass> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchSubClassesTask = Context.GetListOfAsync<Zetbox.App.Base.ObjectClass>(this, "SubClasses")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchSubClassesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Base.ObjectClass>();
+                });
+            }
+    
+            _triggerFetchSubClassesTask.OnResult(t =>
+            {
+                _SubClasses = new OneNRelationList<Zetbox.App.Base.ObjectClass>(
+                    "BaseObjectClass",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("SubClasses", null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchSubClassesTask;    
         }
     
         private OneNRelationList<Zetbox.App.Base.ObjectClass> _SubClasses;

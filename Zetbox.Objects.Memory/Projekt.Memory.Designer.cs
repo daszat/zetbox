@@ -51,25 +51,44 @@ namespace Zetbox.App.Projekte
             {
                 if (_Auftraege == null)
                 {
-                    List<Zetbox.App.Projekte.Auftrag> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Projekte.Auftrag>(this, "Auftraege");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Projekte.Auftrag>();
-                    }
-    
-                    _Auftraege = new OneNRelationList<Zetbox.App.Projekte.Auftrag>(
-                        "Projekt",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("Auftraege", null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
-                        serverList);
+                    TriggerFetchAuftraegeAsync().Wait();
                 }
                 return _Auftraege;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchAuftraegeTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchAuftraegeAsync()
+        {
+            if (_triggerFetchAuftraegeTask != null) return _triggerFetchAuftraegeTask;
+
+            List<Zetbox.App.Projekte.Auftrag> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchAuftraegeTask = Context.GetListOfAsync<Zetbox.App.Projekte.Auftrag>(this, "Auftraege")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchAuftraegeTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Projekte.Auftrag>();
+                });
+            }
+    
+            _triggerFetchAuftraegeTask.OnResult(t =>
+            {
+                _Auftraege = new OneNRelationList<Zetbox.App.Projekte.Auftrag>(
+                    "Projekt",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("Auftraege", null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchAuftraegeTask;    
         }
     
         private OneNRelationList<Zetbox.App.Projekte.Auftrag> _Auftraege;
@@ -859,25 +878,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             {
                 if (_Tasks == null)
                 {
-                    List<Zetbox.App.Projekte.Task> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Projekte.Task>(this, "Tasks");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Projekte.Task>();
-                    }
-    
-                    _Tasks = new OneNRelationList<Zetbox.App.Projekte.Task>(
-                        "Projekt",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("Tasks", null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
-                        serverList);
+                    TriggerFetchTasksAsync().Wait();
                 }
                 return _Tasks;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchTasksTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchTasksAsync()
+        {
+            if (_triggerFetchTasksTask != null) return _triggerFetchTasksTask;
+
+            List<Zetbox.App.Projekte.Task> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchTasksTask = Context.GetListOfAsync<Zetbox.App.Projekte.Task>(this, "Tasks")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchTasksTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Projekte.Task>();
+                });
+            }
+    
+            _triggerFetchTasksTask.OnResult(t =>
+            {
+                _Tasks = new OneNRelationList<Zetbox.App.Projekte.Task>(
+                    "Projekt",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("Tasks", null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchTasksTask;    
         }
     
         private OneNRelationList<Zetbox.App.Projekte.Task> _Tasks;

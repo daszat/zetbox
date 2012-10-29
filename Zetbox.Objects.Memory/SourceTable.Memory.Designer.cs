@@ -719,25 +719,44 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_SourceColumn == null)
                 {
-                    List<Zetbox.App.SchemaMigration.SourceColumn> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.SchemaMigration.SourceColumn>(this, "SourceColumn");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.SchemaMigration.SourceColumn>();
-                    }
-    
-                    _SourceColumn = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
-                        "SourceTable",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("SourceColumn", null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
-                        serverList);
+                    TriggerFetchSourceColumnAsync().Wait();
                 }
                 return _SourceColumn;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchSourceColumnTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchSourceColumnAsync()
+        {
+            if (_triggerFetchSourceColumnTask != null) return _triggerFetchSourceColumnTask;
+
+            List<Zetbox.App.SchemaMigration.SourceColumn> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchSourceColumnTask = Context.GetListOfAsync<Zetbox.App.SchemaMigration.SourceColumn>(this, "SourceColumn")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchSourceColumnTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.SchemaMigration.SourceColumn>();
+                });
+            }
+    
+            _triggerFetchSourceColumnTask.OnResult(t =>
+            {
+                _SourceColumn = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
+                    "SourceTable",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("SourceColumn", null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchSourceColumnTask;    
         }
     
         private OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn> _SourceColumn;

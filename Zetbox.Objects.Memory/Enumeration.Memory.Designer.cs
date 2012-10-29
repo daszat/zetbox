@@ -109,25 +109,44 @@ namespace Zetbox.App.Base
             {
                 if (_EnumerationEntries == null)
                 {
-                    List<Zetbox.App.Base.EnumerationEntry> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Base.EnumerationEntry>(this, "EnumerationEntries");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Base.EnumerationEntry>();
-                    }
-    
-                    _EnumerationEntries = new OneNRelationList<Zetbox.App.Base.EnumerationEntry>(
-                        "Enumeration",
-                        "EnumerationEntries_pos",
-                        this,
-                        () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
-                        serverList);
+                    TriggerFetchEnumerationEntriesAsync().Wait();
                 }
                 return _EnumerationEntries;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchEnumerationEntriesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumerationEntriesAsync()
+        {
+            if (_triggerFetchEnumerationEntriesTask != null) return _triggerFetchEnumerationEntriesTask;
+
+            List<Zetbox.App.Base.EnumerationEntry> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchEnumerationEntriesTask = Context.GetListOfAsync<Zetbox.App.Base.EnumerationEntry>(this, "EnumerationEntries")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchEnumerationEntriesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Base.EnumerationEntry>();
+                });
+            }
+    
+            _triggerFetchEnumerationEntriesTask.OnResult(t =>
+            {
+                _EnumerationEntries = new OneNRelationList<Zetbox.App.Base.EnumerationEntry>(
+                    "Enumeration",
+                    "EnumerationEntries_pos",
+                    this,
+                    () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchEnumerationEntriesTask;    
         }
     
         private OneNRelationList<Zetbox.App.Base.EnumerationEntry> _EnumerationEntries;

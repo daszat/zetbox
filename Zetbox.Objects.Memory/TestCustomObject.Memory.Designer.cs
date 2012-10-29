@@ -115,25 +115,44 @@ namespace Zetbox.App.Test
             {
                 if (_MubBlah_List_Nav == null)
                 {
-                    List<Zetbox.App.Test.Muhblah> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Test.Muhblah>(this, "MubBlah_List_Nav");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Test.Muhblah>();
-                    }
-    
-                    _MubBlah_List_Nav = new OneNRelationList<Zetbox.App.Test.Muhblah>(
-                        "TestCustomObjects_Nav",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("MubBlah_List_Nav", null, null); if(OnMubBlah_List_Nav_PostSetter != null && IsAttached) OnMubBlah_List_Nav_PostSetter(this); },
-                        serverList);
+                    TriggerFetchMubBlah_List_NavAsync().Wait();
                 }
                 return _MubBlah_List_Nav;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchMubBlah_List_NavTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchMubBlah_List_NavAsync()
+        {
+            if (_triggerFetchMubBlah_List_NavTask != null) return _triggerFetchMubBlah_List_NavTask;
+
+            List<Zetbox.App.Test.Muhblah> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchMubBlah_List_NavTask = Context.GetListOfAsync<Zetbox.App.Test.Muhblah>(this, "MubBlah_List_Nav")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchMubBlah_List_NavTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Test.Muhblah>();
+                });
+            }
+    
+            _triggerFetchMubBlah_List_NavTask.OnResult(t =>
+            {
+                _MubBlah_List_Nav = new OneNRelationList<Zetbox.App.Test.Muhblah>(
+                    "TestCustomObjects_Nav",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("MubBlah_List_Nav", null, null); if(OnMubBlah_List_Nav_PostSetter != null && IsAttached) OnMubBlah_List_Nav_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchMubBlah_List_NavTask;    
         }
     
         private OneNRelationList<Zetbox.App.Test.Muhblah> _MubBlah_List_Nav;

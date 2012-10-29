@@ -51,33 +51,55 @@ namespace Zetbox.App.Test
             {
                 if (_Antworten == null)
                 {
-                    List<Zetbox.App.Test.Antwort> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        if (AntwortenIds != null)
-                        {
-                            serverList = AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList();
-                            AntwortenIds = null; // allow id list to be garbage collected
-                        }
-                        else
-                        {
-                            serverList = Context.GetListOf<Zetbox.App.Test.Antwort>(this, "Antworten");
-                        }
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Test.Antwort>();
-                    }
-    
-                    _Antworten = new OneNRelationList<Zetbox.App.Test.Antwort>(
-                        "Fragebogen",
-                        "gute_Antworten_pos",
-                        this,
-                        () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
-                        serverList);
+                    TriggerFetchAntwortenAsync().Wait();
                 }
                 return _Antworten;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchAntwortenTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchAntwortenAsync()
+        {
+            if (_triggerFetchAntwortenTask != null) return _triggerFetchAntwortenTask;
+
+            List<Zetbox.App.Test.Antwort> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                if (AntwortenIds != null)
+                {
+                    _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(null, () =>
+                    {
+                        serverList = AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList();
+                        AntwortenIds = null; // allow id list to be garbage collected
+                    });
+                }
+                else
+                {
+                    _triggerFetchAntwortenTask = Context.GetListOfAsync<Zetbox.App.Test.Antwort>(this, "Antworten")
+                        .OnResult(t =>
+                        {
+                            serverList = t.Result;
+                        });
+                }
+            }
+            else
+            {
+                _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Test.Antwort>();
+                });
+            }
+    
+            _triggerFetchAntwortenTask.OnResult(t =>
+            {
+                _Antworten = new OneNRelationList<Zetbox.App.Test.Antwort>(
+                    "Fragebogen",
+                    "gute_Antworten_pos",
+                    this,
+                    () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchAntwortenTask;    
         }
     
         private OneNRelationList<Zetbox.App.Test.Antwort> _Antworten;

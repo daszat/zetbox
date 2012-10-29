@@ -603,25 +603,44 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_StagingDatabases == null)
                 {
-                    List<Zetbox.App.SchemaMigration.StagingDatabase> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.SchemaMigration.StagingDatabase>(this, "StagingDatabases");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.SchemaMigration.StagingDatabase>();
-                    }
-    
-                    _StagingDatabases = new OneNRelationList<Zetbox.App.SchemaMigration.StagingDatabase>(
-                        "MigrationProject",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("StagingDatabases", null, null); if(OnStagingDatabases_PostSetter != null && IsAttached) OnStagingDatabases_PostSetter(this); },
-                        serverList);
+                    TriggerFetchStagingDatabasesAsync().Wait();
                 }
                 return _StagingDatabases;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchStagingDatabasesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchStagingDatabasesAsync()
+        {
+            if (_triggerFetchStagingDatabasesTask != null) return _triggerFetchStagingDatabasesTask;
+
+            List<Zetbox.App.SchemaMigration.StagingDatabase> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchStagingDatabasesTask = Context.GetListOfAsync<Zetbox.App.SchemaMigration.StagingDatabase>(this, "StagingDatabases")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchStagingDatabasesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.SchemaMigration.StagingDatabase>();
+                });
+            }
+    
+            _triggerFetchStagingDatabasesTask.OnResult(t =>
+            {
+                _StagingDatabases = new OneNRelationList<Zetbox.App.SchemaMigration.StagingDatabase>(
+                    "MigrationProject",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("StagingDatabases", null, null); if(OnStagingDatabases_PostSetter != null && IsAttached) OnStagingDatabases_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchStagingDatabasesTask;    
         }
     
         private OneNRelationList<Zetbox.App.SchemaMigration.StagingDatabase> _StagingDatabases;

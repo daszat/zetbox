@@ -216,25 +216,44 @@ namespace Zetbox.App.GUI
             {
                 if (_Children == null)
                 {
-                    List<Zetbox.App.GUI.NavigationEntry> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.GUI.NavigationEntry>(this, "Children");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.GUI.NavigationEntry>();
-                    }
-    
-                    _Children = new OneNRelationList<Zetbox.App.GUI.NavigationEntry>(
-                        "Parent",
-                        "Children_pos",
-                        this,
-                        () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
-                        serverList);
+                    TriggerFetchChildrenAsync().Wait();
                 }
                 return _Children;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+
+            List<Zetbox.App.GUI.NavigationEntry> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchChildrenTask = Context.GetListOfAsync<Zetbox.App.GUI.NavigationEntry>(this, "Children")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchChildrenTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.GUI.NavigationEntry>();
+                });
+            }
+    
+            _triggerFetchChildrenTask.OnResult(t =>
+            {
+                _Children = new OneNRelationList<Zetbox.App.GUI.NavigationEntry>(
+                    "Parent",
+                    "Children_pos",
+                    this,
+                    () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchChildrenTask;    
         }
     
         private OneNRelationList<Zetbox.App.GUI.NavigationEntry> _Children;

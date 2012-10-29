@@ -1140,25 +1140,44 @@ namespace Zetbox.App.Base
             {
                 if (_Parameter == null)
                 {
-                    List<Zetbox.App.Base.BaseParameter> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Base.BaseParameter>(this, "Parameter");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Base.BaseParameter>();
-                    }
-    
-                    _Parameter = new OneNRelationList<Zetbox.App.Base.BaseParameter>(
-                        "Method",
-                        "Parameter_pos",
-                        this,
-                        () => { this.NotifyPropertyChanged("Parameter", null, null); if(OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); },
-                        serverList);
+                    TriggerFetchParameterAsync().Wait();
                 }
                 return _Parameter;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchParameterTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchParameterAsync()
+        {
+            if (_triggerFetchParameterTask != null) return _triggerFetchParameterTask;
+
+            List<Zetbox.App.Base.BaseParameter> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchParameterTask = Context.GetListOfAsync<Zetbox.App.Base.BaseParameter>(this, "Parameter")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchParameterTask = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<Zetbox.App.Base.BaseParameter>();
+                });
+            }
+    
+            _triggerFetchParameterTask.OnResult(t =>
+            {
+                _Parameter = new OneNRelationList<Zetbox.App.Base.BaseParameter>(
+                    "Method",
+                    "Parameter_pos",
+                    this,
+                    () => { this.NotifyPropertyChanged("Parameter", null, null); if(OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchParameterTask;    
         }
     
         private OneNRelationList<Zetbox.App.Base.BaseParameter> _Parameter;
