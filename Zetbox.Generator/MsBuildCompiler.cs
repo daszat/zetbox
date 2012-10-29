@@ -24,6 +24,7 @@ namespace Zetbox.Generator
     using Microsoft.Build.Evaluation;
     using Zetbox.API;
     using Microsoft.Build.Execution;
+    using Microsoft.Build.Framework;
 
     public class MsBuildCompiler : Compiler
     {
@@ -49,8 +50,12 @@ namespace Zetbox.Generator
                         new[] { target },
                         null);
 
+                    var logger = new Microsoft.Build.Logging.ConsoleLogger(LoggerVerbosity.Minimal);
+                    var buildParameter = new BuildParameters();
+                    buildParameter.Loggers = new List<ILogger>() { logger };
+
                     Log.DebugFormat("Compiling");
-                    var result = BuildManager.DefaultBuildManager.Build(new BuildParameters(), req);
+                    var result = BuildManager.DefaultBuildManager.Build(buildParameter, req);
 
                     if (result.OverallResult == BuildResultCode.Success)
                     {
