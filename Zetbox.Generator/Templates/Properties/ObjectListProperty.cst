@@ -42,6 +42,7 @@
     // RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
     string idsListName = name + "Ids";
+    string taskName = "_triggerFetch" + name + "Task";
     
     // whether or not the collection will be eagerly loaded
     bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
@@ -58,37 +59,65 @@
             {
                 if (<%= wrapperName %> == null)
                 {
-                    List<<%= referencedInterface %>> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-<% if (eagerLoading) { %>
-                        if (<%= idsListName %> != null)
-                        {
-                            serverList = <%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList();
-                            <%= idsListName %> = null; // allow id list to be garbage collected
-                        }
-                        else
-                        {
-                            serverList = Context.GetListOf<<%= referencedInterface %>>(this, "<%= name %>");
-                        }
-<% } else { %>
-                        serverList = Context.GetListOf<<%= referencedInterface %>>(this, "<%= name %>");
-<% } %>
-                    }
-                    else
-                    {
-                        serverList = new List<<%= referencedInterface %>>();
-                    }
-    
-                    <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
-                        "<%= otherName %>",
-                        <% if (!String.IsNullOrEmpty(positionPropertyName)) { %>"<%= positionPropertyName %>"<% } else { %>null<% } %>,
-                        this,
-                        () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
-                        serverList);
+                    TriggerFetch<%= name %>Async().Wait();
                 }
                 return <%= wrapperName %>;
             }
+        }
+
+        Zetbox.API.Async.ZbTask <%= taskName %>;
+        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        {
+            if (<%= taskName %> != null) return <%= taskName %>;
+
+            List<<%= referencedInterface %>> serverList;
+            if (Helper.IsPersistedObject(this))
+            {
+<% if (eagerLoading) { %>
+                if (<%= idsListName %> != null)
+                {
+                    <%= taskName %> = new Zetbox.API.Async.ZbTask(null, () =>
+                    {
+                        serverList = <%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList();
+                        <%= idsListName %> = null; // allow id list to be garbage collected
+                    });
+                    <%= taskName %>.Wait();
+                }
+                else
+                {
+                    <%= taskName %> = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>");
+                        .OnResult(t =>
+                        {
+                            serverList = t.Result;
+                        });
+                }
+<% } else { %>
+                <%= taskName %> = Context.GetListOfAsync<<%= referencedInterface %>>(this, "<%= name %>");
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+<% } %>
+            }
+            else
+            {
+                <%= taskName %> = new Zetbox.API.Async.ZbTask(null, () =>
+                {
+                    serverList = new List<<%= referencedInterface %>>();
+                });
+                <%= taskName %>.Wait();
+            }
+    
+            <%= taskName %>.OnResult(t =>
+            {
+                <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
+                    "<%= otherName %>",
+                    <% if (!String.IsNullOrEmpty(positionPropertyName)) { %>"<%= positionPropertyName %>"<% } else { %>null<% } %>,
+                    this,
+                    () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
+                    serverList);    
+            });
+            return <%= taskName %>;    
         }
     
         private <%= wrapperClass %><<%= referencedInterface %>> <%= wrapperName %>;
