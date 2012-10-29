@@ -85,7 +85,7 @@ this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name ,
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            if (",  taskName , " != null) return ",  taskName , ";\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("            List<",  referencedInterface , "> serverList;\r\n");
+this.WriteObjects("            List<",  referencedInterface , "> serverList = null;\r\n");
 this.WriteObjects("            if (Helper.IsPersistedObject(this))\r\n");
 this.WriteObjects("            {\r\n");
 #line 76 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"

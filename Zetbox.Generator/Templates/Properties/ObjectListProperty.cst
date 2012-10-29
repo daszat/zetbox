@@ -70,7 +70,7 @@
         {
             if (<%= taskName %> != null) return <%= taskName %>;
 
-            List<<%= referencedInterface %>> serverList;
+            List<<%= referencedInterface %>> serverList = null;
             if (Helper.IsPersistedObject(this))
             {
 <% if (eagerLoading) { %>
