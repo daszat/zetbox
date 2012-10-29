@@ -288,14 +288,40 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public virtual List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
-            CheckDisposed();
-            if (obj == null) { throw new ArgumentNullException("obj"); }
+            var t = GetListOfAsync<T>(obj, propertyName);
+            t.Wait();
+            return t.Result;
+        }
 
-            return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
+        /// <summary>
+        /// Returns the List referenced by the given Name.
+        /// </summary>
+        /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
+        /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
+        /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
+        /// <returns>A List of Objects</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public virtual Zetbox.API.Async.ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
+        {
+            CheckDisposed();
+            return new Async.ZbTask<List<T>>(null, () =>
+            {
+                if (obj == null) { throw new ArgumentNullException("obj"); }
+
+                return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
+            });
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public abstract IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry;
+        public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry
+        {
+            var t = FetchRelationAsync<T>(relationId, endRole, parent);
+            t.Wait();
+            return t.Result;
+        }
+
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract Zetbox.API.Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -534,7 +560,23 @@ namespace Zetbox.API.Server
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public abstract IDataObject Find(InterfaceType ifType, int ID);
+        public abstract Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID);
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
+        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        public IDataObject Find(InterfaceType ifType, int ID)
+        {
+            var t = FindAsync(ifType, ID);
+            t.Wait();
+            return t.Result;
+        }
 
         /// <summary>
         /// Find the Object of the given type by ID
@@ -544,7 +586,22 @@ namespace Zetbox.API.Server
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public abstract T Find<T>(int ID) where T : class, IDataObject;
+        public T Find<T>(int ID) where T : class, IDataObject
+        {
+            var t = FindAsync<T>(ID);
+            t.Wait();
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        public abstract Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject;
 
         /// <summary>
         /// Find the Persistence Object of the given type by ID

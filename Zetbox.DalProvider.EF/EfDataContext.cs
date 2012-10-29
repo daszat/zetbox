@@ -236,17 +236,20 @@ namespace Zetbox.DalProvider.Ef
         }
 
         // TODO: Create new override
-        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
+        public override Zetbox.API.Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
             CheckDisposed();
-            if (parent == null)
+            return new API.Async.ZbTask<IList<T>>(null, () =>
             {
-                return this.GetPersistenceObjectQuery<T>().ToList();
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+                if (parent == null)
+                {
+                    return this.GetPersistenceObjectQuery<T>().ToList();
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            });
         }
 
         /// <summary>
@@ -525,19 +528,22 @@ namespace Zetbox.DalProvider.Ef
         /// <param baseDir="ifType">Object Type of the Object to find.</param>
         /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public override IDataObject Find(InterfaceType ifType, int ID)
+        public override Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            try
+            return new API.Async.ZbTask<IDataObject>(null, () =>
             {
-                // See Case 552
-                return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { ifType.Type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
-            }
-            catch (TargetInvocationException tiex)
-            {
-                // unwrap "business" exception
-                throw tiex.InnerException;
-            }
+                try
+                {
+                    // See Case 552
+                    return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { ifType.Type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
+                }
+                catch (TargetInvocationException tiex)
+                {
+                    // unwrap "business" exception
+                    throw tiex.InnerException;
+                }
+            });
         }
 
         /// <summary>
@@ -548,30 +554,33 @@ namespace Zetbox.DalProvider.Ef
         /// <typeparam baseDir="T">Object Type of the Object to find.</typeparam>
         /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public override T Find<T>(int ID)
+        public override Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID)
         {
             CheckDisposed();
-            try
+            return new API.Async.ZbTask<T>(null, () =>
             {
-                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
-                    ?? GetQuery<T>().First(o => o.ID == ID);
-            }
-            catch (InvalidOperationException)
-            {
-                // if the IOEx happened because there is no such object, we 
-                // want to report this with an ArgumentOutOfRangeException, 
-                // else, we just want to pass the exception on.
-                // Since we do not want to rely on the exception string, 
-                // we have to check whether there is _any_ object with that ID
-                if (GetQuery<T>().Count(o => o.ID == ID) == 0)
+                try
                 {
-                    throw new ArgumentOutOfRangeException("ID", ID, "No such object");
+                    return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                        ?? GetQuery<T>().First(o => o.ID == ID);
                 }
-                else
+                catch (InvalidOperationException)
                 {
-                    throw;
+                    // if the IOEx happened because there is no such object, we 
+                    // want to report this with an ArgumentOutOfRangeException, 
+                    // else, we just want to pass the exception on.
+                    // Since we do not want to rely on the exception string, 
+                    // we have to check whether there is _any_ object with that ID
+                    if (GetQuery<T>().Count(o => o.ID == ID) == 0)
+                    {
+                        throw new ArgumentOutOfRangeException("ID", ID, "No such object");
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-            }
+            });
         }
 
         /// <summary>

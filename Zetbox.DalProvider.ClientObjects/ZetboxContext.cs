@@ -232,32 +232,52 @@ namespace Zetbox.DalProvider.Client
         /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
+        public Zetbox.API.Async.ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
-            if (obj.CurrentAccessRights.HasNoRights()) return new List<T>();
-            ZetboxContextQuery<T> query = new ZetboxContextQuery<T>(this, GetInterfaceType(obj), proxy, _perfCounter);
-            return ((ZetboxContextProvider)query.Provider).GetListOfCall(obj.ID, propertyName).Cast<T>().ToList();
+            return new API.Async.ZbTask<List<T>>(null, () =>
+            {
+                if (obj.CurrentAccessRights.HasNoRights()) return new List<T>();
+                ZetboxContextQuery<T> query = new ZetboxContextQuery<T>(this, GetInterfaceType(obj), proxy, _perfCounter);
+                return ((ZetboxContextProvider)query.Provider).GetListOfCall(obj.ID, propertyName).Cast<T>().ToList();
+            });
+        }
+
+        public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
+        {
+            var t = GetListOfAsync<T>(obj, propertyName);
+            t.Wait();
+            return t.Result;
+        }
+
+        public Zetbox.API.Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
+        {
+            return new API.Async.ZbTask<IList<T>>(null, () =>
+            {
+                List<IStreamable> auxObjects;
+                var serverList = proxy.FetchRelation<T>(this, relationId, role, container, out auxObjects);
+
+                foreach (IPersistenceObject obj in auxObjects)
+                {
+                    this.AttachRespectingIsolationLevel(obj);
+                }
+
+                var result = new List<T>();
+                foreach (IPersistenceObject obj in serverList)
+                {
+                    var localobj = this.AttachRespectingIsolationLevel(obj);
+                    result.Add((T)localobj);
+                }
+                PlaybackNotifications();
+                return result;
+            });
         }
 
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
         {
-            List<IStreamable> auxObjects;
-            var serverList = proxy.FetchRelation<T>(this, relationId, role, container, out auxObjects);
-
-            foreach (IPersistenceObject obj in auxObjects)
-            {
-                this.AttachRespectingIsolationLevel(obj);
-            }
-
-            var result = new List<T>();
-            foreach (IPersistenceObject obj in serverList)
-            {
-                var localobj = this.AttachRespectingIsolationLevel(obj);
-                result.Add((T)localobj);
-            }
-            PlaybackNotifications();
-            return result;
+            var t = FetchRelationAsync<T>(relationId, role, container);
+            t.Wait();
+            return t.Result;
         }
 
         /// <summary>
@@ -686,18 +706,36 @@ namespace Zetbox.DalProvider.Client
         /// <param name="ifType">Interface Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public IDataObject Find(InterfaceType ifType, int ID)
+        public Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
 
-            // TODO: should be able to pass "type" unmodified, like this
-            // See Case 552
-            // return GetQuery(type).Single(o => o.ID == ID);
+            return new API.Async.ZbTask<IDataObject>(null, () =>
+            {
+                // TODO: should be able to pass "type" unmodified, like this
+                // See Case 552
+                // return GetQuery(type).Single(o => o.ID == ID);
 
-            return (IDataObject)this.GetType().FindGenericMethod("Find",
-                new Type[] { ifType.Type },
-                new Type[] { typeof(int) })
-                .Invoke(this, new object[] { ID });
+                return (IDataObject)this.GetType().FindGenericMethod("Find",
+                    new Type[] { ifType.Type },
+                    new Type[] { typeof(int) })
+                    .Invoke(this, new object[] { ID });
+            });
+        }
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
+        /// </summary>
+        /// <param name="ifType">Interface Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        public IDataObject Find(InterfaceType ifType, int ID)
+        {
+            var t = FindAsync(ifType, ID);
+            t.Wait();
+            return t.Result;
         }
 
         private T MakeAccessDeniedProxy<T>(int id)
@@ -718,15 +756,34 @@ namespace Zetbox.DalProvider.Client
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public T Find<T>(int ID)
+        public Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID)
             where T : class, IDataObject
         {
             CheckDisposed();
-            IPersistenceObject cacheHit = _objects.Lookup(_iftFactory(typeof(T)), ID);
-            if (cacheHit != null)
-                return (T)cacheHit;
-            else
-                return GetQuery<T>().SingleOrDefault(o => o.ID == ID) ?? MakeAccessDeniedProxy<T>(ID);
+            return new API.Async.ZbTask<T>(null, () =>
+            {
+                IPersistenceObject cacheHit = _objects.Lookup(_iftFactory(typeof(T)), ID);
+                if (cacheHit != null)
+                    return (T)cacheHit;
+                else
+                    return GetQuery<T>().SingleOrDefault(o => o.ID == ID) ?? MakeAccessDeniedProxy<T>(ID);
+            });
+        }
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        public T Find<T>(int ID)
+            where T : class, IDataObject
+        {
+            var t = FindAsync<T>(ID);
+            t.Wait();
+            return t.Result;
         }
 
         /// <summary>

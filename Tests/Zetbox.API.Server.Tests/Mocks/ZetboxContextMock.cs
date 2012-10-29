@@ -98,21 +98,6 @@ namespace Zetbox.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public override IDataObject Find(InterfaceType ifType, int ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override T Find<T>(int ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
-        {
-            throw new NotImplementedException();
-        }
-
         public override T FindPersistenceObject<T>(int ID)
         {
             throw new NotImplementedException();
@@ -193,6 +178,21 @@ namespace Zetbox.API.Server.Mocks
         protected override bool IsTransactionRunning
         {
             get { throw new NotImplementedException(); }
+        }
+
+        public override Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Async.ZbTask<T> FindAsync<T>(int ID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

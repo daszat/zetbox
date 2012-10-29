@@ -47,11 +47,11 @@ namespace Zetbox.API.Async
 
     public class ZbTask
     {
-        protected readonly object _lock = new object();
-        protected readonly List<Action> _asyncContinuationActions = new List<Action>();
-        protected readonly List<Action> _resultActions = new List<Action>();
-        protected readonly SynchronizationContext _syncContext;
-        protected Action _task;
+        protected readonly object lockObj = new object();
+        protected readonly List<Action> asyncContinuationActions = new List<Action>();
+        protected readonly List<Action> resultActions = new List<Action>();
+        protected readonly SynchronizationContext syncContext;
+        protected Action task;
 
         public ZbTaskState State
         {
@@ -66,7 +66,7 @@ namespace Zetbox.API.Async
 
         protected ZbTask(SynchronizationContext syncContext)
         {
-            _syncContext = syncContext;
+            this.syncContext = syncContext;
         }
 
         public ZbTask(Action task)
@@ -93,47 +93,44 @@ namespace Zetbox.API.Async
 
         protected void ExecuteTask(Action task)
         {
-            if (task != null)
+            lock (lockObj) State = ZbTaskState.Running;
+            Void work = () =>
             {
-                lock (_lock) State = ZbTaskState.Running;
-                Void work = () =>
-                {
-                    task();
-                    CallAsyncContinuations();
-                };
-                if (_syncContext != null)
-                {
-                    ThreadPool.QueueUserWorkItem(tpState =>
-                    {
-                        work();
-                        lock (_lock)
-                        {
-                            State = ZbTaskState.ResultEventsPosted;
-                            if (IsWaiting > 0)
-                            {
-                                Monitor.PulseAll(_lock);
-                            }
-                            else
-                            {
-                                _syncContext.Post(scState => CallResultActions(), null);
-                            }
-                        }
-                    });
-                }
-                else
+                if (task != null) task();
+                CallAsyncContinuations();
+            };
+            if (syncContext != null)
+            {
+                ThreadPool.QueueUserWorkItem(tpState =>
                 {
                     work();
-                    lock (_lock)
+                    lock (lockObj)
                     {
                         State = ZbTaskState.ResultEventsPosted;
                         if (IsWaiting > 0)
                         {
-                            Monitor.PulseAll(_lock);
+                            Monitor.PulseAll(lockObj);
                         }
                         else
                         {
-                            CallResultActions();
+                            syncContext.Post(scState => CallResultActions(), null);
                         }
+                    }
+                });
+            }
+            else
+            {
+                work();
+                lock (lockObj)
+                {
+                    State = ZbTaskState.ResultEventsPosted;
+                    if (IsWaiting > 0)
+                    {
+                        Monitor.PulseAll(lockObj);
+                    }
+                    else
+                    {
+                        CallResultActions();
                     }
                 }
             }
@@ -141,12 +138,12 @@ namespace Zetbox.API.Async
 
         public ZbTask ContinueWith(Action<ZbTask> continuationAction)
         {
-            lock (_lock)
+            lock (lockObj)
             {
                 switch (State)
                 {
                     case ZbTaskState.Running:
-                        _asyncContinuationActions.Add(() => continuationAction(this));
+                        asyncContinuationActions.Add(() => continuationAction(this));
                         break;
                     case ZbTaskState.AsyncContinuationsRunning:
                     case ZbTaskState.ResultEventsPosted:
@@ -161,14 +158,14 @@ namespace Zetbox.API.Async
 
         public ZbTask OnResult(Action<ZbTask> continuationAction)
         {
-            lock (_lock)
+            lock (lockObj)
             {
                 switch (State)
                 {
                     case ZbTaskState.Running:
                     case ZbTaskState.AsyncContinuationsRunning:
                     case ZbTaskState.ResultEventsPosted:
-                        _resultActions.Add(() => continuationAction(this));
+                        resultActions.Add(() => continuationAction(this));
                         break;
                     case ZbTaskState.ResultEventRunning:
                     case ZbTaskState.Finished:
@@ -186,8 +183,8 @@ namespace Zetbox.API.Async
 
         protected void CallAsyncContinuations()
         {
-            lock (_lock) State = ZbTaskState.AsyncContinuationsRunning;
-            foreach (var action in _asyncContinuationActions)
+            lock (lockObj) State = ZbTaskState.AsyncContinuationsRunning;
+            foreach (var action in asyncContinuationActions)
             {
                 action();
             }
@@ -195,7 +192,7 @@ namespace Zetbox.API.Async
 
         protected void CallResultActions()
         {
-            lock (_lock)
+            lock (lockObj)
             {
             RECHECK:
                 switch (State)
@@ -203,7 +200,7 @@ namespace Zetbox.API.Async
                     case ZbTaskState.Running:
                     case ZbTaskState.AsyncContinuationsRunning:
                         IsWaiting += 1;
-                        Monitor.Wait(_lock);
+                        Monitor.Wait(lockObj);
                         IsWaiting -= 1;
                         // something happened: we have to decide whether we are the
                         // "lucky" thread to continue execution or whether someone else
@@ -218,12 +215,12 @@ namespace Zetbox.API.Async
                 }
             }
 
-            foreach (var action in _resultActions)
+            foreach (var action in resultActions)
             {
                 action();
             }
 
-            lock (_lock) State = ZbTaskState.Finished;
+            lock (lockObj) State = ZbTaskState.Finished;
         }
     }
 

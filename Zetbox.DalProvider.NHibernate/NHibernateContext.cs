@@ -162,25 +162,28 @@ namespace Zetbox.DalProvider.NHibernate
             return PrepareQueryable(ifType).Cast<Tinterface>();
         }
 
-        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
+        public override Zetbox.API.Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
         {
-            CheckDisposed();
-            if (parent == null)
+            return new API.Async.ZbTask<IList<T>>(null, () =>
             {
-                return this.GetPersistenceObjectQuery<T>().ToList();
-            }
-            else
-            {
-                switch (endRole)
+                CheckDisposed();
+                if (parent == null)
                 {
-                    case RelationEndRole.A:
-                        return GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
-                    case RelationEndRole.B:
-                        return GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
-                    default:
-                        throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                    return this.GetPersistenceObjectQuery<T>().ToList();
                 }
-            }
+                else
+                {
+                    switch (endRole)
+                    {
+                        case RelationEndRole.A:
+                            return GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
+                        case RelationEndRole.B:
+                            return GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
+                        default:
+                            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                    }
+                }
+            });
         }
 
         public override IPersistenceObject ContainsObject(InterfaceType type, int ID)
@@ -434,39 +437,45 @@ namespace Zetbox.DalProvider.NHibernate
             nhObj.Delete();
         }
 
-        public override IDataObject Find(InterfaceType ifType, int ID)
+        public override Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            try
+            return new API.Async.ZbTask<IDataObject>(null, () =>
             {
-                return (IDataObject)this.GetType()
-                    .FindGenericMethod("Find",
-                        new Type[] { ifType.Type },
-                        new Type[] { typeof(int) })
-                    .Invoke(this, new object[] { ID });
-            }
-            catch (System.Reflection.TargetInvocationException ex)
-            {
-                if (ex.InnerException is ArgumentOutOfRangeException)
+                try
                 {
-                    // wrap in new AOORE, to preserve all stack traces
-                    throw new ArgumentOutOfRangeException("ID", ex);
+                    return (IDataObject)this.GetType()
+                        .FindGenericMethod("Find",
+                            new Type[] { ifType.Type },
+                            new Type[] { typeof(int) })
+                        .Invoke(this, new object[] { ID });
                 }
-                else
+                catch (System.Reflection.TargetInvocationException ex)
                 {
-                    // huhu, something bad happened
-                    throw;
+                    if (ex.InnerException is ArgumentOutOfRangeException)
+                    {
+                        // wrap in new AOORE, to preserve all stack traces
+                        throw new ArgumentOutOfRangeException("ID", ex);
+                    }
+                    else
+                    {
+                        // huhu, something bad happened
+                        throw;
+                    }
                 }
-            }
+            });
         }
 
-        public override T Find<T>(int ID)
+        public override Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID)
         {
             CheckDisposed();
 
-            var result = FindPersistenceObject<T>(ID);
-            if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
-            return result;
+            return new API.Async.ZbTask<T>(null, () =>
+            {
+                var result = FindPersistenceObject<T>(ID);
+                if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
+                return result;
+            });
         }
 
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)

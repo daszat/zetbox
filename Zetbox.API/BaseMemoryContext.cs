@@ -25,6 +25,7 @@ namespace Zetbox.API
     using System.Text;
 
     using Zetbox.API.Utils;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// A temporary data context without permanent backing store.
@@ -148,7 +149,6 @@ namespace Zetbox.API
             //CheckInterfaceAssembly("T", typeof(T));
             return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>();
         }
-
         /// <inheritdoc />
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
@@ -203,19 +203,36 @@ namespace Zetbox.API
             throw new NotImplementedException();
         }
 
+        /// <summary>Not implemented.</summary>
+        Zetbox.API.Async.ZbTask<List<T>> IReadOnlyZetboxContext.GetListOfAsync<T>(IDataObject obj, string propertyName)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>Only implemented for the parent==null case.</summary>
         IList<T> IReadOnlyZetboxContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {
-            if (parent == null)
+            var t = ((IReadOnlyZetboxContext)this).FetchRelationAsync<T>(relId, role, parent);
+            t.Wait();
+            return t.Result;
+        }
+
+        /// <summary>Only implemented for the parent==null case.</summary>
+        Zetbox.API.Async.ZbTask<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole role, IDataObject parent)
+        {
+            return new Async.ZbTask<IList<T>>(null, () =>
             {
-                CheckDisposed();
-                //CheckInterfaceAssembly("T", typeof(T));
-                return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>().ToList();
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+                if (parent == null)
+                {
+                    CheckDisposed();
+                    //CheckInterfaceAssembly("T", typeof(T));
+                    return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>().ToList();
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            });
         }
 
         /// <inheritdoc />
@@ -367,10 +384,20 @@ namespace Zetbox.API
         /// <inheritdoc />
         public IDataObject Find(InterfaceType ifType, int ID)
         {
-            CheckDisposed();
-            //CheckInterfaceAssembly("ifType", ifType.Type);
+            var t = FindAsync(ifType, ID);
+            t.Wait();
+            return t.Result;
+        }
 
-            return (IDataObject)objects.Lookup(ifType, ID);
+        /// <inheritdoc />
+        public Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        {
+            CheckDisposed();
+
+            return new Async.ZbTask<IDataObject>(null, () =>
+            {
+                return (IDataObject)objects.Lookup(ifType, ID);
+            });
         }
 
         /// <inheritdoc />
@@ -381,6 +408,11 @@ namespace Zetbox.API
             //CheckInterfaceAssembly("T", typeof(T));
 
             return (T)Find(_iftFactory(typeof(T)), ID);
+        }
+        public Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID)
+            where T : class, IDataObject
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
