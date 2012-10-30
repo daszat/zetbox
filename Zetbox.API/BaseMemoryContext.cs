@@ -404,15 +404,20 @@ namespace Zetbox.API
         public T Find<T>(int ID)
             where T : class, IDataObject
         {
-            CheckDisposed();
-            //CheckInterfaceAssembly("T", typeof(T));
-
-            return (T)Find(_iftFactory(typeof(T)), ID);
+            var t = FindAsync<T>(ID);
+            t.Wait();
+            return t.Result;
         }
+
         public Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID)
             where T : class, IDataObject
         {
-            throw new NotImplementedException();
+            CheckDisposed();
+
+            return new Async.ZbTask<T>(null, () =>
+            {
+                return (T)Find(_iftFactory(typeof(T)), ID);
+            });
         }
 
         /// <inheritdoc />
