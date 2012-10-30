@@ -69,7 +69,7 @@ namespace Zetbox.App.Test
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -248,7 +248,7 @@ namespace Zetbox.App.Test
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -427,7 +427,7 @@ namespace Zetbox.App.Test
             if (_fk_Identity.HasValue)
                 _triggerFetchIdentityTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value);
             else
-                _triggerFetchIdentityTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchIdentityTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchIdentityTask.OnResult(t =>
             {
@@ -591,7 +591,7 @@ namespace Zetbox.App.Test
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.SecurityTestParent>(null, () => null);
+                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.SecurityTestParent>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchParentTask.OnResult(t =>
             {

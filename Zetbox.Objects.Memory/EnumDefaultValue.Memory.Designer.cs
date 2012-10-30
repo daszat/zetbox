@@ -70,7 +70,7 @@ namespace Zetbox.App.Base
             if (_fk_EnumValue.HasValue)
                 _triggerFetchEnumValueTask = Context.FindAsync<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value);
             else
-                _triggerFetchEnumValueTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(null, () => null);
+                _triggerFetchEnumValueTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchEnumValueTask.OnResult(t =>
             {

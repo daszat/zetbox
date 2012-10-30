@@ -69,7 +69,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -306,7 +306,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -615,7 +615,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_MigrationProject.HasValue)
                 _triggerFetchMigrationProjectTask = Context.FindAsync<Zetbox.App.SchemaMigration.MigrationProject>(_fk_MigrationProject.Value);
             else
-                _triggerFetchMigrationProjectTask = new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.MigrationProject>(null, () => null);
+                _triggerFetchMigrationProjectTask = new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.MigrationProject>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchMigrationProjectTask.OnResult(t =>
             {
@@ -857,7 +857,7 @@ namespace Zetbox.App.SchemaMigration
             }
             else
             {
-                _triggerFetchSourceTablesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchSourceTablesTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.SchemaMigration.SourceTable>();
                 });

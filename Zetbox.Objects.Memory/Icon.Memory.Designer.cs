@@ -70,7 +70,7 @@ namespace Zetbox.App.GUI
             if (_fk_Blob.HasValue)
                 _triggerFetchBlobTask = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
             else
-                _triggerFetchBlobTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(null, () => null);
+                _triggerFetchBlobTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchBlobTask.OnResult(t =>
             {
@@ -306,7 +306,7 @@ namespace Zetbox.App.GUI
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(null, () => null);
+                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {

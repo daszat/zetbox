@@ -69,7 +69,7 @@ namespace Zetbox.App.Base
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -249,7 +249,7 @@ namespace Zetbox.App.Base
             if (_fk_ConstrainedProperty.HasValue)
                 _triggerFetchConstrainedPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_ConstrainedProperty.Value);
             else
-                _triggerFetchConstrainedPropertyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(null, () => null);
+                _triggerFetchConstrainedPropertyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchConstrainedPropertyTask.OnResult(t =>
             {
@@ -371,7 +371,7 @@ namespace Zetbox.App.Base
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {

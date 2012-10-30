@@ -59,7 +59,7 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchInputsTask != null) return _triggerFetchInputsTask;
 			if (!Inputs_was_eagerLoaded) _triggerFetchInputsTask = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
-            else _triggerFetchInputsTask = new Zetbox.API.Async.ZbTask(null, () => { });
+            else _triggerFetchInputsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () => { });
 			_triggerFetchInputsTask.OnResult(r => 
             {
                 _Inputs 
@@ -109,7 +109,7 @@ namespace Zetbox.App.Base
             if (_fk_ReferencedClass.HasValue)
                 _triggerFetchReferencedClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
             else
-                _triggerFetchReferencedClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(null, () => null);
+                _triggerFetchReferencedClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchReferencedClassTask.OnResult(t =>
             {

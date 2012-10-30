@@ -131,7 +131,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchNSideTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchNSideTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Test.One_to_N_relations_N>();
                 });

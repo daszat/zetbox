@@ -69,7 +69,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -248,7 +248,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -486,7 +486,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_DestinationModule.HasValue)
                 _triggerFetchDestinationModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_DestinationModule.Value);
             else
-                _triggerFetchDestinationModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(null, () => null);
+                _triggerFetchDestinationModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDestinationModuleTask.OnResult(t =>
             {
@@ -667,7 +667,7 @@ namespace Zetbox.App.SchemaMigration
             }
             else
             {
-                _triggerFetchStagingDatabasesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchStagingDatabasesTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.SchemaMigration.StagingDatabase>();
                 });

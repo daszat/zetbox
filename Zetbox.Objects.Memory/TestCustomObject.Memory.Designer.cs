@@ -137,7 +137,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchMubBlah_List_NavTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchMubBlah_List_NavTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Test.Muhblah>();
                 });
@@ -193,7 +193,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             if (_fk_MubBlah_Nav.HasValue)
                 _triggerFetchMubBlah_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
             else
-                _triggerFetchMubBlah_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(null, () => null);
+                _triggerFetchMubBlah_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchMubBlah_NavTask.OnResult(t =>
             {
@@ -351,7 +351,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             if (_fk_MuhBlah_One_Nav.HasValue)
                 _triggerFetchMuhBlah_One_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
             else
-                _triggerFetchMuhBlah_One_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(null, () => null);
+                _triggerFetchMuhBlah_One_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchMuhBlah_One_NavTask.OnResult(t =>
             {

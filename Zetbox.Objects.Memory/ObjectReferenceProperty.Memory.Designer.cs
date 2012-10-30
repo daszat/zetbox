@@ -235,7 +235,7 @@ namespace Zetbox.App.Base
             if (_fk_RelationEnd.HasValue)
                 _triggerFetchRelationEndTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
             else
-                _triggerFetchRelationEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(null, () => null);
+                _triggerFetchRelationEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchRelationEndTask.OnResult(t =>
             {

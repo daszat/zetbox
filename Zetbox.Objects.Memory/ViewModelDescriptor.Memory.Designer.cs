@@ -70,7 +70,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultDisplayKind.HasValue)
                 _triggerFetchDefaultDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value);
             else
-                _triggerFetchDefaultDisplayKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(null, () => null);
+                _triggerFetchDefaultDisplayKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDefaultDisplayKindTask.OnResult(t =>
             {
@@ -177,7 +177,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultEditorKind.HasValue)
                 _triggerFetchDefaultEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value);
             else
-                _triggerFetchDefaultEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(null, () => null);
+                _triggerFetchDefaultEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDefaultEditorKindTask.OnResult(t =>
             {
@@ -284,7 +284,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultGridCellDisplayKind.HasValue)
                 _triggerFetchDefaultGridCellDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value);
             else
-                _triggerFetchDefaultGridCellDisplayKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(null, () => null);
+                _triggerFetchDefaultGridCellDisplayKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDefaultGridCellDisplayKindTask.OnResult(t =>
             {
@@ -391,7 +391,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultGridCellEditorKind.HasValue)
                 _triggerFetchDefaultGridCellEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value);
             else
-                _triggerFetchDefaultGridCellEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(null, () => null);
+                _triggerFetchDefaultGridCellEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDefaultGridCellEditorKindTask.OnResult(t =>
             {
@@ -498,7 +498,7 @@ namespace Zetbox.App.GUI
             if (_fk_DefaultGridCellPreEditorKind.HasValue)
                 _triggerFetchDefaultGridCellPreEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value);
             else
-                _triggerFetchDefaultGridCellPreEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(null, () => null);
+                _triggerFetchDefaultGridCellPreEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDefaultGridCellPreEditorKindTask.OnResult(t =>
             {
@@ -734,7 +734,7 @@ namespace Zetbox.App.GUI
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(null, () => null);
+                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -877,7 +877,7 @@ namespace Zetbox.App.GUI
             if (_fk_ViewModelRef.HasValue)
                 _triggerFetchViewModelRefTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value);
             else
-                _triggerFetchViewModelRefTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(null, () => null);
+                _triggerFetchViewModelRefTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchViewModelRefTask.OnResult(t =>
             {

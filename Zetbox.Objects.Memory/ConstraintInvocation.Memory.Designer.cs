@@ -141,7 +141,7 @@ namespace Zetbox.App.Base
             if (_fk_Implementor.HasValue)
                 _triggerFetchImplementorTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_Implementor.Value);
             else
-                _triggerFetchImplementorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(null, () => null);
+                _triggerFetchImplementorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchImplementorTask.OnResult(t =>
             {

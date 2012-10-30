@@ -199,7 +199,7 @@ namespace Zetbox.App.GUI
             if (_fk_Method.HasValue)
                 _triggerFetchMethodTask = Context.FindAsync<Zetbox.App.Base.Method>(_fk_Method.Value);
             else
-                _triggerFetchMethodTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method>(null, () => null);
+                _triggerFetchMethodTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchMethodTask.OnResult(t =>
             {
@@ -305,7 +305,7 @@ namespace Zetbox.App.GUI
             if (_fk_Property.HasValue)
                 _triggerFetchPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
             else
-                _triggerFetchPropertyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(null, () => null);
+                _triggerFetchPropertyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchPropertyTask.OnResult(t =>
             {

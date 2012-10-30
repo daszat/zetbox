@@ -69,7 +69,7 @@ namespace Zetbox.App.Base
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -246,7 +246,7 @@ namespace Zetbox.App.Base
             {
                 if (ConstraintsIds != null)
                 {
-                    _triggerFetchConstraintsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                    _triggerFetchConstraintsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                     {
                         serverList = ConstraintsIds.Select(id => Context.Find<Zetbox.App.Base.InstanceConstraint>(id)).ToList();
                         ConstraintsIds = null; // allow id list to be garbage collected
@@ -263,7 +263,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchConstraintsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchConstraintsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Base.InstanceConstraint>();
                 });
@@ -321,7 +321,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -501,7 +501,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             if (_fk_DefaultIcon.HasValue)
                 _triggerFetchDefaultIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_DefaultIcon.Value);
             else
-                _triggerFetchDefaultIconTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(null, () => null);
+                _triggerFetchDefaultIconTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDefaultIconTask.OnResult(t =>
             {
@@ -770,7 +770,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             {
                 if (MethodsIds != null)
                 {
-                    _triggerFetchMethodsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                    _triggerFetchMethodsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                     {
                         serverList = MethodsIds.Select(id => Context.Find<Zetbox.App.Base.Method>(id)).ToList();
                         MethodsIds = null; // allow id list to be garbage collected
@@ -787,7 +787,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             }
             else
             {
-                _triggerFetchMethodsTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchMethodsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Base.Method>();
                 });
@@ -846,7 +846,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(null, () => null);
+                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {
@@ -1008,7 +1008,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             {
                 if (PropertiesIds != null)
                 {
-                    _triggerFetchPropertiesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                    _triggerFetchPropertiesTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                     {
                         serverList = PropertiesIds.Select(id => Context.Find<Zetbox.App.Base.Property>(id)).ToList();
                         PropertiesIds = null; // allow id list to be garbage collected
@@ -1025,7 +1025,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             }
             else
             {
-                _triggerFetchPropertiesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchPropertiesTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Base.Property>();
                 });
@@ -1084,7 +1084,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             if (_fk_RequestedKind.HasValue)
                 _triggerFetchRequestedKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
             else
-                _triggerFetchRequestedKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(null, () => null);
+                _triggerFetchRequestedKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchRequestedKindTask.OnResult(t =>
             {

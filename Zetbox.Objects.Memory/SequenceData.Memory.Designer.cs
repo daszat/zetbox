@@ -127,7 +127,7 @@ namespace Zetbox.App.Base
             if (_fk_Sequence.HasValue)
                 _triggerFetchSequenceTask = Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
             else
-                _triggerFetchSequenceTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence>(null, () => null);
+                _triggerFetchSequenceTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchSequenceTask.OnResult(t =>
             {

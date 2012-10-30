@@ -70,7 +70,7 @@ namespace Zetbox.App.Base
             if (_fk_GetErrorTextInvocation.HasValue)
                 _triggerFetchGetErrorTextInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
             else
-                _triggerFetchGetErrorTextInvocationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation>(null, () => null);
+                _triggerFetchGetErrorTextInvocationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchGetErrorTextInvocationTask.OnResult(t =>
             {
@@ -177,7 +177,7 @@ namespace Zetbox.App.Base
             if (_fk_IsValidInvocation.HasValue)
                 _triggerFetchIsValidInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
             else
-                _triggerFetchIsValidInvocationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation>(null, () => null);
+                _triggerFetchIsValidInvocationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchIsValidInvocationTask.OnResult(t =>
             {

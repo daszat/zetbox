@@ -73,7 +73,7 @@ namespace Zetbox.App.Projekte
             }
             else
             {
-                _triggerFetchAuftraegeTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchAuftraegeTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Projekte.Auftrag>();
                 });
@@ -234,7 +234,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -413,7 +413,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -939,7 +939,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
             else
             {
-                _triggerFetchTasksTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchTasksTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Projekte.Task>();
                 });

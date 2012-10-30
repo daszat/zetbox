@@ -127,7 +127,7 @@ namespace Zetbox.App.Test
             if (_fk_ObjectProp.HasValue)
                 _triggerFetchObjectPropTask = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
             else
-                _triggerFetchObjectPropTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(null, () => null);
+                _triggerFetchObjectPropTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchObjectPropTask.OnResult(t =>
             {

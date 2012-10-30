@@ -127,7 +127,7 @@ namespace Zetbox.App.Test
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent>(null, () => null);
+                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchParentTask.OnResult(t =>
             {

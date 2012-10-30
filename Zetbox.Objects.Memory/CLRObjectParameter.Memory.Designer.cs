@@ -70,7 +70,7 @@ namespace Zetbox.App.Base
             if (_fk_Type.HasValue)
                 _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_Type.Value);
             else
-                _triggerFetchTypeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(null, () => null);
+                _triggerFetchTypeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchTypeTask.OnResult(t =>
             {

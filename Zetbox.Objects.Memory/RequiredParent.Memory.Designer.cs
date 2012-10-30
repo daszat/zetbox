@@ -73,7 +73,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchChildrenTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchChildrenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Test.RequiredParentChild>();
                 });

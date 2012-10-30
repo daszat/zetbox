@@ -70,7 +70,7 @@ namespace Zetbox.App.Base
             if (_fk_ObjectClass.HasValue)
                 _triggerFetchObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
             else
-                _triggerFetchObjectClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(null, () => null);
+                _triggerFetchObjectClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchObjectClassTask.OnResult(t =>
             {

@@ -67,7 +67,7 @@ namespace Zetbox.App.Test
             {
                 if (AntwortenIds != null)
                 {
-                    _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(null, () =>
+                    _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                     {
                         serverList = AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList();
                         AntwortenIds = null; // allow id list to be garbage collected
@@ -84,7 +84,7 @@ namespace Zetbox.App.Test
             }
             else
             {
-                _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Test.Antwort>();
                 });

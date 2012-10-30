@@ -592,7 +592,7 @@ namespace Zetbox.App.GUI
             if (_fk_RequestedEditorKind.HasValue)
                 _triggerFetchRequestedEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value);
             else
-                _triggerFetchRequestedEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(null, () => null);
+                _triggerFetchRequestedEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchRequestedEditorKindTask.OnResult(t =>
             {
@@ -699,7 +699,7 @@ namespace Zetbox.App.GUI
             if (_fk_RequestedWorkspaceKind.HasValue)
                 _triggerFetchRequestedWorkspaceKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value);
             else
-                _triggerFetchRequestedWorkspaceKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(null, () => null);
+                _triggerFetchRequestedWorkspaceKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchRequestedWorkspaceKindTask.OnResult(t =>
             {
@@ -1096,7 +1096,7 @@ namespace Zetbox.App.GUI
             if (_fk_Type.HasValue)
                 _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
             else
-                _triggerFetchTypeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(null, () => null);
+                _triggerFetchTypeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchTypeTask.OnResult(t =>
             {

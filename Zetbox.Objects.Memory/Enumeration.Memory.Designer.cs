@@ -131,7 +131,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                _triggerFetchEnumerationEntriesTask = new Zetbox.API.Async.ZbTask(null, () =>
+                _triggerFetchEnumerationEntriesTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<Zetbox.App.Base.EnumerationEntry>();
                 });

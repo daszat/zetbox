@@ -70,7 +70,7 @@ namespace Zetbox.App.Base
             if (_fk_CompoundObjectDefinition.HasValue)
                 _triggerFetchCompoundObjectDefinitionTask = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
             else
-                _triggerFetchCompoundObjectDefinitionTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(null, () => null);
+                _triggerFetchCompoundObjectDefinitionTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCompoundObjectDefinitionTask.OnResult(t =>
             {

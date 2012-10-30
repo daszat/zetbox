@@ -70,7 +70,7 @@ namespace Zetbox.App.Base
             if (_fk_Group.HasValue)
                 _triggerFetchGroupTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value);
             else
-                _triggerFetchGroupTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(null, () => null);
+                _triggerFetchGroupTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchGroupTask.OnResult(t =>
             {

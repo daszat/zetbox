@@ -69,7 +69,7 @@ namespace Zetbox.App.Test
             if (_fk_OneEnd.HasValue)
                 _triggerFetchOneEndTask = Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
             else
-                _triggerFetchOneEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd>(null, () => null);
+                _triggerFetchOneEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchOneEndTask.OnResult(t =>
             {

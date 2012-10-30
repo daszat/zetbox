@@ -70,7 +70,7 @@ namespace Zetbox.App.Base
             if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
                 _triggerFetchDefaultPropertyViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
             else
-                _triggerFetchDefaultPropertyViewModelDescriptorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(null, () => null);
+                _triggerFetchDefaultPropertyViewModelDescriptorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDefaultPropertyViewModelDescriptorTask.OnResult(t =>
             {

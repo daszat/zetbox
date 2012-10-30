@@ -127,7 +127,7 @@ namespace Zetbox.App.Test
             if (_fk_OneSide.HasValue)
                 _triggerFetchOneSideTask = Context.FindAsync<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
             else
-                _triggerFetchOneSideTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One>(null, () => null);
+                _triggerFetchOneSideTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchOneSideTask.OnResult(t =>
             {

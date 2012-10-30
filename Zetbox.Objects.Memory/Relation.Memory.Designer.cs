@@ -70,7 +70,7 @@ namespace Zetbox.App.Base
             if (_fk_A.HasValue)
                 _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_A.Value);
             else
-                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(null, () => null);
+                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchATask.OnResult(t =>
             {
@@ -193,7 +193,7 @@ namespace Zetbox.App.Base
             if (_fk_B.HasValue)
                 _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_B.Value);
             else
-                _triggerFetchBTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(null, () => null);
+                _triggerFetchBTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchBTask.OnResult(t =>
             {
@@ -315,7 +315,7 @@ namespace Zetbox.App.Base
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -565,7 +565,7 @@ namespace Zetbox.App.Base
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -874,7 +874,7 @@ namespace Zetbox.App.Base
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
-                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(null, () => null);
+                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchModuleTask.OnResult(t =>
             {

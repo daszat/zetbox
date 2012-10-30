@@ -69,7 +69,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -248,7 +248,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -428,7 +428,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_DestinationValue.HasValue)
                 _triggerFetchDestinationValueTask = Context.FindAsync<Zetbox.App.Base.EnumerationEntry>(_fk_DestinationValue.Value);
             else
-                _triggerFetchDestinationValueTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(null, () => null);
+                _triggerFetchDestinationValueTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDestinationValueTask.OnResult(t =>
             {
@@ -606,7 +606,7 @@ namespace Zetbox.App.SchemaMigration
             if (_fk_SourceColumn.HasValue)
                 _triggerFetchSourceColumnTask = Context.FindAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_SourceColumn.Value);
             else
-                _triggerFetchSourceColumnTask = new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(null, () => null);
+                _triggerFetchSourceColumnTask = new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchSourceColumnTask.OnResult(t =>
             {

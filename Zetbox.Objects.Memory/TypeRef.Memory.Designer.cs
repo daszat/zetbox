@@ -70,7 +70,7 @@ namespace Zetbox.App.Base
             if (_fk_Assembly.HasValue)
                 _triggerFetchAssemblyTask = Context.FindAsync<Zetbox.App.Base.Assembly>(_fk_Assembly.Value);
             else
-                _triggerFetchAssemblyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(null, () => null);
+                _triggerFetchAssemblyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchAssemblyTask.OnResult(t =>
             {
@@ -176,7 +176,7 @@ namespace Zetbox.App.Base
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchChangedByTask.OnResult(t =>
             {
@@ -355,7 +355,7 @@ namespace Zetbox.App.Base
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCreatedByTask.OnResult(t =>
             {
@@ -711,7 +711,7 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchGenericArgumentsTask != null) return _triggerFetchGenericArgumentsTask;
 			if (!GenericArguments_was_eagerLoaded) _triggerFetchGenericArgumentsTask = Context.FetchRelationAsync<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71"), RelationEndRole.A, this);
-            else _triggerFetchGenericArgumentsTask = new Zetbox.API.Async.ZbTask(null, () => { });
+            else _triggerFetchGenericArgumentsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () => { });
 			_triggerFetchGenericArgumentsTask.OnResult(r => 
             {
                 _GenericArguments 
@@ -761,7 +761,7 @@ namespace Zetbox.App.Base
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_Parent.Value);
             else
-                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(null, () => null);
+                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchParentTask.OnResult(t =>
             {

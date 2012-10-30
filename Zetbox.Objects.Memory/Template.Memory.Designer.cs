@@ -69,7 +69,7 @@ namespace Zetbox.App.GUI
             if (_fk_DisplayedTypeAssembly.HasValue)
                 _triggerFetchDisplayedTypeAssemblyTask = Context.FindAsync<Zetbox.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
             else
-                _triggerFetchDisplayedTypeAssemblyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(null, () => null);
+                _triggerFetchDisplayedTypeAssemblyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchDisplayedTypeAssemblyTask.OnResult(t =>
             {
@@ -327,7 +327,7 @@ namespace Zetbox.App.GUI
             if (_fk_VisualTree.HasValue)
                 _triggerFetchVisualTreeTask = Context.FindAsync<Zetbox.App.GUI.Visual>(_fk_VisualTree.Value);
             else
-                _triggerFetchVisualTreeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(null, () => null);
+                _triggerFetchVisualTreeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchVisualTreeTask.OnResult(t =>
             {
