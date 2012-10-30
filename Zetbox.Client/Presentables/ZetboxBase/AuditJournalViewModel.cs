@@ -42,7 +42,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             ICompoundCollectionValueModel mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
-            var notifier = mdl.UnderlyingCollection as INotifyCollectionChanged;
+            var notifier = mdl.Value as INotifyCollectionChanged;
             if (notifier != null)
             {
                 notifier.CollectionChanged += (sender, e) =>
@@ -97,11 +97,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_journalEntries == null)
                 {
-                    var notifier = this.ValueModel.UnderlyingCollection as INotifyCollectionChanged;
+                    var notifier = this.ValueModel.Value as INotifyCollectionChanged;
                     if (notifier != null)
                         notifier.CollectionChanged += (sender, e) => _journalEntries = null;
 
-                    _journalEntries = ((IEnumerable<AuditEntry>)this.ValueModel.UnderlyingCollection) // cast to correct interface
+                    _journalEntries = this.ValueModel.Value
                         .OfType<AuditEntry>()
                         .GroupBy(e =>
                         {

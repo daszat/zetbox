@@ -27,6 +27,7 @@ namespace Zetbox.Client.Models
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables;
+    using Zetbox.API.Async;
 
     public interface IValueModel : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -118,12 +119,7 @@ namespace Zetbox.Client.Models
         CompoundObject CompoundObjectDefinition { get; }
     }
 
-    public interface IListValueModel<TValue> : IValueModel<IList<TValue>>, INotifyCollectionChanged
-    {
-        IEnumerable UnderlyingCollection { get; }
-    }
-
-    public interface ICompoundCollectionValueModel : IListValueModel<ICompoundObject>
+    public interface ICompoundCollectionValueModel : IValueModel<IList<ICompoundObject>>, INotifyCollectionChanged
     {
         CompoundObject CompoundObjectDefinition { get; }
     }
@@ -133,7 +129,6 @@ namespace Zetbox.Client.Models
     {
         ObjectClass ReferencedClass { get; }
         RelationEnd RelEnd { get; }
-        IEnumerable UnderlyingCollection { get; }
         bool? IsInlineEditable { get; }
     }
 }

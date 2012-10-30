@@ -761,16 +761,6 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected IEnumerable underlyingCollectionCache = null;
-        public IEnumerable UnderlyingCollection
-        {
-            get
-            {
-                UpdateValueCache();
-                return underlyingCollectionCache;
-            }
-        }
-
         protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             NotifyCollectionChangedEventHandler temp = _CollectionChanged;
@@ -805,9 +795,6 @@ namespace Zetbox.Client.Models
             {
                 var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
                 lst.CollectionChanged += ValueCollectionChanged;
-
-                underlyingCollectionCache = (IEnumerable)lst;
-
                 valueCache = MagicCollectionFactory.WrapAsList<ICompoundObject>(lst);
             }
         }
@@ -851,19 +838,6 @@ namespace Zetbox.Client.Models
             set
             {
                 throw new NotSupportedException();
-            }
-        }
-
-        protected IEnumerable underlyingCollectionCache = null;
-        public IEnumerable UnderlyingCollection
-        {
-            get
-            {
-                if (!valueCacheInititalized)
-                {
-                    UpdateValueCache();
-                }
-                return underlyingCollectionCache;
             }
         }
 
@@ -945,9 +919,6 @@ namespace Zetbox.Client.Models
             {
                 var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
                 lst.CollectionChanged += ValueCollectionChanged;
-
-                underlyingCollectionCache = (IEnumerable)lst;
-
                 valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
             }
             valueCacheInititalized = true;
@@ -968,9 +939,6 @@ namespace Zetbox.Client.Models
             {
                 var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
                 lst.CollectionChanged += ValueCollectionChanged;
-
-                underlyingCollectionCache = (IEnumerable)lst;
-
                 valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
             }
             valueCacheInititalized = true;
