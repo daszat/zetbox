@@ -520,17 +520,37 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region GotFromDerivedClasses
-        private SortedWrapper _wrapper = null;
 
-        private ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
+        protected void EnsureValueCache()
+        {
+            GetValueFromModel().Wait();
+        }
 
+        ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
+        SortedWrapper _wrapper;
+        private ZbTask<IReadOnlyObservableList<DataObjectViewModel>> _fetchValueTask;
         protected override ZbTask<IReadOnlyObservableList<DataObjectViewModel>> GetValueFromModel()
         {
-            return new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ZbTask.Synchron, () =>
+            if (_fetchValueTask == null)
             {
-                EnsureValueCache();
-                return _valueCache;
-            });
+                _fetchValueTask = new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ZbTask.Synchron, () =>
+                {
+                    _wrapper = new SortedWrapper(ObjectCollectionModel.UnderlyingCollection, ObjectCollectionModel, InitialSortProperty);
+                    _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
+                        _wrapper,
+                        obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
+                        mdl => mdl.Object);
+                    _valueCache.CollectionChanged += ValueListChanged;
+                    return _valueCache;
+                });
+
+                _fetchValueTask.OnResult(t =>
+                {
+                    OnPropertyChanged("Value");
+                    OnPropertyChanged("ValueProxies");
+                });
+            };
+            return _fetchValueTask;
         }
 
         //private IDelayedTask _valueLoader;
@@ -548,7 +568,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 //    _valueLoader.Trigger();
                 //}
                 //return _valueCache;
-                return base.Value;
+                GetValueFromModel();
+                return _valueCache;
             }
             set
             {
@@ -562,19 +583,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         protected abstract string InitialSortProperty { get; }
-
-        protected void EnsureValueCache()
-        {
-            if (_wrapper == null)
-            {
-                _wrapper = new SortedWrapper(ObjectCollectionModel.UnderlyingCollection, ObjectCollectionModel, InitialSortProperty);
-                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
-                    _wrapper,
-                    obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
-                    mdl => mdl.Object);
-                _valueCache.CollectionChanged += ValueListChanged;
-            }
-        }
         #endregion
 
         #region Utilities and UI callbacks
@@ -667,7 +675,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         //private IDelayedTask _proxyLoader;
+        //private ZbTask _proxyLoader;
         private BaseObjectCollectionViewModelProxyList _proxyInstances = null;
+        private bool _proxyInstancesLoading = false;
         /// <summary>
         /// Allow instances to be added external
         /// </summary>
@@ -689,15 +699,19 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 //    });
                 //    _proxyLoader.Trigger();
                 //}
-                if (_proxyInstances == null)
+                if (!_proxyInstancesLoading)
                 {
-                    EnsureValueCache();
-                    _proxyInstances = new BaseObjectCollectionViewModelProxyList(
-                        ObjectCollectionModel,
-                        ObjectCollectionModel.Value,
-                        (vm) => GetProxy(vm),
-                        (p) => GetObjectFromProxy(p).Object);
-                    OnPropertyChanged("ValueProxies");
+                    _proxyInstancesLoading = true;
+                    GetValueFromModel()
+                        .OnResult(t =>
+                        {
+                            _proxyInstances = new BaseObjectCollectionViewModelProxyList(
+                                ObjectCollectionModel,
+                                ObjectCollectionModel.Value,
+                                (vm) => GetProxy(vm),
+                                (p) => GetObjectFromProxy(p).Object);
+                            OnPropertyChanged("ValueProxies");
+                        });
                 }
                 return _proxyInstances;
             }
