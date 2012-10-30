@@ -236,11 +236,14 @@ namespace Zetbox.DalProvider.Client
         public ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
-            return new ZbTask<List<T>>(ZbTask.Synchron, () =>
+            if (obj.CurrentAccessRights.HasNoRights()) return new ZbTask<List<T>>(ZbTask.Synchron, () => new List<T>());
+
+            ZetboxContextQuery<T> query = new ZetboxContextQuery<T>(this, GetInterfaceType(obj), proxy, _perfCounter);
+            var task = ((ZetboxContextProvider)query.Provider).GetListOfCallAsync(obj.ID, propertyName);
+            return new ZbTask<List<T>>(task)
+            .OnResult(t =>
             {
-                if (obj.CurrentAccessRights.HasNoRights()) return new List<T>();
-                ZetboxContextQuery<T> query = new ZetboxContextQuery<T>(this, GetInterfaceType(obj), proxy, _perfCounter);
-                return ((ZetboxContextProvider)query.Provider).GetListOfCall(obj.ID, propertyName).Cast<T>().ToList();
+                t.Result =  task.Result.Cast<T>().ToList();
             });
         }
 

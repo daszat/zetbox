@@ -27,6 +27,7 @@ namespace Zetbox.DalProvider.Client
     using Zetbox.API.Client;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Utils;
+    using Zetbox.API.Async;
 
     /// <summary>
     /// Provider for Zetbox Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
@@ -104,26 +105,31 @@ namespace Zetbox.DalProvider.Client
 
         #region Operations GetListOf/GetList/GetObject/InvokeServerMethod
 
-        internal List<IDataObject> GetListOfCall(int ID, string propertyName)
+        internal ZbTask<List<IDataObject>> GetListOfCallAsync(int ID, string propertyName)
         {
-            ResetState();
-
-            List<IStreamable> auxObjects;
-            List<IDataObject> serviceResult = _proxy.GetListOf(_context, _type, ID, propertyName, out auxObjects).ToList();
-            List<IDataObject> result = new List<IDataObject>();
-
-            foreach (IDataObject obj in serviceResult)
+            // ResetState();
+            List<IStreamable> auxObjects = null;
+            return new ZbTask<List<IDataObject>>(() =>
             {
-                result.Add((IDataObject)_context.AttachRespectingIsolationLevel(obj));
-            }
-
-            foreach (IPersistenceObject obj in auxObjects)
+                return _proxy.GetListOf(_context, _type, ID, propertyName, out auxObjects).ToList();
+            })
+            .OnResult(t =>
             {
-                _context.AttachRespectingIsolationLevel(obj);
-            }
+                List<IDataObject> result = new List<IDataObject>();
 
-            _context.PlaybackNotifications();
-            return result;
+                foreach (IDataObject obj in t.Result)
+                {
+                    result.Add((IDataObject)_context.AttachRespectingIsolationLevel(obj));
+                }
+
+                foreach (IPersistenceObject obj in auxObjects)
+                {
+                    _context.AttachRespectingIsolationLevel(obj);
+                }
+
+                _context.PlaybackNotifications();
+                t.Result = result;
+            });
         }
 
         /// <summary>
