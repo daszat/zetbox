@@ -57,7 +57,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
         public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
 			_triggerFetchChildrenTask = Context.FetchRelationAsync<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(new Guid("4d4e1ffd-f362-40e2-9fe1-0711ded83241"), RelationEndRole.A, this);
 			_triggerFetchChildrenTask.OnResult(r => 
             {
@@ -93,7 +93,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask _triggerFetchContextMenuTask;
         public Zetbox.API.Async.ZbTask TriggerFetchContextMenuAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchContextMenuTask != null) return _triggerFetchContextMenuTask;
 			_triggerFetchContextMenuTask = Context.FetchRelationAsync<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(new Guid("358c14b9-fef5-495d-8d44-04e84186830e"), RelationEndRole.A, this);
 			_triggerFetchContextMenuTask.OnResult(r => 
             {
@@ -194,7 +194,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method> _triggerFetchMethodTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method> TriggerFetchMethodAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchMethodTask != null) return _triggerFetchMethodTask;
 
             if (_fk_Method.HasValue)
                 _triggerFetchMethodTask = Context.FindAsync<Zetbox.App.Base.Method>(_fk_Method.Value);
@@ -262,6 +262,8 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Method>(__oldValue, __newValue);
                     OnMethod_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchMethodTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
@@ -298,7 +300,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> _triggerFetchPropertyTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> TriggerFetchPropertyAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchPropertyTask != null) return _triggerFetchPropertyTask;
 
             if (_fk_Property.HasValue)
                 _triggerFetchPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
@@ -366,6 +368,8 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Property>(__oldValue, __newValue);
                     OnProperty_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchPropertyTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property

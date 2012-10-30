@@ -65,7 +65,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> _triggerFetchGetErrorTextInvocationTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> TriggerFetchGetErrorTextInvocationAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchGetErrorTextInvocationTask != null) return _triggerFetchGetErrorTextInvocationTask;
 
             if (_fk_GetErrorTextInvocation.HasValue)
                 _triggerFetchGetErrorTextInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
@@ -133,6 +133,8 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__oldValue, __newValue);
                     OnGetErrorTextInvocation_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchGetErrorTextInvocationTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
@@ -170,7 +172,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> _triggerFetchIsValidInvocationTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> TriggerFetchIsValidInvocationAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchIsValidInvocationTask != null) return _triggerFetchIsValidInvocationTask;
 
             if (_fk_IsValidInvocation.HasValue)
                 _triggerFetchIsValidInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
@@ -238,6 +240,8 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__oldValue, __newValue);
                     OnIsValidInvocation_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchIsValidInvocationTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation

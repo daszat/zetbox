@@ -64,7 +64,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -132,6 +132,8 @@ namespace Zetbox.App.SchemaMigration
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -299,7 +301,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -367,6 +369,8 @@ namespace Zetbox.App.SchemaMigration
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -606,7 +610,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.MigrationProject> _triggerFetchMigrationProjectTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.MigrationProject> TriggerFetchMigrationProjectAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchMigrationProjectTask != null) return _triggerFetchMigrationProjectTask;
 
             if (_fk_MigrationProject.HasValue)
                 _triggerFetchMigrationProjectTask = Context.FindAsync<Zetbox.App.SchemaMigration.MigrationProject>(_fk_MigrationProject.Value);
@@ -690,6 +694,8 @@ namespace Zetbox.App.SchemaMigration
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.SchemaMigration.MigrationProject>(__oldValue, __newValue);
                     OnMigrationProject_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchMigrationProjectTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MigrationProject
@@ -838,7 +844,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask _triggerFetchSourceTablesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchSourceTablesAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchSourceTablesTask != null) return _triggerFetchSourceTablesTask;
 
             List<Zetbox.App.SchemaMigration.SourceTable> serverList = null;
             if (Helper.IsPersistedObject(this))

@@ -60,7 +60,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
         public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
 
             List<Zetbox.App.Test.SecurityTestChild> serverList = null;
             if (Helper.IsPersistedObject(this))

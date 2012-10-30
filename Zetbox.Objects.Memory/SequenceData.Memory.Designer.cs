@@ -122,7 +122,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> _triggerFetchSequenceTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> TriggerFetchSequenceAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchSequenceTask != null) return _triggerFetchSequenceTask;
 
             if (_fk_Sequence.HasValue)
                 _triggerFetchSequenceTask = Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
@@ -206,6 +206,8 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Sequence>(__oldValue, __newValue);
                     OnSequence_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchSequenceTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence

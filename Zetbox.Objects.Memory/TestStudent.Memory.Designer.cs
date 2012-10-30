@@ -115,7 +115,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask _triggerFetchTestbogenTask;
         public Zetbox.API.Async.ZbTask TriggerFetchTestbogenAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchTestbogenTask != null) return _triggerFetchTestbogenTask;
 			_triggerFetchTestbogenTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
 			_triggerFetchTestbogenTask.OnResult(r => 
             {

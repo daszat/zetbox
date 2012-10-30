@@ -65,7 +65,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchFalseIconTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchFalseIconAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchFalseIconTask != null) return _triggerFetchFalseIconTask;
 
             if (_fk_FalseIcon.HasValue)
                 _triggerFetchFalseIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
@@ -133,6 +133,8 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
                     OnFalseIcon_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchFalseIconTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
@@ -228,7 +230,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchNullIconTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchNullIconAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchNullIconTask != null) return _triggerFetchNullIconTask;
 
             if (_fk_NullIcon.HasValue)
                 _triggerFetchNullIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
@@ -296,6 +298,8 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
                     OnNullIcon_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchNullIconTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
@@ -391,7 +395,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchTrueIconTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchTrueIconAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchTrueIconTask != null) return _triggerFetchTrueIconTask;
 
             if (_fk_TrueIcon.HasValue)
                 _triggerFetchTrueIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
@@ -459,6 +463,8 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
                     OnTrueIcon_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchTrueIconTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon

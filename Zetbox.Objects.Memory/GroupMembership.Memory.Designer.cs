@@ -65,7 +65,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> _triggerFetchGroupTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> TriggerFetchGroupAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchGroupTask != null) return _triggerFetchGroupTask;
 
             if (_fk_Group.HasValue)
                 _triggerFetchGroupTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value);
@@ -133,6 +133,8 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Group>(__oldValue, __newValue);
                     OnGroup_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchGroupTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group

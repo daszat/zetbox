@@ -136,7 +136,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchImplementorTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchImplementorAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchImplementorTask != null) return _triggerFetchImplementorTask;
 
             if (_fk_Implementor.HasValue)
                 _triggerFetchImplementorTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_Implementor.Value);
@@ -204,6 +204,8 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
                     OnImplementor_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchImplementorTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Implementor

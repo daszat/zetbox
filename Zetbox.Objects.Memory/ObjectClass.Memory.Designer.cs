@@ -60,7 +60,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask _triggerFetchAccessControlListTask;
         public Zetbox.API.Async.ZbTask TriggerFetchAccessControlListAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchAccessControlListTask != null) return _triggerFetchAccessControlListTask;
 
             List<Zetbox.App.Base.AccessControl> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -125,7 +125,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchBaseObjectClassTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchBaseObjectClassAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchBaseObjectClassTask != null) return _triggerFetchBaseObjectClassTask;
 
             if (_fk_BaseObjectClass.HasValue)
                 _triggerFetchBaseObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
@@ -209,6 +209,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ObjectClass>(__oldValue, __newValue);
                     OnBaseObjectClass_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchBaseObjectClassTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
@@ -291,7 +293,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchDefaultViewModelDescriptorTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> TriggerFetchDefaultViewModelDescriptorAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchDefaultViewModelDescriptorTask != null) return _triggerFetchDefaultViewModelDescriptorTask;
 
             if (_fk_DefaultViewModelDescriptor.HasValue)
                 _triggerFetchDefaultViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
@@ -359,6 +361,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(__oldValue, __newValue);
                     OnDefaultViewModelDescriptor_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultViewModelDescriptorTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
@@ -391,7 +395,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         Zetbox.API.Async.ZbTask _triggerFetchFilterConfigurationsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchFilterConfigurationsAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchFilterConfigurationsTask != null) return _triggerFetchFilterConfigurationsTask;
 
             List<Zetbox.App.GUI.ObjectClassFilterConfiguration> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -664,7 +668,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         Zetbox.API.Async.ZbTask _triggerFetchSubClassesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchSubClassesAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchSubClassesTask != null) return _triggerFetchSubClassesTask;
 
             List<Zetbox.App.Base.ObjectClass> serverList = null;
             if (Helper.IsPersistedObject(this))

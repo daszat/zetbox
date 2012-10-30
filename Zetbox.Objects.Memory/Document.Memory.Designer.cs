@@ -57,7 +57,7 @@ namespace at.dasz.DocumentManagement
         Zetbox.API.Async.ZbTask _triggerFetchRevisionsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchRevisionsTask != null) return _triggerFetchRevisionsTask;
 			_triggerFetchRevisionsTask = Context.FetchRelationAsync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
 			_triggerFetchRevisionsTask.OnResult(r => 
             {

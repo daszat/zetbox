@@ -180,7 +180,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -248,6 +248,8 @@ namespace Zetbox.App.Projekte
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -357,7 +359,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -425,6 +427,8 @@ namespace Zetbox.App.Projekte
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -606,7 +610,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> _triggerFetchKundeTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> TriggerFetchKundeAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchKundeTask != null) return _triggerFetchKundeTask;
 
             if (_fk_Kunde.HasValue)
                 _triggerFetchKundeTask = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_Kunde.Value);
@@ -674,6 +678,8 @@ namespace Zetbox.App.Projekte
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Projekte.Kunde>(__oldValue, __newValue);
                     OnKunde_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchKundeTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Kunde
@@ -711,7 +717,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Mitarbeiter> _triggerFetchMitarbeiterTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Mitarbeiter> TriggerFetchMitarbeiterAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchMitarbeiterTask != null) return _triggerFetchMitarbeiterTask;
 
             if (_fk_Mitarbeiter.HasValue)
                 _triggerFetchMitarbeiterTask = Context.FindAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
@@ -779,6 +785,8 @@ namespace Zetbox.App.Projekte
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Projekte.Mitarbeiter>(__oldValue, __newValue);
                     OnMitarbeiter_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchMitarbeiterTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Mitarbeiter
@@ -816,7 +824,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt> _triggerFetchProjektTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt> TriggerFetchProjektAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchProjektTask != null) return _triggerFetchProjektTask;
 
             if (_fk_Projekt.HasValue)
                 _triggerFetchProjektTask = Context.FindAsync<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);
@@ -900,6 +908,8 @@ namespace Zetbox.App.Projekte
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Projekte.Projekt>(__oldValue, __newValue);
                     OnProjekt_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchProjektTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt

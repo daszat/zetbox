@@ -122,7 +122,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> _triggerFetchFragebogenTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> TriggerFetchFragebogenAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchFragebogenTask != null) return _triggerFetchFragebogenTask;
 
             if (_fk_Fragebogen.HasValue)
                 _triggerFetchFragebogenTask = Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
@@ -206,6 +206,8 @@ namespace Zetbox.App.Test
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.Fragebogen>(__oldValue, __newValue);
                     OnFragebogen_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchFragebogenTask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty

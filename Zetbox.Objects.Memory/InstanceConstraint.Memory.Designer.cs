@@ -65,7 +65,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> _triggerFetchConstrainedTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> TriggerFetchConstrainedAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchConstrainedTask != null) return _triggerFetchConstrainedTask;
 
             if (_fk_Constrained.HasValue)
                 _triggerFetchConstrainedTask = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
@@ -149,6 +149,8 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DataType>(__oldValue, __newValue);
                     OnConstrained_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchConstrainedTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained

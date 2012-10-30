@@ -64,7 +64,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> _triggerFetchOneEndTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> TriggerFetchOneEndAsync()
         {
-            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
+            if (_triggerFetchOneEndTask != null) return _triggerFetchOneEndTask;
 
             if (_fk_OneEnd.HasValue)
                 _triggerFetchOneEndTask = Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
@@ -148,6 +148,8 @@ namespace Zetbox.App.Test
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.OrderedOneEnd>(__oldValue, __newValue);
                     OnOneEnd_PostSetter(this, e);
                 }
+                // Recreate task to clear it's cache
+                _triggerFetchOneEndTask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
