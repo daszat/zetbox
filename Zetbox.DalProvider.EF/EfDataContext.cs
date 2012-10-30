@@ -33,6 +33,7 @@ namespace Zetbox.DalProvider.Ef
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.API.Server.PerfCounter;
+    using Zetbox.API.Async;
 
     /// <summary>
     /// Entityframework IZetboxContext implementation
@@ -236,10 +237,10 @@ namespace Zetbox.DalProvider.Ef
         }
 
         // TODO: Create new override
-        public override Zetbox.API.Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent)
+        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
             CheckDisposed();
-            return new API.Async.ZbTask<IList<T>>(null, () =>
+            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
                 if (parent == null)
                 {
@@ -528,10 +529,10 @@ namespace Zetbox.DalProvider.Ef
         /// <param baseDir="ifType">Object Type of the Object to find.</param>
         /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public override Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public override ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            return new API.Async.ZbTask<IDataObject>(null, () =>
+            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
             {
                 try
                 {
@@ -554,10 +555,10 @@ namespace Zetbox.DalProvider.Ef
         /// <typeparam baseDir="T">Object Type of the Object to find.</typeparam>
         /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public override Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID)
+        public override ZbTask<T> FindAsync<T>(int ID)
         {
             CheckDisposed();
-            return new API.Async.ZbTask<T>(null, () =>
+            return new ZbTask<T>(ZbTask.Synchron, () =>
             {
                 try
                 {

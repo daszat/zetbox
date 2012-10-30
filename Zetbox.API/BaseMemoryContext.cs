@@ -26,6 +26,7 @@ namespace Zetbox.API
 
     using Zetbox.API.Utils;
     using System.Threading.Tasks;
+    using Zetbox.API.Async;
 
     /// <summary>
     /// A temporary data context without permanent backing store.
@@ -204,7 +205,7 @@ namespace Zetbox.API
         }
 
         /// <summary>Not implemented.</summary>
-        Zetbox.API.Async.ZbTask<List<T>> IReadOnlyZetboxContext.GetListOfAsync<T>(IDataObject obj, string propertyName)
+        ZbTask<List<T>> IReadOnlyZetboxContext.GetListOfAsync<T>(IDataObject obj, string propertyName)
         {
             throw new NotImplementedException();
         }
@@ -218,9 +219,9 @@ namespace Zetbox.API
         }
 
         /// <summary>Only implemented for the parent==null case.</summary>
-        Zetbox.API.Async.ZbTask<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole role, IDataObject parent)
+        ZbTask<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {
-            return new Async.ZbTask<IList<T>>(null, () =>
+            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
                 if (parent == null)
                 {
@@ -390,11 +391,11 @@ namespace Zetbox.API
         }
 
         /// <inheritdoc />
-        public Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
 
-            return new Async.ZbTask<IDataObject>(null, () =>
+            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
             {
                 return (IDataObject)objects.Lookup(ifType, ID);
             });
@@ -409,12 +410,12 @@ namespace Zetbox.API
             return t.Result;
         }
 
-        public Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID)
+        public ZbTask<T> FindAsync<T>(int ID)
             where T : class, IDataObject
         {
             CheckDisposed();
 
-            return new Async.ZbTask<T>(null, () =>
+            return new ZbTask<T>(ZbTask.Synchron, () =>
             {
                 return (T)Find(_iftFactory(typeof(T)), ID);
             });

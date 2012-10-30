@@ -23,6 +23,7 @@ namespace Zetbox.DalProvider.Memory
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.API.Async;
 
     public interface IMemoryActionsManager : ICustomActionsManager { }
 
@@ -118,9 +119,9 @@ namespace Zetbox.DalProvider.Memory
         }
 
         /// <summary>Only implemented for the parent==null case.</summary>
-        Zetbox.API.Async.ZbTask<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole endRole, IDataObject parent)
+        ZbTask<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole endRole, IDataObject parent)
         {
-            return new Zetbox.API.Async.ZbTask<IList<T>>(null, () =>
+            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
                 if (parent == null)
                 {

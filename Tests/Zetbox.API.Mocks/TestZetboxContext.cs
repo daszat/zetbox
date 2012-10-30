@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Zetbox.API.Async;
 
 namespace Zetbox.API.Mocks
 {
@@ -89,12 +90,12 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
-        public Zetbox.API.Async.ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
+        public ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             throw new NotImplementedException();
         }
 
-        public Zetbox.API.Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationEntry
+        public ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationEntry
         {
             throw new NotImplementedException();
         }
@@ -175,7 +176,7 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
-        public Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             throw new NotImplementedException();
         }
@@ -215,7 +216,7 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
-        public Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject
+        public ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject
         {
             throw new NotImplementedException();
         }

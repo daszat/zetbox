@@ -53,6 +53,8 @@ namespace Zetbox.API.Async
         protected readonly SynchronizationContext syncContext;
         protected Action task;
 
+        public static readonly SynchronizationContext Synchron = null;
+
         public ZbTaskState State
         {
             get;

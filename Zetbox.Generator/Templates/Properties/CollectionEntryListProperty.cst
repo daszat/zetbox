@@ -70,7 +70,7 @@
 	{
 %>
 			if (!<%= name %>_was_eagerLoaded) <%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
-            else <%= taskName %> = new Zetbox.API.Async.ZbTask(null, () => { });
+            else <%= taskName %> = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () => { });
 <%
 	}
 %>

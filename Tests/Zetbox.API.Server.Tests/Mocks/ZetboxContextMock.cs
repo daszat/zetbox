@@ -20,6 +20,7 @@ using Zetbox.API.Common;
 using Zetbox.API.Configuration;
 using Zetbox.API.Server.Tests;
 using Zetbox.App.Base;
+using Zetbox.API.Async;
 
 namespace Zetbox.API.Server.Mocks
 {
@@ -180,17 +181,17 @@ namespace Zetbox.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
-        public override Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
+        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
         {
             throw new NotImplementedException();
         }
 
-        public override Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public override ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             throw new NotImplementedException();
         }
 
-        public override Async.ZbTask<T> FindAsync<T>(int ID)
+        public override ZbTask<T> FindAsync<T>(int ID)
         {
             throw new NotImplementedException();
         }

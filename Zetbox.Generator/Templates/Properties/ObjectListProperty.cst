@@ -76,7 +76,7 @@
 <% if (eagerLoading) { %>
                 if (<%= idsListName %> != null)
                 {
-                    <%= taskName %> = new Zetbox.API.Async.ZbTask(null, () =>
+                    <%= taskName %> = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                     {
                         serverList = <%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList();
                         <%= idsListName %> = null; // allow id list to be garbage collected
@@ -100,7 +100,7 @@
             }
             else
             {
-                <%= taskName %> = new Zetbox.API.Async.ZbTask(null, () =>
+                <%= taskName %> = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
                 {
                     serverList = new List<<%= referencedInterface %>>();
                 });

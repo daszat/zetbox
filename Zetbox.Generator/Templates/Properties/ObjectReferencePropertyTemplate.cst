@@ -75,7 +75,7 @@
             if (<%= fkBackingName %>.HasValue)
                 <%= taskName %> = Context.FindAsync<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
             else
-                <%= taskName %> = new Zetbox.API.Async.ZbTask<<%= referencedInterface %>>(null, () => null);
+                <%= taskName %> = new Zetbox.API.Async.ZbTask<<%= referencedInterface %>>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
 <% if (callGetterSetterEvents) {                                                                    %>
             <%= taskName %>.OnResult(t =>

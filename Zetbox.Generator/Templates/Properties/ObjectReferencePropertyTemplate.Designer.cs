@@ -109,7 +109,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("            if (",  fkBackingName , ".HasValue)\r\n");
 this.WriteObjects("                ",  taskName , " = Context.FindAsync<",  referencedInterface , ">(",  fkBackingName , ".Value);\r\n");
 this.WriteObjects("            else\r\n");
-this.WriteObjects("                ",  taskName , " = new Zetbox.API.Async.ZbTask<",  referencedInterface , ">(null, () => null);\r\n");
+this.WriteObjects("                ",  taskName , " = new Zetbox.API.Async.ZbTask<",  referencedInterface , ">(Zetbox.API.Async.ZbTask.Synchron, () => null);\r\n");
 this.WriteObjects("\r\n");
 #line 80 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (callGetterSetterEvents) {                                                                    

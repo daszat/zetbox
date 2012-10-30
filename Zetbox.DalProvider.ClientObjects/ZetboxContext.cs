@@ -31,6 +31,7 @@ namespace Zetbox.DalProvider.Client
     using Zetbox.DalProvider.Base;
     using Zetbox.API.Common;
     using Zetbox.App.Extensions;
+    using Zetbox.API.Async;
 
     public interface IZetboxClientContextInternals
     {
@@ -232,10 +233,10 @@ namespace Zetbox.DalProvider.Client
         /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public Zetbox.API.Async.ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
+        public ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
-            return new API.Async.ZbTask<List<T>>(null, () =>
+            return new ZbTask<List<T>>(ZbTask.Synchron, () =>
             {
                 if (obj.CurrentAccessRights.HasNoRights()) return new List<T>();
                 ZetboxContextQuery<T> query = new ZetboxContextQuery<T>(this, GetInterfaceType(obj), proxy, _perfCounter);
@@ -250,9 +251,9 @@ namespace Zetbox.DalProvider.Client
             return t.Result;
         }
 
-        public Zetbox.API.Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
+        public ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
         {
-            return new API.Async.ZbTask<IList<T>>(null, () =>
+            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
                 List<IStreamable> auxObjects;
                 var serverList = proxy.FetchRelation<T>(this, relationId, role, container, out auxObjects);
@@ -706,11 +707,11 @@ namespace Zetbox.DalProvider.Client
         /// <param name="ifType">Interface Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
 
-            return new API.Async.ZbTask<IDataObject>(null, () =>
+            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
             {
                 // TODO: should be able to pass "type" unmodified, like this
                 // See Case 552
@@ -756,11 +757,11 @@ namespace Zetbox.DalProvider.Client
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID)
+        public ZbTask<T> FindAsync<T>(int ID)
             where T : class, IDataObject
         {
             CheckDisposed();
-            return new API.Async.ZbTask<T>(null, () =>
+            return new ZbTask<T>(ZbTask.Synchron, () =>
             {
                 IPersistenceObject cacheHit = _objects.Lookup(_iftFactory(typeof(T)), ID);
                 if (cacheHit != null)

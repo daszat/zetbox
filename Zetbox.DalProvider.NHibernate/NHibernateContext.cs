@@ -30,6 +30,7 @@ namespace Zetbox.DalProvider.NHibernate
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.API.Async;
 
     public sealed class NHibernateContext
         : BaseZetboxDataContext, IZetboxServerContext
@@ -162,9 +163,9 @@ namespace Zetbox.DalProvider.NHibernate
             return PrepareQueryable(ifType).Cast<Tinterface>();
         }
 
-        public override Zetbox.API.Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
+        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
         {
-            return new API.Async.ZbTask<IList<T>>(null, () =>
+            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
                 CheckDisposed();
                 if (parent == null)
@@ -437,10 +438,10 @@ namespace Zetbox.DalProvider.NHibernate
             nhObj.Delete();
         }
 
-        public override Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        public override ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            return new API.Async.ZbTask<IDataObject>(null, () =>
+            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
             {
                 try
                 {
@@ -466,11 +467,11 @@ namespace Zetbox.DalProvider.NHibernate
             });
         }
 
-        public override Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID)
+        public override ZbTask<T> FindAsync<T>(int ID)
         {
             CheckDisposed();
 
-            return new API.Async.ZbTask<T>(null, () =>
+            return new ZbTask<T>(ZbTask.Synchron, () =>
             {
                 var result = FindPersistenceObject<T>(ID);
                 if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }

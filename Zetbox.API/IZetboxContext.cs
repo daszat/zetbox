@@ -19,6 +19,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Zetbox.API.Async;
 
 namespace Zetbox.API
 {
@@ -193,7 +194,7 @@ namespace Zetbox.API
         /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Zetbox.API.Async.ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
+        ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
 
         /// <summary>
         /// Fetches all collection entries of a given Relation (specified by <paramref name="relationId"/>)
@@ -221,7 +222,7 @@ namespace Zetbox.API
         /// <param name="container">The container of the requested collection</param>
         /// <returns></returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Zetbox.API.Async.ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry;
+        ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -255,7 +256,7 @@ namespace Zetbox.API
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        Zetbox.API.Async.ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID);
+        ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID);
         /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
@@ -274,7 +275,7 @@ namespace Zetbox.API
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        Zetbox.API.Async.ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject;
+        ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject;
 
         /// <summary>
         /// Find the Persistence Object of the given type by ID
