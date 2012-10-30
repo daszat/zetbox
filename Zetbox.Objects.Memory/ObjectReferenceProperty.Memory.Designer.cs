@@ -227,26 +227,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_RelationEnd = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd> _triggerFetchRelationEndTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd> TriggerFetchRelationEndAsync()
+        {
+            if (_triggerFetchRelationEndTask != null) return _triggerFetchRelationEndTask;
+
+            if (_fk_RelationEnd.HasValue)
+                _triggerFetchRelationEndTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+            else
+                _triggerFetchRelationEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(null, () => null);
+
+            _triggerFetchRelationEndTask.OnResult(t =>
+            {
+                if (OnRelationEnd_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.RelationEnd>(t.Result);
+                    OnRelationEnd_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchRelationEndTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.RelationEndMemoryImpl RelationEndImpl
         {
             get
             {
-                Zetbox.App.Base.RelationEndMemoryImpl __value;
-                if (_fk_RelationEnd.HasValue)
-                    __value = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
-                else
-                    __value = null;
-
-                if (OnRelationEnd_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.RelationEnd>(__value);
-                    OnRelationEnd_Getter(this, e);
-                    __value = (Zetbox.App.Base.RelationEndMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchRelationEndAsync();
+                t.Wait();
+                return (Zetbox.App.Base.RelationEndMemoryImpl)t.Result;
             }
             set
             {

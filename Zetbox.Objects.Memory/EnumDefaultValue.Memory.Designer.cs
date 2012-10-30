@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_EnumValue = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry> _triggerFetchEnumValueTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry> TriggerFetchEnumValueAsync()
+        {
+            if (_triggerFetchEnumValueTask != null) return _triggerFetchEnumValueTask;
+
+            if (_fk_EnumValue.HasValue)
+                _triggerFetchEnumValueTask = Context.FindAsync<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value);
+            else
+                _triggerFetchEnumValueTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(null, () => null);
+
+            _triggerFetchEnumValueTask.OnResult(t =>
+            {
+                if (OnEnumValue_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.EnumerationEntry>(t.Result);
+                    OnEnumValue_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchEnumValueTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.EnumerationEntryMemoryImpl EnumValueImpl
         {
             get
             {
-                Zetbox.App.Base.EnumerationEntryMemoryImpl __value;
-                if (_fk_EnumValue.HasValue)
-                    __value = (Zetbox.App.Base.EnumerationEntryMemoryImpl)Context.Find<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value);
-                else
-                    __value = null;
-
-                if (OnEnumValue_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.EnumerationEntry>(__value);
-                    OnEnumValue_Getter(this, e);
-                    __value = (Zetbox.App.Base.EnumerationEntryMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchEnumValueAsync();
+                t.Wait();
+                return (Zetbox.App.Base.EnumerationEntryMemoryImpl)t.Result;
             }
             set
             {

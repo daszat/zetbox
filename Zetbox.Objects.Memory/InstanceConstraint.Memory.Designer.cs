@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Constrained = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> _triggerFetchConstrainedTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> TriggerFetchConstrainedAsync()
+        {
+            if (_triggerFetchConstrainedTask != null) return _triggerFetchConstrainedTask;
+
+            if (_fk_Constrained.HasValue)
+                _triggerFetchConstrainedTask = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
+            else
+                _triggerFetchConstrainedTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(null, () => null);
+
+            _triggerFetchConstrainedTask.OnResult(t =>
+            {
+                if (OnConstrained_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DataType>(t.Result);
+                    OnConstrained_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchConstrainedTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.DataTypeMemoryImpl ConstrainedImpl
         {
             get
             {
-                Zetbox.App.Base.DataTypeMemoryImpl __value;
-                if (_fk_Constrained.HasValue)
-                    __value = (Zetbox.App.Base.DataTypeMemoryImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
-                else
-                    __value = null;
-
-                if (OnConstrained_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DataType>(__value);
-                    OnConstrained_Getter(this, e);
-                    __value = (Zetbox.App.Base.DataTypeMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchConstrainedAsync();
+                t.Wait();
+                return (Zetbox.App.Base.DataTypeMemoryImpl)t.Result;
             }
             set
             {

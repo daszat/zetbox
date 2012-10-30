@@ -169,26 +169,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Module = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
+        {
+            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+
+            if (_fk_Module.HasValue)
+                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(null, () => null);
+
+            _triggerFetchModuleTask.OnResult(t =>
+            {
+                if (OnModule_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Module>(t.Result);
+                    OnModule_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchModuleTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.ModuleMemoryImpl ModuleImpl
         {
             get
             {
-                Zetbox.App.Base.ModuleMemoryImpl __value;
-                if (_fk_Module.HasValue)
-                    __value = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
-                else
-                    __value = null;
-
-                if (OnModule_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Module>(__value);
-                    OnModule_Getter(this, e);
-                    __value = (Zetbox.App.Base.ModuleMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchModuleAsync();
+                t.Wait();
+                return (Zetbox.App.Base.ModuleMemoryImpl)t.Result;
             }
             set
             {

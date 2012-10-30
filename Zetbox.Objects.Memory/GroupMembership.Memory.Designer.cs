@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Group = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> _triggerFetchGroupTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> TriggerFetchGroupAsync()
+        {
+            if (_triggerFetchGroupTask != null) return _triggerFetchGroupTask;
+
+            if (_fk_Group.HasValue)
+                _triggerFetchGroupTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value);
+            else
+                _triggerFetchGroupTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(null, () => null);
+
+            _triggerFetchGroupTask.OnResult(t =>
+            {
+                if (OnGroup_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Group>(t.Result);
+                    OnGroup_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchGroupTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.GroupMemoryImpl GroupImpl
         {
             get
             {
-                Zetbox.App.Base.GroupMemoryImpl __value;
-                if (_fk_Group.HasValue)
-                    __value = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_Group.Value);
-                else
-                    __value = null;
-
-                if (OnGroup_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Group>(__value);
-                    OnGroup_Getter(this, e);
-                    __value = (Zetbox.App.Base.GroupMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchGroupAsync();
+                t.Wait();
+                return (Zetbox.App.Base.GroupMemoryImpl)t.Result;
             }
             set
             {

@@ -215,26 +215,38 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         private int? _fk_TestCustomObjects_Nav;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_NavTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> TriggerFetchTestCustomObjects_NavAsync()
+        {
+            if (_triggerFetchTestCustomObjects_NavTask != null) return _triggerFetchTestCustomObjects_NavTask;
+
+            if (_fk_TestCustomObjects_Nav.HasValue)
+                _triggerFetchTestCustomObjects_NavTask = Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
+            else
+                _triggerFetchTestCustomObjects_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(null, () => null);
+
+            _triggerFetchTestCustomObjects_NavTask.OnResult(t =>
+            {
+                if (OnTestCustomObjects_Nav_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestCustomObject>(t.Result);
+                    OnTestCustomObjects_Nav_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchTestCustomObjects_NavTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Test.TestCustomObjectMemoryImpl TestCustomObjects_NavImpl
         {
             get
             {
-                Zetbox.App.Test.TestCustomObjectMemoryImpl __value;
-                if (_fk_TestCustomObjects_Nav.HasValue)
-                    __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
-                else
-                    __value = null;
-
-                if (OnTestCustomObjects_Nav_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestCustomObject>(__value);
-                    OnTestCustomObjects_Nav_Getter(this, e);
-                    __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchTestCustomObjects_NavAsync();
+                t.Wait();
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)t.Result;
             }
             set
             {
@@ -323,26 +335,38 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         private int? _fk_TestCustomObjects_One_Nav;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_One_NavTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> TriggerFetchTestCustomObjects_One_NavAsync()
+        {
+            if (_triggerFetchTestCustomObjects_One_NavTask != null) return _triggerFetchTestCustomObjects_One_NavTask;
+
+            if (_fk_TestCustomObjects_One_Nav.HasValue)
+                _triggerFetchTestCustomObjects_One_NavTask = Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
+            else
+                _triggerFetchTestCustomObjects_One_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(null, () => null);
+
+            _triggerFetchTestCustomObjects_One_NavTask.OnResult(t =>
+            {
+                if (OnTestCustomObjects_One_Nav_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestCustomObject>(t.Result);
+                    OnTestCustomObjects_One_Nav_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchTestCustomObjects_One_NavTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Test.TestCustomObjectMemoryImpl TestCustomObjects_One_NavImpl
         {
             get
             {
-                Zetbox.App.Test.TestCustomObjectMemoryImpl __value;
-                if (_fk_TestCustomObjects_One_Nav.HasValue)
-                    __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
-                else
-                    __value = null;
-
-                if (OnTestCustomObjects_One_Nav_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestCustomObject>(__value);
-                    OnTestCustomObjects_One_Nav_Getter(this, e);
-                    __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchTestCustomObjects_One_NavAsync();
+                t.Wait();
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)t.Result;
             }
             set
             {

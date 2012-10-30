@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Type = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchTypeTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchTypeAsync()
+        {
+            if (_triggerFetchTypeTask != null) return _triggerFetchTypeTask;
+
+            if (_fk_Type.HasValue)
+                _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_Type.Value);
+            else
+                _triggerFetchTypeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(null, () => null);
+
+            _triggerFetchTypeTask.OnResult(t =>
+            {
+                if (OnType_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(t.Result);
+                    OnType_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchTypeTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.TypeRefMemoryImpl TypeImpl
         {
             get
             {
-                Zetbox.App.Base.TypeRefMemoryImpl __value;
-                if (_fk_Type.HasValue)
-                    __value = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_Type.Value);
-                else
-                    __value = null;
-
-                if (OnType_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(__value);
-                    OnType_Getter(this, e);
-                    __value = (Zetbox.App.Base.TypeRefMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchTypeAsync();
+                t.Wait();
+                return (Zetbox.App.Base.TypeRefMemoryImpl)t.Result;
             }
             set
             {

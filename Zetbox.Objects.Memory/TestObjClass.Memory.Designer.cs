@@ -119,26 +119,38 @@ namespace Zetbox.App.Test
         private int? _fk_ObjectProp;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> _triggerFetchObjectPropTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> TriggerFetchObjectPropAsync()
+        {
+            if (_triggerFetchObjectPropTask != null) return _triggerFetchObjectPropTask;
+
+            if (_fk_ObjectProp.HasValue)
+                _triggerFetchObjectPropTask = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
+            else
+                _triggerFetchObjectPropTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(null, () => null);
+
+            _triggerFetchObjectPropTask.OnResult(t =>
+            {
+                if (OnObjectProp_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Projekte.Kunde>(t.Result);
+                    OnObjectProp_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchObjectPropTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Projekte.KundeMemoryImpl ObjectPropImpl
         {
             get
             {
-                Zetbox.App.Projekte.KundeMemoryImpl __value;
-                if (_fk_ObjectProp.HasValue)
-                    __value = (Zetbox.App.Projekte.KundeMemoryImpl)Context.Find<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
-                else
-                    __value = null;
-
-                if (OnObjectProp_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Projekte.Kunde>(__value);
-                    OnObjectProp_Getter(this, e);
-                    __value = (Zetbox.App.Projekte.KundeMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchObjectPropAsync();
+                t.Wait();
+                return (Zetbox.App.Projekte.KundeMemoryImpl)t.Result;
             }
             set
             {

@@ -119,26 +119,38 @@ namespace Zetbox.App.Base
         private int? _fk_Sequence;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> _triggerFetchSequenceTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> TriggerFetchSequenceAsync()
+        {
+            if (_triggerFetchSequenceTask != null) return _triggerFetchSequenceTask;
+
+            if (_fk_Sequence.HasValue)
+                _triggerFetchSequenceTask = Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
+            else
+                _triggerFetchSequenceTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence>(null, () => null);
+
+            _triggerFetchSequenceTask.OnResult(t =>
+            {
+                if (OnSequence_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Sequence>(t.Result);
+                    OnSequence_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchSequenceTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.SequenceMemoryImpl SequenceImpl
         {
             get
             {
-                Zetbox.App.Base.SequenceMemoryImpl __value;
-                if (_fk_Sequence.HasValue)
-                    __value = (Zetbox.App.Base.SequenceMemoryImpl)Context.Find<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
-                else
-                    __value = null;
-
-                if (OnSequence_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Sequence>(__value);
-                    OnSequence_Getter(this, e);
-                    __value = (Zetbox.App.Base.SequenceMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchSequenceAsync();
+                t.Wait();
+                return (Zetbox.App.Base.SequenceMemoryImpl)t.Result;
             }
             set
             {

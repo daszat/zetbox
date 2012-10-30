@@ -133,26 +133,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Implementor = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchImplementorTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchImplementorAsync()
+        {
+            if (_triggerFetchImplementorTask != null) return _triggerFetchImplementorTask;
+
+            if (_fk_Implementor.HasValue)
+                _triggerFetchImplementorTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_Implementor.Value);
+            else
+                _triggerFetchImplementorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(null, () => null);
+
+            _triggerFetchImplementorTask.OnResult(t =>
+            {
+                if (OnImplementor_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(t.Result);
+                    OnImplementor_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchImplementorTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.TypeRefMemoryImpl ImplementorImpl
         {
             get
             {
-                Zetbox.App.Base.TypeRefMemoryImpl __value;
-                if (_fk_Implementor.HasValue)
-                    __value = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_Implementor.Value);
-                else
-                    __value = null;
-
-                if (OnImplementor_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(__value);
-                    OnImplementor_Getter(this, e);
-                    __value = (Zetbox.App.Base.TypeRefMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchImplementorAsync();
+                t.Wait();
+                return (Zetbox.App.Base.TypeRefMemoryImpl)t.Result;
             }
             set
             {

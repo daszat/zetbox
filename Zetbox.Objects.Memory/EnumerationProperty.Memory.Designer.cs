@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_Enumeration = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration> _triggerFetchEnumerationTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration> TriggerFetchEnumerationAsync()
+        {
+            if (_triggerFetchEnumerationTask != null) return _triggerFetchEnumerationTask;
+
+            if (_fk_Enumeration.HasValue)
+                _triggerFetchEnumerationTask = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
+            else
+                _triggerFetchEnumerationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration>(null, () => null);
+
+            _triggerFetchEnumerationTask.OnResult(t =>
+            {
+                if (OnEnumeration_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Enumeration>(t.Result);
+                    OnEnumeration_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchEnumerationTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.EnumerationMemoryImpl EnumerationImpl
         {
             get
             {
-                Zetbox.App.Base.EnumerationMemoryImpl __value;
-                if (_fk_Enumeration.HasValue)
-                    __value = (Zetbox.App.Base.EnumerationMemoryImpl)Context.Find<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
-                else
-                    __value = null;
-
-                if (OnEnumeration_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Enumeration>(__value);
-                    OnEnumeration_Getter(this, e);
-                    __value = (Zetbox.App.Base.EnumerationMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchEnumerationAsync();
+                t.Wait();
+                return (Zetbox.App.Base.EnumerationMemoryImpl)t.Result;
             }
             set
             {

@@ -46,6 +46,9 @@
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%@ Parameter Name="isCalculated" Type="bool" %>
 <%@ Parameter Name="disableExport" Type="bool" %>
+<%
+    string taskName = "_triggerFetch" + name + "Task";
+%>
         // BEGIN <%= this.GetType() %> for <%= name %>
         // fkBackingName=<%= fkBackingName %>; fkGuidBackingName=<%= fkGuidBackingName %>;
         // referencedInterface=<%= referencedInterface %>; moduleNamespace=<%= moduleNamespace %>;
@@ -64,28 +67,40 @@
         private Guid? <%= fkGuidBackingName %> = null;
 <% } %>
 
+        Zetbox.API.Async.ZbTask<<%= referencedInterface %>> <%= taskName %>;
+        public Zetbox.API.Async.ZbTask<<%= referencedInterface %>> TriggerFetch<%= name %>Async()
+        {
+            if (<%= taskName %> != null) return <%= taskName %>;
+
+            if (<%= fkBackingName %>.HasValue)
+                <%= taskName %> = Context.FindAsync<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
+            else
+                <%= taskName %> = new Zetbox.API.Async.ZbTask<<%= referencedInterface %>>(null, () => null);
+
+<% if (callGetterSetterEvents) {                                                                    %>
+            <%= taskName %>.OnResult(t =>
+            {
+                if (<%= eventName %>_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(t.Result);
+                    <%= eventName %>_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+<% }                                                                                                %>
+
+            return <%= taskName %>;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         <%= GetModifiers() %> <%= referencedImplementation %> <%= implName %>
         {
             get
             {
-                <%= referencedImplementation %> __value;
-                if (<%= fkBackingName %>.HasValue)
-                    __value = (<%= referencedImplementation %>)Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
-                else
-                    __value = null;
-
-<% if (callGetterSetterEvents) {                                                                    %>
-                if (<%= eventName %>_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
-                    <%= eventName %>_Getter(this, e);
-                    __value = (<%= referencedImplementation %>)e.Result;
-                }
-<% }                                                                                                %>
-
-                return __value;
+                var t = TriggerFetch<%= name %>Async();
+                t.Wait();
+                return (<%= referencedImplementation %>)t.Result;
             }
             set
             {

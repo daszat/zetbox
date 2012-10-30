@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_GetErrorTextInvocation = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> _triggerFetchGetErrorTextInvocationTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> TriggerFetchGetErrorTextInvocationAsync()
+        {
+            if (_triggerFetchGetErrorTextInvocationTask != null) return _triggerFetchGetErrorTextInvocationTask;
+
+            if (_fk_GetErrorTextInvocation.HasValue)
+                _triggerFetchGetErrorTextInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
+            else
+                _triggerFetchGetErrorTextInvocationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation>(null, () => null);
+
+            _triggerFetchGetErrorTextInvocationTask.OnResult(t =>
+            {
+                if (OnGetErrorTextInvocation_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(t.Result);
+                    OnGetErrorTextInvocation_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchGetErrorTextInvocationTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.ConstraintInvocationMemoryImpl GetErrorTextInvocationImpl
         {
             get
             {
-                Zetbox.App.Base.ConstraintInvocationMemoryImpl __value;
-                if (_fk_GetErrorTextInvocation.HasValue)
-                    __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)Context.Find<Zetbox.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
-                else
-                    __value = null;
-
-                if (OnGetErrorTextInvocation_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__value);
-                    OnGetErrorTextInvocation_Getter(this, e);
-                    __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchGetErrorTextInvocationAsync();
+                t.Wait();
+                return (Zetbox.App.Base.ConstraintInvocationMemoryImpl)t.Result;
             }
             set
             {
@@ -155,26 +167,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_IsValidInvocation = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> _triggerFetchIsValidInvocationTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> TriggerFetchIsValidInvocationAsync()
+        {
+            if (_triggerFetchIsValidInvocationTask != null) return _triggerFetchIsValidInvocationTask;
+
+            if (_fk_IsValidInvocation.HasValue)
+                _triggerFetchIsValidInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
+            else
+                _triggerFetchIsValidInvocationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation>(null, () => null);
+
+            _triggerFetchIsValidInvocationTask.OnResult(t =>
+            {
+                if (OnIsValidInvocation_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(t.Result);
+                    OnIsValidInvocation_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchIsValidInvocationTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.ConstraintInvocationMemoryImpl IsValidInvocationImpl
         {
             get
             {
-                Zetbox.App.Base.ConstraintInvocationMemoryImpl __value;
-                if (_fk_IsValidInvocation.HasValue)
-                    __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)Context.Find<Zetbox.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
-                else
-                    __value = null;
-
-                if (OnIsValidInvocation_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__value);
-                    OnIsValidInvocation_Getter(this, e);
-                    __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchIsValidInvocationAsync();
+                t.Wait();
+                return (Zetbox.App.Base.ConstraintInvocationMemoryImpl)t.Result;
             }
             set
             {

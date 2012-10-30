@@ -119,26 +119,38 @@ namespace Zetbox.App.Test
         private int? _fk_OneSide;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One> _triggerFetchOneSideTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One> TriggerFetchOneSideAsync()
+        {
+            if (_triggerFetchOneSideTask != null) return _triggerFetchOneSideTask;
+
+            if (_fk_OneSide.HasValue)
+                _triggerFetchOneSideTask = Context.FindAsync<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
+            else
+                _triggerFetchOneSideTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One>(null, () => null);
+
+            _triggerFetchOneSideTask.OnResult(t =>
+            {
+                if (OnOneSide_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.One_to_N_relations_One>(t.Result);
+                    OnOneSide_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchOneSideTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Test.One_to_N_relations_OneMemoryImpl OneSideImpl
         {
             get
             {
-                Zetbox.App.Test.One_to_N_relations_OneMemoryImpl __value;
-                if (_fk_OneSide.HasValue)
-                    __value = (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)Context.Find<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
-                else
-                    __value = null;
-
-                if (OnOneSide_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.One_to_N_relations_One>(__value);
-                    OnOneSide_Getter(this, e);
-                    __value = (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchOneSideAsync();
+                t.Wait();
+                return (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)t.Result;
             }
             set
             {

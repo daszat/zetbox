@@ -61,26 +61,38 @@ namespace Zetbox.App.GUI
         private int? _fk_DisplayedTypeAssembly;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly> _triggerFetchDisplayedTypeAssemblyTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly> TriggerFetchDisplayedTypeAssemblyAsync()
+        {
+            if (_triggerFetchDisplayedTypeAssemblyTask != null) return _triggerFetchDisplayedTypeAssemblyTask;
+
+            if (_fk_DisplayedTypeAssembly.HasValue)
+                _triggerFetchDisplayedTypeAssemblyTask = Context.FindAsync<Zetbox.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
+            else
+                _triggerFetchDisplayedTypeAssemblyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(null, () => null);
+
+            _triggerFetchDisplayedTypeAssemblyTask.OnResult(t =>
+            {
+                if (OnDisplayedTypeAssembly_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Assembly>(t.Result);
+                    OnDisplayedTypeAssembly_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDisplayedTypeAssemblyTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.AssemblyMemoryImpl DisplayedTypeAssemblyImpl
         {
             get
             {
-                Zetbox.App.Base.AssemblyMemoryImpl __value;
-                if (_fk_DisplayedTypeAssembly.HasValue)
-                    __value = (Zetbox.App.Base.AssemblyMemoryImpl)Context.Find<Zetbox.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
-                else
-                    __value = null;
-
-                if (OnDisplayedTypeAssembly_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Assembly>(__value);
-                    OnDisplayedTypeAssembly_Getter(this, e);
-                    __value = (Zetbox.App.Base.AssemblyMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchDisplayedTypeAssemblyAsync();
+                t.Wait();
+                return (Zetbox.App.Base.AssemblyMemoryImpl)t.Result;
             }
             set
             {
@@ -305,26 +317,38 @@ namespace Zetbox.App.GUI
         private int? _fk_VisualTree;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> _triggerFetchVisualTreeTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> TriggerFetchVisualTreeAsync()
+        {
+            if (_triggerFetchVisualTreeTask != null) return _triggerFetchVisualTreeTask;
+
+            if (_fk_VisualTree.HasValue)
+                _triggerFetchVisualTreeTask = Context.FindAsync<Zetbox.App.GUI.Visual>(_fk_VisualTree.Value);
+            else
+                _triggerFetchVisualTreeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(null, () => null);
+
+            _triggerFetchVisualTreeTask.OnResult(t =>
+            {
+                if (OnVisualTree_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Visual>(t.Result);
+                    OnVisualTree_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchVisualTreeTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.GUI.VisualMemoryImpl VisualTreeImpl
         {
             get
             {
-                Zetbox.App.GUI.VisualMemoryImpl __value;
-                if (_fk_VisualTree.HasValue)
-                    __value = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_VisualTree.Value);
-                else
-                    __value = null;
-
-                if (OnVisualTree_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Visual>(__value);
-                    OnVisualTree_Getter(this, e);
-                    __value = (Zetbox.App.GUI.VisualMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchVisualTreeAsync();
+                t.Wait();
+                return (Zetbox.App.GUI.VisualMemoryImpl)t.Result;
             }
             set
             {

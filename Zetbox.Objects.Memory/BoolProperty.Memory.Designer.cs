@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_FalseIcon = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchFalseIconTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchFalseIconAsync()
+        {
+            if (_triggerFetchFalseIconTask != null) return _triggerFetchFalseIconTask;
+
+            if (_fk_FalseIcon.HasValue)
+                _triggerFetchFalseIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
+            else
+                _triggerFetchFalseIconTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(null, () => null);
+
+            _triggerFetchFalseIconTask.OnResult(t =>
+            {
+                if (OnFalseIcon_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(t.Result);
+                    OnFalseIcon_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchFalseIconTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.GUI.IconMemoryImpl FalseIconImpl
         {
             get
             {
-                Zetbox.App.GUI.IconMemoryImpl __value;
-                if (_fk_FalseIcon.HasValue)
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
-                else
-                    __value = null;
-
-                if (OnFalseIcon_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(__value);
-                    OnFalseIcon_Getter(this, e);
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchFalseIconAsync();
+                t.Wait();
+                return (Zetbox.App.GUI.IconMemoryImpl)t.Result;
             }
             set
             {
@@ -213,26 +225,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_NullIcon = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchNullIconTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchNullIconAsync()
+        {
+            if (_triggerFetchNullIconTask != null) return _triggerFetchNullIconTask;
+
+            if (_fk_NullIcon.HasValue)
+                _triggerFetchNullIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
+            else
+                _triggerFetchNullIconTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(null, () => null);
+
+            _triggerFetchNullIconTask.OnResult(t =>
+            {
+                if (OnNullIcon_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(t.Result);
+                    OnNullIcon_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchNullIconTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.GUI.IconMemoryImpl NullIconImpl
         {
             get
             {
-                Zetbox.App.GUI.IconMemoryImpl __value;
-                if (_fk_NullIcon.HasValue)
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
-                else
-                    __value = null;
-
-                if (OnNullIcon_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(__value);
-                    OnNullIcon_Getter(this, e);
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchNullIconAsync();
+                t.Wait();
+                return (Zetbox.App.GUI.IconMemoryImpl)t.Result;
             }
             set
             {
@@ -364,26 +388,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_TrueIcon = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchTrueIconTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchTrueIconAsync()
+        {
+            if (_triggerFetchTrueIconTask != null) return _triggerFetchTrueIconTask;
+
+            if (_fk_TrueIcon.HasValue)
+                _triggerFetchTrueIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
+            else
+                _triggerFetchTrueIconTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(null, () => null);
+
+            _triggerFetchTrueIconTask.OnResult(t =>
+            {
+                if (OnTrueIcon_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(t.Result);
+                    OnTrueIcon_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchTrueIconTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.GUI.IconMemoryImpl TrueIconImpl
         {
             get
             {
-                Zetbox.App.GUI.IconMemoryImpl __value;
-                if (_fk_TrueIcon.HasValue)
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
-                else
-                    __value = null;
-
-                if (OnTrueIcon_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(__value);
-                    OnTrueIcon_Getter(this, e);
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchTrueIconAsync();
+                t.Wait();
+                return (Zetbox.App.GUI.IconMemoryImpl)t.Result;
             }
             set
             {

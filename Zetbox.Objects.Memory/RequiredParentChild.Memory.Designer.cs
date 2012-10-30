@@ -119,26 +119,38 @@ namespace Zetbox.App.Test
         private int? _fk_Parent;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> _triggerFetchParentTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> TriggerFetchParentAsync()
+        {
+            if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
+
+            if (_fk_Parent.HasValue)
+                _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
+            else
+                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent>(null, () => null);
+
+            _triggerFetchParentTask.OnResult(t =>
+            {
+                if (OnParent_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.RequiredParent>(t.Result);
+                    OnParent_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchParentTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Test.RequiredParentMemoryImpl ParentImpl
         {
             get
             {
-                Zetbox.App.Test.RequiredParentMemoryImpl __value;
-                if (_fk_Parent.HasValue)
-                    __value = (Zetbox.App.Test.RequiredParentMemoryImpl)Context.Find<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
-                else
-                    __value = null;
-
-                if (OnParent_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.RequiredParent>(__value);
-                    OnParent_Getter(this, e);
-                    __value = (Zetbox.App.Test.RequiredParentMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchParentAsync();
+                t.Wait();
+                return (Zetbox.App.Test.RequiredParentMemoryImpl)t.Result;
             }
             set
             {

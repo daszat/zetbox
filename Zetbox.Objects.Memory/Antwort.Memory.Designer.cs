@@ -119,26 +119,38 @@ namespace Zetbox.App.Test
         private int? _fk_Fragebogen;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> _triggerFetchFragebogenTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> TriggerFetchFragebogenAsync()
+        {
+            if (_triggerFetchFragebogenTask != null) return _triggerFetchFragebogenTask;
+
+            if (_fk_Fragebogen.HasValue)
+                _triggerFetchFragebogenTask = Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
+            else
+                _triggerFetchFragebogenTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen>(null, () => null);
+
+            _triggerFetchFragebogenTask.OnResult(t =>
+            {
+                if (OnFragebogen_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.Fragebogen>(t.Result);
+                    OnFragebogen_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchFragebogenTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Test.FragebogenMemoryImpl FragebogenImpl
         {
             get
             {
-                Zetbox.App.Test.FragebogenMemoryImpl __value;
-                if (_fk_Fragebogen.HasValue)
-                    __value = (Zetbox.App.Test.FragebogenMemoryImpl)Context.Find<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
-                else
-                    __value = null;
-
-                if (OnFragebogen_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.Fragebogen>(__value);
-                    OnFragebogen_Getter(this, e);
-                    __value = (Zetbox.App.Test.FragebogenMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchFragebogenAsync();
+                t.Wait();
+                return (Zetbox.App.Test.FragebogenMemoryImpl)t.Result;
             }
             set
             {

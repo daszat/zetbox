@@ -61,26 +61,38 @@ namespace Zetbox.App.Test
         private int? _fk_OneEnd;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> _triggerFetchOneEndTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> TriggerFetchOneEndAsync()
+        {
+            if (_triggerFetchOneEndTask != null) return _triggerFetchOneEndTask;
+
+            if (_fk_OneEnd.HasValue)
+                _triggerFetchOneEndTask = Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
+            else
+                _triggerFetchOneEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd>(null, () => null);
+
+            _triggerFetchOneEndTask.OnResult(t =>
+            {
+                if (OnOneEnd_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.OrderedOneEnd>(t.Result);
+                    OnOneEnd_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchOneEndTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Test.OrderedOneEndMemoryImpl OneEndImpl
         {
             get
             {
-                Zetbox.App.Test.OrderedOneEndMemoryImpl __value;
-                if (_fk_OneEnd.HasValue)
-                    __value = (Zetbox.App.Test.OrderedOneEndMemoryImpl)Context.Find<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
-                else
-                    __value = null;
-
-                if (OnOneEnd_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.OrderedOneEnd>(__value);
-                    OnOneEnd_Getter(this, e);
-                    __value = (Zetbox.App.Test.OrderedOneEndMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchOneEndAsync();
+                t.Wait();
+                return (Zetbox.App.Test.OrderedOneEndMemoryImpl)t.Result;
             }
             set
             {

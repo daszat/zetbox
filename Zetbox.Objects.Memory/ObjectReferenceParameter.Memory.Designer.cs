@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_ObjectClass = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchObjectClassTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchObjectClassAsync()
+        {
+            if (_triggerFetchObjectClassTask != null) return _triggerFetchObjectClassTask;
+
+            if (_fk_ObjectClass.HasValue)
+                _triggerFetchObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
+            else
+                _triggerFetchObjectClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(null, () => null);
+
+            _triggerFetchObjectClassTask.OnResult(t =>
+            {
+                if (OnObjectClass_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(t.Result);
+                    OnObjectClass_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchObjectClassTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.ObjectClassMemoryImpl ObjectClassImpl
         {
             get
             {
-                Zetbox.App.Base.ObjectClassMemoryImpl __value;
-                if (_fk_ObjectClass.HasValue)
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
-                else
-                    __value = null;
-
-                if (OnObjectClass_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(__value);
-                    OnObjectClass_Getter(this, e);
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchObjectClassAsync();
+                t.Wait();
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)t.Result;
             }
             set
             {

@@ -61,26 +61,38 @@ namespace Zetbox.App.SchemaMigration
         private int? _fk_ChangedBy;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        {
+            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+
+            if (_fk_ChangedBy.HasValue)
+                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+
+            _triggerFetchChangedByTask.OnResult(t =>
+            {
+                if (OnChangedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnChangedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchChangedByTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.IdentityMemoryImpl ChangedByImpl
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_ChangedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-                else
-                    __value = null;
-
-                if (OnChangedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnChangedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchChangedByAsync();
+                t.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)t.Result;
             }
             set
             {
@@ -284,26 +296,38 @@ namespace Zetbox.App.SchemaMigration
         private int? _fk_CreatedBy;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        {
+            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+
+            if (_fk_CreatedBy.HasValue)
+                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(null, () => null);
+
+            _triggerFetchCreatedByTask.OnResult(t =>
+            {
+                if (OnCreatedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnCreatedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCreatedByTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.IdentityMemoryImpl CreatedByImpl
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_CreatedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-                else
-                    __value = null;
-
-                if (OnCreatedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnCreatedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchCreatedByAsync();
+                t.Wait();
+                return (Zetbox.App.Base.IdentityMemoryImpl)t.Result;
             }
             set
             {
@@ -579,26 +603,38 @@ namespace Zetbox.App.SchemaMigration
 
         private Guid? _fk_guid_MigrationProject = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.MigrationProject> _triggerFetchMigrationProjectTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.MigrationProject> TriggerFetchMigrationProjectAsync()
+        {
+            if (_triggerFetchMigrationProjectTask != null) return _triggerFetchMigrationProjectTask;
+
+            if (_fk_MigrationProject.HasValue)
+                _triggerFetchMigrationProjectTask = Context.FindAsync<Zetbox.App.SchemaMigration.MigrationProject>(_fk_MigrationProject.Value);
+            else
+                _triggerFetchMigrationProjectTask = new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.MigrationProject>(null, () => null);
+
+            _triggerFetchMigrationProjectTask.OnResult(t =>
+            {
+                if (OnMigrationProject_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.MigrationProject>(t.Result);
+                    OnMigrationProject_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchMigrationProjectTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl MigrationProjectImpl
         {
             get
             {
-                Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl __value;
-                if (_fk_MigrationProject.HasValue)
-                    __value = (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.MigrationProject>(_fk_MigrationProject.Value);
-                else
-                    __value = null;
-
-                if (OnMigrationProject_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.MigrationProject>(__value);
-                    OnMigrationProject_Getter(this, e);
-                    __value = (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchMigrationProjectAsync();
+                t.Wait();
+                return (Zetbox.App.SchemaMigration.MigrationProjectMemoryImpl)t.Result;
             }
             set
             {

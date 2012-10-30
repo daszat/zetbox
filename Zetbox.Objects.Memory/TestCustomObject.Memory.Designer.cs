@@ -185,26 +185,38 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         private int? _fk_MubBlah_Nav;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchMubBlah_NavTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> TriggerFetchMubBlah_NavAsync()
+        {
+            if (_triggerFetchMubBlah_NavTask != null) return _triggerFetchMubBlah_NavTask;
+
+            if (_fk_MubBlah_Nav.HasValue)
+                _triggerFetchMubBlah_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
+            else
+                _triggerFetchMubBlah_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(null, () => null);
+
+            _triggerFetchMubBlah_NavTask.OnResult(t =>
+            {
+                if (OnMubBlah_Nav_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.Muhblah>(t.Result);
+                    OnMubBlah_Nav_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchMubBlah_NavTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Test.MuhblahMemoryImpl MubBlah_NavImpl
         {
             get
             {
-                Zetbox.App.Test.MuhblahMemoryImpl __value;
-                if (_fk_MubBlah_Nav.HasValue)
-                    __value = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
-                else
-                    __value = null;
-
-                if (OnMubBlah_Nav_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.Muhblah>(__value);
-                    OnMubBlah_Nav_Getter(this, e);
-                    __value = (Zetbox.App.Test.MuhblahMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchMubBlah_NavAsync();
+                t.Wait();
+                return (Zetbox.App.Test.MuhblahMemoryImpl)t.Result;
             }
             set
             {
@@ -329,26 +341,38 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         private int? _fk_MuhBlah_One_Nav;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchMuhBlah_One_NavTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> TriggerFetchMuhBlah_One_NavAsync()
+        {
+            if (_triggerFetchMuhBlah_One_NavTask != null) return _triggerFetchMuhBlah_One_NavTask;
+
+            if (_fk_MuhBlah_One_Nav.HasValue)
+                _triggerFetchMuhBlah_One_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
+            else
+                _triggerFetchMuhBlah_One_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(null, () => null);
+
+            _triggerFetchMuhBlah_One_NavTask.OnResult(t =>
+            {
+                if (OnMuhBlah_One_Nav_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.Muhblah>(t.Result);
+                    OnMuhBlah_One_Nav_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchMuhBlah_One_NavTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Test.MuhblahMemoryImpl MuhBlah_One_NavImpl
         {
             get
             {
-                Zetbox.App.Test.MuhblahMemoryImpl __value;
-                if (_fk_MuhBlah_One_Nav.HasValue)
-                    __value = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
-                else
-                    __value = null;
-
-                if (OnMuhBlah_One_Nav_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.Muhblah>(__value);
-                    OnMuhBlah_One_Nav_Getter(this, e);
-                    __value = (Zetbox.App.Test.MuhblahMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchMuhBlah_One_NavAsync();
+                t.Wait();
+                return (Zetbox.App.Test.MuhblahMemoryImpl)t.Result;
             }
             set
             {

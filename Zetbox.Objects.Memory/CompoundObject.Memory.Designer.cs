@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_DefaultPropertyViewModelDescriptor = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchDefaultPropertyViewModelDescriptorTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> TriggerFetchDefaultPropertyViewModelDescriptorAsync()
+        {
+            if (_triggerFetchDefaultPropertyViewModelDescriptorTask != null) return _triggerFetchDefaultPropertyViewModelDescriptorTask;
+
+            if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
+                _triggerFetchDefaultPropertyViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
+            else
+                _triggerFetchDefaultPropertyViewModelDescriptorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(null, () => null);
+
+            _triggerFetchDefaultPropertyViewModelDescriptorTask.OnResult(t =>
+            {
+                if (OnDefaultPropertyViewModelDescriptor_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(t.Result);
+                    OnDefaultPropertyViewModelDescriptor_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDefaultPropertyViewModelDescriptorTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.GUI.ViewModelDescriptorMemoryImpl DefaultPropertyViewModelDescriptorImpl
         {
             get
             {
-                Zetbox.App.GUI.ViewModelDescriptorMemoryImpl __value;
-                if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
-                    __value = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
-                else
-                    __value = null;
-
-                if (OnDefaultPropertyViewModelDescriptor_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(__value);
-                    OnDefaultPropertyViewModelDescriptor_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+                t.Wait();
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)t.Result;
             }
             set
             {

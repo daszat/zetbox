@@ -121,26 +121,38 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         private int? _fk_Parent;
 
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> _triggerFetchParentTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> TriggerFetchParentAsync()
+        {
+            if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
+
+            if (_fk_Parent.HasValue)
+                _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
+            else
+                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest>(null, () => null);
+
+            _triggerFetchParentTask.OnResult(t =>
+            {
+                if (OnParent_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.MethodTest>(t.Result);
+                    OnParent_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchParentTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Test.MethodTestMemoryImpl ParentImpl
         {
             get
             {
-                Zetbox.App.Test.MethodTestMemoryImpl __value;
-                if (_fk_Parent.HasValue)
-                    __value = (Zetbox.App.Test.MethodTestMemoryImpl)Context.Find<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
-                else
-                    __value = null;
-
-                if (OnParent_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.MethodTest>(__value);
-                    OnParent_Getter(this, e);
-                    __value = (Zetbox.App.Test.MethodTestMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchParentAsync();
+                t.Wait();
+                return (Zetbox.App.Test.MethodTestMemoryImpl)t.Result;
             }
             set
             {

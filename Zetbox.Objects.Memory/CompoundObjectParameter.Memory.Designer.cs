@@ -62,26 +62,38 @@ namespace Zetbox.App.Base
 
         private Guid? _fk_guid_CompoundObject = null;
 
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject> _triggerFetchCompoundObjectTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject> TriggerFetchCompoundObjectAsync()
+        {
+            if (_triggerFetchCompoundObjectTask != null) return _triggerFetchCompoundObjectTask;
+
+            if (_fk_CompoundObject.HasValue)
+                _triggerFetchCompoundObjectTask = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);
+            else
+                _triggerFetchCompoundObjectTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(null, () => null);
+
+            _triggerFetchCompoundObjectTask.OnResult(t =>
+            {
+                if (OnCompoundObject_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.CompoundObject>(t.Result);
+                    OnCompoundObject_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCompoundObjectTask;
+        }
+
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         internal Zetbox.App.Base.CompoundObjectMemoryImpl CompoundObjectImpl
         {
             get
             {
-                Zetbox.App.Base.CompoundObjectMemoryImpl __value;
-                if (_fk_CompoundObject.HasValue)
-                    __value = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);
-                else
-                    __value = null;
-
-                if (OnCompoundObject_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.CompoundObject>(__value);
-                    OnCompoundObject_Getter(this, e);
-                    __value = (Zetbox.App.Base.CompoundObjectMemoryImpl)e.Result;
-                }
-
-                return __value;
+                var t = TriggerFetchCompoundObjectAsync();
+                t.Wait();
+                return (Zetbox.App.Base.CompoundObjectMemoryImpl)t.Result;
             }
             set
             {
