@@ -345,9 +345,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             get
             {
                 // Synchron implementation
-                var t = GetValueFromModel();
-                t.Wait();
-                return t.Result;
+                return GetValueFromModel().Wait().Result;
             }
             set
             {
