@@ -65,7 +65,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultDisplayKindTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultDisplayKindAsync()
         {
-            if (_triggerFetchDefaultDisplayKindTask != null) return _triggerFetchDefaultDisplayKindTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_DefaultDisplayKind.HasValue)
                 _triggerFetchDefaultDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value);
@@ -170,7 +170,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultEditorKindTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultEditorKindAsync()
         {
-            if (_triggerFetchDefaultEditorKindTask != null) return _triggerFetchDefaultEditorKindTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_DefaultEditorKind.HasValue)
                 _triggerFetchDefaultEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value);
@@ -275,7 +275,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellDisplayKindTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellDisplayKindAsync()
         {
-            if (_triggerFetchDefaultGridCellDisplayKindTask != null) return _triggerFetchDefaultGridCellDisplayKindTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_DefaultGridCellDisplayKind.HasValue)
                 _triggerFetchDefaultGridCellDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value);
@@ -380,7 +380,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellEditorKindTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellEditorKindAsync()
         {
-            if (_triggerFetchDefaultGridCellEditorKindTask != null) return _triggerFetchDefaultGridCellEditorKindTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_DefaultGridCellEditorKind.HasValue)
                 _triggerFetchDefaultGridCellEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value);
@@ -485,7 +485,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellPreEditorKindTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellPreEditorKindAsync()
         {
-            if (_triggerFetchDefaultGridCellPreEditorKindTask != null) return _triggerFetchDefaultGridCellPreEditorKindTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_DefaultGridCellPreEditorKind.HasValue)
                 _triggerFetchDefaultGridCellPreEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value);
@@ -719,7 +719,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
-            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
@@ -816,7 +816,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask _triggerFetchSecondaryControlKindsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchSecondaryControlKindsAsync()
         {
-            if (_triggerFetchSecondaryControlKindsTask != null) return _triggerFetchSecondaryControlKindsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchSecondaryControlKindsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47"), RelationEndRole.A, this);
 			_triggerFetchSecondaryControlKindsTask.OnResult(r => 
             {
@@ -860,7 +860,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchViewModelRefTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchViewModelRefAsync()
         {
-            if (_triggerFetchViewModelRefTask != null) return _triggerFetchViewModelRefTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ViewModelRef.HasValue)
                 _triggerFetchViewModelRefTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value);

@@ -65,7 +65,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration> _triggerFetchEnumerationTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration> TriggerFetchEnumerationAsync()
         {
-            if (_triggerFetchEnumerationTask != null) return _triggerFetchEnumerationTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Enumeration.HasValue)
                 _triggerFetchEnumerationTask = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);

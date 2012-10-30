@@ -122,7 +122,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> _triggerFetchObjectPropTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> TriggerFetchObjectPropAsync()
         {
-            if (_triggerFetchObjectPropTask != null) return _triggerFetchObjectPropTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ObjectProp.HasValue)
                 _triggerFetchObjectPropTask = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);

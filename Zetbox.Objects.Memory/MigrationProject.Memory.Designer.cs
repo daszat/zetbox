@@ -64,7 +64,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
-            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -241,7 +241,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
-            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -477,7 +477,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchDestinationModuleTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchDestinationModuleAsync()
         {
-            if (_triggerFetchDestinationModuleTask != null) return _triggerFetchDestinationModuleTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_DestinationModule.HasValue)
                 _triggerFetchDestinationModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_DestinationModule.Value);
@@ -648,7 +648,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask _triggerFetchStagingDatabasesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchStagingDatabasesAsync()
         {
-            if (_triggerFetchStagingDatabasesTask != null) return _triggerFetchStagingDatabasesTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.SchemaMigration.StagingDatabase> serverList = null;
             if (Helper.IsPersistedObject(this))

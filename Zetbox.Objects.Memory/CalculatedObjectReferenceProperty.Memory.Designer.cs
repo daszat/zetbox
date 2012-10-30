@@ -57,7 +57,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask _triggerFetchInputsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchInputsAsync()
         {
-            if (_triggerFetchInputsTask != null) return _triggerFetchInputsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			if (!Inputs_was_eagerLoaded) _triggerFetchInputsTask = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
             else _triggerFetchInputsTask = new Zetbox.API.Async.ZbTask(null, () => { });
 			_triggerFetchInputsTask.OnResult(r => 
@@ -104,7 +104,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchReferencedClassTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchReferencedClassAsync()
         {
-            if (_triggerFetchReferencedClassTask != null) return _triggerFetchReferencedClassTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ReferencedClass.HasValue)
                 _triggerFetchReferencedClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);

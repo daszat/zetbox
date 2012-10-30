@@ -60,7 +60,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask _triggerFetchAntwortenTask;
         public Zetbox.API.Async.ZbTask TriggerFetchAntwortenAsync()
         {
-            if (_triggerFetchAntwortenTask != null) return _triggerFetchAntwortenTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Test.Antwort> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -188,7 +188,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
         Zetbox.API.Async.ZbTask _triggerFetchStudentTask;
         public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
         {
-            if (_triggerFetchStudentTask != null) return _triggerFetchStudentTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
 			_triggerFetchStudentTask.OnResult(r => 
             {

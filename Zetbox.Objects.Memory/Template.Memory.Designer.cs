@@ -64,7 +64,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly> _triggerFetchDisplayedTypeAssemblyTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly> TriggerFetchDisplayedTypeAssemblyAsync()
         {
-            if (_triggerFetchDisplayedTypeAssemblyTask != null) return _triggerFetchDisplayedTypeAssemblyTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_DisplayedTypeAssembly.HasValue)
                 _triggerFetchDisplayedTypeAssemblyTask = Context.FindAsync<Zetbox.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
@@ -277,7 +277,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask _triggerFetchMenuTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMenuAsync()
         {
-            if (_triggerFetchMenuTask != null) return _triggerFetchMenuTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchMenuTask = Context.FetchRelationAsync<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(new Guid("81ff3089-57da-478c-8be5-fd23abc222a2"), RelationEndRole.A, this);
 			_triggerFetchMenuTask.OnResult(r => 
             {
@@ -320,7 +320,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> _triggerFetchVisualTreeTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> TriggerFetchVisualTreeAsync()
         {
-            if (_triggerFetchVisualTreeTask != null) return _triggerFetchVisualTreeTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_VisualTree.HasValue)
                 _triggerFetchVisualTreeTask = Context.FindAsync<Zetbox.App.GUI.Visual>(_fk_VisualTree.Value);

@@ -65,7 +65,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> _triggerFetchPropertyTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> TriggerFetchPropertyAsync()
         {
-            if (_triggerFetchPropertyTask != null) return _triggerFetchPropertyTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Property.HasValue)
                 _triggerFetchPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);

@@ -60,7 +60,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
         public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
         {
-            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Test.MethodTest> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -124,7 +124,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> _triggerFetchParentTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> TriggerFetchParentAsync()
         {
-            if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);

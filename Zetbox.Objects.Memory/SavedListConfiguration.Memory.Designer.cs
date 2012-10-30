@@ -193,7 +193,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchOwnerTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchOwnerAsync()
         {
-            if (_triggerFetchOwnerTask != null) return _triggerFetchOwnerTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Owner.HasValue)
                 _triggerFetchOwnerTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Owner.Value);
@@ -298,7 +298,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchTypeTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchTypeAsync()
         {
-            if (_triggerFetchTypeTask != null) return _triggerFetchTypeTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Type.HasValue)
                 _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);

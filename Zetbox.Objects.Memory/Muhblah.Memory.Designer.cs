@@ -118,7 +118,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask _triggerFetchTestCustomObjects_List_NavTask;
         public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_List_NavAsync()
         {
-            if (_triggerFetchTestCustomObjects_List_NavTask != null) return _triggerFetchTestCustomObjects_List_NavTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Test.TestCustomObject> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -175,7 +175,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         Zetbox.API.Async.ZbTask _triggerFetchTestCustomObjects_ManyList_NavTask;
         public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_ManyList_NavAsync()
         {
-            if (_triggerFetchTestCustomObjects_ManyList_NavTask != null) return _triggerFetchTestCustomObjects_ManyList_NavTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchTestCustomObjects_ManyList_NavTask = Context.FetchRelationAsync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.A, this);
 			_triggerFetchTestCustomObjects_ManyList_NavTask.OnResult(r => 
             {
@@ -218,7 +218,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_NavTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> TriggerFetchTestCustomObjects_NavAsync()
         {
-            if (_triggerFetchTestCustomObjects_NavTask != null) return _triggerFetchTestCustomObjects_NavTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_TestCustomObjects_Nav.HasValue)
                 _triggerFetchTestCustomObjects_NavTask = Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
@@ -338,7 +338,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_One_NavTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> TriggerFetchTestCustomObjects_One_NavAsync()
         {
-            if (_triggerFetchTestCustomObjects_One_NavTask != null) return _triggerFetchTestCustomObjects_One_NavTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_TestCustomObjects_One_Nav.HasValue)
                 _triggerFetchTestCustomObjects_One_NavTask = Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);

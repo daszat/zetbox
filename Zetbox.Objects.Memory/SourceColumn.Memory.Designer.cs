@@ -64,7 +64,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
-            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -370,7 +370,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
-            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -656,7 +656,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask _triggerFetchDestinationPropertyTask;
         public Zetbox.API.Async.ZbTask TriggerFetchDestinationPropertyAsync()
         {
-            if (_triggerFetchDestinationPropertyTask != null) return _triggerFetchDestinationPropertyTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			if (!DestinationProperty_was_eagerLoaded) _triggerFetchDestinationPropertyTask = Context.FetchRelationAsync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
             else _triggerFetchDestinationPropertyTask = new Zetbox.API.Async.ZbTask(null, () => { });
 			_triggerFetchDestinationPropertyTask.OnResult(r => 
@@ -698,7 +698,7 @@ namespace Zetbox.App.SchemaMigration
         Zetbox.API.Async.ZbTask _triggerFetchEnumEntriesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchEnumEntriesAsync()
         {
-            if (_triggerFetchEnumEntriesTask != null) return _triggerFetchEnumEntriesTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.SchemaMigration.SourceEnum> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -950,7 +950,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn> _triggerFetchReferencesTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn> TriggerFetchReferencesAsync()
         {
-            if (_triggerFetchReferencesTask != null) return _triggerFetchReferencesTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_References.HasValue)
                 _triggerFetchReferencesTask = Context.FindAsync<Zetbox.App.SchemaMigration.SourceColumn>(_fk_References.Value);
@@ -1066,7 +1066,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         Zetbox.API.Async.ZbTask _triggerFetchReferersTask;
         public Zetbox.API.Async.ZbTask TriggerFetchReferersAsync()
         {
-            if (_triggerFetchReferersTask != null) return _triggerFetchReferersTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.SchemaMigration.SourceColumn> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -1189,7 +1189,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceTable> _triggerFetchSourceTableTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceTable> TriggerFetchSourceTableAsync()
         {
-            if (_triggerFetchSourceTableTask != null) return _triggerFetchSourceTableTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_SourceTable.HasValue)
                 _triggerFetchSourceTableTask = Context.FindAsync<Zetbox.App.SchemaMigration.SourceTable>(_fk_SourceTable.Value);

@@ -57,7 +57,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask _triggerFetchRelationsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchRelationsAsync()
         {
-            if (_triggerFetchRelationsTask != null) return _triggerFetchRelationsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchRelationsTask = Context.FetchRelationAsync<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
 			_triggerFetchRelationsTask.OnResult(r => 
             {

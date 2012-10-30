@@ -65,7 +65,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> _triggerFetchGetErrorTextInvocationTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> TriggerFetchGetErrorTextInvocationAsync()
         {
-            if (_triggerFetchGetErrorTextInvocationTask != null) return _triggerFetchGetErrorTextInvocationTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_GetErrorTextInvocation.HasValue)
                 _triggerFetchGetErrorTextInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
@@ -170,7 +170,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> _triggerFetchIsValidInvocationTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> TriggerFetchIsValidInvocationAsync()
         {
-            if (_triggerFetchIsValidInvocationTask != null) return _triggerFetchIsValidInvocationTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_IsValidInvocation.HasValue)
                 _triggerFetchIsValidInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);

@@ -64,7 +64,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
-            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -237,7 +237,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
         public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
         {
-            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.GUI.NavigationEntry> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -359,7 +359,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
-            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -600,7 +600,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         Zetbox.API.Async.ZbTask _triggerFetchGroupsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
         {
-            if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			if (!Groups_was_eagerLoaded) _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
             else _triggerFetchGroupsTask = new Zetbox.API.Async.ZbTask(null, () => { });
 			_triggerFetchGroupsTask.OnResult(r => 
@@ -647,7 +647,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
-            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
@@ -752,7 +752,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry> _triggerFetchParentTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry> TriggerFetchParentAsync()
         {
-            if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.GUI.NavigationEntry>(_fk_Parent.Value);
@@ -904,7 +904,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchRequestedKindTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchRequestedKindAsync()
         {
-            if (_triggerFetchRequestedKindTask != null) return _triggerFetchRequestedKindTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_RequestedKind.HasValue)
                 _triggerFetchRequestedKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
@@ -1067,7 +1067,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchViewModelDescriptorTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> TriggerFetchViewModelDescriptorAsync()
         {
-            if (_triggerFetchViewModelDescriptorTask != null) return _triggerFetchViewModelDescriptorTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ViewModelDescriptor.HasValue)
                 _triggerFetchViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ViewModelDescriptor.Value);

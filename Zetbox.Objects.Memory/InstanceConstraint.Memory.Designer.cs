@@ -65,7 +65,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> _triggerFetchConstrainedTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> TriggerFetchConstrainedAsync()
         {
-            if (_triggerFetchConstrainedTask != null) return _triggerFetchConstrainedTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Constrained.HasValue)
                 _triggerFetchConstrainedTask = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value);

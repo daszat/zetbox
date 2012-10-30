@@ -65,7 +65,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchFalseIconTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchFalseIconAsync()
         {
-            if (_triggerFetchFalseIconTask != null) return _triggerFetchFalseIconTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_FalseIcon.HasValue)
                 _triggerFetchFalseIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
@@ -228,7 +228,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchNullIconTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchNullIconAsync()
         {
-            if (_triggerFetchNullIconTask != null) return _triggerFetchNullIconTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_NullIcon.HasValue)
                 _triggerFetchNullIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
@@ -391,7 +391,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchTrueIconTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchTrueIconAsync()
         {
-            if (_triggerFetchTrueIconTask != null) return _triggerFetchTrueIconTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_TrueIcon.HasValue)
                 _triggerFetchTrueIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);

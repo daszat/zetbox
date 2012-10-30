@@ -128,7 +128,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask _triggerFetchMemberTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMemberAsync()
         {
-            if (_triggerFetchMemberTask != null) return _triggerFetchMemberTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchMemberTask = Context.FetchRelationAsync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
 			_triggerFetchMemberTask.OnResult(r => 
             {
@@ -172,7 +172,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
-            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);

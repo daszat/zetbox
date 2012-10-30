@@ -118,7 +118,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask _triggerFetchNSideTask;
         public Zetbox.API.Async.ZbTask TriggerFetchNSideAsync()
         {
-            if (_triggerFetchNSideTask != null) return _triggerFetchNSideTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Test.One_to_N_relations_N> serverList = null;
             if (Helper.IsPersistedObject(this))

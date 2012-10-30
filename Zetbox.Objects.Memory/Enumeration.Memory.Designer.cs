@@ -118,7 +118,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask _triggerFetchEnumerationEntriesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchEnumerationEntriesAsync()
         {
-            if (_triggerFetchEnumerationEntriesTask != null) return _triggerFetchEnumerationEntriesTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Base.EnumerationEntry> serverList = null;
             if (Helper.IsPersistedObject(this))

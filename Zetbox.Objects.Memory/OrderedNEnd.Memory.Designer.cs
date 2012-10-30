@@ -64,7 +64,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> _triggerFetchOneEndTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> TriggerFetchOneEndAsync()
         {
-            if (_triggerFetchOneEndTask != null) return _triggerFetchOneEndTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_OneEnd.HasValue)
                 _triggerFetchOneEndTask = Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);

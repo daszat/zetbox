@@ -60,7 +60,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask _triggerFetchChildControlKindsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchChildControlKindsAsync()
         {
-            if (_triggerFetchChildControlKindsTask != null) return _triggerFetchChildControlKindsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.GUI.ControlKind> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -196,7 +196,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
-            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
@@ -359,7 +359,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchParentTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchParentAsync()
         {
-            if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Parent.HasValue)
                 _triggerFetchParentTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_Parent.Value);

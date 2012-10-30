@@ -180,7 +180,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
-            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -357,7 +357,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
-            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -606,7 +606,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> _triggerFetchKundeTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> TriggerFetchKundeAsync()
         {
-            if (_triggerFetchKundeTask != null) return _triggerFetchKundeTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Kunde.HasValue)
                 _triggerFetchKundeTask = Context.FindAsync<Zetbox.App.Projekte.Kunde>(_fk_Kunde.Value);
@@ -711,7 +711,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Mitarbeiter> _triggerFetchMitarbeiterTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Mitarbeiter> TriggerFetchMitarbeiterAsync()
         {
-            if (_triggerFetchMitarbeiterTask != null) return _triggerFetchMitarbeiterTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Mitarbeiter.HasValue)
                 _triggerFetchMitarbeiterTask = Context.FindAsync<Zetbox.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
@@ -816,7 +816,7 @@ namespace Zetbox.App.Projekte
         Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt> _triggerFetchProjektTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt> TriggerFetchProjektAsync()
         {
-            if (_triggerFetchProjektTask != null) return _triggerFetchProjektTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Projekt.HasValue)
                 _triggerFetchProjektTask = Context.FindAsync<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);

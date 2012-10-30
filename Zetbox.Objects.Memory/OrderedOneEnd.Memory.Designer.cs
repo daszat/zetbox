@@ -60,7 +60,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask _triggerFetchNEndsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchNEndsAsync()
         {
-            if (_triggerFetchNEndsTask != null) return _triggerFetchNEndsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Test.OrderedNEnd> serverList = null;
             if (Helper.IsPersistedObject(this))

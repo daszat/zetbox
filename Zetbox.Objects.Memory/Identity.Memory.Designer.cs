@@ -115,7 +115,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask _triggerFetchGroupsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
         {
-            if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
 			_triggerFetchGroupsTask.OnResult(r => 
             {

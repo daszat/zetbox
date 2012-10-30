@@ -65,7 +65,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchControlKindTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchControlKindAsync()
         {
-            if (_triggerFetchControlKindTask != null) return _triggerFetchControlKindTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ControlKind.HasValue)
                 _triggerFetchControlKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_ControlKind.Value);
@@ -170,7 +170,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchControlRefTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchControlRefAsync()
         {
-            if (_triggerFetchControlRefTask != null) return _triggerFetchControlRefTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ControlRef.HasValue)
                 _triggerFetchControlRefTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_ControlRef.Value);
@@ -346,7 +346,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
-            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
@@ -443,7 +443,7 @@ namespace Zetbox.App.GUI
         Zetbox.API.Async.ZbTask _triggerFetchSupportedViewModelsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchSupportedViewModelsAsync()
         {
-            if (_triggerFetchSupportedViewModelsTask != null) return _triggerFetchSupportedViewModelsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			if (!SupportedViewModels_was_eagerLoaded) _triggerFetchSupportedViewModelsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(new Guid("786dae2f-cb6e-454d-93fd-192541df928d"), RelationEndRole.A, this);
             else _triggerFetchSupportedViewModelsTask = new Zetbox.API.Async.ZbTask(null, () => { });
 			_triggerFetchSupportedViewModelsTask.OnResult(r => 

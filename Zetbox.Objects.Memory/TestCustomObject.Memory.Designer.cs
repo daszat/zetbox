@@ -124,7 +124,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask _triggerFetchMubBlah_List_NavTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMubBlah_List_NavAsync()
         {
-            if (_triggerFetchMubBlah_List_NavTask != null) return _triggerFetchMubBlah_List_NavTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Test.Muhblah> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -188,7 +188,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchMubBlah_NavTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> TriggerFetchMubBlah_NavAsync()
         {
-            if (_triggerFetchMubBlah_NavTask != null) return _triggerFetchMubBlah_NavTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_MubBlah_Nav.HasValue)
                 _triggerFetchMubBlah_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
@@ -301,7 +301,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         Zetbox.API.Async.ZbTask _triggerFetchMuhBlah_ManyList_NavTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMuhBlah_ManyList_NavAsync()
         {
-            if (_triggerFetchMuhBlah_ManyList_NavTask != null) return _triggerFetchMuhBlah_ManyList_NavTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchMuhBlah_ManyList_NavTask = Context.FetchRelationAsync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
 			_triggerFetchMuhBlah_ManyList_NavTask.OnResult(r => 
             {
@@ -344,7 +344,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchMuhBlah_One_NavTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> TriggerFetchMuhBlah_One_NavAsync()
         {
-            if (_triggerFetchMuhBlah_One_NavTask != null) return _triggerFetchMuhBlah_One_NavTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_MuhBlah_One_Nav.HasValue)
                 _triggerFetchMuhBlah_One_NavTask = Context.FindAsync<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);

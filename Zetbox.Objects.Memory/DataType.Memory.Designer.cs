@@ -64,7 +64,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
-            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -237,7 +237,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask _triggerFetchConstraintsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchConstraintsAsync()
         {
-            if (_triggerFetchConstraintsTask != null) return _triggerFetchConstraintsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Base.InstanceConstraint> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -314,7 +314,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
-            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -492,7 +492,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchDefaultIconTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchDefaultIconAsync()
         {
-            if (_triggerFetchDefaultIconTask != null) return _triggerFetchDefaultIconTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_DefaultIcon.HasValue)
                 _triggerFetchDefaultIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_DefaultIcon.Value);
@@ -718,7 +718,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         Zetbox.API.Async.ZbTask _triggerFetchImplementsInterfacesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchImplementsInterfacesAsync()
         {
-            if (_triggerFetchImplementsInterfacesTask != null) return _triggerFetchImplementsInterfacesTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchImplementsInterfacesTask = Context.FetchRelationAsync<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>(new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3"), RelationEndRole.A, this);
 			_triggerFetchImplementsInterfacesTask.OnResult(r => 
             {
@@ -757,7 +757,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         Zetbox.API.Async.ZbTask _triggerFetchMethodsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
         {
-            if (_triggerFetchMethodsTask != null) return _triggerFetchMethodsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Base.Method> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -835,7 +835,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
-            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
@@ -993,7 +993,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         Zetbox.API.Async.ZbTask _triggerFetchPropertiesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
         {
-            if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Base.Property> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -1071,7 +1071,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchRequestedKindTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchRequestedKindAsync()
         {
-            if (_triggerFetchRequestedKindTask != null) return _triggerFetchRequestedKindTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_RequestedKind.HasValue)
                 _triggerFetchRequestedKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);

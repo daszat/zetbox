@@ -186,7 +186,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask _triggerFetchMethodsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
         {
-            if (_triggerFetchMethodsTask != null) return _triggerFetchMethodsTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchMethodsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
 			_triggerFetchMethodsTask.OnResult(r => 
             {
@@ -230,7 +230,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd> _triggerFetchRelationEndTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd> TriggerFetchRelationEndAsync()
         {
-            if (_triggerFetchRelationEndTask != null) return _triggerFetchRelationEndTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_RelationEnd.HasValue)
                 _triggerFetchRelationEndTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);

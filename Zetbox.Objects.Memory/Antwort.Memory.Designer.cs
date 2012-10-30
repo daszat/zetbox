@@ -122,7 +122,7 @@ namespace Zetbox.App.Test
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> _triggerFetchFragebogenTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> TriggerFetchFragebogenAsync()
         {
-            if (_triggerFetchFragebogenTask != null) return _triggerFetchFragebogenTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Fragebogen.HasValue)
                 _triggerFetchFragebogenTask = Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);

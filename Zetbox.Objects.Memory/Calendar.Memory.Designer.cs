@@ -65,7 +65,7 @@ namespace Zetbox.App.Calendar
         Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> _triggerFetchBaseCalendarTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> TriggerFetchBaseCalendarAsync()
         {
-            if (_triggerFetchBaseCalendarTask != null) return _triggerFetchBaseCalendarTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_BaseCalendar.HasValue)
                 _triggerFetchBaseCalendarTask = Context.FindAsync<Zetbox.App.Calendar.Calendar>(_fk_BaseCalendar.Value);
@@ -181,7 +181,7 @@ namespace Zetbox.App.Calendar
         Zetbox.API.Async.ZbTask _triggerFetchCalendarRulesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchCalendarRulesAsync()
         {
-            if (_triggerFetchCalendarRulesTask != null) return _triggerFetchCalendarRulesTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Calendar.CalendarRule> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -245,7 +245,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
         {
-            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_ChangedBy.HasValue)
                 _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -418,7 +418,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         Zetbox.API.Async.ZbTask _triggerFetchChildCalendarTask;
         public Zetbox.API.Async.ZbTask TriggerFetchChildCalendarAsync()
         {
-            if (_triggerFetchChildCalendarTask != null) return _triggerFetchChildCalendarTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             List<Zetbox.App.Calendar.Calendar> serverList = null;
             if (Helper.IsPersistedObject(this))
@@ -482,7 +482,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
         {
-            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_CreatedBy.HasValue)
                 _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -731,7 +731,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
         {
-            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Module.HasValue)
                 _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);

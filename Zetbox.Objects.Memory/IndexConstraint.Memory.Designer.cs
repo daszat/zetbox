@@ -128,7 +128,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask _triggerFetchPropertiesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
         {
-            if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 			_triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
 			_triggerFetchPropertiesTask.OnResult(r => 
             {

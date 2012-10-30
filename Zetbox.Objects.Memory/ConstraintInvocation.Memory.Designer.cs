@@ -136,7 +136,7 @@ namespace Zetbox.App.Base
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchImplementorTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchImplementorAsync()
         {
-            if (_triggerFetchImplementorTask != null) return _triggerFetchImplementorTask;
+            //if (_triggerFetch*Task != null) return _triggerFetch*Task;
 
             if (_fk_Implementor.HasValue)
                 _triggerFetchImplementorTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_Implementor.Value);
