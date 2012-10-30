@@ -27,6 +27,7 @@ namespace Zetbox.Client.Models
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
+    using Zetbox.API.Async;
 
     public static class BaseParameterExtensionsThisShouldBeMovedToAZetboxMethod
     {
@@ -208,6 +209,7 @@ namespace Zetbox.Client.Models
         #region IValueModel<TValue> Members
 
         public abstract TValue Value { get; set; }
+        public abstract ZbTask<TValue> GetValueAsync();
 
         #endregion
 
@@ -253,6 +255,11 @@ namespace Zetbox.Client.Models
                     NotifyValueChanged();
                 }
             }
+        }
+
+        public override ZbTask<TValue?> GetValueAsync()
+        {
+            return new ZbTask<TValue?>(ZbTask.Synchron, () => Value);
         }
 
         public override void ClearValue()
@@ -316,6 +323,11 @@ namespace Zetbox.Client.Models
                     this.Value = DateTime.MinValue.Add(value.Value);
                 }
             }
+        }
+    
+        ZbTask<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
+        {
+            return new ZbTask<TimeSpan?>(ZbTask.Synchron, () => ((IValueModel<TimeSpan?>)this).Value);
         }
     }
 
@@ -401,6 +413,11 @@ namespace Zetbox.Client.Models
                     NotifyValueChanged();
                 }
             }
+        }
+
+        public override ZbTask<TValue> GetValueAsync()
+        {
+            return new ZbTask<TValue>(ZbTask.Synchron, () => Value);
         }
 
         public override void ClearValue()
