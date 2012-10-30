@@ -35,6 +35,9 @@ namespace Zetbox.API.Utils
 
         public SortedWrapper(IEnumerable collection, INotifyCollectionChanged notifier, string defaultSortProperty)
         {
+            if (collection == null) throw new ArgumentNullException("collection");
+            if (notifier == null) throw new ArgumentNullException("notifier");
+
             _collection = collection;
             _notifier = notifier;
             _notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(notifier_CollectionChanged);
