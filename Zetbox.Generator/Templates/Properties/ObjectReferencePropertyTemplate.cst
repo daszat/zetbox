@@ -173,6 +173,8 @@
                     <%= eventName %>_PostSetter(this, e);
                 }
 <% }                                                                                                %>
+                // Recreate task to clear it's cache
+                <%= taskName %> = null;
             }
         }
 <%
