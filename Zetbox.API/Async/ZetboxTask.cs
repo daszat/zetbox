@@ -76,6 +76,13 @@ namespace Zetbox.API.Async
         {
         }
 
+        public ZbTask(ZbTask task)
+            : this(task.syncContext)
+        {
+            // TODO: Improve this -> make it more efficient
+            ExecuteTask(() => task.Wait());
+        }
+
         public ZbTask(SynchronizationContext syncContext, Action task)
             : this(syncContext)
         {
@@ -229,6 +236,11 @@ namespace Zetbox.API.Async
 
     public class ZbTask<TResult> : ZbTask
     {
+        public ZbTask(ZbTask task)
+            : base(task)
+        {
+        }
+
         public ZbTask(Func<TResult> task)
             : this(SynchronizationContext.Current, task)
         {
