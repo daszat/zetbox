@@ -543,7 +543,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     _valueCache.CollectionChanged += ValueListChanged;
                     return _valueCache;
                 });
-
+                // TODO: Split here to avoid a stackoverflow exception!
+                // -> OnPropertyChanged("ValueProxies") triggers ValueProxies.get
+                // -> ValueProxies.get is calling GetValueFromModel()
+                // -> _fetchValueTask has not been assigned yet!
                 _fetchValueTask.OnResult(t =>
                 {
                     OnPropertyChanged("Value");
