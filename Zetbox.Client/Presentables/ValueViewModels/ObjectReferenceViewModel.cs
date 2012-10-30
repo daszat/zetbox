@@ -32,6 +32,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using Zetbox.Client.Presentables.ValueViewModels;
     using System.Linq.Dynamic;
     using System.Linq.Expressions;
+    using Zetbox.API.Async;
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
@@ -398,13 +399,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             base.OnPropertyChanged(propertyName);
         }
 
-        protected override DataObjectViewModel GetValueFromModel()
+        protected override ZbTask<DataObjectViewModel> GetValueFromModel()
         {
-            if (!_valueCacheInititalized)
+            return new ZbTask<DataObjectViewModel>(ZbTask.Synchron, () =>
             {
-                UpdateValueCache();
-            }
-            return _valueCache;
+                if (!_valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return _valueCache;
+            });
         }
 
         protected override void SetValueToModel(DataObjectViewModel value)

@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.GUI;
+    using Zetbox.API.Async;
 
     public enum ValueViewModelState
     {
@@ -332,7 +333,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region IValueViewModel<TValue> Members
 
-        protected abstract TValue GetValueFromModel();
+        protected abstract ZbTask<TValue> GetValueFromModel();
 
         /// <summary>
         /// Writes the specified value to the model, circumventing the state machine.
@@ -343,7 +344,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return GetValueFromModel();
+                // Synchron implementation
+                var t = GetValueFromModel();
+                t.Wait();
+                return t.Result;
             }
             set
             {
@@ -407,7 +411,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     case ValueViewModelState.Blurred_UnmodifiedValue:
                     case ValueViewModelState.ImplicitFocus_WritingModel:
-                        return FormatValue(this.GetValueFromModel());
+                        return FormatValue(this.GetValueFromModel().Wait().Result);
                     case ValueViewModelState.Blurred_PartialUserInput:
                     case ValueViewModelState.ImplicitFocus_PartialUserInput:
                     case ValueViewModelState.Focused_PartialUserInput:
@@ -623,7 +627,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 case ValueViewModelState.Blurred_UnmodifiedValue:
                     try
                     {
-                        _partialUserInput = FormatValue(this.GetValueFromModel());
+                        _partialUserInput = FormatValue(this.GetValueFromModel().Wait().Result);
                     }
                     finally
                     {
@@ -753,9 +757,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override TValue? GetValueFromModel()
+        protected override ZbTask<TValue?> GetValueFromModel()
         {
-            return ValueModel.Value;
+            return new ZbTask<TValue?>(ZbTask.Synchron, () => ValueModel.Value);
         }
 
         protected override void SetValueToModel(TValue? value)
@@ -792,9 +796,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override TValue GetValueFromModel()
+        protected override ZbTask<TValue> GetValueFromModel()
         {
-            return ValueModel.Value;
+            return new ZbTask<TValue>(ZbTask.Synchron, () => ValueModel.Value);
         }
 
         protected override void SetValueToModel(TValue value)
@@ -1115,11 +1119,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return result;
             }
 
-            protected override TimeSpan? GetValueFromModel()
+            protected override ZbTask<TimeSpan?> GetValueFromModel()
             {
-                var val = Parent.GetValueFromModel();
-                if (val == null) return null;
-                return val.Value.TimeOfDay;
+                return new ZbTask<TimeSpan?>(ZbTask.Synchron, () =>
+                {
+                    var val = Parent.GetValueFromModel().Wait().Result;
+                    if (val == null) return null;
+                    return val.Value.TimeOfDay;
+                });
             }
 
             protected override void SetValueToModel(TimeSpan? value)
@@ -1130,7 +1137,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
                 else
                 {
-                    var date = (Parent.GetValueFromModel() ?? DateTime.MinValue).Date;
+                    var date = (Parent.GetValueFromModel().Wait().Result ?? DateTime.MinValue).Date;
                     if (date == DateTime.MinValue.Date)
                     {
                         if (value == null || value == TimeSpan.Zero)
@@ -1191,25 +1198,30 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return value == null ? String.Empty : value.Value.ToShortDateString();
             }
 
-            protected override DateTime? GetValueFromModel()
+            protected override ZbTask<DateTime?> GetValueFromModel()
             {
-                var modelValue = Parent.GetValueFromModel();
-                if (modelValue.HasValue)
+                return new ZbTask<DateTime?>(ZbTask.Synchron, () =>
                 {
-                    var val = modelValue.Value;
-                    if (val.Date == DateTime.MinValue.Date)
+                    var t = Parent.GetValueFromModel();
+                    t.Wait();
+                    var modelValue = t.Result;
+                    if (modelValue.HasValue)
                     {
-                        return null;
+                        var val = modelValue.Value;
+                        if (val.Date == DateTime.MinValue.Date)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return val.Date;
+                        }
                     }
                     else
                     {
-                        return val.Date;
+                        return null;
                     }
-                }
-                else
-                {
-                    return null;
-                }
+                });
             }
 
             protected override void SetValueToModel(DateTime? value)
@@ -1220,7 +1232,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
                 else
                 {
-                    var time = (Parent.GetValueFromModel() ?? DateTime.MinValue).TimeOfDay;
+                    var time = (Parent.GetValueFromModel().Wait().Result ?? DateTime.MinValue).TimeOfDay;
                     if (time == DateTime.MinValue.TimeOfDay)
                     {
                         if (value == DateTime.MinValue)
@@ -1565,7 +1577,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                UpdateValueCache(GetValueFromModel());
+                UpdateValueCache(GetValueFromModel().Wait().Result);
                 return _year;
             }
             set
@@ -1584,7 +1596,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                UpdateValueCache(GetValueFromModel());
+                UpdateValueCache(GetValueFromModel().Wait().Result);
                 return _month;
             }
             set
@@ -1622,7 +1634,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         private DateTime? GetValueFromComponents()
         {
-            var oldDate = GetValueFromModel();
+            var oldDate = GetValueFromModel().Wait().Result;
             var localDateValid = Year != null && Month != null && Year > 0 && Month >= 1 && Month <= 12;
 
             if (localDateValid)

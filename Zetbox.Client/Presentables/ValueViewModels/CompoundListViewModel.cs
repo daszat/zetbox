@@ -31,6 +31,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.App.GUI;
+    using Zetbox.API.Async;
 
     public class CompoundListViewModel
         : ValueViewModel<IReadOnlyObservableList<CompoundObjectViewModel>, IList<ICompoundObject>>, IValueListViewModel<CompoundObjectViewModel, IReadOnlyObservableList<CompoundObjectViewModel>>
@@ -106,7 +107,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return GetValueFromModel();
+                return GetValueFromModel().Wait().Result;
             }
             set
             {
@@ -114,17 +115,20 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override IReadOnlyObservableList<CompoundObjectViewModel> GetValueFromModel()
+        protected override ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> GetValueFromModel()
         {
-            if (_valueCache == null)
+            return new ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>>(ZbTask.Synchron, () =>
             {
-                _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
-                    ValueModel, ValueModel.Value,
-                    obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj),
-                    mdl => mdl.Object);
-                //_valueCache.CollectionChanged += ValueListChanged;
-            }
-            return _valueCache;
+                if (_valueCache == null)
+                {
+                    _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
+                        ValueModel, ValueModel.Value,
+                        obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj),
+                        mdl => mdl.Object);
+                    //_valueCache.CollectionChanged += ValueListChanged;
+                }
+                return _valueCache;
+            });
         }
 
         protected override void SetValueToModel(IReadOnlyObservableList<CompoundObjectViewModel> value)

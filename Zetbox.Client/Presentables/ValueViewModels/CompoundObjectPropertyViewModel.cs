@@ -26,6 +26,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.API.Async;
 
     [ViewModelDescriptor]
     public class CompoundObjectPropertyViewModel : ValueViewModel<CompoundObjectViewModel, ICompoundObject>, IValueViewModel<CompoundObjectViewModel>
@@ -59,13 +60,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         private bool _valueCacheInititalized = false;
         private CompoundObjectViewModel _valueCache;
 
-        protected override CompoundObjectViewModel GetValueFromModel()
+        protected override ZbTask<CompoundObjectViewModel> GetValueFromModel()
         {
-            if (!_valueCacheInititalized)
+            return new ZbTask<CompoundObjectViewModel>(ZbTask.Synchron, () =>
             {
-                UpdateValueCache();
-            }
-            return _valueCache;
+                if (!_valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return _valueCache;
+            });
         }
 
         protected override void SetValueToModel(CompoundObjectViewModel value)
