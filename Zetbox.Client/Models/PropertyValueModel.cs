@@ -218,12 +218,12 @@ namespace Zetbox.Client.Models
         {
             if (e.PropertyName == Property.Name)
             {
-                UpdateValueCache();
+                UpdateValueCache().Wait();
                 NotifyValueChanged();
             }
         }
 
-        protected abstract void UpdateValueCache();
+        protected abstract ZbTask UpdateValueCache();
 
         public Property Property { get; private set; }
         public INotifyingObject Object { get; private set; }
@@ -410,7 +410,7 @@ namespace Zetbox.Client.Models
             {
                 if (!_valueCacheInitialized)
                 {
-                    UpdateValueCache();
+                    UpdateValueCache().Wait();
                 }
                 return _valueCache;
             }
@@ -438,10 +438,13 @@ namespace Zetbox.Client.Models
             return new ZbTask<TValue?>(ZbTask.Synchron, () => Value);
         }
 
-        protected override void UpdateValueCache()
+        protected override ZbTask UpdateValueCache()
         {
-            _valueCache = GetPropertyValue();
-            _valueCacheInitialized = true;
+            return new ZbTask(ZbTask.Synchron, () =>
+            {
+                _valueCache = GetPropertyValue();
+                _valueCacheInitialized = true;
+            });
         }
         #endregion
 
@@ -513,7 +516,7 @@ namespace Zetbox.Client.Models
             {
                 if (!_valueCacheInitialized)
                 {
-                    UpdateValueCache();
+                    UpdateValueCache().Wait();
                 }
                 return _valueCache;
             }
@@ -536,10 +539,13 @@ namespace Zetbox.Client.Models
             return new ZbTask<TValue>(ZbTask.Synchron, () => Value);
         }
 
-        protected override void UpdateValueCache()
+        protected override ZbTask UpdateValueCache()
         {
-            _valueCache = Object.GetPropertyValue<TValue>(Property.Name);
-            _valueCacheInitialized = true;
+            return new ZbTask(ZbTask.Synchron, () =>
+            {
+                _valueCache = Object.GetPropertyValue<TValue>(Property.Name);
+                _valueCacheInitialized = true;
+            });
         }
         #endregion
 
@@ -578,7 +584,7 @@ namespace Zetbox.Client.Models
             {
                 if (!_valueCacheInititalized)
                 {
-                    UpdateValueCache();
+                    UpdateValueCache().Wait();
                 }
                 return _valueCache;
             }
@@ -592,10 +598,13 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected override void UpdateValueCache()
+        protected override ZbTask UpdateValueCache()
         {
-            _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
-            _valueCacheInititalized = true;
+            return new ZbTask(ZbTask.Synchron, () =>
+            {
+                _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
+                _valueCacheInititalized = true;
+            });
         }
         #endregion
 
@@ -654,7 +663,7 @@ namespace Zetbox.Client.Models
             {
                 if (!_valueCacheInititalized)
                 {
-                    UpdateValueCache();
+                    UpdateValueCache().Wait();
                 }
                 return _valueCache;
             }
@@ -668,10 +677,13 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected override void UpdateValueCache()
+        protected override ZbTask UpdateValueCache()
         {
-            _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
-            _valueCacheInititalized = true;
+            return new ZbTask(ZbTask.Synchron, () =>
+            {
+                _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
+                _valueCacheInititalized = true;
+            });
         }
         #endregion
 
@@ -708,7 +720,7 @@ namespace Zetbox.Client.Models
             {
                 if (!_valueCacheInititalized)
                 {
-                    UpdateValueCache();
+                    UpdateValueCache().Wait();
                 }
                 return _valueCache;
             }
@@ -722,10 +734,13 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected override void UpdateValueCache()
+        protected override ZbTask UpdateValueCache()
         {
-            _valueCache = Object.GetPropertyValue<ICompoundObject>(Property.Name);
-            _valueCacheInititalized = true;
+            return new ZbTask(ZbTask.Synchron, () =>
+            {
+                _valueCache = Object.GetPropertyValue<ICompoundObject>(Property.Name);
+                _valueCacheInititalized = true;
+            });
         }
         #endregion
 
@@ -764,7 +779,7 @@ namespace Zetbox.Client.Models
         {
             get
             {
-                UpdateValueCache();
+                UpdateValueCache().Wait();
                 return valueCache;
             }
             set
@@ -801,14 +816,17 @@ namespace Zetbox.Client.Models
 
         #endregion
 
-        protected override void UpdateValueCache()
+        protected override ZbTask UpdateValueCache()
         {
-            if (valueCache == null) // Once is OK
+            return new ZbTask(ZbTask.Synchron, () =>
             {
-                var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                lst.CollectionChanged += ValueCollectionChanged;
-                valueCache = MagicCollectionFactory.WrapAsList<ICompoundObject>(lst);
-            }
+                if (valueCache == null) // Once is OK
+                {
+                    var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                    lst.CollectionChanged += ValueCollectionChanged;
+                    valueCache = MagicCollectionFactory.WrapAsList<ICompoundObject>(lst);
+                }
+            });
         }
 
         public CompoundObject CompoundObjectDefinition
@@ -843,7 +861,7 @@ namespace Zetbox.Client.Models
             {
                 if (!valueCacheInititalized)
                 {
-                    UpdateValueCache();
+                    UpdateValueCache().Wait();
                 }
                 return valueCache;
             }
@@ -851,6 +869,11 @@ namespace Zetbox.Client.Models
             {
                 throw new NotSupportedException();
             }
+        }
+
+        public override ZbTask<TCollection> GetValueAsync()
+        {
+            return new ZbTask<TCollection>(UpdateValueCache());
         }
 
         protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -925,15 +948,22 @@ namespace Zetbox.Client.Models
         {
         }
 
-        protected override void UpdateValueCache()
+        private ZbTask _updateValueCacheTask;
+        protected override ZbTask UpdateValueCache()
         {
-            if (valueCache == null) // Once is OK
+            if (_updateValueCacheTask == null)
             {
-                var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                lst.CollectionChanged += ValueCollectionChanged;
-                valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
+                var mi = Object.GetType().GetMethod(string.Format("TriggerFetch{0}Async", Property.Name));
+                _updateValueCacheTask = (ZbTask)mi.Invoke(Object, null);
+                _updateValueCacheTask.OnResult(t =>
+                {
+                    var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                    lst.CollectionChanged += ValueCollectionChanged;
+                    valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
+                    valueCacheInititalized = true;
+                });
             }
-            valueCacheInititalized = true;
+            return _updateValueCacheTask;
         }
     }
 
@@ -945,15 +975,22 @@ namespace Zetbox.Client.Models
         {
         }
 
-        protected override void UpdateValueCache()
+        private ZbTask _updateValueCacheTask;
+        protected override ZbTask UpdateValueCache()
         {
-            if (valueCache == null) // Once is OK
+            if (_updateValueCacheTask == null)
             {
-                var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                lst.CollectionChanged += ValueCollectionChanged;
-                valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
+                var mi = Object.GetType().GetMethod(string.Format("TriggerFetch{0}Async", Property.Name));
+                _updateValueCacheTask = (ZbTask)mi.Invoke(Object, null);
+                _updateValueCacheTask.OnResult(t =>
+                {
+                    var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                    lst.CollectionChanged += ValueCollectionChanged;
+                    valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
+                    valueCacheInititalized = true;
+                });
             }
-            valueCacheInititalized = true;
+            return _updateValueCacheTask;
         }
     }
 
