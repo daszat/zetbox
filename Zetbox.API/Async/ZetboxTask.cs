@@ -257,6 +257,10 @@ namespace Zetbox.API.Async
                 Wait();
                 return _result;
             }
+            set
+            {
+                _result = value;
+            }
         }
     }
 }
