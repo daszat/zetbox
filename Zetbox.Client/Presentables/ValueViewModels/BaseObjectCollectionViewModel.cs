@@ -562,17 +562,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                //if (_valueLoader == null)
-                //{
-                //    _valueLoader = ViewModelFactory.CreateDelayedTask(this, () =>
-                //    {
-                //        EnsureValueCache();
-                //        OnPropertyChanged("Value");
-                //    });
-                //    _valueLoader.Trigger();
-                //}
-                //return _valueCache;
-                GetValueFromModel();
+                GetValueFromModel().Wait();
                 return _valueCache;
             }
             set
