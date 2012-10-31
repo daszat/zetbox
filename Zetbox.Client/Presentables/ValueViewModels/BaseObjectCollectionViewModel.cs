@@ -545,13 +545,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     t.Result = _valueCache;
                 });
                 // TODO: Split here to avoid a stackoverflow exception!
-                // -> OnPropertyChanged("ValueProxies") triggers ValueProxies.get
-                // -> ValueProxies.get is calling GetValueFromModel()
+                // -> OnPropertyChanged("ValueProxiesAsync") triggers ValueProxiesAsync.get
+                // -> ValueProxiesAsync.get is calling GetValueFromModel()
                 // -> _fetchValueTask has not been assigned yet!
                 _fetchValueTask.OnResult(t =>
                 {
                     OnPropertyChanged("Value");
-                    OnPropertyChanged("ValueProxies");
+                    OnPropertyChanged("ValueProxiesAsync");
                 });
             };
             return _fetchValueTask;
@@ -685,24 +685,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// <summary>
         /// Allow instances to be added external
         /// </summary>
-        public BaseObjectCollectionViewModelProxyList ValueProxies
+        public BaseObjectCollectionViewModelProxyList ValueProxiesAsync
         {
             get
             {
-                //if (_proxyLoader == null)
-                //{
-                //    _proxyLoader = ViewModelFactory.CreateDelayedTask(this, () =>
-                //    {
-                //        EnsureValueCache();
-                //        _proxyInstances = new BaseObjectCollectionViewModelProxyList(
-                //            ObjectCollectionModel,
-                //            ObjectCollectionModel.Value,
-                //            (vm) => GetProxy(vm),
-                //            (p) => GetObjectFromProxy(p).Object);
-                //        OnPropertyChanged("ValueProxies");
-                //    });
-                //    _proxyLoader.Trigger();
-                //}
                 if (!_proxyInstancesLoading)
                 {
                     _proxyInstancesLoading = true;
@@ -714,7 +700,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                                 ObjectCollectionModel.Value,
                                 (vm) => GetProxy(vm),
                                 (p) => GetObjectFromProxy(p).Object);
-                            OnPropertyChanged("ValueProxies");
+                            OnPropertyChanged("ValueProxiesAsync");
                         });
                 }
                 return _proxyInstances;
@@ -751,7 +737,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             EnsureValueCache();
             _wrapper.Sort(propName, direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            OnPropertyChanged("ValueProxies");
+            OnPropertyChanged("ValueProxiesAsync");
         }
 
         public string SortProperty { get { return _sortProperty; } }
