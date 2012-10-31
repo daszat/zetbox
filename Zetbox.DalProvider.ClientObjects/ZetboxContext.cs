@@ -764,13 +764,13 @@ namespace Zetbox.DalProvider.Client
             where T : class, IDataObject
         {
             CheckDisposed();
+            IPersistenceObject cacheHit = _objects.Lookup(_iftFactory(typeof(T)), ID);
+            if (cacheHit != null)
+                return new ZbTask<T>(ZbTask.Synchron, () => (T)cacheHit);
+
             return new ZbTask<T>(ZbTask.Synchron, () =>
             {
-                IPersistenceObject cacheHit = _objects.Lookup(_iftFactory(typeof(T)), ID);
-                if (cacheHit != null)
-                    return (T)cacheHit;
-                else
-                    return GetQuery<T>().SingleOrDefault(o => o.ID == ID) ?? MakeAccessDeniedProxy<T>(ID);
+                return GetQuery<T>().SingleOrDefault(o => o.ID == ID) ?? MakeAccessDeniedProxy<T>(ID);
             });
         }
 

@@ -33,36 +33,23 @@ namespace Zetbox.DalProvider.Client
     {
         private Expression _expression = null;
         private ZetboxContextProvider _provider = null;
-        private InterfaceType _type;
-        private ZetboxContextImpl _context;
-        private IPerfCounter _perfCounter;
 
         #region Constructor
         public ZetboxContextQuery(ZetboxContextImpl ctx, InterfaceType type, IProxy proxy, IPerfCounter perfCounter)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
-            // if (type == null) throw new ArgumentNullException("type");
 
-            _perfCounter = perfCounter;
-            _type = type;
-            _context = ctx;
             _expression = System.Linq.Expressions.Expression.Constant(this);
-            _provider = new ZetboxContextProvider(_context, _type, proxy, _perfCounter);
+            _provider = new ZetboxContextProvider(ctx, type, proxy, perfCounter);
         }
 
-        public ZetboxContextQuery(ZetboxContextImpl ctx, InterfaceType type, ZetboxContextProvider provider, Expression expression, IPerfCounter perfCounter)
+        internal ZetboxContextQuery(ZetboxContextProvider provider, Expression expression)
         {
-            if (ctx == null) throw new ArgumentNullException("ctx");
-            // if (type == null) throw new ArgumentNullException("type");
             if (provider == null) throw new ArgumentNullException("provider");
             if (expression == null) throw new ArgumentNullException("expression");
-            if (perfCounter == null) throw new ArgumentNullException("perfCounter");
 
-            _type = type;
-            _context = ctx;
             _expression = expression;
             _provider = provider;
-            _perfCounter = perfCounter;
         }
         #endregion
 

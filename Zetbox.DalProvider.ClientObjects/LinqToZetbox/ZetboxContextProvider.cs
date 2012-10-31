@@ -67,6 +67,8 @@ namespace Zetbox.DalProvider.Client
 
         internal ZetboxContextProvider(ZetboxContextImpl ctx, InterfaceType ifType, IProxy proxy, IPerfCounter perfCounter)
         {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+
             _context = ctx;
             _type = ifType;
             _proxy = proxy;
@@ -286,7 +288,7 @@ namespace Zetbox.DalProvider.Client
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            return (IQueryable<TElement>)new ZetboxContextQuery<TElement>(_context, _type, this, expression, perfCounter);
+            return (IQueryable<TElement>)new ZetboxContextQuery<TElement>(this, expression);
         }
 
         public IQueryable CreateQuery(Expression expression)
