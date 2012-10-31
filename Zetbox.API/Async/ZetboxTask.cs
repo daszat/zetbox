@@ -52,6 +52,7 @@ namespace Zetbox.API.Async
         protected readonly List<Action> resultActions = new List<Action>();
         protected readonly SynchronizationContext syncContext;
         protected Action task;
+        protected readonly ZbTask innerZbTask;
 
         public static readonly SynchronizationContext Synchron = null;
 
@@ -69,6 +70,7 @@ namespace Zetbox.API.Async
         protected ZbTask(SynchronizationContext syncContext)
         {
             this.syncContext = syncContext;
+            innerZbTask = null;
         }
 
         public ZbTask(Action task)
@@ -77,10 +79,23 @@ namespace Zetbox.API.Async
         }
 
         public ZbTask(ZbTask task)
-            : this(task.syncContext)
+            : this(task != null ? task.syncContext : null)
         {
-            // TODO: Improve this -> make it more efficient
-            ExecuteTask(() => task.WaitOffThread());
+            if (task != null)
+            {
+                innerZbTask = task;
+                innerZbTask
+                    .ContinueWith(t =>
+                    {
+                        CallAsyncContinuations();
+                        lock (lockObj) State = ZbTaskState.ResultEventsPosted;
+                    })
+                    .OnResult(t => CallResultActions());
+            }
+            else
+            {
+                ExecuteTask(() => { });
+            }
         }
 
         public ZbTask(SynchronizationContext syncContext, Action task)
@@ -187,19 +202,9 @@ namespace Zetbox.API.Async
 
         public ZbTask Wait()
         {
+            if (innerZbTask != null) innerZbTask.Wait();
             CallResultActions();
             return this;
-        }
-
-        private void WaitOffThread()
-        {
-            lock (lockObj)
-            {
-                while (State != ZbTaskState.Finished)
-                {
-                    Monitor.Wait(lockObj);
-                }
-            }
         }
 
         protected void CallAsyncContinuations()
@@ -241,11 +246,7 @@ namespace Zetbox.API.Async
                 action();
             }
 
-            lock (lockObj)
-            {
-                State = ZbTaskState.Finished;
-                Monitor.PulseAll(lockObj);
-            }
+            lock (lockObj) State = ZbTaskState.Finished;
         }
     }
 
