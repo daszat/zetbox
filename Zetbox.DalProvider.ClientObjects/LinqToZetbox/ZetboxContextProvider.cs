@@ -88,7 +88,7 @@ namespace Zetbox.DalProvider.Client
         {
             e = TransformExpression(e);
             Visit(e);
-            return CallService(out auxObjects);
+            return _proxy.GetList(_context, _type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
         }
 
         private Expression TransformExpression(Expression e)
@@ -97,11 +97,6 @@ namespace Zetbox.DalProvider.Client
             // TODO: Maybe merge constant evaluator into QueryTranslator
             e = ConstantEvaluator.PartialEval(e);
             return e;
-        }
-
-        private List<IDataObject> CallService(out List<IStreamable> auxObjects)
-        {
-            return _proxy.GetList(_context, _type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
         }
         #endregion
 
@@ -163,7 +158,7 @@ namespace Zetbox.DalProvider.Client
 
                 // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
                 var result = _context.IsModified ? QueryFromLocalObjectsHack(_type).Cast<IDataObject>().ToList() : serviceResult;
-                
+
                 _context.PlaybackNotifications();
 
                 // Projection
@@ -196,72 +191,79 @@ namespace Zetbox.DalProvider.Client
         /// </summary>
         /// <param name="e"></param>
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
-        internal T GetObjectCall<T>(Expression e)
+        private ZbTask<T> GetObjectCallAsync<T>(Expression e)
         {
-            int objectCount = 0;
             var ticks = perfCounter.IncrementQuery(_type);
-            try
+            ResetState();
+
+            if (Logging.Linq.IsInfoEnabled)
             {
-                ResetState();
+                Logging.Linq.Info(e.ToString());
+            }
 
-                if (Logging.Linq.IsInfoEnabled)
-                {
-                    Logging.Linq.Info(e.ToString());
-                }
+            // Visit
+            e = TransformExpression(e);
+            Visit(e);
 
-                // Visit
-                e = TransformExpression(e);
-                Visit(e);
+            // Try to find a local object first
+            var result = QueryFromLocalObjects<T>();
 
-                // Try to find a local object first
-                var result = QueryFromLocalObjects<T>();
-
-                // If nothing found local -> goto Server
-                if (result.Count == 0)
+            ZbTask<T> task;
+            // If nothing found local -> goto Server
+            if (result.Count == 0)
+            {
+                ZbTask<Tuple<List<IDataObject>, List<IStreamable>>> getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
                 {
                     List<IStreamable> auxObjects;
-                    List<IDataObject> serviceResult = CallService(out auxObjects);
+                    List<IDataObject> serviceResult = _proxy.GetList(_context, _type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
+                    return new Tuple<List<IDataObject>, List<IStreamable>>(serviceResult, auxObjects);
+                })
+                .OnResult(t =>
+                {
                     // prepare caches
-                    foreach (IPersistenceObject obj in auxObjects)
+                    foreach (IPersistenceObject obj in t.Result.Item2)
                     {
                         _context.AttachRespectingIsolationLevel(obj);
                     }
 
-                    foreach (IDataObject obj in serviceResult)
+                    foreach (IDataObject obj in t.Result.Item1)
                     {
                         result.Add((T)_context.AttachRespectingIsolationLevel(obj));
                     }
 
                     _context.PlaybackNotifications();
-                }
+                });
+                task = new ZbTask<T>(getListTask);
+            }
+            else
+            {
+                task = new ZbTask<T>(ZbTask.Synchron, () => default(T));
+            }
 
-                objectCount = result.Count;
-
+            return task.OnResult(t =>
+            {
                 if (e.IsMethodCallExpression("First"))
                 {
-                    return result.First();
+                    t.Result = result.First();
                 }
                 else if (e.IsMethodCallExpression("FirstOrDefault"))
                 {
-                    return result.FirstOrDefault();
+                    t.Result = result.FirstOrDefault();
                 }
                 else if (e.IsMethodCallExpression("Single"))
                 {
-                    return result.Single();
+                    t.Result = result.Single();
                 }
                 else if (e.IsMethodCallExpression("SingleOrDefault"))
                 {
-                    return result.SingleOrDefault();
+                    t.Result = result.SingleOrDefault();
                 }
                 else
                 {
                     throw new NotSupportedException("Expression is not supported");
                 }
-            }
-            finally
-            {
-                perfCounter.DecrementQuery(_type, objectCount, ticks);
-            }
+                perfCounter.DecrementQuery(_type, result.Count, ticks);
+            });
         }
 
         #region Local Object handling
@@ -300,14 +302,14 @@ namespace Zetbox.DalProvider.Client
                 .MakeGenericType(elementType), new object[] { this, expression });
         }
 
-        public TResult Execute<TResult>(Expression e)
+        public TResult Execute<TResult>(Expression expression)
         {
-            return GetObjectCall<TResult>(e);
+            return this.ExecuteAsync<TResult>(expression).Wait().Result;
         }
 
-        public object Execute(Expression e)
+        public object Execute(Expression expression)
         {
-            return GetObjectCall<IDataObject>(e);
+            return this.ExecuteAsync(expression).Wait().Result;
         }
 
         #endregion
@@ -389,14 +391,15 @@ namespace Zetbox.DalProvider.Client
         }
         #endregion
 
-        ZbTask<object> IAsyncQueryProvider.ExecuteAsync(Expression expression)
+        public ZbTask<object> ExecuteAsync(Expression expression)
         {
-            return new ZbTask<object>(ZbTask.Synchron, () => this.Execute(expression));
+            var task = GetObjectCallAsync<IDataObject>(expression);
+            return new ZbTask<object>(task).OnResult(t => t.Result = task.Result);
         }
 
-        ZbTask<T> IAsyncQueryProvider.ExecuteAsync<T>(Expression expression)
+        public ZbTask<TResult> ExecuteAsync<TResult>(Expression expression)
         {
-            return new ZbTask<T>(ZbTask.Synchron, () => this.Execute<T>(expression));
+            return GetObjectCallAsync<TResult>(expression);
         }
     }
 }
