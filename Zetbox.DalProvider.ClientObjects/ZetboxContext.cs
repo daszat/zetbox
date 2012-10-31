@@ -768,10 +768,12 @@ namespace Zetbox.DalProvider.Client
             if (cacheHit != null)
                 return new ZbTask<T>(ZbTask.Synchron, () => (T)cacheHit);
 
-            return new ZbTask<T>(ZbTask.Synchron, () =>
-            {
-                return GetQuery<T>().SingleOrDefault(o => o.ID == ID) ?? MakeAccessDeniedProxy<T>(ID);
-            });
+            return GetQuery<T>()
+                    .SingleOrDefaultAsync(o => o.ID == ID)
+                    .OnResult(t =>
+                    {
+                        if (t.Result == null) t.Result = MakeAccessDeniedProxy<T>(ID);
+                    });
         }
 
         /// <summary>

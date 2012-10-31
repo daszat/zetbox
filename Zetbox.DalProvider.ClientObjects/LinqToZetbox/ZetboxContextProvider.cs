@@ -32,7 +32,7 @@ namespace Zetbox.DalProvider.Client
     /// <summary>
     /// Provider for Zetbox Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
     /// </summary>
-    public class ZetboxContextProvider : ExpressionTreeVisitor, IZetboxQueryProvider
+    public class ZetboxContextProvider : ExpressionTreeVisitor, IZetboxQueryProvider, IAsyncQueryProvider
     {
         /// <summary>
         /// The result type of this provider
@@ -297,7 +297,7 @@ namespace Zetbox.DalProvider.Client
 
             Type elementType = expression.Type.FindElementTypes().Single(t => t != typeof(object));
             return (IQueryable)Activator.CreateInstance(typeof(ZetboxContextQuery<>)
-                .MakeGenericType(elementType), new object[] { _context, _type, this, expression, perfCounter });
+                .MakeGenericType(elementType), new object[] { this, expression });
         }
 
         public TResult Execute<TResult>(Expression e)
@@ -388,5 +388,15 @@ namespace Zetbox.DalProvider.Client
             // Do not call base - only first expression is important
         }
         #endregion
+
+        ZbTask<object> IAsyncQueryProvider.ExecuteAsync(Expression expression)
+        {
+            return new ZbTask<object>(ZbTask.Synchron, () => this.Execute(expression));
+        }
+
+        ZbTask<T> IAsyncQueryProvider.ExecuteAsync<T>(Expression expression)
+        {
+            return new ZbTask<T>(ZbTask.Synchron, () => this.Execute<T>(expression));
+        }
     }
 }

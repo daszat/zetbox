@@ -26,10 +26,11 @@ namespace Zetbox.DalProvider.Client
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Async;
 
     // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
-    internal class ZetboxContextQuery<T> : IOrderedQueryable<T>
+    internal class ZetboxContextQuery<T> : IOrderedQueryable<T>, IAsyncQueryable<T>, IAsyncQueryable
     {
         private Expression _expression = null;
         private ZetboxContextProvider _provider = null;
@@ -43,7 +44,7 @@ namespace Zetbox.DalProvider.Client
             _provider = new ZetboxContextProvider(ctx, type, proxy, perfCounter);
         }
 
-        internal ZetboxContextQuery(ZetboxContextProvider provider, Expression expression)
+        public ZetboxContextQuery(ZetboxContextProvider provider, Expression expression)
         {
             if (provider == null) throw new ArgumentNullException("provider");
             if (expression == null) throw new ArgumentNullException("expression");
@@ -84,5 +85,15 @@ namespace Zetbox.DalProvider.Client
             get { return _provider; }
         }
         #endregion
+
+        ZbTask<IEnumerator> IAsyncQueryable.GetEnumeratorAsync()
+        {
+            return new ZbTask<IEnumerator>(ZbTask.Synchron, () => ((IEnumerable)_provider.GetListCall<T>(this._expression)).GetEnumerator());
+        }
+
+        ZbTask<IEnumerator<T>> IAsyncQueryable<T>.GetEnumeratorAsync()
+        {
+            return new ZbTask<IEnumerator<T>>(ZbTask.Synchron, () => ((IEnumerable<T>)_provider.GetListCall<T>(this._expression)).GetEnumerator());
+        }
     }
 }
