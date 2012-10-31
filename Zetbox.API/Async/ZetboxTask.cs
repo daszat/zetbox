@@ -80,7 +80,7 @@ namespace Zetbox.API.Async
             : this(task.syncContext)
         {
             // TODO: Improve this -> make it more efficient
-            ExecuteTask(() => task.Wait());
+            ExecuteTask(() => task.WaitOffThread());
         }
 
         public ZbTask(SynchronizationContext syncContext, Action task)
@@ -191,6 +191,17 @@ namespace Zetbox.API.Async
             return this;
         }
 
+        private void WaitOffThread()
+        {
+            lock (lockObj)
+            {
+                while (State != ZbTaskState.Finished)
+                {
+                    Monitor.Wait(lockObj);
+                }
+            }
+        }
+
         protected void CallAsyncContinuations()
         {
             lock (lockObj) State = ZbTaskState.AsyncContinuationsRunning;
@@ -230,7 +241,11 @@ namespace Zetbox.API.Async
                 action();
             }
 
-            lock (lockObj) State = ZbTaskState.Finished;
+            lock (lockObj)
+            {
+                State = ZbTaskState.Finished;
+                Monitor.PulseAll(lockObj);
+            }
         }
     }
 
