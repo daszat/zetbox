@@ -598,13 +598,20 @@ namespace Zetbox.Client.Models
             }
         }
 
+        private ZbTask _updateValueCacheTask;
         protected override ZbTask UpdateValueCache()
         {
-            return new ZbTask(ZbTask.Synchron, () =>
+            if (_updateValueCacheTask == null)
             {
-                _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
-                _valueCacheInititalized = true;
-            });
+                var mi = Object.GetType().GetMethod(string.Format("TriggerFetch{0}Async", Property.Name));
+                _updateValueCacheTask = (ZbTask)mi.Invoke(Object, null);
+                _updateValueCacheTask.OnResult(t =>
+                {
+                    _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
+                    _valueCacheInititalized = true;
+                });
+            }
+            return _updateValueCacheTask;
         }
         #endregion
 

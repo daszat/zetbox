@@ -1129,7 +1129,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             protected override void SetValueToModel(TimeSpan? value)
             {
-                if (Parent.GetValueFromModel() == null && value == null)
+                if (Parent.GetValueFromModel().Wait().Result == null && value == null)
                 {
                     Parent.SetValueToModel(null);
                 }

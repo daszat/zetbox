@@ -399,16 +399,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             base.OnPropertyChanged(propertyName);
         }
 
+        private ZbTask<DataObjectViewModel> _fetchValueTask;
         protected override ZbTask<DataObjectViewModel> GetValueFromModel()
         {
-            return new ZbTask<DataObjectViewModel>(ZbTask.Synchron, () =>
+            if (_fetchValueTask == null)
             {
-                if (!_valueCacheInititalized)
+                _fetchValueTask = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync())
+                .OnResult(t =>
                 {
-                    UpdateValueCache();
-                }
-                return _valueCache;
-            });
+                    if (!_valueCacheInititalized)
+                    {
+                        var obj = ValueModel.Value;
+                        if (obj != null)
+                        {
+                            _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), ValueModel.Value);
+                            EnsureValuePossible(_valueCache);
+                        }
+                        _valueCacheInititalized = true;
+                    }
+                    t.Result = _valueCache;
+                });
+            }
+
+            return _fetchValueTask;
         }
 
         protected override void SetValueToModel(DataObjectViewModel value)
@@ -437,17 +450,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             _valueCache = null;
             _valueCacheInititalized = false;
-        }
-
-        private void UpdateValueCache()
-        {
-            var obj = ValueModel.Value;
-            if (obj != null)
-            {
-                _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), ValueModel.Value);
-                EnsureValuePossible(_valueCache);
-            }
-            _valueCacheInititalized = true;
+            _fetchValueTask = null; // TODO: ???
         }
         #endregion
 
