@@ -223,6 +223,10 @@ namespace Zetbox.Client.Models
             }
         }
 
+        /// <summary>
+        /// This method is called if a change in the underlying property is detected.
+        /// It must invalidate all caches so that the next call to GetUntypedValue will return the new underlying value.
+        /// </summary>
         protected abstract ZbTask UpdateValueCache();
 
         public Property Property { get; private set; }
