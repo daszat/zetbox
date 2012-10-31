@@ -536,7 +536,7 @@ namespace Zetbox.Client.Models
 
         public override ZbTask<TValue> GetValueAsync()
         {
-            return new ZbTask<TValue>(ZbTask.Synchron, () => Value);
+            return new ZbTask<TValue>(UpdateValueCache()).OnResult(t => t.Result = _valueCache);
         }
 
         protected override ZbTask UpdateValueCache()

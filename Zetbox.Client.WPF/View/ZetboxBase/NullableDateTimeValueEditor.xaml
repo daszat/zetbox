@@ -33,7 +33,7 @@
                  MinWidth="60"
                  Text="{Binding TimePartString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                  IsReadOnly="{Binding IsReadOnly}"
-                 styles:Controls.Highlight="{Binding Highlight}"
+                 styles:Controls.Highlight="{Binding HighlightAsync}"
                  KeyboardNavigation.TabIndex="1"
                  Visibility="{Binding TimePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
@@ -43,7 +43,7 @@
                        IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                        KeyboardNavigation.TabIndex="0"
                        KeyboardNavigation.TabNavigation="Local"
-                       styles:Controls.Highlight="{Binding Highlight}"
+                    styles:Controls.Highlight="{Binding HighlightAsync}"
                        PreviewKeyDown="txtDate_PreviewKeyDown"
                        SelectedDateChanged="txtDate_SelectedDateChanged" />
     </DockPanel>

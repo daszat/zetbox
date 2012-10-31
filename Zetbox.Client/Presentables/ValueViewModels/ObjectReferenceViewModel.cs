@@ -691,6 +691,25 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight;
             }
         }
+
+        private Highlight _highlightAsyncCache;
+        public override Highlight HighlightAsync
+        {
+            get
+            {
+                GetValueFromModel()
+                    .OnResult(t =>
+                    {
+                        var tmp = this.Highlight;
+                        if (_highlightAsyncCache != tmp)
+                        {
+                            _highlightAsyncCache = tmp;
+                            OnPropertyChanged("HighlightAsync");
+                        }
+                    });
+                return _highlightAsyncCache;
+            }
+        }
         #endregion
     }
 }

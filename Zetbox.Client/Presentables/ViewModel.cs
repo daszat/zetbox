@@ -124,14 +124,14 @@ namespace Zetbox.Client.Presentables
             _dependencies = dependencies;
             DataContext = dataCtx;
 
-            if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight") OnPropertyChanged("Highlight"); };
+            if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight") OnHighlightChanged(); };
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
         }
 
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("IsEnabled");
-            OnPropertyChanged("Highlight");
+            OnHighlightChanged();
         }
 
         #region Public interface
@@ -186,7 +186,7 @@ namespace Zetbox.Client.Presentables
                 {
                     _isEnabled = value;
                     OnPropertyChanged("IsEnabled");
-                    OnPropertyChanged("Highlight");
+                    OnHighlightChanged();
                 }
             }
         }
@@ -285,6 +285,20 @@ namespace Zetbox.Client.Presentables
                 if (Parent != null && Parent.Highlight != Highlight.None) return Parent.Highlight;
                 return Highlight.None;
             }
+        }
+
+        public virtual Highlight HighlightAsync
+        {
+            get
+            {
+                return Highlight;
+            }
+        }
+
+        public void OnHighlightChanged()
+        {
+            OnPropertyChanged("Highlight");
+            OnPropertyChanged("HighlightAsync");
         }
 
         private Icon _icon;

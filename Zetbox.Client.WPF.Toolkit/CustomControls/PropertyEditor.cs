@@ -52,7 +52,7 @@ namespace Zetbox.Client.WPF.CustomControls
             MinWidth = 100;
 
             this.GotFocus += new RoutedEventHandler(PropertyEditor_GotFocus);
-            BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("Highlight") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("HighlightAsync") { Mode = BindingMode.OneWay });
         }
 
         protected abstract FrameworkElement MainControl { get; }

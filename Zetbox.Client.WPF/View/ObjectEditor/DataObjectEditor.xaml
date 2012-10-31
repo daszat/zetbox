@@ -24,7 +24,7 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <!-- TODO: Background="{Binding Highlight, Converter={StaticResource HighlightPanelBackgroundConverter}}"-->
+    <!-- TODO: Background="{Binding HighlightAsync, Converter={StaticResource HighlightPanelBackgroundConverter}}"-->
     <DockPanel>
         <DockPanel DockPanel.Dock="Top"
                    Margin="{StaticResource AreaGroup1Margin}">

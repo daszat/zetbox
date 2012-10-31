@@ -1930,13 +1930,13 @@
            TargetType="ListViewItem"
            BasedOn="{StaticResource zbListViewItemTemplate}">
         <Setter Property="styles:Controls.Highlight"
-                Value="{Binding Highlight}" />
+                Value="{Binding HighlightAsync}" />
     </Style>
 
     <Style x:Key="ListBoxItemContainerStyle"
            TargetType="ListBoxItem">
         <Setter Property="styles:Controls.Highlight"
-                Value="{Binding Highlight}" />
+                Value="{Binding HighlightAsync}" />
     </Style>
 
     <!-- Force GridView content to be stretched -->
@@ -1950,7 +1950,7 @@
     <Style x:Key="DataGridItemContainerStyle"
            TargetType="{x:Type DataGridRow}">
         <Setter Property="styles:Controls.Highlight"
-                Value="{Binding Highlight}" />
+                Value="{Binding HighlightAsync}" />
     </Style>
 
     <!-- NavigationBreadCrumb -->

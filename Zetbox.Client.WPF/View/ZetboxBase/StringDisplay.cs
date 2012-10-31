@@ -46,9 +46,9 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             // InitializeComponent
             this.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 
-            BindingOperations.SetBinding(this, TextBlock.TextProperty, new Binding("FormattedValue") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, TextBlock.TextProperty, new Binding("FormattedValueAsync") { Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(this, TextBlock.ToolTipProperty, new Binding("ToolTip") { Mode = BindingMode.OneWay });
-            BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("Highlight") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("HighlightAsync") { Mode = BindingMode.OneWay });
         }
     }
 }

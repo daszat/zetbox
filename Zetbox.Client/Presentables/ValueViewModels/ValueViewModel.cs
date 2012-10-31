@@ -75,7 +75,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         void Context_IsElevatedModeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("IsReadOnly");
-            OnPropertyChanged("Highlight");
+            OnHighlightChanged();
         }
 
         public IValueModel ValueModel { get; private set; }
@@ -115,7 +115,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         protected virtual void NotifyValueChanged()
         {
             OnPropertyChanged("Value");
-            OnPropertyChanged("Highlight");
+            OnHighlightChanged();
             OnFormattedValueChanged();
             OnPropertyChanged("IsNull");
             OnPropertyChanged("HasValue");
@@ -177,7 +177,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     _IsReadOnly = value;
                     OnPropertyChanged("IsReadOnly");
-                    OnPropertyChanged("Highlight");
+                    OnHighlightChanged();
                 }
             }
         }
@@ -220,15 +220,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region IFormattedValueViewModel Members
 
-        public abstract string FormattedValue
-        {
-            get;
-            set;
-        }
+        public abstract string FormattedValue { get; set; }
+        public abstract string FormattedValueAsync { get; }
 
         protected virtual void OnFormattedValueChanged()
         {
             OnPropertyChanged("FormattedValue");
+            OnPropertyChanged("FormattedValueAsync");
         }
 
         #endregion
@@ -446,6 +444,25 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     // implicit via state machine
                     //OnFormattedValueChanged("FormattedValue");
                 }
+            }
+        }
+
+        private string _formattedValueAsyncCache;
+        public override string FormattedValueAsync
+        {
+            get 
+            {
+                GetValueFromModel()
+                    .OnResult(t =>
+                    {
+                        var tmp = FormattedValue;
+                        if (_formattedValueAsyncCache != tmp)
+                        {
+                            _formattedValueAsyncCache = tmp;
+                            OnPropertyChanged("FormattedValueAsync");
+                        }
+                    });
+                return _formattedValueAsyncCache;
             }
         }
         #endregion

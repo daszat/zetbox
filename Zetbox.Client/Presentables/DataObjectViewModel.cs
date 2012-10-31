@@ -62,7 +62,7 @@ namespace Zetbox.Client.Presentables
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("IsReadOnly");
-            OnPropertyChanged("Highlight");
+            OnHighlightChanged();
         }
 
         #region Property Management
