@@ -200,11 +200,10 @@ namespace Zetbox.API.Async
             return this;
         }
 
-        public ZbTask Wait()
+        public void Wait()
         {
             if (innerZbTask != null) innerZbTask.Wait();
             CallResultActions();
-            return this;
         }
 
         protected void CallAsyncContinuations()
@@ -284,12 +283,6 @@ namespace Zetbox.API.Async
         public ZbTask<TResult> OnResult(Action<ZbTask<TResult>> continuationAction)
         {
             OnResult((ZbTask _) => continuationAction(this));
-            return this;
-        }
-
-        public new ZbTask<TResult> Wait()
-        {
-            base.Wait();
             return this;
         }
 
