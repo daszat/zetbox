@@ -22,11 +22,10 @@ namespace Zetbox.DalProvider.Client
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
-
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Client;
     using Zetbox.API.Client.PerfCounter;
-    using Zetbox.API.Async;
 
     // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
@@ -58,12 +57,12 @@ namespace Zetbox.DalProvider.Client
 
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)_provider.GetListCall<T>(this._expression)).GetEnumerator();
+            return ((IEnumerable<T>)_provider.GetListCallAsync<T>(this._expression).Result).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)_provider.GetListCall<T>(this._expression)).GetEnumerator();
+            return ((IEnumerable)_provider.GetListCallAsync<T>(this._expression).Result).GetEnumerator();
         }
 
         #endregion
@@ -88,12 +87,20 @@ namespace Zetbox.DalProvider.Client
 
         ZbTask<IEnumerator> IAsyncQueryable.GetEnumeratorAsync()
         {
-            return new ZbTask<IEnumerator>(ZbTask.Synchron, () => ((IEnumerable)_provider.GetListCall<T>(this._expression)).GetEnumerator());
+            var getTask = _provider.GetListCallAsync<T>(this._expression);
+            return new ZbTask<IEnumerator>(getTask).OnResult(t =>
+            {
+                t.Result = ((IEnumerable)getTask.Result).GetEnumerator();
+            });
         }
 
         ZbTask<IEnumerator<T>> IAsyncQueryable<T>.GetEnumeratorAsync()
         {
-            return new ZbTask<IEnumerator<T>>(ZbTask.Synchron, () => ((IEnumerable<T>)_provider.GetListCall<T>(this._expression)).GetEnumerator());
+            var getTask = _provider.GetListCallAsync<T>(this._expression);
+            return new ZbTask<IEnumerator<T>>(getTask).OnResult(t =>
+            {
+                t.Result = ((IEnumerable<T>)getTask.Result).GetEnumerator();
+            });
         }
     }
 }

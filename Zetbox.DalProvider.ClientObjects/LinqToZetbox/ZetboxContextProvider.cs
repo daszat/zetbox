@@ -84,12 +84,6 @@ namespace Zetbox.DalProvider.Client
         }
 
         #region CallService
-        private List<IDataObject> VisitAndCallService(Expression e, out List<IStreamable> auxObjects)
-        {
-            e = TransformExpression(e);
-            Visit(e);
-            return _proxy.GetList(_type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
-        }
 
         private Expression TransformExpression(Expression e)
         {
@@ -105,89 +99,107 @@ namespace Zetbox.DalProvider.Client
         internal ZbTask<List<IDataObject>> GetListOfCallAsync(int ID, string propertyName)
         {
             // ResetState();
-            List<IStreamable> auxObjects = null;
-            return new ZbTask<List<IDataObject>>(() =>
+            var serviceTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
             {
-                return _proxy.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
-            })
-            .OnResult(t =>
-            {
-                List<IDataObject> result = new List<IDataObject>();
-
-                foreach (IDataObject obj in t.Result)
-                {
-                    result.Add((IDataObject)_context.AttachRespectingIsolationLevel(obj));
-                }
-
-                foreach (IPersistenceObject obj in auxObjects)
-                {
-                    _context.AttachRespectingIsolationLevel(obj);
-                }
-
-                _context.PlaybackNotifications();
-                t.Result = result;
+                List<IStreamable> auxObjects;
+                var result = _proxy.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
+                return new Tuple<List<IDataObject>, List<IStreamable>>(result, auxObjects);
             });
+
+            return new ZbTask<List<IDataObject>>(serviceTask)
+                .OnResult(t =>
+                {
+                    t.Result = new List<IDataObject>();
+
+                    foreach (IDataObject obj in serviceTask.Result.Item1)
+                    {
+                        t.Result.Add((IDataObject)_context.AttachRespectingIsolationLevel(obj));
+                    }
+
+                    foreach (IPersistenceObject obj in serviceTask.Result.Item2)
+                    {
+                        _context.AttachRespectingIsolationLevel(obj);
+                    }
+
+                    _context.PlaybackNotifications();
+                });
         }
 
         /// <summary>
-        /// Performs a GetListCall
+        /// Performs a GetListCallAsync
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
-        internal List<T> GetListCall<T>(Expression e)
+        internal ZbTask<List<T>> GetListCallAsync<T>(Expression e)
         {
             int objectCount = 0;
             var ticks = perfCounter.IncrementQuery(_type);
-            try
+
+            ResetState();
+
+            if (Logging.Linq.IsInfoEnabled)
             {
-                ResetState();
-
-                if (Logging.Linq.IsInfoEnabled)
-                {
-                    Logging.Linq.Info(e.ToString());
-                }
-
-                List<IStreamable> auxObjects;
-                var serviceResult = VisitAndCallService(e, out auxObjects).Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
-                // prepare caches
-                foreach (IPersistenceObject obj in auxObjects)
-                {
-                    _context.AttachRespectingIsolationLevel(obj);
-                }
-                objectCount = serviceResult.Count;
-
-                // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
-                var result = _context.IsModified ? QueryFromLocalObjectsHack(_type).Cast<IDataObject>().ToList() : serviceResult;
-
-                _context.PlaybackNotifications();
-
-                // Projection
-                if (e.IsMethodCallExpression("Select"))
-                {
-                    // Get Selector and SourceType
-                    // Sourcetype should be of type IDataObject
-                    MethodCallExpression me = e as MethodCallExpression;
-                    LambdaExpression selector = (LambdaExpression)me.Arguments[1].StripQuotes();
-                    Type sourceType = selector.Parameters[0].Type;
-
-                    // AddSelector needs a list of the correct type, so we add a cast before selecting
-                    // TODO: revisit with covariant structures
-                    IQueryable selectResult = result.AsQueryable().AddCast(sourceType).AddSelector(selector, sourceType, selector.Body.Type); // typeof(T).FindElementTypes().First());
-                    return selectResult.Cast<T>().ToList();
-                }
-                else
-                {
-                    return result.Cast<T>().ToList();
-                }
+                Logging.Linq.Info(e.ToString());
             }
-            finally
-            {
-                perfCounter.DecrementQuery(_type, objectCount, ticks);
-            }
+
+            e = TransformExpression(e);
+            Visit(e);
+
+            var getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
+                {
+                    List<IStreamable> auxObjects;
+                    var list = _proxy.GetList(_type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
+                    return new Tuple<List<IDataObject>, List<IStreamable>>(list, auxObjects);
+                });
+
+            return new ZbTask<List<T>>(getListTask)
+                .OnResult(t =>
+                {
+                    try
+                    {
+                        // prepare caches
+                        foreach (IPersistenceObject obj in getListTask.Result.Item2)
+                        {
+                            _context.AttachRespectingIsolationLevel(obj);
+                        }
+
+                        var serviceResult = getListTask.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
+                        objectCount = serviceResult.Count;
+
+                        // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
+                        var result = _context.IsModified ? QueryFromLocalObjectsHack(_type).Cast<IDataObject>().ToList() : serviceResult;
+
+                        _context.PlaybackNotifications();
+
+                        // Projection
+                        if (e.IsMethodCallExpression("Select"))
+                        {
+                            // Get Selector and SourceType
+                            // Sourcetype should be of type IDataObject
+                            MethodCallExpression me = e as MethodCallExpression;
+                            LambdaExpression selector = (LambdaExpression)me.Arguments[1].StripQuotes();
+                            Type sourceType = selector.Parameters[0].Type;
+
+                            // AddSelector needs a list of the correct type, so we add a cast before selecting
+                            // TODO: revisit with covariant structures
+                            IQueryable selectResult = result.AsQueryable().AddCast(sourceType).AddSelector(selector, sourceType, selector.Body.Type); // typeof(T).FindElementTypes().First());
+                            t.Result = selectResult.Cast<T>().ToList();
+                        }
+                        else
+                        {
+                            t.Result = result.Cast<T>().ToList();
+                        }
+                    }
+                    finally
+                    {
+                        perfCounter.DecrementQuery(_type, objectCount, ticks);
+                    }
+                });
+
         }
 
         /// <summary>
-        /// Performs a GetListCall but returns a single Object
+        /// Performs a GetListCallAsync but returns a single Object
         /// </summary>
         /// <param name="e"></param>
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
@@ -242,27 +254,33 @@ namespace Zetbox.DalProvider.Client
 
             return task.OnResult(t =>
             {
-                if (e.IsMethodCallExpression("First"))
+                try
                 {
-                    t.Result = result.First();
+                    if (e.IsMethodCallExpression("First"))
+                    {
+                        t.Result = result.First();
+                    }
+                    else if (e.IsMethodCallExpression("FirstOrDefault"))
+                    {
+                        t.Result = result.FirstOrDefault();
+                    }
+                    else if (e.IsMethodCallExpression("Single"))
+                    {
+                        t.Result = result.Single();
+                    }
+                    else if (e.IsMethodCallExpression("SingleOrDefault"))
+                    {
+                        t.Result = result.SingleOrDefault();
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("Expression is not supported");
+                    }
                 }
-                else if (e.IsMethodCallExpression("FirstOrDefault"))
+                finally
                 {
-                    t.Result = result.FirstOrDefault();
+                    perfCounter.DecrementQuery(_type, result.Count, ticks);
                 }
-                else if (e.IsMethodCallExpression("Single"))
-                {
-                    t.Result = result.Single();
-                }
-                else if (e.IsMethodCallExpression("SingleOrDefault"))
-                {
-                    t.Result = result.SingleOrDefault();
-                }
-                else
-                {
-                    throw new NotSupportedException("Expression is not supported");
-                }
-                perfCounter.DecrementQuery(_type, result.Count, ticks);
             });
         }
 
