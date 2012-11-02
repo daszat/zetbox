@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace Zetbox.API.Async
 {
@@ -29,6 +29,27 @@ namespace Zetbox.API.Async
             else
             {
                 return new ZbTask<T>(ZbTask.Synchron, () => qry.SingleOrDefault(predicate));
+            }
+        }
+
+        public static ZbTask<List<T>> ToListAsync<T>(this IQueryable<T> qry)
+        {
+            if (qry is IAsyncQueryable<T>)
+            {
+                var asyncQry = (IAsyncQueryable<T>)qry;
+                var fetchTask = asyncQry.GetEnumeratorAsync();
+                return new ZbTask<List<T>>(fetchTask)
+                    .OnResult(t =>
+                    {
+                        t.Result = new List<T>();
+                        while (fetchTask.Result.MoveNext()) {
+                            t.Result.Add(fetchTask.Result.Current);
+                        }
+                    });
+            }
+            else
+            {
+                return new ZbTask<List<T>>(ZbTask.Synchron, () => qry.ToList());
             }
         }
     }
