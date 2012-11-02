@@ -313,9 +313,22 @@ namespace Zetbox.Client.Presentables
                 if (_icon != value)
                 {
                     _icon = value;
-                    OnPropertyChanged("Icon");
+                    OnIconChanged();
                 }
             }
+        }
+        public virtual Icon IconAsync
+        {
+            get
+            {
+                return Icon;
+            }
+        }
+
+        public void OnIconChanged()
+        {
+            OnPropertyChanged("Icon");
+            OnPropertyChanged("IconAsync");
         }
         #endregion
 
