@@ -289,7 +289,7 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public virtual List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
-            return GetListOfAsync<T>(obj, propertyName).Wait().Result;
+            return GetListOfAsync<T>(obj, propertyName).Result;
         }
 
         /// <summary>
@@ -314,7 +314,7 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry
         {
-            return FetchRelationAsync<T>(relationId, endRole, parent).Wait().Result;
+            return FetchRelationAsync<T>(relationId, endRole, parent).Result;
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]

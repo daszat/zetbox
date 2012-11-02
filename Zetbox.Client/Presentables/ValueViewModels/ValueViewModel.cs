@@ -342,8 +342,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                // Synchron implementation
-                return GetValueFromModel().Wait().Result;
+                return GetValueFromModel().Result;
             }
             set
             {
@@ -407,7 +406,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     case ValueViewModelState.Blurred_UnmodifiedValue:
                     case ValueViewModelState.ImplicitFocus_WritingModel:
-                        return FormatValue(this.GetValueFromModel().Wait().Result);
+                        return FormatValue(this.GetValueFromModel().Result);
                     case ValueViewModelState.Blurred_PartialUserInput:
                     case ValueViewModelState.ImplicitFocus_PartialUserInput:
                     case ValueViewModelState.Focused_PartialUserInput:
@@ -642,7 +641,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 case ValueViewModelState.Blurred_UnmodifiedValue:
                     try
                     {
-                        _partialUserInput = FormatValue(this.GetValueFromModel().Wait().Result);
+                        _partialUserInput = FormatValue(this.GetValueFromModel().Result);
                     }
                     finally
                     {
@@ -1138,7 +1137,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 return new ZbTask<TimeSpan?>(ZbTask.Synchron, () =>
                 {
-                    var val = Parent.GetValueFromModel().Wait().Result;
+                    var val = Parent.GetValueFromModel().Result;
                     if (val == null) return null;
                     return val.Value.TimeOfDay;
                 });
@@ -1146,13 +1145,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             protected override void SetValueToModel(TimeSpan? value)
             {
-                if (Parent.GetValueFromModel().Wait().Result == null && value == null)
+                if (Parent.GetValueFromModel().Result == null && value == null)
                 {
                     Parent.SetValueToModel(null);
                 }
                 else
                 {
-                    var date = (Parent.GetValueFromModel().Wait().Result ?? DateTime.MinValue).Date;
+                    var date = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).Date;
                     if (date == DateTime.MinValue.Date)
                     {
                         if (value == null || value == TimeSpan.Zero)
@@ -1247,7 +1246,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
                 else
                 {
-                    var time = (Parent.GetValueFromModel().Wait().Result ?? DateTime.MinValue).TimeOfDay;
+                    var time = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).TimeOfDay;
                     if (time == DateTime.MinValue.TimeOfDay)
                     {
                         if (value == DateTime.MinValue)
@@ -1592,7 +1591,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                UpdateValueCache(GetValueFromModel().Wait().Result);
+                UpdateValueCache(GetValueFromModel().Result);
                 return _year;
             }
             set
@@ -1611,7 +1610,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                UpdateValueCache(GetValueFromModel().Wait().Result);
+                UpdateValueCache(GetValueFromModel().Result);
                 return _month;
             }
             set
@@ -1649,7 +1648,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         private DateTime? GetValueFromComponents()
         {
-            var oldDate = GetValueFromModel().Wait().Result;
+            var oldDate = GetValueFromModel().Result;
             var localDateValid = Year != null && Month != null && Year > 0 && Month >= 1 && Month <= 12;
 
             if (localDateValid)

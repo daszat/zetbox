@@ -304,12 +304,12 @@ namespace Zetbox.DalProvider.Client
 
         public TResult Execute<TResult>(Expression expression)
         {
-            return this.ExecuteAsync<TResult>(expression).Wait().Result;
+            return this.ExecuteAsync<TResult>(expression).Result;
         }
 
         public object Execute(Expression expression)
         {
-            return this.ExecuteAsync(expression).Wait().Result;
+            return this.ExecuteAsync(expression).Result;
         }
 
         #endregion

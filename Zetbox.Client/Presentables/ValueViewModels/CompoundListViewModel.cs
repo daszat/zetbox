@@ -107,7 +107,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return GetValueFromModel().Wait().Result;
+                return GetValueFromModel().Result;
             }
             set
             {
