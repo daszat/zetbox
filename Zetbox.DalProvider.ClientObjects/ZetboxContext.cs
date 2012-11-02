@@ -963,47 +963,55 @@ namespace Zetbox.DalProvider.Client
             return GetFileInfo(ID).OpenRead();
         }
 
-        public FileInfo GetFileInfo(int ID)
-        {
-            var blob = this.Find<Zetbox.App.Base.Blob>(ID);
-
-            string path = Path.Combine(DocumentCache, blob.StoragePath);
-            if (path.Length >= 256)
-            {
-                var dir = Path.GetDirectoryName(path);
-                if (dir.Length >= 256 - 41 - 4)
-                {
-                    throw new PathTooLongException("DocumentCache path is far too long. Should be less then 256 - 41 for guid and 4 for extension. Path includes DocumentStore\\year\\month\\day. FullPath: " + path);
-                }
-                var name = Path.GetFileNameWithoutExtension(path);
-                var ext = Path.GetExtension(path);
-                name = name.Substring(0, 255 - dir.Length - ext.Length);
-                path = Path.Combine(dir, name + ext);
-            }
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
-
-            if (!File.Exists(path))
-            {
-                using (var stream = proxy.GetBlobStream(ID))
-                using (var file = new FileStream(path, FileMode.Create, FileAccess.Write))
-                {
-                    file.SetLength(0);
-                    stream.CopyAllTo(file);
-                }
-                File.SetAttributes(path, FileAttributes.ReadOnly);
-            }
-
-            return new FileInfo(path);
-        }
-
         public ZbTask<Stream> GetStreamAsync(int ID)
         {
-            return new ZbTask<Stream>(GetStream(ID));
+            var task = GetFileInfoAsync(ID);
+            return new ZbTask<Stream>(task).OnResult(t => t.Result = task.Result.OpenRead());
         }
 
+        public FileInfo GetFileInfo(int ID)
+        {
+            return GetFileInfoAsync(ID).Result;
+        }
+
+        private static readonly object _cacheFileLock = new object();
         public ZbTask<FileInfo> GetFileInfoAsync(int ID)
         {
-            return new ZbTask<FileInfo>(GetFileInfo(ID));
+            var blobTask = this.FindAsync<Zetbox.App.Base.Blob>(ID);
+            return new ZbTask<FileInfo>(blobTask)
+                .ContinueWith(t =>
+                {
+                    string path = Path.Combine(DocumentCache, blobTask.Result.StoragePath);
+                    if (path.Length >= 256)
+                    {
+                        var dir = Path.GetDirectoryName(path);
+                        if (dir.Length >= 256 - 41 - 4)
+                        {
+                            throw new PathTooLongException("DocumentCache path is far too long. Should be less then 256 - 41 for guid and 4 for extension. Path includes DocumentStore\\year\\month\\day. FullPath: " + path);
+                        }
+                        var name = Path.GetFileNameWithoutExtension(path);
+                        var ext = Path.GetExtension(path);
+                        name = name.Substring(0, 255 - dir.Length - ext.Length);
+                        path = Path.Combine(dir, name + ext);
+                    }
+                    Directory.CreateDirectory(Path.GetDirectoryName(path));
+
+                    lock (_cacheFileLock)
+                    {
+                        if (!File.Exists(path))
+                        {
+                            using (var stream = proxy.GetBlobStream(ID))
+                            using (var file = new FileStream(path, FileMode.Create, FileAccess.Write))
+                            {
+                                file.SetLength(0);
+                                stream.CopyAllTo(file);
+                            }
+                            File.SetAttributes(path, FileAttributes.ReadOnly);
+                        }
+                    }
+
+                    t.Result = new FileInfo(path);
+                });
         }
 
         #region IDebuggingZetboxContext Members
