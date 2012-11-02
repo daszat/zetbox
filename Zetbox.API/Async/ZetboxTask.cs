@@ -59,7 +59,7 @@ namespace Zetbox.API.Async
         public ZbTaskState State
         {
             get;
-            private set;
+            protected set;
         }
 
         public object GetAwaiter()
@@ -260,6 +260,13 @@ namespace Zetbox.API.Async
         public ZbTask(Func<TResult> task)
             : this(SynchronizationContext.Current, task)
         {
+        }
+
+        public ZbTask(TResult result)
+            : base(ZbTask.Synchron)
+        {
+            _result = result;
+            State = ZbTaskState.Finished;
         }
 
         public ZbTask(SynchronizationContext syncContext, Func<TResult> task)
