@@ -123,6 +123,7 @@ namespace Zetbox.Client.WPF
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                     InitCulture(config);
+                    InfoLoggingProxyDecorator.SetUiThread(System.Threading.Thread.CurrentThread);
                     InitializeClient(args, config);
                 }
             }

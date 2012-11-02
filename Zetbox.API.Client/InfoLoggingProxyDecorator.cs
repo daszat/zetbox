@@ -22,14 +22,31 @@ namespace Zetbox.API.Client
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
+    using System.Threading;
     using Zetbox.API.Utils;
 
     /// <summary>
     /// A simple decorator to log all calls to the decorated proxy
     /// </summary>
-    [DebuggerStepThrough]
-    internal class InfoLoggingProxyDecorator : IProxy
+    public class InfoLoggingProxyDecorator : IProxy
     {
+        private static Thread _uiThread = null;
+        [Conditional("DEBUG")]
+        public static void SetUiThread(Thread uiThread)
+        {
+            _uiThread = uiThread;
+        }
+
+        [Conditional("DEBUG")]
+        private static void CheckUiThread()
+        {
+            if (_uiThread == null) return;
+            if (_uiThread == Thread.CurrentThread)
+            {
+                Logging.Facade.Warn("Calling Proxy on UI Thread");
+            }
+        }
+
         private readonly IProxy _implementor;
         internal InfoLoggingProxyDecorator(IProxy implementor)
         {
@@ -40,6 +57,7 @@ namespace Zetbox.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetList", "Type=[{0}]", ifType.ToString()))
             {
+                CheckUiThread();
                 try
                 {
                     return _implementor.GetList(ctx, ifType, maxListCount, eagerLoadLists, filter, orderBy, out auxObjects);
@@ -56,6 +74,7 @@ namespace Zetbox.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetListOf", "{0} [{1}].{2}", ifType, ID, property))
             {
+                CheckUiThread();
                 try
                 {
                     return _implementor.GetListOf(ctx, ifType, ID, property, out  auxObjects);
@@ -72,6 +91,7 @@ namespace Zetbox.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCall("SetObjects"))
             {
+                CheckUiThread();
                 try
                 {
                     return _implementor.SetObjects(ctx, objects, notificationRequests);
@@ -88,6 +108,7 @@ namespace Zetbox.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod", "ID=[{0}]", ID))
             {
+                CheckUiThread();
                 try
                 {
                     return _implementor.InvokeServerMethod(ctx, ifType, ID, method, retValType, parameterTypes, parameter, objects, notificationRequests, out changedObjects, out auxObjects);
@@ -104,6 +125,7 @@ namespace Zetbox.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("FetchRelation", "Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parent.ID))
             {
+                CheckUiThread();
                 try
                 {
                     return _implementor.FetchRelation<T>(ctx, relationId, role, parent, out auxObjects);
@@ -120,6 +142,7 @@ namespace Zetbox.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetBlobStream", "ID=[{0}]", ID))
             {
+                CheckUiThread();
                 try
                 {
                     return _implementor.GetBlobStream(ID);
@@ -136,6 +159,7 @@ namespace Zetbox.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("SetBlobStream", "filename=[{0}]", filename))
             {
+                CheckUiThread();
                 try
                 {
                     return _implementor.SetBlobStream(ctx, stream, filename, mimetype);
