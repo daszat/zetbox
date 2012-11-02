@@ -292,6 +292,16 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
+        public ZbTask<System.IO.Stream> GetStreamAsync(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
+        public ZbTask<System.IO.FileInfo> GetFileInfoAsync(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
         public InterfaceType GetInterfaceType(Type t)
         {
             return _iftFactory(t);

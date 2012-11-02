@@ -564,6 +564,18 @@ namespace Zetbox.API
             throw new NotSupportedException();
         }
 
+        /// <summary>Not implemented.</summary>
+        ZbTask<System.IO.Stream> IReadOnlyZetboxContext.GetStreamAsync(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not implemented.</summary>
+        ZbTask<System.IO.FileInfo> IReadOnlyZetboxContext.GetFileInfoAsync(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
         public InterfaceType GetInterfaceType(IPersistenceObject obj)
         {
             return _iftFactory(((BasePersistenceObject)obj).GetImplementedInterface());

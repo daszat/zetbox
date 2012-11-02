@@ -726,6 +726,16 @@ namespace Zetbox.API.Server
             return new FileInfo(path);
         }
 
+        public ZbTask<Stream> GetStreamAsync(int ID)
+        {
+            return new ZbTask<Stream>(GetStream(ID));
+        }
+
+        public ZbTask<FileInfo> GetFileInfoAsync(int ID)
+        {
+            return new ZbTask<FileInfo>(GetFileInfo(ID));
+        }
+
         /// <inheritdoc />
         public event GenericEventHandler<IZetboxContext> Changed;
         protected virtual void OnChanged()

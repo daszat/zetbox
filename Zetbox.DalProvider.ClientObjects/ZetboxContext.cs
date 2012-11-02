@@ -950,17 +950,17 @@ namespace Zetbox.DalProvider.Client
             }
         }
 
-        public Stream GetStream(int ID)
-        {
-            return GetFileInfo(ID).OpenRead();
-        }
-
         private string DocumentCache
         {
             get
             {
                 return Path.Combine(config.TempFolder, "cache");
             }
+        }
+
+        public Stream GetStream(int ID)
+        {
+            return GetFileInfo(ID).OpenRead();
         }
 
         public FileInfo GetFileInfo(int ID)
@@ -994,6 +994,16 @@ namespace Zetbox.DalProvider.Client
             }
 
             return new FileInfo(path);
+        }
+
+        public ZbTask<Stream> GetStreamAsync(int ID)
+        {
+            return new ZbTask<Stream>(GetStream(ID));
+        }
+
+        public ZbTask<FileInfo> GetFileInfoAsync(int ID)
+        {
+            return new ZbTask<FileInfo>(GetFileInfo(ID));
         }
 
         #region IDebuggingZetboxContext Members

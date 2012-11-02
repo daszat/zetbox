@@ -336,6 +336,8 @@ namespace Zetbox.API
 
         System.IO.Stream GetStream(int ID);
         System.IO.FileInfo GetFileInfo(int ID);
+        ZbTask<System.IO.Stream> GetStreamAsync(int ID);
+        ZbTask<System.IO.FileInfo> GetFileInfoAsync(int ID);
 
         /// <summary>
         /// IsDisposed can be used to detect whether this IZetboxContext was aborted with Dispose()
