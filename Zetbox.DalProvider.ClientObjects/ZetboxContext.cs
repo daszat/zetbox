@@ -243,7 +243,7 @@ namespace Zetbox.DalProvider.Client
             return new ZbTask<List<T>>(task)
             .OnResult(t =>
             {
-                t.Result =  task.Result.Cast<T>().ToList();
+                t.Result = task.Result.Cast<T>().ToList();
             });
         }
 
@@ -256,25 +256,29 @@ namespace Zetbox.DalProvider.Client
 
         public ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
         {
-            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
+            var fetchTask = new ZbTask<Tuple<IEnumerable<T>, List<IStreamable>>>(() =>
             {
-                List<IStreamable> auxObjects;
+                 List<IStreamable> auxObjects;
                 var serverList = proxy.FetchRelation<T>(this, relationId, role, container, out auxObjects);
-
-                foreach (IPersistenceObject obj in auxObjects)
-                {
-                    this.AttachRespectingIsolationLevel(obj);
-                }
-
-                var result = new List<T>();
-                foreach (IPersistenceObject obj in serverList)
-                {
-                    var localobj = this.AttachRespectingIsolationLevel(obj);
-                    result.Add((T)localobj);
-                }
-                PlaybackNotifications();
-                return result;
+                return new Tuple<IEnumerable<T>,List<IStreamable>>(serverList, auxObjects);
             });
+
+            return new ZbTask<IList<T>>(fetchTask)
+                .OnResult(t =>
+                {
+                    foreach (IPersistenceObject obj in fetchTask.Result.Item2)
+                    {
+                        this.AttachRespectingIsolationLevel(obj);
+                    }
+
+                    t.Result = new List<T>();
+                    foreach (IPersistenceObject obj in fetchTask.Result.Item1)
+                    {
+                        var localobj = this.AttachRespectingIsolationLevel(obj);
+                        t.Result.Add((T)localobj);
+                    }
+                    PlaybackNotifications();
+                });
         }
 
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
