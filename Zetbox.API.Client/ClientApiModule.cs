@@ -26,6 +26,7 @@ namespace Zetbox.API.Client
     public sealed class ClientApiModule
         : Autofac.Module
     {
+
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
@@ -33,6 +34,7 @@ namespace Zetbox.API.Client
             moduleBuilder
                 .Register<ProxyImplementation>(c => new ProxyImplementation(
                     c.Resolve<InterfaceType.Factory>(),
+                    c.Resolve<UnattachedObjectFactory>(),
                     c.Resolve<Zetbox.API.Client.ZetboxService.IZetboxService>(),
                     c.Resolve<IPerfCounter>(),
                     c.Resolve<ZetboxStreamReader.Factory>(),

@@ -33,23 +33,26 @@ namespace Zetbox.DalProvider.Client
     public sealed class ClientProvider
         : Autofac.Module
     {
+        private const string CLIENT_ASSEMBLY_NAME = "Zetbox.Objects.ClientImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.Register((c,p) =>
+            moduleBuilder.Register((c, p) =>
                 {
                     var ilp = p.FirstOrDefault() as TypedParameter;
                     var il = ilp != null ? (ClientIsolationLevel)ilp.Value : ClientIsolationLevel.PrefereClientData;
-                    
+
                     return new ZetboxContextImpl(
                         il,
                         c.Resolve<ZetboxConfig>(),
                         c.Resolve<IProxy>(),
-                        "Zetbox.Objects.ClientImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf",
+                        CLIENT_ASSEMBLY_NAME,
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<ClientImplementationType.ClientFactory>(),
+                        c.Resolve<UnattachedObjectFactory>(),
                         c.Resolve<IPerfCounter>(),
                         c.Resolve<IIdentityResolver>());
                 })
@@ -68,6 +71,19 @@ namespace Zetbox.DalProvider.Client
                 .As<ClientImplementationType>()
                 .As<ImplementationType>()
                 .InstancePerDependency();
+
+            // the following function has to be thread-independent of any context to allow the proxy to be async
+            moduleBuilder.Register<UnattachedObjectFactory>(c =>
+                {
+                    var clientFactory = c.Resolve<ClientImplementationType.ClientFactory>();
+                    var lazyContext = c.Resolve<Func<IFrozenContext>>();
+
+                    return (UnattachedObjectFactory)(ifType =>
+                    {
+                        return (IPersistenceObject)Activator.CreateInstance(clientFactory(Type.GetType(ifType.Type.FullName + "Client" + Zetbox.API.Helper.ImplementationSuffix + "," + CLIENT_ASSEMBLY_NAME, true)).Type, lazyContext);
+                    });
+                })
+                .SingleInstance();
         }
     }
 }

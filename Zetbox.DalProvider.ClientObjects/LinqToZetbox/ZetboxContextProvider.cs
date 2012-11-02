@@ -88,7 +88,7 @@ namespace Zetbox.DalProvider.Client
         {
             e = TransformExpression(e);
             Visit(e);
-            return _proxy.GetList(_context, _type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
+            return _proxy.GetList(_type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
         }
 
         private Expression TransformExpression(Expression e)
@@ -108,7 +108,7 @@ namespace Zetbox.DalProvider.Client
             List<IStreamable> auxObjects = null;
             return new ZbTask<List<IDataObject>>(() =>
             {
-                return _proxy.GetListOf(_context, _type, ID, propertyName, out auxObjects).ToList();
+                return _proxy.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
             })
             .OnResult(t =>
             {
@@ -215,7 +215,7 @@ namespace Zetbox.DalProvider.Client
                 ZbTask<Tuple<List<IDataObject>, List<IStreamable>>> getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
                 {
                     List<IStreamable> auxObjects;
-                    List<IDataObject> serviceResult = _proxy.GetList(_context, _type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
+                    List<IDataObject> serviceResult = _proxy.GetList(_type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
                     return new Tuple<List<IDataObject>, List<IStreamable>>(serviceResult, auxObjects);
                 })
                 .OnResult(t =>

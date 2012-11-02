@@ -24,14 +24,14 @@ namespace Zetbox.DalProvider.Client
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Client;
     using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using Zetbox.DalProvider.Base;
-    using Zetbox.API.Common;
     using Zetbox.App.Extensions;
-    using Zetbox.API.Async;
+    using Zetbox.DalProvider.Base;
 
     public interface IZetboxClientContextInternals
     {
@@ -62,6 +62,7 @@ namespace Zetbox.DalProvider.Client
         private readonly Func<IFrozenContext> _lazyCtx;
         private readonly InterfaceType.Factory _iftFactory;
         private readonly ClientImplementationType.ClientFactory _implTypeFactory;
+        private readonly UnattachedObjectFactory _unattachedObjectFactory;
         private readonly ClientIsolationLevel _clientIsolationLevel;
         private readonly IPerfCounter _perfCounter;
         private readonly IIdentityResolver _identityResolver;
@@ -77,7 +78,7 @@ namespace Zetbox.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public ZetboxContextImpl(ClientIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver)
+        public ZetboxContextImpl(ClientIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             this._clientIsolationLevel = il;
@@ -88,6 +89,7 @@ namespace Zetbox.DalProvider.Client
             this._lazyCtx = lazyCtx;
             this._iftFactory = iftFactory;
             this._implTypeFactory = implTypeFactory;
+            this._unattachedObjectFactory = unattachedObjectFactory;
             this._perfCounter = perfCounter;
             this._identityResolver = identityResolver;
 
@@ -256,11 +258,13 @@ namespace Zetbox.DalProvider.Client
 
         public ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
         {
+            var parentId = container.ID;
+            var parentIfType = GetInterfaceType(container);
             var fetchTask = new ZbTask<Tuple<IEnumerable<T>, List<IStreamable>>>(() =>
             {
-                 List<IStreamable> auxObjects;
-                var serverList = proxy.FetchRelation<T>(this, relationId, role, container, out auxObjects);
-                return new Tuple<IEnumerable<T>,List<IStreamable>>(serverList, auxObjects);
+                List<IStreamable> auxObjects;
+                var serverList = proxy.FetchRelation<T>(relationId, role, parentId, parentIfType, out auxObjects);
+                return new Tuple<IEnumerable<T>, List<IStreamable>>(serverList, auxObjects);
             });
 
             return new ZbTask<IList<T>>(fetchTask)
@@ -360,7 +364,7 @@ namespace Zetbox.DalProvider.Client
 
         private object CreateUnattachedInstance(InterfaceType ifType)
         {
-            return Activator.CreateInstance(ToImplementationType(ifType).Type, _lazyCtx);
+            return _unattachedObjectFactory(ifType);
         }
 
         private IPersistenceObject CreateInternal(InterfaceType ifType)
@@ -669,7 +673,6 @@ namespace Zetbox.DalProvider.Client
             protected override IEnumerable<IPersistenceObject> ExecuteServerCall(ZetboxContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests)
             {
                 return ctx.proxy.SetObjects(
-                    ctx,
                     objectsToSubmit,
                     notificationRequests);
             }
@@ -934,7 +937,7 @@ namespace Zetbox.DalProvider.Client
 
         public int CreateBlob(Stream s, string filename, string mimetype)
         {
-            var blob = proxy.SetBlobStream(this, s, filename, mimetype);
+            var blob = proxy.SetBlobStream(s, filename, mimetype);
             Attach(blob);
             return blob.ID;
         }
@@ -1120,7 +1123,6 @@ namespace Zetbox.DalProvider.Client
                 IEnumerable<IPersistenceObject> changedObjects;
                 List<IStreamable> auxObjects;
                 Result = ctx.proxy.InvokeServerMethod(
-                    ctx,
                     ctx.GetInterfaceType(obj),
                     obj.ID,
                     name,
