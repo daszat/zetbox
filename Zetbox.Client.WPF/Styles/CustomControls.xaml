@@ -99,7 +99,7 @@
                                   IsSynchronizedWithCurrentItem="False"
                                   IsEditable="True"
                                   Text="{Binding SearchString, Mode=OneWayToSource}"
-                                  ItemsSource="{Binding PossibleValues, Mode=OneWay, ValidatesOnDataErrors=true}"
+                                  ItemsSource="{Binding PossibleValuesAsync, Mode=OneWay, ValidatesOnDataErrors=true}"
                                   SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                                   IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                                   HorizontalContentAlignment="Stretch">

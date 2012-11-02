@@ -474,17 +474,36 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
+        private ZbTask<ReadOnlyObservableCollection<ViewModel>> _getPossibleValuesROTask;
         private ReadOnlyObservableCollection<ViewModel> _possibleValuesRO;
         private ObservableCollection<ViewModel> _possibleValues;
         public ReadOnlyObservableCollection<ViewModel> PossibleValues
         {
             get
             {
-                if (_possibleValues == null)
+                TriggerPossibleValuesROAsync();
+                return _getPossibleValuesROTask.Result;
+            }
+        }
+
+        public ReadOnlyObservableCollection<ViewModel> PossibleValuesAsync
+        {
+            get
+            {
+                TriggerPossibleValuesROAsync();
+                return _possibleValuesRO;
+            }
+        }
+
+        private void TriggerPossibleValuesROAsync()
+        {
+            if (_getPossibleValuesROTask == null)
+            {
+                var task = GetPossibleValuesAsync();
+                _getPossibleValuesROTask = new ZbTask<ReadOnlyObservableCollection<ViewModel>>(task);
+                _getPossibleValuesROTask.OnResult(t =>
                 {
-                    bool needMoreButton;
-                    var mdlList = GetPossibleValues(out needMoreButton);
-                    if (needMoreButton)
+                    if (task.Result.Item2)
                     {
                         var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                             DataContext,
@@ -495,13 +514,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                             null,
                             null);
                         cmdMdl.RequestedKind = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_CommandLinkKind.Find(FrozenContext);
-                        mdlList.Add(cmdMdl);
+                        task.Result.Item1.Add(cmdMdl);
                     }
-                    _possibleValues = new ObservableCollection<ViewModel>(mdlList);
+                    _possibleValues = new ObservableCollection<ViewModel>(task.Result.Item1);
                     _possibleValuesRO = new ReadOnlyObservableCollection<ViewModel>(_possibleValues);
                     EnsureValuePossible(Value);
-                }
-                return _possibleValuesRO;
+                    OnPropertyChanged("PossibleValuesAsync");
+                });
             }
         }
 
@@ -517,14 +536,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             return (IQueryable)mi.Invoke(this, new object[0]);
         }
 
-        private static readonly List<ViewModel> _emptyPossibleValuesList = new List<ViewModel>();
-        protected virtual List<ViewModel> GetPossibleValues(out bool needMoreButton)
+        protected virtual ZbTask<Tuple<List<ViewModel>, bool>> GetPossibleValuesAsync()
         {
             // No selection allowed -> no inline search allowed
             if (!AllowSelectValue)
             {
-                needMoreButton = false;
-                return _emptyPossibleValuesList;
+                return new ZbTask<Tuple<List<ViewModel>, bool>>(new Tuple<List<ViewModel>, bool>(new List<ViewModel>(), false));
             }
 
             var qry = GetUntypedQuery(ReferencedClass);
@@ -532,28 +549,31 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             // Abort query of null was returned
             if (qry == null)
             {
-                needMoreButton = false;
-                return new List<ViewModel>();
+                return new ZbTask<Tuple<List<ViewModel>, bool>>(new Tuple<List<ViewModel>, bool>(new List<ViewModel>(), false));
             }
 
-            var lst = qry.Take(PossibleValuesLimit + 1).OfType<IDataObject>().ToList();
+            var fetchTask = qry.Take(PossibleValuesLimit + 1).OfType<IDataObject>().ToListAsync();
 
-            var mdlList = lst
-                        .Take(PossibleValuesLimit)
-                        .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), i))
-                        .Cast<ViewModel>()
-                        .OrderBy(v => v.Name)
-                        .ToList();
+            var lstTask = new ZbTask<Tuple<List<ViewModel>, bool>>(fetchTask)
+                .OnResult(t =>
+                {
+                    var mdlList = fetchTask.Result
+                                .Take(PossibleValuesLimit)
+                                .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), i))
+                                .Cast<ViewModel>()
+                                .OrderBy(v => v.Name)
+                                .ToList();
 
-            needMoreButton = lst.Count > PossibleValuesLimit;
+                    t.Result = new Tuple<List<ViewModel>, bool>(mdlList, mdlList.Count > PossibleValuesLimit);
 
-            // Add current value if not already present
-            if (Value != null && !mdlList.Contains(Value))
-            {
-                mdlList.Add(Value);
-            }
+                    // Add current value if not already present
+                    if (Value != null && !mdlList.Contains(Value))
+                    {
+                        mdlList.Add(Value);
+                    }
+                });
 
-            return mdlList;
+            return lstTask;
         }
 
         /// <summary>
@@ -645,7 +665,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             _possibleValues = null;
             _possibleValuesRO = null;
+            _getPossibleValuesROTask = null;
             OnPropertyChanged("PossibleValues");
+            OnPropertyChanged("PossibleValuesAsync");
         }
 
         public override string Error
