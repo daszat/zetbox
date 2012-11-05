@@ -66,19 +66,39 @@ namespace Zetbox.Client.Presentables.GUI
         {
             if (screen == null) throw new ArgumentNullException("screen");
 
-            if (CurrentIdentity == null) throw new UnresolvableIdentityException();
-
-            if (screen.Groups.Count != 0 && !CurrentIdentity.IsAdmininistrator() && !screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
-                throw new InvalidOperationException("The current identity is not allowed to see this screen. The screen should not be displayed! Check your filters.");
-
             _screen = screen;
             _screen.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_screen_PropertyChanged);
+        }
+
+        private bool? _hasAccess = null;
+        public bool HasAccess
+        {
+            get
+            {
+                if (_hasAccess == null)
+                {
+                    if (CurrentIdentity == null)
+                    {
+                        _hasAccess = false;
+                    }
+                    else if (_screen.Groups.Count != 0 && !CurrentIdentity.IsAdmininistrator() && !_screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
+                    {
+                        _hasAccess = false;
+                    }
+                    else
+                    {
+                        _hasAccess = true;
+                    }
+                }
+                return _hasAccess.Value;
+            }
         }
 
         public override ControlKind RequestedKind
         {
             get
             {
+                if (!HasAccess) return NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_AccessDeniedDataObjectKind.Find(FrozenContext);
                 return _screen.RequestedKind ?? base.RequestedKind;
             }
             set
@@ -169,7 +189,7 @@ namespace Zetbox.Client.Presentables.GUI
         {
             get
             {
-                if (_childrenRO == null)
+                if (HasAccess && _childrenRO == null)
                 {
                     _children = new ObservableCollection<NavigationEntryViewModel>();
                     foreach (var s in _screen.Children.Where(c => c.Groups.Count == 0 || CurrentIdentity.IsAdmininistrator() || c.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))))
@@ -187,7 +207,7 @@ namespace Zetbox.Client.Presentables.GUI
         {
             get
             {
-                if (_additionalCommandsRW == null)
+                if (HasAccess && _additionalCommandsRW == null)
                 {
                     _additionalCommandsRW = new ObservableCollection<CommandViewModel>(CreateAdditionalCommands());
                 }

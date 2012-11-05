@@ -30,33 +30,27 @@ namespace Zetbox.Client.Presentables.GUI
     {
         public new delegate NavigatorViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen root);
 
-        private readonly NavigationEntryViewModel _root;
-        private NavigationEntryViewModel _container;
-        private NavigationEntryViewModel _current;
-        private readonly ObservableCollection<NavigationEntryViewModel> _history;
-        private readonly ReadOnlyObservableCollection<NavigationEntryViewModel> _historyRO;
+        private readonly NavigationScreen _rootMdl;
+        private NavigationEntryViewModel _rootVmdl;
+        private NavigationEntryViewModel _containerScreen;
+        private NavigationEntryViewModel _currentScreen;
+        private ObservableCollection<NavigationEntryViewModel> _historyCollection;
+        private ReadOnlyObservableCollection<NavigationEntryViewModel> _historyCollectionRO;
 
-        private readonly ObservableCollection<NavigationEntryViewModel> _location;
-        private readonly ReadOnlyObservableCollection<NavigationEntryViewModel> _locationRO;
+        private ObservableCollection<NavigationEntryViewModel> _locationCollection;
+        private ReadOnlyObservableCollection<NavigationEntryViewModel> _locationCollectionRO;
 
         public NavigatorViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, NavigationScreen root)
             : base(dependencies, dataCtx, parent)
         {
-            _container = _current = _root = NavigationEntryViewModel.Fetch(ViewModelFactory, dataCtx, parent, root);
-            _container.Displayer = _current.Displayer = this;
-
-            _history = new ObservableCollection<NavigationEntryViewModel>() { _current };
-            _historyRO = new ReadOnlyObservableCollection<NavigationEntryViewModel>(_history);
-
-            _location = new ObservableCollection<NavigationEntryViewModel>() { _root };
-            _locationRO = new ReadOnlyObservableCollection<NavigationEntryViewModel>(_location);
+            _rootMdl = root;
         }
 
         #region Name
 
         public override string Name
         {
-            get { return GetTitle(_root, _current); }
+            get { return GetTitle(Root, CurrentScreen); }
         }
 
         private static string GetTitle(NavigationEntryViewModel root, NavigationEntryViewModel current)
@@ -68,6 +62,18 @@ namespace Zetbox.Client.Presentables.GUI
 
         #region Navigational Aides
 
+        private NavigationEntryViewModel Root
+        {
+            get
+            {
+                if (_rootVmdl == null)
+                {
+                    _rootVmdl = NavigationEntryViewModel.Fetch(ViewModelFactory, DataContext, Parent, _rootMdl);
+                }
+                return _rootVmdl;
+            }
+        }
+
         /// <summary>
         /// The top-most container of the CurrentScreen
         /// </summary>
@@ -75,15 +81,20 @@ namespace Zetbox.Client.Presentables.GUI
         {
             get
             {
-                return _container;
+                if (_containerScreen == null)
+                {
+                    _containerScreen = Root;
+                    _containerScreen.Displayer = CurrentScreen.Displayer = this;
+                }
+                return _containerScreen;
             }
 
             private set
             {
-                if (_container != value)
+                if (_containerScreen != value)
                 {
-                    _container = value;
-                    _container.Displayer = this;
+                    _containerScreen = value;
+                    _containerScreen.Displayer = this;
                     OnPropertyChanged("ContainerScreen");
                 }
             }
@@ -96,16 +107,20 @@ namespace Zetbox.Client.Presentables.GUI
         {
             get
             {
-                return _current;
+                if (_currentScreen == null)
+                {
+                    _currentScreen = ContainerScreen;
+                }
+                return _currentScreen;
             }
 
             private set
             {
-                if (_current != value)
+                if (_currentScreen != value)
                 {
-                    _current = value;
-                    _current.Displayer = this;
-                    _history.Add(_current);
+                    _currentScreen = value;
+                    _currentScreen.Displayer = this;
+                    _history.Add(_currentScreen);
                     UpdateLocation();
                     OnPropertyChanged("Name");
                     OnPropertyChanged("CurrentScreen");
@@ -116,9 +131,28 @@ namespace Zetbox.Client.Presentables.GUI
         /// <summary>
         /// The "path" to the CurrentScreen, as defined by its Parents.
         /// </summary>
+        private ObservableCollection<NavigationEntryViewModel> _location
+        {
+            get
+            {
+                if (_locationCollection == null)
+                {
+                    _locationCollection = new ObservableCollection<NavigationEntryViewModel>() { Root };
+                }
+                return _locationCollection;
+            }
+        }
+
         public ReadOnlyObservableCollection<NavigationEntryViewModel> Location
         {
-            get { return _locationRO; }
+            get
+            {
+                if (_locationCollectionRO == null)
+                {
+                    _locationCollectionRO = new ReadOnlyObservableCollection<NavigationEntryViewModel>(_location);
+                }
+                return _locationCollectionRO;
+            }
         }
 
         private void UpdateLocation()
@@ -159,12 +193,31 @@ namespace Zetbox.Client.Presentables.GUI
             ContainerScreen = _location.FirstOrDefault(s => s.IsContainer) ?? CurrentScreen;
         }
 
+        private ObservableCollection<NavigationEntryViewModel> _history
+        {
+            get
+            {
+                if (_historyCollection == null)
+                {
+                    _historyCollection = new ObservableCollection<NavigationEntryViewModel>() { CurrentScreen };
+                }
+                return _historyCollection;
+            }
+        }
+
         /// <summary>
         /// A list of recently visited screens.
         /// </summary>
         public ReadOnlyObservableCollection<NavigationEntryViewModel> History
         {
-            get { return _historyRO; }
+            get
+            {
+                if (_historyCollectionRO == null)
+                {
+                    _historyCollectionRO = new ReadOnlyObservableCollection<NavigationEntryViewModel>(_history);
+                }
+                return _historyCollectionRO;
+            }
         }
 
         #endregion
@@ -184,7 +237,7 @@ namespace Zetbox.Client.Presentables.GUI
                         NavigatorViewModelResources.HomeCommand_Name,
                         NavigatorViewModelResources.HomeCommand_Tooltip,
                         Home,
-                        () => CurrentScreen != _root,
+                        () => CurrentScreen != Root,
                         null);
                 }
                 return _HomeCommand;
@@ -193,7 +246,7 @@ namespace Zetbox.Client.Presentables.GUI
 
         public void Home()
         {
-            CurrentScreen = _root;
+            CurrentScreen = Root;
         }
 
         private ICommandViewModel _BackCommand = null;
