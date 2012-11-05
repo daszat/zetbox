@@ -35,7 +35,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             {
                 ViewModel.PropertyChanged += (s, pce) =>
                 {
-                    if (pce.PropertyName == "DisplayedColumns")
+                    if (ViewModel != null && pce.PropertyName == "DisplayedColumns") // ViewModel may be a DisconnectedItem! see WpfHelper.SanitizeDataContext
                     {
                         ViewModel.DisplayedColumns.Columns.CollectionChanged += (sncc, ncc) => ApplyColumns();
                         ApplyColumns();
