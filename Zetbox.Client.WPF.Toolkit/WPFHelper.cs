@@ -186,7 +186,7 @@ namespace Zetbox.Client.WPF.Toolkit
                             if (sortProperty != null) col.SetValue(sortProperty, desc.Path);
 
                             var tmp = desc.Path.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
-                            var binding = "Object." + string.Join(".Value.", tmp.ToArray());
+                            var binding = "Object." + string.Join(".ValueAsync.", tmp.ToArray());
                             if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
@@ -262,7 +262,7 @@ namespace Zetbox.Client.WPF.Toolkit
                             if (sortProperty != null) col.SetValue(sortProperty, desc.Path);
 
                             var tmp = desc.Path.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
-                            var binding = string.Join(".Value.", tmp.ToArray());
+                            var binding = string.Join(".ValueAsync.", tmp.ToArray());
                             cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
