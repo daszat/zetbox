@@ -737,9 +737,7 @@ namespace Zetbox.Client.Models
 
         protected override void InvalidateValueCache()
         {
-            if (getValueTask != null)
-                ((INotifyCollectionChanged)getValueTask.Result).CollectionChanged -= ValueCollectionChanged;
-            base.InvalidateValueCache();
+            // Do not delete trigger fetch task as the underlying collection is const
         }
 
         public CompoundObject CompoundObjectDefinition
@@ -843,9 +841,7 @@ namespace Zetbox.Client.Models
 
         protected override void InvalidateValueCache()
         {
-            if (getValueTask != null)
-                ((INotifyCollectionChanged)getValueTask.Result).CollectionChanged -= ValueCollectionChanged;
-            base.InvalidateValueCache();
+            // Do not delete trigger fetch task as the underlying collection is const
         }
     }
 
@@ -870,9 +866,7 @@ namespace Zetbox.Client.Models
 
         protected override void InvalidateValueCache()
         {
-            if (getValueTask != null)
-                ((INotifyCollectionChanged)getValueTask.Result).CollectionChanged -= ValueCollectionChanged;
-            base.InvalidateValueCache();
+            // Do not delete trigger fetch task as the underlying collection is const
         }
     }
 
