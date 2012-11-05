@@ -147,7 +147,6 @@ namespace Zetbox.API
         public delegate InterfaceType Factory(Type type);
 
         private static readonly object _lockCache = new object();
-        private static readonly object _lockRootTypeCache = new object();
         private static Dictionary<Type, InterfaceType> _cache = new Dictionary<Type, InterfaceType>();
         private static Dictionary<InterfaceType, InterfaceType> _rootTypeCache = new Dictionary<InterfaceType, InterfaceType>();
 
@@ -208,7 +207,7 @@ namespace Zetbox.API
         /// <returns>the root InterfaceType of this InterfaceType's data model</returns>
         public InterfaceType GetRootType()
         {
-            lock (_lockRootTypeCache)
+            lock (_lockCache)
             {
                 if (_rootTypeCache.ContainsKey(this)) return _rootTypeCache[this];
 
