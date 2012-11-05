@@ -38,6 +38,34 @@ namespace Zetbox.App.Projekte
         }
 
         /// <summary>
+        /// Eine Liste der Änderungen an diesem Datensatz.
+        /// </summary>
+        // CompoundObject list property
+		// Zetbox.Generator.Templates.Properties.ValueCollectionProperty
+		public ICollection<Zetbox.App.Base.AuditEntry> AuditJournal
+		{
+			get
+			{
+				if (_AuditJournal == null)
+				{
+				    _AuditJournal 
+				        = new ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl>>(
+							this.Context,
+				            this, 
+				            () => { this.NotifyPropertyChanged("AuditJournal", null, null); if(OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); },
+				            _AuditJournalCollection);
+				}
+				return _AuditJournal;
+			}
+		}
+
+		private ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl>> _AuditJournal;
+		private ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl> _AuditJournalCollection = new ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl>();
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_IsValid;
+
+        /// <summary>
         /// Aufträge
         /// </summary>
         // object list property
@@ -1109,6 +1137,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             me.Kundenname = other.Kundenname;
             me.Name = other.Name;
             me.Von = other.Von;
+            SynchronizeCollections(this._AuditJournalCollection, otherImpl._AuditJournalCollection);
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
@@ -1230,6 +1259,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<Projekt, ICollection<Zetbox.App.Base.AuditEntry>>(
+                        lazyCtx,
+                        new Guid("4bef0e48-79c8-4776-a5de-bbb250599a40"),
+                        "AuditJournal",
+                        null,
+                        obj => obj.AuditJournal,
+                        null, // lists are read-only properties
+                        obj => OnAuditJournal_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<Projekt, ICollection<Zetbox.App.Projekte.Auftrag>>(
                         lazyCtx,
@@ -1447,6 +1485,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Projekt != null) OnNotifyDeleting_Projekt(this);
+            AuditJournal.Clear();
             Auftraege.Clear();
             Mitarbeiter.Clear();
             Tasks.Clear();
@@ -1465,6 +1504,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this._AuditJournalCollection);
             binStream.Write(this._AufwandGes);
             binStream.Write(this._Bis);
             binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
@@ -1494,6 +1534,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.ReadCollectionEntries(this, this._AuditJournalCollection);
             this._AufwandGes = binStream.ReadNullableDouble();
             this._Bis = binStream.ReadNullableDateTime();
             this._fk_ChangedBy = binStream.ReadNullableInt32();
@@ -1528,6 +1569,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ExportCollectionEntries(this._AuditJournalCollection.OrderBy(i => i.Value), xml, "AuditJournal", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._AufwandGes, xml, "AufwandGes", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._Bis, xml, "Bis", "Zetbox.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1546,6 +1588,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Projekte|AuditJournal":
+                XmlStreamer.MergeImportCollectionEntries(this, this._AuditJournalCollection, xml);
+                break;
             case "Zetbox.App.Projekte|AufwandGes":
                 this._AufwandGes = XmlStreamer.ReadNullableDouble(xml);
                 break;

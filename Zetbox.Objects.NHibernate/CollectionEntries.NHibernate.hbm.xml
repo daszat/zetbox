@@ -385,6 +385,52 @@
     </class>
 
     <!-- CompoundObjectCollectionEntries -->
+    <class name="Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl+Projekt_AuditJournal_CollectionEntryProxy"
+           proxy="Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl+Projekt_AuditJournal_CollectionEntryProxy"
+           table="`Projekte_AuditJournalCollection`"
+           schema="`projekte`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`projekte`</param>
+                <param name="sequence">`Projekte_AuditJournalCollection_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="Parent"
+                     column="`fk_Projekt`" />
+        <!-- CompoundObjectProperty isValue -->
+        <component name="Value" class="Zetbox.App.Base.AuditEntryNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="Identity" 
+                  column="`AuditJournal_Identity`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="MessageFormat" 
+                  column="`AuditJournal_MessageFormat`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NewValue" 
+                  column="`AuditJournal_NewValue`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="OldValue" 
+                  column="`AuditJournal_OldValue`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="PropertyName" 
+                  column="`AuditJournal_PropertyName`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Timestamp" type="Timestamp"
+                  column="`AuditJournal_Timestamp`" 
+                  optimistic-lock="false"/>
+        </component>
+        <!-- export guid is not needed since serialization is always "in-place"
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+        -->
+    </class>
+
     <class name="Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy"
            proxy="Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy"
            table="`TestCustomObjects_PhoneNumbersOtherCollection`"

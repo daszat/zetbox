@@ -276,6 +276,11 @@
     </AssociationSet>
 
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
+    <EntitySet Name="Projekt_AuditJournal_CollectionEntryEfImpl" EntityType="Model.Projekt_AuditJournal_CollectionEntryEfImpl" />
+    <AssociationSet Name="FK_Projekt_value_AuditJournal" Association="Model.FK_Projekt_value_AuditJournal" >
+      <End Role="Projekt" EntitySet="ProjektEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Projekt_AuditJournal_CollectionEntryEfImpl" />
+    </AssociationSet>
     <EntitySet Name="TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl" EntityType="Model.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl" />
     <AssociationSet Name="FK_TestCustomObject_value_PhoneNumbersOther" Association="Model.FK_TestCustomObject_value_PhoneNumbersOther" >
       <End Role="TestCustomObject" EntitySet="TestCustomObjectEfImpl" />
@@ -1982,6 +1987,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AuditJournalImpl"
+                        Relationship="Model.FK_Projekt_value_AuditJournal"
+                        FromRole="Projekt"
+                        ToRole="CollectionEntry" />
     <NavigationProperty Name="AuftraegeImpl"
                         Relationship="Model.FK_Projekt_has_Auftraege"
                         FromRole="Projekt"
@@ -3891,6 +3900,31 @@
   </Association>
 
 <!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->
+  <!-- Projekt.AuditJournal -->
+  <EntityType Name="Projekt_AuditJournal_CollectionEntryEfImpl" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="ParentImpl"
+                        Relationship="Model.FK_Projekt_value_AuditJournal"
+                        FromRole="CollectionEntry"
+                        ToRole="Projekt" />
+    <!-- B -->
+    <Property Name="ValueImpl"
+              Type="Model.AuditEntryEfImpl"
+              Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Projekt_value_AuditJournal" >
+    <End Role="Projekt"
+         Type="Model.ProjektEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Projekt_AuditJournal_CollectionEntryEfImpl" 
+         Multiplicity="*" />
+  </Association>
   <!-- TestCustomObject.PhoneNumbersOther -->
   <EntityType Name="TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl" >
     <Key>

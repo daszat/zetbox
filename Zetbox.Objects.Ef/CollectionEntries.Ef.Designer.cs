@@ -8167,6 +8167,331 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
     // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
 }
 
+namespace Zetbox.App.Projekte
+{
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    [EdmEntityType(NamespaceName="Model", Name="Projekt_AuditJournal_CollectionEntryEfImpl")]
+    [System.Diagnostics.DebuggerDisplay("Projekt_AuditJournal_CollectionEntryEfImpl")]
+    public class Projekt_AuditJournal_CollectionEntryEfImpl : Zetbox.DalProvider.Ef.CompoundCollectionEntryEfImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektEfImpl, Zetbox.App.Base.AuditEntry, Zetbox.App.Base.AuditEntryEfImpl>, Projekt_AuditJournal_CollectionEntry, Zetbox.API.IExportableValueCollectionEntryInternal
+    {
+[Obsolete]
+public Projekt_AuditJournal_CollectionEntryEfImpl()
+: base(null)
+{
+            _Value = new Zetbox.App.Base.AuditEntryEfImpl(null, this, "Value");
+}
+public Projekt_AuditJournal_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
+    : base(lazyCtx)
+{
+            _Value = new Zetbox.App.Base.AuditEntryEfImpl(lazyCtx, this, "Value");
+}
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
+            }
+        }
+        private int _ID;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        private static readonly Guid _propertyID = new Guid("4bef0e48-79c8-4776-a5de-bbb250599a40");
+        public override Guid PropertyID { get { return _propertyID; } }
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // fkBackingName=_fk_Parent; fkGuidBackingName=;
+        // referencedInterface=Zetbox.App.Projekte.Projekt; moduleNamespace=Zetbox.App.Projekte;
+        // inverse Navigator=AuditJournal; is list;
+        // PositionStorage=none;
+        // Target not exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.Projekte.Projekt Parent
+        {
+            get { return ParentImpl; }
+            set { ParentImpl = (Zetbox.App.Projekte.ProjektEfImpl)value; }
+        }
+
+        private int? _fk_Parent;
+
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_value_AuditJournal", "Projekt")]
+        public Zetbox.App.Projekte.ProjektEfImpl ParentImpl
+        {
+            get
+            {
+                Zetbox.App.Projekte.ProjektEfImpl __value;
+                EntityReference<Zetbox.App.Projekte.ProjektEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>(
+                        "Model.FK_Projekt_value_AuditJournal",
+                        "Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<Zetbox.App.Projekte.ProjektEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>(
+                        "Model.FK_Projekt_value_AuditJournal",
+                        "Projekt");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Zetbox.App.Projekte.ProjektEfImpl __oldValue = (Zetbox.App.Projekte.ProjektEfImpl)r.Value;
+                Zetbox.App.Projekte.ProjektEfImpl __newValue = (Zetbox.App.Projekte.ProjektEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                if (__oldValue != null) {
+                    __oldValue.NotifyPropertyChanging("AuditJournal", null, null);
+                }
+                if (__newValue != null) {
+                    __newValue.NotifyPropertyChanging("AuditJournal", null, null);
+                }
+
+                r.Value = (Zetbox.App.Projekte.ProjektEfImpl)__newValue;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                if (__oldValue != null) {
+                    __oldValue.NotifyPropertyChanged("AuditJournal", null, null);
+                }
+                if (__newValue != null) {
+                    __newValue.NotifyPropertyChanged("AuditJournal", null, null);
+                }
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
+        {
+            get { return Parent; }
+            set { Parent = (Zetbox.App.Projekte.ProjektEfImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        public Zetbox.App.Base.AuditEntry Value
+        {
+            get { return ValueImpl; }
+            set { ValueImpl = (Zetbox.App.Base.AuditEntryEfImpl)value; }
+        }
+
+        /// <summary>backing store for Value</summary>
+        private Zetbox.App.Base.AuditEntryEfImpl _Value_store;
+        private Zetbox.App.Base.AuditEntryEfImpl _Value {
+            get { return _Value_store; }
+            set {
+                ReportEfPropertyChanging("ValueImpl");
+                _Value_store = value;
+                ReportEfPropertyChanged("ValueImpl");
+            }
+        }
+
+        /// <summary>backing property for Value, takes care of attaching/detaching the values, mapped via EF</summary>
+        [XmlIgnore()]
+        [EdmComplexProperty()]
+        public Zetbox.App.Base.AuditEntryEfImpl ValueImpl
+        {
+            get 
+			{ 
+				return _Value; 
+			}
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(_Value, value))
+                {
+                    var __oldValue = _Value;
+					var __newValue = value;
+
+                    NotifyPropertyChanging("Value", __oldValue, __newValue);
+
+                    if (_Value != null)
+                    {
+                        _Value.DetachFromObject(this, "Value");
+                    }
+					__newValue = (Zetbox.App.Base.AuditEntryEfImpl)__newValue.Clone();
+                    _Value = __newValue;
+                    _Value.AttachToObject(this, "Value");
+
+                    NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+				else
+				{
+					SetInitializedProperty("Value");
+				}
+            }
+        }
+           // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public object ValueObject
+        {
+            get { return Value; }
+            set { Value = (Zetbox.App.Base.AuditEntryEfImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>("Model.FK_Projekt_value_AuditJournal", "Projekt").EntityKey;
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+            }
+            binStream.Write(this.Value);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.Read(out this._fk_Parent);
+            {
+                // use backing store to avoid notifications
+                this.ValueImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AuditEntryEfImpl>();
+                this.ValueImpl.AttachToObject(this, "Value");
+            }
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ExportCompoundObject(this.Value, xml, "Value", "Zetbox.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Projekte|Value":
+                XmlStreamer.MergeImportCompoundObject(this.ValueImpl, xml);
+                break;
+            }
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Projekt_AuditJournal_CollectionEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (Projekt_AuditJournal_CollectionEntryEfImpl)obj;
+            var me = (Projekt_AuditJournal_CollectionEntryEfImpl)this;
+
+            me._fk_Parent = other._fk_Parent;
+            if (me.Value == null && other.Value != null) {
+                me.Value = (Zetbox.App.Base.AuditEntry)other.Value.Clone();
+            } else if (me.Value != null && other.Value == null) {
+                me.Value = null;
+            } else if (me.Value != null && other.Value != null) {
+                me.Value.ApplyChangesFrom(other.Value);
+            }
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_Parent.HasValue)
+                Parent = (Zetbox.App.Projekte.ProjektEfImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_Parent.Value);
+            else
+                Parent = null;
+
+        }
+
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
+                case "Parent":
+                    {
+                        var __oldValue = _fk_Parent;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                        _fk_Parent = __newValue;
+                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    }
+                    break;
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
+    }
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
+}
+
 namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry

@@ -8096,6 +8096,292 @@ namespace Zetbox.App.Projekte
     // END Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
 }
 
+namespace Zetbox.App.Projekte
+{
+    // BEGIN Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    [System.Diagnostics.DebuggerDisplay("Projekt_AuditJournal_CollectionEntryMemoryImpl")]
+    public class Projekt_AuditJournal_CollectionEntryMemoryImpl : Zetbox.DalProvider.Memory.CompoundCollectionEntryMemoryImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektMemoryImpl, Zetbox.App.Base.AuditEntry, Zetbox.App.Base.AuditEntryMemoryImpl>, Projekt_AuditJournal_CollectionEntry, Zetbox.API.IExportableValueCollectionEntryInternal
+    {
+        [Obsolete]
+        public Projekt_AuditJournal_CollectionEntryMemoryImpl()
+            : base(null)
+        {
+        }
+
+        public Projekt_AuditJournal_CollectionEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+        // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
+            }
+        }
+        private int _ID;
+        // END Zetbox.Generator.Templates.Properties.IdProperty
+        private static readonly Guid _propertyID = new Guid("4bef0e48-79c8-4776-a5de-bbb250599a40");
+        public override Guid PropertyID { get { return _propertyID; } }
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        public Zetbox.App.Projekte.Projekt Parent
+        {
+            get
+            {
+                if (_ParentCache != null && _ParentCache.ID == _fk_Parent)
+                    return _ParentCache;
+
+                if (_fk_Parent.HasValue)
+                    _ParentCache = this.Context.Find<Zetbox.App.Projekte.Projekt>(_fk_Parent.Value);
+                else
+                    _ParentCache = null;
+
+                return _ParentCache;
+            }
+            set
+            {
+                if (value == null && !_fk_Parent.HasValue)
+                    return;
+                if (value != null && _fk_Parent.HasValue && value.ID == _fk_Parent.Value)
+                    return;
+
+                _ParentCache = value;
+                if (value != null)
+                    fk_Parent = value.ID;
+                else
+                    fk_Parent = null;
+            }
+        }
+        private Zetbox.App.Projekte.Projekt _ParentCache;
+
+        public int? fk_Parent
+        {
+            get
+            {
+                return _fk_Parent;
+            }
+            set
+            {
+                if (_fk_Parent != value)
+                {
+                    var __oldValue = _fk_Parent;
+                    NotifyPropertyChanging("Parent", __oldValue, value);
+                    _fk_Parent = value;
+                    NotifyPropertyChanged("Parent", __oldValue, value);
+                }
+            }
+        }
+
+        // backing store for serialization
+        private int? _fk_Parent;
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
+        {
+            get { return Parent; }
+            set { Parent = (Zetbox.App.Projekte.ProjektMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.Base.AuditEntry Value
+        {
+            get { return ValueImpl; }
+            set { ValueImpl = (Zetbox.App.Base.AuditEntryMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>backing store for Value</summary>
+        private Zetbox.App.Base.AuditEntryMemoryImpl _Value;
+
+        /// <summary>backing property for Value, takes care of attaching/detaching the values</summary>
+        public Zetbox.App.Base.AuditEntryMemoryImpl ValueImpl
+        {
+            get 
+			{ 
+				return _Value; 
+			}
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(_Value, value))
+                {
+					var __oldValue = _Value;
+					var __newValue = value;
+
+					NotifyPropertyChanging("Value", __oldValue, __newValue);
+
+					if (_Value != null)
+					{ 
+						_Value.DetachFromObject(this, "Value");
+					}
+					__newValue = (Zetbox.App.Base.AuditEntryMemoryImpl)__newValue.Clone();
+					_Value = __newValue;
+					_Value.AttachToObject(this, "Value");
+
+					NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+				}
+				else
+				{
+					SetInitializedProperty("Value");
+				}
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public object ValueObject
+        {
+            get { return Value; }
+            set { Value = (Zetbox.App.Base.AuditEntryMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this._fk_Parent);
+            binStream.Write(this.Value);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._fk_Parent = binStream.ReadNullableInt32();
+            {
+                // use backing store to avoid notifications
+                this.ValueImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AuditEntryMemoryImpl>();
+                this.ValueImpl.AttachToObject(this, "Value");
+            }
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._fk_Parent, xml, "Parent", "Zetbox.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ExportCompoundObject(this.Value, xml, "Value", "Zetbox.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Projekte|Parent":
+                this._fk_Parent = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Zetbox.App.Projekte|Value":
+                XmlStreamer.MergeImportCompoundObject(this.ValueImpl, xml);
+                break;
+            }
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Projekt_AuditJournal_CollectionEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (Projekt_AuditJournal_CollectionEntryMemoryImpl)obj;
+            var me = (Projekt_AuditJournal_CollectionEntryMemoryImpl)this;
+
+            me._fk_Parent = other._fk_Parent;
+            if (me.Value == null && other.Value != null) {
+                me.Value = (Zetbox.App.Base.AuditEntry)other.Value.Clone();
+            } else if (me.Value != null && other.Value == null) {
+                me.Value = null;
+            } else if (me.Value != null && other.Value != null) {
+                me.Value.ApplyChangesFrom(other.Value);
+            }
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_Parent.HasValue)
+                Parent = (Zetbox.App.Projekte.ProjektMemoryImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_Parent.Value);
+            else
+                Parent = null;
+
+        }
+
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
+                case "Parent":
+                    {
+                        var __oldValue = _fk_Parent;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                        _fk_Parent = __newValue;
+                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    }
+                    break;
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
+    }
+    // END Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
+}
+
 namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry

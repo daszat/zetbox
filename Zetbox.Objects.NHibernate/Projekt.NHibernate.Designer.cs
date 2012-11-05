@@ -52,6 +52,49 @@ namespace Zetbox.App.Projekte
         internal readonly ProjektProxy Proxy;
 
         /// <summary>
+        /// Eine Liste der Änderungen an diesem Datensatz.
+        /// </summary>
+        // CompoundObject list property
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
+        public ICollection<Zetbox.App.Base.AuditEntry> AuditJournal
+        {
+            get
+            {
+                if (_AuditJournal == null)
+                {
+                    _AuditJournal = new ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl>>(
+                            this.Context,
+                            this,
+                            () => { this.NotifyPropertyChanged("AuditJournal", null, null); if(OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); },
+                            AuditJournalCollection);
+                }
+                return _AuditJournal;
+            }
+        }
+
+        private ProjectedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl> AuditJournalCollection
+        {
+            get {
+                if (_AuditJournalCollection == null)
+                {
+                    _AuditJournalCollection = new ProjectedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl>(
+                        () => this.Proxy.AuditJournal,
+                        p => (Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                        d => (Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
+                }
+                return _AuditJournalCollection;
+            }
+        }
+
+        private ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl>> _AuditJournal;
+        private ProjectedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl> _AuditJournalCollection;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_IsValid;
+
+        /// <summary>
         /// Aufträge
         /// </summary>
         // object list property
@@ -1180,6 +1223,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorNHibernateImpl<Projekt, ICollection<Zetbox.App.Base.AuditEntry>>(
+                        lazyCtx,
+                        new Guid("4bef0e48-79c8-4776-a5de-bbb250599a40"),
+                        "AuditJournal",
+                        null,
+                        obj => obj.AuditJournal,
+                        null, // lists are read-only properties
+                        obj => OnAuditJournal_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<Projekt, ICollection<Zetbox.App.Projekte.Auftrag>>(
                         lazyCtx,
                         new Guid("30a1d8b6-4db5-45a0-a9a8-531472a9107e"),
@@ -1400,6 +1452,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Projekt != null) OnNotifyDeleting_Projekt(this);
+            foreach(NHibernatePersistenceObject x in AuditJournalCollection) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
 
             // FK_Projekt_has_Auftraege ZeroOrMore
             foreach(NHibernatePersistenceObject x in Auftraege) {
@@ -1422,6 +1478,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
+            AuditJournal.Clear();
             Auftraege.Clear();
             Mitarbeiter.Clear();
             Tasks.Clear();
@@ -1437,6 +1494,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         {
             public ProjektProxy()
             {
+                AuditJournal = new Collection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy>();
                 Auftraege = new Collection<Zetbox.App.Projekte.AuftragNHibernateImpl.AuftragProxy>();
                 Mitarbeiter = new Collection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy>();
                 Tasks = new Collection<Zetbox.App.Projekte.TaskNHibernateImpl.TaskProxy>();
@@ -1446,6 +1504,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
 
             public virtual Type ZetboxWrapper { get { return typeof(ProjektNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(ProjektProxy); } }
+
+            public virtual ICollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy> AuditJournal { get; set; }
+
+            public virtual int? AuditJournal_pos { get; set; }
 
             public virtual ICollection<Zetbox.App.Projekte.AuftragNHibernateImpl.AuftragProxy> Auftraege { get; set; }
 
@@ -1507,6 +1569,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this.AuditJournalCollection);
             binStream.Write(this.Proxy.AufwandGes);
             binStream.Write(this.Proxy.Bis);
             binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
@@ -1570,6 +1633,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ExportCollectionEntries(this.AuditJournalCollection, xml, "AuditJournal", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this.Proxy.AufwandGes, xml, "AufwandGes", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Bis, xml, "Bis", "Zetbox.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1588,6 +1652,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Projekte|AuditJournal":
+                XmlStreamer.MergeImportCollectionEntries(this, this.AuditJournalCollection, xml);
+                break;
             case "Zetbox.App.Projekte|AufwandGes":
                 this.Proxy.AufwandGes = XmlStreamer.ReadNullableDouble(xml);
                 break;

@@ -1562,6 +1562,12 @@
     
 
     <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
+    <EntitySet Name="Projekt_AuditJournal_CollectionEntry" EntityType="Model.Store.Projekt_AuditJournal_CollectionEntry" Schema="projekte" Table="Projekte_AuditJournalCollection" />
+    <AssociationSet Name="FK_Projekt_value_AuditJournal" Association="Model.Store.FK_Projekt_value_AuditJournal" >
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="CollectionEntry" EntitySet="Projekt_AuditJournal_CollectionEntry" />
+    </AssociationSet>
+    
     <EntitySet Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" EntityType="Model.Store.TestCustomObject_PhoneNumbersOther_CollectionEntry" Schema="test" Table="TestCustomObjects_PhoneNumbersOtherCollection" />
     <AssociationSet Name="FK_TestCustomObject_value_PhoneNumbersOther" Association="Model.Store.FK_TestCustomObject_value_PhoneNumbersOther" >
       <End Role="TestCustomObject" EntitySet="TestCustomObject" />
@@ -7356,6 +7362,35 @@
 
 
     <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
+    <EntityType Name="Projekt_AuditJournal_CollectionEntry" >
+      <Key>
+        <PropertyRef Name="ID" />
+      </Key>
+      <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_Projekt" Type="int4" Nullable="true" />
+    <Property Name="AuditJournal_Identity" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="AuditJournal_MessageFormat" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="AuditJournal_NewValue" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="AuditJournal_OldValue" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="AuditJournal_PropertyName" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="AuditJournal_Timestamp" Type="timestamp" Nullable="true" />
+    </EntityType>
+
+    <Association Name="FK_Projekt_value_AuditJournal">
+      <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="0..1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="CollectionEntry" Type="Model.Store.Projekt_AuditJournal_CollectionEntry" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="Projekt">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CollectionEntry">
+          <PropertyRef Name="fk_Projekt" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+
     <EntityType Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" >
       <Key>
         <PropertyRef Name="ID" />

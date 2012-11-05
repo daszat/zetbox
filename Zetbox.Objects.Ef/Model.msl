@@ -5206,6 +5206,32 @@
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->
+    <EntitySetMapping Name="Projekt_AuditJournal_CollectionEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_AuditJournal_CollectionEntryEfImpl)">
+        <MappingFragment StoreEntitySet="Projekt_AuditJournal_CollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ComplexProperty Name="ValueImpl" TypeName="Model.AuditEntryEfImpl">
+<ScalarProperty Name="Identity" ColumnName="AuditJournal_Identity" />
+<ScalarProperty Name="MessageFormat" ColumnName="AuditJournal_MessageFormat" />
+<ScalarProperty Name="NewValue" ColumnName="AuditJournal_NewValue" />
+<ScalarProperty Name="OldValue" ColumnName="AuditJournal_OldValue" />
+<ScalarProperty Name="PropertyName" ColumnName="AuditJournal_PropertyName" />
+<ScalarProperty Name="Timestamp" ColumnName="AuditJournal_Timestamp" />
+</ComplexProperty>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Projekt_value_AuditJournal"
+                           TypeName="Model.FK_Projekt_value_AuditJournal"
+                           StoreEntitySet="Projekt_AuditJournal_CollectionEntry" >
+      <EndProperty Name="Projekt">
+        <ScalarProperty Name="ID" ColumnName="fk_Projekt"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Projekt" IsNull="false"/>
+    </AssociationSetMapping>
     <EntitySetMapping Name="TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl)">
         <MappingFragment StoreEntitySet="TestCustomObject_PhoneNumbersOther_CollectionEntry">

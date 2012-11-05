@@ -41,6 +41,52 @@ namespace Zetbox.App.Projekte
         }
 
         /// <summary>
+        /// Eine Liste der Änderungen an diesem Datensatz.
+        /// </summary>
+        // CompoundObject list property
+   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Zetbox.App.Base.AuditEntry> AuditJournal
+        {
+            get
+            {
+                if (_AuditJournal == null)
+                {
+                    _AuditJournal = new EfValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl>>(
+						this.Context,
+                        this,
+              			() => { this.NotifyPropertyChanged("AuditJournal", null, null); if(OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); },
+          	            AuditJournalImpl);
+                }
+                return _AuditJournal;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_value_AuditJournal", "CollectionEntry")]
+        public EntityCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl> AuditJournalImpl
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl>(
+                        "Model.FK_Projekt_value_AuditJournal",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EfValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl>> _AuditJournal;
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_IsValid;
+
+        /// <summary>
         /// Aufträge
         /// </summary>
     /*
@@ -1314,6 +1360,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorEfImpl<Projekt, ICollection<Zetbox.App.Base.AuditEntry>>(
+                        lazyCtx,
+                        new Guid("4bef0e48-79c8-4776-a5de-bbb250599a40"),
+                        "AuditJournal",
+                        null,
+                        obj => obj.AuditJournal,
+                        null, // lists are read-only properties
+                        obj => OnAuditJournal_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<Projekt, ICollection<Zetbox.App.Projekte.Auftrag>>(
                         lazyCtx,
                         new Guid("30a1d8b6-4db5-45a0-a9a8-531472a9107e"),
@@ -1530,6 +1585,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Projekt != null) OnNotifyDeleting_Projekt(this);
+            AuditJournal.Clear();
             Auftraege.Clear();
             Mitarbeiter.Clear();
             Tasks.Clear();
@@ -1614,6 +1670,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this.AuditJournalImpl);
             binStream.Write(this._AufwandGes);
             binStream.Write(this._Bis);
             {
@@ -1683,6 +1740,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ExportCollectionEntries(this.AuditJournalImpl.OrderBy(i => i.Value), xml, "AuditJournal", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._AufwandGes, xml, "AufwandGes", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._Bis, xml, "Bis", "Zetbox.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1701,6 +1759,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Projekte|AuditJournal":
+                XmlStreamer.MergeImportCollectionEntries(this, this.AuditJournalImpl, xml);
+                break;
             case "Zetbox.App.Projekte|AufwandGes":
                 this._AufwandGes = XmlStreamer.ReadNullableDouble(xml);
                 break;

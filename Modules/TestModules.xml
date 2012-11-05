@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-10-10T17:18:37Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-11-05T14:14:58Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -266,6 +266,10 @@ public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="db4db4c0-9c21-4ea8-ad4f-5ca7d7f67310">
     <ZetboxBase:A>77933a20-338a-4961-b751-62ffa0a75c6a</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_Interface_RelationEntry>
+  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="d5926d75-e987-4e9b-93a6-44919ad0cafe">
+    <ZetboxBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:A>
+    <ZetboxBase:B>ef042c7f-93c0-4989-a7c9-0d03598671e5</ZetboxBase:B>
   </ZetboxBase:DataType_implements_Interface_RelationEntry>
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="0f9d7471-7f42-4e62-a59a-cb22b702bd7f">
     <ZetboxBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:A>
@@ -1453,6 +1457,44 @@ public static void isValid_TelefonNummer(Mitarbeiter obj, PropertyIsValidEventAr
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
+  <ZetboxBase:CompoundObjectProperty ExportGuid="4bef0e48-79c8-4776-a5de-bbb250599a40">
+    <ZetboxBase:CategoryTags>Änderungen</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-11-05T13:14:58.503461Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_AuditJournal(Projekt obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.AuditEntry&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_AuditJournal(Projekt obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.AuditEntry&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_AuditJournal(Projekt obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.AuditEntry&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_AuditJournal(Projekt obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.AuditJournal == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-11-05T13:14:58.503461Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Eine Liste der Änderungen an diesem Datensatz.</ZetboxBase:Description>
+    <ZetboxBase:Label>Änderungen</ZetboxBase:Label>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:Name>AuditJournal</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1006</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>b8e11c28-a64b-4e9b-a18d-1e0f006faedc</GUI:ValueModelDescriptor>
+    <ZetboxBase:CompoundObjectDefinition>84d3d914-cb79-41fe-8aae-54128e7edb87</ZetboxBase:CompoundObjectDefinition>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsList>true</ZetboxBase:IsList>
+  </ZetboxBase:CompoundObjectProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="30a1d8b6-4db5-45a0-a9a8-531472a9107e">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
@@ -3236,6 +3278,12 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:MaxLength>50</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="3afb04a5-fa6f-4978-8467-e2474b1e03fe">
+    <ZetboxBase:ChangedOn>2012-11-05T13:14:58.503461Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>4bef0e48-79c8-4776-a5de-bbb250599a40</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2012-11-05T13:14:58.503461Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Reason>Auditing is managed on the server.</ZetboxBase:Reason>
+  </ZetboxBase:ClientReadOnlyConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="2441b125-5fa6-4c60-bf9b-b813a6380925">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:06.521909Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>2fe9d894-c359-412f-b787-d3ed3a26a0a2</ZetboxBase:ConstrainedProperty>

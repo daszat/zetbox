@@ -726,7 +726,7 @@ namespace Zetbox.Client.Models
 
         public override ZbTask<IList<ICompoundObject>> GetValueAsync()
         {
-            return base.GetValueAsync()
+            return new ZbTask<IList<ICompoundObject>>(new ZbTask<INotifyCollectionChanged>(Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name)))
                 .OnResult(t =>
                 {
                     var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);

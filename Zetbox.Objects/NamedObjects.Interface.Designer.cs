@@ -2854,6 +2854,10 @@ namespace Zetbox {
                             }
                             public static class Projekt_Properties
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> AuditJournal
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4bef0e48-79c8-4776-a5de-bbb250599a40"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Auftraege
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("30a1d8b6-4db5-45a0-a9a8-531472a9107e"); }

@@ -219,6 +219,11 @@
         </id>
 
         <!-- define the properties -->
+        <!-- CompoundObjectProperty IsList -->
+        <set name="AuditJournal" inverse="true" batch-size="100">
+            <key column="`fk_Projekt`" />
+            <one-to-many class="Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl+Projekt_AuditJournal_CollectionEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
 <!-- ObjectReferenceProperty -->
         <set name="Auftraege" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Projekt`" />

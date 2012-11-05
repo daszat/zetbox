@@ -11,7 +11,7 @@ namespace Zetbox.App.Projekte
     /// 
     /// </summary>
     [Zetbox.API.DefinitionGuid("885939e8-82e1-4fdf-b80e-5f612d5131d3")]
-    public interface Projekt : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable 
+    public interface Projekt : IDataObject, Zetbox.App.Base.IAuditable, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable 
     {
 
         /// <summary>
