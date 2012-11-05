@@ -551,6 +551,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 _fetchValueTask.OnResult(t =>
                 {
                     OnPropertyChanged("Value");
+                    OnPropertyChanged("ValueAsync");
                     OnPropertyChanged("ValueProxiesAsync");
                 });
             };
@@ -569,6 +570,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 throw new NotSupportedException();
             }
+        }
+
+        public override IReadOnlyObservableList<DataObjectViewModel> ValueAsync
+        {
+            get { return Value; }
         }
 
         protected override void SetValueToModel(IReadOnlyObservableList<DataObjectViewModel> value)
@@ -630,6 +636,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         private void AnyPropertyChangedHandler(object sender, EventArgs e)
         {
+            OnPropertyChanged("ValueAsync");
             OnPropertyChanged("Value");
         }
 

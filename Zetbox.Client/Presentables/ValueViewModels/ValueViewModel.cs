@@ -114,6 +114,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #region Utilities and UI callbacks
         protected virtual void NotifyValueChanged()
         {
+            OnPropertyChanged("ValueAsync");
             OnPropertyChanged("Value");
             OnHighlightChanged();
             OnFormattedValueChanged();
@@ -356,6 +357,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
+        public abstract TValue ValueAsync { get; }
+
         #endregion
 
         public override bool HasValue
@@ -449,7 +452,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         private string _formattedValueAsyncCache;
         public override string FormattedValueAsync
         {
-            get 
+            get
             {
                 GetValueFromModel()
                     .OnResult(t =>
@@ -745,6 +748,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
         }
 
+        public override TValue? ValueAsync
+        {
+            get
+            {
+                return Value;
+            }
+        }
+
         protected override ParseResult<TValue?> ParseValue(string str)
         {
             try
@@ -790,6 +801,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public ClassValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
+        }
+
+        public override TValue ValueAsync
+        {
+            get
+            {
+                return Value;
+            }
         }
 
         protected override ParseResult<TValue> ParseValue(string str)

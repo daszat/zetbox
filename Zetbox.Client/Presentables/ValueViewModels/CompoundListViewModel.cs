@@ -115,6 +115,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
+        public override IReadOnlyObservableList<CompoundObjectViewModel> ValueAsync
+        {
+            get { return Value; }
+        }
+
         protected override ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> GetValueFromModel()
         {
             return new ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>>(ZbTask.Synchron, () =>

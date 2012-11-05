@@ -57,6 +57,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             throw new NotSupportedException();
         }
 
+        public override CompoundObjectViewModel ValueAsync
+        {
+            get { return Value; }
+        }
+
         private bool _valueCacheInititalized = false;
         private CompoundObjectViewModel _valueCache;
 
