@@ -552,9 +552,14 @@ namespace Zetbox.Client.Models
         /// <returns>The ZbTask from TriggerFetch</returns>
         protected ZbTask GetTriggerFetchTask()
         {
-            var mi = Object.GetType().GetMethod(string.Format("TriggerFetch{0}Async", Property.Name));
-            var _updateValueCacheTask = (ZbTask)mi.Invoke(Object, null);
-            return _updateValueCacheTask;
+            if (Object is IDataObject)
+            {
+                return ((IDataObject)Object).TriggerFetch(Property.Name);
+            }
+            else 
+            {
+                throw new InvalidOperationException("Object is not an IDataObject - unable to call TriggerFetch");
+            }
         }
 
         #endregion
