@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Memory.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
@@ -27,38 +27,6 @@ namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
         public Template(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, ObjectClass cls)
             : base(_host, ctx, cls)
         {
-        }
-
-        protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)
-        {
-            this.WriteLine("        // CompoundObject list property");
-            Templates.Properties.ValueCollectionProperty.Call(Host, ctx,
-                this.MembersToSerialize,
-                prop,
-                "ClientValueCollectionAsListWrapper",
-                "ClientValueListWrapper");
-        }
-
-        protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)
-        {
-            this.WriteLine("        // value list property");
-            Templates.Properties.ValueCollectionProperty.Call(Host, ctx,
-                MembersToSerialize,
-                prop,
-                "ClientValueCollectionAsListWrapper",
-                "ClientValueListWrapper");
-        }
-
-        protected override void ApplyMethodTemplate(Method m, int index)
-        {
-            if (m.InvokeOnServer == true)
-            {
-                ObjectClasses.InvokeServerMethod.Call(Host, ctx, this.DataType, m, index);                
-            }
-            else
-            {
-                base.ApplyMethodTemplate(m, index);
-            }
         }
 
         protected override void ApplyTriggerFetchTemplate()

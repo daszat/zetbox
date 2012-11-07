@@ -180,9 +180,14 @@ namespace Zetbox.Generator.Templates.ObjectClasses
             base.ApplyClassTailTemplate();
             ApplyUpdateParentTemplate();
             ApplyOnPropertyChangeTemplate();
+            ApplyTriggerFetchTemplate();
             ReloadReferences.Call(Host, ctx, this.DataType);
             CustomTypeDescriptor.Call(Host, ctx, this.ObjectClass, DataType.Name, GetTypeName());
             DefaultMethods.Call(Host, ctx, this.DataType);
+        }
+
+        protected virtual void ApplyTriggerFetchTemplate()
+        {
         }
 
         protected virtual void ApplyUpdateParentTemplate()

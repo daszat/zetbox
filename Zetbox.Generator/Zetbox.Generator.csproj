@@ -289,6 +289,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReloadReferences.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\TriggerFetchMethod.Designer.cs">
+      <DependentUpon>TriggerFetchMethod.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Properties\CalculatedProperty.cs">
       <DependentUpon>CalculatedProperty.cst</DependentUpon>
     </Compile>
@@ -516,6 +521,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Zetbox.Objects.snk" />
+    <None Include="Templates\ObjectClasses\TriggerFetchMethod.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>TriggerFetchMethod.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Zetbox.snk" />
     <None Include="InterfaceTemplates\CollectionEntries\CollectionEntries.cst">
       <Generator>Arebis Template Processor</Generator>

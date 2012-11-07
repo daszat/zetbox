@@ -99,6 +99,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Templates\ObjectClasses\CollectionEntries.cs" />
+    <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
   </ItemGroup>
   <ItemGroup>
