@@ -136,26 +136,6 @@ namespace Zetbox.API.AbstractConsumerTests
             }
         }
 
-        /// <summary>
-        /// Call this to reset the configured databases.
-        /// </summary>
-        /// <param name="container"></param>
-        protected void ResetDatabase(IContainer container)
-        {
-            foreach (var resetter in container.Resolve<IEnumerable<IDatabaseResetter>>())
-            {
-                try
-                {
-                    resetter.ResetDatabase();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Failed to reset database", ex);
-                    throw;
-                }
-            }
-        }
-
         [TearDown]
         public virtual void TearDown()
         {

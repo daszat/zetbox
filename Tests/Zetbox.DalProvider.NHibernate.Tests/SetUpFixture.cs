@@ -51,7 +51,6 @@ namespace Zetbox.DalProvider.NHibernate.Tests
         protected override void SetUp(IContainer container)
         {
             base.SetUp(container);
-            ResetDatabase(container);
 
             PropertyNHibernateImpl.OnToString_Property
                 += (obj, args) => { args.Result = String.Format("Prop, [{0}]", obj.Description); };
