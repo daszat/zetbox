@@ -250,7 +250,7 @@ namespace Zetbox.API.Server
         /// <returns>IQueryable</returns>
         public abstract IQueryable<T> GetQuery<T>() where T : class, IDataObject;
 
-        public List<IDataObject> GetAllHack<T>()
+        private List<IDataObject> GetAllHack<T>()
             where T : class, IDataObject
         {
             // The query translator cannot properly handle the IDataObject cast:
@@ -267,7 +267,7 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public List<IDataObject> GetAll(InterfaceType t)
         {
-            var mi = this.GetType().FindGenericMethod("GetAllHack", new[] { t.Type }, new Type[0]);
+            var mi = this.GetType().FindGenericMethod(true, "GetAllHack", new[] { t.Type }, new Type[0]);
             return (List<IDataObject>)mi.Invoke(this, new object[0]);
         }
 

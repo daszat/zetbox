@@ -361,7 +361,7 @@ namespace Zetbox.Server
             }
         }
 
-        public List<IDataObject> GetParcelHack<T>(IZetboxServerContext ctx, int lastID, int count)
+        private List<IDataObject> GetParcelHack<T>(IZetboxServerContext ctx, int lastID, int count)
             where T : class, IDataObject
         {
             // The query translator cannot properly handle the IDataObject cast:
@@ -377,7 +377,7 @@ namespace Zetbox.Server
 
         private List<IDataObject> GetParcel(Type t, IZetboxServerContext ctx, int lastID, int count)
         {
-            var mi = this.GetType().FindGenericMethod("GetParcelHack", new[] { t }, new Type[] { typeof(IZetboxServerContext), typeof(int), typeof(int) });
+            var mi = this.GetType().FindGenericMethod(true, "GetParcelHack", new[] { t }, new Type[] { typeof(IZetboxServerContext), typeof(int), typeof(int) });
             return (List<IDataObject>)mi.Invoke(this, new object[] { ctx, lastID, count });
         }
 

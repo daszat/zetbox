@@ -721,17 +721,22 @@ namespace Zetbox.DalProvider.Client
         {
             CheckDisposed();
 
-            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
-            {
-                // TODO: should be able to pass "type" unmodified, like this
-                // See Case 552
-                // return GetQuery(type).Single(o => o.ID == ID);
+            // TODO: should be able to pass "type" unmodified, like this
+            // See Case 552
+            // return GetQuery(type).Single(o => o.ID == ID);
 
-                return (IDataObject)this.GetType().FindGenericMethod("Find",
-                    new Type[] { ifType.Type },
-                    new Type[] { typeof(int) })
-                    .Invoke(this, new object[] { ID });
-            });
+            return (ZbTask<IDataObject>)this.GetType().FindGenericMethod(true, "FindAsyncGenericHelper",
+                new Type[] { ifType.Type },
+                new Type[] { typeof(int) })
+                .Invoke(this, new object[] { ID });
+        }
+
+        private ZbTask<IDataObject> FindAsyncGenericHelper<T>(int id)
+            where T : class, IDataObject
+        {
+            var nestedTask = FindAsync<T>(id);
+            return new ZbTask<IDataObject>(nestedTask)
+                .OnResult(t => { t.Result = nestedTask.Result; });
         }
 
         /// <summary>
