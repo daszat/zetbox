@@ -685,7 +685,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                if (Value == null && !string.IsNullOrEmpty(SearchString))
+                if (!string.IsNullOrEmpty(SearchString) && Value == null)
                 {
                     return ObjectReferenceViewModelResources.Error_SearchString_NoValue;
                 }
