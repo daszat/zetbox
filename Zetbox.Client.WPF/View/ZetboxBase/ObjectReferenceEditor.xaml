@@ -36,7 +36,7 @@
         </ctrls:DropDownButton>
         <Border Style="{StaticResource ControlBorderStyle}"
                 VerticalAlignment="Stretch">
-            <ContentPresenter Content="{Binding Value, Mode=OneWay}"
+            <ContentPresenter Content="{Binding ValueAsync, Mode=OneWay}"
                               VerticalAlignment="Center"
                               styles:Margin.Left="{StaticResource ItemMargin}"
                               ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />

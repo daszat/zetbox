@@ -33,7 +33,7 @@
                              CommandViewModel="{Binding SelectValueCommand}">*</ctrls:CommandButton>
 
         <ContentPresenter Margin="3"
-                          Content="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                          Content="{Binding ValueAsync, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                           ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
     </DockPanel>
 </UserControl>
