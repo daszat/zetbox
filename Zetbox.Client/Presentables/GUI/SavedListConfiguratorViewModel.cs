@@ -30,6 +30,7 @@ namespace Zetbox.Client.Presentables.GUI
     using Zetbox.Client.Models;
     using Zetbox.Client.GUI;
     using Zetbox.App.Base;
+using Zetbox.API.Async;
 
     // No ViewModelDescriptor -> internal
     public partial class SavedListConfiguratorViewModel : ViewModel
@@ -67,20 +68,23 @@ namespace Zetbox.Client.Presentables.GUI
             get { return "SavedListConfiguratorViewModel"; }
         }
 
+        private ZbTask<List<SavedListConfiguration>> _configsTask;
         private ReadOnlyCollectionShortcut<SavedListConfigViewModel> _configs;
-        public ReadOnlyObservableCollection<SavedListConfigViewModel> Configs
+        public ReadOnlyObservableCollection<SavedListConfigViewModel> ConfigsAsync
         {
             get
             {
-                if (_configs == null)
-                {
-                    _configs = new ReadOnlyCollectionShortcut<SavedListConfigViewModel>();
-                    using (var ctx = ctxFactory())
-                    {
-                        var configs = ctx.GetQuery<SavedListConfiguration>()
+                if (_configsTask == null)
+                {                    
+                    var ctx = ctxFactory();
+                    _configsTask = ctx.GetQuery<SavedListConfiguration>()
                             .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
-                            .Where(i => i.Owner == null || i.Owner == this.CurrentIdentity);
-                        foreach (var cfg in configs)
+                            .Where(i => i.Owner == null || i.Owner == this.CurrentIdentity)
+                            .ToListAsync();
+                    _configsTask.OnResult(t =>
+                    {
+                        _configs = new ReadOnlyCollectionShortcut<SavedListConfigViewModel>();
+                        foreach (var cfg in t.Result)
                         {
                             var obj = cfg.Configuration.FromXmlString<SavedListConfigurationList>();
                             foreach (var item in obj.Configs)
@@ -88,9 +92,10 @@ namespace Zetbox.Client.Presentables.GUI
                                 _configs.Rw.Add(ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, cfg.Owner != null));
                             }
                         }
-                    }
+                        OnPropertyChanged("ConfigsAsync");
+                    });
                 }
-                return _configs.Ro;
+                return _configs != null ? _configs.Ro : null;
             }
         }
 
