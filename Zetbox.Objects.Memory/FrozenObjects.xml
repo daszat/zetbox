@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-11-05T14:14:58Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-11-07T12:38:54Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -43438,7 +43438,7 @@ public static void isValid_EagerLoading(ObjectReferenceProperty obj, PropertyIsV
   </ZetboxBase:BoolProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="63ba109d-92c6-4ced-980b-0a52aabfaec0">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2012-11-07T11:38:54.359818Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_RelationEnd(ObjectReferenceProperty obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.RelationEnd&gt; e)
 {
@@ -43468,8 +43468,10 @@ public static void isValid_RelationEnd(ObjectReferenceProperty obj, PropertyIsVa
     <ZetboxBase:Name>RelationEnd</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>f1baf69c-a341-4a3a-b321-e782e1458e87</ZetboxBase:ObjectClass>
     <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <GUI:RequestedKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:RequestedKind>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
+    <GUI:IsInlineEditable>false</GUI:IsInlineEditable>
     <ZetboxBase:RelationEnd>7c2d4f4d-62b5-4fa6-a44f-c5a2239b9ee9</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:StringProperty ExportGuid="13418a59-a804-4bc7-88ed-4d3509940301">
@@ -52613,6 +52615,12 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>63ba109d-92c6-4ced-980b-0a52aabfaec0</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:ViewReadOnlyConstraint ExportGuid="294efc44-ac20-4a10-a4d3-a07a4d45d3d8">
+    <ZetboxBase:ChangedOn>2012-11-07T11:38:54.359818Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>63ba109d-92c6-4ced-980b-0a52aabfaec0</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2012-11-07T11:38:54.359818Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Reason>Should only be changed from relation end side</ZetboxBase:Reason>
+  </ZetboxBase:ViewReadOnlyConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="9d9c8bf8-26cf-4a35-a542-1fc4ebcd2504">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.738067Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>13418a59-a804-4bc7-88ed-4d3509940301</ZetboxBase:ConstrainedProperty>
