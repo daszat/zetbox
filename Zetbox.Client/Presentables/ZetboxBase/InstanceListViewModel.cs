@@ -38,6 +38,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Presentables.ValueViewModels;
     using ObjectEditor = Zetbox.Client.Presentables.ObjectEditor;
     using Zetbox.Client.Presentables.GUI;
+    using Zetbox.API.Async;
 
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
@@ -860,18 +861,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         #region Instances
         private List<DataObjectViewModel> _instancesCache = null;
-        protected List<DataObjectViewModel> InstancesCache
-        {
-            get
-            {
-                if (_instancesCache == null)
-                {
-                    LoadInstances();
-                }
-                return _instancesCache;
-            }
-        }
-
         private ObservableCollection<DataObjectViewModel> _instances = null;
         /// <summary>
         /// Allow instances to be added external
@@ -882,7 +871,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_instances == null)
                 {
-                    ExecutePostFilter();
+                    LoadInstances();
                 }
                 return _instances;
             }
@@ -1472,7 +1461,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return DataContext.GetQuery<T>(); // ToList would make all filter client side filter .ToList().OrderBy(obj => obj.ToString()).AsQueryable();
         }
 
-        private IDelayedTask _loadInstancesLoader;
         private bool _loadingInstances = false;
         /// <summary>
         /// Loads the instances of this DataType and adds them to the Instances collection
@@ -1482,51 +1470,49 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             // Prevent loading instances twice
             if (_loadingInstances) return;
             _loadingInstances = true;
-            if (_loadInstancesLoader == null) _loadInstancesLoader = ViewModelFactory.CreateDelayedTask(this, () =>
-            {
-                try
-                {
-                    if (_loadingInstances)
-                    {
-                        _instancesCache = LoadInstancesCore();
-                        OnInstancesChanged();
-                    }
-                }
-                finally
-                {
-                    _loadingInstances = false;
-                }
-            });
 
-            _loadInstancesLoader.Trigger();
+            IsBusy = true;
+            LoadInstancesCore()
+                .OnResult(t =>
+                {
+                    _instancesCache = t.Result;
+                    OnInstancesChanged();
+                    _loadingInstances = false;
+                    IsBusy = false;
+                });
         }
 
-        private List<DataObjectViewModel> LoadInstancesCore()
+        private ZbTask<List<DataObjectViewModel>> LoadInstancesCore()
         {
             // Can execute?
             if (FilterList.RespectRequiredFilter && FilterList.Filter.Count(f => !f.Enabled && f.Required) > 0)
             {
                 // return previous _instancesCache or empty list
-                return _instancesCache ?? new List<DataObjectViewModel>();
+                return new ZbTask<List<DataObjectViewModel>>(_instancesCache ?? new List<DataObjectViewModel>());
             }
 
-            var result = new List<DataObjectViewModel>();
+            var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
+            return new ZbTask<List<DataObjectViewModel>>(execQueryTask)
+                .OnResult(t =>
+                {
+                    var result = new List<DataObjectViewModel>();
 
-            foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
-            {
-                // Not interested in deleted objects
-                // TODO: Discuss if a query should return deleted objects
-                if (obj.ObjectState == DataObjectState.Deleted) continue;
+                    foreach (IDataObject obj in execQueryTask.Result)
+                    {
+                        // Not interested in deleted objects
+                        // TODO: Discuss if a query should return deleted objects
+                        if (obj.ObjectState == DataObjectState.Deleted) continue;
 
-                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
-                result.Add(mdl);
-            }
+                        var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
+                        result.Add(mdl);
+                    }
 
-            return result;
+                    t.Result = result;
+                });
         }
 
         /// <summary>
-        /// Call this when the <see cref="InstancesCache"/> property or its 
+        /// Call this when the <see cref="LoadInstances"/> property or its 
         /// contents have changed. Override this to react on changes here.
         /// </summary>
         protected virtual void OnInstancesChanged()
@@ -1542,17 +1528,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             // TODO: remove this bad hack
             if (_instancesCache == null)
             {
-                try
-                {
-                    _instancesCache = LoadInstancesCore();
-                }
-                finally
-                {
-                    _loadingInstances = false;
-                }
+                return;
             }
 
-            var tmp = FilterList.AppendPostFilter(new List<DataObjectViewModel>(this.InstancesCache));
+            var tmp = FilterList.AppendPostFilter(new List<DataObjectViewModel>(_instancesCache));
 
             // Sort
             if (!string.IsNullOrEmpty(_sortProperty))

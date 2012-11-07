@@ -113,6 +113,7 @@ using Zetbox.API.Async;
                     _selectedItem = value;
                     OnPropertyChanged("SelectedItem");
                     Load();
+                    Parent.ReloadInstances();
                 }
             }
         }
