@@ -1423,6 +1423,21 @@ namespace Zetbox.App.GUI
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "RequestedEditorKind":
+                return TriggerFetchRequestedEditorKindAsync();
+            case "RequestedWorkspaceKind":
+                return TriggerFetchRequestedWorkspaceKindAsync();
+            case "Type":
+                return TriggerFetchTypeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

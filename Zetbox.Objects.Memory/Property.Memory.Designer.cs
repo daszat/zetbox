@@ -2205,6 +2205,33 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "Constraints":
+                return TriggerFetchConstraintsAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DefaultValue":
+                return TriggerFetchDefaultValueAsync();
+            case "FilterConfiguration":
+                return TriggerFetchFilterConfigurationAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "ObjectClass":
+                return TriggerFetchObjectClassAsync();
+            case "RequestedKind":
+                return TriggerFetchRequestedKindAsync();
+            case "ValueModelDescriptor":
+                return TriggerFetchValueModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

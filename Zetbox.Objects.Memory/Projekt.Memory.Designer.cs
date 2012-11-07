@@ -1245,6 +1245,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Auftraege":
+                return TriggerFetchAuftraegeAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Mitarbeiter":
+                return TriggerFetchMitarbeiterAsync();
+            case "Tasks":
+                return TriggerFetchTasksAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

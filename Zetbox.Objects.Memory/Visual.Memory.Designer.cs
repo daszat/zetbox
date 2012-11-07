@@ -475,6 +475,23 @@ namespace Zetbox.App.GUI
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "ContextMenu":
+                return TriggerFetchContextMenuAsync();
+            case "Method":
+                return TriggerFetchMethodAsync();
+            case "Property":
+                return TriggerFetchPropertyAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

@@ -1326,6 +1326,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "AccessControlList":
+                return TriggerFetchAccessControlListAsync();
+            case "BaseObjectClass":
+                return TriggerFetchBaseObjectClassAsync();
+            case "DefaultViewModelDescriptor":
+                return TriggerFetchDefaultViewModelDescriptorAsync();
+            case "FilterConfigurations":
+                return TriggerFetchFilterConfigurationsAsync();
+            case "SubClasses":
+                return TriggerFetchSubClassesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

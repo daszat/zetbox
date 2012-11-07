@@ -1212,6 +1212,31 @@ namespace Zetbox.App.GUI
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DefaultDisplayKind":
+                return TriggerFetchDefaultDisplayKindAsync();
+            case "DefaultEditorKind":
+                return TriggerFetchDefaultEditorKindAsync();
+            case "DefaultGridCellDisplayKind":
+                return TriggerFetchDefaultGridCellDisplayKindAsync();
+            case "DefaultGridCellEditorKind":
+                return TriggerFetchDefaultGridCellEditorKindAsync();
+            case "DefaultGridCellPreEditorKind":
+                return TriggerFetchDefaultGridCellPreEditorKindAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "SecondaryControlKinds":
+                return TriggerFetchSecondaryControlKindsAsync();
+            case "ViewModelRef":
+                return TriggerFetchViewModelRefAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

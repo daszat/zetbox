@@ -251,6 +251,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Antworten":
+                return TriggerFetchAntwortenAsync();
+            case "Student":
+                return TriggerFetchStudentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

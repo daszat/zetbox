@@ -1405,6 +1405,31 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Groups":
+                return TriggerFetchGroupsAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            case "RequestedKind":
+                return TriggerFetchRequestedKindAsync();
+            case "ViewModelDescriptor":
+                return TriggerFetchViewModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

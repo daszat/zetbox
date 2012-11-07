@@ -713,6 +713,23 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "TestCustomObjects_List_Nav":
+                return TriggerFetchTestCustomObjects_List_NavAsync();
+            case "TestCustomObjects_ManyList_Nav":
+                return TriggerFetchTestCustomObjects_ManyList_NavAsync();
+            case "TestCustomObjects_Nav":
+                return TriggerFetchTestCustomObjects_NavAsync();
+            case "TestCustomObjects_One_Nav":
+                return TriggerFetchTestCustomObjects_One_NavAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

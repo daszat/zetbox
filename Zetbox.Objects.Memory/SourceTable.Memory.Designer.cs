@@ -1261,6 +1261,25 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DestinationObjectClass":
+                return TriggerFetchDestinationObjectClassAsync();
+            case "SourceColumn":
+                return TriggerFetchSourceColumnAsync();
+            case "StagingDatabase":
+                return TriggerFetchStagingDatabaseAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
