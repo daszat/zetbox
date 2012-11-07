@@ -58,7 +58,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultDisplayKind;
+        private int? __fk_DefaultDisplayKindCache;
+
+        private int? _fk_DefaultDisplayKind {
+            get
+            {
+                return __fk_DefaultDisplayKindCache;
+            }
+            set
+            {
+                __fk_DefaultDisplayKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultDisplayKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultDisplayKind = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchDefaultDisplayKindAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultDisplayKindAsync().Result;
             }
             set
             {
@@ -133,8 +144,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
                     OnDefaultDisplayKind_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchDefaultDisplayKindTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
@@ -165,7 +174,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultEditorKind;
+        private int? __fk_DefaultEditorKindCache;
+
+        private int? _fk_DefaultEditorKind {
+            get
+            {
+                return __fk_DefaultEditorKindCache;
+            }
+            set
+            {
+                __fk_DefaultEditorKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultEditorKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultEditorKind = null;
 
@@ -198,9 +220,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchDefaultEditorKindAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultEditorKindAsync().Result;
             }
             set
             {
@@ -240,8 +260,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
                     OnDefaultEditorKind_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchDefaultEditorKindTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
@@ -272,7 +290,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultGridCellDisplayKind;
+        private int? __fk_DefaultGridCellDisplayKindCache;
+
+        private int? _fk_DefaultGridCellDisplayKind {
+            get
+            {
+                return __fk_DefaultGridCellDisplayKindCache;
+            }
+            set
+            {
+                __fk_DefaultGridCellDisplayKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultGridCellDisplayKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultGridCellDisplayKind = null;
 
@@ -305,9 +336,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchDefaultGridCellDisplayKindAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellDisplayKindAsync().Result;
             }
             set
             {
@@ -347,8 +376,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
                     OnDefaultGridCellDisplayKind_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchDefaultGridCellDisplayKindTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
@@ -379,7 +406,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultGridCellEditorKind;
+        private int? __fk_DefaultGridCellEditorKindCache;
+
+        private int? _fk_DefaultGridCellEditorKind {
+            get
+            {
+                return __fk_DefaultGridCellEditorKindCache;
+            }
+            set
+            {
+                __fk_DefaultGridCellEditorKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultGridCellEditorKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultGridCellEditorKind = null;
 
@@ -412,9 +452,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchDefaultGridCellEditorKindAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellEditorKindAsync().Result;
             }
             set
             {
@@ -454,8 +492,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
                     OnDefaultGridCellEditorKind_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchDefaultGridCellEditorKindTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
@@ -486,7 +522,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultGridCellPreEditorKind;
+        private int? __fk_DefaultGridCellPreEditorKindCache;
+
+        private int? _fk_DefaultGridCellPreEditorKind {
+            get
+            {
+                return __fk_DefaultGridCellPreEditorKindCache;
+            }
+            set
+            {
+                __fk_DefaultGridCellPreEditorKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultGridCellPreEditorKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultGridCellPreEditorKind = null;
 
@@ -519,9 +568,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchDefaultGridCellPreEditorKindAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellPreEditorKindAsync().Result;
             }
             set
             {
@@ -561,8 +608,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
                     OnDefaultGridCellPreEditorKind_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchDefaultGridCellPreEditorKindTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
@@ -722,7 +767,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Module;
+        private int? __fk_ModuleCache;
+
+        private int? _fk_Module {
+            get
+            {
+                return __fk_ModuleCache;
+            }
+            set
+            {
+                __fk_ModuleCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchModuleTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Module = null;
 
@@ -755,9 +813,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchModuleAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ModuleMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -797,8 +853,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Module>(__oldValue, __newValue);
                     OnModule_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchModuleTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -865,7 +919,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ViewModelRef;
+        private int? __fk_ViewModelRefCache;
+
+        private int? _fk_ViewModelRef {
+            get
+            {
+                return __fk_ViewModelRefCache;
+            }
+            set
+            {
+                __fk_ViewModelRefCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchViewModelRefTask = null;
+            }
+        }
 
         private Guid? _fk_guid_ViewModelRef = null;
 
@@ -898,9 +965,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchViewModelRefAsync();
-                t.Wait();
-                return (Zetbox.App.Base.TypeRefMemoryImpl)t.Result;
+                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchViewModelRefAsync().Result;
             }
             set
             {
@@ -940,8 +1005,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
                     OnViewModelRef_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchViewModelRefTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef

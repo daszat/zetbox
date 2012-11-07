@@ -116,7 +116,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Fragebogen;
+        private int? __fk_FragebogenCache;
+
+        private int? _fk_Fragebogen {
+            get
+            {
+                return __fk_FragebogenCache;
+            }
+            set
+            {
+                __fk_FragebogenCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchFragebogenTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> _triggerFetchFragebogenTask;
@@ -148,9 +161,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchFragebogenAsync();
-                t.Wait();
-                return (Zetbox.App.Test.FragebogenMemoryImpl)t.Result;
+                return (Zetbox.App.Test.FragebogenMemoryImpl)TriggerFetchFragebogenAsync().Result;
             }
             set
             {
@@ -206,8 +217,6 @@ namespace Zetbox.App.Test
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.Fragebogen>(__oldValue, __newValue);
                     OnFragebogen_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchFragebogenTask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty

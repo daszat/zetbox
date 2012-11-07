@@ -58,7 +58,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Enumeration;
+        private int? __fk_EnumerationCache;
+
+        private int? _fk_Enumeration {
+            get
+            {
+                return __fk_EnumerationCache;
+            }
+            set
+            {
+                __fk_EnumerationCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchEnumerationTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Enumeration = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchEnumerationAsync();
-                t.Wait();
-                return (Zetbox.App.Base.EnumerationMemoryImpl)t.Result;
+                return (Zetbox.App.Base.EnumerationMemoryImpl)TriggerFetchEnumerationAsync().Result;
             }
             set
             {
@@ -133,8 +144,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Enumeration>(__oldValue, __newValue);
                     OnEnumeration_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchEnumerationTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Enumeration

@@ -58,7 +58,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_EnumValue;
+        private int? __fk_EnumValueCache;
+
+        private int? _fk_EnumValue {
+            get
+            {
+                return __fk_EnumValueCache;
+            }
+            set
+            {
+                __fk_EnumValueCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchEnumValueTask = null;
+            }
+        }
 
         private Guid? _fk_guid_EnumValue = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchEnumValueAsync();
-                t.Wait();
-                return (Zetbox.App.Base.EnumerationEntryMemoryImpl)t.Result;
+                return (Zetbox.App.Base.EnumerationEntryMemoryImpl)TriggerFetchEnumValueAsync().Result;
             }
             set
             {
@@ -133,8 +144,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.EnumerationEntry>(__oldValue, __newValue);
                     OnEnumValue_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchEnumValueTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue

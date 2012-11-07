@@ -61,7 +61,20 @@
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 <% DelegatingProperty.Call(Host, ctx, name, referencedInterface, implName, referencedImplementation); %>
 
-        private int? <%= fkBackingName %>;
+        private int? _<%= fkBackingName %>Cache;
+
+        private int? <%= fkBackingName %> {
+            get
+            {
+                return _<%= fkBackingName %>Cache;
+            }
+            set
+            {
+                _<%= fkBackingName %>Cache = value;
+                // Recreate task to clear it's cache
+                <%= taskName %> = null;
+            }
+        }
 
 <% if (relDataTypeExportable) { %>
         private Guid? <%= fkGuidBackingName %> = null;
@@ -98,9 +111,7 @@
         {
             get
             {
-                var t = TriggerFetch<%= name %>Async();
-                t.Wait();
-                return (<%= referencedImplementation %>)t.Result;
+                return (<%= referencedImplementation %>)TriggerFetch<%= name %>Async().Result;
             }
             set
             {
@@ -173,8 +184,6 @@
                     <%= eventName %>_PostSetter(this, e);
                 }
 <% }                                                                                                %>
-                // Recreate task to clear it's cache
-                <%= taskName %> = null;
             }
         }
 <%

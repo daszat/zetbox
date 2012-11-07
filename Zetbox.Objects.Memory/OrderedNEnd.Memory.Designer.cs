@@ -58,7 +58,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_OneEnd;
+        private int? __fk_OneEndCache;
+
+        private int? _fk_OneEnd {
+            get
+            {
+                return __fk_OneEndCache;
+            }
+            set
+            {
+                __fk_OneEndCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchOneEndTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> _triggerFetchOneEndTask;
@@ -90,9 +103,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchOneEndAsync();
-                t.Wait();
-                return (Zetbox.App.Test.OrderedOneEndMemoryImpl)t.Result;
+                return (Zetbox.App.Test.OrderedOneEndMemoryImpl)TriggerFetchOneEndAsync().Result;
             }
             set
             {
@@ -148,8 +159,6 @@ namespace Zetbox.App.Test
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.OrderedOneEnd>(__oldValue, __newValue);
                     OnOneEnd_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchOneEndTask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty

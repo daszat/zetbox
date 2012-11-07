@@ -58,7 +58,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_FalseIcon;
+        private int? __fk_FalseIconCache;
+
+        private int? _fk_FalseIcon {
+            get
+            {
+                return __fk_FalseIconCache;
+            }
+            set
+            {
+                __fk_FalseIconCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchFalseIconTask = null;
+            }
+        }
 
         private Guid? _fk_guid_FalseIcon = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchFalseIconAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.IconMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchFalseIconAsync().Result;
             }
             set
             {
@@ -133,8 +144,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
                     OnFalseIcon_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchFalseIconTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
@@ -223,7 +232,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_NullIcon;
+        private int? __fk_NullIconCache;
+
+        private int? _fk_NullIcon {
+            get
+            {
+                return __fk_NullIconCache;
+            }
+            set
+            {
+                __fk_NullIconCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchNullIconTask = null;
+            }
+        }
 
         private Guid? _fk_guid_NullIcon = null;
 
@@ -256,9 +278,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchNullIconAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.IconMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchNullIconAsync().Result;
             }
             set
             {
@@ -298,8 +318,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
                     OnNullIcon_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchNullIconTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
@@ -388,7 +406,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_TrueIcon;
+        private int? __fk_TrueIconCache;
+
+        private int? _fk_TrueIcon {
+            get
+            {
+                return __fk_TrueIconCache;
+            }
+            set
+            {
+                __fk_TrueIconCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchTrueIconTask = null;
+            }
+        }
 
         private Guid? _fk_guid_TrueIcon = null;
 
@@ -421,9 +452,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchTrueIconAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.IconMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchTrueIconAsync().Result;
             }
             set
             {
@@ -463,8 +492,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
                     OnTrueIcon_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchTrueIconTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon

@@ -212,7 +212,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_TestCustomObjects_Nav;
+        private int? __fk_TestCustomObjects_NavCache;
+
+        private int? _fk_TestCustomObjects_Nav {
+            get
+            {
+                return __fk_TestCustomObjects_NavCache;
+            }
+            set
+            {
+                __fk_TestCustomObjects_NavCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchTestCustomObjects_NavTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_NavTask;
@@ -244,9 +257,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                var t = TriggerFetchTestCustomObjects_NavAsync();
-                t.Wait();
-                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)t.Result;
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)TriggerFetchTestCustomObjects_NavAsync().Result;
             }
             set
             {
@@ -302,8 +313,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestCustomObject>(__oldValue, __newValue);
                     OnTestCustomObjects_Nav_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchTestCustomObjects_NavTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_Nav
@@ -334,7 +343,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_TestCustomObjects_One_Nav;
+        private int? __fk_TestCustomObjects_One_NavCache;
+
+        private int? _fk_TestCustomObjects_One_Nav {
+            get
+            {
+                return __fk_TestCustomObjects_One_NavCache;
+            }
+            set
+            {
+                __fk_TestCustomObjects_One_NavCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchTestCustomObjects_One_NavTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_One_NavTask;
@@ -366,9 +388,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                var t = TriggerFetchTestCustomObjects_One_NavAsync();
-                t.Wait();
-                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)t.Result;
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)TriggerFetchTestCustomObjects_One_NavAsync().Result;
             }
             set
             {
@@ -424,8 +444,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestCustomObject>(__oldValue, __newValue);
                     OnTestCustomObjects_One_Nav_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchTestCustomObjects_One_NavTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_One_Nav

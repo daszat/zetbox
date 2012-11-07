@@ -58,7 +58,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_GetErrorTextInvocation;
+        private int? __fk_GetErrorTextInvocationCache;
+
+        private int? _fk_GetErrorTextInvocation {
+            get
+            {
+                return __fk_GetErrorTextInvocationCache;
+            }
+            set
+            {
+                __fk_GetErrorTextInvocationCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchGetErrorTextInvocationTask = null;
+            }
+        }
 
         private Guid? _fk_guid_GetErrorTextInvocation = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchGetErrorTextInvocationAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ConstraintInvocationMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ConstraintInvocationMemoryImpl)TriggerFetchGetErrorTextInvocationAsync().Result;
             }
             set
             {
@@ -133,8 +144,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__oldValue, __newValue);
                     OnGetErrorTextInvocation_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchGetErrorTextInvocationTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
@@ -165,7 +174,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_IsValidInvocation;
+        private int? __fk_IsValidInvocationCache;
+
+        private int? _fk_IsValidInvocation {
+            get
+            {
+                return __fk_IsValidInvocationCache;
+            }
+            set
+            {
+                __fk_IsValidInvocationCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchIsValidInvocationTask = null;
+            }
+        }
 
         private Guid? _fk_guid_IsValidInvocation = null;
 
@@ -198,9 +220,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchIsValidInvocationAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ConstraintInvocationMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ConstraintInvocationMemoryImpl)TriggerFetchIsValidInvocationAsync().Result;
             }
             set
             {
@@ -240,8 +260,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__oldValue, __newValue);
                     OnIsValidInvocation_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchIsValidInvocationTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation

@@ -58,7 +58,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Constrained;
+        private int? __fk_ConstrainedCache;
+
+        private int? _fk_Constrained {
+            get
+            {
+                return __fk_ConstrainedCache;
+            }
+            set
+            {
+                __fk_ConstrainedCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchConstrainedTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Constrained = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchConstrainedAsync();
-                t.Wait();
-                return (Zetbox.App.Base.DataTypeMemoryImpl)t.Result;
+                return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchConstrainedAsync().Result;
             }
             set
             {
@@ -149,8 +160,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DataType>(__oldValue, __newValue);
                     OnConstrained_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchConstrainedTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained

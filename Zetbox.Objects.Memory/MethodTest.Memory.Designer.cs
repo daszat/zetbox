@@ -118,7 +118,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Parent;
+        private int? __fk_ParentCache;
+
+        private int? _fk_Parent {
+            get
+            {
+                return __fk_ParentCache;
+            }
+            set
+            {
+                __fk_ParentCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchParentTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> _triggerFetchParentTask;
@@ -150,9 +163,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         {
             get
             {
-                var t = TriggerFetchParentAsync();
-                t.Wait();
-                return (Zetbox.App.Test.MethodTestMemoryImpl)t.Result;
+                return (Zetbox.App.Test.MethodTestMemoryImpl)TriggerFetchParentAsync().Result;
             }
             set
             {
@@ -208,8 +219,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.MethodTest>(__oldValue, __newValue);
                     OnParent_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchParentTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent

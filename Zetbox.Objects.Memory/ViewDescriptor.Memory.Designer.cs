@@ -58,7 +58,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ControlKind;
+        private int? __fk_ControlKindCache;
+
+        private int? _fk_ControlKind {
+            get
+            {
+                return __fk_ControlKindCache;
+            }
+            set
+            {
+                __fk_ControlKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchControlKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_ControlKind = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchControlKindAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchControlKindAsync().Result;
             }
             set
             {
@@ -133,8 +144,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
                     OnControlKind_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchControlKindTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
@@ -165,7 +174,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ControlRef;
+        private int? __fk_ControlRefCache;
+
+        private int? _fk_ControlRef {
+            get
+            {
+                return __fk_ControlRefCache;
+            }
+            set
+            {
+                __fk_ControlRefCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchControlRefTask = null;
+            }
+        }
 
         private Guid? _fk_guid_ControlRef = null;
 
@@ -198,9 +220,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchControlRefAsync();
-                t.Wait();
-                return (Zetbox.App.Base.TypeRefMemoryImpl)t.Result;
+                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchControlRefAsync().Result;
             }
             set
             {
@@ -240,8 +260,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
                     OnControlRef_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchControlRefTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
@@ -343,7 +361,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Module;
+        private int? __fk_ModuleCache;
+
+        private int? _fk_Module {
+            get
+            {
+                return __fk_ModuleCache;
+            }
+            set
+            {
+                __fk_ModuleCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchModuleTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Module = null;
 
@@ -376,9 +407,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchModuleAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ModuleMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -418,8 +447,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Module>(__oldValue, __newValue);
                     OnModule_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchModuleTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module

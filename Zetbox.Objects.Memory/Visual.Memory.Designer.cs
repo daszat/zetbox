@@ -188,7 +188,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Method;
+        private int? __fk_MethodCache;
+
+        private int? _fk_Method {
+            get
+            {
+                return __fk_MethodCache;
+            }
+            set
+            {
+                __fk_MethodCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchMethodTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method> _triggerFetchMethodTask;
@@ -220,9 +233,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchMethodAsync();
-                t.Wait();
-                return (Zetbox.App.Base.MethodMemoryImpl)t.Result;
+                return (Zetbox.App.Base.MethodMemoryImpl)TriggerFetchMethodAsync().Result;
             }
             set
             {
@@ -262,8 +273,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Method>(__oldValue, __newValue);
                     OnMethod_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchMethodTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
@@ -294,7 +303,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Property;
+        private int? __fk_PropertyCache;
+
+        private int? _fk_Property {
+            get
+            {
+                return __fk_PropertyCache;
+            }
+            set
+            {
+                __fk_PropertyCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchPropertyTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> _triggerFetchPropertyTask;
@@ -326,9 +348,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchPropertyAsync();
-                t.Wait();
-                return (Zetbox.App.Base.PropertyMemoryImpl)t.Result;
+                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchPropertyAsync().Result;
             }
             set
             {
@@ -368,8 +388,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Property>(__oldValue, __newValue);
                     OnProperty_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchPropertyTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property

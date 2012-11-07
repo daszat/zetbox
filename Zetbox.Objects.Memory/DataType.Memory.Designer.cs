@@ -58,7 +58,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ChangedBy;
+        private int? __fk_ChangedByCache;
+
+        private int? _fk_ChangedBy {
+            get
+            {
+                return __fk_ChangedByCache;
+            }
+            set
+            {
+                __fk_ChangedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
@@ -90,9 +103,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchChangedByAsync();
-                t.Wait();
-                return (Zetbox.App.Base.IdentityMemoryImpl)t.Result;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -132,8 +143,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchChangedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -310,7 +319,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CreatedBy;
+        private int? __fk_CreatedByCache;
+
+        private int? _fk_CreatedBy {
+            get
+            {
+                return __fk_CreatedByCache;
+            }
+            set
+            {
+                __fk_CreatedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
@@ -342,9 +364,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                var t = TriggerFetchCreatedByAsync();
-                t.Wait();
-                return (Zetbox.App.Base.IdentityMemoryImpl)t.Result;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -384,8 +404,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchCreatedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -489,7 +507,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultIcon;
+        private int? __fk_DefaultIconCache;
+
+        private int? _fk_DefaultIcon {
+            get
+            {
+                return __fk_DefaultIconCache;
+            }
+            set
+            {
+                __fk_DefaultIconCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultIconTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultIcon = null;
 
@@ -522,9 +553,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                var t = TriggerFetchDefaultIconAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.IconMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchDefaultIconAsync().Result;
             }
             set
             {
@@ -564,8 +593,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
                     OnDefaultIcon_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchDefaultIconTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultIcon
@@ -834,7 +861,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Module;
+        private int? __fk_ModuleCache;
+
+        private int? _fk_Module {
+            get
+            {
+                return __fk_ModuleCache;
+            }
+            set
+            {
+                __fk_ModuleCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchModuleTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Module = null;
 
@@ -867,9 +907,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         {
             get
             {
-                var t = TriggerFetchModuleAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ModuleMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -909,8 +947,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Module>(__oldValue, __newValue);
                     OnModule_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchModuleTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -1072,7 +1108,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_RequestedKind;
+        private int? __fk_RequestedKindCache;
+
+        private int? _fk_RequestedKind {
+            get
+            {
+                return __fk_RequestedKindCache;
+            }
+            set
+            {
+                __fk_RequestedKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchRequestedKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_RequestedKind = null;
 
@@ -1105,9 +1154,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         {
             get
             {
-                var t = TriggerFetchRequestedKindAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedKindAsync().Result;
             }
             set
             {
@@ -1147,8 +1194,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
                     OnRequestedKind_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchRequestedKindTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind

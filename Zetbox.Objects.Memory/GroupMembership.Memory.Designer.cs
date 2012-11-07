@@ -58,7 +58,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Group;
+        private int? __fk_GroupCache;
+
+        private int? _fk_Group {
+            get
+            {
+                return __fk_GroupCache;
+            }
+            set
+            {
+                __fk_GroupCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchGroupTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Group = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchGroupAsync();
-                t.Wait();
-                return (Zetbox.App.Base.GroupMemoryImpl)t.Result;
+                return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchGroupAsync().Result;
             }
             set
             {
@@ -133,8 +144,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Group>(__oldValue, __newValue);
                     OnGroup_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchGroupTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group

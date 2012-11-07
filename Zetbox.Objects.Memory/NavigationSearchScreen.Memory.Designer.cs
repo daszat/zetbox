@@ -580,7 +580,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_RequestedEditorKind;
+        private int? __fk_RequestedEditorKindCache;
+
+        private int? _fk_RequestedEditorKind {
+            get
+            {
+                return __fk_RequestedEditorKindCache;
+            }
+            set
+            {
+                __fk_RequestedEditorKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchRequestedEditorKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_RequestedEditorKind = null;
 
@@ -613,9 +626,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchRequestedEditorKindAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedEditorKindAsync().Result;
             }
             set
             {
@@ -655,8 +666,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
                     OnRequestedEditorKind_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchRequestedEditorKindTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
@@ -687,7 +696,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_RequestedWorkspaceKind;
+        private int? __fk_RequestedWorkspaceKindCache;
+
+        private int? _fk_RequestedWorkspaceKind {
+            get
+            {
+                return __fk_RequestedWorkspaceKindCache;
+            }
+            set
+            {
+                __fk_RequestedWorkspaceKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchRequestedWorkspaceKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_RequestedWorkspaceKind = null;
 
@@ -720,9 +742,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchRequestedWorkspaceKindAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedWorkspaceKindAsync().Result;
             }
             set
             {
@@ -762,8 +782,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
                     OnRequestedWorkspaceKind_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchRequestedWorkspaceKindTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
@@ -1084,7 +1102,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Type;
+        private int? __fk_TypeCache;
+
+        private int? _fk_Type {
+            get
+            {
+                return __fk_TypeCache;
+            }
+            set
+            {
+                __fk_TypeCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchTypeTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Type = null;
 
@@ -1117,9 +1148,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchTypeAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
             }
             set
             {
@@ -1159,8 +1188,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ObjectClass>(__oldValue, __newValue);
                     OnType_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchTypeTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type

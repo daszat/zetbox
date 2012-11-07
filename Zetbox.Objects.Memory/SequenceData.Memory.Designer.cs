@@ -116,7 +116,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Sequence;
+        private int? __fk_SequenceCache;
+
+        private int? _fk_Sequence {
+            get
+            {
+                return __fk_SequenceCache;
+            }
+            set
+            {
+                __fk_SequenceCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchSequenceTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> _triggerFetchSequenceTask;
@@ -148,9 +161,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchSequenceAsync();
-                t.Wait();
-                return (Zetbox.App.Base.SequenceMemoryImpl)t.Result;
+                return (Zetbox.App.Base.SequenceMemoryImpl)TriggerFetchSequenceAsync().Result;
             }
             set
             {
@@ -206,8 +217,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Sequence>(__oldValue, __newValue);
                     OnSequence_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchSequenceTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence

@@ -129,7 +129,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Implementor;
+        private int? __fk_ImplementorCache;
+
+        private int? _fk_Implementor {
+            get
+            {
+                return __fk_ImplementorCache;
+            }
+            set
+            {
+                __fk_ImplementorCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchImplementorTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Implementor = null;
 
@@ -162,9 +175,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchImplementorAsync();
-                t.Wait();
-                return (Zetbox.App.Base.TypeRefMemoryImpl)t.Result;
+                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchImplementorAsync().Result;
             }
             set
             {
@@ -204,8 +215,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
                     OnImplementor_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchImplementorTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Implementor

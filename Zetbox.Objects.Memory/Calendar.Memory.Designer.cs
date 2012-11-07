@@ -58,7 +58,20 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_BaseCalendar;
+        private int? __fk_BaseCalendarCache;
+
+        private int? _fk_BaseCalendar {
+            get
+            {
+                return __fk_BaseCalendarCache;
+            }
+            set
+            {
+                __fk_BaseCalendarCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBaseCalendarTask = null;
+            }
+        }
 
         private Guid? _fk_guid_BaseCalendar = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                var t = TriggerFetchBaseCalendarAsync();
-                t.Wait();
-                return (Zetbox.App.Calendar.CalendarMemoryImpl)t.Result;
+                return (Zetbox.App.Calendar.CalendarMemoryImpl)TriggerFetchBaseCalendarAsync().Result;
             }
             set
             {
@@ -149,8 +160,6 @@ namespace Zetbox.App.Calendar
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Calendar.Calendar>(__oldValue, __newValue);
                     OnBaseCalendar_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchBaseCalendarTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseCalendar
@@ -241,7 +250,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ChangedBy;
+        private int? __fk_ChangedByCache;
+
+        private int? _fk_ChangedBy {
+            get
+            {
+                return __fk_ChangedByCache;
+            }
+            set
+            {
+                __fk_ChangedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
@@ -273,9 +295,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                var t = TriggerFetchChangedByAsync();
-                t.Wait();
-                return (Zetbox.App.Base.IdentityMemoryImpl)t.Result;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -315,8 +335,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchChangedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -480,7 +498,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CreatedBy;
+        private int? __fk_CreatedByCache;
+
+        private int? _fk_CreatedBy {
+            get
+            {
+                return __fk_CreatedByCache;
+            }
+            set
+            {
+                __fk_CreatedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
@@ -512,9 +543,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                var t = TriggerFetchCreatedByAsync();
-                t.Wait();
-                return (Zetbox.App.Base.IdentityMemoryImpl)t.Result;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -554,8 +583,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchCreatedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -730,7 +757,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Module;
+        private int? __fk_ModuleCache;
+
+        private int? _fk_Module {
+            get
+            {
+                return __fk_ModuleCache;
+            }
+            set
+            {
+                __fk_ModuleCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchModuleTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Module = null;
 
@@ -763,9 +803,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                var t = TriggerFetchModuleAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ModuleMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -805,8 +843,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Module>(__oldValue, __newValue);
                     OnModule_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchModuleTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module

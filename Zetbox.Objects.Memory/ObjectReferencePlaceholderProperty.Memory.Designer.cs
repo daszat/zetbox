@@ -290,7 +290,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ReferencedObjectClass;
+        private int? __fk_ReferencedObjectClassCache;
+
+        private int? _fk_ReferencedObjectClass {
+            get
+            {
+                return __fk_ReferencedObjectClassCache;
+            }
+            set
+            {
+                __fk_ReferencedObjectClassCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchReferencedObjectClassTask = null;
+            }
+        }
 
         private Guid? _fk_guid_ReferencedObjectClass = null;
 
@@ -323,9 +336,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchReferencedObjectClassAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchReferencedObjectClassAsync().Result;
             }
             set
             {
@@ -365,8 +376,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ObjectClass>(__oldValue, __newValue);
                     OnReferencedObjectClass_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchReferencedObjectClassTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedObjectClass

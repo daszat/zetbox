@@ -149,7 +149,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -173,9 +186,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)t.Result;
+                return (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -204,8 +215,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -231,7 +240,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -255,9 +277,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.PropertyMemoryImpl)t.Result;
+                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -286,8 +306,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -564,7 +582,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -588,9 +619,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Base.DataTypeMemoryImpl)t.Result;
+                return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -619,8 +648,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -646,7 +673,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -670,9 +710,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.InterfaceMemoryImpl)t.Result;
+                return (Zetbox.App.Base.InterfaceMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -701,8 +739,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -979,7 +1015,20 @@ namespace at.dasz.DocumentManagement
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -1003,9 +1052,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (at.dasz.DocumentManagement.DocumentMemoryImpl)t.Result;
+                return (at.dasz.DocumentManagement.DocumentMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -1034,8 +1081,6 @@ namespace at.dasz.DocumentManagement
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -1092,7 +1137,20 @@ namespace at.dasz.DocumentManagement
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -1116,9 +1174,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.BlobMemoryImpl)t.Result;
+                return (Zetbox.App.Base.BlobMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -1147,8 +1203,6 @@ namespace at.dasz.DocumentManagement
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -1446,7 +1500,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchATask;
@@ -1469,9 +1536,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Base.IdentityMemoryImpl)t.Result;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -1500,8 +1565,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -1527,7 +1590,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> _triggerFetchBTask;
@@ -1550,9 +1626,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.GroupMemoryImpl)t.Result;
+                return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -1581,8 +1655,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -1825,7 +1897,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -1849,9 +1934,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Base.IndexConstraintMemoryImpl)t.Result;
+                return (Zetbox.App.Base.IndexConstraintMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -1880,8 +1963,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -1907,7 +1988,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -1931,9 +2025,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.PropertyMemoryImpl)t.Result;
+                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -1962,8 +2054,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -2206,7 +2296,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchATask;
@@ -2229,9 +2332,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Test.MuhblahMemoryImpl)t.Result;
+                return (Zetbox.App.Test.MuhblahMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -2260,8 +2361,6 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -2287,7 +2386,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchBTask;
@@ -2310,9 +2422,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)t.Result;
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -2341,8 +2451,6 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -2551,7 +2659,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A> _triggerFetchATask;
@@ -2574,9 +2695,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)t.Result;
+                return (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -2605,8 +2724,6 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -2632,7 +2749,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B> _triggerFetchBTask;
@@ -2655,9 +2785,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)t.Result;
+                return (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -2686,8 +2814,6 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -2930,7 +3056,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -2954,9 +3093,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.NavigationEntryMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.NavigationEntryMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -2985,8 +3122,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -3012,7 +3147,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -3036,9 +3184,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.GroupMemoryImpl)t.Result;
+                return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -3067,8 +3213,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -3345,7 +3489,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -3369,9 +3526,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -3400,8 +3555,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -3427,7 +3580,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -3451,9 +3617,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.MethodMemoryImpl)t.Result;
+                return (Zetbox.App.Base.MethodMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -3482,8 +3646,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -3760,7 +3922,20 @@ namespace Zetbox.App.Projekte
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -3784,9 +3959,7 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Projekte.ProjektMemoryImpl)t.Result;
+                return (Zetbox.App.Projekte.ProjektMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -3815,8 +3988,6 @@ namespace Zetbox.App.Projekte
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -3873,7 +4044,20 @@ namespace Zetbox.App.Projekte
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -3897,9 +4081,7 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Projekte.MitarbeiterMemoryImpl)t.Result;
+                return (Zetbox.App.Projekte.MitarbeiterMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -3928,8 +4110,6 @@ namespace Zetbox.App.Projekte
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -4261,7 +4441,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -4285,9 +4478,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Base.RoleMembershipMemoryImpl)t.Result;
+                return (Zetbox.App.Base.RoleMembershipMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -4316,8 +4507,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -4374,7 +4563,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -4398,9 +4600,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.RelationMemoryImpl)t.Result;
+                return (Zetbox.App.Base.RelationMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -4429,8 +4629,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -4762,7 +4960,20 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -4786,9 +4997,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)t.Result;
+                return (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -4817,8 +5026,6 @@ namespace Zetbox.App.SchemaMigration
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -4875,7 +5082,20 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -4899,9 +5119,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.PropertyMemoryImpl)t.Result;
+                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -4930,8 +5148,6 @@ namespace Zetbox.App.SchemaMigration
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -5229,7 +5445,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Template> _triggerFetchATask;
@@ -5252,9 +5481,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.TemplateMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.TemplateMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -5283,8 +5510,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -5310,7 +5535,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> _triggerFetchBTask;
@@ -5333,9 +5571,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.VisualMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.VisualMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -5364,8 +5600,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -5574,7 +5808,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestStudent> _triggerFetchATask;
@@ -5597,9 +5844,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Test.TestStudentMemoryImpl)t.Result;
+                return (Zetbox.App.Test.TestStudentMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -5628,8 +5873,6 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -5655,7 +5898,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> _triggerFetchBTask;
@@ -5678,9 +5934,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Test.FragebogenMemoryImpl)t.Result;
+                return (Zetbox.App.Test.FragebogenMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -5709,8 +5963,6 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -5953,7 +6205,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -5977,9 +6242,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.Base.TypeRefMemoryImpl)t.Result;
+                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -6008,8 +6271,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -6066,7 +6327,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -6090,9 +6364,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.TypeRefMemoryImpl)t.Result;
+                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -6121,8 +6393,6 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
@@ -6454,7 +6724,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -6478,9 +6761,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ViewDescriptorMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ViewDescriptorMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -6509,8 +6790,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -6536,7 +6815,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -6560,9 +6852,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.Base.TypeRefMemoryImpl)t.Result;
+                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -6591,8 +6881,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -6869,7 +7157,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
         private Guid? _fk_guid_A = null;
 
@@ -6893,9 +7194,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -6924,8 +7223,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -6951,7 +7248,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
         private Guid? _fk_guid_B = null;
 
@@ -6975,9 +7285,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -7006,8 +7314,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -7250,7 +7556,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> _triggerFetchATask;
@@ -7273,9 +7592,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.VisualMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.VisualMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -7304,8 +7621,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -7331,7 +7646,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> _triggerFetchBTask;
@@ -7354,9 +7682,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.VisualMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.VisualMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -7385,8 +7711,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -7595,7 +7919,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_A;
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> _triggerFetchATask;
@@ -7618,9 +7955,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchAAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.VisualMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.VisualMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -7649,8 +7984,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -7676,7 +8009,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_B;
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> _triggerFetchBTask;
@@ -7699,9 +8045,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchBAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.VisualMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.VisualMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -7730,8 +8074,6 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
 
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B

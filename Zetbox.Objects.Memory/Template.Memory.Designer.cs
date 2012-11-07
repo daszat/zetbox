@@ -58,7 +58,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DisplayedTypeAssembly;
+        private int? __fk_DisplayedTypeAssemblyCache;
+
+        private int? _fk_DisplayedTypeAssembly {
+            get
+            {
+                return __fk_DisplayedTypeAssemblyCache;
+            }
+            set
+            {
+                __fk_DisplayedTypeAssemblyCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDisplayedTypeAssemblyTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly> _triggerFetchDisplayedTypeAssemblyTask;
@@ -90,9 +103,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchDisplayedTypeAssemblyAsync();
-                t.Wait();
-                return (Zetbox.App.Base.AssemblyMemoryImpl)t.Result;
+                return (Zetbox.App.Base.AssemblyMemoryImpl)TriggerFetchDisplayedTypeAssemblyAsync().Result;
             }
             set
             {
@@ -132,8 +143,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Assembly>(__oldValue, __newValue);
                     OnDisplayedTypeAssembly_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchDisplayedTypeAssemblyTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
@@ -316,7 +325,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_VisualTree;
+        private int? __fk_VisualTreeCache;
+
+        private int? _fk_VisualTree {
+            get
+            {
+                return __fk_VisualTreeCache;
+            }
+            set
+            {
+                __fk_VisualTreeCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchVisualTreeTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> _triggerFetchVisualTreeTask;
@@ -348,9 +370,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchVisualTreeAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.VisualMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.VisualMemoryImpl)TriggerFetchVisualTreeAsync().Result;
             }
             set
             {
@@ -390,8 +410,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Visual>(__oldValue, __newValue);
                     OnVisualTree_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchVisualTreeTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree

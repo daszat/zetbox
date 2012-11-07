@@ -58,7 +58,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CompoundObject;
+        private int? __fk_CompoundObjectCache;
+
+        private int? _fk_CompoundObject {
+            get
+            {
+                return __fk_CompoundObjectCache;
+            }
+            set
+            {
+                __fk_CompoundObjectCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCompoundObjectTask = null;
+            }
+        }
 
         private Guid? _fk_guid_CompoundObject = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchCompoundObjectAsync();
-                t.Wait();
-                return (Zetbox.App.Base.CompoundObjectMemoryImpl)t.Result;
+                return (Zetbox.App.Base.CompoundObjectMemoryImpl)TriggerFetchCompoundObjectAsync().Result;
             }
             set
             {
@@ -133,8 +144,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.CompoundObject>(__oldValue, __newValue);
                     OnCompoundObject_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchCompoundObjectTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject

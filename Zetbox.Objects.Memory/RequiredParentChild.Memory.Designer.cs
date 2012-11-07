@@ -116,7 +116,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Parent;
+        private int? __fk_ParentCache;
+
+        private int? _fk_Parent {
+            get
+            {
+                return __fk_ParentCache;
+            }
+            set
+            {
+                __fk_ParentCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchParentTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> _triggerFetchParentTask;
@@ -148,9 +161,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchParentAsync();
-                t.Wait();
-                return (Zetbox.App.Test.RequiredParentMemoryImpl)t.Result;
+                return (Zetbox.App.Test.RequiredParentMemoryImpl)TriggerFetchParentAsync().Result;
             }
             set
             {
@@ -206,8 +217,6 @@ namespace Zetbox.App.Test
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.RequiredParent>(__oldValue, __newValue);
                     OnParent_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchParentTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent

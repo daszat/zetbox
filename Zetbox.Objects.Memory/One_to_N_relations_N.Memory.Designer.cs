@@ -116,7 +116,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_OneSide;
+        private int? __fk_OneSideCache;
+
+        private int? _fk_OneSide {
+            get
+            {
+                return __fk_OneSideCache;
+            }
+            set
+            {
+                __fk_OneSideCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchOneSideTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One> _triggerFetchOneSideTask;
@@ -148,9 +161,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchOneSideAsync();
-                t.Wait();
-                return (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)t.Result;
+                return (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)TriggerFetchOneSideAsync().Result;
             }
             set
             {
@@ -206,8 +217,6 @@ namespace Zetbox.App.Test
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.One_to_N_relations_One>(__oldValue, __newValue);
                     OnOneSide_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchOneSideTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide

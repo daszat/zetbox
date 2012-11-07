@@ -58,7 +58,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_AParent;
+        private int? __fk_AParentCache;
+
+        private int? _fk_AParent {
+            get
+            {
+                return __fk_AParentCache;
+            }
+            set
+            {
+                __fk_AParentCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchAParentTask = null;
+            }
+        }
 
         private Guid? _fk_guid_AParent = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchAParentAsync();
-                t.Wait();
-                return (Zetbox.App.Base.RelationMemoryImpl)t.Result;
+                return (Zetbox.App.Base.RelationMemoryImpl)TriggerFetchAParentAsync().Result;
             }
             set
             {
@@ -149,8 +160,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Relation>(__oldValue, __newValue);
                     OnAParent_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchAParentTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AParent
@@ -181,7 +190,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_BParent;
+        private int? __fk_BParentCache;
+
+        private int? _fk_BParent {
+            get
+            {
+                return __fk_BParentCache;
+            }
+            set
+            {
+                __fk_BParentCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBParentTask = null;
+            }
+        }
 
         private Guid? _fk_guid_BParent = null;
 
@@ -214,9 +236,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchBParentAsync();
-                t.Wait();
-                return (Zetbox.App.Base.RelationMemoryImpl)t.Result;
+                return (Zetbox.App.Base.RelationMemoryImpl)TriggerFetchBParentAsync().Result;
             }
             set
             {
@@ -272,8 +292,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Relation>(__oldValue, __newValue);
                     OnBParent_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchBParentTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BParent
@@ -304,7 +322,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ChangedBy;
+        private int? __fk_ChangedByCache;
+
+        private int? _fk_ChangedBy {
+            get
+            {
+                return __fk_ChangedByCache;
+            }
+            set
+            {
+                __fk_ChangedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
@@ -336,9 +367,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchChangedByAsync();
-                t.Wait();
-                return (Zetbox.App.Base.IdentityMemoryImpl)t.Result;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
@@ -378,8 +407,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchChangedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -483,7 +510,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CreatedBy;
+        private int? __fk_CreatedByCache;
+
+        private int? _fk_CreatedBy {
+            get
+            {
+                return __fk_CreatedByCache;
+            }
+            set
+            {
+                __fk_CreatedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
@@ -515,9 +555,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchCreatedByAsync();
-                t.Wait();
-                return (Zetbox.App.Base.IdentityMemoryImpl)t.Result;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
@@ -557,8 +595,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchCreatedByTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -862,7 +898,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Navigator;
+        private int? __fk_NavigatorCache;
+
+        private int? _fk_Navigator {
+            get
+            {
+                return __fk_NavigatorCache;
+            }
+            set
+            {
+                __fk_NavigatorCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchNavigatorTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Navigator = null;
 
@@ -895,9 +944,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchNavigatorAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)TriggerFetchNavigatorAsync().Result;
             }
             set
             {
@@ -953,8 +1000,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ObjectReferenceProperty>(__oldValue, __newValue);
                     OnNavigator_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchNavigatorTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Navigator
@@ -1071,7 +1116,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Type;
+        private int? __fk_TypeCache;
+
+        private int? _fk_Type {
+            get
+            {
+                return __fk_TypeCache;
+            }
+            set
+            {
+                __fk_TypeCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchTypeTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Type = null;
 
@@ -1104,9 +1162,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchTypeAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
             }
             set
             {
@@ -1146,8 +1202,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ObjectClass>(__oldValue, __newValue);
                     OnType_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchTypeTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type

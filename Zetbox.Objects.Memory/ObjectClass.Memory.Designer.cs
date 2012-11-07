@@ -118,7 +118,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_BaseObjectClass;
+        private int? __fk_BaseObjectClassCache;
+
+        private int? _fk_BaseObjectClass {
+            get
+            {
+                return __fk_BaseObjectClassCache;
+            }
+            set
+            {
+                __fk_BaseObjectClassCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBaseObjectClassTask = null;
+            }
+        }
 
         private Guid? _fk_guid_BaseObjectClass = null;
 
@@ -151,9 +164,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                var t = TriggerFetchBaseObjectClassAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ObjectClassMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchBaseObjectClassAsync().Result;
             }
             set
             {
@@ -209,8 +220,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ObjectClass>(__oldValue, __newValue);
                     OnBaseObjectClass_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchBaseObjectClassTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
@@ -286,7 +295,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultViewModelDescriptor;
+        private int? __fk_DefaultViewModelDescriptorCache;
+
+        private int? _fk_DefaultViewModelDescriptor {
+            get
+            {
+                return __fk_DefaultViewModelDescriptorCache;
+            }
+            set
+            {
+                __fk_DefaultViewModelDescriptorCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultViewModelDescriptorTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 
@@ -319,9 +341,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                var t = TriggerFetchDefaultViewModelDescriptorAsync();
-                t.Wait();
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)t.Result;
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchDefaultViewModelDescriptorAsync().Result;
             }
             set
             {
@@ -361,8 +381,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(__oldValue, __newValue);
                     OnDefaultViewModelDescriptor_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchDefaultViewModelDescriptorTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor

@@ -58,7 +58,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Blob;
+        private int? __fk_BlobCache;
+
+        private int? _fk_Blob {
+            get
+            {
+                return __fk_BlobCache;
+            }
+            set
+            {
+                __fk_BlobCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBlobTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Blob = null;
 
@@ -91,9 +104,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchBlobAsync();
-                t.Wait();
-                return (Zetbox.App.Base.BlobMemoryImpl)t.Result;
+                return (Zetbox.App.Base.BlobMemoryImpl)TriggerFetchBlobAsync().Result;
             }
             set
             {
@@ -133,8 +144,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Blob>(__oldValue, __newValue);
                     OnBlob_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchBlobTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
@@ -294,7 +303,20 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Module;
+        private int? __fk_ModuleCache;
+
+        private int? _fk_Module {
+            get
+            {
+                return __fk_ModuleCache;
+            }
+            set
+            {
+                __fk_ModuleCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchModuleTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Module = null;
 
@@ -327,9 +349,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var t = TriggerFetchModuleAsync();
-                t.Wait();
-                return (Zetbox.App.Base.ModuleMemoryImpl)t.Result;
+                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
@@ -369,8 +389,6 @@ namespace Zetbox.App.GUI
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Module>(__oldValue, __newValue);
                     OnModule_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchModuleTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module

@@ -223,7 +223,20 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_RelationEnd;
+        private int? __fk_RelationEndCache;
+
+        private int? _fk_RelationEnd {
+            get
+            {
+                return __fk_RelationEndCache;
+            }
+            set
+            {
+                __fk_RelationEndCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchRelationEndTask = null;
+            }
+        }
 
         private Guid? _fk_guid_RelationEnd = null;
 
@@ -256,9 +269,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var t = TriggerFetchRelationEndAsync();
-                t.Wait();
-                return (Zetbox.App.Base.RelationEndMemoryImpl)t.Result;
+                return (Zetbox.App.Base.RelationEndMemoryImpl)TriggerFetchRelationEndAsync().Result;
             }
             set
             {
@@ -314,8 +325,6 @@ namespace Zetbox.App.Base
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.RelationEnd>(__oldValue, __newValue);
                     OnRelationEnd_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchRelationEndTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd

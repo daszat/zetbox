@@ -182,7 +182,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_MubBlah_Nav;
+        private int? __fk_MubBlah_NavCache;
+
+        private int? _fk_MubBlah_Nav {
+            get
+            {
+                return __fk_MubBlah_NavCache;
+            }
+            set
+            {
+                __fk_MubBlah_NavCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchMubBlah_NavTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchMubBlah_NavTask;
@@ -214,9 +227,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                var t = TriggerFetchMubBlah_NavAsync();
-                t.Wait();
-                return (Zetbox.App.Test.MuhblahMemoryImpl)t.Result;
+                return (Zetbox.App.Test.MuhblahMemoryImpl)TriggerFetchMubBlah_NavAsync().Result;
             }
             set
             {
@@ -272,8 +283,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.Muhblah>(__oldValue, __newValue);
                     OnMubBlah_Nav_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchMubBlah_NavTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MubBlah_Nav
@@ -340,7 +349,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_MuhBlah_One_Nav;
+        private int? __fk_MuhBlah_One_NavCache;
+
+        private int? _fk_MuhBlah_One_Nav {
+            get
+            {
+                return __fk_MuhBlah_One_NavCache;
+            }
+            set
+            {
+                __fk_MuhBlah_One_NavCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchMuhBlah_One_NavTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchMuhBlah_One_NavTask;
@@ -372,9 +394,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                var t = TriggerFetchMuhBlah_One_NavAsync();
-                t.Wait();
-                return (Zetbox.App.Test.MuhblahMemoryImpl)t.Result;
+                return (Zetbox.App.Test.MuhblahMemoryImpl)TriggerFetchMuhBlah_One_NavAsync().Result;
             }
             set
             {
@@ -430,8 +450,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.Muhblah>(__oldValue, __newValue);
                     OnMuhBlah_One_Nav_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchMuhBlah_One_NavTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MuhBlah_One_Nav

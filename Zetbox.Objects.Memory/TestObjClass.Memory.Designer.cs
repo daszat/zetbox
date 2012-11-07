@@ -116,7 +116,20 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ObjectProp;
+        private int? __fk_ObjectPropCache;
+
+        private int? _fk_ObjectProp {
+            get
+            {
+                return __fk_ObjectPropCache;
+            }
+            set
+            {
+                __fk_ObjectPropCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchObjectPropTask = null;
+            }
+        }
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> _triggerFetchObjectPropTask;
@@ -148,9 +161,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var t = TriggerFetchObjectPropAsync();
-                t.Wait();
-                return (Zetbox.App.Projekte.KundeMemoryImpl)t.Result;
+                return (Zetbox.App.Projekte.KundeMemoryImpl)TriggerFetchObjectPropAsync().Result;
             }
             set
             {
@@ -190,8 +201,6 @@ namespace Zetbox.App.Test
                     var e = new PropertyPostSetterEventArgs<Zetbox.App.Projekte.Kunde>(__oldValue, __newValue);
                     OnObjectProp_PostSetter(this, e);
                 }
-                // Recreate task to clear it's cache
-                _triggerFetchObjectPropTask = null;
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
