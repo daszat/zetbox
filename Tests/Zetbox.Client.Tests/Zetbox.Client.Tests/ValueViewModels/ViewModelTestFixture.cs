@@ -43,6 +43,11 @@ namespace Zetbox.Client.Tests.ValueViewModels
                 get { throw new NotImplementedException(); }
             }
 
+            public override object ValueAsync
+            {
+                get { return Value; }
+            }
+
             protected override string FormatValue(object value)
             {
                 if (OnFormatValue != null)

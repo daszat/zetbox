@@ -451,12 +451,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         private void ClearValueCache()
         {
             _valueCache = null;
-            _valueAsyncCache = null;
             _valueCacheInititalized = false;
             _fetchValueTask = null; // TODO: ???
         }
 
-        private DataObjectViewModel _valueAsyncCache;
         public override DataObjectViewModel ValueAsync
         {
             get 
