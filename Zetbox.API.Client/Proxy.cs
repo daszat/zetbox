@@ -26,11 +26,11 @@ namespace Zetbox.API.Client
     using System.Runtime.Serialization.Formatters.Binary;
     using System.ServiceModel;
     using System.Text;
-    using Zetbox.API.Client.ZetboxService;
     using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Client.ZetboxService;
     using Zetbox.API.Utils;
 
-    public delegate IPersistenceObject UnattachedObjectFactory(InterfaceType ifType);
+    public delegate object UnattachedObjectFactory(InterfaceType ifType);
 
     /// <summary>
     /// Proxy Interface for IZetboxService

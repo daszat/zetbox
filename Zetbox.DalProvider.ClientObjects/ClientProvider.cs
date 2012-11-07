@@ -80,7 +80,7 @@ namespace Zetbox.DalProvider.Client
 
                     return (UnattachedObjectFactory)(ifType =>
                     {
-                        return (IPersistenceObject)Activator.CreateInstance(clientFactory(Type.GetType(ifType.Type.FullName + "Client" + Zetbox.API.Helper.ImplementationSuffix + "," + CLIENT_ASSEMBLY_NAME, true)).Type, lazyContext);
+                        return Activator.CreateInstance(clientFactory(Type.GetType(ifType.Type.FullName + "Client" + Zetbox.API.Helper.ImplementationSuffix + "," + CLIENT_ASSEMBLY_NAME, true)).Type, lazyContext);
                     });
                 })
                 .SingleInstance();
