@@ -107,7 +107,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return GetValueFromModel().Result;
+                GetValueFromModel().Wait();
+                return _valueCache;
             }
             set
             {
@@ -117,7 +118,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public override IReadOnlyObservableList<CompoundObjectViewModel> ValueAsync
         {
-            get { return Value; }
+            get 
+            {
+                GetValueFromModel();
+                return _valueCache; 
+            }
         }
 
         protected override ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> GetValueFromModel()

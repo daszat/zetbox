@@ -533,7 +533,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             if (_fetchValueTask == null)
             {
-                _fetchValueTask = new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ObjectCollectionModel.GetValueAsync())                    
+                _fetchValueTask = new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
                 .OnResult(t =>
                 {
                     _wrapper = new SortedWrapper(ObjectCollectionModel.Value, ObjectCollectionModel, InitialSortProperty);
@@ -574,7 +574,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public override IReadOnlyObservableList<DataObjectViewModel> ValueAsync
         {
-            get { return Value; }
+            get
+            {
+                GetValueFromModel();
+                return _valueCache;
+            }
         }
 
         protected override void SetValueToModel(IReadOnlyObservableList<DataObjectViewModel> value)
