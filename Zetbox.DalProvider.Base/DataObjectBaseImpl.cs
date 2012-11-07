@@ -24,6 +24,7 @@ namespace Zetbox.DalProvider.Base
     using System.Reflection;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Async;
 
     public abstract class DataObjectBaseImpl : PersistenceObjectBaseImpl, IDataObject
     {
@@ -67,6 +68,11 @@ namespace Zetbox.DalProvider.Base
             if (aStr == null && bStr == null) return 0;
             if (aStr == null) return -1;
             return aStr.CompareTo(bStr);
+        }
+
+        public virtual ZbTask TriggerFetch(string propName)
+        {
+            throw new ArgumentOutOfRangeException("propName", string.Format("Given property '{0}' cannot be fetched async.", propName));
         }
     }
 }

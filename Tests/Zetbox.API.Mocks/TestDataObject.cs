@@ -22,6 +22,7 @@ namespace Zetbox.API.Mocks
     using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
+using Zetbox.API.Async;
 
     public interface TestDataObject : IDataObject
     {
@@ -98,6 +99,11 @@ namespace Zetbox.API.Mocks
 
         public void ReloadReferences()
         {
+        }
+
+        public ZbTask TriggerFetch(string propName)
+        {
+            throw new NotImplementedException();
         }
 
         public override int GetHashCode()

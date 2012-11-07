@@ -24,6 +24,7 @@ namespace Zetbox.API.Server
     using System.Linq;
     using System.Text;
     using Zetbox.App.Base;
+    using Zetbox.API.Async;
 
     /// <summary>
     /// Abstract Base Class for a PersistenceObject on the Server Side
@@ -296,6 +297,11 @@ namespace Zetbox.API.Server
             if (aStr == null && bStr == null) return 0;
             if (aStr == null) return -1;
             return aStr.CompareTo(bStr);
+        }
+
+        public virtual ZbTask TriggerFetch(string propName)
+        {
+            throw new NotSupportedException("Fetching properties async is not supported on a server yet.");
         }
     }
 

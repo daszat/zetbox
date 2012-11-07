@@ -21,6 +21,7 @@ namespace Zetbox.DalProvider.NHibernate
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
+    using Zetbox.API.Async;
 
     public abstract class DataObjectNHibernateImpl
         : NHibernatePersistenceObject, IDataObject
@@ -65,6 +66,11 @@ namespace Zetbox.DalProvider.NHibernate
             if (aStr == null && bStr == null) return 0;
             if (aStr == null) return -1;
             return aStr.CompareTo(bStr);
+        }
+
+        public virtual ZbTask TriggerFetch(string propName)
+        {
+            throw new NotSupportedException("Fetching properties async is not supported on a server yet.");
         }
     }
 }

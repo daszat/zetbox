@@ -21,6 +21,7 @@ namespace Zetbox.API.Client.Mocks.OneNLists
     using System.Linq;
     using System.Text;
     using Zetbox.DalProvider.Base.RelationWrappers;
+    using Zetbox.API.Async;
 
     class OneSide : IOneSide
     {
@@ -121,6 +122,11 @@ namespace Zetbox.API.Client.Mocks.OneNLists
         }
 
         public void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ZbTask TriggerFetch(string propName)
         {
             throw new NotImplementedException();
         }

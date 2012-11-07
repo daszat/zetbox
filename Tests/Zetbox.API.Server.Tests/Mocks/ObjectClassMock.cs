@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Zetbox.App.GUI;
+using Zetbox.API.Async;
 
 namespace Zetbox.API.Server.Mocks
 {
@@ -211,6 +212,10 @@ namespace Zetbox.API.Server.Mocks
             throw new NotImplementedException();
         }
         public void Recalculate(string propName)
+        {
+            throw new NotImplementedException();
+        }
+        public ZbTask TriggerFetch(string propName)
         {
             throw new NotImplementedException();
         }

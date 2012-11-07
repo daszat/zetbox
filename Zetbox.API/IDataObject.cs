@@ -19,6 +19,7 @@ namespace Zetbox.API
     using System.ComponentModel;
     using System.IO;
     using System.Xml;
+using Zetbox.API.Async;
 
     /// <summary>
     /// Data Object State
@@ -321,6 +322,13 @@ namespace Zetbox.API
         /// </summary>
         /// <param name="propName">Name of the property to recalc</param>
         void Recalculate(string propName);
+
+        /// <summary>
+        /// Fetch a property async
+        /// </summary>
+        /// <param name="propName">Name of the property to fetch</param>
+        /// <returns></returns>
+        ZbTask TriggerFetch(string propName);
 
         #region //// INTERNALS /////
         // TODO: move to separate interface
