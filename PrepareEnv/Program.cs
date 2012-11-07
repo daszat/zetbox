@@ -280,6 +280,8 @@ namespace PrepareEnv
                     LogAction("copying Binaries from " + source);
                     if (isWildcard && !Directory.Exists(source)) continue;
 
+                    CopyFolder(source, envConfig.TestsTarget, "*.exe", CopyMode.Flat); // does not handle sattelite assemblies
+                    CopyFolder(source, envConfig.TestsTarget, "*.exe.config", CopyMode.Flat);
                     CopyFolder(source, envConfig.TestsTarget, "*.dll", CopyMode.Flat); // does not handle sattelite assemblies
                     CopyFolder(source, envConfig.TestsTarget, "*.dll.config", CopyMode.Flat);
                     CopyFolder(source, envConfig.TestsTarget, "*.pdb", CopyMode.Flat);
