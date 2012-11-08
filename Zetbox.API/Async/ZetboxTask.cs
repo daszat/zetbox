@@ -24,6 +24,10 @@ namespace Zetbox.API.Async
     public enum ZbTaskState
     {
         /// <summary>
+        /// In this state, the task is currently waiting for something (usually another task, or its own initialisation) before starting to run.
+        /// </summary>
+        Waiting = 0,
+        /// <summary>
         /// In this state, the task is currently executing somewhere.
         /// </summary>
         Running,
@@ -79,7 +83,7 @@ namespace Zetbox.API.Async
         }
 
         public ZbTask(ZbTask task)
-            : this(task != null ? task.syncContext : null)
+            : this(task != null ? task.syncContext : Synchron)
         {
             if (task != null)
             {
@@ -87,6 +91,9 @@ namespace Zetbox.API.Async
                 innerZbTask
                     .ContinueWith(t =>
                     {
+                        // Set State to Running for completeness' sake
+                        lock (lockObj) State = ZbTaskState.Running;
+                        // but since this task has nothing to do, execute continuations immediately
                         CallAsyncContinuations();
                         lock (lockObj) State = ZbTaskState.ResultEventsPosted;
                     })
@@ -166,6 +173,7 @@ namespace Zetbox.API.Async
             {
                 switch (State)
                 {
+                    case ZbTaskState.Waiting:
                     case ZbTaskState.Running:
                         asyncContinuationActions.Add(() => continuationAction(this));
                         break;
@@ -186,6 +194,7 @@ namespace Zetbox.API.Async
             {
                 switch (State)
                 {
+                    case ZbTaskState.Waiting:
                     case ZbTaskState.Running:
                     case ZbTaskState.AsyncContinuationsRunning:
                     case ZbTaskState.ResultEventsPosted:
@@ -222,6 +231,7 @@ namespace Zetbox.API.Async
             RECHECK:
                 switch (State)
                 {
+                    case ZbTaskState.Waiting:
                     case ZbTaskState.Running:
                     case ZbTaskState.AsyncContinuationsRunning:
                         IsWaiting += 1;
