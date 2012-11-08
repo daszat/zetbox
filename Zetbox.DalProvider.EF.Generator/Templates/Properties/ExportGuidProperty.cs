@@ -45,9 +45,9 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         protected override void ApplyInitializeGuidOnGetTemplate()
         {
-            template.WriteObjects("                if (", backingName, "_store == Guid.Empty) {\r\n");
-            template.WriteObjects("                    __result = ", backingName, "_store = Guid.NewGuid();\r\n");
-            template.WriteObjects("                }\r\n");
+            WriteObjects("                if (", backingName, "_store == Guid.Empty) {\r\n");
+            WriteObjects("                    __result = ", backingName, "_store = Guid.NewGuid();\r\n");
+            WriteObjects("                }\r\n");
         }
     }
 }
