@@ -54,14 +54,5 @@ namespace Zetbox.DalProvider.Ef.Tests
             var local_obj = CreateObjectInstance();
             Assert.That(local_obj.EntityState, Is.EqualTo(EntityState.Detached));
         }
-
-        [Test]
-        public void should_be_attached_to_EFContext_after_attaching()
-        {
-            Assert.That(obj.EntityState, Is.Not.EqualTo(EntityState.Detached));
-            Assert.That(obj.IsAttached, Is.EqualTo(true));
-            ObjectContext objCtx = obj.GetEFContext();
-            Assert.That(objCtx, Is.Not.Null);
-        }
     }
 }
