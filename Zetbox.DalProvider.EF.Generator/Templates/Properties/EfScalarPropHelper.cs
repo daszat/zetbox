@@ -60,16 +60,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
             template.WriteLine();
         }
 
-        public static void ApplyInitialisation(CodeTemplate template, string backingName)
-        {
-            if (template == null) throw new ArgumentNullException("template");
-            if (string.IsNullOrEmpty(backingName)) throw new ArgumentNullException("backingName");
-
-            template.WriteObjects("                if (", backingName, "_store == Guid.Empty) {\r\n");
-            template.WriteObjects("                    __result = ", backingName, "_store = Guid.NewGuid();\r\n");
-            template.WriteObjects("                }\r\n");
-        }
-
         public static string GetEfPropName(Property prop)
         {
             if (prop is EnumerationProperty)
