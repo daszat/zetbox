@@ -12,7 +12,6 @@
     <Modules>
       <Module>Zetbox.Objects.NHibernateModule, Zetbox.Objects.NHibernateImpl</Module>
       <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>
-      <Module>Zetbox.Tests.Utilities.PostgreSql.UtilityModule, Zetbox.Tests.Utilities.PostgreSql</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>

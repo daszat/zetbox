@@ -12,7 +12,6 @@
     <Modules>
       <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
-      <Module>Zetbox.Tests.Utilities.MsSql.UtilityModule, Zetbox.Tests.Utilities.MsSql</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>

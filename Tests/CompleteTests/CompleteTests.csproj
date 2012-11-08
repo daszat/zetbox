@@ -114,14 +114,6 @@
       <Project>{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}</Project>
       <Name>Zetbox.Server.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Tests.Utilities.MsSql\Zetbox.Tests.Utilities.MsSql.csproj">
-      <Project>{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}</Project>
-      <Name>Zetbox.Tests.Utilities.MsSql</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Tests.Utilities.PostgreSql\Zetbox.Tests.Utilities.PostgreSql.csproj">
-      <Project>{C0992804-A195-4087-B77C-910ABEAB74B9}</Project>
-      <Name>Zetbox.Tests.Utilities.PostgreSql</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="env.xml">

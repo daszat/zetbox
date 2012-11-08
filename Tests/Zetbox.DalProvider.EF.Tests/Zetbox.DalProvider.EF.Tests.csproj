@@ -216,14 +216,6 @@
       <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
       <Name>Zetbox.API.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Tests.Utilities.MsSql\Zetbox.Tests.Utilities.MsSql.csproj">
-      <Project>{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}</Project>
-      <Name>Zetbox.Tests.Utilities.MsSql</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Tests.Utilities.PostgreSql\Zetbox.Tests.Utilities.PostgreSql.csproj">
-      <Project>{C0992804-A195-4087-B77C-910ABEAB74B9}</Project>
-      <Name>Zetbox.Tests.Utilities.PostgreSql</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -233,7 +225,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-    <Import Project="..\..\packages\MSBuildVersioning.1.0.36.0\lib\net40\MsBuildVersioning.targets" />
+  <Import Project="..\..\packages\MSBuildVersioning.1.0.36.0\lib\net40\MsBuildVersioning.targets" />
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>

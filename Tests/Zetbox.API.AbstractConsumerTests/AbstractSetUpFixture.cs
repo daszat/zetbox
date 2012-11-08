@@ -123,16 +123,6 @@ namespace Zetbox.API.AbstractConsumerTests
             {
                 config.Server.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());
                 Log.InfoFormat("Setting Server.DocumentStore=[{0}]", config.Server.DocumentStore);
-
-                var resetter = container.Resolve<IEnumerable<IDatabaseResetter>>().SingleOrDefault();
-                if (resetter != null && config.Server.ConnectionStrings != null)
-                {
-                    Log.Info("Forcing test connection string");
-                    for (int i = 0; i < config.Server.ConnectionStrings.Length; i++)
-                    {
-                        config.Server.ConnectionStrings[i].ConnectionString = resetter.ForceTestDB(config.Server.ConnectionStrings[i].ConnectionString);
-                    }
-                }
             }
         }
 

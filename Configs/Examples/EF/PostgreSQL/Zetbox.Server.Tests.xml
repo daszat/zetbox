@@ -12,7 +12,6 @@
     <Modules>
       <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
-      <Module>Zetbox.Tests.Utilities.PostgreSql.UtilityModule, Zetbox.Tests.Utilities.PostgreSql</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>
