@@ -44,6 +44,11 @@ namespace Zetbox.Generator.Templates.Properties
         {
             base.ApplyOnGetTemplate();
 
+            ApplyInitializeGuidOnGetTemplate();
+        }
+
+        protected virtual void ApplyInitializeGuidOnGetTemplate()
+        {
             this.WriteObjects("                if (", backingName, " == Guid.Empty) {\r\n");
             this.WriteObjects("                    __result = ", backingName, " = Guid.NewGuid();\r\n");
             this.WriteObjects("                }\r\n");

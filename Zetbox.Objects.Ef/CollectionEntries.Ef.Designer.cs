@@ -75,8 +75,8 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -492,8 +492,8 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -906,8 +906,8 @@ namespace at.dasz.DocumentManagement
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -1761,8 +1761,8 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -2841,8 +2841,8 @@ namespace Zetbox.App.GUI
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -3258,8 +3258,8 @@ namespace Zetbox.App.GUI
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -3672,8 +3672,8 @@ namespace Zetbox.App.Projekte
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -4194,8 +4194,8 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -4716,8 +4716,8 @@ namespace Zetbox.App.SchemaMigration
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -5907,8 +5907,8 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -6432,8 +6432,8 @@ namespace Zetbox.App.GUI
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -6849,8 +6849,8 @@ namespace Zetbox.App.GUI
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
                 }
                 return __result;
             }

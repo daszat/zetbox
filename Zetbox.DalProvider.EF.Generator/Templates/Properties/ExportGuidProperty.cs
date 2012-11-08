@@ -42,5 +42,10 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
         {
             EfScalarPropHelper.ApplyBackingStoreDefinition(this, type, backingName, name);
         }
+
+        protected override void ApplyInitializeGuidOnGetTemplate()
+        {
+            EfScalarPropHelper.ApplyInitialisation(this, backingName);
+        }
     }
 }
