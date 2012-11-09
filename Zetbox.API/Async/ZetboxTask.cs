@@ -304,6 +304,11 @@ namespace Zetbox.API.Async
             });
         }
 
+        protected ZbTask(SynchronizationContext syncContext, ZbTask innerTask)
+            : base(syncContext, innerTask)
+        {
+        }
+
         public ZbTask(Func<TResult> task)
             : base(SynchronizationContext.Current, NoInnerTask)
         {
