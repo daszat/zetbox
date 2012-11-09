@@ -478,7 +478,7 @@ namespace Zetbox.App.GUI
         {
             if (_triggerFetchSupportedViewModelsTask != null) return _triggerFetchSupportedViewModelsTask;
 			if (!SupportedViewModels_was_eagerLoaded) _triggerFetchSupportedViewModelsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(new Guid("786dae2f-cb6e-454d-93fd-192541df928d"), RelationEndRole.A, this);
-            else _triggerFetchSupportedViewModelsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () => { });
+            else _triggerFetchSupportedViewModelsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
 			_triggerFetchSupportedViewModelsTask.OnResult(r => 
             {
                 _SupportedViewModels 

@@ -91,7 +91,7 @@ this.WriteObjects("			",  taskName , " = Context.FetchRelationAsync<",  entryTyp
 
 #line 72 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("			if (!",  name , "_was_eagerLoaded) ",  taskName , " = Context.FetchRelationAsync<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
-this.WriteObjects("            else ",  taskName , " = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () => { });\r\n");
+this.WriteObjects("            else ",  taskName , " = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);\r\n");
 #line 75 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
 

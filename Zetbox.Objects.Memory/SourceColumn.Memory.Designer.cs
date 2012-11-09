@@ -680,7 +680,7 @@ namespace Zetbox.App.SchemaMigration
         {
             if (_triggerFetchDestinationPropertyTask != null) return _triggerFetchDestinationPropertyTask;
 			if (!DestinationProperty_was_eagerLoaded) _triggerFetchDestinationPropertyTask = Context.FetchRelationAsync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
-            else _triggerFetchDestinationPropertyTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () => { });
+            else _triggerFetchDestinationPropertyTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
 			_triggerFetchDestinationPropertyTask.OnResult(r => 
             {
                 _DestinationProperty 

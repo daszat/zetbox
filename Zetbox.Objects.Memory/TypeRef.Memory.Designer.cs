@@ -738,7 +738,7 @@ namespace Zetbox.App.Base
         {
             if (_triggerFetchGenericArgumentsTask != null) return _triggerFetchGenericArgumentsTask;
 			if (!GenericArguments_was_eagerLoaded) _triggerFetchGenericArgumentsTask = Context.FetchRelationAsync<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71"), RelationEndRole.A, this);
-            else _triggerFetchGenericArgumentsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () => { });
+            else _triggerFetchGenericArgumentsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
 			_triggerFetchGenericArgumentsTask.OnResult(r => 
             {
                 _GenericArguments 
