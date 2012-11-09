@@ -51,14 +51,15 @@ namespace Zetbox.API.Async
 
     public class ZbTask
     {
-        protected readonly object lockObj = new object();
+        public static readonly SynchronizationContext Synchron = null;
+        public static readonly ZbTask NoInnerTask = null;
+
+        private readonly object _lockObject = new object();
+        protected object SyncRoot { get { return _lockObject; } }
+
         protected readonly List<Action> asyncContinuationActions = new List<Action>();
         protected readonly List<Action> resultActions = new List<Action>();
-        protected readonly SynchronizationContext syncContext;
-        protected Action task;
         protected readonly ZbTask innerZbTask;
-
-        public static readonly SynchronizationContext Synchron = null;
 
         public ZbTaskState State
         {
@@ -66,49 +67,123 @@ namespace Zetbox.API.Async
             protected set;
         }
 
+        private readonly SynchronizationContext _syncContext;
+        public SynchronizationContext SyncContext
+        {
+            get { return _syncContext; }
+        }
+
         public object GetAwaiter()
         {
             throw new NotImplementedException("Will be implemented when switching to .net 4.5; or replaced by using await directly");
         }
 
-        protected ZbTask(SynchronizationContext syncContext)
+        protected ZbTask(SynchronizationContext syncContext, ZbTask innerTask)
         {
-            this.syncContext = syncContext;
-            innerZbTask = null;
+            if (syncContext != null && innerTask != null && syncContext != innerTask._syncContext) throw new ArgumentOutOfRangeException("syncContext", "SynchronizationContext differs between this and inner Task");
+
+            this._syncContext = syncContext ?? (innerTask != null ? innerTask._syncContext : null);
+            this.innerZbTask = innerTask;
         }
 
-        public ZbTask(Action task)
-            : this(SynchronizationContext.Current, task)
+        protected void ExecuteOrChainTask(Action task)
         {
-        }
-
-        public ZbTask(ZbTask task)
-            : this(task != null ? task.syncContext : Synchron)
-        {
-            if (task != null)
+            if (innerZbTask != null)
             {
-                innerZbTask = task;
-                innerZbTask
-                    .ContinueWith(t =>
-                    {
-                        // Set State to Running for completeness' sake
-                        lock (lockObj) State = ZbTaskState.Running;
-                        // but since this task has nothing to do, execute continuations immediately
-                        CallAsyncContinuations();
-                        lock (lockObj) State = ZbTaskState.ResultEventsPosted;
-                    })
-                    .OnResult(t => CallResultActions());
+                if (task == null)
+                {
+                    // attach to innerZbTask directly
+                    innerZbTask
+                        .ContinueWith(t =>
+                        {
+                            // Set State to Running for completeness' sake
+                            lock (_lockObject) State = ZbTaskState.Running;
+                            // but since this task has nothing to do, execute continuations immediately
+                            CallAsyncContinuations();
+                            lock (_lockObject) State = ZbTaskState.ResultEventsPosted;
+                        })
+                        .OnResult(t => CallResultActions());
+                }
+                else
+                {
+                    // has to be deferred until the innerZbTask has run
+                    innerZbTask
+                        .OnResult(t => ExecuteTask(task));
+                }
             }
             else
             {
-                ExecuteTask(() => { });
+                ExecuteTask(task);
             }
         }
 
-        public ZbTask(SynchronizationContext syncContext, Action task)
-            : this(syncContext)
+        private void ExecuteTask(Action task)
         {
-            ExecuteTask(task);
+            lock (_lockObject) State = ZbTaskState.Running;
+            Void work = () =>
+            {
+                if (task != null) task();
+                CallAsyncContinuations();
+            };
+            if (_syncContext != null)
+            {
+                ThreadPool.QueueUserWorkItem(tpState =>
+                {
+                    work();
+                    lock (_lockObject)
+                    {
+                        State = ZbTaskState.ResultEventsPosted;
+                        if (IsWaiting > 0)
+                        {
+                            Monitor.PulseAll(_lockObject);
+                        }
+                        else
+                        {
+                            _syncContext.Post(scState => CallResultActions(), null);
+                        }
+                    }
+                });
+            }
+            else
+            {
+                work();
+                lock (_lockObject)
+                {
+                    State = ZbTaskState.ResultEventsPosted;
+                    if (IsWaiting > 0)
+                    {
+                        Monitor.PulseAll(_lockObject);
+                    }
+                    else
+                    {
+                        CallResultActions();
+                    }
+                }
+            }
+        }
+
+        public ZbTask(Action task)
+            : this(SynchronizationContext.Current, NoInnerTask)
+        {
+            ExecuteOrChainTask(task);
+        }
+
+        public ZbTask(ZbTask innerTask)
+            : this(innerTask != null ? innerTask._syncContext : Synchron, innerTask)
+        {
+            ExecuteOrChainTask(null);
+        }
+
+        public ZbTask(ZbTask innerTask, Action task)
+            : this(innerTask != null ? innerTask._syncContext : Synchron, innerTask)
+        {
+            ExecuteOrChainTask(task);
+        }
+
+        public ZbTask(SynchronizationContext syncContext, Action task)
+            : this(syncContext, NoInnerTask)
+        {
+            ExecuteOrChainTask(task);
         }
 
         delegate void Void();
@@ -122,54 +197,11 @@ namespace Zetbox.API.Async
             private set;
         }
 
-        protected void ExecuteTask(Action task)
-        {
-            lock (lockObj) State = ZbTaskState.Running;
-            Void work = () =>
-            {
-                if (task != null) task();
-                CallAsyncContinuations();
-            };
-            if (syncContext != null)
-            {
-                ThreadPool.QueueUserWorkItem(tpState =>
-                {
-                    work();
-                    lock (lockObj)
-                    {
-                        State = ZbTaskState.ResultEventsPosted;
-                        if (IsWaiting > 0)
-                        {
-                            Monitor.PulseAll(lockObj);
-                        }
-                        else
-                        {
-                            syncContext.Post(scState => CallResultActions(), null);
-                        }
-                    }
-                });
-            }
-            else
-            {
-                work();
-                lock (lockObj)
-                {
-                    State = ZbTaskState.ResultEventsPosted;
-                    if (IsWaiting > 0)
-                    {
-                        Monitor.PulseAll(lockObj);
-                    }
-                    else
-                    {
-                        CallResultActions();
-                    }
-                }
-            }
-        }
-
         public ZbTask ContinueWith(Action<ZbTask> continuationAction)
         {
-            lock (lockObj)
+            if (continuationAction == null) throw new ArgumentNullException("continuationAction");
+
+            lock (_lockObject)
             {
                 switch (State)
                 {
@@ -190,7 +222,9 @@ namespace Zetbox.API.Async
 
         public ZbTask OnResult(Action<ZbTask> continuationAction)
         {
-            lock (lockObj)
+            if (continuationAction == null) throw new ArgumentNullException("continuationAction");
+
+            lock (_lockObject)
             {
                 switch (State)
                 {
@@ -217,7 +251,7 @@ namespace Zetbox.API.Async
 
         protected void CallAsyncContinuations()
         {
-            lock (lockObj) State = ZbTaskState.AsyncContinuationsRunning;
+            lock (_lockObject) State = ZbTaskState.AsyncContinuationsRunning;
             foreach (var action in asyncContinuationActions)
             {
                 action();
@@ -226,7 +260,7 @@ namespace Zetbox.API.Async
 
         protected void CallResultActions()
         {
-            lock (lockObj)
+            lock (_lockObject)
             {
             RECHECK:
                 switch (State)
@@ -235,7 +269,7 @@ namespace Zetbox.API.Async
                     case ZbTaskState.Running:
                     case ZbTaskState.AsyncContinuationsRunning:
                         IsWaiting += 1;
-                        Monitor.Wait(lockObj);
+                        Monitor.Wait(_lockObject);
                         IsWaiting -= 1;
                         // something happened: we have to decide whether we are the
                         // "lucky" thread to continue execution or whether someone else
@@ -255,43 +289,64 @@ namespace Zetbox.API.Async
                 action();
             }
 
-            lock (lockObj) State = ZbTaskState.Finished;
+            lock (_lockObject) State = ZbTaskState.Finished;
         }
     }
 
     public class ZbTask<TResult> : ZbTask
     {
-        public ZbTask(ZbTask task)
-            : base(task)
+        protected void ExecuteOrChainTask(Func<TResult> task)
         {
+            ExecuteOrChainTask(() =>
+            {
+                if (task != null)
+                    this._result = task();
+            });
         }
 
         public ZbTask(Func<TResult> task)
-            : this(SynchronizationContext.Current, task)
+            : base(SynchronizationContext.Current, NoInnerTask)
         {
+            ExecuteOrChainTask(task);
+        }
+
+        public ZbTask(ZbTask innerTask)
+            : base(innerTask)
+        {
+            // ExecuteOrChainTask is called by base constructor
+        }
+
+        public ZbTask(ZbTask innerTask, Func<TResult> task)
+            : base(innerTask != null ? innerTask.SyncContext : Synchron, innerTask)
+        {
+            ExecuteOrChainTask(task);
+        }
+
+        public ZbTask(SynchronizationContext syncContext, Func<TResult> task)
+            : base(syncContext, NoInnerTask)
+        {
+            ExecuteOrChainTask(task);
         }
 
         public ZbTask(TResult result)
-            : base(ZbTask.Synchron)
+            : base(ZbTask.Synchron, NoInnerTask)
         {
             _result = result;
             State = ZbTaskState.Finished;
         }
 
-        public ZbTask(SynchronizationContext syncContext, Func<TResult> task)
-            : base(syncContext)
-        {
-            ExecuteTask(() => this._result = task());
-        }
-
         public ZbTask<TResult> ContinueWith(Action<ZbTask<TResult>> continuationAction)
         {
+            if (continuationAction == null) throw new ArgumentNullException("continuationAction");
+
             ContinueWith((ZbTask _) => continuationAction(this));
             return this;
         }
 
         public ZbTask<TResult> OnResult(Action<ZbTask<TResult>> continuationAction)
         {
+            if (continuationAction == null) throw new ArgumentNullException("continuationAction");
+
             OnResult((ZbTask _) => continuationAction(this));
             return this;
         }
