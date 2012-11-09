@@ -78,6 +78,9 @@ namespace Zetbox.API.Async
             throw new NotImplementedException("Will be implemented when switching to .net 4.5; or replaced by using await directly");
         }
 
+        /// <summary>
+        /// This constructor only initializes the internal state of the ZbTask, without starting any execution.
+        /// </summary>
         protected ZbTask(SynchronizationContext syncContext, ZbTask innerTask)
         {
             if (syncContext != null && innerTask != null && syncContext != innerTask._syncContext) throw new ArgumentOutOfRangeException("syncContext", "SynchronizationContext differs between this and inner Task");
@@ -304,6 +307,9 @@ namespace Zetbox.API.Async
             });
         }
 
+        /// <summary>
+        /// This constructor only initializes the internal state of the ZbTask, without starting any execution.
+        /// </summary>
         protected ZbTask(SynchronizationContext syncContext, ZbTask innerTask)
             : base(syncContext, innerTask)
         {
@@ -368,6 +374,38 @@ namespace Zetbox.API.Async
             {
                 _result = value;
             }
+        }
+    }
+
+    /// <summary>
+    /// This class executes after a Task that can be only created in the future. Then it proceeds as normal.
+    /// </summary>
+    /// <typeparam name="TIntermediate">The result type of the future task</typeparam>
+    /// <typeparam name="TResult">The final result type</typeparam>
+    public sealed class ZbFutureTask<TIntermediate, TResult> : ZbTask<TResult>
+    {
+        /// <summary>
+        /// Initialize the future task.
+        /// </summary>
+        /// <param name="innerTaskFactory">The task which will create the task we'll be acting on.</param>
+        /// <param name="task">the transformation we have to do.</param>
+        public ZbFutureTask(ZbTask<ZbTask<TIntermediate>> innerTaskFactory, Func<TIntermediate, TResult> task)
+            : base(innerTaskFactory != null ? innerTaskFactory.SyncContext : Synchron, innerTaskFactory)
+        {
+            if (innerTaskFactory == null) throw new ArgumentNullException("innerTaskFactory");
+
+            innerTaskFactory
+                .OnResult(
+                    (ZbTask<ZbTask<TIntermediate>> factory) =>
+                        factory.Result.OnResult(
+                            t =>
+                            {
+                                ExecuteOrChainTask(() =>
+                                    {
+                                        if (task != null)
+                                            task(t.Result);
+                                    });
+                            }));
         }
     }
 }
