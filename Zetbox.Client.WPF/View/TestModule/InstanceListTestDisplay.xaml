@@ -36,6 +36,10 @@
                                 Value="Center" />
                     </Style>
                 </StackPanel.Resources>
+                <ctrls:LabeledContainer Label="Kind">
+                    <ComboBox ItemsSource="{Binding ListKindsSource}" 
+                              SelectedItem="{Binding ListKind}" />
+                </ctrls:LabeledContainer>
                 <TextBlock FontSize="20"
                            FontWeight="Bold">Filter:</TextBlock>
                 <ctrls:LabeledContainer Label="ShowFilter">
@@ -139,7 +143,8 @@
         </ScrollViewer>
         <GridSplitter Grid.Column="1"
                       ResizeDirection="Columns" />
-        <zbBase:InstanceListDisplay Grid.Column="2"
-                                    DataContext="{Binding TestList}" />
+        <ContentPresenter Grid.Column="2"
+                          Content="{Binding TestList}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
     </Grid>
 </UserControl>

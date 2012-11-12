@@ -39,6 +39,41 @@ namespace Zetbox.Client.Presentables.TestModule
             _ctxFactory = ctxFactory;
         }
 
+        public enum ListKinds
+        {
+            List,
+            Grid,
+            HorizontalList,
+            HorizontalGrid,
+        }
+
+        public ListKinds[] ListKindsSource
+        {
+            get
+            {
+                return new[] { ListKinds.List, ListKinds.Grid, ListKinds.HorizontalList, ListKinds.HorizontalGrid };
+            }
+        }
+
+        private ListKinds _listKind;
+        public ListKinds ListKind
+        {
+            get
+            {
+                return _listKind;
+            }
+            set
+            {
+                if (_listKind != value)
+                {
+                    _listKind = value;
+                    _TestList = null;
+                    OnPropertyChanged("ListKind");
+                    OnPropertyChanged("TestList");
+                }
+            }
+        }
+
         private InstanceListViewModel _TestList = null;
         public InstanceListViewModel TestList
         {
@@ -61,6 +96,24 @@ namespace Zetbox.Client.Presentables.TestModule
                     _TestList.ShowFilter = false;
                     _TestList.ViewMethod = InstanceListViewMethod.Details;
                     _TestList.DisplayedColumnsCreated += new InstanceListViewModel.DisplayedColumnsCreatedHandler(_TestList_DisplayedColumnsCreated);
+
+                    switch (ListKind)
+                    {
+                        case ListKinds.List:
+                            _TestList.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_InstanceListKind.Find(FrozenContext);
+                            break;
+                        case ListKinds.Grid:
+                            _TestList.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_InstanceGridKind.Find(FrozenContext);
+                            break;
+                        case ListKinds.HorizontalList:
+                            _TestList.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_InstanceListHorizontalKind.Find(FrozenContext);
+                            break;
+                        case ListKinds.HorizontalGrid:
+                            _TestList.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_InstanceGridHorizontalKind.Find(FrozenContext);
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 return _TestList;
             }
