@@ -515,6 +515,17 @@
                             <Setter Property="Foreground"
                                     Value="{StaticResource ControlDisabledForeground}" />
                         </Trigger>
+                        <!-- Multiline -->
+                        <Trigger Property="TextBox.TextWrapping"
+                                 Value="Wrap">
+                            <Setter Property="VerticalContentAlignment"
+                                    Value="Top" />
+                        </Trigger>
+                        <Trigger Property="TextBox.TextWrapping"
+                                 Value="WrapWithOverflow">
+                            <Setter Property="VerticalContentAlignment"
+                                    Value="Top" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
