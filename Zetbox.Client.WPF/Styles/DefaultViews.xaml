@@ -2029,6 +2029,8 @@
                 Value="{StaticResource NormalControlHeight}" />
         <Setter Property="VerticalAlignment"
                 Value="Top" />
+        <Setter Property="IsTabStop"
+                Value="false" />
     </Style>
 
     <!-- default styles for our usercontrols -->
