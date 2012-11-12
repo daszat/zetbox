@@ -922,7 +922,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                if (_proxyInstances == null)
+                if (_proxyInstances == null && Instances != null)
                 {
                     _proxyInstances = new ProxyList(
                         Instances,
