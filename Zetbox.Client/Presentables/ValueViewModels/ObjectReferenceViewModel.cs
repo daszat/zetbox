@@ -493,7 +493,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             get
             {
                 TriggerPossibleValuesROAsync();
-                return _getPossibleValuesROTask.Result;
+                _getPossibleValuesROTask.Wait();
+                return _possibleValuesRO;
             }
         }
 
