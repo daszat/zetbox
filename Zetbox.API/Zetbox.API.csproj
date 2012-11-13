@@ -76,6 +76,7 @@
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Async\AsyncQueryableExtensions.cs" />
     <Compile Include="Async\IAsyncQueryable.cs" />
+    <Compile Include="Async\PropertyTask.cs" />
     <Compile Include="Async\ZetboxTask.cs" />
     <Compile Include="AutofacExtensions.cs" />
     <Compile Include="CmdLineAction.cs" />
