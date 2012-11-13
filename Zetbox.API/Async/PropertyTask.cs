@@ -24,11 +24,13 @@ namespace Zetbox.API.Async
         /// <remarks>
         /// createTask
         /// </remarks>
-        /// <param name="notifier">This is called when the cached value changes.</param>
+        /// <param name="notifier">This is called when the cached value changes. If it is null, nothing is done.</param>
         /// <param name="createTask">This Func should create a fresh task to fetch the underlying value</param>
-        /// <param name="set">This action should set the underlying value immediately</param>
+        /// <param name="set">This action should set the underlying value immediately. If it is null, Set() will throw a ReadOnlyObjectException</param>
         public PropertyTask(Action notifier, Func<ZbTask<T>> createTask, Action<T> set)
         {
+            if (createTask == null) throw new ArgumentNullException("createTask");
+
             this._notifier = notifier;
             this._createTask = createTask;
             this._set = set;
@@ -47,7 +49,8 @@ namespace Zetbox.API.Async
             _task.OnResult(t =>
                     {
                         self._result = t.Result;
-                        self._notifier();
+                        if (self._notifier != null)
+                            self._notifier();
                     });
         }
 
@@ -83,6 +86,7 @@ namespace Zetbox.API.Async
         /// <param name="value">the new value</param>
         public void Set(T value)
         {
+            if (_set == null) throw new ReadOnlyObjectException("No setter available");
             Invalidate();
             _set(value);
         }
