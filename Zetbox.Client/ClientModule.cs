@@ -22,20 +22,18 @@ namespace Zetbox.Client
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
+    using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.App.Extensions;
     using Zetbox.Client.Presentables;
-    using Zetbox.API.Common;
 
     public sealed class ClientModule : Module
     {
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IViewModelFactory f, IUiThreadManager ui, IAsyncThreadManager async, IFrozenContext frozenCtx, IIdentityResolver idResolver)
+            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IIdentityResolver idResolver)
             {
                 Factory = f;
-                UiThread = ui;
-                AsyncThread = async;
                 FrozenContext = frozenCtx;
                 IdentityResolver = idResolver;
             }
@@ -43,18 +41,6 @@ namespace Zetbox.Client
             #region IViewModelDependencies Members
 
             public IViewModelFactory Factory
-            {
-                get;
-                private set;
-            }
-
-            public IUiThreadManager UiThread
-            {
-                get;
-                private set;
-            }
-
-            public IAsyncThreadManager AsyncThread
             {
                 get;
                 private set;
@@ -80,21 +66,14 @@ namespace Zetbox.Client
             base.Load(moduleBuilder);
 
             moduleBuilder
-                .Register<SynchronousThreadManager>(c => new SynchronousThreadManager())
-                .As<IAsyncThreadManager>()
-                .As<IUiThreadManager>();
-
-            moduleBuilder
                 .Register<ViewModelDependencies>(c => new ViewModelDependencies(
-                    c.Resolve<IViewModelFactory>(), 
-                    c.Resolve<IUiThreadManager>(), 
-                    c.Resolve<IAsyncThreadManager>(), 
-                    c.Resolve<IFrozenContext>(), 
+                    c.Resolve<IViewModelFactory>(),
+                    c.Resolve<IFrozenContext>(),
                     c.Resolve<IIdentityResolver>()))
                 .As<IViewModelDependencies>();
 
             moduleBuilder
-                .Register<ThreadPrincipalResolver>(c=> new ThreadPrincipalResolver(c.Resolve<Func<IReadOnlyZetboxContext>>()))
+                .Register<ThreadPrincipalResolver>(c => new ThreadPrincipalResolver(c.Resolve<Func<IReadOnlyZetboxContext>>()))
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();
 
@@ -112,7 +91,7 @@ namespace Zetbox.Client
                 .RegisterType<Zetbox.Client.GUI.DialogCreator>()
                 .AsSelf()
                 .InstancePerDependency();
-            
+
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
         }
     }

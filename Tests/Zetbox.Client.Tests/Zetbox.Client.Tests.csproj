@@ -83,12 +83,10 @@
     <Compile Include="Zetbox.Client.Mocks\TestObject.cs" />
     <Compile Include="Zetbox.Client.Mocks\TestProxy.cs" />
     <Compile Include="Zetbox.Client.Mocks\TestViewModelFactory.cs" />
-    <Compile Include="Zetbox.Client.Mocks\ThreadManagerMock.cs" />
     <Compile Include="Zetbox.Client.Tests\DataObjectModelTests.cs" />
     <Compile Include="Zetbox.Client.Tests\ObjectListModelTests.cs" />
     <Compile Include="Zetbox.Client.Tests\PresenterModelTests.cs" />
     <Compile Include="Zetbox.Client.Tests\RecurrenceRuleTests.cs" />
-    <Compile Include="Zetbox.Client.Tests\SynchronousThreadManagerTests.cs" />
     <Compile Include="Zetbox.Client.Tests\ValueViewModels\DateTimes\MonthFixture.cs" />
     <Compile Include="Zetbox.Client.Tests\ValueViewModels\DateTimes\DateTimeFixture.cs" />
     <Compile Include="Zetbox.Client.Tests\ValueViewModels\Enumerations\EnumerationFixture.cs" />

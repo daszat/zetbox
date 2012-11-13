@@ -36,15 +36,6 @@ namespace Zetbox.Client.Presentables
         IViewModelFactory Factory { get; }
 
         /// <summary>
-        /// A <see cref="IThreadManager"/> for the UI Thread
-        /// </summary>
-        IUiThreadManager UiThread { get; }
-        /// <summary>
-        /// A <see cref="IThreadManager"/> for asynchronous Tasks
-        /// </summary>
-        IAsyncThreadManager AsyncThread { get; }
-
-        /// <summary>
         /// FrozenContext for resolving meta data
         /// </summary>
         IFrozenContext FrozenContext { get; }
@@ -90,15 +81,6 @@ namespace Zetbox.Client.Presentables
         public delegate ViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
         private readonly IViewModelDependencies _dependencies;
-
-        /// <summary>
-        /// A <see cref="IThreadManager"/> for the UI Thread
-        /// </summary>
-        protected IUiThreadManager UI { get { return _dependencies.UiThread; } }
-        /// <summary>
-        /// A <see cref="IThreadManager"/> for asynchronous Tasks
-        /// </summary>
-        protected IAsyncThreadManager Async { get { return _dependencies.AsyncThread; } }
 
         /// <summary>
         /// FrozenContext for resolving meta data
@@ -260,7 +242,7 @@ namespace Zetbox.Client.Presentables
         /// Signifies that a model is in "design" mode or really accessing the data store.
         /// </summary>
         /// In design mode, no data store is used and only mock data is shown. 
-        /// No <see cref="IZetboxContext"/>s or <see cref="IThreadManager"/>s are available.
+        /// No <see cref="IZetboxContext"/>s is available.
         public bool IsInDesignMode { get; private set; }
 
         #endregion
@@ -397,7 +379,7 @@ namespace Zetbox.Client.Presentables
 
         public override int GetHashCode()
         {
-            return State.GetHashCode() + 
+            return State.GetHashCode() +
                 (GridBackground ?? string.Empty).GetHashCode() +
                 (GridForeground ?? string.Empty).GetHashCode() +
                 GridFontStyle.GetHashCode() +
@@ -418,10 +400,10 @@ namespace Zetbox.Client.Presentables
                 this.GridBackground == b.Value.GridBackground &&
                 this.GridForeground == b.Value.GridForeground &&
                 this.GridFontStyle == b.Value.GridFontStyle &&
-                this.PanelBackground == b.Value.PanelBackground;           
+                this.PanelBackground == b.Value.PanelBackground;
         }
 
-        public static bool operator==(Highlight a, Highlight b)
+        public static bool operator ==(Highlight a, Highlight b)
         {
             // If both are null, or both are same instance, return true.
             if (System.Object.ReferenceEquals(a, b))
@@ -439,7 +421,7 @@ namespace Zetbox.Client.Presentables
                 a.GridBackground == b.GridBackground &&
                 a.GridForeground == b.GridForeground &&
                 a.GridFontStyle == b.GridFontStyle &&
-                a.PanelBackground == b.PanelBackground;                
+                a.PanelBackground == b.PanelBackground;
         }
 
         public static bool operator !=(Highlight a, Highlight b)
@@ -458,17 +440,6 @@ namespace Zetbox.Client.Presentables
         public IViewModelFactory Factory
         {
             get { throw new NotImplementedException(); }
-        }
-
-        private IUiThreadManager _thread = new SynchronousThreadManager();
-        public IUiThreadManager UiThread
-        {
-            get { return _thread; }
-        }
-
-        public IAsyncThreadManager AsyncThread
-        {
-            get { throw new InvalidOperationException("No asynchronous operations allowed in Design mode"); }
         }
 
         public IFrozenContext FrozenContext

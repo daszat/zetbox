@@ -134,7 +134,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ActionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModel.cs" />
     <Compile Include="Models\ColumnDisplayModel.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModelResources.Designer.cs">
@@ -328,7 +327,6 @@
     <Compile Include="Presentables\ZetboxBase\CommonCommands.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceListViewModel.cs" />
     <Compile Include="Presentables\ErrorListViewModel.cs" />
-    <Compile Include="Presentables\IAsyncUiManager.cs" />
     <Compile Include="Presentables\ICommandViewModel.cs" />
     <Compile Include="Presentables\ILabeledViewModel.cs" />
     <Compile Include="Presentables\IViewModelFactory.cs" />

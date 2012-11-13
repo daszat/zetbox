@@ -34,12 +34,9 @@ namespace Zetbox.Client.WPF
     public class WpfModelFactory
         : ViewModelFactory
     {
-        private readonly IUiThreadManager uiThread;
-
-        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
+        public WpfModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
             : base(container, frozenCtx, cfg, perfCounter, dialogFactory)
         {
-            this.uiThread = uiThread;
         }
 
         /// <inheritdoc/>
@@ -58,8 +55,6 @@ namespace Zetbox.Client.WPF
         /// <inheritdoc/>
         protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
         {
-            uiThread.Verify();
-
             var window = view as Window;
 
             if (window != null)
