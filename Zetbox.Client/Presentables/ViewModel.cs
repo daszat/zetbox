@@ -64,6 +64,20 @@ namespace Zetbox.Client.Presentables
     }
 
     /// <summary>
+    /// This is a marker attribute to document the fact that the attributed class does not need a VMD in the database.
+    /// </summary>
+    /// <remarks>
+    /// Useful when extending a existing ViewModel, or for internally used ViewModels.
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public sealed class IgnoreViewModelDescriptorAttribute : Attribute
+    {
+        public IgnoreViewModelDescriptorAttribute()
+        {
+        }
+    }
+
+    /// <summary>
     /// A base class for implementing the ViewModel pattern. This class should proxy the actual
     /// data model into a non-blocking, view-state holding entity. Unless noted differently, members
     /// are not thread-safe and may only be called from the UI thread.

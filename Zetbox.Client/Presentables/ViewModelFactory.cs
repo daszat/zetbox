@@ -320,10 +320,9 @@ namespace Zetbox.Client.Presentables
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
 
-            ViewModelDescriptor pmd = mdl
-                .GetType()
-                .ToRef(FrozenContext)
-                .GetViewModelDescriptor();
+            var pmd = GuiExtensions.GetViewModelDescriptor(mdl, FrozenContext);
+
+            if (pmd == null) return null;
 
             var vDesc = mdl.RequestedKind != null
                 ? pmd.GetViewDescriptor(Toolkit, mdl.RequestedKind)
@@ -343,12 +342,11 @@ namespace Zetbox.Client.Presentables
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
             if (kind == null) { throw new ArgumentNullException("kind"); }
 
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext)
-                .GetViewModelDescriptor();
+            var pmd = GuiExtensions.GetViewModelDescriptor(mdl, FrozenContext);
 
-            var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
+            if (pmd == null) return null;
 
-            return CreateSpecificView(mdl, vDesc);
+            return CreateSpecificView(mdl, pmd.GetViewDescriptor(Toolkit, kind));
         }
 
         /// <summary>
