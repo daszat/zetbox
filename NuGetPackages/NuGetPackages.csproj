@@ -76,6 +76,7 @@
       <DependentUpon>zetboxBasic-WpfExe.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </NuSpec>
+    <None Include="packages.config" />
     <None Include="zetboxBasic-WpfExe.nuspec.in" />
     <None Include="zetboxBasic-ClientWpf.nuspec.in" />
     <None Include="zetboxBasic-Server.nuspec.in" />
@@ -94,10 +95,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Content Include="install-references.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="install-references.ps1" />
+    <Compile Include="Properties\VersionInfo.cs" />
   </ItemGroup>
   <Import Project="..\packages\MSBuildVersioning.1.0.36.0\lib\net40\MsBuildVersioning.targets" />
   <Target Name="GitVersionNuSpec" Inputs="@(NuSpec)" Outputs="%(Identity).Dummy">
