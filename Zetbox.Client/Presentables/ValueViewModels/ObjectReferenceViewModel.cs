@@ -457,7 +457,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public override DataObjectViewModel ValueAsync
         {
-            get 
+            get
             {
                 GetValueFromModel();
                 return _valueCache;
@@ -718,6 +718,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region Highlight
+
         public override Highlight Highlight
         {
             get
@@ -726,23 +727,26 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        private Highlight _highlightAsyncCache;
+        private PropertyTask<Highlight> _highlightTask;
+        private PropertyTask<Highlight> EnsureHighlightTask()
+        {
+            if (_highlightTask != null) return _highlightTask;
+
+            return _highlightTask = new PropertyTask<Highlight>(
+                notifier: () =>
+                {
+                    OnPropertyChanged("HighlightAsync");
+                },
+                createTask: () =>
+                {
+                    return new ZbTask<Highlight>(GetValueFromModel(), () => Highlight);
+                },
+                set: null);
+        }
+
         public override Highlight HighlightAsync
         {
-            get
-            {
-                GetValueFromModel()
-                    .OnResult(t =>
-                    {
-                        var tmp = this.Highlight;
-                        if (_highlightAsyncCache != tmp)
-                        {
-                            _highlightAsyncCache = tmp;
-                            OnPropertyChanged("HighlightAsync");
-                        }
-                    });
-                return _highlightAsyncCache;
-            }
+            get { return EnsureHighlightTask().GetAsync(); }
         }
         #endregion
     }
