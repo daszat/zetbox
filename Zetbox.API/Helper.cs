@@ -184,6 +184,8 @@ namespace Zetbox.API
         public static ZbTask TriggerFetch<TObject, TProperty>(this TObject obj, Expression<Func<TObject, TProperty>> property)
             where TObject : IDataObject
         {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (property == null) throw new ArgumentNullException("property");
             return obj.TriggerFetch(((MemberExpression)property.Body).Member.Name);
         }
 

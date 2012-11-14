@@ -34,18 +34,13 @@ namespace Zetbox.Client.WPF.Converter
     [ValueConversion(typeof(object), typeof(Image))]
     public class ImageCtrlConverter : IValueConverter
     {
-        private readonly IconConverter _iconConverter;
-
-        public ImageCtrlConverter(IconConverter iconConverter)
-        {
-            this._iconConverter = iconConverter;
-        }
+        private readonly ImageConverter _imageConverter = new ImageConverter();
 
         #region IValueConverter Members
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var img = _iconConverter.Convert(value, targetType, parameter, culture) as BitmapImage;
+            var img = _imageConverter.Convert(value, targetType, parameter, culture) as BitmapImage;
             if (img == null) return Binding.DoNothing;
 
             var result = new Image() { Source = img };

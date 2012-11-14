@@ -47,7 +47,7 @@
                 <HierarchicalDataTemplate DataType="{x:Type viewModels:ControlKindViewModel}"
                                           ItemsSource="{Binding ChildControlKinds}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                        <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                                Width="14"
                                Height="14" />
                         <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"

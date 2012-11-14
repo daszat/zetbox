@@ -102,7 +102,6 @@
     <Compile Include="Converter\EmptyStringToCollapsedConverter.cs" />
     <Compile Include="Converter\FormattingToFontWeightConverter.cs" />
     <Compile Include="Converter\DebugConverter.cs" />
-    <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="Converter\ImageCtrlConverter.cs" />
     <Compile Include="Converter\ObjectStateConverter.cs" />

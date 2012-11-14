@@ -31,6 +31,7 @@
     <converter:InvertedBoolConverter x:Key="InvertedBoolConverter" />
     <converter:BooleanMultiselectToSelectionModeConverter x:Key="BooleanMultiselectToSelectionModeConverter" />
     <converter:ImageConverter x:Key="ImageConverter" />
+    <converter:ImageCtrlConverter x:Key="ImageCtrlConverter" />
     <converter:SystemDrawingConverter x:Key="SystemDrawingConverter" />
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converter:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />

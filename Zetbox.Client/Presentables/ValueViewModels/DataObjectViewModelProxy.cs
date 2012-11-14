@@ -29,7 +29,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public DataObjectViewModel Object { get; set; }
 
-        public App.GUI.Icon Icon
+        public System.Drawing.Image Icon
         {
             get { return Object != null ? Object.Icon : null; }
         }

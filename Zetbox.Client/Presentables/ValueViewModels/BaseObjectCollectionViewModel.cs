@@ -325,7 +325,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         () => CreateNewItem(),
                         () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly,
                         null);
-                    _CreateNewCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
+                    _CreateNewCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _CreateNewCommand;
             }
@@ -346,7 +346,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         () => AddExistingItem(),
                         () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly,
                         null);
-                    _AddExistingCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext);
+                    _AddExistingCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext));
                 }
                 return _AddExistingCommand;
             }
@@ -387,7 +387,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
                         () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly,
                         null);
-                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
+                    _DeleteCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
                 }
                 return _DeleteCommand;
             }

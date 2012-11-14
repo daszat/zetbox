@@ -108,7 +108,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             this.Listener = listener;
             this.SubmitChanges = submitChanges;
-            this.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
+            this.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
         }
 
         protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
@@ -380,11 +380,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             
         }
 
-        public override Icon Icon
+        public override System.Drawing.Image Icon
         {
             get
             {
-                return base.Icon ?? NamedObjects.Gui.Icons.ZetboxBase.otheroptions_ico.Find(FrozenContext);
+                return base.Icon ?? IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.otheroptions_ico.Find(FrozenContext));
             }
             set
             {

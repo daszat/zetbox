@@ -89,7 +89,7 @@
                                 Style="{StaticResource ControlBorderStyle}"
                                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                                 BorderThickness="1,1,0,1">
-                            <Image Source="{Binding Value, Converter={StaticResource IconConverter}}"
+                            <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                                    Margin="3 0 3 0"
                                    Width="14"
                                    Height="14" />

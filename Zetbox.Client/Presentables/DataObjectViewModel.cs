@@ -422,12 +422,12 @@ namespace Zetbox.Client.Presentables
             OnPropertyChanged("Name");
         }
 
-        private Icon _iconCache = null;
+        private System.Drawing.Image _iconCache = null;
         /// <summary>
         /// Override this to present a custom icon
         /// </summary>
         /// <returns>an <see cref="Icon"/> describing the desired icon</returns>
-        public override Icon Icon
+        public override System.Drawing.Image Icon
         {
             get
             {
@@ -435,11 +435,11 @@ namespace Zetbox.Client.Presentables
                 {
                     if (_object is Icon)
                     {
-                        _iconCache = (Icon)_object;
+                        _iconCache = IconConverter.ToImage((Icon)_object);
                     }
                     else
                     {
-                        _iconCache = _object.GetObjectClass(FrozenContext).DefaultIcon;
+                        _iconCache = IconConverter.ToImage(_object.GetObjectClass(FrozenContext).DefaultIcon);
                     }
                 }
                 return _iconCache;

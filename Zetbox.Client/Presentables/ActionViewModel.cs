@@ -67,11 +67,11 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public override App.GUI.Icon Icon
+        public override System.Drawing.Image Icon
         {
             get
             {
-                return Method.Icon ?? base.Icon;
+                return IconConverter.ToImage(Method.Icon) ?? base.Icon;
             }
             set
             {

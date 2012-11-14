@@ -235,7 +235,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.ResetCommandName,
                         SavedListConfiguratorViewModelResources.ResetCommandTooltip,
                         Reset, null, null);
-                    _ResetCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext);
+                    _ResetCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
                 }
                 return _ResetCommand;
             }
@@ -260,7 +260,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.DeleteCommandTooltip,
                         Delete, () => SelectedItem != null,
                         () => SavedListConfiguratorViewModelResources.DeleteCommandReason);
-                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
+                    _DeleteCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
                 }
                 return _DeleteCommand;
             }
@@ -538,7 +538,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.DeleteCommandName,
                         SavedListConfiguratorViewModelResources.DeleteCommandTooltip,
                         Delete, null, null);
-                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
+                    _DeleteCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
                 }
                 return _DeleteCommand;
             }
@@ -560,7 +560,7 @@ namespace Zetbox.Client.Presentables.GUI
                         SavedListConfiguratorViewModelResources.RenameCommandName,
                         SavedListConfiguratorViewModelResources.RenameCommandTooltip,
                         Rename, null, null);
-                    _RenameCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext);
+                    _RenameCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext));
                 }
                 return _RenameCommand;
             }

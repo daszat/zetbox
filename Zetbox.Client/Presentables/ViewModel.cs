@@ -27,6 +27,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
+using Zetbox.API.Common.GUI;
 
     public interface IViewModelDependencies
     {
@@ -44,6 +45,11 @@ namespace Zetbox.Client.Presentables
         /// The current Identity Resolver
         /// </summary>
         IIdentityResolver IdentityResolver { get; }
+
+        /// <summary>
+        /// IIconConverter instance
+        /// </summary>
+        IIconConverter IconConverter { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
@@ -91,6 +97,11 @@ namespace Zetbox.Client.Presentables
         /// The factory from where new models should be created
         /// </summary>
         public IViewModelFactory ViewModelFactory { get { return _dependencies.Factory; } }
+
+        /// <summary>
+        /// The IconConverter instance
+        /// </summary>
+        public IIconConverter IconConverter { get { return _dependencies.IconConverter; } }
 
         /// <summary>
         /// A <see cref="IZetboxContext"/> to access the current user's data
@@ -297,8 +308,8 @@ namespace Zetbox.Client.Presentables
             OnPropertyChanged("HighlightAsync");
         }
 
-        private Icon _icon;
-        public virtual Icon Icon
+        private System.Drawing.Image _icon;
+        public virtual System.Drawing.Image Icon
         {
             get
             {
@@ -313,7 +324,7 @@ namespace Zetbox.Client.Presentables
                 }
             }
         }
-        public virtual Icon IconAsync
+        public virtual System.Drawing.Image IconAsync
         {
             get
             {
@@ -448,6 +459,11 @@ namespace Zetbox.Client.Presentables
         }
 
         public IIdentityResolver IdentityResolver
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IIconConverter IconConverter
         {
             get { throw new NotImplementedException(); }
         }

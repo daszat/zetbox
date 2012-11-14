@@ -100,7 +100,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         FilterListEntryViewModelResources.RemoveCommand, 
                         FilterListEntryViewModelResources.RemoveCommand_Tooltip,
                         Remove, () => IsUserFilter, null);
-                    _RemoveCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
+                    _RemoveCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
                 }
                 return _RemoveCommand;
             }

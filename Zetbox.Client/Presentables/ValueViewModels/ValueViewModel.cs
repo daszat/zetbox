@@ -1561,8 +1561,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        private Icon _customIcon;
-        public override Icon Icon
+        private System.Drawing.Image _customIcon;
+        public override System.Drawing.Image Icon
         {
             get
             {
@@ -1572,15 +1572,15 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
                 else if (base.Value == true)
                 {
-                    return BoolModel.TrueIcon;
+                    return IconConverter.ToImage(BoolModel.TrueIcon);
                 }
                 else if (base.Value == false)
                 {
-                    return BoolModel.FalseIcon;
+                    return IconConverter.ToImage(BoolModel.FalseIcon);
                 }
                 else
                 {
-                    return BoolModel.NullIcon;
+                    return IconConverter.ToImage(BoolModel.NullIcon);
                 }
             }
             set

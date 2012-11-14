@@ -23,7 +23,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         public SingleLineDisplay()
         {
             var img = new Image() { Width = 14, Height = 14 };
-            BindingOperations.SetBinding(img, Image.SourceProperty, new Binding() { Converter = (IValueConverter)FindResource("IconConverter") });
+            BindingOperations.SetBinding(img, Image.SourceProperty, new Binding("Icon") { Converter = (IValueConverter)FindResource("ImageConverter") });
             Children.Add(img);
 
             var txt = new TextBlock() { Margin = new Thickness(3, 0, 0, 0) };

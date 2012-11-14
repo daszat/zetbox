@@ -37,7 +37,7 @@
         </ToolBarTray>
         <DockPanel DockPanel.Dock="Top">
             <Image DockPanel.Dock="Left"
-                   Source="{Binding Converter={StaticResource IconConverter}}"
+                   Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                    Margin="4,2,2,2"
                    Width="14"
                    Height="14" />

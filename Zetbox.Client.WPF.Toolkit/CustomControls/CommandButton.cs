@@ -48,7 +48,7 @@ namespace Zetbox.Client.WPF.CustomControls
 
             var bImage = new Binding("CommandViewModel.Icon");
             bImage.RelativeSource = RelativeSource.Self;
-            bImage.Converter = (IValueConverter)Application.Current.Resources["IconConverter"];
+            bImage.Converter = (IValueConverter)Application.Current.Resources["ImageConverter"];
             this.SetBinding(ImageProperty, bImage);
 
             this.SetValue(ToolTipService.ShowOnDisabledProperty, true);

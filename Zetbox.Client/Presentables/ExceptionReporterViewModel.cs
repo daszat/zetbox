@@ -146,7 +146,7 @@ using Zetbox.Client.Presentables.ValueViewModels;
                         ExceptionReporterViewModelResources.Report,
                         ExceptionReporterViewModelResources.Report_Tooltip,
                         Report, null, null);
-                    _ReportCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext);
+                    _ReportCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext));
                 }
                 return _ReportCommand;
             }
@@ -175,7 +175,7 @@ using Zetbox.Client.Presentables.ValueViewModels;
                         ExceptionReporterViewModelResources.Cancel,
                         ExceptionReporterViewModelResources.Cancel_Tooltip,
                         Cancel, null, null);
-                    _CancelCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.no_png.Find(FrozenContext);
+                    _CancelCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.no_png.Find(FrozenContext));
                 }
                 return _CancelCommand;
             }

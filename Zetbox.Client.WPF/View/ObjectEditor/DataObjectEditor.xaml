@@ -29,7 +29,7 @@
         <DockPanel DockPanel.Dock="Top"
                    Margin="{StaticResource AreaGroup1Margin}">
             <Image DockPanel.Dock="Left"
-                   Source="{Binding Converter={StaticResource IconConverter}}"
+                   Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                    Width="{StaticResource BigControlHeight}"
                    Height="{StaticResource BigControlHeight}" />
             <TextBlock Text="{Binding Name}"

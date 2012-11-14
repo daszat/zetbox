@@ -409,7 +409,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (_RefreshCommand == null)
                 {
                     _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this, this);
-                    _RefreshCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext);
+                    _RefreshCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
                 }
                 return _RefreshCommand;
             }
@@ -428,7 +428,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         CommonCommandsResources.OpenDataObjectCommand_Name,
                         CommonCommandsResources.OpenDataObjectCommand_Tooltip,
                         OpenObjects);
-                    _OpenCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
+                    _OpenCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
                 }
                 return _OpenCommand;
             }
@@ -443,7 +443,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     _NewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, this, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, NewObject, () => AllowAddNew, null);
-                    _NewCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
+                    _NewCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _NewCommand;
             }
@@ -554,7 +554,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         CommonCommandsResources.DeleteDataObjectCommand_Name,
                         CommonCommandsResources.DeleteDataObjectCommand_Tooltip,
                         DeleteObjects);
-                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
+                    _DeleteCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
                 }
                 return _DeleteCommand;
             }
@@ -619,7 +619,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         SelectColumns,
                         () => AllowSelectColumns,
                         null);
-                    _SelectColumnsCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext);
+                    _SelectColumnsCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext));
                 }
                 return _SelectColumnsCommand;
             }
@@ -670,7 +670,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.PrintCommand,
                         InstanceListViewModelResources.PrintCommand_Tooltip,
                         Print, null, null);
-                    _PrintCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext);
+                    _PrintCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
                 return _PrintCommand;
             }
@@ -1316,12 +1316,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         /// <returns>the default icon of this <see cref="DataType"/></returns>
-        public override Zetbox.App.GUI.Icon Icon
+        public override System.Drawing.Image Icon
         {
             get
             {
                 if (_type != null)
-                    return _type.DefaultIcon;
+                    return IconConverter.ToImage(_type.DefaultIcon);
                 else
                     return null;
             }

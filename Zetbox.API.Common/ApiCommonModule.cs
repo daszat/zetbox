@@ -20,6 +20,7 @@ namespace Zetbox.API.Common
     using System.Linq;
     using System.Text;
     using Autofac;
+    using Zetbox.API.Common.GUI;
 
     public class ApiCommonModule : Autofac.Module
     {
@@ -37,6 +38,12 @@ namespace Zetbox.API.Common
                 .RegisterType<InvocationExecutor>()
                 .As<IInvocationExecutor>()
                 .SingleInstance();
+
+            builder
+                .RegisterType<IconConverter>()
+                .As<IIconConverter>()
+                .SingleInstance();
+
         }
     }
 }

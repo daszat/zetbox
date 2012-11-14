@@ -60,7 +60,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Label,
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Tooltip,
                         OpenAll, null, null);
-                    _OpenAllCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
+                    _OpenAllCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
                 }
                 return _OpenAllCommand;
             }

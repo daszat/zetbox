@@ -243,7 +243,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         public CompoundObjectViewModel Object { get; set; }
-        public App.GUI.Icon Icon
+        public System.Drawing.Image Icon
         {
             get { return Object != null ? Object.Icon : null; }
         }

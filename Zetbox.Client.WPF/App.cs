@@ -178,16 +178,13 @@ namespace Zetbox.Client.WPF
 
             //SplashScreen.DispatchAndWait(() => LoadStyles(SplashScreen.Resources));
 
-            var iconConverter = LoadStyles(this.Resources);
+            LoadStyles(this.Resources);
 
             // Init credentials explicit
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
             container.Resolve<ICredentialsResolver>().EnsureCredentials();
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
-
-            // Tell icon converter that everything is initialized
-            iconConverter.Initialized();
 
             // Focus nightmare
             // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
@@ -217,15 +214,10 @@ namespace Zetbox.Client.WPF
             launcher.Show(args);
         }
 
-        private IconConverter LoadStyles(ResourceDictionary targetResources)
+        private void LoadStyles(ResourceDictionary targetResources)
         {
             targetResources.BeginInit();
             targetResources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/AppResources.xaml", UriKind.Relative) });
-
-            // Create icon converter
-            var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<Func<IZetboxContext>>());
-            targetResources["IconConverter"] = iconConverter;
-            targetResources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
 
             // Init all Converter that are not using a Context
             var templateSelectorFactory = container.Resolve<Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
@@ -253,7 +245,6 @@ namespace Zetbox.Client.WPF
             }
 
             targetResources.EndInit();
-            return iconConverter;
         }
 
         private static ResourceDictionary Freeze(ResourceDictionary dict)

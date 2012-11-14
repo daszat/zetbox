@@ -73,7 +73,7 @@ namespace Zetbox.Client.Presentables
         /// <summary>
         /// Gets an optional Icon for the Command
         /// </summary>
-        Zetbox.App.GUI.Icon Icon { get; set; }
+        System.Drawing.Image Icon { get; set; }
     }
 
     /// <summary>

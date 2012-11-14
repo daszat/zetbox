@@ -261,7 +261,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 if (_NewModuleCommand == null)
                 {
                     _NewModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Module", "Creates a new Module", () => CreateNewModule(), null, null);
-                    _NewModuleCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
+                    _NewModuleCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _NewModuleCommand;
             }
@@ -275,7 +275,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 if (_RefreshCommand == null)
                 {
                     _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Refresh", "Refresh", () => Refresh(), null, null);
-                    _RefreshCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext);
+                    _RefreshCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
                 }
                 return _RefreshCommand;
             }
@@ -289,7 +289,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 if (_EditCurrentModuleCommand == null)
                 {
                     _EditCurrentModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Edit Module", "Opens the Editor for the current module", () => EditCurrentModule(), null, null);
-                    _EditCurrentModuleCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
+                    _EditCurrentModuleCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
                 }
                 return _EditCurrentModuleCommand;
             }
@@ -313,7 +313,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 if (_ReportProblemCommand == null)
                 {
                     _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext, this);
-                    _ReportProblemCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext);
+                    _ReportProblemCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext));
                 }
                 return _ReportProblemCommand;
             }

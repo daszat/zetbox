@@ -62,7 +62,7 @@
                                               ItemsSource="{Binding Children}">
                         <!--<view:DataObjectLineDisplay />-->
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                            <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                                    Width="14"
                                    Height="14" />
                             <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"
@@ -72,7 +72,7 @@
                     <DataTemplate DataType="{x:Type clientZetboxBase:InstanceListViewModel}">
                         <!-- <view:DataObjectLineDisplay DataContext="{Binding DataTypeViewModel}" />-->
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                            <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                                    Width="14"
                                    Height="14" />
                             <TextBlock Text="{Binding DataTypeViewModel.PropertyModelsByName[Name].Value}"

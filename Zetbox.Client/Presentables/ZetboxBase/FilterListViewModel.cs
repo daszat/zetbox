@@ -333,7 +333,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         AddFilter,
                         () => ShowFilter && AllowUserFilter, 
                         null);
-                    _AddFilterCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
+                    _AddFilterCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _AddFilterCommand;
             }

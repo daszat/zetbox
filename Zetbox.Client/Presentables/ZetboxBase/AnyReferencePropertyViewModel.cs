@@ -100,7 +100,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         () => OpenReference(),
                         () => CanOpen,
                         null);
-                    _openReferenceCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
+                    _openReferenceCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
                 }
                 return _openReferenceCommand;
             }
@@ -159,7 +159,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         () => SelectValue(),
                         () => AllowSelectValue && !DataContext.IsReadonly && !IsReadOnly,
                         null);
-                    _SelectValueCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext);
+                    _SelectValueCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext));
                 }
                 return _SelectValueCommand;
             }

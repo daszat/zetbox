@@ -26,16 +26,18 @@ namespace Zetbox.Client
     using Zetbox.API.Configuration;
     using Zetbox.App.Extensions;
     using Zetbox.Client.Presentables;
+using Zetbox.API.Common.GUI;
 
     public sealed class ClientModule : Module
     {
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IIdentityResolver idResolver)
+            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IIdentityResolver idResolver, IIconConverter iconConverter)
             {
                 Factory = f;
                 FrozenContext = frozenCtx;
                 IdentityResolver = idResolver;
+                IconConverter = iconConverter;
             }
 
             #region IViewModelDependencies Members
@@ -59,6 +61,13 @@ namespace Zetbox.Client
             }
 
             #endregion
+
+
+            public IIconConverter IconConverter
+            {
+                get;
+                private set;
+            }
         }
 
         protected override void Load(ContainerBuilder moduleBuilder)
@@ -69,7 +78,8 @@ namespace Zetbox.Client
                 .Register<ViewModelDependencies>(c => new ViewModelDependencies(
                     c.Resolve<IViewModelFactory>(),
                     c.Resolve<IFrozenContext>(),
-                    c.Resolve<IIdentityResolver>()))
+                    c.Resolve<IIdentityResolver>(),
+                    c.Resolve<IIconConverter>()))
                 .As<IViewModelDependencies>();
 
             moduleBuilder

@@ -103,7 +103,7 @@
                               styles:Margin.Right="{StaticResource ItemMargin}">
                     <Border Padding="5">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Path=ElevatedModeCommand.Icon, Converter={StaticResource IconConverter}}"
+                            <Image Source="{Binding Path=ElevatedModeCommand.Icon, Converter={StaticResource ImageConverter}}"
                                    MaxHeight="{StaticResource SmallControlHeight}"
                                    MaxWidth="{StaticResource SmallControlHeight}" />
                             <ContentPresenter Content="{Binding Path=ElevatedModeCommand.Label}"
