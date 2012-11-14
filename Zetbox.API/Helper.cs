@@ -22,6 +22,8 @@ using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
 using Zetbox.API.Utils;
+using Zetbox.API.Async;
+using System.Linq.Expressions;
 
 namespace Zetbox.API
 {
@@ -178,6 +180,13 @@ namespace Zetbox.API
             }
             return result;
         }
+
+        public static ZbTask TriggerFetch<TObject, TProperty>(this TObject obj, Expression<Func<TObject, TProperty>> property)
+            where TObject : IDataObject
+        {
+            return obj.TriggerFetch(((MemberExpression)property.Body).Member.Name);
+        }
+
     }
 
     public static class TypeExtensions
