@@ -6,6 +6,7 @@
     <Modules>
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
       <Module>Zetbox.API.Client.ClientApiModule, Zetbox.API.Client</Module>
+      <Module>Zetbox.API.Common.ApiCommonModule, Zetbox.API.Common</Module>
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
       <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
       <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
