@@ -21,6 +21,9 @@ using Zetbox.Client.Presentables.DocumentManagement;
 using Zetbox.Client.WPF.Toolkit;
 using System.Windows.Media.Imaging;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.App.Base;
+using System.IO;
+using System.Text;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
@@ -68,27 +71,9 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                 {
                     var fi = ViewModel.File.Context.GetFileInfo(blob.ID);
 
-                    try
-                    {
-                        var bmpImg = new BitmapImage();
-                        bmpImg.BeginInit();
-                        bmpImg.StreamSource = blob.GetStream();
-                        bmpImg.EndInit();
-
-                        PreviewControl.Content = new ZoomBorder() { Child = new Image() { Source = bmpImg } };
-                        return;
-                    }
-                    catch (NotSupportedException)
-                    {
-                        // No image, try the Vista-Preview
-                    }
-
-                    if (vistaPreview == null)
-                    {
-                        vistaPreview = new WPFPreviewControl();
-                    }
-                    PreviewControl.Content = vistaPreview;
-                    vistaPreview.PreviewFilePath = fi.FullName;
+                    if (TryText(blob)) return;
+                    if (TryImage(blob)) return;
+                    if (TryVistaPreview(fi)) return;
                 }
                 else
                 {
@@ -101,5 +86,66 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                 PreviewControl.Content = new TextBlock() { Text = ex.Message };
             }
         }
+
+        #region Try *
+        private bool TryVistaPreview(System.IO.FileInfo fi)
+        {
+            if (vistaPreview == null)
+            {
+                vistaPreview = new WPFPreviewControl();
+            }
+            PreviewControl.Content = vistaPreview;
+            vistaPreview.PreviewFilePath = fi.FullName;
+            return true;
+        }
+
+        private bool TryImage(Blob blob)
+        {
+            try
+            {
+                var bmpImg = new BitmapImage();
+                bmpImg.BeginInit();
+                bmpImg.StreamSource = blob.GetStream();
+                bmpImg.EndInit();
+
+                PreviewControl.Content = new ZoomBorder() { Child = new Image() { Source = bmpImg } };
+                return true;
+            }
+            catch (NotSupportedException)
+            {
+                // No image, try next one
+                return false;
+            }
+        }
+
+        private bool TryText(Blob blob)
+        {
+            if ("text/plain".Equals(blob.MimeType, StringComparison.InvariantCultureIgnoreCase))
+            {
+                using (var s = blob.GetStream())
+                {
+                    var isUtf8 = Utf8Checker.IsUtf8(s);
+                    s.Seek(0, SeekOrigin.Begin);
+                    var sr = new StreamReader(s, isUtf8 ? Encoding.UTF8 : Encoding.Default);
+                    
+                    PreviewControl.Content = new TextBox()
+                    {
+                        Text = sr.ReadToEnd(),
+                        IsReadOnly = true,
+                        TextWrapping = TextWrapping.Wrap,
+                        HorizontalScrollBarVisibility = ScrollBarVisibility.Visible,
+                        VerticalScrollBarVisibility = ScrollBarVisibility.Visible,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Stretch,
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
+                    };
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
     }
 }
