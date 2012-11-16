@@ -556,7 +556,7 @@ namespace Zetbox.Client.Models
             {
                 return ((IDataObject)Object).TriggerFetch(Property.Name);
             }
-            else 
+            else
             {
                 throw new InvalidOperationException("Object is not an IDataObject - unable to call TriggerFetch");
             }
@@ -729,15 +729,20 @@ namespace Zetbox.Client.Models
 
         #endregion
 
+        private ZbTask<IList<ICompoundObject>> _getValueTask;
         public override ZbTask<IList<ICompoundObject>> GetValueAsync()
         {
-            return new ZbTask<IList<ICompoundObject>>(new ZbTask<INotifyCollectionChanged>(Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name)))
-                .OnResult(t =>
-                {
-                    var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                    notifier.CollectionChanged += ValueCollectionChanged;
-                    t.Result = MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier);
-                });
+            if (_getValueTask == null)
+            {
+                _getValueTask = new ZbTask<IList<ICompoundObject>>(new ZbTask<INotifyCollectionChanged>(Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name)))
+                    .OnResult(t =>
+                    {
+                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                        notifier.CollectionChanged += ValueCollectionChanged;
+                        t.Result = MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier);
+                    });
+            }
+            return _getValueTask;
         }
 
         protected override void InvalidateValueCache()
@@ -833,15 +838,20 @@ namespace Zetbox.Client.Models
         {
         }
 
+        private ZbTask<ICollection<IDataObject>> _getValueTask;
         public override ZbTask<ICollection<IDataObject>> GetValueAsync()
         {
-            return new ZbTask<ICollection<IDataObject>>(GetTriggerFetchTask())
-                .OnResult(t =>
-                {
-                    var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                    notifier.CollectionChanged += ValueCollectionChanged;
-                    t.Result = MagicCollectionFactory.WrapAsCollection<IDataObject>(notifier);
-                });
+            if (_getValueTask == null)
+            {
+                _getValueTask = new ZbTask<ICollection<IDataObject>>(GetTriggerFetchTask())
+                    .OnResult(t =>
+                    {
+                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                        notifier.CollectionChanged += ValueCollectionChanged;
+                        t.Result = MagicCollectionFactory.WrapAsCollection<IDataObject>(notifier);
+                    });
+            }
+            return _getValueTask;
         }
 
         protected override void InvalidateValueCache()
@@ -858,15 +868,20 @@ namespace Zetbox.Client.Models
         {
         }
 
+        private ZbTask<IList<IDataObject>> _getValueTask;
         public override ZbTask<IList<IDataObject>> GetValueAsync()
         {
-            return new ZbTask<IList<IDataObject>>(GetTriggerFetchTask())
-               .OnResult(t =>
-               {
-                   var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                   notifier.CollectionChanged += ValueCollectionChanged;
-                   t.Result = MagicCollectionFactory.WrapAsList<IDataObject>(notifier);
-               });
+            if (_getValueTask == null)
+            {
+                _getValueTask = new ZbTask<IList<IDataObject>>(GetTriggerFetchTask())
+                    .OnResult(t =>
+                    {
+                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                        notifier.CollectionChanged += ValueCollectionChanged;
+                        t.Result = MagicCollectionFactory.WrapAsList<IDataObject>(notifier);
+                    });
+            }
+            return _getValueTask;
         }
 
         protected override void InvalidateValueCache()
