@@ -133,6 +133,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                         Text = sr.ReadToEnd(),
                         IsReadOnly = true,
                         TextWrapping = TextWrapping.Wrap,
+                        FontFamily = new System.Windows.Media.FontFamily("Consolas, Courier New"),
                         HorizontalScrollBarVisibility = ScrollBarVisibility.Visible,
                         VerticalScrollBarVisibility = ScrollBarVisibility.Visible,
                         VerticalAlignment = System.Windows.VerticalAlignment.Stretch,
