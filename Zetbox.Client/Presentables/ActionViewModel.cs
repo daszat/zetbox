@@ -23,6 +23,7 @@ namespace Zetbox.Client.Presentables
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
+    using System.Linq.Expressions;
 
     public class ActionViewModel
         : CommandViewModel
@@ -88,12 +89,25 @@ namespace Zetbox.Client.Presentables
             get { return Label; }
         }
 
+        private Func<bool> _canExec;
+        private Func<string> _canExecReason;
         public override bool CanExecute(object data)
         {
-            var result = Object.GetPropertyValue<bool>(Method.Name + "CanExec");
+            if (_canExec == null)
+            {
+                var lambda = Expression.Lambda<Func<bool>>(Expression.MakeMemberAccess(Expression.Constant(Object), Object.GetType().FindProperty(Method.Name + "CanExec").Single()));
+                _canExec = lambda.Compile();
+            }
+
+            var result = _canExec();
             if (result == false)
             {
-                base.Reason = Object.GetPropertyValue<string>(Method.Name + "CanExecReason");
+                if (_canExecReason == null)
+                {
+                    var lambda = Expression.Lambda<Func<string>>(Expression.MakeMemberAccess(Expression.Constant(Object), Object.GetType().FindProperty(Method.Name + "CanExecReason").Single()));
+                    _canExecReason = lambda.Compile();
+                }
+                base.Reason = _canExecReason();
             }
             else
             {
