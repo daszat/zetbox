@@ -41,5 +41,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return Object != null ? Object.Highlight : Highlight.None;
             }
         }
+
+        /// <summary>
+        /// TODO: Add propper implementation
+        /// </summary>
+        public Highlight HighlightAsync
+        {
+            get
+            {
+                return this.Highlight;
+            }
+        }
     }
 }
