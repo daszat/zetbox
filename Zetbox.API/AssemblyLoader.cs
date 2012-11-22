@@ -38,6 +38,7 @@ namespace Zetbox.API
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.AssemblyLoader");
         private readonly static object _lock = new object();
+        private readonly static HashSet<string> _missingAssemblies = new HashSet<string>();
 
         /// <summary>
         /// Initializes the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path.
@@ -257,6 +258,8 @@ namespace Zetbox.API
             {
                 try
                 {
+                    if (_missingAssemblies.Contains(name)) return null; // shortcut
+
                     AssemblyName assemblyName = new AssemblyName(name);
                     string baseName = assemblyName.Name;
 
@@ -269,7 +272,10 @@ namespace Zetbox.API
 
                     // assembly could not be found?
                     if (String.IsNullOrEmpty(sourceDll))
+                    {
+                        _missingAssemblies.Add(name);
                         return null;
+                    }
 
                     // Copy files to destination folder, unless the target file exists
                     // the folder should have been cleared on initialisation and once
