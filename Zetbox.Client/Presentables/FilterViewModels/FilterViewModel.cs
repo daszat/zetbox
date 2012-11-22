@@ -166,7 +166,16 @@ namespace Zetbox.Client.Presentables.FilterViewModels
                 {
                     _label = value;
                     OnPropertyChanged("Label");
+                    OnPropertyChanged("ToolTip");
                 }
+            }
+        }
+
+        public string ToolTip
+        {
+            get
+            {
+                return Label;
             }
         }
 
