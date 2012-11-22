@@ -1007,6 +1007,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         () => Edit(),
                         () => !IsReadOnly,
                         null);
+                    _EditCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext));
                 }
                 return _EditCommand;
             }

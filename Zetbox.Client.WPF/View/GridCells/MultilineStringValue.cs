@@ -31,6 +31,7 @@ using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.ValueViewModels;
 using Zetbox.Client.WPF.Toolkit;
+using Zetbox.Client.WPF.CustomControls;
 
 
 namespace Zetbox.Client.WPF.View.GridCells
@@ -44,7 +45,6 @@ namespace Zetbox.Client.WPF.View.GridCells
         static MultilineStringValue()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MultilineStringValue), new FrameworkPropertyMetadata(typeof(MultilineStringValue)));
-
         }
 
         #region IHasViewModel<MultiLineStringPropertyModel> Members

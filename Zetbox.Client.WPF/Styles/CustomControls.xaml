@@ -169,11 +169,11 @@
                 <ControlTemplate TargetType="{x:Type gridCells:MultilineStringValue}">
                     <DockPanel>
                         <ctrls:CommandButton DockPanel.Dock="Left"
-                                             CommandViewModel="{Binding EditCommand}"
+                                             x:Name="PART_EditButton"
+                                             CommandViewModel="{Binding EditCommand}"                                             
                                              Height="25"
                                              Width="25"
-                                             Style="{StaticResource ImageButton}"
-                                             Image="/Zetbox.Client.WPF;component/Images/pen.png" />
+                                             Style="{StaticResource ImageOnlyButton}" />
                         <TextBlock Text="{Binding ShortText, Mode=OneWay}"
                                    ToolTip="{Binding Value, Mode=OneWay}" />
                     </DockPanel>
