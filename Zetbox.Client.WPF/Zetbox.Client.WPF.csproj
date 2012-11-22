@@ -411,12 +411,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\ObjectReferenceEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ZetboxBase\ParameterInputTaskDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -656,6 +650,7 @@
     <Compile Include="View\ZetboxBase\NullableBoolValueView.cs" />
     <Compile Include="View\ZetboxBase\NullablePropertyTextBoxView.cs" />
     <Compile Include="View\ZetboxBase\ObjectReferenceDropdownEditor.cs" />
+    <Compile Include="View\ZetboxBase\ObjectReferenceEditor.cs" />
     <Compile Include="View\ZetboxBase\PropertiesPrewiewDisplay.xaml.cs">
       <DependentUpon>PropertiesPrewiewDisplay.xaml</DependentUpon>
     </Compile>
@@ -767,9 +762,6 @@
     </Compile>
     <Compile Include="View\ZetboxBase\ObjectReferenceListEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\ObjectReferenceEditor.xaml.cs">
-      <DependentUpon>ObjectReferenceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\ParameterInputTaskDialog.xaml.cs">
       <DependentUpon>ParameterInputTaskDialog.xaml</DependentUpon>

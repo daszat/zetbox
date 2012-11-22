@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -39,10 +39,9 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     /// </summary>
     public partial class ObjectReferenceEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>
     {
-        public ObjectReferenceEditor()
+        static ObjectReferenceEditor()
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ObjectReferenceEditor), new FrameworkPropertyMetadata(typeof(ObjectReferenceEditor)));
         }
 
         #region IHasViewModel<ObjectReferenceModel> Members

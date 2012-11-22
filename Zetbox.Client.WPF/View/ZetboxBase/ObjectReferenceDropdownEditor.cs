@@ -39,7 +39,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     /// Interaction logic for ObjectReferenceEditor.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class ObjectReferenceDropdownEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>
+    public class ObjectReferenceDropdownEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>
     {
         static ObjectReferenceDropdownEditor()
         {
