@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -33,12 +33,13 @@ namespace Zetbox.Client.WPF.View.GridCells
     /// <summary>
     /// Interaction logic for StringValue.xaml
     /// </summary>
-    public partial class StringValue : UserControl
+    public class StringValue : TextBlock
     {
         public StringValue()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
+            this.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+            BindingOperations.SetBinding(this, TextBlock.TextProperty, new Binding("FormattedValueAsync") { Mode = BindingMode.OneWay });
         }
     }
 }

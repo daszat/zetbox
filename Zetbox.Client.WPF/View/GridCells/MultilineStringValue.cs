@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -39,12 +39,12 @@ namespace Zetbox.Client.WPF.View.GridCells
     /// Interaction logic for StringValue.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class MultilineStringValue : UserControl, IHasViewModel<MultiLineStringValueViewModel>
+    public class MultilineStringValue : UserControl, IHasViewModel<MultiLineStringValueViewModel>
     {
-        public MultilineStringValue()
+        static MultilineStringValue()
         {
-            if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MultilineStringValue), new FrameworkPropertyMetadata(typeof(MultilineStringValue)));
+
         }
 
         #region IHasViewModel<MultiLineStringPropertyModel> Members

@@ -6,6 +6,7 @@
                     xmlns:converter="clr-namespace:Zetbox.Client.WPF.Converter;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View"
+                    xmlns:gridCells="clr-namespace:Zetbox.Client.WPF.View.GridCells"
                     xmlns:base="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase">
     <!--
     This file is part of zetbox.
@@ -157,6 +158,25 @@
                               ToolTip="{Binding ToolTip}"
                               MinWidth="1"
                               VerticalAlignment="Top" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type gridCells:MultilineStringValue}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type gridCells:MultilineStringValue}">
+                    <DockPanel>
+                        <ctrls:CommandButton DockPanel.Dock="Left"
+                                             CommandViewModel="{Binding EditCommand}"
+                                             Height="25"
+                                             Width="25"
+                                             Style="{StaticResource ImageButton}"
+                                             Image="/Zetbox.Client.WPF;component/Images/pen.png" />
+                        <TextBlock Text="{Binding ShortText, Mode=OneWay}"
+                                   ToolTip="{Binding Value, Mode=OneWay}" />
+                    </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

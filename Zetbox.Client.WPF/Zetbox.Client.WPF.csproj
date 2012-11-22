@@ -313,12 +313,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\GridCells\MultilineStringValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\GUI\MultiLineEditorDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -459,12 +453,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\GridCells\StringValue.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\GUI\DashboardDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -597,6 +585,8 @@
     <Compile Include="View\Filters\DateRangeFilterEditor.xaml.cs">
       <DependentUpon>DateRangeFilterEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GridCells\MultilineStringValue.cs" />
+    <Compile Include="View\GridCells\StringValue.cs" />
     <Compile Include="View\GUI\NavigationTabbedLeftScreenDisplay.xaml.cs">
       <DependentUpon>NavigationTabbedLeftScreenDisplay.xaml</DependentUpon>
     </Compile>
@@ -700,9 +690,6 @@
     <Compile Include="View\Filters\SingleValueFilterEditor.xaml.cs">
       <DependentUpon>SingleValueFilterEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GridCells\MultilineStringValue.xaml.cs">
-      <DependentUpon>MultilineStringValue.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\GUI\MultiLineEditorDialog.xaml.cs">
       <DependentUpon>MultiLineEditorDialog.xaml</DependentUpon>
     </Compile>
@@ -789,9 +776,6 @@
     </Compile>
     <Compile Include="View\GridCells\ReferenceEditor.xaml.cs">
       <DependentUpon>ReferenceEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\GridCells\StringValue.xaml.cs">
-      <DependentUpon>StringValue.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GUI\DashboardDisplay.xaml.cs">
       <DependentUpon>DashboardDisplay.xaml</DependentUpon>
