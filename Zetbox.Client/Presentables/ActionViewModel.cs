@@ -89,25 +89,30 @@ namespace Zetbox.Client.Presentables
             get { return Label; }
         }
 
-        private Func<bool> _canExec;
-        private Func<string> _canExecReason;
+        private static Dictionary<Tuple<Type, string>, Func<object, bool>> _canExecCache = new Dictionary<Tuple<Type,string>,Func<object,bool>>();
+        private static Dictionary<Tuple<Type, string>, Func<object, string>> _canExecReasonCache = new Dictionary<Tuple<Type,string>,Func<object,string>>();
         public override bool CanExecute(object data)
         {
-            if (_canExec == null)
+            Func<object, bool> canExec;
+            var key = new Tuple<Type, string>(Object.GetType(), Method.Name);
+            if (!_canExecCache.TryGetValue(key, out canExec))
             {
-                var lambda = Expression.Lambda<Func<bool>>(Expression.MakeMemberAccess(Expression.Constant(Object), Object.GetType().FindProperty(Method.Name + "CanExec").Single()));
-                _canExec = lambda.Compile();
+                var p = Expression.Parameter(typeof(object));
+                var lambda = Expression.Lambda<Func<object, bool>>(Expression.MakeMemberAccess(Expression.Convert(p, Object.GetType()), Object.GetType().FindProperty(Method.Name + "CanExec").Single()), p);
+                _canExecCache[key] = canExec = lambda.Compile();
             }
 
-            var result = _canExec();
+            var result = canExec(Object);
             if (result == false)
             {
-                if (_canExecReason == null)
+                Func<object, string> canExecReason;
+                if (!_canExecReasonCache.TryGetValue(key, out canExecReason))
                 {
-                    var lambda = Expression.Lambda<Func<string>>(Expression.MakeMemberAccess(Expression.Constant(Object), Object.GetType().FindProperty(Method.Name + "CanExecReason").Single()));
-                    _canExecReason = lambda.Compile();
+                    var p = Expression.Parameter(typeof(object));
+                    var lambda = Expression.Lambda<Func<object, string>>(Expression.MakeMemberAccess(Expression.Convert(p, Object.GetType()), Object.GetType().FindProperty(Method.Name + "CanExecReason").Single()), p);
+                    _canExecReasonCache[key] = canExecReason = lambda.Compile();
                 }
-                base.Reason = _canExecReason();
+                base.Reason = canExecReason(Object);
             }
             else
             {
