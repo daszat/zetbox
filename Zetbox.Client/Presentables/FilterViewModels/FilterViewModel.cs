@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables.FilterViewModels
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
 
@@ -123,6 +124,8 @@ namespace Zetbox.Client.Presentables.FilterViewModels
                             .Select(f =>
                             {
                                 var mdl = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, f.ViewModelType, f.Value);
+                                // Set kind to a grid kind
+                                mdl.RequestedKind = f.ViewModelType.GetDefaultGridCellEditorKind();
                                 // I know, a hack, but better then allowing user to create new objects during a search
                                 if (mdl is ObjectReferenceViewModel)
                                 {
