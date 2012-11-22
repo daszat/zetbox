@@ -26,6 +26,8 @@ namespace Zetbox.Client.WPF.Converter
     
     public sealed class ImageConverter : IValueConverter
     {
+        private static readonly Dictionary<System.Drawing.Image, BitmapImage> _imageCache = new Dictionary<System.Drawing.Image, BitmapImage>();
+
         public object Convert(object value, Type targetType,
                               object parameter, CultureInfo culture)
         {
@@ -45,14 +47,19 @@ namespace Zetbox.Client.WPF.Converter
                 }
                 else if (value is System.Drawing.Image)
                 {
-                    var bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    var ms = new MemoryStream();
                     var img = (System.Drawing.Image)value;
-                    img.Save(ms, img.RawFormat);
-                    ms.Seek(0, SeekOrigin.Begin);
-                    bmp.StreamSource = ms;
-                    bmp.EndInit();
+                    BitmapImage bmp;
+                    if (!_imageCache.TryGetValue(img, out bmp))
+                    {
+                        bmp = new BitmapImage();
+                        bmp.BeginInit();
+                        var ms = new MemoryStream();
+                        img.Save(ms, img.RawFormat);
+                        ms.Seek(0, SeekOrigin.Begin);
+                        bmp.StreamSource = ms;
+                        bmp.EndInit();
+                        _imageCache[img] = bmp;
+                    }
                     return bmp;
                 }
                 else
