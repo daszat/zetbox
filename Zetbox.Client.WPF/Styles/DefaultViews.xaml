@@ -125,11 +125,14 @@
     <Style TargetType="{x:Type ctrls:WindowView}"
            BasedOn="{StaticResource zbWindow}" />
 
+    <Style TargetType="Window"
+           BasedOn="{StaticResource zbWindow}" />
+
     <Style TargetType="Border">
         <Setter Property="SnapsToDevicePixels"
                 Value="True" />
     </Style>
-
+    
     <!-- Complex controls -->
     <Style x:Key="GroupBorderStyle"
            TargetType="Border">
@@ -407,8 +410,18 @@
         </Setter>
     </Style>
 
+    <Style x:Key="zbMenu"
+           TargetType="Menu">
+        <Setter Property="FontSize"
+                Value="{StaticResource NormalFontSize}" />
+    </Style>
+
+    <Style TargetType="Menu"
+           BasedOn="{StaticResource zbMenu}" />
+
     <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
     <Style x:Key="ToolbarMenu"
+           BasedOn="{StaticResource zbMenu}"
            TargetType="{x:Type Menu}">
         <Setter Property="Margin"
                 Value="0,2,0,0" />

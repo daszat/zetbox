@@ -234,7 +234,7 @@ namespace Zetbox.Client.WPF
             }
 
             // For testing only!!!!
-            //targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/BigFontStyles.xaml", UriKind.Relative) }));
+            // targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/BigFontStyles.xaml", UriKind.Relative) }));
 
             targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) }));
             targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/CustomControls.xaml", UriKind.Relative) }));
