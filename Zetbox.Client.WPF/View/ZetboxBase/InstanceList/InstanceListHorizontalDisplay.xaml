@@ -60,7 +60,7 @@
                     <ctrls:ZetboxListView x:Name="lst"
                                           Margin="10"
                                           BorderThickness="0"
-                                          ItemsSource="{Binding Instances}"
+                                          ItemsSource="{Binding InstancesAsync}"
                                           ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
                                           ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                                           SelectedZetboxItems="{Binding SelectedItems}"
