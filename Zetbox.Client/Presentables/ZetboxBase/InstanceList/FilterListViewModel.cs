@@ -146,6 +146,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        public bool RequiredFilterMissing
+        {
+            get
+            {
+                return RespectRequiredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0;
+            }
+        }
+
         private ObservableCollection<IFilterModel> _filter = null;
         private ObservableCollection<FilterViewModel> _FilterViewModels = null;
         private ObservableCollection<FilterListEntryViewModel> _FilterListEntryViewModels = null;

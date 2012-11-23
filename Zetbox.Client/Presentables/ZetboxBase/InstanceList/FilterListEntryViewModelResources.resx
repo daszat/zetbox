@@ -112,15 +112,18 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="RemoveCommand" xml:space="preserve">
-    <value>Entfernen</value>
+    <value>Remove</value>
   </data>
   <data name="RemoveCommand_Tooltip" xml:space="preserve">
-    <value>Entfernt den Filter</value>
+    <value>Remove this filter</value>
+  </data>
+  <data name="RequiredFilterMissingReason" xml:space="preserve">
+    <value>Not all required filters are set</value>
   </data>
 </root>

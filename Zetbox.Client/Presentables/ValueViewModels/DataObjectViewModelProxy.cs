@@ -19,6 +19,9 @@ using System.Text;
 
 namespace Zetbox.Client.Presentables.ValueViewModels
 {
+    /// <summary>
+    /// Proxy object for datagrids who are able to create new instances
+    /// </summary>
     public class DataObjectViewModelProxy
     {
         public DataObjectViewModelProxy()

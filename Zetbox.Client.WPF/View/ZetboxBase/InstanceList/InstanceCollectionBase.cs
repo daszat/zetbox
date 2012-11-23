@@ -55,7 +55,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             if (ViewModel != null && ViewModel.SelectedItem != null)
             {
-                ViewModel.OnItemsDefaultAction(new DataObjectViewModel[] { ViewModel.SelectedItem });
+                ViewModel.ExecItemsDefaultAction(new DataObjectViewModel[] { ViewModel.SelectedItem });
             }
 
             e.Handled = true;

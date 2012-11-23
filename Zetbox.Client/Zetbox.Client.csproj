@@ -198,18 +198,24 @@
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
     <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\AnyReferencePropertyViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\FilterListEntryViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\FilterListEntryViewModelResources.Designer.cs">
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Commands.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.PrintExport.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.GridSupport.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Selection.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Filter.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterListEntryViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\FilterListViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\FilterListViewModelResources.Designer.cs">
+    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterListViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Sorting.cs" />
     <Compile Include="Presentables\ZetboxBase\PropertySelectionTaskViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -265,7 +271,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonCommandsResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\InstanceListViewModelResources.Designer.cs">
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InstanceListViewModelResources.resx</DependentUpon>
@@ -325,7 +331,7 @@
     <Compile Include="Presentables\DataTypeViewModel.cs" />
     <Compile Include="Presentables\GUI\MultiLineEditorDialogViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\CommonCommands.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceListViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.cs" />
     <Compile Include="Presentables\ErrorListViewModel.cs" />
     <Compile Include="Presentables\ICommandViewModel.cs" />
     <Compile Include="Presentables\ILabeledViewModel.cs" />
@@ -431,15 +437,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SavedListConfiguratorViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\FilterListEntryViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\FilterListEntryViewModelResources.resx">
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FilterListEntryViewModelResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Zetbox.Client.Presentables.ZetboxBase</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\FilterListViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\FilterListViewModelResources.resx">
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FilterListViewModelResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Zetbox.Client.Presentables.ZetboxBase</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.resx">
@@ -500,11 +508,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonCommandsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceListViewModelResources.de.resx">
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.de.resx">
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceListViewModelResources.resx">
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>InstanceListViewModelResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Zetbox.Client.Presentables.ZetboxBase</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ZetboxBase\RelationChainViewModelResources.de.resx">
     </EmbeddedResource>
