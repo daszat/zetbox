@@ -41,12 +41,12 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         public ActionDisplay()
         {
             this.Loaded += new RoutedEventHandler(ActionDisplay_Loaded);
+            SetResourceReference(StyleProperty, "zbButtonTemplate");
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this.Style = (Style)FindResource("zbButtonTemplate");
             BindingOperations.SetBinding(this, CommandButton.CommandViewModelProperty, new Binding() {  });
         }
 

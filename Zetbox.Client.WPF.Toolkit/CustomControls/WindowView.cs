@@ -38,6 +38,8 @@ namespace Zetbox.Client.WPF.CustomControls
             };
             this.Loaded += new RoutedEventHandler(WindowView_Loaded);
             Debug.WriteLine("Window: Constructed");
+
+            SetResourceReference(StyleProperty, typeof(WindowView));
         }
 
         private bool _closing;

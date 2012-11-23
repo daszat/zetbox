@@ -24,11 +24,6 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
-    <ResourceDictionary.MergedDictionaries>
-        <!--<ResourceDictionary Source="DebugColors.xaml" />-->
-        <ResourceDictionary Source="DefaultStyles.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <!-- #################################################################
     
     Translate color scheme into actual control-specific scheme
@@ -126,6 +121,9 @@
         <Setter Property="Control.FontSize"
                 Value="{StaticResource NormalFontSize}" />
     </Style>
+
+    <Style TargetType="{x:Type ctrls:WindowView}"
+           BasedOn="{StaticResource zbWindow}" />
 
     <Style TargetType="Border">
         <Setter Property="SnapsToDevicePixels"
