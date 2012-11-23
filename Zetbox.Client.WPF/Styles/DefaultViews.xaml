@@ -2066,4 +2066,31 @@
            BasedOn="{StaticResource LabeledViewStyle}">
     </Style>
 
+    <DataTemplate x:Key="FakeProgressOverlay">
+        <Grid Background="#88888888">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="1"
+                    Grid.Column="1"
+                    Background="#AAAAAAAA"
+                    Padding="5"
+                    CornerRadius="10"
+                    Height="30">
+                <TextBlock HorizontalAlignment="Center">Bitte warten...</TextBlock>
+            </Border>
+            <ProgressBar Grid.Row="2"
+                         Grid.Column="1"
+                         IsIndeterminate="True"
+                         Height="30" />
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>
