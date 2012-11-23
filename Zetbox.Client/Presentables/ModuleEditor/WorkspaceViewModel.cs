@@ -106,7 +106,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         typeof(ObjectClass).GetObjectClass(FrozenContext), 
                         () => DataContext.GetQuery<ObjectClass>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Interface
@@ -163,7 +162,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         typeof(TypeRef).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<TypeRef>().Where(i => i.Assembly.Module == CurrentModule).OrderBy(i => i.FullName));
                     SetupViewModel(lstMdl);
-                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Application
@@ -182,8 +180,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         typeof(ViewDescriptor).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ViewDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.ControlKind.Name));
                     SetupViewModel(lstMdl);
-                    lstMdl.EnableAutoFilter = false;
-                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // ViewModelDescriptor
@@ -191,8 +187,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         typeof(ViewModelDescriptor).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ViewModelDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
-                    lstMdl.EnableAutoFilter = false;
-                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // ServiceDescriptor
@@ -200,8 +194,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         typeof(ServiceDescriptor).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ServiceDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
-                    lstMdl.EnableAutoFilter = false;
-                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // ControlKinds
@@ -213,8 +205,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         typeof(Icon).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Icon>().Where(i => i.Module == CurrentModule).OrderBy(i => i.IconFile));
                     SetupViewModel(lstMdl);
-                    lstMdl.EnableAutoFilter = false;
-                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Relation
@@ -222,8 +212,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         typeof(Relation).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Relation>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
-                    lstMdl.EnableAutoFilter = false;
-                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Sequences
@@ -247,6 +235,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         {
             lstMdl.AllowAddNew = true;
             lstMdl.AllowDelete = true;
+            var toRemove = lstMdl.Filter.SingleOrDefault(f => f.ValueSource != null && f.ValueSource.Expression == "Module");
+            if(toRemove != null)
+                lstMdl.FilterList.RemoveFilter(toRemove);
         }
 
         private ViewModel _selectedItem;
