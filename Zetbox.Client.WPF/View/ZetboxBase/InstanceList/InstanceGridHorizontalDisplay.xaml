@@ -60,7 +60,7 @@
                                           BorderThickness="0"
                                           ItemsSource="{Binding Source={StaticResource itemsSource}}"
                                           CanUserAddRows="{Binding AllowAddNew}"
-                                          CanUserDeleteRows="{Binding AllowDelete}"
+                                          CanUserDeleteRows="false"
                                           AutoGenerateColumns="False"
                                           SelectedZetboxItems="{Binding SelectedProxies}"
                                           SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
