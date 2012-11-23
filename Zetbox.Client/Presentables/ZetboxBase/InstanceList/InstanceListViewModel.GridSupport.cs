@@ -18,7 +18,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Collections.Specialized;
+    using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.Client.Presentables.ValueViewModels;
 
@@ -61,27 +61,46 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private ProxyList _proxyInstances = null;
-        /// <summary>
-        /// Allow instances to be added external
-        /// </summary>
+        #region ProxyInstancesAsync
+
+        private PropertyTask<ProxyList> _proxyInstancesTask;
+        private PropertyTask<ProxyList> EnsureProxyInstancesTask()
+        {
+            if (_proxyInstancesTask != null) return _proxyInstancesTask;
+
+            return _proxyInstancesTask = new PropertyTask<ProxyList>(
+                notifier: () =>
+                {
+                    OnPropertyChanged("ProxyInstances");
+                    OnPropertyChanged("ProxyInstancesAsync");
+                },
+                createTask: () =>
+                {
+                    var task = LoadInstancesCore();
+                    return new ZbTask<ProxyList>(task)
+                        .OnResult(t =>
+                        {
+                            t.Result = new ProxyList(
+                                _filteredInstances,
+                                (vm) => GetProxy(vm),
+                                (p) => GetObjectFromProxy(p));
+                        });
+                        
+                },
+                set: null);
+        }
+
         public ProxyList ProxyInstances
         {
-            get
-            {
-                if (_proxyInstances == null)
-                {
-                    if(_instances == null)
-                        ReloadInstances();
-
-                    _proxyInstances = new ProxyList(
-                        _instances,
-                        (vm) => GetProxy(vm),
-                        (p) => GetObjectFromProxy(p));
-                }
-                return _proxyInstances;
-            }
+            get { return EnsureProxyInstancesTask().Get(); }
         }
+
+        public ProxyList ProxyInstancesAsync
+        {
+            get { return EnsureProxyInstancesTask().GetAsync(); }
+        }
+
+        #endregion
 
         private ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy> _selectedProxies = null;
         public ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy> SelectedProxies
@@ -97,13 +116,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 }
                 return _selectedProxies;
             }
-        }
-
-        private void ResetProxies()
-        {
-            _proxyCache.Clear();
-            _proxyInstances = null;
-            OnPropertyChanged("ProxyInstances");
         }
     }
 }

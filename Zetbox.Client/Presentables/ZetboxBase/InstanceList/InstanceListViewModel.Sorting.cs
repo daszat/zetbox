@@ -31,9 +31,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
             _sortProperty = propName;
             _sortDirection = direction;
-            if (_instancesCache != null && _instancesCache.Count < Helper.MAXLISTCOUNT)
+            if (_instancesFromServer.Count < Helper.MAXLISTCOUNT)
             {
-                ExecutePostFilter();
+                UpdateFilteredInstances();
             }
             else
             {

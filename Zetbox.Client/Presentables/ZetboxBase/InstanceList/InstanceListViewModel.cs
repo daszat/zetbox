@@ -192,39 +192,62 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         #endregion
 
         #region Instances
-        private List<DataObjectViewModel> _instancesCache = null;
-        private List<DataObjectViewModel> _instances = null;
-        /// <summary>
-        /// Allow instances to be added external
-        /// </summary>
+        private List<DataObjectViewModel> _instancesFromServer = new List<DataObjectViewModel>();
+        private List<DataObjectViewModel> _filteredInstances = new List<DataObjectViewModel>();
+
+        #region InstancesAsync
+
+        private PropertyTask<ReadOnlyCollection<DataObjectViewModel>> _instancesTask;
+        private PropertyTask<ReadOnlyCollection<DataObjectViewModel>> EnsureInstancesTask()
+        {
+            if (_instancesTask != null) return _instancesTask;
+
+            return _instancesTask = new PropertyTask<ReadOnlyCollection<DataObjectViewModel>>(
+                notifier: () =>
+                {
+                    OnInstancesChanged();
+                },
+                createTask: () =>
+                {
+                    var task = LoadInstancesCore();
+                    return new ZbTask<ReadOnlyCollection<DataObjectViewModel>>(task)
+                        .OnResult(t => t.Result = _filteredInstances.AsReadOnly());
+                },
+                set: null);
+        }
+
         public ReadOnlyCollection<DataObjectViewModel> Instances
         {
-            get
-            {
-                if (_instances == null)
-                {
-                    ReloadInstances();
-                }
-                return _instances.AsReadOnly();
-            }
+            get { return EnsureInstancesTask().Get(); }
         }
+
+        public ReadOnlyCollection<DataObjectViewModel> InstancesAsync
+        {
+            get { return EnsureInstancesTask().GetAsync(); }
+        }
+
+        private void InvalidateInstances()
+        {
+            if (_instancesTask != null)
+                _instancesTask.Invalidate();
+            OnInstancesChanged();
+        }
+
+        #endregion
 
         private void AddLocalInstance(DataObjectViewModel mdl)
         {
-            if (_instancesCache == null) _instancesCache = new List<DataObjectViewModel>();
-            if (_instances == null) _instances = new List<DataObjectViewModel>(_instancesCache);
+            _instancesFromServer.Add(mdl);
+            _filteredInstances.Add(mdl);
 
-            _instancesCache.Add(mdl);
-            _instances.Add(mdl);
-
-            OnInstancesChanged();
+            InvalidateInstances();
         }
 
         public int InstancesCount
         {
             get
             {
-                return _instances != null ? _instances.Count : 0;
+                return _filteredInstances.Count;
             }
         }
 
@@ -283,8 +306,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private void OnInstancesChanged()
         {
             // TODO: Selection update!
-            ResetProxies();
+            _proxyCache.Clear();
+            if (_proxyInstancesTask != null)
+                _proxyInstancesTask.Invalidate();
+            OnPropertyChanged("ProxyInstances");
+            OnPropertyChanged("ProxyInstancesAsync");
+
             OnPropertyChanged("Instances");
+            OnPropertyChanged("InstancesAsync");
             OnPropertyChanged("InstancesCount");
             OnPropertyChanged("InstancesCountAsText");
             OnPropertyChanged("InstancesCountWarning");
@@ -749,75 +778,50 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return FilterListEntryViewModelResources.RequiredFilterMissingReason;
         }
 
-        private bool _loadingInstances = false;
         /// <summary>
         /// Reload instances from context.
         /// </summary>
         public void ReloadInstances()
         {
-            // Initialize empty, if filter are not ready
-            if (_instances == null)
-                _instances = new List<DataObjectViewModel>();
-
             if (!CanExecReloadInstances())
             {
                 return;
             }
-
-            // Prevent loading instances twice
-            if (_loadingInstances) return;
-            _loadingInstances = true;
-
-            IsBusy = true;
-            LoadInstancesCore()
-                .OnResult(t =>
-                {
-                    _instancesCache = t.Result;
-                    ExecutePostFilter();
-                    _loadingInstances = false;
-                    IsBusy = false;
-                });
+            _loadInstancesCoreTask = null;
+            LoadInstancesCore();
         }
 
-        private ZbTask<List<DataObjectViewModel>> LoadInstancesCore()
+        ZbTask _loadInstancesCoreTask;
+        private ZbTask LoadInstancesCore()
         {
+            if (_loadInstancesCoreTask != null) return _loadInstancesCoreTask;
+            IsBusy = true;
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
-            return new ZbTask<List<DataObjectViewModel>>(execQueryTask)
+            _loadInstancesCoreTask = new ZbTask(execQueryTask)
                 .OnResult(t =>
                 {
-                    var result = new List<DataObjectViewModel>();
+                    _instancesFromServer = execQueryTask.Result.Cast<IDataObject>()
+                        .Where(obj => obj.ObjectState != DataObjectState.Deleted) // Not interested in deleted objects TODO: Discuss if a query should return deleted objects
+                        .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj))
+                        .ToList();
 
-                    foreach (IDataObject obj in execQueryTask.Result)
-                    {
-                        // Not interested in deleted objects
-                        // TODO: Discuss if a query should return deleted objects
-                        if (obj.ObjectState == DataObjectState.Deleted) continue;
-
-                        var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
-                        result.Add(mdl);
-                    }
-
-                    t.Result = result;
+                    UpdateFilteredInstances();
+                    IsBusy = false;
                 });
+            return _loadInstancesCoreTask;
         }
 
         /// <summary>
         /// Create a fresh <see cref="Instances"/> collection when something has changed.
         /// </summary>
-        private void ExecutePostFilter()
+        private void UpdateFilteredInstances()
         {
-            // TODO: remove this bad hack
-            if (_instancesCache == null)
-            {
-                return;
-            }
-
-            var tmp = FilterList.AppendPostFilter(new List<DataObjectViewModel>(_instancesCache));
+            var tmp = FilterList.AppendPostFilter(new List<DataObjectViewModel>(_instancesFromServer));
 
             // Sort
             if (!string.IsNullOrEmpty(_sortProperty))
             {
-                _instances =
+                _filteredInstances =
                     new List<DataObjectViewModel>(
                         tmp.Select(vm => vm.Object)                            // Back to a plain list of IDataObjects
                            .AsQueryable(this.InterfaceType.Type)               // To a typed List
@@ -830,14 +834,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
             else
             {
-                _instances = new List<DataObjectViewModel>(tmp);
+                _filteredInstances = new List<DataObjectViewModel>(tmp);
             }
 
-            OnInstancesChanged();
+            InvalidateInstances();
 
             if (SelectFirstOnLoad && SelectedItem == null)
             {
-                this.SelectedItem = _instances.FirstOrDefault();
+                this.SelectedItem = _filteredInstances.FirstOrDefault();
             }
         }
         #endregion

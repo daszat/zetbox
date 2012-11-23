@@ -33,7 +33,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     this._filterList = ViewModelFactory.CreateViewModel<FilterListViewModel.Factory>().Invoke(DataContext, this, _type);
                     this._filterList.ExecuteFilter += (s, e) => ReloadInstances();
-                    this._filterList.ExecutePostFilter += (s, e) => ExecutePostFilter();
+                    this._filterList.ExecutePostFilter += (s, e) => UpdateFilteredInstances();
                     this._filterList.PropertyChanged += _filterList_PropertyChanged;
                     this._filterList.UserFilterAdded += _filterList_UserFilterAdded;
                 }
