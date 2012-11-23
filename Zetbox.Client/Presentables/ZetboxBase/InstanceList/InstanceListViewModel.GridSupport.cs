@@ -76,8 +76,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 },
                 createTask: () =>
                 {
-                    var task = LoadInstancesCore();
-                    return new ZbTask<ProxyList>(task)
+                    return new ZbTask<ProxyList>(LoadInstancesCore())
                         .OnResult(t =>
                         {
                             t.Result = new ProxyList(

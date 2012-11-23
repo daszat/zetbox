@@ -209,8 +209,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 },
                 createTask: () =>
                 {
-                    var task = LoadInstancesCore();
-                    return new ZbTask<ReadOnlyCollection<DataObjectViewModel>>(task)
+                    return new ZbTask<ReadOnlyCollection<DataObjectViewModel>>(LoadInstancesCore())
                         .OnResult(t => t.Result = _filteredInstances.AsReadOnly());
                 },
                 set: null);
@@ -784,9 +783,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public void ReloadInstances()
         {
             if (!CanExecReloadInstances())
-            {
                 return;
-            }
+
+            if (_loadInstancesCoreTask != null)
+                _loadInstancesCoreTask.Wait();
             _loadInstancesCoreTask = null;
             LoadInstancesCore();
         }
@@ -794,7 +794,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         ZbTask _loadInstancesCoreTask;
         private ZbTask LoadInstancesCore()
         {
-            if (_loadInstancesCoreTask != null) return _loadInstancesCoreTask;
+            if (_loadInstancesCoreTask != null || !CanExecReloadInstances()) return _loadInstancesCoreTask;
+
             IsBusy = true;
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             _loadInstancesCoreTask = new ZbTask(execQueryTask)
