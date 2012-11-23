@@ -346,17 +346,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx, null);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
 
-                var loader = ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+                ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
                 {
                     var openedItems = objects.Select(o => newWorkspace.ShowForeignModel(o, RequestedEditorKind)).ToList();
 
                     OnItemsOpened(newWorkspace, openedItems);
 
                     newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
-                    newWorkspace.IsBusy = false;
-                });
-
-                loader.Trigger();
+                }).Trigger();
             }
         }
 
@@ -796,7 +793,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (_loadInstancesCoreTask != null || !CanExecReloadInstances()) return _loadInstancesCoreTask;
 
-            IsBusy = true;
+            SetBusy();
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             _loadInstancesCoreTask = new ZbTask(execQueryTask)
                 .OnResult(t =>
@@ -807,7 +804,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         .ToList();
 
                     UpdateFilteredInstances();
-                    IsBusy = false;
+                    ClearBusy();
                 });
             return _loadInstancesCoreTask;
         }

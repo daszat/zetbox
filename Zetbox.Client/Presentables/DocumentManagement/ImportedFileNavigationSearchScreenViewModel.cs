@@ -79,7 +79,6 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                     newWorkspace.ShowForeignModel(obj);
                 }
                 newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
-                newWorkspace.IsBusy = false;
             }).Trigger();
         }
     }

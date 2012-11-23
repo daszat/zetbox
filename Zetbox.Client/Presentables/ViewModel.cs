@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
 using Zetbox.API.Common.GUI;
+    using Zetbox.API.Utils;
 
     public interface IViewModelDependencies
     {
@@ -162,21 +163,30 @@ using Zetbox.API.Common.GUI;
             set { _RequestedKind = value; OnPropertyChanged("ControlKind"); }
         }
 
-        private bool _isBusy = false;
+        private int _isBusy = 0;
         public bool IsBusy
         {
             get
             {
-                return _isBusy;
+                return _isBusy > 0;
             }
-            set
+        }
+
+        public void SetBusy()
+        {
+            _isBusy++;
+            OnPropertyChanged("IsBusy");
+        }
+
+        public void ClearBusy()
+        {
+            _isBusy--;
+            if (_isBusy < 0)
             {
-                if (_isBusy != value)
-                {
-                    _isBusy = value;
-                    OnPropertyChanged("IsBusy");
-                }
+                _isBusy = 0;
+                Logging.Log.Warn("ClearBusy called too often or without a prev. SetBusy call");
             }
+            OnPropertyChanged("IsBusy");
         }
 
         private bool _isEnabled = true;
