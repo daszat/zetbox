@@ -130,7 +130,7 @@ namespace Zetbox.Client.Presentables
             _dependencies = dependencies;
             DataContext = dataCtx;
 
-            if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight") OnHighlightChanged(); };
+            if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight" || e.PropertyName == "HighlightAsync") OnHighlightChanged(); };
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
         }
 
@@ -310,7 +310,9 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                return Highlight;
+                if (!IsEnabled) return Highlight.Deactivated;
+                if (Parent != null && Parent.HighlightAsync != Highlight.None) return Parent.HighlightAsync;
+                return Highlight.None;
             }
         }
 
