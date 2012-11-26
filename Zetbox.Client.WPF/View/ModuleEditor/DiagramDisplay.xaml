@@ -49,7 +49,7 @@
                 </ListBox>
             </DockPanel>
             <GridSplitter Grid.Column="1"
-                          HorizontalAlignment="Stretch" />
+                          ResizeDirection="Columns" />
             <DockPanel Grid.Column="2">
                 <ToolBarTray DockPanel.Dock="Top">
                     <ctrls:WorkaroundToolBar>
