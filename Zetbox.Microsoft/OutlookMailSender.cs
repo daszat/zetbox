@@ -17,16 +17,16 @@ namespace Zetbox.Microsoft
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Net.Mail;
+    using System.Runtime.InteropServices;
     using System.Text;
     using Autofac;
     using Zetbox.API;
-    using Outlook = global::Microsoft.Office.Interop.Outlook;
-    using System.IO;
-    using System.Runtime.InteropServices;
-using Zetbox.Client.Presentables;
     using Zetbox.API.Utils;
+    using Zetbox.Client.Presentables;
+    using Outlook = global::Microsoft.Office.Interop.Outlook;
 
     /// <summary>
     /// Sends MailMessages using Outlook
@@ -73,7 +73,7 @@ using Zetbox.Client.Presentables;
                 {
                     var r = mail.Recipients.Add(to.Address);
                     r.Type = (int)Outlook.OlMailRecipientType.olBCC;
-                }               
+                }
 
                 mail.Subject = msg.Subject;
                 if (msg.IsBodyHtml)
@@ -99,10 +99,10 @@ using Zetbox.Client.Presentables;
             }
             catch (COMException ex)
             {
-                Logging.Client.Error("Unable to send mail throug Outlook", ex);
-                _vmf.ShowMessage(ex.ErrorCode == E_ABORT 
-                        ? OutlookMailSenderResources.AbortErrorMessage 
-                        : OutlookMailSenderResources.GenericErrorMessage, 
+                Logging.Client.Error("Unable to send mail through Outlook", ex);
+                _vmf.ShowMessage(ex.ErrorCode == E_ABORT
+                        ? OutlookMailSenderResources.AbortErrorMessage
+                        : OutlookMailSenderResources.GenericErrorMessage,
                     OutlookMailSenderResources.ErrorCaption);
             }
             finally
