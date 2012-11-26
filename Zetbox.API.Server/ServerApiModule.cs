@@ -251,7 +251,18 @@ namespace Zetbox.API.Server
                 var obj = ctx.GetQuery<App.Base.Property>().FirstOrDefault(p => p.Name == propName && p.ObjectClass.Name == clsName && p.ObjectClass.Module.Name == moduleName);
                 if (obj == null)
                 {
-                    Logging.Log.ErrorFormat("Property '{0}' was not found in ObjectClass '{1}' in Module '{2}'", parts[2], parts[1], parts[0]);
+                    if (!ctx.GetQuery<App.Base.Module>().Any(m => m.Name == moduleName))
+                    {
+                        Logging.Log.ErrorFormat("Module '{0}' not found", moduleName);
+                    }
+                    else if (!ctx.GetQuery<App.Base.ObjectClass>().Any(cls => cls.Name == clsName && cls.Module.Name == moduleName))
+                    {
+                        Logging.Log.ErrorFormat("ObjectClass '{0}' not found in Module '{1}'", clsName, moduleName);
+                    }
+                    else
+                    {
+                        Logging.Log.ErrorFormat("Property '{0}' was not found in ObjectClass '{1}' in Module '{2}'", propName, clsName, moduleName);
+                    }
                 }
                 else
                 {
