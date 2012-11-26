@@ -46,7 +46,11 @@ namespace Zetbox.API.Async
         /// <summary>
         /// The task has completely finished running and processing results.
         /// </summary>
-        Finished
+        Finished,
+        /// <summary>
+        /// The task has encountered an exception and did not run to completion.
+        /// </summary>
+        Failed
     }
 
     public class ZbTask
@@ -62,6 +66,12 @@ namespace Zetbox.API.Async
         protected readonly ZbTask innerZbTask;
 
         public ZbTaskState State
+        {
+            get;
+            protected set;
+        }
+
+        public Exception Exception
         {
             get;
             protected set;
@@ -125,8 +135,22 @@ namespace Zetbox.API.Async
             lock (_lockObject) State = ZbTaskState.Running;
             Void work = () =>
             {
-                if (task != null) task();
-                CallAsyncContinuations();
+                try
+                {
+                    if (task != null)
+                        task();
+                    CallAsyncContinuations();
+                }
+                catch (Exception ex)
+                {
+                    // Stop processing
+                    Exception = ex;
+                    lock (_lockObject)
+                    {
+                        State = ZbTaskState.Failed;
+                        Monitor.PulseAll(_lockObject);
+                    }
+                }
             };
             if (_syncContext != null)
             {
@@ -135,6 +159,7 @@ namespace Zetbox.API.Async
                     work();
                     lock (_lockObject)
                     {
+                        if (State == ZbTaskState.Failed) return;
                         State = ZbTaskState.ResultEventsPosted;
                         if (IsWaiting > 0)
                         {
@@ -152,6 +177,7 @@ namespace Zetbox.API.Async
                 work();
                 lock (_lockObject)
                 {
+                    if (State == ZbTaskState.Failed) return;
                     State = ZbTaskState.ResultEventsPosted;
                     if (IsWaiting > 0)
                     {
@@ -218,6 +244,9 @@ namespace Zetbox.API.Async
                     case ZbTaskState.Finished:
                         continuationAction(this);
                         break;
+                    case ZbTaskState.Failed:
+                        // nothing to do.
+                        break;
                 }
             }
             return this;
@@ -240,6 +269,9 @@ namespace Zetbox.API.Async
                     case ZbTaskState.ResultEventRunning:
                     case ZbTaskState.Finished:
                         continuationAction(this);
+                        break;
+                    case ZbTaskState.Failed:
+                        // nothing to do.
                         break;
                 }
             }
@@ -283,6 +315,8 @@ namespace Zetbox.API.Async
                         break;
                     case ZbTaskState.ResultEventRunning:
                     case ZbTaskState.Finished:
+                    case ZbTaskState.Failed:
+                        // nothing to do.
                         return;
                 }
             }
