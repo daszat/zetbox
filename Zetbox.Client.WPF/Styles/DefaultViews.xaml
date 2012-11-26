@@ -271,6 +271,15 @@
                                     Property="Padding"
                                     Value="2,1" />
                         </Trigger>
+                        <Trigger Property="ToggleButton.IsChecked"
+                                 Value="true">
+                            <Setter TargetName="Border"
+                                    Property="TextBlock.Foreground"
+                                    Value="{StaticResource ButtonPressedForeground}" />
+                            <Setter TargetName="Border"
+                                    Property="Background"
+                                    Value="{StaticResource ButtonPressedBackground}" />
+                        </Trigger>
                         <Trigger Property="styles:Controls.IsSecondary"
                                  Value="true">
                             <Setter TargetName="Border"

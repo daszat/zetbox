@@ -32,9 +32,8 @@
                 SnapsToDevicePixels="true">
             <ToggleButton IsChecked="{Binding Zoom}"
                           HorizontalAlignment="Stretch"
-                          VerticalAlignment="Center">
-                <TextBlock Text="{Binding DayText}"/>
-            </ToggleButton>
+                          VerticalAlignment="Center"
+                          Content="{Binding DayText}" />
         </Border>
     </Border>
 </UserControl>
