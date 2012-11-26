@@ -795,8 +795,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             SetBusy();
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
-            _loadInstancesCoreTask = new ZbTask(execQueryTask)
-                .OnResult(t =>
+            _loadInstancesCoreTask = new ZbTask(execQueryTask);
+            _loadInstancesCoreTask.OnResult(t =>
                 {
                     _instancesFromServer = execQueryTask.Result.Cast<IDataObject>()
                         .Where(obj => obj.ObjectState != DataObjectState.Deleted) // Not interested in deleted objects TODO: Discuss if a query should return deleted objects
