@@ -174,11 +174,17 @@ namespace Zetbox.Client.Presentables
         {
             _isBusy++;
             OnPropertyChanged("IsBusy");
+
+            if (_isBusy == 1)
+                OnPropertyChanged("IsEnabled");
         }
 
         public void ClearBusy()
         {
             _isBusy--;
+            if (_isBusy == 0)
+                OnPropertyChanged("IsEnabled");
+
             if (_isBusy < 0)
             {
                 _isBusy = 0;
@@ -237,9 +243,6 @@ namespace Zetbox.Client.Presentables
         {
             if (_PropertyChangedEvent != null)
                 _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
-
-            if (propertyName == "IsBusy")
-                OnPropertyChanged("IsEnabled");
         }
         #endregion
 
