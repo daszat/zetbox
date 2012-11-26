@@ -49,6 +49,9 @@ namespace Zetbox.Client.Presentables.Calendar
                     OnPropertyChanged("Name");
                     OnPropertyChanged("Text");
                     break;
+                case "SubjectAsync":
+                    OnPropertyChanged("TextAsync");
+                    break;
                 case "Color":
                     OnPropertyChanged("Color");
                     break;
@@ -154,6 +157,14 @@ namespace Zetbox.Client.Presentables.Calendar
             get
             {
                 return ObjectViewModel.Subject;
+            }
+        }
+
+        public string TextAsync
+        {
+            get
+            {
+                return ObjectViewModel.SubjectAsync;
             }
         }
 

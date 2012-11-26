@@ -49,6 +49,11 @@ namespace Zetbox.Client.Presentables.Calendar
             get { return Rule.Name; }
         }
 
+        string IAppointmentViewModel.SubjectAsync
+        {
+            get { return Rule.Name; }
+        }
+
         DateTime IAppointmentViewModel.From
         {
             get { return Date; }

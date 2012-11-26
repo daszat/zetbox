@@ -96,7 +96,7 @@
                 </LinearGradientBrush>
               </Border.Background>
               <StackPanel>
-                <TextBlock Text="{Binding Text}" FontWeight="Bold" />
+                <TextBlock Text="{Binding TextAsync}" FontWeight="Bold" />
                 <TextBlock Text="{Binding FromToText}" />
               </StackPanel>
             </Border>
