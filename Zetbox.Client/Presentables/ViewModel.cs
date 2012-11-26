@@ -19,16 +19,14 @@ namespace Zetbox.Client.Presentables
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
     using Zetbox.API.Common;
+    using Zetbox.API.Common.GUI;
+    using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
-    using Zetbox.Client.Presentables.ValueViewModels;
-using Zetbox.API.Common.GUI;
-    using Zetbox.API.Utils;
 
     public interface IViewModelDependencies
     {
@@ -239,6 +237,9 @@ using Zetbox.API.Common.GUI;
         {
             if (_PropertyChangedEvent != null)
                 _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
+
+            if (propertyName == "IsBusy")
+                OnPropertyChanged("IsEnabled");
         }
         #endregion
 

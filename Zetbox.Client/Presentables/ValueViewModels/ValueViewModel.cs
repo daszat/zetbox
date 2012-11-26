@@ -137,16 +137,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
             }
         }
-
-        protected override void OnPropertyChanged(string propertyName)
-        {
-            if (propertyName == "IsBusy")
-            {
-                OnPropertyChanged("IsEnabled");
-            }
-            base.OnPropertyChanged(propertyName);
-        }
-
         #endregion
 
         #region IValueViewModel Members
