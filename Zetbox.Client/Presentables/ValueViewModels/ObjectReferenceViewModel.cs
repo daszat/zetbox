@@ -18,21 +18,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Linq;
+    using System.Linq.Dynamic;
+    using System.Linq.Expressions;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.API.Utils;
+    using Zetbox.API.Async;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
-    using Zetbox.Client.Presentables.ValueViewModels;
-    using System.Linq.Dynamic;
-    using System.Linq.Expressions;
-    using Zetbox.API.Async;
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
@@ -404,6 +400,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             if (_fetchValueTask == null)
             {
+                SetBusy();
                 _fetchValueTask = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync());
                 // Avoid stackoverflow
                 _fetchValueTask.OnResult(t =>
@@ -420,6 +417,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         OnPropertyChanged("ValueAsync");
                     }
                     t.Result = _valueCache;
+                    ClearBusy();
                 });
             }
 
@@ -452,7 +450,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             _valueCache = null;
             _valueCacheInititalized = false;
-            _fetchValueTask = null; // TODO: ???
+
+            // TODO: cancel running task
+            if (_fetchValueTask != null) _fetchValueTask.Wait();
+            _fetchValueTask = null;
         }
 
         public override DataObjectViewModel ValueAsync

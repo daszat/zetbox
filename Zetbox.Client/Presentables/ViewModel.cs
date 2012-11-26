@@ -194,6 +194,7 @@ using Zetbox.API.Common.GUI;
         {
             get
             {
+                if (IsBusy) return false;
                 if (DataContext.IsElevatedMode) return true;
                 return _isEnabled;
             }
