@@ -47,7 +47,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectViewModel>> Members
 
-        protected override string InitialSortProperty {get { return "ID";}}
+        protected override string InitialSortProperty { get { return "ID"; } }
 
         public bool HasPersistentOrder
         {
@@ -59,6 +59,5 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #endregion
 
-        
     }
 }

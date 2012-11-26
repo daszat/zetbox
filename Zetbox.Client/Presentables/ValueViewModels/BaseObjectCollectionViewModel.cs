@@ -22,17 +22,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
-    using System.Linq.Dynamic;
     using System.Text;
-
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
-    using Zetbox.App.GUI;
-    using Zetbox.API.Client;
-    using Zetbox.API.Async;
 
     /// <summary>
     /// </summary>
@@ -533,17 +529,18 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             if (_fetchValueTask == null)
             {
+                SetBusy();
                 _fetchValueTask = new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
-                .OnResult(t =>
-                {
-                    _wrapper = new SortedWrapper(ObjectCollectionModel.Value, ObjectCollectionModel, InitialSortProperty);
-                    _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
-                        _wrapper,
-                        obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
-                        mdl => mdl.Object);
-                    _valueCache.CollectionChanged += ValueListChanged;
-                    t.Result = _valueCache;
-                });
+                    .OnResult(t =>
+                    {
+                        _wrapper = new SortedWrapper(ObjectCollectionModel.Value, ObjectCollectionModel, InitialSortProperty);
+                        _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
+                            _wrapper,
+                            obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
+                            mdl => mdl.Object);
+                        _valueCache.CollectionChanged += ValueListChanged;
+                        t.Result = _valueCache;
+                    });
                 // TODO: Split here to avoid a stackoverflow exception!
                 // -> OnPropertyChanged("ValueProxiesAsync") triggers ValueProxiesAsync.get
                 // -> ValueProxiesAsync.get is calling GetValueFromModel()
@@ -553,6 +550,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     OnPropertyChanged("Value");
                     OnPropertyChanged("ValueAsync");
                     OnPropertyChanged("ValueProxiesAsync");
+                    ClearBusy();
                 });
             };
             return _fetchValueTask;
@@ -587,6 +585,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         protected abstract string InitialSortProperty { get; }
+
         #endregion
 
         #region Utilities and UI callbacks
