@@ -224,6 +224,11 @@ namespace Zetbox.Client.Presentables
                 {
                     _executingCache = value;
                     OnExecutingChanged();
+
+                    if (Executing)
+                        SetBusy();
+                    else
+                        ClearBusy();
                 }
             }
         }
@@ -363,7 +368,7 @@ namespace Zetbox.Client.Presentables
         {
             if (canExecute == null) return true;
             var canExec = canExecute();
-            if (getReason != null) 
+            if (getReason != null)
             {
                 base.Reason = canExec ? string.Empty : getReason();
             }
