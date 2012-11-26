@@ -22,6 +22,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Zetbox.App.GUI;
 using Zetbox.Client.WPF.Toolkit;
+using System.Windows;
 
 namespace Zetbox.Client.WPF.Converter
 {
@@ -397,6 +398,31 @@ namespace Zetbox.Client.WPF.Converter
                             object parameter, CultureInfo culture)
         {
             return WPFHelper.TranslateWidth(value as WidthHint?);
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            // Readonly
+            return Binding.DoNothing;
+        }
+    }
+
+    /// <summary>
+    /// Convert a WidthHint into a DIP count
+    /// </summary>
+    [ValueConversion(typeof(WidthHint), typeof(double))]
+    public class PercentToGridLengthConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, CultureInfo culture)
+        {
+            var dbl = value as double?;
+            if (dbl != null)
+            {
+                return new GridLength(dbl.Value, GridUnitType.Star);
+            }
+            return Binding.DoNothing;
         }
 
         public object ConvertBack(object value, Type targetType,

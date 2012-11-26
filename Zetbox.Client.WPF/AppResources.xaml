@@ -36,6 +36,7 @@
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converter:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     <converter:WidthHintConverter x:Key="WidthHintConverter" />
+    <converter:PercentToGridLengthConverter x:Key="PercentToGridLengthConverter" />
     <commands:Converter x:Key="CommandConverter" />
     <converter:ObjectStateToTextConverter x:Key="ObjectStateToTextConverter" />
     <converter:ObjectStateToTextVisibilityConverter x:Key="ObjectStateToTextVisibilityConverter" />

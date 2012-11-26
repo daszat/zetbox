@@ -27,177 +27,185 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <Border Background="#E3EFFF"
-          BorderBrush="#6593CF"
-          BorderThickness="2">
-    <DockPanel>
+    <Border Background="#E3EFFF"
+            BorderBrush="#6593CF"
+            BorderThickness="2">
+        <DockPanel>
 
-      <Border DockPanel.Dock="Bottom"
-              Background="#E3EFFF"
-              BorderBrush="#6593CF"
-              BorderThickness="0,1,0,0">
-        <Expander IsExpanded="True" Header="{Binding DetailsLabel}">
-          <ScrollViewer Height="200">
-            <ContentPresenter Content="{Binding SelectedItem}"
-                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
-                              tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedCalendarKind}" />
-          </ScrollViewer>
-        </Expander>
-      </Border>
-
-      <Grid x:Name="panelWeekCalendar">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="38" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <StackPanel x:Name="panelNavigation"
-                    Orientation="Horizontal"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="5,0,0,0">
-          <ctrls:CommandButton Height="25"
-                               Width="100"
-                               CommandViewModel="{Binding PrevWeekCommand}"
-                               Background="{x:Null}"
-                               BorderBrush="{x:Null}" />
-
-          <ctrls:CommandButton Height="25"
-                               Width="100"
-                               CommandViewModel="{Binding ThisWeekCommand}"
-                               Background="{x:Null}"
-                               BorderBrush="{x:Null}" />
-
-          <ctrls:CommandButton Height="25"
-                               Width="100"
-                               CommandViewModel="{Binding NextWeekCommand}"
-                               Background="{x:Null}"
-                               BorderBrush="{x:Null}" />
-
-          <ctrls:CommandButton Height="25"
-                               Width="100"
-                               Margin="10,0,0,0"
-                               CommandViewModel="{Binding RefreshCommand}"
-                               Background="{x:Null}"
-                               BorderBrush="{x:Null}" />
-        </StackPanel>
-        <Border BorderBrush="#6593CF"
-                BorderThickness="0,0,1,1"
-                Grid.Column="0"
-                Grid.Row="1"
-                SnapsToDevicePixels="true" />
-        <ScrollViewer x:Name="scrollDayHeaders"
-                      Grid.Row="1"
-                      Grid.Column="0">
-          <Grid>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="Auto" MinHeight="32" MaxHeight="128" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="50" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Border Grid.Column="0"
-                    Grid.Row="0"
+            <Border DockPanel.Dock="Bottom"
+                    Background="#E3EFFF"
                     BorderBrush="#6593CF"
-                    BorderThickness="0,1,0,1"
-                    Background="#30000000"
-                    SnapsToDevicePixels="true"/>
-            <Border Grid.Column="0"
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    BorderBrush="#9493CF"
-                    BorderThickness="0,0,1,0"
-                    SnapsToDevicePixels="true"/>
-            <!-- Header -->
-            <local:CalendarDayHeader Grid.Column="1"
-                                     Grid.Row="0"
-                                     DataContext="{Binding DayItems[0]}" />
-            <local:CalendarDayHeader Grid.Column="2"
-                                     Grid.Row="0"
-                                     DataContext="{Binding DayItems[1]}" />
-            <local:CalendarDayHeader Grid.Column="3"
-                                     Grid.Row="0"
-                                     DataContext="{Binding DayItems[2]}" />
-            <local:CalendarDayHeader Grid.Column="4"
-                                     Grid.Row="0"
-                                     DataContext="{Binding DayItems[3]}" />
-            <local:CalendarDayHeader Grid.Column="5"
-                                     Grid.Row="0"
-                                     DataContext="{Binding DayItems[4]}" />
-            <local:CalendarDayHeader Grid.Column="6"
-                                     Grid.Row="0"
-                                     DataContext="{Binding DayItems[5]}" />
-            <local:CalendarDayHeader Grid.Column="7"
-                                     Grid.Row="0"
-                                     DataContext="{Binding DayItems[6]}" />
+                    BorderThickness="0,1,0,0">
+                <Expander IsExpanded="True"
+                          Header="{Binding DetailsLabel}">
+                    <ScrollViewer Height="200">
+                        <ContentPresenter Content="{Binding SelectedItem}"
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedCalendarKind}" />
+                    </ScrollViewer>
+                </Expander>
+            </Border>
 
-            <!-- All Day -->
-            <local:CalendarAllDay Grid.Column="1"
-                                  Grid.Row="1"
-                                  DataContext="{Binding DayItems[0]}" />
-            <local:CalendarAllDay Grid.Column="2"
-                                  Grid.Row="1"
-                                  DataContext="{Binding DayItems[1]}" />
-            <local:CalendarAllDay Grid.Column="3"
-                                  Grid.Row="1"
-                                  DataContext="{Binding DayItems[2]}" />
-            <local:CalendarAllDay Grid.Column="4"
-                                  Grid.Row="1"
-                                  DataContext="{Binding DayItems[3]}" />
-            <local:CalendarAllDay Grid.Column="5"
-                                  Grid.Row="1"
-                                  DataContext="{Binding DayItems[4]}" />
-            <local:CalendarAllDay Grid.Column="6"
-                                  Grid.Row="1"
-                                  DataContext="{Binding DayItems[5]}" />
-            <local:CalendarAllDay Grid.Column="7"
-                                  Grid.Row="1"
-                                  DataContext="{Binding DayItems[6]}" />
-          </Grid>
-        </ScrollViewer>
-        <!-- Day Items -->
-        <ScrollViewer x:Name="scrollDayEntries"
-                      Grid.Row="2"
-                      Grid.Column="0">
-          <Grid>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="50" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-              <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid x:Name="panelWeekCalendar">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <local:CalendarLedger Grid.Column="0" />
-            <local:CalendarDay Grid.Column="1"
-                               DataContext="{Binding DayItems[0]}" />
-            <local:CalendarDay Grid.Column="2"
-                               DataContext="{Binding DayItems[1]}" />
-            <local:CalendarDay Grid.Column="3"
-                               DataContext="{Binding DayItems[2]}" />
-            <local:CalendarDay Grid.Column="4"
-                               DataContext="{Binding DayItems[3]}" />
-            <local:CalendarDay Grid.Column="5"
-                               DataContext="{Binding DayItems[4]}" />
-            <local:CalendarDay Grid.Column="6"
-                               DataContext="{Binding DayItems[5]}" />
-            <local:CalendarDay Grid.Column="7"
-                               DataContext="{Binding DayItems[6]}" />
-          </Grid>
-        </ScrollViewer>
-      </Grid>
-    </DockPanel>
-  </Border>
+                <StackPanel x:Name="panelNavigation"
+                            Orientation="Horizontal"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="5,0,0,0">
+                    <ctrls:CommandButton Height="25"
+                                         Width="100"
+                                         CommandViewModel="{Binding PrevWeekCommand}"
+                                         Background="{x:Null}"
+                                         BorderBrush="{x:Null}" />
+
+                    <ctrls:CommandButton Height="25"
+                                         Width="100"
+                                         CommandViewModel="{Binding ThisWeekCommand}"
+                                         Background="{x:Null}"
+                                         BorderBrush="{x:Null}" />
+
+                    <ctrls:CommandButton Height="25"
+                                         Width="100"
+                                         CommandViewModel="{Binding NextWeekCommand}"
+                                         Background="{x:Null}"
+                                         BorderBrush="{x:Null}" />
+
+                    <ctrls:CommandButton Height="25"
+                                         Width="100"
+                                         Margin="10,0,0,0"
+                                         CommandViewModel="{Binding RefreshCommand}"
+                                         Background="{x:Null}"
+                                         BorderBrush="{x:Null}" />
+                    <CheckBox IsChecked="{Binding ShowFullWeek}"
+                              VerticalAlignment="Center"
+                              Margin="20,0,0,0">
+                        <TextBlock Text="{Binding ShowFullWeekLabel}" />
+                    </CheckBox>
+                </StackPanel>
+                <Border BorderBrush="#6593CF"
+                        BorderThickness="0,0,1,1"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        SnapsToDevicePixels="true" />
+                <ScrollViewer x:Name="scrollDayHeaders"
+                              Grid.Row="1"
+                              Grid.Column="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto"
+                                           MinHeight="32"
+                                           MaxHeight="128" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="{Binding DayItems[0].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[1].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[2].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[3].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[4].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[5].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[6].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"
+                                Grid.Row="0"
+                                BorderBrush="#6593CF"
+                                BorderThickness="0,1,0,1"
+                                Background="#30000000"
+                                SnapsToDevicePixels="true" />
+                        <Border Grid.Column="0"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                BorderBrush="#9493CF"
+                                BorderThickness="0,0,1,0"
+                                SnapsToDevicePixels="true" />
+                        <!-- Header -->
+                        <local:CalendarDayHeader Grid.Column="1"
+                                                 Grid.Row="0"
+                                                 DataContext="{Binding DayItems[0]}" />
+                        <local:CalendarDayHeader Grid.Column="2"
+                                                 Grid.Row="0"
+                                                 DataContext="{Binding DayItems[1]}" />
+                        <local:CalendarDayHeader Grid.Column="3"
+                                                 Grid.Row="0"
+                                                 DataContext="{Binding DayItems[2]}" />
+                        <local:CalendarDayHeader Grid.Column="4"
+                                                 Grid.Row="0"
+                                                 DataContext="{Binding DayItems[3]}" />
+                        <local:CalendarDayHeader Grid.Column="5"
+                                                 Grid.Row="0"
+                                                 DataContext="{Binding DayItems[4]}" />
+                        <local:CalendarDayHeader Grid.Column="6"
+                                                 Grid.Row="0"
+                                                 DataContext="{Binding DayItems[5]}" />
+                        <local:CalendarDayHeader Grid.Column="7"
+                                                 Grid.Row="0"
+                                                 DataContext="{Binding DayItems[6]}" />
+
+                        <!-- All Day -->
+                        <local:CalendarAllDay Grid.Column="1"
+                                              Grid.Row="1"
+                                              DataContext="{Binding DayItems[0]}" />
+                        <local:CalendarAllDay Grid.Column="2"
+                                              Grid.Row="1"
+                                              DataContext="{Binding DayItems[1]}" />
+                        <local:CalendarAllDay Grid.Column="3"
+                                              Grid.Row="1"
+                                              DataContext="{Binding DayItems[2]}" />
+                        <local:CalendarAllDay Grid.Column="4"
+                                              Grid.Row="1"
+                                              DataContext="{Binding DayItems[3]}" />
+                        <local:CalendarAllDay Grid.Column="5"
+                                              Grid.Row="1"
+                                              DataContext="{Binding DayItems[4]}" />
+                        <local:CalendarAllDay Grid.Column="6"
+                                              Grid.Row="1"
+                                              DataContext="{Binding DayItems[5]}" />
+                        <local:CalendarAllDay Grid.Column="7"
+                                              Grid.Row="1"
+                                              DataContext="{Binding DayItems[6]}" />
+                    </Grid>
+                </ScrollViewer>
+                <!-- Day Items -->
+                <ScrollViewer x:Name="scrollDayEntries"
+                              Grid.Row="2"
+                              Grid.Column="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="{Binding DayItems[0].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[1].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[2].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[3].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[4].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[5].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                            <ColumnDefinition Width="{Binding DayItems[6].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                        </Grid.ColumnDefinitions>
+
+                        <local:CalendarLedger Grid.Column="0" />
+                        <local:CalendarDay Grid.Column="1"
+                                           DataContext="{Binding DayItems[0]}" />
+                        <local:CalendarDay Grid.Column="2"
+                                           DataContext="{Binding DayItems[1]}" />
+                        <local:CalendarDay Grid.Column="3"
+                                           DataContext="{Binding DayItems[2]}" />
+                        <local:CalendarDay Grid.Column="4"
+                                           DataContext="{Binding DayItems[3]}" />
+                        <local:CalendarDay Grid.Column="5"
+                                           DataContext="{Binding DayItems[4]}" />
+                        <local:CalendarDay Grid.Column="6"
+                                           DataContext="{Binding DayItems[5]}" />
+                        <local:CalendarDay Grid.Column="7"
+                                           DataContext="{Binding DayItems[6]}" />
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </DockPanel>
+    </Border>
 </UserControl>

@@ -141,8 +141,38 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
+        private bool _showFullWeek = false;
+        public bool ShowFullWeek
+        {
+            get
+            {
+                return _showFullWeek;
+            }
+            set
+            {
+                if (_showFullWeek != value)
+                {
+                    _showFullWeek = value;
+                    if (_DayItems != null && _DayItems.Count == 7)
+                    {
+                        _DayItems[5].IsVisible = value;
+                        _DayItems[6].IsVisible = value;
+                    }
+                    OnPropertyChanged("ShowFullWeek");
+                }
+            }
+        }
+
+        public string ShowFullWeekLabel
+        {
+            get
+            {
+                return "Volle Woche anzeigen";
+            }
+        }
+
         private List<DayCalendarViewModel> _DayItems;
-        public IEnumerable<DayCalendarViewModel> DayItems
+        public List<DayCalendarViewModel> DayItems
         {
             get
             {
@@ -151,7 +181,12 @@ namespace Zetbox.Client.Presentables.Calendar
                     _DayItems = new List<DayCalendarViewModel>();
                     for (int i = 0; i < 7; i++)
                     {
-                        _DayItems.Add(ViewModelFactory.CreateViewModel<DayCalendarViewModel.Factory>().Invoke(DataContext, this, From.AddDays(i)));
+                        var item = ViewModelFactory.CreateViewModel<DayCalendarViewModel.Factory>().Invoke(DataContext, this, From.AddDays(i));
+                        if (ShowFullWeek == false && (i == 5 || i == 6))
+                        {
+                            item.IsVisible = false;
+                        }
+                        _DayItems.Add(item);
                     }
                 }
                 return _DayItems;
@@ -171,12 +206,24 @@ namespace Zetbox.Client.Presentables.Calendar
         private Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> _Source = null;
         public Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> Source
         {
-            get { return _Source; }
+            get 
+            {
+                if (_Source == null)
+                {
+                    _Source = GetSource();
+                }
+                return _Source; 
+            }
             set
             {
                 _Source = value;
                 Refresh();
             }
+        }
+
+        protected virtual Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> GetSource()
+        {
+            return null;
         }
 
         private IAppointmentViewModel _selectedItem;

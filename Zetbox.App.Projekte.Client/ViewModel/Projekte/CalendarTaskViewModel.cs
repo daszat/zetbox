@@ -33,7 +33,11 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
         public CalendarTaskViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, null)
         {
-            base.Source = GetData;
+        }
+
+        protected override Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> GetSource()
+        {
+            return GetData;
         }
 
         #region Properties

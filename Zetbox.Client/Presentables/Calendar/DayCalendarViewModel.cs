@@ -63,6 +63,59 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
+        private bool _zoom;
+        public bool Zoom
+        {
+            get
+            {
+                return _zoom;
+            }
+            set
+            {
+                if (_zoom != value)
+                {
+                    _zoom = value;
+                    if (_zoom)
+                    {
+                        foreach (var otherItem in WeekCalendar.DayItems)
+                        {
+                            if(otherItem != this) otherItem.Zoom = false;
+                        }
+                    }
+                    OnPropertyChanged("Zoom");
+                    OnPropertyChanged("WidthPercent");
+                }
+            }
+        }
+
+        private bool _isVisible = true;
+        public bool IsVisible
+        {
+            get
+            {
+                return _isVisible;
+            }
+            set
+            {
+                if (_isVisible != value)
+                {
+                    _isVisible = value;
+                    OnPropertyChanged("IsVisible");
+                    OnPropertyChanged("WidthPercent");
+                }
+            }
+        }
+
+        public double WidthPercent
+        {
+            get
+            {
+                if (!IsVisible) return 0;
+                if (Zoom) return 5;
+                return 1;
+            }
+        }
+
         private List<TimeSlotItemViewModel> _TimeSlotItems;
         public IEnumerable<TimeSlotItemViewModel> TimeSlotItems
         {
