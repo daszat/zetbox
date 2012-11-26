@@ -403,7 +403,7 @@ namespace Zetbox.API.Async
                                 ExecuteOrChainTask(() =>
                                     {
                                         if (task != null)
-                                            task(t.Result);
+                                            this.Result = task(t.Result);
                                     });
                             }));
         }
