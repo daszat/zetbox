@@ -20,6 +20,7 @@ namespace Zetbox.API.Async
     using System.Linq;
     using System.Text;
     using System.Threading;
+    using System.Reflection;
 
     public enum ZbTaskState
     {
@@ -75,6 +76,11 @@ namespace Zetbox.API.Async
         {
             get;
             protected set;
+        }
+
+        protected void ThrowException()
+        {
+            throw new TargetInvocationException("An exception occurred while executing a task or one of it's continuation actions", Exception);
         }
 
         private readonly SynchronizationContext _syncContext;
@@ -145,11 +151,7 @@ namespace Zetbox.API.Async
                 {
                     // Stop processing
                     Exception = ex;
-                    lock (_lockObject)
-                    {
-                        State = ZbTaskState.Failed;
-                        Monitor.PulseAll(_lockObject);
-                    }
+                    lock (_lockObject) State = ZbTaskState.Failed;
                 }
             };
             if (_syncContext != null)
@@ -159,8 +161,7 @@ namespace Zetbox.API.Async
                     work();
                     lock (_lockObject)
                     {
-                        if (State == ZbTaskState.Failed) return;
-                        State = ZbTaskState.ResultEventsPosted;
+                        if (State != ZbTaskState.Failed) State = ZbTaskState.ResultEventsPosted;
                         if (IsWaiting > 0)
                         {
                             Monitor.PulseAll(_lockObject);
@@ -177,8 +178,7 @@ namespace Zetbox.API.Async
                 work();
                 lock (_lockObject)
                 {
-                    if (State == ZbTaskState.Failed) return;
-                    State = ZbTaskState.ResultEventsPosted;
+                    if (State != ZbTaskState.Failed) State = ZbTaskState.ResultEventsPosted;
                     if (IsWaiting > 0)
                     {
                         Monitor.PulseAll(_lockObject);
@@ -245,7 +245,7 @@ namespace Zetbox.API.Async
                         continuationAction(this);
                         break;
                     case ZbTaskState.Failed:
-                        // nothing to do.
+                        ThrowException();
                         break;
                 }
             }
@@ -271,7 +271,7 @@ namespace Zetbox.API.Async
                         continuationAction(this);
                         break;
                     case ZbTaskState.Failed:
-                        // nothing to do.
+                        ThrowException();
                         break;
                 }
             }
@@ -315,8 +315,9 @@ namespace Zetbox.API.Async
                         break;
                     case ZbTaskState.ResultEventRunning:
                     case ZbTaskState.Finished:
+                        return;
                     case ZbTaskState.Failed:
-                        // nothing to do.
+                        ThrowException();
                         return;
                 }
             }
