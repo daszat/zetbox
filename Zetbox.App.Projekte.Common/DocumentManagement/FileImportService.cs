@@ -98,51 +98,58 @@ namespace Zetbox.App.Projekte.DocumentManagement
 
         private void initFileWatcher(object state)
         {
-            using (var ctx = _ctxFactory())
+            try
             {
-                var machine = System.Environment.MachineName.ToLower();
-
-                var configs = ctx.GetQuery<FileImportConfiguration>()
-                                .Where(i => (i.MachineName.ToLower() == machine)
-                                         || (i.MachineName == null))
-                                .ToList();
-                foreach (var cfg in configs)
+                using (var ctx = _ctxFactory())
                 {
-                    try
+                    var machine = System.Environment.MachineName.ToLower();
+
+                    var configs = ctx.GetQuery<FileImportConfiguration>()
+                                    .Where(i => (i.MachineName.ToLower() == machine)
+                                             || (i.MachineName == null))
+                                    .ToList();
+                    foreach (var cfg in configs)
                     {
-                        if (!string.IsNullOrEmpty(cfg.PickupDirectory))
+                        try
                         {
-                            var dir = cfg.PickupDirectory;
-                            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\.*%(\w*)%\.*");
-                            dir = regex.Replace(dir, (m) => System.Environment.GetEnvironmentVariable(m.Groups[1].Value));
-
-                            if (Directory.Exists(dir))
+                            if (!string.IsNullOrEmpty(cfg.PickupDirectory))
                             {
-                                var watcher = new FileSystemWatcher(dir, "*.*");
-                                watcher.IncludeSubdirectories = true;
-                                watcher.Created += watcher_Changed;
-                                watcher.Changed += watcher_Changed;
-                                watcher.EnableRaisingEvents = true;
+                                var dir = cfg.PickupDirectory;
+                                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\.*%(\w*)%\.*");
+                                dir = regex.Replace(dir, (m) => System.Environment.GetEnvironmentVariable(m.Groups[1].Value));
 
-                                _watcher.Add(watcher);
-                                Logging.Log.InfoFormat("Directory '{0}' added to file watcher", dir);
-
-                                foreach (var f in Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories))
+                                if (Directory.Exists(dir))
                                 {
-                                    Enqueue(f);
+                                    var watcher = new FileSystemWatcher(dir, "*.*");
+                                    watcher.IncludeSubdirectories = true;
+                                    watcher.Created += watcher_Changed;
+                                    watcher.Changed += watcher_Changed;
+                                    watcher.EnableRaisingEvents = true;
+
+                                    _watcher.Add(watcher);
+                                    Logging.Log.InfoFormat("Directory '{0}' added to file watcher", dir);
+
+                                    foreach (var f in Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories))
+                                    {
+                                        Enqueue(f);
+                                    }
+                                }
+                                else
+                                {
+                                    Logging.Log.WarnFormat("Directory '{0}' does not exists", dir);
                                 }
                             }
-                            else
-                            {
-                                Logging.Log.WarnFormat("Directory '{0}' does not exists", dir);
-                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Log.Warn("Error initializing file importer config " + cfg.ToString(), ex);
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        Logging.Log.Warn("Error initializing file importer", ex);
-                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.Warn("Error initializing file importer", ex);
             }
         }
 
