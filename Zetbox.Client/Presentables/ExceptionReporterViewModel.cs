@@ -20,9 +20,9 @@ namespace Zetbox.Client.Presentables
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-using System.Drawing;
-using Zetbox.Client.Models;
-using Zetbox.Client.Presentables.ValueViewModels;
+    using System.Drawing;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
     public class ExceptionReporterViewModel
@@ -186,5 +186,10 @@ using Zetbox.Client.Presentables.ValueViewModels;
             this.Show = false;
         }
         #endregion
+
+        public void ShowDialog()
+        {
+            ViewModelFactory.ShowDialog(this);
+        }
     }
 }

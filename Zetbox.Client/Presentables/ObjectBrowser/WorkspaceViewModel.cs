@@ -103,29 +103,23 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         private void LoadModules()
         {
-            var modules = DataContext.GetQuery<Module>().ToList();
-            foreach (var m in modules.OrderBy(i => i.Name))
+            try
             {
-                Modules.Add(ViewModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, this, m));
+                var modules = DataContext.GetQuery<Module>().ToList();
+                foreach (var m in modules.OrderBy(i => i.Name))
+                {
+                    Modules.Add(ViewModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, this, m));
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>()
+                    .Invoke(DataContext, null, ex, null)
+                    .ShowDialog();
             }
         }
 
         #endregion
-
-        /// <summary>
-        /// Show a foreign model by finding and creating the equivalent model on the local DataContext.
-        /// </summary>
-        /// <param name="dataObject"></param>
-        /// <returns></returns>
-        public void ShowForeignModel(DataObjectViewModel dataObject)
-        {
-            if (dataObject == null || dataObject.Object == null)
-                return;
-
-            var other = dataObject.Object;
-            var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, here);
-        }
 
         public override string Name
         {
