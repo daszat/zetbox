@@ -12,16 +12,19 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Zetbox.Client.Presentables.ValueViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// Proxy object for datagrids who are able to create new instances
     /// </summary>
+    [DebuggerDisplay("Proxy for = {Object}")]
     public class DataObjectViewModelProxy
     {
         public DataObjectViewModelProxy()
@@ -54,6 +57,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 return this.Highlight;
             }
+        }
+
+        public override string ToString()
+        {
+            return "Proxy for " + (Object == null ? "(null)" : Object.ToString());
         }
     }
 }
