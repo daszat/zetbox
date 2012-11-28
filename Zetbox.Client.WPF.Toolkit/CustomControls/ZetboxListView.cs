@@ -120,7 +120,7 @@ namespace Zetbox.Client.WPF.CustomControls
                     {
                         var lst = (IList)SelectedZetboxItems;
                         e.RemovedItems.OfType<object>().ForEach(i => lst.Remove(i));
-                        e.AddedItems.OfType<object>().ForEach(i => lst.Add(i));
+                        e.AddedItems.OfType<object>().ForEach(i => { if (!lst.Contains(i)) lst.Add(i); });
                     }
                     else if (SelectedZetboxItems is ICollection)
                     {
