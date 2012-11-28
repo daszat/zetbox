@@ -37,7 +37,7 @@
                     </Style>
                 </StackPanel.Resources>
                 <ctrls:LabeledContainer Label="Kind">
-                    <ComboBox ItemsSource="{Binding ListKindsSource}" 
+                    <ComboBox ItemsSource="{Binding ListKindsSource}"
                               SelectedItem="{Binding ListKind}" />
                 </ctrls:LabeledContainer>
                 <TextBlock FontSize="20"
@@ -100,6 +100,13 @@
                     <TextBlock Text="{Binding TestList.InstancesCountWarningText}" />
                 </ctrls:LabeledContainer>
                 <TextBlock FontSize="20"
+                           FontWeight="Bold">Selection:</TextBlock>
+                <ctrls:LabeledContainer Label="SelectedItems">
+                    <ListBox ItemsSource="{Binding TestList.SelectedItems}" />
+                </ctrls:LabeledContainer>
+                <ctrls:LabeledContainer Label="SelectedProxies">
+                    <ListBox ItemsSource="{Binding TestList.SelectedProxies}" />
+                </ctrls:LabeledContainer>
                            FontWeight="Bold">Sorting:</TextBlock>
                 <ctrls:LabeledContainer Label="SortProperty">
                     <TextBlock Text="{Binding TestList.SortProperty}" />
