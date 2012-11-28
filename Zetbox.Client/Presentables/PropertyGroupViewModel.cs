@@ -34,8 +34,8 @@ namespace Zetbox.Client.Presentables
     {
         public new delegate PropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
 
-        private string _title;
-        protected ObservableCollection<ViewModel> properties;
+        private readonly string _title;
+        protected readonly ObservableCollection<ViewModel> properties;
 
         public PropertyGroupViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
@@ -121,10 +121,13 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        private void AnyPropertyChangedHandler(object sender, EventArgs e)
+        private void AnyPropertyChangedHandler(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("Title");
-            OnPropertyChanged("PropertyModels");
+            // TODO: this is only a hacky workaround that needs to be replaced by better notifications.
+            if (e.PropertyName != "IsBusy")
+            {
+                OnPropertyChanged("PropertyModels");
+            }
         }
 
         #endregion
