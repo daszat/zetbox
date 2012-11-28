@@ -107,6 +107,7 @@
                 <ctrls:LabeledContainer Label="SelectedProxies">
                     <ListBox ItemsSource="{Binding TestList.SelectedProxies}" />
                 </ctrls:LabeledContainer>
+                <TextBlock FontSize="20"
                            FontWeight="Bold">Sorting:</TextBlock>
                 <ctrls:LabeledContainer Label="SortProperty">
                     <TextBlock Text="{Binding TestList.SortProperty}" />
