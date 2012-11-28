@@ -80,7 +80,7 @@ namespace Zetbox.API.Async
 
         protected void ThrowException()
         {
-            throw new TargetInvocationException("An exception occurred while executing a task or one of it's continuation actions", Exception);
+            throw new TargetInvocationException("An exception occurred while executing a task or one of it's continuation actions: " + Exception.Message, Exception);
         }
 
         private readonly SynchronizationContext _syncContext;
