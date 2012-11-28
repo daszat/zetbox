@@ -152,6 +152,10 @@ namespace Zetbox.API.Async
                     // Stop processing
                     Exception = ex;
                     lock (_lockObject) State = ZbTaskState.Failed;
+
+                    // If we're synchronous, it's *much* cleaner to just trow the exception and let it be handled immediately.
+                    if (_syncContext == Synchron)
+                        throw;
                 }
             };
             if (_syncContext != null)
