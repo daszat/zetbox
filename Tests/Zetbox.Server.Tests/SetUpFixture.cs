@@ -36,8 +36,6 @@ namespace Zetbox.Server.Tests
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Server.SetUp");
 
-        private IZetboxAppDomain manager;
-
         protected override void SetupBuilder(ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
@@ -58,27 +56,10 @@ namespace Zetbox.Server.Tests
             AutofacServiceHostFactory.Container = container;
 
             var config = container.Resolve<ZetboxConfig>();
-
-            using (Log.InfoTraceMethodCall("Starting server domain"))
-            {
-                manager = container.Resolve<IZetboxAppDomain>();
-                manager.Start(config);
-            }
         }
 
         public override void TearDown()
         {
-            lock (typeof(SetUpFixture))
-            {
-                if (manager != null)
-                {
-                    using (Log.InfoTraceMethodCall("Shutting down"))
-                    {
-                        manager.Stop();
-                        manager = null;
-                    }
-                }
-            }
         }
 
         #region IDisposable Members

@@ -44,5 +44,41 @@ namespace Zetbox.Server.Tests.Security
             Assert.That(id2Ctx.GetQuery<Task>().Count(), Is.EqualTo(id2ProjectCount * task_projectCount));
             Assert.That(id3Ctx_low.GetQuery<Task>().Count(), Is.EqualTo(0));
         }
+
+        [Test]
+        public void project_list_count_should_be_correct()
+        {
+            Assert.That(srvCtx.GetQuery<Projekt>().ToList().Count(), Is.EqualTo(projectCount));
+            Assert.That(id1Ctx.GetQuery<Projekt>().ToList().Count(), Is.EqualTo(id1ProjectCount));
+            Assert.That(id2Ctx.GetQuery<Projekt>().ToList().Count(), Is.EqualTo(id2ProjectCount));
+            Assert.That(id3Ctx_low.GetQuery<Projekt>().ToList().Count(), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void task_list_count_should_be_correct()
+        {
+            Assert.That(srvCtx.GetQuery<Task>().ToList().Count(), Is.EqualTo(projectCount * task_projectCount));
+            Assert.That(id1Ctx.GetQuery<Task>().ToList().Count(), Is.EqualTo(id1ProjectCount * task_projectCount));
+            Assert.That(id2Ctx.GetQuery<Task>().ToList().Count(), Is.EqualTo(id2ProjectCount * task_projectCount));
+            Assert.That(id3Ctx_low.GetQuery<Task>().ToList().Count(), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void project_list_with_filter_count_should_be_correct()
+        {
+            Assert.That(srvCtx.GetQuery<Projekt>().Where(p => p.Name.StartsWith("Project")).ToList().Count, Is.EqualTo(projectCount));
+            Assert.That(id1Ctx.GetQuery<Projekt>().Where(p => p.Name.StartsWith("Project")).ToList().Count, Is.EqualTo(id1ProjectCount));
+            Assert.That(id2Ctx.GetQuery<Projekt>().Where(p => p.Name.StartsWith("Project")).ToList().Count, Is.EqualTo(id2ProjectCount));
+            Assert.That(id3Ctx_low.GetQuery<Projekt>().Where(p => p.Name.StartsWith("Project")).ToList().Count, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void task_list_with_filter_count_should_be_correct()
+        {
+            Assert.That(srvCtx.GetQuery<Task>().Where(p => p.Name.StartsWith("Task")).ToList().Count, Is.EqualTo(projectCount * task_projectCount));
+            Assert.That(id1Ctx.GetQuery<Task>().Where(p => p.Name.StartsWith("Task")).ToList().Count, Is.EqualTo(id1ProjectCount * task_projectCount));
+            Assert.That(id2Ctx.GetQuery<Task>().Where(p => p.Name.StartsWith("Task")).ToList().Count, Is.EqualTo(id2ProjectCount * task_projectCount));
+            Assert.That(id3Ctx_low.GetQuery<Task>().Where(p => p.Name.StartsWith("Task")).ToList().Count, Is.EqualTo(0));
+        }
     }
 }
