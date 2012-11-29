@@ -207,7 +207,13 @@ namespace Zetbox.API.Server
             Expression objExp = base.Visit(m.Object);
             MethodInfo newMethod = GetMethodInfo(m.Method);
             ReadOnlyCollection<Expression> args = base.VisitExpressionList(m.Arguments);
-            if (m.IsMethodCallExpression("WithEagerLoading", typeof(ZetboxContextQueryableExtensions)))
+            if (m.IsMethodCallExpression("Cast"))
+            {
+                // Throw away unneeded casts - no database will handle that
+                // Note: Cast != OfType
+                return args.Single();
+            }
+            else if (m.IsMethodCallExpression("WithEagerLoading", typeof(ZetboxContextQueryableExtensions)))
             {
                 // Eager Loading is done automatically on the server - ignore and continue
                 return args.Single();
