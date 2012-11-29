@@ -452,8 +452,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             _valueCacheInititalized = false;
 
             // TODO: cancel running task
-            if (_fetchValueTask != null) _fetchValueTask.Wait();
-            _fetchValueTask = null;
+            try
+            {
+                if (_fetchValueTask != null) _fetchValueTask.Wait();
+            }
+            finally
+            {
+                _fetchValueTask = null;
+            }
         }
 
         public override DataObjectViewModel ValueAsync

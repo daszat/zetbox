@@ -782,9 +782,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (!CanExecReloadInstances())
                 return;
 
-            if (_loadInstancesCoreTask != null)
-                _loadInstancesCoreTask.Wait();
-            _loadInstancesCoreTask = null;
+            try
+            {
+                if (_loadInstancesCoreTask != null)
+                    _loadInstancesCoreTask.Wait();
+            }
+            finally
+            {
+                _loadInstancesCoreTask = null;
+            }
             LoadInstancesCore();
         }
 

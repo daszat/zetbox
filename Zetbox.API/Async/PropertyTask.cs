@@ -98,8 +98,14 @@ namespace Zetbox.API.Async
         {
             // To avoid subtle race conditions after invalidating a task, we have to ensure that the task has finished before throwing it away.
             // TODO: instead canceling would provide an easier way: "if (_task != null) _task.Cancel();"
-            if (_task != null) _task.Wait();
-            _task = null;
+            try
+            {
+                if (_task != null) _task.Wait();
+            }
+            finally
+            {
+                _task = null;
+            }
         }
     }
 }
