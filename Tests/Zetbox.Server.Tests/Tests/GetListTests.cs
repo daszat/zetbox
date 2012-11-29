@@ -343,5 +343,73 @@ namespace Zetbox.Server.Tests
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Count, Is.GreaterThan(0));
         }
+
+        [Test]
+        public void GetListWithObjectFilter()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+                Assert.That(module, Is.Not.Null);
+                var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+
+        [Test]
+        public void GetListWithObjectFilterAndCast()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+                Assert.That(module, Is.Not.Null);
+                var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).Cast<IDataObject>().ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+
+        [Test]
+        public void GetListWithObjectFilterAndCastAndOtherFilter()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+                Assert.That(module, Is.Not.Null);
+                var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).Cast<DataType>().Where(i => i.Name == "DataType").ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+
+        [Test]
+        [ExpectedException]
+        public void GetListWithObjectFilterAndCastAndOtherGenericFilter()
+        {
+            // Strange, but does not work
+            using (IZetboxContext ctx = GetContext())
+            {
+                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+                Assert.That(module, Is.Not.Null);
+                var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).Cast<IDataObject>().Where(i => i.ID > 0).ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+
+        [Test]
+        [ExpectedException]
+        public void GetListWithInvalidCast()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+                Assert.That(module, Is.Not.Null);
+                var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<ObjectClass>().Where(i => i.Name == "DataType").ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
     }
 }
