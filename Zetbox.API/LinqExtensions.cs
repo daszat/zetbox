@@ -444,7 +444,7 @@ namespace Zetbox.API
             object value = pInfo.GetValue(obj, null);
             if (value != null)
             {
-                if (value.GetType().IsGenericType && value.GetType().GetGenericTypeDefinition() == typeof(ReadOnlyCollection<>))
+                if (value.GetType().IsGenericType && typeof(ReadOnlyCollection<object>).IsAssignableFrom(value.GetType().GetGenericTypeDefinition().MakeGenericType(typeof(object))))
                 {
                     int count = (int)value.GetType().InvokeMember("get_Count", BindingFlags.InvokeMethod, null, value, null, CultureInfo.InvariantCulture);
                     if (count == 0)
