@@ -48,7 +48,7 @@ namespace Zetbox.Client.Presentables
             properties.CollectionChanged += PropertyListChanged;
             foreach (var prop in properties)
             {
-                prop.PropertyChanged += AnyPropertyChangedHandler;
+                prop.PropertyChanged += ErrorPropertyChangedHandler;
             }
         }
 
@@ -80,7 +80,7 @@ namespace Zetbox.Client.Presentables
 
         public string Error
         {
-            get { return this["PropertyModels"]; }
+            get { return this["Title"]; }
         }
 
         public string this[string columnName]
@@ -90,7 +90,6 @@ namespace Zetbox.Client.Presentables
                 switch (columnName)
                 {
                     case "Title":
-                    case "PropertyModels":
                         return String.Join("\n", properties.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
                     default:
                         return null;
@@ -108,7 +107,7 @@ namespace Zetbox.Client.Presentables
             {
                 foreach (var prop in e.NewItems.OfType<INotifyPropertyChanged>())
                 {
-                    prop.PropertyChanged += AnyPropertyChangedHandler;
+                    prop.PropertyChanged += ErrorPropertyChangedHandler;
                 }
             }
 
@@ -116,17 +115,17 @@ namespace Zetbox.Client.Presentables
             {
                 foreach (var prop in e.OldItems.OfType<INotifyPropertyChanged>())
                 {
-                    prop.PropertyChanged -= AnyPropertyChangedHandler;
+                    prop.PropertyChanged -= ErrorPropertyChangedHandler;
                 }
             }
         }
 
-        private void AnyPropertyChangedHandler(object sender, PropertyChangedEventArgs e)
+        private void ErrorPropertyChangedHandler(object sender, PropertyChangedEventArgs e)
         {
-            // TODO: this is only a hacky workaround that needs to be replaced by better notifications.
-            if (e.PropertyName != "IsBusy")
+            if (e.PropertyName == "Error")
             {
-                OnPropertyChanged("PropertyModels");
+                OnPropertyChanged("Title");
+                OnPropertyChanged("Error");
             }
         }
 
