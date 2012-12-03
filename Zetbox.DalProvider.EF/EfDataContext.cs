@@ -615,8 +615,11 @@ namespace Zetbox.DalProvider.Ef
         {
             if (ID <= Zetbox.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID", ID, "Cannot ask EntityFramework for INVALIDID"); }
 
-            var sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ID] = @id", GetEntityName(ifType));
-            return _ctx.CreateQuery<BaseServerDataObject_EntityFramework>(sql, new System.Data.Objects.ObjectParameter("id", ID)).FirstOrDefault();
+            var key = new EntityKey(string.Format("Entities.{0}", GetEntityName(ifType)), "ID", ID);
+            // var sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ID] = @id", GetEntityName(ifType));
+            object result = null;
+            _ctx.TryGetObjectByKey(key, out result);
+            return (IPersistenceObject)result; // CreateQuery<BaseServerDataObject_EntityFramework>(sql, new System.Data.Objects.ObjectParameter("id", ID)).FirstOrDefault();
         }
 
         private IPersistenceObject EfFindByExportGuid(InterfaceType ifType, Guid exportGuid)
