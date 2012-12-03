@@ -779,6 +779,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                                 _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
             }
 
+            // Limit to maxlistcount
+            // Due to the fact, that the client provider is appending 
+            // local objects to the query we have to ad an additional limit
+            result = result.Take(Zetbox.API.Helper.MAXLISTCOUNT);
+
             return result;
         }
 
