@@ -737,35 +737,37 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region Highlight
 
-        public override Highlight Highlight
-        {
-            get
-            {
-                return Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight;
-            }
-        }
-
-        private PropertyTask<Highlight> _highlightTask;
+        private PropertyTask<Highlight> _HighlightTask;
         private PropertyTask<Highlight> EnsureHighlightTask()
         {
-            if (_highlightTask != null) return _highlightTask;
+            if (_HighlightTask != null) return _HighlightTask;
 
-            return _highlightTask = new PropertyTask<Highlight>(
+            return _HighlightTask = new PropertyTask<Highlight>(
                 notifier: () =>
                 {
+                    OnPropertyChanged("Highlight");
                     OnPropertyChanged("HighlightAsync");
                 },
                 createTask: () =>
                 {
-                    return new ZbTask<Highlight>(GetValueFromModel(), () => Highlight);
+                    return new ZbTask<Highlight>(GetValueFromModel(), () => Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight);
                 },
-                set: null);
+                set: (Highlight value) =>
+                {
+                    throw new NotImplementedException();
+                });
+        }
+
+        public override Highlight Highlight
+        {
+            get { return EnsureHighlightTask().Get(); }
         }
 
         public override Highlight HighlightAsync
         {
             get { return EnsureHighlightTask().GetAsync(); }
         }
+
         #endregion
     }
 }

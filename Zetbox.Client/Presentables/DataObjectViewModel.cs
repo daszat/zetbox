@@ -464,6 +464,16 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        public override Highlight HighlightAsync
+        {
+            get
+            {
+                if (DataContext.IsElevatedMode) return Highlight.Bad;
+                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
+                return Highlight.None;
+            }
+        }
+
 
         public override ControlKind RequestedKind
         {

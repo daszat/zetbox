@@ -147,6 +147,17 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
+        public override Highlight HighlightAsync
+        {
+            get
+            {
+                // Don't call base, since it's readonly, deactivated would be returned
+                // Deactivated on !IsEnabled is OK
+                if (!IsEnabled) return Highlight.Deactivated;
+                return Highlight.None;
+            }
+        }
+
         public NavigationEntry Screen { get { return _screen; } }
 
         public Guid ExportGuid { get { return _screen.ExportGuid; } }

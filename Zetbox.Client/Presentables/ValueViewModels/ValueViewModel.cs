@@ -108,6 +108,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
+        public override Highlight HighlightAsync
+        {
+            get
+            {
+                if (DataContext.IsElevatedMode && !IsReadOnly) return Highlight.Bad; // May be true for calculated properties                
+                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
+                if (Parent != null && Parent.HighlightAsync != Highlight.None) return Parent.HighlightAsync;
+                return Highlight.None;
+            }
+        }
+
         public abstract void Focus();
         public abstract void Blur();
 
