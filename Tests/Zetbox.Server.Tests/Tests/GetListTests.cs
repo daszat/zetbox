@@ -19,15 +19,12 @@ namespace Zetbox.Server.Tests
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Autofac;
-
+    using NUnit.Framework;
+    using NUnit.Framework.Constraints;
     using Zetbox.API;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
-
-    using NUnit.Framework;
-    using NUnit.Framework.Constraints;
 
     [TestFixture]
     public class GetListTests : AbstractServerTestFixture
@@ -385,6 +382,7 @@ namespace Zetbox.Server.Tests
 
         [Test]
         [ExpectedException]
+        [Ignore("Undefined behaviour: different between NH and EF")]
         public void GetListWithObjectFilterAndCastAndOtherGenericFilter()
         {
             // Strange, but does not work
