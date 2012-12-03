@@ -26,14 +26,14 @@ namespace Zetbox.DalProvider.Ef
     using System.Reflection;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
+    using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.API.Server.PerfCounter;
-    using Zetbox.API.Async;
 
     /// <summary>
     /// Entityframework IZetboxContext implementation
@@ -616,10 +616,9 @@ namespace Zetbox.DalProvider.Ef
             if (ID <= Zetbox.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID", ID, "Cannot ask EntityFramework for INVALIDID"); }
 
             var key = new EntityKey(string.Format("Entities.{0}", GetEntityName(ifType)), "ID", ID);
-            // var sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ID] = @id", GetEntityName(ifType));
             object result = null;
             _ctx.TryGetObjectByKey(key, out result);
-            return (IPersistenceObject)result; // CreateQuery<BaseServerDataObject_EntityFramework>(sql, new System.Data.Objects.ObjectParameter("id", ID)).FirstOrDefault();
+            return (IPersistenceObject)result;
         }
 
         private IPersistenceObject EfFindByExportGuid(InterfaceType ifType, Guid exportGuid)
