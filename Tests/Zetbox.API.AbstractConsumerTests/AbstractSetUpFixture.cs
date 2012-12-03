@@ -114,6 +114,11 @@ namespace Zetbox.API.AbstractConsumerTests
                 .RegisterType<NopFileOpener>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
+
+            builder
+                .RegisterType<MockCredentialsResolver>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
         }
 
         protected virtual void SetUp(IContainer container)

@@ -68,6 +68,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -93,6 +94,7 @@
     <Compile Include="ContextTests\when_searching.cs" />
     <Compile Include="DefaultValues\when_submitting.cs" />
     <Compile Include="AbstractLinqTests.cs" />
+    <Compile Include="MockCredentialsResolver.cs" />
     <Compile Include="MockedViewModelFactory.cs" />
     <Compile Include="MockImplementationTypeChecker.cs" />
     <Compile Include="N_to_M_relations\NMTestFixture.cs" />
