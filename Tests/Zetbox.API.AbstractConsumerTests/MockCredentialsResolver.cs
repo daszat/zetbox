@@ -10,7 +10,7 @@ namespace Zetbox.API.AbstractConsumerTests
     using Zetbox.API.Client;
 
     /// <summary>
-    /// uses zetbox/zetbox as username/password
+    /// uses jenkins/jenkins as username/password
     /// </summary>
     public class MockCredentialsResolver : ICredentialsResolver
     {
@@ -20,14 +20,14 @@ namespace Zetbox.API.AbstractConsumerTests
 
         public void InitCredentials(ClientCredentials c)
         {
-            c.UserName.UserName = "zetbox";
-            c.UserName.Password = "zetbox";
+            c.UserName.UserName = "jenkins";
+            c.UserName.Password = "jenkins";
         }
 
         public void InitWebRequest(WebRequest req)
         {
             req.PreAuthenticate = true; // always send credentials, reduces startup and testing overhead
-            req.Credentials = new NetworkCredential("zetbox", "zetbox");
+            req.Credentials = new NetworkCredential("jenkins", "jenkins");
         }
 
         public void InvalidCredentials()
