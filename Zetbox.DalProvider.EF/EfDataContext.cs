@@ -92,6 +92,11 @@ namespace Zetbox.DalProvider.Ef
             _perfCounter = perfCounter;
 
             _ctx.ObjectMaterialized += new ObjectMaterializedEventHandler(_ctx_ObjectMaterialized);
+
+            // Do the hamster dance.
+            // See http://social.msdn.microsoft.com/Forums/en-US/adodotnetentityframework/thread/6b6d72f0-d894-4ae4-84f6-ec69e043e79a for details.
+            // This initialises the EfObjectContext to a functional state.
+            GetQuery<ObjectClass>();
         }
 
         void _ctx_ObjectMaterialized(object sender, ObjectMaterializedEventArgs e)
