@@ -35,6 +35,7 @@
     <converter:SystemDrawingConverter x:Key="SystemDrawingConverter" />
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converter:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
+    <converter:BooleanToInvisibilityConverter x:Key="BooleanToInvisibilityConverter" />
     <converter:WidthHintConverter x:Key="WidthHintConverter" />
     <converter:PercentToGridLengthConverter x:Key="PercentToGridLengthConverter" />
     <commands:Converter x:Key="CommandConverter" />

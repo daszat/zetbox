@@ -389,6 +389,25 @@ namespace Zetbox.Client.WPF.Converter
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    [ValueConversion(typeof(bool), typeof(System.Windows.Visibility))]
+    public class BooleanToInvisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            return value is bool && (bool)value ? System.Windows.Visibility.Collapsed : System.Windows.Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+    }
+
+    /// <summary>
     /// Convert a WidthHint into a DIP count
     /// </summary>
     [ValueConversion(typeof(WidthHint), typeof(double))]

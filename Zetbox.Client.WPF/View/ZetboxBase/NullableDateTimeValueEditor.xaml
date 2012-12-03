@@ -37,13 +37,13 @@
                  KeyboardNavigation.TabIndex="1"
                  Visibility="{Binding TimePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-        <DatePicker x:Name="txtDate"
+        <ctrls:ZetboxDatePicker x:Name="txtDate"
                        Text="{Binding DatePartString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                        Visibility="{Binding DatePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                        IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                        KeyboardNavigation.TabIndex="0"
                        KeyboardNavigation.TabNavigation="Local"
-                    styles:Controls.Highlight="{Binding HighlightAsync}"
+                       styles:Controls.Highlight="{Binding HighlightAsync}"
                        PreviewKeyDown="txtDate_PreviewKeyDown"
                        SelectedDateChanged="txtDate_SelectedDateChanged" />
     </DockPanel>

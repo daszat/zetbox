@@ -134,24 +134,6 @@ namespace Zetbox.Client.WPF
                 // unable to start, exit
                 System.Environment.Exit(1);
             }
-
-            EventManager.RegisterClassHandler(typeof(DatePicker),
-                DatePicker.LoadedEvent,
-                new RoutedEventHandler(DatePicker_Loaded));
-        }
-
-        void DatePicker_Loaded(object sender, RoutedEventArgs e)
-        {
-            var dp = sender as DatePicker;
-            if (dp == null) return;
-
-            var tb = WPFHelper.FindVisualChild<DatePickerTextBox>(dp);
-            if (tb == null) return;
-
-            var wm = tb.Template.FindName("PART_Watermark", tb) as ContentControl;
-            if (wm == null) return;
-
-            wm.Content = WpfToolkitResources.DatePicker_WatermarkText;
         }
 
         protected virtual string GetConfigFileName()
