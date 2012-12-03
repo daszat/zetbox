@@ -741,6 +741,29 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 }
             }
         }
+
+        private int _isInInit = 0;
+        public void BeginInit()
+        {
+            _isInInit++;
+            OnPropertyChanged("IsInInit");
+        }
+
+        public void EndInit()
+        {
+            _isInInit--;
+            if(_isInInit < 0)
+                _isInInit = 0;
+            OnPropertyChanged("IsInInit");
+        }
+
+        public bool IsInInit
+        {
+            get
+            {
+                return _isInInit > 0;
+            }
+        }
         #endregion
 
         #region Execute Filter and fill List
@@ -797,7 +820,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         ZbTask _loadInstancesCoreTask;
         private ZbTask LoadInstancesCore()
         {
-            if (_loadInstancesCoreTask != null || !CanExecReloadInstances()) return _loadInstancesCoreTask;
+            if (_loadInstancesCoreTask != null || !CanExecReloadInstances() || IsInInit) return _loadInstancesCoreTask;
 
             SetBusy();
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))

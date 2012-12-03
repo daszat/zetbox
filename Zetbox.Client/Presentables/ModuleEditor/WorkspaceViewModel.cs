@@ -233,11 +233,13 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         private static void SetupViewModel(InstanceListViewModel lstMdl)
         {
+            lstMdl.BeginInit();
             lstMdl.AllowAddNew = true;
             lstMdl.AllowDelete = true;
             var toRemove = lstMdl.Filter.SingleOrDefault(f => f.ValueSource != null && f.ValueSource.Expression == "Module");
             if(toRemove != null)
                 lstMdl.FilterList.RemoveFilter(toRemove);
+            lstMdl.EndInit();
         }
 
         private ViewModel _selectedItem;
