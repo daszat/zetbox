@@ -38,7 +38,6 @@ namespace Zetbox.Server.Tests
 
         protected override void SetupBuilder(ContainerBuilder builder)
         {
-            base.SetupBuilder(builder);
             builder.RegisterModule(new Zetbox.API.ApiModule());
             builder.RegisterModule(new Zetbox.API.Common.ApiCommonModule());
             builder.RegisterModule(new Zetbox.API.Server.ServerApiModule());
@@ -46,7 +45,8 @@ namespace Zetbox.Server.Tests
             builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
             builder.RegisterModule(new Zetbox.Objects.MemoryModule());
 
-            // load DB Utility from config
+            // load overrides after loading the default modules
+            base.SetupBuilder(builder);
         }
 
         protected override void SetUp(IContainer container)
