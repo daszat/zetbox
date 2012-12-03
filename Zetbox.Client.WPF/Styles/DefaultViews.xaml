@@ -5,7 +5,6 @@
                     xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
                     xmlns:kevinTxt="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                    xmlns:kevinDate="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.DateControls;assembly=WPFSamplesLib"
                     xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                     xmlns:swcp="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework">
     <!--
