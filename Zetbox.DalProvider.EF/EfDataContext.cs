@@ -558,29 +558,11 @@ namespace Zetbox.DalProvider.Ef
         public override ZbTask<T> FindAsync<T>(int ID)
         {
             CheckDisposed();
+
             return new ZbTask<T>(ZbTask.Synchron, () =>
             {
-                try
-                {
-                    return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
-                        ?? GetQuery<T>().First(o => o.ID == ID);
-                }
-                catch (InvalidOperationException)
-                {
-                    // if the IOEx happened because there is no such object, we 
-                    // want to report this with an ArgumentOutOfRangeException, 
-                    // else, we just want to pass the exception on.
-                    // Since we do not want to rely on the exception string, 
-                    // we have to check whether there is _any_ object with that ID
-                    if (GetQuery<T>().Count(o => o.ID == ID) == 0)
-                    {
-                        throw new ArgumentOutOfRangeException("ID", ID, "No such object");
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                    ?? (T)EfFindById(GetInterfaceType(typeof(T)), ID);
             });
         }
 
@@ -619,27 +601,23 @@ namespace Zetbox.DalProvider.Ef
         public override T FindPersistenceObject<T>(int ID)
         {
             CheckDisposed();
-            try
-            {
-                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
-                    ?? GetPersistenceObjectQuery<T>().First(o => o.ID == ID);
-            }
-            catch (InvalidOperationException)
-            {
-                // if the IOEx happened because there is no such object, we 
-                // want to report this with an ArgumentOutOfRangeException, 
-                // else, we just want to pass the exception on.
-                // Since we do not want to rely on the exception string, 
-                // we have to check whether there is _any_ object with that ID
-                if (!GetPersistenceObjectQuery<T>().Any(o => o.ID == ID))
-                {
-                    throw new ArgumentOutOfRangeException("ID", ID, "No such object");
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
+            return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                ?? (T)EfFindById(GetInterfaceType(typeof(T)), ID);
+        }
+
+        private IPersistenceObject EfFindById(InterfaceType ifType, int ID)
+        {
+            if (ID <= Zetbox.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID", ID, "Cannot ask EntityFramework for INVALIDID"); }
+
+            var sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ID] = @id", GetEntityName(ifType));
+            return _ctx.CreateQuery<BaseServerDataObject_EntityFramework>(sql, new System.Data.Objects.ObjectParameter("id", ID)).FirstOrDefault();
+        }
+
+        private IPersistenceObject EfFindByExportGuid(InterfaceType ifType, Guid exportGuid)
+        {
+            var sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(ifType));
+            return _ctx.CreateQuery<BaseServerDataObject_EntityFramework>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
         }
 
         /// <summary>
@@ -677,8 +655,7 @@ namespace Zetbox.DalProvider.Ef
             {
                 // TODO: Case #1174
                 var tmp = GetPersistenceObjectQuery<Zetbox.App.Base.ObjectClass>().FirstOrDefault();
-                string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(iftFactory(typeof(T))));
-                result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
+                result = (T)EfFindByExportGuid(GetInterfaceType(typeof(T)), exportGuid);
             }
             return result;
         }
