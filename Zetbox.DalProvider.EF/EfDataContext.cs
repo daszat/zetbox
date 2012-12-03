@@ -130,7 +130,7 @@ namespace Zetbox.DalProvider.Ef
             if (intf == null)
                 throw new ArgumentNullException("intf");
             var rootType = intf.GetRootType();
-            return rootType.Type.Name +"EfImpl";
+            return rootType.Type.Name + "EfImpl";
         }
 
         /// <summary>
@@ -467,7 +467,7 @@ namespace Zetbox.DalProvider.Ef
             string entityName = GetEntityName(GetInterfaceType(obj));
 
             _ctx.AttachTo(entityName, obj);
-                        
+
             if (obj.ID < _newIDCounter)// Check ID <-> newIDCounter
             {
                 _newIDCounter = obj.ID;
