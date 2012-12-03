@@ -135,6 +135,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         selectionTask.ListViewModel.AllowDelete = false;
                         selectionTask.ListViewModel.ShowOpenCommand = false;
                         selectionTask.ListViewModel.AllowAddNew = true;
+                        OnDataObjectSelectionTaskCreated(selectionTask);
 
                         ViewModelFactory.ShowDialog(selectionTask);
                     }
@@ -142,7 +143,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 null);
             ViewModelFactory.ShowDialog(selectClass);
         }
-
+        
+        public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
+        protected virtual void OnDataObjectSelectionTaskCreated(DataObjectSelectionTaskViewModel vmdl)
+        {
+            var temp = DataObjectSelectionTaskCreated;
+            if (temp != null)
+            {
+                temp(this, new DataObjectSelectionTaskEventArgs(vmdl));
+            }
+        }
+        
         private ICommandViewModel _SelectValueCommand;
 
         public ICommandViewModel SelectValueCommand

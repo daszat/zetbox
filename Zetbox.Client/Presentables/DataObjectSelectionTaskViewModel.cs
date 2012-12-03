@@ -25,6 +25,18 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
 
+    public class DataObjectSelectionTaskEventArgs : EventArgs
+    {
+        public DataObjectSelectionTaskEventArgs(DataObjectSelectionTaskViewModel vmdl)
+        {
+            TaskViewModel = vmdl;
+        }
+
+        public DataObjectSelectionTaskViewModel TaskViewModel { get; private set; }
+    }
+
+    public delegate void DataObjectSelectionTaskCreatedEventHandler(object sender, DataObjectSelectionTaskEventArgs e);
+
     public class DataObjectSelectionTaskViewModel
         : WindowViewModel, IRefreshCommandListener
     {

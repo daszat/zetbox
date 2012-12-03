@@ -425,8 +425,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         },
                     null);
                 lstMdl.ListViewModel.ShowCommands = false;
-
                 ViewModelFactory.ShowDialog(lstMdl);
+            }
+        }
+
+        public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
+        protected virtual void OnDataObjectSelectionTaskCreated(DataObjectSelectionTaskViewModel vmdl)
+        {
+            var temp = DataObjectSelectionTaskCreated;
+            if (temp != null)
+            {
+                temp(this, new DataObjectSelectionTaskEventArgs(vmdl));
             }
         }
 
@@ -473,7 +482,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             lstMdl.ListViewModel.AllowDelete = false;
             lstMdl.ListViewModel.ShowOpenCommand = false;
             lstMdl.ListViewModel.AllowAddNew = AllowAddNew || AllowAddNewWhenAddingExisting;
-
+            OnDataObjectSelectionTaskCreated(lstMdl);
             ViewModelFactory.ShowDialog(lstMdl);
         }
 

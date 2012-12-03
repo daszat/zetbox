@@ -343,8 +343,19 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             selectionTask.ListViewModel.AllowDelete = false;
             selectionTask.ListViewModel.ShowOpenCommand = false;
             selectionTask.ListViewModel.AllowAddNew = AllowCreateNewItemOnSelect;
+            OnDataObjectSelectionTaskCreated(selectionTask);
 
             ViewModelFactory.ShowDialog(selectionTask);
+        }
+
+        public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
+        protected virtual void OnDataObjectSelectionTaskCreated(DataObjectSelectionTaskViewModel vmdl)
+        {
+            var temp = DataObjectSelectionTaskCreated;
+            if (temp != null)
+            {
+                temp(this, new DataObjectSelectionTaskEventArgs(vmdl));
+            }
         }
 
         private ICommandViewModel _SelectValueCommand;

@@ -117,12 +117,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 },
                 new List<CommandViewModel>() { regenerateCmd }
             );
-            //var filter = selectionTask.ListViewModel.Filter.Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
-            //filter.Value = filter.PossibleValues
-            //    .Cast<KeyValuePair<DataObjectViewModel, string>>()
-            //    .Where(m => m.Key != null)
-            //    .FirstOrDefault(m => m.Key.Object == assembly)
-            //    .Key;
+            
             regenerateCmd.ListModel = selectionTask.ListViewModel;
             ViewModelFactory.ShowDialog(selectionTask);
         }
