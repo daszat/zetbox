@@ -41,6 +41,13 @@ namespace Zetbox.Server.Service
 
         public static int Main(string[] arguments)
         {
+            // Fix working directory
+            //if (Environment.OSVersion.Platform != PlatformID.Unix && Environment.UserInteractive == false)
+            //{
+            //    // Starting as windows service -> fixing path
+            //    Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+            //}
+            
             Logging.Configure();
 
             Log.InfoFormat("Starting Zetbox Server with args [{0}]", String.Join(" ", arguments));
@@ -94,20 +101,20 @@ namespace Zetbox.Server.Service
                     else
                     {
                         var service = container.Resolve<WindowsService>();
-                        if (Environment.UserInteractive)
-                        {
+                        //if (Environment.UserInteractive || Environment.OSVersion.Platform == PlatformID.Unix) // Environment.UserInteractive returns false under mono
+                        //{
                             service.StartService();
                             Log.Info("Waiting for console input to shutdown");
                             Console.WriteLine("Services started, press the anykey to exit");
                             Console.ReadKey();
                             Log.Info("Shutting down");
                             service.StopService();
-                        }
-                        else
-                        {
-                            var ServicesToRun = new System.ServiceProcess.ServiceBase[] { service };
-                            System.ServiceProcess.ServiceBase.Run(ServicesToRun);
-                        }
+                        //}
+                        //else
+                        //{
+                        //    var ServicesToRun = new System.ServiceProcess.ServiceBase[] { service };
+                        //    System.ServiceProcess.ServiceBase.Run(ServicesToRun);
+                        //}
                     }
                 }
                 Log.Info("Exiting");
