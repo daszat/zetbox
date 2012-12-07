@@ -745,8 +745,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             return _HighlightTask = new PropertyTask<Highlight>(
                 notifier: () =>
                 {
-                    OnPropertyChanged("Highlight");
-                    OnPropertyChanged("HighlightAsync");
+                    OnHighlightChanged();
                 },
                 createTask: () =>
                 {
