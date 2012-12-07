@@ -61,16 +61,6 @@ namespace Zetbox.Server
                 .Register(c => new ActiveDirectoryIdentitySource())
                 .As<IIdentitySource>()
                 .InstancePerLifetimeScope();
-
-            try
-            {
-                builder
-                    .RegisterModule((Autofac.Core.IModule)Activator.CreateInstance(Type.GetType("Zetbox.Server.Wcf.WcfModule, Zetbox.Server.Wcf", true)));
-            }
-            catch (Exception ex)
-            {
-                Logging.Server.Error("Unable to load Wcf-Module", ex);
-            }
 #endif
         }
     }

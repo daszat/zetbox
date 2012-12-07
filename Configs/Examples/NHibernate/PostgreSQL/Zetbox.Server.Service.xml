@@ -39,6 +39,8 @@
       <!-- application specific modules -->
 
       <Module>Zetbox.API.Server.PerfCounter.PerfMonAppender+Module, Zetbox.API.Server</Module>
+      <!-- WCF Module for local testing, every deployment (jenkins also) uses http (iis or apache) -->
+	  <Module>Zetbox.Server.Wcf.WcfModule, Zetbox.Server.Wcf</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>
