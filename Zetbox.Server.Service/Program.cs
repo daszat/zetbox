@@ -93,22 +93,21 @@ namespace Zetbox.Server.Service
                     }
                     else
                     {
-                        IServiceControlManager scm = null;
-                        if (container.TryResolve<IServiceControlManager>(out scm))
+                        var service = container.Resolve<WindowsService>();
+                        if (Environment.UserInteractive)
                         {
-                            Log.Info("Starting zetbox Services");
-                            scm.Start();
+                            service.StartService();
                             Log.Info("Waiting for console input to shutdown");
                             Console.WriteLine("Services started, press the anykey to exit");
                             Console.ReadKey();
                             Log.Info("Shutting down");
+                            service.StopService();
                         }
                         else
                         {
-                            Log.Error("No IServiceControlManager registered");
+                            var ServicesToRun = new System.ServiceProcess.ServiceBase[] { service };
+                            System.ServiceProcess.ServiceBase.Run(ServicesToRun);
                         }
-
-                        if (scm != null) scm.Stop();
                     }
                 }
                 Log.Info("Exiting");
@@ -124,6 +123,8 @@ namespace Zetbox.Server.Service
         internal static IContainer CreateMasterContainer(ZetboxConfig config)
         {
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
+
+            builder.RegisterType<WindowsService>().SingleInstance();
 
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
