@@ -644,6 +644,27 @@
         </Setter>
     </Style>
 
+    <Style x:Key="zbPasswordBoxStyle"
+           TargetType="PasswordBox">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="MinHeight"
+                Value="{StaticResource NormalControlHeight}" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="Background"
+                Value="{StaticResource ControlBackground}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource ControlForeground}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource ControlBorder}" />
+    </Style>
+
+    <Style TargetType="PasswordBox"
+           BasedOn="{StaticResource zbPasswordBoxStyle}" />
+
     <Style TargetType="swcp:DatePickerTextBox">
         <Setter Property="MinHeight"
                 Value="{StaticResource NormalControlHeight}" />
