@@ -16,6 +16,9 @@
       <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
 
+      <!-- WCF Module for initialising Autofac/WCF integration -->
+      <Module>Zetbox.Server.Wcf.WcfModule, Zetbox.Server.Wcf</Module>
+
       <!-- application specific modules -->
     </Modules>
     <ClientFilesLocations>
