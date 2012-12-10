@@ -26,6 +26,7 @@ namespace Zetbox.API.Client
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security.Authentication;
     using System.ServiceModel;
+    using System.ServiceModel.Security;
     using System.Text;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Client.ZetboxService;
@@ -100,6 +101,10 @@ namespace Zetbox.API.Client
                 catch (FaultException<InvalidZetboxGeneratedVersionException> vex)
                 {
                     throw vex.Detail;
+                }
+                catch (MessageSecurityException)
+                {
+                    throw;
                 }
                 catch (FaultException)
                 {
