@@ -25,6 +25,7 @@ namespace Zetbox.Server.Tests.Security
     public class when_changing : SecurityDataFixture
     {
         [Test]
+        [Ignore("Case 3013: Add trigger for security tables also on n_m tables")]
         public void should_refresh_rights_on_add_mitarbeiter()
         {
             Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount));
@@ -34,8 +35,8 @@ namespace Zetbox.Server.Tests.Security
             id1Ctx.SubmitChanges();
             Assert.That(prj1.Mitarbeiter.Count, Is.EqualTo(2));
 
-            Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount + 1));
-            Assert.That(id2Ctx.GetQuery<Task>().Count(), Is.EqualTo((id2ProjectCount + 1) * task_projectCount));
+            Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount + 1), "Projects 1");
+            Assert.That(id2Ctx.GetQuery<Task>().Count(), Is.EqualTo((id2ProjectCount + 1) * task_projectCount), "Tasks 1");
         }
 
         [Test]
@@ -43,22 +44,22 @@ namespace Zetbox.Server.Tests.Security
         public void should_refresh_rights_on_remove_mitarbeiter()
         {
             // Add
-            Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount));
-            Assert.That(id2Ctx.GetQuery<Task>().Count(), Is.EqualTo(id2ProjectCount * task_projectCount));
+            Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount), "Projects 2");
+            Assert.That(id2Ctx.GetQuery<Task>().Count(), Is.EqualTo(id2ProjectCount * task_projectCount), "Tasks 2");
 
             prj1.Mitarbeiter.Add(id1Ctx.Find<Mitarbeiter>(ma2.ID));
             id1Ctx.SubmitChanges();
 
-            Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount + 1));
-            Assert.That(id2Ctx.GetQuery<Task>().Count(), Is.EqualTo((id2ProjectCount + 1) * task_projectCount));
+            Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount + 1), "Projects 3");
+            Assert.That(id2Ctx.GetQuery<Task>().Count(), Is.EqualTo((id2ProjectCount + 1) * task_projectCount), "Tasks 3");
 
-            // And now the the remove
+            // And now the remove
             prj1.Mitarbeiter.Remove(id1Ctx.Find<Mitarbeiter>(ma2.ID));
             id1Ctx.SubmitChanges();
             Assert.That(prj1.Mitarbeiter.Count, Is.EqualTo(1));
 
-            Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount));
-            Assert.That(id2Ctx.GetQuery<Task>().Count(), Is.EqualTo(id2ProjectCount * task_projectCount));
+            Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount), "Projects 4");
+            Assert.That(id2Ctx.GetQuery<Task>().Count(), Is.EqualTo(id2ProjectCount * task_projectCount), "Tasks 4");
         }
     }
 }
