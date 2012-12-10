@@ -34,6 +34,7 @@ namespace Zetbox.Client.WPF
     using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
     using Zetbox.API;
     using Zetbox.API.Client;
+    using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.Client.Presentables;
@@ -162,7 +163,10 @@ namespace Zetbox.Client.WPF
 
             // Init credentials explicit
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
-            container.Resolve<ICredentialsResolver>().EnsureCredentials();
+            while (container.Resolve<IIdentityResolver>().GetCurrent() == null)
+            {
+                container.Resolve<ICredentialsResolver>().InvalidCredentials();
+            }
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
 
