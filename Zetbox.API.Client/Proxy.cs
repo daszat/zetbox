@@ -24,6 +24,7 @@ namespace Zetbox.API.Client
     using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Security.Authentication;
     using System.ServiceModel;
     using System.Text;
     using Zetbox.API.Client.PerfCounter;
@@ -101,6 +102,10 @@ namespace Zetbox.API.Client
                     throw vex.Detail;
                 }
                 catch (FaultException)
+                {
+                    throw;
+                }
+                catch (AuthenticationException)
                 {
                     throw;
                 }
