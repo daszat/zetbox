@@ -207,6 +207,10 @@ namespace Zetbox.Client
             {
                 var userName = _credentialResolver.GetUsername();
                 result = Resolve(userName);
+                if (result == null)
+                {
+                    _credentialResolver.InvalidCredentials();
+                }
             }
             return result;
         }
