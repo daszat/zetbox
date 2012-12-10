@@ -3,21 +3,26 @@ namespace Zetbox.Client.WPF.CustomControls
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using System.Windows.Controls;
     using System.Windows;
-    using System.ComponentModel;
-    using Zetbox.Client.Presentables;
+    using System.Windows.Controls;
     using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.Toolkit;
 
     public class LabeledView : Control, IHasViewModel<ILabeledViewModel>
     {
         static LabeledView()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LabeledView), new FrameworkPropertyMetadata(typeof(LabeledView)));
-            UserControl.VerticalContentAlignmentProperty.OverrideMetadata(
+            DefaultStyleKeyProperty.OverrideMetadata(
+                typeof(LabeledView),
+                new FrameworkPropertyMetadata(typeof(LabeledView)));
+            FocusableProperty.OverrideMetadata(
+                typeof(LabeledView),
+                new FrameworkPropertyMetadata(false));
+            VerticalContentAlignmentProperty.OverrideMetadata(
                 typeof(LabeledView),
                 new FrameworkPropertyMetadata(VerticalAlignment.Center));
         }

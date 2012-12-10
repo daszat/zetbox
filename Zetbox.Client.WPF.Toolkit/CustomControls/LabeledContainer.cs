@@ -17,6 +17,7 @@ namespace Zetbox.Client.WPF.CustomControls
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Windows;
@@ -24,21 +25,25 @@ namespace Zetbox.Client.WPF.CustomControls
     using System.Windows.Data;
     using System.Windows.Documents;
     using System.Windows.Input;
+    using System.Windows.Markup;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables;
-    using System.ComponentModel;
-    using System.Windows.Markup;
 
     [ContentProperty("LabeledContent")]
     public class LabeledContainer : ContentControl
     {
         static LabeledContainer()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LabeledContainer), new FrameworkPropertyMetadata(typeof(LabeledContainer)));
+            DefaultStyleKeyProperty.OverrideMetadata(
+                typeof(LabeledContainer),
+                new FrameworkPropertyMetadata(typeof(LabeledContainer)));
+            FocusableProperty.OverrideMetadata(
+                typeof(LabeledContainer),
+                new FrameworkPropertyMetadata(false));
         }
 
         [TypeConverter(typeof(LengthConverter))]

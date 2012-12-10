@@ -42,7 +42,8 @@ namespace Zetbox.Client.WPF.CustomControls
         {
             // by default the PropertyEditor itself should not take part 
             // in focus-stuff
-            FocusableProperty.OverrideMetadata(typeof(PropertyEditor),
+            FocusableProperty.OverrideMetadata(
+                typeof(PropertyEditor),
                 new FrameworkPropertyMetadata(false));
         }
 

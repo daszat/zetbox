@@ -11,8 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Zetbox.Client.Presentables;
 using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.CustomControls
@@ -21,7 +21,12 @@ namespace Zetbox.Client.WPF.CustomControls
     {
         static LabeledViewHorizontal()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LabeledViewHorizontal), new FrameworkPropertyMetadata(typeof(LabeledViewHorizontal)));
+            DefaultStyleKeyProperty.OverrideMetadata(
+                typeof(LabeledViewHorizontal),
+                new FrameworkPropertyMetadata(typeof(LabeledViewHorizontal)));
+            FocusableProperty.OverrideMetadata(
+                typeof(LabeledViewHorizontal),
+                new FrameworkPropertyMetadata(false));
         }
 
         public override void OnApplyTemplate()
@@ -31,7 +36,7 @@ namespace Zetbox.Client.WPF.CustomControls
             var presenter = (ContentPresenter)GetTemplateChild("PART_ContentPresenter");
             presenter.ContentTemplateSelector = (DataTemplateSelector)FindResource("defaultTemplateSelector");
         }
-    
+
         // Using a DependencyProperty as the backing store for LabelSharedSizeGroup.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RequestedKindProperty =
             DependencyProperty.Register("RequestedKind", typeof(object), typeof(LabeledViewHorizontal), new UIPropertyMetadata(null));
