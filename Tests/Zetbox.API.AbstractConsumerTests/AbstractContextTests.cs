@@ -305,7 +305,7 @@ namespace Zetbox.API.AbstractConsumerTests
                 foreach (var obj in objects)
                 {
                     Assert.That(obj.ID, Is.GreaterThan(Helper.INVALIDID));
-                    Assert.That(() => testCtx.Find<TestObjClass>(obj.ID), Throws.ArgumentException);
+                    Assert.That(() => testCtx.Find<TestObjClass>(obj.ID), Throws.InstanceOf<ArgumentOutOfRangeException>());
                 }
             }
         }
