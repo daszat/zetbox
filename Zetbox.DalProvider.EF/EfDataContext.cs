@@ -566,8 +566,10 @@ namespace Zetbox.DalProvider.Ef
 
             return new ZbTask<T>(ZbTask.Synchron, () =>
             {
-                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                var result = AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
                     ?? (T)EfFindById(GetInterfaceType(typeof(T)), ID);
+                if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
+                return result;
             });
         }
 
