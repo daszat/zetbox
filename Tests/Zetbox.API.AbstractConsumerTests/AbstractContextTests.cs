@@ -276,7 +276,6 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void should_rollbacktransaction()
         {
             using (var ctx = GetContext())
@@ -306,8 +305,7 @@ namespace Zetbox.API.AbstractConsumerTests
                 foreach (var obj in objects)
                 {
                     Assert.That(obj.ID, Is.GreaterThan(Helper.INVALIDID));
-                    var testObj = testCtx.Find<TestObjClass>(obj.ID);
-                    Assert.That(testObj, Is.Null);
+                    Assert.That(() => testCtx.Find<TestObjClass>(obj.ID), Throws.ArgumentException);
                 }
             }
         }
