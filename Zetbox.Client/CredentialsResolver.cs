@@ -72,6 +72,11 @@ namespace Zetbox.Client
             // Exit application, server won't talk to us
             Environment.Exit(1);
         }
+
+        public void Freeze()
+        {
+            // doesn't need to do anything.
+        }
     }
 
     public class BasicAuthCredentialsResolver : ICredentialsResolver
@@ -115,7 +120,7 @@ namespace Zetbox.Client
         private bool _isEnsuringCredentials = false;
         public void EnsureCredentials()
         {
-            lock (_lock) // singelton, once is enougth
+            lock (_lock) // singleton, once is enough
             {
                 if (_isEnsuringCredentials)
                 {
@@ -175,9 +180,20 @@ namespace Zetbox.Client
 
         public void InvalidCredentials()
         {
+            if (_isFrozen)
+            {
+                Logging.Client.Fatal("Exiting due to invalid credentials after freezing.");
+                Environment.Exit(1);
+            }
             // Reset username/password
             UserName = null;
             Password = null;
+        }
+
+        private bool _isFrozen = false;
+        public void Freeze()
+        {
+            _isFrozen = true;
         }
 
         internal string GetUsername()

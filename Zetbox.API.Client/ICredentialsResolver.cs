@@ -45,5 +45,11 @@ namespace Zetbox.API.Client
         /// Implementors should reset their internal state and rerequest credentials from the user.
         /// </summary>
         void InvalidCredentials();
+
+        /// <summary>
+        /// After calling this function, invalidating the credentials will cause a complete abort.
+        /// This can be used to protect identity and ACL caches.
+        /// </summary>
+        void Freeze();
     }
 }

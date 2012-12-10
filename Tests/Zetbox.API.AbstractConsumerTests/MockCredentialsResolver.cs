@@ -33,5 +33,9 @@ namespace Zetbox.API.AbstractConsumerTests
         public void InvalidCredentials()
         {
         }
+
+        public void Freeze()
+        {
+        }
     }
 }
