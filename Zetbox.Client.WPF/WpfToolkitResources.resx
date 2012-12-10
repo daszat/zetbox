@@ -249,4 +249,10 @@
   <data name="InvalidZetboxGeneratedVersionException_Title" xml:space="preserve">
     <value>Invalid Version</value>
   </data>
+  <data name="App_InvalidCredentials" xml:space="preserve">
+    <value>You are not authorized to access this application.</value>
+  </data>
+  <data name="App_InvalidCredentials_Caption" xml:space="preserve">
+    <value>Authorization Error</value>
+  </data>
 </root>

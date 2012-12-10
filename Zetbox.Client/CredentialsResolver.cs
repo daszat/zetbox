@@ -18,19 +18,21 @@ namespace Zetbox.Client
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
+    using System.Security.Authentication;
     using System.Security.Principal;
     using System.Text;
+    using System.Threading;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Common;
+    using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.Client.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.API.Utils;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -59,7 +61,6 @@ namespace Zetbox.Client
             // Set implicity by WindowsAuthentication
         }
 
-
         public void SetCredentialsTo(WebRequest req)
         {
             if (req == null) throw new ArgumentNullException("req");
@@ -69,8 +70,8 @@ namespace Zetbox.Client
 
         public void InvalidCredentials()
         {
-            // Exit application, server won't talk to us
-            Environment.Exit(1);
+            throw new AuthenticationException(string.Format("You are not authorized to access this application. (username={0})",
+                Thread.CurrentPrincipal.Identity != null ? Thread.CurrentPrincipal.Identity.Name : "<empty>"));
         }
 
         public void Freeze()

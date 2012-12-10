@@ -21,6 +21,7 @@ namespace Zetbox.Client.WPF
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using System.Security.Authentication;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
@@ -167,7 +168,15 @@ namespace Zetbox.Client.WPF
             var credResolver = container.Resolve<ICredentialsResolver>();
             while (idResolver.GetCurrent() == null)
             {
-                credResolver.InvalidCredentials();
+                try
+                {
+                    credResolver.InvalidCredentials();
+                }
+                catch (AuthenticationException)
+                {
+                    MessageBox.Show(WpfToolkitResources.App_InvalidCredentials, WpfToolkitResources.App_InvalidCredentials_Caption, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    Environment.Exit(1);
+                }
             }
             credResolver.Freeze();
 

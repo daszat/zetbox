@@ -61,6 +61,24 @@ namespace Zetbox.Client.WPF {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are not authorized to access this application..
+        /// </summary>
+        internal static string App_InvalidCredentials {
+            get {
+                return ResourceManager.GetString("App_InvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authorization Error.
+        /// </summary>
+        internal static string App_InvalidCredentials_Caption {
+            get {
+                return ResourceManager.GetString("App_InvalidCredentials_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The SelectedDates collection can be changed only in a multiple selection mode. Use the SelectedDate in a single selection mode..
         /// </summary>
         internal static string Calendar_CheckSelectionMode_InvalidOperation {
