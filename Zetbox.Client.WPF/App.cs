@@ -163,10 +163,13 @@ namespace Zetbox.Client.WPF
 
             // Init credentials explicit
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
-            while (container.Resolve<IIdentityResolver>().GetCurrent() == null)
+            var idResolver = container.Resolve<IIdentityResolver>();
+            var credResolver = container.Resolve<ICredentialsResolver>();
+            while (idResolver.GetCurrent() == null)
             {
-                container.Resolve<ICredentialsResolver>().InvalidCredentials();
+                credResolver.InvalidCredentials();
             }
+            credResolver.Freeze();
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
 
