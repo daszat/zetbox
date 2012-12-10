@@ -23,9 +23,22 @@ namespace Zetbox.API.Common
     using System.Runtime.Serialization;
     using Zetbox.API.Utils;
 
+    /// <summary>
+    /// Resolve the client's identity.
+    /// </summary>
     public interface IIdentityResolver
     {
+        /// <summary>
+        /// Retrieves the zetbox identity of the current user.
+        /// </summary>
+        /// <returns>a Identity or null if none was found.</returns>
         Identity GetCurrent();
+
+        /// <summary>
+        /// Retrieves the zetbox identity of the specified security principal.
+        /// </summary>
+        /// <param name="identity">a security principal</param>
+        /// <returns>a Identity or null if none was found.</returns>
         Identity Resolve(IIdentity identity);
     }
 
