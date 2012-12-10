@@ -133,7 +133,7 @@ namespace Zetbox.API.Client
                 httpWebRequest.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             }
 
-            _credentialsResolver.InitWebRequest(req);
+            _credentialsResolver.SetCredentialsTo(req);
             return req;
         }
 

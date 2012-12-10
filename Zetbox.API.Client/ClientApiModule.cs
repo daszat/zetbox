@@ -87,7 +87,7 @@ namespace Zetbox.API.Client
                 .AsImplementedInterfaces()
                 .OnActivated(args =>
                 {
-                    args.Context.Resolve<ICredentialsResolver>().InitCredentials(args.Instance.ClientCredentials);
+                    args.Context.Resolve<ICredentialsResolver>().SetCredentialsTo(args.Instance.ClientCredentials);
                 })
                 .InstancePerLifetimeScope();
         }

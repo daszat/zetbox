@@ -18,13 +18,13 @@ namespace Zetbox.API.AbstractConsumerTests
         {
         }
 
-        public void InitCredentials(ClientCredentials c)
+        public void SetCredentialsTo(ClientCredentials c)
         {
             c.UserName.UserName = "jenkins";
             c.UserName.Password = "jenkins";
         }
 
-        public void InitWebRequest(WebRequest req)
+        public void SetCredentialsTo(WebRequest req)
         {
             req.PreAuthenticate = true; // always send credentials, reduces startup and testing overhead
             req.Credentials = new NetworkCredential("jenkins", "jenkins");

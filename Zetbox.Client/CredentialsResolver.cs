@@ -53,14 +53,14 @@ namespace Zetbox.Client
             // Using Windows Credentials, they are already set by the operating system
         }
 
-        public void InitCredentials(System.ServiceModel.Description.ClientCredentials c)
+        public void SetCredentialsTo(System.ServiceModel.Description.ClientCredentials c)
         {
             // Gracefully do nothing
             // Set implicity by WindowsAuthentication
         }
 
 
-        public void InitWebRequest(WebRequest req)
+        public void SetCredentialsTo(WebRequest req)
         {
             if (req == null) throw new ArgumentNullException("req");
 
@@ -155,7 +155,7 @@ namespace Zetbox.Client
             }
         }
 
-        public void InitCredentials(System.ServiceModel.Description.ClientCredentials c)
+        public void SetCredentialsTo(System.ServiceModel.Description.ClientCredentials c)
         {
             if (c == null) throw new ArgumentNullException("c");
 
@@ -164,7 +164,7 @@ namespace Zetbox.Client
             c.UserName.Password = Password;
         }
 
-        public void InitWebRequest(WebRequest req)
+        public void SetCredentialsTo(WebRequest req)
         {
             if (req == null) throw new ArgumentNullException("req");
 

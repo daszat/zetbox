@@ -32,12 +32,13 @@ namespace Zetbox.API.Client
         /// Initializes the given ClientCredentials
         /// </summary>
         /// <param name="c">ClientCredentials to initialize</param>
-        void InitCredentials(ClientCredentials c);
+        void SetCredentialsTo(ClientCredentials c);
+
         /// <summary>
         /// Initializes the given WebRequest
         /// </summary>
         /// <param name="req">WebRequest to initialize</param>
-        void InitWebRequest(WebRequest req);
+        void SetCredentialsTo(WebRequest req);
 
         /// <summary>
         /// Called by the using class to report invalid credentials.
