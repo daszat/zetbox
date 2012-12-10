@@ -162,6 +162,11 @@ namespace Zetbox.Client.WPF
 
             LoadStyles(this.Resources);
 
+            // Focus nightmare
+            // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
+            EventManager.RegisterClassHandler(typeof(Window), Window.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
+            EventManager.RegisterClassHandler(typeof(Zetbox.Client.WPF.View.ZetboxBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
+
             // Init credentials explicit
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
             var idResolver = container.Resolve<IIdentityResolver>();
@@ -181,11 +186,6 @@ namespace Zetbox.Client.WPF
             credResolver.Freeze();
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
-
-            // Focus nightmare
-            // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
-            EventManager.RegisterClassHandler(typeof(Window), Window.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
-            EventManager.RegisterClassHandler(typeof(Zetbox.Client.WPF.View.ZetboxBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
 
             wpfResourcesInitialized = true;
 
@@ -267,7 +267,7 @@ namespace Zetbox.Client.WPF
             var element = e.Source as FrameworkElement;
             element.Dispatcher.BeginInvoke(new Action(() =>
             {
-                var firstTxt = element.FindVisualChild<InfoTextBox>();
+                var firstTxt = element.FindVisualChild<InfoTextBox>() ?? element.FindVisualChild<TextBox>();
                 if (firstTxt != null)
                 {
                     Keyboard.Focus(firstTxt);
