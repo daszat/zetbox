@@ -279,18 +279,20 @@ namespace Zetbox.Server
             using (Log.InfoTraceMethodCall("RunFixes"))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                //Log.Info("Currently no fixes to do");
+                Log.Info("Currently no fixes to do");
 
                 var ctx = subContainer.Resolve<IZetboxServerContext>();
 
-                foreach (var prop in ctx.GetQuery<Property>().Where(p => p.CategoryTags != null))
-                {
-                    prop.CategoryTags = prop.CategoryTags
-                        .Replace("Changed", "Meta")
-                        .Replace("Export", "Meta")
-                        .Replace("Information", "Main")
-                        .Trim();
-                }
+                var result = ctx.GetQuery<Zetbox.App.Test.AnyReferenceTestObject>().OrderBy(a => a.Any).ToList();
+
+                //foreach (var prop in ctx.GetQuery<Property>().Where(p => p.CategoryTags != null))
+                //{
+                //    prop.CategoryTags = prop.CategoryTags
+                //        .Replace("Changed", "Meta")
+                //        .Replace("Export", "Meta")
+                //        .Replace("Information", "Main")
+                //        .Trim();
+                //}
 
                 //foreach (var prj in ctx.GetQuery<Zetbox.App.SchemaMigration.MigrationProject>())
                 //{
@@ -345,7 +347,7 @@ namespace Zetbox.Server
                 //    var blob = ctx.CreateBlob(s, "test.txt", "text");
                 //}
 
-                ctx.SubmitChanges();
+                //ctx.SubmitChanges();
             }
         }
 
