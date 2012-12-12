@@ -24,10 +24,10 @@ namespace Zetbox.API.Server
     using System.Reflection;
     using System.Text;
     using Zetbox.API.Common;
+    using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.API.Server.PerfCounter;
 
     // http://msdn.microsoft.com/en-us/library/bb549414.aspx
     // The Execute method executes queries that return a single value 
@@ -218,12 +218,51 @@ namespace Zetbox.API.Server
                 // Eager Loading is done automatically on the server - ignore and continue
                 return args.Single();
             }
+            else if (m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("OrderByDescending") || m.IsMethodCallExpression("ThenBy") || m.IsMethodCallExpression("ThenByDescending"))
+            {
+                var lambda = (LambdaExpression)args.Skip(1).Single().StripQuotes();
+                if (lambda.Body.Type.IsICompoundObject())
+                {
+                    var cpDef = MetaDataResolver.GetCompoundObject(Ctx.GetImplementationType(lambda.Body.Type).ToInterfaceType());
+                    if (cpDef == null) throw new InvalidOperationException("cannot resolve CompoundObject type: " + lambda.Body.Type.AssemblyQualifiedName);
+
+                    var sourceType = args.First().Type.GetGenericArguments()[0];
+                    var param = lambda.Parameters.Single();
+                    bool isOrderBy = m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("OrderByDescending");
+                    bool isAsc = m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("ThenBy");
+                    var result = args.First();
+                    foreach (var prop in cpDef.Properties)
+                    {
+                        var propType = prop.IsNullable() ? typeof(Nullable<>).MakeGenericType(prop.GetPropertyType()) : prop.GetPropertyType();
+                        var newOrderByLambda = Expression.Quote(
+                            Expression.Lambda(
+                                Expression.MakeMemberAccess(lambda.Body, lambda.Body.Type.GetProperty(prop.Name)),
+                                param)
+                        );
+
+                        var sortExpression = Expression.Call(
+                            typeof(Queryable),
+                            isOrderBy
+                                ? (isAsc ? "OrderBy" : "OrderByDescending")
+                                : (isAsc ? "ThenBy" : "ThenByDescending"),
+                            new Type[] { sourceType, propType }, // CP-Objects can only contain value properties, until nested CP-Objects are implemented correctly
+                            result,
+                            newOrderByLambda);
+
+                        result = sortExpression;
+                        isOrderBy = false;
+                    }
+
+                    return result;
+                }
+                else
+                {
+                    return Expression.Call(objExp, newMethod, args);
+                }
+            }
             else
             {
-                var result = Expression.Call(
-                    objExp,
-                    newMethod,
-                    args);
+                var result = Expression.Call(objExp, newMethod, args);
 
                 if (result.IsMethodCallExpression("OfType"))
                 {

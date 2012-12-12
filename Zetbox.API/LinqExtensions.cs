@@ -179,9 +179,13 @@ namespace Zetbox.API
 
             type = orderBy.Type.GetGenericArguments()[0].GetGenericArguments()[1];
             return queryable.Provider.CreateQuery<T>(
-                Expression.Call(typeof(Queryable), "OrderBy",
-                new Type[] { queryable.ElementType, type },
-                queryable.Expression, orderBy));
+                Expression.Call(
+                    typeof(Queryable),
+                    "OrderBy",
+                    new Type[] { queryable.ElementType, type },
+                    queryable.Expression,
+                    orderBy)
+                );
         }
 
         /// <summary>
