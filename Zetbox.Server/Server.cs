@@ -279,11 +279,10 @@ namespace Zetbox.Server
             using (Log.InfoTraceMethodCall("RunFixes"))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Log.Info("Currently no fixes to do");
-
+                Log.Info("Running OrderBy Test");
                 var ctx = subContainer.Resolve<IZetboxServerContext>();
-
                 var result = ctx.GetQuery<Zetbox.App.Test.AnyReferenceTestObject>().OrderBy(a => a.Any).ToList();
+                Log.InfoFormat("Found {0} objects", result.Count);
 
                 //foreach (var prop in ctx.GetQuery<Property>().Where(p => p.CategoryTags != null))
                 //{
