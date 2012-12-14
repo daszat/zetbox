@@ -41,80 +41,63 @@ namespace Zetbox.Server.Service
 
         public static int Main(string[] arguments)
         {
-            // Fix working directory
-            //if (Environment.OSVersion.Platform != PlatformID.Unix && Environment.UserInteractive == false)
-            //{
-            //    // Starting as windows service -> fixing path
-            //    Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
-            //}
-            
+            // Fix working directory: Services start in System32
+            Environment.CurrentDirectory = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+
             Logging.Configure();
 
-            Log.InfoFormat("Starting Zetbox Server with args [{0}]", String.Join(" ", arguments));
+            Log.InfoFormat("Starting Zetbox Service with args [{0}] at {1}", String.Join(" ", arguments), Environment.CurrentDirectory);
 
             try
             {
                 var config = ExtractConfig(ref arguments);
+                bool consoleMode = false;
+                if (arguments.Length == 0)
+                {
+                    consoleMode = false;
+                }
+                if (arguments.Length == 1)
+                {
+                    switch (arguments[0])
+                    {
+                        case "/console":
+                        case "-console":
+                        case "--console":
+                            consoleMode = true;
+                            Log.Info("Staying in foreground");
+                            break;
+                        case "/help":
+                        case "-help":
+                        case "--help":
+                            Log.Warn("Start with --console to keep the service in the foreground.");
+                            Environment.Exit(1);
+                            break;
+                    }
+                }
+                else
+                {
+                    Log.Fatal("Too many parameters. Start with --help to see usage.");
+                    Environment.Exit(1);
+                }
+
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 using (var container = CreateMasterContainer(config))
                 {
-                    OptionSet options = new OptionSet();
-
-                    // activate all registered options
-                    container.Resolve<IEnumerable<Option>>().OrderBy(o => o.Prototype).ForEach(o => options.Add(o));
-
-                    List<string> extraArguments = null;
-                    try
+                    var service = container.Resolve<WindowsService>();
+                    if (consoleMode)
                     {
-                        extraArguments = options.Parse(arguments);
-                    }
-                    catch (OptionException e)
-                    {
-                        Log.Fatal("Error in commandline", e);
-                        return 1;
-                    }
-
-                    if (extraArguments != null && extraArguments.Count > 0)
-                    {
-                        Log.FatalFormat("Unrecognized arguments on commandline: {0}", string.Join(", ", extraArguments.ToArray()));
-                        return 1;
-                    }
-
-                    var actions = config.AdditionalCommandlineActions;
-
-                    // process command line
-                    if (actions.Count > 0)
-                    {
-                        using (Log.DebugTraceMethodCall("CmdLineActions", "processing commandline actions"))
-                        {
-                            foreach (var action in actions)
-                            {
-                                using (var innerContainer = container.BeginLifetimeScope())
-                                {
-                                    action(innerContainer);
-                                }
-                            }
-                        }
+                        service.StartService();
+                        Log.Info("Waiting for console input to shutdown");
+                        Console.WriteLine("Services started, press the anykey to exit");
+                        Console.ReadKey();
                         Log.Info("Shutting down");
+                        service.StopService();
                     }
                     else
                     {
-                        var service = container.Resolve<WindowsService>();
-                        //if (Environment.UserInteractive || Environment.OSVersion.Platform == PlatformID.Unix) // Environment.UserInteractive returns false under mono
-                        //{
-                            service.StartService();
-                            Log.Info("Waiting for console input to shutdown");
-                            Console.WriteLine("Services started, press the anykey to exit");
-                            Console.ReadKey();
-                            Log.Info("Shutting down");
-                            service.StopService();
-                        //}
-                        //else
-                        //{
-                        //    var ServicesToRun = new System.ServiceProcess.ServiceBase[] { service };
-                        //    System.ServiceProcess.ServiceBase.Run(ServicesToRun);
-                        //}
+                        var ServicesToRun = new System.ServiceProcess.ServiceBase[] { service };
+                        System.ServiceProcess.ServiceBase.Run(ServicesToRun);
                     }
                 }
                 Log.Info("Exiting");
