@@ -18,34 +18,28 @@ namespace Zetbox.DalProvider.NHibernate.Tests
     using System;
     using System.Collections.Generic;
     using Autofac;
+    using Npgsql;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.API.AbstractConsumerTests;
     using Zetbox.API.Configuration;
     using Zetbox.App.Base;
     using Zetbox.App.Projekte;
     using Zetbox.Server;
-    using Npgsql;
-    using NUnit.Framework;
 
     [SetUpFixture]
     public class SetUpFixture
         : AbstractSetUpFixture
     {
-
         protected override void SetupBuilder(ContainerBuilder builder)
         {
-            base.SetupBuilder(builder);
-            builder.RegisterModule(new Zetbox.API.ApiModule());
-            builder.RegisterModule(new Zetbox.API.Common.ApiCommonModule());
-            builder.RegisterModule(new Zetbox.API.Server.ServerApiModule());
-            builder.RegisterModule(new Zetbox.Server.ServerModule());
-            builder.RegisterModule(new Zetbox.Objects.InterfaceModule());
-            builder.RegisterModule(new Zetbox.Objects.NHibernateModule());
-            builder.RegisterModule(new Zetbox.Objects.MemoryModule());
-            builder.RegisterModule(new Zetbox.DalProvider.NHibernate.NHibernateProvider());
-            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Zetbox.Server.UnifiedModule());
 
-            // load DB Utility from config
+            builder.RegisterModule(new Zetbox.Objects.NHibernateModule());
+            builder.RegisterModule(new Zetbox.DalProvider.NHibernate.NHibernateProvider());
+
+            // load overrides after loading the default modules
+            base.SetupBuilder(builder);
         }
 
         protected override void SetUp(IContainer container)

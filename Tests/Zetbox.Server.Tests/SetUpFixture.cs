@@ -23,13 +23,13 @@ namespace Zetbox.Server.Tests
     using System.Text;
     using Autofac;
     using Autofac.Integration.Wcf;
+    using NUnit.Framework;
+    using NUnit.Framework.Constraints;
     using Zetbox.API;
     using Zetbox.API.AbstractConsumerTests;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.GUI;
-    using NUnit.Framework;
-    using NUnit.Framework.Constraints;
 
     [SetUpFixture]
     public class SetUpFixture : AbstractSetUpFixture, IDisposable
@@ -38,12 +38,10 @@ namespace Zetbox.Server.Tests
 
         protected override void SetupBuilder(ContainerBuilder builder)
         {
-            builder.RegisterModule(new Zetbox.API.ApiModule());
-            builder.RegisterModule(new Zetbox.API.Common.ApiCommonModule());
-            builder.RegisterModule(new Zetbox.API.Server.ServerApiModule());
-            builder.RegisterModule(new Zetbox.Server.ServerModule());
-            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Zetbox.Server.UnifiedModule());
+
             builder.RegisterModule(new Zetbox.Objects.MemoryModule());
+            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
 
             // load overrides after loading the default modules
             base.SetupBuilder(builder);
