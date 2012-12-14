@@ -24,8 +24,8 @@ namespace Zetbox.Server
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
-    using Zetbox.App.Extensions;
     using Zetbox.API.Utils;
+    using Zetbox.App.Extensions;
 
     public class ServerModule : Module
     {
