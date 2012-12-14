@@ -68,23 +68,21 @@ namespace Zetbox.API.Common
             _lazyFrozen = lazyFrozen;
         }
 
-        private void Init(IFrozenContext ctx)
+        private void Init()
         {
-            if (ctx == null) { throw new ArgumentNullException("ctx"); }
-
             lock (_lock)
             {
                 if (_cache != null)
                     return;
 
-                _cache = ctx.GetQuery<DataType>().ToLookup(cls => cls.Name);
+                _cache = _lazyFrozen.Invoke().GetQuery<DataType>().ToLookup(cls => cls.Name);
                 Logging.Log.InfoFormat("Initialised CachingMetaDataResolver with {0} classes", _cache.Count);
             }
         }
 
         private DataType Lookup(InterfaceType ifType)
         {
-            if (_cache == null) { Init(_lazyFrozen.Invoke()); }
+            if (_cache == null) { Init(); }
 
             return _cache[ifType.Type.Name].FirstOrDefault(o => o.Module.Namespace == ifType.Type.Namespace && o.Name == ifType.Type.Name);
         }
