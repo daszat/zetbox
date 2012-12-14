@@ -60,10 +60,10 @@ namespace Zetbox.API.Common
     {
         private readonly object _lock = new object();
 
-        private readonly Func<IFrozenContext> _lazyFrozen;
+        private readonly Lazy<IFrozenContext> _lazyFrozen;
         private ILookup<string, DataType> _cache;
 
-        public CachingMetaDataResolver(Func<IFrozenContext> lazyFrozen)
+        public CachingMetaDataResolver(Lazy<IFrozenContext> lazyFrozen)
         {
             _lazyFrozen = lazyFrozen;
         }
@@ -75,7 +75,7 @@ namespace Zetbox.API.Common
                 if (_cache != null)
                     return;
 
-                _cache = _lazyFrozen.Invoke().GetQuery<DataType>().ToLookup(cls => cls.Name);
+                _cache = _lazyFrozen.Value.GetQuery<DataType>().ToLookup(cls => cls.Name);
                 Logging.Log.InfoFormat("Initialised CachingMetaDataResolver with {0} classes", _cache.Count);
             }
         }
