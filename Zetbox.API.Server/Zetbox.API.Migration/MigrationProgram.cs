@@ -85,6 +85,8 @@ namespace Zetbox.API.Migration
 
             _container = CreateMasterContainer(_config);
 
+            API.AppDomainInitializer.InitializeFrom(_container);
+
             _applicationScope = _container.BeginLifetimeScope();
 
             ValidateConfig();

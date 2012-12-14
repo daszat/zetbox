@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.Server
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -24,5 +24,19 @@ namespace Zetbox.Server
     public interface IAppDomainInitializer
     {
         void Initialize(ILifetimeScope container);
+    }
+
+    public static class AppDomainInitializer
+    {
+        /// <summary>
+        /// Call all registered IAppDomainInitializer implementors.
+        /// </summary>
+        public static void InitializeFrom(IContainer container)
+        {
+            foreach (var initializer in container.Resolve<IEnumerable<IAppDomainInitializer>>())
+            {
+                initializer.Initialize(container);
+            }
+        }
     }
 }

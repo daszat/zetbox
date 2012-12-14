@@ -157,6 +157,7 @@ namespace Zetbox.Client.WPF
             }
 
             container = CreateMasterContainer(config);
+            API.AppDomainInitializer.InitializeFrom(container);
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
 

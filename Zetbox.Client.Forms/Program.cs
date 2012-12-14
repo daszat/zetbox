@@ -41,6 +41,7 @@ namespace Zetbox.Client.Forms
 
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
             container = builder.Build();
+            API.AppDomainInitializer.InitializeFrom(container);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -93,7 +93,6 @@
     <Compile Include="BootstrapperService.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HtpasswdIdentitySource.cs" />
-    <Compile Include="IAppDomainInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZetboxService.cs" />
     <None Include="packages.config" />

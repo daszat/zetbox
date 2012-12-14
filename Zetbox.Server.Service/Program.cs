@@ -137,7 +137,7 @@ namespace Zetbox.Server.Service
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
 
             var container = builder.Build();
-            Zetbox.Server.Helper.InitializeAppDomain(container);
+            API.AppDomainInitializer.InitializeFrom(container);
             return container;
         }
 

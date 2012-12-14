@@ -54,7 +54,7 @@ namespace Zetbox.Server.HttpService
             // Store root container for WCF & ASP.NET
             var container = builder.Build();
 
-            Zetbox.Server.Helper.InitializeAppDomain(container);
+            API.AppDomainInitializer.InitializeFrom(container);
 
             _containerProvider = new ContainerProvider(container);
         }

@@ -62,16 +62,5 @@ namespace Zetbox.Server
 #endif
             }
         }
-
-        /// <summary>
-        /// Call all registered IAppDomainInitializer implementors.
-        /// </summary>
-        public static void InitializeAppDomain(IContainer container)
-        {
-            foreach (var initializer in container.Resolve<IEnumerable<IAppDomainInitializer>>())
-            {
-                initializer.Initialize(container);
-            }
-        }
     }
 }

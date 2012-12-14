@@ -90,6 +90,7 @@
     <Compile Include="FrozenContext.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HostType.cs" />
+    <Compile Include="IAppDomainInitializer.cs" />
     <Compile Include="ICustomActions.cs" />
     <Compile Include="IDataObject.cs" />
     <Compile Include="IFileOpener.cs" />

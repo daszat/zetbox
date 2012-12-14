@@ -21,6 +21,7 @@ namespace Zetbox.Server.Wcf
     using System.Text;
     using Autofac;
     using Autofac.Integration.Wcf;
+    using Zetbox.API;
 
     public class WcfAppDomainInitializer : IAppDomainInitializer
     {

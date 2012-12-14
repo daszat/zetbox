@@ -123,6 +123,7 @@ namespace Zetbox.API.AbstractConsumerTests
 
         protected virtual void SetUp(IContainer container)
         {
+            API.AppDomainInitializer.InitializeFrom(container);
             var config = container.Resolve<ZetboxConfig>();
             if (config.Server != null)
             {
