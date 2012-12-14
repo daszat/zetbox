@@ -101,9 +101,9 @@
       <Project>{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}</Project>
       <Name>Zetbox.DalProvider.ClientObjects.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zetbox.DalProvider.EF.Tests\Zetbox.DalProvider.Ef.Tests.csproj">
+    <ProjectReference Include="..\Zetbox.DalProvider.EF.Tests\Zetbox.DalProvider.EF.Tests.csproj">
       <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666F}</Project>
-      <Name>Zetbox.DalProvider.Ef.Tests</Name>
+      <Name>Zetbox.DalProvider.EF.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.DalProvider.Memory.Tests\Zetbox.DalProvider.Memory.Tests.csproj">
       <Project>{CF5E170F-DC31-4AAE-AFFC-8BECA0B366EF}</Project>
