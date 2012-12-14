@@ -11,7 +11,7 @@
     <MSBuild Projects="Zetbox.Complete.sln" Targets="Rebuild" Properties="Configuration=Minimal" />
 
 	<!-- reset and generate -->
-    <Exec Command="!ResetDatabase Configs\$(zenv)\Zetbox.Server.Service.xml" />
+    <Exec Command="!ResetDatabase Configs\$(zenv)\Zetbox.Cli.xml" />
 
     <Message Importance="high" Text="Backup and remove old generated code" />
     <ItemGroup>

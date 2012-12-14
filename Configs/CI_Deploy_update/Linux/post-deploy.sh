@@ -1,3 +1,3 @@
 #!/bin/bash -e
 
-mono --debug ./Zetbox.Server.Service.exe --syncidentities
+mono --debug ./Zetbox.Cli.exe --syncidentities

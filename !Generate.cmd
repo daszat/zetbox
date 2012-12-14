@@ -5,7 +5,7 @@ echo Used if only frozen objects has changed during development.
 echo XXXXXXXXXXXXX Do not forget to publish changes before committing! XXXXXXXXXXXXXX
 echo ********************************************************************************
 
-set config=Configs\%zenv%\Zetbox.Server.Service.xml
+set config=Configs\%zenv%\Zetbox.Cli.xml
 
 if .%1. == .. GOTO GOON
 
@@ -13,7 +13,7 @@ set config=%1
 
 :GOON
 
-bin\Debug\Zetbox.Server.Service.exe %configs% -generate
+bin\Debug\Zetbox.Cli.exe %configs% -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

@@ -11,7 +11,7 @@ rem restrict /m to two cores, since msbuild is not able to build the solution wi
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /m:2 /v:m CCNet.msbuild
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\Debug\Zetbox.Server.Service.exe -syncidentities
+bin\Debug\Zetbox.Cli.exe -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem regenerate modules to prove roundtrippability
