@@ -3490,6 +3490,10 @@ namespace Zetbox {
                             }
                             public static class Muhblah_Properties
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> StringCollection
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b89fc0d2-8603-40d7-8649-61431a9fb09b"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> TestBool
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("9206e71e-85ea-4d74-85ea-59ee2484ed2a"); }

@@ -625,6 +625,11 @@
         </id>
 
         <!-- define the properties -->
+        <!-- ValueTypeProperty isList -->
+        <set name="StringCollection"  inverse="true" batch-size="100">
+            <key column="`fk_Muhblah`" />
+            <one-to-many class="Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl+Muhblah_StringCollection_CollectionEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
         <!-- ValueTypeProperty isValue -->
         <property name="TestBool" 
                   column="`TestBool`" 

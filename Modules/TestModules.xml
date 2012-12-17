@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-11-07T12:38:54Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-12-17T14:07:41Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -5515,6 +5515,41 @@ public static void isValid_StringProp(MethodTest obj, PropertyIsValidEventArgs e
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:StringProperty ExportGuid="b89fc0d2-8603-40d7-8649-61431a9fb09b">
+    <ZetboxBase:ChangedOn>2012-12-17T13:07:41.725115Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_StringCollection(Muhblah obj, PropertyGetterEventArgs&lt;ICollection&lt;string&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StringCollection(Muhblah obj, PropertyPreSetterEventArgs&lt;ICollection&lt;string&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StringCollection(Muhblah obj, PropertyPostSetterEventArgs&lt;ICollection&lt;string&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StringCollection(Muhblah obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StringCollection == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-12-17T13:07:41.725115Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StringCollection</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>fd357e42-2c2c-4bef-8110-69a466d09af0</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>801</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>88ce02bf-fc40-4227-a7b5-28f6385efa1b</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>true</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:BoolProperty ExportGuid="9206e71e-85ea-4d74-85ea-59ee2484ed2a">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>

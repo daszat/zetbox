@@ -3133,6 +3133,14 @@ using Zetbox.DalProvider.Ef;
     )]
 
 
+// object-value association
+[assembly: EdmRelationship(
+    "Model", "FK_Muhblah_value_StringCollection",
+    "Muhblah", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.MuhblahEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl)
+    )]
+
+
 
 // object-struct association
 [assembly: EdmRelationship(

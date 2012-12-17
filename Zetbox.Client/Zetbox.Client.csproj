@@ -461,6 +461,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.de.resx">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

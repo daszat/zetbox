@@ -5204,6 +5204,25 @@
       </EndProperty>
       <Condition ColumnName="fk_Kunde" IsNull="false"/>
     </AssociationSetMapping>
+    <EntitySetMapping Name="Muhblah_StringCollection_CollectionEntryEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Muhblah_StringCollection_CollectionEntryEfImpl)">
+        <MappingFragment StoreEntitySet="Muhblah_StringCollection_CollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Value" ColumnName="StringCollection" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Muhblah_value_StringCollection"
+                           TypeName="Model.FK_Muhblah_value_StringCollection"
+                           StoreEntitySet="Muhblah_StringCollection_CollectionEntry" >
+      <EndProperty Name="Muhblah">
+        <ScalarProperty Name="ID" ColumnName="fk_Muhblah"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Muhblah" IsNull="false"/>
+    </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->
     <EntitySetMapping Name="Projekt_AuditJournal_CollectionEntryEfImpl">

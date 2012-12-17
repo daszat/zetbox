@@ -8438,6 +8438,242 @@ namespace Zetbox.App.Projekte
     // END Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
 }
 
+namespace Zetbox.App.Test
+{
+    // BEGIN Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    [System.Diagnostics.DebuggerDisplay("Muhblah_StringCollection_CollectionEntryMemoryImpl")]
+    public class Muhblah_StringCollection_CollectionEntryMemoryImpl : Zetbox.DalProvider.Memory.ValueCollectionEntryMemoryImpl<Zetbox.App.Test.Muhblah, Zetbox.App.Test.MuhblahMemoryImpl, string>, Muhblah_StringCollection_CollectionEntry
+    {
+        [Obsolete]
+        public Muhblah_StringCollection_CollectionEntryMemoryImpl()
+            : base(null)
+        {
+        }
+
+        public Muhblah_StringCollection_CollectionEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+        // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
+            }
+        }
+        private int _ID;
+        // END Zetbox.Generator.Templates.Properties.IdProperty
+        private static readonly Guid _propertyID = new Guid("b89fc0d2-8603-40d7-8649-61431a9fb09b");
+        public override Guid PropertyID { get { return _propertyID; } }
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        public Zetbox.App.Test.Muhblah Parent
+        {
+            get
+            {
+                if (_ParentCache != null && _ParentCache.ID == _fk_Parent)
+                    return _ParentCache;
+
+                if (_fk_Parent.HasValue)
+                    _ParentCache = this.Context.Find<Zetbox.App.Test.Muhblah>(_fk_Parent.Value);
+                else
+                    _ParentCache = null;
+
+                return _ParentCache;
+            }
+            set
+            {
+                if (value == null && !_fk_Parent.HasValue)
+                    return;
+                if (value != null && _fk_Parent.HasValue && value.ID == _fk_Parent.Value)
+                    return;
+
+                _ParentCache = value;
+                if (value != null)
+                    fk_Parent = value.ID;
+                else
+                    fk_Parent = null;
+            }
+        }
+        private Zetbox.App.Test.Muhblah _ParentCache;
+
+        public int? fk_Parent
+        {
+            get
+            {
+                return _fk_Parent;
+            }
+            set
+            {
+                if (_fk_Parent != value)
+                {
+                    var __oldValue = _fk_Parent;
+                    NotifyPropertyChanging("Parent", __oldValue, value);
+                    _fk_Parent = value;
+                    NotifyPropertyChanged("Parent", __oldValue, value);
+                }
+            }
+        }
+
+        // backing store for serialization
+        private int? _fk_Parent;
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
+        {
+            get { return Parent; }
+            set { Parent = (Zetbox.App.Test.MuhblahMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
+        public string Value
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Value;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Value != value)
+                {
+                    var __oldValue = _Value;
+                    var __newValue = value;
+                    NotifyPropertyChanging("Value", __oldValue, __newValue);
+                    _Value = __newValue;
+                    NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+				else 
+				{
+					SetInitializedProperty("Value");
+				}
+            }
+        }
+        private string _Value;
+        // END Zetbox.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public object ValueObject
+        {
+            get { return Value; }
+            set { Value = (string)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this._fk_Parent);
+            binStream.Write(this._Value);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._fk_Parent = binStream.ReadNullableInt32();
+            this._Value = binStream.ReadString();
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Muhblah_StringCollection_CollectionEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (Muhblah_StringCollection_CollectionEntryMemoryImpl)obj;
+            var me = (Muhblah_StringCollection_CollectionEntryMemoryImpl)this;
+
+            me._fk_Parent = other._fk_Parent;
+            me.Value = other.Value;
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_Parent.HasValue)
+                Parent = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_Parent.Value);
+            else
+                Parent = null;
+
+        }
+
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
+                case "Parent":
+                    {
+                        var __oldValue = _fk_Parent;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                        _fk_Parent = __newValue;
+                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    }
+                    break;
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
+    }
+    // END Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
+}
+
 namespace Zetbox.App.Projekte
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry

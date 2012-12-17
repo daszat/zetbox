@@ -8167,6 +8167,286 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
     // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
 }
 
+namespace Zetbox.App.Test
+{
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    [EdmEntityType(NamespaceName="Model", Name="Muhblah_StringCollection_CollectionEntryEfImpl")]
+    [System.Diagnostics.DebuggerDisplay("Muhblah_StringCollection_CollectionEntryEfImpl")]
+    public class Muhblah_StringCollection_CollectionEntryEfImpl : Zetbox.DalProvider.Ef.ValueCollectionEntryEfImpl<Zetbox.App.Test.Muhblah, Zetbox.App.Test.MuhblahEfImpl, string>, Muhblah_StringCollection_CollectionEntry
+    {
+[Obsolete]
+public Muhblah_StringCollection_CollectionEntryEfImpl()
+: base(null)
+{
+}
+public Muhblah_StringCollection_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
+    : base(lazyCtx)
+{
+}
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
+            }
+        }
+        private int _ID;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        private static readonly Guid _propertyID = new Guid("b89fc0d2-8603-40d7-8649-61431a9fb09b");
+        public override Guid PropertyID { get { return _propertyID; } }
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // fkBackingName=_fk_Parent; fkGuidBackingName=;
+        // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
+        // inverse Navigator=StringCollection; is list;
+        // PositionStorage=none;
+        // Target not exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.Test.Muhblah Parent
+        {
+            get { return ParentImpl; }
+            set { ParentImpl = (Zetbox.App.Test.MuhblahEfImpl)value; }
+        }
+
+        private int? _fk_Parent;
+
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_value_StringCollection", "Muhblah")]
+        public Zetbox.App.Test.MuhblahEfImpl ParentImpl
+        {
+            get
+            {
+                Zetbox.App.Test.MuhblahEfImpl __value;
+                EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>(
+                        "Model.FK_Muhblah_value_StringCollection",
+                        "Muhblah");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>(
+                        "Model.FK_Muhblah_value_StringCollection",
+                        "Muhblah");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Zetbox.App.Test.MuhblahEfImpl __oldValue = (Zetbox.App.Test.MuhblahEfImpl)r.Value;
+                Zetbox.App.Test.MuhblahEfImpl __newValue = (Zetbox.App.Test.MuhblahEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                if (__oldValue != null) {
+                    __oldValue.NotifyPropertyChanging("StringCollection", null, null);
+                }
+                if (__newValue != null) {
+                    __newValue.NotifyPropertyChanging("StringCollection", null, null);
+                }
+
+                r.Value = (Zetbox.App.Test.MuhblahEfImpl)__newValue;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                if (__oldValue != null) {
+                    __oldValue.NotifyPropertyChanged("StringCollection", null, null);
+                }
+                if (__newValue != null) {
+                    __newValue.NotifyPropertyChanged("StringCollection", null, null);
+                }
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
+        {
+            get { return Parent; }
+            set { Parent = (Zetbox.App.Test.MuhblahEfImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public string Value
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Value;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Value != value)
+                {
+                    var __oldValue = _Value;
+                    var __newValue = value;
+                    NotifyPropertyChanging("Value", __oldValue, __newValue);
+                    _Value = __newValue;
+                    NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+				else 
+				{
+					SetInitializedProperty("Value");
+				}
+            }
+        }
+        private string _Value_store;
+        private string _Value {
+            get { return _Value_store; }
+            set {
+                ReportEfPropertyChanging("Value");
+                _Value_store = value;
+                ReportEfPropertyChanged("Value");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public object ValueObject
+        {
+            get { return Value; }
+            set { Value = (string)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_Muhblah_value_StringCollection", "Muhblah").EntityKey;
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+            }
+            binStream.Write(this._Value);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.Read(out this._fk_Parent);
+            this._Value = binStream.ReadString();
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Muhblah_StringCollection_CollectionEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (Muhblah_StringCollection_CollectionEntryEfImpl)obj;
+            var me = (Muhblah_StringCollection_CollectionEntryEfImpl)this;
+
+            me._fk_Parent = other._fk_Parent;
+            me.Value = other.Value;
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_Parent.HasValue)
+                Parent = (Zetbox.App.Test.MuhblahEfImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_Parent.Value);
+            else
+                Parent = null;
+
+        }
+
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
+                case "Parent":
+                    {
+                        var __oldValue = _fk_Parent;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                        _fk_Parent = __newValue;
+                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    }
+                    break;
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
+    }
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
+}
+
 namespace Zetbox.App.Projekte
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry

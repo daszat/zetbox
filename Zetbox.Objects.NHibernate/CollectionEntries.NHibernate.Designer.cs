@@ -8127,6 +8127,298 @@ namespace Zetbox.App.Projekte
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
 }
 
+namespace Zetbox.App.Test
+{
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    [System.Diagnostics.DebuggerDisplay("Muhblah_StringCollection_CollectionEntryNHibernateImpl")]
+    public class Muhblah_StringCollection_CollectionEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.ValueCollectionEntryNHibernateImpl<Zetbox.App.Test.Muhblah, Zetbox.App.Test.MuhblahNHibernateImpl, string>, Muhblah_StringCollection_CollectionEntry
+    {
+        public Muhblah_StringCollection_CollectionEntryNHibernateImpl()
+            : this(null)
+        {
+        }
+
+        /// <summary>Create a new unattached instance</summary>
+        public Muhblah_StringCollection_CollectionEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new Muhblah_StringCollection_CollectionEntryProxy())
+        {
+        }
+
+        /// <summary>Create a instance, wrapping the specified proxy</summary>
+        public Muhblah_StringCollection_CollectionEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, Muhblah_StringCollection_CollectionEntryProxy proxy)
+            : base(lazyCtx) // do not pass proxy to base data object
+        {
+            this.Proxy = proxy;
+        }
+
+        /// <summary>the NHibernate proxy of the represented entity</summary>
+        internal readonly Muhblah_StringCollection_CollectionEntryProxy Proxy;
+        private static readonly Guid _propertyID = new Guid("b89fc0d2-8603-40d7-8649-61431a9fb09b");
+        public override Guid PropertyID { get { return _propertyID; } }
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // fkBackingName=this.Proxy.Parent; fkGuidBackingName=unused;
+        // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
+        // inverse Navigator=StringCollection; is list;
+        // PositionStorage=none;
+        // Target not exportable; does not call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.Test.Muhblah Parent
+        {
+            get
+            {
+                Zetbox.App.Test.MuhblahNHibernateImpl __value = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+
+
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.Parent == null)
+				{
+					SetInitializedProperty("Parent");
+                    return;
+				}
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                var __newValue = (Zetbox.App.Test.MuhblahNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Parent");
+                    return;
+				}
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("Parent", __oldValue, __newValue);
+
+                if (__oldValue != null) {
+                    __oldValue.NotifyPropertyChanging("StringCollection", null, null);
+                }
+                if (__newValue != null) {
+                    __newValue.NotifyPropertyChanging("StringCollection", null, null);
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.Parent = null;
+                }
+                else
+                {
+                    this.Proxy.Parent = __newValue.Proxy;
+                }
+
+                // now fixup redundant, inverse references
+                // The inverse navigator will also fire events when changed, so should
+                // only be touched after setting the local value above.
+                // TODO: for complete correctness, the "other" Changing event should also fire
+                //       before the local value is changed
+                if (__oldValue != null)
+                {
+                    // remove from old list
+                    (__oldValue.StringCollection as IRelationListSync<Muhblah_StringCollection_CollectionEntry>).RemoveWithoutClearParent(this);
+                }
+
+                if (__newValue != null)
+                {
+                    // add to new list
+                    (__newValue.StringCollection as IRelationListSync<Muhblah_StringCollection_CollectionEntry>).AddWithoutSetParent(this);
+                }
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+            }
+        }
+
+        /// <summary>Backing store for Parent's id, used on dehydration only</summary>
+        private int? _fk_Parent = null;
+
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
+        {
+            get { return Parent; }
+            set { Parent = (Zetbox.App.Test.MuhblahNHibernateImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        public virtual string Value
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.Value;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.Value != value)
+                {
+                    var __oldValue = Proxy.Value;
+                    var __newValue = value;
+                    NotifyPropertyChanging("Value", __oldValue, __newValue);
+                    Proxy.Value = __newValue;
+                    NotifyPropertyChanged("Value", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+				else 
+				{
+					SetInitializedProperty("Value");
+				}
+            }
+        }
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public object ValueObject
+        {
+            get { return Value; }
+            set { Value = (string)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this.Proxy.Parent != null ? OurContext.GetIdFromProxy(this.Proxy.Parent) : (int?)null);
+            binStream.Write(this.Proxy.Value);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.Read(out this._fk_Parent);
+            this.Proxy.Value = binStream.ReadString();
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Muhblah_StringCollection_CollectionEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (Muhblah_StringCollection_CollectionEntryNHibernateImpl)obj;
+            var me = (Muhblah_StringCollection_CollectionEntryNHibernateImpl)this;
+
+            me._fk_Parent = other._fk_Parent;
+            me.Value = other.Value;
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_Parent.HasValue)
+                this.Parent = ((Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.Muhblah>(_fk_Parent.Value));
+            else
+                this.Parent = null;
+
+        }
+
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
+                case "Parent":
+                    {
+                        var __oldValue = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                        var __newValue = (Zetbox.App.Test.MuhblahNHibernateImpl)parentObj;
+                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                        this.Proxy.Parent = __newValue == null ? null : __newValue.Proxy;
+                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    }
+                    break;
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
+        public override void SaveOrUpdateTo(NHibernate.ISession session)
+        {
+            // ValueCollectionEntries and CompoundCollectionEntries are saved by cascade
+            //base.SaveOrUpdateTo(session);
+        }
+
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow Parent
+            if (this.Parent != null && this.Parent.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.Parent);
+
+            return result;
+        }
+
+        public class Muhblah_StringCollection_CollectionEntryProxy
+            : IProxyObject, ISortKey<int>
+        {
+            public Muhblah_StringCollection_CollectionEntryProxy()
+            {
+            }
+
+            public virtual int ID { get; set; }
+
+            public virtual Type ZetboxWrapper { get { return typeof(Muhblah_StringCollection_CollectionEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(Muhblah_StringCollection_CollectionEntryProxy); } }
+
+            public virtual Zetbox.App.Test.MuhblahNHibernateImpl.MuhblahProxy Parent { get; set; }
+
+            public virtual bool ValueIsNull { get; set; }
+
+            public virtual string Value { get; set; }
+
+        }
+
+        // make proxy available for the provider
+        public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
+}
+
 namespace Zetbox.App.Projekte
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry

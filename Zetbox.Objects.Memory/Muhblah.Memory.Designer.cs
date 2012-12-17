@@ -40,6 +40,34 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
+        // value list property
+		// Zetbox.Generator.Templates.Properties.ValueCollectionProperty
+		public ICollection<string> StringCollection
+		{
+			get
+			{
+				if (_StringCollection == null)
+				{
+				    _StringCollection 
+				        = new ClientValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntry, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl>>(
+							this.Context,
+				            this, 
+				            () => { this.NotifyPropertyChanged("StringCollection", null, null); if(OnStringCollection_PostSetter != null && IsAttached) OnStringCollection_PostSetter(this); },
+				            _StringCollectionCollection);
+				}
+				return _StringCollection;
+			}
+		}
+
+		private ClientValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntry, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl>> _StringCollection;
+		private ObservableCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl> _StringCollectionCollection = new ObservableCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl>();
+public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnStringCollection_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.Muhblah> OnStringCollection_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
         public bool? TestBool
@@ -641,6 +669,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             var otherImpl = (MuhblahMemoryImpl)obj;
             var me = (Muhblah)this;
 
+            SynchronizeCollections(this._StringCollectionCollection, otherImpl._StringCollectionCollection);
             me.TestBool = other.TestBool;
             me.TestDateTime = other.TestDateTime;
             me.TestEnum = other.TestEnum;
@@ -762,6 +791,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<Muhblah, ICollection<string>>(
+                        lazyCtx,
+                        new Guid("b89fc0d2-8603-40d7-8649-61431a9fb09b"),
+                        "StringCollection",
+                        null,
+                        obj => obj.StringCollection,
+                        null, // lists are read-only properties
+                        obj => OnStringCollection_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Muhblah, bool?>(
                         lazyCtx,
@@ -913,6 +951,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
+            StringCollection.Clear();
             TestCustomObjects_List_Nav.Clear();
             TestCustomObjects_ManyList_Nav.Clear();
             TestCustomObjects_Nav = null;
@@ -930,6 +969,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this._StringCollectionCollection);
             binStream.Write(this._TestBool);
             binStream.Write(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null);
             binStream.Write(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null);
@@ -944,6 +984,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.ReadCollectionEntries(this, this._StringCollectionCollection);
             this._TestBool = binStream.ReadNullableBoolean();
             this._fk_TestCustomObjects_Nav = binStream.ReadNullableInt32();
             this._fk_TestCustomObjects_One_Nav = binStream.ReadNullableInt32();

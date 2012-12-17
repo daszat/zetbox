@@ -1560,6 +1560,12 @@
       <End Role="CollectionEntry" EntitySet="Kunde_EMails_CollectionEntry" />
     </AssociationSet>
     
+    <EntitySet Name="Muhblah_StringCollection_CollectionEntry" EntityType="Model.Store.Muhblah_StringCollection_CollectionEntry" Schema="test" Table="Muhblas_StringCollectionCollection" />
+    <AssociationSet Name="FK_Muhblah_value_StringCollection" Association="Model.Store.FK_Muhblah_value_StringCollection" >
+      <End Role="Muhblah" EntitySet="Muhblah" />
+      <End Role="CollectionEntry" EntitySet="Muhblah_StringCollection_CollectionEntry" />
+    </AssociationSet>
+    
 
     <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
     <EntitySet Name="Projekt_AuditJournal_CollectionEntry" EntityType="Model.Store.Projekt_AuditJournal_CollectionEntry" Schema="projekte" Table="Projekte_AuditJournalCollection" />
@@ -7356,6 +7362,30 @@
         </Principal>
         <Dependent Role="CollectionEntry">
           <PropertyRef Name="fk_Kunde" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+
+    <EntityType Name="Muhblah_StringCollection_CollectionEntry" >
+      <Key>
+        <PropertyRef Name="ID" />
+      </Key>
+      <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_Muhblah" Type="int" Nullable="true" />
+      <Property Name="StringCollection" Type="nvarchar" MaxLength="1000" />
+    </EntityType>
+
+    <Association Name="FK_Muhblah_value_StringCollection">
+      <End Role="Muhblah" Type="Model.Store.Muhblah" Multiplicity="0..1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="CollectionEntry" Type="Model.Store.Muhblah_StringCollection_CollectionEntry" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="Muhblah">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CollectionEntry">
+          <PropertyRef Name="fk_Muhblah" />
         </Dependent>
       </ReferentialConstraint>
     </Association>

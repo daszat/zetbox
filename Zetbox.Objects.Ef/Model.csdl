@@ -274,6 +274,11 @@
       <End Role="Kunde" EntitySet="KundeEfImpl" />
       <End Role="CollectionEntry" EntitySet="Kunde_EMails_CollectionEntryEfImpl" />
     </AssociationSet>
+    <EntitySet Name="Muhblah_StringCollection_CollectionEntryEfImpl" EntityType="Model.Muhblah_StringCollection_CollectionEntryEfImpl" />
+    <AssociationSet Name="FK_Muhblah_value_StringCollection" Association="Model.FK_Muhblah_value_StringCollection" >
+      <End Role="Muhblah" EntitySet="MuhblahEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Muhblah_StringCollection_CollectionEntryEfImpl" />
+    </AssociationSet>
 
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
     <EntitySet Name="Projekt_AuditJournal_CollectionEntryEfImpl" EntityType="Model.Projekt_AuditJournal_CollectionEntryEfImpl" />
@@ -1850,6 +1855,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="StringCollectionImpl"
+                        Relationship="Model.FK_Muhblah_value_StringCollection"
+                        FromRole="Muhblah"
+                        ToRole="CollectionEntry" />
     <Property Name="TestBool" Type="Boolean" Nullable="true"  />
     <NavigationProperty Name="TestCustomObjects_List_NavImpl"
                         Relationship="Model.FK_MB_Role_has_TCO_Lst_Role"
@@ -3896,6 +3905,29 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.Kunde_EMails_CollectionEntryEfImpl" 
+         Multiplicity="*" />
+  </Association>
+  <!-- Muhblah.StringCollection -->
+  <EntityType Name="Muhblah_StringCollection_CollectionEntryEfImpl" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="ParentImpl"
+                        Relationship="Model.FK_Muhblah_value_StringCollection"
+                        FromRole="CollectionEntry"
+                        ToRole="Muhblah" />
+    <!-- B -->
+    <Property Name="Value" Type="String" Nullable="true" MaxLength="1000"  />
+  </EntityType>
+  <Association Name="FK_Muhblah_value_StringCollection" >
+    <End Role="Muhblah"
+         Type="Model.MuhblahEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Muhblah_StringCollection_CollectionEntryEfImpl" 
          Multiplicity="*" />
   </Association>
 

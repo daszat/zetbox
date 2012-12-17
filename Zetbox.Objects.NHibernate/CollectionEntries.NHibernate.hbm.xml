@@ -384,6 +384,26 @@
         -->
     </class>
 
+    <class name="Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl+Muhblah_StringCollection_CollectionEntryProxy"
+           proxy="Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl+Muhblah_StringCollection_CollectionEntryProxy"
+           table="`Muhblas_StringCollectionCollection`"
+           schema="`test`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`Muhblas_StringCollectionCollection_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="Parent"
+                     column="`fk_Muhblah`" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="Value" 
+                  column="`StringCollection`" 
+                  optimistic-lock="false"/>
+    </class>
+
     <!-- CompoundObjectCollectionEntries -->
     <class name="Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl+Projekt_AuditJournal_CollectionEntryProxy"
            proxy="Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl+Projekt_AuditJournal_CollectionEntryProxy"

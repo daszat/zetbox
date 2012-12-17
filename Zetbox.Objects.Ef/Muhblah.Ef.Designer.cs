@@ -43,6 +43,52 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
+        // value list property
+   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<string> StringCollection
+        {
+            get
+            {
+                if (_StringCollection == null)
+                {
+                    _StringCollection = new EfValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>>(
+						this.Context,
+                        this,
+              			() => { this.NotifyPropertyChanged("StringCollection", null, null); if(OnStringCollection_PostSetter != null && IsAttached) OnStringCollection_PostSetter(this); },
+          	            StringCollectionImpl);
+                }
+                return _StringCollection;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_value_StringCollection", "CollectionEntry")]
+        public EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl> StringCollectionImpl
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>(
+                        "Model.FK_Muhblah_value_StringCollection",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EfValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>> _StringCollection;
+public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnStringCollection_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.Muhblah> OnStringCollection_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // value type property
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
         [XmlIgnore()]
@@ -748,6 +794,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorEfImpl<Muhblah, ICollection<string>>(
+                        lazyCtx,
+                        new Guid("b89fc0d2-8603-40d7-8649-61431a9fb09b"),
+                        "StringCollection",
+                        null,
+                        obj => obj.StringCollection,
+                        null, // lists are read-only properties
+                        obj => OnStringCollection_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Muhblah, bool?>(
                         lazyCtx,
@@ -899,6 +954,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
+            StringCollection.Clear();
             TestCustomObjects_List_Nav.Clear();
             TestCustomObjects_ManyList_Nav.Clear();
             TestCustomObjects_Nav = null;
@@ -948,6 +1004,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this.StringCollectionImpl);
             binStream.Write(this._TestBool);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_Lst_Role_hasOther_TCO_Role", "TCO_Role").EntityKey;
