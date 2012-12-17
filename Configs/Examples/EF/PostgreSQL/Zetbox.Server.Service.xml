@@ -6,12 +6,6 @@
       <Database Name="Zetbox" Schema="POSTGRESQL" Provider="Npgsql">Server=localhost;Port=5432;Database=zetbox;User Id=zetbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
-    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
-    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
-    <CodeGenBinaryOutputPath>
-      <string>bin\Debug</string>
-    </CodeGenBinaryOutputPath>
-    <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
       <Module>Zetbox.Server.UnifiedModule, Zetbox.Server</Module>
 
@@ -20,13 +14,6 @@
 
       <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
-
-      <!-- Development/Master Server modules -->
-      <Module>Zetbox.Generator.GeneratorModule, Zetbox.Generator</Module>
-      <Module>Zetbox.DalProvider.Memory.Generator.MemoryGeneratorProvider, Zetbox.DalProvider.Memory.Generator</Module>
-      <Module>Zetbox.DalProvider.NHibernate.Generator.NHibernateGeneratorProvider, Zetbox.DalProvider.NHibernate.Generator</Module>
-      <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
-      <Module>Zetbox.DalProvider.Ef.Generator.EfGeneratorProvider, Zetbox.DalProvider.Ef.Generator</Module>
 
       <Module>Zetbox.API.Server.PerfCounter.PerfMonAppender+Module, Zetbox.API.Server</Module>
       <!-- WCF Module for local testing, every deployment (jenkins also) uses http (iis or apache) -->
