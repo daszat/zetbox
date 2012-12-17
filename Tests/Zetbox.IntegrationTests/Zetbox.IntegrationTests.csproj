@@ -114,6 +114,7 @@
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
     <Compile Include="Tests\PersistenceObjects\when_loaded.cs" />
     <Compile Include="Tests\Presentables\ObjectReferenceModels\should_present_underlying_property_as_value.cs" />
+    <Compile Include="Tests\Presentables\Properties\should_have_models.cs" />
     <Compile Include="Tests\RelationDefinitionTests.cs" />
     <Compile Include="Tests\RelationTests.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
