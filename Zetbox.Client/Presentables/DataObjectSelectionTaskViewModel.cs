@@ -179,7 +179,7 @@ namespace Zetbox.Client.Presentables
 
         public override string Name
         {
-            get { return string.Format(DataObjectSelectionTaskViewModelResources.Name, ListViewModel.DataTypeViewModel.Name); }
+            get { return string.Format(DataObjectSelectionTaskViewModelResources.Name, ListViewModel.DataTypeViewModel.DescribedType); }
         }
     }
 }
