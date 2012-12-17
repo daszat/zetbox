@@ -21,6 +21,8 @@ IF ERRORLEVEL 1 GOTO FAIL
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m Zetbox.Complete.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
+IF NOT EXIST bin\Debug\Configs XCOPY /S/E Configs bin\Debug\Configs\
+
 GOTO EOF
 
 :FAIL
