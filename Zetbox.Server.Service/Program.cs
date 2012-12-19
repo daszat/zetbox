@@ -56,7 +56,7 @@ namespace Zetbox.Server.Service
                 {
                     consoleMode = false;
                 }
-                if (arguments.Length == 1)
+                else if (arguments.Length == 1)
                 {
                     switch (arguments[0])
                     {
