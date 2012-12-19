@@ -37,6 +37,7 @@ namespace Zetbox.IntegrationTests.Presentables.Properties
                 if (setupCtx.GetQuery<Muhblah>().FirstOrDefault() == null)
                 {
                     var testObj = setupCtx.Create<Muhblah>();
+                    Assert.That(testObj, Is.Not.Null);
                     setupCtx.SubmitChanges();
                 }
             }
