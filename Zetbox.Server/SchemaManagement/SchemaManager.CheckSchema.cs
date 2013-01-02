@@ -190,15 +190,18 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass != null).OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-                string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
-                var tblName = objClass.GetTableRef(db);
-                if (!db.CheckFKConstraintExists(tblName, assocName))
+                if (objClass.GetTableMapping() == TableMapping.TPT)
                 {
-                    Log.WarnFormat("FK Constraint to BaseClass is missing on Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-                    if (repair)
+                    Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+                    string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
+                    var tblName = objClass.GetTableRef(db);
+                    if (!db.CheckFKConstraintExists(tblName, assocName))
                     {
-                        Case.DoNewObjectClassInheritance(objClass);
+                        Log.WarnFormat("FK Constraint to BaseClass is missing on Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+                        if (repair)
+                        {
+                            Case.DoNewObjectClassInheritance(objClass);
+                        }
                     }
                 }
             }
@@ -762,7 +765,7 @@ namespace Zetbox.Server.SchemaManagement
             {
                 // TODO: Add DataType Check
                 {
-                    bool colIsNullable = db.GetIsColumnNullable(tblName, colName);
+                    var colIsNullable = db.GetIsColumnNullable(tblName, colName);
                     if (colIsNullable != isNullable)
                     {
                         Log.WarnFormat("Column '{0}'.'{1}' nullable mismatch. Column is {2} but should be {3}", tblName, colName,
@@ -864,7 +867,11 @@ namespace Zetbox.Server.SchemaManagement
                 var tblName = objClass.GetTableRef(db);
                 var colName = Construct.NestedColumnName(prop, prefix);
                 Log.DebugFormat("    {0}", colName);
-                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), SchemaManager.GetDefaultConstraint(prop));
+
+                var realIsNullable = prop.IsNullable();
+                if (realIsNullable == false)
+                    realIsNullable = objClass.GetTableMapping() == TableMapping.TPH && objClass.BaseObjectClass != null;
+                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), realIsNullable, SchemaManager.GetDefaultConstraint(prop));
             }
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
