@@ -254,6 +254,7 @@
     <Compile Include="MappingStatus.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />
     <Compile Include="StorageType.Interface.Designer.cs" />
+    <Compile Include="TableMapping.Interface.Designer.cs" />
     <Compile Include="TestEnum.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />
     <Compile Include="WidthHint.Interface.Designer.cs" />

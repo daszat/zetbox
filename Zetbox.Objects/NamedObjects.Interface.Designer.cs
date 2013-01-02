@@ -1396,6 +1396,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("0914de6e-966c-46fc-9359-e4da6c3608b1"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> TableMapping
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("8002bbe3-68b6-475b-b929-398744cc2398"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> TableName
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("2a5e5111-199c-4dce-8369-ce35ee741568"); }

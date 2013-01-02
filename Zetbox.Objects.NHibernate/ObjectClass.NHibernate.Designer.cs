@@ -44,8 +44,8 @@ namespace Zetbox.App.Base
         {
             this.Proxy = proxy;
             _isIsSimpleObjectSet = Proxy.ID > 0;
-            _isIsFrozenObjectSet = Proxy.ID > 0;
             _isIsAbstractSet = Proxy.ID > 0;
+            _isIsFrozenObjectSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -657,6 +657,64 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_IsValid;
 
         /// <summary>
+        /// Kind of table mapping. Only valid on base classes. Default is TPT.
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public Zetbox.App.Base.TableMapping? TableMapping
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.TableMapping;
+                if (OnTableMapping_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.TableMapping?>(__result);
+                    OnTableMapping_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.TableMapping != value)
+                {
+                    var __oldValue = Proxy.TableMapping;
+                    var __newValue = value;
+                    if (OnTableMapping_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TableMapping?>(__oldValue, __newValue);
+                        OnTableMapping_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("TableMapping", __oldValue, __newValue);
+                    Proxy.TableMapping = __newValue;
+                    NotifyPropertyChanged("TableMapping", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTableMapping_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TableMapping?>(__oldValue, __newValue);
+                        OnTableMapping_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("TableMapping");
+				}
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.TableMapping?> OnTableMapping_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.TableMapping?> OnTableMapping_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.TableMapping?> OnTableMapping_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnTableMapping_IsValid;
+
+        /// <summary>
         /// Tabellenname in der Datenbank
         /// </summary>
 
@@ -1173,6 +1231,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             me.IsAbstract = other.IsAbstract;
             me.IsFrozenObject = other.IsFrozenObject;
             me.IsSimpleObject = other.IsSimpleObject;
+            me.TableMapping = other.TableMapping;
             me.TableName = other.TableName;
             this._fk_BaseObjectClass = otherImpl._fk_BaseObjectClass;
             this._fk_DefaultViewModelDescriptor = otherImpl._fk_DefaultViewModelDescriptor;
@@ -1224,6 +1283,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 case "IsAbstract":
                 case "IsFrozenObject":
                 case "IsSimpleObject":
+                case "TableMapping":
                 case "TableName":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
@@ -1378,6 +1438,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         null, // lists are read-only properties
                         obj => OnSubClasses_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<ObjectClass, Zetbox.App.Base.TableMapping?>(
+                        lazyCtx,
+                        new Guid("8002bbe3-68b6-475b-b929-398744cc2398"),
+                        "TableMapping",
+                        null,
+                        obj => obj.TableMapping,
+                        (obj, val) => obj.TableMapping = val,
+						obj => OnTableMapping_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<ObjectClass, string>(
                         lazyCtx,
                         new Guid("2a5e5111-199c-4dce-8369-ce35ee741568"),
@@ -1455,6 +1524,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         {
             SetNotInitializedProperty("BaseObjectClass");
             SetNotInitializedProperty("DefaultViewModelDescriptor");
+            SetNotInitializedProperty("TableMapping");
             SetNotInitializedProperty("TableName");
             _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
@@ -1537,6 +1607,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
 
             public virtual ICollection<Zetbox.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy> SubClasses { get; set; }
 
+            public virtual Zetbox.App.Base.TableMapping? TableMapping { get; set; }
+
             public virtual string TableName { get; set; }
 
         }
@@ -1564,6 +1636,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (this._isIsSimpleObjectSet) {
                 binStream.Write(this.Proxy.IsSimpleObject);
             }
+            binStream.Write((int?)Proxy.TableMapping);
             binStream.Write(this.Proxy.TableName);
         }
 
@@ -1588,6 +1661,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (this._isIsSimpleObjectSet) {
                 this.Proxy.IsSimpleObject = binStream.ReadBoolean();
             }
+            Proxy.TableMapping = (Zetbox.App.Base.TableMapping?)binStream.ReadNullableInt32();
             this.Proxy.TableName = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -1611,6 +1685,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.IsFrozenObject, xml, "IsFrozenObject", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isIsSimpleObjectSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsSimpleObject, xml, "IsSimpleObject", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)Proxy.TableMapping, xml, "TableMapping", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.TableName, xml, "TableName", "Zetbox.App.Base");
         }
 
@@ -1644,6 +1719,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 this.Proxy.IsSimpleObject = XmlStreamer.ReadBoolean(xml);
                 this._isIsSimpleObjectSet = true;
                 break;
+            case "Zetbox.App.Base|TableMapping":
+                Proxy.TableMapping = (Zetbox.App.Base.TableMapping?)XmlStreamer.ReadNullableInt32(xml);
+               break;
             case "Zetbox.App.Base|TableName":
                 this.Proxy.TableName = XmlStreamer.ReadString(xml);
                 break;

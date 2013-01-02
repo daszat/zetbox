@@ -408,6 +408,7 @@
 <ScalarProperty Name="IsAbstract" ColumnName="IsAbstract" />
 <ScalarProperty Name="IsFrozenObject" ColumnName="IsFrozenObject" />
 <ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
+<ScalarProperty Name="TableMappingImpl" ColumnName="TableMapping" />
 <ScalarProperty Name="TableName" ColumnName="TableName" />
 	    </MappingFragment>
       </EntityTypeMapping>

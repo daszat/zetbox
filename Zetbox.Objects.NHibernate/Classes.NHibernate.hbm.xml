@@ -3418,6 +3418,10 @@
         </set>
 
         <!-- ValueTypeProperty isValue -->
+        <property name="TableMapping" 
+                  column="`TableMapping`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="TableName" 
                   column="`TableName`" 
                   optimistic-lock="false"/>

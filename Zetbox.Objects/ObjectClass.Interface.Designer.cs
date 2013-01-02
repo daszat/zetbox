@@ -89,6 +89,15 @@ namespace Zetbox.App.Base
         ICollection<Zetbox.App.Base.ObjectClass> SubClasses { get; }
 
         /// <summary>
+        /// Kind of table mapping. Only valid on base classes. Default is TPT.
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("8002bbe3-68b6-475b-b929-398744cc2398")]
+        Zetbox.App.Base.TableMapping? TableMapping {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Tabellenname in der Datenbank
         /// </summary>
         [Zetbox.API.DefinitionGuid("2a5e5111-199c-4dce-8369-ce35ee741568")]

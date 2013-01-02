@@ -2976,6 +2976,7 @@
                         Relationship="Model.FK_BaseObjectClass_has_SubClasses"
                         FromRole="BaseObjectClass"
                         ToRole="SubClasses" />
+    <Property Name="TableMappingImpl" Type="Int32" Nullable="true"  />
     <Property Name="TableName" Type="String" Nullable="false" MaxLength="100"  />
   </EntityType>
   <EntityType Name="ObjectClassFilterConfigurationEfImpl" BaseType="Model.FilterConfigurationEfImpl" Abstract="true">

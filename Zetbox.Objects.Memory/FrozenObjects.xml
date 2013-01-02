@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2012-12-17T14:07:41Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-02T12:53:07Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -36058,6 +36058,17 @@ public static void ObjectIsValid(StringRangeConstraint obj, ObjectIsValidEventAr
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>StringRangeConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:Enumeration ExportGuid="99069ad4-268a-4375-90ff-346b70f077f1">
+    <ZetboxBase:ChangedOn>2013-01-02T11:43:37.863203Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-01-02T11:43:37.863203Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Kind of table mapping</ZetboxBase:Description>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>TableMapping</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:AreFlags>false</ZetboxBase:AreFlags>
+  </ZetboxBase:Enumeration>
   <ZetboxBase:ObjectClass ExportGuid="87766ae2-89a4-4c37-ab25-583a710c55e5">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -43028,7 +43039,7 @@ public static void isValid_CodeTemplate(ObjectClass obj, PropertyIsValidEventArg
   </ZetboxBase:StringProperty>
   <ZetboxBase:BoolProperty ExportGuid="e9d1402e-3580-4084-8836-c44844683191">
     <ZetboxBase:CategoryTags>DataModel</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-01-02T11:46:35.066339Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_IsAbstract(ObjectClass obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
@@ -43058,7 +43069,7 @@ public static void isValid_IsAbstract(ObjectClass obj, PropertyIsValidEventArgs 
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>IsAbstract</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>1000</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>501</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -43066,7 +43077,7 @@ public static void isValid_IsAbstract(ObjectClass obj, PropertyIsValidEventArgs 
   </ZetboxBase:BoolProperty>
   <ZetboxBase:BoolProperty ExportGuid="13c33710-ea02-4621-ad50-294a1f36b07d">
     <ZetboxBase:CategoryTags>Physical</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-01-02T11:47:43.583258Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_IsFrozenObject(ObjectClass obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
@@ -43096,7 +43107,7 @@ public static void isValid_IsFrozenObject(ObjectClass obj, PropertyIsValidEventA
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>IsFrozenObject</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>700</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>803</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -43138,6 +43149,45 @@ public static void isValid_SubClasses(ObjectClass obj, PropertyIsValidEventArgs 
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>5df5018b-da33-4372-876c-7c8e63b0f8ec</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:EnumerationProperty ExportGuid="8002bbe3-68b6-475b-b929-398744cc2398">
+    <ZetboxBase:CategoryTags>Physical</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-01-02T11:53:07.100762Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_TableMapping(ObjectClass obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.TableMapping&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_TableMapping(ObjectClass obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.TableMapping&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_TableMapping(ObjectClass obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.TableMapping&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_TableMapping(ObjectClass obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.TableMapping == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-01-02T11:46:35.066339Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Kind of table mapping. Only valid on base classes. Default is TPT.</ZetboxBase:Description>
+    <ZetboxBase:Label>Table mapping</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>TableMapping</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>802</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Enumeration>99069ad4-268a-4375-90ff-346b70f077f1</ZetboxBase:Enumeration>
+  </ZetboxBase:EnumerationProperty>
   <ZetboxBase:StringProperty ExportGuid="2a5e5111-199c-4dce-8369-ce35ee741568">
     <ZetboxBase:CategoryTags>Physical</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
@@ -49387,6 +49437,24 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Separate</ZetboxBase:Name>
     <ZetboxBase:Value>4</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="1a1e8a9a-e509-46bc-9b7f-5dc696ee4e6d">
+    <ZetboxBase:ChangedOn>2013-01-02T11:43:37.863203Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-01-02T11:43:37.863203Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>99069ad4-268a-4375-90ff-346b70f077f1</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Label>Table per Hierarchy</ZetboxBase:Label>
+    <ZetboxBase:Name>TPH</ZetboxBase:Name>
+    <ZetboxBase:Value>2</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="e6a227e0-9a3c-4d1d-919f-dfba10756b89">
+    <ZetboxBase:ChangedOn>2013-01-02T11:43:37.863203Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-01-02T11:43:37.863203Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>99069ad4-268a-4375-90ff-346b70f077f1</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Label>Table per Type</ZetboxBase:Label>
+    <ZetboxBase:Name>TPT</ZetboxBase:Name>
+    <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:Method ExportGuid="73d02eaf-f1d2-4df1-85f6-03fbce26df70">
     <ZetboxBase:ChangedOn>2012-07-18T04:39:23.249996Z</ZetboxBase:ChangedOn>

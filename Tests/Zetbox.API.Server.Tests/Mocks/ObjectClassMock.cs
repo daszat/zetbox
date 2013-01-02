@@ -503,5 +503,12 @@ namespace Zetbox.API.Server.Mocks
         }
         #endregion
 
+
+
+        public App.Base.TableMapping? TableMapping
+        {
+            get;
+            set;
+        }
     }
 }

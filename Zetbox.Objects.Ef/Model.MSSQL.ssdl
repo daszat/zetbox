@@ -2556,6 +2556,7 @@
     <Property Name="IsAbstract" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
     <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
+    <Property Name="TableMapping" Type="int" Nullable="true" />
     <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
