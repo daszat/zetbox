@@ -530,18 +530,22 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-                if (Case.IsNewObjectClassInheritance(objClass))
+                var mapping = objClass.GetTableMapping();
+                Log.DebugFormat("Objectclass: {0}.{1}, {2}", objClass.Module.Namespace, objClass.Name, mapping);
+                if (mapping == TableMapping.TPT)
                 {
-                    Case.DoNewObjectClassInheritance(objClass);
-                }
-                if (Case.IsChangeObjectClassInheritance(objClass))
-                {
-                    Case.DoChangeObjectClassInheritance(objClass);
-                }
-                if (Case.IsRemoveObjectClassInheritance(objClass))
-                {
-                    Case.DoRemoveObjectClassInheritance(objClass);
+                    if (Case.IsNewObjectClassInheritance(objClass))
+                    {
+                        Case.DoNewObjectClassInheritance(objClass);
+                    }
+                    if (Case.IsChangeObjectClassInheritance(objClass))
+                    {
+                        Case.DoChangeObjectClassInheritance(objClass);
+                    }
+                    if (Case.IsRemoveObjectClassInheritance(objClass))
+                    {
+                        Case.DoRemoveObjectClassInheritance(objClass);
+                    }
                 }
             }
             Log.Debug(String.Empty);
