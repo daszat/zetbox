@@ -92,12 +92,24 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewObjectClass(ObjectClass objClass)
         {
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
-            Log.InfoFormat("New Table: {0}", tblName);
-            if (!db.CheckTableExists(tblName))
-                db.CreateTable(tblName, objClass.BaseObjectClass == null);
+            TableMapping mapping = objClass.GetTableMapping();
+            if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
+            {
+                var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+                Log.InfoFormat("New Table: {0}", tblName);
+                if (!db.CheckTableExists(tblName))
+                    db.CreateTable(tblName, objClass.BaseObjectClass == null);
+                else
+                    Log.ErrorFormat("Table {0} already exists", tblName);
+            }
+            else if(mapping == TableMapping.TPH)
+            {
+                // Nothing to do, columns will be created during check column stage
+            }
             else
-                Log.ErrorFormat("Table {0} already exists", tblName);
+            {
+                throw new NotSupportedException(string.Format("TableMapping {0} is not supported", mapping));
+            }
         }
         #endregion
 
@@ -110,8 +122,12 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoRenameObjectClassTable(ObjectClass objClass)
         {
-            var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-            db.RenameTable(db.GetTableName(saved.Module.SchemaName, saved.TableName), db.GetTableName(objClass.Module.SchemaName, objClass.TableName));
+            var mapping = objClass.GetTableMapping();
+            if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
+            {
+                var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+                db.RenameTable(db.GetTableName(saved.Module.SchemaName, saved.TableName), db.GetTableName(objClass.Module.SchemaName, objClass.TableName));
+            }
         }
         #endregion
 
@@ -223,7 +239,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             string colName = Construct.NestedColumnName(prop, prefix);
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
-            db.CreateColumn(db.GetTableName(objClass.Module.SchemaName, objClass.TableName), colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultConstraint(prop));
+            db.CreateColumn(objClass.GetTableRef(db), colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultConstraint(prop));
         }
         #endregion
 
@@ -234,16 +250,18 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyNotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var colName = Construct.NestedColumnName(prop, prefix);
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
             var scale = prop.GetScale();
             var def = SchemaManager.GetDefaultConstraint(prop);
+            var realIsNullable = objClass.GetTableMapping() == TableMapping.TPH && objClass.BaseObjectClass != null;
+            // todo: add special is null check contraint for TableMapping.TPH
             Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.Name, prop.Name, colName);
             if (!db.CheckTableContainsData(tblName))
             {
-                db.CreateColumn(tblName, colName, dbType, size, scale, false, def);
+                db.CreateColumn(tblName, colName, dbType, size, scale, realIsNullable, def);
             }
             else
             {
@@ -275,7 +293,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 if (updateDone)
                 {
-                    db.CreateColumn(tblName, colName, dbType, size, scale, false, def);
+                    db.CreateColumn(tblName, colName, dbType, size, scale, realIsNullable, def);
                 }
                 else
                 {
@@ -1911,7 +1929,7 @@ namespace Zetbox.Server.SchemaManagement
             // do not check fk_ChangedBy since it always changes, even when only recalculations were done.
             // ACLs MUST never use ChangedBy information
             var fkCols = objClass.GetRelationEndsWithLocalStorage()
-                .Where(r => !(r.Type.ImplementsIChangedBy() && r.Navigator != null && r.Navigator.Name =="ChangedBy"))
+                .Where(r => !(r.Type.ImplementsIChangedBy() && r.Navigator != null && r.Navigator.Name == "ChangedBy"))
                 .Select(r => Construct.ForeignKeyColumnName(r.GetParent().GetOtherEnd(r)))
                 .ToList();
             db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList, fkCols);
@@ -2174,6 +2192,7 @@ namespace Zetbox.Server.SchemaManagement
 
         #endregion
 
+        #region RefreshRights
         public void DoCreateRefreshAllRightsProcedure(List<ObjectClass> allACLTables)
         {
             var procName = db.GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName());
@@ -2185,5 +2204,8 @@ namespace Zetbox.Server.SchemaManagement
                 .ToList();
             db.CreateRefreshAllRightsProcedure(refreshProcNames);
         }
+        #endregion
+
+
     }
 }

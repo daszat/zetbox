@@ -89,6 +89,7 @@
     <Compile Include="DbTypeMapper.cs" />
     <Compile Include="PerfCounter\IPerfCounter.cs" />
     <Compile Include="IServer.cs" />
+    <Compile Include="TableMapper.cs" />
     <Compile Include="Zetbox.API.Migration\Extensions.cs" />
     <Compile Include="Zetbox.API.Migration\IConverter.cs" />
     <Compile Include="Zetbox.API.Migration\IMigrationTasks.cs" />

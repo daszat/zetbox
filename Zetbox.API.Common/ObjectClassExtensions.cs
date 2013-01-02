@@ -174,6 +174,12 @@ namespace Zetbox.App.Extensions
             return (Zetbox.API.AccessRights?)result;
         }
 
+        public static TableMapping GetTableMapping(this ObjectClass objClass)
+        {
+            var root = objClass.GetRootClass();
+            return root.TableMapping.HasValue ? root.TableMapping.Value : TableMapping.TPT;
+        }
+
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
