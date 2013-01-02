@@ -151,7 +151,7 @@ namespace Zetbox.Server.SchemaManagement
 
                     viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = db.GetTableName(nextRelEnd.Type.Module.SchemaName, nextRelEnd.Type.TableName);
+                    viewRel.JoinTableName = nextRelEnd.Type.GetTableRef(db);
                     viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
 
@@ -162,7 +162,7 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = db.GetTableName(nextRelEnd.Type.Module.SchemaName, nextRelEnd.Type.TableName);
+                    viewRel.JoinTableName = nextRelEnd.Type.GetTableRef(db);
                     string localCol = string.Empty;
                     string fkCol = string.Empty;
                     if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoA)

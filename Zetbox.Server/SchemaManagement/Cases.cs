@@ -78,10 +78,22 @@ namespace Zetbox.Server.SchemaManagement
                 DoDeleteObjectClassSecurityRules(objClass);
             }
 
-            var tbl = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
-            Log.InfoFormat("Drop Table: {0}", tbl);
-            if (db.CheckTableExists(tbl))
-                db.DropTable(tbl);
+            var mapping = objClass.GetTableMapping();
+            if (mapping == TableMapping.TPT)
+            {
+                var tbl = objClass.GetTableRef(db);
+                Log.InfoFormat("Drop Table: {0}", tbl);
+                if (db.CheckTableExists(tbl))
+                    db.DropTable(tbl);
+            }
+            else if (mapping == TableMapping.TPH)
+            {
+                // Do delete all columns
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format("Mapping {0} is not supported", mapping));
+            }
         }
         #endregion
 
@@ -95,7 +107,7 @@ namespace Zetbox.Server.SchemaManagement
             TableMapping mapping = objClass.GetTableMapping();
             if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
             {
-                var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+                var tblName = objClass.GetTableRef(db);
                 Log.InfoFormat("New Table: {0}", tblName);
                 if (!db.CheckTableExists(tblName))
                     db.CreateTable(tblName, objClass.BaseObjectClass == null);
@@ -126,7 +138,7 @@ namespace Zetbox.Server.SchemaManagement
             if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
             {
                 var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-                db.RenameTable(db.GetTableName(saved.Module.SchemaName, saved.TableName), db.GetTableName(objClass.Module.SchemaName, objClass.TableName));
+                db.RenameTable(saved.GetTableRef(db), objClass.GetTableRef(db));
             }
         }
         #endregion
@@ -142,7 +154,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
             // TODO: What if prefix has changed
-            db.RenameColumn(db.GetTableName(objClass.Module.SchemaName, objClass.TableName), Construct.NestedColumnName(saved, prefix), Construct.NestedColumnName(prop, prefix));
+            db.RenameColumn(objClass.GetTableRef(db), Construct.NestedColumnName(saved, prefix), Construct.NestedColumnName(prop, prefix));
         }
         #endregion
 
@@ -162,8 +174,8 @@ namespace Zetbox.Server.SchemaManagement
             var movedUp = IsParentOf(objClass, currentOriginObjClass);
             var movedDown = IsParentOf(currentOriginObjClass, objClass);
 
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
-            var srcTblName = db.GetTableName(saved.Module.SchemaName, ((ObjectClass)saved.ObjectClass).TableName);
+            var tblName = objClass.GetTableRef(db);
+            var srcTblName = ((ObjectClass)saved.ObjectClass).GetTableRef(db);
             var colName = Construct.NestedColumnName(prop, prefix);
             var srcColName = Construct.NestedColumnName(saved, prefix); // TODO: What if prefix has changed
             var dbType = prop.GetDbType();
@@ -316,7 +328,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeDefaultValue(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var colName = Construct.NestedColumnName(prop, prefix);
 
             // Use current nullable definition. 
@@ -336,7 +348,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeValueTypeProperty_To_NotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var colName = Construct.NestedColumnName(prop, prefix);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
@@ -359,7 +371,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeValueTypeProperty_To_Nullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var colName = Construct.NestedColumnName(prop, prefix);
 
             db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null);
@@ -418,7 +430,7 @@ namespace Zetbox.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false);
             }
-            db.CreateFKConstraint(tblName, db.GetTableName(objClass.Module.SchemaName, objClass.TableName), fkName, assocName, true);
+            db.CreateFKConstraint(tblName, objClass.GetTableRef(db), fkName, assocName, true);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
         }
         #endregion
@@ -451,7 +463,7 @@ namespace Zetbox.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false);
             }
-            db.CreateFKConstraint(tblName, db.GetTableName(objClass.Module.SchemaName, objClass.TableName), fkName, assocName, true);
+            db.CreateFKConstraint(tblName, objClass.GetTableRef(db), fkName, assocName, true);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
         }
         #endregion
@@ -514,7 +526,7 @@ namespace Zetbox.Server.SchemaManagement
                     return;
             }
 
-            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var tblName = relEnd.Type.GetTableRef(db);
             string colName = Construct.ListPositionColumnName(otherEnd);
             // always allow nulls for items missing a definite order
             db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
@@ -538,12 +550,12 @@ namespace Zetbox.Server.SchemaManagement
             RelationEnd otherEnd;
             if (rel.HasStorage(RelationEndRole.A))
             {
-                tblName = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
+                tblName = rel.A.Type.GetTableRef(db);
                 otherEnd = rel.B;
             }
             else if (rel.HasStorage(RelationEndRole.B))
             {
-                tblName = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
+                tblName = rel.B.Type.GetTableRef(db);
                 otherEnd = rel.A;
             }
             else
@@ -587,7 +599,7 @@ namespace Zetbox.Server.SchemaManagement
                     return;
             }
 
-            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
@@ -624,7 +636,7 @@ namespace Zetbox.Server.SchemaManagement
                     return;
             }
 
-            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
@@ -653,13 +665,13 @@ namespace Zetbox.Server.SchemaManagement
             RelationEnd otherEnd;
             if (rel.HasStorage(RelationEndRole.A))
             {
-                tblName = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
+                tblName = rel.A.Type.GetTableRef(db);
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
                 otherEnd = rel.B;
             }
             else if (rel.HasStorage(RelationEndRole.B))
             {
-                tblName = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
+                tblName = rel.B.Type.GetTableRef(db);
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.B);
                 otherEnd = rel.A;
             }
@@ -725,8 +737,8 @@ namespace Zetbox.Server.SchemaManagement
                     return;
             }
 
-            var destTblRef = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
-            var destRefTblName = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
+            var destTblRef = relEnd.Type.GetTableRef(db);
+            var destRefTblName = otherEnd.Type.GetTableRef(db);
             bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
             string destColName = Construct.ForeignKeyColumnName(otherEnd);
@@ -859,7 +871,7 @@ namespace Zetbox.Server.SchemaManagement
             var savedAType = saved.A.Type;
             var savedBType = saved.B.Type;
 
-            var srcTblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var srcTblName = relEnd.Type.GetTableRef(db);
             var srcColName = Construct.ForeignKeyColumnName(otherEnd);
 
             var destTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
@@ -868,11 +880,11 @@ namespace Zetbox.Server.SchemaManagement
 
             // Drop relations first as 1:1 and n:m relations share the same names
             var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
-            if (db.CheckFKConstraintExists(db.GetTableName(aType.Module.SchemaName, aType.TableName), srcAssocA))
-                db.DropFKConstraint(db.GetTableName(aType.Module.SchemaName, aType.TableName), srcAssocA);
+            if (db.CheckFKConstraintExists(aType.GetTableRef(db), srcAssocA))
+                db.DropFKConstraint(aType.GetTableRef(db), srcAssocA);
             var srcAssocB = saved.GetRelationAssociationName(RelationEndRole.B);
-            if (db.CheckFKConstraintExists(db.GetTableName(bType.Module.SchemaName, bType.TableName), srcAssocB))
-                db.DropFKConstraint(db.GetTableName(bType.Module.SchemaName, bType.TableName), srcAssocB);
+            if (db.CheckFKConstraintExists(bType.GetTableRef(db), srcAssocB))
+                db.DropFKConstraint(bType.GetTableRef(db), srcAssocB);
 
             DoNew_N_M_Relation(rel);
             db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
@@ -880,13 +892,13 @@ namespace Zetbox.Server.SchemaManagement
             // Drop columns
             if (saved.Storage == StorageType.MergeIntoA || saved.Storage == StorageType.Replicate)
             {
-                if (db.CheckColumnExists(db.GetTableName(savedAType.Module.SchemaName, savedAType.TableName), Construct.ForeignKeyColumnName(saved.B)))
-                    db.DropColumn(db.GetTableName(savedAType.Module.SchemaName, savedAType.TableName), Construct.ForeignKeyColumnName(saved.B));
+                if (db.CheckColumnExists(savedAType.GetTableRef(db), Construct.ForeignKeyColumnName(saved.B)))
+                    db.DropColumn(savedAType.GetTableRef(db), Construct.ForeignKeyColumnName(saved.B));
             }
             if (saved.Storage == StorageType.MergeIntoB || saved.Storage == StorageType.Replicate)
             {
-                if (db.CheckColumnExists(db.GetTableName(savedBType.Module.SchemaName, savedBType.TableName), Construct.ForeignKeyColumnName(saved.A)))
-                    db.DropColumn(db.GetTableName(savedBType.Module.SchemaName, savedBType.TableName), Construct.ForeignKeyColumnName(saved.A));
+                if (db.CheckColumnExists(savedBType.GetTableRef(db), Construct.ForeignKeyColumnName(saved.A)))
+                    db.DropColumn(savedBType.GetTableRef(db), Construct.ForeignKeyColumnName(saved.A));
             }
         }
         #endregion
@@ -922,7 +934,7 @@ namespace Zetbox.Server.SchemaManagement
                     return;
             }
 
-            var srcTblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var srcTblName = relEnd.Type.GetTableRef(db);
             string srcColName = Construct.ForeignKeyColumnName(otherEnd);
             bool srcIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
             string srcIndexName = Construct.ListPositionColumnName(otherEnd);
@@ -953,7 +965,7 @@ namespace Zetbox.Server.SchemaManagement
             // And only migrate because the source data might be used twice
             if (rel.HasStorage(RelationEndRole.A))
             {
-                var destTblName = db.GetTableName(aType.Module.SchemaName, aType.TableName);
+                var destTblName = aType.GetTableRef(db);
                 var destColName = Construct.ForeignKeyColumnName(b);
                 if (destTblName != srcTblName)
                 {
@@ -964,7 +976,7 @@ namespace Zetbox.Server.SchemaManagement
             }
             if (rel.HasStorage(RelationEndRole.B))
             {
-                var destTblName = db.GetTableName(bType.Module.SchemaName, bType.TableName);
+                var destTblName = bType.GetTableRef(db);
                 var destColName = Construct.ForeignKeyColumnName(a);
                 if (destTblName != srcTblName)
                 {
@@ -977,28 +989,28 @@ namespace Zetbox.Server.SchemaManagement
             // Then try to rename columns
             if (rel.HasStorage(RelationEndRole.A) && !aCreated)
             {
-                var destTblName = db.GetTableName(aType.Module.SchemaName, aType.TableName);
+                var destTblName = aType.GetTableRef(db);
                 var destColName = Construct.ForeignKeyColumnName(b);
                 if (destTblName == srcTblName && destColName != srcColName)
                 {
                     db.RenameColumn(destTblName, srcColName, destColName);
                 }
                 var assocName = rel.GetRelationAssociationName(RelationEndRole.A);
-                var refTblName = db.GetTableName(bType.Module.SchemaName, bType.TableName);
+                var refTblName = bType.GetTableRef(db);
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
                 db.CreateIndex(destTblName, Construct.IndexName(destTblName.Name, destColName), true, false, destColName);
                 srcColWasReused = true;
             }
             if (rel.HasStorage(RelationEndRole.B) && !bCreated)
             {
-                var destTblName = db.GetTableName(bType.Module.SchemaName, bType.TableName);
+                var destTblName = bType.GetTableRef(db);
                 var destColName = Construct.ForeignKeyColumnName(a);
                 if (destTblName == srcTblName && destColName != srcColName)
                 {
                     db.RenameColumn(destTblName, srcColName, destColName);
                 }
                 var assocName = rel.GetRelationAssociationName(RelationEndRole.B);
-                var refTblName = db.GetTableName(aType.Module.SchemaName, aType.TableName);
+                var refTblName = aType.GetTableRef(db);
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
                 db.CreateIndex(destTblName, Construct.IndexName(destTblName.Name, destColName), true, false, destColName);
                 srcColWasReused = true;
@@ -1040,7 +1052,7 @@ namespace Zetbox.Server.SchemaManagement
                     return;
             }
 
-            var srcTblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var srcTblName = relEnd.Type.GetTableRef(db);
             var srcColName = Construct.ForeignKeyColumnName(otherEnd);
 
             var destTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
@@ -1081,7 +1093,7 @@ namespace Zetbox.Server.SchemaManagement
 
             if (rel.HasStorage(RelationEndRole.A))
             {
-                var destTblName = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
+                var destTblName = rel.A.Type.GetTableRef(db);
                 var destColName = Construct.ForeignKeyColumnName(rel.B);
                 var srcColName = rel.GetRelationFkColumnName(RelationEndRole.B);
                 var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.A);
@@ -1095,7 +1107,7 @@ namespace Zetbox.Server.SchemaManagement
             }
             if (rel.HasStorage(RelationEndRole.B))
             {
-                var destTblName = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
+                var destTblName = rel.B.Type.GetTableRef(db);
                 var destColName = Construct.ForeignKeyColumnName(rel.A);
                 var srcColName = rel.GetRelationFkColumnName(RelationEndRole.A);
                 var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.B);
@@ -1155,7 +1167,7 @@ namespace Zetbox.Server.SchemaManagement
                 return;
             }
 
-            var destTblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var destTblName = relEnd.Type.GetTableRef(db);
             var destColName = Construct.ForeignKeyColumnName(otherEnd);
 
             DoNew_1_N_Relation(rel);
@@ -1199,8 +1211,8 @@ namespace Zetbox.Server.SchemaManagement
 
                         var fkAName = saved.GetRelationFkColumnName(RelationEndRole.A);
                         var fkBName = saved.GetRelationFkColumnName(RelationEndRole.B);
-                        db.CreateFKConstraint(oldTblName, db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), fkAName, saved.GetRelationAssociationName(RelationEndRole.A), false);
-                        db.CreateFKConstraint(oldTblName, db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), fkBName, saved.GetRelationAssociationName(RelationEndRole.B), false);
+                        db.CreateFKConstraint(oldTblName, rel.A.Type.GetTableRef(db), fkAName, saved.GetRelationAssociationName(RelationEndRole.A), false);
+                        db.CreateFKConstraint(oldTblName, rel.B.Type.GetTableRef(db), fkBName, saved.GetRelationAssociationName(RelationEndRole.B), false);
                     }
                     else
                     {
@@ -1232,7 +1244,7 @@ namespace Zetbox.Server.SchemaManagement
                         return;
                 }
 
-                var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+                var tblName = relEnd.Type.GetTableRef(db);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
 
                 if (db.CheckColumnContainsValues(tblName, colName))
@@ -1265,7 +1277,7 @@ namespace Zetbox.Server.SchemaManagement
                         return;
                 }
 
-                var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+                var tblName = relEnd.Type.GetTableRef(db);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
 
                 if (db.CheckColumnContainsValues(tblName, colName))
@@ -1306,9 +1318,9 @@ namespace Zetbox.Server.SchemaManagement
                 var destRelTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
 
                 db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.A),
-                    db.GetTableName(aType.Module.SchemaName, aType.TableName), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+                    aType.GetTableRef(db), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                 db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.B),
-                    db.GetTableName(bType.Module.SchemaName, bType.TableName), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                    bType.GetTableRef(db), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
 
                 db.RenameTable(srcRelTbl, destRelTbl);
 
@@ -1320,17 +1332,17 @@ namespace Zetbox.Server.SchemaManagement
                 if (saved.HasStorage(RelationEndRole.A) &&
                     Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
                 {
-                    var tbl = db.GetTableName(aType.Module.SchemaName, aType.TableName);
+                    var tbl = aType.GetTableRef(db);
                     db.RenameFKConstraint(tbl, saved.GetAssociationName(),
-                        db.GetTableName(aType.Module.SchemaName, aType.TableName), fkAName, rel.GetAssociationName(), false);
+                        aType.GetTableRef(db), fkAName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
                 }
                 else if (saved.HasStorage(RelationEndRole.B) &&
                     Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
                 {
-                    var tbl = db.GetTableName(bType.Module.SchemaName, bType.TableName);
+                    var tbl = bType.GetTableRef(db);
                     db.RenameFKConstraint(tbl, saved.GetAssociationName(),
-                        db.GetTableName(bType.Module.SchemaName, bType.TableName), fkBName, rel.GetAssociationName(), false);
+                        bType.GetTableRef(db), fkBName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
                 }
             }
@@ -1338,9 +1350,9 @@ namespace Zetbox.Server.SchemaManagement
             {
                 if (saved.HasStorage(RelationEndRole.A))
                 {
-                    var tbl = db.GetTableName(aType.Module.SchemaName, aType.TableName);
+                    var tbl = aType.GetTableRef(db);
                     db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.A),
-                        db.GetTableName(aType.Module.SchemaName, aType.TableName), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+                        aType.GetTableRef(db), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                     if (Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
                     {
                         db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
@@ -1348,9 +1360,9 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 if (saved.HasStorage(RelationEndRole.B))
                 {
-                    var tbl = db.GetTableName(bType.Module.SchemaName, bType.TableName);
+                    var tbl = bType.GetTableRef(db);
                     db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.B),
-                        db.GetTableName(bType.Module.SchemaName, bType.TableName), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                        bType.GetTableRef(db), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
                     if (Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
                     {
                         db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
@@ -1387,8 +1399,8 @@ namespace Zetbox.Server.SchemaManagement
                     return;
             }
 
-            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
-            var refTblName = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
+            var tblName = relEnd.Type.GetTableRef(db);
+            var refTblName = otherEnd.Type.GetTableRef(db);
             bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
             var colName = Construct.ForeignKeyColumnName(otherEnd);
@@ -1508,9 +1520,9 @@ namespace Zetbox.Server.SchemaManagement
                 db.CreateColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false, new NewGuidDefaultConstraint());
             }
 
-            db.CreateFKConstraint(tblName, db.GetTableName(aType.Module.SchemaName, aType.TableName), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+            db.CreateFKConstraint(tblName, aType.GetTableRef(db), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkAName), false, false, fkAName);
-            db.CreateFKConstraint(tblName, db.GetTableName(bType.Module.SchemaName, bType.TableName), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+            db.CreateFKConstraint(tblName, bType.GetTableRef(db), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkBName), false, false, fkBName);
         }
         #endregion
@@ -1537,7 +1549,7 @@ namespace Zetbox.Server.SchemaManagement
 
         private void Delete_1_1_Relation_DropColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
         {
-            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var assocName = rel.GetRelationAssociationName(role);
 
@@ -1573,8 +1585,8 @@ namespace Zetbox.Server.SchemaManagement
 
         private void New_1_1_Relation_CreateColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
         {
-            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
-            var refTblName = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
+            var tblName = relEnd.Type.GetTableRef(db);
+            var refTblName = otherEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var assocName = rel.GetRelationAssociationName(role);
             var idxName = Construct.IndexName(tblName.Name, colName);
@@ -1659,9 +1671,9 @@ namespace Zetbox.Server.SchemaManagement
                 }
 
                 New_1_1_Relation_CreateColumns(rel, relEnd, otherEnd, role);
-                var srcTbl = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
+                var srcTbl = otherEnd.Type.GetTableRef(db);
                 var srcCol = Construct.ForeignKeyColumnName(relEnd);
-                var destTbl = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+                var destTbl = relEnd.Type.GetTableRef(db);
                 var destCol = Construct.ForeignKeyColumnName(otherEnd);
                 db.MigrateFKs(srcTbl, srcCol, destTbl, destCol);
                 if (!relEnd.IsNullable())
@@ -1702,7 +1714,7 @@ namespace Zetbox.Server.SchemaManagement
             RelationEnd relEnd = rel.GetEndFromRole(role);
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
-            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
@@ -1727,7 +1739,7 @@ namespace Zetbox.Server.SchemaManagement
             RelationEnd relEnd = rel.GetEndFromRole(role);
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
-            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
@@ -1752,7 +1764,7 @@ namespace Zetbox.Server.SchemaManagement
         public void DoNewObjectClassInheritance(ObjectClass objClass)
         {
             var assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
 
             Log.InfoFormat("New ObjectClass Inheritance: {0} -> {1}: {2}", objClass.Name, objClass.BaseObjectClass.Name, assocName);
 
@@ -1762,7 +1774,7 @@ namespace Zetbox.Server.SchemaManagement
                 return;
             }
 
-            db.CreateFKConstraint(tblName, db.GetTableName(objClass.BaseObjectClass.Module.SchemaName, objClass.BaseObjectClass.TableName), "ID", assocName, false);
+            db.CreateFKConstraint(tblName, objClass.BaseObjectClass.GetTableRef(db), "ID", assocName, false);
         }
         #endregion
 
@@ -1797,7 +1809,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
             string assocName = Construct.InheritanceAssociationName(savedObjClass.BaseObjectClass, savedObjClass);
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
 
             Log.InfoFormat("Remove ObjectClass Inheritance: {0} -> {1}: {2}", savedObjClass.Name, savedObjClass.BaseObjectClass.Name, assocName);
 
@@ -1823,9 +1835,9 @@ namespace Zetbox.Server.SchemaManagement
             db.CreateColumn(tblRightsName, "Right", System.Data.DbType.Int32, 0, 0, false);
 
             db.CreateIndex(tblRightsName, Construct.SecurityRulesIndexName(objClass), true, true, "ID", "Identity");
-            db.CreateFKConstraint(tblRightsName, db.GetTableName(objClass.Module.SchemaName, objClass.TableName), "ID", Construct.SecurityRulesFKName(objClass), true);
+            db.CreateFKConstraint(tblRightsName, objClass.GetTableRef(db), "ID", Construct.SecurityRulesFKName(objClass), true);
 
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
@@ -1837,7 +1849,7 @@ namespace Zetbox.Server.SchemaManagement
 
         public void DoCreateRightsViewUnmaterialized(ObjectClass objClass)
         {
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
 
@@ -1880,14 +1892,14 @@ namespace Zetbox.Server.SchemaManagement
         public void DoCreateUpdateRightsTrigger(ObjectClass objClass)
         {
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
                 db.DropTrigger(tblName, updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
             tblList.Add(new RightsTrigger()
             {
-                TblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName),
+                TblName = objClass.GetTableRef(db),
                 TblNameRights = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass)),
                 ViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass))
             });
@@ -1908,7 +1920,7 @@ namespace Zetbox.Server.SchemaManagement
                     {
                         var rt = new RightsTrigger()
                         {
-                            TblName = db.GetTableName(dep.Module.SchemaName, dep.TableName),
+                            TblName = dep.GetTableRef(db),
                             TblNameRights = db.GetTableName(dep.Module.SchemaName, Construct.SecurityRulesTableName(dep)),
                             ViewUnmaterializedName = db.GetTableName(dep.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(dep)),
                         };
@@ -1960,7 +1972,7 @@ namespace Zetbox.Server.SchemaManagement
                     {
                         var rt = new RightsTrigger()
                         {
-                            TblName = db.GetTableName(dep.Module.SchemaName, dep.TableName),
+                            TblName = dep.GetTableRef(db),
                             TblNameRights = db.GetTableName(dep.Module.SchemaName, Construct.SecurityRulesTableName(dep)),
                             ViewUnmaterializedName = db.GetTableName(dep.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(dep)),
                         };
@@ -2039,7 +2051,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoDeleteObjectClassSecurityRules(ObjectClass objClass)
         {
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
@@ -2069,7 +2081,7 @@ namespace Zetbox.Server.SchemaManagement
 
         public void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var colName = Construct.NestedColumnName(prop, prefix);
             Log.InfoFormat("Drop Column: {0}.{1}", tblName, colName);
             if (db.CheckColumnExists(tblName, colName))
@@ -2086,7 +2098,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             string baseColName = Construct.NestedColumnName(cprop, prefix);
             Log.InfoFormat("New is null column for CompoundObject Property: '{0}'", cprop.Name);
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var hasData = db.CheckTableContainsData(tblName);
 
             foreach (var valProp in cprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
@@ -2115,7 +2127,7 @@ namespace Zetbox.Server.SchemaManagement
         public void DoNewIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var columns = GetUCColNames(uc);
             Log.InfoFormat("New Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
             if (db.CheckIndexPossible(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns))
@@ -2140,7 +2152,7 @@ namespace Zetbox.Server.SchemaManagement
         public void DoDeleteIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
-            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = objClass.GetTableRef(db);
             var columns = GetUCColNames(uc);
             if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
             {
