@@ -402,7 +402,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 children.Add(baseclass);
             }
-            baseclass.CollectChildClasses(FrozenContext, children, false);
+            baseclass.CollectChildClasses(children, false);
 
             if (children.Count == 1)
             {

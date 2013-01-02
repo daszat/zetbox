@@ -269,10 +269,19 @@ namespace Zetbox.Server.SchemaManagement
 
         private void CheckExtraColumns(ObjectClass objClass)
         {
+            if (objClass.GetTableMapping() == TableMapping.TPH && objClass.BaseObjectClass != null) return; // Check only base TPH classes
+
             Log.Debug("Extra Columns: ");
             List<string> columns = new List<string>();
-            GetExistingColumnNames(objClass, objClass.Properties, String.Empty, columns);
-            GetRelationColumnNames(objClass, columns);
+            List<ObjectClass> classes = new List<ObjectClass>(new [] { objClass });
+            if(objClass.GetTableMapping() == TableMapping.TPH)
+                objClass.CollectChildClasses(classes, true);
+
+            foreach (var cls in classes)
+            {
+                GetExistingColumnNames(cls, cls.Properties, String.Empty, columns);
+                GetRelationColumnNames(cls, columns);
+            }
 
             foreach (string propName in db.GetTableColumnNames(objClass.GetTableRef(db)))
             {

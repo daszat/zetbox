@@ -67,23 +67,17 @@ namespace Zetbox.App.Extensions
             return cls;
         }
 
-        public static void CollectChildClasses(this ObjectClass cls, IReadOnlyZetboxContext ctx, List<ObjectClass> children, bool includeAbstract)
+        public static void CollectChildClasses(this ObjectClass cls, List<ObjectClass> children, bool includeAbstract)
         {
             if (cls == null) throw new ArgumentNullException("cls");
-            if (ctx == null) throw new ArgumentNullException("ctx");
             if (children == null) throw new ArgumentNullException("children");
 
-            var nextChildren = ctx
-                .GetQuery<ObjectClass>()
-                .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == cls.ID)
-                .ToList();
-
-            if (nextChildren.Count() > 0)
+            if (cls.SubClasses.Count > 0)
             {
-                foreach (ObjectClass oc in nextChildren)
+                foreach (ObjectClass oc in cls.SubClasses)
                 {
                     if (includeAbstract || !oc.IsAbstract) children.Add(oc);
-                    CollectChildClasses(oc, ctx, children, includeAbstract);
+                    CollectChildClasses(oc, children, includeAbstract);
                 };
             }
         }
