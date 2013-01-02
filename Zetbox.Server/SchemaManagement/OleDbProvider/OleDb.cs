@@ -502,6 +502,16 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             cmd.ExecuteNonQuery();
         }
 
+        public void WriteDefaultValue(TableRef tblName, string colName, object value)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void WriteGuidDefaultValue(TableRef tblName, string colName)
+        {
+            throw new NotSupportedException();
+        }
+
         public void RefreshDbStats()
         {
             // do nothing

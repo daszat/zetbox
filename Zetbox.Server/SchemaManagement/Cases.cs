@@ -248,7 +248,39 @@ namespace Zetbox.Server.SchemaManagement
             else
             {
                 db.CreateColumn(tblName, colName, dbType, size, scale, true, def);
-                Log.ErrorFormat("unable to create new not nullable ValueType Property '{0}' when table '{1}' contains data. Created nullable column instead.", colName, tblName);
+                bool updateDone = false;
+                if (def is NewGuidDefaultConstraint)
+                {
+                    db.WriteGuidDefaultValue(tblName, colName);
+                    updateDone = true;
+                }
+                else if (def is DateTimeDefaultConstraint)
+                {
+                    if (((DateTimeDefaultConstraint)def).Precision == DateTimeDefaultConstraintPrecision.Date)
+                        db.WriteDefaultValue(tblName, colName, DateTime.Today);
+                    else
+                        db.WriteDefaultValue(tblName, colName, DateTime.Now);
+                    updateDone = true;
+                }
+                else if (def is BoolDefaultConstraint)
+                {
+                    db.WriteDefaultValue(tblName, colName, ((BoolDefaultConstraint)def).Value);
+                    updateDone = true;
+                }
+                else if (def is IntDefaultConstraint)
+                {
+                    db.WriteDefaultValue(tblName, colName, ((IntDefaultConstraint)def).Value);
+                    updateDone = true;
+                }
+
+                if (updateDone)
+                {
+                    db.CreateColumn(tblName, colName, dbType, size, scale, false, def);
+                }
+                else
+                {
+                    Log.ErrorFormat("unable to create new not nullable ValueType Property '{0}' when table '{1}' contains data. No supported default contraint found. Created nullable column instead.", colName, tblName);
+                }
             }
         }
         #endregion

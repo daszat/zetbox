@@ -224,6 +224,10 @@ namespace Zetbox.Server.SchemaManagement
             {
                 return new IntDefaultConstraint() { Value = ((Zetbox.App.Base.IntDefaultValue)defValue).IntValue };
             }
+            else if (defValue is Zetbox.App.Base.EnumDefaultValue)
+            {
+                return new IntDefaultConstraint() { Value = ((Zetbox.App.Base.EnumDefaultValue)defValue).EnumValue.Value };
+            }
             else
             {
                 return null;

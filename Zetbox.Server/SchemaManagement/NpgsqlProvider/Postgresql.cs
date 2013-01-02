@@ -1652,6 +1652,21 @@ END$BODY$
             throw new NotImplementedException();
         }
 
+        public override void WriteDefaultValue(TableRef tblName, string colName, object value)
+        {
+            ExecuteNonQuery(String.Format("UPDATE {0} SET {1} = @val WHERE {1} IS NULL;",
+                                FormatSchemaName(tblName),
+                                QuoteIdentifier(colName)),
+                             new Dictionary<string, object>() { { "@val", value } });
+        }
+
+        public override void WriteGuidDefaultValue(TableRef tblName, string colName)
+        {
+            ExecuteNonQuery(String.Format("UPDATE {0} SET {1} = uuid_generate_v4() WHERE {1} IS NULL;",
+                                FormatSchemaName(tblName),
+                                QuoteIdentifier(colName)));
+        }
+
         public override void RefreshDbStats()
         {
             Log.Info("Vacuuming database");

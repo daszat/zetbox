@@ -633,6 +633,9 @@ namespace Zetbox.Server.SchemaManagement
         public abstract void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames);
         public abstract void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values);
 
+        public abstract void WriteDefaultValue(TableRef tblNametblName, string colName, object value);
+        public abstract void WriteGuidDefaultValue(TableRef destTblName, string colName);
+
         /// <summary>
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.
         /// </summary>

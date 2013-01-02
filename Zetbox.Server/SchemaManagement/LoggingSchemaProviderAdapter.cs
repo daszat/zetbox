@@ -471,6 +471,16 @@ namespace Zetbox.Server.SchemaManagement
             _provider.WriteTableData(destTbl, colNames, values);
         }
 
+        public void WriteDefaultValue(TableRef tblName, string colName, object value)
+        {
+            _provider.WriteDefaultValue(tblName, colName, value);
+        }
+
+        public void WriteGuidDefaultValue(TableRef tblName, string colName)
+        {
+            _provider.WriteGuidDefaultValue(tblName, colName);
+        }
+
         public void RefreshDbStats()
         {
             _provider.RefreshDbStats();
