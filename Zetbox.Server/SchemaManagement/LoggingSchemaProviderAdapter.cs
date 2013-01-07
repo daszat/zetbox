@@ -376,6 +376,11 @@ namespace Zetbox.Server.SchemaManagement
             _provider.CopyColumnData(srcTblName, srcColName, tblName, colName);
         }
 
+        public void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName)
+        {
+            _provider.CopyColumnData(srcTblName, srcColName, tblName, colName);
+        }
+
         public void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             _provider.MigrateFKs(srcTblName, srcColName, tblName, colName);

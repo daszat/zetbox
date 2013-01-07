@@ -687,7 +687,15 @@ namespace Zetbox.API.Server
 
         void TruncateTable(TableRef tblName);
 
+        /// <summary>
+        /// Batch-copies column data from srcTblName.srcColName to tblName.colName, matching rows on "ID" column.
+        /// </summary>
         void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
+
+        /// <summary>
+        /// Batch-copies column data from srcTblName.srcColName[i] to tblName.colName[i], matching rows on "ID" column.
+        /// </summary>
+        void CopyColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames);
 
         #endregion
 

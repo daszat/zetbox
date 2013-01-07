@@ -121,14 +121,14 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        private string Quote(string val)
+        private string QuoteIdentifier(string val)
         {
             return string.Format("{0}{1}{2}", quotePrefix ?? string.Empty, val, quoteSuffix ?? string.Empty);
         }
 
-        private string FormatTableName(TableRef tbl)
+        private string FormatSchemaName(DboRef dbo)
         {
-            return String.Format("[{0}].[{1}]", tbl.Schema, tbl.Name);
+            return String.Format("{0}.{1}", QuoteIdentifier(dbo.Schema), QuoteIdentifier(dbo.Name));
         }
 
         public bool CheckTableExists(TableRef tblName)
@@ -187,7 +187,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         public bool CheckTableContainsData(TableRef tblName)
         {
-            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM {0}", FormatTableName(tblName), db, tx)))
+            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM {0}", FormatSchemaName(tblName), db, tx)))
             {
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;
@@ -407,6 +407,20 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
                 colName, srcColName, tblName, srcTblName);
         }
 
+        public void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName)
+        {
+            if (srcColName == null) throw new ArgumentNullException("srcColName");
+            if (colName == null) throw new ArgumentNullException("colName");
+            if (srcColName.Length != colName.Length) throw new ArgumentOutOfRangeException("colName", "need the same number of columns in srcColName and colName");
+
+            ExecuteNonQuery(string.Format(
+                "UPDATE dest SET {2} FROM {1} dest INNER JOIN {2} src ON dest.{3} = src.{3}",
+                FormatSchemaName(srcTblName),     // 0
+                FormatSchemaName(tblName),        // 1
+                string.Join(", ", srcColName.Zip(colName, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst)))),       // 2
+                QuoteIdentifier("ID")));        // 3
+        }
+
         public void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             Log.DebugFormat("Migrating FK data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
@@ -435,7 +449,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
             var sb = new StringBuilder();
             sb.AppendLine("SELECT ");
-            colNames.ForEach(i => sb.Append(Quote(i) + ","));
+            colNames.ForEach(i => sb.Append(QuoteIdentifier(i) + ","));
             sb.Remove(sb.Length - 1, 1);
             sb.AppendLine(" FROM " + tbl.Name);
 
@@ -480,9 +494,9 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
                 throw new ArgumentNullException("values");
 
             var sb = new StringBuilder();
-            sb.AppendLine(string.Format("INSERT INTO {0} (", Quote(tbl.Name)));
+            sb.AppendLine(string.Format("INSERT INTO {0} (", QuoteIdentifier(tbl.Name)));
 
-            colNames.ForEach(i => sb.Append(Quote(i) + ","));
+            colNames.ForEach(i => sb.Append(QuoteIdentifier(i) + ","));
             sb.Remove(sb.Length - 1, 1);
 
             sb.AppendLine(") VALUES (");

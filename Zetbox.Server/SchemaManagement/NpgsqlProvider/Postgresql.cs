@@ -990,6 +990,20 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier("ID")));        // 4
         }
 
+        public override void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName)
+        {
+            if (srcColName == null) throw new ArgumentNullException("srcColName");
+            if (colName == null) throw new ArgumentNullException("colName");
+            if (srcColName.Length != colName.Length) throw new ArgumentOutOfRangeException("colName", "need the same number of columns in srcColName and colName");
+
+            ExecuteNonQuery(string.Format(
+                "UPDATE {1} dest SET {2} FROM {0} src WHERE dest.{3} = src.{3}",
+                FormatSchemaName(srcTblName),     // 0
+                FormatSchemaName(tblName),        // 1
+                string.Join(", ", srcColName.Zip(colName, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst)))),       // 2
+                QuoteIdentifier("ID")));        // 3
+        }
+
         public override void MigrateFKs(
             TableRef srcTblName, string srcColName,
             TableRef tblName, string colName)
