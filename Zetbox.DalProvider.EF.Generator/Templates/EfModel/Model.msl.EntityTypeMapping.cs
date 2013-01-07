@@ -92,7 +92,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
             }
             else
             {
-                throw new NotSupportedException("Unknown table mapping " + mapping);
+                throw new NotSupportedException(string.Format("Unknown table mapping: {0}", mapping));
             }
         }
 
