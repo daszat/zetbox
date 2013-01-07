@@ -91,7 +91,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
             bool needsConcurrency = cls.ImplementsIChangedBy(true);
 
-            return new object[] { interfaceName, implementationName, schemaName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, needsConcurrency, qualifiedRightsClassName };
+            return new object[] { interfaceName, implementationName, schemaName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, needsConcurrency, qualifiedRightsClassName, cls.GetTableMapping() };
         }
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)
@@ -103,7 +103,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
         {
             foreach (var subClass in subClasses.OrderBy(cls => cls.Name))
             {
-                JoinedSubclassHbm.Call(Host, ctx, subClass);
+                SubclassHbm.Call(Host, ctx, subClass);
             }
         }
     }

@@ -22,8 +22,9 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
     using Arebis.CodeGeneration;
     using Zetbox.API;
     using Zetbox.App.Base;
+    using Zetbox.API.Server;
 
-    public partial class JoinedSubclassHbm
+    public partial class SubclassHbm
     {
         public static void Call(IGenerationHost host, IZetboxContext ctx, ObjectClass cls)
         {
@@ -37,10 +38,23 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 throw new ArgumentOutOfRangeException("cls", msg);
             }
 
-            host.CallTemplate("Mappings.JoinedSubclassHbm",
+            host.CallTemplate("Mappings.SubclassHbm",
                 new object[] { ctx }
                     .Concat(ObjectClassHbm.MakeArgs(ctx, cls, host.Settings))
                     .ToArray());
+        }
+
+        protected virtual string GetTagName()
+        {
+            switch (mappingType)
+            {
+                case TableMapping.TPT:
+                    return "joined-subclass";
+                case TableMapping.TPH:
+                    return "subclass";
+                default:
+                    throw new NotSupportedException(string.Format("Mapping Type {0} is not supported", mappingType));
+            }
         }
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)
@@ -52,7 +66,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
         {
             foreach (var subClass in subClasses.OrderBy(cls => cls.Name))
             {
-                JoinedSubclassHbm.Call(Host, ctx, subClass);
+                SubclassHbm.Call(Host, ctx, subClass);
             }
         }
     }

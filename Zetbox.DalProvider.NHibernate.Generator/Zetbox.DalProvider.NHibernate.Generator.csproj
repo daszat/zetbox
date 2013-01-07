@@ -122,10 +122,20 @@
     <Compile Include="Templates\Mappings\ClassesHbm.cs">
       <DependentUpon>ClassesHbm.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Mappings\DiscriminatorColumnHbm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiscriminatorColumnHbm.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Mappings\IdGeneratorHbm.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IdGeneratorHbm.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Mappings\SubclassHbm1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubclassHbm.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\Mappings\ValueTypePropertyHbm.Designer.cs">
       <DependentUpon>ValueTypePropertyHbm.cst</DependentUpon>
@@ -138,13 +148,8 @@
     <Compile Include="Templates\Mappings\ValueTypePropertyHbm.cs">
       <DependentUpon>ValueTypePropertyHbm.cst</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Mappings\JoinedSubclassHbm.cs">
-      <DependentUpon>JoinedSubclassHbm.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Mappings\JoinedSubclassHbm.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>JoinedSubclassHbm.cst</DependentUpon>
+    <Compile Include="Templates\Mappings\SubclassHbm.cs">
+      <DependentUpon>SubclassHbm.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\Mappings\ObjectClassHbm.cs">
       <DependentUpon>ObjectClassHbm.cst</DependentUpon>
@@ -343,6 +348,10 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ClassesHbm.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Templates\Mappings\DiscriminatorColumnHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DiscriminatorColumnHbm.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\Mappings\IdGeneratorHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>IdGeneratorHbm.Designer.cs</LastGenOutput>
@@ -425,9 +434,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\Mappings\JoinedSubclassHbm.cst">
+    <None Include="Templates\Mappings\SubclassHbm.cst">
       <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>JoinedSubclassHbm.Designer.cs</LastGenOutput>
+      <LastGenOutput>SubclassHbm1.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup />

@@ -15,8 +15,8 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
 <%@ CodeTemplate Language="C#" 
-    Name="Mappings.JoinedSubclassHbm"
-    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings.JoinedSubclassHbm" 
+    Name="Mappings.SubclassHbm"
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings.SubclassHbm" 
     Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -39,14 +39,22 @@
 <%@ Parameter Name="needsRightsTable" Type="bool" %>
 <%@ Parameter Name="needsConcurrency" Type="bool" %>
 <%@ Parameter Name="qualifiedRightsClassName" Type="string" %>
-        <joined-subclass name="<%= qualifiedImplementationName %>"
-                         proxy="<%= qualifiedImplementationName %>"
-                         schema="`<%= schemaName %>`"
-                         table="`<%= tableName %>`"
-                         dynamic-update="<%= needsConcurrency ? "true" : "false" %>">
+<%@ Parameter Name="mappingType" Type="Zetbox.App.Base.TableMapping" %>
+        <<%= GetTagName() %>
+                name="<%= qualifiedImplementationName %>"
+                proxy="<%= qualifiedImplementationName %>"
+<% if(mappingType == Zetbox.App.Base.TableMapping.TPH) { %>
+                discriminator-value="<%= schemaName %>.<%= tableName %>"
+<% } else { %>
+                schema="`<%= schemaName %>`"
+                table="`<%= tableName %>`"
+<% } %>
+                dynamic-update="<%= needsConcurrency ? "true" : "false" %>">
             
+<% if(mappingType == Zetbox.App.Base.TableMapping.TPT) { %>
             <!-- base class reference -->
             <key column="`ID`" />
+<% } %>
 
             <!-- define the properties -->
 <% ApplyPropertyDefinitions(properties); %>
@@ -54,4 +62,4 @@
             <!-- define the subclasses -->
 <% ApplyJoinedSubclasses(subClasses); %>
 
-        </joined-subclass>
+        </<%= GetTagName() %>>
