@@ -277,6 +277,7 @@ namespace Zetbox.Server.SchemaManagement
             Log.Debug("Extra Columns: ");
             List<string> columns = new List<string>();
             List<ObjectClass> classes = new List<ObjectClass>(new [] { objClass });
+
             if(objClass.GetTableMapping() == TableMapping.TPH)
                 objClass.CollectChildClasses(classes, true);
 
@@ -288,7 +289,7 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (string propName in db.GetTableColumnNames(objClass.GetTableRef(db)))
             {
-                if (propName == "ID")
+                if (propName == "ID" || propName == TableMapper.DiscriminatorColumnName)
                     continue;
                 if (!columns.Contains(propName))
                 {
@@ -860,17 +861,24 @@ namespace Zetbox.Server.SchemaManagement
         private void CheckColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
         {
             Log.Debug("  Columns: ");
+            var tblName = objClass.GetTableRef(db);
+            var mapping = objClass.GetTableMapping();
+
+            if (mapping == TableMapping.TPH && objClass.BaseObjectClass == null)
+            {
+                CheckColumn(tblName, TableMapper.DiscriminatorColumnName, System.Data.DbType.String, TableMapper.DiscriminatorColumnSize, 0, false, null);
+            }
+
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>()
                 .Where(p => !p.IsList)
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
-                var tblName = objClass.GetTableRef(db);
                 var colName = Construct.NestedColumnName(prop, prefix);
                 Log.DebugFormat("    {0}", colName);
 
                 var realIsNullable = prop.IsNullable();
                 if (realIsNullable == false)
-                    realIsNullable = objClass.GetTableMapping() == TableMapping.TPH && objClass.BaseObjectClass != null;
+                    realIsNullable = mapping == TableMapping.TPH && objClass.BaseObjectClass != null;
                 CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), realIsNullable, SchemaManager.GetDefaultConstraint(prop));
             }
 

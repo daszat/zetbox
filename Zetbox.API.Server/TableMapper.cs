@@ -26,6 +26,9 @@ namespace Zetbox.API.Server
 
     public static class TableMapper
     {
+        public static readonly string DiscriminatorColumnName = "__Discriminator";
+        public static readonly int DiscriminatorColumnSize = 150;
+
         public static TableRef GetTableRef(this ObjectClass cls, ISchemaProvider provider)
         {
             if (cls == null) throw new ArgumentNullException("cls");

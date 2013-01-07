@@ -110,17 +110,17 @@ namespace Zetbox.Server.SchemaManagement
                 var tblName = objClass.GetTableRef(db);
                 Log.InfoFormat("New Table: {0}", tblName);
                 if (!db.CheckTableExists(tblName))
+                {
                     db.CreateTable(tblName, objClass.BaseObjectClass == null);
+                    if (mapping == TableMapping.TPH)
+                    {
+                        db.CreateColumn(tblName, TableMapper.DiscriminatorColumnName, System.Data.DbType.String, TableMapper.DiscriminatorColumnSize, 0, false);
+                    }
+                }
                 else
+                {
                     Log.ErrorFormat("Table {0} already exists", tblName);
-            }
-            else if(mapping == TableMapping.TPH)
-            {
-                // Nothing to do, columns will be created during check column stage
-            }
-            else
-            {
-                throw new NotSupportedException(string.Format("TableMapping {0} is not supported", mapping));
+                }
             }
         }
         #endregion
