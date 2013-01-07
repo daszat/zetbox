@@ -444,7 +444,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             Log.InfoFormat("New CompoundObject Property List: {0}", cprop.Name);
             var tblName = db.GetTableName(cprop.Module.SchemaName, cprop.GetCollectionEntryTable());
-            string fkName = "fk_" + cprop.ObjectClass.Name;
+            string fkName = cprop.GetCollectionEntryReverseKeyColumnName();
 
             // TODO: Support nested CompoundObject
             string valPropIndexName = cprop.Name + "Index";

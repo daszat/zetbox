@@ -667,7 +667,7 @@ namespace Zetbox.Server.SchemaManagement
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
-                var fkName = "fk_" + prop.ObjectClass.Name;
+                var fkName = prop.GetCollectionEntryReverseKeyColumnName();
                 var valPropName = prop.Name;
                 var valPropIndexName = prop.Name + "Index";
                 var assocName = prop.GetAssociationName();
@@ -716,7 +716,7 @@ namespace Zetbox.Server.SchemaManagement
             .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
-                var fkName = "fk_" + prop.ObjectClass.Name;
+                var fkName = prop.GetCollectionEntryReverseKeyColumnName();
                 var basePropName = prop.Name;
                 var valPropIndexName = prop.Name + "Index";
                 var assocName = prop.GetAssociationName();
