@@ -691,7 +691,7 @@ namespace Zetbox.DalProvider.NHibernate
                 if (proxy.ID > Zetbox.API.Helper.INVALIDID)
                 {
                     var objClass = metaDataResolver.GetObjectClass(ift);
-                    if (objClass != null && metaDataResolver.GetObjectClass(ift).SubClasses.Count > 0)
+                    if (objClass != null && objClass.SubClasses.Count > 0)
                     {
                         proxy = (IProxyObject)_nhSession.Load(proxy.ZetboxProxy, proxy.ID);
                         item = (NHibernatePersistenceObject)ContainsObject(ift, proxy.ID);
