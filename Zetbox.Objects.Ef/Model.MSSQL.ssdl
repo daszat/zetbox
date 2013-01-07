@@ -95,6 +95,7 @@
     <EntitySet Name="TestDecimal" EntityType="Model.Store.TestDecimal" Schema="test" Table="TestDecimals"/>
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Schema="test" Table="TestObjClasses"/>
     <EntitySet Name="TestStudent" EntityType="Model.Store.TestStudent" Schema="test" Table="TestStudenten"/>
+    <EntitySet Name="TPHBaseObj" EntityType="Model.Store.TPHBaseObj" Schema="test" Table="TPHBaseObjs"/>
     <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Schema="base" Table="TypeRefs"/>
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Schema="gui" Table="ViewDescriptors"/>
     <EntitySet Name="ViewModelDescriptor" EntityType="Model.Store.ViewModelDescriptor" Schema="gui" Table="ViewModelDescriptors"/>
@@ -1499,6 +1500,14 @@
     <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.Store.FK_TestObjClass_has_ObjectProp" >
       <End Role="TestObjClass" EntitySet="TestObjClass" />
       <End Role="ObjectProp" EntitySet="Kunde" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TPHBaseObj_was_ChangedBy" Association="Model.Store.FK_TPHBaseObj_was_ChangedBy" >
+      <End Role="TPHBaseObj" EntitySet="TPHBaseObj" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TPHBaseObj_was_CreatedBy" Association="Model.Store.FK_TPHBaseObj_was_CreatedBy" >
+      <End Role="TPHBaseObj" EntitySet="TPHBaseObj" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_TypeRef_has_Assembly" Association="Model.Store.FK_TypeRef_has_Assembly" >
       <End Role="TypeRef" EntitySet="TypeRef" />
@@ -3106,6 +3115,23 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="TPHBaseObj">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="__Discriminator" Type="nvarchar" Nullable="false" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="AInt" Type="int" Nullable="true" />
+    <Property Name="AString" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="BString" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="TypeRef">
@@ -6347,6 +6373,34 @@
       </Principal>
       <Dependent Role="TestObjClass">
         <PropertyRef Name="fk_ObjectProp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_TPHBaseObj_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="TPHBaseObj" Type="Model.Store.TPHBaseObj" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TPHBaseObj">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_TPHBaseObj_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="TPHBaseObj" Type="Model.Store.TPHBaseObj" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TPHBaseObj">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -48,7 +48,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
         public override void Generate()
         {
-            this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}EfImpl\">",
+            this.WriteLine("          <ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}EfImpl\">",
                 propertyName,
                 ImplementationPropertySuffix,
                 prop.CompoundObjectDefinition.Name
@@ -65,7 +65,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
                 ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, subProp, subProp.Name, newParent);
             }
 
-            this.WriteLine("</ComplexProperty>");
+            this.WriteLine("          </ComplexProperty>");
         }
     }
 }

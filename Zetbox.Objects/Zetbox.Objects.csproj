@@ -224,6 +224,9 @@
     <Compile Include="TestDecimal.Interface.Designer.cs" />
     <Compile Include="TestObjClass.Interface.Designer.cs" />
     <Compile Include="TestStudent.Interface.Designer.cs" />
+    <Compile Include="TPHBaseObj.Interface.Designer.cs" />
+    <Compile Include="TPHDerivedAObj.Interface.Designer.cs" />
+    <Compile Include="TPHDerivedBObj.Interface.Designer.cs" />
     <Compile Include="TypeRef.Interface.Designer.cs" />
     <Compile Include="ValueTypeProperty.Interface.Designer.cs" />
     <Compile Include="ViewDescriptor.Interface.Designer.cs" />

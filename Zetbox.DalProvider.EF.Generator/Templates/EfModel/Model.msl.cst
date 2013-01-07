@@ -46,7 +46,7 @@
 		{
 %>
     <EntitySetMapping Name="<%= Construct.SecurityRulesClassName(cls) %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= Construct.SecurityRulesClassName(cls) %>)">
+      <EntityTypeMapping TypeName="Model.<%= Construct.SecurityRulesClassName(cls) %>">
         <MappingFragment StoreEntitySet="<%= Construct.SecurityRulesClassName(cls) %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Identity" ColumnName="Identity" />
@@ -82,7 +82,7 @@
 %>
     -->
     <EntitySetMapping Name="<%= rel.GetRelationClassName() %>EfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetRelationClassName() %>EfImpl)">
+      <EntityTypeMapping TypeName="Model.<%= rel.GetRelationClassName() %>EfImpl">
         <MappingFragment StoreEntitySet="<%= rel.GetRelationClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
 <% 
@@ -192,7 +192,7 @@
         var propClsName = prop.ObjectClass.Name;
 %>
     <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>EfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>EfImpl)">
+      <EntityTypeMapping TypeName="Model.<%= prop.GetCollectionEntryClassName() %>EfImpl">
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Value" ColumnName="<%= prop.Name %>" />
@@ -234,7 +234,7 @@
         var propClsName = prop.ObjectClass.Name;
 %>
     <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>EfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>EfImpl)">
+      <EntityTypeMapping TypeName="Model.<%= prop.GetCollectionEntryClassName() %>EfImpl">
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <% ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "Value", string.Empty); %>

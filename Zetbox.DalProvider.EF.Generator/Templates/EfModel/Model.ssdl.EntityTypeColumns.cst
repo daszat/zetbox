@@ -81,7 +81,7 @@
 			if (p.IsValueTypePropertySingle())
 			{
 				// must have one space at the end
-				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
+				nullableAttr = String.Format("Nullable=\"{0}\" ", IsRealNullable(p).ToString().ToLowerInvariant());
 			}
 %>
     <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= precScaleAttr %><%= nullableAttr %>/>

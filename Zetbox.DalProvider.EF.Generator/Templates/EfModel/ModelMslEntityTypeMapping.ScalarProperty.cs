@@ -69,7 +69,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
                 return;
             }
 
-            this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", name, columnName);
+            this.WriteLine("          <ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", name, columnName);
         }
     }
 }

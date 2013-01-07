@@ -510,6 +510,8 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
             // should fetch && remember parent for Task_was_Identity_RelationEntry
             // should fetch && remember parent for Task_was_Identity_RelationEntry
+            // should fetch && remember parent for TPHBaseObj_was_Identity_RelationEntry
+            // should fetch && remember parent for TPHBaseObj_was_Identity_RelationEntry
             // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
             // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
 

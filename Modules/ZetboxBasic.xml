@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-02T12:53:07Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-02T15:06:18.712856Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -26493,17 +26493,17 @@ public static void isValid_SubClasses(ObjectClass obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Physical</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-01-02T11:53:07.100762Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_TableMapping(ObjectClass obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.TableMapping&gt; e)
+public static void get_TableMapping(ObjectClass obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.TableMapping?&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_TableMapping(ObjectClass obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.TableMapping&gt; e)
+public static void preSet_TableMapping(ObjectClass obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.TableMapping?&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_TableMapping(ObjectClass obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.TableMapping&gt; e)
+public static void postSet_TableMapping(ObjectClass obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.TableMapping?&gt; e)
 {
 }
 
@@ -27500,17 +27500,17 @@ public static void isValid_DaysOffset(RecurrenceRule obj, PropertyIsValidEventAr
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T07:37:59.180362Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_EveryDay(RecurrenceRule obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+public static void get_EveryDay(RecurrenceRule obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_EveryDay(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+public static void preSet_EveryDay(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_EveryDay(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+public static void postSet_EveryDay(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
 {
 }
 
@@ -27576,17 +27576,17 @@ public static void isValid_EveryDayOfWeek(RecurrenceRule obj, PropertyIsValidEve
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T07:37:59.180362Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_EveryMonth(RecurrenceRule obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+public static void get_EveryMonth(RecurrenceRule obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_EveryMonth(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+public static void preSet_EveryMonth(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_EveryMonth(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+public static void postSet_EveryMonth(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
 {
 }
 
@@ -27614,17 +27614,17 @@ public static void isValid_EveryMonth(RecurrenceRule obj, PropertyIsValidEventAr
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T07:37:59.180362Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_EveryQuater(RecurrenceRule obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+public static void get_EveryQuater(RecurrenceRule obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_EveryQuater(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+public static void preSet_EveryQuater(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_EveryQuater(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+public static void postSet_EveryQuater(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
 {
 }
 
@@ -27652,17 +27652,17 @@ public static void isValid_EveryQuater(RecurrenceRule obj, PropertyIsValidEventA
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T07:37:59.180362Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_EveryYear(RecurrenceRule obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+public static void get_EveryYear(RecurrenceRule obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_EveryYear(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+public static void preSet_EveryYear(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_EveryYear(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+public static void postSet_EveryYear(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
 {
 }
 

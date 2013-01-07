@@ -61,7 +61,7 @@
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
 <%	
-	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
+	foreach(var cls in ctx.GetDerivedTPTClasses().OrderBy(c => c.Name))
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
         var clsName = cls.Name;
@@ -174,8 +174,7 @@
 
   <!-- EntityTypes for all classes -->
 <%
-	foreach(var cls in ctx.GetQuery<ObjectClass>()
-		.OrderBy(cls => cls.Name))
+	foreach(var cls in GetEntityTypes())
 	{
         var clsName = cls.Name;
 %>	
@@ -184,6 +183,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="<%= int32DbType %>" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : String.Empty %>/>
+<% if(cls.GetTableMapping() == TableMapping.TPH) { %>
+    <Property Name="<%= Zetbox.API.Server.TableMapper.DiscriminatorColumnName %>" Type="<%= nvarcharDbType %>" Nullable="false" />
+<% } %>
 <%
 		ApplyEntityTypeColumnDefs(cls);
 %>
@@ -238,7 +240,7 @@
 		if (a.Type.ImplementsIExportable() && b.Type.ImplementsIExportable())
 		{
 %>
-	<Property Name="ExportGuid" Type="<%= guid32DbType %>" Nullable="false" />
+	<Property Name="ExportGuid" Type="<%= guidDbType %>" Nullable="false" />
 <%	
 		}
 %>
@@ -336,7 +338,7 @@
 
   <!-- derived->base ObjectClass references -->
 <%
-	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
+	foreach(var cls in ctx.GetDerivedTPTClasses().OrderBy(c => c.Name))
 	{
 		var parentType = cls.BaseObjectClass;
 		var childType = cls;
@@ -477,11 +479,11 @@
 	}
 %>
 	<Function Name="GetContinuousSequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="seqNumber" Type="<%= guid32DbType %>" Mode="In" />
+          <Parameter Name="seqNumber" Type="<%= guidDbType %>" Mode="In" />
 		  <Parameter Name="result" Type="<%= int32DbType %>" Mode="Out" />
     </Function>
     <Function Name="GetSequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-        <Parameter Name="seqNumber" Type="<%= guid32DbType %>" Mode="In" />
+        <Parameter Name="seqNumber" Type="<%= guidDbType %>" Mode="In" />
 		<Parameter Name="result" Type="<%= int32DbType %>" Mode="Out" />
     </Function>
 </Schema>

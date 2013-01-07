@@ -29,12 +29,15 @@
 <%@ Import Namespace="Zetbox.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= cls.Name %>EfImpl)">
-	    <MappingFragment StoreEntitySet="<%= cls.Name %>">
+      <EntityTypeMapping TypeName="<%= GetMappingTypeName() %>">
+	    <MappingFragment StoreEntitySet="<%= GetStoreEntitySet() %>">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <%
-		ApplyPropertyMappings();
+		ApplyPropertyMappings(cls);
 %>
+<% if(cls.GetTableMapping() == TableMapping.TPH) { %>
+          <Condition ColumnName="<%= Zetbox.API.Server.TableMapper.DiscriminatorColumnName %>" Value="<%= cls.Module.SchemaName %>.<%= cls.TableName %>" />
+<% } %>
 	    </MappingFragment>
       </EntityTypeMapping>
 <%

@@ -43,20 +43,37 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
             if (_int32DbType == null)
                 _int32DbType = schemaProvider.DbTypeToNative(DbType.Int32);
         }
-        private string _guid32DbType;
-        protected string guid32DbType
+
+        private string _guidDbType;
+        protected string guidDbType
         {
             get
             {
                 InitGuidType();
-                return _guid32DbType;
+                return _guidDbType;
             }
         }
 
         private void InitGuidType()
         {
-            if (_guid32DbType == null)
-                _guid32DbType = schemaProvider.DbTypeToNative(DbType.Guid);
+            if (_guidDbType == null)
+                _guidDbType = schemaProvider.DbTypeToNative(DbType.Guid);
+        }
+
+        private string _nvarcharDbType;
+        protected string nvarcharDbType
+        {
+            get
+            {
+                InitnvarcharType();
+                return _nvarcharDbType;
+            }
+        }
+
+        private void InitnvarcharType()
+        {
+            if (_nvarcharDbType == null)
+                _nvarcharDbType = schemaProvider.DbTypeToNative(DbType.String);
         }
 
         // ContextBound Objects are not allowed to have Generic Methods
@@ -102,6 +119,14 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
                 ModelSsdlHelper.RetrieveAndSortPropertiesOfType<CompoundObjectProperty>(cls.Properties, p => !p.IsList).Cast<Property>(),
                 String.Empty,
                 schemaProvider);
+
+            if (cls.GetTableMapping() == TableMapping.TPH)
+            {
+                foreach (var subCls in cls.SubClasses)
+                {
+                    ApplyEntityTypeColumnDefs(subCls);
+                }
+            }
         }
 
         protected virtual void ApplyEntityTypeColumnDefs(CompoundObjectProperty prop)
@@ -112,6 +137,15 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
                 new Property[] { prop },
                 String.Empty,
                 schemaProvider);
+        }
+
+        protected IEnumerable<ObjectClass> GetEntityTypes()
+        {
+            
+            return ctx.GetQuery<ObjectClass>()
+                .ToList()
+                .Where(c => c.GetTableMapping() == TableMapping.TPT || (c.GetTableMapping() == TableMapping.TPH && c.BaseObjectClass == null))
+                .OrderBy(cls => cls.Name);
         }
     }
 }

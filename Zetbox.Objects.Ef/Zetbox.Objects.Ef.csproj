@@ -253,6 +253,9 @@
     <Compile Include="TestDecimal.Ef.Designer.cs" />
     <Compile Include="TestObjClass.Ef.Designer.cs" />
     <Compile Include="TestStudent.Ef.Designer.cs" />
+    <Compile Include="TPHBaseObj.Ef.Designer.cs" />
+    <Compile Include="TPHDerivedAObj.Ef.Designer.cs" />
+    <Compile Include="TPHDerivedBObj.Ef.Designer.cs" />
     <Compile Include="TypeRef.Ef.Designer.cs" />
     <Compile Include="ValueTypeProperty.Ef.Designer.cs" />
     <Compile Include="ViewDescriptor.Ef.Designer.cs" />

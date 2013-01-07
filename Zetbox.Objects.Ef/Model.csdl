@@ -91,6 +91,7 @@
     <EntitySet Name="TestDecimalEfImpl" EntityType="Model.TestDecimalEfImpl" />
     <EntitySet Name="TestObjClassEfImpl" EntityType="Model.TestObjClassEfImpl" />
     <EntitySet Name="TestStudentEfImpl" EntityType="Model.TestStudentEfImpl" />
+    <EntitySet Name="TPHBaseObjEfImpl" EntityType="Model.TPHBaseObjEfImpl" />
     <EntitySet Name="TypeRefEfImpl" EntityType="Model.TypeRefEfImpl" />
     <EntitySet Name="ViewDescriptorEfImpl" EntityType="Model.ViewDescriptorEfImpl" />
     <EntitySet Name="ViewModelDescriptorEfImpl" EntityType="Model.ViewModelDescriptorEfImpl" />
@@ -980,6 +981,14 @@
     <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.FK_TestObjClass_has_ObjectProp" >
       <End Role="TestObjClass" EntitySet="TestObjClassEfImpl" />
       <End Role="ObjectProp" EntitySet="KundeEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TPHBaseObj_was_ChangedBy" Association="Model.FK_TPHBaseObj_was_ChangedBy" >
+      <End Role="TPHBaseObj" EntitySet="TPHBaseObjEfImpl" />
+      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TPHBaseObj_was_CreatedBy" Association="Model.FK_TPHBaseObj_was_CreatedBy" >
+      <End Role="TPHBaseObj" EntitySet="TPHBaseObjEfImpl" />
+      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_TypeRef_has_Assembly" Association="Model.FK_TypeRef_has_Assembly" >
       <End Role="TypeRef" EntitySet="TypeRefEfImpl" />
@@ -2614,6 +2623,24 @@
                         FromRole="Student"
                         ToRole="CollectionEntry" />
   </EntityType>
+  <EntityType Name="TPHBaseObjEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedByImpl"
+                        Relationship="Model.FK_TPHBaseObj_was_ChangedBy"
+                        FromRole="TPHBaseObj"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <NavigationProperty Name="CreatedByImpl"
+                        Relationship="Model.FK_TPHBaseObj_was_CreatedBy"
+                        FromRole="TPHBaseObj"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000"  />
+  </EntityType>
   <EntityType Name="TypeRefEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -3047,6 +3074,13 @@
   <EntityType Name="StringRangeConstraintEfImpl" BaseType="Model.ConstraintEfImpl">
     <Property Name="MaxLength" Type="Int32" Nullable="true"  />
     <Property Name="MinLength" Type="Int32" Nullable="false"  />
+  </EntityType>
+  <EntityType Name="TPHDerivedAObjEfImpl" BaseType="Model.TPHBaseObjEfImpl">
+    <Property Name="AInt" Type="Int32" Nullable="false"  />
+    <Property Name="AString" Type="String" Nullable="true" MaxLength="200"  />
+  </EntityType>
+  <EntityType Name="TPHDerivedBObjEfImpl" BaseType="Model.TPHBaseObjEfImpl">
+    <Property Name="BString" Type="String" Nullable="false" MaxLength="100"  />
   </EntityType>
   <EntityType Name="ValueTypePropertyEfImpl" BaseType="Model.PropertyEfImpl" Abstract="true">
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false"  />
@@ -5359,6 +5393,22 @@
          Multiplicity="*" />
     <End Role="ObjectProp"
          Type="Model.KundeEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_TPHBaseObj_was_ChangedBy" >
+    <End Role="TPHBaseObj"
+         Type="Model.TPHBaseObjEfImpl" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_TPHBaseObj_was_CreatedBy" >
+    <End Role="TPHBaseObj"
+         Type="Model.TPHBaseObjEfImpl" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_TypeRef_has_Assembly" >

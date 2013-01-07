@@ -247,21 +247,21 @@ Finally the various parts have to be defined in the EDMX:
 
 	<EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
 		<EntitySetMapping Name="ObjectClass">
-			<EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
+			<EntityTypeMapping TypeName="Model.ObjectClass">
 				<MappingFragment StoreEntitySet="ObjectClass">
 					<ScalarProperty Name="ID" ColumnName="ID" />
 				</MappingFragment>
 			</EntityTypeMapping>
 		</EntitySetMapping>
 		<EntitySetMapping Name="Interface">
-			<EntityTypeMapping TypeName="IsTypeOf(Model.Interface)">
+			<EntityTypeMapping TypeName="Model.Interface">
 				<MappingFragment StoreEntitySet="Interface">
 					<ScalarProperty Name="ID" ColumnName="ID" />
 				</MappingFragment>
 			</EntityTypeMapping>
 		</EntitySetMapping>
 		<EntitySetMapping Name="ObjectClass_ImplementsInterfacesCollectionEntry">
-			<EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass_ImplementsInterfacesCollectionEntry)">
+			<EntityTypeMapping TypeName="Model.ObjectClass_ImplementsInterfacesCollectionEntry">
 				<MappingFragment StoreEntitySet="ObjectClass_ImplementsInterfacesCollectionEntry">
 					<ScalarProperty Name="ID" ColumnName="ID" />
 				</MappingFragment>

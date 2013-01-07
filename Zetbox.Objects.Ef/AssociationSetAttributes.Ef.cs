@@ -2840,6 +2840,36 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_TPHBaseObj_was_ChangedBy
+    A: ZeroOrMore TPHBaseObj as TPHBaseObj
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_TPHBaseObj_was_ChangedBy",
+    "TPHBaseObj", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.TPHBaseObjEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_TPHBaseObj_was_CreatedBy
+    A: ZeroOrMore TPHBaseObj as TPHBaseObj
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_TPHBaseObj_was_CreatedBy",
+    "TPHBaseObj", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.TPHBaseObjEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_TypeRef_has_Assembly
     A: ZeroOrMore TypeRef as TypeRef
     B: One Assembly as Assembly

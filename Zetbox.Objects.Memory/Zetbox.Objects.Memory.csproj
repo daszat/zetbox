@@ -250,6 +250,9 @@
     <Compile Include="TestDecimal.Memory.Designer.cs" />
     <Compile Include="TestObjClass.Memory.Designer.cs" />
     <Compile Include="TestStudent.Memory.Designer.cs" />
+    <Compile Include="TPHBaseObj.Memory.Designer.cs" />
+    <Compile Include="TPHDerivedAObj.Memory.Designer.cs" />
+    <Compile Include="TPHDerivedBObj.Memory.Designer.cs" />
     <Compile Include="TypeRef.Memory.Designer.cs" />
     <Compile Include="ValueTypeProperty.Memory.Designer.cs" />
     <Compile Include="ViewDescriptor.Memory.Designer.cs" />
