@@ -446,7 +446,7 @@ namespace Zetbox.Server.SchemaManagement
             var tblName = db.GetTableName(cprop.Module.SchemaName, cprop.GetCollectionEntryTable());
             string fkName = "fk_" + cprop.ObjectClass.Name;
 
-            // TODO: Support neested CompoundObject
+            // TODO: Support nested CompoundObject
             string valPropIndexName = cprop.Name + "Index";
             string assocName = cprop.GetAssociationName();
             bool hasPersistentOrder = cprop.HasPersistentOrder;
@@ -2115,7 +2115,7 @@ namespace Zetbox.Server.SchemaManagement
                     SchemaManager.GetDefaultConstraint(valProp));
             }
 
-            // TODO: Add neested CompoundObjectProperty
+            // TODO: Add nested CompoundObjectProperty
         }
         #endregion
 

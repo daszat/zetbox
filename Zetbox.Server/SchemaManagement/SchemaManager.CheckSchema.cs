@@ -727,7 +727,7 @@ namespace Zetbox.Server.SchemaManagement
                     Log.DebugFormat("{0}", prop.Name);
 
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
-                    // TODO: Support neested CompoundObject
+                    // TODO: Support nested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
                         CheckColumn(tblName, Construct.NestedColumnName(p.Name, basePropName), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));

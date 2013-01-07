@@ -503,7 +503,7 @@ namespace Zetbox.API
         /// Begins a transaction.
         /// </summary>
         /// <remarks>
-        /// Neested transactions are not supported.
+        /// Nested transactions are not supported.
         /// </remarks>
         /// <exception cref="InvalidOperationException">
         /// InvalidOperationException is thrown if a transaction is already running.
