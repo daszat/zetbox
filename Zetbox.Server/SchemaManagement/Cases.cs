@@ -316,7 +316,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 if (updateDone)
                 {
-                    db.CreateColumn(tblName, colName, dbType, size, scale, realIsNullable, def);
+                    db.AlterColumn(tblName, colName, dbType, size, scale, realIsNullable, def);
                 }
                 else
                 {
@@ -1901,16 +1901,24 @@ namespace Zetbox.Server.SchemaManagement
         public void DoChangeTptToTph(ObjectClass objClass)
         {
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var baseTblName = db.GetTableName(savedObjClass.GetRootClass().Module.SchemaName, savedObjClass.GetRootClass().TableName);
 
             if (savedObjClass.BaseObjectClass == null)
             {
                 // create and initialize discriminator
-
+                db.CreateColumn(
+                    baseTblName, TableMapper.DiscriminatorColumnName,
+                    System.Data.DbType.String, TableMapper.DiscriminatorColumnSize, 0,
+                    true, null);
+                db.WriteDefaultValue(baseTblName, TableMapper.DiscriminatorColumnName, Construct.DiscriminatorValue(savedObjClass));
+                db.AlterColumn(
+                    baseTblName, TableMapper.DiscriminatorColumnName,
+                    System.Data.DbType.String, TableMapper.DiscriminatorColumnSize, 0,
+                    false, null);
             }
             else
             {
                 var colNamesList = new List<string>();
-                var baseTblName = db.GetTableName(savedObjClass.GetRootClass().Module.SchemaName, savedObjClass.GetRootClass().TableName);
 
                 #region create new columns in base table
 
@@ -2047,7 +2055,7 @@ namespace Zetbox.Server.SchemaManagement
                     var srcTblName = db.GetTableName(savedObjClass.Module.SchemaName, savedObjClass.TableName);
                     var srcColNames = colNamesList.ToArray();
                     var dstColNames = colNamesList.Select(n => Construct.NestedColumnName(n, savedObjClass.TableName)).ToArray();
-                    db.CopyColumnData(srcTblName, srcColNames, baseTblName, dstColNames); // TODO: SET discriminator
+                    db.CopyColumnData(srcTblName, srcColNames, baseTblName, dstColNames, Construct.DiscriminatorValue(savedObjClass));
                 }
 
                 #endregion

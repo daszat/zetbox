@@ -541,6 +541,11 @@ namespace Zetbox.API.Server
         public bool Value { get; set; }
     }
 
+    public class StringDefaultConstraint : DefaultConstraint
+    {
+        public string Value { get; set; }
+    }
+
     public class NewGuidDefaultConstraint : DefaultConstraint
     {
     }
@@ -693,9 +698,9 @@ namespace Zetbox.API.Server
         void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
 
         /// <summary>
-        /// Batch-copies column data from srcTblName.srcColName[i] to tblName.colName[i], matching rows on "ID" column.
+        /// Batch-copies column data from srcTblName.srcColName[i] to tblName.colName[i], matching rows on "ID" column. When discriminatorValue is not null, the TableMapper.DiscriminatorColumnName is set to this value.
         /// </summary>
-        void CopyColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames);
+        void CopyColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, string discriminatorValue);
 
         #endregion
 

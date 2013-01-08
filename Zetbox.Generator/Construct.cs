@@ -224,6 +224,11 @@ namespace Zetbox.Generator
 
         #endregion
 
+        public static string DiscriminatorValue(ObjectClass cls)
+        {
+            return string.Format("{0}.{1}", cls.Module.SchemaName, cls.TableName);
+        }
+
         public static string ValueListCollectionTableName(ValueTypeProperty prop)
         {
             throw new NotImplementedException();

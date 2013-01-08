@@ -605,7 +605,7 @@ namespace Zetbox.Server.SchemaManagement
 
 
         public abstract void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
-        public abstract void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName);
+        public abstract void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName, string discriminatorValue);
         public abstract void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
         public abstract void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName);
         public abstract void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName);
