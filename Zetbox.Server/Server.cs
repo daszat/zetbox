@@ -252,7 +252,7 @@ namespace Zetbox.Server
             using (Log.InfoTraceMethodCall("SyncIdentities"))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IZetboxContext ctx = subContainer.Resolve<IZetboxContext>();
+                IZetboxContext ctx = subContainer.Resolve<IZetboxServerContext>();
                 var userList = subContainer.Resolve<IIdentitySource>().GetAllIdentities();
 
                 var identities = ctx.GetQuery<Zetbox.App.Base.Identity>().ToLookup(k => k.UserName.ToUpper());

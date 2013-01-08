@@ -149,7 +149,7 @@ namespace Zetbox.Generator
                     {
                         using (var innerContainer = _container.BeginLifetimeScope())
                         {
-                            generator.Generate(innerContainer.Resolve<IZetboxContext>(), workingPath);
+                            generator.Generate(innerContainer.Resolve<IZetboxServerContext>(), workingPath);
                         }
                     }
                     catch (Exception ex)

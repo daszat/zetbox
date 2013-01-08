@@ -256,7 +256,7 @@ namespace Zetbox.API.Migration
         protected void WriteLog(string srcTbl, long srcRows, string dstTbl, long dstRows)
         {
             using (var logScope = _applicationScope.BeginLifetimeScope())
-            using (var logCtx = logScope.Resolve<IZetboxContext>())
+            using (var logCtx = logScope.Resolve<IZetboxServerContext>())
             {
                 var log = logCtx.Create<MigrationLog>();
                 log.Timestamp = DateTime.Now;
