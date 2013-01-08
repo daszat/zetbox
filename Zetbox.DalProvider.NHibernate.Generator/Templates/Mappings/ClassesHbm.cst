@@ -28,7 +28,7 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update">
-<% foreach (var oc in ctx.GetQuery<ObjectClass>().Where(i => i.BaseObjectClass == null)) {          %>
+<% foreach (var oc in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null).OrderBy(c => c.Module.Name).ThenBy(c => c.Name)) {          %>
 <%      ApplyObjectClassTemplate(oc);                                                               %>
 <% }                                                                                                %>
 </hibernate-mapping>
