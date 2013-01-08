@@ -111,9 +111,10 @@ namespace Zetbox.Generator
         {
             if (otherEnd == null) { throw new ArgumentNullException("otherEnd"); }
 
-            if (otherEnd.Type.GetTableMapping() == TableMapping.TPH && otherEnd.Type.BaseObjectClass != null)
+            var relEnd = otherEnd.GetParent().GetOtherEnd(otherEnd);
+            if (relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null)
             {
-                return NestedColumnName(ForeignKeyColumnName(NestedColumnName(otherEnd.RoleName, prefix)), otherEnd.Type.TableName);
+                return NestedColumnName(ForeignKeyColumnName(NestedColumnName(otherEnd.RoleName, prefix)), relEnd.Type.TableName);
             }
             else
             {
