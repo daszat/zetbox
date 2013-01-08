@@ -91,7 +91,7 @@ ApplyPropertyDefinitions(properties);
 this.WriteObjects("\r\n");
 this.WriteObjects("            <!-- define the subclasses -->\r\n");
 #line 63 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\SubclassHbm.cst"
-ApplyJoinedSubclasses(subClasses); 
+ApplySubclasses(subClasses); 
 #line 64 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\SubclassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        </",  GetTagName() , ">\r\n");

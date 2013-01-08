@@ -62,7 +62,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             PropertiesHbm.Call(Host, ctx, String.Empty, properties, false);
         }
 
-        protected virtual void ApplyJoinedSubclasses(List<ObjectClass> subClasses)
+        protected virtual void ApplySubclasses(List<ObjectClass> subClasses)
         {
             foreach (var subClass in subClasses.OrderBy(cls => cls.Name))
             {

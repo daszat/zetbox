@@ -107,7 +107,7 @@ this.WriteObjects("\r\n");
 #line 77 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("        <!-- define the subclasses -->\r\n");
 #line 78 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-ApplyJoinedSubclasses(subClasses); 
+ApplySubclasses(subClasses); 
 #line 79 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    </class>\r\n");

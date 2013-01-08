@@ -75,6 +75,6 @@
 
 <% } %>
         <!-- define the subclasses -->
-<% ApplyJoinedSubclasses(subClasses); %>
+<% ApplySubclasses(subClasses); %>
 
     </class>
