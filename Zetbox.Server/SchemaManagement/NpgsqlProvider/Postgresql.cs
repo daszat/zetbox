@@ -1002,7 +1002,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 FormatSchemaName(tblName),        // 1
                 string.Join(", ", srcColName.Zip(colName, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst)))),       // 2
                 QuoteIdentifier("ID"),           // 3
-                discriminatorValue == null ? string.Empty : string.Format(", {0} = '{1}'", TableMapper.DiscriminatorColumnName, discriminatorValue)));      // 4
+                discriminatorValue == null ? string.Empty : string.Format(", {0} = '{1}'", QuoteIdentifier(TableMapper.DiscriminatorColumnName), discriminatorValue)));      // 4
         }
 
         public override void MigrateFKs(
@@ -1534,7 +1534,7 @@ END$BODY$
             try
             {
                 bulkCopy.Start();
-                 // explicitly use Npgsql's default encoding, without BOM
+                // explicitly use Npgsql's default encoding, without BOM
                 using (var dst = new StreamWriter(bulkCopy.CopyStream, new System.Text.UTF8Encoding(false)))
                 {
                     // normal windows newline confuses npgsql

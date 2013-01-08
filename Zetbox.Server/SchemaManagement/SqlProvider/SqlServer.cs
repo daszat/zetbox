@@ -934,7 +934,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 FormatSchemaName(tblName),        // 1
                 string.Join(", ", srcColName.Zip(colName, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst)))),       // 2
                 QuoteIdentifier("ID"),           // 3
-                discriminatorValue == null ? string.Empty : string.Format(", {0} = '{1}'", TableMapper.DiscriminatorColumnName, discriminatorValue)));        // 4
+                discriminatorValue == null ? string.Empty : string.Format(", {0} = '{1}'", QuoteIdentifier(TableMapper.DiscriminatorColumnName), discriminatorValue)));        // 4
         }
 
         public override void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
