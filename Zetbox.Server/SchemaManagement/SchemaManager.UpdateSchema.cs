@@ -273,7 +273,12 @@ namespace Zetbox.Server.SchemaManagement
                 }
             }
 
-            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>()
+                .Select(o => new { Class = o, Generation = o.AndParents(c => c.BaseObjectClass).Count() })
+                .OrderBy(o => o.Generation)
+                .ThenBy(o => o.Class.Module.Namespace)
+                .ThenBy(o => o.Class.Name)
+                .Select(o => o.Class))
             {
                 Log.DebugFormat("Managing Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
