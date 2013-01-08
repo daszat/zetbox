@@ -259,7 +259,7 @@ namespace Zetbox.Server.SchemaManagement
                 UpdateDeletedColumns(objClass, String.Empty);
             }
 
-            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass == null).OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 Log.DebugFormat("TPH/TPT migrations for Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
