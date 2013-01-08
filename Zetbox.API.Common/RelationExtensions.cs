@@ -52,15 +52,6 @@ namespace Zetbox.App.Extensions
             return String.Format("FK_{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
         }
 
-        /// <summary>
-        /// Returns the name for the foreign key <strong>to</strong> the specified role.
-        /// </summary>
-        public static string GetRelationFkNameToEnd(this Relation rel, RelationEnd relEnd)
-        {
-            if (relEnd == null) { throw new ArgumentNullException("relEnd"); }
-            return String.Format("fk_{0}", relEnd.RoleName);
-        }
-
         public static RelationEndRole GetRole(this RelationEnd relEnd)
         {
             if (relEnd == null) { throw new ArgumentNullException("relEnd"); }
