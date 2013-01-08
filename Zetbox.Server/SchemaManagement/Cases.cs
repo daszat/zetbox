@@ -1671,15 +1671,29 @@ namespace Zetbox.Server.SchemaManagement
 
         private void CreateFKColumn(RelationEnd otherEnd, TableRef tblName, string colName)
         {
-            if (otherEnd.IsNullable() || !db.CheckTableContainsData(tblName))
+            var relEnd = otherEnd.GetParent().GetOtherEnd(otherEnd);
+
+            var isNullable = otherEnd.IsNullable();
+            var checkNotNull = !isNullable;
+            string errorMsg = null;
+            if (checkNotNull && relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null)
             {
-                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable());
+                // TODO: implement proper CHECK constraint
+                isNullable = true;
+                errorMsg = "Unable to create NOT NULL column ({1}), since table ({0}) is type-per-hierarchy. Created nullable column instead";
             }
-            else
+            else if (checkNotNull && db.CheckTableContainsData(tblName))
             {
-                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
-                Log.ErrorFormat("Unable to create NOT NULL column, since table contains data. Created nullable column instead");
+                isNullable = true;
+                errorMsg = "Unable to create NOT NULL column ({1}), since table ({0}) contains data. Created nullable column instead";
             }
+
+            if (errorMsg != null)
+            {
+                Log.ErrorFormat(errorMsg, tblName, colName);
+            }
+
+            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, isNullable);
         }
         #endregion
 
