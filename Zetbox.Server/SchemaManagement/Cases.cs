@@ -152,7 +152,8 @@ namespace Zetbox.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
-            return Construct.ColumnName(saved, prefix) != Construct.ColumnName(prop, prefix);
+            // TODO: What if prefix has changed
+            return saved.Name != prop.Name;
         }
         public void DoRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
@@ -1948,7 +1949,7 @@ namespace Zetbox.Server.SchemaManagement
 
             #region Relations
 
-            foreach (Relation savedRel in savedSchema.GetQuery<Relation>().Where(r => r.A.Type == objClass || r.B.Type == objClass).OrderBy(r => r.Module.Namespace))
+            foreach (Relation savedRel in savedSchema.GetQuery<Relation>().Where(r => r.A.Type == savedObjClass || r.B.Type == savedObjClass).OrderBy(r => r.Module.Namespace))
             {
                 switch (savedRel.GetRelationType())
                 {
@@ -1964,11 +1965,11 @@ namespace Zetbox.Server.SchemaManagement
                                 // Only do this when we are N-side
                                 if (relEnd.Type == savedObjClass)
                                 {
-                                    CreateFKColumn(otherEnd, baseTblName, colName);
+                                    CreateFKColumn(otherEnd, baseTblName, Construct.NestedColumnName(colName, objClass.TableName));
                                     colNamesList.Add(colName);
                                     if (hasPersistentOrder)
                                     {
-                                        db.CreateColumn(baseTblName, listPosName, System.Data.DbType.Int32, 0, 0, true);
+                                        db.CreateColumn(baseTblName, Construct.NestedColumnName(listPosName, objClass.TableName), System.Data.DbType.Int32, 0, 0, true);
                                         colNamesList.Add(listPosName);
                                     }
                                 }
@@ -1983,14 +1984,14 @@ namespace Zetbox.Server.SchemaManagement
                             ObjectClass aType, bType;
                             if (TryInspect_N_M_Relation(savedRel, out assocName, out tblName, out fkAName, out fkBName, out aType, out bType))
                             {
-                                if (aType == objClass)
+                                if (aType == savedObjClass)
                                 {
-                                    db.DropFKConstraint(tblName, fkAName);
+                                    db.DropFKConstraint(tblName, savedRel.GetRelationAssociationName(RelationEndRole.A));
                                     db.CreateFKConstraint(tblName, baseTblName, fkAName, savedRel.GetRelationAssociationName(RelationEndRole.A), false);
                                 }
-                                if (bType == objClass)
+                                if (bType == savedObjClass)
                                 {
-                                    db.DropFKConstraint(tblName, fkBName);
+                                    db.DropFKConstraint(tblName, savedRel.GetRelationAssociationName(RelationEndRole.B));
                                     db.CreateFKConstraint(tblName, baseTblName, fkBName, savedRel.GetRelationAssociationName(RelationEndRole.B), false);
                                 }
                             }
@@ -2002,10 +2003,11 @@ namespace Zetbox.Server.SchemaManagement
                         {
                             TableRef tblName, refTblName;
                             string assocName, colName, idxName;
-                            if (!TryInspect_1_1_Relation(savedRel, savedRel.A, savedRel.B, RelationEndRole.A, out tblName, out refTblName, out assocName, out colName, out idxName))
+                            if (TryInspect_1_1_Relation(savedRel, savedRel.A, savedRel.B, RelationEndRole.A, out tblName, out refTblName, out assocName, out colName, out idxName))
                             {
                                 db.DropFKConstraint(tblName, assocName);
-                                CreateFKColumn(savedRel.B, baseTblName, colName);
+                                CreateFKColumn(savedRel.B, baseTblName, Construct.NestedColumnName(colName, objClass.TableName));
+                                colNamesList.Add(colName);
                             }
                         }
 
@@ -2013,10 +2015,11 @@ namespace Zetbox.Server.SchemaManagement
                         {
                             TableRef tblName, refTblName;
                             string assocName, colName, idxName;
-                            if (!TryInspect_1_1_Relation(savedRel, savedRel.B, savedRel.A, RelationEndRole.B, out tblName, out refTblName, out assocName, out colName, out idxName))
+                            if (TryInspect_1_1_Relation(savedRel, savedRel.B, savedRel.A, RelationEndRole.B, out tblName, out refTblName, out assocName, out colName, out idxName))
                             {
                                 db.DropFKConstraint(tblName, assocName);
-                                CreateFKColumn(savedRel.A, baseTblName, colName);
+                                CreateFKColumn(savedRel.A, baseTblName, Construct.NestedColumnName(colName, objClass.TableName));
+                                colNamesList.Add(colName);
                             }
                         }
                         break;
@@ -2033,15 +2036,19 @@ namespace Zetbox.Server.SchemaManagement
 
             #region copy data from derived tables to base table
 
-            var srcTblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
-            var colNames = colNamesList.ToArray();
-            db.CopyColumnData(srcTblName, colNames, baseTblName, colNames);
+            if (colNamesList.Count > 0)
+            {
+                var srcTblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+                var srcColNames = colNamesList.ToArray();
+                var dstColNames = colNamesList.Select(n => Construct.NestedColumnName(n, objClass.TableName)).ToArray();
+                db.CopyColumnData(srcTblName, srcColNames, baseTblName, dstColNames);
+            }
 
             #endregion
 
             #region create constraints and references
 
-            foreach (Relation savedRel in savedSchema.GetQuery<Relation>().Where(r => r.A.Type == objClass || r.B.Type == objClass).OrderBy(r => r.Module.Namespace))
+            foreach (Relation savedRel in savedSchema.GetQuery<Relation>().Where(r => r.A.Type == savedObjClass || r.B.Type == savedObjClass).OrderBy(r => r.Module.Namespace))
             {
                 switch (savedRel.GetRelationType())
                 {
@@ -2053,6 +2060,7 @@ namespace Zetbox.Server.SchemaManagement
                             bool hasPersistentOrder;
                             if (TryInspect_1_N_Relation(savedRel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
                             {
+                                colName = Construct.NestedColumnName(colName, objClass.TableName);
                                 db.CreateFKConstraint(baseTblName, refTblName, colName, assocName, false);
                                 db.CreateIndex(baseTblName, Construct.IndexName(baseTblName.Name, colName), false, false, colName);
                             }
@@ -2068,6 +2076,7 @@ namespace Zetbox.Server.SchemaManagement
                             string assocName, colName, idxName;
                             if (!TryInspect_1_1_Relation(savedRel, savedRel.A, savedRel.B, RelationEndRole.A, out tblName, out refTblName, out assocName, out colName, out idxName))
                             {
+                                colName = Construct.NestedColumnName(colName, objClass.TableName);
                                 db.CreateFKConstraint(tblName, baseTblName, colName, assocName, false);
                                 idxName = Construct.IndexName(baseTblName.Name, colName);
                                 if (db.CheckIndexPossible(baseTblName, idxName, true, false, colName))
@@ -2083,6 +2092,7 @@ namespace Zetbox.Server.SchemaManagement
                             string assocName, colName, idxName;
                             if (!TryInspect_1_1_Relation(savedRel, savedRel.B, savedRel.A, RelationEndRole.B, out tblName, out refTblName, out assocName, out colName, out idxName))
                             {
+                                colName = Construct.NestedColumnName(colName, objClass.TableName);
                                 db.CreateFKConstraint(tblName, baseTblName, colName, assocName, false);
                                 idxName = Construct.IndexName(baseTblName.Name, colName);
                                 if (db.CheckIndexPossible(baseTblName, idxName, true, false, colName))
@@ -2103,8 +2113,8 @@ namespace Zetbox.Server.SchemaManagement
 
             if (objClass.BaseObjectClass != null)
             {
-                var oldTblName = objClass.GetTableRef(db);
-                var unknownColumns = db.GetTableColumnNames(oldTblName).Except(colNames).ToList();
+                var oldTblName = savedObjClass.GetTableRef(db);
+                var unknownColumns = db.GetTableColumnNames(oldTblName).Except(colNamesList).ToList();
                 unknownColumns.Remove("ID");
 
                 if (unknownColumns.Count > 0)
@@ -2113,6 +2123,16 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
+                    // Break children's references, they'll go away soon, if they haven't already
+                    foreach (var savedSubClass in savedObjClass.SubClasses)
+                    {
+                        string assocName = Construct.InheritanceAssociationName(savedObjClass, savedSubClass);
+                        var tblName = savedSubClass.GetTableRef(db);
+                        if (db.CheckFKConstraintExists(tblName, assocName))
+                        {
+                            db.DropFKConstraint(tblName, assocName);
+                        }
+                    }
                     db.DropTable(oldTblName);
                 }
             }

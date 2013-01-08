@@ -279,10 +279,26 @@ namespace Zetbox.Server
             using (Log.InfoTraceMethodCall("RunFixes"))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Log.Info("Running OrderBy Test");
-                var ctx = subContainer.Resolve<IZetboxServerContext>();
-                var result = ctx.GetQuery<Zetbox.App.Test.AnyReferenceTestObject>().OrderBy(a => a.Any).ToList();
-                Log.InfoFormat("Found {0} objects", result.Count);
+                using (Log.InfoTraceMethodCall("Setting Properties to TPH"))
+                {
+                    var ctx = subContainer.Resolve<IZetboxServerContext>();
+                    var cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Property.Find(ctx);
+                    cls.TableMapping = TableMapping.TPH;
+                    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.BaseParameter.Find(ctx);
+                    cls.TableMapping = TableMapping.TPH;
+                    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Constraint.Find(ctx);
+                    cls.TableMapping = TableMapping.TPH;
+                    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.DefaultPropertyValue.Find(ctx);
+                    cls.TableMapping = TableMapping.TPH;
+                    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.GUI.FilterConfiguration.Find(ctx);
+                    cls.TableMapping = TableMapping.TPH;
+                    ctx.SubmitChanges();
+                }
+
+                //Log.Info("Running OrderBy Test");
+                //var ctx = subContainer.Resolve<IZetboxServerContext>();
+                //var result = ctx.GetQuery<Zetbox.App.Test.AnyReferenceTestObject>().OrderBy(a => a.Any).ToList();
+                //Log.InfoFormat("Found {0} objects", result.Count);
 
                 //foreach (var prop in ctx.GetQuery<Property>().Where(p => p.CategoryTags != null))
                 //{
