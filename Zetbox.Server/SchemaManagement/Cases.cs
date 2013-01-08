@@ -2050,13 +2050,10 @@ namespace Zetbox.Server.SchemaManagement
 
                 #region copy data from derived tables to base table
 
-                if (colNamesList.Count > 0)
-                {
-                    var srcTblName = db.GetTableName(savedObjClass.Module.SchemaName, savedObjClass.TableName);
-                    var srcColNames = colNamesList.ToArray();
-                    var dstColNames = colNamesList.Select(n => Construct.NestedColumnName(n, savedObjClass.TableName)).ToArray();
-                    db.CopyColumnData(srcTblName, srcColNames, baseTblName, dstColNames, Construct.DiscriminatorValue(savedObjClass));
-                }
+                var srcTblName = db.GetTableName(savedObjClass.Module.SchemaName, savedObjClass.TableName);
+                var srcColNames = colNamesList.ToArray();
+                var dstColNames = colNamesList.Select(n => Construct.NestedColumnName(n, savedObjClass.TableName)).ToArray();
+                db.CopyColumnData(srcTblName, srcColNames, baseTblName, dstColNames, Construct.DiscriminatorValue(savedObjClass));
 
                 #endregion
 

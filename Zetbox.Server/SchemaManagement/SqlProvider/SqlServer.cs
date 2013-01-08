@@ -928,13 +928,21 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             if (colName == null) throw new ArgumentNullException("colName");
             if (srcColName.Length != colName.Length) throw new ArgumentOutOfRangeException("colName", "need the same number of columns in srcColName and colName");
 
-            ExecuteNonQuery(string.Format(
-                "UPDATE dest SET {2}{4} FROM {1} dest INNER JOIN {2} src ON dest.{3} = src.{3}",
-                FormatSchemaName(srcTblName),     // 0
-                FormatSchemaName(tblName),        // 1
-                string.Join(", ", srcColName.Zip(colName, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst)))),       // 2
-                QuoteIdentifier("ID"),           // 3
-                discriminatorValue == null ? string.Empty : string.Format(", {0} = '{1}'", QuoteIdentifier(TableMapper.DiscriminatorColumnName), discriminatorValue)));        // 4
+            var assignments = srcColName.Zip(colName, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst))).ToList();
+            if (discriminatorValue != null)
+            {
+                assignments.Add(string.Format("{0} = '{1}'", QuoteIdentifier(TableMapper.DiscriminatorColumnName), discriminatorValue));
+            }
+
+            if (assignments.Count > 0)
+            {
+                ExecuteNonQuery(string.Format(
+                    "UPDATE dest SET {2} FROM {1} dest INNER JOIN {2} src ON dest.{3} = src.{3}",
+                    FormatSchemaName(srcTblName),     // 0
+                    FormatSchemaName(tblName),        // 1
+                    string.Join(", ", assignments),   // 2
+                    QuoteIdentifier("ID")));          // 3
+            }
         }
 
         public override void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
