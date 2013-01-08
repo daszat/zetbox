@@ -75,12 +75,12 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
         {
             var otherEnd = rel.GetOtherEnd(relEnd);
 
-            string propertyName = Construct.ForeignKeyColumnName(otherEnd, prefix);
+            string columnName = Construct.ForeignKeyColumnName(otherEnd, prefix);
             bool needPositionStorage = rel.NeedsPositionStorage(relEnd.GetRole());
             string positionColumnName = Construct.ListPositionColumnName(otherEnd, prefix);
 
             GenerateProperty(
-                propertyName,
+                columnName,
                 needPositionStorage,
                 positionColumnName);
         }
