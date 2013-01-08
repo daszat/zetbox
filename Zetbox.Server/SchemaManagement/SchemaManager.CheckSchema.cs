@@ -247,12 +247,12 @@ namespace Zetbox.Server.SchemaManagement
 
         private void GetExistingColumnNames(ObjectClass objClass, ICollection<Property> properties, string prefix, List<string> columns)
         {
-            columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => Construct.NestedColumnName(p, prefix)).ToArray());
+            columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => Construct.ColumnName(p, prefix)).ToArray());
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                columns.Add(Construct.NestedColumnName(sprop, prefix));
-                GetExistingColumnNames(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix), columns);
+                columns.Add(Construct.ColumnName(sprop, prefix));
+                GetExistingColumnNames(objClass, sprop.CompoundObjectDefinition.Properties, Construct.ColumnName(sprop, prefix), columns);
             }
         }
         private void GetRelationColumnNames(ObjectClass objClass, List<string> columns)
@@ -276,9 +276,9 @@ namespace Zetbox.Server.SchemaManagement
 
             Log.Debug("Extra Columns: ");
             List<string> columns = new List<string>();
-            List<ObjectClass> classes = new List<ObjectClass>(new [] { objClass });
+            List<ObjectClass> classes = new List<ObjectClass>(new[] { objClass });
 
-            if(objClass.GetTableMapping() == TableMapping.TPH)
+            if (objClass.GetTableMapping() == TableMapping.TPH)
                 objClass.CollectChildClasses(classes, true);
 
             foreach (var cls in classes)
@@ -730,7 +730,7 @@ namespace Zetbox.Server.SchemaManagement
                     // TODO: Support nested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
-                        CheckColumn(tblName, Construct.NestedColumnName(p.Name, basePropName), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));
+                        CheckColumn(tblName, Construct.ColumnName(p, basePropName), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));
                     }
                     if (hasPersistentOrder)
                     {
@@ -873,7 +873,7 @@ namespace Zetbox.Server.SchemaManagement
                 .Where(p => !p.IsList)
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
-                var colName = Construct.NestedColumnName(prop, prefix);
+                var colName = Construct.ColumnName(prop, prefix);
                 Log.DebugFormat("    {0}", colName);
 
                 var realIsNullable = prop.IsNullable();
@@ -884,7 +884,7 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                CheckColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
+                CheckColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.ColumnName(sprop, prefix));
             }
         }
     }

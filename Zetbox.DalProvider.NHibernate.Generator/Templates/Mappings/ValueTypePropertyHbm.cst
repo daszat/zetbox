@@ -39,6 +39,6 @@
 <% } else {                                                                         %>
         <!-- ValueTypeProperty isValue -->
         <property name="<%= propName %>" <%= typeAttr %>
-                  column="`<%= prefix %><%= columnName %>`" 
+                  column="`<%= columnName %>`" 
                   optimistic-lock="<%= optimisticLock ? "true" : "false" %>"/>
 <% }                                                                                %>

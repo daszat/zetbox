@@ -122,6 +122,10 @@ namespace Zetbox.Server.SchemaManagement
                     Log.ErrorFormat("Table {0} already exists", tblName);
                 }
             }
+            else
+            {
+                Log.DebugFormat("Skipping table for TPH child {0}", objClass.Name);
+            }
         }
         #endregion
 
@@ -148,13 +152,13 @@ namespace Zetbox.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
-            return Construct.NestedColumnName(saved, prefix) != Construct.NestedColumnName(prop, prefix);
+            return Construct.ColumnName(saved, prefix) != Construct.ColumnName(prop, prefix);
         }
         public void DoRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
             // TODO: What if prefix has changed
-            db.RenameColumn(objClass.GetTableRef(db), Construct.NestedColumnName(saved, prefix), Construct.NestedColumnName(prop, prefix));
+            db.RenameColumn(objClass.GetTableRef(db), Construct.ColumnName(saved, prefix), Construct.ColumnName(prop, prefix));
         }
         #endregion
 
@@ -169,15 +173,15 @@ namespace Zetbox.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
 
-            // Refleced changed hierarchie
+            // Reflected changed hierarchie
             var currentOriginObjClass = schema.FindPersistenceObject<ObjectClass>(saved.ObjectClass.ExportGuid);
             var movedUp = IsParentOf(objClass, currentOriginObjClass);
             var movedDown = IsParentOf(currentOriginObjClass, objClass);
 
             var tblName = objClass.GetTableRef(db);
             var srcTblName = ((ObjectClass)saved.ObjectClass).GetTableRef(db);
-            var colName = Construct.NestedColumnName(prop, prefix);
-            var srcColName = Construct.NestedColumnName(saved, prefix); // TODO: What if prefix has changed
+            var colName = Construct.ColumnName(prop, prefix);
+            var srcColName = Construct.ColumnName(saved, prefix); // TODO: What if prefix has changed
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
             var scale = prop.GetScale();
@@ -249,10 +253,16 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            string colName = Construct.NestedColumnName(prop, prefix);
+            string colName = Construct.ColumnName(prop, prefix);
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
-            db.CreateColumn(objClass.GetTableRef(db), colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultConstraint(prop));
+            CreateValueTypePropertyNullable(objClass.GetTableRef(db), prop, colName);
         }
+
+        private void CreateValueTypePropertyNullable(TableRef tblName, ValueTypeProperty prop, string colName)
+        {
+            db.CreateColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultConstraint(prop));
+        }
+
         #endregion
 
         #region NewValueTypeProperty not nullable
@@ -263,7 +273,7 @@ namespace Zetbox.Server.SchemaManagement
         public void DoNewValueTypePropertyNotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var tblName = objClass.GetTableRef(db);
-            var colName = Construct.NestedColumnName(prop, prefix);
+            var colName = Construct.ColumnName(prop, prefix);
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
             var scale = prop.GetScale();
@@ -329,7 +339,7 @@ namespace Zetbox.Server.SchemaManagement
         public void DoChangeDefaultValue(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var tblName = objClass.GetTableRef(db);
-            var colName = Construct.NestedColumnName(prop, prefix);
+            var colName = Construct.ColumnName(prop, prefix);
 
             // Use current nullable definition. 
             // Another case is responsible to change that.
@@ -349,7 +359,7 @@ namespace Zetbox.Server.SchemaManagement
         public void DoChangeValueTypeProperty_To_NotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var tblName = objClass.GetTableRef(db);
-            var colName = Construct.NestedColumnName(prop, prefix);
+            var colName = Construct.ColumnName(prop, prefix);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {
@@ -372,7 +382,7 @@ namespace Zetbox.Server.SchemaManagement
         public void DoChangeValueTypeProperty_To_Nullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var tblName = objClass.GetTableRef(db);
-            var colName = Construct.NestedColumnName(prop, prefix);
+            var colName = Construct.ColumnName(prop, prefix);
 
             db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null);
         }
@@ -456,7 +466,7 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (ValueTypeProperty p in cprop.CompoundObjectDefinition.Properties)
             {
-                db.CreateColumn(tblName, Construct.NestedColumnName(p.Name, cprop.Name), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(cprop));
+                db.CreateColumn(tblName, Construct.ColumnName(p, cprop.Name), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(cprop));
             }
 
             if (hasPersistentOrder)
@@ -1379,10 +1389,40 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNew_1_N_Relation(Relation rel)
         {
-            string assocName = rel.GetAssociationName();
+            string assocName, colName, listPosName;
+            RelationEnd relEnd, otherEnd;
+            TableRef tblName, refTblName;
+            bool hasPersistentOrder;
+            if (!TryInspect_1_N_Relation(rel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
+            {
+                return;
+            }
+
             Log.InfoFormat("New 1:N Relation: {0}", assocName);
 
-            RelationEnd relEnd, otherEnd;
+            CreateFKColumn(otherEnd, tblName, colName);
+            db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
+            db.CreateIndex(tblName, Construct.IndexName(tblName.Name, colName), false, false, colName);
+
+            if (hasPersistentOrder)
+            {
+                Log.InfoFormat("Creating position column '{0}.{1}'", tblName, listPosName);
+                db.CreateColumn(tblName, listPosName, System.Data.DbType.Int32, 0, 0, true);
+            }
+        }
+
+        /// <summary>
+        /// Tries to dissect a relation for the 1_N case.
+        /// </summary>
+        /// <returns>false if something is wrong with the relation definition. The out parameters are only filled correctly when the function returns true.</returns>
+        private bool TryInspect_1_N_Relation(
+            Relation rel, out string assocName,
+            out RelationEnd relEnd, out RelationEnd otherEnd,
+            out TableRef tblName, out TableRef refTblName,
+            out string colName,
+            out bool hasPersistentOrder, out string listPosName)
+        {
+            assocName = rel.GetAssociationName();
 
             switch (rel.Storage)
             {
@@ -1395,26 +1435,25 @@ namespace Zetbox.Server.SchemaManagement
                     relEnd = rel.B;
                     break;
                 default:
-                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
-                    return;
+                    Log.ErrorFormat("Skipping Relation '{0}': unsupported Storage set: {1}", assocName, rel.Storage);
+                    otherEnd = null;
+                    relEnd = null;
+                    tblName = null;
+                    refTblName = null;
+                    hasPersistentOrder = default(bool);
+                    colName = null;
+                    listPosName = null;
+                    return false;
             }
 
-            var tblName = relEnd.Type.GetTableRef(db);
-            var refTblName = otherEnd.Type.GetTableRef(db);
-            bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
+            tblName = relEnd.Type.GetTableRef(db);
+            refTblName = otherEnd.Type.GetTableRef(db);
+            hasPersistentOrder = rel.NeedsPositionStorage(relEnd.GetRole());
 
-            var colName = Construct.ForeignKeyColumnName(otherEnd);
-            var indexName = Construct.ListPositionColumnName(otherEnd);
+            colName = Construct.ForeignKeyColumnName(otherEnd);
+            listPosName = Construct.ListPositionColumnName(otherEnd);
 
-            CreateFKColumn(otherEnd, tblName, colName);
-            db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
-            db.CreateIndex(tblName, Construct.IndexName(tblName.Name, colName), false, false, colName);
-
-            if (isIndexed)
-            {
-                Log.InfoFormat("Creating position column '{0}.{1}'", tblName, indexName);
-                db.CreateColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true);
-            }
+            return true;
         }
         #endregion
 
@@ -1486,15 +1525,15 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNew_N_M_Relation(Relation rel)
         {
-            string assocName = rel.GetAssociationName();
+            string assocName, fkAName, fkBName;
+            TableRef tblName;
+            ObjectClass aType, bType;
+            if (!TryInspect_N_M_Relation(rel, out assocName, out tblName, out fkAName, out fkBName, out aType, out bType))
+            {
+                return;
+            }
+
             Log.InfoFormat("New N:M Relation: {0}", assocName);
-
-            var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            var fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
-            var fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
-            var aType = rel.A.Type;
-            var bType = rel.B.Type;
-
             if (db.CheckTableExists(tblName))
             {
                 Log.ErrorFormat("Relation table {0} already exists", tblName);
@@ -1524,6 +1563,19 @@ namespace Zetbox.Server.SchemaManagement
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkAName), false, false, fkAName);
             db.CreateFKConstraint(tblName, bType.GetTableRef(db), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkBName), false, false, fkBName);
+        }
+
+        private bool TryInspect_N_M_Relation(Relation rel, out string assocName, out TableRef tblName, out string fkAName, out string fkBName, out ObjectClass aType, out ObjectClass bType)
+        {
+            assocName = rel.GetAssociationName();
+
+            tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
+            fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
+            fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+            aType = rel.A.Type;
+            bType = rel.B.Type;
+
+            return true;
         }
         #endregion
 
@@ -1585,11 +1637,12 @@ namespace Zetbox.Server.SchemaManagement
 
         private void New_1_1_Relation_CreateColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
         {
-            var tblName = relEnd.Type.GetTableRef(db);
-            var refTblName = otherEnd.Type.GetTableRef(db);
-            var colName = Construct.ForeignKeyColumnName(otherEnd);
-            var assocName = rel.GetRelationAssociationName(role);
-            var idxName = Construct.IndexName(tblName.Name, colName);
+            TableRef tblName, refTblName;
+            string assocName, colName, idxName;
+            if (!TryInspect_1_1_Relation(rel, relEnd, otherEnd, role, out tblName, out refTblName, out assocName, out colName, out idxName))
+            {
+                return;
+            }
 
             CreateFKColumn(otherEnd, tblName, colName);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
@@ -1602,6 +1655,17 @@ namespace Zetbox.Server.SchemaManagement
             {
                 Log.ErrorFormat("1:1 Relation should never need position storage, but this one does!");
             }
+        }
+
+        private bool TryInspect_1_1_Relation(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role, out TableRef tblName, out TableRef refTblName, out string assocName, out string colName, out string idxName)
+        {
+            tblName = relEnd.Type.GetTableRef(db);
+            refTblName = otherEnd.Type.GetTableRef(db);
+            assocName = rel.GetRelationAssociationName(role);
+            colName = Construct.ForeignKeyColumnName(otherEnd);
+            idxName = Construct.IndexName(tblName.Name, colName);
+
+            return true;
         }
 
         private void CreateFKColumn(RelationEnd otherEnd, TableRef tblName, string colName)
@@ -1815,6 +1879,268 @@ namespace Zetbox.Server.SchemaManagement
 
             if (db.CheckFKConstraintExists(tblName, assocName))
                 db.DropFKConstraint(tblName, assocName);
+        }
+        #endregion
+
+        #region ChangeTptToTph
+        public bool IsChangeTptToTph(ObjectClass objClass)
+        {
+            // only migrate derived classes
+            if (objClass.BaseObjectClass == null) return false;
+
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            if (savedObjClass == null) return false;
+
+            return savedObjClass.GetTableMapping() == TableMapping.TPT && objClass.GetTableMapping() == TableMapping.TPH;
+        }
+
+        /// <summary>
+        /// Changes table layout from table-per-type to table-per-hierarchy. This operates only on the saved schema to avoid doing work of other cases, specifically the Do(New/Change)*Property cases.
+        /// </summary>
+        /// <param name="objClass"></param>
+        public void DoChangeTptToTph(ObjectClass objClass)
+        {
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var colNamesList = new List<string>();
+
+            #region create new columns in base table
+
+            var baseTblName = objClass.GetTableRef(db);
+
+            #region Value and Compound Properties
+
+            foreach (ValueTypeProperty savedProp in savedObjClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
+            {
+                CreateValueTypePropertyNullable(baseTblName, savedProp, Construct.NestedColumnName(savedProp.Name, savedObjClass.TableName));
+                colNamesList.Add(savedProp.Name);
+            }
+            foreach (CompoundObjectProperty savedProp in savedObjClass.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
+            {
+                CreateCompoundObjectProperty(baseTblName, savedProp, string.Empty, false);
+
+                var baseColName = Construct.ColumnName(savedProp, string.Empty);
+                colNamesList.AddRange(savedProp.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>().Select(p => Construct.ColumnName(p, baseColName)));
+            }
+            foreach (ValueTypeProperty savedProp in savedObjClass.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
+            {
+                // relink fk column on tblName
+                var tblName = db.GetTableName(savedProp.Module.SchemaName, savedProp.GetCollectionEntryTable());
+                string fkName = savedProp.GetCollectionEntryReverseKeyColumnName();
+                string assocName = savedProp.GetAssociationName();
+
+                db.DropFKConstraint(tblName, assocName);
+                // TPH downside: constraint doesn't restrict to subclass any more
+                db.CreateFKConstraint(tblName, baseTblName, fkName, assocName, true);
+            }
+            foreach (CompoundObjectProperty savedProp in savedObjClass.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList))
+            {
+                // relink fk column on tblName
+                var tblName = db.GetTableName(savedProp.Module.SchemaName, savedProp.GetCollectionEntryTable());
+                string fkName = savedProp.GetCollectionEntryReverseKeyColumnName();
+                string assocName = savedProp.GetAssociationName();
+
+                db.DropFKConstraint(tblName, assocName);
+                // TPH downside: constraint doesn't restrict to subclass any more
+                db.CreateFKConstraint(tblName, baseTblName, fkName, assocName, true);
+            }
+
+            #endregion
+
+            #region Relations
+
+            foreach (Relation savedRel in savedSchema.GetQuery<Relation>().Where(r => r.A.Type == objClass || r.B.Type == objClass).OrderBy(r => r.Module.Namespace))
+            {
+                switch (savedRel.GetRelationType())
+                {
+                    case RelationType.one_n:
+                        // create new columns on base table
+                        {
+                            string assocName, colName, listPosName;
+                            RelationEnd relEnd, otherEnd;
+                            TableRef tblName, refTblName;
+                            bool hasPersistentOrder;
+                            if (TryInspect_1_N_Relation(savedRel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
+                            {
+                                // Only do this when we are N-side
+                                if (relEnd.Type == savedObjClass)
+                                {
+                                    CreateFKColumn(otherEnd, baseTblName, colName);
+                                    colNamesList.Add(colName);
+                                    if (hasPersistentOrder)
+                                    {
+                                        db.CreateColumn(baseTblName, listPosName, System.Data.DbType.Int32, 0, 0, true);
+                                        colNamesList.Add(listPosName);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case RelationType.n_m:
+                        // rewire fk on RelationEntry
+                        {
+                            string assocName, fkAName, fkBName;
+                            TableRef tblName;
+                            ObjectClass aType, bType;
+                            if (TryInspect_N_M_Relation(savedRel, out assocName, out tblName, out fkAName, out fkBName, out aType, out bType))
+                            {
+                                if (aType == objClass)
+                                {
+                                    db.DropFKConstraint(tblName, fkAName);
+                                    db.CreateFKConstraint(tblName, baseTblName, fkAName, savedRel.GetRelationAssociationName(RelationEndRole.A), false);
+                                }
+                                if (bType == objClass)
+                                {
+                                    db.DropFKConstraint(tblName, fkBName);
+                                    db.CreateFKConstraint(tblName, baseTblName, fkBName, savedRel.GetRelationAssociationName(RelationEndRole.B), false);
+                                }
+                            }
+                        }
+                        break;
+                    case RelationType.one_one:
+                        // create new columns on base table
+                        if (savedRel.Storage == StorageType.MergeIntoA || savedRel.Storage == StorageType.Replicate)
+                        {
+                            TableRef tblName, refTblName;
+                            string assocName, colName, idxName;
+                            if (!TryInspect_1_1_Relation(savedRel, savedRel.A, savedRel.B, RelationEndRole.A, out tblName, out refTblName, out assocName, out colName, out idxName))
+                            {
+                                db.DropFKConstraint(tblName, assocName);
+                                CreateFKColumn(savedRel.B, baseTblName, colName);
+                            }
+                        }
+
+                        if (savedRel.Storage == StorageType.MergeIntoB || savedRel.Storage == StorageType.Replicate)
+                        {
+                            TableRef tblName, refTblName;
+                            string assocName, colName, idxName;
+                            if (!TryInspect_1_1_Relation(savedRel, savedRel.B, savedRel.A, RelationEndRole.B, out tblName, out refTblName, out assocName, out colName, out idxName))
+                            {
+                                db.DropFKConstraint(tblName, assocName);
+                                CreateFKColumn(savedRel.A, baseTblName, colName);
+                            }
+                        }
+                        break;
+                    default:
+                        Log.ErrorFormat("Skipping Relation '{0}': unsupported RelationType: {1}", savedRel.GetRelationType());
+                        break;
+                }
+
+            }
+
+            #endregion
+
+            #endregion
+
+            #region copy data from derived tables to base table
+
+            var srcTblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var colNames = colNamesList.ToArray();
+            db.CopyColumnData(srcTblName, colNames, baseTblName, colNames);
+
+            #endregion
+
+            #region create constraints and references
+
+            foreach (Relation savedRel in savedSchema.GetQuery<Relation>().Where(r => r.A.Type == objClass || r.B.Type == objClass).OrderBy(r => r.Module.Namespace))
+            {
+                switch (savedRel.GetRelationType())
+                {
+                    case RelationType.one_n:
+                        {
+                            string assocName, colName, listPosName;
+                            RelationEnd relEnd, otherEnd;
+                            TableRef tblName, refTblName;
+                            bool hasPersistentOrder;
+                            if (TryInspect_1_N_Relation(savedRel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
+                            {
+                                db.CreateFKConstraint(baseTblName, refTblName, colName, assocName, false);
+                                db.CreateIndex(baseTblName, Construct.IndexName(baseTblName.Name, colName), false, false, colName);
+                            }
+                        }
+                        break;
+                    case RelationType.n_m:
+                        // nothing to do
+                        break;
+                    case RelationType.one_one:
+                        if (savedRel.Storage == StorageType.MergeIntoA || savedRel.Storage == StorageType.Replicate)
+                        {
+                            TableRef tblName, refTblName;
+                            string assocName, colName, idxName;
+                            if (!TryInspect_1_1_Relation(savedRel, savedRel.A, savedRel.B, RelationEndRole.A, out tblName, out refTblName, out assocName, out colName, out idxName))
+                            {
+                                db.CreateFKConstraint(tblName, baseTblName, colName, assocName, false);
+                                idxName = Construct.IndexName(baseTblName.Name, colName);
+                                if (db.CheckIndexPossible(baseTblName, idxName, true, false, colName))
+                                    db.CreateIndex(baseTblName, idxName, true, false, colName);
+                                else
+                                    Log.WarnFormat("Cannot create index: {0}", idxName);
+                            }
+                        }
+
+                        if (savedRel.Storage == StorageType.MergeIntoB || savedRel.Storage == StorageType.Replicate)
+                        {
+                            TableRef tblName, refTblName;
+                            string assocName, colName, idxName;
+                            if (!TryInspect_1_1_Relation(savedRel, savedRel.B, savedRel.A, RelationEndRole.B, out tblName, out refTblName, out assocName, out colName, out idxName))
+                            {
+                                db.CreateFKConstraint(tblName, baseTblName, colName, assocName, false);
+                                idxName = Construct.IndexName(baseTblName.Name, colName);
+                                if (db.CheckIndexPossible(baseTblName, idxName, true, false, colName))
+                                    db.CreateIndex(baseTblName, idxName, true, false, colName);
+                                else
+                                    Log.WarnFormat("Cannot create index: {0}", idxName);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            #endregion
+
+            #region drop old tables for derived classes
+
+            if (objClass.BaseObjectClass != null)
+            {
+                var oldTblName = objClass.GetTableRef(db);
+                var unknownColumns = db.GetTableColumnNames(oldTblName).Except(colNames).ToList();
+                unknownColumns.Remove("ID");
+
+                if (unknownColumns.Count > 0)
+                {
+                    Log.ErrorFormat("Keeping old table {0} while migrating to TPH: Unknown Columns detected: {1}", oldTblName, string.Join(", ", unknownColumns));
+                }
+                else
+                {
+                    db.DropTable(oldTblName);
+                }
+            }
+
+            #endregion
+        }
+        #endregion
+
+        #region ChangeTphToTpt
+        public bool IsChangeTphToTpt(ObjectClass objClass)
+        {
+            // only migrate on the RootClass
+            if (objClass.BaseObjectClass != null) return false;
+
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            if (savedObjClass == null) return false;
+
+            return savedObjClass.GetTableMapping() == TableMapping.TPH && objClass.GetTableMapping() == TableMapping.TPT;
+        }
+        /// <summary>
+        /// Changes table layout from table-per-hierarchy to table-per-type. This operates only on the saved schema to avoid doing work of other cases, specifically the Do(New/Change)*Property cases.
+        /// </summary>
+        /// <param name="objClass"></param>
+        public void DoChangeTphToTpt(ObjectClass objClass)
+        {
+            // create new derived tables
+            // copy data from base table to derived tables
+            // drop old columns for derived classes in base table
         }
         #endregion
 
@@ -2082,7 +2408,7 @@ namespace Zetbox.Server.SchemaManagement
         public void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var tblName = objClass.GetTableRef(db);
-            var colName = Construct.NestedColumnName(prop, prefix);
+            var colName = Construct.ColumnName(prop, prefix);
             Log.InfoFormat("Drop Column: {0}.{1}", tblName, colName);
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
@@ -2096,15 +2422,20 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty cprop, string prefix)
         {
-            string baseColName = Construct.NestedColumnName(cprop, prefix);
-            Log.InfoFormat("New is null column for CompoundObject Property: '{0}'", cprop.Name);
             var tblName = objClass.GetTableRef(db);
+            CreateCompoundObjectProperty(tblName, cprop, prefix, true);
+        }
+
+        private void CreateCompoundObjectProperty(TableRef tblName, CompoundObjectProperty cprop, string prefix, bool logAsNew)
+        {
+            string baseColName = Construct.ColumnName(cprop, prefix);
+            if (logAsNew) Log.InfoFormat("New is null column for CompoundObject Property: '{0}'", cprop.Name);
             var hasData = db.CheckTableContainsData(tblName);
 
             foreach (var valProp in cprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
             {
-                var colName = Construct.NestedColumnName(valProp, baseColName);
-                Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
+                var colName = Construct.ColumnName(valProp, baseColName);
+                if (logAsNew) Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
                 db.CreateColumn(
                     tblName,
                     colName,
@@ -2138,7 +2469,7 @@ namespace Zetbox.Server.SchemaManagement
 
         internal static string[] GetUCColNames(IndexConstraint uc)
         {
-            var vt_columns = uc.Properties.OfType<ValueTypeProperty>().Select(p => Construct.NestedColumnName(p, null)).ToArray();
+            var vt_columns = uc.Properties.OfType<ValueTypeProperty>().Select(p => Construct.ColumnName(p, null)).ToArray();
             var columns = vt_columns.Union(uc.Properties.OfType<ObjectReferenceProperty>().Select(p => Construct.ForeignKeyColumnName(p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd)))).OrderBy(n => n).ToArray();
             return columns;
         }

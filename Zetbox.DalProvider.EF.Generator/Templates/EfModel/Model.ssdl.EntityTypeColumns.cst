@@ -46,7 +46,7 @@
 		{
 			ApplyEntityTypeColumnDefs(
 				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.Name),
-				Construct.NestedColumnName(p, prefix),
+				Construct.ColumnName(p, prefix),
 				schemaProvider);
 		}
 		else if (p is ObjectReferenceProperty)
@@ -55,7 +55,7 @@
 		}
 		else
 		{
-			string propertyName = Construct.NestedColumnName(p, prefix);
+			string columnName = Construct.ColumnName(p, prefix);
 			string sqlTypeName = schemaProvider.DbTypeToNative(DbTypeMapper.GetDbTypeForProperty(p.GetType()));
 			
 			string maxLengthAttr = String.Empty;
@@ -84,7 +84,7 @@
 				nullableAttr = String.Format("Nullable=\"{0}\" ", IsRealNullable(p).ToString().ToLowerInvariant());
 			}
 %>
-    <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= precScaleAttr %><%= nullableAttr %>/>
+    <Property Name="<%= columnName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= precScaleAttr %><%= nullableAttr %>/>
 <%
 		}
 	}

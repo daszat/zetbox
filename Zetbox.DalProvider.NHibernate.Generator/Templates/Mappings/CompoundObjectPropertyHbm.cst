@@ -42,6 +42,6 @@
 <% } else {                                                                         %>
         <!-- CompoundObjectProperty isValue -->
         <component name="<%= propName %>" <%= valueClassAttr %>>
-<%          PropertiesHbm.Call(Host, ctx, prefix + columnName + "_", properties, false);         %>
+<%          PropertiesHbm.Call(Host, ctx, columnName + "_", properties, false);         %>
         </component>
 <% }                                                                                %>

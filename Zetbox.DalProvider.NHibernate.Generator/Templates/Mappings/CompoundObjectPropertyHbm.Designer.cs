@@ -61,7 +61,7 @@ this.WriteObjects("        </set>\r\n");
 this.WriteObjects("        <!-- CompoundObjectProperty isValue -->\r\n");
 this.WriteObjects("        <component name=\"",  propName , "\" ",  valueClassAttr , ">\r\n");
 #line 45 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
-PropertiesHbm.Call(Host, ctx, prefix + columnName + "_", properties, false);         
+PropertiesHbm.Call(Host, ctx, columnName + "_", properties, false);         
 #line 46 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 this.WriteObjects("        </component>\r\n");
 #line 47 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"

@@ -46,7 +46,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             }
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
-            columnName = string.IsNullOrEmpty(columnName) ? propName : columnName;
+            columnName = string.IsNullOrEmpty(columnName) ? Construct.ColumnName(prop, prefix) : prefix + columnName;
             var optimisticLock = needsConcurrency && propName == "ChangedOn";
 
             string typeAttr = String.Empty;

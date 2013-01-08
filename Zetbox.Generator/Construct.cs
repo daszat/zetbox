@@ -21,6 +21,7 @@ namespace Zetbox.Generator
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
     using Zetbox.Generator.Extensions;
 
     /// <summary>
@@ -121,11 +122,20 @@ namespace Zetbox.Generator
             return parentPropName + "_" + prop;
         }
 
-        public static string NestedColumnName(Property prop, string parentPropName)
+        public static string ColumnName(Property prop, string parentPropName)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            return NestedColumnName(prop.Name, parentPropName);
+            var cls = prop.ObjectClass as ObjectClass;
+
+            if (cls != null && cls.GetTableMapping() == TableMapping.TPH && cls.BaseObjectClass != null)
+            {
+                return NestedColumnName(NestedColumnName(prop.Name, parentPropName), cls.TableName);
+            }
+            else
+            {
+                return NestedColumnName(prop.Name, parentPropName);
+            }
         }
 
         public static string ListPositionColumnName(ValueTypeProperty prop)
@@ -189,7 +199,7 @@ namespace Zetbox.Generator
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return "RefreshRightsOn_" + objClass.TableName;
         }
-        
+
         public static string SecurityRulesRefreshAllRightsProcedureName()
         {
             return "RefreshAllRights";

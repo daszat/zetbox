@@ -51,12 +51,12 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
             if (prop is EnumerationProperty)
             {
-                columnName = Construct.NestedColumnName(prop, parentName);
+                columnName = Construct.ColumnName(prop, parentName);
                 name += ImplementationPropertySuffix;
             }
             else if (prop is ValueTypeProperty)
             {
-                columnName = Construct.NestedColumnName(prop, parentName);
+                columnName = Construct.ColumnName(prop, parentName);
             }
             else if (prop is ObjectReferenceProperty)
             {

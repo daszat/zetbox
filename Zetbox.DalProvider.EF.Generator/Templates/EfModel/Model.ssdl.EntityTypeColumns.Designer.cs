@@ -53,7 +53,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 		{
 			ApplyEntityTypeColumnDefs(
 				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.Name),
-				Construct.NestedColumnName(p, prefix),
+				Construct.ColumnName(p, prefix),
 				schemaProvider);
 		}
 		else if (p is ObjectReferenceProperty)
@@ -62,7 +62,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 		}
 		else
 		{
-			string propertyName = Construct.NestedColumnName(p, prefix);
+			string columnName = Construct.ColumnName(p, prefix);
 			string sqlTypeName = schemaProvider.DbTypeToNative(DbTypeMapper.GetDbTypeForProperty(p.GetType()));
 			
 			string maxLengthAttr = String.Empty;
@@ -92,7 +92,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 			}
 
 #line 87 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
-this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  precScaleAttr , "",  nullableAttr , "/>\r\n");
+this.WriteObjects("    <Property Name=\"",  columnName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  precScaleAttr , "",  nullableAttr , "/>\r\n");
 #line 89 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 	}
