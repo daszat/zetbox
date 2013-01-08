@@ -16,10 +16,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Arebis.CodeGeneration;
 using Zetbox.API;
 using Zetbox.App.Base;
 using Zetbox.Generator;
-using Arebis.CodeGeneration;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 {
@@ -27,42 +27,49 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
     {
         protected IZetboxContext ctx;
         protected CompoundObjectProperty prop;
-        protected string propertyName;
+        protected string propNameOverride;
         protected string parentName;
 
-        public static void Call(IGenerationHost host, IZetboxContext ctx, Property prop, string propertyName, string parentName)
+        public static void Call(IGenerationHost host, IZetboxContext ctx, Property prop, string parentName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("EfModel.ModelMslEntityTypeMappingComplexProperty", ctx, prop, propertyName, parentName);
+            host.CallTemplate("EfModel.ModelMslEntityTypeMappingComplexProperty", ctx, prop, null, parentName);
         }
 
-        public ModelMslEntityTypeMappingComplexProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, CompoundObjectProperty prop, string propertyName, string parentName)
+        public static void Call(IGenerationHost host, IZetboxContext ctx, Property prop, string propNameOverride, string parentName)
+        {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
+            host.CallTemplate("EfModel.ModelMslEntityTypeMappingComplexProperty", ctx, prop, propNameOverride, parentName);
+        }
+
+        public ModelMslEntityTypeMappingComplexProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, CompoundObjectProperty prop, string propNameOverride, string parentName)
             : base(_host)
         {
             this.ctx = ctx;
             this.prop = prop;
-            this.propertyName = propertyName;
+            this.propNameOverride = propNameOverride;
             this.parentName = parentName;
         }
 
         public override void Generate()
         {
             this.WriteLine("          <ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}EfImpl\">",
-                propertyName,
+                propNameOverride ?? prop.Name,
                 ImplementationPropertySuffix,
                 prop.CompoundObjectDefinition.Name
                 );
 
-            string newParent = Construct.NestedColumnName(prop, parentName);
+            string newParent = Construct.ColumnName(prop, parentName);
             foreach (var subProp in prop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
-                ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, subProp, subProp.Name, newParent);
+                ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, subProp, newParent);
             }
 
             foreach (var subProp in prop.CompoundObjectDefinition.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
-                ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, subProp, subProp.Name, newParent);
+                ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, subProp, newParent);
             }
 
             this.WriteLine("          </ComplexProperty>");

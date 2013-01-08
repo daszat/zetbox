@@ -70,12 +70,12 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
             foreach (var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
-                ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, prop, prop.Name, String.Empty);
+                ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, prop, String.Empty);
             }
 
             foreach (var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
-                ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, prop.Name, String.Empty);
+                ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, String.Empty);
             }
         }
 
