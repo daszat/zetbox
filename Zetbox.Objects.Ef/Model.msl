@@ -131,7 +131,7 @@
       </EndProperty>
     </AssociationSetMapping>
     <EntitySetMapping Name="BaseParameterEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameterEfImpl)">
+      <EntityTypeMapping TypeName="Model.BaseParameterEfImpl">
 	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
@@ -144,57 +144,168 @@
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.BaseParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="BoolParameter">
+      <EntityTypeMapping TypeName="Model.BoolParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.BoolParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CLRObjectParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="CLRObjectParameter">
+      <EntityTypeMapping TypeName="Model.CLRObjectParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.CLRObjectParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObjectParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="CompoundObjectParameter">
+      <EntityTypeMapping TypeName="Model.CompoundObjectParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.CompoundObjectParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimeParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="DateTimeParameter">
+      <EntityTypeMapping TypeName="Model.DateTimeParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="DateTimeStyleImpl" ColumnName="DateTimeStyle" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateTimeStyleImpl" ColumnName="DateTimeParameters_DateTimeStyle" />
+          <Condition ColumnName="__Discriminator" Value="base.DateTimeParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DecimalParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="DecimalParameter">
+      <EntityTypeMapping TypeName="Model.DecimalParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.DecimalParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="DoubleParameter">
+      <EntityTypeMapping TypeName="Model.DoubleParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.DoubleParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="EnumParameter">
+      <EntityTypeMapping TypeName="Model.EnumParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.EnumParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="IntParameter">
+      <EntityTypeMapping TypeName="Model.IntParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.IntParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="ObjectReferenceParameter">
+      <EntityTypeMapping TypeName="Model.ObjectReferenceParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.ObjectParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringParameterEfImpl)">
-	    <MappingFragment StoreEntitySet="StringParameter">
+      <EntityTypeMapping TypeName="Model.StringParameterEfImpl">
+	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <Condition ColumnName="__Discriminator" Value="base.StringParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -275,72 +386,128 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ConstraintEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ConstraintEfImpl)">
+      <EntityTypeMapping TypeName="Model.ConstraintEfImpl">
 	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.Constraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntegerRangeConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="IntegerRangeConstraint">
+      <EntityTypeMapping TypeName="Model.IntegerRangeConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Max" ColumnName="Max" />
-          <ScalarProperty Name="Min" ColumnName="Min" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Max" ColumnName="IntegerRangeConstraints_Max" />
+          <ScalarProperty Name="Min" ColumnName="IntegerRangeConstraints_Min" />
+          <Condition ColumnName="__Discriminator" Value="base.IntegerRangeConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.InvokingConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="InvokingConstraint">
+      <EntityTypeMapping TypeName="Model.InvokingConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.InvokingConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IsValidIdentifierConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="IsValidIdentifierConstraint">
+      <EntityTypeMapping TypeName="Model.IsValidIdentifierConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.IsValidIdentifierConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IsValidNamespaceConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="IsValidNamespaceConstraint">
+      <EntityTypeMapping TypeName="Model.IsValidNamespaceConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.IsValidNamespaceConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocationConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="MethodInvocationConstraint">
+      <EntityTypeMapping TypeName="Model.MethodInvocationConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.MethodInvocationConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NotNullableConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="NotNullableConstraint">
+      <EntityTypeMapping TypeName="Model.NotNullableConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.NotNullableConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ReadOnlyConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="ReadOnlyConstraint">
+      <EntityTypeMapping TypeName="Model.ReadOnlyConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.ReadOnlyConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ClientReadOnlyConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="ClientReadOnlyConstraint">
+      <EntityTypeMapping TypeName="Model.ClientReadOnlyConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.ClientReadOnlyConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.InitOnlyConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="InitOnlyConstraint">
+      <EntityTypeMapping TypeName="Model.InitOnlyConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.InitOnlyConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewReadOnlyConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="ViewReadOnlyConstraint">
+      <EntityTypeMapping TypeName="Model.ViewReadOnlyConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <Condition ColumnName="__Discriminator" Value="base.ViewReadOnlyConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringRangeConstraintEfImpl)">
-	    <MappingFragment StoreEntitySet="StringRangeConstraint">
+      <EntityTypeMapping TypeName="Model.StringRangeConstraintEfImpl">
+	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="MaxLength" ColumnName="MaxLength" />
-          <ScalarProperty Name="MinLength" ColumnName="MinLength" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="MaxLength" ColumnName="StringRangeConstraints_MaxLength" />
+          <ScalarProperty Name="MinLength" ColumnName="StringRangeConstraints_MinLength" />
+          <Condition ColumnName="__Discriminator" Value="base.StringRangeConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -414,45 +581,70 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DefaultPropertyValueEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DefaultPropertyValueEfImpl)">
+      <EntityTypeMapping TypeName="Model.DefaultPropertyValueEfImpl">
 	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <Condition ColumnName="__Discriminator" Value="base.DefaultPropertyValues" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolDefaultValueEfImpl)">
-	    <MappingFragment StoreEntitySet="BoolDefaultValue">
+      <EntityTypeMapping TypeName="Model.BoolDefaultValueEfImpl">
+	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="BoolValue" ColumnName="BoolValue" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="BoolValue" ColumnName="BoolDefaultValues_BoolValue" />
+          <Condition ColumnName="__Discriminator" Value="base.BoolDefaultValues" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentDateTimeDefaultValueEfImpl)">
-	    <MappingFragment StoreEntitySet="CurrentDateTimeDefaultValue">
+      <EntityTypeMapping TypeName="Model.CurrentDateTimeDefaultValueEfImpl">
+	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <Condition ColumnName="__Discriminator" Value="base.CurrentDateTimeDefaultValues" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumDefaultValueEfImpl)">
-	    <MappingFragment StoreEntitySet="EnumDefaultValue">
+      <EntityTypeMapping TypeName="Model.EnumDefaultValueEfImpl">
+	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <Condition ColumnName="__Discriminator" Value="base.EnumDefaultValues" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntDefaultValueEfImpl)">
-	    <MappingFragment StoreEntitySet="IntDefaultValue">
+      <EntityTypeMapping TypeName="Model.IntDefaultValueEfImpl">
+	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="IntValue" ColumnName="IntValue" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IntValue" ColumnName="IntDefaultValues_IntValue" />
+          <Condition ColumnName="__Discriminator" Value="base.IntDefaultValues" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NewGuidDefaultValueEfImpl)">
-	    <MappingFragment StoreEntitySet="NewGuidDefaultValue">
+      <EntityTypeMapping TypeName="Model.NewGuidDefaultValueEfImpl">
+	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <Condition ColumnName="__Discriminator" Value="base.NewGuidDefaultValues" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringDefaultValueEfImpl)">
-	    <MappingFragment StoreEntitySet="StringDefaultValue">
+      <EntityTypeMapping TypeName="Model.StringDefaultValueEfImpl">
+	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="DefaultValue" ColumnName="StringDefaultValues_DefaultValue" />
+          <Condition ColumnName="__Discriminator" Value="base.StringDefaultValues" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -528,7 +720,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FilterConfigurationEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.FilterConfigurationEfImpl)">
+      <EntityTypeMapping TypeName="Model.FilterConfigurationEfImpl">
 	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -537,52 +729,109 @@
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
           <ScalarProperty Name="Required" ColumnName="Required" />
+          <Condition ColumnName="__Discriminator" Value="gui.FilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClassFilterConfigurationEfImpl)">
-	    <MappingFragment StoreEntitySet="ObjectClassFilterConfiguration">
+      <EntityTypeMapping TypeName="Model.ObjectClassFilterConfigurationEfImpl">
+	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <Condition ColumnName="__Discriminator" Value="gui.ObjectClassFilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.OptionalPredicateFilterConfigurationEfImpl)">
-	    <MappingFragment StoreEntitySet="OptionalPredicateFilterConfiguration">
+      <EntityTypeMapping TypeName="Model.OptionalPredicateFilterConfigurationEfImpl">
+	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Predicate" ColumnName="Predicate" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <ScalarProperty Name="Predicate" ColumnName="OptionalPredicateFilterConfigurations_Predicate" />
+          <Condition ColumnName="__Discriminator" Value="gui.OptionalPredicateFilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.PropertyFilterConfigurationEfImpl)">
-	    <MappingFragment StoreEntitySet="PropertyFilterConfiguration">
+      <EntityTypeMapping TypeName="Model.PropertyFilterConfigurationEfImpl">
+	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <Condition ColumnName="__Discriminator" Value="gui.PropertyFilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DateRangeFilterConfigurationEfImpl)">
-	    <MappingFragment StoreEntitySet="DateRangeFilterConfiguration">
+      <EntityTypeMapping TypeName="Model.DateRangeFilterConfigurationEfImpl">
+	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="IsCurrentMonthDefault" ColumnName="IsCurrentMonthDefault" />
-          <ScalarProperty Name="IsCurrentQuaterDefault" ColumnName="IsCurrentQuaterDefault" />
-          <ScalarProperty Name="IsCurrentYearDefault" ColumnName="IsCurrentYearDefault" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <ScalarProperty Name="IsCurrentMonthDefault" ColumnName="DateRangeFilterConfigurations_IsCurrentMonthDefault" />
+          <ScalarProperty Name="IsCurrentQuaterDefault" ColumnName="DateRangeFilterConfigurations_IsCurrentQuaterDefault" />
+          <ScalarProperty Name="IsCurrentYearDefault" ColumnName="DateRangeFilterConfigurations_IsCurrentYearDefault" />
+          <Condition ColumnName="__Discriminator" Value="gui.DateRangeFilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MonthFilterConfigurationEfImpl)">
-	    <MappingFragment StoreEntitySet="MonthFilterConfiguration">
+      <EntityTypeMapping TypeName="Model.MonthFilterConfigurationEfImpl">
+	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="IsCurrentMonthDefault" ColumnName="IsCurrentMonthDefault" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <ScalarProperty Name="IsCurrentMonthDefault" ColumnName="MonthFilterConfigurations_IsCurrentMonthDefault" />
+          <Condition ColumnName="__Discriminator" Value="gui.MonthFilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RangeFilterConfigurationEfImpl)">
-	    <MappingFragment StoreEntitySet="RangeFilterConfiguration">
+      <EntityTypeMapping TypeName="Model.RangeFilterConfigurationEfImpl">
+	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <Condition ColumnName="__Discriminator" Value="gui.RangeFilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SinglePropertyFilterConfigurationEfImpl)">
-	    <MappingFragment StoreEntitySet="SinglePropertyFilterConfiguration">
+      <EntityTypeMapping TypeName="Model.SinglePropertyFilterConfigurationEfImpl">
+	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <Condition ColumnName="__Discriminator" Value="gui.SinglePropertyFilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.YearFilterConfigurationEfImpl)">
-	    <MappingFragment StoreEntitySet="YearFilterConfiguration">
+      <EntityTypeMapping TypeName="Model.YearFilterConfigurationEfImpl">
+	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="IsCurrentYearDefault" ColumnName="IsCurrentYearDefault" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <ScalarProperty Name="IsCurrentYearDefault" ColumnName="YearFilterConfigurations_IsCurrentYearDefault" />
+          <Condition ColumnName="__Discriminator" Value="gui.YearFilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -867,7 +1116,7 @@
       </EndProperty>
     </AssociationSetMapping>
     <EntitySetMapping Name="PropertyEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.PropertyEfImpl)">
+      <EntityTypeMapping TypeName="Model.PropertyEfImpl">
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
@@ -881,89 +1130,270 @@
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <Condition ColumnName="__Discriminator" Value="base.Properties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CalculatedObjectReferencePropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="CalculatedObjectReferenceProperty">
+      <EntityTypeMapping TypeName="Model.CalculatedObjectReferencePropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <Condition ColumnName="__Discriminator" Value="base.CalculatedObjectReferenceProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObjectPropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="CompoundObjectProperty">
+      <EntityTypeMapping TypeName="Model.CompoundObjectPropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
-          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="CompoundObjectProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsList" ColumnName="CompoundObjectProperties_IsList" />
+          <Condition ColumnName="__Discriminator" Value="base.CompoundObjectProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferencePlaceholderPropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="ObjectReferencePlaceholderProperty">
+      <EntityTypeMapping TypeName="Model.ObjectReferencePlaceholderPropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
-          <ScalarProperty Name="ImplementorRoleName" ColumnName="ImplementorRoleName" />
-          <ScalarProperty Name="IsList" ColumnName="IsList" />
-          <ScalarProperty Name="ItemRoleName" ColumnName="ItemRoleName" />
-          <ScalarProperty Name="Verb" ColumnName="Verb" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ObjectReferencePlaceholderProperties_HasPersistentOrder" />
+          <ScalarProperty Name="ImplementorRoleName" ColumnName="ObjectReferencePlaceholderProperties_ImplementorRoleName" />
+          <ScalarProperty Name="IsList" ColumnName="ObjectReferencePlaceholderProperties_IsList" />
+          <ScalarProperty Name="ItemRoleName" ColumnName="ObjectReferencePlaceholderProperties_ItemRoleName" />
+          <ScalarProperty Name="Verb" ColumnName="ObjectReferencePlaceholderProperties_Verb" />
+          <Condition ColumnName="__Discriminator" Value="base.ObjectReferencePlaceholderProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferencePropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="ObjectReferenceProperty">
+      <EntityTypeMapping TypeName="Model.ObjectReferencePropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="EagerLoading" ColumnName="EagerLoading" />
-          <ScalarProperty Name="IsInlineEditable" ColumnName="IsInlineEditable" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="EagerLoading" ColumnName="ObjectReferenceProperties_EagerLoading" />
+          <ScalarProperty Name="IsInlineEditable" ColumnName="ObjectReferenceProperties_IsInlineEditable" />
+          <Condition ColumnName="__Discriminator" Value="base.ObjectReferenceProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ValueTypePropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="ValueTypeProperty">
+      <EntityTypeMapping TypeName="Model.ValueTypePropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
-          <ScalarProperty Name="IsCalculated" ColumnName="IsCalculated" />
-          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
+          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
+          <Condition ColumnName="__Discriminator" Value="base.ValueTypeProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolPropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="BoolProperty">
+      <EntityTypeMapping TypeName="Model.BoolPropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="FalseLabel" ColumnName="FalseLabel" />
-          <ScalarProperty Name="NullLabel" ColumnName="NullLabel" />
-          <ScalarProperty Name="TrueLabel" ColumnName="TrueLabel" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
+          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
+          <ScalarProperty Name="FalseLabel" ColumnName="BoolProperties_FalseLabel" />
+          <ScalarProperty Name="NullLabel" ColumnName="BoolProperties_NullLabel" />
+          <ScalarProperty Name="TrueLabel" ColumnName="BoolProperties_TrueLabel" />
+          <Condition ColumnName="__Discriminator" Value="base.BoolProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimePropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="DateTimeProperty">
+      <EntityTypeMapping TypeName="Model.DateTimePropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="DateTimeStyleImpl" ColumnName="DateTimeStyle" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
+          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
+          <ScalarProperty Name="DateTimeStyleImpl" ColumnName="DateTimeProperties_DateTimeStyle" />
+          <Condition ColumnName="__Discriminator" Value="base.DateTimeProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DecimalPropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="DecimalProperty">
+      <EntityTypeMapping TypeName="Model.DecimalPropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Precision" ColumnName="Precision" />
-          <ScalarProperty Name="Scale" ColumnName="Scale" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
+          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
+          <ScalarProperty Name="Precision" ColumnName="DecimalProperties_Precision" />
+          <ScalarProperty Name="Scale" ColumnName="DecimalProperties_Scale" />
+          <Condition ColumnName="__Discriminator" Value="base.DecimalProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DoublePropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="DoubleProperty">
+      <EntityTypeMapping TypeName="Model.DoublePropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
+          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
+          <Condition ColumnName="__Discriminator" Value="base.DoubleProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationPropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="EnumerationProperty">
+      <EntityTypeMapping TypeName="Model.EnumerationPropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
+          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
+          <Condition ColumnName="__Discriminator" Value="base.EnumerationProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.GuidPropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="GuidProperty">
+      <EntityTypeMapping TypeName="Model.GuidPropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
+          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
+          <Condition ColumnName="__Discriminator" Value="base.GuidProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntPropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="IntProperty">
+      <EntityTypeMapping TypeName="Model.IntPropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
+          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
+          <Condition ColumnName="__Discriminator" Value="base.IntProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringPropertyEfImpl)">
-	    <MappingFragment StoreEntitySet="StringProperty">
+      <EntityTypeMapping TypeName="Model.StringPropertyEfImpl">
+	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
+          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
+          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
+          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
+          <Condition ColumnName="__Discriminator" Value="base.StringProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

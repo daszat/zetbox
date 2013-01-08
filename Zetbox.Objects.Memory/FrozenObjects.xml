@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-02T15:06:18Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-08T14:08:46Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -3739,7 +3739,7 @@ public static void ObjectIsValid(DateRangeFilterConfiguration obj, ObjectIsValid
     <ZetboxBase:TableName>DateRangeFilterConfigurations</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="9419242e-31f2-4af7-bb09-49b908f397ee">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-01-08T13:08:46.17706Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-05-27T05:21:03Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>FilterConfiguration</ZetboxBase:Name>
@@ -3781,6 +3781,7 @@ public static void ObjectIsValid(FilterConfiguration obj, ObjectIsValidEventArgs
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
     <ZetboxBase:TableName>FilterConfigurations</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:Enumeration ExportGuid="ec554fba-231c-4a9e-a6cc-3a6d37ed9b6d">
@@ -33485,7 +33486,7 @@ public static void ObjectIsValid(Assembly obj, ObjectIsValidEventArgs e)
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
   </ZetboxBase:CompoundObject>
   <ZetboxBase:ObjectClass ExportGuid="63b8e3f7-e663-4fde-a09a-64ca876586bd">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-01-08T13:08:46.17706Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <ZetboxBase:Description>Metadefinition Object for Parameter. This class is abstract.</ZetboxBase:Description>
@@ -33529,6 +33530,7 @@ public static void ObjectIsValid(BaseParameter obj, ObjectIsValidEventArgs e)
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
     <ZetboxBase:TableName>BaseParameters</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="afd99ba6-f150-4ed4-ad1f-4ef57b14728b">
@@ -34007,7 +34009,7 @@ public static void ObjectIsValid(CompoundObjectProperty obj, ObjectIsValidEventA
     <ZetboxBase:TableName>CompoundObjectProperties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="ac1d5ac9-d909-438f-a4f5-f64ea6904944">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-01-08T13:08:46.17706Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -34050,6 +34052,7 @@ public static void ObjectIsValid(Constraint obj, ObjectIsValidEventArgs e)
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
     <ZetboxBase:TableName>Constraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="038230c3-ee0b-4a04-b89b-fe342ac8f069">
@@ -34472,7 +34475,7 @@ public static void ObjectIsValid(DecimalProperty obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>DecimalProperties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="74785c72-3271-4fb7-95fc-86b0baa09c8e">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-01-08T13:08:46.17706Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>DefaultPropertyValue</ZetboxBase:Name>
@@ -34514,6 +34517,7 @@ public static void ObjectIsValid(DefaultPropertyValue obj, ObjectIsValidEventArg
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
     <ZetboxBase:TableName>DefaultPropertyValues</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:Enumeration ExportGuid="2b0b1986-0337-4d90-ad59-bc9d1ad82b2b">
@@ -36111,7 +36115,7 @@ public static void ObjectIsValid(ObjectReferenceProperty obj, ObjectIsValidEvent
     <ZetboxBase:TableName>ObjectReferenceProperties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="e5f93f63-9cb8-40a5-8118-d1d9e479370c">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-01-08T13:08:46.17706Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <ZetboxBase:Description>Metadefinition Object for Properties. This class is abstract.</ZetboxBase:Description>
@@ -36155,6 +36159,7 @@ public static void ObjectIsValid(Property obj, ObjectIsValidEventArgs e)
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
     <ZetboxBase:TableName>Properties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="c83424ff-71bd-449a-81c7-4b6439fa28c6">

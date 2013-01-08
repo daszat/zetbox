@@ -482,6 +482,7 @@
     </class>
     <class name="Zetbox.App.GUI.FilterConfigurationNHibernateImpl+FilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.GUI.FilterConfigurationNHibernateImpl+FilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
+           discriminator-value="gui.FilterConfigurations"
            schema="`gui`"
            table="`FilterConfigurations`"
            abstract="true"
@@ -495,6 +496,9 @@
                 <param name="sequence">`FilterConfigurations_ID_seq`</param>
             </generator>
         </id>
+        <discriminator column="`__Discriminator`"
+                       type="String" />
+
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
@@ -538,156 +542,132 @@
 
 
         <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.GUI.ObjectClassFilterConfigurationNHibernateImpl+ObjectClassFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.GUI.ObjectClassFilterConfigurationNHibernateImpl+ObjectClassFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`gui`"
-                table="`ObjectClassFilterConfigurations`"
+                discriminator-value="gui.ObjectClassFilterConfigurations"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="ObjectClass" column="`ObjectClassFilterConfigurations_fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.GUI.OptionalPredicateFilterConfigurationNHibernateImpl+OptionalPredicateFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.GUI.OptionalPredicateFilterConfigurationNHibernateImpl+OptionalPredicateFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`gui`"
-                table="`OptionalPredicateFilterConfigurations`"
+                discriminator-value="gui.OptionalPredicateFilterConfigurations"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Predicate" 
-                  column="`Predicate`" 
+                  column="`OptionalPredicateFilterConfigurations_Predicate`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
+        </subclass>
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl+PropertyFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl+PropertyFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`gui`"
-                table="`PropertyFilterConfigurations`"
+                discriminator-value="gui.PropertyFilterConfigurations"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Property" column="`fk_Property`" class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="Property" column="`PropertyFilterConfigurations_fk_Property`" class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
 
             <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.GUI.DateRangeFilterConfigurationNHibernateImpl+DateRangeFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.GUI.DateRangeFilterConfigurationNHibernateImpl+DateRangeFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`gui`"
-                table="`DateRangeFilterConfigurations`"
+                discriminator-value="gui.DateRangeFilterConfigurations"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentMonthDefault" 
-                  column="`IsCurrentMonthDefault`" 
+                  column="`DateRangeFilterConfigurations_IsCurrentMonthDefault`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentQuaterDefault" 
-                  column="`IsCurrentQuaterDefault`" 
+                  column="`DateRangeFilterConfigurations_IsCurrentQuaterDefault`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentYearDefault" 
-                  column="`IsCurrentYearDefault`" 
+                  column="`DateRangeFilterConfigurations_IsCurrentYearDefault`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.GUI.MonthFilterConfigurationNHibernateImpl+MonthFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.GUI.MonthFilterConfigurationNHibernateImpl+MonthFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`gui`"
-                table="`MonthFilterConfigurations`"
+                discriminator-value="gui.MonthFilterConfigurations"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentMonthDefault" 
-                  column="`IsCurrentMonthDefault`" 
+                  column="`MonthFilterConfigurations_IsCurrentMonthDefault`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.GUI.RangeFilterConfigurationNHibernateImpl+RangeFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.GUI.RangeFilterConfigurationNHibernateImpl+RangeFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`gui`"
-                table="`RangeFilterConfigurations`"
+                discriminator-value="gui.RangeFilterConfigurations"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.GUI.SinglePropertyFilterConfigurationNHibernateImpl+SinglePropertyFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.GUI.SinglePropertyFilterConfigurationNHibernateImpl+SinglePropertyFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`gui`"
-                table="`SinglePropertyFilterConfigurations`"
+                discriminator-value="gui.SinglePropertyFilterConfigurations"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.GUI.YearFilterConfigurationNHibernateImpl+YearFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.GUI.YearFilterConfigurationNHibernateImpl+YearFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`gui`"
-                table="`YearFilterConfigurations`"
+                discriminator-value="gui.YearFilterConfigurations"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="IsCurrentYearDefault" 
-                  column="`IsCurrentYearDefault`" 
+                  column="`YearFilterConfigurations_IsCurrentYearDefault`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
+        </subclass>
 
-        </joined-subclass>
+        </subclass>
 
     </class>
     <class name="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl"
@@ -3045,6 +3025,7 @@
     </class>
     <class name="Zetbox.App.Base.BaseParameterNHibernateImpl+BaseParameterProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Base.BaseParameterNHibernateImpl+BaseParameterProxy, Zetbox.Objects.NHibernateImpl"
+           discriminator-value="base.BaseParameters"
            schema="`base`"
            table="`BaseParameters`"
            abstract="true"
@@ -3058,6 +3039,9 @@
                 <param name="sequence">`BaseParameters_ID_seq`</param>
             </generator>
         </id>
+        <discriminator column="`__Discriminator`"
+                       type="String" />
+
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
@@ -3108,172 +3092,142 @@
                   optimistic-lock="false"/>
 
         <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.Base.BoolParameterNHibernateImpl+BoolParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.BoolParameterNHibernateImpl+BoolParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`BoolParameters`"
+                discriminator-value="base.BoolParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.CLRObjectParameterNHibernateImpl+CLRObjectParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.CLRObjectParameterNHibernateImpl+CLRObjectParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`CLRObjectParameters`"
+                discriminator-value="base.CLRObjectParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Type" column="`fk_Type`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="Type" column="`CLRObjectParameters_fk_Type`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.CompoundObjectParameterNHibernateImpl+CompoundObjectParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.CompoundObjectParameterNHibernateImpl+CompoundObjectParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`CompoundObjectParameters`"
+                discriminator-value="base.CompoundObjectParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CompoundObject" column="`fk_CompoundObject`" class="Zetbox.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="CompoundObject" column="`CompoundObjectParameters_fk_CompoundObject`" class="Zetbox.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.DateTimeParameterNHibernateImpl+DateTimeParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.DateTimeParameterNHibernateImpl+DateTimeParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`DateTimeParameters`"
+                discriminator-value="base.DateTimeParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="DateTimeStyle" 
-                  column="`DateTimeStyle`" 
+                  column="`DateTimeParameters_DateTimeStyle`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.DecimalParameterNHibernateImpl+DecimalParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.DecimalParameterNHibernateImpl+DecimalParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`DecimalParameters`"
+                discriminator-value="base.DecimalParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.DoubleParameterNHibernateImpl+DoubleParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.DoubleParameterNHibernateImpl+DoubleParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`DoubleParameters`"
+                discriminator-value="base.DoubleParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.EnumParameterNHibernateImpl+EnumParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.EnumParameterNHibernateImpl+EnumParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`EnumParameters`"
+                discriminator-value="base.EnumParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Enumeration" column="`fk_Enumeration`" class="Zetbox.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="Enumeration" column="`EnumParameters_fk_Enumeration`" class="Zetbox.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.IntParameterNHibernateImpl+IntParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.IntParameterNHibernateImpl+IntParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`IntParameters`"
+                discriminator-value="base.IntParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.ObjectReferenceParameterNHibernateImpl+ObjectReferenceParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.ObjectReferenceParameterNHibernateImpl+ObjectReferenceParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`ObjectParameters`"
+                discriminator-value="base.ObjectParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="ObjectClass" column="`ObjectParameters_fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.StringParameterNHibernateImpl+StringParameterProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.StringParameterNHibernateImpl+StringParameterProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`StringParameters`"
+                discriminator-value="base.StringParameters"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
+        </subclass>
 
     </class>
     <class name="Zetbox.App.Base.BlobNHibernateImpl+BlobProxy, Zetbox.Objects.NHibernateImpl"
@@ -3329,6 +3283,7 @@
     </class>
     <class name="Zetbox.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Zetbox.Objects.NHibernateImpl"
+           discriminator-value="base.Constraints"
            schema="`base`"
            table="`Constraints`"
            abstract="false"
@@ -3342,6 +3297,9 @@
                 <param name="sequence">`Constraints_ID_seq`</param>
             </generator>
         </id>
+        <discriminator column="`__Discriminator`"
+                       type="String" />
+
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
@@ -3371,193 +3329,160 @@
                   optimistic-lock="false"/>
 
         <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.Base.IntegerRangeConstraintNHibernateImpl+IntegerRangeConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.IntegerRangeConstraintNHibernateImpl+IntegerRangeConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`IntegerRangeConstraints`"
+                discriminator-value="base.IntegerRangeConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Max" 
-                  column="`Max`" 
+                  column="`IntegerRangeConstraints_Max`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="Min" 
-                  column="`Min`" 
+                  column="`IntegerRangeConstraints_Min`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.InvokingConstraintNHibernateImpl+InvokingConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.InvokingConstraintNHibernateImpl+InvokingConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`InvokingConstraints`"
+                discriminator-value="base.InvokingConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="GetErrorTextInvocation" column="`fk_GetErrorTextInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="GetErrorTextInvocation" column="`InvokingConstraints_fk_GetErrorTextInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="IsValidInvocation" column="`fk_IsValidInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="IsValidInvocation" column="`InvokingConstraints_fk_IsValidInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.IsValidIdentifierConstraintNHibernateImpl+IsValidIdentifierConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.IsValidIdentifierConstraintNHibernateImpl+IsValidIdentifierConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`IsValidIdentifierConstraints`"
+                discriminator-value="base.IsValidIdentifierConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.Base.IsValidNamespaceConstraintNHibernateImpl+IsValidNamespaceConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.IsValidNamespaceConstraintNHibernateImpl+IsValidNamespaceConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`IsValidNamespaceConstraints`"
+                discriminator-value="base.IsValidNamespaceConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
+        </subclass>
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.MethodInvocationConstraintNHibernateImpl+MethodInvocationConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.MethodInvocationConstraintNHibernateImpl+MethodInvocationConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`MethodInvocationConstraints`"
+                discriminator-value="base.MethodInvocationConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.NotNullableConstraintNHibernateImpl+NotNullableConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.NotNullableConstraintNHibernateImpl+NotNullableConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`NotNullableConstraints`"
+                discriminator-value="base.NotNullableConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.ReadOnlyConstraintNHibernateImpl+ReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.ReadOnlyConstraintNHibernateImpl+ReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`ReadOnlyConstraints`"
+                discriminator-value="base.ReadOnlyConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.Base.ClientReadOnlyConstraintNHibernateImpl+ClientReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.ClientReadOnlyConstraintNHibernateImpl+ClientReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`ClientReadOnlyConstraints`"
+                discriminator-value="base.ClientReadOnlyConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.InitOnlyConstraintNHibernateImpl+InitOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.InitOnlyConstraintNHibernateImpl+InitOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`InitOnlyConstraints`"
+                discriminator-value="base.InitOnlyConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.ViewReadOnlyConstraintNHibernateImpl+ViewReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.ViewReadOnlyConstraintNHibernateImpl+ViewReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`ViewReadOnlyConstraints`"
+                discriminator-value="base.ViewReadOnlyConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
+        </subclass>
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.StringRangeConstraintNHibernateImpl+StringRangeConstraintProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.StringRangeConstraintNHibernateImpl+StringRangeConstraintProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`StringRangeConstraints`"
+                discriminator-value="base.StringRangeConstraints"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="MaxLength" 
-                  column="`MaxLength`" 
+                  column="`StringRangeConstraints_MaxLength`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="MinLength" 
-                  column="`MinLength`" 
+                  column="`StringRangeConstraints_MinLength`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
+        </subclass>
 
     </class>
     <class name="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl"
@@ -3802,7 +3727,7 @@
 
 <!-- ObjectReferenceProperty -->
         <set name="FilterConfigurations" batch-size="100" cascade="none" inverse="true" >
-            <key column="`fk_ObjectClass`" />
+            <key column="`ObjectClassFilterConfigurations_fk_ObjectClass`" />
             <one-to-many class="Zetbox.App.GUI.ObjectClassFilterConfigurationNHibernateImpl+ObjectClassFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
@@ -3840,6 +3765,7 @@
     </class>
     <class name="Zetbox.App.Base.DefaultPropertyValueNHibernateImpl+DefaultPropertyValueProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Base.DefaultPropertyValueNHibernateImpl+DefaultPropertyValueProxy, Zetbox.Objects.NHibernateImpl"
+           discriminator-value="base.DefaultPropertyValues"
            schema="`base`"
            table="`DefaultPropertyValues`"
            abstract="true"
@@ -3853,6 +3779,9 @@
                 <param name="sequence">`DefaultPropertyValues_ID_seq`</param>
             </generator>
         </id>
+        <discriminator column="`__Discriminator`"
+                       type="String" />
+
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
@@ -3878,111 +3807,93 @@
 
 
         <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.Base.BoolDefaultValueNHibernateImpl+BoolDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.BoolDefaultValueNHibernateImpl+BoolDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`BoolDefaultValues`"
+                discriminator-value="base.BoolDefaultValues"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="BoolValue" 
-                  column="`BoolValue`" 
+                  column="`BoolDefaultValues_BoolValue`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.CurrentDateTimeDefaultValueNHibernateImpl+CurrentDateTimeDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.CurrentDateTimeDefaultValueNHibernateImpl+CurrentDateTimeDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`CurrentDateTimeDefaultValues`"
+                discriminator-value="base.CurrentDateTimeDefaultValues"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.EnumDefaultValueNHibernateImpl+EnumDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.EnumDefaultValueNHibernateImpl+EnumDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`EnumDefaultValues`"
+                discriminator-value="base.EnumDefaultValues"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="EnumValue" column="`fk_EnumValue`" class="Zetbox.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="EnumValue" column="`EnumDefaultValues_fk_EnumValue`" class="Zetbox.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.IntDefaultValueNHibernateImpl+IntDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.IntDefaultValueNHibernateImpl+IntDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`IntDefaultValues`"
+                discriminator-value="base.IntDefaultValues"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="IntValue" 
-                  column="`IntValue`" 
+                  column="`IntDefaultValues_IntValue`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.NewGuidDefaultValueNHibernateImpl+NewGuidDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.NewGuidDefaultValueNHibernateImpl+NewGuidDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`NewGuidDefaultValues`"
+                discriminator-value="base.NewGuidDefaultValues"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.StringDefaultValueNHibernateImpl+StringDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.StringDefaultValueNHibernateImpl+StringDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`StringDefaultValues`"
+                discriminator-value="base.StringDefaultValues"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="DefaultValue" 
-                  column="`DefaultValue`" 
+                  column="`StringDefaultValues_DefaultValue`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
+        </subclass>
 
     </class>
     <class name="Zetbox.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Zetbox.Objects.NHibernateImpl"
@@ -4316,7 +4227,7 @@
         <!-- rel=ObjectReferenceProperty_shows_Method_RelationEntry -->
         <!-- relEnd=Methods otherEnd=ObjRefProp -->
         <set name="ShowByProperties" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
-            <key column="`fk_Methods`" />
+            <key column="`ObjectReferenceProperties_fk_Methods`" />
             <one-to-many class="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
@@ -4381,6 +4292,7 @@
     </class>
     <class name="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl"
+           discriminator-value="base.Properties"
            schema="`base`"
            table="`Properties`"
            abstract="true"
@@ -4394,6 +4306,9 @@
                 <param name="sequence">`Properties_ID_seq`</param>
             </generator>
         </id>
+        <discriminator column="`__Discriminator`"
+                       type="String" />
+
 
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
@@ -4468,15 +4383,12 @@
 
 
         <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl+CalculatedObjectReferencePropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl+CalculatedObjectReferencePropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`CalculatedObjectReferenceProperties`"
+                discriminator-value="base.CalculatedObjectReferenceProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
@@ -4489,94 +4401,85 @@
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ReferencedClass" column="`fk_ReferencedClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="ReferencedClass" column="`CalculatedObjectReferenceProperties_fk_ReferencedClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.CompoundObjectPropertyNHibernateImpl+CompoundObjectPropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.CompoundObjectPropertyNHibernateImpl+CompoundObjectPropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`CompoundObjectProperties`"
+                discriminator-value="base.CompoundObjectProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CompoundObjectDefinition" column="`fk_CompoundObjectDefinition`" class="Zetbox.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="CompoundObjectDefinition" column="`CompoundObjectProperties_fk_CompoundObjectDefinition`" class="Zetbox.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
-                  column="`HasPersistentOrder`" 
+                  column="`CompoundObjectProperties_HasPersistentOrder`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
-                  column="`IsList`" 
+                  column="`CompoundObjectProperties_IsList`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.ObjectReferencePlaceholderPropertyNHibernateImpl+ObjectReferencePlaceholderPropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.ObjectReferencePlaceholderPropertyNHibernateImpl+ObjectReferencePlaceholderPropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`ObjectReferencePlaceholderProperties`"
+                discriminator-value="base.ObjectReferencePlaceholderProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
-                  column="`HasPersistentOrder`" 
+                  column="`ObjectReferencePlaceholderProperties_HasPersistentOrder`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="ImplementorRoleName" 
-                  column="`ImplementorRoleName`" 
+                  column="`ObjectReferencePlaceholderProperties_ImplementorRoleName`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
-                  column="`IsList`" 
+                  column="`ObjectReferencePlaceholderProperties_IsList`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="ItemRoleName" 
-                  column="`ItemRoleName`" 
+                  column="`ObjectReferencePlaceholderProperties_ItemRoleName`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ReferencedObjectClass" column="`fk_ReferencedObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="ReferencedObjectClass" column="`ObjectReferencePlaceholderProperties_fk_ReferencedObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Verb" 
-                  column="`Verb`" 
+                  column="`ObjectReferencePlaceholderProperties_Verb`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl+ObjectReferencePropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl+ObjectReferencePropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`ObjectReferenceProperties`"
+                discriminator-value="base.ObjectReferenceProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="EagerLoading" 
-                  column="`EagerLoading`" 
+                  column="`ObjectReferenceProperties_EagerLoading`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="IsInlineEditable" 
-                  column="`IsInlineEditable`" 
+                  column="`ObjectReferenceProperties_IsInlineEditable`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
@@ -4588,195 +4491,168 @@
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="RelationEnd" column="`fk_RelationEnd`" class="Zetbox.App.Base.RelationEndNHibernateImpl+RelationEndProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="RelationEnd" column="`ObjectReferenceProperties_fk_RelationEnd`" class="Zetbox.App.Base.RelationEndNHibernateImpl+RelationEndProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.ValueTypePropertyNHibernateImpl+ValueTypePropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.ValueTypePropertyNHibernateImpl+ValueTypePropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`ValueTypeProperties`"
+                discriminator-value="base.ValueTypeProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="HasPersistentOrder" 
-                  column="`HasPersistentOrder`" 
+                  column="`ValueTypeProperties_HasPersistentOrder`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="IsCalculated" 
-                  column="`IsCalculated`" 
+                  column="`ValueTypeProperties_IsCalculated`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
-                  column="`IsList`" 
+                  column="`ValueTypeProperties_IsList`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
-        <joined-subclass
+        <subclass
                 name="Zetbox.App.Base.BoolPropertyNHibernateImpl+BoolPropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.BoolPropertyNHibernateImpl+BoolPropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`BoolProperties`"
+                discriminator-value="base.BoolProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="FalseIcon" column="`fk_FalseIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="FalseIcon" column="`BoolProperties_fk_FalseIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="FalseLabel" 
-                  column="`FalseLabel`" 
+                  column="`BoolProperties_FalseLabel`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="NullIcon" column="`fk_NullIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="NullIcon" column="`BoolProperties_fk_NullIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="NullLabel" 
-                  column="`NullLabel`" 
+                  column="`BoolProperties_NullLabel`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="TrueIcon" column="`fk_TrueIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="TrueIcon" column="`BoolProperties_fk_TrueIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="TrueLabel" 
-                  column="`TrueLabel`" 
+                  column="`BoolProperties_TrueLabel`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.DateTimePropertyNHibernateImpl+DateTimePropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.DateTimePropertyNHibernateImpl+DateTimePropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`DateTimeProperties`"
+                discriminator-value="base.DateTimeProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="DateTimeStyle" 
-                  column="`DateTimeStyle`" 
+                  column="`DateTimeProperties_DateTimeStyle`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.DecimalPropertyNHibernateImpl+DecimalPropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.DecimalPropertyNHibernateImpl+DecimalPropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`DecimalProperties`"
+                discriminator-value="base.DecimalProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Precision" 
-                  column="`Precision`" 
+                  column="`DecimalProperties_Precision`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="Scale" 
-                  column="`Scale`" 
+                  column="`DecimalProperties_Scale`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.DoublePropertyNHibernateImpl+DoublePropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.DoublePropertyNHibernateImpl+DoublePropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`DoubleProperties`"
+                discriminator-value="base.DoubleProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.EnumerationPropertyNHibernateImpl+EnumerationPropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.EnumerationPropertyNHibernateImpl+EnumerationPropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`EnumerationProperties`"
+                discriminator-value="base.EnumerationProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Enumeration" column="`fk_Enumeration`" class="Zetbox.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="Enumeration" column="`EnumerationProperties_fk_Enumeration`" class="Zetbox.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.GuidPropertyNHibernateImpl+GuidPropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.GuidPropertyNHibernateImpl+GuidPropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`GuidProperties`"
+                discriminator-value="base.GuidProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.IntPropertyNHibernateImpl+IntPropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.IntPropertyNHibernateImpl+IntPropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`IntProperties`"
+                discriminator-value="base.IntProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.StringPropertyNHibernateImpl+StringPropertyProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.StringPropertyNHibernateImpl+StringPropertyProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`base`"
-                table="`StringProperties`"
+                discriminator-value="base.StringProperties"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
+        </subclass>
 
-        </joined-subclass>
+        </subclass>
 
     </class>
     <class name="Zetbox.App.Base.RelationNHibernateImpl+RelationProxy, Zetbox.Objects.NHibernateImpl"
