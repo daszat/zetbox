@@ -122,7 +122,7 @@ namespace Zetbox.Generator
             {
                 Log.Warn("Serializing generation threads.");
 
-                var ctx = _container.Resolve<IZetboxContext>();
+                var ctx = _container.Resolve<IZetboxServerContext>();
                 foreach (var gen in _generatorProviders)
                 {
                     gen.Generate(ctx, workingPath);
