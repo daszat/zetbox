@@ -3129,9 +3129,9 @@
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="false" />
-    <Property Name="AInt" Type="int4" Nullable="true" />
-    <Property Name="AString" Type="varchar" MaxLength="200" Nullable="true" />
-    <Property Name="BString" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="TPHDerivedAObjs_AInt" Type="int4" Nullable="true" />
+    <Property Name="TPHDerivedAObjs_AString" Type="varchar" MaxLength="200" Nullable="true" />
+    <Property Name="TPHDerivedBObjs_BString" Type="varchar" MaxLength="100" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="TypeRef">

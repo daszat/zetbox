@@ -1268,8 +1268,8 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="AInt" ColumnName="AInt" />
-          <ScalarProperty Name="AString" ColumnName="AString" />
+          <ScalarProperty Name="AInt" ColumnName="TPHDerivedAObjs_AInt" />
+          <ScalarProperty Name="AString" ColumnName="TPHDerivedAObjs_AString" />
           <Condition ColumnName="__Discriminator" Value="test.TPHDerivedAObjs" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -1280,7 +1280,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="BString" ColumnName="BString" />
+          <ScalarProperty Name="BString" ColumnName="TPHDerivedBObjs_BString" />
           <Condition ColumnName="__Discriminator" Value="test.TPHDerivedBObjs" />
 	    </MappingFragment>
       </EntityTypeMapping>
