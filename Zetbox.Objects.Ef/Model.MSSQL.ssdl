@@ -1748,14 +1748,14 @@
     <Property Name="Label" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="RefreshOnFilterChanged" Type="bit" Nullable="true" />
     <Property Name="Required" Type="bit" Nullable="false" />
+    <Property Name="ObjectClassFilterConfigurations_fk_ObjectClass" Type="int" />
+    <Property Name="OptionalPredicateFilterConfigurations_Predicate" Type="nvarchar" MaxLength="1000" Nullable="true" />
     <Property Name="PropertyFilterConfigurations_fk_Property" Type="int" />
     <Property Name="DateRangeFilterConfigurations_IsCurrentMonthDefault" Type="bit" Nullable="true" />
     <Property Name="DateRangeFilterConfigurations_IsCurrentQuaterDefault" Type="bit" Nullable="true" />
     <Property Name="DateRangeFilterConfigurations_IsCurrentYearDefault" Type="bit" Nullable="true" />
     <Property Name="MonthFilterConfigurations_IsCurrentMonthDefault" Type="bit" Nullable="true" />
     <Property Name="YearFilterConfigurations_IsCurrentYearDefault" Type="bit" Nullable="true" />
-    <Property Name="ObjectClassFilterConfigurations_fk_ObjectClass" Type="int" />
-    <Property Name="OptionalPredicateFilterConfigurations_Predicate" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="FixedYearlyCalendarRule">
@@ -2153,19 +2153,6 @@
     <Property Name="Label" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="RequestedWidth" Type="int" Nullable="true" />
-    <Property Name="ValueTypeProperties_HasPersistentOrder" Type="bit" Nullable="true" />
-    <Property Name="ValueTypeProperties_IsCalculated" Type="bit" Nullable="true" />
-    <Property Name="ValueTypeProperties_IsList" Type="bit" Nullable="true" />
-    <Property Name="BoolProperties_fk_FalseIcon" Type="int" />
-    <Property Name="BoolProperties_fk_NullIcon" Type="int" />
-    <Property Name="BoolProperties_fk_TrueIcon" Type="int" />
-    <Property Name="BoolProperties_FalseLabel" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="BoolProperties_NullLabel" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="BoolProperties_TrueLabel" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="DateTimeProperties_DateTimeStyle" Type="int" Nullable="true" />
-    <Property Name="DecimalProperties_Precision" Type="int" Nullable="true" />
-    <Property Name="DecimalProperties_Scale" Type="int" Nullable="true" />
-    <Property Name="EnumerationProperties_fk_Enumeration" Type="int" />
     <Property Name="CalculatedObjectReferenceProperties_fk_ReferencedClass" Type="int" />
     <Property Name="CompoundObjectProperties_fk_CompoundObjectDefinition" Type="int" />
     <Property Name="CompoundObjectProperties_HasPersistentOrder" Type="bit" Nullable="true" />
@@ -2179,6 +2166,19 @@
     <Property Name="ObjectReferenceProperties_fk_RelationEnd" Type="int" />
     <Property Name="ObjectReferenceProperties_EagerLoading" Type="bit" Nullable="true" />
     <Property Name="ObjectReferenceProperties_IsInlineEditable" Type="bit" Nullable="true" />
+    <Property Name="ValueTypeProperties_HasPersistentOrder" Type="bit" Nullable="true" />
+    <Property Name="ValueTypeProperties_IsCalculated" Type="bit" Nullable="true" />
+    <Property Name="ValueTypeProperties_IsList" Type="bit" Nullable="true" />
+    <Property Name="BoolProperties_fk_FalseIcon" Type="int" />
+    <Property Name="BoolProperties_fk_NullIcon" Type="int" />
+    <Property Name="BoolProperties_fk_TrueIcon" Type="int" />
+    <Property Name="BoolProperties_FalseLabel" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="BoolProperties_NullLabel" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="BoolProperties_TrueLabel" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="DateTimeProperties_DateTimeStyle" Type="int" Nullable="true" />
+    <Property Name="DecimalProperties_Precision" Type="int" Nullable="true" />
+    <Property Name="DecimalProperties_Scale" Type="int" Nullable="true" />
+    <Property Name="EnumerationProperties_fk_Enumeration" Type="int" />
   </EntityType>
 	
   <EntityType Name="RecurrenceRuleTester">

@@ -122,7 +122,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
             if (cls.GetTableMapping() == TableMapping.TPH)
             {
-                foreach (var subCls in cls.SubClasses)
+                foreach (var subCls in cls.SubClasses.OrderBy(c => c.Module.Name).ThenBy(c => c.Name))
                 {
                     ApplyEntityTypeColumnDefs(subCls);
                 }
