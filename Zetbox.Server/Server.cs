@@ -125,8 +125,7 @@ namespace Zetbox.Server
                 var files = Directory.GetFiles("Modules", "*.xml", SearchOption.TopDirectoryOnly);
                 if (files == null || files.Length == 0) throw new InvalidOperationException("No files found to deploy");
                 Logging.Server.InfoFormat("Found {0} files to deploy", files.Length);
-                // TODO: remove this as it is only a temporary workaround for introducing calculated properties
-                CheckSchema(true);
+
                 // TODO: Define a standard migration procedure
                 MigrateDatabase();
 
@@ -143,13 +142,7 @@ namespace Zetbox.Server
             {
                 try
                 {
-                    var ctx = subContainer.Resolve<IZetboxServerContext>();
-                    var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(i => i.Name == "KistlBase").FirstOrDefault();
-                    if (module != null)
-                    {
-                        module.Name = "ZetboxBase";
-                    }
-                    ctx.SubmitRestore();
+                    // add manual hacks here!
                 }
                 catch
                 {
