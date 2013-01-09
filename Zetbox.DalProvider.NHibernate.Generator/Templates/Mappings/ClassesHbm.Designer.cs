@@ -36,7 +36,7 @@ this.WriteObjects("<?xml version=\"1.0\"?>\r\n");
 this.WriteObjects("<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\" \r\n");
 this.WriteObjects("                   default-cascade=\"save-update\">\r\n");
 #line 31 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
-foreach (var oc in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null).OrderBy(c => c.Module.Name).ThenBy(c => c.Name)) {          
+foreach (var oc in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null).ToList().OrderBy(c => c.Module.Name).ThenBy(c => c.Name)) {          
 #line 32 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
 ApplyObjectClassTemplate(oc);                                                               
 #line 33 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
