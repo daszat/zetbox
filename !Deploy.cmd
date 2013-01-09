@@ -13,7 +13,7 @@ set config=%1
 
 :GOON
 
-bin\debug\Zetbox.Cli.exe %config% -deploy-update -generate
+bin\debug\Zetbox.Cli.exe %config% -fallback -deploy-update -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

@@ -46,7 +46,7 @@ namespace Zetbox.Client
                     AppDomain.CurrentDomain.Evidence,
                     AppDomain.CurrentDomain.SetupInformation);
 
-                AssemblyLoader.Bootstrap(serverDomain, config);
+                AssemblyLoader.Bootstrap(serverDomain, config, true);
 
                 serverManager = (IZetboxAppDomain)serverDomain.CreateInstanceAndUnwrap(
                     "Zetbox.Server.Service",

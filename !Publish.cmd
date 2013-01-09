@@ -13,7 +13,7 @@ set config=%1
 
 :GOON
 
-bin\Debug\Zetbox.Cli.exe %config% -generate -updatedeployedschema -repairschema
+bin\Debug\Zetbox.Cli.exe %config% -fallback -generate -updatedeployedschema -repairschema
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem refresh local code

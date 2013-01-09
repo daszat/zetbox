@@ -43,7 +43,7 @@ namespace Zetbox.API
         /// <summary>
         /// Initializes the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path.
         /// </summary>
-        public static void Bootstrap(AppDomain domain, ZetboxConfig config)
+        public static void Bootstrap(AppDomain domain, ZetboxConfig config, bool loadGeneratedAssemblies)
         {
             if (domain == null) { throw new ArgumentNullException("domain"); }
             if (config == null) { throw new ArgumentNullException("config"); }
@@ -52,7 +52,7 @@ namespace Zetbox.API
                 "Zetbox.API",
                 "Zetbox.API.AssemblyLoaderInitializer");
 
-            init.Init(config);
+            init.Init(config, loadGeneratedAssemblies);
         }
 
         public static void Unload(AppDomain domain)
@@ -77,7 +77,7 @@ namespace Zetbox.API
         }
 
         private static bool _isInitialised = false;
-        public static void EnsureInitialisation(ZetboxConfig config)
+        public static void EnsureInitialisation(ZetboxConfig config, bool loadGeneratedAssemblies)
         {
             if (config == null) { throw new ArgumentNullException("config"); }
 
@@ -94,7 +94,7 @@ namespace Zetbox.API
 
                 Log.DebugFormat("Initializing {0}", AppDomain.CurrentDomain.FriendlyName);
                 InitialiseTargetAssemblyFolder(config);
-                InitialiseSearchPath(config.AssemblySearchPaths.Paths);
+                InitialiseSearchPath(config.AssemblySearchPaths.Paths, loadGeneratedAssemblies);
 
                 // Start resolving Assemblies
                 AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
@@ -102,7 +102,7 @@ namespace Zetbox.API
             }
         }
 
-        private static void InitialiseSearchPath(string[] paths)
+        private static void InitialiseSearchPath(string[] paths, bool loadGeneratedAssemblies)
         {
             foreach (var path in paths ?? new string[] { })
             {
@@ -110,8 +110,26 @@ namespace Zetbox.API
                     ? path
                     : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
 
+                // Thank you WIN32: There is no canonical path representation
+                // See: http://stackoverflow.com/questions/1816691/how-do-i-resolve-a-canonical-filename-in-windows
+                // instead we're hacking a little bit
+                var tmpPath = Path.Combine(rootedPath, "x").Replace('\\', '/').ToLowerInvariant();
+                if (tmpPath.EndsWith(".generated/x") || tmpPath.EndsWith(".fallback/x"))
+                {
+                    continue;
+                }
+
                 Log.DebugFormat("Added searchpath [{0}]", rootedPath);
                 AssemblyLoader.SearchPath.Add(rootedPath);
+
+                if (loadGeneratedAssemblies)
+                {
+                    AssemblyLoader.SearchPath.Add(rootedPath + ".Generated");
+                }
+                else
+                {
+                    AssemblyLoader.SearchPath.Add(rootedPath + ".Fallback");
+                }
             }
         }
 
@@ -351,15 +369,13 @@ namespace Zetbox.API
                 }
             }
         }
-
-
     }
 
     public class AssemblyLoaderInitializer : MarshalByRefObject
     {
-        public void Init(ZetboxConfig config)
+        public void Init(ZetboxConfig config, bool loadGeneratedAssemblies)
         {
-            AssemblyLoader.EnsureInitialisation(config);
+            AssemblyLoader.EnsureInitialisation(config, loadGeneratedAssemblies);
         }
 
         public void Unload()

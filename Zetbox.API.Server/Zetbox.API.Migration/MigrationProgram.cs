@@ -81,7 +81,7 @@ namespace Zetbox.API.Migration
 
             _config = ReadConfig(extraArguments);
 
-            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, _config);
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, _config, true);
 
             _container = CreateMasterContainer(_config);
 

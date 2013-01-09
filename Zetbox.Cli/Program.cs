@@ -41,9 +41,10 @@ namespace Zetbox.Cli
 
             try
             {
-                var config = ExtractConfig(ref arguments);
+                bool loadGeneratedAssemblies;
+                var config = ExtractConfig(ref arguments, out loadGeneratedAssemblies);
 
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config, loadGeneratedAssemblies);
 
                 using (var container = CreateMasterContainer(config))
                 {
@@ -112,7 +113,7 @@ namespace Zetbox.Cli
             return container;
         }
 
-        private static ZetboxConfig ExtractConfig(ref string[] args)
+        private static ZetboxConfig ExtractConfig(ref string[] args, out bool loadGeneratedAssemblies)
         {
             string configFilePath;
             if (args.Length > 0 && File.Exists(args[0]))
@@ -125,6 +126,15 @@ namespace Zetbox.Cli
             {
                 configFilePath = String.Empty;
             }
+
+            var fallbackOpts = new[] { "-fallback", "--fallback", "/fallback" };
+            var localArgs = args;
+            loadGeneratedAssemblies = !fallbackOpts.Any(opt => localArgs.Contains(opt));
+            if (!loadGeneratedAssemblies)
+            {
+                args = args.Except(fallbackOpts).ToArray();
+            }
+
             return ZetboxConfig.FromFile(configFilePath, "Zetbox.Cli.xml");
         }
     }

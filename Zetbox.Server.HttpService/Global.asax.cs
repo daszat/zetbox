@@ -78,7 +78,7 @@ namespace Zetbox.Server.HttpService
             // Make DocumentStore relative to HttpService
             config.Server.DocumentStore = Path.Combine(appBasePath, config.Server.DocumentStore);
 
-            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config, true);
             CreateMasterContainer(config);
         }
 
