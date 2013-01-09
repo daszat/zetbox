@@ -30,7 +30,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
             var interfaceType = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
 
             CollectionEntries.ValueCollectionEntryParentReference.Call(Host, ctx,
-                MembersToSerialize, interfaceType, "Parent", prop.Module.Namespace, prop.DisableExport == true);
+                MembersToSerialize, interfaceType, "Parent", "fk_Parent", prop.Module.Namespace, prop.DisableExport == true);
 
             Properties.DelegatingProperty.Call(
                 Host, ctx,

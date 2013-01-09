@@ -4227,7 +4227,7 @@
         <!-- rel=ObjectReferenceProperty_shows_Method_RelationEntry -->
         <!-- relEnd=Methods otherEnd=ObjRefProp -->
         <set name="ShowByProperties" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
-            <key column="`ObjectReferenceProperties_fk_Methods`" />
+            <key column="`fk_Methods`" />
             <one-to-many class="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 

@@ -426,7 +426,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             Log.InfoFormat("New ValueType Property List: {0}", prop.Name);
             var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
-            string fkName = prop.GetCollectionEntryReverseKeyColumnName();
+            string fkName = Construct.ForeignKeyColumnName(prop);
             string valPropName = prop.Name;
             string valPropIndexName = prop.Name + "Index";
             string assocName = prop.GetAssociationName();
@@ -455,7 +455,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             Log.InfoFormat("New CompoundObject Property List: {0}", cprop.Name);
             var tblName = db.GetTableName(cprop.Module.SchemaName, cprop.GetCollectionEntryTable());
-            string fkName = cprop.GetCollectionEntryReverseKeyColumnName();
+            string fkName = Construct.ForeignKeyColumnName(cprop);
 
             // TODO: Support nested CompoundObject
             string valPropIndexName = cprop.Name + "Index";
@@ -886,8 +886,8 @@ namespace Zetbox.Server.SchemaManagement
             var srcColName = Construct.ForeignKeyColumnName(otherEnd);
 
             var destTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            var destCol = rel.GetRelationFkColumnName(relEnd.GetRole());
-            var destFKCol = rel.GetRelationFkColumnName(otherEnd.GetRole());
+            var destCol = Construct.ForeignKeyColumnName(relEnd);
+            var destFKCol = Construct.ForeignKeyColumnName(otherEnd);
 
             // Drop relations first as 1:1 and n:m relations share the same names
             var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
@@ -1067,8 +1067,8 @@ namespace Zetbox.Server.SchemaManagement
             var srcColName = Construct.ForeignKeyColumnName(otherEnd);
 
             var destTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            var destCol = rel.GetRelationFkColumnName(relEnd.GetRole());
-            var destFKCol = rel.GetRelationFkColumnName(otherEnd.GetRole());
+            var destCol = Construct.ForeignKeyColumnName(relEnd);
+            var destFKCol = Construct.ForeignKeyColumnName(otherEnd);
 
             DoNew_N_M_Relation(rel);
             db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
@@ -1106,8 +1106,8 @@ namespace Zetbox.Server.SchemaManagement
             {
                 var destTblName = rel.A.Type.GetTableRef(db);
                 var destColName = Construct.ForeignKeyColumnName(rel.B);
-                var srcColName = rel.GetRelationFkColumnName(RelationEndRole.B);
-                var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.A);
+                var srcColName = Construct.ForeignKeyColumnName(rel.B);
+                var srcFKColName = Construct.ForeignKeyColumnName(rel.A);
 
                 if (!db.CheckFKColumnContainsUniqueValues(srcTblName, srcColName))
                 {
@@ -1120,8 +1120,8 @@ namespace Zetbox.Server.SchemaManagement
             {
                 var destTblName = rel.B.Type.GetTableRef(db);
                 var destColName = Construct.ForeignKeyColumnName(rel.A);
-                var srcColName = rel.GetRelationFkColumnName(RelationEndRole.A);
-                var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.B);
+                var srcColName = Construct.ForeignKeyColumnName(rel.A);
+                var srcFKColName = Construct.ForeignKeyColumnName(rel.B);
 
                 if (!db.CheckFKColumnContainsUniqueValues(srcTblName, srcColName))
                 {
@@ -1169,8 +1169,9 @@ namespace Zetbox.Server.SchemaManagement
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
             var srcTbl = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
-            var srcCol = saved.GetRelationFkColumnName(otherEnd.GetRole());
-            var srcFKCol = saved.GetRelationFkColumnName(relEnd.GetRole());
+            // translate ends to savedEnds
+            var srcCol = Construct.ForeignKeyColumnName(saved.GetEndFromRole(otherEnd.GetRole()));
+            var srcFKCol = Construct.ForeignKeyColumnName(saved.GetEndFromRole(relEnd.GetRole()));
 
             if (!db.CheckFKColumnContainsUniqueValues(srcTbl, srcCol))
             {
@@ -1220,8 +1221,8 @@ namespace Zetbox.Server.SchemaManagement
                         // renaming is handled by DoChangeRelationName
                         //db.RenameTable(oldTblName, newTblName);
 
-                        var fkAName = saved.GetRelationFkColumnName(RelationEndRole.A);
-                        var fkBName = saved.GetRelationFkColumnName(RelationEndRole.B);
+                        var fkAName = Construct.ForeignKeyColumnName(saved.A);
+                        var fkBName = Construct.ForeignKeyColumnName(saved.B);
                         db.CreateFKConstraint(oldTblName, rel.A.Type.GetTableRef(db), fkAName, saved.GetRelationAssociationName(RelationEndRole.A), false);
                         db.CreateFKConstraint(oldTblName, rel.B.Type.GetTableRef(db), fkBName, saved.GetRelationAssociationName(RelationEndRole.B), false);
                     }
@@ -1317,8 +1318,8 @@ namespace Zetbox.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            var fkAName = saved.GetRelationFkColumnName(RelationEndRole.A);
-            var fkBName = saved.GetRelationFkColumnName(RelationEndRole.B);
+            var fkAName = Construct.ForeignKeyColumnName(saved.A);
+            var fkBName = Construct.ForeignKeyColumnName(saved.B);
 
             var aType = rel.A.Type;
             var bType = rel.B.Type;
@@ -1335,8 +1336,8 @@ namespace Zetbox.Server.SchemaManagement
 
                 db.RenameTable(srcRelTbl, destRelTbl);
 
-                db.RenameColumn(destRelTbl, saved.GetRelationFkColumnName(RelationEndRole.A), rel.GetRelationFkColumnName(RelationEndRole.A));
-                db.RenameColumn(destRelTbl, saved.GetRelationFkColumnName(RelationEndRole.B), rel.GetRelationFkColumnName(RelationEndRole.B));
+                db.RenameColumn(destRelTbl, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
+                db.RenameColumn(destRelTbl, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
             }
             else if (rel.GetRelationType() == RelationType.one_n)
             {
@@ -1471,7 +1472,7 @@ namespace Zetbox.Server.SchemaManagement
             Log.InfoFormat("Create N:M Relation {1} PositionStorage: {0}", assocName, role);
 
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            var fkName = rel.GetRelationFkColumnName(role);
+            var fkName = Construct.ForeignKeyColumnName(rel.GetEndFromRole(role));
 
             db.CreateColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
         }
@@ -1490,7 +1491,7 @@ namespace Zetbox.Server.SchemaManagement
             Log.InfoFormat("Drop N:M Relation {1} PositionStorage: {0}", assocName, role);
 
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            var fkName = rel.GetRelationFkColumnName(role);
+            var fkName = Construct.ForeignKeyColumnName(rel.GetEndFromRole(role));
 
             if (db.CheckColumnExists(tblName, fkName + Zetbox.API.Helper.PositionSuffix))
                 db.DropColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix);
@@ -1571,8 +1572,8 @@ namespace Zetbox.Server.SchemaManagement
             assocName = rel.GetAssociationName();
 
             tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
-            fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+            fkAName = Construct.ForeignKeyColumnName(rel.A);
+            fkBName = Construct.ForeignKeyColumnName(rel.B);
             aType = rel.A.Type;
             bType = rel.B.Type;
 
@@ -1954,7 +1955,7 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     // relink fk column on tblName
                     var tblName = db.GetTableName(savedProp.Module.SchemaName, savedProp.GetCollectionEntryTable());
-                    string fkName = savedProp.GetCollectionEntryReverseKeyColumnName();
+                    string fkName = Construct.ForeignKeyColumnName(savedProp);
                     string assocName = savedProp.GetAssociationName();
 
                     db.DropFKConstraint(tblName, assocName);
@@ -1965,7 +1966,7 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     // relink fk column on tblName
                     var tblName = db.GetTableName(savedProp.Module.SchemaName, savedProp.GetCollectionEntryTable());
-                    string fkName = savedProp.GetCollectionEntryReverseKeyColumnName();
+                    string fkName = Construct.ForeignKeyColumnName(savedProp);
                     string assocName = savedProp.GetAssociationName();
 
                     db.DropFKConstraint(tblName, assocName);

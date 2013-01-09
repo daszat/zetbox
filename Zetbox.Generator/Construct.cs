@@ -102,6 +102,20 @@ namespace Zetbox.Generator
             return "fk_" + colName;
         }
 
+        public static string ForeignKeyColumnName(ValueTypeProperty listProp)
+        {
+            if (listProp == null) { throw new ArgumentNullException("listProp"); }
+
+            return ForeignKeyColumnName(listProp.ObjectClass.Name);
+        }
+
+        public static string ForeignKeyColumnName(CompoundObjectProperty listProp)
+        {
+            if (listProp == null) { throw new ArgumentNullException("listProp"); }
+            
+            return ForeignKeyColumnName(listProp.ObjectClass.Name);
+        }
+
         public static string ForeignKeyColumnName(RelationEnd otherEnd)
         {
             return ForeignKeyColumnName(otherEnd, string.Empty);
@@ -111,8 +125,11 @@ namespace Zetbox.Generator
         {
             if (otherEnd == null) { throw new ArgumentNullException("otherEnd"); }
 
-            var relEnd = otherEnd.GetParent().GetOtherEnd(otherEnd);
-            if (relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null)
+            var rel = otherEnd.GetParent();
+            var relEnd = rel.GetOtherEnd(otherEnd);
+            if (relEnd.Type.GetTableMapping() == TableMapping.TPH
+                && relEnd.Type.BaseObjectClass != null
+                && rel.HasStorage(relEnd.GetRole()))
             {
                 return NestedColumnName(ForeignKeyColumnName(NestedColumnName(otherEnd.RoleName, prefix)), relEnd.Type.TableName);
             }

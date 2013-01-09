@@ -85,11 +85,12 @@ namespace Zetbox.Generator.Extensions
             return String.Format("{0}.{1}", rel.Module.Namespace, rel.GetRelationClassName());
         }
 
+        [Obsolete]
         public static string GetRelationFkColumnName(this Relation rel, RelationEndRole endRole)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
             var relEnd = rel.GetEndFromRole(endRole);
-            return "fk_" + relEnd.RoleName;
+            return Construct.ForeignKeyColumnName(relEnd);
         }
         #endregion
 
@@ -127,6 +128,7 @@ namespace Zetbox.Generator.Extensions
             return String.Format("{0}.{1}", prop.GetCollectionEntryNamespace(), prop.GetCollectionEntryClassName());
         }
 
+        [Obsolete]
         public static string GetCollectionEntryReverseKeyColumnName(this Property prop)
         {
             return "fk_" + prop.ObjectClass.Name;

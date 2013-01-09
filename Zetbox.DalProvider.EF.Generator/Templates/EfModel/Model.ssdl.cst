@@ -96,12 +96,12 @@
     -->
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Schema="<%= esSchemaName %>" Table="<%= esTableName %>" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.Store.<%= assocNameA %>" >
-      <End Role="<%= a.RoleName %>" EntitySet="<%= a.Type.Name %>" />
+      <End Role="<%= a.RoleName %>" EntitySet="<%= a.Type.GetEntitySetName() %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
     </AssociationSet>
     <AssociationSet Name="<%= assocNameB %>" Association="Model.Store.<%= assocNameB %>" >
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
-      <End Role="<%= b.RoleName %>" EntitySet="<%= b.Type.Name %>" />
+      <End Role="<%= b.RoleName %>" EntitySet="<%= b.Type.GetEntitySetName() %>" />
     </AssociationSet>
     
 <%
@@ -118,8 +118,8 @@
         var b = rel.B;
 %>
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
-      <End Role="<%= a.RoleName %>" EntitySet="<%= a.Type.Name %>" />
-      <End Role="<%= b.RoleName %>" EntitySet="<%= b.Type.Name %>" />
+      <End Role="<%= a.RoleName %>" EntitySet="<%= a.Type.GetEntitySetName() %>" />
+      <End Role="<%= b.RoleName %>" EntitySet="<%= b.Type.GetEntitySetName() %>" />
     </AssociationSet>
 <%
 	}
@@ -135,11 +135,12 @@
 	{
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
-        var propClsName = prop.ObjectClass.Name;
+        string propClsName = prop.ObjectClass.Name;
+        string propEntitySetName = prop.ObjectClass.GetEntitySetName();
 %>
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Schema="<%= prop.Module.SchemaName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
-      <End Role="<%= propClsName %>" EntitySet="<%= propClsName %>" />
+      <End Role="<%= propClsName %>" EntitySet="<%= propEntitySetName %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
     </AssociationSet>
     
@@ -157,11 +158,12 @@
 	{
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
-        var propClsName = prop.ObjectClass.Name;
+        string propClsName = prop.ObjectClass.Name;
+        string propEntitySetName = prop.ObjectClass.GetEntitySetName();
 %>
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Schema="<%= prop.Module.SchemaName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
-      <End Role="<%= propClsName %>" EntitySet="<%= propClsName %>" />
+      <End Role="<%= propClsName %>" EntitySet="<%= propEntitySetName %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
     </AssociationSet>
     
@@ -204,7 +206,7 @@
       <Property Name="Right" Type="<%= int32DbType %>" Nullable="false" />
     </EntityType>
     <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
-      <End Role="<%= clsName %>" Type="Model.Store.<%= cls.Name %>" Multiplicity="1" />
+      <End Role="<%= clsName %>" Type="Model.Store.<%= cls.GetEntitySetName() %>" Multiplicity="1" />
       <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
       <ReferentialConstraint>
         <Principal Role="<%= clsName %>">
@@ -226,8 +228,8 @@
 	foreach(var rel in ctx.GetRelationsWithSeparateStorage())
 	{
 		string ceName = rel.GetRelationClassName();
-		string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
-		string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+		string fkAName = Construct.ForeignKeyColumnName(rel.A);
+		string fkBName = Construct.ForeignKeyColumnName(rel.B);
         var a = rel.A;
         var b = rel.B;
 %>	
@@ -266,7 +268,7 @@
 
   <!-- A to CollectionEntry -->
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.A) %>">
-    <End Role="<%= a.RoleName %>" Type="Model.Store.<%= a.Type.Name %>" Multiplicity="0..1" />
+    <End Role="<%= a.RoleName %>" Type="Model.Store.<%= a.Type.GetEntitySetName() %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="<%= a.RoleName %>">
@@ -280,7 +282,7 @@
 
   <!-- B to CollectionEntry -->
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>">
-    <End Role="<%= b.RoleName %>" Type="Model.Store.<%= b.Type.Name %>" Multiplicity="0..1" />
+    <End Role="<%= b.RoleName %>" Type="Model.Store.<%= b.Type.GetEntitySetName() %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="<%= b.RoleName %>">
@@ -319,14 +321,14 @@
 %>
 
   <Association Name="<%= rel.GetAssociationName() %>">
-    <End Role="<%= principal.RoleName %>" Type="Model.Store.<%= principal.Type.Name %>" Multiplicity="<%= principal.Multiplicity.ToSsdlMultiplicity().ToXmlValue() %>" />
-    <End Role="<%= dependent.RoleName %>" Type="Model.Store.<%= dependent.Type.Name %>" Multiplicity="*" />
+    <End Role="<%= principal.RoleName %>" Type="Model.Store.<%= principal.Type.GetEntitySetName() %>" Multiplicity="<%= principal.Multiplicity.ToSsdlMultiplicity().ToXmlValue() %>" />
+    <End Role="<%= dependent.RoleName %>" Type="Model.Store.<%= dependent.Type.GetEntitySetName() %>" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="<%= principal.RoleName %>">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="<%= dependent.RoleName %>">
-        <PropertyRef Name="fk_<%= principal.RoleName %>" />
+        <PropertyRef Name="<%= Construct.ForeignKeyColumnName(principal) %>" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -347,8 +349,8 @@
 		string childRoleName = Construct.AssociationChildRoleName(childType);
 %>
   <Association Name="<%= Construct.InheritanceAssociationName(parentType, childType) %>">
-    <End Role="<%= parentRoleName %>" Type="Model.Store.<%= parentType.Name %>" Multiplicity="1" />
-    <End Role="<%= childRoleName %>" Type="Model.Store.<%= childType.Name %>" Multiplicity="0..1" />
+    <End Role="<%= parentRoleName %>" Type="Model.Store.<%= parentType.GetEntitySetName() %>" Multiplicity="1" />
+    <End Role="<%= childRoleName %>" Type="Model.Store.<%= childType.GetEntitySetName() %>" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="<%= parentRoleName %>">
         <PropertyRef Name="ID" />
@@ -374,6 +376,7 @@
 		
 		// the name of the class containing this list
 		string containerTypeName = prop.ObjectClass.Name;
+		string containerEntitySetName = prop.ObjectClass.GetEntitySetName();
 		// the name of the CollectionEntry class
 		string entryTypeName = prop.GetCollectionEntryClassName();
 		// the name of the contained type
@@ -395,7 +398,7 @@
         <PropertyRef Name="ID" />
       </Key>
       <Property Name="ID" Type="<%= int32DbType %>" Nullable="false" StoreGeneratedPattern="Identity" />
-      <Property Name="fk_<%= containerTypeName %>" Type="<%= int32DbType %>" Nullable="true" />
+      <Property Name="<%= Construct.ForeignKeyColumnName(prop) %>" Type="<%= int32DbType %>" Nullable="true" />
       <Property Name="<%= prop.Name %>" Type="<%= itemTypeName %>" <%= constraint %>/>
 <%
 		if (prop.HasPersistentOrder)
@@ -408,7 +411,7 @@
     </EntityType>
 
     <Association Name="<%= prop.GetAssociationName() %>">
-      <End Role="<%= containerTypeName %>" Type="Model.Store.<%= containerTypeName %>" Multiplicity="0..1">
+      <End Role="<%= containerTypeName %>" Type="Model.Store.<%= containerEntitySetName %>" Multiplicity="0..1">
         <OnDelete Action="Cascade" />
       </End>
       <End Role="CollectionEntry" Type="Model.Store.<%= entryTypeName %>" Multiplicity="*" />
@@ -417,7 +420,7 @@
           <PropertyRef Name="ID" />
         </Principal>
         <Dependent Role="CollectionEntry">
-          <PropertyRef Name="fk_<%= containerTypeName %>" />
+          <PropertyRef Name="<%= Construct.ForeignKeyColumnName(prop) %>" />
         </Dependent>
       </ReferentialConstraint>
     </Association>
@@ -438,6 +441,7 @@
 		
 		// the name of the class containing this list
 		string containerTypeName = prop.ObjectClass.Name;
+		string containerEntitySetName = prop.ObjectClass.GetEntitySetName();
 		// the name of the CollectionEntry class
 		string entryTypeName = prop.GetCollectionEntryClassName();
 %>
@@ -446,7 +450,7 @@
         <PropertyRef Name="ID" />
       </Key>
       <Property Name="ID" Type="<%= int32DbType %>" Nullable="false" StoreGeneratedPattern="Identity" />
-      <Property Name="fk_<%= containerTypeName %>" Type="<%= int32DbType %>" Nullable="true" />
+      <Property Name="<%= Construct.ForeignKeyColumnName(prop) %>" Type="<%= int32DbType %>" Nullable="true" />
 <%
 		ApplyEntityTypeColumnDefs(prop);
 %>
@@ -461,7 +465,7 @@
     </EntityType>
 
     <Association Name="<%= prop.GetAssociationName() %>">
-      <End Role="<%= containerTypeName %>" Type="Model.Store.<%= containerTypeName %>" Multiplicity="0..1">
+      <End Role="<%= containerTypeName %>" Type="Model.Store.<%= containerEntitySetName %>" Multiplicity="0..1">
         <OnDelete Action="Cascade" />
       </End>
       <End Role="CollectionEntry" Type="Model.Store.<%= entryTypeName %>" Multiplicity="*" />
@@ -470,7 +474,7 @@
           <PropertyRef Name="ID" />
         </Principal>
         <Dependent Role="CollectionEntry">
-          <PropertyRef Name="fk_<%= containerTypeName %>" />
+          <PropertyRef Name="<%= Construct.ForeignKeyColumnName(prop) %>" />
         </Dependent>
       </ReferentialConstraint>
     </Association>

@@ -63,9 +63,9 @@ IdGeneratorHbm.Call(Host, "id", schemaName, tableName);
 #line 55 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        <many-to-one name=\"A\"\r\n");
-this.WriteObjects("                     column=\"`",  rel.GetRelationFkColumnName(RelationEndRole.A) , "`\" />\r\n");
+this.WriteObjects("                     column=\"`",  Construct.ForeignKeyColumnName(rel.A) , "`\" />\r\n");
 this.WriteObjects("        <many-to-one name=\"B\"\r\n");
-this.WriteObjects("                     column=\"`",  rel.GetRelationFkColumnName(RelationEndRole.B) , "`\" />\r\n");
+this.WriteObjects("                     column=\"`",  Construct.ForeignKeyColumnName(rel.B) , "`\" />\r\n");
 #line 60 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 if (rel.NeedsPositionStorage(RelationEndRole.A)) { 
 #line 61 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
@@ -106,7 +106,7 @@ foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
         var tableName = prop.GetCollectionEntryTable();
-        var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
+        var ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
 
 #line 90 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("    <class name=\"",  collectionEntryNamespace , ".",  collectionEntryClassName , "+",  proxyClassName , "\"\r\n");
@@ -157,7 +157,7 @@ foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
         var tableName = prop.GetCollectionEntryTable();
-        var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
+        var ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
 
 #line 128 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("    <class name=\"",  collectionEntryNamespace , ".",  collectionEntryClassName , "+",  proxyClassName , "\"\r\n");

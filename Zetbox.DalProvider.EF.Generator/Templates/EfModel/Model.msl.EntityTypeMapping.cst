@@ -29,17 +29,19 @@
 <%@ Import Namespace="Zetbox.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
+<% if (cls.IsAbstract == false || cls.GetTableMapping() == TableMapping.TPT) {  %>
       <EntityTypeMapping TypeName="<%= GetMappingTypeName() %>">
 	    <MappingFragment StoreEntitySet="<%= GetStoreEntitySet() %>">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <%
 		ApplyPropertyMappings(cls);
 %>
-<% if(cls.GetTableMapping() == TableMapping.TPH) { %>
+<% if (cls.GetTableMapping() == TableMapping.TPH) {                             %>
           <Condition ColumnName="<%= Zetbox.API.Server.TableMapper.DiscriminatorColumnName %>" Value="<%= cls.Module.SchemaName %>.<%= cls.TableName %>" />
-<% } %>
+<% }                                                                            %>
 	    </MappingFragment>
       </EntityTypeMapping>
+<% }                                                                            %>
 <%
 	foreach(var subCls in cls.SubClasses.OrderBy(c => c.Name))
 	{

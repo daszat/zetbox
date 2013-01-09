@@ -25,7 +25,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
 
-    public static class RelationExtensions
+    public static class Extensions
     {
         /// <summary>
         /// maps from a RelationEnd.Multiplicity to EF's RelationshipMultiplicity as used in the CSDL part of EDMX
@@ -82,6 +82,22 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates
                     return "*";
                 default:
                     throw new ArgumentOutOfRangeException("m");
+            }
+        }
+
+        /// <summary>
+        /// Returns the StoreEntitySet name for the specified ObjectClass.
+        /// </summary>
+        public static string GetEntitySetName(this DataType dt)
+        {
+            var cls = dt as ObjectClass;
+            if (cls != null && cls.GetTableMapping() == TableMapping.TPH)
+            {
+                return cls.GetRootClass().Name;
+            }
+            else
+            {
+                return dt.Name;
             }
         }
     }

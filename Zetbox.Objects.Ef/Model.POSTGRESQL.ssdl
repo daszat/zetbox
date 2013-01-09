@@ -242,7 +242,7 @@
     -->
     <EntitySet Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" EntityType="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Schema="base" Table="CalculatedReference_dependsOn_InputProperties" />
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_A" Association="Model.Store.FK_CalculatedReference_dependsOn_InputProperties_A" >
-      <End Role="CalculatedReference" EntitySet="CalculatedObjectReferenceProperty" />
+      <End Role="CalculatedReference" EntitySet="Property" />
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.Store.FK_CalculatedReference_dependsOn_InputProperties_B" >
@@ -338,7 +338,7 @@
     -->
     <EntitySet Name="ObjectReferenceProperty_shows_Method_RelationEntry" EntityType="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Schema="gui" Table="ObjRefProp_shows_Methods" />
     <AssociationSet Name="FK_ObjRefProp_shows_Methods_A" Association="Model.Store.FK_ObjRefProp_shows_Methods_A" >
-      <End Role="ObjRefProp" EntitySet="ObjectReferenceProperty" />
+      <End Role="ObjRefProp" EntitySet="Property" />
       <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjRefProp_shows_Methods_B" Association="Model.Store.FK_ObjRefProp_shows_Methods_B" >
@@ -614,19 +614,19 @@
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_BoolProperty_has_FalseIcon" Association="Model.Store.FK_BoolProperty_has_FalseIcon" >
-      <End Role="BoolProperty" EntitySet="BoolProperty" />
+      <End Role="BoolProperty" EntitySet="Property" />
       <End Role="FalseIcon" EntitySet="Icon" />
     </AssociationSet>
     <AssociationSet Name="FK_BoolProperty_has_NullIcon" Association="Model.Store.FK_BoolProperty_has_NullIcon" >
-      <End Role="BoolProperty" EntitySet="BoolProperty" />
+      <End Role="BoolProperty" EntitySet="Property" />
       <End Role="NullIcon" EntitySet="Icon" />
     </AssociationSet>
     <AssociationSet Name="FK_BoolProperty_has_TrueIcon" Association="Model.Store.FK_BoolProperty_has_TrueIcon" >
-      <End Role="BoolProperty" EntitySet="BoolProperty" />
+      <End Role="BoolProperty" EntitySet="Property" />
       <End Role="TrueIcon" EntitySet="Icon" />
     </AssociationSet>
     <AssociationSet Name="FK_CalculatedReference_references_ReferencedClass" Association="Model.Store.FK_CalculatedReference_references_ReferencedClass" >
-      <End Role="CalculatedReference" EntitySet="CalculatedObjectReferenceProperty" />
+      <End Role="CalculatedReference" EntitySet="Property" />
       <End Role="ReferencedClass" EntitySet="ObjectClass" />
     </AssociationSet>
     <AssociationSet Name="FK_Calendar_has_CalendarRules" Association="Model.Store.FK_Calendar_has_CalendarRules" >
@@ -670,11 +670,11 @@
       <End Role="Parent" EntitySet="ControlKind" />
     </AssociationSet>
     <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.Store.FK_ClrObjectParameter_isOf_Type" >
-      <End Role="ClrObjectParameter" EntitySet="CLRObjectParameter" />
+      <End Role="ClrObjectParameter" EntitySet="BaseParameter" />
       <End Role="Type" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition" Association="Model.Store.FK_CompoundObjectProperty_has_CompoundObjectDefinition" >
-      <End Role="CompoundObjectProperty" EntitySet="CompoundObjectProperty" />
+      <End Role="CompoundObjectProperty" EntitySet="Property" />
       <End Role="CompoundObjectDefinition" EntitySet="CompoundObject" />
     </AssociationSet>
     <AssociationSet Name="FK_Configuration_of_Identity" Association="Model.Store.FK_Configuration_of_Identity" >
@@ -686,11 +686,11 @@
       <End Role="Constraints" EntitySet="Constraint" />
     </AssociationSet>
     <AssociationSet Name="FK_Constraint_invokes_GetErrorTextInvocation" Association="Model.Store.FK_Constraint_invokes_GetErrorTextInvocation" >
-      <End Role="Constraint" EntitySet="InvokingConstraint" />
+      <End Role="Constraint" EntitySet="Constraint" />
       <End Role="GetErrorTextInvocation" EntitySet="ConstraintInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Constraint_invokes_IsValidInvocation" Association="Model.Store.FK_Constraint_invokes_IsValidInvocation" >
-      <End Role="Constraint" EntitySet="InvokingConstraint" />
+      <End Role="Constraint" EntitySet="Constraint" />
       <End Role="IsValidInvocation" EntitySet="ConstraintInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Constraint_on_Constrained" Association="Model.Store.FK_Constraint_on_Constrained" >
@@ -714,7 +714,7 @@
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_CPParameter_has_CompoundObject" Association="Model.Store.FK_CPParameter_has_CompoundObject" >
-      <End Role="CPParameter" EntitySet="CompoundObjectParameter" />
+      <End Role="CPParameter" EntitySet="BaseParameter" />
       <End Role="CompoundObject" EntitySet="CompoundObject" />
     </AssociationSet>
     <AssociationSet Name="FK_DataType_has_DefaultIcon" Association="Model.Store.FK_DataType_has_DefaultIcon" >
@@ -758,7 +758,7 @@
       <End Role="gute_Antworten" EntitySet="Antwort" />
     </AssociationSet>
     <AssociationSet Name="FK_EnumDefaultValue_defaults_to_EnumValue" Association="Model.Store.FK_EnumDefaultValue_defaults_to_EnumValue" >
-      <End Role="EnumDefaultValue" EntitySet="EnumDefaultValue" />
+      <End Role="EnumDefaultValue" EntitySet="DefaultPropertyValue" />
       <End Role="EnumValue" EntitySet="EnumerationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Enumeration_has_EnumerationEntries" Association="Model.Store.FK_Enumeration_has_EnumerationEntries" >
@@ -774,11 +774,11 @@
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_EnumerationProperty_has_Enumeration" Association="Model.Store.FK_EnumerationProperty_has_Enumeration" >
-      <End Role="EnumerationProperty" EntitySet="EnumerationProperty" />
+      <End Role="EnumerationProperty" EntitySet="Property" />
       <End Role="Enumeration" EntitySet="Enumeration" />
     </AssociationSet>
     <AssociationSet Name="FK_EnumParameter_has_Enumeration" Association="Model.Store.FK_EnumParameter_has_Enumeration" >
-      <End Role="EnumParameter" EntitySet="EnumParameter" />
+      <End Role="EnumParameter" EntitySet="BaseParameter" />
       <End Role="Enumeration" EntitySet="Enumeration" />
     </AssociationSet>
     <AssociationSet Name="FK_File_has_Blob" Association="Model.Store.FK_File_has_Blob" >
@@ -959,7 +959,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_Has_FilterConfigurations" Association="Model.Store.FK_ObjectClass_Has_FilterConfigurations" >
       <End Role="ObjectClass" EntitySet="ObjectClass" />
-      <End Role="FilterConfigurations" EntitySet="ObjectClassFilterConfiguration" />
+      <End Role="FilterConfigurations" EntitySet="FilterConfiguration" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_Methods" Association="Model.Store.FK_ObjectClass_has_Methods" >
       <End Role="ObjectClass" EntitySet="DataType" />
@@ -970,11 +970,11 @@
       <End Role="Properties" EntitySet="Property" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectParameter_has_ObjectClass" Association="Model.Store.FK_ObjectParameter_has_ObjectClass" >
-      <End Role="ObjectParameter" EntitySet="ObjectReferenceParameter" />
+      <End Role="ObjectParameter" EntitySet="BaseParameter" />
       <End Role="ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass" Association="Model.Store.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass" >
-      <End Role="ObjectReferencePlaceholderProperty" EntitySet="ObjectReferencePlaceholderProperty" />
+      <End Role="ObjectReferencePlaceholderProperty" EntitySet="Property" />
       <End Role="ReferencedObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
     <AssociationSet Name="FK_OneEnd_hasMany_NEnds" Association="Model.Store.FK_OneEnd_hasMany_NEnds" >
@@ -1035,7 +1035,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_Property_Has_PropertyFilterConfiguration" Association="Model.Store.FK_Property_Has_PropertyFilterConfiguration" >
       <End Role="Property" EntitySet="Property" />
-      <End Role="PropertyFilterConfiguration" EntitySet="PropertyFilterConfiguration" />
+      <End Role="PropertyFilterConfiguration" EntitySet="FilterConfiguration" />
     </AssociationSet>
     <AssociationSet Name="FK_Property_has_ValueModelDescriptor" Association="Model.Store.FK_Property_has_ValueModelDescriptor" >
       <End Role="Property" EntitySet="Property" />
@@ -1071,7 +1071,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_RelationEnd_has_Navigator" Association="Model.Store.FK_RelationEnd_has_Navigator" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
-      <End Role="Navigator" EntitySet="ObjectReferenceProperty" />
+      <End Role="Navigator" EntitySet="Property" />
     </AssociationSet>
     <AssociationSet Name="FK_RelationEnd_has_Type" Association="Model.Store.FK_RelationEnd_has_Type" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
@@ -2654,7 +2654,7 @@
 
   <!-- A to CollectionEntry -->
   <Association Name="FK_CalculatedReference_dependsOn_InputProperties_A">
-    <End Role="CalculatedReference" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="0..1" />
+    <End Role="CalculatedReference" Type="Model.Store.Property" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CalculatedReference">
@@ -2888,7 +2888,7 @@
 
   <!-- A to CollectionEntry -->
   <Association Name="FK_ObjRefProp_shows_Methods_A">
-    <End Role="ObjRefProp" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
+    <End Role="ObjRefProp" Type="Model.Store.Property" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjRefProp">
@@ -3661,13 +3661,13 @@
 
   <Association Name="FK_BoolProperty_has_FalseIcon">
     <End Role="FalseIcon" Type="Model.Store.Icon" Multiplicity="0..1" />
-    <End Role="BoolProperty" Type="Model.Store.BoolProperty" Multiplicity="*" />
+    <End Role="BoolProperty" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FalseIcon">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="BoolProperty">
-        <PropertyRef Name="fk_FalseIcon" />
+        <PropertyRef Name="BoolProperties_fk_FalseIcon" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3675,13 +3675,13 @@
 
   <Association Name="FK_BoolProperty_has_NullIcon">
     <End Role="NullIcon" Type="Model.Store.Icon" Multiplicity="0..1" />
-    <End Role="BoolProperty" Type="Model.Store.BoolProperty" Multiplicity="*" />
+    <End Role="BoolProperty" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NullIcon">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="BoolProperty">
-        <PropertyRef Name="fk_NullIcon" />
+        <PropertyRef Name="BoolProperties_fk_NullIcon" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3689,13 +3689,13 @@
 
   <Association Name="FK_BoolProperty_has_TrueIcon">
     <End Role="TrueIcon" Type="Model.Store.Icon" Multiplicity="0..1" />
-    <End Role="BoolProperty" Type="Model.Store.BoolProperty" Multiplicity="*" />
+    <End Role="BoolProperty" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TrueIcon">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="BoolProperty">
-        <PropertyRef Name="fk_TrueIcon" />
+        <PropertyRef Name="BoolProperties_fk_TrueIcon" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3703,13 +3703,13 @@
 
   <Association Name="FK_CalculatedReference_references_ReferencedClass">
     <End Role="ReferencedClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <End Role="CalculatedReference" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="*" />
+    <End Role="CalculatedReference" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ReferencedClass">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CalculatedReference">
-        <PropertyRef Name="fk_ReferencedClass" />
+        <PropertyRef Name="CalculatedObjectReferenceProperties_fk_ReferencedClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3857,13 +3857,13 @@
 
   <Association Name="FK_ClrObjectParameter_isOf_Type">
     <End Role="Type" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="ClrObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="*" />
+    <End Role="ClrObjectParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Type">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="ClrObjectParameter">
-        <PropertyRef Name="fk_Type" />
+        <PropertyRef Name="CLRObjectParameters_fk_Type" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3871,13 +3871,13 @@
 
   <Association Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition">
     <End Role="CompoundObjectDefinition" Type="Model.Store.CompoundObject" Multiplicity="0..1" />
-    <End Role="CompoundObjectProperty" Type="Model.Store.CompoundObjectProperty" Multiplicity="*" />
+    <End Role="CompoundObjectProperty" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CompoundObjectDefinition">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CompoundObjectProperty">
-        <PropertyRef Name="fk_CompoundObjectDefinition" />
+        <PropertyRef Name="CompoundObjectProperties_fk_CompoundObjectDefinition" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3913,13 +3913,13 @@
 
   <Association Name="FK_Constraint_invokes_GetErrorTextInvocation">
     <End Role="GetErrorTextInvocation" Type="Model.Store.ConstraintInvocation" Multiplicity="0..1" />
-    <End Role="Constraint" Type="Model.Store.InvokingConstraint" Multiplicity="*" />
+    <End Role="Constraint" Type="Model.Store.Constraint" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="GetErrorTextInvocation">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Constraint">
-        <PropertyRef Name="fk_GetErrorTextInvocation" />
+        <PropertyRef Name="InvokingConstraints_fk_GetErrorTextInvocation" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3927,13 +3927,13 @@
 
   <Association Name="FK_Constraint_invokes_IsValidInvocation">
     <End Role="IsValidInvocation" Type="Model.Store.ConstraintInvocation" Multiplicity="0..1" />
-    <End Role="Constraint" Type="Model.Store.InvokingConstraint" Multiplicity="*" />
+    <End Role="Constraint" Type="Model.Store.Constraint" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="IsValidInvocation">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Constraint">
-        <PropertyRef Name="fk_IsValidInvocation" />
+        <PropertyRef Name="InvokingConstraints_fk_IsValidInvocation" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4011,13 +4011,13 @@
 
   <Association Name="FK_CPParameter_has_CompoundObject">
     <End Role="CompoundObject" Type="Model.Store.CompoundObject" Multiplicity="0..1" />
-    <End Role="CPParameter" Type="Model.Store.CompoundObjectParameter" Multiplicity="*" />
+    <End Role="CPParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CompoundObject">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CPParameter">
-        <PropertyRef Name="fk_CompoundObject" />
+        <PropertyRef Name="CompoundObjectParameters_fk_CompoundObject" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4165,13 +4165,13 @@
 
   <Association Name="FK_EnumDefaultValue_defaults_to_EnumValue">
     <End Role="EnumValue" Type="Model.Store.EnumerationEntry" Multiplicity="0..1" />
-    <End Role="EnumDefaultValue" Type="Model.Store.EnumDefaultValue" Multiplicity="*" />
+    <End Role="EnumDefaultValue" Type="Model.Store.DefaultPropertyValue" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EnumValue">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="EnumDefaultValue">
-        <PropertyRef Name="fk_EnumValue" />
+        <PropertyRef Name="EnumDefaultValues_fk_EnumValue" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4221,13 +4221,13 @@
 
   <Association Name="FK_EnumerationProperty_has_Enumeration">
     <End Role="Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
-    <End Role="EnumerationProperty" Type="Model.Store.EnumerationProperty" Multiplicity="*" />
+    <End Role="EnumerationProperty" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Enumeration">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="EnumerationProperty">
-        <PropertyRef Name="fk_Enumeration" />
+        <PropertyRef Name="EnumerationProperties_fk_Enumeration" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4235,13 +4235,13 @@
 
   <Association Name="FK_EnumParameter_has_Enumeration">
     <End Role="Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
-    <End Role="EnumParameter" Type="Model.Store.EnumParameter" Multiplicity="*" />
+    <End Role="EnumParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Enumeration">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="EnumParameter">
-        <PropertyRef Name="fk_Enumeration" />
+        <PropertyRef Name="EnumParameters_fk_Enumeration" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4865,13 +4865,13 @@
 
   <Association Name="FK_ObjectClass_Has_FilterConfigurations">
     <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <End Role="FilterConfigurations" Type="Model.Store.ObjectClassFilterConfiguration" Multiplicity="*" />
+    <End Role="FilterConfigurations" Type="Model.Store.FilterConfiguration" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjectClass">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="FilterConfigurations">
-        <PropertyRef Name="fk_ObjectClass" />
+        <PropertyRef Name="ObjectClassFilterConfigurations_fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4907,13 +4907,13 @@
 
   <Association Name="FK_ObjectParameter_has_ObjectClass">
     <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <End Role="ObjectParameter" Type="Model.Store.ObjectReferenceParameter" Multiplicity="*" />
+    <End Role="ObjectParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjectClass">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="ObjectParameter">
-        <PropertyRef Name="fk_ObjectClass" />
+        <PropertyRef Name="ObjectParameters_fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4921,13 +4921,13 @@
 
   <Association Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass">
     <End Role="ReferencedObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <End Role="ObjectReferencePlaceholderProperty" Type="Model.Store.ObjectReferencePlaceholderProperty" Multiplicity="*" />
+    <End Role="ObjectReferencePlaceholderProperty" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ReferencedObjectClass">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="ObjectReferencePlaceholderProperty">
-        <PropertyRef Name="fk_ReferencedObjectClass" />
+        <PropertyRef Name="ObjectReferencePlaceholderProperties_fk_ReferencedObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5131,13 +5131,13 @@
 
   <Association Name="FK_Property_Has_PropertyFilterConfiguration">
     <End Role="Property" Type="Model.Store.Property" Multiplicity="0..1" />
-    <End Role="PropertyFilterConfiguration" Type="Model.Store.PropertyFilterConfiguration" Multiplicity="*" />
+    <End Role="PropertyFilterConfiguration" Type="Model.Store.FilterConfiguration" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Property">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="PropertyFilterConfiguration">
-        <PropertyRef Name="fk_Property" />
+        <PropertyRef Name="PropertyFilterConfigurations_fk_Property" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5257,13 +5257,13 @@
 
   <Association Name="FK_RelationEnd_has_Navigator">
     <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="0..1" />
-    <End Role="Navigator" Type="Model.Store.ObjectReferenceProperty" Multiplicity="*" />
+    <End Role="Navigator" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="RelationEnd">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Navigator">
-        <PropertyRef Name="fk_RelationEnd" />
+        <PropertyRef Name="ObjectReferenceProperties_fk_RelationEnd" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

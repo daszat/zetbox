@@ -70,7 +70,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 ceClassAttr = String.Empty;
             }
 
-            string ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
+            string ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
             string listPositionColumnName = Construct.ListPositionColumnName(prop);
 
             Call(_host,

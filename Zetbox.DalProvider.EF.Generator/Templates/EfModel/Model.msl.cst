@@ -73,8 +73,8 @@
 <%
     foreach(var rel in ctx.GetRelationsWithSeparateStorage())
     {
-        string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
-        string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+        string fkAName = Construct.ForeignKeyColumnName(rel.A);
+        string fkBName = Construct.ForeignKeyColumnName(rel.B);
 %>
     <!--
 <%
@@ -167,14 +167,14 @@
     -->
     <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"
                            TypeName="Model.<%= rel.GetAssociationName() %>"
-                           StoreEntitySet="<%= dependent.Type.Name %>" >
+                           StoreEntitySet="<%= dependent.Type.GetEntitySetName() %>" >
       <EndProperty Name="<%= principal.RoleName %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= principal.RoleName %>"/>
+        <ScalarProperty Name="ID" ColumnName="<%= Construct.ForeignKeyColumnName(principal) %>"/>
       </EndProperty>
       <EndProperty Name="<%= dependent.RoleName %>">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= principal.RoleName %>" IsNull="false"/>
+      <Condition ColumnName="<%= Construct.ForeignKeyColumnName(principal) %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }
@@ -211,12 +211,12 @@
                            TypeName="Model.<%= prop.GetAssociationName() %>"
                            StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= prop.ObjectClass.Name %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= propClsName %>"/>
+        <ScalarProperty Name="ID" ColumnName="<%= Construct.ForeignKeyColumnName(prop) %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= propClsName %>" IsNull="false"/>
+      <Condition ColumnName="<%= Construct.ForeignKeyColumnName(prop)  %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }
@@ -253,12 +253,12 @@
                            TypeName="Model.<%= prop.GetAssociationName() %>"
                            StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= prop.ObjectClass.Name %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= propClsName %>"/>
+        <ScalarProperty Name="ID" ColumnName="<%= Construct.ForeignKeyColumnName(prop) %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= propClsName %>" IsNull="false"/>
+      <Condition ColumnName="<%= Construct.ForeignKeyColumnName(prop) %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }

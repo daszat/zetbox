@@ -84,8 +84,8 @@ this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for obj
 #line 74 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 foreach(var rel in ctx.GetRelationsWithSeparateStorage())
     {
-        string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
-        string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+        string fkAName = Construct.ForeignKeyColumnName(rel.A);
+        string fkBName = Construct.ForeignKeyColumnName(rel.B);
 
 #line 79 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    <!--\r\n");
@@ -187,14 +187,14 @@ RelationDebugTemplate.Call(Host, ctx, rel);
 this.WriteObjects("    -->\r\n");
 this.WriteObjects("    <AssociationSetMapping Name=\"",  rel.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           TypeName=\"Model.",  rel.GetAssociationName() , "\"\r\n");
-this.WriteObjects("                           StoreEntitySet=\"",  dependent.Type.Name , "\" >\r\n");
+this.WriteObjects("                           StoreEntitySet=\"",  dependent.Type.GetEntitySetName() , "\" >\r\n");
 this.WriteObjects("      <EndProperty Name=\"",  principal.RoleName , "\">\r\n");
-this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"fk_",  principal.RoleName , "\"/>\r\n");
+this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"",  Construct.ForeignKeyColumnName(principal) , "\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <EndProperty Name=\"",  dependent.RoleName , "\">\r\n");
 this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
-this.WriteObjects("      <Condition ColumnName=\"fk_",  principal.RoleName , "\" IsNull=\"false\"/>\r\n");
+this.WriteObjects("      <Condition ColumnName=\"",  Construct.ForeignKeyColumnName(principal) , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
 #line 180 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
@@ -235,12 +235,12 @@ this.WriteObjects("    <AssociationSetMapping Name=\"",  prop.GetAssociationName
 this.WriteObjects("                           TypeName=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
 this.WriteObjects("      <EndProperty Name=\"",  prop.ObjectClass.Name , "\">\r\n");
-this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"fk_",  propClsName , "\"/>\r\n");
+this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"",  Construct.ForeignKeyColumnName(prop) , "\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <EndProperty Name=\"CollectionEntry\">\r\n");
 this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
-this.WriteObjects("      <Condition ColumnName=\"fk_",  propClsName , "\" IsNull=\"false\"/>\r\n");
+this.WriteObjects("      <Condition ColumnName=\"",  Construct.ForeignKeyColumnName(prop)  , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
 #line 222 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
@@ -283,12 +283,12 @@ this.WriteObjects("    <AssociationSetMapping Name=\"",  prop.GetAssociationName
 this.WriteObjects("                           TypeName=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
 this.WriteObjects("      <EndProperty Name=\"",  prop.ObjectClass.Name , "\">\r\n");
-this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"fk_",  propClsName , "\"/>\r\n");
+this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"",  Construct.ForeignKeyColumnName(prop) , "\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <EndProperty Name=\"CollectionEntry\">\r\n");
 this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
-this.WriteObjects("      <Condition ColumnName=\"fk_",  propClsName , "\" IsNull=\"false\"/>\r\n");
+this.WriteObjects("      <Condition ColumnName=\"",  Construct.ForeignKeyColumnName(prop) , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
 #line 264 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }

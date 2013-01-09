@@ -243,7 +243,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\RelationExtensions.cs" />
+    <Compile Include="Templates\Extensions.cs" />
     <Compile Include="Templates\EfModel\ModelMslEntityTypeMapping.ComplexProperty.cs" />
     <Compile Include="Templates\EfModel\ModelMslEntityTypeMapping.ScalarProperty.cs" />
     <Compile Include="Templates\Serialization\EagerLoadingSerialization.cs" />

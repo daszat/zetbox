@@ -476,8 +476,8 @@ namespace Zetbox.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
 
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
-            string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+            string fkAName = Construct.ForeignKeyColumnName(rel.A);
+            string fkBName = Construct.ForeignKeyColumnName(rel.B);
             string assocAName = rel.GetRelationAssociationName(RelationEndRole.A);
             string assocBName = rel.GetRelationAssociationName(RelationEndRole.B);
             string fkAIndex = fkAName + Zetbox.API.Helper.PositionSuffix;
@@ -667,7 +667,7 @@ namespace Zetbox.Server.SchemaManagement
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
-                var fkName = prop.GetCollectionEntryReverseKeyColumnName();
+                var fkName = Construct.ForeignKeyColumnName(prop);
                 var valPropName = prop.Name;
                 var valPropIndexName = prop.Name + "Index";
                 var assocName = prop.GetAssociationName();
@@ -716,7 +716,7 @@ namespace Zetbox.Server.SchemaManagement
             .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
-                var fkName = prop.GetCollectionEntryReverseKeyColumnName();
+                var fkName = Construct.ForeignKeyColumnName(prop);
                 var basePropName = prop.Name;
                 var valPropIndexName = prop.Name + "Index";
                 var assocName = prop.GetAssociationName();

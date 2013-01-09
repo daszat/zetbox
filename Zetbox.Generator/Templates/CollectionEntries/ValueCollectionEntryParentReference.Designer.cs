@@ -16,24 +16,26 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 		protected Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList;
 		protected string referencedInterface;
 		protected string propertyName;
+		protected string fkName;
 		protected string moduleNamespace;
 		protected bool disableExport;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string moduleNamespace, bool disableExport)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string fkName, string moduleNamespace, bool disableExport)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("CollectionEntries.ValueCollectionEntryParentReference", ctx, serializationList, referencedInterface, propertyName, moduleNamespace, disableExport);
+            _host.CallTemplate("CollectionEntries.ValueCollectionEntryParentReference", ctx, serializationList, referencedInterface, propertyName, fkName, moduleNamespace, disableExport);
         }
 
-        public ValueCollectionEntryParentReference(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string moduleNamespace, bool disableExport)
+        public ValueCollectionEntryParentReference(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string fkName, string moduleNamespace, bool disableExport)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
 			this.referencedInterface = referencedInterface;
 			this.propertyName = propertyName;
+			this.fkName = fkName;
 			this.moduleNamespace = moduleNamespace;
 			this.disableExport = disableExport;
 
@@ -41,9 +43,8 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 35 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 36 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 string cacheName = "_" + propertyName + "Cache";
-    string fkName = "fk_" + propertyName;
     string backingName = "_" + fkName;
 
 #line 39 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"

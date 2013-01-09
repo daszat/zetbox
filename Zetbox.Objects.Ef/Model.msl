@@ -131,22 +131,6 @@
       </EndProperty>
     </AssociationSetMapping>
     <EntitySetMapping Name="BaseParameterEfImpl">
-      <EntityTypeMapping TypeName="Model.BaseParameterEfImpl">
-	    <MappingFragment StoreEntitySet="BaseParameter">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="IsList" ColumnName="IsList" />
-          <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
-          <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
-          <ScalarProperty Name="Label" ColumnName="Label" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <Condition ColumnName="__Discriminator" Value="base.BaseParameters" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="Model.BoolParameterEfImpl">
 	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -458,16 +442,6 @@
           <Condition ColumnName="__Discriminator" Value="base.NotNullableConstraints" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="Model.ReadOnlyConstraintEfImpl">
-	    <MappingFragment StoreEntitySet="Constraint">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="Reason" ColumnName="Reason" />
-          <Condition ColumnName="__Discriminator" Value="base.ReadOnlyConstraints" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="Model.ClientReadOnlyConstraintEfImpl">
 	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -581,15 +555,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DefaultPropertyValueEfImpl">
-      <EntityTypeMapping TypeName="Model.DefaultPropertyValueEfImpl">
-	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <Condition ColumnName="__Discriminator" Value="base.DefaultPropertyValues" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="Model.BoolDefaultValueEfImpl">
 	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -720,30 +685,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FilterConfigurationEfImpl">
-      <EntityTypeMapping TypeName="Model.FilterConfigurationEfImpl">
-	    <MappingFragment StoreEntitySet="FilterConfiguration">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="Label" ColumnName="Label" />
-          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
-          <ScalarProperty Name="Required" ColumnName="Required" />
-          <Condition ColumnName="__Discriminator" Value="gui.FilterConfigurations" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="Model.ObjectClassFilterConfigurationEfImpl">
-	    <MappingFragment StoreEntitySet="FilterConfiguration">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="Label" ColumnName="Label" />
-          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
-          <ScalarProperty Name="Required" ColumnName="Required" />
-          <Condition ColumnName="__Discriminator" Value="gui.ObjectClassFilterConfigurations" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="Model.OptionalPredicateFilterConfigurationEfImpl">
 	    <MappingFragment StoreEntitySet="FilterConfiguration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -755,18 +696,6 @@
           <ScalarProperty Name="Required" ColumnName="Required" />
           <ScalarProperty Name="Predicate" ColumnName="OptionalPredicateFilterConfigurations_Predicate" />
           <Condition ColumnName="__Discriminator" Value="gui.OptionalPredicateFilterConfigurations" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="Model.PropertyFilterConfigurationEfImpl">
-	    <MappingFragment StoreEntitySet="FilterConfiguration">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="Label" ColumnName="Label" />
-          <ScalarProperty Name="RefreshOnFilterChanged" ColumnName="RefreshOnFilterChanged" />
-          <ScalarProperty Name="Required" ColumnName="Required" />
-          <Condition ColumnName="__Discriminator" Value="gui.PropertyFilterConfigurations" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="Model.DateRangeFilterConfigurationEfImpl">
@@ -1116,23 +1045,6 @@
       </EndProperty>
     </AssociationSetMapping>
     <EntitySetMapping Name="PropertyEfImpl">
-      <EntityTypeMapping TypeName="Model.PropertyEfImpl">
-	    <MappingFragment StoreEntitySet="Property">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
-          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="Label" ColumnName="Label" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
-          <Condition ColumnName="__Discriminator" Value="base.Properties" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="Model.CalculatedObjectReferencePropertyEfImpl">
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1208,26 +1120,6 @@
           <ScalarProperty Name="EagerLoading" ColumnName="ObjectReferenceProperties_EagerLoading" />
           <ScalarProperty Name="IsInlineEditable" ColumnName="ObjectReferenceProperties_IsInlineEditable" />
           <Condition ColumnName="__Discriminator" Value="base.ObjectReferenceProperties" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="Model.ValueTypePropertyEfImpl">
-	    <MappingFragment StoreEntitySet="Property">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
-          <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="Label" ColumnName="Label" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
-          <ScalarProperty Name="HasPersistentOrder" ColumnName="ValueTypeProperties_HasPersistentOrder" />
-          <ScalarProperty Name="IsCalculated" ColumnName="ValueTypeProperties_IsCalculated" />
-          <ScalarProperty Name="IsList" ColumnName="ValueTypeProperties_IsList" />
-          <Condition ColumnName="__Discriminator" Value="base.ValueTypeProperties" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="Model.BoolPropertyEfImpl">
@@ -2886,14 +2778,14 @@
     -->
     <AssociationSetMapping Name="FK_BoolProperty_has_FalseIcon"
                            TypeName="Model.FK_BoolProperty_has_FalseIcon"
-                           StoreEntitySet="BoolProperty" >
+                           StoreEntitySet="Property" >
       <EndProperty Name="FalseIcon">
-        <ScalarProperty Name="ID" ColumnName="fk_FalseIcon"/>
+        <ScalarProperty Name="ID" ColumnName="BoolProperties_fk_FalseIcon"/>
       </EndProperty>
       <EndProperty Name="BoolProperty">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_FalseIcon" IsNull="false"/>
+      <Condition ColumnName="BoolProperties_fk_FalseIcon" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_BoolProperty_has_NullIcon
@@ -2903,14 +2795,14 @@
     -->
     <AssociationSetMapping Name="FK_BoolProperty_has_NullIcon"
                            TypeName="Model.FK_BoolProperty_has_NullIcon"
-                           StoreEntitySet="BoolProperty" >
+                           StoreEntitySet="Property" >
       <EndProperty Name="NullIcon">
-        <ScalarProperty Name="ID" ColumnName="fk_NullIcon"/>
+        <ScalarProperty Name="ID" ColumnName="BoolProperties_fk_NullIcon"/>
       </EndProperty>
       <EndProperty Name="BoolProperty">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_NullIcon" IsNull="false"/>
+      <Condition ColumnName="BoolProperties_fk_NullIcon" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_BoolProperty_has_TrueIcon
@@ -2920,14 +2812,14 @@
     -->
     <AssociationSetMapping Name="FK_BoolProperty_has_TrueIcon"
                            TypeName="Model.FK_BoolProperty_has_TrueIcon"
-                           StoreEntitySet="BoolProperty" >
+                           StoreEntitySet="Property" >
       <EndProperty Name="TrueIcon">
-        <ScalarProperty Name="ID" ColumnName="fk_TrueIcon"/>
+        <ScalarProperty Name="ID" ColumnName="BoolProperties_fk_TrueIcon"/>
       </EndProperty>
       <EndProperty Name="BoolProperty">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_TrueIcon" IsNull="false"/>
+      <Condition ColumnName="BoolProperties_fk_TrueIcon" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_CalculatedReference_references_ReferencedClass
@@ -2937,14 +2829,14 @@
     -->
     <AssociationSetMapping Name="FK_CalculatedReference_references_ReferencedClass"
                            TypeName="Model.FK_CalculatedReference_references_ReferencedClass"
-                           StoreEntitySet="CalculatedObjectReferenceProperty" >
+                           StoreEntitySet="Property" >
       <EndProperty Name="ReferencedClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ReferencedClass"/>
+        <ScalarProperty Name="ID" ColumnName="CalculatedObjectReferenceProperties_fk_ReferencedClass"/>
       </EndProperty>
       <EndProperty Name="CalculatedReference">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_ReferencedClass" IsNull="false"/>
+      <Condition ColumnName="CalculatedObjectReferenceProperties_fk_ReferencedClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Calendar_has_CalendarRules
@@ -3124,14 +3016,14 @@
     -->
     <AssociationSetMapping Name="FK_ClrObjectParameter_isOf_Type"
                            TypeName="Model.FK_ClrObjectParameter_isOf_Type"
-                           StoreEntitySet="CLRObjectParameter" >
+                           StoreEntitySet="BaseParameter" >
       <EndProperty Name="Type">
-        <ScalarProperty Name="ID" ColumnName="fk_Type"/>
+        <ScalarProperty Name="ID" ColumnName="CLRObjectParameters_fk_Type"/>
       </EndProperty>
       <EndProperty Name="ClrObjectParameter">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Type" IsNull="false"/>
+      <Condition ColumnName="CLRObjectParameters_fk_Type" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_CompoundObjectProperty_has_CompoundObjectDefinition
@@ -3141,14 +3033,14 @@
     -->
     <AssociationSetMapping Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition"
                            TypeName="Model.FK_CompoundObjectProperty_has_CompoundObjectDefinition"
-                           StoreEntitySet="CompoundObjectProperty" >
+                           StoreEntitySet="Property" >
       <EndProperty Name="CompoundObjectDefinition">
-        <ScalarProperty Name="ID" ColumnName="fk_CompoundObjectDefinition"/>
+        <ScalarProperty Name="ID" ColumnName="CompoundObjectProperties_fk_CompoundObjectDefinition"/>
       </EndProperty>
       <EndProperty Name="CompoundObjectProperty">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_CompoundObjectDefinition" IsNull="false"/>
+      <Condition ColumnName="CompoundObjectProperties_fk_CompoundObjectDefinition" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Configuration_of_Identity
@@ -3192,14 +3084,14 @@
     -->
     <AssociationSetMapping Name="FK_Constraint_invokes_GetErrorTextInvocation"
                            TypeName="Model.FK_Constraint_invokes_GetErrorTextInvocation"
-                           StoreEntitySet="InvokingConstraint" >
+                           StoreEntitySet="Constraint" >
       <EndProperty Name="GetErrorTextInvocation">
-        <ScalarProperty Name="ID" ColumnName="fk_GetErrorTextInvocation"/>
+        <ScalarProperty Name="ID" ColumnName="InvokingConstraints_fk_GetErrorTextInvocation"/>
       </EndProperty>
       <EndProperty Name="Constraint">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_GetErrorTextInvocation" IsNull="false"/>
+      <Condition ColumnName="InvokingConstraints_fk_GetErrorTextInvocation" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Constraint_invokes_IsValidInvocation
@@ -3209,14 +3101,14 @@
     -->
     <AssociationSetMapping Name="FK_Constraint_invokes_IsValidInvocation"
                            TypeName="Model.FK_Constraint_invokes_IsValidInvocation"
-                           StoreEntitySet="InvokingConstraint" >
+                           StoreEntitySet="Constraint" >
       <EndProperty Name="IsValidInvocation">
-        <ScalarProperty Name="ID" ColumnName="fk_IsValidInvocation"/>
+        <ScalarProperty Name="ID" ColumnName="InvokingConstraints_fk_IsValidInvocation"/>
       </EndProperty>
       <EndProperty Name="Constraint">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_IsValidInvocation" IsNull="false"/>
+      <Condition ColumnName="InvokingConstraints_fk_IsValidInvocation" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Constraint_on_Constrained
@@ -3311,14 +3203,14 @@
     -->
     <AssociationSetMapping Name="FK_CPParameter_has_CompoundObject"
                            TypeName="Model.FK_CPParameter_has_CompoundObject"
-                           StoreEntitySet="CompoundObjectParameter" >
+                           StoreEntitySet="BaseParameter" >
       <EndProperty Name="CompoundObject">
-        <ScalarProperty Name="ID" ColumnName="fk_CompoundObject"/>
+        <ScalarProperty Name="ID" ColumnName="CompoundObjectParameters_fk_CompoundObject"/>
       </EndProperty>
       <EndProperty Name="CPParameter">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_CompoundObject" IsNull="false"/>
+      <Condition ColumnName="CompoundObjectParameters_fk_CompoundObject" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_DataType_has_DefaultIcon
@@ -3498,14 +3390,14 @@
     -->
     <AssociationSetMapping Name="FK_EnumDefaultValue_defaults_to_EnumValue"
                            TypeName="Model.FK_EnumDefaultValue_defaults_to_EnumValue"
-                           StoreEntitySet="EnumDefaultValue" >
+                           StoreEntitySet="DefaultPropertyValue" >
       <EndProperty Name="EnumValue">
-        <ScalarProperty Name="ID" ColumnName="fk_EnumValue"/>
+        <ScalarProperty Name="ID" ColumnName="EnumDefaultValues_fk_EnumValue"/>
       </EndProperty>
       <EndProperty Name="EnumDefaultValue">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_EnumValue" IsNull="false"/>
+      <Condition ColumnName="EnumDefaultValues_fk_EnumValue" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Enumeration_has_EnumerationEntries
@@ -3566,14 +3458,14 @@
     -->
     <AssociationSetMapping Name="FK_EnumerationProperty_has_Enumeration"
                            TypeName="Model.FK_EnumerationProperty_has_Enumeration"
-                           StoreEntitySet="EnumerationProperty" >
+                           StoreEntitySet="Property" >
       <EndProperty Name="Enumeration">
-        <ScalarProperty Name="ID" ColumnName="fk_Enumeration"/>
+        <ScalarProperty Name="ID" ColumnName="EnumerationProperties_fk_Enumeration"/>
       </EndProperty>
       <EndProperty Name="EnumerationProperty">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Enumeration" IsNull="false"/>
+      <Condition ColumnName="EnumerationProperties_fk_Enumeration" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_EnumParameter_has_Enumeration
@@ -3583,14 +3475,14 @@
     -->
     <AssociationSetMapping Name="FK_EnumParameter_has_Enumeration"
                            TypeName="Model.FK_EnumParameter_has_Enumeration"
-                           StoreEntitySet="EnumParameter" >
+                           StoreEntitySet="BaseParameter" >
       <EndProperty Name="Enumeration">
-        <ScalarProperty Name="ID" ColumnName="fk_Enumeration"/>
+        <ScalarProperty Name="ID" ColumnName="EnumParameters_fk_Enumeration"/>
       </EndProperty>
       <EndProperty Name="EnumParameter">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Enumeration" IsNull="false"/>
+      <Condition ColumnName="EnumParameters_fk_Enumeration" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_File_has_Blob
@@ -4348,14 +4240,14 @@
     -->
     <AssociationSetMapping Name="FK_ObjectClass_Has_FilterConfigurations"
                            TypeName="Model.FK_ObjectClass_Has_FilterConfigurations"
-                           StoreEntitySet="ObjectClassFilterConfiguration" >
+                           StoreEntitySet="FilterConfiguration" >
       <EndProperty Name="ObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
+        <ScalarProperty Name="ID" ColumnName="ObjectClassFilterConfigurations_fk_ObjectClass"/>
       </EndProperty>
       <EndProperty Name="FilterConfigurations">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
+      <Condition ColumnName="ObjectClassFilterConfigurations_fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ObjectClass_has_Methods
@@ -4399,14 +4291,14 @@
     -->
     <AssociationSetMapping Name="FK_ObjectParameter_has_ObjectClass"
                            TypeName="Model.FK_ObjectParameter_has_ObjectClass"
-                           StoreEntitySet="ObjectReferenceParameter" >
+                           StoreEntitySet="BaseParameter" >
       <EndProperty Name="ObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
+        <ScalarProperty Name="ID" ColumnName="ObjectParameters_fk_ObjectClass"/>
       </EndProperty>
       <EndProperty Name="ObjectParameter">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
+      <Condition ColumnName="ObjectParameters_fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
@@ -4416,14 +4308,14 @@
     -->
     <AssociationSetMapping Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
                            TypeName="Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
-                           StoreEntitySet="ObjectReferencePlaceholderProperty" >
+                           StoreEntitySet="Property" >
       <EndProperty Name="ReferencedObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ReferencedObjectClass"/>
+        <ScalarProperty Name="ID" ColumnName="ObjectReferencePlaceholderProperties_fk_ReferencedObjectClass"/>
       </EndProperty>
       <EndProperty Name="ObjectReferencePlaceholderProperty">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_ReferencedObjectClass" IsNull="false"/>
+      <Condition ColumnName="ObjectReferencePlaceholderProperties_fk_ReferencedObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_OneEnd_hasMany_NEnds
@@ -4671,14 +4563,14 @@
     -->
     <AssociationSetMapping Name="FK_Property_Has_PropertyFilterConfiguration"
                            TypeName="Model.FK_Property_Has_PropertyFilterConfiguration"
-                           StoreEntitySet="PropertyFilterConfiguration" >
+                           StoreEntitySet="FilterConfiguration" >
       <EndProperty Name="Property">
-        <ScalarProperty Name="ID" ColumnName="fk_Property"/>
+        <ScalarProperty Name="ID" ColumnName="PropertyFilterConfigurations_fk_Property"/>
       </EndProperty>
       <EndProperty Name="PropertyFilterConfiguration">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Property" IsNull="false"/>
+      <Condition ColumnName="PropertyFilterConfigurations_fk_Property" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Property_has_ValueModelDescriptor
@@ -4824,14 +4716,14 @@
     -->
     <AssociationSetMapping Name="FK_RelationEnd_has_Navigator"
                            TypeName="Model.FK_RelationEnd_has_Navigator"
-                           StoreEntitySet="ObjectReferenceProperty" >
+                           StoreEntitySet="Property" >
       <EndProperty Name="RelationEnd">
-        <ScalarProperty Name="ID" ColumnName="fk_RelationEnd"/>
+        <ScalarProperty Name="ID" ColumnName="ObjectReferenceProperties_fk_RelationEnd"/>
       </EndProperty>
       <EndProperty Name="Navigator">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_RelationEnd" IsNull="false"/>
+      <Condition ColumnName="ObjectReferenceProperties_fk_RelationEnd" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_RelationEnd_has_Type
