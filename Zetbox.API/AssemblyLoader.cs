@@ -43,7 +43,7 @@ namespace Zetbox.API
         /// <summary>
         /// Initializes the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path.
         /// </summary>
-        public static void Bootstrap(AppDomain domain, ZetboxConfig config, bool loadGeneratedAssemblies)
+        public static void Bootstrap(AppDomain domain, ZetboxConfig config)
         {
             if (domain == null) { throw new ArgumentNullException("domain"); }
             if (config == null) { throw new ArgumentNullException("config"); }
@@ -52,7 +52,7 @@ namespace Zetbox.API
                 "Zetbox.API",
                 "Zetbox.API.AssemblyLoaderInitializer");
 
-            init.Init(config, loadGeneratedAssemblies);
+            init.Init(config);
         }
 
         public static void Unload(AppDomain domain)
@@ -77,7 +77,7 @@ namespace Zetbox.API
         }
 
         private static bool _isInitialised = false;
-        public static void EnsureInitialisation(ZetboxConfig config, bool loadGeneratedAssemblies)
+        public static void EnsureInitialisation(ZetboxConfig config)
         {
             if (config == null) { throw new ArgumentNullException("config"); }
 
@@ -94,7 +94,7 @@ namespace Zetbox.API
 
                 Log.DebugFormat("Initializing {0}", AppDomain.CurrentDomain.FriendlyName);
                 InitialiseTargetAssemblyFolder(config);
-                InitialiseSearchPath(config.AssemblySearchPaths.Paths, loadGeneratedAssemblies);
+                InitialiseSearchPath(config.AssemblySearchPaths.Paths, config.IsFallback == false);
 
                 // Start resolving Assemblies
                 AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
@@ -373,9 +373,9 @@ namespace Zetbox.API
 
     public class AssemblyLoaderInitializer : MarshalByRefObject
     {
-        public void Init(ZetboxConfig config, bool loadGeneratedAssemblies)
+        public void Init(ZetboxConfig config)
         {
-            AssemblyLoader.EnsureInitialisation(config, loadGeneratedAssemblies);
+            AssemblyLoader.EnsureInitialisation(config);
         }
 
         public void Unload()

@@ -122,7 +122,7 @@ namespace Zetbox.Client.WPF
                     var args = HandleCommandline(e.Args, out configFilePath);
 
                     var config = ZetboxConfig.FromFile(configFilePath, GetConfigFileName());
-                    AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config, true);
+                    AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                     InitCulture(config);
                     InfoLoggingProxyDecorator.SetUiThread(System.Threading.Thread.CurrentThread);

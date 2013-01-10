@@ -79,6 +79,7 @@
     <Compile Include="Async\PropertyTask.cs" />
     <Compile Include="Async\ZetboxTask.cs" />
     <Compile Include="AutofacExtensions.cs" />
+    <Compile Include="Configuration\NotOnFallbackAttribute.cs" />
     <Compile Include="CmdLineAction.cs" />
     <Compile Include="CollectionEntries.cs" />
     <Compile Include="Configuration\ZetboxConfig.cs" />

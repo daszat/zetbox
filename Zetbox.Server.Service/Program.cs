@@ -80,7 +80,7 @@ namespace Zetbox.Server.Service
                     Environment.Exit(1);
                 }
 
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config, true);
+                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 using (var container = CreateMasterContainer(config))
                 {

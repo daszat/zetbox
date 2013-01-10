@@ -31,7 +31,7 @@ namespace Zetbox.API.Utils
             return CreateContainerBuilder(config, null);
         }
 
-        public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config, string[] modules)
+        public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config, ZetboxConfig.Module[] modules)
         {
             if (config == null) throw new ArgumentNullException("config");
 
@@ -43,11 +43,11 @@ namespace Zetbox.API.Utils
                 .ExternallyOwned()
                 .SingleInstance();
 
-            foreach (var m in modules ?? new string[] { })
+            foreach (var m in (modules ?? new ZetboxConfig.Module[] { }).Where(i => config.IsFallback == false || i.NotOnFallback == false))
             {
                 try
                 {
-                    Logging.Log.InfoFormat("Adding module [{0}]", m);
+                    Logging.Log.InfoFormat("Adding module [{0}]", m.TypeName);
 #if MONO
                     // workaround for https://bugzilla.novell.com/show_bug.cgi?id=661461
                     var parts = m.Split(",".ToCharArray(), 2);
@@ -57,11 +57,11 @@ namespace Zetbox.API.Utils
                         System.Reflection.Assembly.Load(assemblyName);
                     }
 #endif
-                    builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(m, true)));
+                    builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(m.TypeName, true)));
                 }
                 catch (Exception ex)
                 {
-                    Logging.Log.Error(String.Format("Unable to register Module [{0}] from Config", m), ex);
+                    Logging.Log.Error(String.Format("Unable to register Module [{0}] from Config", m.TypeName), ex);
                     throw;
                 }
             }

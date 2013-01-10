@@ -41,10 +41,9 @@ namespace Zetbox.Cli
 
             try
             {
-                bool loadGeneratedAssemblies;
-                var config = ExtractConfig(ref arguments, out loadGeneratedAssemblies);
+                var config = ExtractConfig(ref arguments);
 
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config, loadGeneratedAssemblies);
+                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 using (var container = CreateMasterContainer(config))
                 {
@@ -101,7 +100,7 @@ namespace Zetbox.Cli
                 ? config.Server.Modules
                 : config.Client != null && config.Client.Modules != null
                     ? config.Client.Modules
-                    : new string[0];
+                    : new ZetboxConfig.Module[0];
 
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, modules);
 
@@ -113,7 +112,7 @@ namespace Zetbox.Cli
             return container;
         }
 
-        private static ZetboxConfig ExtractConfig(ref string[] args, out bool loadGeneratedAssemblies)
+        private static ZetboxConfig ExtractConfig(ref string[] args)
         {
             string configFilePath;
             if (args.Length > 0 && File.Exists(args[0]))
@@ -129,13 +128,15 @@ namespace Zetbox.Cli
 
             var fallbackOpts = new[] { "-fallback", "--fallback", "/fallback" };
             var localArgs = args;
-            loadGeneratedAssemblies = !fallbackOpts.Any(opt => localArgs.Contains(opt));
-            if (!loadGeneratedAssemblies)
+            var isFallback = fallbackOpts.Any(opt => localArgs.Contains(opt));
+            if (isFallback)
             {
                 args = args.Except(fallbackOpts).ToArray();
             }
 
-            return ZetboxConfig.FromFile(configFilePath, "Zetbox.Cli.xml");
+            var cfg = ZetboxConfig.FromFile(configFilePath, "Zetbox.Cli.xml");
+            cfg.IsFallback = isFallback;
+            return cfg;
         }
     }
 }

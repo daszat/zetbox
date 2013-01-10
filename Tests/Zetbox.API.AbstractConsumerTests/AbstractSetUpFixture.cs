@@ -64,7 +64,7 @@ namespace Zetbox.API.AbstractConsumerTests
             {
                 var config = ZetboxConfig.FromFile(null, GetConfigFile());
 
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config, true);
+                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 ContainerBuilder builder;
                 switch (GetHostType())

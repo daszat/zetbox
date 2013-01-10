@@ -12,19 +12,20 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-using Zetbox.API.Utils;
 
 namespace Zetbox.API.Configuration
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
+    using Zetbox.API.Utils;
+
     [Serializable]
     public class ConfigurationException
         : Exception
@@ -115,6 +116,20 @@ namespace Zetbox.API.Configuration
             public string[] Paths { get; set; }
         }
 
+        [Serializable]
+        public class Module
+        {
+            public Module()
+            {
+                NotOnFallback = false;
+            }
+
+            [XmlAttribute("NotOnFallback")]
+            public bool NotOnFallback { get; set; }
+            [XmlText]
+            public string TypeName { get; set; }
+        }
+
         /// <summary>
         /// These additional command line options are filled while parsing the commandline.
         /// </summary>
@@ -126,6 +141,9 @@ namespace Zetbox.API.Configuration
         /// </summary>
         [XmlIgnore]
         public List<Action<Autofac.ILifetimeScope>> AdditionalCommandlineActions { get; set; }
+
+        [XmlIgnore]
+        public bool IsFallback { get; set; }
 
         /// <summary>
         /// Server Configuration
@@ -228,8 +246,8 @@ namespace Zetbox.API.Configuration
             /// AutoFac modules to load
             /// </summary>
             [XmlArray("Modules")]
-            [XmlArrayItem("Module", typeof(string))]
-            public string[] Modules { get; set; }
+            [XmlArrayItem("Module", typeof(Module))]
+            public Module[] Modules { get; set; }
 
             /// <summary>
             /// Client Files
@@ -307,8 +325,8 @@ namespace Zetbox.API.Configuration
             /// AutoFac modules to load
             /// </summary>
             [XmlArray("Modules")]
-            [XmlArrayItem("Module", typeof(string))]
-            public string[] Modules { get; set; }
+            [XmlArrayItem("Module", typeof(Module))]
+            public Module[] Modules { get; set; }
         }
 
         /// <summary>

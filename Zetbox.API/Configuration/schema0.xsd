@@ -18,7 +18,7 @@
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenOutputPath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenBinaryOutputPath" type="tns:ArrayOfString" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenArchivePath" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfString1" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfModule" />
       <xs:element minOccurs="0" maxOccurs="1" name="ClientFilesLocations" type="tns:ArrayOfClientFilesLocation" />
     </xs:sequence>
     <xs:attribute name="StartServer" type="xs:boolean" use="required" />
@@ -42,10 +42,17 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="ArrayOfString1">
+  <xs:complexType name="ArrayOfModule">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Module" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Module" nillable="true" type="tns:Module" />
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Module">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="NotOnFallback" type="xs:boolean" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="ArrayOfClientFilesLocation">
     <xs:sequence>
@@ -57,7 +64,7 @@
       <xs:extension base="xs:string">
         <xs:attribute name="Name" type="xs:string" />
         <xs:attribute name="Exclude" type="xs:string" />
-        <xs:attribute name="Start" type="xs:boolean" use="optional" />
+        <xs:attribute default="false" name="Start" type="xs:boolean" />
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -67,7 +74,7 @@
       <xs:element minOccurs="1" maxOccurs="1" name="Culture" nillable="true" type="xs:string" />
       <xs:element minOccurs="1" maxOccurs="1" name="UICulture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="DevelopmentEnvironment" nillable="true" type="xs:boolean" />
-      <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfString1" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfModule" />
     </xs:sequence>
     <xs:attribute name="StartClient" type="xs:boolean" use="required" />
     <xs:attribute name="ThrowErrors" type="xs:boolean" use="required" />
@@ -76,6 +83,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="string" type="xs:string" />
     </xs:sequence>
-    <xs:attribute name="enableShadowCopy" type="xs:boolean" use="required" />
+    <xs:attribute name="EnableShadowCopy" type="xs:boolean" use="required" />
   </xs:complexType>
 </xs:schema>

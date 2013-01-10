@@ -38,7 +38,7 @@ namespace Zetbox.Server.Service
             if (container != null) { throw new InvalidOperationException("already started"); }
             
             Logging.Configure();
-            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config, true);
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
             container = Program.CreateMasterContainer(config);
 
