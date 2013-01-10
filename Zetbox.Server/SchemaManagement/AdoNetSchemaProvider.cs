@@ -19,6 +19,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
@@ -180,6 +181,18 @@ namespace Zetbox.Server.SchemaManagement
                     }
                 }
             }
+        }
+
+        protected static Dictionary<string, object> ToAdoParameters(IEnumerable<string> discriminatorFilter)
+        {
+            var parameters = new Dictionary<string, object>();
+            int i = 0;
+            foreach (var val in discriminatorFilter)
+            {
+                parameters["@p" + i.ToString(CultureInfo.InvariantCulture)] = val;
+                i += 1;
+            }
+            return parameters;
         }
 
         #endregion
@@ -438,6 +451,8 @@ namespace Zetbox.Server.SchemaManagement
 
         public abstract bool CheckTableContainsData(TableRef tblName);
 
+        public abstract bool CheckTableContainsData(TableRef tblName, IEnumerable<string> discriminatorFilter);
+
         public abstract bool CheckColumnContainsNulls(TableRef tblName, string colName);
 
         public abstract bool CheckFKColumnContainsUniqueValues(TableRef tblName, string colName);
@@ -478,15 +493,15 @@ namespace Zetbox.Server.SchemaManagement
         protected string FormatCheckExpression(string colName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
         {
             // CASE { WHEN {0} IN ({1}) THEN {2} }+ END
-            var whens = string.Join(" ", 
+            var whens = string.Join(" ",
                 checkExpressions.Select(kvp => string.Format("WHEN {0} IN ({1}) THEN {2}",
-                    TableMapper.DiscriminatorColumnName,
-                    string.Join(", ", kvp.Key.Select(s => QuoteString(s))), 
+                    QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                    string.Join(", ", kvp.Key.Select(s => QuoteString(s))),
                     string.Format(_checkExpressionVisitor.TranslateCheckExpression(kvp.Value), QuoteIdentifier(colName)))));
 
-            if (string.IsNullOrWhiteSpace(whens)) 
+            if (string.IsNullOrWhiteSpace(whens))
                 return "(0=0)";
-            else 
+            else
                 return "CASE " + whens + " ELSE (0=0) END";
         }
 
@@ -676,7 +691,9 @@ namespace Zetbox.Server.SchemaManagement
         public abstract void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values);
 
         public abstract void WriteDefaultValue(TableRef tblNametblName, string colName, object value);
+        public abstract void WriteDefaultValue(TableRef tblNametblName, string colName, object value, IEnumerable<string> discriminatorFilter);
         public abstract void WriteGuidDefaultValue(TableRef destTblName, string colName);
+        public abstract void WriteGuidDefaultValue(TableRef destTblName, string colName, IEnumerable<string> discriminatorFilter);
 
         /// <summary>
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.

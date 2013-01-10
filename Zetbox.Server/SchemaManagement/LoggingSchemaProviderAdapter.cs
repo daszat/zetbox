@@ -194,6 +194,11 @@ namespace Zetbox.Server.SchemaManagement
             return _provider.CheckTableContainsData(tblName);
         }
 
+        public bool CheckTableContainsData(TableRef tblName, IEnumerable<string> discriminatorFilter)
+        {
+            return _provider.CheckTableContainsData(tblName, discriminatorFilter);
+        }
+
         public bool CheckColumnContainsNulls(TableRef tblName, string colName)
         {
             return _provider.CheckColumnContainsNulls(tblName, colName);
@@ -482,9 +487,19 @@ namespace Zetbox.Server.SchemaManagement
             _provider.WriteDefaultValue(tblName, colName, value);
         }
 
+        public void WriteDefaultValue(TableRef tblName, string colName, object value, IEnumerable<string> discriminatorFilter)
+        {
+            _provider.WriteDefaultValue(tblName, colName, value, discriminatorFilter);
+        }
+
         public void WriteGuidDefaultValue(TableRef tblName, string colName)
         {
             _provider.WriteGuidDefaultValue(tblName, colName);
+        }
+
+        public void WriteGuidDefaultValue(TableRef tblName, string colName, IEnumerable<string> discriminatorFilter)
+        {
+            _provider.WriteGuidDefaultValue(tblName, colName, discriminatorFilter);
         }
 
         public void RefreshDbStats()

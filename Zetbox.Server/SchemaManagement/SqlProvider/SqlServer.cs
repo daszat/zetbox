@@ -626,6 +626,25 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 FormatSchemaName(tbl))) > 0;
         }
 
+        public override bool CheckTableContainsData(TableRef tbl, IEnumerable<string> discriminatorFilter)
+        {
+            if (discriminatorFilter == null)
+            {
+                return CheckTableContainsData(tbl);
+            }
+            else
+            {
+                var parameters = ToAdoParameters(discriminatorFilter);
+
+                return (int)ExecuteScalar(string.Format(
+                    "SELECT COUNT(*) FROM (SELECT TOP 1 * FROM {0} WHERE {1} IN ({2})) AS data",
+                    FormatSchemaName(tbl),
+                    QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                    string.Join(",", parameters.Keys)),
+                    parameters) == 0;
+            }
+        }
+
         public override bool CheckColumnContainsNulls(TableRef tbl, string colName)
         {
             return (int)ExecuteScalar(String.Format(
@@ -1441,11 +1460,54 @@ END";
                              new Dictionary<string, object>() { { "@val", value } });
         }
 
+        public override void WriteDefaultValue(TableRef tblName, string colName, object value, IEnumerable<string> discriminatorFilter)
+        {
+            if (discriminatorFilter == null)
+            {
+                WriteGuidDefaultValue(tblName, colName);
+            }
+            else
+            {
+                var parameters = ToAdoParameters(discriminatorFilter);
+                var discriminatorParams = string.Join(",", parameters.Keys);
+                parameters["@val"] = value;
+
+                ExecuteNonQuery(String.Format(
+                    "UPDATE {0} SET {1} = @val WHERE {1} IS NULL AND {2} IN ({3})",
+                        FormatSchemaName(tblName),
+                        QuoteIdentifier(colName),
+                        QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                        discriminatorParams),
+                     parameters);
+            }
+        }
+
         public override void WriteGuidDefaultValue(TableRef tblName, string colName)
         {
-            ExecuteNonQuery(String.Format("UPDATE {0} SET {1} = NEWID() WHERE {1} IS NULL",
-                                FormatSchemaName(tblName),
-                                QuoteIdentifier(colName)));
+            ExecuteNonQuery(String.Format(
+                "UPDATE {0} SET {1} = NEWID() WHERE {1} IS NULL",
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(colName)));
+        }
+
+        public override void WriteGuidDefaultValue(TableRef tblName, string colName, IEnumerable<string> discriminatorFilter)
+        {
+            if (discriminatorFilter == null)
+            {
+                WriteGuidDefaultValue(tblName, colName);
+            }
+            else
+            {
+                var parameters = ToAdoParameters(discriminatorFilter);
+
+                ExecuteNonQuery(String.Format(
+                    "UPDATE {0} SET {1} = NEWID() WHERE {1} IS NULL AND {2} IN ({3})",
+                        FormatSchemaName(tblName),
+                        QuoteIdentifier(colName),
+                        QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                        string.Join(",", parameters.Keys)),
+                     parameters);
+            }
         }
 
         public override void RefreshDbStats()

@@ -526,16 +526,6 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             cmd.ExecuteNonQuery();
         }
 
-        public void WriteDefaultValue(TableRef tblName, string colName, object value)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void WriteGuidDefaultValue(TableRef tblName, string colName)
-        {
-            throw new NotSupportedException();
-        }
-
         public void RefreshDbStats()
         {
             // do nothing
@@ -912,6 +902,36 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         /// <summary>Not supported.</summary>
         void ISchemaProvider.DropCheckConstraint(TableRef tblName, string constraintName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckTableContainsData(TableRef tblName, IEnumerable<string> discriminatorFilter)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.WriteDefaultValue(TableRef tblName, string colName, object value)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.WriteDefaultValue(TableRef tblName, string colName, object value, IEnumerable<string> discriminatorFilter)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.WriteGuidDefaultValue(TableRef tblName, string colName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.WriteGuidDefaultValue(TableRef tblName, string colName, IEnumerable<string> discriminatorFilter)
         {
             throw new NotSupportedException();
         }

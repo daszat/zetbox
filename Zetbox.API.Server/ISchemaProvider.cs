@@ -686,6 +686,7 @@ using System.Linq.Expressions;
         #region Table Content
 
         bool CheckTableContainsData(TableRef tblName);
+        bool CheckTableContainsData(TableRef tblName, IEnumerable<string> discriminatorFilter);
         bool CheckColumnContainsNulls(TableRef tblName, string colName);
         bool CheckFKColumnContainsUniqueValues(TableRef tblName, string colName);
         bool CheckColumnContainsValues(TableRef tblName, string colName);
@@ -822,7 +823,9 @@ using System.Linq.Expressions;
         void WriteTableData(TableRef destTblName, IEnumerable<string> colNames, IEnumerable values);
 
         void WriteDefaultValue(TableRef tblName, string colName, object value);
+        void WriteDefaultValue(TableRef tblName, string colName, object value, IEnumerable<string> discriminatorFilter);
         void WriteGuidDefaultValue(TableRef tblName, string colName);
+        void WriteGuidDefaultValue(TableRef tblName, string colName, IEnumerable<string> discriminatorFilter);
 
         /// <summary>
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.
