@@ -19,6 +19,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using Zetbox.API;
     using Zetbox.API.Server;
@@ -279,50 +280,89 @@ namespace Zetbox.Server.SchemaManagement
             var size = prop.GetSize();
             var scale = prop.GetScale();
             var def = SchemaManager.GetDefaultConstraint(prop);
-            var realIsNullable = objClass.GetTableMapping() == TableMapping.TPH && objClass.BaseObjectClass != null;
-            // todo: add special is null check contraint for TableMapping.TPH
+            var isSimplyCheckable = objClass.GetTableMapping() == TableMapping.TPT || objClass.BaseObjectClass == null;
+            bool updateDone = false;
+
+            // classes that do have this property
+            var classes = objClass.AndChildren(c => c.SubClasses).Select(cls => Construct.DiscriminatorValue(cls)).ToList();
+
             Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.Name, prop.Name, colName);
-            if (!db.CheckTableContainsData(tblName))
+
+            if (db.CheckTableContainsData(tblName, isSimplyCheckable ? null : classes))
             {
-                db.CreateColumn(tblName, colName, dbType, size, scale, realIsNullable, def);
+                db.CreateColumn(tblName, colName, dbType, size, scale, true, isSimplyCheckable ? def : null);
+                updateDone = WriteDefaultValue(tblName, colName, def, isSimplyCheckable ? null : classes);
             }
             else
             {
-                db.CreateColumn(tblName, colName, dbType, size, scale, true, def);
-                bool updateDone = false;
-                if (def is NewGuidDefaultConstraint)
-                {
-                    db.WriteGuidDefaultValue(tblName, colName);
-                    updateDone = true;
-                }
-                else if (def is DateTimeDefaultConstraint)
-                {
-                    if (((DateTimeDefaultConstraint)def).Precision == DateTimeDefaultConstraintPrecision.Date)
-                        db.WriteDefaultValue(tblName, colName, DateTime.Today);
-                    else
-                        db.WriteDefaultValue(tblName, colName, DateTime.Now);
-                    updateDone = true;
-                }
-                else if (def is BoolDefaultConstraint)
-                {
-                    db.WriteDefaultValue(tblName, colName, ((BoolDefaultConstraint)def).Value);
-                    updateDone = true;
-                }
-                else if (def is IntDefaultConstraint)
-                {
-                    db.WriteDefaultValue(tblName, colName, ((IntDefaultConstraint)def).Value);
-                    updateDone = true;
-                }
-
-                if (updateDone)
-                {
-                    db.AlterColumn(tblName, colName, dbType, size, scale, realIsNullable, def);
-                }
-                else
-                {
-                    Log.ErrorFormat("unable to create new not nullable ValueType Property '{0}' when table '{1}' contains data. No supported default contraint found. Created nullable column instead.", colName, tblName);
-                }
+                db.CreateColumn(tblName, colName, dbType, size, scale, !isSimplyCheckable, isSimplyCheckable ? def : null);
+                updateDone = true;
             }
+
+            if (updateDone && isSimplyCheckable)
+            {
+                db.AlterColumn(tblName, colName, dbType, size, scale, true, def);
+            }
+            else if (updateDone && !isSimplyCheckable)
+            {
+                // classes that do not have this property
+                var otherClasses = objClass
+                    .BaseObjectClass // step once up, which is allowed, since we're not base (else isSimplyCheckable would be true) and necessary to let the skip work (see below)
+                    .AndParents(cls => cls.BaseObjectClass)
+                    .SelectMany(cls => cls
+                        .AndChildren(c => c.SubClasses
+                            .Where(child => child != objClass))) // skip self (and thus its children)
+                    .Select(cls => Construct.DiscriminatorValue(cls)).ToList();
+
+                var checkExpressions = new Dictionary<List<string>, Expression<Func<string, bool>>>()
+                    {
+                        { classes, s => s != null },
+                        { otherClasses, s => s == null },
+                    };
+
+                var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+                if (db.CheckCheckConstraintPossible(tblName, colName, checkConstraintName, checkExpressions))
+                    db.CreateCheckConstraint(tblName, colName, checkConstraintName, checkExpressions);
+                else
+                    Log.ErrorFormat("unable to create CHECK constraint for ValueType Property '{0}' in '{1}': column contains invalid NULLs or superfluous values", colName, tblName);
+
+            }
+            else if (!updateDone && isSimplyCheckable)
+            {
+                Log.ErrorFormat("unable to set ValueType Property '{0}' to NOT NULL when table '{1}' contains data: No supported default constraint found", colName, tblName);
+            }
+            else if (!updateDone && !isSimplyCheckable)
+            {
+                Log.ErrorFormat("unable to create CHECK constraint on ValueType Property '{0}' when table '{1}' contains data: No supported default constraint found", colName, tblName);
+            }
+        }
+
+        private bool WriteDefaultValue(TableRef tblName, string colName, DefaultConstraint def, IEnumerable<string> discriminatorFilter)
+        {
+            if (def is NewGuidDefaultConstraint)
+            {
+                db.WriteGuidDefaultValue(tblName, colName, discriminatorFilter);
+                return true;
+            }
+            else if (def is DateTimeDefaultConstraint)
+            {
+                if (((DateTimeDefaultConstraint)def).Precision == DateTimeDefaultConstraintPrecision.Date)
+                    db.WriteDefaultValue(tblName, colName, DateTime.Today, discriminatorFilter);
+                else
+                    db.WriteDefaultValue(tblName, colName, DateTime.Now, discriminatorFilter);
+                return true;
+            }
+            else if (def is BoolDefaultConstraint)
+            {
+                db.WriteDefaultValue(tblName, colName, ((BoolDefaultConstraint)def).Value, discriminatorFilter);
+                return true;
+            }
+            else if (def is IntDefaultConstraint)
+            {
+                db.WriteDefaultValue(tblName, colName, ((IntDefaultConstraint)def).Value, discriminatorFilter);
+                return true;
+            }
+            return false;
         }
         #endregion
 

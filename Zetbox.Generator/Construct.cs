@@ -87,11 +87,17 @@ namespace Zetbox.Generator
 
         #endregion
 
-        #region IndexNames
+        #region Index and Constraint Names
         public static string IndexName(string tblName, params string[] colNames)
         {
             return "IDX_" + tblName + "_" + string.Join("_", colNames);
         }
+
+        public static string CheckConstraintName(string tblName, string colName)
+        {
+            return "CK_" + tblName + "_" + colName;
+        }
+
         #endregion
 
         #region Column Names
@@ -112,7 +118,7 @@ namespace Zetbox.Generator
         public static string ForeignKeyColumnName(CompoundObjectProperty listProp)
         {
             if (listProp == null) { throw new ArgumentNullException("listProp"); }
-            
+
             return ForeignKeyColumnName(listProp.ObjectClass.Name);
         }
 
