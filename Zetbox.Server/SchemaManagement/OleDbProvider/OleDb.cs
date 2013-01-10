@@ -21,6 +21,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
     using System.Data.OleDb;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API;
@@ -837,52 +838,80 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         bool ISchemaProvider.CheckSchemaExists(string schemaName)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         IEnumerable<string> ISchemaProvider.GetSchemaNames()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.CreateSchema(string schemaName)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.DropSchema(string schemaName, bool force)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         ProcRef ISchemaProvider.GetFunctionName(string schemaName, string funcName)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>Not supported.</summary>
         IEnumerable<ProcRef> ISchemaProvider.GetFunctionNames()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         bool ISchemaProvider.CheckFunctionExists(ProcRef funcName)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.DropFunction(ProcRef funcName)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.DblinkConnect(TableRef tblNamE)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         bool ISchemaProvider.CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpression)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateCheckConstraint(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpression)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropCheckConstraint(TableRef tblName, string constraintName)
         {
             throw new NotSupportedException();
         }

@@ -28,6 +28,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
     using Zetbox.API.Migration;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
+    using System.Linq.Expressions;
 
     public class SqlServer
         : AdoNetSchemaProvider<SqlConnection, SqlTransaction, SqlCommand>
@@ -774,6 +775,14 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         public override void DropIndex(TableRef tblName, string idxName)
         {
             ExecuteNonQuery(string.Format("DROP INDEX [{0}] ON {1}", idxName, FormatSchemaName(tblName)));
+        }
+
+        public override bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            return (int)ExecuteScalar(String.Format(
+                "SELECT COUNT(*) FROM (SELECT TOP 1 * FROM {0} WHERE NOT {1}) AS data",
+                FormatSchemaName(tblName),
+                FormatCheckExpression(colName, checkExpressions))) > 0;
         }
 
         #endregion

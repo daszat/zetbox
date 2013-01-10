@@ -23,6 +23,7 @@ namespace Zetbox.API.Server
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
+using System.Linq.Expressions;
 
     public abstract class DboRef : IComparable<DboRef>, IComparable
     {
@@ -716,6 +717,31 @@ namespace Zetbox.API.Server
         bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void DropIndex(TableRef tblName, string idxName);
+
+        /// <summary>
+        /// Checks whether a column fulfills certain criteria based on the DiscriminatorColumn
+        /// </summary>
+        /// <param name="tblName"></param>
+        /// <param name="colName"></param>
+        /// <param name="newConstraintName"></param>
+        /// <param name="checkExpressions">A mapping from DiscriminatorColumn values to check Expressions</param>
+        /// <returns>true, when all values in the column match the constraint</returns>
+        bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions);
+
+        /// <summary>
+        /// Creates a check constraint based on the DiscriminatorColumn values
+        /// </summary>
+        /// <param name="tblName"></param>
+        /// <param name="colName"></param>
+        /// <param name="newConstraintName"></param>
+        /// <param name="checkExpressions">A mapping from DiscriminatorColumn values to check Expressions</param>
+        /// <returns></returns>
+        void CreateCheckConstraint(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions);
+
+        /// <summary>
+        /// Drops the specified check constraint.
+        /// </summary>
+        void DropCheckConstraint(TableRef tblName, string constraintName);
 
         #endregion
 

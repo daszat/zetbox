@@ -21,6 +21,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Data;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API.Server;
@@ -308,6 +309,11 @@ namespace Zetbox.Server.SchemaManagement
 
         protected abstract string QuoteIdentifier(string name);
 
+        protected virtual string QuoteString(string value)
+        {
+            return "'" + value.Replace("'", "''") + "'";
+        }
+
         protected virtual string BuildSelect(TableRef tbl, params string[] columns)
         {
             return "SELECT "
@@ -324,7 +330,7 @@ namespace Zetbox.Server.SchemaManagement
         protected static string ConstructCheckConstraintName(TableRef tblName, string colName)
         {
             return String.Format("check_{0}_{1}", tblName.Name, colName);
-        }        
+        }
 
         #endregion
 
@@ -467,6 +473,41 @@ namespace Zetbox.Server.SchemaManagement
         public abstract void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         public abstract void DropIndex(TableRef tblName, string idxName);
 
+
+        private static CheckExpressionVisitor _checkExpressionVisitor = new CheckExpressionVisitor();
+        protected string FormatCheckExpression(string colName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            // CASE { WHEN {0} IN ({1}) THEN {2} }+ END
+            var whens = string.Join(" ", 
+                checkExpressions.Select(kvp => string.Format("WHEN {0} IN ({1}) THEN {2}",
+                    TableMapper.DiscriminatorColumnName,
+                    string.Join(", ", kvp.Key.Select(s => QuoteString(s))), 
+                    string.Format(_checkExpressionVisitor.TranslateCheckExpression(kvp.Value), QuoteIdentifier(colName)))));
+
+            if (string.IsNullOrWhiteSpace(whens)) 
+                return "(0=0)";
+            else 
+                return "CASE " + whens + " ELSE (0=0) END";
+        }
+
+        public abstract bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions);
+
+        public virtual void CreateCheckConstraint(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            ExecuteNonQuery(string.Format("ALTER TABLE {0} ADD CONSTRAINT {1} CHECK ( {2} )",
+                FormatSchemaName(tblName),
+                QuoteIdentifier(newConstraintName),
+                FormatCheckExpression(colName, checkExpressions)));
+        }
+
+        public virtual void DropCheckConstraint(TableRef tblName, string constraintName)
+        {
+            ExecuteNonQuery(string.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",
+                            FormatSchemaName(tblName),
+                            QuoteIdentifier(constraintName)));
+        }
+
+
         #endregion
 
         #region Other DB Objects (Views, Triggers, Procedures)
@@ -501,7 +542,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             if (db == null)
                 throw new InvalidOperationException("cannot qualify table name without database connection");
-            
+
             return new ProcRef(db.Database, schemaName, funcName);
         }
 

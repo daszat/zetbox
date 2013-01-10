@@ -21,13 +21,14 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using System.Text.RegularExpressions;
+    using Npgsql;
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
-    using Npgsql;
 
     public class Postgresql
         : AdoNetSchemaProvider<NpgsqlConnection, NpgsqlTransaction, NpgsqlCommand>
@@ -755,6 +756,14 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 "DROP INDEX {0}.{1}",
                 QuoteIdentifier(tblName.Schema),
                 QuoteIdentifier(idxName)));
+        }
+
+        public override bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            return (bool)ExecuteScalar(string.Format(
+                "SELECT Count(*) > 0 FROM (SELECT * FROM {0} WHERE NOT {1} LIMIT 1) AS data",
+                FormatSchemaName(tblName),
+                FormatCheckExpression(colName, checkExpressions)));
         }
 
         #endregion

@@ -20,6 +20,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
@@ -581,6 +582,21 @@ namespace Zetbox.Server.SchemaManagement
         public bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             return _provider.CheckIndexPossible(tblName, idxName, unique, clustered, columns);
+        }
+
+        public bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            return _provider.CheckCheckConstraintPossible(tblName, colName, newConstraintName, checkExpressions);
+        }
+
+        public void CreateCheckConstraint(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            _provider.CreateCheckConstraint(tblName, colName, newConstraintName, checkExpressions);
+        }
+
+        public void DropCheckConstraint(TableRef tblName, string constraintName)
+        {
+            _provider.DropCheckConstraint(tblName, constraintName);
         }
     }
 }
