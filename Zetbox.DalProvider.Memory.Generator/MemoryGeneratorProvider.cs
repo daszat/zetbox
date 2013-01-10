@@ -21,7 +21,9 @@ namespace Zetbox.DalProvider.Memory.Generator
     using System.Text;
     using Autofac;
     using Zetbox.Generator;
+    using Zetbox.API.Configuration;
 
+    [Feature]
     public class MemoryGeneratorProvider
         : Autofac.Module
     {

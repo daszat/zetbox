@@ -216,6 +216,11 @@
       <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Zetbox.App.Projekte.Common\Zetbox.App.Projekte.Common.csproj">
+      <Project>{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}</Project>
+      <Name>Zetbox.App.Projekte.Common</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Zetbox.Client</Name>

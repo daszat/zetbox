@@ -21,7 +21,9 @@ namespace Zetbox.Microsoft
     using System.Text;
     using Autofac;
     using Zetbox.API.Client;
+    using Zetbox.API.Configuration;
 
+    [Feature]
     public class Module : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)

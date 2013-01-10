@@ -22,6 +22,7 @@ namespace Zetbox.API
     using System.IO;
     using Autofac;
     using System.Net.Mail;
+    using Zetbox.API.Configuration;
 
     public interface IProblemReporter
     {
@@ -38,6 +39,7 @@ namespace Zetbox.API
 
     public class FogBugzProblemReporter : IProblemReporter
     {
+        [Feature]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)
@@ -90,6 +92,7 @@ namespace Zetbox.API
 
     public class MailProblemReporter : IProblemReporter
     {
+        [Feature]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)

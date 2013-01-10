@@ -21,7 +21,9 @@ namespace Zetbox.DalProvider.Ef.Generator
     using System.Text;
     using Autofac;
     using Zetbox.Generator;
+    using Zetbox.API.Configuration;
 
+    [Feature]
     public sealed class EfGeneratorProvider
         : Module
     {

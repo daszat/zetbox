@@ -25,7 +25,9 @@ namespace Zetbox.Server
     using System.Linq;
     using System.Text;
     using Autofac;
+    using Zetbox.API.Configuration;
 
+    [Feature]
     public class UnifiedModule : Module
     {
         protected override void Load(ContainerBuilder builder)

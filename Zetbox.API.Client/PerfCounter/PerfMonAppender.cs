@@ -23,9 +23,11 @@ namespace Zetbox.API.Client.PerfCounter
     using Zetbox.API;
     using Zetbox.API.PerfCounter;
     using Zetbox.API.Utils;
+    using Zetbox.API.Configuration;
 
     public class PerfMonAppender : BasePerfMonAppender, IPerfCounterAppender
     {
+        [Feature]
         public class Module : Autofac.Module
         {
             protected override void Load(ContainerBuilder moduleBuilder)

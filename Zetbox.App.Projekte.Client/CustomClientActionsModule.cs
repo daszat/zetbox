@@ -22,12 +22,16 @@ namespace Zetbox.App.Projekte.Client
     using Autofac;
     using Zetbox.API;
     using Zetbox.Client;
+    using Zetbox.API.Configuration;
 
+    [Feature]
     public class CustomClientActionsModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
+
+            moduleBuilder.RegisterModule<Zetbox.App.Projekte.Common.CustomCommonActionsModule>();
 
             moduleBuilder.RegisterZetboxImplementors(typeof(CustomClientActionsModule).Assembly);
             moduleBuilder.RegisterViewModels(typeof(CustomClientActionsModule).Assembly);

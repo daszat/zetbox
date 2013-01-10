@@ -19,12 +19,20 @@ namespace Zetbox.API.Configuration
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.ComponentModel;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public sealed class NotOnFallbackAttribute : Attribute
+    public sealed class FeatureAttribute : Attribute
     {
-        public NotOnFallbackAttribute()
+        public FeatureAttribute()
         {
+            NotOnFallback = false;
         }
+
+        /// <summary>
+        /// Will not be loaded in fallback mode
+        /// </summary>
+        [DefaultValue(false)]
+        public bool NotOnFallback { get; set; }
     }
 }

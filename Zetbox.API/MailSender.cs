@@ -21,6 +21,7 @@ namespace Zetbox.API
     using System.Text;
     using System.Net.Mail;
     using Autofac;
+    using Zetbox.API.Configuration;
 
     public interface IMailSender
     {
@@ -57,6 +58,7 @@ namespace Zetbox.API
             client.Send(msg);
         }
 
+        [Feature]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)
@@ -112,6 +114,7 @@ namespace Zetbox.API
             System.Diagnostics.Process.Start(si);       
         }
 
+        [Feature]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)

@@ -25,10 +25,9 @@ namespace Zetbox.Server.SchemaManagement
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
 
+    // No feature, loaded by server module
     public class SchemaModule : Module
     {
-        public static object NoWcfKey { get { return "nowcf"; } }
-
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);

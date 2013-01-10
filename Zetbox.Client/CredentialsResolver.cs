@@ -33,6 +33,7 @@ namespace Zetbox.Client
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.API.Configuration;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -82,6 +83,7 @@ namespace Zetbox.Client
 
     public class BasicAuthCredentialsResolver : ICredentialsResolver
     {
+        [Feature]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)

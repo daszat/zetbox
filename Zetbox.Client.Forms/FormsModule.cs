@@ -23,6 +23,7 @@ namespace Zetbox.Client.Forms
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.Client.Presentables;
+    using Zetbox.API.Configuration;
 
     public class FormsModule : Module
     {

@@ -31,6 +31,7 @@ namespace Zetbox.DalProvider.Ef
 
     public interface IEfActionsManager : ICustomActionsManager { }
 
+    [Feature]
     public class EfProvider
         : Autofac.Module
     {

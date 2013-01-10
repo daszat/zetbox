@@ -26,7 +26,9 @@ namespace Zetbox.DalProvider.Memory
     using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
     using Zetbox.App.Packaging;
+    using Zetbox.API.Configuration;
 
+    [Feature]
     public class MemoryProvider
         : Autofac.Module
     {

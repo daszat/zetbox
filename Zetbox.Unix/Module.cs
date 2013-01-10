@@ -21,7 +21,9 @@ namespace Zetbox.Unix
     using System.Text;
 
     using Autofac;
+    using Zetbox.API.Configuration;
 
+    [Feature]
     public class Module
         : Autofac.Module
     {

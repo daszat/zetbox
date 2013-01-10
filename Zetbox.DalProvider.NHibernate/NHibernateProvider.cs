@@ -29,6 +29,7 @@ namespace Zetbox.DalProvider.NHibernate
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
 
+    [Feature]
     public class NHibernateProvider
         : Autofac.Module
     {
