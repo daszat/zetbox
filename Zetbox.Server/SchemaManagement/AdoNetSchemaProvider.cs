@@ -492,17 +492,16 @@ namespace Zetbox.Server.SchemaManagement
         private static CheckExpressionVisitor _checkExpressionVisitor = new CheckExpressionVisitor();
         protected string FormatCheckExpression(string colName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
         {
-            // CASE { WHEN {0} IN ({1}) THEN {2} }+ END
-            var whens = string.Join(" ",
-                checkExpressions.Select(kvp => string.Format("WHEN {0} IN ({1}) THEN {2}",
+            var clauses = string.Join(" OR ",
+                checkExpressions.Select(kvp => string.Format("(({0} IN ({1})) AND ({2}))",
                     QuoteIdentifier(TableMapper.DiscriminatorColumnName),
                     string.Join(", ", kvp.Key.Select(s => QuoteString(s))),
                     string.Format(_checkExpressionVisitor.TranslateCheckExpression(kvp.Value), QuoteIdentifier(colName)))));
 
-            if (string.IsNullOrWhiteSpace(whens))
+            if (string.IsNullOrWhiteSpace(clauses))
                 return "(0=0)";
             else
-                return "CASE " + whens + " ELSE (0=0) END";
+                return "(" + clauses + ")";
         }
 
         public abstract bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions);
@@ -521,7 +520,6 @@ namespace Zetbox.Server.SchemaManagement
                             FormatSchemaName(tblName),
                             QuoteIdentifier(constraintName)));
         }
-
 
         #endregion
 
