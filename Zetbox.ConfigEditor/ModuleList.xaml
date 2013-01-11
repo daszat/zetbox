@@ -20,6 +20,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0"
@@ -35,7 +36,9 @@
                             <ctrls:CommandButton CommandViewModel="{Binding UpCommand}" />
                             <ctrls:CommandButton CommandViewModel="{Binding DownCommand}" />
                         </StackPanel>
-                        <StackPanel Grid.Column="1"
+                        <TextBlock Visibility="{Binding NotOnFallback, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   Text="No Fallback" />
+                        <StackPanel Grid.Column="2"
                                     Margin="2">
                             <StackPanel.Resources>
                                 <Style TargetType="{x:Type TextBlock}">
