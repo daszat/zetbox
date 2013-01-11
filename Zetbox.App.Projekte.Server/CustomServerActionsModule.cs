@@ -23,8 +23,10 @@ namespace Zetbox.App.Projekte.Server
     using Zetbox.API;
     using Zetbox.API.Server;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     [Feature]
+    [Description("Zetbox server actions")]
     public class CustomServerActionsModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)

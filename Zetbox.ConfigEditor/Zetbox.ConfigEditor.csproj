@@ -61,6 +61,7 @@
     <Compile Include="ModuleList.xaml.cs">
       <DependentUpon>ModuleList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModulesCache.cs" />
     <Compile Include="ViewModels\ClientConfigViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\ServerConfigViewModel.cs" />

@@ -28,6 +28,7 @@ namespace Zetbox.Microsoft
     using Zetbox.Client.Presentables;
     using Outlook = global::Microsoft.Office.Interop.Outlook;
     using Zetbox.API.Configuration;
+using System.ComponentModel;
 
     /// <summary>
     /// Sends MailMessages using Outlook
@@ -113,6 +114,7 @@ namespace Zetbox.Microsoft
         }
 
         [Feature]
+        [Description("Sends EMails using Microsoft Outlook")]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)

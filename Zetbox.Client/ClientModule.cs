@@ -26,7 +26,7 @@ namespace Zetbox.Client
     using Zetbox.API.Configuration;
     using Zetbox.App.Extensions;
     using Zetbox.Client.Presentables;
-using Zetbox.API.Common.GUI;
+    using Zetbox.API.Common.GUI;
 
     public sealed class ClientModule : Module
     {

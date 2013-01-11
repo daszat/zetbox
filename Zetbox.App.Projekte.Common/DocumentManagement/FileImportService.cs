@@ -26,10 +26,12 @@ namespace Zetbox.App.Projekte.DocumentManagement
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     public class FileImportService : IService
     {
         [Feature]
+        [Description("Zetbox file import service")]
         public class Module : Autofac.Module
         {
             protected override void Load(ContainerBuilder moduleBuilder)

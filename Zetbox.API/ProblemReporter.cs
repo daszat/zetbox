@@ -23,12 +23,14 @@ namespace Zetbox.API
     using Autofac;
     using System.Net.Mail;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     public interface IProblemReporter
     {
         void Report(string message, string description, System.Drawing.Bitmap screenshot, Exception exeption);
     }
 
+    // Will be loaded by the Api Module
     public class LoggingProblemReporter : IProblemReporter
     {
         public void Report(string message, string description, System.Drawing.Bitmap screenshot, Exception exeption)
@@ -40,6 +42,7 @@ namespace Zetbox.API
     public class FogBugzProblemReporter : IProblemReporter
     {
         [Feature]
+        [Description("ProblemReporter that sends problem reports to fogbugz")]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)
@@ -93,6 +96,7 @@ namespace Zetbox.API
     public class MailProblemReporter : IProblemReporter
     {
         [Feature]
+        [Description("ProblemReporter that sends problem reports using the registrated mail sender")]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)

@@ -23,8 +23,10 @@ namespace Zetbox.App.Projekte.Client
     using Zetbox.API;
     using Zetbox.Client;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     [Feature]
+    [Description("Zetbox client actions")]
     public class CustomClientActionsModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
