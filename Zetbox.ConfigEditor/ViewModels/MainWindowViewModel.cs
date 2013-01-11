@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Win32;
+using System.Windows;
+using Zetbox.API.Configuration;
 
 namespace Zetbox.ConfigEditor.ViewModels
 {
@@ -53,7 +55,9 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         public void Open(string path)
         {
-            Config = new ConfigViewModel(Zetbox.API.Configuration.ZetboxConfig.FromFile(path, string.Empty));
+            Config = new ConfigViewModel(ZetboxConfig.FromFile(path, string.Empty), path);
+            SaveCommand.OnCanExecuteChanged();
+            SaveAsCommand.OnCanExecuteChanged();
         }
 
         private ICommandViewModel _SaveCommand = null;
@@ -63,7 +67,7 @@ namespace Zetbox.ConfigEditor.ViewModels
             {
                 if (_SaveCommand == null)
                 {
-                    _SaveCommand = new SimpleCommandViewModel("Save", "Saves the configuration", Save);
+                    _SaveCommand = new SimpleCommandViewModel("Save", "Saves the configuration", Save, () => Config != null);
                 }
                 return _SaveCommand;
             }
@@ -71,6 +75,17 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         public void Save()
         {
+            if (Config != null)
+            {
+                if (string.IsNullOrEmpty(Config.SourcePath))
+                {
+                    SaveAs();
+                }
+                else
+                {
+                    Config.Config.ToFile(Config.SourcePath);
+                }
+            }
         }
 
         private ICommandViewModel _SaveAsCommand = null;
@@ -80,7 +95,7 @@ namespace Zetbox.ConfigEditor.ViewModels
             {
                 if (_SaveAsCommand == null)
                 {
-                    _SaveAsCommand = new SimpleCommandViewModel("SaveAs", "Save the configuration under a new name", SaveAs);
+                    _SaveAsCommand = new SimpleCommandViewModel("SaveAs", "Save the configuration under a new name", SaveAs, () => Config != null);
                 }
                 return _SaveAsCommand;
             }
@@ -88,6 +103,7 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         public void SaveAs()
         {
+            MessageBox.Show("Not Implemented yet");
         }
         #endregion
     }

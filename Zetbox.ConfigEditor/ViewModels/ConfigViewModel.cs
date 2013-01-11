@@ -10,12 +10,23 @@ namespace Zetbox.ConfigEditor.ViewModels
     {
         private ZetboxConfig _cfg;
 
-        public ConfigViewModel(ZetboxConfig zetboxConfig)
+        public ConfigViewModel(ZetboxConfig zetboxConfig, string srcPath)
         {
             this._cfg = zetboxConfig;
+            this.SourcePath = srcPath;
         }
 
         #region Properties
+
+        public string SourcePath { get; private set; }
+        public ZetboxConfig Config
+        {
+            get
+            {
+                return _cfg;
+            }
+        }
+
         public string ConfigName
         {
             get
