@@ -21,7 +21,7 @@ namespace Zetbox.ConfigEditor.ViewModels
             {
                 if (_modules == null)
                 {
-                    _modules = new ModuleListViewModel(_cfg.Modules);
+                    _modules = new ModuleListViewModel(() => _cfg.Modules, v => _cfg.Modules = v);
                 }
                 return _modules;
             }

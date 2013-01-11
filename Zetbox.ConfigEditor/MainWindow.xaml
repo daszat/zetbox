@@ -4,8 +4,8 @@
         xmlns:ctrls="clr-namespace:Zetbox.ConfigEditor.Controls"
         xmlns:local="clr-namespace:Zetbox.ConfigEditor"
         Title="Zetbox Configuration Editor"
-        Height="472"
-        Width="557">
+        Height="600"
+        Width="800">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
@@ -32,7 +32,9 @@
                                   Header="Client settings">
 
                         </GroupBox>
-                        <local:ModuleList DataContext="{Binding Modules}" />
+                        <GroupBox Header="Modules">
+                            <local:ModuleList DataContext="{Binding Modules}" />
+                        </GroupBox>
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Server">
@@ -41,7 +43,9 @@
                                   Header="Server settings">
 
                         </GroupBox>
-                        <local:ModuleList DataContext="{Binding Modules}" />
+                        <GroupBox Header="Modules">
+                            <local:ModuleList DataContext="{Binding Modules}" />
+                        </GroupBox>
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Assembly search paths">

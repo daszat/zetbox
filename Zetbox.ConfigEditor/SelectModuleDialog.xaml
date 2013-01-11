@@ -1,0 +1,34 @@
+﻿<Window x:Class="Zetbox.ConfigEditor.SelectModuleDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctrls="clr-namespace:Zetbox.ConfigEditor.Controls"
+        Title="SelectModuleDialog"
+        Height="600"
+        Width="800">
+    <DockPanel>
+        <UniformGrid DockPanel.Dock="Bottom"
+                     Rows="1">
+            <ctrls:CommandButton CommandViewModel="{Binding SelectCommand}"
+                                 IsDefault="True"
+                                 Margin="10"
+                                 Click="SelectButton_Click" />
+            <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
+                                 Margin="10"
+                                 IsCancel="True" />
+        </UniformGrid>
+        <ctrls:ListView ItemsSource="{Binding List}"
+                        SelectedViewModels="{Binding Selected}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Grid.Column="1"
+                                Margin="2">
+                        <TextBlock FontSize="13"
+                                   Text="{Binding TypeName}" />
+                        <TextBlock Text="{Binding Description}"
+                                   Margin="10,1,1,1" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ctrls:ListView>
+    </DockPanel>
+</Window>

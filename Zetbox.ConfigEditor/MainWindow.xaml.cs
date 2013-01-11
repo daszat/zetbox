@@ -20,11 +20,11 @@ namespace Zetbox.ConfigEditor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private WindowViewModel vmdl;
+        private MainWindowViewModel vmdl;
         public MainWindow()
         {
             InitializeComponent();
-            vmdl = new WindowViewModel();
+            vmdl = new MainWindowViewModel();
             var args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {

@@ -57,6 +57,15 @@ namespace Zetbox.ConfigEditor
             }
         }
 
+        public IEnumerable<ModuleType> All
+        {
+            get
+            {
+                EnsureCache();
+                return _modules.Values;
+            }
+        }
+
         private Dictionary<string, Assembly> _assemblies;
         private Dictionary<string, ModuleType> _modules;
 
