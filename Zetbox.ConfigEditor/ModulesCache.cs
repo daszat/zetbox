@@ -12,6 +12,8 @@ namespace Zetbox.ConfigEditor
         public Type Type { get; set; }
         public string TypeName { get; set; }
         public string Description { get; set; }
+        public bool IsFeature { get; set; }
+        public bool NotOnFallback { get; set; }
     }
 
     public class ModulesCache
@@ -82,7 +84,7 @@ namespace Zetbox.ConfigEditor
                     {
                         LoadAssembly(file);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         System.Diagnostics.Debug.WriteLine(ex.Message);
                     }
@@ -97,7 +99,7 @@ namespace Zetbox.ConfigEditor
 
             var assemblyName = assembly.GetName().Name;
             _assemblies[assemblyName] = assembly;
-            
+
             foreach (var type in GetTypes(assembly))
             {
                 if (type == null) continue; // Oh, yes!
@@ -108,7 +110,9 @@ namespace Zetbox.ConfigEditor
                     {
                         Type = type,
                         TypeName = string.Format("{0}, {1}", type.FullName, assemblyName),
-                        Description = ExtractDescription(type)
+                        Description = ExtractDescription(type),
+                        IsFeature = ExtractIsFeature(type),
+                        NotOnFallback = ExtractNotOnFallback(type)
                     };
                     _modules[mt.TypeName] = mt;
                 }
@@ -121,16 +125,38 @@ namespace Zetbox.ConfigEditor
             var attr = CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(System.ComponentModel.DescriptionAttribute).FullName);
             if (attr != null)
             {
-                if (attr.ConstructorArguments.Count > 0)
+                var namedArg = attr.NamedArguments.FirstOrDefault(i => i.MemberInfo.Name == "Description");
+                if (namedArg != null)
+                {
+                    description = (string)namedArg.TypedValue.Value;
+                }
+                else if (attr.ConstructorArguments.Count > 0)
                 {
                     description = (string)attr.ConstructorArguments.First().Value;
                 }
-                else if (attr.NamedArguments.FirstOrDefault(i => i.MemberInfo.Name == "Description") != null)
-                {
-                    description = (string)attr.NamedArguments.FirstOrDefault(i => i.MemberInfo.Name == "Description").TypedValue.Value;
-                }
             }
             return description;
+        }
+
+        private static bool ExtractIsFeature(Type type)
+        {
+            var attr = CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(Zetbox.API.Configuration.FeatureAttribute).FullName);
+            return attr != null;
+        }
+
+        private static bool ExtractNotOnFallback(Type type)
+        {
+            bool notOnFallback = false;
+            var attr = CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(Zetbox.API.Configuration.FeatureAttribute).FullName);
+            if (attr != null)
+            {
+                var namedArg = attr.NamedArguments.FirstOrDefault(i => i.MemberInfo.Name == "NotOnFallback");
+                if (namedArg != null)
+                {
+                    notOnFallback = namedArg.TypedValue.Value as bool? == true;
+                }
+            }
+            return notOnFallback;
         }
 
         private static Type[] GetTypes(Assembly assembly)

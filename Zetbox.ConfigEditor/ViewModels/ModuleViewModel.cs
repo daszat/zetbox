@@ -101,7 +101,7 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         public ModuleViewModel(ModuleType type)
         {
-            _module = new ZetboxConfig.Module() { TypeName = type.TypeName, NotOnFallback = false };
+            _module = new ZetboxConfig.Module() { TypeName = type.TypeName, NotOnFallback = type.NotOnFallback };
         }
 
         #region Properties
@@ -126,6 +126,14 @@ namespace Zetbox.ConfigEditor.ViewModels
             get
             {
                 return _module.NotOnFallback;
+            }
+        }
+
+        public bool IsFeature
+        {
+            get
+            {
+                return ModulesCache.Instance[TypeName].IsFeature;
             }
         }
 

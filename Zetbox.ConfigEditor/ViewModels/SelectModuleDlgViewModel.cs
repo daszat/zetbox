@@ -16,7 +16,7 @@ namespace Zetbox.ConfigEditor.ViewModels
         {
             get
             {
-                return ModulesCache.Instance.All.Select(i => new ModuleViewModel(i));
+                return ModulesCache.Instance.All.Where(i => i.IsFeature).Select(i => new ModuleViewModel(i));
             }
         }
 
