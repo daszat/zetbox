@@ -1589,9 +1589,7 @@ Global
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|.NET.ActiveCfg = Debug|x86
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|Any CPU.ActiveCfg = Debug|x86
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|x86.ActiveCfg = Debug|x86
-		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|x86.Build.0 = Debug|x86
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Minimal|.NET.ActiveCfg = Release|x86
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Minimal|Any CPU.ActiveCfg = Release|x86
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Minimal|Mixed Platforms.ActiveCfg = Release|x86
