@@ -11,26 +11,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Zetbox.ConfigEditor.ViewModels;
 
 namespace Zetbox.ConfigEditor
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ModuleList.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ModuleList : UserControl
     {
-        private WindowViewModel vmdl;
-        public MainWindow()
+        public ModuleList()
         {
             InitializeComponent();
-            vmdl = new WindowViewModel();
-            var args = Environment.GetCommandLineArgs();
-            if (args.Length > 1)
-            {
-                vmdl.Open(args[1]);
-            }
-            this.DataContext = vmdl;
         }
     }
 }

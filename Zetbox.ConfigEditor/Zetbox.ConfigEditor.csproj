@@ -58,7 +58,13 @@
     </ApplicationDefinition>
     <Compile Include="Controls\CommandButton.cs" />
     <Compile Include="Controls\TabControl.cs" />
+    <Compile Include="ModuleList.xaml.cs">
+      <DependentUpon>ModuleList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ClientConfigViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
+    <Compile Include="ViewModels\ServerConfigViewModel.cs" />
+    <Compile Include="ViewModels\ModuleViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ConfigViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
@@ -74,6 +80,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModuleList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
