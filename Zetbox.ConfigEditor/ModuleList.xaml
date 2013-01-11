@@ -17,12 +17,32 @@
         <ctrls:ListView ItemsSource="{Binding List}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="2">
-                        <TextBlock FontSize="13"
-                                   Text="{Binding TypeName}" />
-                        <TextBlock Text="{Binding Description}"
-                                   Margin="10,1,1,1" />
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    Margin="2">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type ctrls:CommandButton}">
+                                    <Setter Property="Margin"
+                                            Value="2" />
+                                </Style>
+                            </StackPanel.Resources>
+                            <ctrls:CommandButton CommandViewModel="{Binding RemoveCommand}" />
+                            <ctrls:CommandButton CommandViewModel="{Binding UpCommand}" />
+                            <ctrls:CommandButton CommandViewModel="{Binding DownCommand}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1"
+                                    Margin="2">
+                            <TextBlock FontSize="13"
+                                       Text="{Binding TypeName}" />
+                            <TextBlock Text="{Binding Description}"
+                                       Margin="10,1,1,1" />
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ctrls:ListView>
