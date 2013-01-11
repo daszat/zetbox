@@ -48,15 +48,7 @@ namespace Zetbox.API.Utils
                 try
                 {
                     Logging.Log.InfoFormat("Adding module [{0}]", m.TypeName);
-#if MONO
-                    // workaround for https://bugzilla.novell.com/show_bug.cgi?id=661461
-                    var parts = m.Split(",".ToCharArray(), 2);
-                    if (parts.Length == 2)
-                    {
-                        var assemblyName = parts[1];
-                        System.Reflection.Assembly.Load(assemblyName);
-                    }
-#endif
+
                     builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(m.TypeName, true)));
                 }
                 catch (Exception ex)
