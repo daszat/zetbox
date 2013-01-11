@@ -126,7 +126,7 @@ namespace Zetbox.ConfigEditor
             if (attr != null)
             {
                 var namedArg = attr.NamedArguments.FirstOrDefault(i => i.MemberInfo.Name == "Description");
-                if (namedArg != null)
+                if (namedArg != null && namedArg.TypedValue.Value != null)
                 {
                     description = (string)namedArg.TypedValue.Value;
                 }
