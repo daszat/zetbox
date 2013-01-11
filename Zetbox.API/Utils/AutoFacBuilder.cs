@@ -43,7 +43,7 @@ namespace Zetbox.API.Utils
                 .ExternallyOwned()
                 .SingleInstance();
 
-            foreach (var m in (modules ?? new ZetboxConfig.Module[] { }).Where(i => config.IsFallback == false || i.NotOnFallback == false))
+            foreach (var m in (modules ?? new ZetboxConfig.Module[] { }).Where(i => config.IsFallback == false || i.NotOnFallback != true))
             {
                 try
                 {

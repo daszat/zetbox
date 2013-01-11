@@ -125,7 +125,7 @@ namespace Zetbox.ConfigEditor.ViewModels
         {
             get
             {
-                return _module.NotOnFallback;
+                return _module.NotOnFallback == true;
             }
         }
 

@@ -121,11 +121,11 @@ namespace Zetbox.API.Configuration
         {
             public Module()
             {
-                NotOnFallback = false;
+                NotOnFallback = null;
             }
 
             [XmlAttribute("NotOnFallback")]
-            public bool NotOnFallback { get; set; }
+            public bool? NotOnFallback { get; set; }
             [XmlText]
             public string TypeName { get; set; }
         }
@@ -351,6 +351,7 @@ namespace Zetbox.API.Configuration
         {
             using (XmlTextWriter w = new XmlTextWriter(filename, Encoding.Default))
             {
+                w.Formatting = Formatting.Indented;
                 xml.Serialize(w, this);
             }
         }
