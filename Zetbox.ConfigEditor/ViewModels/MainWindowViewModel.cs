@@ -46,6 +46,24 @@ namespace Zetbox.ConfigEditor.ViewModels
         #endregion
 
         #region Commands
+        private ICommandViewModel _NewCommand = null;
+        public ICommandViewModel NewCommand
+        {
+            get
+            {
+                if (_NewCommand == null)
+                {
+                    _NewCommand = new SimpleCommandViewModel("New", "Creates a new configuration", New);
+                }
+                return _NewCommand;
+            }
+        }
+
+        public void New()
+        {
+            Config = new ConfigViewModel(new ZetboxConfig(), null);
+        }
+
         private ICommandViewModel _OpenCommand = null;
         public ICommandViewModel OpenCommand
         {

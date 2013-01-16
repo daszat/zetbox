@@ -9,12 +9,18 @@
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
+                <ctrls:CommandButton CommandViewModel="{Binding NewCommand}"
+                                     Style="{StaticResource ImageToolbarButton}"
+                                     Image="/Zetbox.ConfigEditor;component/Images/filenew.png" />
                 <ctrls:CommandButton CommandViewModel="{Binding OpenCommand}"
-                                     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+                                     Style="{StaticResource ImageToolbarButton}"
+                                     Image="/Zetbox.ConfigEditor;component/Images/fileopen.png" />
                 <ctrls:CommandButton CommandViewModel="{Binding SaveCommand}"
-                                     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+                                     Style="{StaticResource ImageToolbarButton}"
+                                     Image="/Zetbox.ConfigEditor;component/Images/filesave.png" />
                 <ctrls:CommandButton CommandViewModel="{Binding SaveAsCommand}"
-                                     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+                                     Style="{StaticResource ImageToolbarButton}"
+                                     Image="/Zetbox.ConfigEditor;component/Images/filesaveas.png" />
             </ToolBar>
         </ToolBarTray>
         <DockPanel DataContext="{Binding Config}">
