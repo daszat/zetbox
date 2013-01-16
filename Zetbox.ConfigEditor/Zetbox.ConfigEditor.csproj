@@ -131,6 +131,19 @@
     <EmbeddedResource Include="AppIcon.ico" />
     <SplashScreen Include="SplashScreenImage.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1downarrow.png" />
+    <Resource Include="Images\1downarrow1.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\down.png" />
+    <Resource Include="Images\filenew.png" />
+    <Resource Include="Images\fileopen.png" />
+    <Resource Include="Images\fileprint.png" />
+    <Resource Include="Images\filesave.png" />
+    <Resource Include="Images\filesaveas.png" />
+    <Resource Include="Images\reload.png" />
+    <Resource Include="Images\up.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

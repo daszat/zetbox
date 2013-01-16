@@ -29,11 +29,6 @@ namespace Zetbox.ConfigEditor.Controls
             bTooltip.RelativeSource = RelativeSource.Self;
             this.SetBinding(ToolTipProperty, bTooltip);
 
-            var bImage = new Binding("CommandViewModel.Icon");
-            bImage.RelativeSource = RelativeSource.Self;
-            bImage.Converter = (IValueConverter)Application.Current.Resources["IconConverter"];
-            this.SetBinding(ImageProperty, bImage);
-
             this.SetValue(ToolTipService.ShowOnDisabledProperty, true);
 
             this.Loaded += new RoutedEventHandler(CommandButton_Loaded);
