@@ -8,8 +8,6 @@ namespace Zetbox.ConfigEditor.ViewModels
 {
     public class ModuleListViewModel : ViewModel
     {
-        private Func<ZetboxConfig.Module[]> _getModules;
-        private Action<ZetboxConfig.Module[]> _setModules;
 
         public ModuleListViewModel(Func<ZetboxConfig.Module[]> getModules, Action<ZetboxConfig.Module[]> setModules)
         {
@@ -17,18 +15,34 @@ namespace Zetbox.ConfigEditor.ViewModels
             _setModules = setModules;
         }
 
-        private List<ModuleViewModel> _modules;
+        private static readonly ZetboxConfig.Module[] Empty = new ZetboxConfig.Module[] { };
+        private Func<ZetboxConfig.Module[]> _getModules;
+        private Action<ZetboxConfig.Module[]> _setModules;
+        private ZetboxConfig.Module[] Modules
+        {
+            get
+            {
+                return (_getModules() ?? Empty);
+            }
+            set
+            {
+                _setModules(value);
+            }
+        }
+
+        private List<ModuleViewModel> _moduleViewModels;
         public IEnumerable<ModuleViewModel> List
         {
             get
             {
-                if (_modules == null)
+                if (_moduleViewModels == null)
                 {
-                    _modules = _getModules().Select(m => new ModuleViewModel(m, this)).ToList();
+                    _moduleViewModels = Modules.Select(m => new ModuleViewModel(m, this)).ToList();
                 }
-                return _modules;
+                return _moduleViewModels;
             }
         }
+
 
         private ICommandViewModel _AddCommand = null;
         public ICommandViewModel AddCommand
@@ -49,42 +63,42 @@ namespace Zetbox.ConfigEditor.ViewModels
             var dlg = new SelectModuleDialog(dlgVmdl);
             if (dlg.ShowDialog() == true)
             {
-                var result = _getModules().Concat(dlgVmdl.Selected.Select(i => i.Module)).ToArray();
-                _setModules(result);
-                _modules = null;
+                var result = Modules.Concat(dlgVmdl.Selected.Select(i => i.Module)).ToArray();
+                Modules = result;
+                _moduleViewModels = null;
                 OnPropertyChanged("List");
             }
         }
 
         public void Remove(ModuleViewModel moduleViewModel)
         {
-            var result = _getModules().Except(new [] { moduleViewModel.Module }).ToArray();
-            _setModules(result);
-            _modules = null;
+            var result = Modules.Except(new[] { moduleViewModel.Module }).ToArray();
+            Modules = result;
+            _moduleViewModels = null;
             OnPropertyChanged("List");            
         }
 
         public void Up(ModuleViewModel moduleViewModel)
         {
-            var result = _getModules().ToList();
+            var result = Modules.ToList();
             var idx = result.IndexOf(moduleViewModel.Module);
             if (idx <= 0) return;
             result.RemoveAt(idx);
             result.Insert(idx - 1, moduleViewModel.Module);
-            _setModules(result.ToArray());
-            _modules = null;
+            Modules = result.ToArray();
+            _moduleViewModels = null;
             OnPropertyChanged("List");
         }
 
         public void Down(ModuleViewModel moduleViewModel)
         {
-            var result = _getModules().ToList();
+            var result = Modules.ToList();
             var idx = result.IndexOf(moduleViewModel.Module);
             if (idx >= result.Count - 1) return;
             result.RemoveAt(idx);
             result.Insert(idx + 1, moduleViewModel.Module);
-            _setModules(result.ToArray());
-            _modules = null;
+            Modules = result.ToArray();
+            _moduleViewModels = null;
             OnPropertyChanged("List");
         }
     }

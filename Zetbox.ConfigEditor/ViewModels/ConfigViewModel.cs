@@ -43,29 +43,79 @@ namespace Zetbox.ConfigEditor.ViewModels
             }
         }
 
-        private ClientConfigViewModel _client;
+        public bool HasClient
+        {
+            get
+            {
+                return _cfg.Client != null;
+            }
+            set
+            {
+                if (HasClient != value)
+                {
+                    if (value == true)
+                    {
+                        _cfg.Client = new ZetboxConfig.ClientConfig();
+                    }
+                    else
+                    {
+                        _cfg.Client = null;
+                    }
+                    _clientViewModel = null;
+                    OnPropertyChanged("HasClient");
+                    OnPropertyChanged("Client");
+                }
+            }
+        }
+
+        private ClientConfigViewModel _clientViewModel;
         public ClientConfigViewModel Client
         {
             get
             {
-                if (_client == null && _cfg.Client != null)
+                if (_clientViewModel == null && _cfg.Client != null)
                 {
-                    _client = new ClientConfigViewModel(_cfg.Client);
+                    _clientViewModel = new ClientConfigViewModel(_cfg.Client);
                 }
-                return _client;
+                return _clientViewModel;
             }
         }
 
-        private ServerConfigViewModel _server;
+        public bool HasServer
+        {
+            get
+            {
+                return _cfg.Server != null;
+            }
+            set
+            {
+                if (HasServer != value)
+                {
+                    if (value == true)
+                    {
+                        _cfg.Server = new ZetboxConfig.ServerConfig();
+                    }
+                    else
+                    {
+                        _cfg.Server = null;
+                    }
+                    _serverViewModel = null;
+                    OnPropertyChanged("HasServer");
+                    OnPropertyChanged("Server");
+                }
+            }
+        }
+
+        private ServerConfigViewModel _serverViewModel;
         public ServerConfigViewModel Server
         {
             get
             {
-                if (_server == null && _cfg.Server != null)
+                if (_serverViewModel == null && _cfg.Server != null)
                 {
-                    _server = new ServerConfigViewModel(_cfg.Server);
+                    _serverViewModel = new ServerConfigViewModel(_cfg.Server);
                 }
-                return _server;
+                return _serverViewModel;
             }
         }
 

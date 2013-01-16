@@ -27,25 +27,39 @@
             </GroupBox>
             <TabControl>
                 <TabItem Header="Client">
-                    <DockPanel DataContext="{Binding Client}">
-                        <GroupBox DockPanel.Dock="Top"
-                                  Header="Client settings">
+                    <DockPanel>
+                        <CheckBox DockPanel.Dock="Top"
+                                  IsChecked="{Binding HasClient}"
+                                  Margin="5">Has Value</CheckBox>
+                        <Grid Visibility="{Binding HasClient, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel DataContext="{Binding Client}">
+                                <GroupBox DockPanel.Dock="Top"
+                                          Header="Client settings">
 
-                        </GroupBox>
-                        <GroupBox Header="Modules">
-                            <local:ModuleList DataContext="{Binding Modules}" />
-                        </GroupBox>
+                                </GroupBox>
+                                <GroupBox Header="Modules">
+                                    <local:ModuleList DataContext="{Binding Modules}" />
+                                </GroupBox>
+                            </DockPanel>
+                        </Grid>
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Server">
-                    <DockPanel DataContext="{Binding Server}">
-                        <GroupBox DockPanel.Dock="Top"
-                                  Header="Server settings">
+                    <DockPanel>
+                        <CheckBox DockPanel.Dock="Top"
+                                  IsChecked="{Binding HasServer}"
+                                  Margin="5">Has Value</CheckBox>
+                        <Grid Visibility="{Binding HasServer, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DockPanel DataContext="{Binding Server}">
+                                <GroupBox DockPanel.Dock="Top"
+                                          Header="Server settings">
 
-                        </GroupBox>
-                        <GroupBox Header="Modules">
-                            <local:ModuleList DataContext="{Binding Modules}" />
-                        </GroupBox>
+                                </GroupBox>
+                                <GroupBox Header="Modules">
+                                    <local:ModuleList DataContext="{Binding Modules}" />
+                                </GroupBox>
+                            </DockPanel>
+                        </Grid>
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Assembly search paths">

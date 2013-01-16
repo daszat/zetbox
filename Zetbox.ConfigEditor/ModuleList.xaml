@@ -14,49 +14,53 @@
                                      Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
             </ToolBar>
         </ToolBarTray>
-        <ctrls:ListView ItemsSource="{Binding List}">
+        <ctrls:ListView ItemsSource="{Binding List}"
+                        HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0"
-                                    Orientation="Horizontal"
-                                    Margin="2">
-                            <StackPanel.Resources>
-                                <Style TargetType="{x:Type ctrls:CommandButton}">
-                                    <Setter Property="Margin"
-                                            Value="2" />
-                                </Style>
-                            </StackPanel.Resources>
-                            <ctrls:CommandButton CommandViewModel="{Binding RemoveCommand}" />
-                            <ctrls:CommandButton CommandViewModel="{Binding UpCommand}" />
-                            <ctrls:CommandButton CommandViewModel="{Binding DownCommand}" />
-                        </StackPanel>
-                        <TextBlock Visibility="{Binding NotOnFallback, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                   Text="No Fallback" />
-                        <StackPanel Grid.Column="2"
-                                    Margin="2">
-                            <StackPanel.Resources>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsFeature}"
-                                                     Value="false">
-                                            <Setter Property="TextDecorations"
-                                                    Value="Strikethrough" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </StackPanel.Resources>
-                            <TextBlock FontSize="13"
-                                       Text="{Binding TypeName}" />
-                            <TextBlock Text="{Binding Description}"
-                                       Margin="10,1,1,1" />
-                        </StackPanel>
-                    </Grid>
+                    <Border BorderBrush="#FFDDDDDD"
+                            BorderThickness="0,0,0,1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal"
+                                        Margin="2">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type ctrls:CommandButton}">
+                                        <Setter Property="Margin"
+                                                Value="2" />
+                                    </Style>
+                                </StackPanel.Resources>
+                                <ctrls:CommandButton CommandViewModel="{Binding RemoveCommand}" />
+                                <ctrls:CommandButton CommandViewModel="{Binding UpCommand}" />
+                                <ctrls:CommandButton CommandViewModel="{Binding DownCommand}" />
+                            </StackPanel>
+                            <TextBlock Visibility="{Binding NotOnFallback, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       Text="No Fallback" />
+                            <StackPanel Grid.Column="2"
+                                        Margin="2">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsFeature}"
+                                                         Value="false">
+                                                <Setter Property="TextDecorations"
+                                                        Value="Strikethrough" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <TextBlock FontSize="13"
+                                           Text="{Binding TypeName}" />
+                                <TextBlock Text="{Binding Description}"
+                                           Margin="10,1,1,1" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ctrls:ListView>
