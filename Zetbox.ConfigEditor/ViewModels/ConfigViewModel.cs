@@ -18,7 +18,7 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         #region Properties
 
-        public string SourcePath { get; private set; }
+        public string SourcePath { get; set; }
         public ZetboxConfig Config
         {
             get
