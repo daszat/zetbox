@@ -43,6 +43,7 @@ namespace Zetbox.ConfigEditor.ViewModels
             }
         }
 
+        private ZetboxConfig.ClientConfig _deletedClientConfig;
         public bool HasClient
         {
             get
@@ -55,10 +56,12 @@ namespace Zetbox.ConfigEditor.ViewModels
                 {
                     if (value == true)
                     {
-                        _cfg.Client = new ZetboxConfig.ClientConfig();
+                        _cfg.Client = _deletedClientConfig ?? new ZetboxConfig.ClientConfig();
                     }
                     else
                     {
+                        if(_cfg.Client != null)
+                            _deletedClientConfig = _cfg.Client;
                         _cfg.Client = null;
                     }
                     _clientViewModel = null;
@@ -81,6 +84,7 @@ namespace Zetbox.ConfigEditor.ViewModels
             }
         }
 
+        private ZetboxConfig.ServerConfig _deletedServerConfig;
         public bool HasServer
         {
             get
@@ -93,10 +97,12 @@ namespace Zetbox.ConfigEditor.ViewModels
                 {
                     if (value == true)
                     {
-                        _cfg.Server = new ZetboxConfig.ServerConfig();
+                        _cfg.Server = _deletedServerConfig ?? new ZetboxConfig.ServerConfig();
                     }
                     else
                     {
+                        if (_cfg.Server != null)
+                            _deletedServerConfig = _cfg.Server;
                         _cfg.Server = null;
                     }
                     _serverViewModel = null;
