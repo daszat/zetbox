@@ -24,6 +24,22 @@ namespace Zetbox.ConfigEditor.ViewModels
                 {
                     _config = value;
                     OnPropertyChanged("Config");
+                    OnPropertyChanged("WindowTitle");
+                }
+            }
+        }
+
+        public string WindowTitle
+        {
+            get
+            {
+                if (Config != null)
+                {
+                    return string.Format("Zetbox Configuration Editor - {0}", Config.SourcePath);
+                }
+                else
+                {
+                    return "Zetbox Configuration Editor";
                 }
             }
         }
@@ -109,7 +125,7 @@ namespace Zetbox.ConfigEditor.ViewModels
                 var dlg = new SaveFileDialog();
                 dlg.DefaultExt = ".xml";
                 dlg.Filter = "Configuration XML Files|*.xml|All Files|*.*";
-                dlg.InitialDirectory = Environment.CurrentDirectory;
+                dlg.InitialDirectory = string.IsNullOrEmpty(Config.SourcePath) ? Environment.CurrentDirectory : System.IO.Path.GetDirectoryName(Config.SourcePath);
                 if (dlg.ShowDialog() == true)
                 {
                     Config.SourcePath = dlg.FileName;

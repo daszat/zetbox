@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctrls="clr-namespace:Zetbox.ConfigEditor.Controls"
         xmlns:local="clr-namespace:Zetbox.ConfigEditor"
-        Title="Zetbox Configuration Editor"
+        Title="{Binding WindowTitle}"
         Height="600"
         Width="800">
     <DockPanel>
