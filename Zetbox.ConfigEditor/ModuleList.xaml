@@ -15,37 +15,35 @@
             </ToolBar>
         </ToolBarTray>
         <ctrls:ListView ItemsSource="{Binding List}"
-                        HorizontalContentAlignment="Stretch">
+                        HorizontalContentAlignment="Stretch"
+                        Grid.IsSharedSizeScope="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="#FFDDDDDD"
                             BorderThickness="0,0,0,1">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="Buttons" />
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="NotOnFallback" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0"
                                         Orientation="Horizontal"
                                         Margin="2">
-                                <StackPanel.Resources>
-                                    <Style TargetType="{x:Type ctrls:CommandButton}">
-                                        <Setter Property="Margin"
-                                                Value="2" />
-                                    </Style>
-                                </StackPanel.Resources>
-                                <ctrls:CommandButton CommandViewModel="{Binding RemoveCommand}"
-                                                     Style="{StaticResource ImageOnlyButton}"
-                                                     Image="/Zetbox.ConfigEditor;component/Images/delete.png" />
                                 <ctrls:CommandButton CommandViewModel="{Binding UpCommand}"
                                                      Style="{StaticResource ImageOnlyButton}"
                                                      Image="/Zetbox.ConfigEditor;component/Images/1downarrow.png" />
                                 <ctrls:CommandButton CommandViewModel="{Binding DownCommand}"
                                                      Style="{StaticResource ImageOnlyButton}"
                                                      Image="/Zetbox.ConfigEditor;component/Images/1downarrow1.png" />
+                                <ctrls:CommandButton CommandViewModel="{Binding RemoveCommand}"
+                                                     Style="{StaticResource ImageOnlyButton}"
+                                                     Margin="5,0,0,0"
+                                                     Image="/Zetbox.ConfigEditor;component/Images/delete.png" />
                             </StackPanel>
-                            <TextBlock Visibility="{Binding NotOnFallback, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            <TextBlock Grid.Column="1"
+                                       Visibility="{Binding NotOnFallback, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       Margin="5,0,0,0"
                                        Text="No Fallback" />
                             <StackPanel Grid.Column="2"
                                         Margin="2">
@@ -61,9 +59,10 @@
                                     </Style>
                                 </StackPanel.Resources>
                                 <TextBlock FontSize="13"
-                                           Text="{Binding TypeName}" />
+                                           Text="{Binding TypeName}"
+                                           Margin="5,0,0,0" />
                                 <TextBlock Text="{Binding Description}"
-                                           Margin="10,1,1,1" />
+                                           Margin="15,1,1,1" />
                             </StackPanel>
                         </Grid>
                     </Border>

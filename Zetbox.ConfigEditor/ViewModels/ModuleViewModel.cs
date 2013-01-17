@@ -8,7 +8,6 @@ namespace Zetbox.ConfigEditor.ViewModels
 {
     public class ModuleListViewModel : ViewModel
     {
-
         public ModuleListViewModel(Func<ZetboxConfig.Module[]> getModules, Action<ZetboxConfig.Module[]> setModules)
         {
             _getModules = getModules;
@@ -107,6 +106,7 @@ namespace Zetbox.ConfigEditor.ViewModels
     {
         private ZetboxConfig.Module _module;
         ModuleListViewModel _parent;
+
         public ModuleViewModel(ZetboxConfig.Module module, ModuleListViewModel parent)
         {
             _module = module;
