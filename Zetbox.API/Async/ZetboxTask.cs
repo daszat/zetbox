@@ -322,13 +322,27 @@ namespace Zetbox.API.Async
                         return;
                     case ZbTaskState.Failed:
                         ThrowException();
+                        // never reached:
                         return;
                 }
             }
 
-            foreach (var action in resultActions)
+            try
             {
-                action();
+                foreach (var action in resultActions)
+                {
+                    action();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Stop processing
+                Exception = ex;
+                lock (_lockObject) State = ZbTaskState.Failed;
+
+                // We're already on the Result thread, so we can throw the exception on
+                // at least the first consumer will get a proper StackTrace
+                throw;
             }
 
             lock (_lockObject) State = ZbTaskState.Finished;
