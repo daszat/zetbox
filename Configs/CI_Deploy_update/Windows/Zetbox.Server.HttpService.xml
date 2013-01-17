@@ -5,17 +5,8 @@
     <DocumentStore>..\..\DocumentStore\Server\</DocumentStore>
     <Modules>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
-
-      <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
-
-      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
-      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
-
-      <!-- WCF Module for initialising Autofac/WCF integration -->
       <Module>Zetbox.Server.Wcf.WcfModule, Zetbox.Server.Wcf</Module>
-
-      <!-- application specific modules -->
     </Modules>
     <ClientFilesLocations>
       <Location Name="Exe" Start="true">..\Zetbox.WPF.exe</Location>
@@ -26,10 +17,8 @@
   </Server>
   <AssemblySearchPaths>
     <string>..\Common\Core</string>
-    <string>..\Common\Core.Generated</string>
     <string>..\Server\Core</string>
     <string>..\Server\EF</string>
-    <string>..\Server\EF.Generated</string>
     <string>..\Common\App.Zetbox</string>
     <string>..\Server\App.Zetbox</string>
   </AssemblySearchPaths>

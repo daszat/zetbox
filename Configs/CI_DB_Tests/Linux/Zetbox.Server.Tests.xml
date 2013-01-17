@@ -4,7 +4,6 @@
   <Server StartServer="true">
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <Modules>
-      <Module>Zetbox.Objects.NHibernateModule, Zetbox.Objects.NHibernateImpl</Module>
       <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>
     </Modules>
   </Server>

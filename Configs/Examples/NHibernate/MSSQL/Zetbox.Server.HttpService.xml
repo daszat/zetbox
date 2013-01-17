@@ -11,13 +11,7 @@
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
-
-      <Module>Zetbox.Objects.NHibernateModule, Zetbox.Objects.NHibernateImpl</Module>
       <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>
-
-      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
-      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
-      <!-- <Module>Zetbox.API.Server.PerfCounter.ResetOnReadAppender+Module, Zetbox.API.Server</Module> -->
     </Modules>
     <ClientFilesLocations>
       <Location Name="Exe" Start="true">P:\Zetbox\bin\Debug\Zetbox.WPF.exe</Location>
@@ -28,12 +22,8 @@
   </Server>
   <AssemblySearchPaths>
     <string>Common\Core</string>
-    <string>Common\Core.Generated</string>
-    <string>Common\Core.Fallback</string>
     <string>Server\Core</string>
     <string>Server\NH</string>
-    <string>Server\NH.Generated</string>
-    <string>Server\NH.Fallback</string>
     <string>Common\App.Zetbox</string>
     <string>Server\App.Zetbox</string>
 	<string>Server\Npgsql.Microsoft</string>

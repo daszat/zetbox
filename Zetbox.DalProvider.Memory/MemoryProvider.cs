@@ -29,7 +29,7 @@ namespace Zetbox.DalProvider.Memory
     using Zetbox.API.Configuration;
     using System.ComponentModel;
 
-    [Feature]
+    // Not a feature, will be loaded by ApiCommon module
     [Description("Memory provider")]
     public class MemoryProvider
         : Autofac.Module

@@ -80,7 +80,6 @@ namespace Zetbox.ConfigEditor.ViewModels
         public void Open()
         {
             var dlg = new OpenFileDialog();
-            dlg.InitialDirectory = Environment.CurrentDirectory;
             dlg.Filter = "Configuration XML Files|*.xml|All Files|*.*";
             if (dlg.ShowDialog() == true)
             {
@@ -144,7 +143,10 @@ namespace Zetbox.ConfigEditor.ViewModels
                 var dlg = new SaveFileDialog();
                 dlg.DefaultExt = ".xml";
                 dlg.Filter = "Configuration XML Files|*.xml|All Files|*.*";
-                dlg.InitialDirectory = string.IsNullOrEmpty(Config.SourcePath) ? Environment.CurrentDirectory : System.IO.Path.GetDirectoryName(Config.SourcePath);
+                if (!string.IsNullOrEmpty(Config.SourcePath))
+                {
+                    dlg.InitialDirectory = System.IO.Path.GetDirectoryName(Config.SourcePath);
+                }
                 if (dlg.ShowDialog() == true)
                 {
                     Config.SourcePath = dlg.FileName;

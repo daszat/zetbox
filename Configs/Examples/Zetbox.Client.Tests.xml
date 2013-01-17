@@ -4,18 +4,10 @@
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>
     <Modules>
-      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
-      <Module>Zetbox.API.Client.ClientApiModule, Zetbox.API.Client</Module>
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
-      <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
-      <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
-      <Module>Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl</Module>
-      <Module>Zetbox.Objects.ClientModule, Zetbox.Objects.ClientImpl</Module>
-      <Module>Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client</Module>
-      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
     </Modules>
   </Client>
   <AssemblySearchPaths>
-    <string>..\Client\Core.Generated</string>
+    <string>..\Client\Core</string>
   </AssemblySearchPaths>
 </ZetboxConfig>

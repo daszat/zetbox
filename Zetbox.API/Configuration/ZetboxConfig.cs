@@ -79,20 +79,20 @@ namespace Zetbox.API.Configuration
         /// <summary>
         /// Server Configuration
         /// </summary>
-        [XmlElement(IsNullable = false)]
+        [XmlElement(IsNullable = true)]
         public ServerConfig Server { get; set; }
 
         [XmlIgnore]
-        public bool ServerSpecified { get; set; }
+        public bool ServerSpecified { get { return Server != null; } }
 
         /// <summary>
         /// Client Configuration
         /// </summary>
-        [XmlElement(IsNullable = false)]
+        [XmlElement(IsNullable = true)]
         public ClientConfig Client { get; set; }
 
         [XmlIgnore]
-        public bool ClientSpecified { get; set; }
+        public bool ClientSpecified { get { return Client != null; } }
 
         /// <summary>
         /// Location (Path) to Assemblies
@@ -127,7 +127,7 @@ namespace Zetbox.API.Configuration
             private bool _notOnFallback = false;
             [XmlAttribute("NotOnFallback")]
             [DefaultValue(false)]
-            public bool NotOnFallback             
+            public bool NotOnFallback
             {
                 get
                 {
@@ -319,17 +319,26 @@ namespace Zetbox.API.Configuration
             [XmlElement(IsNullable = true)]
             public Guid? Application { get; set; }
 
+            [XmlIgnore]
+            public bool ApplicationSpecified { get { return Application.HasValue; } }
+
             /// <summary>
             /// Overrides the current system culture
             /// </summary>
             [XmlElement(IsNullable = true)]
             public string Culture { get; set; }
 
+            [XmlIgnore]
+            public bool CultureSpecified { get { return !string.IsNullOrWhiteSpace(Culture); } }
+
             /// <summary>
             /// Overrides the current system ui culture
             /// </summary>
             [XmlElement(IsNullable = true)]
             public string UICulture { get; set; }
+
+            [XmlIgnore]
+            public bool UICultureSpecified { get { return !string.IsNullOrWhiteSpace(UICulture); } }
 
             /// <summary>
             /// </summary>

@@ -2,24 +2,18 @@
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>Default Client Configuration</ConfigName>
   <Client StartClient="false" ThrowErrors="false">
-    <!--<Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>-->
     <Culture>de-AT</Culture>
     <UICulture>de-AT</UICulture>
     <DocumentStore>P:\Zetbox\DocumentStore\Client\</DocumentStore>
     <DevelopmentEnvironment>false</DevelopmentEnvironment>
     <Modules>
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
-
       <Module>Zetbox.Client.WPF.WPFModule, Zetbox.Client.WPF</Module>
       <Module>Zetbox.API.Client.WcfClientModule, Zetbox.API.Client</Module>
 	  <Module>Zetbox.Microsoft.Module, Zetbox.Microsoft</Module>
 	  <Module>Zetbox.Microsoft.OutlookMailSender+Module, Zetbox.Microsoft</Module>
       <Module>Zetbox.API.MailProblemReporter+Module, Zetbox.API</Module>
       <Module>Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
-
-      <!-- 
-      <Module>Zetbox.Client.BasicAuthCredentialsResolver+Module, Zetbox.Client</Module>
-      -->
     </Modules>
   </Client>
   <AssemblySearchPaths>

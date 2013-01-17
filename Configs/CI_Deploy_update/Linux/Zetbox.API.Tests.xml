@@ -16,7 +16,6 @@
     </Modules>
   </Server>
   <Client StartClient="false" ThrowErrors="true">
-    <DocumentStore>DocumentStore\Client\</DocumentStore>
     <Modules>
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
     </Modules>

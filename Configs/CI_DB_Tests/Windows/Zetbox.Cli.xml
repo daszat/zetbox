@@ -5,12 +5,7 @@
     <DocumentStore>..\DocumentStore\Server</DocumentStore>
     <Modules>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
-
-      <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
-
-      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
-      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>

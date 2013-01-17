@@ -41,14 +41,8 @@ namespace Zetbox.DalProvider.Client.Tests
         protected override void SetupBuilder(Autofac.ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
-            builder.RegisterModule(new Zetbox.API.ApiModule());
-            builder.RegisterModule(new Zetbox.API.Client.ClientApiModule());
-            builder.RegisterModule(new Zetbox.API.Client.HttpClientModule());
             builder.RegisterModule(new Zetbox.Client.ClientModule());
-            builder.RegisterModule(new Zetbox.DalProvider.Client.ClientProvider());
-            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
-            builder.RegisterModule(new Zetbox.Objects.InterfaceModule());
-            builder.RegisterModule(new Zetbox.Objects.MemoryModule());
+            builder.RegisterModule(new Zetbox.API.Client.HttpClientModule());
 
             builder
                 .RegisterType<ProxyMock>()

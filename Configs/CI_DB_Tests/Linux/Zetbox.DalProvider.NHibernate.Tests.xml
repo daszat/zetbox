@@ -1,14 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+<?xml version="1.0" encoding="Windows-1252"?>
+<ZetboxConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dasz.at/Zetbox/">
   <ConfigName>Zetbox.DalProvider.NHibernate's Test PostgreSQL Configuration</ConfigName>
   <Server StartServer="true">
     <DocumentStore>DocumentStore/Server/</DocumentStore>
     <CodeGenWorkingPath>bin/CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
-    <Modules>
-      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
-      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
-    </Modules>
+    <Modules />
   </Server>
 </ZetboxConfig>

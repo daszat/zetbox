@@ -9,19 +9,12 @@
     <CodeGenWorkingPath>bin/CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
-    <Modules>
-      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
-      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
-    </Modules>
+    <Modules />
   </Server>
   <AssemblySearchPaths>
     <string>Common/Core</string>
-    <string>Common/Core.Generated</string>
-    <string>Common/Core.Fallback</string>
     <string>Server/Core</string>
     <string>Server/NH</string>
-    <string>Server/NH.Generated</string>
-    <string>Server/NH.Fallback</string>
     <string>Common/App.Zetbox</string>
     <string>Server/App.Zetbox</string>
   </AssemblySearchPaths>

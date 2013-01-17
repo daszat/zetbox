@@ -11,13 +11,7 @@
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
-
-      <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
-
-      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
-      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
-      <!-- <Module>Zetbox.API.Server.PerfCounter.ResetOnReadAppender+Module, Zetbox.API.Server</Module> -->
     </Modules>
     <ClientFilesLocations>
       <Location Name="Exe" Start="true">P:\Zetbox\bin\Debug\Zetbox.WPF.exe</Location>
@@ -28,12 +22,8 @@
   </Server>
   <AssemblySearchPaths>
     <string>Common\Core</string>
-    <string>Common\Core.Generated</string>
-    <string>Common\Core.Fallback</string>
     <string>Server\Core</string>
     <string>Server\EF</string>
-    <string>Server\EF.Generated</string>
-    <string>Server\EF.Fallback</string>
     <string>Server\NH</string>
     <string>Common\App.Zetbox</string>
     <string>Server\App.Zetbox</string>
