@@ -94,6 +94,8 @@ namespace Zetbox.ConfigEditor
 
         private void LoadAssembly(string file)
         {
+            if (_assemblies.ContainsKey(FileToAssemblyName(file))) return;
+
             Assembly assembly = TryLoadAssembly(file);
             if (assembly == null) return;
 
@@ -176,7 +178,7 @@ namespace Zetbox.ConfigEditor
 
         private Assembly TryLoadAssembly(string file)
         {
-            var assemblyName = Path.GetFileNameWithoutExtension(file);
+            var assemblyName = FileToAssemblyName(file);
             if (_assemblies.ContainsKey(assemblyName))
             {
                 return _assemblies[assemblyName];
@@ -196,6 +198,11 @@ namespace Zetbox.ConfigEditor
                 assembly = Assembly.ReflectionOnlyLoadFrom(file);
             }
             return assembly;
+        }
+
+        private static string FileToAssemblyName(string file)
+        {
+            return Path.GetFileNameWithoutExtension(file);
         }
     }
 }
