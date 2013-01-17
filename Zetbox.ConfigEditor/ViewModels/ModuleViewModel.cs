@@ -8,25 +8,14 @@ namespace Zetbox.ConfigEditor.ViewModels
 {
     public class ModuleListViewModel : ViewModel
     {
-        public ModuleListViewModel(Func<ZetboxConfig.Module[]> getModules, Action<ZetboxConfig.Module[]> setModules)
+        public ModuleListViewModel(List<ZetboxConfig.Module> modules)
         {
-            _getModules = getModules;
-            _setModules = setModules;
+            Model = modules;
         }
 
-        private static readonly ZetboxConfig.Module[] Empty = new ZetboxConfig.Module[] { };
-        private Func<ZetboxConfig.Module[]> _getModules;
-        private Action<ZetboxConfig.Module[]> _setModules;
-        private ZetboxConfig.Module[] Model
+        private List<ZetboxConfig.Module> Model
         {
-            get
-            {
-                return (_getModules() ?? Empty);
-            }
-            set
-            {
-                _setModules(value);
-            }
+            get; set;
         }
 
         private List<ModuleViewModel> _moduleViewModels;
@@ -62,8 +51,7 @@ namespace Zetbox.ConfigEditor.ViewModels
             var dlg = new SelectModuleDialog(dlgVmdl);
             if (dlg.ShowDialog() == true)
             {
-                var result = Model.Concat(dlgVmdl.Selected.Select(i => i.Module)).ToArray();
-                Model = result;
+                Model.AddRange(dlgVmdl.Selected.Select(i => i.Module));
                 _moduleViewModels = null;
                 OnPropertyChanged("List");
             }
@@ -71,32 +59,27 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         public void Remove(ModuleViewModel moduleViewModel)
         {
-            var result = Model.Except(new[] { moduleViewModel.Module }).ToArray();
-            Model = result;
+            Model.Remove(moduleViewModel.Module);
             _moduleViewModels = null;
             OnPropertyChanged("List");            
         }
 
         public void Up(ModuleViewModel moduleViewModel)
         {
-            var result = Model.ToList();
-            var idx = result.IndexOf(moduleViewModel.Module);
+            var idx = Model.IndexOf(moduleViewModel.Module);
             if (idx <= 0) return;
-            result.RemoveAt(idx);
-            result.Insert(idx - 1, moduleViewModel.Module);
-            Model = result.ToArray();
+            Model.RemoveAt(idx);
+            Model.Insert(idx - 1, moduleViewModel.Module);
             _moduleViewModels = null;
             OnPropertyChanged("List");
         }
 
         public void Down(ModuleViewModel moduleViewModel)
         {
-            var result = Model.ToList();
-            var idx = result.IndexOf(moduleViewModel.Module);
-            if (idx >= result.Count - 1) return;
-            result.RemoveAt(idx);
-            result.Insert(idx + 1, moduleViewModel.Module);
-            Model = result.ToArray();
+            var idx = Model.IndexOf(moduleViewModel.Module);
+            if (idx >= Model.Count - 1) return;
+            Model.RemoveAt(idx);
+            Model.Insert(idx + 1, moduleViewModel.Module);
             _moduleViewModels = null;
             OnPropertyChanged("List");
         }

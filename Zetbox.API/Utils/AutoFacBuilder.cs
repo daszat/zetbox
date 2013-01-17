@@ -31,7 +31,7 @@ namespace Zetbox.API.Utils
             return CreateContainerBuilder(config, null);
         }
 
-        public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config, ZetboxConfig.Module[] modules)
+        public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config, IEnumerable<ZetboxConfig.Module> modules)
         {
             if (config == null) throw new ArgumentNullException("config");
 

@@ -36,12 +36,19 @@
                     <DockPanel>
                         <CheckBox DockPanel.Dock="Top"
                                   IsChecked="{Binding HasClient}"
-                                  Margin="5">Has Value</CheckBox>
+                                  Margin="5">Has Client Configuration</CheckBox>
                         <Grid Visibility="{Binding HasClient, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <DockPanel DataContext="{Binding Client}">
                                 <GroupBox DockPanel.Dock="Top"
                                           Header="Client settings">
-
+                                    <StackPanel>
+                                        <Label>Application:</Label>
+                                        <TextBox Text="{Binding Application, UpdateSourceTrigger=PropertyChanged}" />
+                                        <Label>Culture:</Label>
+                                        <TextBox Text="{Binding Culture, UpdateSourceTrigger=PropertyChanged}" />
+                                        <Label>UICulture:</Label>
+                                        <TextBox Text="{Binding UICulture, UpdateSourceTrigger=PropertyChanged}" />
+                                    </StackPanel>
                                 </GroupBox>
                                 <GroupBox Header="Modules">
                                     <local:ModuleList DataContext="{Binding Modules}" />
@@ -54,12 +61,73 @@
                     <DockPanel>
                         <CheckBox DockPanel.Dock="Top"
                                   IsChecked="{Binding HasServer}"
-                                  Margin="5">Has Value</CheckBox>
+                                  Margin="5">Has Server Configuration</CheckBox>
                         <Grid Visibility="{Binding HasServer, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <DockPanel DataContext="{Binding Server}">
                                 <GroupBox DockPanel.Dock="Top"
                                           Header="Server settings">
-
+                                    <StackPanel>
+                                        <CheckBox IsChecked="{Binding StartServer}">StartServer</CheckBox>
+                                        <Expander Header="Connection strings"
+                                                  IsExpanded="False">
+                                            <DataGrid ItemsSource="{Binding ConnectionStrings}"
+                                                      CanUserAddRows="True"
+                                                      CanUserDeleteRows="True"                                                      
+                                                      AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Name"
+                                                                        Binding="{Binding Name}" />
+                                                    <DataGridTextColumn Header="SchemaProvider"
+                                                                        Binding="{Binding SchemaProvider}" />
+                                                    <DataGridTextColumn Header="DatabaseProvider"
+                                                                        Binding="{Binding DatabaseProvider}" />
+                                                    <DataGridTextColumn Header="ConnectionString"
+                                                                        Binding="{Binding ConnectionString}" />
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Expander>
+                                        <Label>DocumentStore:</Label>
+                                        <TextBox Text="{Binding DocumentStore, UpdateSourceTrigger=PropertyChanged}" />
+                                        <Expander Header="Code generation"
+                                                  IsExpanded="False">
+                                            <StackPanel>
+                                                <Label>CodeGenWorkingPath:</Label>
+                                                <TextBox Text="{Binding CodeGenWorkingPath, UpdateSourceTrigger=PropertyChanged}" />
+                                                <Label>CodeGenOutputPath:</Label>
+                                                <TextBox Text="{Binding CodeGenOutputPath, UpdateSourceTrigger=PropertyChanged}" />
+                                                <Label>CodeGenBinaryOutputPath:</Label>
+                                                <DataGrid ItemsSource="{Binding CodeGenBinaryOutputPath}"
+                                                          CanUserAddRows="True"
+                                                          CanUserDeleteRows="True"
+                                                          AutoGenerateColumns="False">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Path"
+                                                                            Binding="{Binding Mode=OneWay}" />
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                                <Label>CodeGenArchivePath:</Label>
+                                                <TextBox Text="{Binding CodeGenArchivePath, UpdateSourceTrigger=PropertyChanged}" />
+                                            </StackPanel>
+                                        </Expander>
+                                        <Expander Header="Client files locations"
+                                                  IsExpanded="False">
+                                            <DataGrid ItemsSource="{Binding ClientFilesLocations}"
+                                                      CanUserAddRows="True"
+                                                      CanUserDeleteRows="True"
+                                                      AutoGenerateColumns="False">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Name"
+                                                                        Binding="{Binding Name}" />
+                                                    <DataGridTextColumn Header="Exclude"
+                                                                        Binding="{Binding Exclude}" />
+                                                    <DataGridCheckBoxColumn Header="Start"
+                                                                            Binding="{Binding Start}" />
+                                                    <DataGridTextColumn Header="Value"
+                                                                        Binding="{Binding Value}" />
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Expander>
+                                    </StackPanel>
                                 </GroupBox>
                                 <GroupBox Header="Modules">
                                     <local:ModuleList DataContext="{Binding Modules}" />

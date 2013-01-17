@@ -100,7 +100,7 @@ namespace Zetbox.Cli
                 ? config.Server.Modules
                 : config.Client != null && config.Client.Modules != null
                     ? config.Client.Modules
-                    : new ZetboxConfig.Module[0];
+                    : new List<ZetboxConfig.Module>();
 
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, modules);
 

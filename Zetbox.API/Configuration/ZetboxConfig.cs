@@ -224,7 +224,7 @@ namespace Zetbox.API.Configuration
             /// Collection of connection strings
             /// </summary>
             [XmlArray(IsNullable = false)]
-            public Database[] ConnectionStrings { get; set; }
+            public List<Database> ConnectionStrings { get; set; }
 
             /// <summary>
             /// Path of the Document Store
@@ -265,14 +265,14 @@ namespace Zetbox.API.Configuration
             /// </summary>
             [XmlArray("Modules")]
             [XmlArrayItem("Module", typeof(Module))]
-            public Module[] Modules { get; set; }
+            public List<Module> Modules { get; set; }
 
             /// <summary>
             /// Client Files
             /// </summary>
             [XmlArray("ClientFilesLocations")]
             [XmlArrayItem("Location")]
-            public ClientFilesLocation[] ClientFilesLocations { get; set; }
+            public List<ClientFilesLocation> ClientFilesLocations { get; set; }
 
             [Serializable]
             public class ClientFilesLocation
@@ -302,18 +302,6 @@ namespace Zetbox.API.Configuration
         public class ClientConfig
         {
             /// <summary>
-            /// Should a Client be started.
-            /// </summary>
-            [XmlAttribute]
-            public bool StartClient { get; set; }
-
-            /// <summary>
-            /// Used in Debug Mode - should Exceptions be thrown.
-            /// </summary>
-            [XmlAttribute]
-            public bool ThrowErrors { get; set; }
-
-            /// <summary>
             /// If a Guid is specified, the given Application is launched
             /// </summary>
             [XmlElement(IsNullable = true)]
@@ -341,19 +329,11 @@ namespace Zetbox.API.Configuration
             public bool UICultureSpecified { get { return !string.IsNullOrWhiteSpace(UICulture); } }
 
             /// <summary>
-            /// </summary>
-            [XmlElement(IsNullable = true)]
-            public bool? DevelopmentEnvironment { get; set; }
-
-            [XmlIgnore]
-            public bool DevelopmentEnvironmentSpecified { get; set; }
-
-            /// <summary>
             /// AutoFac modules to load
             /// </summary>
             [XmlArray("Modules")]
             [XmlArrayItem("Module", typeof(Module))]
-            public Module[] Modules { get; set; }
+            public List<Module> Modules { get; set; }
         }
 
         /// <summary>
