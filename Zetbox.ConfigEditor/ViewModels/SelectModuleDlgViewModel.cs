@@ -74,7 +74,10 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         public void Select()
         {
-            OnClose();
+            if (Selected.Count > 0)
+            {
+                OnClose();
+            }
         }
 
         private ICommandViewModel _CancelCommand = null;

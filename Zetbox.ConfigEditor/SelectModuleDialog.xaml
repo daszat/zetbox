@@ -22,17 +22,22 @@
             <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
         <ctrls:ListView ItemsSource="{Binding List}"
-                        Margin="10"
-                        SelectedViewModels="{Binding Selected}">
+                        HorizontalContentAlignment="Stretch"
+                        SelectedViewModels="{Binding Selected}"
+                        MouseDoubleClick="ListView_MouseDoubleClick"
+                        Margin="10">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Grid.Column="1"
-                                Margin="2">
-                        <TextBlock FontSize="13"
-                                   Text="{Binding TypeName}" />
-                        <TextBlock Text="{Binding Description}"
-                                   Margin="10,1,1,1" />
-                    </StackPanel>
+                    <Border BorderBrush="#FFDDDDDD"
+                            BorderThickness="0,0,0,1">
+                        <StackPanel Grid.Column="1"
+                                    Margin="2">
+                            <TextBlock FontSize="13"
+                                       Text="{Binding TypeName}" />
+                            <TextBlock Text="{Binding Description}"
+                                       Margin="10,1,1,1" />
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ctrls:ListView>

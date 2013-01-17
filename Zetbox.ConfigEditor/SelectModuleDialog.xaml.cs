@@ -37,5 +37,11 @@ namespace Zetbox.ConfigEditor
         {
             this.DialogResult = true;
         }
+
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.DialogResult = true;
+            _vmdl.Select();
+        }
     }
 }
