@@ -15,19 +15,19 @@ set config=%1
 
 cd bin\Debug
 
-Zetbox.Server.Service.exe %config% -generate -updatedeployedschema -repairschema
+Zetbox.Cli.exe %config% -fallback -generate -updatedeployedschema -repairschema
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem publish schema data for $safesolutionname$ project
-Zetbox.Server.Service.exe %config% -publish ..\..\Modules\$safesolutionname$.xml -ownermodules $safesolutionname$;$safesolutionname$.Config
+Zetbox.Cli.exe %config% -publish ..\..\Modules\$safesolutionname$.xml -ownermodules $safesolutionname$;$safesolutionname$.Config
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem export $safesolutionname$.Config data
-rem Zetbox.Server.Service.exe %config% -export ..\..\Data\$safesolutionname$.Config.xml -schemamodules $safesolutionname$.Config
+rem Zetbox.Cli.exe %config% -export ..\..\Data\$safesolutionname$.Config.xml -schemamodules $safesolutionname$.Config
 rem IF ERRORLEVEL 1 GOTO FAIL
 
 rem export $safesolutionname$.Data data
-rem Zetbox.Server.Service.exe %config% -export ..\..\Data\$safesolutionname$.Data.xml -schemamodules $safesolutionname$ -ownermodules $safesolutionname$
+rem Zetbox.Cli.exe %config% -export ..\..\Data\$safesolutionname$.Data.xml -schemamodules $safesolutionname$ -ownermodules $safesolutionname$
 rem IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

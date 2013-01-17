@@ -16,6 +16,8 @@ namespace $safeprojectname$
         {
             base.Load(moduleBuilder);
 
+            moduleBuilder.RegisterModule<CommonModule>();
+
             moduleBuilder.RegisterZetboxImplementors(typeof(ClientModule).Assembly);
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
 

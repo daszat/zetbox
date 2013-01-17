@@ -167,11 +167,6 @@
     <EmbeddedResource Include="SolutionItems\___zetbox\PrepareEnv.exe" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\Fallback\Zetbox___Server___Service.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___Server___HttpService.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>

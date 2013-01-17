@@ -15,6 +15,8 @@ namespace $safeprojectname$
         {
             base.Load(moduleBuilder);
 
+            moduleBuilder.RegisterModule<CommonModule>();
+
             moduleBuilder.RegisterZetboxImplementors(typeof(ServerModule).Assembly);
 
             // Register explicit overrides here
