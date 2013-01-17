@@ -7,16 +7,21 @@ namespace Zetbox.ConfigEditor.ViewModels
 {
     public class SelectModuleDlgViewModel : WindowViewModel
     {
-        public SelectModuleDlgViewModel()
+        private IEnumerable<ModuleViewModel> _current;
+        public SelectModuleDlgViewModel(IEnumerable<ModuleViewModel> current)
         {
-
+            if (current == null) throw new ArgumentNullException("current");
+            _current = current;
         }
 
         public IEnumerable<ModuleViewModel> List
         {
             get
             {
-                return ModulesCache.Instance.All.Where(i => i.IsFeature).Select(i => new ModuleViewModel(i));
+                return ModulesCache.Instance.All
+                    .Where(i => i.IsFeature)
+                    .Where(i => !_current.Any(c => c.TypeName == i.TypeName))
+                    .Select(i => new ModuleViewModel(i));
             }
         }
 
