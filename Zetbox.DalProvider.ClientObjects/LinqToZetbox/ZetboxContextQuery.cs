@@ -90,7 +90,8 @@ namespace Zetbox.DalProvider.Client
             var getTask = _provider.GetListCallAsync<T>(this._expression);
             return new ZbTask<IEnumerator>(getTask).OnResult(t =>
             {
-                t.Result = ((IEnumerable)getTask.Result).GetEnumerator();
+                if (getTask.Result != null)
+                    t.Result = ((IEnumerable)getTask.Result).GetEnumerator();
             });
         }
 
@@ -99,7 +100,8 @@ namespace Zetbox.DalProvider.Client
             var getTask = _provider.GetListCallAsync<T>(this._expression);
             return new ZbTask<IEnumerator<T>>(getTask).OnResult(t =>
             {
-                t.Result = ((IEnumerable<T>)getTask.Result).GetEnumerator();
+                if (getTask.Result != null)
+                    t.Result = ((IEnumerable<T>)getTask.Result).GetEnumerator();
             });
         }
     }
