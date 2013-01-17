@@ -14,6 +14,14 @@ namespace Zetbox.ConfigEditor.ViewModels
             _cfg = cfg;
         }
 
+        public void Repair()
+        {
+            foreach (var m in Modules.List)
+            {
+                m.Repair();
+            }
+        }
+
         private ModuleListViewModel _modules;
         public ModuleListViewModel Modules
         {

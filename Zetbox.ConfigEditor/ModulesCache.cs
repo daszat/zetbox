@@ -59,6 +59,12 @@ namespace Zetbox.ConfigEditor
             }
         }
 
+        public bool Contains(string typeName)
+        {
+            EnsureCache();
+            return _modules.ContainsKey(typeName);
+        }
+
         public IEnumerable<ModuleType> All
         {
             get

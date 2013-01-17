@@ -16,6 +16,18 @@ namespace Zetbox.ConfigEditor.ViewModels
             this.SourcePath = srcPath;
         }
 
+        public void Repair()
+        {
+            if (Server != null)
+            {
+                Server.Repair();
+            }
+            if (Client != null)
+            {
+                Client.Repair();
+            }
+        }
+
         #region Properties
 
         public string SourcePath { get; set; }

@@ -91,6 +91,7 @@ namespace Zetbox.ConfigEditor.ViewModels
         public void Open(string path)
         {
             Config = new ConfigViewModel(ZetboxConfig.FromFile(path, string.Empty), path);
+            Config.Repair();
             SaveCommand.OnCanExecuteChanged();
             SaveAsCommand.OnCanExecuteChanged();
         }
