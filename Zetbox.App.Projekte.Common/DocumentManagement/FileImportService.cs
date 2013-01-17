@@ -30,7 +30,7 @@ namespace Zetbox.App.Projekte.DocumentManagement
 
     public class FileImportService : IService
     {
-        [Feature]
+        [Feature(NotOnFallback=true)]
         [Description("Zetbox file import service")]
         public class Module : Autofac.Module
         {
