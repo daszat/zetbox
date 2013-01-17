@@ -38,10 +38,7 @@ namespace Zetbox.Server.Tests
 
         protected override void SetupBuilder(ContainerBuilder builder)
         {
-            builder.RegisterModule(new Zetbox.Server.UnifiedModule());
-
-            builder.RegisterModule(new Zetbox.Objects.MemoryModule());
-            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Zetbox.Server.ServerModule());
 
             // load overrides after loading the default modules
             base.SetupBuilder(builder);

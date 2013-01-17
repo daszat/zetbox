@@ -26,12 +26,18 @@ namespace Zetbox.Server
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
+    using System.ComponentModel;
 
+    [Feature]
+    [Description("The Server Module")]
     public class ServerModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+
+            builder.RegisterModule<Zetbox.API.Common.ApiCommonModule>();
+            builder.RegisterModule<Zetbox.API.Server.ServerApiModule>();
 
             builder
                 .RegisterType<Server>()
@@ -62,6 +68,7 @@ namespace Zetbox.Server
                 .As<IIdentitySource>()
                 .InstancePerLifetimeScope();
 #endif
+            builder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server", true)));
         }
     }
 }

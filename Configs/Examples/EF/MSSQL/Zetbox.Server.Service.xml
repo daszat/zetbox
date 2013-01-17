@@ -7,13 +7,9 @@
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <Modules>
-      <Module>Zetbox.Server.UnifiedModule, Zetbox.Server</Module>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
 
-      <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
-
-      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
-      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
 
       <Module>Zetbox.API.Server.PerfCounter.PerfMonAppender+Module, Zetbox.API.Server</Module>
       <!-- WCF Module for local testing, every deployment (jenkins also) uses http (iis or apache) -->

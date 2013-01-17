@@ -33,9 +33,7 @@ namespace Zetbox.DalProvider.Ef.Tests
     {
         protected override void SetupBuilder(ContainerBuilder builder)
         {
-            builder.RegisterModule(new Zetbox.Server.UnifiedModule());
-
-            builder.RegisterModule(new Zetbox.Objects.EfModule());
+            builder.RegisterModule(new Zetbox.Server.ServerModule());
             builder.RegisterModule(new Zetbox.DalProvider.Ef.EfProvider());
 
             // load overrides after loading the default modules

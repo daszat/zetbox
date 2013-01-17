@@ -7,7 +7,7 @@
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <Modules>
-      <Module>Zetbox.Server.UnifiedModule, Zetbox.Server</Module>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
 
       <Module>Zetbox.DalProvider.Memory.MemoryDatabaseProvider, Zetbox.DalProvider.Memory</Module>
 

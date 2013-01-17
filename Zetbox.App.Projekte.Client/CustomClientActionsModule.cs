@@ -25,7 +25,7 @@ namespace Zetbox.App.Projekte.Client
     using Zetbox.API.Configuration;
     using System.ComponentModel;
 
-    [Feature]
+    // Will be loaded by ClientModule
     [Description("Zetbox client actions")]
     public class CustomClientActionsModule : Module
     {

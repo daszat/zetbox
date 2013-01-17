@@ -10,7 +10,7 @@
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
-      <Module>Zetbox.Server.UnifiedModule, Zetbox.Server</Module>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
 
       <Module>Zetbox.Objects.NHibernateModule, Zetbox.Objects.NHibernateImpl</Module>
       <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>

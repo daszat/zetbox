@@ -127,6 +127,8 @@ namespace Zetbox.DalProvider.Ef
                 .As(typeof(IServerObjectHandlerFactory));
 
             moduleBuilder.RegisterType<EfImplementationType>();
+
+            moduleBuilder.RegisterModule((Autofac.Module)Activator.CreateInstance(Type.GetType("Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl", true)));
         }
     }
 }

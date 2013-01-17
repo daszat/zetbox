@@ -29,6 +29,9 @@ namespace Zetbox.API.Common
             base.Load(builder);
 
             builder
+                .RegisterModule<Zetbox.API.ApiModule>();
+
+            builder
                 .RegisterType<CachingMetaDataResolver>()
                 .As<CachingMetaDataResolver>()
                 .As<IMetaDataResolver>()
@@ -44,6 +47,8 @@ namespace Zetbox.API.Common
                 .As<IIconConverter>()
                 .SingleInstance();
 
+            builder.RegisterModule<Zetbox.Objects.InterfaceModule>();
+            builder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory", true)));
         }
     }
 }

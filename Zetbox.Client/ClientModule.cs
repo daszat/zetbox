@@ -27,7 +27,10 @@ namespace Zetbox.Client
     using Zetbox.App.Extensions;
     using Zetbox.Client.Presentables;
     using Zetbox.API.Common.GUI;
+    using System.ComponentModel;
 
+    [Feature]
+    [Description("The Client Module")]
     public sealed class ClientModule : Module
     {
         private class ViewModelDependencies : IViewModelDependencies
@@ -74,6 +77,9 @@ namespace Zetbox.Client
         {
             base.Load(moduleBuilder);
 
+            moduleBuilder.RegisterModule<Zetbox.API.Common.ApiCommonModule>();
+            moduleBuilder.RegisterModule<Zetbox.API.Client.ClientApiModule>();
+
             moduleBuilder
                 .Register<ViewModelDependencies>(c => new ViewModelDependencies(
                     c.Resolve<IViewModelFactory>(),
@@ -103,6 +109,9 @@ namespace Zetbox.Client
                 .InstancePerDependency();
 
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
+
+            moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.DalProvider.Client.ClientProvider, Zetbox.DalProvider.ClientObjects", true)));
+            moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client", true)));
         }
     }
 }

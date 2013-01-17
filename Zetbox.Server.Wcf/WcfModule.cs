@@ -28,7 +28,7 @@ namespace Zetbox.Server.Wcf
     using System.ComponentModel;
 
     [Feature]
-    [Description("Providing WCF infrastructure")]
+    [Description("Providing WCF infrastructure, either for selfhosting or IIS integration. For selfhosting start a WcfServer instance.")]
     public class WcfModule : Module
     {
         public static object NoWcfKey { get { return "nowcf"; } }

@@ -59,6 +59,8 @@ namespace Zetbox.DalProvider.Memory
                 })
                 .InstancePerDependency();
 
+            moduleBuilder.RegisterModule((Autofac.Module)Activator.CreateInstance(Type.GetType("Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl", true)));
+
             try
             {
                 // TODO: Move to MemoryModule

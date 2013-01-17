@@ -84,6 +84,8 @@ namespace Zetbox.DalProvider.Client
                     });
                 })
                 .SingleInstance();
+
+            moduleBuilder.RegisterModule((Autofac.Module)Activator.CreateInstance(Type.GetType("Zetbox.Objects.ClientModule, Zetbox.Objects.ClientImpl", true)));
         }
     }
 }

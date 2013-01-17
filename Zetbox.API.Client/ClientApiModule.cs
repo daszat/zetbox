@@ -15,13 +15,11 @@
 
 namespace Zetbox.API.Client
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
+    using System.ComponentModel;
     using Autofac;
     using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Configuration;
 
     public sealed class ClientApiModule
         : Autofac.Module
@@ -65,6 +63,8 @@ namespace Zetbox.API.Client
         }
     }
 
+    [Feature]
+    [Description("HTTP Proxy implementation")]
     public sealed class HttpClientModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
@@ -77,6 +77,8 @@ namespace Zetbox.API.Client
         }
     }
 
+    [Feature]
+    [Description("WCF Proxy implementation")]
     public sealed class WcfClientModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)

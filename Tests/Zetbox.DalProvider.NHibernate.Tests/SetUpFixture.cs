@@ -33,9 +33,7 @@ namespace Zetbox.DalProvider.NHibernate.Tests
     {
         protected override void SetupBuilder(ContainerBuilder builder)
         {
-            builder.RegisterModule(new Zetbox.Server.UnifiedModule());
-
-            builder.RegisterModule(new Zetbox.Objects.NHibernateModule());
+            builder.RegisterModule(new Zetbox.Server.ServerModule());
             builder.RegisterModule(new Zetbox.DalProvider.NHibernate.NHibernateProvider());
 
             // load overrides after loading the default modules

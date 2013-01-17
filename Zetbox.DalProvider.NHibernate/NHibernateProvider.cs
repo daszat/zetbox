@@ -109,6 +109,8 @@ namespace Zetbox.DalProvider.NHibernate
             //    .RegisterType<AutofacBytecodeProvider>()
             //    .As<global::NHibernate.Bytecode.IBytecodeProvider>()
             //    .InstancePerDependency();
+
+            moduleBuilder.RegisterModule((Autofac.Module)Activator.CreateInstance(Type.GetType("Zetbox.Objects.NHibernateModule, Zetbox.Objects.NHibernateImpl", true)));
         }
 
         private static Autofac.Builder.IRegistrationBuilder<NHibernateContext, Autofac.Builder.SimpleActivatorData, Autofac.Builder.SingleRegistrationStyle> RegisterContext<TInterface>(ContainerBuilder moduleBuilder)

@@ -25,7 +25,7 @@ namespace Zetbox.App.Projekte.Server
     using Zetbox.API.Configuration;
     using System.ComponentModel;
 
-    [Feature]
+    // Will be loaded by ServerModule
     [Description("Zetbox server actions")]
     public class CustomServerActionsModule : Module
     {

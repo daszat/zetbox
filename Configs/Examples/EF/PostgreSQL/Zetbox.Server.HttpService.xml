@@ -10,7 +10,7 @@
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
-      <Module>Zetbox.Server.UnifiedModule, Zetbox.Server</Module>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
 
       <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
