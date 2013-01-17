@@ -14,14 +14,39 @@ namespace Zetbox.ConfigEditor.ViewModels
             _current = current;
         }
 
+        private string _filter;
+        public string Filter
+        {
+            get
+            {
+                return _filter;
+            }
+            set
+            {
+                if (_filter != value)
+                {
+                    _filter = value;
+                    OnPropertyChanged("Filter");
+                    OnPropertyChanged("List");
+                }
+            }
+        }
+
+
         public IEnumerable<ModuleViewModel> List
         {
             get
             {
-                return ModulesCache.Instance.All
+                var qry = ModulesCache.Instance.All
                     .Where(i => i.IsFeature)
-                    .Where(i => !_current.Any(c => c.TypeName == i.TypeName))
-                    .Select(i => new ModuleViewModel(i));
+                    .Where(i => !_current.Any(c => c.TypeName == i.TypeName));
+                if (!string.IsNullOrWhiteSpace(Filter))
+                {
+                    qry = qry.Where(i => i.TypeName.ToLowerInvariant().Contains(Filter.ToLowerInvariant()));
+                }
+                return qry
+                    .Select(i => new ModuleViewModel(i))
+                    .OrderBy(i => i.TypeName);
             }
         }
 
