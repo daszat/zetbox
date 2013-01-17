@@ -57,12 +57,14 @@ namespace Zetbox.ConfigEditor.ViewModels
                     if (value == true)
                     {
                         _cfg.Client = _deletedClientConfig ?? new ZetboxConfig.ClientConfig();
+                        _cfg.ClientSpecified = true;
                     }
                     else
                     {
                         if(_cfg.Client != null)
                             _deletedClientConfig = _cfg.Client;
                         _cfg.Client = null;
+                        _cfg.ClientSpecified = false;
                     }
                     _clientViewModel = null;
                     OnPropertyChanged("HasClient");
@@ -98,12 +100,14 @@ namespace Zetbox.ConfigEditor.ViewModels
                     if (value == true)
                     {
                         _cfg.Server = _deletedServerConfig ?? new ZetboxConfig.ServerConfig();
+                        _cfg.ServerSpecified = true;
                     }
                     else
                     {
                         if (_cfg.Server != null)
                             _deletedServerConfig = _cfg.Server;
                         _cfg.Server = null;
+                        _cfg.ServerSpecified = false;
                     }
                     _serverViewModel = null;
                     OnPropertyChanged("HasServer");
