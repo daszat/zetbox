@@ -22,8 +22,10 @@ namespace Zetbox.DalProvider.Ef.Generator
     using Autofac;
     using Zetbox.Generator;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     [Feature]
+    [Description("Entity Framework (EF) generator")]
     public sealed class EfGeneratorProvider
         : Module
     {

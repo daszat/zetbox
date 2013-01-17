@@ -22,8 +22,10 @@ namespace Zetbox.Microsoft
     using Autofac;
     using Zetbox.API.Client;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     [Feature]
+    [Description("Modules that only run on Micorosoft Windows (namely a ScreenshotTool)")]
     public class Module : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)

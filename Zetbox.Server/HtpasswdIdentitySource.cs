@@ -23,6 +23,7 @@ namespace Zetbox.Server
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     public sealed class HtpasswdIdentitySource
         : IIdentitySource
@@ -48,6 +49,7 @@ namespace Zetbox.Server
         }
 
         [Feature]
+        [Description("IdentitySource for a .htpasswd file")]
         public sealed class Module
             : Autofac.Module
         {

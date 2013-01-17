@@ -28,10 +28,12 @@ namespace Zetbox.DalProvider.Ef
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.API.Server.PerfCounter;
+    using System.ComponentModel;
 
     public interface IEfActionsManager : ICustomActionsManager { }
 
     [Feature]
+    [Description("Entity Framework (EF) provider")]
     public class EfProvider
         : Autofac.Module
     {

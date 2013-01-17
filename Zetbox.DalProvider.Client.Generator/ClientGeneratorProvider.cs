@@ -22,8 +22,10 @@ namespace Zetbox.DalProvider.Client.Generator
     using Autofac;
     using Zetbox.Generator;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     [Feature]
+    [Description("Client code generator")]
     public sealed class ClientGeneratorProvider
         : Module
     {

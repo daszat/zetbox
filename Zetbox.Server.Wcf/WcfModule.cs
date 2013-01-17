@@ -25,8 +25,10 @@ namespace Zetbox.Server.Wcf
     using Autofac.Integration.Wcf;
     using Zetbox.API;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     [Feature]
+    [Description("Providing WCF infrastructure")]
     public class WcfModule : Module
     {
         public static object NoWcfKey { get { return "nowcf"; } }

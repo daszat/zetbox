@@ -28,8 +28,10 @@ namespace Zetbox.DalProvider.NHibernate
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using System.ComponentModel;
 
     [Feature]
+    [Description("nHibernate (NH) provider")]
     public class NHibernateProvider
         : Autofac.Module
     {

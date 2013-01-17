@@ -24,10 +24,12 @@ namespace Zetbox.API.Client.PerfCounter
     using Zetbox.API.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     public class PerfMonAppender : BasePerfMonAppender, IPerfCounterAppender
     {
         [Feature]
+        [Description("PerfCounter writing to the Windows Performance Monitor")]
         public class Module : Autofac.Module
         {
             protected override void Load(ContainerBuilder moduleBuilder)

@@ -26,8 +26,10 @@ namespace Zetbox.Server
     using System.Text;
     using Autofac;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     [Feature]
+    [Description("The Server Module")]
     public class UnifiedModule : Module
     {
         protected override void Load(ContainerBuilder builder)

@@ -21,11 +21,13 @@ namespace Zetbox.Generator
     using System.Text;
     using Autofac;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
     
     /// <summary>
     /// Mainly for testing; generates classes without any hooks filled
     /// </summary>
     [Feature]
+    [Description("Mainly for testing; generates classes without any hooks filled")]
     public sealed class BaseGeneratorModule
         : Module
     {

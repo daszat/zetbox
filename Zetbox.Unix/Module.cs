@@ -22,8 +22,10 @@ namespace Zetbox.Unix
 
     using Autofac;
     using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     [Feature]
+    [Description("Modules that only run on Linux (namely the PosixIdentitySource)")]
     public class Module
         : Autofac.Module
     {
