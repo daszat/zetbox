@@ -137,6 +137,22 @@ namespace Zetbox.ConfigEditor.ViewModels
             }
         }
 
+        private AssemblySearchPathsViewModel _assemblySearchPathsViewModel;
+        public AssemblySearchPathsViewModel AssemblySearchPaths
+        {
+            get
+            {
+                if (_assemblySearchPathsViewModel == null)
+                {
+                    if (_cfg.AssemblySearchPaths == null)
+                    {
+                        _cfg.AssemblySearchPaths = new ZetboxConfig.AssemblySearchPathArray();
+                    }
+                    _assemblySearchPathsViewModel = new AssemblySearchPathsViewModel(_cfg.AssemblySearchPaths);
+                }
+                return _assemblySearchPathsViewModel;
+            }
+        }
         #endregion
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="SelectModuleDialog.xaml.cs">
       <DependentUpon>SelectModuleDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AssemblySearchPaths.cs" />
     <Compile Include="ViewModels\ClientConfigViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\SelectModuleDlgViewModel.cs" />

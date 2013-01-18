@@ -137,7 +137,21 @@
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Assembly search paths">
-                    <TextBlock Text="Maybe this will be obsolete" />
+                    <StackPanel DataContext="{Binding AssemblySearchPaths}">
+                        <Label>EnableShadowCopy:</Label>
+                        <CheckBox IsChecked="{Binding EnableShadowCopy}">EnableShadowCopy</CheckBox>
+                        <Label>Paths:</Label>
+                        <DataGrid ItemsSource="{Binding Paths}"
+                                  CanUserAddRows="True"
+                                  CanUserDeleteRows="True"
+                                  AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Path"
+                                                    Binding="{Binding Mode=OneWay}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </StackPanel>
                 </TabItem>
             </TabControl>
         </DockPanel>
