@@ -388,8 +388,11 @@ namespace Zetbox.Server.SchemaManagement
                 string colName = Construct.ForeignKeyColumnName(otherEnd);
                 string assocName = rel.GetRelationAssociationName(role);
                 string idxName = Construct.IndexName(tblName.Name, colName);
+                var realIsNullable = otherEnd.IsNullable();
+                if (realIsNullable == false)
+                    realIsNullable = relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null;
 
-                CheckColumn(tblName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+                CheckColumn(tblName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, 0, realIsNullable, null);
                 if (!db.CheckFKConstraintExists(tblName, assocName))
                 {
                     Log.WarnFormat("FK Constraint '{0}' is missing", assocName);
@@ -437,7 +440,11 @@ namespace Zetbox.Server.SchemaManagement
             string colName = Construct.ForeignKeyColumnName(otherEnd);
             string indexName = Construct.ListPositionColumnName(otherEnd);
 
-            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+            var realIsNullable = otherEnd.IsNullable();
+            if (realIsNullable == false)
+                realIsNullable = relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null;
+
+            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, realIsNullable, null);
 
             if (!db.CheckFKConstraintExists(tblName, assocName))
             {
