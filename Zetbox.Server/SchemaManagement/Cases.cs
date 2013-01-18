@@ -1612,6 +1612,12 @@ namespace Zetbox.Server.SchemaManagement
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkAName), false, false, fkAName);
             db.CreateFKConstraint(tblName, bType.GetTableRef(db), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkBName), false, false, fkBName);
+
+            if (schema.GetQuery<RoleMembership>().Where(rm => rm.Relations.Contains(rel)).Count() > 0)
+            {
+                // Relation is in a ACL selector
+                DoCreateUpdateRightsTrigger(rel);
+            }
         }
 
         private bool TryInspect_N_M_Relation(Relation rel, out string assocName, out TableRef tblName, out string fkAName, out string fkBName, out ObjectClass aType, out ObjectClass bType)
