@@ -30,6 +30,10 @@ namespace Zetbox.ConfigEditor
             {
                 vmdl.Open(args[1]);
             }
+            else
+            {
+                vmdl.New();
+            }
             this.DataContext = vmdl;
         }
     }

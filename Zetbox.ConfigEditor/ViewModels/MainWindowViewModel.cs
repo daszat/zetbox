@@ -35,7 +35,7 @@ namespace Zetbox.ConfigEditor.ViewModels
             {
                 if (Config != null)
                 {
-                    return string.Format("Zetbox Configuration Editor - {0}", Config.SourcePath);
+                    return string.Format("Zetbox Configuration Editor - {0}", string.IsNullOrEmpty(Config.SourcePath) ? "* New configuration" : Config.SourcePath);
                 }
                 else
                 {
