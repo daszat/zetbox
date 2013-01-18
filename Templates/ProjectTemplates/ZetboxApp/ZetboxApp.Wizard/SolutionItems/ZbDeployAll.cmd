@@ -8,7 +8,6 @@ echo ***************************************************************************
 set config=
 
 if .%1. == .. GOTO GOON
-
 set config=%1
 
 :GOON
@@ -17,7 +16,7 @@ call "ZbInstall.cmd" %config%
 
 cd bin\Debug
 
-Zetbox.Cli.exe %config% -fallback -deploy-update -generate
+Zetbox.Cli.exe %config% -fallback -deploy-update -generate -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

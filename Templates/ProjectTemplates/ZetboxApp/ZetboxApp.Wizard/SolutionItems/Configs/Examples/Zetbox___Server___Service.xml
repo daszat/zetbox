@@ -11,6 +11,7 @@
     <CodeGenArchivePath>..\Backup</CodeGenArchivePath>
     <Modules>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
+      <Module>Zetbox.Server.Wcf.WcfModule, Zetbox.Server.Wcf</Module>
       <Module>Zetbox.DalProvider.$ormapperclassname$.$ormapperclassname$Provider, Zetbox.DalProvider.$ormapperclassname$</Module>
       <Module>Zetbox.Generator.GeneratorModule, Zetbox.Generator</Module>
       <Module>Zetbox.DalProvider.Memory.Generator.MemoryGeneratorProvider, Zetbox.DalProvider.Memory.Generator</Module>
