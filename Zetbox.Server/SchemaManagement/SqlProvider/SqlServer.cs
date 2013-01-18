@@ -641,7 +641,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                     FormatSchemaName(tbl),
                     QuoteIdentifier(TableMapper.DiscriminatorColumnName),
                     string.Join(",", parameters.Keys)),
-                    parameters) == 0;
+                    parameters) > 0;
             }
         }
 
@@ -801,7 +801,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             return (int)ExecuteScalar(String.Format(
                 "SELECT COUNT(*) FROM (SELECT TOP 1 * FROM {0} WHERE NOT {1}) AS data",
                 FormatSchemaName(tblName),
-                FormatCheckExpression(colName, checkExpressions))) > 0;
+                FormatCheckExpression(colName, checkExpressions))) == 0;
         }
 
         #endregion
