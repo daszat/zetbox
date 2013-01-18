@@ -2127,6 +2127,7 @@ namespace Zetbox.Server.SchemaManagement
                                 if (TryInspect_1_N_Relation(savedRel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
                                 {
                                     colName = Construct.NestedColumnName(colName, savedObjClass.TableName);
+                                    if (db.CheckFKConstraintExists(tblName, assocName)) db.DropFKConstraint(tblName, assocName);
                                     db.CreateFKConstraint(baseTblName, refTblName, colName, assocName, false);
                                     db.CreateIndex(baseTblName, Construct.IndexName(baseTblName.Name, colName), false, false, colName);
                                 }
@@ -2143,6 +2144,7 @@ namespace Zetbox.Server.SchemaManagement
                                 if (!TryInspect_1_1_Relation(savedRel, savedRel.A, savedRel.B, RelationEndRole.A, out tblName, out refTblName, out assocName, out colName, out idxName))
                                 {
                                     colName = Construct.NestedColumnName(colName, savedObjClass.TableName);
+                                    if (db.CheckFKConstraintExists(tblName, assocName)) db.DropFKConstraint(tblName, assocName);
                                     db.CreateFKConstraint(tblName, baseTblName, colName, assocName, false);
                                     idxName = Construct.IndexName(baseTblName.Name, colName);
                                     if (db.CheckIndexPossible(baseTblName, idxName, true, false, colName))
@@ -2159,6 +2161,7 @@ namespace Zetbox.Server.SchemaManagement
                                 if (!TryInspect_1_1_Relation(savedRel, savedRel.B, savedRel.A, RelationEndRole.B, out tblName, out refTblName, out assocName, out colName, out idxName))
                                 {
                                     colName = Construct.NestedColumnName(colName, savedObjClass.TableName);
+                                    if (db.CheckFKConstraintExists(tblName, assocName)) db.DropFKConstraint(tblName, assocName);
                                     db.CreateFKConstraint(tblName, baseTblName, colName, assocName, false);
                                     idxName = Construct.IndexName(baseTblName.Name, colName);
                                     if (db.CheckIndexPossible(baseTblName, idxName, true, false, colName))
