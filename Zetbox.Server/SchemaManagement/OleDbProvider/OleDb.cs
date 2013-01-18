@@ -423,7 +423,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             if (assignments.Count > 0)
             {
                 ExecuteNonQuery(string.Format(
-                    "UPDATE dest SET {2} FROM {1} dest INNER JOIN {2} src ON dest.{3} = src.{3}",
+                    "UPDATE dest SET {2} FROM {1} dest INNER JOIN {0} src ON dest.{3} = src.{3}",
                     FormatSchemaName(srcTblName),     // 0
                     FormatSchemaName(tblName),        // 1
                     string.Join(", ", assignments),   // 2
