@@ -2,6 +2,7 @@
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
   <Server StartServer="true">
+    <ConnectionStrings />
     <DocumentStore>DocumentStore/Server</DocumentStore>
     <CodeGenWorkingPath>../CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>../CodeGen</CodeGenOutputPath>
