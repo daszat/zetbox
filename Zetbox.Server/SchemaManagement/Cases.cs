@@ -301,31 +301,11 @@ namespace Zetbox.Server.SchemaManagement
 
             if (updateDone && isSimplyCheckable)
             {
-                db.AlterColumn(tblName, colName, dbType, size, scale, true, def);
+                db.AlterColumn(tblName, colName, dbType, size, scale, false, def);
             }
             else if (updateDone && !isSimplyCheckable)
             {
-                // classes that do not have this property
-                var otherClasses = objClass
-                    .BaseObjectClass // step once up, which is allowed, since we're not base (else isSimplyCheckable would be true) and necessary to let the skip work (see below)
-                    .AndParents(cls => cls.BaseObjectClass)
-                    .SelectMany(cls => cls
-                        .AndChildren(c => c.SubClasses
-                            .Where(child => child != objClass))) // skip self (and thus its children)
-                    .Select(cls => Construct.DiscriminatorValue(cls)).ToList();
-
-                var checkExpressions = new Dictionary<List<string>, Expression<Func<string, bool>>>()
-                    {
-                        { classes, s => s != null },
-                        { otherClasses, s => s == null },
-                    };
-
-                var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
-                if (db.CheckCheckConstraintPossible(tblName, colName, checkConstraintName, checkExpressions))
-                    db.CreateCheckConstraint(tblName, colName, checkConstraintName, checkExpressions);
-                else
-                    Log.ErrorFormat("unable to create CHECK constraint for ValueType Property '{0}' in '{1}': column contains invalid NULLs or superfluous values", colName, tblName);
-
+                CreateTPHNotNullCheckConstraint(tblName, colName, objClass);
             }
             else if (!updateDone && isSimplyCheckable)
             {
@@ -335,6 +315,33 @@ namespace Zetbox.Server.SchemaManagement
             {
                 Log.ErrorFormat("unable to create CHECK constraint on ValueType Property '{0}' when table '{1}' contains data: No supported default constraint found", colName, tblName);
             }
+        }
+
+        private void CreateTPHNotNullCheckConstraint(TableRef tblName, string colName, ObjectClass objClass)
+        {
+            // classes that do have this property
+            var classes = objClass.AndChildren(c => c.SubClasses).Select(cls => Construct.DiscriminatorValue(cls)).ToList();
+
+            // classes that do not have this property
+            var otherClasses = objClass
+                .BaseObjectClass // step once up, which is allowed, since we're not base (else isSimplyCheckable would be true) and necessary to let the skip work (see below)
+                .AndParents(cls => cls.BaseObjectClass)
+                .SelectMany(cls => cls
+                    .AndChildren(c => c.SubClasses
+                        .Where(child => child != objClass))) // skip self (and thus its children)
+                .Select(cls => Construct.DiscriminatorValue(cls)).ToList();
+
+            var checkExpressions = new Dictionary<List<string>, Expression<Func<string, bool>>>()
+                    {
+                        { classes, s => s != null },
+                        { otherClasses, s => s == null },
+                    };
+
+            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+            if (db.CheckCheckConstraintPossible(tblName, colName, checkConstraintName, checkExpressions))
+                db.CreateCheckConstraint(tblName, colName, checkConstraintName, checkExpressions);
+            else
+                Log.ErrorFormat("unable to create CHECK constraint for ValueType Property '{0}' in '{1}': column contains invalid NULLs or superfluous values", colName, tblName);
         }
 
         private bool WriteDefaultValue(TableRef tblName, string colName, DefaultConstraint def, IEnumerable<string> discriminatorFilter)
@@ -1716,12 +1723,12 @@ namespace Zetbox.Server.SchemaManagement
 
             var isNullable = otherEnd.IsNullable();
             var checkNotNull = !isNullable;
+            var createCheckConstraint = false;
             string errorMsg = null;
             if (checkNotNull && relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null)
             {
-                // TODO: implement proper CHECK constraint
                 isNullable = true;
-                errorMsg = "Unable to create NOT NULL column ({1}), since table ({0}) is type-per-hierarchy. Created nullable column instead";
+                createCheckConstraint = true;
             }
             else if (checkNotNull && db.CheckTableContainsData(tblName))
             {
@@ -1729,12 +1736,16 @@ namespace Zetbox.Server.SchemaManagement
                 errorMsg = "Unable to create NOT NULL column ({1}), since table ({0}) contains data. Created nullable column instead";
             }
 
+            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, isNullable);
+            if (createCheckConstraint)
+            {
+                CreateTPHNotNullCheckConstraint(tblName, colName, relEnd.Type);
+            }
+
             if (errorMsg != null)
             {
                 Log.ErrorFormat(errorMsg, tblName, colName);
             }
-
-            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, isNullable);
         }
         #endregion
 
