@@ -1365,8 +1365,11 @@ namespace Zetbox.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            var fkAName = Construct.ForeignKeyColumnName(saved.A);
-            var fkBName = Construct.ForeignKeyColumnName(saved.B);
+            var fkAName = Construct.ForeignKeyColumnName(rel.A);
+            var fkBName = Construct.ForeignKeyColumnName(rel.B);
+
+            var old_fkAName = Construct.ForeignKeyColumnName(saved.A);
+            var old_fkBName = Construct.ForeignKeyColumnName(saved.B);
 
             var aType = rel.A.Type;
             var bType = rel.B.Type;
@@ -1377,9 +1380,9 @@ namespace Zetbox.Server.SchemaManagement
                 var destRelTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
 
                 db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.A),
-                    aType.GetTableRef(db), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+                    aType.GetTableRef(db), old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                 db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.B),
-                    bType.GetTableRef(db), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                    bType.GetTableRef(db), old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
 
                 db.RenameTable(srcRelTbl, destRelTbl);
 
@@ -1392,17 +1395,22 @@ namespace Zetbox.Server.SchemaManagement
                     Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
                 {
                     var tbl = aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, saved.GetAssociationName(),
-                        aType.GetTableRef(db), fkAName, rel.GetAssociationName(), false);
+                    // TODO: Use the drop & recreate method until Posgres 9.2 is the minimum supported database -> it supports renaming FK constraints
+                    //db.RenameFKConstraint(tbl, saved.GetAssociationName(),
+                    //   aType.GetTableRef(db), fkBName, rel.GetAssociationName(), false);
+                    db.DropFKConstraint(tbl, saved.GetAssociationName());
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
+                    db.CreateFKConstraint(tbl, aType.GetTableRef(db), fkBName, rel.GetAssociationName(), false);
                 }
                 else if (saved.HasStorage(RelationEndRole.B) &&
                     Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
                 {
                     var tbl = bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, saved.GetAssociationName(),
-                        bType.GetTableRef(db), fkBName, rel.GetAssociationName(), false);
+                    //db.RenameFKConstraint(tbl, saved.GetAssociationName(),
+                    //   bType.GetTableRef(db), fkAName, rel.GetAssociationName(), false);
+                    db.DropFKConstraint(tbl, saved.GetAssociationName());
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
+                    db.CreateFKConstraint(tbl, bType.GetTableRef(db), fkAName, rel.GetAssociationName(), false);
                 }
             }
             else if (rel.GetRelationType() == RelationType.one_one)
@@ -1411,7 +1419,7 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     var tbl = aType.GetTableRef(db);
                     db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.A),
-                        aType.GetTableRef(db), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+                        aType.GetTableRef(db), old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                     if (Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
                     {
                         db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
@@ -1421,7 +1429,7 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     var tbl = bType.GetTableRef(db);
                     db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.B),
-                        bType.GetTableRef(db), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                        bType.GetTableRef(db), old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
                     if (Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
                     {
                         db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
