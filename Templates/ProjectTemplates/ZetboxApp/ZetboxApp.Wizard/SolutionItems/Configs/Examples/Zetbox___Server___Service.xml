@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+<?xml version="1.0" encoding="Windows-1252"?>
+<ZetboxConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dasz.at/Zetbox/">
   <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionStrings>
@@ -16,10 +16,11 @@
       <Module>Zetbox.DalProvider.Memory.Generator.MemoryGeneratorProvider, Zetbox.DalProvider.Memory.Generator</Module>
       <Module>Zetbox.DalProvider.$ormapperclassname$.Generator.$ormapperclassname$GeneratorProvider, Zetbox.DalProvider.$ormapperclassname$.Generator</Module>
       <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
-      <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
+      <Module NotOnFallback="true">$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
     </Modules>
+    <ClientFilesLocations />
   </Server>
-  <AssemblySearchPaths>
+  <AssemblySearchPaths EnableShadowCopy="true">
     <string>Common\Core</string>
     <string>Server\Core</string>
     <string>Server\$ormappermodule$</string>

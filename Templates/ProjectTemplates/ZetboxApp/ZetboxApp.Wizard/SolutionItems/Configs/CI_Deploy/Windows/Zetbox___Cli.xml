@@ -1,7 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+<?xml version="1.0" encoding="Windows-1252"?>
+<ZetboxConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dasz.at/Zetbox/">
   <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
   <Server StartServer="true">
+    <ConnectionStrings />
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>..\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>..\CodeGen</CodeGenOutputPath>
@@ -9,10 +10,11 @@
     <Modules>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
-      <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
+      <Module NotOnFallback="true">$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
     </Modules>
+    <ClientFilesLocations />
   </Server>
-  <AssemblySearchPaths>
+  <AssemblySearchPaths EnableShadowCopy="true">
     <string>Common\Core</string>
     <string>Server\Core</string>
     <string>Server\EF</string>

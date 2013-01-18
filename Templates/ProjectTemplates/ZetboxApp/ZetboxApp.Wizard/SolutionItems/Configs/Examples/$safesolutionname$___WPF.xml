@@ -1,12 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+<?xml version="1.0" encoding="Windows-1252"?>
+<ZetboxConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dasz.at/Zetbox/">
   <ConfigName>$safesolutionname$ Client Configuration</ConfigName>
-  <Client StartClient="false" ThrowErrors="false">
-    <!--<Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>-->
+  <Client>
     <Culture>de-AT</Culture>
     <UICulture>de-AT</UICulture>
-    <DocumentStore>DocumentStore\Client\</DocumentStore>
-    <DevelopmentEnvironment>false</DevelopmentEnvironment>
     <Modules>
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
       <Module>Zetbox.API.Client.WcfClientModule, Zetbox.API.Client</Module>
@@ -14,11 +11,11 @@
       <Module>Zetbox.Microsoft.Module, Zetbox.Microsoft</Module>
       <Module>Zetbox.Microsoft.OutlookMailSender+Module, Zetbox.Microsoft</Module>
       <Module>Zetbox.API.MailProblemReporter+Module, Zetbox.API</Module>
-      <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
-      <Module>$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
+      <Module NotOnFallback="true">$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
+      <Module NotOnFallback="true">$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths>
+  <AssemblySearchPaths EnableShadowCopy="true">
     <string>Common\Core</string>
     <string>Client\Core</string>
     <string>Client\WPF</string>
