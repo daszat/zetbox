@@ -50,10 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ZetboxApp.Client.Tests\packages.config" />
+    <None Include="ZetboxApp.Client.Tests\packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ZetboxApp.Client.Tests\SetUpFixture.cs" />
     <None Include="ZetboxApp.Client.WPF\packages.config" />
-    <None Include="ZetboxApp.Client\packages.config" />
+    <None Include="ZetboxApp.Client\packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ZetboxApp.Common\packages.config" />
     <None Include="ZetboxApp.Server\packages.config" />
     <None Include="ZetboxApp.WPF\app.config">
