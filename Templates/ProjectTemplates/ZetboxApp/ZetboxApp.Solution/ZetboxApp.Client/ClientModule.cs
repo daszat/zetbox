@@ -20,7 +20,7 @@ namespace $safeprojectname$
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.RegisterModule<CommonModule>();
+            moduleBuilder.RegisterModule<Common.CommonModule>();
 
             moduleBuilder.RegisterZetboxImplementors(typeof(ClientModule).Assembly);
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
