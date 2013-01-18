@@ -514,7 +514,7 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (ValueTypeProperty p in cprop.CompoundObjectDefinition.Properties)
             {
-                db.CreateColumn(tblName, Construct.ColumnName(p, cprop.Name), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(cprop));
+                db.CreateColumn(tblName, Construct.ColumnName(p, cprop.Name), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));
             }
 
             if (hasPersistentOrder)
