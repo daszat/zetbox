@@ -1395,22 +1395,17 @@ namespace Zetbox.Server.SchemaManagement
                     Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
                 {
                     var tbl = aType.GetTableRef(db);
-                    // TODO: Use the drop & recreate method until Posgres 9.2 is the minimum supported database -> it supports renaming FK constraints
-                    //db.RenameFKConstraint(tbl, saved.GetAssociationName(),
-                    //   aType.GetTableRef(db), fkBName, rel.GetAssociationName(), false);
-                    db.DropFKConstraint(tbl, saved.GetAssociationName());
+                    db.RenameFKConstraint(tbl, saved.GetAssociationName(),
+                       aType.GetTableRef(db), old_fkBName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
-                    db.CreateFKConstraint(tbl, aType.GetTableRef(db), fkBName, rel.GetAssociationName(), false);
                 }
                 else if (saved.HasStorage(RelationEndRole.B) &&
                     Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
                 {
                     var tbl = bType.GetTableRef(db);
-                    //db.RenameFKConstraint(tbl, saved.GetAssociationName(),
-                    //   bType.GetTableRef(db), fkAName, rel.GetAssociationName(), false);
-                    db.DropFKConstraint(tbl, saved.GetAssociationName());
+                    db.RenameFKConstraint(tbl, saved.GetAssociationName(),
+                       bType.GetTableRef(db), old_fkAName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
-                    db.CreateFKConstraint(tbl, bType.GetTableRef(db), fkAName, rel.GetAssociationName(), false);
                 }
             }
             else if (rel.GetRelationType() == RelationType.one_one)
