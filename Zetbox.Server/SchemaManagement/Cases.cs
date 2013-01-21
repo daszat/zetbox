@@ -81,7 +81,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoDeleteObjectClass(ObjectClass savedObjClass)
         {
-            if (PreMigration(ClassMigrationEventType.Delete, savedObjClass, null))
+            if (!PreMigration(ClassMigrationEventType.Delete, savedObjClass, null))
                 return;
 
             if (savedObjClass.NeedsRightsTable())
@@ -117,7 +117,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewObjectClass(ObjectClass objClass)
         {
-            if (PreMigration(ClassMigrationEventType.Add, null, objClass))
+            if (!PreMigration(ClassMigrationEventType.Add, null, objClass))
                 return;
 
             TableMapping mapping = objClass.GetTableMapping();
@@ -159,7 +159,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
 
-            if (PreMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass))
+            if (!PreMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass))
                 return;
 
             var mapping = objClass.GetTableMapping();
@@ -184,7 +184,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
 
-            if (PreMigration(PropertyMigrationEventType.Rename, savedProp, prop))
+            if (!PreMigration(PropertyMigrationEventType.Rename, savedProp, prop))
                 return;
 
             // TODO: What if prefix has changed
@@ -205,7 +205,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
 
-            if (PreMigration(PropertyMigrationEventType.Move, savedProp, prop))
+            if (!PreMigration(PropertyMigrationEventType.Move, savedProp, prop))
                 return;
 
             // Reflected changed hierarchie
@@ -290,7 +290,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            if (PreMigration(PropertyMigrationEventType.Add, null, prop))
+            if (!PreMigration(PropertyMigrationEventType.Add, null, prop))
                 return;
 
             string colName = Construct.ColumnName(prop, prefix);
@@ -314,7 +314,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyNotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            if (PreMigration(PropertyMigrationEventType.Add, null, prop))
+            if (!PreMigration(PropertyMigrationEventType.Add, null, prop))
                 return;
 
             var tblName = objClass.GetTableRef(db);
@@ -433,7 +433,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedProp = savedSchema.FindPersistenceObject<Property>(prop.ExportGuid);
 
-            if (PreMigration(PropertyMigrationEventType.ChangeDefaultValueDefinition, savedProp, prop))
+            if (!PreMigration(PropertyMigrationEventType.ChangeDefaultValueDefinition, savedProp, prop))
                 return;
 
             var tblName = objClass.GetTableRef(db);
@@ -460,7 +460,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
 
-            if (PreMigration(PropertyMigrationEventType.ChangeToNotNullable, savedProp, prop))
+            if (!PreMigration(PropertyMigrationEventType.ChangeToNotNullable, savedProp, prop))
                 return;
 
             var tblName = objClass.GetTableRef(db);
@@ -490,7 +490,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
 
-            if (PreMigration(PropertyMigrationEventType.ChangeToNullable, savedProp, prop))
+            if (!PreMigration(PropertyMigrationEventType.ChangeToNullable, savedProp, prop))
                 return;
 
             var tblName = objClass.GetTableRef(db);
@@ -513,7 +513,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
 
-            if (PreMigration(PropertyMigrationEventType.Rename, savedProp, prop))
+            if (!PreMigration(PropertyMigrationEventType.Rename, savedProp, prop))
                 return;
 
             Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", savedProp.Name, prop.Name);
@@ -533,7 +533,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
 
-            if (PreMigration(PropertyMigrationEventType.Move, savedProp, prop))
+            if (!PreMigration(PropertyMigrationEventType.Move, savedProp, prop))
                 return;
 
             Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", savedProp.ObjectClass.Name, prop.ObjectClass.Name);
@@ -549,7 +549,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
-            if (PreMigration(PropertyMigrationEventType.Add, null, prop))
+            if (!PreMigration(PropertyMigrationEventType.Add, null, prop))
                 return;
 
             Log.InfoFormat("New ValueType Property List: {0}", prop.Name);
@@ -583,7 +583,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty cprop)
         {
-            if (PreMigration(PropertyMigrationEventType.Add, null, cprop))
+            if (!PreMigration(PropertyMigrationEventType.Add, null, cprop))
                 return;
 
             Log.InfoFormat("New CompoundObject Property List: {0}", cprop.Name);
@@ -625,7 +625,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(cprop.ExportGuid);
 
-            if (PreMigration(PropertyMigrationEventType.Rename, savedProp, cprop))
+            if (!PreMigration(PropertyMigrationEventType.Rename, savedProp, cprop))
                 return;
 
             Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", savedProp.Name, cprop.Name);
@@ -645,7 +645,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(cprop.ExportGuid);
 
-            if (PreMigration(PropertyMigrationEventType.Move, savedProp, cprop))
+            if (!PreMigration(PropertyMigrationEventType.Move, savedProp, cprop))
                 return;
 
             Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", savedProp.ObjectClass.Name, cprop.ObjectClass.Name);
@@ -666,7 +666,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
                 return;
 
             string assocName = rel.GetAssociationName();
@@ -710,7 +710,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
                 return;
 
             string assocName = rel.GetAssociationName();
@@ -753,7 +753,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel))
                 return;
 
             string assocName = rel.GetAssociationName();
@@ -797,7 +797,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel))
                 return;
 
             string assocName = rel.GetAssociationName();
@@ -843,7 +843,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoDelete_1_N_Relation(Relation savedRel)
         {
-            if (PreMigration(RelationMigrationEventType.Delete, savedRel, null))
+            if (!PreMigration(RelationMigrationEventType.Delete, savedRel, null))
                 return;
 
             string assocName = savedRel.GetAssociationName();
@@ -908,7 +908,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return;
 
             string destAssocName = rel.GetAssociationName();
@@ -1042,7 +1042,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return; string srcAssocName = savedRel.GetAssociationName();
 
             RelationEnd relEnd, otherEnd;
@@ -1115,7 +1115,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return; string srcAssocName = savedRel.GetAssociationName();
 
             RelationEnd relEnd, otherEnd;
@@ -1237,7 +1237,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return;
 
             string srcAssocName = rel.GetAssociationName();
@@ -1287,7 +1287,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return;
 
             string destAssocName = rel.GetAssociationName();
@@ -1353,7 +1353,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
                 return;
 
             string destAssocName = rel.GetAssociationName();
@@ -1411,7 +1411,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeEndType, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeEndType, savedRel, rel))
                 return;
 
             if (rel.GetRelationType() == RelationType.n_m)
@@ -1531,7 +1531,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.Rename, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.Rename, savedRel, rel))
                 return;
 
             var fkAName = Construct.ForeignKeyColumnName(rel.A);
@@ -1612,7 +1612,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNew_1_N_Relation(Relation rel)
         {
-            if (PreMigration(RelationMigrationEventType.Add, null, rel))
+            if (!PreMigration(RelationMigrationEventType.Add, null, rel))
                 return;
 
             string assocName, colName, listPosName;
@@ -1696,7 +1696,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
                 return;
 
             string assocName = rel.GetAssociationName();
@@ -1722,7 +1722,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
                 return;
 
             string assocName = rel.GetAssociationName();
@@ -1745,7 +1745,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoDelete_N_M_Relation(Relation savedRel)
         {
-            if (PreMigration(RelationMigrationEventType.Delete, savedRel, null))
+            if (!PreMigration(RelationMigrationEventType.Delete, savedRel, null))
                 return;
 
             string assocName = savedRel.GetAssociationName();
@@ -1772,7 +1772,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNew_N_M_Relation(Relation rel)
         {
-            if (PreMigration(RelationMigrationEventType.Add, null, rel))
+            if (!PreMigration(RelationMigrationEventType.Add, null, rel))
                 return;
 
             string assocName, fkAName, fkBName;
@@ -1844,7 +1844,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoDelete_1_1_Relation(Relation savedRel)
         {
-            if (PreMigration(RelationMigrationEventType.Delete, savedRel, null))
+            if (!PreMigration(RelationMigrationEventType.Delete, savedRel, null))
                 return;
 
             Log.InfoFormat("Deleting 1:1 Relation: {0}", savedRel.GetAssociationName());
@@ -1885,7 +1885,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNew_1_1_Relation(Relation rel)
         {
-            if (PreMigration(RelationMigrationEventType.Add, null, rel))
+            if (!PreMigration(RelationMigrationEventType.Add, null, rel))
                 return;
 
             Log.InfoFormat("New 1:1 Relation: {0}", rel.GetAssociationName());
@@ -1980,7 +1980,7 @@ namespace Zetbox.Server.SchemaManagement
 
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeStorage, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeStorage, savedRel, rel))
                 return;
 
             Log.InfoFormat("Changing 1:1 Relation Storage: {0}", rel.GetAssociationName());
@@ -2070,7 +2070,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel))
                 return;
 
             RelationEnd relEnd = rel.GetEndFromRole(role);
@@ -2102,7 +2102,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (PreMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel))
+            if (!PreMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel))
                 return;
 
             RelationEnd relEnd = rel.GetEndFromRole(role);
@@ -2136,7 +2136,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
 
-            if (PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
+            if (!PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
                 return;
 
             var assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
@@ -2171,7 +2171,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
 
-            if (PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
+            if (!PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
                 return;
 
             Log.InfoFormat("Changing ObjectClass Inheritance: {0} -> {1}", objClass.Name, objClass.BaseObjectClass.Name);
@@ -2194,7 +2194,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
 
-            if (PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
+            if (!PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
                 return;
 
             string assocName = Construct.InheritanceAssociationName(savedObjClass.BaseObjectClass, savedObjClass);
@@ -2228,7 +2228,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
 
-            if (PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
+            if (!PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
                 return;
 
             var baseTblName = db.GetTableName(savedObjClass.GetRootClass().Module.SchemaName, savedObjClass.GetRootClass().TableName);
@@ -2510,7 +2510,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
 
-            if (PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
+            if (!PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
                 return;
 
             // create new derived tables
@@ -2784,7 +2784,7 @@ namespace Zetbox.Server.SchemaManagement
 
         public void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty savedProp, string prefix)
         {
-            if (PreMigration(PropertyMigrationEventType.Delete, savedProp, null))
+            if (!PreMigration(PropertyMigrationEventType.Delete, savedProp, null))
                 return;
 
             var tblName = objClass.GetTableRef(db);
@@ -2804,7 +2804,7 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty cprop, string prefix)
         {
-            if (PreMigration(PropertyMigrationEventType.Add, null, cprop))
+            if (!PreMigration(PropertyMigrationEventType.Add, null, cprop))
                 return;
 
             var tblName = objClass.GetTableRef(db);
@@ -2845,7 +2845,7 @@ namespace Zetbox.Server.SchemaManagement
 
         public void DoDeleteCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty savedCProp, string prefix)
         {
-            if (PreMigration(PropertyMigrationEventType.Delete, savedCProp, null))
+            if (!PreMigration(PropertyMigrationEventType.Delete, savedCProp, null))
                 return;
 
             Log.ErrorFormat("deleting compound properties not implemented: {0}.{1}", objClass.Name, savedCProp.Name);
