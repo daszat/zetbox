@@ -3480,6 +3480,14 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> ServerObjParameter
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("ee365add-736b-473b-8907-fdeb49d5ea6f"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> ServerParameterless
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("3486bd52-5a89-4e64-9d9f-e50556433a09"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> StringParameter
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("7901a41d-6ee0-4283-86fe-f19982464f73"); }

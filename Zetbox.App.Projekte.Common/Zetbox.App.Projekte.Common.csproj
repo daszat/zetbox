@@ -88,6 +88,7 @@
     <Compile Include="Gui\NavigationEntryActions.cs" />
     <Compile Include="Gui\ViewDescriptorActions.cs" />
     <Compile Include="Gui\ViewModelDescriptorActions.cs" />
+    <Compile Include="TestModule\MethodTestActions.cs" />
     <Compile Include="TestModule\RecurrenceRuleTesterActions.cs" />
     <Compile Include="TestModule\SecurityTestParentActions.cs" />
     <Compile Include="TestModule\SecurityTestChildActions.cs" />

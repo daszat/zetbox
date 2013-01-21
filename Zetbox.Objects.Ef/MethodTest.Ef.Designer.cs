@@ -599,6 +599,133 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnServerObjParameter_MethodTest")]
+        public virtual Zetbox.App.Test.TestObjClass ServerObjParameter(Zetbox.App.Test.TestObjClass input)
+        {
+            var e = new MethodReturnEventArgs<Zetbox.App.Test.TestObjClass>();
+            if (OnServerObjParameter_MethodTest != null)
+            {
+                OnServerObjParameter_MethodTest(this, e, input);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on MethodTest.ServerObjParameter");
+            }
+            return e.Result;
+        }
+        public delegate void ServerObjParameter_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Test.TestObjClass> ret, Zetbox.App.Test.TestObjClass input);
+        public static event ServerObjParameter_Handler<MethodTest> OnServerObjParameter_MethodTest;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<MethodTest> OnServerObjParameter_MethodTest_CanExec;
+
+        [EventBasedMethod("OnServerObjParameter_MethodTest_CanExec")]
+        public virtual bool ServerObjParameterCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnServerObjParameter_MethodTest_CanExec != null)
+				{
+					OnServerObjParameter_MethodTest_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MethodTest> OnServerObjParameter_MethodTest_CanExecReason;
+
+        [EventBasedMethod("OnServerObjParameter_MethodTest_CanExecReason")]
+        public virtual string ServerObjParameterCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnServerObjParameter_MethodTest_CanExecReason != null)
+				{
+					OnServerObjParameter_MethodTest_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnServerParameterless_MethodTest")]
+        public virtual void ServerParameterless()
+        {
+            // base.ServerParameterless();
+            if (OnServerParameterless_MethodTest != null)
+            {
+                OnServerParameterless_MethodTest(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method MethodTest.ServerParameterless");
+            }
+        }
+        public delegate void ServerParameterless_Handler<T>(T obj);
+        public static event ServerParameterless_Handler<MethodTest> OnServerParameterless_MethodTest;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<MethodTest> OnServerParameterless_MethodTest_CanExec;
+
+        [EventBasedMethod("OnServerParameterless_MethodTest_CanExec")]
+        public virtual bool ServerParameterlessCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnServerParameterless_MethodTest_CanExec != null)
+				{
+					OnServerParameterless_MethodTest_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MethodTest> OnServerParameterless_MethodTest_CanExecReason;
+
+        [EventBasedMethod("OnServerParameterless_MethodTest_CanExecReason")]
+        public virtual string ServerParameterlessCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnServerParameterless_MethodTest_CanExecReason != null)
+				{
+					OnServerParameterless_MethodTest_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnStringParameter_MethodTest")]
         public virtual void StringParameter(string str)
         {

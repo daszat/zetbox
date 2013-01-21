@@ -96,6 +96,7 @@
     <Compile Include="Tests\GetListTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
+    <Compile Include="Tests\Methods\when_invoking_on_server.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
     <Compile Include="Tests\ObjectListModels\when_moving_items.cs" />
     <Compile Include="Tests\ObjectTests.cs" />

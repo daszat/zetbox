@@ -224,14 +224,17 @@ namespace Zetbox.API.Server
             var requestedObjects = ctx.AttachedObjects
                 .Where(obj =>
                 {
+                    if (entityObjects.ContainsKey(obj)) return false; // only once
+                    if (obj.ObjectState.In(DataObjectState.Modified, DataObjectState.New)) return true; // Changed or new
+
                     var ids = requestLookup[ctx.GetInterfaceType(obj).Type.FullName].FirstOrDefault();
-                    if (ids == null)
+                    if (ids != null)
                     {
-                        return false;
+                        return ids.Contains(obj.ID); // Client request
                     }
                     else
                     {
-                        return ids.Contains(obj.ID) && !entityObjects.ContainsKey(obj);
+                        return false;
                     }
                 });
             return requestedObjects;

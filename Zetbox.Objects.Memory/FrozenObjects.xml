@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-21T11:36:37Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-21T12:28:28Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -32537,6 +32537,56 @@ public static void ParameterlessCanExecReason(MethodTest obj, MethodReturnEventA
     <ZetboxBase:Name>Parameterless</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="ee365add-736b-473b-8907-fdeb49d5ea6f">
+    <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ServerObjParameter(MethodTest obj, MethodReturnEventArgs&lt;Zetbox.App.Test.TestObjClass&gt; e, Zetbox.App.Test.TestObjClass input)
+{
+}
+
+[Invocation]
+public static void ServerObjParameterCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ServerObjParameterCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>ServerObjParameter</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="3486bd52-5a89-4e64-9d9f-e50556433a09">
+    <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-01-21T11:15:16.69328Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ServerParameterless(MethodTest obj)
+{
+}
+
+[Invocation]
+public static void ServerParameterlessCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ServerParameterlessCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-01-21T11:15:16.69328Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>ServerParameterless</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="7901a41d-6ee0-4283-86fe-f19982464f73">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -32667,6 +32717,28 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>retVal</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="44160789-5fad-4faa-9ea1-1f157299b715">
+    <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>ee365add-736b-473b-8907-fdeb49d5ea6f</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>input</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="f54b1c11-8002-412f-9697-e647ad2a93b9">
+    <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>ee365add-736b-473b-8907-fdeb49d5ea6f</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:ObjectClass>
   </ZetboxBase:ObjectReferenceParameter>
   <ZetboxBase:StringParameter ExportGuid="bd10a4c2-9544-4b68-b5cc-1b777bf436ea">
     <ZetboxBase:ChangedOn>2012-02-16T01:20:13.159311Z</ZetboxBase:ChangedOn>

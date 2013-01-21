@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomServerActionsModule.cs" />
+    <Compile Include="TestModule\MethodTestActions.cs" />
     <Compile Include="ZetboxBase\BaseParameterActions.cs" />
     <Compile Include="ZetboxBase\MethodActions.cs" />
     <Compile Include="Projekte\TaskActions.cs" />
