@@ -126,29 +126,9 @@ namespace Zetbox.Server
                 if (files == null || files.Length == 0) throw new InvalidOperationException("No files found to deploy");
                 Logging.Server.InfoFormat("Found {0} files to deploy", files.Length);
 
-                // TODO: Define a standard migration procedure
-                MigrateDatabase();
-
                 UpdateSchema(files);
                 Deploy(files);
                 CheckSchema(false);
-            }
-        }
-
-        private void MigrateDatabase()
-        {
-            using (Log.InfoTraceMethodCall("Migrating Database"))
-            using (var subContainer = container.BeginLifetimeScope())
-            {
-                try
-                {
-                    // add manual hacks here!
-                }
-                catch
-                {
-                    // TODO: For now - ignore any error
-                    // TODO: Define a standard migration procedure
-                }
             }
         }
 
