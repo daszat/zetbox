@@ -24,6 +24,12 @@ namespace Zetbox.API.SchemaManagement
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
 
+    public interface IGlobalMigratorFragment
+    {
+        void PreMigration(ISchemaProvider db);
+        void PostMigration(ISchemaProvider db);
+    }
+
     public interface IMigratorFragment
     {
         Guid Target { get; }
@@ -104,6 +110,16 @@ namespace Zetbox.API.SchemaManagement
         {
             if (builder == null) { throw new ArgumentNullException("builder"); }
             if (source == null) { throw new ArgumentNullException("source"); }
+
+            foreach (var t in source.GetTypes()
+                                    .Where(t => !t.IsAbstract
+                                            && t.GetInterfaces().Contains(typeof(IGlobalMigratorFragment))))
+            {
+                builder
+                    .RegisterType(t)
+                    .AsImplementedInterfaces()
+                    .SingleInstance();
+            }
 
             foreach (var t in source.GetTypes()
                                     .Where(t => !t.IsAbstract

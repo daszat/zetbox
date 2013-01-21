@@ -40,6 +40,11 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     db.EnsureInfrastructure();
 
+                    foreach (var gmf in _globalMigrationFragments)
+                    {
+                        gmf.PreMigration(db);
+                    }
+
                     UpdateDatabaseSchemas();
                     UpdateTables();
                     UpdateRelations();
@@ -53,6 +58,11 @@ namespace Zetbox.Server.SchemaManagement
                     UpdateProcedures();
 
                     SaveSchema(schema);
+
+                    foreach (var gmf in _globalMigrationFragments)
+                    {
+                        gmf.PostMigration(db);
+                    }
 
                     db.CommitTransaction();
                     db.RefreshDbStats();
