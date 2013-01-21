@@ -378,11 +378,19 @@ namespace Zetbox.Server.SchemaManagement
 
         private void UpdateDeletedColumns(ObjectClass objClass, string prefix)
         {
-            foreach (ValueTypeProperty prop in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList))
+            foreach (ValueTypeProperty savedProp in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList))
             {
-                if (Case.IsDeleteValueTypeProperty(prop))
+                if (Case.IsDeleteValueTypeProperty(savedProp))
                 {
-                    Case.DoDeleteValueTypeProperty(objClass, prop, prefix);
+                    Case.DoDeleteValueTypeProperty(objClass, savedProp, prefix);
+                }
+            }
+
+            foreach (CompoundObjectProperty savedCProp in Case.savedSchema.GetQuery<CompoundObjectProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList))
+            {
+                if (Case.IsDeleteCompoundObjectProperty(savedCProp))
+                {
+                    Case.DoDeleteCompoundObjectProperty(objClass, savedCProp, prefix);
                 }
             }
         }
@@ -516,22 +524,22 @@ namespace Zetbox.Server.SchemaManagement
                             Case.DoChange_1_1_Storage(rel);
                         }
 
-                        if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
+                        if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
                         {
-                            Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
+                            Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
                         }
-                        if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
+                        if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
                         {
-                            Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
+                            Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
                         }
 
-                        if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
+                        if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
                         {
-                            Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
+                            Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
                         }
-                        if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
+                        if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
                         {
-                            Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
+                            Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
                         }
                     }
 

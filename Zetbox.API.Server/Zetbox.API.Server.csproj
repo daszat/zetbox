@@ -89,6 +89,7 @@
     <Compile Include="DbTypeMapper.cs" />
     <Compile Include="PerfCounter\IPerfCounter.cs" />
     <Compile Include="IServer.cs" />
+    <Compile Include="SchemaManagement\IMigratorFragment.cs" />
     <Compile Include="TableMapper.cs" />
     <Compile Include="Zetbox.API.Migration\Extensions.cs" />
     <Compile Include="Zetbox.API.Migration\IConverter.cs" />
@@ -108,7 +109,7 @@
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />
     <Compile Include="IZetboxServerContext.cs" />
-    <Compile Include="ISchemaProvider.cs" />
+    <Compile Include="SchemaManagement\ISchemaProvider.cs" />
     <Compile Include="IServerObjectHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />

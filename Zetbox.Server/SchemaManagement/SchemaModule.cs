@@ -23,6 +23,7 @@ namespace Zetbox.Server.SchemaManagement
     using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
 
     // No feature, loaded by server module
@@ -42,11 +43,14 @@ namespace Zetbox.Server.SchemaManagement
                     schemaProvider.Open(connectionString.ConnectionString);
                     SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
+                    var migrationFragments = c.Resolve<IEnumerable<IMigratorFragment>>();
+
                     return new SchemaManagement.SchemaManager(
                         schemaProvider,
                         p.Named<IZetboxContext>("newSchema"),
                         ctx,
-                        cfg);
+                        cfg,
+                        migrationFragments);
                 })
                 .InstancePerDependency();
 

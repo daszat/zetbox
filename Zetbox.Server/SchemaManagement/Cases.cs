@@ -22,6 +22,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Linq.Expressions;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -36,6 +37,9 @@ namespace Zetbox.Server.SchemaManagement
         #region Fields
         private readonly IZetboxContext schema;
         private readonly ISchemaProvider db;
+        private readonly Dictionary<Tuple<ClassMigrationEventType, Guid>, IClassMigratorFragment> _classMigrationFragments;
+        private readonly Dictionary<Tuple<PropertyMigrationEventType, Guid>, IPropertyMigratorFragment> _propertyMigrationFragments;
+        private readonly Dictionary<Tuple<RelationMigrationEventType, Guid>, IRelationMigratorFragment> _relationMigrationFragments;
 
         private readonly IZetboxContext _savedSchema;
         public IZetboxContext savedSchema
@@ -56,11 +60,14 @@ namespace Zetbox.Server.SchemaManagement
         }
         #endregion
 
-        internal Cases(IZetboxContext schema, ISchemaProvider db, IZetboxContext savedSchema)
+        internal Cases(IZetboxContext schema, ISchemaProvider db, IZetboxContext savedSchema, IEnumerable<IMigratorFragment> migrationFragments)
         {
             this.schema = schema;
             this.db = db;
             this._savedSchema = savedSchema;
+            this._classMigrationFragments = migrationFragments.OfType<IClassMigratorFragment>().ToDictionary(cmf => new Tuple<ClassMigrationEventType, Guid>(cmf.ClassEventType, cmf.Target));
+            this._propertyMigrationFragments = migrationFragments.OfType<IPropertyMigratorFragment>().ToDictionary(cmf => new Tuple<PropertyMigrationEventType, Guid>(cmf.PropertyEventType, cmf.Target));
+            this._relationMigrationFragments = migrationFragments.OfType<IRelationMigratorFragment>().ToDictionary(cmf => new Tuple<RelationMigrationEventType, Guid>(cmf.RelationEventType, cmf.Target));
         }
 
         // Add all IsCase_ + DoCase_ Methods
@@ -68,33 +75,38 @@ namespace Zetbox.Server.SchemaManagement
         #region Cases
 
         #region DeleteObjectClass
-        public bool IsDeleteObjectClass(ObjectClass objClass)
+        public bool IsDeleteObjectClass(ObjectClass savedObjClass)
         {
-            return schema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid) == null;
+            return schema.FindPersistenceObject<ObjectClass>(savedObjClass.ExportGuid) == null;
         }
-        public void DoDeleteObjectClass(ObjectClass objClass)
+        public void DoDeleteObjectClass(ObjectClass savedObjClass)
         {
-            if (objClass.NeedsRightsTable())
+            if (PreMigration(ClassMigrationEventType.Delete, savedObjClass, null))
+                return;
+
+            if (savedObjClass.NeedsRightsTable())
             {
-                DoDeleteObjectClassSecurityRules(objClass);
+                DoDeleteObjectClassSecurityRules(savedObjClass);
             }
 
-            var mapping = objClass.GetTableMapping();
+            var mapping = savedObjClass.GetTableMapping();
             if (mapping == TableMapping.TPT)
             {
-                var tbl = objClass.GetTableRef(db);
+                var tbl = savedObjClass.GetTableRef(db);
                 Log.InfoFormat("Drop Table: {0}", tbl);
                 if (db.CheckTableExists(tbl))
                     db.DropTable(tbl);
             }
             else if (mapping == TableMapping.TPH)
             {
-                // Do delete all columns
+                // TODO: Do delete all columns
             }
             else
             {
                 throw new NotSupportedException(string.Format("Mapping {0} is not supported", mapping));
             }
+
+            PostMigration(ClassMigrationEventType.Delete, savedObjClass, null);
         }
         #endregion
 
@@ -105,6 +117,9 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewObjectClass(ObjectClass objClass)
         {
+            if (PreMigration(ClassMigrationEventType.Add, null, objClass))
+                return;
+
             TableMapping mapping = objClass.GetTableMapping();
             if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
             {
@@ -127,7 +142,10 @@ namespace Zetbox.Server.SchemaManagement
             {
                 Log.DebugFormat("Skipping table for TPH child {0}", objClass.Name);
             }
+
+            PostMigration(ClassMigrationEventType.Add, null, objClass);
         }
+
         #endregion
 
         #region RenameObjectClassTable
@@ -139,12 +157,18 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoRenameObjectClassTable(ObjectClass objClass)
         {
+            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+
+            if (PreMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass))
+                return;
+
             var mapping = objClass.GetTableMapping();
             if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
             {
-                var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-                db.RenameTable(saved.GetTableRef(db), objClass.GetTableRef(db));
+                db.RenameTable(savedObjClass.GetTableRef(db), objClass.GetTableRef(db));
             }
+
+            PostMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass);
         }
         #endregion
 
@@ -158,9 +182,15 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+
+            if (PreMigration(PropertyMigrationEventType.Rename, savedProp, prop))
+                return;
+
             // TODO: What if prefix has changed
-            db.RenameColumn(objClass.GetTableRef(db), Construct.ColumnName(saved, prefix), Construct.ColumnName(prop, prefix));
+            db.RenameColumn(objClass.GetTableRef(db), Construct.ColumnName(savedProp, prefix), Construct.ColumnName(prop, prefix));
+
+            PostMigration(PropertyMigrationEventType.Rename, savedProp, prop);
         }
         #endregion
 
@@ -173,17 +203,20 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoMoveValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+
+            if (PreMigration(PropertyMigrationEventType.Move, savedProp, prop))
+                return;
 
             // Reflected changed hierarchie
-            var currentOriginObjClass = schema.FindPersistenceObject<ObjectClass>(saved.ObjectClass.ExportGuid);
+            var currentOriginObjClass = schema.FindPersistenceObject<ObjectClass>(savedProp.ObjectClass.ExportGuid);
             var movedUp = IsParentOf(objClass, currentOriginObjClass);
             var movedDown = IsParentOf(currentOriginObjClass, objClass);
 
             var tblName = objClass.GetTableRef(db);
-            var srcTblName = ((ObjectClass)saved.ObjectClass).GetTableRef(db);
+            var srcTblName = ((ObjectClass)savedProp.ObjectClass).GetTableRef(db);
             var colName = Construct.ColumnName(prop, prefix);
-            var srcColName = Construct.ColumnName(saved, prefix); // TODO: What if prefix has changed
+            var srcColName = Construct.ColumnName(savedProp, prefix); // TODO: What if prefix has changed
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
             var scale = prop.GetScale();
@@ -191,7 +224,7 @@ namespace Zetbox.Server.SchemaManagement
 
             if (movedUp)
             {
-                Log.InfoFormat("Moving property '{0}' from '{1}' up to '{2}'", prop.Name, saved.ObjectClass.Name, objClass.Name);
+                Log.InfoFormat("Moving property '{0}' from '{1}' up to '{2}'", prop.Name, savedProp.ObjectClass.Name, objClass.Name);
                 db.CreateColumn(tblName, colName, dbType, size, scale, true, defConstr);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
@@ -213,7 +246,7 @@ namespace Zetbox.Server.SchemaManagement
             }
             else if (movedDown)
             {
-                Log.InfoFormat("Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.Name, saved.ObjectClass.Name, objClass.Name);
+                Log.InfoFormat("Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.Name, savedProp.ObjectClass.Name, objClass.Name);
                 db.CreateColumn(tblName, colName, dbType, size, scale, true, defConstr);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
@@ -228,9 +261,11 @@ namespace Zetbox.Server.SchemaManagement
             }
             else
             {
-                Log.ErrorFormat("Moving property '{2}' from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy. Will only create destination column.", saved.ObjectClass.Name, prop.ObjectClass.Name, prop.Name);
+                Log.ErrorFormat("Moving property '{2}' from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy. Will only create destination column.", savedProp.ObjectClass.Name, prop.ObjectClass.Name, prop.Name);
                 db.CreateColumn(tblName, colName, dbType, size, scale, true, defConstr);
             }
+
+            PostMigration(PropertyMigrationEventType.Move, savedProp, prop);
         }
 
         private static bool IsParentOf(ObjectClass objClass, ObjectClass child)
@@ -255,9 +290,14 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
+            if (PreMigration(PropertyMigrationEventType.Add, null, prop))
+                return;
+
             string colName = Construct.ColumnName(prop, prefix);
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
             CreateValueTypePropertyNullable(objClass.GetTableRef(db), prop, colName);
+
+            PostMigration(PropertyMigrationEventType.Add, null, prop);
         }
 
         private void CreateValueTypePropertyNullable(TableRef tblName, ValueTypeProperty prop, string colName)
@@ -274,6 +314,9 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyNotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
+            if (PreMigration(PropertyMigrationEventType.Add, null, prop))
+                return;
+
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(prop, prefix);
             var dbType = prop.GetDbType();
@@ -315,6 +358,8 @@ namespace Zetbox.Server.SchemaManagement
             {
                 Log.ErrorFormat("unable to create CHECK constraint on ValueType Property '{0}' when table '{1}' contains data: No supported default constraint found", colName, tblName);
             }
+
+            PostMigration(PropertyMigrationEventType.Add, null, prop);
         }
 
         private void CreateTPHNotNullCheckConstraint(TableRef tblName, string colName, ObjectClass objClass)
@@ -386,6 +431,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeDefaultValue(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
+            var savedProp = savedSchema.FindPersistenceObject<Property>(prop.ExportGuid);
+
+            if (PreMigration(PropertyMigrationEventType.ChangeDefaultValueDefinition, savedProp, prop))
+                return;
+
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(prop, prefix);
 
@@ -394,6 +444,8 @@ namespace Zetbox.Server.SchemaManagement
             var currentIsNullable = db.GetIsColumnNullable(tblName, colName);
 
             db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), currentIsNullable, SchemaManager.GetDefaultConstraint(prop));
+
+            PostMigration(PropertyMigrationEventType.ChangeDefaultValueDefinition, savedProp, prop);
         }
         #endregion
 
@@ -406,6 +458,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeValueTypeProperty_To_NotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
+            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+
+            if (PreMigration(PropertyMigrationEventType.ChangeToNotNullable, savedProp, prop))
+                return;
+
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(prop, prefix);
 
@@ -417,6 +474,8 @@ namespace Zetbox.Server.SchemaManagement
             {
                 db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null);
             }
+
+            PostMigration(PropertyMigrationEventType.ChangeToNotNullable, savedProp, prop);
         }
         #endregion
 
@@ -429,10 +488,17 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeValueTypeProperty_To_Nullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
+            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+
+            if (PreMigration(PropertyMigrationEventType.ChangeToNullable, savedProp, prop))
+                return;
+
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(prop, prefix);
 
             db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null);
+
+            PostMigration(PropertyMigrationEventType.ChangeToNullable, savedProp, prop);
         }
         #endregion
 
@@ -445,8 +511,14 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoRenameValueTypePropertyListName(ObjectClass objClass, ValueTypeProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", saved.Name, prop.Name);
+            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+
+            if (PreMigration(PropertyMigrationEventType.Rename, savedProp, prop))
+                return;
+
+            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", savedProp.Name, prop.Name);
+
+            PostMigration(PropertyMigrationEventType.Rename, savedProp, prop);
         }
         #endregion
 
@@ -459,8 +531,14 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoMoveValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.Name, prop.ObjectClass.Name);
+            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+
+            if (PreMigration(PropertyMigrationEventType.Move, savedProp, prop))
+                return;
+
+            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", savedProp.ObjectClass.Name, prop.ObjectClass.Name);
+
+            PostMigration(PropertyMigrationEventType.Move, savedProp, prop);
         }
         #endregion
 
@@ -471,6 +549,9 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
+            if (PreMigration(PropertyMigrationEventType.Add, null, prop))
+                return;
+
             Log.InfoFormat("New ValueType Property List: {0}", prop.Name);
             var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
             string fkName = Construct.ForeignKeyColumnName(prop);
@@ -490,6 +571,8 @@ namespace Zetbox.Server.SchemaManagement
             }
             db.CreateFKConstraint(tblName, objClass.GetTableRef(db), fkName, assocName, true);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
+
+            PostMigration(PropertyMigrationEventType.Add, null, prop);
         }
         #endregion
 
@@ -500,6 +583,9 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty cprop)
         {
+            if (PreMigration(PropertyMigrationEventType.Add, null, cprop))
+                return;
+
             Log.InfoFormat("New CompoundObject Property List: {0}", cprop.Name);
             var tblName = db.GetTableName(cprop.Module.SchemaName, cprop.GetCollectionEntryTable());
             string fkName = Construct.ForeignKeyColumnName(cprop);
@@ -523,6 +609,8 @@ namespace Zetbox.Server.SchemaManagement
             }
             db.CreateFKConstraint(tblName, objClass.GetTableRef(db), fkName, assocName, true);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
+
+            PostMigration(PropertyMigrationEventType.Add, null, cprop);
         }
         #endregion
 
@@ -533,10 +621,16 @@ namespace Zetbox.Server.SchemaManagement
             if (saved == null) return false;
             return saved.Name != prop.Name;
         }
-        public void DoRenameCompoundObjectPropertyListName(ObjectClass objClass, CompoundObjectProperty prop)
+        public void DoRenameCompoundObjectPropertyListName(ObjectClass objClass, CompoundObjectProperty cprop)
         {
-            var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
-            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", saved.Name, prop.Name);
+            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(cprop.ExportGuid);
+
+            if (PreMigration(PropertyMigrationEventType.Rename, savedProp, cprop))
+                return;
+
+            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", savedProp.Name, cprop.Name);
+
+            PostMigration(PropertyMigrationEventType.Rename, savedProp, cprop);
         }
         #endregion
 
@@ -547,10 +641,16 @@ namespace Zetbox.Server.SchemaManagement
             if (saved == null) return false;
             return saved.ObjectClass.ExportGuid != prop.ObjectClass.ExportGuid;
         }
-        public void DoMoveCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty prop)
+        public void DoMoveCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty cprop)
         {
-            var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
-            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.Name, prop.ObjectClass.Name);
+            var savedProp = savedSchema.FindPersistenceObject<ValueTypeProperty>(cprop.ExportGuid);
+
+            if (PreMigration(PropertyMigrationEventType.Move, savedProp, cprop))
+                return;
+
+            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", savedProp.ObjectClass.Name, cprop.ObjectClass.Name);
+
+            PostMigration(PropertyMigrationEventType.Move, savedProp, cprop);
         }
         #endregion
 
@@ -564,6 +664,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void Do_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
+                return;
+
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Create 1:N Relation Position Storage: {0}", assocName);
 
@@ -588,6 +693,8 @@ namespace Zetbox.Server.SchemaManagement
             string colName = Construct.ListPositionColumnName(otherEnd);
             // always allow nulls for items missing a definite order
             db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
+
+            PostMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel);
         }
         #endregion
 
@@ -601,6 +708,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void Do_1_N_RelationChange_FromIndexed_To_NotIndexed(Relation rel)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
+                return;
+
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Drop 1:N Relation Position Storage: {0}", assocName);
 
@@ -624,6 +736,8 @@ namespace Zetbox.Server.SchemaManagement
 
             if (db.CheckColumnExists(tblName, Construct.ListPositionColumnName(otherEnd)))
                 db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
+
+            PostMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel);
         }
         #endregion
 
@@ -637,6 +751,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void Do_1_N_RelationChange_FromNotNullable_To_Nullable(Relation rel)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel))
+                return;
+
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Make 1:N relation optional: {0}", assocName);
 
@@ -661,6 +780,8 @@ namespace Zetbox.Server.SchemaManagement
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+
+            PostMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel);
         }
         #endregion
 
@@ -674,6 +795,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void Do_1_N_RelationChange_FromNullable_To_NotNullable(Relation rel)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel))
+                return;
+
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Make 1:N relation mandatory: {0}", assocName);
 
@@ -705,6 +831,8 @@ namespace Zetbox.Server.SchemaManagement
             {
                 db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
             }
+
+            PostMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel);
         }
         #endregion
 
@@ -713,29 +841,32 @@ namespace Zetbox.Server.SchemaManagement
         {
             return schema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
         }
-        public void DoDelete_1_N_Relation(Relation rel)
+        public void DoDelete_1_N_Relation(Relation savedRel)
         {
-            string assocName = rel.GetAssociationName();
+            if (PreMigration(RelationMigrationEventType.Delete, savedRel, null))
+                return;
+
+            string assocName = savedRel.GetAssociationName();
             Log.InfoFormat("Deleting 1:N Relation: {0}", assocName);
 
             TableRef tblName;
             bool isIndexed = false;
             RelationEnd otherEnd;
-            if (rel.HasStorage(RelationEndRole.A))
+            if (savedRel.HasStorage(RelationEndRole.A))
             {
-                tblName = rel.A.Type.GetTableRef(db);
-                isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
-                otherEnd = rel.B;
+                tblName = savedRel.A.Type.GetTableRef(db);
+                isIndexed = savedRel.NeedsPositionStorage(RelationEndRole.A);
+                otherEnd = savedRel.B;
             }
-            else if (rel.HasStorage(RelationEndRole.B))
+            else if (savedRel.HasStorage(RelationEndRole.B))
             {
-                tblName = rel.B.Type.GetTableRef(db);
-                isIndexed = rel.NeedsPositionStorage(RelationEndRole.B);
-                otherEnd = rel.A;
+                tblName = savedRel.B.Type.GetTableRef(db);
+                isIndexed = savedRel.NeedsPositionStorage(RelationEndRole.B);
+                otherEnd = savedRel.A;
             }
             else
             {
-                Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
+                Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, savedRel.Storage);
                 return;
             }
 
@@ -749,6 +880,8 @@ namespace Zetbox.Server.SchemaManagement
 
             if (isIndexed && db.CheckColumnExists(tblName, Construct.ListPositionColumnName(otherEnd)))
                 db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
+
+            PostMigration(RelationMigrationEventType.Delete, savedRel, null);
         }
         #endregion
 
@@ -773,7 +906,10 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_1_1_to_1_n(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+                return;
 
             string destAssocName = rel.GetAssociationName();
             Log.InfoFormat("Changing 1:1 Relation to 1:N: {0}", destAssocName);
@@ -808,17 +944,17 @@ namespace Zetbox.Server.SchemaManagement
 
             // Difference to 1:N. 1:1 may have storage 'Replicate'
             // use best matching
-            if (saved.HasStorage(RelationEndRole.A))
+            if (savedRel.HasStorage(RelationEndRole.A))
             {
-                srcSchemaName = saved.A.Type.Module.SchemaName;
-                srcTblName = saved.A.Type.TableName;
-                srcColName = Construct.ForeignKeyColumnName(saved.B);
+                srcSchemaName = savedRel.A.Type.Module.SchemaName;
+                srcTblName = savedRel.A.Type.TableName;
+                srcColName = Construct.ForeignKeyColumnName(savedRel.B);
             }
-            if (saved.HasStorage(RelationEndRole.B) && (string.IsNullOrEmpty(srcSchemaName) || string.IsNullOrEmpty(srcTblName) || db.GetTableName(srcSchemaName, srcTblName) != destTblRef))
+            if (savedRel.HasStorage(RelationEndRole.B) && (string.IsNullOrEmpty(srcSchemaName) || string.IsNullOrEmpty(srcTblName) || db.GetTableName(srcSchemaName, srcTblName) != destTblRef))
             {
-                srcSchemaName = saved.B.Type.Module.SchemaName;
-                srcTblName = saved.B.Type.TableName;
-                srcColName = Construct.ForeignKeyColumnName(saved.A);
+                srcSchemaName = savedRel.B.Type.Module.SchemaName;
+                srcTblName = savedRel.B.Type.TableName;
+                srcColName = Construct.ForeignKeyColumnName(savedRel.A);
             }
 
             var srcTblRef = db.GetTableName(srcSchemaName, srcTblName);
@@ -861,11 +997,11 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             // Cleanup
-            if (saved.HasStorage(RelationEndRole.A))
+            if (savedRel.HasStorage(RelationEndRole.A))
             {
-                srcTblName = saved.A.Type.TableName;
-                srcColName = Construct.ForeignKeyColumnName(saved.B);
-                var srcAssocName = saved.GetRelationAssociationName(RelationEndRole.A);
+                srcTblName = savedRel.A.Type.TableName;
+                srcColName = Construct.ForeignKeyColumnName(savedRel.B);
+                var srcAssocName = savedRel.GetRelationAssociationName(RelationEndRole.A);
 
                 if (db.CheckFKConstraintExists(srcTblRef, srcAssocName))
                     db.DropFKConstraint(srcTblRef, srcAssocName);
@@ -875,11 +1011,11 @@ namespace Zetbox.Server.SchemaManagement
                         db.DropColumn(srcTblRef, srcColName);
                 }
             }
-            if (saved.HasStorage(RelationEndRole.B))
+            if (savedRel.HasStorage(RelationEndRole.B))
             {
-                srcTblName = saved.B.Type.TableName;
-                srcColName = Construct.ForeignKeyColumnName(saved.A);
-                var srcAssocName = saved.GetRelationAssociationName(RelationEndRole.B);
+                srcTblName = savedRel.B.Type.TableName;
+                srcColName = Construct.ForeignKeyColumnName(savedRel.A);
+                var srcAssocName = savedRel.GetRelationAssociationName(RelationEndRole.B);
 
                 if (db.CheckFKConstraintExists(srcTblRef, srcAssocName))
                     db.DropFKConstraint(srcTblRef, srcAssocName);
@@ -889,6 +1025,7 @@ namespace Zetbox.Server.SchemaManagement
                         db.DropColumn(srcTblRef, srcColName);
                 }
             }
+
         }
         #endregion
 
@@ -903,21 +1040,23 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_1_1_to_n_m(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
-            string srcAssocName = saved.GetAssociationName();
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+                return; string srcAssocName = savedRel.GetAssociationName();
 
             RelationEnd relEnd, otherEnd;
 
-            switch (saved.Storage)
+            switch (savedRel.Storage)
             {
                 case StorageType.Replicate:
                 case StorageType.MergeIntoA:
-                    relEnd = saved.A;
-                    otherEnd = saved.B;
+                    relEnd = savedRel.A;
+                    otherEnd = savedRel.B;
                     break;
                 case StorageType.MergeIntoB:
-                    otherEnd = saved.A;
-                    relEnd = saved.B;
+                    otherEnd = savedRel.A;
+                    relEnd = savedRel.B;
                     break;
                 default:
                     Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", srcAssocName, rel.Storage);
@@ -926,8 +1065,8 @@ namespace Zetbox.Server.SchemaManagement
 
             var aType = rel.A.Type;
             var bType = rel.B.Type;
-            var savedAType = saved.A.Type;
-            var savedBType = saved.B.Type;
+            var savedAType = savedRel.A.Type;
+            var savedBType = savedRel.B.Type;
 
             var srcTblName = relEnd.Type.GetTableRef(db);
             var srcColName = Construct.ForeignKeyColumnName(otherEnd);
@@ -937,10 +1076,10 @@ namespace Zetbox.Server.SchemaManagement
             var destFKCol = Construct.ForeignKeyColumnName(otherEnd);
 
             // Drop relations first as 1:1 and n:m relations share the same names
-            var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
+            var srcAssocA = savedRel.GetRelationAssociationName(RelationEndRole.A);
             if (db.CheckFKConstraintExists(aType.GetTableRef(db), srcAssocA))
                 db.DropFKConstraint(aType.GetTableRef(db), srcAssocA);
-            var srcAssocB = saved.GetRelationAssociationName(RelationEndRole.B);
+            var srcAssocB = savedRel.GetRelationAssociationName(RelationEndRole.B);
             if (db.CheckFKConstraintExists(bType.GetTableRef(db), srcAssocB))
                 db.DropFKConstraint(bType.GetTableRef(db), srcAssocB);
 
@@ -948,16 +1087,18 @@ namespace Zetbox.Server.SchemaManagement
             db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
 
             // Drop columns
-            if (saved.Storage == StorageType.MergeIntoA || saved.Storage == StorageType.Replicate)
+            if (savedRel.Storage == StorageType.MergeIntoA || savedRel.Storage == StorageType.Replicate)
             {
-                if (db.CheckColumnExists(savedAType.GetTableRef(db), Construct.ForeignKeyColumnName(saved.B)))
-                    db.DropColumn(savedAType.GetTableRef(db), Construct.ForeignKeyColumnName(saved.B));
+                if (db.CheckColumnExists(savedAType.GetTableRef(db), Construct.ForeignKeyColumnName(savedRel.B)))
+                    db.DropColumn(savedAType.GetTableRef(db), Construct.ForeignKeyColumnName(savedRel.B));
             }
-            if (saved.Storage == StorageType.MergeIntoB || saved.Storage == StorageType.Replicate)
+            if (savedRel.Storage == StorageType.MergeIntoB || savedRel.Storage == StorageType.Replicate)
             {
-                if (db.CheckColumnExists(savedBType.GetTableRef(db), Construct.ForeignKeyColumnName(saved.A)))
-                    db.DropColumn(savedBType.GetTableRef(db), Construct.ForeignKeyColumnName(saved.A));
+                if (db.CheckColumnExists(savedBType.GetTableRef(db), Construct.ForeignKeyColumnName(savedRel.A)))
+                    db.DropColumn(savedBType.GetTableRef(db), Construct.ForeignKeyColumnName(savedRel.A));
             }
+
+            PostMigration(RelationMigrationEventType.ChangeType, savedRel, rel);
         }
         #endregion
 
@@ -972,20 +1113,22 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_1_n_to_1_1(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
-            string srcAssocName = saved.GetAssociationName();
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+                return; string srcAssocName = savedRel.GetAssociationName();
 
             RelationEnd relEnd, otherEnd;
 
-            switch (saved.Storage)
+            switch (savedRel.Storage)
             {
                 case StorageType.MergeIntoA:
-                    relEnd = saved.A;
-                    otherEnd = saved.B;
+                    relEnd = savedRel.A;
+                    otherEnd = savedRel.B;
                     break;
                 case StorageType.MergeIntoB:
-                    otherEnd = saved.A;
-                    relEnd = saved.B;
+                    otherEnd = savedRel.A;
+                    relEnd = savedRel.B;
                     break;
                 default:
                     Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", srcAssocName, rel.Storage);
@@ -1076,6 +1219,8 @@ namespace Zetbox.Server.SchemaManagement
 
             if (!srcColWasReused && db.CheckColumnExists(srcTblName, srcColName))
                 db.DropColumn(srcTblName, srcColName);
+
+            PostMigration(RelationMigrationEventType.ChangeType, savedRel, rel);
         }
         #endregion
 
@@ -1090,20 +1235,24 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_1_n_to_n_m(Relation rel)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+                return;
+
             string srcAssocName = rel.GetAssociationName();
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
             RelationEnd relEnd, otherEnd;
 
-            switch (saved.Storage)
+            switch (savedRel.Storage)
             {
                 case StorageType.MergeIntoA:
-                    relEnd = saved.A;
-                    otherEnd = saved.B;
+                    relEnd = savedRel.A;
+                    otherEnd = savedRel.B;
                     break;
                 case StorageType.MergeIntoB:
-                    otherEnd = saved.A;
-                    relEnd = saved.B;
+                    otherEnd = savedRel.A;
+                    relEnd = savedRel.B;
                     break;
                 default:
                     Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", srcAssocName, rel.Storage);
@@ -1119,7 +1268,9 @@ namespace Zetbox.Server.SchemaManagement
 
             DoNew_N_M_Relation(rel);
             db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
-            DoDelete_1_N_Relation(saved);
+            DoDelete_1_N_Relation(savedRel);
+
+            PostMigration(RelationMigrationEventType.ChangeType, savedRel, rel);
         }
         #endregion
 
@@ -1134,16 +1285,20 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_n_m_to_1_1(Relation rel)
         {
-            string destAssocName = rel.GetAssociationName();
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            var srcTblName = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
+            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+                return;
+
+            string destAssocName = rel.GetAssociationName();
+
+            var srcTblName = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
 
             // Drop relations first as 1:1 and n:m relations share the same names
-            var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
+            var srcAssocA = savedRel.GetRelationAssociationName(RelationEndRole.A);
             if (db.CheckFKConstraintExists(srcTblName, srcAssocA))
                 db.DropFKConstraint(srcTblName, srcAssocA);
-            var srcAssocB = saved.GetRelationAssociationName(RelationEndRole.B);
+            var srcAssocB = savedRel.GetRelationAssociationName(RelationEndRole.B);
             if (db.CheckFKConstraintExists(srcTblName, srcAssocB))
                 db.DropFKConstraint(srcTblName, srcAssocB);
 
@@ -1180,6 +1335,8 @@ namespace Zetbox.Server.SchemaManagement
 
             if (db.CheckTableExists(srcTblName))
                 db.DropTable(srcTblName);
+
+            PostMigration(RelationMigrationEventType.ChangeType, savedRel, rel);
         }
         #endregion
 
@@ -1194,6 +1351,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_n_m_to_1_n(Relation rel)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeType, savedRel, rel))
+                return;
+
             string destAssocName = rel.GetAssociationName();
 
             RelationEnd relEnd, otherEnd;
@@ -1213,12 +1375,10 @@ namespace Zetbox.Server.SchemaManagement
                     return;
             }
 
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
-
-            var srcTbl = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
+            var srcTbl = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
             // translate ends to savedEnds
-            var srcCol = Construct.ForeignKeyColumnName(saved.GetEndFromRole(otherEnd.GetRole()));
-            var srcFKCol = Construct.ForeignKeyColumnName(saved.GetEndFromRole(relEnd.GetRole()));
+            var srcCol = Construct.ForeignKeyColumnName(savedRel.GetEndFromRole(otherEnd.GetRole()));
+            var srcFKCol = Construct.ForeignKeyColumnName(savedRel.GetEndFromRole(relEnd.GetRole()));
 
             if (!db.CheckFKColumnContainsUniqueValues(srcTbl, srcCol))
             {
@@ -1231,7 +1391,9 @@ namespace Zetbox.Server.SchemaManagement
 
             DoNew_1_N_Relation(rel);
             db.CopyFKs(srcTbl, srcCol, destTblName, destColName, srcFKCol);
-            DoDelete_N_M_Relation(saved);
+            DoDelete_N_M_Relation(savedRel);
+
+            PostMigration(RelationMigrationEventType.ChangeType, savedRel, rel);
         }
         #endregion
 
@@ -1247,31 +1409,34 @@ namespace Zetbox.Server.SchemaManagement
 
         public void DoChangeRelationEndTypes(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeEndType, savedRel, rel))
+                return;
 
             if (rel.GetRelationType() == RelationType.n_m)
             {
-                var oldTblName = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
+                var oldTblName = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
                 if (db.CheckTableContainsData(oldTblName))
                 {
-                    if (saved.A.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.A.Type.ExportGuid)
-                        && saved.B.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.B.Type.ExportGuid))
+                    if (savedRel.A.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.A.Type.ExportGuid)
+                        && savedRel.B.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.B.Type.ExportGuid))
                     {
                         string assocName = rel.GetAssociationName();
                         Log.InfoFormat("Rewiring N:M Relation: {0}", assocName);
 
-                        if (db.CheckFKConstraintExists(oldTblName, saved.GetRelationAssociationName(RelationEndRole.A)))
-                            db.DropFKConstraint(oldTblName, saved.GetRelationAssociationName(RelationEndRole.A));
-                        if (db.CheckFKConstraintExists(oldTblName, saved.GetRelationAssociationName(RelationEndRole.B)))
-                            db.DropFKConstraint(oldTblName, saved.GetRelationAssociationName(RelationEndRole.B));
+                        if (db.CheckFKConstraintExists(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A)))
+                            db.DropFKConstraint(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A));
+                        if (db.CheckFKConstraintExists(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.B)))
+                            db.DropFKConstraint(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.B));
 
                         // renaming is handled by DoChangeRelationName
                         //db.RenameTable(oldTblName, newTblName);
 
-                        var fkAName = Construct.ForeignKeyColumnName(saved.A);
-                        var fkBName = Construct.ForeignKeyColumnName(saved.B);
-                        db.CreateFKConstraint(oldTblName, rel.A.Type.GetTableRef(db), fkAName, saved.GetRelationAssociationName(RelationEndRole.A), false);
-                        db.CreateFKConstraint(oldTblName, rel.B.Type.GetTableRef(db), fkBName, saved.GetRelationAssociationName(RelationEndRole.B), false);
+                        var fkAName = Construct.ForeignKeyColumnName(savedRel.A);
+                        var fkBName = Construct.ForeignKeyColumnName(savedRel.B);
+                        db.CreateFKConstraint(oldTblName, rel.A.Type.GetTableRef(db), fkAName, savedRel.GetRelationAssociationName(RelationEndRole.A), false);
+                        db.CreateFKConstraint(oldTblName, rel.B.Type.GetTableRef(db), fkBName, savedRel.GetRelationAssociationName(RelationEndRole.B), false);
                     }
                     else
                     {
@@ -1280,7 +1445,7 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
-                    DoDelete_N_M_Relation(saved);
+                    DoDelete_N_M_Relation(savedRel);
                     DoNew_N_M_Relation(rel);
                 }
             }
@@ -1291,12 +1456,12 @@ namespace Zetbox.Server.SchemaManagement
                 switch (rel.Storage)
                 {
                     case StorageType.MergeIntoA:
-                        relEnd = saved.A;
-                        otherEnd = saved.B;
+                        relEnd = savedRel.A;
+                        otherEnd = savedRel.B;
                         break;
                     case StorageType.MergeIntoB:
-                        otherEnd = saved.A;
-                        relEnd = saved.B;
+                        otherEnd = savedRel.A;
+                        relEnd = savedRel.B;
                         break;
                     default:
                         Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", rel.GetAssociationName(), rel.Storage);
@@ -1312,7 +1477,7 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
-                    DoDelete_1_N_Relation(saved);
+                    DoDelete_1_N_Relation(savedRel);
                     DoNew_1_N_Relation(rel);
                 }
             }
@@ -1324,12 +1489,12 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     case StorageType.MergeIntoA:
                     case StorageType.Replicate:
-                        relEnd = saved.A;
-                        otherEnd = saved.B;
+                        relEnd = savedRel.A;
+                        otherEnd = savedRel.B;
                         break;
                     case StorageType.MergeIntoB:
-                        otherEnd = saved.A;
-                        relEnd = saved.B;
+                        otherEnd = savedRel.A;
+                        relEnd = savedRel.B;
                         break;
                     default:
                         Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", rel.GetAssociationName(), rel.Storage);
@@ -1345,11 +1510,12 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
-                    DoDelete_1_1_Relation(saved);
+                    DoDelete_1_1_Relation(savedRel);
                     DoNew_1_1_Relation(rel);
                 }
             }
 
+            PostMigration(RelationMigrationEventType.ChangeEndType, savedRel, rel);
         }
         #endregion
 
@@ -1363,25 +1529,28 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeRelationName(Relation rel)
         {
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.Rename, savedRel, rel))
+                return;
 
             var fkAName = Construct.ForeignKeyColumnName(rel.A);
             var fkBName = Construct.ForeignKeyColumnName(rel.B);
 
-            var old_fkAName = Construct.ForeignKeyColumnName(saved.A);
-            var old_fkBName = Construct.ForeignKeyColumnName(saved.B);
+            var old_fkAName = Construct.ForeignKeyColumnName(savedRel.A);
+            var old_fkBName = Construct.ForeignKeyColumnName(savedRel.B);
 
             var aType = rel.A.Type;
             var bType = rel.B.Type;
 
             if (rel.GetRelationType() == RelationType.n_m)
             {
-                var srcRelTbl = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
+                var srcRelTbl = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
                 var destRelTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
 
-                db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.A),
+                db.RenameFKConstraint(srcRelTbl, savedRel.GetRelationAssociationName(RelationEndRole.A),
                     aType.GetTableRef(db), old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
-                db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.B),
+                db.RenameFKConstraint(srcRelTbl, savedRel.GetRelationAssociationName(RelationEndRole.B),
                     bType.GetTableRef(db), old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
 
                 db.RenameTable(srcRelTbl, destRelTbl);
@@ -1391,39 +1560,39 @@ namespace Zetbox.Server.SchemaManagement
             }
             else if (rel.GetRelationType() == RelationType.one_n)
             {
-                if (saved.HasStorage(RelationEndRole.A) &&
+                if (savedRel.HasStorage(RelationEndRole.A) &&
                     old_fkBName != fkBName)
                 {
                     var tbl = aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, saved.GetAssociationName(),
+                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(),
                        aType.GetTableRef(db), old_fkBName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, old_fkBName, fkBName);
                 }
-                else if (saved.HasStorage(RelationEndRole.B) &&
+                else if (savedRel.HasStorage(RelationEndRole.B) &&
                     old_fkAName != fkAName)
                 {
                     var tbl = bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, saved.GetAssociationName(),
+                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(),
                        bType.GetTableRef(db), old_fkAName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, old_fkAName, fkAName);
                 }
             }
             else if (rel.GetRelationType() == RelationType.one_one)
             {
-                if (saved.HasStorage(RelationEndRole.A))
+                if (savedRel.HasStorage(RelationEndRole.A))
                 {
                     var tbl = aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.A),
+                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.A),
                         aType.GetTableRef(db), old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                     if (old_fkBName != fkBName)
                     {
                         db.RenameColumn(tbl, old_fkBName, fkBName);
                     }
                 }
-                if (saved.HasStorage(RelationEndRole.B))
+                if (savedRel.HasStorage(RelationEndRole.B))
                 {
                     var tbl = bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.B),
+                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.B),
                         bType.GetTableRef(db), old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
                     if (old_fkAName != fkAName)
                     {
@@ -1431,6 +1600,8 @@ namespace Zetbox.Server.SchemaManagement
                     }
                 }
             }
+
+            PostMigration(RelationMigrationEventType.Rename, savedRel, rel);
         }
         #endregion
 
@@ -1441,6 +1612,9 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNew_1_N_Relation(Relation rel)
         {
+            if (PreMigration(RelationMigrationEventType.Add, null, rel))
+                return;
+
             string assocName, colName, listPosName;
             RelationEnd relEnd, otherEnd;
             TableRef tblName, refTblName;
@@ -1461,6 +1635,8 @@ namespace Zetbox.Server.SchemaManagement
                 Log.InfoFormat("Creating position column '{0}.{1}'", tblName, listPosName);
                 db.CreateColumn(tblName, listPosName, System.Data.DbType.Int32, 0, 0, true);
             }
+
+            PostMigration(RelationMigrationEventType.Add, null, rel);
         }
 
         /// <summary>
@@ -1518,6 +1694,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void Do_N_M_RelationChange_FromNotIndexed_To_Indexed(Relation rel, RelationEndRole role)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
+                return;
+
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Create N:M Relation {1} PositionStorage: {0}", assocName, role);
 
@@ -1525,6 +1706,8 @@ namespace Zetbox.Server.SchemaManagement
             var fkName = Construct.ForeignKeyColumnName(rel.GetEndFromRole(role));
 
             db.CreateColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
+
+            PostMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel);
         }
         #endregion
 
@@ -1537,6 +1720,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void Do_N_M_RelationChange_FromIndexed_To_NotIndexed(Relation rel, RelationEndRole role)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel))
+                return;
+
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Drop N:M Relation {1} PositionStorage: {0}", assocName, role);
 
@@ -1545,28 +1733,35 @@ namespace Zetbox.Server.SchemaManagement
 
             if (db.CheckColumnExists(tblName, fkName + Zetbox.API.Helper.PositionSuffix))
                 db.DropColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix);
+
+            PostMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel);
         }
         #endregion
 
         #region Delete_N_M_Relation
-        public bool IsDelete_N_M_Relation(Relation rel)
+        public bool IsDelete_N_M_Relation(Relation savedRel)
         {
-            return schema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
+            return schema.FindPersistenceObject<Relation>(savedRel.ExportGuid) == null;
         }
-        public void DoDelete_N_M_Relation(Relation rel)
+        public void DoDelete_N_M_Relation(Relation savedRel)
         {
-            string assocName = rel.GetAssociationName();
+            if (PreMigration(RelationMigrationEventType.Delete, savedRel, null))
+                return;
+
+            string assocName = savedRel.GetAssociationName();
             Log.InfoFormat("Deleting N:M Relation: {0}", assocName);
 
-            var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
+            var tblName = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
 
-            if (db.CheckFKConstraintExists(tblName, rel.GetRelationAssociationName(RelationEndRole.A)))
-                db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.A));
-            if (db.CheckFKConstraintExists(tblName, rel.GetRelationAssociationName(RelationEndRole.B)))
-                db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.B));
+            if (db.CheckFKConstraintExists(tblName, savedRel.GetRelationAssociationName(RelationEndRole.A)))
+                db.DropFKConstraint(tblName, savedRel.GetRelationAssociationName(RelationEndRole.A));
+            if (db.CheckFKConstraintExists(tblName, savedRel.GetRelationAssociationName(RelationEndRole.B)))
+                db.DropFKConstraint(tblName, savedRel.GetRelationAssociationName(RelationEndRole.B));
 
             if (db.CheckTableExists(tblName))
                 db.DropTable(tblName);
+
+            PostMigration(RelationMigrationEventType.Delete, savedRel, null);
         }
         #endregion
 
@@ -1577,6 +1772,9 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNew_N_M_Relation(Relation rel)
         {
+            if (PreMigration(RelationMigrationEventType.Add, null, rel))
+                return;
+
             string assocName, fkAName, fkBName;
             TableRef tblName;
             ObjectClass aType, bType;
@@ -1621,6 +1819,8 @@ namespace Zetbox.Server.SchemaManagement
                 // Relation is in a ACL selector
                 DoCreateUpdateRightsTrigger(rel);
             }
+
+            PostMigration(RelationMigrationEventType.Add, null, rel);
         }
 
         private bool TryInspect_N_M_Relation(Relation rel, out string assocName, out TableRef tblName, out string fkAName, out string fkBName, out ObjectClass aType, out ObjectClass bType)
@@ -1638,23 +1838,28 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region Delete_1_1_Relation
-        public bool IsDelete_1_1_Relation(Relation rel)
+        public bool IsDelete_1_1_Relation(Relation savedRel)
         {
-            return schema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
+            return schema.FindPersistenceObject<Relation>(savedRel.ExportGuid) == null;
         }
-        public void DoDelete_1_1_Relation(Relation rel)
+        public void DoDelete_1_1_Relation(Relation savedRel)
         {
-            Log.InfoFormat("Deleting 1:1 Relation: {0}", rel.GetAssociationName());
+            if (PreMigration(RelationMigrationEventType.Delete, savedRel, null))
+                return;
 
-            if (rel.HasStorage(RelationEndRole.A))
+            Log.InfoFormat("Deleting 1:1 Relation: {0}", savedRel.GetAssociationName());
+
+            if (savedRel.HasStorage(RelationEndRole.A))
             {
-                Delete_1_1_Relation_DropColumns(rel, rel.A, rel.B, RelationEndRole.A);
+                Delete_1_1_Relation_DropColumns(savedRel, savedRel.A, savedRel.B, RelationEndRole.A);
             }
             // Difference to 1:N. 1:1 may have storage 'Replicate'
-            if (rel.HasStorage(RelationEndRole.B))
+            if (savedRel.HasStorage(RelationEndRole.B))
             {
-                Delete_1_1_Relation_DropColumns(rel, rel.B, rel.A, RelationEndRole.B);
+                Delete_1_1_Relation_DropColumns(savedRel, savedRel.B, savedRel.A, RelationEndRole.B);
             }
+
+            PostMigration(RelationMigrationEventType.Delete, savedRel, null);
         }
 
         private void Delete_1_1_Relation_DropColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
@@ -1680,6 +1885,9 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNew_1_1_Relation(Relation rel)
         {
+            if (PreMigration(RelationMigrationEventType.Add, null, rel))
+                return;
+
             Log.InfoFormat("New 1:1 Relation: {0}", rel.GetAssociationName());
 
             if (rel.Storage == StorageType.MergeIntoA || rel.Storage == StorageType.Replicate)
@@ -1691,6 +1899,8 @@ namespace Zetbox.Server.SchemaManagement
             {
                 New_1_1_Relation_CreateColumns(rel, rel.B, rel.A, RelationEndRole.B);
             }
+
+            PostMigration(RelationMigrationEventType.Add, null, rel);
         }
 
         private void New_1_1_Relation_CreateColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
@@ -1767,19 +1977,24 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChange_1_1_Storage(Relation rel)
         {
-            Log.InfoFormat("Changing 1:1 Relation Storage: {0}", rel.GetAssociationName());
-            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            if (saved.Storage == StorageType.Replicate)
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeStorage, savedRel, rel))
+                return;
+
+            Log.InfoFormat("Changing 1:1 Relation Storage: {0}", rel.GetAssociationName());
+
+            if (savedRel.Storage == StorageType.Replicate)
             {
                 // To MergeIntoA or MergeIntoB
                 if (rel.HasStorage(RelationEndRole.B))
                 {
-                    Delete_1_1_Relation_DropColumns(saved, saved.A, saved.B, RelationEndRole.A);
+                    Delete_1_1_Relation_DropColumns(savedRel, savedRel.A, savedRel.B, RelationEndRole.A);
                 }
                 else if (rel.HasStorage(RelationEndRole.A))
                 {
-                    Delete_1_1_Relation_DropColumns(saved, saved.B, saved.A, RelationEndRole.B);
+                    Delete_1_1_Relation_DropColumns(savedRel, savedRel.B, savedRel.A, RelationEndRole.B);
                 }
             }
             else
@@ -1788,7 +2003,7 @@ namespace Zetbox.Server.SchemaManagement
                 RelationEnd otherEnd;
                 RelationEndRole role;
                 RelationEndRole otherRole;
-                if (saved.Storage == StorageType.MergeIntoA)
+                if (savedRel.Storage == StorageType.MergeIntoA)
                 {
                     // To MergeIntoB or Replicate
                     relEnd = rel.B;
@@ -1797,7 +2012,7 @@ namespace Zetbox.Server.SchemaManagement
                     otherRole = RelationEndRole.A;
 
                 }
-                else if (saved.Storage == StorageType.MergeIntoB)
+                else if (savedRel.Storage == StorageType.MergeIntoB)
                 {
                     // To MergeIntoA or Replicate
                     relEnd = rel.A;
@@ -1807,7 +2022,7 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
-                    throw new InvalidOperationException("Unexpected saved stroage type " + saved.Storage.ToString());
+                    throw new InvalidOperationException("Unexpected saved stroage type " + savedRel.Storage.ToString());
                 }
 
                 New_1_1_Relation_CreateColumns(rel, relEnd, otherEnd, role);
@@ -1833,11 +2048,13 @@ namespace Zetbox.Server.SchemaManagement
                     Delete_1_1_Relation_DropColumns(rel, otherEnd, relEnd, otherRole);
                 }
             }
+
+            PostMigration(RelationMigrationEventType.ChangeStorage, savedRel, rel);
         }
         #endregion
 
         #region 1_1_RelationChange_FromNullable_To_NotNullable
-        public bool Is1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
+        public bool Is_1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
         {
             Relation savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
             if (savedRel == null)
@@ -1849,8 +2066,13 @@ namespace Zetbox.Server.SchemaManagement
                     || (rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
                     || (rel.Storage == StorageType.Replicate));
         }
-        public void Do1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
+        public void Do_1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel))
+                return;
+
             RelationEnd relEnd = rel.GetEndFromRole(role);
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
@@ -1858,11 +2080,13 @@ namespace Zetbox.Server.SchemaManagement
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+
+            PostMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel);
         }
         #endregion
 
         #region 1_1_RelationChange_FromNotNullable_To_Nullable
-        public bool Is1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
+        public bool Is_1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
         {
             Relation savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
             if (savedRel == null)
@@ -1874,8 +2098,13 @@ namespace Zetbox.Server.SchemaManagement
                     || (rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
                     || (rel.Storage == StorageType.Replicate));
         }
-        public void Do1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
+        public void Do_1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
         {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (PreMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel))
+                return;
+
             RelationEnd relEnd = rel.GetEndFromRole(role);
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
@@ -1890,6 +2119,8 @@ namespace Zetbox.Server.SchemaManagement
             {
                 db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
             }
+
+            PostMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel);
         }
         #endregion
 
@@ -1903,6 +2134,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoNewObjectClassInheritance(ObjectClass objClass)
         {
+            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+
+            if (PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
+                return;
+
             var assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
             var tblName = objClass.GetTableRef(db);
 
@@ -1915,6 +2151,8 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             db.CreateFKConstraint(tblName, objClass.BaseObjectClass.GetTableRef(db), "ID", assocName, false);
+
+            PostMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass);
         }
         #endregion
 
@@ -1931,9 +2169,16 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoChangeObjectClassInheritance(ObjectClass objClass)
         {
+            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+
+            if (PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
+                return;
+
             Log.InfoFormat("Changing ObjectClass Inheritance: {0} -> {1}", objClass.Name, objClass.BaseObjectClass.Name);
             DoRemoveObjectClassInheritance(objClass);
             DoNewObjectClassInheritance(objClass);
+
+            PostMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass);
         }
         #endregion
 
@@ -1947,7 +2192,11 @@ namespace Zetbox.Server.SchemaManagement
         }
         public void DoRemoveObjectClassInheritance(ObjectClass objClass)
         {
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+
+            if (PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
+                return;
+
             string assocName = Construct.InheritanceAssociationName(savedObjClass.BaseObjectClass, savedObjClass);
             var tblName = objClass.GetTableRef(db);
 
@@ -1955,6 +2204,8 @@ namespace Zetbox.Server.SchemaManagement
 
             if (db.CheckFKConstraintExists(tblName, assocName))
                 db.DropFKConstraint(tblName, assocName);
+
+            PostMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass);
         }
         #endregion
 
@@ -1975,7 +2226,11 @@ namespace Zetbox.Server.SchemaManagement
         /// </remarks>
         public void DoChangeTptToTph(ObjectClass objClass)
         {
-            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+
+            if (PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
+                return;
+
             var baseTblName = db.GetTableName(savedObjClass.GetRootClass().Module.SchemaName, savedObjClass.GetRootClass().TableName);
 
             if (savedObjClass.BaseObjectClass == null)
@@ -2231,6 +2486,8 @@ namespace Zetbox.Server.SchemaManagement
             {
                 DoChangeTptToTph(child);
             }
+
+            PostMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass);
         }
         #endregion
 
@@ -2251,9 +2508,16 @@ namespace Zetbox.Server.SchemaManagement
         /// <param name="objClass"></param>
         public void DoChangeTphToTpt(ObjectClass objClass)
         {
+            var savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+
+            if (PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
+                return;
+
             // create new derived tables
             // copy data from base table to derived tables
             // drop old columns for derived classes in base table
+
+            PostMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass);
         }
         #endregion
 
@@ -2513,30 +2777,40 @@ namespace Zetbox.Server.SchemaManagement
         #endregion
 
         #region DeleteValueTypeProperty
-        public bool IsDeleteValueTypeProperty(ValueTypeProperty prop)
+        public bool IsDeleteValueTypeProperty(ValueTypeProperty savedProp)
         {
-            return schema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
+            return schema.FindPersistenceObject<ValueTypeProperty>(savedProp.ExportGuid) == null;
         }
 
-        public void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty savedProp, string prefix)
         {
+            if (PreMigration(PropertyMigrationEventType.Delete, savedProp, null))
+                return;
+
             var tblName = objClass.GetTableRef(db);
-            var colName = Construct.ColumnName(prop, prefix);
+            var colName = Construct.ColumnName(savedProp, prefix);
             Log.InfoFormat("Drop Column: {0}.{1}", tblName, colName);
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
+
+            PostMigration(PropertyMigrationEventType.Delete, savedProp, null);
         }
         #endregion
 
-        #region NewValueTypeProperty nullable
+        #region NewCompoundObjectProperty
         public bool IsNewCompoundObjectProperty(CompoundObjectProperty prop)
         {
             return savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid) == null;
         }
         public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty cprop, string prefix)
         {
+            if (PreMigration(PropertyMigrationEventType.Add, null, cprop))
+                return;
+
             var tblName = objClass.GetTableRef(db);
             CreateCompoundObjectProperty(tblName, cprop, prefix, true);
+
+            PostMigration(PropertyMigrationEventType.Add, null, cprop);
         }
 
         private void CreateCompoundObjectProperty(TableRef tblName, CompoundObjectProperty cprop, string prefix, bool logAsNew)
@@ -2560,6 +2834,23 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             // TODO: Add nested CompoundObjectProperty
+        }
+        #endregion
+
+        #region DeleteCompoundObjectProperty
+        public bool IsDeleteCompoundObjectProperty(CompoundObjectProperty savedCProp)
+        {
+            return schema.FindPersistenceObject<CompoundObjectProperty>(savedCProp.ExportGuid) == null;
+        }
+
+        public void DoDeleteCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty savedCProp, string prefix)
+        {
+            if (PreMigration(PropertyMigrationEventType.Delete, savedCProp, null))
+                return;
+
+            Log.ErrorFormat("deleting compound properties not implemented: {0}.{1}", objClass.Name, savedCProp.Name);
+
+            PostMigration(PropertyMigrationEventType.Delete, savedCProp, null);
         }
         #endregion
 
@@ -2662,6 +2953,73 @@ namespace Zetbox.Server.SchemaManagement
         }
         #endregion
 
+        #region Migration Infrastructure
 
+        private bool PreMigration(ClassMigrationEventType classMigrationEventType, ObjectClass savedObjClass, ObjectClass objClass)
+        {
+            IClassMigratorFragment result;
+            if (_classMigrationFragments.TryGetValue(new Tuple<ClassMigrationEventType, Guid>(classMigrationEventType, (savedObjClass ?? objClass).ExportGuid), out result))
+            {
+                return result.PreMigration(db, savedObjClass, objClass);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void PostMigration(ClassMigrationEventType classMigrationEventType, ObjectClass savedObjClass, ObjectClass objClass)
+        {
+            IClassMigratorFragment result;
+            if (_classMigrationFragments.TryGetValue(new Tuple<ClassMigrationEventType, Guid>(classMigrationEventType, (savedObjClass ?? objClass).ExportGuid), out result))
+            {
+                result.PostMigration(db, savedObjClass, objClass);
+            }
+        }
+
+        private bool PreMigration(PropertyMigrationEventType propertyMigrationEventType, Property savedObjProperty, Property objProperty)
+        {
+            IPropertyMigratorFragment result;
+            if (_propertyMigrationFragments.TryGetValue(new Tuple<PropertyMigrationEventType, Guid>(propertyMigrationEventType, (savedObjProperty ?? objProperty).ExportGuid), out result))
+            {
+                return result.PreMigration(db, savedObjProperty, objProperty);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void PostMigration(PropertyMigrationEventType propertyMigrationEventType, Property savedObjProperty, Property objProperty)
+        {
+            IPropertyMigratorFragment result;
+            if (_propertyMigrationFragments.TryGetValue(new Tuple<PropertyMigrationEventType, Guid>(propertyMigrationEventType, (savedObjProperty ?? objProperty).ExportGuid), out result))
+            {
+                result.PostMigration(db, savedObjProperty, objProperty);
+            }
+        }
+
+        private bool PreMigration(RelationMigrationEventType relationMigrationEventType, Relation savedObjRelation, Relation objRelation)
+        {
+            IRelationMigratorFragment result;
+            if (_relationMigrationFragments.TryGetValue(new Tuple<RelationMigrationEventType, Guid>(relationMigrationEventType, (savedObjRelation ?? objRelation).ExportGuid), out result))
+            {
+                return result.PreMigration(db, savedObjRelation, objRelation);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void PostMigration(RelationMigrationEventType relationMigrationEventType, Relation savedObjRelation, Relation objRelation)
+        {
+            IRelationMigratorFragment result;
+            if (_relationMigrationFragments.TryGetValue(new Tuple<RelationMigrationEventType, Guid>(relationMigrationEventType, (savedObjRelation ?? objRelation).ExportGuid), out result))
+            {
+                result.PostMigration(db, savedObjRelation, objRelation);
+            }
+        }
+        #endregion
     }
 }

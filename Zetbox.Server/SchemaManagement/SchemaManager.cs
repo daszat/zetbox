@@ -21,13 +21,12 @@ namespace Zetbox.Server.SchemaManagement
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Text;
-
     using Zetbox.API;
     using Zetbox.API.Configuration;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
-    using Zetbox.App.Extensions;
     using Zetbox.App.Packaging;
     using Zetbox.Generator;
     using Zetbox.Generator.Extensions;
@@ -47,12 +46,12 @@ namespace Zetbox.Server.SchemaManagement
 
         #region Constructor
 
-        public SchemaManager(ISchemaProvider provider, IZetboxContext schema, IZetboxContext savedSchema, ZetboxConfig config)
+        public SchemaManager(ISchemaProvider provider, IZetboxContext schema, IZetboxContext savedSchema, ZetboxConfig config, IEnumerable<IMigratorFragment> migrationFragments)
         {
             this.config = config;
             this.schema = schema;
             this.db = provider;
-            this.Case = new Cases(schema, provider, savedSchema);
+            this.Case = new Cases(schema, provider, savedSchema, migrationFragments);
         }
 
         #endregion

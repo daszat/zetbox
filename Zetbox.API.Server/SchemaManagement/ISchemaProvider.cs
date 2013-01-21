@@ -22,8 +22,8 @@ namespace Zetbox.API.Server
     using System.Data;
     using System.Diagnostics;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
-using System.Linq.Expressions;
 
     public abstract class DboRef : IComparable<DboRef>, IComparable
     {
