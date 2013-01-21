@@ -182,7 +182,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
             if (id.Length > PG_MAX_IDENTIFIER_LENGTH)
             {
-                throw new InvalidOperationException("PG does not support Identifiers with a length more than " + PG_MAX_IDENTIFIER_LENGTH + " chars.");
+                throw new InvalidOperationException(string.Format("PG does not support Identifiers with a length more than {0} chars.", PG_MAX_IDENTIFIER_LENGTH ));
             }
         }
 
@@ -323,8 +323,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
         {
-            if (cols == null)
-                throw new ArgumentNullException("cols");
+            if (cols == null) throw new ArgumentNullException("cols");
+            if (tblName == null) throw new ArgumentNullException("tblName");
             CheckMaxIdentifierLength(tblName.Name);
 
             StringBuilder sb = new StringBuilder();
