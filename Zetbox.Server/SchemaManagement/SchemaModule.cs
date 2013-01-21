@@ -43,6 +43,7 @@ namespace Zetbox.Server.SchemaManagement
                     schemaProvider.Open(connectionString.ConnectionString);
                     SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
+                    var globalMigrationFragments = c.Resolve<IEnumerable<IGlobalMigrationFragment>>();
                     var migrationFragments = c.Resolve<IEnumerable<IMigrationFragment>>();
 
                     return new SchemaManagement.SchemaManager(
@@ -50,6 +51,7 @@ namespace Zetbox.Server.SchemaManagement
                         p.Named<IZetboxContext>("newSchema"),
                         ctx,
                         cfg,
+                        globalMigrationFragments,
                         migrationFragments);
                 })
                 .InstancePerDependency();
