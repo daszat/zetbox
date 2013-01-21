@@ -25,6 +25,7 @@ namespace Zetbox.IntegrationTests.Methods
                 using (var createCtx = GetContext())
                 {
                     var createObj = createCtx.Create<MethodTest>();
+                    Assert.That(createObj, Is.Not.Null);
                     createCtx.SubmitChanges();
                 }
                 obj = ctx.GetQuery<MethodTest>().FirstOrDefault();
