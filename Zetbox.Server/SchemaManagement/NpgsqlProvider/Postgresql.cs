@@ -173,10 +173,10 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         #endregion
 
         #region SQL Infrastructure
-
+        public static readonly int PG_MAX_IDENTIFIER_LENGTH = 63;
         protected override string QuoteIdentifier(string name)
         {
-            return "\"" + name + "\"";
+            return "\"" + name.MaxLength(PG_MAX_IDENTIFIER_LENGTH) + "\"";
         }
 
         private string GetColumnDefinition(Column col)
@@ -667,7 +667,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_constraint JOIN pg_namespace n ON (connamespace = n.oid) WHERE n.nspname = @schema AND conname = @constraint_name AND contype = 'f'",
                 new Dictionary<string, object>(){
                     { "@schema", tblName.Schema },
-                    { "@constraint_name", fkName }
+                    { "@constraint_name", fkName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) }
                 });
         }
 
