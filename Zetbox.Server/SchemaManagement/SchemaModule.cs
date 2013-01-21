@@ -43,7 +43,7 @@ namespace Zetbox.Server.SchemaManagement
                     schemaProvider.Open(connectionString.ConnectionString);
                     SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
-                    var migrationFragments = c.Resolve<IEnumerable<IMigratorFragment>>();
+                    var migrationFragments = c.Resolve<IEnumerable<IMigrationFragment>>();
 
                     return new SchemaManagement.SchemaManager(
                         schemaProvider,

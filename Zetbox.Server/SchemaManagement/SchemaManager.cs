@@ -42,12 +42,12 @@ namespace Zetbox.Server.SchemaManagement
         private bool repair = false;
         private readonly Cases Case;
         private readonly ZetboxConfig config;
-        private readonly IEnumerable<IGlobalMigratorFragment> _globalMigrationFragments;
+        private readonly IEnumerable<IGlobalMigrationFragment> _globalMigrationFragments;
         #endregion
 
         #region Constructor
 
-        public SchemaManager(ISchemaProvider provider, IZetboxContext schema, IZetboxContext savedSchema, ZetboxConfig config, IEnumerable<IGlobalMigratorFragment> globalMigrationFragments, IEnumerable<IMigratorFragment> migrationFragments)
+        public SchemaManager(ISchemaProvider provider, IZetboxContext schema, IZetboxContext savedSchema, ZetboxConfig config, IEnumerable<IGlobalMigrationFragment> globalMigrationFragments, IEnumerable<IMigrationFragment> migrationFragments)
         {
             this.config = config;
             this.schema = schema;

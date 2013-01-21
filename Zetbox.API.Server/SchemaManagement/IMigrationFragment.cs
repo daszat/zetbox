@@ -24,13 +24,13 @@ namespace Zetbox.API.SchemaManagement
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
 
-    public interface IGlobalMigratorFragment
+    public interface IGlobalMigrationFragment
     {
         void PreMigration(ISchemaProvider db);
         void PostMigration(ISchemaProvider db);
     }
 
-    public interface IMigratorFragment
+    public interface IMigrationFragment
     {
         Guid Target { get; }
     }
@@ -44,7 +44,7 @@ namespace Zetbox.API.SchemaManagement
         Delete,
     }
 
-    public interface IClassMigratorFragment : IMigratorFragment
+    public interface IClassMigrationFragment : IMigrationFragment
     {
         ClassMigrationEventType ClassEventType { get; }
 
@@ -67,7 +67,7 @@ namespace Zetbox.API.SchemaManagement
         Delete,
     }
 
-    public interface IPropertyMigratorFragment : IMigratorFragment
+    public interface IPropertyMigrationFragment : IMigrationFragment
     {
         PropertyMigrationEventType PropertyEventType { get; }
 
@@ -92,7 +92,7 @@ namespace Zetbox.API.SchemaManagement
         Delete,
     }
 
-    public interface IRelationMigratorFragment : IMigratorFragment
+    public interface IRelationMigrationFragment : IMigrationFragment
     {
         RelationMigrationEventType RelationEventType { get; }
 
@@ -113,7 +113,7 @@ namespace Zetbox.API.SchemaManagement
 
             foreach (var t in source.GetTypes()
                                     .Where(t => !t.IsAbstract
-                                            && t.GetInterfaces().Contains(typeof(IGlobalMigratorFragment))))
+                                            && t.GetInterfaces().Contains(typeof(IGlobalMigrationFragment))))
             {
                 builder
                     .RegisterType(t)
@@ -123,7 +123,7 @@ namespace Zetbox.API.SchemaManagement
 
             foreach (var t in source.GetTypes()
                                     .Where(t => !t.IsAbstract
-                                            && t.GetInterfaces().Contains(typeof(IMigratorFragment))))
+                                            && t.GetInterfaces().Contains(typeof(IMigrationFragment))))
             {
                 builder
                     .RegisterType(t)

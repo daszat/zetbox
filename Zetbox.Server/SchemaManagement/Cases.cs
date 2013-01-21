@@ -37,9 +37,9 @@ namespace Zetbox.Server.SchemaManagement
         #region Fields
         private readonly IZetboxContext schema;
         private readonly ISchemaProvider db;
-        private readonly Dictionary<Tuple<ClassMigrationEventType, Guid>, IClassMigratorFragment> _classMigrationFragments;
-        private readonly Dictionary<Tuple<PropertyMigrationEventType, Guid>, IPropertyMigratorFragment> _propertyMigrationFragments;
-        private readonly Dictionary<Tuple<RelationMigrationEventType, Guid>, IRelationMigratorFragment> _relationMigrationFragments;
+        private readonly Dictionary<Tuple<ClassMigrationEventType, Guid>, IClassMigrationFragment> _classMigrationFragments;
+        private readonly Dictionary<Tuple<PropertyMigrationEventType, Guid>, IPropertyMigrationFragment> _propertyMigrationFragments;
+        private readonly Dictionary<Tuple<RelationMigrationEventType, Guid>, IRelationMigrationFragment> _relationMigrationFragments;
 
         private readonly IZetboxContext _savedSchema;
         public IZetboxContext savedSchema
@@ -60,14 +60,14 @@ namespace Zetbox.Server.SchemaManagement
         }
         #endregion
 
-        internal Cases(IZetboxContext schema, ISchemaProvider db, IZetboxContext savedSchema, IEnumerable<IMigratorFragment> migrationFragments)
+        internal Cases(IZetboxContext schema, ISchemaProvider db, IZetboxContext savedSchema, IEnumerable<IMigrationFragment> migrationFragments)
         {
             this.schema = schema;
             this.db = db;
             this._savedSchema = savedSchema;
-            this._classMigrationFragments = migrationFragments.OfType<IClassMigratorFragment>().ToDictionary(cmf => new Tuple<ClassMigrationEventType, Guid>(cmf.ClassEventType, cmf.Target));
-            this._propertyMigrationFragments = migrationFragments.OfType<IPropertyMigratorFragment>().ToDictionary(cmf => new Tuple<PropertyMigrationEventType, Guid>(cmf.PropertyEventType, cmf.Target));
-            this._relationMigrationFragments = migrationFragments.OfType<IRelationMigratorFragment>().ToDictionary(cmf => new Tuple<RelationMigrationEventType, Guid>(cmf.RelationEventType, cmf.Target));
+            this._classMigrationFragments = migrationFragments.OfType<IClassMigrationFragment>().ToDictionary(cmf => new Tuple<ClassMigrationEventType, Guid>(cmf.ClassEventType, cmf.Target));
+            this._propertyMigrationFragments = migrationFragments.OfType<IPropertyMigrationFragment>().ToDictionary(cmf => new Tuple<PropertyMigrationEventType, Guid>(cmf.PropertyEventType, cmf.Target));
+            this._relationMigrationFragments = migrationFragments.OfType<IRelationMigrationFragment>().ToDictionary(cmf => new Tuple<RelationMigrationEventType, Guid>(cmf.RelationEventType, cmf.Target));
         }
 
         // Add all IsCase_ + DoCase_ Methods
@@ -2957,7 +2957,7 @@ namespace Zetbox.Server.SchemaManagement
 
         private bool PreMigration(ClassMigrationEventType classMigrationEventType, ObjectClass savedObjClass, ObjectClass objClass)
         {
-            IClassMigratorFragment result;
+            IClassMigrationFragment result;
             if (_classMigrationFragments.TryGetValue(new Tuple<ClassMigrationEventType, Guid>(classMigrationEventType, (savedObjClass ?? objClass).ExportGuid), out result))
             {
                 return result.PreMigration(db, savedObjClass, objClass);
@@ -2970,7 +2970,7 @@ namespace Zetbox.Server.SchemaManagement
 
         private void PostMigration(ClassMigrationEventType classMigrationEventType, ObjectClass savedObjClass, ObjectClass objClass)
         {
-            IClassMigratorFragment result;
+            IClassMigrationFragment result;
             if (_classMigrationFragments.TryGetValue(new Tuple<ClassMigrationEventType, Guid>(classMigrationEventType, (savedObjClass ?? objClass).ExportGuid), out result))
             {
                 result.PostMigration(db, savedObjClass, objClass);
@@ -2979,7 +2979,7 @@ namespace Zetbox.Server.SchemaManagement
 
         private bool PreMigration(PropertyMigrationEventType propertyMigrationEventType, Property savedObjProperty, Property objProperty)
         {
-            IPropertyMigratorFragment result;
+            IPropertyMigrationFragment result;
             if (_propertyMigrationFragments.TryGetValue(new Tuple<PropertyMigrationEventType, Guid>(propertyMigrationEventType, (savedObjProperty ?? objProperty).ExportGuid), out result))
             {
                 return result.PreMigration(db, savedObjProperty, objProperty);
@@ -2992,7 +2992,7 @@ namespace Zetbox.Server.SchemaManagement
 
         private void PostMigration(PropertyMigrationEventType propertyMigrationEventType, Property savedObjProperty, Property objProperty)
         {
-            IPropertyMigratorFragment result;
+            IPropertyMigrationFragment result;
             if (_propertyMigrationFragments.TryGetValue(new Tuple<PropertyMigrationEventType, Guid>(propertyMigrationEventType, (savedObjProperty ?? objProperty).ExportGuid), out result))
             {
                 result.PostMigration(db, savedObjProperty, objProperty);
@@ -3001,7 +3001,7 @@ namespace Zetbox.Server.SchemaManagement
 
         private bool PreMigration(RelationMigrationEventType relationMigrationEventType, Relation savedObjRelation, Relation objRelation)
         {
-            IRelationMigratorFragment result;
+            IRelationMigrationFragment result;
             if (_relationMigrationFragments.TryGetValue(new Tuple<RelationMigrationEventType, Guid>(relationMigrationEventType, (savedObjRelation ?? objRelation).ExportGuid), out result))
             {
                 return result.PreMigration(db, savedObjRelation, objRelation);
@@ -3014,7 +3014,7 @@ namespace Zetbox.Server.SchemaManagement
 
         private void PostMigration(RelationMigrationEventType relationMigrationEventType, Relation savedObjRelation, Relation objRelation)
         {
-            IRelationMigratorFragment result;
+            IRelationMigrationFragment result;
             if (_relationMigrationFragments.TryGetValue(new Tuple<RelationMigrationEventType, Guid>(relationMigrationEventType, (savedObjRelation ?? objRelation).ExportGuid), out result))
             {
                 result.PostMigration(db, savedObjRelation, objRelation);
