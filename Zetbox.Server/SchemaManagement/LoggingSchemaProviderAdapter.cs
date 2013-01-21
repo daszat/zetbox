@@ -613,5 +613,11 @@ namespace Zetbox.Server.SchemaManagement
         {
             _provider.DropCheckConstraint(tblName, constraintName);
         }
+
+        public string QuoteIdentifier(string name)
+        {
+            return _provider.QuoteIdentifier(name);
+        }
+
     }
 }

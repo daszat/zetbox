@@ -154,7 +154,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         #region SQL Infrastructure
 
-        protected override string QuoteIdentifier(string name)
+        public override string QuoteIdentifier(string name)
         {
             return "[" + name + "]";
         }

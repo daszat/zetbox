@@ -341,9 +341,11 @@ namespace Zetbox.Server.SchemaManagement
                 relationNames.Add(Construct.SecurityRulesFKName(objClass));
             }
 
+            // Quote Identifier to meet the exact name in database. PG will short those names when they exceed 63 chars
+            relationNames = relationNames.Select(n => db.QuoteIdentifier(n)).ToList();
             foreach (var rel in db.GetFKConstraintNames())
             {
-                if (!relationNames.Contains(rel.ConstraintName))
+                if (!relationNames.Contains(db.QuoteIdentifier(rel.ConstraintName)))
                 {
                     Log.WarnFormat("'{0}' on table '{1}' found in database but no relation object was defined", rel.ConstraintName, rel.TableName);
                     if (repair)

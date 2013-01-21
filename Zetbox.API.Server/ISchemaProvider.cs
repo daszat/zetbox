@@ -610,11 +610,12 @@ using System.Linq.Expressions;
 
         #endregion
 
-        #region Type Mapping
+        #region Type Mapping and string handling
 
         string DbTypeToNative(DbType type);
         DbType NativeToDbType(string type);
 
+        string QuoteIdentifier(string name);
         #endregion
 
         #region Database Management

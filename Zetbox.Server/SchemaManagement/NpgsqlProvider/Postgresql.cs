@@ -174,9 +174,16 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         #region SQL Infrastructure
         public static readonly int PG_MAX_IDENTIFIER_LENGTH = 63;
-        protected override string QuoteIdentifier(string name)
+        public override string QuoteIdentifier(string name)
         {
             return "\"" + name.MaxLength(PG_MAX_IDENTIFIER_LENGTH) + "\"";
+        }
+        protected void CheckMaxIdentifierLength(string id)
+        {
+            if (id.Length > PG_MAX_IDENTIFIER_LENGTH)
+            {
+                throw new InvalidOperationException("PG does not support Identifiers with a length more than " + PG_MAX_IDENTIFIER_LENGTH + " chars.");
+            }
         }
 
         private string GetColumnDefinition(Column col)
@@ -229,6 +236,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void CreateDatabase(string dbName)
         {
+            CheckMaxIdentifierLength(dbName);
             ExecuteNonQuery(string.Format("CREATE DATABASE {0} WITH TEMPLATE template0", QuoteIdentifier(dbName)));
         }
 
@@ -253,6 +261,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         public override void CreateSchema(string schemaName)
         {
             if (string.IsNullOrEmpty(schemaName)) throw new ArgumentNullException("schemaName");
+            CheckMaxIdentifierLength(schemaName);
 
             ExecuteNonQuery(String.Format("CREATE SCHEMA {0}", QuoteIdentifier(schemaName)));
         }
@@ -316,6 +325,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
             if (cols == null)
                 throw new ArgumentNullException("cols");
+            CheckMaxIdentifierLength(tblName.Name);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE {0} (", FormatSchemaName(tblName));
@@ -331,6 +341,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
             if (tblName == null)
                 throw new ArgumentNullException("tblName");
+            CheckMaxIdentifierLength(tblName.Name);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE {0} ( ", FormatSchemaName(tblName));
@@ -441,6 +452,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
+            CheckMaxIdentifierLength(colName);
             StringBuilder sb = new StringBuilder();
 
             if (add)
@@ -743,7 +755,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 new Dictionary<string, object>(){
                     { "@schema", tblName.Schema },
                     { "@table", tblName.Name },
-                    { "@index", idxName },
+                    { "@index", idxName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
 
@@ -816,7 +828,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 WHERE t.typname = 'trigger' AND n.nspname = @schema AND p.proname = @trigger",
                 new Dictionary<string, object>(){
                     { "@schema", objName.Schema },
-                    { "@trigger", triggerName },
+                    { "@trigger", triggerName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
 
@@ -840,7 +852,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 WHERE n.nspname = @schema AND p.proname = @proc",
                 new Dictionary<string, object>() {
                     { "@schema", procName.Schema },
-                    { "@proc", procName.Name },
+                    { "@proc", procName.Name.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
 

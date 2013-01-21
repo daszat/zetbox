@@ -122,7 +122,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        private string QuoteIdentifier(string val)
+        public string QuoteIdentifier(string val)
         {
             return string.Format("{0}{1}{2}", quotePrefix ?? string.Empty, val, quoteSuffix ?? string.Empty);
         }

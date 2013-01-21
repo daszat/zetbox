@@ -320,7 +320,7 @@ namespace Zetbox.Server.SchemaManagement
 
         #region SQL Infrastructure
 
-        protected abstract string QuoteIdentifier(string name);
+        public abstract string QuoteIdentifier(string name);
 
         protected virtual string QuoteString(string value)
         {
