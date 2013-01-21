@@ -450,15 +450,19 @@ namespace Zetbox.API.Async
             innerTaskFactory
                 .OnResult(
                     (ZbTask<ZbTask<TIntermediate>> factory) =>
-                        factory.Result.OnResult(
-                            t =>
-                            {
-                                ExecuteOrChainTask(() =>
-                                    {
-                                        if (task != null)
-                                            this.Result = task(t.Result);
-                                    });
-                            }));
+                    {
+                        var intermediateTask = factory.Result;
+                        intermediateTask.OnResult(
+                        t =>
+                        {
+                            ExecuteOrChainTask(() =>
+                                {
+                                    if (task != null)
+                                        this.Result = task(t.Result);
+                                });
+                        });
+                        intermediateTask.Wait();
+                    });
         }
     }
 }
