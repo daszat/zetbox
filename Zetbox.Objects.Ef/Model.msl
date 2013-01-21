@@ -4301,21 +4301,21 @@
       <Condition ColumnName="ObjectParameters_fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
-    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjectReferencePlaceholderProperty
-    B: One ObjectClass as ReferencedObjectClass
+    Relation: FK_ObjRefPlaceholderProp_ofType_ReferencedClass
+    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjRefPlaceholderProp
+    B: One ObjectClass as ReferencedClass
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
-                           TypeName="Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
+    <AssociationSetMapping Name="FK_ObjRefPlaceholderProp_ofType_ReferencedClass"
+                           TypeName="Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass"
                            StoreEntitySet="Property" >
-      <EndProperty Name="ReferencedObjectClass">
-        <ScalarProperty Name="ID" ColumnName="ObjectReferencePlaceholderProperties_fk_ReferencedObjectClass"/>
+      <EndProperty Name="ReferencedClass">
+        <ScalarProperty Name="ID" ColumnName="ObjectReferencePlaceholderProperties_fk_ReferencedClass"/>
       </EndProperty>
-      <EndProperty Name="ObjectReferencePlaceholderProperty">
+      <EndProperty Name="ObjRefPlaceholderProp">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="ObjectReferencePlaceholderProperties_fk_ReferencedObjectClass" IsNull="false"/>
+      <Condition ColumnName="ObjectReferencePlaceholderProperties_fk_ReferencedClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_OneEnd_hasMany_NEnds

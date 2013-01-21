@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-08T14:08:46Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-21T11:36:37Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -49377,11 +49377,11 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
   </ZetboxBase:RelationEnd>
   <ZetboxBase:RelationEnd ExportGuid="f41a4e24-8d47-4575-9085-cf6dda2ee3f2">
     <ZetboxBase:BParent>47ccedbe-6cfa-4810-8b8e-c064b8434f3f</ZetboxBase:BParent>
-    <ZetboxBase:ChangedOn>2011-08-06T04:30:56.921563Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-01-21T10:36:37.310619Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:Multiplicity>2</ZetboxBase:Multiplicity>
-    <ZetboxBase:RoleName>ReferencedObjectClass</ZetboxBase:RoleName>
+    <ZetboxBase:RoleName>ReferencedClass</ZetboxBase:RoleName>
     <ZetboxBase:Type>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
   <ZetboxBase:RelationEnd ExportGuid="74b66243-dc52-44b2-bae6-705a0757f81f">
@@ -49415,12 +49415,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
   </ZetboxBase:RelationEnd>
   <ZetboxBase:RelationEnd ExportGuid="9c30930f-b7fe-4145-be09-cf5c0b0ac723">
     <ZetboxBase:AParent>47ccedbe-6cfa-4810-8b8e-c064b8434f3f</ZetboxBase:AParent>
-    <ZetboxBase:ChangedOn>2011-08-06T04:30:56.918562Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-01-21T10:36:37.310619Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
     <ZetboxBase:Navigator>41da7ae6-aff7-44cf-83be-6150bf7578fd</ZetboxBase:Navigator>
-    <ZetboxBase:RoleName>ObjectReferencePlaceholderProperty</ZetboxBase:RoleName>
+    <ZetboxBase:RoleName>ObjRefPlaceholderProp</ZetboxBase:RoleName>
     <ZetboxBase:Type>93241989-0bb0-435f-b6e5-06fdbbf19e5d</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
   <ZetboxBase:RelationEnd ExportGuid="7c2d4f4d-62b5-4fa6-a44f-c5a2239b9ee9">

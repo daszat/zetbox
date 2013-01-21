@@ -1814,17 +1814,17 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
-    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjectReferencePlaceholderProperty
-    B: One ObjectClass as ReferencedObjectClass
+    Relation: FK_ObjRefPlaceholderProp_ofType_ReferencedClass
+    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjRefPlaceholderProp
+    B: One ObjectClass as ReferencedClass
     Preferred Storage: MergeIntoA
 	*/
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass",
-    "ObjectReferencePlaceholderProperty", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ObjectReferencePlaceholderPropertyEfImpl),
-    "ReferencedObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
+    "Model", "FK_ObjRefPlaceholderProp_ofType_ReferencedClass",
+    "ObjRefPlaceholderProp", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ObjectReferencePlaceholderPropertyEfImpl),
+    "ReferencedClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
     )]
 
 

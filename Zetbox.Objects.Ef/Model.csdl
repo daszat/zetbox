@@ -742,9 +742,9 @@
       <End Role="ObjectParameter" EntitySet="BaseParameterEfImpl" />
       <End Role="ObjectClass" EntitySet="DataTypeEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass" Association="Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass" >
-      <End Role="ObjectReferencePlaceholderProperty" EntitySet="PropertyEfImpl" />
-      <End Role="ReferencedObjectClass" EntitySet="DataTypeEfImpl" />
+    <AssociationSet Name="FK_ObjRefPlaceholderProp_ofType_ReferencedClass" Association="Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass" >
+      <End Role="ObjRefPlaceholderProp" EntitySet="PropertyEfImpl" />
+      <End Role="ReferencedClass" EntitySet="DataTypeEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_OneEnd_hasMany_NEnds" Association="Model.FK_OneEnd_hasMany_NEnds" >
       <End Role="OneEnd" EntitySet="OrderedOneEndEfImpl" />
@@ -3024,9 +3024,9 @@
     <Property Name="IsList" Type="Boolean" Nullable="false"  />
     <Property Name="ItemRoleName" Type="String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="ReferencedObjectClassImpl"
-                        Relationship="Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
-                        FromRole="ObjectReferencePlaceholderProperty"
-                        ToRole="ReferencedObjectClass" />
+                        Relationship="Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass"
+                        FromRole="ObjRefPlaceholderProp"
+                        ToRole="ReferencedClass" />
     <Property Name="Verb" Type="String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="ObjectReferencePropertyEfImpl" BaseType="Model.PropertyEfImpl">
@@ -4915,11 +4915,11 @@
          Type="Model.ObjectClassEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass" >
-    <End Role="ObjectReferencePlaceholderProperty"
+  <Association Name="FK_ObjRefPlaceholderProp_ofType_ReferencedClass" >
+    <End Role="ObjRefPlaceholderProp"
          Type="Model.ObjectReferencePlaceholderPropertyEfImpl" 
          Multiplicity="*" />
-    <End Role="ReferencedObjectClass"
+    <End Role="ReferencedClass"
          Type="Model.ObjectClassEfImpl" 
          Multiplicity="0..1" />
   </Association>

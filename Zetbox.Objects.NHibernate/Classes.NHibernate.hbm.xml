@@ -4455,7 +4455,7 @@
                   column="`ObjectReferencePlaceholderProperties_ItemRoleName`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ReferencedObjectClass" column="`ObjectReferencePlaceholderProperties_fk_ReferencedObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="ReferencedObjectClass" column="`ObjectReferencePlaceholderProperties_fk_ReferencedClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Verb" 

@@ -975,7 +975,7 @@ namespace Zetbox.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferencePlaceholderProperty != null) OnNotifyDeleting_ObjectReferencePlaceholderProperty(this);
 
-            // FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
+            // FK_ObjRefPlaceholderProp_ofType_ReferencedClass
             if (ReferencedObjectClass != null) {
                 ((NHibernatePersistenceObject)ReferencedObjectClass).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ReferencedObjectClass);

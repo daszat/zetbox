@@ -320,9 +320,9 @@ namespace Zetbox.App.Base
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
     /*
-    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
-    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjectReferencePlaceholderProperty
-    B: One ObjectClass as ReferencedObjectClass
+    Relation: FK_ObjRefPlaceholderProp_ofType_ReferencedClass
+    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjRefPlaceholderProp
+    B: One ObjectClass as ReferencedClass
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -347,7 +347,7 @@ namespace Zetbox.App.Base
         private Guid? _fk_guid_ReferencedObjectClass = null;
 
         // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass", "ReferencedObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjRefPlaceholderProp_ofType_ReferencedClass", "ReferencedClass")]
         public Zetbox.App.Base.ObjectClassEfImpl ReferencedObjectClassImpl
         {
             get
@@ -355,8 +355,8 @@ namespace Zetbox.App.Base
                 Zetbox.App.Base.ObjectClassEfImpl __value;
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>(
-                        "Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass",
-                        "ReferencedObjectClass");
+                        "Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass",
+                        "ReferencedClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -378,8 +378,8 @@ namespace Zetbox.App.Base
 
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>(
-                        "Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass",
-                        "ReferencedObjectClass");
+                        "Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass",
+                        "ReferencedClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -1028,7 +1028,7 @@ namespace Zetbox.App.Base
             binStream.Write(this._IsList);
             binStream.Write(this._ItemRoleName);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass", "ReferencedObjectClass").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass", "ReferencedClass").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             if (auxObjects != null) {

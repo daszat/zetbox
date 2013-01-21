@@ -973,9 +973,9 @@
       <End Role="ObjectParameter" EntitySet="BaseParameter" />
       <End Role="ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass" Association="Model.Store.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass" >
-      <End Role="ObjectReferencePlaceholderProperty" EntitySet="Property" />
-      <End Role="ReferencedObjectClass" EntitySet="ObjectClass" />
+    <AssociationSet Name="FK_ObjRefPlaceholderProp_ofType_ReferencedClass" Association="Model.Store.FK_ObjRefPlaceholderProp_ofType_ReferencedClass" >
+      <End Role="ObjRefPlaceholderProp" EntitySet="Property" />
+      <End Role="ReferencedClass" EntitySet="ObjectClass" />
     </AssociationSet>
     <AssociationSet Name="FK_OneEnd_hasMany_NEnds" Association="Model.Store.FK_OneEnd_hasMany_NEnds" >
       <End Role="OneEnd" EntitySet="OrderedOneEnd" />
@@ -2157,7 +2157,7 @@
     <Property Name="CompoundObjectProperties_fk_CompoundObjectDefinition" Type="int4" />
     <Property Name="CompoundObjectProperties_HasPersistentOrder" Type="bool" Nullable="true" />
     <Property Name="CompoundObjectProperties_IsList" Type="bool" Nullable="true" />
-    <Property Name="ObjectReferencePlaceholderProperties_fk_ReferencedObjectClass" Type="int4" />
+    <Property Name="ObjectReferencePlaceholderProperties_fk_ReferencedClass" Type="int4" />
     <Property Name="ObjectReferencePlaceholderProperties_HasPersistentOrder" Type="bool" Nullable="true" />
     <Property Name="ObjectReferencePlaceholderProperties_ImplementorRoleName" Type="varchar" MaxLength="1000" Nullable="true" />
     <Property Name="ObjectReferencePlaceholderProperties_IsList" Type="bool" Nullable="true" />
@@ -4919,15 +4919,15 @@
   </Association>
 
 
-  <Association Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass">
-    <End Role="ReferencedObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <End Role="ObjectReferencePlaceholderProperty" Type="Model.Store.Property" Multiplicity="*" />
+  <Association Name="FK_ObjRefPlaceholderProp_ofType_ReferencedClass">
+    <End Role="ReferencedClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="ObjRefPlaceholderProp" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ReferencedObjectClass">
+      <Principal Role="ReferencedClass">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="ObjectReferencePlaceholderProperty">
-        <PropertyRef Name="ObjectReferencePlaceholderProperties_fk_ReferencedObjectClass" />
+      <Dependent Role="ObjRefPlaceholderProp">
+        <PropertyRef Name="ObjectReferencePlaceholderProperties_fk_ReferencedClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
