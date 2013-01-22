@@ -387,6 +387,19 @@ namespace Zetbox.Server.SchemaManagement
             _provider.CopyColumnData(srcTblName, srcColName, tblName, colName, discriminatorValue);
         }
 
+        public void MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings)
+        {
+            _provider.MapColumnData(srcTblName, srcColNames, tblName, colNames, mappings);
+        }
+
+        public object MappingDefaultSourceValue
+        {
+            get
+            {
+                return _provider.MappingDefaultSourceValue;
+            }
+        }
+
         public void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             _provider.MigrateFKs(srcTblName, srcColName, tblName, colName);

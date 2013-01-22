@@ -1031,16 +1031,41 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier("ID")));        // 4
         }
 
-        public override void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName, string discriminatorValue)
+        public override void CopyColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, string discriminatorValue)
         {
-            if (srcColName == null) throw new ArgumentNullException("srcColName");
-            if (colName == null) throw new ArgumentNullException("colName");
-            if (srcColName.Length != colName.Length) throw new ArgumentOutOfRangeException("colName", "need the same number of columns in srcColName and colName");
+            if (srcColNames == null) throw new ArgumentNullException("srcColNames");
+            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (srcColNames.Length != colNames.Length) throw new ArgumentOutOfRangeException("colNames", "need the same number of columns in srcColNames and colNames");
 
-            var assignments = srcColName.Zip(colName, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst))).ToList();
+            var assignments = srcColNames.Zip(colNames, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst))).ToList();
             if (discriminatorValue != null)
             {
                 assignments.Add(string.Format("{0} = '{1}'", QuoteIdentifier(TableMapper.DiscriminatorColumnName), discriminatorValue));
+            }
+
+            if (assignments.Count > 0)
+            {
+                ExecuteNonQuery(string.Format(
+                    "UPDATE {1} dest SET {2} FROM {0} src WHERE dest.{3} = src.{3}",
+                    FormatSchemaName(srcTblName),     // 0
+                    FormatSchemaName(tblName),        // 1
+                    string.Join(", ", assignments),   // 2
+                    QuoteIdentifier("ID")));          // 3
+            }
+        }
+
+        public override void MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings)
+        {
+            if (srcColNames == null) throw new ArgumentNullException("srcColNames");
+            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (srcColNames.Length != colNames.Length) throw new ArgumentOutOfRangeException("colNames", "need the same number of columns in srcColNames and colNames");
+            if (mappings == null) mappings = new Dictionary<object, object>[srcColNames.Length];
+            if (mappings.Length != srcColNames.Length) throw new ArgumentOutOfRangeException("mappings", "need the same number of columns in srcColNames and mappings");
+
+            var assignments = new List<string>();
+            for (int i = 0; i < srcColNames.Length; i++)
+            {
+                assignments.Add(string.Format("{1} = {0}", CreateMappingMap("src." + QuoteIdentifier(srcColNames[i]), mappings[i]), QuoteIdentifier(colNames[i])));
             }
 
             if (assignments.Count > 0)

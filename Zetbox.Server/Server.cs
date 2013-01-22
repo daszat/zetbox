@@ -252,21 +252,41 @@ namespace Zetbox.Server
             using (Log.InfoTraceMethodCall("RunFixes"))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                using (Log.InfoTraceMethodCall("Setting Properties to TPH"))
+                var cfg = subContainer.Resolve<ZetboxConfig>();
+                var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
+
+                using (var db = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider))
                 {
-                    var ctx = subContainer.Resolve<IZetboxServerContext>();
-                    var cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Property.Find(ctx);
-                    cls.TableMapping = TableMapping.TPH;
-                    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.BaseParameter.Find(ctx);
-                    cls.TableMapping = TableMapping.TPH;
-                    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Constraint.Find(ctx);
-                    cls.TableMapping = TableMapping.TPH;
-                    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.DefaultPropertyValue.Find(ctx);
-                    cls.TableMapping = TableMapping.TPH;
-                    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.GUI.FilterConfiguration.Find(ctx);
-                    cls.TableMapping = TableMapping.TPH;
-                    ctx.SubmitChanges();
+                    db.Open(connectionString.ConnectionString);
+                    using (Log.InfoTraceMethodCall("Testing MapColumnData"))
+                    {
+                        db.MapColumnData(new TableRef(null, "test", "Companies"), new[] { "ID" }, new TableRef(null, "test", "Companies"), new[] { "Name" },
+                        new[]{
+                                new Dictionary<object,object>() {
+                                    {1, "X"},
+                                    {2, "Y"},
+                                    {3, null},
+                                    {db.MappingDefaultSourceValue, "ZERO"},
+                                }
+                            });
+                    }
                 }
+
+                //using (Log.InfoTraceMethodCall("Setting Properties to TPH"))
+                //{
+                //    var ctx = subContainer.Resolve<IZetboxServerContext>();
+                //    var cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Property.Find(ctx);
+                //    cls.TableMapping = TableMapping.TPH;
+                //    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.BaseParameter.Find(ctx);
+                //    cls.TableMapping = TableMapping.TPH;
+                //    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Constraint.Find(ctx);
+                //    cls.TableMapping = TableMapping.TPH;
+                //    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.DefaultPropertyValue.Find(ctx);
+                //    cls.TableMapping = TableMapping.TPH;
+                //    cls = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.GUI.FilterConfiguration.Find(ctx);
+                //    cls.TableMapping = TableMapping.TPH;
+                //    ctx.SubmitChanges();
+                //}
 
                 //Log.Info("Running OrderBy Test");
                 //var ctx = subContainer.Resolve<IZetboxServerContext>();

@@ -660,6 +660,50 @@ namespace Zetbox.Server.SchemaManagement
 
         public abstract void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
         public abstract void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName, string discriminatorValue);
+        public abstract void MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings);
+
+        private static readonly object _MappingDefaultSourceValue = new object();
+        public object MappingDefaultSourceValue { get { return _MappingDefaultSourceValue; } }
+
+        /// <summary>
+        /// Creates "CASE x WHEN y THEN z ELSE a END" fragments for MapColumnData.
+        /// </summary>
+        protected string CreateMappingMap(string srcColName, Dictionary<object, object> mapping)
+        {
+            if (mapping == null || mapping.Count == 0) return srcColName;
+
+            object defaultValue;
+            var haveDefaultValue = mapping.TryGetValue(MappingDefaultSourceValue, out defaultValue);
+            var defaultValueOrNull = defaultValue == null
+                ? "NULL"
+                : string.Format(CultureInfo.InvariantCulture, "'{0}'", defaultValue);
+
+            var whens = mapping
+                .Where(kvp => kvp.Key != MappingDefaultSourceValue)
+                .Select(kvp => string.Format(CultureInfo.InvariantCulture, "WHEN {0} THEN {1}",
+                    kvp.Key == null
+                        ? srcColName + " IS NULL"
+                        : string.Format(CultureInfo.InvariantCulture, "{0} = '{1}'", srcColName, kvp.Key),
+                    kvp.Value == null
+                        ? "NULL"
+                        : string.Format(CultureInfo.InvariantCulture, "'{0}'", kvp.Value)))
+                .ToList();
+
+            if (haveDefaultValue)
+            {
+                if (whens.Count == 0)
+                {
+                    return defaultValueOrNull;
+                }
+                else
+                {
+                    whens.Add("ELSE" + defaultValueOrNull);
+                }
+            }
+
+            return string.Format("CASE {0} END", string.Join(" ", whens));
+        }
+
         public abstract void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
         public abstract void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName);
         public abstract void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName);

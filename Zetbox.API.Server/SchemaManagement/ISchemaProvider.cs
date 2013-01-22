@@ -703,7 +703,18 @@ namespace Zetbox.API.Server
         /// <summary>
         /// Batch-copies column data from srcTblName.srcColName[i] to tblName.colName[i], matching rows on "ID" column. When discriminatorValue is not null, the TableMapper.DiscriminatorColumnName is set to this value.
         /// </summary>
-        void CopyColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, string discriminatorValue);
+        /// <remarks>discriminatorValue is introduced specifically for TPT&gt;-&lt;TPH migrations.</remarks>
+        void CopyColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, string discriminatorValue = null);
+
+        /// <summary>
+        /// Maps the srcColNames from srcTableName to the corresponding colNames in tblName, translating each value by the specified mappings.
+        /// </summary>
+        void MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings);
+
+        /// <summary>
+        /// Use this value in MapColumnData mappings as source value for the mapping when no other value has matched.
+        /// </summary>
+        object MappingDefaultSourceValue { get; }
 
         #endregion
 

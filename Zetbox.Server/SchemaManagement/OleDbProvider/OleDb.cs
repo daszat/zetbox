@@ -935,5 +935,14 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
         {
             throw new NotSupportedException();
         }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings)
+        {
+            throw new NotSupportedException();
+        }
+
+        private static readonly object _MappingDefaultSourceValue = new object();
+        public object MappingDefaultSourceValue { get { return _MappingDefaultSourceValue; } }
     }
 }
