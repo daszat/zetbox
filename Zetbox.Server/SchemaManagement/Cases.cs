@@ -1936,7 +1936,10 @@ namespace Zetbox.Server.SchemaManagement
             return true;
         }
 
-        private void CreateFKColumn(RelationEnd otherEnd, TableRef tblName, string colName)
+        /// <summary>
+        /// Creates a fk column "colName" on table "tblName", pointing to "otherEnd".
+        /// </summary>
+        private void CreateFKColumn(RelationEnd otherEnd, TableRef tblName, string colName, bool forceTPH = false)
         {
             var relEnd = otherEnd.GetParent().GetOtherEnd(otherEnd);
 
@@ -1944,7 +1947,7 @@ namespace Zetbox.Server.SchemaManagement
             var checkNotNull = !isNullable;
             var createCheckConstraint = false;
             string errorMsg = null;
-            if (checkNotNull && relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null)
+            if (checkNotNull && (forceTPH || (relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null)))
             {
                 isNullable = true;
                 createCheckConstraint = true;
@@ -2301,15 +2304,15 @@ namespace Zetbox.Server.SchemaManagement
                             // create new columns on base table
                             {
                                 string assocName, colName, listPosName;
-                                RelationEnd relEnd, otherEnd;
+                                RelationEnd savedRelEnd, savedOtherEnd;
                                 TableRef tblName, refTblName;
                                 bool hasPersistentOrder;
-                                if (TryInspect_1_N_Relation(savedRel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
+                                if (TryInspect_1_N_Relation(savedRel, out assocName, out savedRelEnd, out savedOtherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
                                 {
                                     // Only do this when we are N-side
-                                    if (relEnd.Type == savedObjClass)
+                                    if (savedRelEnd.Type == savedObjClass)
                                     {
-                                        CreateFKColumn(otherEnd, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName));
+                                        CreateFKColumn(savedOtherEnd, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName), true);
                                         colNamesList.Add(colName);
                                         if (hasPersistentOrder)
                                         {
@@ -2350,7 +2353,7 @@ namespace Zetbox.Server.SchemaManagement
                                 if (TryInspect_1_1_Relation(savedRel, savedRel.A, savedRel.B, RelationEndRole.A, out tblName, out refTblName, out assocName, out colName, out idxName))
                                 {
                                     db.DropFKConstraint(tblName, assocName);
-                                    CreateFKColumn(savedRel.B, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName));
+                                    CreateFKColumn(savedRel.B, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName), true);
                                     colNamesList.Add(colName);
                                 }
                             }
@@ -2362,7 +2365,7 @@ namespace Zetbox.Server.SchemaManagement
                                 if (TryInspect_1_1_Relation(savedRel, savedRel.B, savedRel.A, RelationEndRole.B, out tblName, out refTblName, out assocName, out colName, out idxName))
                                 {
                                     db.DropFKConstraint(tblName, assocName);
-                                    CreateFKColumn(savedRel.A, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName));
+                                    CreateFKColumn(savedRel.A, baseTblName, Construct.NestedColumnName(colName, savedObjClass.TableName), true);
                                     colNamesList.Add(colName);
                                 }
                             }
@@ -2486,6 +2489,9 @@ namespace Zetbox.Server.SchemaManagement
             {
                 DoChangeTptToTph(child);
             }
+
+            // "fix" saved schema, so other cases accessing the "old" schema see the already transformed base table
+            savedObjClass.TableMapping = TableMapping.TPH;
 
             PostMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass);
         }

@@ -122,11 +122,15 @@ namespace Zetbox.Generator
             return ForeignKeyColumnName(listProp.ObjectClass.Name);
         }
 
+        /// <summary>Returns the name for a fk column pointing to otherEnd</summary>
+        /// <returns>The name for a fk column pointing to otherEnd</returns>
         public static string ForeignKeyColumnName(RelationEnd otherEnd)
         {
             return ForeignKeyColumnName(otherEnd, string.Empty);
         }
 
+        /// <summary>Returns the name for a fk column pointing to otherEnd</summary>
+        /// <returns>The prefixed name for a fk column pointing to otherEnd</returns>
         public static string ForeignKeyColumnName(RelationEnd otherEnd, string prefix)
         {
             if (otherEnd == null) { throw new ArgumentNullException("otherEnd"); }
