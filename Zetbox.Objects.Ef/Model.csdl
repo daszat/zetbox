@@ -1237,7 +1237,9 @@
     <Property Name="Right" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_Auftraege_Rights">
-    <End Role="Auftrag" Type="Model.AuftragEfImpl" Multiplicity="1" />
+    <End Role="Auftrag" Type="Model.AuftragEfImpl" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Auftrag_Rights" Type="Model.Auftrag_Rights" Multiplicity="*" />
     <ReferentialConstraint>
 	  <Principal Role="Auftrag">
@@ -2051,7 +2053,9 @@
     <Property Name="Right" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_Projekte_Rights">
-    <End Role="Projekt" Type="Model.ProjektEfImpl" Multiplicity="1" />
+    <End Role="Projekt" Type="Model.ProjektEfImpl" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Projekt_Rights" Type="Model.Projekt_Rights" Multiplicity="*" />
     <ReferentialConstraint>
 	  <Principal Role="Projekt">
@@ -2268,7 +2272,9 @@
     <Property Name="Right" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_SecurityTestChildren_Rights">
-    <End Role="SecurityTestChild" Type="Model.SecurityTestChildEfImpl" Multiplicity="1" />
+    <End Role="SecurityTestChild" Type="Model.SecurityTestChildEfImpl" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="SecurityTestChild_Rights" Type="Model.SecurityTestChild_Rights" Multiplicity="*" />
     <ReferentialConstraint>
 	  <Principal Role="SecurityTestChild">
@@ -2525,7 +2531,9 @@
     <Property Name="Right" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_Tasks_Rights">
-    <End Role="Task" Type="Model.TaskEfImpl" Multiplicity="1" />
+    <End Role="Task" Type="Model.TaskEfImpl" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Task_Rights" Type="Model.Task_Rights" Multiplicity="*" />
     <ReferentialConstraint>
 	  <Principal Role="Task">

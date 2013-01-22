@@ -178,7 +178,9 @@
     <Property Name="Right" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
-    <End Role="<%= clsName %>" Type="Model.<%= clsName %>EfImpl" Multiplicity="1" />
+    <End Role="<%= clsName %>" Type="Model.<%= clsName %>EfImpl" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
     <ReferentialConstraint>
 	  <Principal Role="<%= clsName %>">
