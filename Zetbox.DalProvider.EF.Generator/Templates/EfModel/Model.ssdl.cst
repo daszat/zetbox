@@ -206,7 +206,9 @@
       <Property Name="Right" Type="<%= int32DbType %>" Nullable="false" />
     </EntityType>
     <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
-      <End Role="<%= clsName %>" Type="Model.Store.<%= cls.GetEntitySetName() %>" Multiplicity="1" />
+      <End Role="<%= clsName %>" Type="Model.Store.<%= cls.GetEntitySetName() %>" Multiplicity="1">
+        <OnDelete Action="Cascade" />
+      </End>
       <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
       <ReferentialConstraint>
         <Principal Role="<%= clsName %>">
