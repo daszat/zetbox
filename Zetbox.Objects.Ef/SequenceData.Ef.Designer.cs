@@ -426,8 +426,9 @@ namespace Zetbox.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._CurrentNumber);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.SequenceEfImpl>("Model.FK_Sequence_has_Data", "Sequence").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.SequenceEfImpl>("Model.FK_Sequence_has_Data", "Sequence");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

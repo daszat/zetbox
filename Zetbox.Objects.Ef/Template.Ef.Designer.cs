@@ -748,14 +748,16 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.AssemblyEfImpl>("Model.FK_Template_has_DisplayedTypeAssembly", "DisplayedTypeAssembly").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.AssemblyEfImpl>("Model.FK_Template_has_DisplayedTypeAssembly", "DisplayedTypeAssembly");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._DisplayedTypeFullName);
             binStream.Write(this._DisplayName);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>("Model.FK_Template_has_VisualTree", "VisualTree").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>("Model.FK_Template_has_VisualTree", "VisualTree");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

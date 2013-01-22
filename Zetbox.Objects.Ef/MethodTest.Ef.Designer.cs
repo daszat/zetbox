@@ -1072,8 +1072,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MethodTestEfImpl>("Model.FK_Parent_has_Children", "Parent").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MethodTestEfImpl>("Model.FK_Parent_has_Children", "Parent");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._StringProp);
         }

@@ -837,12 +837,14 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewDescriptor_is_a_ControlKind", "ControlKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewDescriptor_is_a_ControlKind", "ControlKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_View_has_ControlRef", "ControlRef").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_View_has_ControlRef", "ControlRef");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(ControlRef);
@@ -852,8 +854,9 @@ namespace Zetbox.App.GUI
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_ViewDescriptor_has_Module", "Module").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_ViewDescriptor_has_Module", "Module");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
 
             binStream.Write(eagerLoadLists);

@@ -1381,16 +1381,18 @@ namespace Zetbox.App.Projekte
             binStream.Write(this._Auftragsname);
             binStream.Write(this._Auftragswert);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Auftrag_ChangedBy_ChangedBy", "ChangedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Auftrag_ChangedBy_ChangedBy", "ChangedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Auftrag_CreatedBy_CreatedBy", "CreatedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Auftrag_CreatedBy_CreatedBy", "CreatedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1401,16 +1403,19 @@ namespace Zetbox.App.Projekte
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.KundeEfImpl>("Model.FK_Auftrag_has_Kunde", "Kunde").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.KundeEfImpl>("Model.FK_Auftrag_has_Kunde", "Kunde");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.MitarbeiterEfImpl>("Model.FK_Auftrag_has_Mitarbeiter", "Mitarbeiter").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.MitarbeiterEfImpl>("Model.FK_Auftrag_has_Mitarbeiter", "Mitarbeiter");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>("Model.FK_Projekt_has_Auftraege", "Projekt").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>("Model.FK_Projekt_has_Auftraege", "Projekt");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

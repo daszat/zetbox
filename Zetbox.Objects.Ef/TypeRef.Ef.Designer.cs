@@ -1551,23 +1551,26 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.AssemblyEfImpl>("Model.FK_TypeRef_has_Assembly", "Assembly").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.AssemblyEfImpl>("Model.FK_TypeRef_has_Assembly", "Assembly");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(Assembly);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_TypeRef_was_ChangedBy", "ChangedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_TypeRef_was_ChangedBy", "ChangedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_TypeRef_was_CreatedBy", "CreatedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_TypeRef_was_CreatedBy", "CreatedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1593,8 +1596,9 @@ namespace Zetbox.App.Base
 				}
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_Child_has_Parent", "Parent").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_Child_has_Parent", "Parent");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._ToStringCache);
         }

@@ -1387,27 +1387,32 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewModel_displayed_by_DefaultDisplayKind", "DefaultDisplayKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewModel_displayed_by_DefaultDisplayKind", "DefaultDisplayKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_Presentable_has_DefaultKind", "DefaultKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_Presentable_has_DefaultKind", "DefaultKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(DefaultEditorKind);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewModel_displayed_by_DefaultGridDisplayKind", "DefaultGridDisplayKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewModel_displayed_by_DefaultGridDisplayKind", "DefaultGridDisplayKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewModel_displayed_by_DefaultGridCellEditorKind", "DefaultGridCellEditorKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewModel_displayed_by_DefaultGridCellEditorKind", "DefaultGridCellEditorKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind", "DefaultGridCellKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind", "DefaultGridCellKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(DefaultGridCellPreEditorKind);
@@ -1418,12 +1423,14 @@ namespace Zetbox.App.GUI
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_ViewModelDescriptor_has_Module", "Module").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_ViewModelDescriptor_has_Module", "Module");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_Descriptor_has_ViewModelRef", "ViewModelRef").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_Descriptor_has_ViewModelRef", "ViewModelRef");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(ViewModelRef);

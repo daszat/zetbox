@@ -367,8 +367,9 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.EnumerationEntryEfImpl>("Model.FK_EnumDefaultValue_defaults_to_EnumValue", "EnumValue").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.EnumerationEntryEfImpl>("Model.FK_EnumDefaultValue_defaults_to_EnumValue", "EnumValue");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

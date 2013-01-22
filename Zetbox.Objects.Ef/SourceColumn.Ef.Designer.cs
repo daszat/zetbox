@@ -1953,8 +1953,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SourceColumn_was_ChangedBy", "ChangedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SourceColumn_was_ChangedBy", "ChangedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
@@ -1966,8 +1967,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 binStream.Write(this._CompareNulls);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SourceColumn_was_CreatedBy", "CreatedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SourceColumn_was_CreatedBy", "CreatedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1995,16 +1997,18 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             binStream.Write(this._IsNullable);
             binStream.Write(this._Name);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>("Model.FK_FK_Column_references_PK_Column", "PK_Column").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>("Model.FK_FK_Column_references_PK_Column", "PK_Column");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(References);
             }
             binStream.Write(this._Size);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceTableEfImpl>("Model.FK_SourceColumn_belongs_to_SourceTable", "SourceTable").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceTableEfImpl>("Model.FK_SourceColumn_belongs_to_SourceTable", "SourceTable");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write((int?)((Zetbox.App.SchemaMigration.SourceColumn)this).Status);
         }

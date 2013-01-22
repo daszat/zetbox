@@ -1111,18 +1111,21 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_FalseIcon", "FalseIcon").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_FalseIcon", "FalseIcon");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._FalseLabel);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_NullIcon", "NullIcon").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_NullIcon", "NullIcon");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._NullLabel);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_TrueIcon", "TrueIcon").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_TrueIcon", "TrueIcon");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._TrueLabel);
         }

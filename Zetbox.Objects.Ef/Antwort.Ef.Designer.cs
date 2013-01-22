@@ -641,8 +641,9 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Frage);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.FragebogenEfImpl>("Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten", "Ein_Fragebogen").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.FragebogenEfImpl>("Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten", "Ein_Fragebogen");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._gute_Antworten_pos);
             binStream.Write(this._FragenNummer);

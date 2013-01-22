@@ -945,8 +945,9 @@ namespace Zetbox.App.Base
             }
             binStream.Write(this._IsInlineEditable);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.RelationEndEfImpl>("Model.FK_RelationEnd_has_Navigator", "RelationEnd").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.RelationEndEfImpl>("Model.FK_RelationEnd_has_Navigator", "RelationEnd");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

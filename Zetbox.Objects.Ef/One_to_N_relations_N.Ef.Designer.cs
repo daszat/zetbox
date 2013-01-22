@@ -427,8 +427,9 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Name);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.One_to_N_relations_OneEfImpl>("Model.FK_OneSide_connectsTo_NSide", "OneSide").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.One_to_N_relations_OneEfImpl>("Model.FK_OneSide_connectsTo_NSide", "OneSide");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

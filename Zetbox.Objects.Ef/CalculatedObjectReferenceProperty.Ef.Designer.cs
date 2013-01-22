@@ -703,8 +703,9 @@ namespace Zetbox.App.Base
 				}
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_CalculatedReference_references_ReferencedClass", "ReferencedClass").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_CalculatedReference_references_ReferencedClass", "ReferencedClass");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(ReferencedClass);

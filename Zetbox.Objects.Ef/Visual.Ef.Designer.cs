@@ -665,12 +665,14 @@ namespace Zetbox.App.GUI
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Description);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.MethodEfImpl>("Model.FK_Visual_has_Method", "Method").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.MethodEfImpl>("Model.FK_Visual_has_Method", "Method");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_Visual_has_Property", "Property").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_Visual_has_Property", "Property");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

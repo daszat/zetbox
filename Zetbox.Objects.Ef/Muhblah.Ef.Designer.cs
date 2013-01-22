@@ -1007,12 +1007,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             binStream.WriteCollectionEntries(this.StringCollectionImpl);
             binStream.Write(this._TestBool);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_Lst_Role_hasOther_TCO_Role", "TCO_Role").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_Lst_Role_hasOther_TCO_Role", "TCO_Role");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "TCO_One_Role").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "TCO_One_Role");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._TestDateTime);
             binStream.Write((int?)((Zetbox.App.Test.Muhblah)this).TestEnum);

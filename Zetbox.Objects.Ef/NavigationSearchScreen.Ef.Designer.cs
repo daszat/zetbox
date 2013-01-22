@@ -1858,12 +1858,14 @@ namespace Zetbox.App.GUI
             binStream.Write(this._IsEditable);
             binStream.Write(this._IsMultiselect);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedEditorKind", "RequestedEditorKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedEditorKind", "RequestedEditorKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedWorkspaceKind", "RequestedWorkspaceKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedWorkspaceKind", "RequestedWorkspaceKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._RespectRequiredFilter);
             binStream.Write(this._ShowFilter);
@@ -1871,8 +1873,9 @@ namespace Zetbox.App.GUI
             binStream.Write(this._ShowOpenCommand);
             binStream.Write(this._ShowRefreshCommand);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_SearchScreen_of_Type", "Type").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_SearchScreen_of_Type", "Type");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write((int?)((Zetbox.App.GUI.NavigationSearchScreen)this).ViewMethod);
         }

@@ -553,15 +553,17 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_GetErrorTextInvocation", "GetErrorTextInvocation").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_GetErrorTextInvocation", "GetErrorTextInvocation");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(GetErrorTextInvocation);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_IsValidInvocation", "IsValidInvocation").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_IsValidInvocation", "IsValidInvocation");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(IsValidInvocation);

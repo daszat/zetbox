@@ -426,8 +426,9 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Name);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.RequiredParentEfImpl>("Model.FK_Parent_of_Children", "Parent").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.RequiredParentEfImpl>("Model.FK_Parent_of_Children", "Parent");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

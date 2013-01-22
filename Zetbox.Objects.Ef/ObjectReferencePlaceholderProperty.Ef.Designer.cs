@@ -1028,8 +1028,9 @@ namespace Zetbox.App.Base
             binStream.Write(this._IsList);
             binStream.Write(this._ItemRoleName);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass", "ReferencedClass").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass", "ReferencedClass");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(ReferencedObjectClass);

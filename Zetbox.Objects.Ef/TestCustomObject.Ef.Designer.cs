@@ -1004,12 +1004,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Birthday);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_MB_Role_has_TCO_Lst_Role", "MB_Role").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_MB_Role_has_TCO_Lst_Role", "MB_Role");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "MB_One_Role").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "MB_One_Role");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._PersonName);
             binStream.Write(this.PhoneNumberMobile);
