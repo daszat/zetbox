@@ -312,6 +312,15 @@ namespace Zetbox.DalProvider.Ef
 
                 NotifyChanging(notifySaveList);
 
+                // Detach all rights entities as they are managed by the triggers in the database
+                foreach (var right in _ctx.ObjectStateManager
+                    .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted)
+                    .Where(e => e.IsRelationship == false && e.EntitySet.Name.EndsWith("_Rights") && (e.Entity is IDataObject) == false)
+                    .ToList())
+                {
+                    _ctx.Detach(right.Entity);
+                }
+
                 try
                 {
                     result = _ctx.SaveChanges();
@@ -320,6 +329,10 @@ namespace Zetbox.DalProvider.Ef
                 catch (OptimisticConcurrencyException cex)
                 {
                     Logging.Log.Error("OptimisticConcurrencyException during SubmitChanges", cex);
+                    foreach (var stateEntry in cex.StateEntries)
+                    {
+                        Logging.Log.ErrorFormat("  -> {0} ({1})", stateEntry.EntitySet, string.Join(", ", stateEntry.EntityKey.EntityKeyValues.Select(i => i.ToString())));
+                    }
                     throw new ConcurrencyException(cex);
                 }
                 catch (UpdateException updex)
