@@ -80,7 +80,6 @@
     <Compile Include="BaseGenerator.cs" />
     <Compile Include="AbstractBaseGenerator.cs" />
     <Compile Include="Compiler.cs" />
-    <Compile Include="Construct.cs" />
     <Compile Include="GenerationHost.cs" />
     <Compile Include="GeneratorModule.cs" />
     <Compile Include="InterfaceGenerator.cs" />

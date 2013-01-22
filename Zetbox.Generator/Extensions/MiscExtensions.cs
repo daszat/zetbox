@@ -23,6 +23,7 @@ namespace Zetbox.Generator.Extensions
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.API.SchemaManagement;
 
     public static class MiscExtensions
     {
@@ -75,8 +76,7 @@ namespace Zetbox.Generator.Extensions
 
         public static string GetRelationTableName(this Relation rel)
         {
-            if (rel == null) { throw new ArgumentNullException("rel"); }
-            return String.Format("{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
+            return Construct.RelationTableName(rel);
         }
 
         public static string GetRelationFullName(this Relation rel)

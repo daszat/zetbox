@@ -21,6 +21,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.Generator;
@@ -44,10 +45,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             var otherEnd = rel.GetOtherEnd(relEnd);
 
             string name = prop.Name;
-            
+
             // whether or not the collection will be eagerly loaded
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
-            
+
             string wrapperName = "_" + name;
             string wrapperClass = "OneNRelationList";
 

@@ -17,8 +17,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-
 using Zetbox.API;
+using Zetbox.API.SchemaManagement;
 using Zetbox.App.Base;
 using Zetbox.Generator;
 using Zetbox.Generator.Extensions;

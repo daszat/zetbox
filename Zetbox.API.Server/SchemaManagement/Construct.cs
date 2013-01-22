@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.Generator
+namespace Zetbox.API.SchemaManagement
 {
     using System;
     using System.Collections.Generic;
@@ -22,14 +22,23 @@ namespace Zetbox.Generator
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.Generator.Extensions;
-
+    
     /// <summary>
     /// A collection of naming policies.
     /// </summary>
     /// TODO: respect maximal name length restrictions. PostgreSQL has 63 chars max, for example
     public static class Construct
     {
+        #region Tablenames
+
+        public static string RelationTableName(Relation rel)
+        {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+            return String.Format("{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
+        }
+
+        #endregion
+
         #region Association Names
 
         private static string InheritanceAssociationName(string parentClass, string childClass)
@@ -222,7 +231,7 @@ namespace Zetbox.Generator
         public static string SecurityRulesUpdateRightsTriggerName(Relation rel)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
-            return rel.GetRelationTableName() + "_Update_Rights_Trigger";
+            return RelationTableName(rel) + "_Update_Rights_Trigger";
         }
         public static string SecurityRulesRightsViewUnmaterializedName(ObjectClass objClass)
         {

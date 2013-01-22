@@ -20,6 +20,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;

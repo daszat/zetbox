@@ -20,6 +20,7 @@
     Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.SchemaManagement" %>
 <%@ Import Namespace="Zetbox.API.Server" %>
 <%@ Import Namespace="Zetbox.App.Base" %>
 <%@ Import Namespace="Zetbox.App.Extensions" %>

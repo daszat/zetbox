@@ -27,6 +27,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
     using Npgsql;
     using Zetbox.API;
     using Zetbox.API.Configuration;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
 
@@ -182,7 +183,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
             if (id.Length > PG_MAX_IDENTIFIER_LENGTH)
             {
-                throw new InvalidOperationException(string.Format("PG does not support Identifiers with a length more than {0} chars.", PG_MAX_IDENTIFIER_LENGTH ));
+                throw new InvalidOperationException(string.Format("PG does not support Identifiers with a length more than {0} chars.", PG_MAX_IDENTIFIER_LENGTH));
             }
         }
 
@@ -1303,13 +1304,13 @@ LANGUAGE 'plpgsql' VOLATILE",
         public override void ExecRefreshAllRightsProcedure()
         {
             Log.DebugFormat("Refreshing all rights");
-            ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
+            ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
         public override void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
+            sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName())));
             sb.AppendLine();
             sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("PERFORM {0}(refreshID);", FormatSchemaName(i))).ToArray()));
             sb.AppendLine();

@@ -21,6 +21,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
     using System.Text;
     using Arebis.CodeGeneration;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;

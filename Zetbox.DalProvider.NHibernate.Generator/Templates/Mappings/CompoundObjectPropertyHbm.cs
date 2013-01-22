@@ -19,6 +19,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
     using System.Collections.Generic;
     using System.Linq;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;

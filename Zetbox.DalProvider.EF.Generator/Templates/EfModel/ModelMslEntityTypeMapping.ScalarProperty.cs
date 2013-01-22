@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using Arebis.CodeGeneration;
 using Zetbox.API;
+using Zetbox.API.SchemaManagement;
 using Zetbox.App.Base;
 using Zetbox.Generator;
 
@@ -33,7 +34,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("EfModel.ModelMslEntityTypeMappingScalarProperty", ctx, prop,  parentName);
+            host.CallTemplate("EfModel.ModelMslEntityTypeMappingScalarProperty", ctx, prop, parentName);
         }
 
         public ModelMslEntityTypeMappingScalarProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Property prop, string parentName)
