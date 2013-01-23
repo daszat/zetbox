@@ -631,15 +631,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 foreach (var obj in e.OldItems.OfType<INotifyPropertyChanged>())
                 {
                     obj.PropertyChanged -= AnyPropertyChangedHandler;
-
-                    // Delete dependent objects when they leave our scope
-                    if (obj is DataObjectViewModel && !AllowRemove && AllowDelete)
-                    {
-                        // Case 2282: Sorting Lists will delete 1:n Entries
-                        // This is evil, as it would delete an Object during 
-                        // resort of an ObjectRefList.
-                        // ((DataObjectViewModel)obj).Delete();
-                    }
                 }
             }
 
