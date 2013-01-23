@@ -95,6 +95,7 @@
     <Compile Include="HtpasswdIdentitySource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchemaManagement\CheckExpressionVisitor.cs" />
+    <Compile Include="SchemaManagement\MigrationFragments\DemoMigrationFragment.cs" />
     <Compile Include="ZetboxService.cs" />
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />

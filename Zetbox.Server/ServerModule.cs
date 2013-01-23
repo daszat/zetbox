@@ -27,6 +27,7 @@ namespace Zetbox.Server
     using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
     using System.ComponentModel;
+    using Zetbox.API.SchemaManagement;
 
     [Feature]
     [Description("The Server Module")]
@@ -69,6 +70,8 @@ namespace Zetbox.Server
                 .InstancePerLifetimeScope();
 #endif
             builder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server", true)));
+
+            builder.RegisterMigrationFragments(typeof(ServerModule).Assembly);
         }
     }
 }

@@ -23,6 +23,8 @@ namespace Zetbox.API.SchemaManagement
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Mono.Cecil;
+    using Mono.Cecil.Rocks;
 
     public interface IGlobalMigrationFragment
     {
@@ -111,22 +113,24 @@ namespace Zetbox.API.SchemaManagement
             if (builder == null) { throw new ArgumentNullException("builder"); }
             if (source == null) { throw new ArgumentNullException("source"); }
 
-            foreach (var t in source.GetTypes()
+            var module = ModuleDefinition.ReadModule(source.Location);
+
+            foreach (var t in module.GetAllTypes()
                                     .Where(t => !t.IsAbstract
-                                            && t.GetInterfaces().Contains(typeof(IGlobalMigrationFragment))))
+                                            && t.Interfaces.Any(i => i.FullName == typeof(IGlobalMigrationFragment).FullName)))
             {
                 builder
-                    .RegisterType(t)
+                    .RegisterType(Type.GetType(System.Reflection.Assembly.CreateQualifiedName(source.FullName, t.FullName.Replace('/', '+'))))
                     .AsImplementedInterfaces()
                     .SingleInstance();
             }
 
-            foreach (var t in source.GetTypes()
+            foreach (var t in module.GetAllTypes()
                                     .Where(t => !t.IsAbstract
-                                            && t.GetInterfaces().Contains(typeof(IMigrationFragment))))
+                                            && t.Interfaces.Any(i => i.FullName == typeof(IMigrationFragment).FullName)))
             {
                 builder
-                    .RegisterType(t)
+                    .RegisterType(Type.GetType(System.Reflection.Assembly.CreateQualifiedName(source.FullName, t.FullName.Replace('/', '+'))))
                     .AsImplementedInterfaces()
                     .SingleInstance();
             }
