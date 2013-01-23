@@ -147,6 +147,14 @@ namespace Zetbox.ConfigEditor.ViewModels
             }
         }
 
+        public bool IsAutoloaded
+        {
+            get
+            {
+                return ModulesCache.Instance[TypeName].IsAutoloaded;
+            }
+        }
+
         public string Description
         {
             get

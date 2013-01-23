@@ -55,6 +55,11 @@
                                                 <Setter Property="TextDecorations"
                                                         Value="Strikethrough" />
                                             </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsAutoloaded}"
+                                                         Value="true">
+                                                <Setter Property="TextDecorations"
+                                                        Value="Strikethrough" />
+                                            </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </StackPanel.Resources>

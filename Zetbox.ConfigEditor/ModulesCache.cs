@@ -15,6 +15,7 @@ namespace Zetbox.ConfigEditor
         public string TypeName { get; set; }
         public string Description { get; set; }
         public bool IsFeature { get; set; }
+        public bool IsAutoloaded { get; set; }
         public bool NotOnFallback { get; set; }
     }
 
@@ -105,6 +106,7 @@ namespace Zetbox.ConfigEditor
                         TypeName = string.Format("{0}, {1}", type.FullName.Replace('/', '+'), module.Assembly.Name.Name),
                         Description = ExtractDescription(type),
                         IsFeature = ExtractIsFeature(type),
+                        IsAutoloaded = ExtractIsAutoloaded(type),
                         NotOnFallback = ExtractNotOnFallback(type)
                     };
                     _autofacModules[mt.TypeName] = mt;
@@ -129,10 +131,18 @@ namespace Zetbox.ConfigEditor
             return attr != null;
         }
 
+        private static bool ExtractIsAutoloaded(TypeDefinition type)
+        {
+            var attr = type.CustomAttributes.FirstOrDefault(i => i.AttributeType.FullName == typeof(Zetbox.API.Configuration.AutoLoadAttribute).FullName);
+            return attr != null;
+        }
+
         private static bool ExtractNotOnFallback(TypeDefinition type)
         {
             bool notOnFallback = false;
-            var attr = type.CustomAttributes.FirstOrDefault(i => i.AttributeType.FullName == typeof(Zetbox.API.Configuration.FeatureAttribute).FullName);
+            var attr = type.CustomAttributes
+                .FirstOrDefault(i => i.AttributeType.FullName == typeof(Zetbox.API.Configuration.FeatureAttribute).FullName
+                                  || i.AttributeType.FullName == typeof(Zetbox.API.Configuration.AutoLoadAttribute).FullName);
             if (attr != null)
             {
                 var namedArg = attr.Properties.Where(i => i.Name == "NotOnFallback").ToArray();

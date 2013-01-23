@@ -35,4 +35,25 @@ namespace Zetbox.API.Configuration
         [DefaultValue(false)]
         public bool NotOnFallback { get; set; }
     }
+
+    /// <summary>
+    /// Modules marked with this attribute are automatically loaded.
+    /// </summary>
+    /// <remarks>
+    /// The AssemblyResolver loads such modules after manually configured modules. They are loaded in the order defined by the AssemblySearchPath.
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    public sealed class AutoLoadAttribute : Attribute
+    {
+        public AutoLoadAttribute()
+        {
+            NotOnFallback = false;
+        }
+
+        /// <summary>
+        /// Will not be loaded in fallback mode
+        /// </summary>
+        [DefaultValue(false)]
+        public bool NotOnFallback { get; set; }
+    }
 }
