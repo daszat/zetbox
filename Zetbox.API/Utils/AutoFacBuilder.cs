@@ -147,7 +147,7 @@ namespace Zetbox.API.Utils
 
                 var module = ModuleDefinition.ReadModule(file);
 
-                var typeDef = module.GetType(parts[0]);
+                var typeDef = module.GetType(parts[0], true).Resolve();
                 if (typeDef == null)
                 {
                     throw new ConfigurationException(string.Format("Cannot find module '{0}'", typeName));
