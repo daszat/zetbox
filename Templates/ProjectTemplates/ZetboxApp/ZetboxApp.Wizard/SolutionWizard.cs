@@ -98,6 +98,12 @@ namespace ZetboxApp.Wizard
                     ctx.ShouldBuild = false;
                 }
             }
+
+            var fallbackConfig = _solution.SolutionBuild.SolutionConfigurations.Add("Fallback", "Debug", false);
+            foreach (SolutionContext ctx in fallbackConfig.SolutionContexts)
+            {
+                ctx.ShouldBuild = ctx.ProjectName.EndsWith(".Fallback.csproj");
+            }
         }
 
         private void AddImportTargets()
