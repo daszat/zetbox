@@ -1589,15 +1589,11 @@ Global
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Linux.Debug|x86.ActiveCfg = Debug|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Minimal|.NET.ActiveCfg = Release|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Minimal|Any CPU.ActiveCfg = Release|Any CPU
-		{EBB9E238-741C-455D-9D49-8114F22128FD}.Minimal|Any CPU.Build.0 = Release|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Minimal|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{EBB9E238-741C-455D-9D49-8114F22128FD}.Minimal|Mixed Platforms.Build.0 = Release|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Minimal|x86.ActiveCfg = Release|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Release|.NET.ActiveCfg = Release|Any CPU
 		{EBB9E238-741C-455D-9D49-8114F22128FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
