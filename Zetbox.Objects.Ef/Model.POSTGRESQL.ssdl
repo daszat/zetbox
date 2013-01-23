@@ -2518,6 +2518,7 @@
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_ObjectProp" Type="int4" />
+    <Property Name="CalculatedEnumeration" Type="int4" Nullable="false" />
     <Property Name="MyIntProperty" Type="int4" Nullable="true" />
     <Property Name="StringProp" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="TestEnumProp" Type="int4" Nullable="false" />

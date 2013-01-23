@@ -2696,6 +2696,11 @@
         </id>
 
         <!-- define the properties -->
+<!-- ValueTypeProperty CalculatedEnumeration is calculated and persisted -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="CalculatedEnumeration" 
+                  column="`CalculatedEnumeration`" 
+                  optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="MyIntProperty" 
                   column="`MyIntProperty`" 

@@ -518,12 +518,13 @@ namespace Zetbox.App.GUI
                     _Toolkit = value;
                     NotifyPropertyChanged("Toolkit", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
+					
                     if(OnToolkit_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
 						OnToolkit_PostSetter(this, e);
                     }
-                    
+					
                 }
             }
         }
@@ -537,6 +538,7 @@ namespace Zetbox.App.GUI
                 ReportEfPropertyChanged("ToolkitImpl");
             }
         }
+					
         
         /// <summary>EF sees only this property, for Toolkit</summary>
         [XmlIgnore()]
@@ -871,7 +873,7 @@ namespace Zetbox.App.GUI
 					auxObjects.Add(relEntry);
 				}
             }
-            binStream.Write((int?)((Zetbox.App.GUI.ViewDescriptor)this).Toolkit);
+            binStream.Write((int?)this._Toolkit);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -889,7 +891,7 @@ namespace Zetbox.App.GUI
             binStream.Read(out this._fk_Module);
 
             SupportedViewModels_was_eagerLoaded = binStream.ReadBoolean();
-            ((Zetbox.App.GUI.ViewDescriptor)this).Toolkit = (Zetbox.App.GUI.Toolkit)binStream.ReadNullableInt32();
+            this._Toolkit = (Zetbox.App.GUI.Toolkit)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -906,7 +908,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlKind != null ? ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)((Zetbox.App.GUI.ViewDescriptor)this).Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -929,7 +931,7 @@ namespace Zetbox.App.GUI
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|Toolkit":
-                ((Zetbox.App.GUI.ViewDescriptor)this).Toolkit = (Zetbox.App.GUI.Toolkit)XmlStreamer.ReadNullableInt32(xml);
+                this._Toolkit = (Zetbox.App.GUI.Toolkit)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

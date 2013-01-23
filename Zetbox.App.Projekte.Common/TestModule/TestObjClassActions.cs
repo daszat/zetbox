@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -13,27 +13,22 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
+namespace Zetbox.App.Test
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Zetbox.API;
-    using Zetbox.App.Base;
-    using Zetbox.App.Extensions;
-    using Templates = Zetbox.Generator.Templates;
 
-    public partial class EnumerationPropertyTemplate
+    public static class TestObjClassActions
     {
-        protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list)
+        [Invocation]
+        public static void get_CalculatedEnumeration(TestObjClass obj, PropertyGetterEventArgs<TestEnum> e)
         {
-            if (list != null)
-            {
-                var backingStoreName = String.Format("this._{0}", prop.Name);
-                Templates.Serialization.EnumBinarySerialization.AddToSerializers(list, prop, backingStoreName);
-            }
+            e.Result = obj.ID % 2 == 0
+                ? TestEnum.First
+                : TestEnum.Second;
         }
     }
 }

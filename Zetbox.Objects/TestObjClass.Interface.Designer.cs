@@ -15,6 +15,14 @@ namespace Zetbox.App.Test
     {
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("e5101331-312b-4518-b7f8-750ca7b61d80")]
+        Zetbox.App.Test.TestEnum CalculatedEnumeration {
+            get;
+        }
+
+        /// <summary>
         /// test
         /// </summary>
         [Zetbox.API.DefinitionGuid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf")]

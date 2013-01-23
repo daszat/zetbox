@@ -1553,7 +1553,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             binStream.Write(this._Name);
             binStream.Write(StagingDatabase != null ? StagingDatabase.ID : (int?)null);
-            binStream.Write((int?)((Zetbox.App.SchemaMigration.SourceTable)this).Status);
+            binStream.Write((int?)this._Status);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1581,7 +1581,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             this._Name = binStream.ReadString();
             this._fk_StagingDatabase = binStream.ReadNullableInt32();
-            ((Zetbox.App.SchemaMigration.SourceTable)this).Status = (Zetbox.App.SchemaMigration.MappingStatus?)binStream.ReadNullableInt32();
+            this._Status = (Zetbox.App.SchemaMigration.MappingStatus?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1604,7 +1604,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(DestinationObjectClass != null ? DestinationObjectClass.ExportGuid : (Guid?)null, xml, "DestinationObjectClass", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(StagingDatabase != null ? StagingDatabase.ExportGuid : (Guid?)null, xml, "StagingDatabase", "Zetbox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)((Zetbox.App.SchemaMigration.SourceTable)this).Status, xml, "Status", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)this._Status, xml, "Status", "Zetbox.App.SchemaMigration");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1643,7 +1643,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 this._fk_guid_StagingDatabase = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.SchemaMigration|Status":
-                ((Zetbox.App.SchemaMigration.SourceTable)this).Status = (Zetbox.App.SchemaMigration.MappingStatus?)XmlStreamer.ReadNullableInt32(xml);
+                this._Status = (Zetbox.App.SchemaMigration.MappingStatus?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

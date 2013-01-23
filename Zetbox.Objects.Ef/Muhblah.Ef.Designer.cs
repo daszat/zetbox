@@ -596,12 +596,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     _TestEnum = value;
                     NotifyPropertyChanged("TestEnum", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
+					
                     if(OnTestEnum_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
 						OnTestEnum_PostSetter(this, e);
                     }
-                    
+					
                 }
             }
         }
@@ -615,6 +616,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 ReportEfPropertyChanged("TestEnumImpl");
             }
         }
+					
         
         /// <summary>EF sees only this property, for TestEnum</summary>
         [XmlIgnore()]
@@ -1017,7 +1019,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._TestDateTime);
-            binStream.Write((int?)((Zetbox.App.Test.Muhblah)this).TestEnum);
+            binStream.Write((int?)this._TestEnum);
             binStream.Write(this._TestString);
         }
 
@@ -1031,7 +1033,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             binStream.Read(out this._fk_TestCustomObjects_Nav);
             binStream.Read(out this._fk_TestCustomObjects_One_Nav);
             this._TestDateTime = binStream.ReadNullableDateTime();
-            ((Zetbox.App.Test.Muhblah)this).TestEnum = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._TestEnum = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             this._TestString = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null

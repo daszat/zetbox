@@ -1953,7 +1953,7 @@ namespace Zetbox.App.Base
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
-            binStream.Write((int?)((Zetbox.App.Base.Relation)this).Containment);
+            binStream.Write((int?)this._Containment);
             binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1965,7 +1965,7 @@ namespace Zetbox.App.Base
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(Module != null ? Module.ID : (int?)null);
-            binStream.Write((int?)((Zetbox.App.Base.Relation)this).Storage);
+            binStream.Write((int?)this._Storage);
             binStream.Write(this._Verb);
         }
 
@@ -1982,7 +1982,7 @@ namespace Zetbox.App.Base
             if (this._isChangedOnSet) {
                 this._ChangedOn = binStream.ReadDateTime();
             }
-            ((Zetbox.App.Base.Relation)this).Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
+            this._Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
             this._fk_CreatedBy = binStream.ReadNullableInt32();
             this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
@@ -1994,7 +1994,7 @@ namespace Zetbox.App.Base
                 this._ExportGuid = binStream.ReadGuid();
             }
             this._fk_Module = binStream.ReadNullableInt32();
-            ((Zetbox.App.Base.Relation)this).Storage = (Zetbox.App.Base.StorageType)binStream.ReadNullableInt32();
+            this._Storage = (Zetbox.App.Base.StorageType)binStream.ReadNullableInt32();
             this._Verb = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -2013,12 +2013,12 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.Relation)this).Containment, xml, "Containment", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Containment, xml, "Containment", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.Relation)this).Storage, xml, "Storage", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Storage, xml, "Storage", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Verb, xml, "Verb", "Zetbox.App.Base");
         }
 
@@ -2039,7 +2039,7 @@ namespace Zetbox.App.Base
                 this._isChangedOnSet = true;
                 break;
             case "Zetbox.App.Base|Containment":
-                ((Zetbox.App.Base.Relation)this).Containment = (Zetbox.App.Base.ContainmentSpecification)XmlStreamer.ReadNullableInt32(xml);
+                this._Containment = (Zetbox.App.Base.ContainmentSpecification)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|CreatedOn":
                 // Import must have default value set
@@ -2058,7 +2058,7 @@ namespace Zetbox.App.Base
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.Base|Storage":
-                ((Zetbox.App.Base.Relation)this).Storage = (Zetbox.App.Base.StorageType)XmlStreamer.ReadNullableInt32(xml);
+                this._Storage = (Zetbox.App.Base.StorageType)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|Verb":
                 this._Verb = XmlStreamer.ReadString(xml);

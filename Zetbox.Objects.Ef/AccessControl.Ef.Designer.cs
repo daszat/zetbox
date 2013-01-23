@@ -887,12 +887,13 @@ namespace Zetbox.App.Base
                     _Rights = value;
                     NotifyPropertyChanged("Rights", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
+					
                     if(OnRights_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
 						OnRights_PostSetter(this, e);
                     }
-                    
+					
                 }
             }
         }
@@ -906,6 +907,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("RightsImpl");
             }
         }
+					
         
         /// <summary>EF sees only this property, for Rights</summary>
         [XmlIgnore()]
@@ -1279,7 +1281,7 @@ namespace Zetbox.App.Base
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            binStream.Write((int?)((Zetbox.App.Base.AccessControl)this).Rights);
+            binStream.Write((int?)this._Rights);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1306,7 +1308,7 @@ namespace Zetbox.App.Base
             binStream.Read(out this._fk_Module);
             this._Name = binStream.ReadString();
             binStream.Read(out this._fk_ObjectClass);
-            ((Zetbox.App.Base.AccessControl)this).Rights = (Zetbox.App.Base.AccessRights?)binStream.ReadNullableInt32();
+            this._Rights = (Zetbox.App.Base.AccessRights?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1328,7 +1330,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.AccessControl)this).Rights, xml, "Rights", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Rights, xml, "Rights", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1364,7 +1366,7 @@ namespace Zetbox.App.Base
                 this._fk_guid_ObjectClass = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.Base|Rights":
-                ((Zetbox.App.Base.AccessControl)this).Rights = (Zetbox.App.Base.AccessRights?)XmlStreamer.ReadNullableInt32(xml);
+                this._Rights = (Zetbox.App.Base.AccessRights?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

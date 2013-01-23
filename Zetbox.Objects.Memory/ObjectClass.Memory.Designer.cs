@@ -1652,7 +1652,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (this._isIsSimpleObjectSet) {
                 binStream.Write(this._IsSimpleObject);
             }
-            binStream.Write((int?)((Zetbox.App.Base.ObjectClass)this).TableMapping);
+            binStream.Write((int?)this._TableMapping);
             binStream.Write(this._TableName);
         }
 
@@ -1677,7 +1677,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (this._isIsSimpleObjectSet) {
                 this._IsSimpleObject = binStream.ReadBoolean();
             }
-            ((Zetbox.App.Base.ObjectClass)this).TableMapping = (Zetbox.App.Base.TableMapping?)binStream.ReadNullableInt32();
+            this._TableMapping = (Zetbox.App.Base.TableMapping?)binStream.ReadNullableInt32();
             this._TableName = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -1701,7 +1701,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isIsSimpleObjectSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.ObjectClass)this).TableMapping, xml, "TableMapping", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._TableMapping, xml, "TableMapping", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._TableName, xml, "TableName", "Zetbox.App.Base");
         }
 
@@ -1736,7 +1736,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 this._isIsSimpleObjectSet = true;
                 break;
             case "Zetbox.App.Base|TableMapping":
-                ((Zetbox.App.Base.ObjectClass)this).TableMapping = (Zetbox.App.Base.TableMapping?)XmlStreamer.ReadNullableInt32(xml);
+                this._TableMapping = (Zetbox.App.Base.TableMapping?)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|TableName":
                 this._TableName = XmlStreamer.ReadString(xml);

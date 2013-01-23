@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-21T12:28:28Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-23T13:52:24Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -7386,6 +7386,42 @@ public static void isValid_SmallDecimal(TestDecimal obj, PropertyIsValidEventArg
     <ZetboxBase:Precision>4</ZetboxBase:Precision>
     <ZetboxBase:Scale>2</ZetboxBase:Scale>
   </ZetboxBase:DecimalProperty>
+  <ZetboxBase:EnumerationProperty ExportGuid="e5101331-312b-4518-b7f8-750ca7b61d80">
+    <ZetboxBase:ChangedOn>2013-01-23T12:52:24.709268Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_CalculatedEnumeration(TestObjClass obj, PropertyGetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CalculatedEnumeration(TestObjClass obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CalculatedEnumeration(TestObjClass obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CalculatedEnumeration(TestObjClass obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CalculatedEnumeration == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-01-23T12:52:24.709268Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>CalculatedEnumeration</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>401</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>true</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
+  </ZetboxBase:EnumerationProperty>
   <ZetboxBase:IntProperty ExportGuid="29c0242b-cd1c-42b4-8ca0-be0a209afcbf">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -9113,6 +9149,11 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:ConstrainedProperty>465e10ec-4e5e-4e8f-831f-44562dd0d68b</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-01-25T23:02:48Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Reason>Every Customer has to have a Phone Number</ZetboxBase:Reason>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="2152b7e3-32d8-4916-b9cd-d5975d01ec8a">
+    <ZetboxBase:ChangedOn>2013-01-23T12:52:24.709268Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>e5101331-312b-4518-b7f8-750ca7b61d80</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-01-23T12:52:24.709268Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="d0b1d81b-55fd-4054-8c72-469a81dc7b00">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:06.920932Z</ZetboxBase:ChangedOn>

@@ -1919,7 +1919,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
-            binStream.Write((int?)((Zetbox.App.SchemaMigration.SourceColumn)this).DbType);
+            binStream.Write((int?)this._DbType);
             binStream.Write(this._Description);
 
             binStream.Write(eagerLoadLists);
@@ -1939,7 +1939,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             binStream.Write(References != null ? References.ID : (int?)null);
             binStream.Write(this._Size);
             binStream.Write(SourceTable != null ? SourceTable.ID : (int?)null);
-            binStream.Write((int?)((Zetbox.App.SchemaMigration.SourceColumn)this).Status);
+            binStream.Write((int?)this._Status);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1963,7 +1963,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             if (this._isCreatedOnSet) {
                 this._CreatedOn = binStream.ReadDateTime();
             }
-            ((Zetbox.App.SchemaMigration.SourceColumn)this).DbType = (Zetbox.App.SchemaMigration.ColumnType)binStream.ReadNullableInt32();
+            this._DbType = (Zetbox.App.SchemaMigration.ColumnType)binStream.ReadNullableInt32();
             this._Description = binStream.ReadString();
 
             DestinationProperty_was_eagerLoaded = binStream.ReadBoolean();
@@ -1976,7 +1976,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             this._fk_References = binStream.ReadNullableInt32();
             this._Size = binStream.ReadNullableInt32();
             this._fk_SourceTable = binStream.ReadNullableInt32();
-            ((Zetbox.App.SchemaMigration.SourceColumn)this).Status = (Zetbox.App.SchemaMigration.MappingStatus?)binStream.ReadNullableInt32();
+            this._Status = (Zetbox.App.SchemaMigration.MappingStatus?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1997,14 +1997,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._CompareNulls, xml, "CompareNulls", "Zetbox.App.SchemaMigration");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)((Zetbox.App.SchemaMigration.SourceColumn)this).DbType, xml, "DbType", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)this._DbType, xml, "DbType", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._IsNullable, xml, "IsNullable", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(References != null ? References.ExportGuid : (Guid?)null, xml, "References", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._Size, xml, "Size", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(SourceTable != null ? SourceTable.ExportGuid : (Guid?)null, xml, "SourceTable", "Zetbox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)((Zetbox.App.SchemaMigration.SourceColumn)this).Status, xml, "Status", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)this._Status, xml, "Status", "Zetbox.App.SchemaMigration");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -2031,7 +2031,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 this._isCreatedOnSet = true;
                 break;
             case "Zetbox.App.SchemaMigration|DbType":
-                ((Zetbox.App.SchemaMigration.SourceColumn)this).DbType = (Zetbox.App.SchemaMigration.ColumnType)XmlStreamer.ReadNullableInt32(xml);
+                this._DbType = (Zetbox.App.SchemaMigration.ColumnType)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.SchemaMigration|Description":
                 this._Description = XmlStreamer.ReadString(xml);
@@ -2057,7 +2057,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 this._fk_guid_SourceTable = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.SchemaMigration|Status":
-                ((Zetbox.App.SchemaMigration.SourceColumn)this).Status = (Zetbox.App.SchemaMigration.MappingStatus?)XmlStreamer.ReadNullableInt32(xml);
+                this._Status = (Zetbox.App.SchemaMigration.MappingStatus?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

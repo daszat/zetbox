@@ -3766,6 +3766,10 @@ namespace Zetbox {
                             }
                             public static class TestObjClass_Properties
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CalculatedEnumeration
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("e5101331-312b-4518-b7f8-750ca7b61d80"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> MyIntProperty
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("29c0242b-cd1c-42b4-8ca0-be0a209afcbf"); }

@@ -1759,7 +1759,7 @@ namespace Zetbox.App.GUI
             binStream.Write(this._AllowUserFilter);
             binStream.Write(this._EnableAutoFilter);
             binStream.Write(this._InitialSort);
-            binStream.Write((int?)((Zetbox.App.GUI.NavigationSearchScreen)this).InitialSortDirection);
+            binStream.Write((int?)this._InitialSortDirection);
             binStream.Write(this._IsEditable);
             binStream.Write(this._IsMultiselect);
             binStream.Write(RequestedEditorKind != null ? RequestedEditorKind.ID : (int?)null);
@@ -1770,7 +1770,7 @@ namespace Zetbox.App.GUI
             binStream.Write(this._ShowOpenCommand);
             binStream.Write(this._ShowRefreshCommand);
             binStream.Write(Type != null ? Type.ID : (int?)null);
-            binStream.Write((int?)((Zetbox.App.GUI.NavigationSearchScreen)this).ViewMethod);
+            binStream.Write((int?)this._ViewMethod);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1785,7 +1785,7 @@ namespace Zetbox.App.GUI
             this._AllowUserFilter = binStream.ReadNullableBoolean();
             this._EnableAutoFilter = binStream.ReadNullableBoolean();
             this._InitialSort = binStream.ReadString();
-            ((Zetbox.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)binStream.ReadNullableInt32();
+            this._InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)binStream.ReadNullableInt32();
             this._IsEditable = binStream.ReadNullableBoolean();
             this._IsMultiselect = binStream.ReadNullableBoolean();
             this._fk_RequestedEditorKind = binStream.ReadNullableInt32();
@@ -1796,7 +1796,7 @@ namespace Zetbox.App.GUI
             this._ShowOpenCommand = binStream.ReadNullableBoolean();
             this._ShowRefreshCommand = binStream.ReadNullableBoolean();
             this._fk_Type = binStream.ReadNullableInt32();
-            ((Zetbox.App.GUI.NavigationSearchScreen)this).ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
+            this._ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1816,7 +1816,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._AllowUserFilter, xml, "AllowUserFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._EnableAutoFilter, xml, "EnableAutoFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._InitialSort, xml, "InitialSort", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)((Zetbox.App.GUI.NavigationSearchScreen)this).InitialSortDirection, xml, "InitialSortDirection", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._InitialSortDirection, xml, "InitialSortDirection", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._IsEditable, xml, "IsEditable", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._IsMultiselect, xml, "IsMultiselect", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedEditorKind != null ? RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Zetbox.App.GUI");
@@ -1827,7 +1827,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowOpenCommand, xml, "ShowOpenCommand", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)((Zetbox.App.GUI.NavigationSearchScreen)this).ViewMethod, xml, "ViewMethod", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._ViewMethod, xml, "ViewMethod", "Zetbox.App.GUI");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -1855,7 +1855,7 @@ namespace Zetbox.App.GUI
                 this._InitialSort = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.GUI|InitialSortDirection":
-                ((Zetbox.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)XmlStreamer.ReadNullableInt32(xml);
+                this._InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.GUI|IsEditable":
                 this._IsEditable = XmlStreamer.ReadNullableBoolean(xml);
@@ -1888,7 +1888,7 @@ namespace Zetbox.App.GUI
                 this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|ViewMethod":
-                ((Zetbox.App.GUI.NavigationSearchScreen)this).ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)XmlStreamer.ReadNullableInt32(xml);
+                this._ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

@@ -234,12 +234,13 @@ namespace Zetbox.App.Base
                     _EveryDayOfWeek = value;
                     NotifyPropertyChanged("EveryDayOfWeek", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
+					
                     if(OnEveryDayOfWeek_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__oldValue, __newValue);
 						OnEveryDayOfWeek_PostSetter(this, e);
                     }
-                    
+					
                 }
             }
         }
@@ -253,6 +254,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("EveryDayOfWeekImpl");
             }
         }
+					
         
         /// <summary>EF sees only this property, for EveryDayOfWeek</summary>
         [XmlIgnore()]
@@ -953,7 +955,7 @@ namespace Zetbox.App.Base
             if (this._isEveryDaySet) {
                 binStream.Write(this._EveryDay);
             }
-            binStream.Write((int?)((Zetbox.App.Base.RecurrenceRule)this).EveryDayOfWeek);
+            binStream.Write((int?)this._EveryDayOfWeek);
             binStream.Write(this._isEveryMonthSet);
             if (this._isEveryMonthSet) {
                 binStream.Write(this._EveryMonth);
@@ -982,7 +984,7 @@ namespace Zetbox.App.Base
             if (this._isEveryDaySet) {
                 this._EveryDay = binStream.ReadBoolean();
             }
-            ((Zetbox.App.Base.RecurrenceRule)this).EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)binStream.ReadNullableInt32();
+            this._EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)binStream.ReadNullableInt32();
             this._isEveryMonthSet = binStream.ReadBoolean();
             if (this._isEveryMonthSet) {
                 this._EveryMonth = binStream.ReadBoolean();
@@ -1014,7 +1016,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._DaysOffset, xml, "DaysOffset", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isEveryDaySet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryDay, xml, "EveryDay", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.RecurrenceRule)this).EveryDayOfWeek, xml, "EveryDayOfWeek", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._EveryDayOfWeek, xml, "EveryDayOfWeek", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isEveryMonthSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryMonth, xml, "EveryMonth", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isEveryQuaterSet, "Exported objects need to have all default values evaluated");
@@ -1041,7 +1043,7 @@ namespace Zetbox.App.Base
                 this._isEveryDaySet = true;
                 break;
             case "Zetbox.App.Base|EveryDayOfWeek":
-                ((Zetbox.App.Base.RecurrenceRule)this).EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)XmlStreamer.ReadNullableInt32(xml);
+                this._EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|EveryMonth":
                 // Import must have default value set

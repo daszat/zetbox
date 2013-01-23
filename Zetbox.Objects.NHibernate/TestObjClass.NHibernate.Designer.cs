@@ -49,6 +49,59 @@ namespace Zetbox.App.Test
         internal readonly TestObjClassProxy Proxy;
 
         /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public Zetbox.App.Test.TestEnum CalculatedEnumeration
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchCalculatedEnumerationOrDefault();
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.CalculatedEnumeration != value)
+                {
+                    var __oldValue = Proxy.CalculatedEnumeration;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CalculatedEnumeration", __oldValue, __newValue);
+                    Proxy.CalculatedEnumeration = __newValue;
+                    NotifyPropertyChanged("CalculatedEnumeration", __oldValue, __newValue);
+			        _CalculatedEnumeration_IsDirty = false;
+
+                }
+				else 
+				{
+					SetInitializedProperty("CalculatedEnumeration");
+				}
+            }
+        }
+		private bool _CalculatedEnumeration_IsDirty = false;
+
+
+        private Zetbox.App.Test.TestEnum FetchCalculatedEnumerationOrDefault()
+        {
+           var __result = Proxy.CalculatedEnumeration;
+            if (_CalculatedEnumeration_IsDirty && OnCalculatedEnumeration_Getter != null)
+            {
+                var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__result);
+                OnCalculatedEnumeration_Getter(this, __e);
+                _CalculatedEnumeration_IsDirty = false;
+                __result = Proxy.CalculatedEnumeration = __e.Result;
+            }
+            return __result;
+        }
+
+        private bool _isCalculatedEnumerationSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnCalculatedEnumeration_Getter;
+
+        /// <summary>
         /// test
         /// </summary>
 
@@ -398,6 +451,7 @@ namespace Zetbox.App.Test
         public override void SetNew()
         {
             base.SetNew();
+            _CalculatedEnumeration_IsDirty = true;
         }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
@@ -435,6 +489,20 @@ namespace Zetbox.App.Test
                     break;
             }
         }
+
+        public override void Recalculate(string property)
+        {
+            switch (property)
+            {
+                case "CalculatedEnumeration":
+                    NotifyPropertyChanging(property, null, null);
+                    _CalculatedEnumeration_IsDirty = true;
+                    NotifyPropertyChanged(property, null, null);
+                    return;
+            }
+
+            base.Recalculate(property);
+        }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -464,6 +532,15 @@ namespace Zetbox.App.Test
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorNHibernateImpl<TestObjClass, Zetbox.App.Test.TestEnum>(
+                        lazyCtx,
+                        new Guid("e5101331-312b-4518-b7f8-750ca7b61d80"),
+                        "CalculatedEnumeration",
+                        null,
+                        obj => obj.CalculatedEnumeration,
+                        null, // calculated property
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorNHibernateImpl<TestObjClass, int?>(
                         lazyCtx,
@@ -547,6 +624,7 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyPreSave_TestObjClass")]
         public override void NotifyPreSave()
         {
+            FetchCalculatedEnumerationOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_TestObjClass != null) OnNotifyPreSave_TestObjClass(this);
         }
@@ -567,6 +645,7 @@ namespace Zetbox.App.Test
             SetNotInitializedProperty("ObjectProp");
             SetNotInitializedProperty("StringProp");
             SetNotInitializedProperty("TestEnumProp");
+            _CalculatedEnumeration_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_TestObjClass != null) OnNotifyCreated_TestObjClass(this);
         }
@@ -602,6 +681,8 @@ namespace Zetbox.App.Test
             public virtual Type ZetboxWrapper { get { return typeof(TestObjClassNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(TestObjClassProxy); } }
 
+            public virtual Zetbox.App.Test.TestEnum CalculatedEnumeration { get; set; }
+
             public virtual int? MyIntProperty { get; set; }
 
             public virtual Zetbox.App.Projekte.KundeNHibernateImpl.KundeProxy ObjectProp { get; set; }
@@ -622,6 +703,7 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write((int?)Proxy.CalculatedEnumeration);
             binStream.Write(this.Proxy.MyIntProperty);
             binStream.Write(this.Proxy.ObjectProp != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectProp) : (int?)null);
             binStream.Write(this.Proxy.StringProp);
@@ -634,6 +716,7 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            Proxy.CalculatedEnumeration = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             this.Proxy.MyIntProperty = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_ObjectProp);
             this.Proxy.StringProp = binStream.ReadString();

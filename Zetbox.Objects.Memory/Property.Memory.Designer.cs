@@ -2642,7 +2642,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             binStream.Write(ObjectClass != null ? ObjectClass.ID : (int?)null);
             binStream.Write(this._Properties_pos);
             binStream.Write(RequestedKind != null ? RequestedKind.ID : (int?)null);
-            binStream.Write((int?)((Zetbox.App.Base.Property)this).RequestedWidth);
+            binStream.Write((int?)this._RequestedWidth);
             binStream.Write(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null);
         }
 
@@ -2693,7 +2693,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             this._fk_ObjectClass = binStream.ReadNullableInt32();
             this._Properties_pos = binStream.ReadNullableInt32();
             this._fk_RequestedKind = binStream.ReadNullableInt32();
-            ((Zetbox.App.Base.Property)this).RequestedWidth = (Zetbox.App.GUI.WidthHint?)binStream.ReadNullableInt32();
+            this._RequestedWidth = (Zetbox.App.GUI.WidthHint?)binStream.ReadNullableInt32();
             this._fk_ValueModelDescriptor = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -2724,7 +2724,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Properties_pos, xml, "Properties_pos", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedKind != null ? RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.Property)this).RequestedWidth, xml, "RequestedWidth", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._RequestedWidth, xml, "RequestedWidth", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ExportGuid : (Guid?)null, xml, "ValueModelDescriptor", "Zetbox.App.GUI");
         }
 
@@ -2785,7 +2785,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|RequestedWidth":
-                ((Zetbox.App.Base.Property)this).RequestedWidth = (Zetbox.App.GUI.WidthHint?)XmlStreamer.ReadNullableInt32(xml);
+                this._RequestedWidth = (Zetbox.App.GUI.WidthHint?)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.GUI|ValueModelDescriptor":
                 this._fk_guid_ValueModelDescriptor = XmlStreamer.ReadNullableGuid(xml);

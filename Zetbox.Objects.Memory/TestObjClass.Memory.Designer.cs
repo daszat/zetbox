@@ -38,6 +38,51 @@ namespace Zetbox.App.Test
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        // enumeration property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public Zetbox.App.Test.TestEnum CalculatedEnumeration
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CalculatedEnumeration;
+                if (_CalculatedEnumeration_IsDirty && OnCalculatedEnumeration_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__result);
+                    OnCalculatedEnumeration_Getter(this, __e);
+                    _CalculatedEnumeration_IsDirty = false;
+                    __result = _CalculatedEnumeration = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_CalculatedEnumeration != value)
+                {
+                    var __oldValue = _CalculatedEnumeration;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CalculatedEnumeration", __oldValue, __newValue);
+                    _CalculatedEnumeration = __newValue;
+                    NotifyPropertyChanged("CalculatedEnumeration", __oldValue, __newValue);
+			        _CalculatedEnumeration_IsDirty = false;
+
+                }
+				else 
+				{
+					SetInitializedProperty("CalculatedEnumeration");
+				}
+            }
+        }
+        private Zetbox.App.Test.TestEnum _CalculatedEnumeration;
+        private bool _CalculatedEnumeration_IsDirty = false;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnCalculatedEnumeration_Getter;
+
+        /// <summary>
         /// test
         /// </summary>
         // value type property
@@ -401,6 +446,7 @@ namespace Zetbox.App.Test
             var otherImpl = (TestObjClassMemoryImpl)obj;
             var me = (TestObjClass)this;
 
+            this.CalculatedEnumeration = otherImpl.CalculatedEnumeration;
             me.MyIntProperty = other.MyIntProperty;
             me.StringProp = other.StringProp;
             me.TestEnumProp = other.TestEnumProp;
@@ -409,6 +455,7 @@ namespace Zetbox.App.Test
         public override void SetNew()
         {
             base.SetNew();
+            _CalculatedEnumeration_IsDirty = true;
         }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
@@ -445,6 +492,20 @@ namespace Zetbox.App.Test
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
+        }
+
+        public override void Recalculate(string property)
+        {
+            switch (property)
+            {
+                case "CalculatedEnumeration":
+                    NotifyPropertyChanging(property, null, null);
+                    _CalculatedEnumeration_IsDirty = true;
+                    NotifyPropertyChanged(property, null, null);
+                    return;
+            }
+
+            base.Recalculate(property);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
@@ -486,6 +547,15 @@ namespace Zetbox.App.Test
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorMemoryImpl<TestObjClass, Zetbox.App.Test.TestEnum>(
+                        lazyCtx,
+                        new Guid("e5101331-312b-4518-b7f8-750ca7b61d80"),
+                        "CalculatedEnumeration",
+                        null,
+                        obj => obj.CalculatedEnumeration,
+                        null, // calculated property
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorMemoryImpl<TestObjClass, int?>(
                         lazyCtx,
@@ -589,6 +659,7 @@ namespace Zetbox.App.Test
             SetNotInitializedProperty("ObjectProp");
             SetNotInitializedProperty("StringProp");
             SetNotInitializedProperty("TestEnumProp");
+            _CalculatedEnumeration_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_TestObjClass != null) OnNotifyCreated_TestObjClass(this);
         }
@@ -613,10 +684,11 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write((int?)this._CalculatedEnumeration);
             binStream.Write(this._MyIntProperty);
             binStream.Write(ObjectProp != null ? ObjectProp.ID : (int?)null);
             binStream.Write(this._StringProp);
-            binStream.Write((int?)((Zetbox.App.Test.TestObjClass)this).TestEnumProp);
+            binStream.Write((int?)this._TestEnumProp);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -625,10 +697,11 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._CalculatedEnumeration = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             this._MyIntProperty = binStream.ReadNullableInt32();
             this._fk_ObjectProp = binStream.ReadNullableInt32();
             this._StringProp = binStream.ReadString();
-            ((Zetbox.App.Test.TestObjClass)this).TestEnumProp = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._TestEnumProp = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

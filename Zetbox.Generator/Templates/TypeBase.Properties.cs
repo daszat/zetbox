@@ -135,9 +135,7 @@ namespace Zetbox.Generator.Templates
         {
             this.WriteLine("        // enumeration property");
             this.ApplyNotifyingValueProperty(prop, null);
-            var backingStoreName = String.Format("(({0})this).{1}",
-                prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name,
-                prop.Name);
+            var backingStoreName = String.Format("this._{0}", prop.Name);
             Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize, prop, backingStoreName);
         }
 

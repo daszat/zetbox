@@ -41,6 +41,8 @@
 	string enumType = prop.GetElementTypeString();
 	string eventName = "On" + name;
 
+    bool isCalculated = prop.IsCalculated;
+
 %>
    		// <%= this.GetType() %>
         // implement the user-visible interface
@@ -76,40 +78,37 @@
                 {
 					var __oldValue = <%= backingName %>;
 					var __newValue = value;
-<%
-					if(callGetterSetterEvents)
-					{
-%>
+<% if(callGetterSetterEvents && !isCalculated) {                                                        %>
                     if(<%= eventName %>_PreSetter != null)
                     {
 						var e = new PropertyPreSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
 						<%= eventName %>_PreSetter(this, e);
 						__newValue = e.Result;
                     }
-<%
-					}
-%>					
+<% }                                                                                                    %>					
                     NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
                     <%= backingName %> = value;
                     NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
+<% if(!isCalculated) {                                                                                  %>
                     if(IsAttached) UpdateChangedInfo = true;
-<%
-					if(callGetterSetterEvents)
-					{
-%>
+<% } else {                                                                                             %>					
+                    <%= backingName %>_IsDirty = false;
+<% }                                                                                                    %>					
+<% if(callGetterSetterEvents && !isCalculated) {                                                        %>
                     if(<%= eventName %>_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
 						<%= eventName %>_PostSetter(this, e);
                     }
-<%
-					}
-%>                    
+<% }                                                                                                    %>					
                 }
             }
         }
 
 <% EfScalarPropHelper.ApplyBackingStoreDefinition(this, enumType, backingName, efName); %>
+<% if (isCalculated) {                                                                                  %>
+        private bool <%= backingName %>_IsDirty = false;
+<% }                                                                                                    %>					
         
         /// <summary>EF sees only this property, for <%= UglyXmlEncode(name) %></summary>
         [XmlIgnore()]

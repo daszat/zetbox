@@ -1558,6 +1558,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestObjClassEfImpl)">
 	    <MappingFragment StoreEntitySet="TestObjClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CalculatedEnumerationImpl" ColumnName="CalculatedEnumeration" />
           <ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
           <ScalarProperty Name="StringProp" ColumnName="StringProp" />
           <ScalarProperty Name="TestEnumPropImpl" ColumnName="TestEnumProp" />

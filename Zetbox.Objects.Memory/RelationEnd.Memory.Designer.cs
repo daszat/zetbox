@@ -1716,7 +1716,7 @@ namespace Zetbox.App.Base
             if (this._isHasPersistentOrderSet) {
                 binStream.Write(this._HasPersistentOrder);
             }
-            binStream.Write((int?)((Zetbox.App.Base.RelationEnd)this).Multiplicity);
+            binStream.Write((int?)this._Multiplicity);
             binStream.Write(Navigator != null ? Navigator.ID : (int?)null);
             binStream.Write(this._RoleName);
             binStream.Write(Type != null ? Type.ID : (int?)null);
@@ -1748,7 +1748,7 @@ namespace Zetbox.App.Base
             if (this._isHasPersistentOrderSet) {
                 this._HasPersistentOrder = binStream.ReadBoolean();
             }
-            ((Zetbox.App.Base.RelationEnd)this).Multiplicity = (Zetbox.App.Base.Multiplicity)binStream.ReadNullableInt32();
+            this._Multiplicity = (Zetbox.App.Base.Multiplicity)binStream.ReadNullableInt32();
             this._fk_Navigator = binStream.ReadNullableInt32();
             this._RoleName = binStream.ReadString();
             this._fk_Type = binStream.ReadNullableInt32();
@@ -1773,7 +1773,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isHasPersistentOrderSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.RelationEnd)this).Multiplicity, xml, "Multiplicity", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Multiplicity, xml, "Multiplicity", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Navigator != null ? Navigator.ExportGuid : (Guid?)null, xml, "Navigator", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.Base");
@@ -1811,7 +1811,7 @@ namespace Zetbox.App.Base
                 this._isHasPersistentOrderSet = true;
                 break;
             case "Zetbox.App.Base|Multiplicity":
-                ((Zetbox.App.Base.RelationEnd)this).Multiplicity = (Zetbox.App.Base.Multiplicity)XmlStreamer.ReadNullableInt32(xml);
+                this._Multiplicity = (Zetbox.App.Base.Multiplicity)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|Navigator":
                 this._fk_guid_Navigator = XmlStreamer.ReadNullableGuid(xml);

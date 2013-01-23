@@ -449,12 +449,13 @@ namespace Zetbox.App.Base
                     _DeploymentRestrictions = value;
                     NotifyPropertyChanged("DeploymentRestrictions", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
+					
                     if(OnDeploymentRestrictions_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DeploymentRestriction>(__oldValue, __newValue);
 						OnDeploymentRestrictions_PostSetter(this, e);
                     }
-                    
+					
                 }
             }
         }
@@ -468,6 +469,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("DeploymentRestrictionsImpl");
             }
         }
+					
         
         /// <summary>EF sees only this property, for DeploymentRestrictions</summary>
         [XmlIgnore()]
@@ -1111,7 +1113,7 @@ namespace Zetbox.App.Base
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
-            binStream.Write((int?)((Zetbox.App.Base.Assembly)this).DeploymentRestrictions);
+            binStream.Write((int?)this._DeploymentRestrictions);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
@@ -1140,7 +1142,7 @@ namespace Zetbox.App.Base
             if (this._isCreatedOnSet) {
                 this._CreatedOn = binStream.ReadDateTime();
             }
-            ((Zetbox.App.Base.Assembly)this).DeploymentRestrictions = (Zetbox.App.Base.DeploymentRestriction)binStream.ReadNullableInt32();
+            this._DeploymentRestrictions = (Zetbox.App.Base.DeploymentRestriction)binStream.ReadNullableInt32();
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
@@ -1164,7 +1166,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.Assembly)this).DeploymentRestrictions, xml, "DeploymentRestrictions", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._DeploymentRestrictions, xml, "DeploymentRestrictions", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.Base");
         }
@@ -1185,7 +1187,7 @@ namespace Zetbox.App.Base
                 this._isCreatedOnSet = true;
                 break;
             case "Zetbox.App.Base|DeploymentRestrictions":
-                ((Zetbox.App.Base.Assembly)this).DeploymentRestrictions = (Zetbox.App.Base.DeploymentRestriction)XmlStreamer.ReadNullableInt32(xml);
+                this._DeploymentRestrictions = (Zetbox.App.Base.DeploymentRestriction)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|ExportGuid":
                 // Import must have default value set

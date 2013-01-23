@@ -1178,7 +1178,7 @@ namespace Zetbox.App.Base
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
-            binStream.Write((int?)((Zetbox.App.Base.ServiceDescriptor)this).DeploymentRestriction);
+            binStream.Write((int?)this._DeploymentRestriction);
             binStream.Write(this._Description);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
@@ -1204,7 +1204,7 @@ namespace Zetbox.App.Base
             if (this._isCreatedOnSet) {
                 this._CreatedOn = binStream.ReadDateTime();
             }
-            ((Zetbox.App.Base.ServiceDescriptor)this).DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)binStream.ReadNullableInt32();
+            this._DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)binStream.ReadNullableInt32();
             this._Description = binStream.ReadString();
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
@@ -1229,7 +1229,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.ServiceDescriptor)this).DeploymentRestriction, xml, "DeploymentRestriction", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._DeploymentRestriction, xml, "DeploymentRestriction", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(TypeRef != null ? TypeRef.ExportGuid : (Guid?)null, xml, "TypeRef", "Zetbox.App.Base");
@@ -1251,7 +1251,7 @@ namespace Zetbox.App.Base
                 this._isCreatedOnSet = true;
                 break;
             case "Zetbox.App.Base|DeploymentRestriction":
-                ((Zetbox.App.Base.ServiceDescriptor)this).DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)XmlStreamer.ReadNullableInt32(xml);
+                this._DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|Description":
                 this._Description = XmlStreamer.ReadString(xml);

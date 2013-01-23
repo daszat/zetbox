@@ -974,7 +974,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             binStream.Write(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null);
             binStream.Write(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null);
             binStream.Write(this._TestDateTime);
-            binStream.Write((int?)((Zetbox.App.Test.Muhblah)this).TestEnum);
+            binStream.Write((int?)this._TestEnum);
             binStream.Write(this._TestString);
         }
 
@@ -989,7 +989,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             this._fk_TestCustomObjects_Nav = binStream.ReadNullableInt32();
             this._fk_TestCustomObjects_One_Nav = binStream.ReadNullableInt32();
             this._TestDateTime = binStream.ReadNullableDateTime();
-            ((Zetbox.App.Test.Muhblah)this).TestEnum = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._TestEnum = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             this._TestString = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null

@@ -320,7 +320,7 @@ namespace Zetbox.App.Calendar
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write((int?)((Zetbox.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek);
+            binStream.Write((int?)this._DayOfWeek);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -329,7 +329,7 @@ namespace Zetbox.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            ((Zetbox.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek = (Zetbox.App.Base.DayOfWeek)binStream.ReadNullableInt32();
+            this._DayOfWeek = (Zetbox.App.Base.DayOfWeek)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -343,7 +343,7 @@ namespace Zetbox.App.Calendar
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream((int?)((Zetbox.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek, xml, "DayOfWeek", "Zetbox.App.Calendar");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream((int?)this._DayOfWeek, xml, "DayOfWeek", "Zetbox.App.Calendar");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -353,7 +353,7 @@ namespace Zetbox.App.Calendar
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Calendar|DayOfWeek":
-                ((Zetbox.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek = (Zetbox.App.Base.DayOfWeek)XmlStreamer.ReadNullableInt32(xml);
+                this._DayOfWeek = (Zetbox.App.Base.DayOfWeek)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

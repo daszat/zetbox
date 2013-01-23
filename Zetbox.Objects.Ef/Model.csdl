@@ -2612,6 +2612,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="CalculatedEnumerationImpl" Type="Int32" Nullable="false"  />
     <Property Name="MyIntProperty" Type="Int32" Nullable="true"  />
     <NavigationProperty Name="ObjectPropImpl"
                         Relationship="Model.FK_TestObjClass_has_ObjectProp"
