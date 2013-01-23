@@ -377,6 +377,34 @@ namespace Zetbox.Server.SchemaManagement
         protected abstract string FormatFullName(DboRef tblName);
         protected abstract string FormatSchemaName(DboRef tblName);
 
+        protected virtual string FormatValue(object val)
+        {
+            if (val == null)
+                return "NULL";
+
+            var exprType = val.GetType();
+            if (exprType == typeof(bool) || exprType == typeof(bool?))
+            {
+                return ((bool)val) ? "(0=0)" : "(0=1)";
+            }
+            else if (exprType == typeof(int) || exprType == typeof(int?))
+            {
+                return ((int)val).ToString(CultureInfo.InvariantCulture);
+            }
+            else if (exprType == typeof(double) || exprType == typeof(double?))
+            {
+                return ((double)val).ToString(CultureInfo.InvariantCulture);
+            }
+            else if (exprType == typeof(string))
+            {
+                return QuoteString((string)val);
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format("Cannot evaluate constant of type {0}: \'{1}\'", exprType.AssemblyQualifiedName, val));
+            }
+        }
+
         public TableRef GetTableName(string schemaName, string tblName)
         {
             if (db == null)
@@ -674,30 +702,28 @@ namespace Zetbox.Server.SchemaManagement
 
             object defaultValue;
             var haveDefaultValue = mapping.TryGetValue(MappingDefaultSourceValue, out defaultValue);
-            var defaultValueOrNull = defaultValue == null
-                ? "NULL"
-                : string.Format(CultureInfo.InvariantCulture, "'{0}'", defaultValue);
+            var formattedDefaultValue = FormatValue(defaultValue);
 
             var whens = mapping
                 .Where(kvp => kvp.Key != MappingDefaultSourceValue)
                 .Select(kvp => string.Format(CultureInfo.InvariantCulture, "WHEN {0} THEN {1}",
                     kvp.Key == null
                         ? srcColName + " IS NULL"
-                        : string.Format(CultureInfo.InvariantCulture, "{0} = '{1}'", srcColName, kvp.Key),
+                        : string.Format(CultureInfo.InvariantCulture, "{0} = {1}", QuoteIdentifier(srcColName), FormatValue(kvp.Key)),
                     kvp.Value == null
                         ? "NULL"
-                        : string.Format(CultureInfo.InvariantCulture, "'{0}'", kvp.Value)))
+                        : FormatValue(kvp.Value)))
                 .ToList();
 
             if (haveDefaultValue)
             {
                 if (whens.Count == 0)
                 {
-                    return defaultValueOrNull;
+                    return formattedDefaultValue;
                 }
                 else
                 {
-                    whens.Add("ELSE" + defaultValueOrNull);
+                    whens.Add("ELSE " + formattedDefaultValue);
                 }
             }
 
