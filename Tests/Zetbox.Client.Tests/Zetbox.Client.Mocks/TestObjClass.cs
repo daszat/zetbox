@@ -405,5 +405,10 @@ namespace Zetbox.App.Test
         {
             get { throw new NotImplementedException(); }
         }
+
+        public TestEnum CalculatedEnumeration
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }
