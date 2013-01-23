@@ -40,7 +40,7 @@ namespace Zetbox.API.Configuration
     /// Modules marked with this attribute are automatically loaded.
     /// </summary>
     /// <remarks>
-    /// The AssemblyResolver loads such modules after manually configured modules. They are loaded in the order defined by the AssemblySearchPath.
+    /// The AutoFacBuilder loads such modules after manually configured modules. They are loaded in the order defined by the AssemblySearchPath.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public sealed class AutoLoadAttribute : Attribute

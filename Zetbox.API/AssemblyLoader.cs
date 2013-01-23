@@ -106,9 +106,7 @@ namespace Zetbox.API
         {
             foreach (var path in paths ?? new string[] { })
             {
-                var rootedPath = Path.IsPathRooted(path)
-                    ? path
-                    : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+                var rootedPath = QualifySearchPath(path);
 
                 // Thank you WIN32: There is no canonical path representation
                 // See: http://stackoverflow.com/questions/1816691/how-do-i-resolve-a-canonical-filename-in-windows
@@ -131,6 +129,14 @@ namespace Zetbox.API
                     AssemblyLoader.SearchPath.Add(rootedPath + ".Fallback");
                 }
             }
+        }
+
+        public static string QualifySearchPath(string path)
+        {
+            var rootedPath = Path.IsPathRooted(path)
+                ? path
+                : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            return rootedPath;
         }
 
         /// <param name="config">must not be null</param>

@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Zetbox.API.Configuration;
-
+﻿
 namespace Zetbox.ConfigEditor.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+
     public class ModuleListViewModel : ViewModel
     {
         public ModuleListViewModel(List<ZetboxConfig.Module> modules)
@@ -15,7 +17,8 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         private List<ZetboxConfig.Module> Model
         {
-            get; set;
+            get;
+            set;
         }
 
         private List<ModuleViewModel> _moduleViewModels;
@@ -61,7 +64,7 @@ namespace Zetbox.ConfigEditor.ViewModels
         {
             Model.Remove(moduleViewModel.Module);
             _moduleViewModels = null;
-            OnPropertyChanged("List");            
+            OnPropertyChanged("List");
         }
 
         public void Up(ModuleViewModel moduleViewModel)
@@ -96,7 +99,7 @@ namespace Zetbox.ConfigEditor.ViewModels
             _parent = parent;
         }
 
-        public ModuleViewModel(ModuleType type)
+        public ModuleViewModel(ModuleDescriptor type)
         {
             _module = new ZetboxConfig.Module() { TypeName = type.TypeName, NotOnFallback = type.NotOnFallback };
         }
