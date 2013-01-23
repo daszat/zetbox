@@ -101,19 +101,12 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         public ModuleViewModel(ModuleDescriptor type)
         {
-            _module = new ZetboxConfig.Module() { TypeName = type.TypeName, NotOnFallback = type.NotOnFallback };
+            _module = new ZetboxConfig.Module() { TypeName = type.TypeName };
         }
 
         public void Repair()
         {
-            if (ModulesCache.Instance.Contains(TypeName))
-            {
-                var type = ModulesCache.Instance[TypeName];
-                if (type.NotOnFallback != _module.NotOnFallback)
-                {
-                    _module.NotOnFallback = _module.NotOnFallbackSpecified = type.NotOnFallback;
-                }
-            }
+            // nothingto repair currently
         }
 
 
@@ -138,7 +131,7 @@ namespace Zetbox.ConfigEditor.ViewModels
         {
             get
             {
-                return _module.NotOnFallback;
+                return ModulesCache.Instance[TypeName].NotOnFallback;
             }
         }
 

@@ -119,31 +119,6 @@ namespace Zetbox.API.Configuration
         [Serializable]
         public class Module
         {
-            public Module()
-            {
-                NotOnFallbackSpecified = false;
-            }
-
-            private bool _notOnFallback = false;
-            [XmlAttribute("NotOnFallback")]
-            [DefaultValue(false)]
-            public bool NotOnFallback
-            {
-                get
-                {
-                    return _notOnFallback;
-                }
-                set
-                {
-                    if (_notOnFallback != value)
-                    {
-                        NotOnFallbackSpecified = _notOnFallback = value;
-                    }
-                }
-            }
-            [XmlIgnore]
-            public bool NotOnFallbackSpecified { get; set; }
-
             [XmlText]
             public string TypeName { get; set; }
         }
