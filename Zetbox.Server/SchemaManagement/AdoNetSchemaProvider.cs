@@ -385,7 +385,7 @@ namespace Zetbox.Server.SchemaManagement
             var exprType = val.GetType();
             if (exprType == typeof(bool) || exprType == typeof(bool?))
             {
-                return ((bool)val) ? "(0=0)" : "(0=1)";
+                return FormatBool((bool)val);
             }
             else if (exprType == typeof(int) || exprType == typeof(int?))
             {
@@ -404,6 +404,8 @@ namespace Zetbox.Server.SchemaManagement
                 throw new NotSupportedException(string.Format("Cannot evaluate constant of type {0}: \'{1}\'", exprType.AssemblyQualifiedName, val));
             }
         }
+
+        protected abstract string FormatBool(bool p);
 
         public TableRef GetTableName(string schemaName, string tblName)
         {
@@ -696,9 +698,9 @@ namespace Zetbox.Server.SchemaManagement
         /// <summary>
         /// Creates "CASE x WHEN y THEN z ELSE a END" fragments for MapColumnData.
         /// </summary>
-        protected string CreateMappingMap(string srcColName, Dictionary<object, object> mapping)
+        protected string CreateMappingMap(string srcColNameQuoted, Dictionary<object, object> mapping)
         {
-            if (mapping == null || mapping.Count == 0) return srcColName;
+            if (mapping == null || mapping.Count == 0) return srcColNameQuoted;
 
             object defaultValue;
             var haveDefaultValue = mapping.TryGetValue(MappingDefaultSourceValue, out defaultValue);
@@ -708,8 +710,8 @@ namespace Zetbox.Server.SchemaManagement
                 .Where(kvp => kvp.Key != MappingDefaultSourceValue)
                 .Select(kvp => string.Format(CultureInfo.InvariantCulture, "WHEN {0} THEN {1}",
                     kvp.Key == null
-                        ? srcColName + " IS NULL"
-                        : string.Format(CultureInfo.InvariantCulture, "{0} = {1}", QuoteIdentifier(srcColName), FormatValue(kvp.Key)),
+                        ? srcColNameQuoted + " IS NULL"
+                        : string.Format(CultureInfo.InvariantCulture, "{0} = {1}", srcColNameQuoted, FormatValue(kvp.Key)),
                     kvp.Value == null
                         ? "NULL"
                         : FormatValue(kvp.Value)))

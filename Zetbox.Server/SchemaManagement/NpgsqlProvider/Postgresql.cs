@@ -179,12 +179,18 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
             return "\"" + name.MaxLength(PG_MAX_IDENTIFIER_LENGTH) + "\"";
         }
+
         protected void CheckMaxIdentifierLength(string id)
         {
             if (id.Length > PG_MAX_IDENTIFIER_LENGTH)
             {
                 throw new InvalidOperationException(string.Format("PG does not support Identifiers with a length more than {0} chars.", PG_MAX_IDENTIFIER_LENGTH));
             }
+        }
+
+        protected override string FormatBool(bool p)
+        {
+            return p ? "'t'" : "'f'";
         }
 
         private string GetColumnDefinition(Column col)

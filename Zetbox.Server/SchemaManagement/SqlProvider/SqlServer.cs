@@ -161,6 +161,11 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             return "[" + name + "]";
         }
 
+        protected override string FormatBool(bool p)
+        {
+            return p ? "1" : "0";
+        }
+
         protected string GetColumnDefinition(Column col)
         {
             StringBuilder sb = new StringBuilder();
