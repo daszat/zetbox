@@ -56,11 +56,11 @@
     <Reference Include="System.Xml"/>
     <Reference Include="Microsoft.CSharp"/>
     <Reference Include="Zetbox.API">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4840.1\lib\net40\Zetbox.API.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.4901.1\lib\net40\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Common">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4840.1\lib\net40\Zetbox.API.Common.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.4901.1\lib\net40\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
