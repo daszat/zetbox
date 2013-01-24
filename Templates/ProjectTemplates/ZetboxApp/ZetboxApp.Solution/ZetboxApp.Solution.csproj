@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ZetboxApp.Server.Migrations\DemoMigrationFragments.cs" />
     <None Include="ZetboxApp.Server.Migrations\MigrationsModule.cs" />
     <None Include="ZetboxApp.Server.Migrations\AssemblyInfo.cs" />
     <None Include="ZetboxApp.Client.Tests\packages.config">
