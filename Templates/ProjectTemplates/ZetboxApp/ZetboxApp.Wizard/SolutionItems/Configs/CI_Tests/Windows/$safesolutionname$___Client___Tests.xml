@@ -16,13 +16,5 @@
     </Modules>
   </Client>
   <AssemblySearchPaths EnableShadowCopy="true">
-    <string>Common\Core</string>
-    <string>Client\Core</string>
-    <string>Client\WPF</string>
-    <string>Common\App.Zetbox</string>
-    <string>Client\App.Zetbox</string>
-    <string>Common\Microsoft</string>
-    <string>Common\App.$safesolutionname$</string>
-    <string>Client\App.$safesolutionname$</string>
   </AssemblySearchPaths>
 </ZetboxConfig>
