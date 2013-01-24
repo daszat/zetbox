@@ -24,7 +24,7 @@ namespace ZetboxApp.Wizard
         {
             get
             {
-                return _solutionName;
+                return _solutionName ?? string.Empty;
             }
         }
 
@@ -93,18 +93,17 @@ namespace ZetboxApp.Wizard
             var config = _solution.SolutionBuild.SolutionConfigurations.Item("Linux.Debug");
             foreach (SolutionContext ctx in config.SolutionContexts)
             {
-                if (ctx.ProjectName.EndsWith(".WPF.csproj"))
-                {
-                    ctx.ShouldBuild = false;
-                }
+                ctx.ShouldBuild = !ctx.ProjectName.EndsWith(".WPF.csproj");
             }
 
-            var fallbackConfig = _solution.SolutionBuild.SolutionConfigurations.Add("Fallback", "Debug", false);
+
+            var fallbackConfig = _solution.SolutionBuild.SolutionConfigurations.Item("Fallback");
             foreach (SolutionContext ctx in fallbackConfig.SolutionContexts)
             {
-                ctx.ShouldBuild = ctx.ProjectName.EndsWith(".Fallback.csproj");
+                ctx.ShouldBuild = ctx.ProjectName.EndsWith(".Migrations.csproj");
             }
         }
+
 
         private void AddImportTargets()
         {
@@ -147,6 +146,10 @@ namespace ZetboxApp.Wizard
                 else if (prjName.EndsWith(".Server") || prjName.EndsWith(".Server.Tests"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\server.targets", null);
+                }
+                else if (prjName.EndsWith(".Server.Migrations"))
+                {
+                    msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\fallback.targets", null);
                 }
 
                 msBuildProj.Save(fileName);
@@ -260,6 +263,7 @@ namespace ZetboxApp.Wizard
                         if (".xml".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
                             ".txt".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
                             ".cmd".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
+                            ".config".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
                             ".gitignore".Equals(relFilePath, StringComparison.InvariantCultureIgnoreCase))
                         {
                             var sr = new StreamReader(s);

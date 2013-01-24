@@ -22,6 +22,7 @@
       <ProjectTemplateLink ProjectName="$safeprojectname$.Client.WPF">ZetboxApp.Client.WPF\ZetboxApp.Client.WPF.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.WPF">ZetboxApp.WPF\ZetboxApp.WPF.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Server">ZetboxApp.Server\ZetboxApp.Server.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Server.Migrations">ZetboxApp.Server.Migrations\ZetboxApp.Server.Migrations.vstemplate</ProjectTemplateLink>
     </ProjectCollection>
   </TemplateContent>
   <WizardExtension>

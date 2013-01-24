@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>ZetboxApp.Server.Migrations</Name>
+    <Description>This assembly contains server-side schema migraiont logic</Description>
+    <Icon>ZetboxApp.Server.Migrations.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>2cdbb35b-50b2-4fd3-8a3d-73ad26170bcf</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>ZetboxApp.Server.Migrations</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">MigrationsModule.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true">packages.config</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>ZetboxApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
+    <FullClassName>ZetboxApp.Wizard.ProjectWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>
