@@ -76,6 +76,9 @@
       <DependentUpon>zetboxBasic-WpfExe.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </NuSpec>
+    <Targets Include="fallback.targets">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Targets>
     <None Include="packages.config" />
     <None Include="zetboxBasic-WpfExe.nuspec.in" />
     <None Include="zetboxBasic-ClientWpf.nuspec.in" />
