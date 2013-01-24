@@ -9,7 +9,8 @@ namespace $safeprojectname$
     using Zetbox.API.SchemaManagement;
     using Zetbox.App.Base;
 
-    public class DemoGlobalMigrationFragment : IGlobalMigrationFragment
+    // TODO: Derive from IGlobalMigrationFragment to implement a global database migration 
+    public class DemoGlobalMigrationFragment // : IGlobalMigrationFragment 
     {
         public void PreMigration(ISchemaProvider db)
         {
@@ -20,10 +21,12 @@ namespace $safeprojectname$
         }
     }
 
-    public class DemoClassMigrationFragment : IClassMigrationFragment
+    // TODO: Derive from I*MigrationFragment to implement a specific (class, property, relation, ...) migration 
+    public class DemoClassMigrationFragment // : IClassMigrationFragment
     {
         public ClassMigrationEventType ClassEventType
         {
+            // TODO: Change Type
             get { return ClassMigrationEventType.Add; }
         }
 
@@ -39,6 +42,7 @@ namespace $safeprojectname$
 
         public Guid Target
         {
+            // TODO: Add target guid here
             get { return Guid.Empty; }
         }
     }
