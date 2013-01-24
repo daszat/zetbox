@@ -52,7 +52,15 @@ namespace Zetbox.API.Utils
 
                     if (moduleDescriptor == null)
                     {
-                        throw new ConfigurationException(string.Format("Module loading aborted: cannot find '{0}'", m.TypeName));
+                        if (config.IsFallback)
+                        {
+                            // Don't report an error - fallback case. Dev Environments require this! Directory may not exits yet. 
+                            Logging.Log.WarnFormat(string.Format("Fallback - ignoring error: Module loading aborted: cannot find '{0}'", m.TypeName));
+                        }
+                        else
+                        {
+                            throw new ConfigurationException(string.Format("Module loading aborted: cannot find '{0}'", m.TypeName));
+                        }
                     }
 
                     if (config.IsFallback && moduleDescriptor.NotOnFallback)
@@ -93,6 +101,8 @@ namespace Zetbox.API.Utils
 
             foreach (var searchPath in paths.Select(p => AssemblyLoader.QualifySearchPath(p)))
             {
+                if (config.IsFallback && !Directory.Exists(searchPath)) continue; // Don't report an error - fallback case. Dev Environments requiere this! Directory may not exits yet. 
+
                 var files = Directory.GetFiles(searchPath, "*.dll").ToList();
                 var additionalPath = searchPath + (config.IsFallback ? ".Fallback" : ".Generated");
                 if (Directory.Exists(additionalPath))
