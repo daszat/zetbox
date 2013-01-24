@@ -65,9 +65,16 @@ namespace Zetbox.Server.SchemaManagement
             this.schema = schema;
             this.db = db;
             this._savedSchema = savedSchema;
-            this._classMigrationFragments = migrationFragments.OfType<IClassMigrationFragment>().ToDictionary(cmf => new Tuple<ClassMigrationEventType, Guid>(cmf.ClassEventType, cmf.Target));
-            this._propertyMigrationFragments = migrationFragments.OfType<IPropertyMigrationFragment>().ToDictionary(cmf => new Tuple<PropertyMigrationEventType, Guid>(cmf.PropertyEventType, cmf.Target));
-            this._relationMigrationFragments = migrationFragments.OfType<IRelationMigrationFragment>().ToDictionary(cmf => new Tuple<RelationMigrationEventType, Guid>(cmf.RelationEventType, cmf.Target));
+            try
+            {
+                this._classMigrationFragments = migrationFragments.OfType<IClassMigrationFragment>().ToDictionary(cmf => new Tuple<ClassMigrationEventType, Guid>(cmf.ClassEventType, cmf.Target));
+                this._propertyMigrationFragments = migrationFragments.OfType<IPropertyMigrationFragment>().ToDictionary(cmf => new Tuple<PropertyMigrationEventType, Guid>(cmf.PropertyEventType, cmf.Target));
+                this._relationMigrationFragments = migrationFragments.OfType<IRelationMigrationFragment>().ToDictionary(cmf => new Tuple<RelationMigrationEventType, Guid>(cmf.RelationEventType, cmf.Target));
+            }
+            catch (ArgumentException ex)
+            {
+                throw new InvalidOperationException("Initializing migration framents. An ArgumentException has been catched. This usually indicates, that more than one migration fragment is registrated for a specific migration.", ex);
+            }
         }
 
         // Add all IsCase_ + DoCase_ Methods
