@@ -55,7 +55,8 @@ namespace Zetbox.API.Utils
                         if (config.IsFallback)
                         {
                             // Don't report an error - fallback case. Dev Environments require this! Directory may not exits yet. 
-                            Logging.Log.WarnFormat(string.Format("Fallback - ignoring error: Module loading aborted: cannot find '{0}'", m.TypeName));
+                            Logging.Log.WarnFormat(string.Format("Fallback, ignoring error: Module loading aborted: cannot find '{0}'", m.TypeName));
+                            continue;
                         }
                         else
                         {
