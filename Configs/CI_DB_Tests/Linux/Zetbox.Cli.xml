@@ -9,12 +9,6 @@
       <Module>Zetbox.Unix.Module, Zetbox.Unix</Module>
     </Modules>
   </Server>
-  <AssemblySearchPaths EnableShadowCopy="true">
-    <string>Common/Core</string>
-    <string>Server/Core</string>
-    <string>Server/Linux</string>
-    <string>Server/NH</string>
-    <string>Common/App.Zetbox</string>
-    <string>Server/App.Zetbox</string>
+  <AssemblySearchPaths EnableShadowCopy="true">    
   </AssemblySearchPaths>
 </ZetboxConfig>
