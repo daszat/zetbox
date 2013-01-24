@@ -119,6 +119,7 @@ namespace Zetbox.API.SchemaManagement
                                     .Where(t => !t.IsAbstract
                                             && t.Interfaces.Any(i => i.FullName == typeof(IGlobalMigrationFragment).FullName)))
             {
+                Logging.Log.InfoFormat("Registering global migration fragment {0}", t.FullName);
                 builder
                     .RegisterType(Type.GetType(System.Reflection.Assembly.CreateQualifiedName(source.FullName, t.FullName.Replace('/', '+'))))
                     .AsImplementedInterfaces()
@@ -129,6 +130,7 @@ namespace Zetbox.API.SchemaManagement
                                     .Where(t => !t.IsAbstract
                                             && t.Interfaces.Any(i => i.FullName == typeof(IMigrationFragment).FullName)))
             {
+                Logging.Log.InfoFormat("Registering global migration fragment {0}", t.FullName);
                 builder
                     .RegisterType(Type.GetType(System.Reflection.Assembly.CreateQualifiedName(source.FullName, t.FullName.Replace('/', '+'))))
                     .AsImplementedInterfaces()
