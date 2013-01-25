@@ -43,41 +43,41 @@ namespace Zetbox.API.Common.Reporting
 #if RELEASE
     [System.Diagnostics.DebuggerStepThrough]
 #endif
+    [CLSCompliant(false)]
     public abstract class AbstractReportingHost : IGenerationHost, IDisposable
     {
         private Dictionary<string, TemplateInfo> templates;
         private NameValueCollection settings;
         private readonly IFileOpener _fileOpener;
-        private readonly ITempFileService _tmpService;
-
+        private readonly ITempFileService _tempFileService;
+        private readonly IReportingErrorReporter _errorReporter;
         private TextWriter contextWriter = null;
-        //private List<string> _tempDirs = new List<string>();
 
         /// <summary>
         /// Creates a new reporting host
         /// </summary>
-        /// <param name="fileOpener"></param>
-        /// <param name="tmpService"></param>
-        public AbstractReportingHost(IFileOpener fileOpener, ITempFileService tmpService)
-            : this(null, null, fileOpener, tmpService)
+        public AbstractReportingHost(IFileOpener fileOpener, ITempFileService tempFileService, IReportingErrorReporter errorReporter)
+            : this(null, null, fileOpener, tempFileService, errorReporter)
         {
         }
 
-        // TODO: Move that class into a common reporting assembly and create a own derived class with configuration
         /// <summary>
         /// Creates a new reporting host
         /// </summary>
         /// <param name="overrideTemplateNamespace">null or empty, if default templates should be used, else a assembly with templates.</param>
         /// <param name="overrideTemplateAssembly">null, if default templates should be used, else a assembly with templates.</param>
         /// <param name="fileOpener"></param>
-        /// <param name="tmpService"></param>
-        public AbstractReportingHost(string overrideTemplateNamespace, Assembly overrideTemplateAssembly, IFileOpener fileOpener, ITempFileService tmpService)
+        /// <param name="tempFileService"></param>
+        /// <param name="errorReporter"></param>
+        public AbstractReportingHost(string overrideTemplateNamespace, Assembly overrideTemplateAssembly, IFileOpener fileOpener, ITempFileService tempFileService, IReportingErrorReporter errorReporter)
         {
             if (fileOpener == null) throw new ArgumentNullException("fileOpener");
-            if (tmpService == null) throw new ArgumentNullException("tmpService");
+            if (tempFileService == null) throw new ArgumentNullException("tempFileService");
+            if (errorReporter == null) throw new ArgumentNullException("errorReporter");
 
             _fileOpener = fileOpener;
-            _tmpService = tmpService;
+            _tempFileService = tempFileService;
+            _errorReporter = errorReporter;
 
             var settings = new NameValueCollection();
             settings["overrideReportTemplateNamespace"] = overrideTemplateNamespace;
@@ -99,7 +99,7 @@ namespace Zetbox.API.Common.Reporting
         {
             get
             {
-                return _tmpService;
+                return _tempFileService;
             }
         }
 
@@ -220,20 +220,6 @@ namespace Zetbox.API.Common.Reporting
                 }
                 this.templates = null;
             }
-
-            //foreach (var f in _tempDirs)
-            //{
-            //    try
-            //    {
-            //        // TODO: Move that to a global helper and delete files on shutdown
-            //        // Cannot use that - Acrobat is too slow, file has been deleted in the meantime
-            //        // System.IO.File.Delete(f);
-            //    }
-            //    catch
-            //    {
-            //        // dont care
-            //    }
-            //}
         }
 
         private Stream GetMDDLStream()
@@ -319,36 +305,10 @@ namespace Zetbox.API.Common.Reporting
                     {
                         msg.Append("\n" + error.ToString());
                     }
-                    throw new ApplicationException(msg.ToString());
+                    throw new InvalidOperationException(msg.ToString(), ex);
                 }
 
-                if (ex != null)
-                {
-                    Logging.Log.Error("Unable to create report:", ex);
-                }
-
-                if (errors != null && errors.ErrorCount > 0)
-                {
-                    StringBuilder sb = new StringBuilder();
-
-                    foreach (DdlReaderError e in errors)
-                    {
-                        switch (e.ErrorLevel)
-                        {
-                            case DdlErrorLevel.Error:
-                                sb.Append("E: ");
-                                break;
-                            case DdlErrorLevel.Warning:
-                                sb.Append("W: ");
-                                break;
-                            default:
-                                sb.Append("?: ");
-                                break;
-                        }
-                        sb.AppendLine(e.ToString());
-                    }
-                    Logging.Log.Info(sb.ToString());
-                }
+                _errorReporter.ReportErrors(errors, ex, mddl);
             }
         }
 
@@ -392,7 +352,7 @@ namespace Zetbox.API.Common.Reporting
         public virtual Stream GetStreamRtf()
         {
             var rtf = new RtfDocumentRenderer();
-            var workingDir = _tmpService.CreateFolder();
+            var workingDir = _tempFileService.CreateFolder();
 
             var s = new NonClosingMemStream();
             rtf.Render(GetDocument(), s, workingDir);
@@ -402,14 +362,14 @@ namespace Zetbox.API.Common.Reporting
 
         public virtual string SaveTemp(string filename)
         {
-            var tmp = _tmpService.Create(filename);
+            var tmp = _tempFileService.Create(filename);
             Save(tmp);
             return tmp;
         }
 
         public virtual string Open(string filename)
         {
-            var tmp = _tmpService.Create(filename);
+            var tmp = _tempFileService.Create(filename);
             Save(tmp);
             _fileOpener.ShellExecute(tmp);
             return tmp;

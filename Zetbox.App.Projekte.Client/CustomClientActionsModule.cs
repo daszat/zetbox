@@ -17,13 +17,14 @@ namespace Zetbox.App.Projekte.Client
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Autofac;
     using Zetbox.API;
-    using Zetbox.Client;
+    using Zetbox.API.Common.Reporting;
     using Zetbox.API.Configuration;
-    using System.ComponentModel;
+    using Zetbox.Client;
 
     // Will be loaded by ClientModule
     [Description("Zetbox client actions")]
@@ -44,7 +45,8 @@ namespace Zetbox.App.Projekte.Client
                         "Zetbox.App.Projekte.Client.DerivedReportTest",
                         typeof(CustomClientActionsModule).Assembly,
                         c.Resolve<IFileOpener>(),
-                        c.Resolve<ITempFileService>()
+                        c.Resolve<ITempFileService>(),
+                        c.Resolve<IReportingErrorReporter>()
                     )
                 )
                 .InstancePerDependency();

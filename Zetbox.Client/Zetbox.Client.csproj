@@ -375,6 +375,7 @@
     <Compile Include="Presentables\DataObjectSelectionTaskViewModel.cs" />
     <Compile Include="Presentables\ObjectEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\WindowViewModel.cs" />
+    <Compile Include="Reporting\ReportingErrorDialog.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="ClientHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

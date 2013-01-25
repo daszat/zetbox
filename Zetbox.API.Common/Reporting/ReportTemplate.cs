@@ -37,6 +37,7 @@ namespace Zetbox.API.Common.Reporting
         {
         }
 
+        [CLSCompliant(false)]
         protected AbstractReportingHost ReportingHost
         {
             get

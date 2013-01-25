@@ -108,6 +108,11 @@ namespace Zetbox.Client
                 .AsSelf()
                 .InstancePerDependency();
 
+            moduleBuilder
+                .RegisterType<Zetbox.Client.Reporting.ReportingErrorDialog>()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
+
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
 
             moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.DalProvider.Client.ClientProvider, Zetbox.DalProvider.ClientObjects", true)));

@@ -32,6 +32,11 @@ namespace Zetbox.API.Common
                 .RegisterModule<Zetbox.API.ApiModule>();
 
             builder
+                .RegisterType<Zetbox.API.Common.Reporting.LoggingErrorReporter>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder
                 .RegisterType<CachingMetaDataResolver>()
                 .As<CachingMetaDataResolver>()
                 .As<IMetaDataResolver>()
