@@ -28,17 +28,20 @@ namespace Zetbox.API.Utils
     {
         private List<IDataObject> _sortedList;
         private IEnumerable _collection;
+        private InterfaceType _elementType;
         private INotifyCollectionChanged _notifier;
 
         private string _sortProp;
         private ListSortDirection _direction = ListSortDirection.Ascending;
 
-        public SortedWrapper(IEnumerable collection, INotifyCollectionChanged notifier, string defaultSortProperty)
+        public SortedWrapper(IEnumerable collection, InterfaceType elementType, INotifyCollectionChanged notifier, string defaultSortProperty)
         {
             if (collection == null) throw new ArgumentNullException("collection");
             if (notifier == null) throw new ArgumentNullException("notifier");
+            if (elementType == null) throw new ArgumentNullException("elementType");
 
             _collection = collection;
+            _elementType = elementType;
             _notifier = notifier;
             _notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(notifier_CollectionChanged);
             _sortProp = defaultSortProperty;
@@ -55,7 +58,9 @@ namespace Zetbox.API.Utils
             }
             else
             {
-                _sortedList = _collection.AsQueryable()
+                _sortedList = _collection
+                    .AsQueryable()
+                    .AddCast(_elementType.Type)
                     .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
                     .Cast<IDataObject>()
                     .ToList();

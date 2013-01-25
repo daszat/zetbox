@@ -542,7 +542,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 _fetchValueTask = new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
                     .OnResult(t =>
                     {
-                        _wrapper = new SortedWrapper(ObjectCollectionModel.Value, ObjectCollectionModel, InitialSortProperty);
+                        _wrapper = new SortedWrapper(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
                         _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                             _wrapper,
                             obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
