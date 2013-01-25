@@ -278,6 +278,19 @@ namespace Zetbox.Client.Models
 
         public abstract void SetUntypedValue(object val);
 
+        public virtual bool ReportErrors
+        {
+            get
+            {
+                if (Object is IDataObject)
+                {
+                    var dataObj = (IDataObject)Object;
+                    return dataObj.ObjectState != DataObjectState.Deleted;
+                }
+                return true;
+            }
+        }
+
         public ControlKind RequestedKind { get { return Property.RequestedKind; } }
         #endregion
 

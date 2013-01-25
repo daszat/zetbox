@@ -117,6 +117,8 @@ namespace Zetbox.Client.Models
 
         public abstract void SetUntypedValue(object val);
 
+        public bool ReportErrors { get { return true; } }
+
         public ControlKind RequestedKind { get; private set; }
         #endregion
 

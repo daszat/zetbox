@@ -138,7 +138,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         protected virtual void OnErrorChanged()
         {
             OnPropertyChanged("Error");
-            if (!string.IsNullOrEmpty(this.Error))
+            if (!string.IsNullOrEmpty(this.Error) && ValueModel.ReportErrors)
             {
                 // Register with a IContextViewModel
                 var ctxVmdl = ViewModelFactory.GetWorkspace(DataContext) as IContextViewModel;

@@ -69,6 +69,14 @@ namespace Zetbox.Client.Models
         void SetUntypedValue(object val);
 
         /// <summary>
+        /// Returns true, if a ViewModel or other users should report errors.
+        /// </summary>
+        /// <remarks>
+        /// A property value model whould return false if the object has been deleted
+        /// </remarks>
+        bool ReportErrors { get; }
+
+        /// <summary>
         /// DefaultKind override from the underlying Value model.
         /// </summary>
         ControlKind RequestedKind { get; }
