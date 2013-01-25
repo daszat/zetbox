@@ -43,7 +43,6 @@ namespace Zetbox.API.Common.Reporting
 #if RELEASE
     [System.Diagnostics.DebuggerStepThrough]
 #endif
-    [CLSCompliant(false)]
     public abstract class AbstractReportingHost : IGenerationHost, IDisposable
     {
         private Dictionary<string, TemplateInfo> templates;
@@ -84,7 +83,7 @@ namespace Zetbox.API.Common.Reporting
             settings["overrideReportTemplateAssembly"] = overrideTemplateAssembly != null ? overrideTemplateAssembly.FullName : null;
 
             // use this.GetType() to prepare a change:
-            // This class should be abstract. Anyone who provides report templates should derive from this class (empty implementation).
+            // This class is abstract. Anyone who provides report templates should derive from this class (empty implementation).
             // This will distinguish between different reports.
             settings["baseReportTemplateNamespace"] = this.GetType().Namespace;
             settings["baseReportTemplateAssembly"] = this.GetType().Assembly.FullName;

@@ -29,7 +29,6 @@ namespace Zetbox.Client.Reporting
     using Zetbox.Client.Presentables.ValueViewModels;
     using ControlKinds = Zetbox.NamedObjects.Gui.ControlKinds;
 
-    [CLSCompliant(false)]
     public class ReportingErrorDialog : IReportingErrorReporter
     {
         private readonly IViewModelFactory _viewModelFactory;

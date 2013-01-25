@@ -25,7 +25,6 @@ namespace Zetbox.App.Projekte
     /// Client implementation
     /// </summary>
     [Implementor]
-    [CLSCompliant(false)]
     public class ProjektActions
     {
         private static Func<ReportingHost> _rptFactory;

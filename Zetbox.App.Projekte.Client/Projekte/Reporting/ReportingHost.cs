@@ -22,7 +22,6 @@ namespace Zetbox.App.Projekte.Client.Projekte.Reporting
     using Zetbox.API;
     using Zetbox.API.Common.Reporting;
 
-    [CLSCompliant(false)]
     public class ReportingHost : AbstractReportingHost
     {
         /// <summary>

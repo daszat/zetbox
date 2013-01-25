@@ -22,13 +22,11 @@ namespace Zetbox.API.Common.Reporting
     using MigraDoc.DocumentObjectModel.IO;
     using Zetbox.API.Utils;
 
-    [CLSCompliant(false)]
     public interface IReportingErrorReporter
     {
         void ReportErrors(DdlReaderErrors errors, Exception ex, Stream mddl);
     }
 
-    [CLSCompliant(false)]
     public class LoggingErrorReporter : IReportingErrorReporter
     {
         public void ReportErrors(DdlReaderErrors errors, Exception ex, Stream mddl)
