@@ -113,6 +113,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             valueModelMock.SetupProperty(o => o.Value);
             valueModelMock.SetupGet(o => o.Label).Returns("ValueLabel");
             valueModelMock.SetupGet(o => o.AllowNullInput).Returns(true);
+            valueModelMock.SetupGet(o => o.ReportErrors).Returns(true);
             obj = new TestValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), null, valueModelMock.Object);
         }
     }

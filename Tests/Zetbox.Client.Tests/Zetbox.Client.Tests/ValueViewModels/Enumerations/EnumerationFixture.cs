@@ -71,6 +71,7 @@ namespace Zetbox.Client.Tests.ValueViewModels.Enumerations
             valueModelMock.SetupProperty(o => o.Value);
             valueModelMock.SetupGet(o => o.Label).Returns("ValueLabel");
             valueModelMock.SetupGet(o => o.AllowNullInput).Returns(true);
+            valueModelMock.SetupGet(o => o.ReportErrors).Returns(true);
 
             valueModelMock
                 .Setup<IEnumerable<KeyValuePair<int, string>>>(o => o.GetEntries())
