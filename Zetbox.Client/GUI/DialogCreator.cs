@@ -30,7 +30,14 @@ namespace Zetbox.Client.GUI
 
         public string Title { get; set; }
         public List<BaseValueViewModel> ValueModels { get; private set; }
-        
+
+        private static readonly Action<object[]> _doNothing = p => { };
+
+        public void Show()
+        {
+            Show(_doNothing);
+        }
+
         public void Show(Action<object[]> ok)
         {
             var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, ValueModels, ok);
@@ -42,20 +49,28 @@ namespace Zetbox.Client.GUI
     {
         public static DialogCreator AddString(this DialogCreator c, string label)
         {
-            if (c == null) throw new ArgumentNullException("c");
-            
-            var mdl = new ClassValueModel<string>(label, "", false, false);
-            c.ValueModels.Add(c.ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(c.DataContext, null, mdl));
-            return c;
+            return c.AddString(label, null, null);
         }
 
         public static DialogCreator AddString(this DialogCreator c, string label, ControlKind requestedKind)
         {
+            return c.AddString(label, null, requestedKind);
+        }
+
+        public static DialogCreator AddString(this DialogCreator c, string label, string value, ControlKind requestedKind)
+        {
             if (c == null) throw new ArgumentNullException("c");
 
             var mdl = new ClassValueModel<string>(label, "", false, false);
+
+            if (value != null)
+                mdl.Value = value;
+
             var vmdl = c.ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(c.DataContext, null, mdl);
-            vmdl.RequestedKind = requestedKind;
+
+            if (requestedKind != null)
+                vmdl.RequestedKind = requestedKind;
+
             c.ValueModels.Add(vmdl);
             return c;
         }
