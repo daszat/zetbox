@@ -24,13 +24,16 @@ namespace Zetbox.API.Common.Reporting
 
     public interface IReportingErrorReporter
     {
-        void ReportErrors(DdlReaderErrors errors, Exception ex, Stream mddl);
+        // TODO: mono 2.10 does not correctly recognize this as CLSCompliant
+        // void ReportErrors(DdlReaderErrors errors, Exception ex, Stream mddl);
+        void ReportErrors(object errors, Exception ex, Stream mddl);
     }
 
     public class LoggingErrorReporter : IReportingErrorReporter
     {
-        public void ReportErrors(DdlReaderErrors errors, Exception ex, Stream mddl)
+        public void ReportErrors(object foo, Exception ex, Stream mddl)
         {
+            var errors = (DdlReaderErrors)foo;
             if (ex != null)
             {
                 Logging.Log.Error("Unable to create report:", ex);

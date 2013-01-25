@@ -46,8 +46,9 @@ namespace Zetbox.Client.Reporting
             _lazyCtx = lazyCtx;
         }
 
-        public void ReportErrors(DdlReaderErrors errors, Exception ex, Stream mddl)
+        public void ReportErrors(object foo, Exception ex, Stream mddl)
         {
+            var errors = (DdlReaderErrors)foo;
             var dlg = _viewModelFactory.CreateDialog(_lazyCtx.Value, "Fehler beim Erstellen des Reports");
 
             if (ex != null)
