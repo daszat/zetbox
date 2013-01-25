@@ -51,9 +51,6 @@ namespace Zetbox.Client.Reporting
         {
             var dlg = _viewModelFactory.CreateDialog(_lazyCtx.Value, "Fehler beim Erstellen des Reports");
 
-            var ctx = _lazyCtx.Value;
-            var valueModels = new List<BaseValueViewModel>();
-
             if (ex != null)
             {
                 dlg.AddString("Exception", ex.ToString(), ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx));
