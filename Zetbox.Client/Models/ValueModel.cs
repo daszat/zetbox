@@ -266,8 +266,10 @@ namespace Zetbox.Client.Models
 
         public override void ClearValue()
         {
-            if (AllowNullInput) Value = null;
-            else throw new NotSupportedException();
+            if (this.AllowNullInput)
+                this.Value = null;
+            else
+                throw new InvalidOperationException("Does not allow null values");
         }
     }
 
@@ -424,8 +426,10 @@ namespace Zetbox.Client.Models
 
         public override void ClearValue()
         {
-            if (AllowNullInput) Value = null;
-            else throw new NotSupportedException();
+            if (this.AllowNullInput)
+                this.Value = null;
+            else
+                throw new InvalidOperationException("Does not allow null values");
         }
     }
 
