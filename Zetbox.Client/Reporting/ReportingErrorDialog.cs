@@ -23,6 +23,7 @@ namespace Zetbox.Client.Reporting
     using MigraDoc.DocumentObjectModel.IO;
     using Zetbox.API;
     using Zetbox.API.Common.Reporting;
+    using Zetbox.Client.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
@@ -48,16 +49,14 @@ namespace Zetbox.Client.Reporting
 
         public void ReportErrors(DdlReaderErrors errors, Exception ex, Stream mddl)
         {
+            var dlg = _viewModelFactory.CreateDialog(_lazyCtx.Value, "Fehler beim Erstellen des Reports");
+
             var ctx = _lazyCtx.Value;
             var valueModels = new List<BaseValueViewModel>();
 
             if (ex != null)
             {
-                var exMdl = new ClassValueModel<string>("Exception", "", false, false);
-                exMdl.Value = ex.ToString();
-                var exVMdl = _viewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, exMdl);
-                exVMdl.RequestedKind = ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx);
-                valueModels.Add(exVMdl);
+                dlg.AddString("Exception", ex.ToString(), ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx));
             }
 
             if (errors != null && errors.ErrorCount > 0)
@@ -80,11 +79,8 @@ namespace Zetbox.Client.Reporting
                     }
                     sb.AppendLine(e.ToString());
                 }
-                var errorsMdl = new ClassValueModel<string>("Errors", "", false, false);
-                errorsMdl.Value = sb.ToString();
-                var errorsVMdl = _viewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, errorsMdl);
-                errorsVMdl.RequestedKind = ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx);
-                valueModels.Add(errorsVMdl);
+
+                dlg.AddString("Errors", sb.ToString(), ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx));
             }
 
             if (mddl != null)
@@ -98,15 +94,11 @@ namespace Zetbox.Client.Reporting
                     var line = sr.ReadLine();
                     sb.AppendLine(string.Format("{0:000}: {1}", ++counter, line));
                 }
-                var mddlMdl = new ClassValueModel<string>("MDDL", "", false, false);
-                mddlMdl.Value = sb.ToString();
-                var mddlVMdl = _viewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, mddlMdl);
-                mddlVMdl.RequestedKind = ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx);
-                valueModels.Add(mddlVMdl);
+
+                dlg.AddString("MDDL", sb.ToString(), ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx));
             }
 
-            var dlg = _viewModelFactory.CreateViewModel<Zetbox.Client.Presentables.ValueInputTaskViewModel.Factory>().Invoke(ctx, null, "Fehler beim erstellen des Reports", valueModels, (args) => { });
-            _viewModelFactory.ShowModel(dlg, true);
+            dlg.Show();
         }
     }
 }
