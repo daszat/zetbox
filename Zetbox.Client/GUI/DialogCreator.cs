@@ -14,6 +14,8 @@ namespace Zetbox.Client.GUI
 
     public class DialogCreator
     {
+        public delegate DialogCreator Factory(IZetboxContext ctx);
+
         public DialogCreator(IZetboxContext ctx, IViewModelFactory mdlFactory, IFrozenContext frozenCtx)
         {
             ValueModels = new List<BaseValueViewModel>();

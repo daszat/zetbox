@@ -197,7 +197,7 @@ namespace Zetbox.Client.Presentables.GUI
         public void SaveAs()
         {
             string name = string.Empty;
-            ViewModelFactory.CreateDialog(SavedListConfiguratorViewModelResources.SaveDlgTitle)
+            ViewModelFactory.CreateDialog(DataContext, SavedListConfiguratorViewModelResources.SaveDlgTitle)
                 .AddString(SavedListConfiguratorViewModelResources.SaveDlgNameLabel)
                 .Show((p) => { name = p[0] as string; });
             if (string.IsNullOrEmpty(name)) return;
@@ -210,7 +210,7 @@ namespace Zetbox.Client.Presentables.GUI
             if (SelectedItem == null || !SelectedItem.IsMyOwn)
             {
                 // Create new
-                ViewModelFactory.CreateDialog(SavedListConfiguratorViewModelResources.SaveDlgTitle)
+                ViewModelFactory.CreateDialog(DataContext, SavedListConfiguratorViewModelResources.SaveDlgTitle)
                     .AddString(SavedListConfiguratorViewModelResources.SaveDlgNameLabel)
                     .Show((p) => { name = p[0] as string; });
                 if (string.IsNullOrEmpty(name)) return;
@@ -328,9 +328,9 @@ namespace Zetbox.Client.Presentables.GUI
             string newName = null;
             string oldName = itemToRename.Name;
 
-            ViewModelFactory.CreateDialog(SavedListConfiguratorViewModelResources.SaveDlgTitle)
+            ViewModelFactory.CreateDialog(DataContext, SavedListConfiguratorViewModelResources.SaveDlgTitle)
                 .AddString(SavedListConfiguratorViewModelResources.SaveDlgNameLabel)
-                .Show((p) => { newName = p[0] as string; });
+                .Show(p => { newName = p[0] as string; });
             if (string.IsNullOrEmpty(newName)) return;
 
             using (var ctx = ctxFactory())

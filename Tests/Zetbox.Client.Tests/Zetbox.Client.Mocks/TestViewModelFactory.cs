@@ -31,7 +31,7 @@ namespace Zetbox.Client.Mocks
     {
         public TestViewModelFactory(Autofac.ILifetimeScope container,
             IFrozenContext frozenCtx,
-            ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
+            ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
             : base(container, frozenCtx, cfg, perfCounter, dialogFactory)
         {
         }

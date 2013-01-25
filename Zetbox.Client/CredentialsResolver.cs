@@ -140,10 +140,10 @@ namespace Zetbox.Client
                         using (var ctx = _ctxFactory())
                         {
                             var dlgOK = false;
-                            _vmf.CreateDialog(CredentialsResolverResources.DialogTitle)
+                            _vmf.CreateDialog(ctx, CredentialsResolverResources.DialogTitle)
                                 .AddString(CredentialsResolverResources.UserNameLabel)
                                 .AddPassword(CredentialsResolverResources.PasswordLabel)
-                                .Show((p) =>
+                                .Show(p =>
                                 {
                                     this.UserName = (string)p[0];
                                     this.Password = (string)p[1];

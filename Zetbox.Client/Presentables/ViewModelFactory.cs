@@ -49,7 +49,7 @@ namespace Zetbox.Client.Presentables
         protected readonly Autofac.ILifetimeScope Container;
         protected readonly IFrozenContext FrozenContext;
         protected readonly ZetboxConfig Configuration;
-        protected readonly Func<DialogCreator> DialogFactory;
+        protected readonly DialogCreator.Factory DialogFactory;
 
         private struct VMCacheKey
         {
@@ -83,7 +83,7 @@ namespace Zetbox.Client.Presentables
 
         private readonly Dictionary<VMCacheKey, object> _viewModelFactoryCache;
 
-        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
+        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
         {
             if (container == null) throw new ArgumentNullException("container");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
@@ -612,9 +612,9 @@ namespace Zetbox.Client.Presentables
             private set;
         }
 
-        public DialogCreator CreateDialog(string title)
+        public DialogCreator CreateDialog(IZetboxContext ctx, string title)
         {
-            var result = DialogFactory();
+            var result = DialogFactory(ctx);
             result.Title = title;
             return result;
         }
