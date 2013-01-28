@@ -815,6 +815,17 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 FormatCheckExpression(colName, checkExpressions))) == 0;
         }
 
+        public override bool CheckCheckConstraintExists(TableRef tblName, string constraintName)
+        {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (string.IsNullOrEmpty(constraintName)) throw new ArgumentNullException("constraintName");
+
+            return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@constraint_name) AND type IN (N'C')",
+                new Dictionary<string, object>() {
+                    { "@constraint_name", FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, constraintName)) },
+                }) > 0;
+        }
+
         #endregion
 
         #region Other DB Objects (Views, Triggers, Procedures)

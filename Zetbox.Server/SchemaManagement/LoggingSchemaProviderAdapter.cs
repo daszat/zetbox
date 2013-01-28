@@ -617,6 +617,11 @@ namespace Zetbox.Server.SchemaManagement
             return _provider.CheckCheckConstraintPossible(tblName, colName, newConstraintName, checkExpressions);
         }
 
+        public bool CheckCheckConstraintExists(TableRef tblName, string constraintName)
+        {
+            return _provider.CheckCheckConstraintExists(tblName, constraintName);
+        }
+
         public void CreateCheckConstraint(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
         {
             _provider.CreateCheckConstraint(tblName, colName, newConstraintName, checkExpressions);

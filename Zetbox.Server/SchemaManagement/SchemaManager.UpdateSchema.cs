@@ -58,6 +58,8 @@ namespace Zetbox.Server.SchemaManagement
 
                     UpdateProcedures();
 
+                    Workaround_UpdateTPHNotNullCheckConstraint();
+
                     SaveSchema(schema);
 
                     foreach (var gmf in _globalMigrationFragments)
@@ -74,6 +76,56 @@ namespace Zetbox.Server.SchemaManagement
                     Log.Debug(String.Empty);
                     Log.Error("An error ocurred while updating the schema", ex);
                     throw;
+                }
+            }
+        }
+
+        private void Workaround_UpdateTPHNotNullCheckConstraint()
+        {
+            foreach (var prop in schema.GetQuery<ValueTypeProperty>())
+            {
+                var cls = prop.ObjectClass as ObjectClass;
+                if (!prop.IsNullable() && cls != null && cls.BaseObjectClass != null && cls.GetTableMapping() == TableMapping.TPH)
+                {
+                    var tblName = cls.GetTableRef(db);
+                    var colName = Construct.ColumnName(prop, string.Empty);
+                    var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+
+                    if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                    {
+                        db.DropCheckConstraint(tblName, checkConstraintName);
+                    }
+
+                    Case.CreateTPHNotNullCheckConstraint(tblName, colName, cls);
+                }
+            }
+
+            foreach (var rel in schema.GetQuery<Relation>())
+            {
+                if (rel.GetRelationType() == RelationType.one_n)
+                {
+                    string assocName, colName, listPosName;
+                    RelationEnd relEnd, otherEnd;
+                    TableRef tblName, refTblName;
+                    bool hasPersistentOrder;
+                    if (Case.TryInspect_1_N_Relation(rel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
+                    {
+                        var isNullable = otherEnd.IsNullable();
+                        var checkNotNull = !isNullable;
+                        if (checkNotNull && (relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null))
+                        {
+                            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+                            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                            {
+                                db.DropCheckConstraint(tblName, checkConstraintName);
+                            }
+                            Case.CreateTPHNotNullCheckConstraint(tblName, colName, relEnd.Type);
+                        }
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.one_one)
+                {
+                    // TODO: ....
                 }
             }
         }

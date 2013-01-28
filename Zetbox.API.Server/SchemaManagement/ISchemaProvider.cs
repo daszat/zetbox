@@ -761,6 +761,8 @@ namespace Zetbox.API.Server
         /// </summary>
         void DropCheckConstraint(TableRef tblName, string constraintName);
 
+        bool CheckCheckConstraintExists(TableRef tblName, string constraintName);
+
         #endregion
 
         #region Other DB Objects (Views, Triggers, Procedures)

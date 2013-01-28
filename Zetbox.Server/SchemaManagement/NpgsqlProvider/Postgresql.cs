@@ -808,6 +808,18 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 FormatCheckExpression(colName, checkExpressions)));
         }
 
+        public override bool CheckCheckConstraintExists(TableRef tblName, string constraintName)
+        {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (string.IsNullOrEmpty(constraintName)) throw new ArgumentNullException("constraintName");
+
+            return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_constraint JOIN pg_namespace n ON (connamespace = n.oid) WHERE n.nspname = @schema AND conname = @constraint_name AND contype = 'c'",
+                new Dictionary<string, object>(){
+                    { "@schema", tblName.Schema },
+                    { "@constraint_name", constraintName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) }
+                });
+        }
+
         #endregion
 
         #region Other DB Objects (Views, Triggers, Procedures)

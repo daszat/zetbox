@@ -61,6 +61,9 @@ namespace Zetbox.Server.SchemaManagement
                     CheckInheritance();
                     Log.Debug(String.Empty);
 
+                    if(withRepair)
+                        Workaround_UpdateTPHNotNullCheckConstraint();
+
                     CheckExtraRelations();
 
                     if (withRepair)

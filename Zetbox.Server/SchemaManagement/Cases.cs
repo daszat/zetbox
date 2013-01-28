@@ -369,7 +369,7 @@ namespace Zetbox.Server.SchemaManagement
             PostMigration(PropertyMigrationEventType.Add, null, prop);
         }
 
-        private void CreateTPHNotNullCheckConstraint(TableRef tblName, string colName, ObjectClass objClass)
+        internal void CreateTPHNotNullCheckConstraint(TableRef tblName, string colName, ObjectClass objClass)
         {
             // classes that do have this property
             var classes = objClass.AndChildren(c => c.SubClasses).Select(cls => Construct.DiscriminatorValue(cls)).ToList();
@@ -1655,7 +1655,7 @@ namespace Zetbox.Server.SchemaManagement
         /// Tries to dissect a relation for the 1_N case.
         /// </summary>
         /// <returns>false if something is wrong with the relation definition. The out parameters are only filled correctly when the function returns true.</returns>
-        private bool TryInspect_1_N_Relation(
+        internal bool TryInspect_1_N_Relation(
             Relation rel, out string assocName,
             out RelationEnd relEnd, out RelationEnd otherEnd,
             out TableRef tblName, out TableRef refTblName,
@@ -1937,7 +1937,7 @@ namespace Zetbox.Server.SchemaManagement
             }
         }
 
-        private bool TryInspect_1_1_Relation(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role, out TableRef tblName, out TableRef refTblName, out string assocName, out string colName, out string idxName)
+        internal bool TryInspect_1_1_Relation(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role, out TableRef tblName, out TableRef refTblName, out string assocName, out string colName, out string idxName)
         {
             tblName = relEnd.Type.GetTableRef(db);
             refTblName = otherEnd.Type.GetTableRef(db);

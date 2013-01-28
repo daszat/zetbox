@@ -551,6 +551,8 @@ namespace Zetbox.Server.SchemaManagement
                             QuoteIdentifier(constraintName)));
         }
 
+        public abstract bool CheckCheckConstraintExists(TableRef tblName, string constraintName);
+
         #endregion
 
         #region Other DB Objects (Views, Triggers, Procedures)

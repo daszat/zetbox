@@ -900,6 +900,11 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        bool ISchemaProvider.CheckCheckConstraintExists(TableRef tblName, string constraintName)
+        {
+            throw new NotSupportedException();
+        }
+
         /// <summary>Not supported.</summary>
         void ISchemaProvider.DropCheckConstraint(TableRef tblName, string constraintName)
         {
