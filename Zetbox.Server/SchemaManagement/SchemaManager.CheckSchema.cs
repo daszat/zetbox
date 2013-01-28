@@ -892,8 +892,7 @@ namespace Zetbox.Server.SchemaManagement
                 var realIsNullable = prop.IsNullable();
                 if (realIsNullable == false)
                     realIsNullable = mapping == TableMapping.TPH && objClass.BaseObjectClass != null;
-                var defaultPossibleValue = mapping == TableMapping.TPT || objClass.BaseObjectClass == null; // Only TPT columns can have default constraints
-                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), realIsNullable, defaultPossibleValue ? SchemaManager.GetDefaultConstraint(prop) : null);
+                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), realIsNullable, SchemaManager.GetDefaultConstraint(prop));
             }
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))

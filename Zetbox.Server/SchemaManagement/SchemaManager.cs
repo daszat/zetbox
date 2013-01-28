@@ -27,6 +27,7 @@ namespace Zetbox.Server.SchemaManagement
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
     using Zetbox.App.Packaging;
     using Zetbox.Generator;
     using Zetbox.Generator.Extensions;
@@ -207,6 +208,13 @@ namespace Zetbox.Server.SchemaManagement
         public static DefaultConstraint GetDefaultConstraint(Property prop)
         {
             if (prop == null) throw new ArgumentNullException("prop");
+            var objClass = prop.ObjectClass as ObjectClass;
+
+            // Only TPT or TPH base columns can have default constraints
+            // And only member of object classes - no CP objects!
+            var defaultPossibleValue = objClass != null && (objClass.GetTableMapping() == TableMapping.TPT || objClass.BaseObjectClass == null); 
+            if(!defaultPossibleValue) return null;
+
             var defValue = prop.DefaultValue;
             if (defValue is Zetbox.App.Base.NewGuidDefaultValue)
             {
