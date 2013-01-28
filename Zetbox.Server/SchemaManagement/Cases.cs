@@ -302,14 +302,14 @@ namespace Zetbox.Server.SchemaManagement
 
             string colName = Construct.ColumnName(prop, prefix);
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
-            CreateValueTypePropertyNullable(objClass.GetTableRef(db), prop, colName);
+            CreateValueTypePropertyNullable(objClass.GetTableRef(db), prop, colName, true);
 
             PostMigration(PropertyMigrationEventType.Add, null, prop);
         }
 
-        private void CreateValueTypePropertyNullable(TableRef tblName, ValueTypeProperty prop, string colName)
+        private void CreateValueTypePropertyNullable(TableRef tblName, ValueTypeProperty prop, string colName, bool withDefault)
         {
-            db.CreateColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultConstraint(prop));
+            db.CreateColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, withDefault ? SchemaManager.GetDefaultConstraint(prop) : null);
         }
 
         #endregion
@@ -612,7 +612,7 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (ValueTypeProperty p in cprop.CompoundObjectDefinition.Properties)
             {
-                db.CreateColumn(tblName, Construct.ColumnName(p, cprop.Name), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));
+                db.CreateColumn(tblName, Construct.ColumnName(p, cprop.Name), p.GetDbType(), p.GetSize(), p.GetScale(), true, null);
             }
 
             if (hasPersistentOrder)
@@ -2271,7 +2271,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 foreach (ValueTypeProperty savedProp in savedObjClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
                 {
-                    CreateValueTypePropertyNullable(baseTblName, savedProp, Construct.NestedColumnName(savedProp.Name, savedObjClass.TableName));
+                    CreateValueTypePropertyNullable(baseTblName, savedProp, Construct.NestedColumnName(savedProp.Name, savedObjClass.TableName), false);
                     colNamesList.Add(savedProp.Name);
                 }
                 foreach (CompoundObjectProperty savedProp in savedObjClass.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
@@ -2848,7 +2848,7 @@ namespace Zetbox.Server.SchemaManagement
                     valProp.GetSize(),
                     valProp.GetScale(),
                     hasData || valProp.IsNullable(),
-                    SchemaManager.GetDefaultConstraint(valProp));
+                    null); // CP-Objects does not have a default value. could be nullable or deep in a TPH hierarchy
             }
 
             // TODO: Add nested CompoundObjectProperty

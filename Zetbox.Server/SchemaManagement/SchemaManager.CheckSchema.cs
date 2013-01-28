@@ -743,7 +743,7 @@ namespace Zetbox.Server.SchemaManagement
                     // TODO: Support nested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
-                        CheckColumn(tblName, Construct.ColumnName(p, basePropName), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));
+                        CheckColumn(tblName, Construct.ColumnName(p, basePropName), p.GetDbType(), p.GetSize(), p.GetScale(), true, null);
                     }
                     if (hasPersistentOrder)
                     {
