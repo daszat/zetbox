@@ -236,6 +236,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("1caadf11-7b95-4c68-8b42-87ac51b01ea0"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> DecimalDefaultValue
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("bde7fffe-beff-4220-aa20-99a9ebec3c59"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> DecimalParameter
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("f839cf8c-4cd4-4351-bbfe-d599a93af226"); }
@@ -914,6 +918,13 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> DateTimeStyle
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("76b04254-3911-4753-ba11-cb1af074b056"); }
+                                }
+                            }
+                            public static class DecimalDefaultValue_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DecimalValue
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ba39e802-db21-40d3-8978-be947a2baaa9"); }
                                 }
                             }
                             public static class DecimalProperty_Properties

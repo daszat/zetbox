@@ -421,6 +421,11 @@ namespace Zetbox.Server.SchemaManagement
                 db.WriteDefaultValue(tblName, colName, ((IntDefaultConstraint)def).Value, discriminatorFilter);
                 return true;
             }
+            else if (def is DecimalDefaultConstraint)
+            {
+                db.WriteDefaultValue(tblName, colName, ((DecimalDefaultConstraint)def).Value, discriminatorFilter);
+                return true;
+            }
             return false;
         }
         #endregion

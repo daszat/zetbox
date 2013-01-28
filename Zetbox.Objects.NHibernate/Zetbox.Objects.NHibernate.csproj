@@ -168,6 +168,7 @@
     <Compile Include="DateTimeParameter.NHibernate.Designer.cs" />
     <Compile Include="DateTimeProperty.NHibernate.Designer.cs" />
     <Compile Include="DayOfWeekCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="DecimalDefaultValue.NHibernate.Designer.cs" />
     <Compile Include="DecimalParameter.NHibernate.Designer.cs" />
     <Compile Include="DecimalProperty.NHibernate.Designer.cs" />
     <Compile Include="DefaultPropertyValue.NHibernate.Designer.cs" />

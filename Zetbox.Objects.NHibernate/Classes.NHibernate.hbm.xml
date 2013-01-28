@@ -3841,6 +3841,22 @@
 
         </subclass>
         <subclass
+                name="Zetbox.App.Base.DecimalDefaultValueNHibernateImpl+DecimalDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Base.DecimalDefaultValueNHibernateImpl+DecimalDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="base.DecimalDefaultValues"
+                dynamic-update="true">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="DecimalValue" 
+                  column="`DecimalDefaultValues_DecimalValue`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.EnumDefaultValueNHibernateImpl+EnumDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.EnumDefaultValueNHibernateImpl+EnumDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 discriminator-value="base.EnumDefaultValues"

@@ -2849,6 +2849,9 @@
   <EntityType Name="DayOfWeekCalendarRuleEfImpl" BaseType="Model.CalendarRuleEfImpl">
     <Property Name="DayOfWeekImpl" Type="Int32" Nullable="false"  />
   </EntityType>
+  <EntityType Name="DecimalDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
+    <Property Name="DecimalValue" Type="Decimal" Nullable="false" Precision="19" Scale="5"  />
+  </EntityType>
   <EntityType Name="DecimalParameterEfImpl" BaseType="Model.BaseParameterEfImpl">
   </EntityType>
   <EntityType Name="DecimalPropertyEfImpl" BaseType="Model.ValueTypePropertyEfImpl">

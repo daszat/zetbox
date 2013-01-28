@@ -518,6 +518,10 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 {
                     defValue = ((IntDefaultConstraint)constr).Value.ToString();
                 }
+                else if (constr is DecimalDefaultConstraint)
+                {
+                    defValue = ((DecimalDefaultConstraint)constr).Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
+                }
                 else if (constr is BoolDefaultConstraint)
                 {
                     defValue = ((BoolDefaultConstraint)constr).Value ? "1" : "0";

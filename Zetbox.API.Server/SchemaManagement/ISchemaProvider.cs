@@ -537,6 +537,11 @@ namespace Zetbox.API.Server
         public int Value { get; set; }
     }
 
+    public class DecimalDefaultConstraint : DefaultConstraint
+    {
+        public decimal Value { get; set; }
+    }
+
     public class BoolDefaultConstraint : DefaultConstraint
     {
         public bool Value { get; set; }

@@ -127,6 +127,7 @@
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />
     <Compile Include="DayOfWeekCalendarRule.Interface.Designer.cs" />
+    <Compile Include="DecimalDefaultValue.Interface.Designer.cs" />
     <Compile Include="DecimalParameter.Interface.Designer.cs" />
     <Compile Include="DecimalProperty.Interface.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Interface.Designer.cs" />

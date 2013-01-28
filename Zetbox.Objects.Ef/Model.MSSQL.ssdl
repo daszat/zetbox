@@ -1638,6 +1638,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="BoolDefaultValues_BoolValue" Type="bit" Nullable="true" />
+    <Property Name="DecimalDefaultValues_DecimalValue" Type="decimal" Precision="19" Scale="5" Nullable="true" />
     <Property Name="EnumDefaultValues_fk_EnumValue" Type="int" />
     <Property Name="IntDefaultValues_IntValue" Type="int" Nullable="true" />
     <Property Name="StringDefaultValues_DefaultValue" Type="nvarchar" MaxLength="1000" Nullable="true" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-23T13:52:24Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-28T11:56:07Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -34492,6 +34492,53 @@ public static void ObjectIsValid(DateTimeProperty obj, ObjectIsValidEventArgs e)
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:AreFlags>false</ZetboxBase:AreFlags>
   </ZetboxBase:Enumeration>
+  <ZetboxBase:ObjectClass ExportGuid="bde7fffe-beff-4220-aa20-99a9ebec3c59">
+    <ZetboxBase:ChangedOn>2013-01-28T10:56:07.184681Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-01-28T10:56:07.184681Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Sets an decimal property with the configured default value</ZetboxBase:Description>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>DecimalDefaultValue</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:BaseObjectClass>74785c72-3271-4fb7-95fc-86b0baa09c8e</ZetboxBase:BaseObjectClass>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(DecimalDefaultValue obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(DecimalDefaultValue obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(DecimalDefaultValue obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(DecimalDefaultValue obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(DecimalDefaultValue obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(DecimalDefaultValue obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>DecimalDefaultValues</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="f839cf8c-4cd4-4351-bbfe-d599a93af226">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-09-25T05:22:53Z</ZetboxBase:CreatedOn>
@@ -40692,6 +40739,45 @@ public static void isValid_TotalDays(DateTimeRange obj, PropertyIsValidEventArgs
     <ZetboxBase:IsCalculated>true</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:IntProperty>
+  <ZetboxBase:DecimalProperty ExportGuid="ba39e802-db21-40d3-8978-be947a2baaa9">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-01-28T10:56:07.184681Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_DecimalValue(DecimalDefaultValue obj, PropertyGetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_DecimalValue(DecimalDefaultValue obj, PropertyPreSetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_DecimalValue(DecimalDefaultValue obj, PropertyPostSetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_DecimalValue(DecimalDefaultValue obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.DecimalValue == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-01-28T10:56:07.184681Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Label>Decimal value</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>DecimalValue</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>bde7fffe-beff-4220-aa20-99a9ebec3c59</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>481d7a65-208c-4706-8d4d-64ea629a109c</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Precision>19</ZetboxBase:Precision>
+    <ZetboxBase:Scale>5</ZetboxBase:Scale>
+  </ZetboxBase:DecimalProperty>
   <ZetboxBase:IntProperty ExportGuid="35dd7765-0e26-4195-b687-ce814560ba34">
     <ZetboxBase:CategoryTags>Main, Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-08-03T11:58:33.975812Z</ZetboxBase:ChangedOn>
@@ -52848,6 +52934,11 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:MaxLength>51</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>1</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="0eada9c9-095b-4afd-a29f-4f3eb7255c95">
+    <ZetboxBase:ChangedOn>2013-01-28T10:56:07.184681Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ba39e802-db21-40d3-8978-be947a2baaa9</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-01-28T10:56:07.184681Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="dfd60ac8-70be-43a7-82ae-ca5e217025b1">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.281041Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>35dd7765-0e26-4195-b687-ce814560ba34</ZetboxBase:ConstrainedProperty>

@@ -153,6 +153,7 @@
     <Compile Include="DateTimeParameter.Memory.Designer.cs" />
     <Compile Include="DateTimeProperty.Memory.Designer.cs" />
     <Compile Include="DayOfWeekCalendarRule.Memory.Designer.cs" />
+    <Compile Include="DecimalDefaultValue.Memory.Designer.cs" />
     <Compile Include="DecimalParameter.Memory.Designer.cs" />
     <Compile Include="DecimalProperty.Memory.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Memory.Designer.cs" />

@@ -502,6 +502,10 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 {
                     defValue = ((IntDefaultConstraint)defConstraint).Value.ToString();
                 }
+                else if (defConstraint is DecimalDefaultConstraint)
+                {
+                    defValue = ((DecimalDefaultConstraint)defConstraint).Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
+                }
                 else if (defConstraint is BoolDefaultConstraint)
                 {
                     defValue = ((BoolDefaultConstraint)defConstraint).Value ? "TRUE" : "FALSE";
