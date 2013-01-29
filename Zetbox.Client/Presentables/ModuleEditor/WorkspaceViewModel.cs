@@ -129,6 +129,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
+                    // Properties
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
+                        typeof(Property).GetObjectClass(FrozenContext),
+                        () => DataContext.GetQuery<Property>().Where(i => i.Module == CurrentModule));
+                    lstMdl.SetInitialSort("Name");
+                    SetupViewModel(lstMdl);
+                    lst.Add(lstMdl);
+
                     // Assembly
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
                         typeof(Assembly).GetObjectClass(FrozenContext),
