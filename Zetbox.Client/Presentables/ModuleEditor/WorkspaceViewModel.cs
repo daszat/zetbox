@@ -212,6 +212,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         typeof(Relation).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Relation>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
+                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Sequences
@@ -236,6 +237,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             lstMdl.BeginInit();
             lstMdl.AllowAddNew = true;
             lstMdl.AllowDelete = true;
+            lstMdl.ViewMethod = InstanceListViewMethod.Details;
             var toRemove = lstMdl.Filter.SingleOrDefault(f => f.ValueSource != null && f.ValueSource.Expression == "Module");
             if(toRemove != null)
                 lstMdl.FilterList.RemoveFilter(toRemove);
