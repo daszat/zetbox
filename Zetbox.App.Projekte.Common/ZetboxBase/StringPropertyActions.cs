@@ -19,10 +19,21 @@ namespace Zetbox.App.Base
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.App.Extensions;
 
     [Implementor]
     public static class StringPropertyActions
     {
+        [Invocation]
+        public static void ObjectIsValid(StringProperty obj, ObjectIsValidEventArgs e)
+        {
+            if (obj.GetLengthConstraint() == null)
+            {
+                e.IsValid = false;
+                e.Errors.Add("String property must have a string range constraint");
+            }
+        }
+
         [Invocation]
         public static void GetPropertyType(StringProperty obj, MethodReturnEventArgs<Type> e)
         {

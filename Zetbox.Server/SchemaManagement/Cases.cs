@@ -302,6 +302,8 @@ namespace Zetbox.Server.SchemaManagement
 
             string colName = Construct.ColumnName(prop, prefix);
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
+            CheckValueTypePropertyHasWarnings(prop);
+
             CreateValueTypePropertyNullable(objClass.GetTableRef(db), prop, colName, true);
 
             PostMigration(PropertyMigrationEventType.Add, null, prop);
@@ -338,6 +340,8 @@ namespace Zetbox.Server.SchemaManagement
 
             Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.Name, prop.Name, colName);
 
+            CheckValueTypePropertyHasWarnings(prop);
+
             if (db.CheckTableContainsData(tblName, isSimplyCheckable ? null : classes))
             {
                 db.CreateColumn(tblName, colName, dbType, size, scale, true, isSimplyCheckable ? def : null);
@@ -367,6 +371,17 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             PostMigration(PropertyMigrationEventType.Add, null, prop);
+        }
+
+        private static void CheckValueTypePropertyHasWarnings(ValueTypeProperty prop)
+        {
+            if (prop is StringProperty)
+            {
+                if (((StringProperty)prop).GetLengthConstraint() == null)
+                {
+                    Log.Warn("String property must have a string range constraint");
+                }
+            }
         }
 
         internal void CreateTPHNotNullCheckConstraint(TableRef tblName, string colName, ObjectClass objClass)
@@ -565,6 +580,8 @@ namespace Zetbox.Server.SchemaManagement
                 return;
 
             Log.InfoFormat("New ValueType Property List: {0}", prop.Name);
+            CheckValueTypePropertyHasWarnings(prop);
+
             var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
             string fkName = Construct.ForeignKeyColumnName(prop);
             string valPropName = prop.Name;
@@ -612,6 +629,7 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (ValueTypeProperty p in cprop.CompoundObjectDefinition.Properties)
             {
+                CheckValueTypePropertyHasWarnings(p);
                 db.CreateColumn(tblName, Construct.ColumnName(p, cprop.Name), p.GetDbType(), p.GetSize(), p.GetScale(), true, null);
             }
 
@@ -2841,6 +2859,7 @@ namespace Zetbox.Server.SchemaManagement
             {
                 var colName = Construct.ColumnName(valProp, baseColName);
                 if (logAsNew) Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
+                CheckValueTypePropertyHasWarnings(valProp);
                 db.CreateColumn(
                     tblName,
                     colName,
