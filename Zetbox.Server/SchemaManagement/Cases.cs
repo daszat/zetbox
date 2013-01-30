@@ -2922,7 +2922,20 @@ namespace Zetbox.Server.SchemaManagement
             if (!PreMigration(PropertyMigrationEventType.Delete, savedCProp, null))
                 return;
 
-            Log.ErrorFormat("deleting compound properties not implemented: {0}.{1}", objClass.Name, savedCProp.Name);
+            Log.InfoFormat("deleting CompoundObject Property: '{0}'", savedCProp.Name);
+
+            var tblName = objClass.GetTableRef(db);
+            string baseColName = Construct.ColumnName(savedCProp, prefix);
+            var hasData = db.CheckTableContainsData(tblName);
+
+            foreach (var valProp in savedCProp.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
+            {
+                var colName = Construct.ColumnName(valProp, baseColName);
+                Log.InfoFormat("  deleting ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
+                db.DropColumn(tblName, colName);
+            }
+
+            // TODO: Add nested CompoundObjectProperty
 
             PostMigration(PropertyMigrationEventType.Delete, savedCProp, null);
         }
