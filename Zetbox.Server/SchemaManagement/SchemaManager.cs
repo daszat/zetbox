@@ -78,7 +78,7 @@ namespace Zetbox.Server.SchemaManagement
 
             Log.InfoFormat("== {0} ==", reportName);
             Log.InfoFormat("Date: {0}", DateTime.Now);
-            Log.InfoFormat("Database: {0}", connectionString.ConnectionString);
+            Log.InfoFormat("Database: {0}", db.GetSafeConnectionString(connectionString.ConnectionString));
             Log.Info(String.Empty);
         }
 
