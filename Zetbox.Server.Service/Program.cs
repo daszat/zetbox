@@ -42,7 +42,7 @@ namespace Zetbox.Server.Service
         public static int Main(string[] arguments)
         {
             // Fix working directory: Services start in System32
-            Environment.CurrentDirectory = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+            Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             Logging.Configure();
 
