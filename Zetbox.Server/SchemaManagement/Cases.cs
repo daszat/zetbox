@@ -2926,7 +2926,6 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = objClass.GetTableRef(db);
             string baseColName = Construct.ColumnName(savedCProp, prefix);
-            var hasData = db.CheckTableContainsData(tblName);
 
             foreach (var valProp in savedCProp.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
             {
