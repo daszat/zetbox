@@ -1402,6 +1402,102 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
+            <Trigger Property="ExpandDirection"
+                     Value="Up">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Expander">
+                            <Border Style="{Binding Path=(styles:Controls.BorderStyle), RelativeSource={RelativeSource AncestorType={x:Type Expander}}}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Name="ContentRow"
+                                                       Height="0" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Border Name="Border"
+                                            Grid.Row="1"
+                                            MinHeight="{StaticResource NormalControlHeight}"
+                                            Background="{TemplateBinding styles:Controls.HeaderBackground}">
+                                        <ToggleButton IsChecked="{Binding Path=IsExpanded,Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                      OverridesDefaultStyle="True"
+                                                      Foreground="{TemplateBinding styles:Controls.HeaderForeground}"
+                                                      Margin="0"
+                                                      Template="{StaticResource ExpanderToggleButtonDown}">
+                                            <ContentPresenter ContentSource="Header"
+                                                              VerticalAlignment="Center"
+                                                              RecognizesAccessKey="True" />
+                                        </ToggleButton>
+                                    </Border>
+                                    <Border Name="Content"
+                                            Grid.Row="0"
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter Margin="{TemplateBinding Padding}" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsExpanded"
+                                         Value="True">
+                                    <Setter TargetName="ContentRow"
+                                            Property="Height"
+                                            Value="{Binding ElementName=Content,Path=DesiredHeight}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="ExpandDirection"
+                     Value="Left">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Expander">
+                            <Border Style="{Binding Path=(styles:Controls.BorderStyle), RelativeSource={RelativeSource AncestorType={x:Type Expander}}}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Name="ContentRow"
+                                                          Width="0" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Name="Border"
+                                            Grid.Column="1"
+                                            Background="{TemplateBinding styles:Controls.HeaderBackground}"
+                                            MinWidth="{StaticResource NormalControlHeight}">
+                                        <ToggleButton IsChecked="{Binding Path=IsExpanded,Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                      Foreground="{TemplateBinding styles:Controls.HeaderForeground}"
+                                                      OverridesDefaultStyle="True"
+                                                      Margin="0"
+                                                      MinWidth="{StaticResource NormalControlHeight}"
+                                                      Template="{StaticResource ExpanderToggleButtonRight}">
+                                            <ContentPresenter ContentSource="Header"
+                                                              VerticalAlignment="Top"
+                                                              HorizontalAlignment="Center"
+                                                              RecognizesAccessKey="True">
+                                                <ContentPresenter.LayoutTransform>
+                                                    <RotateTransform Angle="-90" />
+                                                </ContentPresenter.LayoutTransform>
+                                            </ContentPresenter>
+                                        </ToggleButton>
+                                    </Border>
+                                    <Border Name="Content"
+                                            Grid.Column="0"
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter Margin="{TemplateBinding Padding}" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsExpanded"
+                                         Value="True">
+                                    <Setter TargetName="ContentRow"
+                                            Property="Width"
+                                            Value="{Binding ElementName=Content,Path=DesiredHeight}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
         </Style.Triggers>
     </Style>
 
