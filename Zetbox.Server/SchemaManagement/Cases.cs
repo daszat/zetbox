@@ -605,6 +605,25 @@ namespace Zetbox.Server.SchemaManagement
         }
         #endregion
 
+        #region DeleteValueTypePropertyList
+        public bool IsDeleteValueTypePropertyList(ValueTypeProperty savedProp)
+        {
+            return savedProp.IsList && schema.FindPersistenceObject<ValueTypeProperty>(savedProp.ExportGuid) == null;
+        }
+
+        public void DoDeleteValueTypePropertyList(ObjectClass objClass, ValueTypeProperty savedProp, string prefix)
+        {
+            if (!PreMigration(PropertyMigrationEventType.Delete, savedProp, null))
+                return;
+
+            Log.InfoFormat("Delete ValueType Property List: {0}", savedProp.Name);
+            var tblName = db.GetTableName(savedProp.Module.SchemaName, savedProp.GetCollectionEntryTable());
+            db.DropTable(tblName);
+
+            PostMigration(PropertyMigrationEventType.Delete, savedProp, null);
+        }
+        #endregion
+
         #region NewCompoundObjectPropertyList
         public bool IsNewCompoundObjectPropertyList(CompoundObjectProperty prop)
         {
@@ -641,6 +660,24 @@ namespace Zetbox.Server.SchemaManagement
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
 
             PostMigration(PropertyMigrationEventType.Add, null, cprop);
+        }
+        #endregion
+
+        #region DeleteCompoundObjectPropertyList
+        public bool IsDeleteCompoundObjectPropertyList(CompoundObjectProperty savedCProp)
+        {
+            return savedCProp.IsList && schema.FindPersistenceObject<CompoundObjectProperty>(savedCProp.ExportGuid) == null;
+        }
+        public void DoDeleteCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty savedCProp, string prefix)
+        {
+            if (!PreMigration(PropertyMigrationEventType.Delete, savedCProp, null))
+                return;
+
+            Log.InfoFormat("Delete CompoundObject Property List: {0}", savedCProp.Name);
+            var tblName = db.GetTableName(savedCProp.Module.SchemaName, savedCProp.GetCollectionEntryTable());
+            db.DropTable(tblName);
+
+            PostMigration(PropertyMigrationEventType.Delete, savedCProp, null);
         }
         #endregion
 
@@ -2815,7 +2852,7 @@ namespace Zetbox.Server.SchemaManagement
         #region DeleteValueTypeProperty
         public bool IsDeleteValueTypeProperty(ValueTypeProperty savedProp)
         {
-            return schema.FindPersistenceObject<ValueTypeProperty>(savedProp.ExportGuid) == null;
+            return !savedProp.IsList && schema.FindPersistenceObject<ValueTypeProperty>(savedProp.ExportGuid) == null;
         }
 
         public void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty savedProp, string prefix)
@@ -2877,7 +2914,7 @@ namespace Zetbox.Server.SchemaManagement
         #region DeleteCompoundObjectProperty
         public bool IsDeleteCompoundObjectProperty(CompoundObjectProperty savedCProp)
         {
-            return schema.FindPersistenceObject<CompoundObjectProperty>(savedCProp.ExportGuid) == null;
+            return !savedCProp.IsList && schema.FindPersistenceObject<CompoundObjectProperty>(savedCProp.ExportGuid) == null;
         }
 
         public void DoDeleteCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty savedCProp, string prefix)

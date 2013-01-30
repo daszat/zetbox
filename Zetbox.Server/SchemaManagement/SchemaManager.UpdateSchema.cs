@@ -441,19 +441,27 @@ namespace Zetbox.Server.SchemaManagement
 
         private void UpdateDeletedColumns(ObjectClass objClass, string prefix)
         {
-            foreach (ValueTypeProperty savedProp in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList))
+            foreach (ValueTypeProperty savedProp in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid))
             {
                 if (Case.IsDeleteValueTypeProperty(savedProp))
                 {
                     Case.DoDeleteValueTypeProperty(objClass, savedProp, prefix);
                 }
+                if (Case.IsDeleteValueTypePropertyList(savedProp))
+                {
+                    Case.DoDeleteValueTypePropertyList(objClass, savedProp, prefix);
+                }
             }
 
-            foreach (CompoundObjectProperty savedCProp in Case.savedSchema.GetQuery<CompoundObjectProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList))
+            foreach (CompoundObjectProperty savedCProp in Case.savedSchema.GetQuery<CompoundObjectProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid))
             {
                 if (Case.IsDeleteCompoundObjectProperty(savedCProp))
                 {
                     Case.DoDeleteCompoundObjectProperty(objClass, savedCProp, prefix);
+                }
+                if (Case.IsDeleteCompoundObjectPropertyList(savedCProp))
+                {
+                    Case.DoDeleteCompoundObjectPropertyList(objClass, savedCProp, prefix);
                 }
             }
         }
