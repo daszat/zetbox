@@ -72,7 +72,8 @@ namespace Zetbox.DalProvider.NHibernate
                         c.Resolve<NHibernateImplementationType.Factory>(),
                         c.Resolve<global::NHibernate.ISessionFactory>(),
                         c.Resolve<INHibernateImplementationTypeChecker>(),
-                        c.Resolve<IPerfCounter>()
+                        c.Resolve<IPerfCounter>(),
+                        c.Resolve<ISqlErrorTranslator>()
                         );
                 })
                 .As<IZetboxContext>()
@@ -128,7 +129,8 @@ namespace Zetbox.DalProvider.NHibernate
                         c.Resolve<NHibernateImplementationType.Factory>(),
                         c.Resolve<global::NHibernate.ISessionFactory>(),
                         c.Resolve<INHibernateImplementationTypeChecker>(),
-                        c.Resolve<IPerfCounter>()
+                        c.Resolve<IPerfCounter>(),
+                        c.Resolve<ISqlErrorTranslator>()
                         );
                 })
                 .As<TInterface>()

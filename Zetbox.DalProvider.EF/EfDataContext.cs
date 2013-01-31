@@ -83,13 +83,16 @@ namespace Zetbox.DalProvider.Ef
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter)
+        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter, ISqlErrorTranslator sqlErrorTranslator)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
+            if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
+
             _ctx = new EfObjectContext(config);
             _implTypeFactory = implTypeFactory;
             _perfCounter = perfCounter;
+            _sqlErrorTranslator = sqlErrorTranslator;
 
             _ctx.ObjectMaterialized += new ObjectMaterializedEventHandler(_ctx_ObjectMaterialized);
 
@@ -108,7 +111,8 @@ namespace Zetbox.DalProvider.Ef
         }
 
         internal ObjectContext ObjectContext { get { return _ctx; } }
-        private IPerfCounter _perfCounter;
+        private readonly IPerfCounter _perfCounter;
+        private readonly ISqlErrorTranslator _sqlErrorTranslator;
 
         private class QueryCacheEntry
         {
@@ -338,9 +342,8 @@ namespace Zetbox.DalProvider.Ef
                 catch (UpdateException updex)
                 {
                     Logging.Log.Error("UpdateException during SubmitChanges", updex);
-                    if (updex.InnerException == null)
-                        throw;
-                    throw updex.InnerException;
+                    if (updex.InnerException == null) throw;
+                    throw _sqlErrorTranslator.Translate(updex.InnerException);
                 }
 
                 NotifyChanged(notifySaveList);

@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="BaseZetboxDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
+    <Compile Include="ISqlErrorTranslator.cs" />
     <Compile Include="SchemaManagement\Construct.cs" />
     <Compile Include="DbTypeMapper.cs" />
     <Compile Include="PerfCounter\IPerfCounter.cs" />

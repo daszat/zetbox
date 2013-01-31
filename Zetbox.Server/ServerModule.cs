@@ -63,6 +63,11 @@ namespace Zetbox.Server
             builder
                 .RegisterModule(new SchemaManagement.SchemaModule());
 
+            builder
+                .RegisterType<SqlErrorTranslator>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
 #if !MONO
             builder
                 .Register(c => new ActiveDirectoryIdentitySource())

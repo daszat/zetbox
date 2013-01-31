@@ -58,7 +58,8 @@ namespace Zetbox.DalProvider.Ef
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
-                            c.Resolve<IPerfCounter>()
+                            c.Resolve<IPerfCounter>(),
+                            c.Resolve<ISqlErrorTranslator>()
                             );
                     }
                 })
@@ -84,7 +85,8 @@ namespace Zetbox.DalProvider.Ef
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
-                            c.Resolve<IPerfCounter>()
+                            c.Resolve<IPerfCounter>(),
+                            c.Resolve<ISqlErrorTranslator>()
                             );
                     }
                 })
@@ -109,7 +111,8 @@ namespace Zetbox.DalProvider.Ef
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
-                            c.Resolve<IPerfCounter>()
+                            c.Resolve<IPerfCounter>(),
+                            c.Resolve<ISqlErrorTranslator>()
                             );
                         return result;
                     }

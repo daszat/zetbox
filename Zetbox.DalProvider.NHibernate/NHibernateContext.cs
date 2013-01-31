@@ -42,7 +42,8 @@ namespace Zetbox.DalProvider.NHibernate
         private readonly ContextCache<int> _attachedObjects;
         private readonly ContextCache<IProxyObject> _attachedObjectsByProxy;
 
-        private IPerfCounter _perfCounter;
+        private readonly IPerfCounter _perfCounter;
+        private readonly ISqlErrorTranslator _sqlErrorTranslator;
 
         /// <summary>
         /// Counter for newly created Objects to give them a valid ID for the ContextCache
@@ -59,10 +60,12 @@ namespace Zetbox.DalProvider.NHibernate
             NHibernateImplementationType.Factory implTypeFactory,
             global::NHibernate.ISessionFactory nhSessionFactory,
             INHibernateImplementationTypeChecker implChecker,
-            IPerfCounter perfCounter)
+            IPerfCounter perfCounter,
+            ISqlErrorTranslator sqlErrorTranslator)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
+            if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrortranslator");
             _implTypeFactory = implTypeFactory;
             _implChecker = implChecker;
 
@@ -70,6 +73,7 @@ namespace Zetbox.DalProvider.NHibernate
             _attachedObjectsByProxy = new ContextCache<IProxyObject>(this, item => ((NHibernatePersistenceObject)item).NHibernateProxy);
 
             _perfCounter = perfCounter;
+            _sqlErrorTranslator = sqlErrorTranslator;
 
             _nhSession = nhSessionFactory.OpenSession(new NHInterceptor(this, lazyCtx));
         }
@@ -345,6 +349,15 @@ namespace Zetbox.DalProvider.NHibernate
                     RollbackTransaction();
                 var error = string.Format("Failed saving transaction: Concurrent modification on {0}#{1}", ex.EntityName, ex.Identifier);
                 throw new ConcurrencyException(error, ex);
+            }
+            catch (global::NHibernate.Exceptions.GenericADOException ex)
+            {
+                if (isItMyTransaction)
+                    RollbackTransaction();
+
+                Logging.Log.Error("Failed saving transaction", ex);
+                if (ex.InnerException == null) throw;
+                throw _sqlErrorTranslator.Translate(ex.InnerException);
             }
             catch (Exception ex)
             {
