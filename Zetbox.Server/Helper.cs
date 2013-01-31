@@ -42,6 +42,14 @@ namespace Zetbox.Server
             {
                 throw new FaultException<ConcurrencyException>((ConcurrencyException)ex);
             }
+            else if (ex is FKViolationException)
+            {
+                throw new FaultException<FKViolationException>((FKViolationException)ex);
+            }
+            else if (ex is UniqueConstraintViolationException)
+            {
+                throw new FaultException<UniqueConstraintViolationException>((UniqueConstraintViolationException)ex);
+            }
             else if (ex is InvalidZetboxGeneratedVersionException)
             {
                 throw new FaultException<InvalidZetboxGeneratedVersionException>((InvalidZetboxGeneratedVersionException)ex);
