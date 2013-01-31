@@ -115,7 +115,6 @@ namespace Zetbox.API
         private IEnumerable<IDataObject> objects;
 
         [XmlIgnore]
-        [NonSerialized]
         public IEnumerable<IDataObject> Objects
         {
             get

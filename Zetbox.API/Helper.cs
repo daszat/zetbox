@@ -686,7 +686,7 @@ namespace Zetbox.API
         /// Converts a XML byte array to a Objekt.
         /// </summary>
         /// <typeparam name="T">Type of the Object.</typeparam>
-        /// <param name="xmlByteArray">XML byte array. May not be null.</param>
+        /// <param name="stream">Input stream.</param>
         /// <returns>Returns a Object or throws an XML-Exception (see MSDN, XmlSerializer)</returns>
         public static T FromXmlStream<T>(this System.IO.Stream stream)
             where T : new()
