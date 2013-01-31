@@ -86,14 +86,23 @@ using Zetbox.API.Async;
     [System.Flags]
     public enum AccessRights
     {
+        // Internal bits
         None = 0x00,
         Read = 0x01,
         Write = 0x02,
         Delete = 0x04,
         Create = 0x08,
 
-        Full = Read | Write | Delete | Create,
+        // Aggregations
         Change = Read | Write,
+        Full = Read | Write | Delete | Create,
+
+        // Visible to user
+        // UI_Read = Read,
+        // UI_Change = Change,
+        // UI_Delete = Delete,
+        // UI_Create = Create,
+        // UI_Full = Full,
     }
 
     public static class AccessRightsExtensions
