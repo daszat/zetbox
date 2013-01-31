@@ -65,7 +65,7 @@ namespace Zetbox.DalProvider.NHibernate
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
-            if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrortranslator");
+            if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
             _implTypeFactory = implTypeFactory;
             _implChecker = implChecker;
 
