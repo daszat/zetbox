@@ -380,12 +380,45 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         BaseObjectCollectionViewModelResources.DeleteCommand_Name,
                         BaseObjectCollectionViewModelResources.DeleteCommand_Tooltip,
-                        () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly,
-                        null);
+                        DeleteSelectedItems,
+                        CanDeleteSelectedItems,
+                        CanDeleteSelectedItemsReason);
                     _DeleteCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
                 }
                 return _DeleteCommand;
+            }
+        }
+
+        public void DeleteSelectedItems()
+        {
+            // Selection will change while deleting => requires local copy
+            var tmp = SelectedItems.ToList();
+            tmp.ForEach(i => DeleteItem(i));
+        }
+
+        public bool CanDeleteSelectedItems()
+        {
+            return !IsReadOnly && !DataContext.IsReadonly && AllowDelete && SelectedItems != null && SelectedItems.Count() > 0 && SelectedItems.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights());
+        }
+
+        public string CanDeleteSelectedItemsReason()
+        {
+            if (IsReadOnly || DataContext.IsReadonly)
+            {
+                return "Context is read only.";
+            }
+            else if (!AllowDelete)
+            {
+                // Normally not displayed
+                return "Deleting is not allowed here.";
+            }
+            else if (SelectedItems == null || SelectedItems.Count() == 0)
+            {
+                return "No item selected.";
+            }
+            else /* if (SelectedItems.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights())) */
+            {
+                return "One of the objects is not deletable.";
             }
         }
 

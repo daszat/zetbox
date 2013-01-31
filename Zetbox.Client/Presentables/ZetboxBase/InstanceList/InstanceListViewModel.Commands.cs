@@ -244,7 +244,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public bool CanDeleteSelectedObjects()
         {
-            return AllowDelete &&SelectedItems.Count > 0 && SelectedItems.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights());
+            return AllowDelete && SelectedItems != null && SelectedItems.Count > 0 && SelectedItems.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights());
         }
 
         public string CanDeleteSelectedObjectsReason()
@@ -254,7 +254,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 // Normally not displayed
                 return "Deleting is not allowed here.";
             }
-            else if (SelectedItems.Count == 0)
+            else if (SelectedItems == null || SelectedItems.Count == 0)
             {
                 return "No item selected.";
             }
@@ -263,7 +263,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 return "One of the objects is not deletable.";
             }
         }
-        
+
         private ICommandViewModel _SelectColumnsCommand = null;
         public ICommandViewModel SelectColumnsCommand
         {
