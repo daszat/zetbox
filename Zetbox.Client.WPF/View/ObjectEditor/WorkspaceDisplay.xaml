@@ -55,8 +55,7 @@
                                      styles:Margin.Right="{StaticResource ItemMargin}" />
                 <ctrls:CommandButton DockPanel.Dock="Right"
                                      CommandViewModel="{Binding DeleteCommand}"
-                                     CommandParameter="{Binding SelectedItem}"
-                                     Visibility="{Binding ElevatedModeCommand.IsElevated, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Self}}"
                                      styles:Controls.IsSecondary="true"
                                      Style="{StaticResource ImageButton}"
                                      Image="/Zetbox.Client.WPF;component/Images/delete.png"

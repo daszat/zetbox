@@ -31,7 +31,10 @@ namespace Zetbox.Client.Presentables
         void Save();
         void Abort();
         void Verify();
-        void Delete(IEnumerable<DataObjectViewModel> items);
+        /// <summary>
+        /// Deletes the current selected data object
+        /// </summary>
+        void Delete();
 
         bool IsContextModified { get; }
 

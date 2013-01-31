@@ -185,20 +185,32 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
                         this,
                         WorkspaceViewModelResources.DeleteCommand_Name,
                         WorkspaceViewModelResources.DeleteCommand_Tooltip,
-                        Delete);
+                        Delete,
+                        CanDelete,
+                        null);
                 }
                 return _DeleteCommand;
             }
         }
 
-        public void Delete(IEnumerable<DataObjectViewModel> items)
+        public bool CanDelete()
         {
-            items.ForEach(i => i.Delete());
+            var objVm = SelectedItem as DataObjectViewModel;
+            return objVm != null && objVm.Object.CurrentAccessRights.HasDeleteRights();
+        }
+
+        public void Delete()
+        {
+            if (CanDelete())
+            {
+                var objVm = SelectedItem as DataObjectViewModel;
+                DataContext.Delete(objVm.Object);
+            }
         }
         #endregion
 

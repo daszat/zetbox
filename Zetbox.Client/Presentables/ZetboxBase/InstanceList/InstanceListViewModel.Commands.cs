@@ -208,26 +208,27 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
                         this,
                         CommonCommandsResources.DeleteDataObjectCommand_Name,
                         CommonCommandsResources.DeleteDataObjectCommand_Tooltip,
-                        DeleteObjects);
+                        DeleteSelectedObjects,
+                        CanDeleteSelectedObjects,
+                        CanDeleteSelectedObjectsReason);
                     _DeleteCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
                 }
                 return _DeleteCommand;
             }
         }
 
-        public void DeleteObjects(IEnumerable<DataObjectViewModel> objects)
+        public void DeleteSelectedObjects()
         {
-            if (objects == null) throw new ArgumentNullException("objects");
             if (!AllowDelete) throw new InvalidOperationException("Deleting items is not allowed. See AllowDelete property");
 
             var workingCtx = workingCtxFactory();
 
-            foreach (var item in objects)
+            foreach (var item in SelectedItems)
             {
                 var working = workingCtx.Find(workingCtx.GetInterfaceType(item.Object), item.ID);
                 workingCtx.Delete(working);
@@ -241,6 +242,28 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             ReloadInstances();
         }
 
+        public bool CanDeleteSelectedObjects()
+        {
+            return AllowDelete &&SelectedItems.Count > 0 && SelectedItems.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights());
+        }
+
+        public string CanDeleteSelectedObjectsReason()
+        {
+            if (!AllowDelete)
+            {
+                // Normally not displayed
+                return "Deleting is not allowed here.";
+            }
+            else if (SelectedItems.Count == 0)
+            {
+                return "No item selected.";
+            }
+            else /* if (SelectedItems.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights())) */
+            {
+                return "One of the objects is not deletable.";
+            }
+        }
+        
         private ICommandViewModel _SelectColumnsCommand = null;
         public ICommandViewModel SelectColumnsCommand
         {
