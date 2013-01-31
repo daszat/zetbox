@@ -391,19 +391,11 @@ namespace Zetbox.API.Server
         {
             if (b.NodeType == ExpressionType.Equal && b.Left.Type.IsIDataObject() && b.Right.Type.IsIDataObject())
             {
-                var left = Visit(b.Left);
-                var right = Visit(b.Right);
-
-                return Expression.AndAlso(
-                    Expression.NotEqual(left, Expression.Constant(null)),
-                    Expression.AndAlso(
-                        Expression.NotEqual(right, Expression.Constant(null)),
-                        Expression.MakeBinary(
-                            b.NodeType,
-                            Expression.MakeMemberAccess(left, b.Left.Type.FindFirstOrDefaultMember("ID")),
-                            Expression.MakeMemberAccess(right, b.Right.Type.FindFirstOrDefaultMember("ID")))
-                        )
-                    );
+                var newLeft = Visit(b.Left);
+                var newRight = Visit(b.Right);
+                return Expression.MakeBinary(b.NodeType,
+                    Expression.MakeMemberAccess(newLeft, newLeft.Type.FindFirstOrDefaultMember("ID")),
+                    Expression.MakeMemberAccess(newRight, newRight.Type.FindFirstOrDefaultMember("ID")));
             }
             return base.VisitBinary(b);
         }
