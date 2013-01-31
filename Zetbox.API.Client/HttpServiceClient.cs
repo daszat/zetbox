@@ -93,7 +93,9 @@ namespace Zetbox.API.Client
                     }
                     else if (httpResponse.StatusCode == HttpStatusCode.Conflict)
                     {
-                        throw new ConcurrencyException();
+                        var exToThrow = httpResponse.GetResponseStream().FromXmlStream<ZetboxContextException>();
+                        Log.Debug("Received an exception", exToThrow);
+                        throw exToThrow;
                     }
                     else if (httpResponse.StatusCode == HttpStatusCode.PreconditionFailed)
                     {

@@ -245,15 +245,25 @@ namespace Zetbox.Server.HttpService
                 }
                 Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
             }
-            catch (FaultException<ConcurrencyException> cex)
+            catch (FaultException<ConcurrencyException> ex)
             {
-                context.Response.StatusCode = (int)HttpStatusCode.Conflict;
-                Log.Info("Concurrency error while processing request", cex);
+                SerializeException(context, ex.Detail);
+                Log.Info("Concurrency error while processing request", ex);
             }
-            catch (FaultException<InvalidZetboxGeneratedVersionException> vex)
+            catch (FaultException<FKViolationException> ex)
+            {
+                SerializeException(context, ex.Detail);
+                Log.Info("FK violation error while processing request", ex);
+            }
+            catch (FaultException<UniqueConstraintViolationException> ex)
+            {
+                SerializeException(context, ex.Detail);
+                Log.Info("unique constraint violation error while processing request", ex);
+            }
+            catch (FaultException<InvalidZetboxGeneratedVersionException> ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.PreconditionFailed;
-                Log.Info("InvalidZetboxGeneratedVersion error while processing request", vex);
+                Log.Info("InvalidZetboxGeneratedVersion error while processing request", ex);
             }
             catch (FaultException ex)
             {
@@ -273,6 +283,14 @@ namespace Zetbox.Server.HttpService
                     cpa.ContainerProvider.EndRequestLifetime();
                 }
             }
+        }
+
+        private void SerializeException(HttpContext context, ZetboxContextException ex)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.Conflict;
+            context.Response.ContentType = "text/xml";
+            ex.ToXmlStream(context.Response.OutputStream);
+            context.Response.OutputStream.Flush();            
         }
 
         private void SendByteArray(HttpContext context, byte[] result, ZetboxStreamWriter.Factory writerFactory)

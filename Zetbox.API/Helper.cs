@@ -683,6 +683,27 @@ namespace Zetbox.API
         }
 
         /// <summary>
+        /// Converts a XML byte array to a Objekt.
+        /// </summary>
+        /// <typeparam name="T">Type of the Object.</typeparam>
+        /// <param name="xmlByteArray">XML byte array. May not be null.</param>
+        /// <returns>Returns a Object or throws an XML-Exception (see MSDN, XmlSerializer)</returns>
+        public static T FromXmlStream<T>(this System.IO.Stream stream)
+            where T : new()
+        {
+            if (stream == null) throw new ArgumentNullException("stream");
+
+            using (Logging.Log.DebugTraceMethodCallFormat("FromXmlStream<T>", "T = {1}", typeof(T).FullName))
+            {
+                using (var sr = new StreamReader(stream))
+                {
+                    var xml = new XmlSerializer(typeof(T));
+                    return (T)xml.Deserialize(sr);
+                }
+            }
+        }
+
+        /// <summary>
         /// Checks if a enumeration is one of the given values
         /// </summary>
         /// <param name="e">Enum to check.</param>

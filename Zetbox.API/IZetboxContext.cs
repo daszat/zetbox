@@ -20,10 +20,17 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Zetbox.API.Async;
+using System.Xml.Serialization;
 
 namespace Zetbox.API
 {
     [Serializable]
+    [XmlRoot]
+    [XmlInclude(typeof(ZetboxContextDisposedException))]
+    [XmlInclude(typeof(WrongZetboxContextException))]
+    [XmlInclude(typeof(ConcurrencyException))]
+    [XmlInclude(typeof(FKViolationException))]
+    [XmlInclude(typeof(UniqueConstraintViolationException))]
     public class ZetboxContextException
         : Exception
     {
@@ -106,6 +113,9 @@ namespace Zetbox.API
 
         [NonSerialized]
         private IEnumerable<IDataObject> objects;
+
+        [XmlIgnore]
+        [NonSerialized]
         public IEnumerable<IDataObject> Objects
         {
             get

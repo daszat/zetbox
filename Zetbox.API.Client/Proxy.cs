@@ -94,14 +94,43 @@ namespace Zetbox.API.Client
                     request();
                     break;
                 }
-                catch (FaultException<ConcurrencyException> cex)
+                // ConcurrencyException
+                catch (FaultException<ConcurrencyException> ex)
                 {
-                    throw cex.Detail;
+                    throw ex.Detail;
                 }
-                catch (FaultException<InvalidZetboxGeneratedVersionException> vex)
+                catch (ConcurrencyException)
                 {
-                    throw vex.Detail;
+                    throw;
                 }
+                // FKViolationException
+                catch (FaultException<FKViolationException> ex)
+                {
+                    throw ex.Detail;
+                }
+                catch (FKViolationException)
+                {
+                    throw;
+                }
+                // UniqueConstraintViolationException
+                catch (FaultException<UniqueConstraintViolationException> ex)
+                {
+                    throw ex.Detail;
+                }
+                catch (UniqueConstraintViolationException)
+                {
+                    throw;
+                }
+                // InvalidZetboxGeneratedVersionException
+                catch (FaultException<InvalidZetboxGeneratedVersionException> ex)
+                {
+                    throw ex.Detail;
+                }
+                catch (InvalidZetboxGeneratedVersionException)
+                {
+                    throw;
+                }
+                // all other
                 catch (MessageSecurityException)
                 {
                     throw;
@@ -111,14 +140,6 @@ namespace Zetbox.API.Client
                     throw;
                 }
                 catch (AuthenticationException)
-                {
-                    throw;
-                }
-                catch (ConcurrencyException)
-                {
-                    throw;
-                }
-                catch (InvalidZetboxGeneratedVersionException)
                 {
                     throw;
                 }
