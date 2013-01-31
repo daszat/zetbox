@@ -20,18 +20,18 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="FKViolationException" nillable="true" type="tns:FKViolationException" />
-  <xs:complexType name="InvalidZetboxGeneratedVersionException">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/System" base="q2:Exception" />
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="InvalidZetboxGeneratedVersionException" nillable="true" type="tns:InvalidZetboxGeneratedVersionException" />
   <xs:complexType name="UniqueConstraintViolationException">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ZetboxContextException" />
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="UniqueConstraintViolationException" nillable="true" type="tns:UniqueConstraintViolationException" />
+  <xs:complexType name="InvalidZetboxGeneratedVersionException">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/System" base="q2:Exception" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvalidZetboxGeneratedVersionException" nillable="true" type="tns:InvalidZetboxGeneratedVersionException" />
   <xs:simpleType name="OrderByType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="ASC">

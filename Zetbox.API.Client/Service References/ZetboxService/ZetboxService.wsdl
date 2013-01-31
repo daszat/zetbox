@@ -191,7 +191,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_SetObjects_InvalidZetboxGeneratedVersionExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_SetObjects_UniqueConstraintViolationExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -210,7 +210,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_SetObjects_UniqueConstraintViolationExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_SetObjects_InvalidZetboxGeneratedVersionExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -267,7 +267,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_GetList_InvalidZetboxGeneratedVersionExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_GetList_ExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -286,7 +286,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_GetList_ExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_GetList_InvalidZetboxGeneratedVersionExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -655,7 +655,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_InvokeServerMethod_ExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -674,7 +674,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_InvokeServerMethod_ExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -720,13 +720,13 @@
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_SetObjects_FKViolationExceptionFault_Fault" />
         <soap12:fault use="literal" name="FKViolationExceptionFault" namespace="" />
       </wsdl:fault>
-      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
-        <wsp:PolicyReference URI="#ZetboxService_Endpoint_SetObjects_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
-        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
-      </wsdl:fault>
       <wsdl:fault name="UniqueConstraintViolationExceptionFault">
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_SetObjects_UniqueConstraintViolationExceptionFault_Fault" />
         <soap12:fault use="literal" name="UniqueConstraintViolationExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_SetObjects_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
+        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetList">
@@ -739,13 +739,13 @@
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_GetList_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
-        <wsp:PolicyReference URI="#ZetboxService_Endpoint_GetList_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
-        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
-      </wsdl:fault>
       <wsdl:fault name="ExceptionFault">
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_GetList_ExceptionFault_Fault" />
         <soap12:fault use="literal" name="ExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_GetList_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
+        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetListOf">
@@ -838,13 +838,13 @@
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_InvokeServerMethod_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
-        <wsp:PolicyReference URI="#ZetboxService_Endpoint_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
-        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
-      </wsdl:fault>
       <wsdl:fault name="ExceptionFault">
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_InvokeServerMethod_ExceptionFault_Fault" />
         <soap12:fault use="literal" name="ExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
+        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
