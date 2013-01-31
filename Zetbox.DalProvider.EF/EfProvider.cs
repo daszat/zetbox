@@ -51,15 +51,16 @@ namespace Zetbox.DalProvider.Ef
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
+                        var cfg = c.Resolve<ZetboxConfig>();
                         return new EfDataContext(
                             c.Resolve<IMetaDataResolver>(),
                             null,
-                            c.Resolve<ZetboxConfig>(),
+                            cfg,
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
                             c.Resolve<IPerfCounter>(),
-                            c.Resolve<ISqlErrorTranslator>()
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
                             );
                     }
                 })
@@ -78,15 +79,16 @@ namespace Zetbox.DalProvider.Ef
                     lock (_lock)
                     {
                         var param = p.OfType<ConstantParameter>().FirstOrDefault();
+                        var cfg = c.Resolve<ZetboxConfig>();
                         return new EfDataContext(
                             c.Resolve<IMetaDataResolver>(),
                             param != null ? (Zetbox.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
-                            c.Resolve<ZetboxConfig>(),
+                            cfg,
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
                             c.Resolve<IPerfCounter>(),
-                            c.Resolve<ISqlErrorTranslator>()
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
                             );
                     }
                 })
@@ -104,15 +106,16 @@ namespace Zetbox.DalProvider.Ef
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
+                        var cfg = c.Resolve<ZetboxConfig>();
                         var result = new EfDataContext(
                             c.Resolve<CachingMetaDataResolver>(),
                             null,
-                            c.Resolve<ZetboxConfig>(),
+                            cfg,
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
                             c.Resolve<IPerfCounter>(),
-                            c.Resolve<ISqlErrorTranslator>()
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
                             );
                         return result;
                     }

@@ -96,7 +96,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchemaManagement\CheckExpressionVisitor.cs" />
     <Compile Include="SchemaManagement\MigrationFragments\DemoMigrationFragment.cs" />
-    <Compile Include="SqlErrorTranslator.cs" />
+    <Compile Include="SchemaManagement\NpgsqlProvider\PostgresqlErrorTranslator.cs" />
+    <Compile Include="SchemaManagement\SqlProvider\SqlErrorTranslator.cs" />
     <Compile Include="ZetboxService.cs" />
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />

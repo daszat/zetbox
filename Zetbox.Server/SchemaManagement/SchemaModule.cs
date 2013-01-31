@@ -71,6 +71,18 @@ namespace Zetbox.Server.SchemaManagement
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("POSTGRESQL")
                 .InstancePerDependency();
+
+            builder
+                .RegisterType<SchemaManagement.SqlProvider.SqlErrorTranslator>()
+                .As<ISqlErrorTranslator>()
+                .Named<ISqlErrorTranslator>("MSSQL")
+                .SingleInstance();
+
+            builder
+                .RegisterType<SchemaManagement.NpgsqlProvider.PostgresqlErrorTranslator>()
+                .As<ISqlErrorTranslator>()
+                .Named<ISqlErrorTranslator>("POSTGRESQL")
+                .SingleInstance();
         }
     }
 }

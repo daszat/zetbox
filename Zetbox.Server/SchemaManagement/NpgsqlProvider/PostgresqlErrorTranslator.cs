@@ -13,28 +13,23 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.Server
+namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Zetbox.API.Server;
-    using System.Data.SqlClient;
     using Npgsql;
     using Zetbox.API;
 
-    public class SqlErrorTranslator : ISqlErrorTranslator
+    public class PostgresqlErrorTranslator : ISqlErrorTranslator
     {
         public Exception Translate(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException("ex");
 
-            if (ex is SqlException)
-            {
-                return TranslateSqlServerErrors((SqlException)ex);
-            }
-            else if (ex is NpgsqlException)
+            if (ex is NpgsqlException)
             {
                 return TranslateNpgsqlErrors((NpgsqlException)ex);
             }
@@ -51,19 +46,6 @@ namespace Zetbox.Server
                 return new UniqueConstraintViolationException();
             }
             else if (ex.Errors.OfType<NpgsqlError>().Any(e => e.Code == "23503"))
-            {
-                return new FKViolationException();
-            }
-            return ex;
-        }
-
-        private Exception TranslateSqlServerErrors(SqlException ex)
-        {
-            if (ex.Errors.OfType<SqlError>().Any(e => e.Number == 2601))
-            {
-                return new UniqueConstraintViolationException();
-            }
-            else if (ex.Errors.OfType<SqlError>().Any(e => e.Number == 547))
             {
                 return new FKViolationException();
             }
