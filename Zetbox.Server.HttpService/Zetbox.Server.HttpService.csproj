@@ -208,6 +208,7 @@ xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\Server"
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\Client"
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Bootstrapper" "$(ProjectDir)\Bootstrapper"
+del "$(ProjectDir)\bin\Zetbox.Objects.*"
     </PostBuildEvent>
     <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
 bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Bootstrapper} "$(ProjectDir)"'
