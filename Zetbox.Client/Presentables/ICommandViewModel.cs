@@ -424,9 +424,12 @@ namespace Zetbox.Client.Presentables
 
     public abstract class ItemCommandViewModel<T> : CommandViewModel
     {
-        public ItemCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel progressDisplayer, string label, string tooltip)
+        private readonly bool _ignoreOtherItemTypes;
+
+        public ItemCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel progressDisplayer, string label, string tooltip, bool ignoreOtherItemTypes = true)
             : base(appCtx, dataCtx, progressDisplayer, label, tooltip)
         {
+            _ignoreOtherItemTypes = ignoreOtherItemTypes;
         }
 
         public override bool CanExecute(object data)
@@ -437,7 +440,8 @@ namespace Zetbox.Client.Presentables
             }
             else if (data is IEnumerable)
             {
-                return ((IEnumerable)data).OfType<T>().Count() > 0;
+                var numT = ((IEnumerable)data).OfType<T>().Count();
+                return numT > 0 && (_ignoreOtherItemTypes || ((IEnumerable<T>)data).Count() == numT);
             }
             else return (data is T);
         }
