@@ -24,13 +24,88 @@ using System.Xml.Serialization;
 
 namespace Zetbox.API
 {
+    #region Serialization helper
     [Serializable]
-    [XmlRoot]
-    [XmlInclude(typeof(ZetboxContextDisposedException))]
-    [XmlInclude(typeof(WrongZetboxContextException))]
-    [XmlInclude(typeof(ConcurrencyException))]
-    [XmlInclude(typeof(FKViolationException))]
-    [XmlInclude(typeof(UniqueConstraintViolationException))]
+    [XmlRoot(Namespace = "http://dasz.at/zetbox/ZetboxContextExceptionSerializationHelper")]
+    [XmlInclude(typeof(ConcurrencyExceptionSerializationHelper))]
+    [XmlInclude(typeof(FKViolationExceptionSerializationHelper))]
+    [XmlInclude(typeof(UniqueConstraintViolationExceptionSerializationHelper))]
+    public class ZetboxContextExceptionSerializationHelper
+    {
+        public ZetboxContextExceptionSerializationHelper()
+        {
+        }
+
+        public ZetboxContextExceptionSerializationHelper(Exception ex)
+        {
+            if (ex == null) throw new ArgumentNullException("ex");
+            this.Message = ex.Message;
+        }
+
+        public string Message { get; set; }
+
+        public virtual ZetboxContextException ToException()
+        {
+            throw new NotImplementedException("Must be implemented in derived classes");
+        }
+    }
+
+    public class ConcurrencyExceptionSerializationHelper : ZetboxContextExceptionSerializationHelper
+    {
+        public ConcurrencyExceptionSerializationHelper()
+        {
+
+        }
+        
+        public ConcurrencyExceptionSerializationHelper(Exception ex)
+            : base(ex)
+        {
+        }
+
+        public override ZetboxContextException ToException()
+        {
+            return new ConcurrencyException(Message);
+        }
+    }
+    
+    public class FKViolationExceptionSerializationHelper : ZetboxContextExceptionSerializationHelper
+    {
+        public FKViolationExceptionSerializationHelper()
+        {
+
+        }
+        
+        public FKViolationExceptionSerializationHelper(Exception ex)
+            : base(ex)
+        {
+        }
+
+        public override ZetboxContextException ToException()
+        {
+            return new FKViolationException(Message);
+        }
+    }
+
+    public class UniqueConstraintViolationExceptionSerializationHelper : ZetboxContextExceptionSerializationHelper
+    {
+        public UniqueConstraintViolationExceptionSerializationHelper()
+        {
+
+        }
+        
+        public UniqueConstraintViolationExceptionSerializationHelper(Exception ex)
+            : base(ex)
+        {
+        }
+        public override ZetboxContextException ToException()
+        {
+            return new UniqueConstraintViolationException(Message);
+        }
+    }
+
+    #endregion
+
+    [Serializable]
     public class ZetboxContextException
         : Exception
     {
@@ -52,6 +127,11 @@ namespace Zetbox.API
         protected ZetboxContextException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
+        }
+
+        public virtual void ToXmlStream(System.IO.Stream s)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -153,6 +233,11 @@ namespace Zetbox.API
         {
             this.objects = objects;
         }
+
+        public override void ToXmlStream(System.IO.Stream s)
+        {
+            new ConcurrencyExceptionSerializationHelper(this).ToXmlStream(s);
+        }
     }
 
     [Serializable]
@@ -185,6 +270,11 @@ namespace Zetbox.API
             : base(info, context)
         {
         }
+
+        public override void ToXmlStream(System.IO.Stream s)
+        {
+            new FKViolationExceptionSerializationHelper(this).ToXmlStream(s);
+        }
     }
 
     [Serializable]
@@ -216,6 +306,11 @@ namespace Zetbox.API
         protected UniqueConstraintViolationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
+        }
+
+        public override void ToXmlStream(System.IO.Stream s)
+        {
+            new UniqueConstraintViolationExceptionSerializationHelper(this).ToXmlStream(s);
         }
     }
 
