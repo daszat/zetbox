@@ -46,6 +46,8 @@ namespace Zetbox.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(ConcurrencyException))]
+        [FaultContract(typeof(FKViolationException))]
+        [FaultContract(typeof(UniqueConstraintViolationException))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests);
 

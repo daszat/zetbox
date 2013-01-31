@@ -146,6 +146,70 @@ namespace Zetbox.API
         }
     }
 
+    [Serializable]
+    public class FKViolationException
+        : ZetboxContextException
+    {
+        private const string DEFAULT_MESSAGE = "At least one foreign key constraint has been violated";
+
+        public FKViolationException()
+            : base(DEFAULT_MESSAGE)
+        {
+        }
+
+        public FKViolationException(string message)
+            : base(message)
+        {
+        }
+
+        public FKViolationException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        public FKViolationException(Exception inner)
+            : base(DEFAULT_MESSAGE, inner)
+        {
+        }
+
+        protected FKViolationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    public class UniqueConstraintViolationException
+        : ZetboxContextException
+    {
+        private const string DEFAULT_MESSAGE = "At least one unique constraint has been violated";
+
+        public UniqueConstraintViolationException()
+            : base(DEFAULT_MESSAGE)
+        {
+        }
+
+        public UniqueConstraintViolationException(string message)
+            : base(message)
+        {
+        }
+
+        public UniqueConstraintViolationException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        public UniqueConstraintViolationException(Exception inner)
+            : base(DEFAULT_MESSAGE, inner)
+        {
+        }
+
+        protected UniqueConstraintViolationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
+
     public interface IZetboxContextDebugger
     {
         void Created(IZetboxContext ctx);

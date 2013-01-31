@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="LUvYOtoDqq/AFWPBCguT9507Cgo=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="f9zYhO/TbE7HyyemdQq8awVZZvI=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="wsHttpBinding" name="ZetboxService_Endpoint">
       <properties>

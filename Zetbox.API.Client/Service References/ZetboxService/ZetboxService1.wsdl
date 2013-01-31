@@ -19,11 +19,17 @@
   <wsdl:message name="IZetboxService_SetObjects_ExceptionFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:Exception" />
   </wsdl:message>
-  <wsdl:message name="IZetboxService_SetObjects_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q2:InvalidZetboxGeneratedVersionException" />
-  </wsdl:message>
   <wsdl:message name="IZetboxService_SetObjects_ConcurrencyExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q3:ConcurrencyException" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q2:ConcurrencyException" />
+  </wsdl:message>
+  <wsdl:message name="IZetboxService_SetObjects_FKViolationExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q3:FKViolationException" />
+  </wsdl:message>
+  <wsdl:message name="IZetboxService_SetObjects_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q4:InvalidZetboxGeneratedVersionException" />
+  </wsdl:message>
+  <wsdl:message name="IZetboxService_SetObjects_UniqueConstraintViolationExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q5:UniqueConstraintViolationException" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_GetList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetList" />
@@ -31,11 +37,11 @@
   <wsdl:message name="IZetboxService_GetList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetListResponse" />
   </wsdl:message>
-  <wsdl:message name="IZetboxService_GetList_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:Exception" />
-  </wsdl:message>
   <wsdl:message name="IZetboxService_GetList_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q5:InvalidZetboxGeneratedVersionException" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q6:InvalidZetboxGeneratedVersionException" />
+  </wsdl:message>
+  <wsdl:message name="IZetboxService_GetList_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/System" name="detail" element="q7:Exception" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_GetListOf_InputMessage">
     <wsdl:part name="parameters" element="tns:GetListOf" />
@@ -44,10 +50,10 @@
     <wsdl:part name="parameters" element="tns:GetListOfResponse" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_GetListOf_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q6:InvalidZetboxGeneratedVersionException" />
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q8:InvalidZetboxGeneratedVersionException" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_GetListOf_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/System" name="detail" element="q7:Exception" />
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/System" name="detail" element="q9:Exception" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_FetchRelation_InputMessage">
     <wsdl:part name="parameters" element="tns:FetchRelation" />
@@ -56,10 +62,10 @@
     <wsdl:part name="parameters" element="tns:FetchRelationResponse" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_FetchRelation_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q8:InvalidZetboxGeneratedVersionException" />
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q10:InvalidZetboxGeneratedVersionException" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_FetchRelation_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/System" name="detail" element="q9:Exception" />
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/System" name="detail" element="q11:Exception" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_GetBlobStream_InputMessage">
     <wsdl:part name="parameters" element="tns:GetBlobStream" />
@@ -67,11 +73,11 @@
   <wsdl:message name="IZetboxService_GetBlobStream_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetBlobStreamResponse" />
   </wsdl:message>
-  <wsdl:message name="IZetboxService_GetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q10:InvalidZetboxGeneratedVersionException" />
-  </wsdl:message>
   <wsdl:message name="IZetboxService_GetBlobStream_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/System" name="detail" element="q11:Exception" />
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/System" name="detail" element="q12:Exception" />
+  </wsdl:message>
+  <wsdl:message name="IZetboxService_GetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q13:InvalidZetboxGeneratedVersionException" />
   </wsdl:message>
   <wsdl:message name="BlobMessage">
     <wsdl:part name="parameters" element="tns:BlobMessage" />
@@ -87,11 +93,11 @@
   <wsdl:message name="BlobResponse_Headers">
     <wsdl:part name="ID" element="tns:ID" />
   </wsdl:message>
-  <wsdl:message name="IZetboxService_SetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q12:InvalidZetboxGeneratedVersionException" />
-  </wsdl:message>
   <wsdl:message name="IZetboxService_SetBlobStream_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/System" name="detail" element="q13:Exception" />
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/System" name="detail" element="q14:Exception" />
+  </wsdl:message>
+  <wsdl:message name="IZetboxService_SetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q15:InvalidZetboxGeneratedVersionException" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_InvokeServerMethod_InputMessage">
     <wsdl:part name="parameters" element="tns:InvokeServerMethod" />
@@ -100,24 +106,26 @@
     <wsdl:part name="parameters" element="tns:InvokeServerMethodResponse" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q14:InvalidZetboxGeneratedVersionException" />
+    <wsdl:part xmlns:q16="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q16:InvalidZetboxGeneratedVersionException" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_InvokeServerMethod_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/System" name="detail" element="q15:Exception" />
+    <wsdl:part xmlns:q17="http://schemas.datacontract.org/2004/07/System" name="detail" element="q17:Exception" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="false" name="IZetboxService">
     <wsdl:operation name="SetObjects">
       <wsdl:input wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetObjects" message="tns:IZetboxService_SetObjects_InputMessage" />
       <wsdl:output wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsResponse" message="tns:IZetboxService_SetObjects_OutputMessage" />
       <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsExceptionFault" name="ExceptionFault" message="tns:IZetboxService_SetObjects_ExceptionFault_FaultMessage" />
-      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_SetObjects_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsConcurrencyExceptionFault" name="ConcurrencyExceptionFault" message="tns:IZetboxService_SetObjects_ConcurrencyExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsFKViolationExceptionFault" name="FKViolationExceptionFault" message="tns:IZetboxService_SetObjects_FKViolationExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_SetObjects_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsUniqueConstraintViolationExceptionFault" name="UniqueConstraintViolationExceptionFault" message="tns:IZetboxService_SetObjects_UniqueConstraintViolationExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetList">
       <wsdl:input wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetList" message="tns:IZetboxService_GetList_InputMessage" />
       <wsdl:output wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetListResponse" message="tns:IZetboxService_GetList_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetListExceptionFault" name="ExceptionFault" message="tns:IZetboxService_GetList_ExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetListInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_GetList_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetListExceptionFault" name="ExceptionFault" message="tns:IZetboxService_GetList_ExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetListOf">
       <wsdl:input wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetListOf" message="tns:IZetboxService_GetListOf_InputMessage" />
@@ -134,14 +142,14 @@
     <wsdl:operation name="GetBlobStream">
       <wsdl:input wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetBlobStream" message="tns:IZetboxService_GetBlobStream_InputMessage" />
       <wsdl:output wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetBlobStreamResponse" message="tns:IZetboxService_GetBlobStream_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetBlobStreamInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_GetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetBlobStreamExceptionFault" name="ExceptionFault" message="tns:IZetboxService_GetBlobStream_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetBlobStreamInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_GetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetBlobStream">
       <wsdl:input wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStream" name="BlobMessage" message="tns:BlobMessage" />
       <wsdl:output wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamResponse" name="BlobResponse" message="tns:BlobResponse" />
-      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_SetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamExceptionFault" name="ExceptionFault" message="tns:IZetboxService_SetBlobStream_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_SetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="InvokeServerMethod">
       <wsdl:input wsaw:Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethod" message="tns:IZetboxService_InvokeServerMethod_InputMessage" />

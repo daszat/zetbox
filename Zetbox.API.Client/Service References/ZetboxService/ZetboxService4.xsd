@@ -2,12 +2,6 @@
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Zetbox.API" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Zetbox.API" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:6666/ZetboxService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:import schemaLocation="http://localhost:6666/ZetboxService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:complexType name="InvalidZetboxGeneratedVersionException">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="InvalidZetboxGeneratedVersionException" nillable="true" type="tns:InvalidZetboxGeneratedVersionException" />
   <xs:complexType name="ConcurrencyException">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ZetboxContextException" />
@@ -16,10 +10,28 @@
   <xs:element name="ConcurrencyException" nillable="true" type="tns:ConcurrencyException" />
   <xs:complexType name="ZetboxContextException">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/System" base="q2:Exception" />
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ZetboxContextException" nillable="true" type="tns:ZetboxContextException" />
+  <xs:complexType name="FKViolationException">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ZetboxContextException" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FKViolationException" nillable="true" type="tns:FKViolationException" />
+  <xs:complexType name="InvalidZetboxGeneratedVersionException">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/System" base="q2:Exception" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvalidZetboxGeneratedVersionException" nillable="true" type="tns:InvalidZetboxGeneratedVersionException" />
+  <xs:complexType name="UniqueConstraintViolationException">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ZetboxContextException" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UniqueConstraintViolationException" nillable="true" type="tns:UniqueConstraintViolationException" />
   <xs:simpleType name="OrderByType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="ASC">
