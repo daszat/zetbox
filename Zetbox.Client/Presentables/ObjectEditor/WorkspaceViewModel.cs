@@ -192,7 +192,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         WorkspaceViewModelResources.DeleteCommand_Tooltip,
                         Delete,
                         CanDelete,
-                        null);
+                        ()=> WorkspaceViewModelResources.DeleteCommand_Reason);
                 }
                 return _DeleteCommand;
             }

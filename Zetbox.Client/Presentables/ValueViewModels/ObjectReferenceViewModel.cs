@@ -50,7 +50,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 _allowClear = false;
                 _allowCreateNewItem = false;
                 _allowCreateNewItemOnSelect = false;
-                _allowDelete = false;
                 _allowSelectValue = false;
             }
             else if (relEnd == null && !mdl.IsReadOnly)
@@ -59,7 +58,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 _allowClear = true;
                 _allowCreateNewItem = false;
                 _allowCreateNewItemOnSelect = false;
-                _allowDelete = false;
                 _allowSelectValue = true;
             }
             else
@@ -164,25 +162,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     _allowClear = value;
                     OnPropertyChanged("Clear");
-                }
-            }
-        }
-
-        // Not supported by any command yet
-        private bool _allowDelete = false;
-        public bool AllowDelete
-        {
-            get
-            {
-                if (DataContext.IsElevatedMode) return true;
-                return _allowDelete;
-            }
-            set
-            {
-                if (_allowDelete != value)
-                {
-                    _allowDelete = value;
-                    OnPropertyChanged("AllowDelete");
                 }
             }
         }

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AbortCommand_Name" xml:space="preserve">
     <value>Abbruch</value>
@@ -133,7 +133,7 @@
     <value>Löschen</value>
   </data>
   <data name="DeleteCommand_Tooltip" xml:space="preserve">
-    <value>Löscht das aktuelle Objekt</value>
+    <value>Löscht den aktuellen Datensatz</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Arbeitsbereich</value>
@@ -164,5 +164,8 @@
   </data>
   <data name="ConcurrencyException_Message" xml:space="preserve">
     <value>Mindestens ein Datensatz wurde zwischenzeitlich geändert. Bitte schließen Sie den Arbeitsbereich und führen Sie die Änderungen erneut durch.</value>
+  </data>
+  <data name="DeleteCommand_Reason" xml:space="preserve">
+    <value>Sie haben keine Berechtigung diesen Datensatz zu löschen</value>
   </data>
 </root>

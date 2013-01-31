@@ -132,7 +132,6 @@ namespace Zetbox.Client.Presentables.FilterViewModels
                                     var objRefMdl = (ObjectReferenceViewModel)mdl;
                                     objRefMdl.AllowCreateNewItem = false;
                                     objRefMdl.AllowCreateNewItemOnSelect = false;
-                                    objRefMdl.AllowDelete = false;
                                 }
                                 return mdl;
                             })
