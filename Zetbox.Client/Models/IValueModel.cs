@@ -72,7 +72,7 @@ namespace Zetbox.Client.Models
         /// Returns true, if a ViewModel or other users should report errors.
         /// </summary>
         /// <remarks>
-        /// A property value model whould return false if the object has been deleted
+        /// A property value model would return false if the object has been deleted.
         /// </remarks>
         bool ReportErrors { get; }
 

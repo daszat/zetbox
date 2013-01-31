@@ -24,14 +24,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Linq;
     using System.Linq.Dynamic;
     using System.Text;
-
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.Client.Models;
     using Zetbox.App.GUI;
-    using Zetbox.API.Async;
+    using Zetbox.Client.Models;
 
     public class CompoundListViewModel
         : ValueViewModel<IReadOnlyObservableList<CompoundObjectViewModel>, IList<ICompoundObject>>, IValueListViewModel<CompoundObjectViewModel, IReadOnlyObservableList<CompoundObjectViewModel>>
@@ -118,10 +117,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public override IReadOnlyObservableList<CompoundObjectViewModel> ValueAsync
         {
-            get 
+            get
             {
                 GetValueFromModel();
-                return _valueCache; 
+                return _valueCache;
             }
         }
 

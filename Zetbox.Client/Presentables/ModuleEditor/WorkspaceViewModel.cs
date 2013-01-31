@@ -100,30 +100,30 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     var lst = new ObservableCollection<ViewModel>();
 
                     InstanceListViewModel lstMdl;
-                    
+
                     // Object Classes
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
-                        typeof(ObjectClass).GetObjectClass(FrozenContext), 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
+                        typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ObjectClass>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
                     // Interface
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Interface).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Interface>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
                     // Enums
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Enumeration).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Enumeration>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
                     // CompoundObject
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(CompoundObject).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<CompoundObject>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
@@ -138,7 +138,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lst.Add(lstMdl);
 
                     // Assembly
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Assembly).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Assembly>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
@@ -150,7 +150,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                             foreach (var mdl in i)
                             {
                                 var ctx = ctxFactory(ClientIsolationLevel.PrefereClientData);
-                                
+
                                 var a = ctx.Find<Assembly>(mdl.ID);
                                 var workspaceShown = a.RegenerateTypeRefs();
 
@@ -166,14 +166,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lst.Add(lstMdl);
 
                     // TypeRefs
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(TypeRef).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<TypeRef>().Where(i => i.Assembly.Module == CurrentModule).OrderBy(i => i.FullName));
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
                     // Application
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Application).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Application>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
@@ -184,21 +184,21 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lst.Add(navScreenMdl);
 
                     // ViewDescriptor
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(ViewDescriptor).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ViewDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.ControlKind.Name));
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
                     // ViewModelDescriptor
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(ViewModelDescriptor).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ViewModelDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
                     // ServiceDescriptor
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(ServiceDescriptor).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ServiceDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
@@ -209,14 +209,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lst.Add(ctrlKindMdl);
 
                     // Icons
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Icon).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Icon>().Where(i => i.Module == CurrentModule).OrderBy(i => i.IconFile));
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
                     // Relation
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Relation).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Relation>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
@@ -224,7 +224,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lst.Add(lstMdl);
 
                     // Sequences
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, 
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Sequence).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Sequence>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
@@ -247,7 +247,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             lstMdl.AllowDelete = true;
             lstMdl.ViewMethod = InstanceListViewMethod.Details;
             var toRemove = lstMdl.Filter.SingleOrDefault(f => f.ValueSource != null && f.ValueSource.Expression == "Module");
-            if(toRemove != null)
+            if (toRemove != null)
                 lstMdl.FilterList.RemoveFilter(toRemove);
             lstMdl.EndInit();
         }
@@ -345,7 +345,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         public void CreateNewModule()
         {
             var newCtx = ctxFactory(ClientIsolationLevel.PrefereClientData);
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx ,null);
+            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
             var newObj = newCtx.Create<Module>();
 
             newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newObj));
