@@ -400,8 +400,8 @@ namespace Zetbox.API.Server
                         Expression.NotEqual(right, Expression.Constant(null)),
                         Expression.MakeBinary(
                             b.NodeType,
-                            Expression.MakeMemberAccess(left, b.Left.Type.FindFirstOrDefaultMember("ID")),
-                            Expression.MakeMemberAccess(right, b.Right.Type.FindFirstOrDefaultMember("ID")))
+                            Expression.MakeMemberAccess(left, left.Type.FindFirstOrDefaultMember("ID")),
+                            Expression.MakeMemberAccess(right, right.Type.FindFirstOrDefaultMember("ID")))
                         )
                     );
             }
