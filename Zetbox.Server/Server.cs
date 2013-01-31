@@ -230,6 +230,7 @@ namespace Zetbox.Server
 
                 var identities = ctx.GetQuery<Zetbox.App.Base.Identity>().ToLookup(k => k.UserName.ToUpper());
                 var everyone = Zetbox.NamedObjects.Base.Groups.Everyone.Find(ctx);
+                if (everyone == null) throw new InvalidOperationException("The group 'Everyone' was not found in the database! Abording");
 
                 foreach (var user in userList)
                 {
