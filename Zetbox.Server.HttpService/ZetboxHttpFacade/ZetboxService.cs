@@ -93,7 +93,16 @@ namespace Zetbox.Server.HttpService
                 string username;
                 try
                 {
-                    username = scope.Resolve<IIdentityResolver>().GetCurrent().DisplayName;
+                    var id = scope.Resolve<IIdentityResolver>().GetCurrent();
+                    if (id != null)
+                    {
+                        username = id.DisplayName;
+                    }
+                    else
+                    {
+                        Log.Error("Error while trying to resolve user - not found");
+                        username = "(unknown)";
+                    }
                 }
                 catch (Exception ex)
                 {
