@@ -36,23 +36,24 @@ namespace Zetbox.Server
         public static void ThrowFaultException(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException("ex");
-            Logging.Log.Error("Error in Facade: " + ex.Message, ex);
+            var msg = ex.Message;
+            Logging.Log.Error("Error in Facade: " + msg, ex);
 
             if (ex is ConcurrencyException)
             {
-                throw new FaultException<ConcurrencyException>((ConcurrencyException)ex);
+                throw new FaultException<ConcurrencyException>((ConcurrencyException)ex, msg);
             }
             else if (ex is FKViolationException)
             {
-                throw new FaultException<FKViolationException>((FKViolationException)ex);
+                throw new FaultException<FKViolationException>((FKViolationException)ex, msg);
             }
             else if (ex is UniqueConstraintViolationException)
             {
-                throw new FaultException<UniqueConstraintViolationException>((UniqueConstraintViolationException)ex);
+                throw new FaultException<UniqueConstraintViolationException>((UniqueConstraintViolationException)ex, msg);
             }
             else if (ex is InvalidZetboxGeneratedVersionException)
             {
-                throw new FaultException<InvalidZetboxGeneratedVersionException>((InvalidZetboxGeneratedVersionException)ex);
+                throw new FaultException<InvalidZetboxGeneratedVersionException>((InvalidZetboxGeneratedVersionException)ex, msg);
             }
             else
             {
@@ -63,7 +64,7 @@ namespace Zetbox.Server
                 }
                 else
                 {
-                    throw new FaultException(ex.Message);
+                    throw new FaultException(msg);
                 }
 #else
                 throw new FaultException("An error ocurred while processing this request.");
