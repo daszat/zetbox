@@ -168,4 +168,16 @@
   <data name="DeleteCommand_Reason" xml:space="preserve">
     <value>Sie haben keine Berechtigung diesen Datensatz zu löschen</value>
   </data>
+  <data name="FKViolationException_Caption" xml:space="preserve">
+    <value>Verweis Fehler</value>
+  </data>
+  <data name="FKViolationException_Message" xml:space="preserve">
+    <value>Ein Datensatz kann nicht gelöscht oder geändert werden da ein anderer Datensatz von ihm abhängt.</value>
+  </data>
+  <data name="UniqueConstraintViolationException_Caption" xml:space="preserve">
+    <value>Werte nicht eindeutig</value>
+  </data>
+  <data name="UniqueConstraintViolationException_Message" xml:space="preserve">
+    <value>Mindestens ein Wert ist nicht eindeutig</value>
+  </data>
 </root>

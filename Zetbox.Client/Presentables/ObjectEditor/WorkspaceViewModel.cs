@@ -346,6 +346,16 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         ViewModelFactory.ShowMessage(WorkspaceViewModelResources.ConcurrencyException_Message, WorkspaceViewModelResources.ConcurrencyException_Caption);
                         return false;
                     }
+                    else if (ex.GetInnerException() is FKViolationException)
+                    {
+                        ViewModelFactory.ShowMessage(WorkspaceViewModelResources.FKViolationException_Caption, WorkspaceViewModelResources.FKViolationException_Message);
+                        return false;
+                    }
+                    else if (ex.GetInnerException() is UniqueConstraintViolationException)
+                    {
+                        ViewModelFactory.ShowMessage(WorkspaceViewModelResources.UniqueConstraintViolationException_Caption, WorkspaceViewModelResources.UniqueConstraintViolationException_Message);
+                        return false;
+                    }
                     else
                     {
                         throw;

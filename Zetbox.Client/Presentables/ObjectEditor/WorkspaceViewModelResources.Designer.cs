@@ -142,6 +142,24 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Usage Error.
+        /// </summary>
+        internal static string FKViolationException_Caption {
+            get {
+                return ResourceManager.GetString("FKViolationException_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The object cannot be deleted or updated because is is used by another object..
+        /// </summary>
+        internal static string FKViolationException_Message {
+            get {
+                return ResourceManager.GetString("FKViolationException_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Objects:.
         /// </summary>
         internal static string ItemsLabel {
@@ -192,6 +210,24 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
         internal static string SaveCommand_Tooltip {
             get {
                 return ResourceManager.GetString("SaveCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unique Error.
+        /// </summary>
+        internal static string UniqueConstraintViolationException_Caption {
+            get {
+                return ResourceManager.GetString("UniqueConstraintViolationException_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one value is not unique..
+        /// </summary>
+        internal static string UniqueConstraintViolationException_Message {
+            get {
+                return ResourceManager.GetString("UniqueConstraintViolationException_Message", resourceCulture);
             }
         }
         

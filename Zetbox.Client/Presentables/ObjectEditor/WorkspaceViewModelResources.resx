@@ -144,6 +144,12 @@
   <data name="DeleteCommand_Tooltip" xml:space="preserve">
     <value>Deletes the current object</value>
   </data>
+  <data name="FKViolationException_Caption" xml:space="preserve">
+    <value>Usage Error</value>
+  </data>
+  <data name="FKViolationException_Message" xml:space="preserve">
+    <value>The object cannot be deleted or updated because is is used by another object.</value>
+  </data>
   <data name="ItemsLabel" xml:space="preserve">
     <value>Objects:</value>
   </data>
@@ -161,6 +167,12 @@
   </data>
   <data name="SaveCommand_Tooltip" xml:space="preserve">
     <value>Saves outstanding changes to the data store.</value>
+  </data>
+  <data name="UniqueConstraintViolationException_Caption" xml:space="preserve">
+    <value>Unique Error</value>
+  </data>
+  <data name="UniqueConstraintViolationException_Message" xml:space="preserve">
+    <value>At least one value is not unique.</value>
   </data>
   <data name="VerifyContextCommand_Name" xml:space="preserve">
     <value>Verify</value>
