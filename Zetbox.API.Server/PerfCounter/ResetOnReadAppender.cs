@@ -29,7 +29,7 @@ namespace Zetbox.API.Server.PerfCounter
     {
         #region Autofac Module
         [Feature]
-        [Description("PerfCounter writing to the Windows Performance Monitor")]
+        [Description("PerfCounter: read & save data internal, but reset global data.")]
         public class Module : Autofac.Module
         {
             protected override void Load(ContainerBuilder moduleBuilder)
