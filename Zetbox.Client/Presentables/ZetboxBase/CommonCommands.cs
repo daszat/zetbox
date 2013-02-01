@@ -63,7 +63,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public ActivateDataObjectCommand(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip,
-            ObjectClass type, bool useSeparateContext)
+            bool useSeparateContext)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             this.UseSeparateContext = useSeparateContext;
@@ -133,17 +133,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public class OpenDataObjectCommand : ActivateDataObjectCommand
     {
-        public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext);
+        public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, bool useSeparateContext);
 
         protected readonly Func<IZetboxContext> ctxFactory;
         protected IOpenCommandParameter Parameter { get { return Parent as IOpenCommandParameter; } }
 
         public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
-            IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext
+            IZetboxContext dataCtx, ViewModel parent, bool useSeparateContext
             )
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip, type, useSeparateContext)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip, useSeparateContext)
         {
             this.ctxFactory = ctxFactory;
+            if (Parameter != null)
+                Parameter.PropertyChanged += OnParameterChanged;
         }
 
         public override System.Drawing.Image Icon
@@ -168,26 +170,35 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public override bool CanExecute(object data)
         {
             return Parameter != null
-                ? Parameter.AllowOpen
-                    && Parameter.SelectedItems != null
-                    && Parameter.SelectedItems.Count() > 0
-                    && Parameter.SelectedItems.All(vm => ViewModelFactory.CanShowModel(vm))
-                : true;
+                && Parameter.AllowOpen
+                && Parameter.SelectedItems != null
+                && Parameter.SelectedItems.Count() > 0
+                && Parameter.SelectedItems.All(vm => ViewModelFactory.CanShowModel(vm));
         }
 
         protected override void DoExecute(object data)
         {
+            var vModels = GetViewModels().ToList();
             if (UseSeparateContext)
             {
                 var newCtx = ctxFactory();
-                ActivateForeignItems(ViewModelFactory, newCtx, GetViewModels().Select(dovm => dovm.Object), RequestedWorkspaceKind, RequestedEditorKind, OnItemsOpened);
+                ActivateForeignItems(ViewModelFactory, newCtx, vModels.Select(dovm => dovm.Object), RequestedWorkspaceKind, RequestedEditorKind, OnItemsOpened);
             }
             else
             {
-                foreach (var vm in GetViewModels())
+                foreach (var vm in vModels)
                 {
                     ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, vm, IsInlineEditable);
                 }
+                OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), vModels);
+            }
+        }
+
+        private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "AllowOpen" || e.PropertyName == "SelectedItems")
+            {
+                OnCanExecuteChanged();
             }
         }
     }
@@ -386,7 +397,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public NewDataObjectCommand(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext,
             Func<IZetboxContext> ctxFactory)
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, type, useSeparateContext)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, useSeparateContext)
         {
             if (this.Parameter != null)
                 this.Parameter.PropertyChanged += OnParameterChanged;

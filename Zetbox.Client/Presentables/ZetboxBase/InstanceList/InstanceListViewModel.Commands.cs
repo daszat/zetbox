@@ -27,7 +27,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.FilterViewModels;
 
-    public partial class InstanceListViewModel : IRefreshCommandListener, IDeleteCommandParameter, INewCommandParameter
+    public partial class InstanceListViewModel
+        : IRefreshCommandListener, IDeleteCommandParameter, INewCommandParameter, IOpenCommandParameter
     {
         #region Commands
         protected override ObservableCollection<ICommandViewModel> CreateCommands()
@@ -81,20 +82,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private ICommandViewModel _OpenCommand;
+        private OpenDataObjectCommand _OpenCommand;
         public ICommandViewModel OpenCommand
         {
             get
             {
                 if (_OpenCommand == null)
                 {
-                    _OpenCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
+                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        CommonCommandsResources.OpenDataObjectCommand_Name,
-                        CommonCommandsResources.OpenDataObjectCommand_Tooltip,
-                        OpenObjects);
-                    _OpenCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
+                        workingCtxFactory != null);
+
+                    _OpenCommand.ItemsOpened += OnItemsOpened;
                 }
                 return _OpenCommand;
             }

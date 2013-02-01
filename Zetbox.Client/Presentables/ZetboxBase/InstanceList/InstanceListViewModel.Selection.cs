@@ -15,6 +15,7 @@
 
 namespace Zetbox.Client.Presentables.ZetboxBase
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
 
@@ -34,9 +35,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems
+        {
+            get { return SelectedItems; }
+        }
+
+
         void _selectedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("SelectedItem");
+            OnPropertyChanged("SelectedItems");
             OnPropertyChanged("SelectedDetailItem");
         }
 

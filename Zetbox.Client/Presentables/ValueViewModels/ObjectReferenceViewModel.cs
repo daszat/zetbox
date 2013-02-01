@@ -33,7 +33,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
-        : ValueViewModel<DataObjectViewModel, IDataObject>, INewCommandParameter
+        : ValueViewModel<DataObjectViewModel, IDataObject>, INewCommandParameter, IOpenCommandParameter
     {
         public new delegate ObjectReferenceViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -212,12 +212,23 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     _openReferenceCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        ReferencedClass,
                         false);
                 }
                 return _openReferenceCommand;
             }
         }
+
+        bool IOpenCommandParameter.AllowOpen { get { return true; } }
+        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems
+        {
+            get
+            {
+                return ValueAsync == null
+                    ? Enumerable.Empty<ViewModel>()
+                    : new[] { ValueAsync };
+            }
+        }
+
         #endregion
 
         #region CreateNewItemAndSetValue
@@ -321,9 +332,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected override void OnPropertyChanged(string propertyName)
         {
-            if (propertyName == "Value")
+            switch (propertyName)
             {
-                ClearValueCache();
+                case "ValueAsync":
+                    OnPropertyChanged("SelectedItems");
+                    break;
+                case "Value":
+                    ClearValueCache();
+                    break;
+                default:
+                    break;
             }
             base.OnPropertyChanged(propertyName);
         }

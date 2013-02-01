@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public class ControlKindHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter
+    public class ControlKindHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter, IOpenCommandParameter
     {
         public new delegate ControlKindHierarchyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
 
@@ -119,7 +119,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        typeof(ControlKind).GetObjectClass(FrozenContext),
                         true);
                 }
                 return _OpenCommand;
@@ -173,5 +172,10 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
         #endregion
 
+        #region IOpenCommandParameter members
+        bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
+        bool IOpenCommandParameter.AllowOpen { get { return true; } }
+        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
+        #endregion
     }
 }

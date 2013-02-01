@@ -310,22 +310,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         #endregion
 
         #region Opening items
-        public void OpenObjects(IEnumerable<DataObjectViewModel> objects)
-        {
-            if (objects == null) throw new ArgumentNullException("objects");
-            if (workingCtxFactory == null)
-            {
-                foreach (var item in objects)
-                {
-                    ActivateItem(item);
-                }
-                OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), objects);
-            }
-            else
-            {
-                ActivateDataObjectCommand.ActivateForeignItems(ViewModelFactory, workingCtxFactory(), objects.Select(vm => vm.Object), RequestedWorkspaceKind, RequestedEditorKind, OnItemsOpened);
-            }
-        }
 
         public delegate void ItemsOpenedHandler(ViewModel sender, IEnumerable<DataObjectViewModel> objects);
 
@@ -346,16 +330,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public delegate void ItemsDefaultActionHandler(InstanceListViewModel sender, IEnumerable<DataObjectViewModel> objects);
         public event ItemsDefaultActionHandler ItemsDefaultAction = null;
 
-        public void ExecItemsDefaultAction(IEnumerable<DataObjectViewModel> objects)
+        public void ExecItemsDefaultAction()
         {
             ItemsDefaultActionHandler temp = ItemsDefaultAction;
             if (temp != null)
             {
-                temp(this, objects);
+                temp(this, SelectedItems);
             }
-            else
+            else if (OpenCommand.CanExecute(null))
             {
-                OpenObjects(objects);
+                OpenCommand.Execute(null);
             }
         }
         #endregion
@@ -398,9 +382,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     _ShowOpenCommand = value;
                     UpdateCommands();
+                    OnPropertyChanged("ShowOpenCommand");
+                    OnPropertyChanged("AllowOpen");
                 }
             }
         }
+
+        bool IOpenCommandParameter.AllowOpen { get { return ShowOpenCommand; } }
 
         private bool _ShowRefreshCommand = true;
         public bool ShowRefreshCommand
@@ -415,6 +403,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     _ShowRefreshCommand = value;
                     UpdateCommands();
+                    OnPropertyChanged("ShowRefreshCommand");
                 }
             }
         }
@@ -432,6 +421,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     _ShowExportCommand = value;
                     UpdateCommands();
+                    OnPropertyChanged("ShowExportCommand");
                 }
             }
         }

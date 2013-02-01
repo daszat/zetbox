@@ -447,7 +447,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public void ActivateItem(DataObjectViewModel item)
         {
-            NewDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, item, IsInlineEditable);
+            ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, item, IsInlineEditable);
         }
 
         #endregion

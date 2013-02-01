@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter
+    public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter, IOpenCommandParameter
     {
         public new delegate NavigationScreenHierarchyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
 
@@ -113,7 +113,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        typeof(NavigationEntry).GetObjectClass(FrozenContext),
                         true);
                 }
                 return _OpenCommand;
@@ -132,9 +131,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         this,
                         typeof(NavigationEntry).GetObjectClass(FrozenContext),
                         true);
-                    _NewCommand.ObjectCreated += (obj) => 
-                        ((NavigationEntry)obj).Parent = SelectedItem != null 
-                            ? obj.Context.Find<NavigationEntry>(SelectedItem.ID) 
+                    _NewCommand.ObjectCreated += (obj) =>
+                        ((NavigationEntry)obj).Parent = SelectedItem != null
+                            ? obj.Context.Find<NavigationEntry>(SelectedItem.ID)
                             : null;
                 }
                 return _NewCommand;
@@ -169,6 +168,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
         IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
+        #endregion
+
+        #region IOpenCommandParameter members
+        bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
+        bool IOpenCommandParameter.AllowOpen { get { return true; } }
+        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
         #endregion
     }
 }
