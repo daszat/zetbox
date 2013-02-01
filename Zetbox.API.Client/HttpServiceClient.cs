@@ -95,7 +95,8 @@ namespace Zetbox.API.Client
                     {
                         var exToThrow = httpResponse
                             .GetResponseStream()
-                            .FromXmlStream<ZetboxContextExceptionSerializationHelper>()
+                            .FromXmlStream<ExceptionSerializationHelperContainer>()
+                            .Exception
                             .ToException();
                         Log.Debug("Received an exception", exToThrow);
                         throw exToThrow;
