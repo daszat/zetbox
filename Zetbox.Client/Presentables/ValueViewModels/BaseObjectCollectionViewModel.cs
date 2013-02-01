@@ -34,7 +34,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     /// <summary>
     /// </summary>
     public abstract class BaseObjectCollectionViewModel<TModelCollection>
-        : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>, IDeleteCommandParameter
+        : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>, IDeleteCommandParameter, INewCommandParameter
         where TModelCollection : ICollection<IDataObject>
     {
         public new delegate BaseObjectCollectionViewModel<TModelCollection> Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -307,22 +307,20 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             return cmds;
         }
 
-        private ICommandViewModel _CreateNewCommand = null;
+        private NewDataObjectCommand _CreateNewCommand = null;
         public ICommandViewModel CreateNewCommand
         {
             get
             {
                 if (_CreateNewCommand == null)
                 {
-                    _CreateNewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    _CreateNewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        BaseObjectCollectionViewModelResources.CreateNewCommand_Name,
-                        BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip,
-                        () => CreateNewItem(),
-                        () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly,
-                        null);
-                    _CreateNewCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
+                        ReferencedClass,
+                        false);
+
+                    _CreateNewCommand.LocalModelCreated += vm => AddItem(vm);
                 }
                 return _CreateNewCommand;
             }
@@ -382,15 +380,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        /// <summary>
-        /// Creates a new Item suitable for adding to the list. This may prompt 
-        /// the user to choose a type of item to add or enter an initial value.
-        /// </summary>
-        public void CreateNewItem()
-        {
-            NewDataObjectCommand.ChooseObjectClass(ViewModelFactory, DataContext, FrozenContext, this, ReferencedClass, CreateItemAndActivate); 
-        }
-
         public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
         protected virtual void OnDataObjectSelectionTaskCreated(DataObjectSelectionTaskViewModel vmdl)
         {
@@ -399,17 +388,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 temp(this, new DataObjectSelectionTaskEventArgs(vmdl));
             }
-        }
-
-        private void CreateItemAndActivate(ObjectClass targetClass)
-        {
-            var targetType = targetClass.GetDescribedInterfaceType();
-            var item = this.DataContext.Create(targetType);
-            var result = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
-
-            AddItem(result);
-
-            ActivateItem(result);
         }
 
         public virtual void AddItem(DataObjectViewModel item)

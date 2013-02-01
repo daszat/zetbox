@@ -303,6 +303,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     public interface INewCommandParameter : INotifyPropertyChanged
     {
         bool IsReadOnly { get; }
+        bool IsInlineEditable { get; }
         bool AllowAddNew { get; }
     }
 
@@ -355,6 +356,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected INewCommandParameter Parameter { get { return Parent as INewCommandParameter; } }
         protected IRequestedEditorKinds RequestedKinds { get { return Parent as IRequestedEditorKinds; } }
         protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
+        protected bool IsInlineEditable { get { return Parameter == null ? false : Parameter.IsInlineEditable; } }
 
         public NewDataObjectCommand(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext,
@@ -446,8 +448,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             var isSimpleObject = dtType.IsSimpleObject;
 
-            var newCtx = UseSeparateContext ? ctxFactory() : DataContext; //
-            var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType())); //
+            var newCtx = UseSeparateContext ? ctxFactory() : DataContext;
+            var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
 
             OnObjectCreated(newObj);
 
@@ -457,9 +459,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
             else
             {
-                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), newObj); //
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), newObj);
 
-                ActivateItem(ViewModelFactory, newCtx, this, mdl, dtType, false); // TODO!!!! isInlineEditable?
+                ActivateItem(ViewModelFactory, newCtx, this, mdl, dtType, IsInlineEditable);
 
                 if (Listener != null)
                 {
@@ -492,7 +494,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsReadOnly" || e.PropertyName == "AllowAddNew")
+            if (e.PropertyName == "IsReadOnly" || e.PropertyName == "AllowAddNew" || e.PropertyName == "IsInlineEditable")
             {
                 OnCanExecuteChanged();
             }
