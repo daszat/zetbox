@@ -200,6 +200,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
+                // Disables the command when outside of a "proper" DataContext/Workspace. E.g. in filters.
                 return Value != null ? ViewModelFactory.CanShowModel(Value) : false;
             }
         }
@@ -207,7 +208,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public void OpenReference()
         {
             if (CanOpen)
-                ViewModelFactory.ShowModel(Value, true);
+                ActivateItem(Value);
         }
 
         private ICommandViewModel _openReferenceCommand;
@@ -250,6 +251,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
 
             Value = model;
+            ActivateItem(model);
+        }
+
+        private void ActivateItem(DataObjectViewModel model)
+        {
             NewDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, model, ObjectReferenceModel.ReferencedClass, false);
         }
 

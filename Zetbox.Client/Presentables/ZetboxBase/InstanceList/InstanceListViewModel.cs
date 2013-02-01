@@ -322,15 +322,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 foreach (var item in objects)
                 {
-                    if (this.DataType.IsSimpleObject)
-                    {
-                        var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, this, item);
-                        ViewModelFactory.ShowDialog(dlg);
-                    }
-                    else
-                    {
-                        ViewModelFactory.ShowModel(item, true);
-                    }
+                    ActivateItem(item);
                 }
                 OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext) as ObjectEditor.WorkspaceViewModel, objects);
             }
