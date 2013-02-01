@@ -135,7 +135,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var item = workingCtx.Create(targetType);
             OnObjectCreated(item);
 
-            if (isEmbedded())
+            if (workingCtxFactory == null)
             {
                 // TODO: Reorganize this control - it's too complex
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
@@ -147,21 +147,38 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
             else
             {
-                ActivateForeignItem(workingCtx, item);
+                ActivateForeignItem(workingCtx, new[] { item });
             }
         }
 
-        private void ActivateForeignItem(IZetboxContext workingCtx, IDataObject item)
+        private void ActivateForeignItem(IZetboxContext workingCtx, IEnumerable<IDataObject> items)
         {
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx, null);
-            var mdl = DataObjectViewModel.Fetch(ViewModelFactory, workingCtx, newWorkspace, item);
-            newWorkspace.ShowForeignModel(mdl, RequestedEditorKind);
             ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+
+            ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+            {
+                var openedItems = new List<DataObjectViewModel>();
+
+                foreach (var other in items)
+                {
+                    var here = workingCtx.Find(DataContext.GetInterfaceType(other), other.ID);
+                    var mdl = DataObjectViewModel.Fetch(ViewModelFactory, workingCtx, newWorkspace, other);
+                    mdl.RequestedKind = RequestedEditorKind;
+                    openedItems.Add(mdl);
+                    newWorkspace.ShowModel(mdl);
+                }
+
+                OnItemsOpened(newWorkspace, openedItems);
+
+                newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+            }).Trigger();
         }
 
         public void ActivateItem(DataObjectViewModel item)
         {
             NewDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, item, this.DataType, IsInlineEditable);
+            OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), new[] { item });
         }
 
         public delegate void ObjectCreatedHandler(IDataObject obj);
@@ -183,7 +200,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, this, !isEmbedded());
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, this, !(workingCtxFactory == null));
                 }
                 return _DeleteCommand;
             }

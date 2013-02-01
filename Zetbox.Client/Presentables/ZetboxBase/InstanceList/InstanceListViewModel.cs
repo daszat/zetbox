@@ -53,11 +53,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected readonly IFileOpener fileOpener;
         protected readonly ITempFileService tmpService;
 
-        protected bool isEmbedded()
-        {
-            return workingCtxFactory == null;
-        }
-
         /// <summary>
         /// Initializes a new instance of the DataTypeViewModel class.
         /// </summary>
@@ -318,39 +313,28 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public void OpenObjects(IEnumerable<DataObjectViewModel> objects)
         {
             if (objects == null) throw new ArgumentNullException("objects");
-            if (isEmbedded())
+            if (workingCtxFactory == null)
             {
                 foreach (var item in objects)
                 {
                     ActivateItem(item);
                 }
-                OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext) as ObjectEditor.WorkspaceViewModel, objects);
+                OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), objects);
             }
             else
             {
-                var workingCtx = workingCtxFactory == null ? DataContext : workingCtxFactory();
-                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx, null);
-                ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
-
-                ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
-                {
-                    var openedItems = objects.Select(o => newWorkspace.ShowForeignModel(o, RequestedEditorKind)).ToList();
-
-                    OnItemsOpened(newWorkspace, openedItems);
-
-                    newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
-                }).Trigger();
+                ActivateForeignItem(workingCtxFactory(), objects.Select(vm => vm.Object));
             }
         }
 
-        public delegate void ItemsOpenedHandler(ObjectEditor.WorkspaceViewModel sender, IEnumerable<DataObjectViewModel> objects);
+        public delegate void ItemsOpenedHandler(ViewModel sender, IEnumerable<DataObjectViewModel> objects);
 
         /// <summary>
         /// Is triggered when items are opened in a new workspace. This can be used to give the ViewModels a context dependent finishing touch, like opening a non-default view
         /// </summary>
         public event ItemsOpenedHandler ItemsOpened = null;
 
-        protected virtual void OnItemsOpened(ObjectEditor.WorkspaceViewModel sender, IEnumerable<DataObjectViewModel> objects)
+        protected virtual void OnItemsOpened(ViewModel sender, IEnumerable<DataObjectViewModel> objects)
         {
             var temp = ItemsOpened;
             if (temp != null)
