@@ -272,6 +272,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        public static void ActivateItem(IViewModelFactory vmFactory, IZetboxContext dataCtx, ViewModel parent, DataObjectViewModel item, ObjectClass type, bool isInlineEditable)
+        {
+            if (item == null) { throw new ArgumentNullException("item"); }
+
+            if (type.IsSimpleObject && !isInlineEditable)
+            {
+                // Open in a Dialog
+                var dlg = vmFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(dataCtx, parent, item);
+                vmFactory.ShowDialog(dlg);
+            }
+            else if (!type.IsSimpleObject)
+            {
+                vmFactory.ShowModel(item, true);
+            }
+            // Don't open simple objects
+        }
+
         protected readonly Func<IZetboxContext> ctxFactory;
         protected ObjectClass Type { get; private set; }
         protected IRefreshCommandListener Listener { get; private set; }

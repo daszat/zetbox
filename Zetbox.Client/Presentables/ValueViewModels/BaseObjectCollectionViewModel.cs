@@ -406,6 +406,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             var targetType = targetClass.GetDescribedInterfaceType();
             var item = this.DataContext.Create(targetType);
             var result = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
+
             AddItem(result);
             ActivateItem(result);
         }
@@ -467,19 +468,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public void ActivateItem(DataObjectViewModel item)
         {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            if (this.ReferencedClass.IsSimpleObject && !IsInlineEditable)
-            {
-                // Open in a Dialog
-                var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, this, item);
-                ViewModelFactory.ShowDialog(dlg);
-            }
-            else if (!this.ReferencedClass.IsSimpleObject)
-            {
-                ViewModelFactory.ShowModel(item, true);
-            }
-            // Don't open simple objects
+            NewDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, item, this.ReferencedClass, IsInlineEditable);
         }
 
         #endregion

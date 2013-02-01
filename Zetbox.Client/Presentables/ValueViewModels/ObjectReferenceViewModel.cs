@@ -246,10 +246,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             var targetType = targetClass.GetDescribedInterfaceType();
             var item = this.DataContext.Create(targetType);
+
             var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
 
             Value = model;
-            ViewModelFactory.ShowModel(model, true);
+            NewDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, model, ObjectReferenceModel.ReferencedClass, false);
         }
 
         private ICommandViewModel _createNewItemAndSetValueCommand;
