@@ -129,12 +129,6 @@
   <data name="CanClose_Title" xml:space="preserve">
     <value>Nicht gespeicherte Daten</value>
   </data>
-  <data name="DeleteCommand_Name" xml:space="preserve">
-    <value>Löschen</value>
-  </data>
-  <data name="DeleteCommand_Tooltip" xml:space="preserve">
-    <value>Löscht den aktuellen Datensatz</value>
-  </data>
   <data name="Name" xml:space="preserve">
     <value>Arbeitsbereich</value>
   </data>
@@ -164,9 +158,6 @@
   </data>
   <data name="ConcurrencyException_Message" xml:space="preserve">
     <value>Mindestens ein Datensatz wurde zwischenzeitlich geändert. Bitte schließen Sie den Arbeitsbereich und führen Sie die Änderungen erneut durch.</value>
-  </data>
-  <data name="DeleteCommand_Reason" xml:space="preserve">
-    <value>Sie haben keine Berechtigung diesen Datensatz zu löschen</value>
   </data>
   <data name="FKViolationException_Caption" xml:space="preserve">
     <value>Verweis Fehler</value>

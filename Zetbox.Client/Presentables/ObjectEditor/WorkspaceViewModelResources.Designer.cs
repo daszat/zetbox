@@ -115,33 +115,6 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
-        /// </summary>
-        internal static string DeleteCommand_Name {
-            get {
-                return ResourceManager.GetString("DeleteCommand_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You have no rights to delete this object.
-        /// </summary>
-        internal static string DeleteCommand_Reason {
-            get {
-                return ResourceManager.GetString("DeleteCommand_Reason", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deletes the current object.
-        /// </summary>
-        internal static string DeleteCommand_Tooltip {
-            get {
-                return ResourceManager.GetString("DeleteCommand_Tooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Usage Error.
         /// </summary>
         internal static string FKViolationException_Caption {

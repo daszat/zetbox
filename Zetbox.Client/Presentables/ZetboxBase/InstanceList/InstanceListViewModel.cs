@@ -752,7 +752,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public void EndInit()
         {
             _isInInit--;
-            if(_isInInit < 0)
+            if (_isInInit < 0)
                 _isInInit = 0;
             OnPropertyChanged("IsInInit");
         }

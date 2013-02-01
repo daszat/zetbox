@@ -29,11 +29,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     /// <summary>
     /// </summary>
     public abstract class BaseObjectCollectionViewModel<TModelCollection>
-        : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>
+        : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>, IDeleteCommandParameter
         where TModelCollection : ICollection<IDataObject>
     {
         public new delegate BaseObjectCollectionViewModel<TModelCollection> Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -368,57 +369,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        private ICommandViewModel _DeleteCommand = null;
+        private DeleteDataObjectCommand _DeleteCommand;
         public ICommandViewModel DeleteCommand
         {
             get
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        BaseObjectCollectionViewModelResources.DeleteCommand_Name,
-                        BaseObjectCollectionViewModelResources.DeleteCommand_Tooltip,
-                        DeleteSelectedItems,
-                        CanDeleteSelectedItems,
-                        CanDeleteSelectedItemsReason);
-                    _DeleteCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, null, false);
                 }
                 return _DeleteCommand;
-            }
-        }
-
-        public void DeleteSelectedItems()
-        {
-            // Selection will change while deleting => requires local copy
-            var tmp = SelectedItems.ToList();
-            tmp.ForEach(i => DeleteItem(i));
-        }
-
-        public bool CanDeleteSelectedItems()
-        {
-            return !IsReadOnly && !DataContext.IsReadonly && AllowDelete && SelectedItems != null && SelectedItems.Count() > 0 && SelectedItems.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights());
-        }
-
-        public string CanDeleteSelectedItemsReason()
-        {
-            if (IsReadOnly || DataContext.IsReadonly)
-            {
-                return "Context is read only.";
-            }
-            else if (!AllowDelete)
-            {
-                // Normally not displayed
-                return "Deleting is not allowed here.";
-            }
-            else if (SelectedItems == null || SelectedItems.Count() == 0)
-            {
-                return "No item selected.";
-            }
-            else /* if (SelectedItems.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights())) */
-            {
-                return "One of the objects is not deletable.";
             }
         }
 
@@ -788,6 +748,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             throw new NotSupportedException();
         }
+        #endregion
+
+        #region IDeleteCommandParameter Members
+        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return SelectedItems; } }
         #endregion
     }
 

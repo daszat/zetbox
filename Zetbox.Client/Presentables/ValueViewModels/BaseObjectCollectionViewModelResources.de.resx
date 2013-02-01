@@ -129,12 +129,6 @@
   <data name="CreateNewCommand_Tooltip" xml:space="preserve">
     <value>Erstellt einen neuen Datensatz und fügt ihn zur Liste hinzu</value>
   </data>
-  <data name="DeleteCommand_Name" xml:space="preserve">
-    <value>Löschen</value>
-  </data>
-  <data name="DeleteCommand_Tooltip" xml:space="preserve">
-    <value>Löschen Auswahl aus Datenspeicher</value>
-  </data>
   <data name="MoreItems" xml:space="preserve">
     <value>({0}): {1}...</value>
   </data>

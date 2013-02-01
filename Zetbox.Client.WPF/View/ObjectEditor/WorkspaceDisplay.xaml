@@ -58,7 +58,6 @@
                                      Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Self}}"
                                      styles:Controls.IsSecondary="true"
                                      Style="{StaticResource ImageButton}"
-                                     Image="/Zetbox.Client.WPF;component/Images/delete.png"
                                      Margin="0"
                                      styles:Margin.Left="{StaticResource ItemMargin}"
                                      styles:Margin.Right="{StaticResource ItemMargin}" />

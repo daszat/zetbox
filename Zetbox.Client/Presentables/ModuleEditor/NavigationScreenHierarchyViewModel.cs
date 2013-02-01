@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener
+    public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter
     {
         public new delegate NavigationScreenHierarchyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
 
@@ -137,7 +137,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, true);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, this, true);
                 }
                 return _DeleteCommand;
             }
@@ -152,6 +152,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             OnPropertyChanged("RootScreens");
         }
 
+        #endregion
+
+        #region IDeleteCommandParameter members
+        bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
+        bool IDeleteCommandParameter.AllowDelete { get { return true; } }
+        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
         #endregion
     }
 }

@@ -35,7 +35,6 @@
                 <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}"
                                      Style="{StaticResource ImageToolbarButton}" />
                 <ctrls:CommandButton CommandViewModel="{Binding DeleteCommand}"
-                                     CommandParameter="{Binding SelectedItem}"
                                      Style="{StaticResource ImageToolbarButton}" />
             </ctrls:WorkaroundToolBar>
         </ToolBarTray>

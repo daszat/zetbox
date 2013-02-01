@@ -29,7 +29,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using Zetbox.Client.Presentables.ZetboxBase;
 
     public class WorkspaceViewModel
-        : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDisposable
+        : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter, IDisposable
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
@@ -178,40 +178,25 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         #endregion
 
         #region DeleteCommand
-        private ICommandViewModel _DeleteCommand = null;
+
+        private DeleteDataObjectCommand _DeleteCommand;
         public ICommandViewModel DeleteCommand
         {
             get
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        WorkspaceViewModelResources.DeleteCommand_Name,
-                        WorkspaceViewModelResources.DeleteCommand_Tooltip,
-                        Delete,
-                        CanDelete,
-                        () => WorkspaceViewModelResources.DeleteCommand_Reason);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, null, false);
                 }
                 return _DeleteCommand;
             }
         }
 
-        public bool CanDelete()
-        {
-            var objVm = SelectedItem as DataObjectViewModel;
-            return objVm != null && objVm.Object.CurrentAccessRights.HasDeleteRights();
-        }
-
         public void Delete()
         {
-            if (CanDelete())
-            {
-                var objVm = SelectedItem as DataObjectViewModel;
-                DataContext.Delete(objVm.Object);
-            }
+            DeleteCommand.Execute(null);
         }
+
         #endregion
 
         #region Save Context
@@ -369,7 +354,6 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
             return false;
         }
-
 
         #endregion
 
@@ -545,5 +529,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         }
 
         #endregion
+
+        #region IDeleteCommandParameter members
+        bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
+        bool IDeleteCommandParameter.AllowDelete { get { return true; } }
+        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
+        #endregion
+
     }
 }

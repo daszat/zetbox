@@ -17,15 +17,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.App.Base;
-    using Zetbox.App.GUI;
-    using Zetbox.App.Extensions;
-    using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
     using Zetbox.API.Client;
     using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
     public class OpenDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
@@ -96,35 +97,139 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
     }
 
-    public class DeleteDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
+    public interface IDeleteCommandParameter : INotifyPropertyChanged
     {
-        public new delegate DeleteDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges);
+        bool IsReadOnly { get; }
+        bool AllowDelete { get; }
+        IEnumerable<ViewModel> SelectedItems { get; }
+    }
 
+    public class DeleteDataObjectCommand : CommandViewModel
+    {
+        public new delegate DeleteDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, IDeleteCommandParameter parameter, IRefreshCommandListener listener, bool useSeparateContext);
+
+        protected IDeleteCommandParameter Parameter { get; private set; }
         protected IRefreshCommandListener Listener { get; private set; }
-        protected bool SubmitChanges { get; private set; }
+        protected bool UseSeparateContext { get; private set; }
 
-        public DeleteDataObjectCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges)
+        private readonly Func<IZetboxContext> _ctxFactory;
+
+        public DeleteDataObjectCommand(IViewModelDependencies appCtx,
+            IZetboxContext dataCtx, ViewModel parent, IDeleteCommandParameter parameter, IRefreshCommandListener listener, bool useSeparateContext,
+            Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
         {
+            this.Parameter = parameter;
+            this.Parameter.PropertyChanged += OnParameterChanged;
             this.Listener = listener;
-            this.SubmitChanges = submitChanges;
-            this.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
+            this.UseSeparateContext = useSeparateContext;
+            this._ctxFactory = ctxFactory;
         }
 
-        protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
+        private System.Drawing.Image _icon;
+        public override System.Drawing.Image Icon
         {
-            if (SubmitChanges && !ViewModelFactory.GetDecisionFromUser(CommonCommandsResources.DeleteDataObjectCommand_Confirm, CommonCommandsResources.DeleteDataObjectCommand_Confirm_Title))
+            get
+            {
+                return base.Icon ?? _icon ?? (_icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext)));
+            }
+            set
+            {
+                base.Icon = value;
+            }
+        }
+
+        private IEnumerable<DataObjectViewModel> GetViewModels()
+        {
+            return Parameter.SelectedItems.OfType<DataObjectViewModel>();
+        }
+
+        public override bool CanExecute(object data)
+        {
+            // TODO: re-enable after converting all commands
+            //if (data != null)
+            //{
+            //    Reason = string.Format(CommonCommandsResources.DeleteDataObjectCommand_ProgrammerError, data);
+            //    return false;
+            //}
+            //else
+
+            if (Parameter.IsReadOnly || DataContext.IsReadonly)
+            {
+                Reason = CommonCommandsResources.DeleteDataObjectCommand_IsReadOnly;
+                return false;
+            }
+            else if (!Parameter.AllowDelete)
+            {
+                Reason = CommonCommandsResources.DeleteDataObjectCommand_NotAllowed;
+                return false;
+            }
+            else if (Parameter.SelectedItems == null)
+            {
+                Reason = CommonCommandsResources.DeleteDataObjectCommand_NothingSelected;
+                return false;
+            }
+
+            var itemsCount = Parameter.SelectedItems.OfType<object>().Count();
+
+            if (itemsCount == 0)
+            {
+                Reason = CommonCommandsResources.DeleteDataObjectCommand_NothingSelected;
+                return false;
+            }
+
+            var dataObjectsCount = GetViewModels().Count();
+
+            if (dataObjectsCount != itemsCount || !GetViewModels().All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights()))
+            {
+                Reason = CommonCommandsResources.DeleteDataObjectCommand_SomeMayNotBeDeleted;
+                return false;
+            }
+
+            // whew!
+            Reason = string.Empty;
+            return true;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            if (UseSeparateContext && !ViewModelFactory.GetDecisionFromUser(CommonCommandsResources.DeleteDataObjectCommand_Confirm, CommonCommandsResources.DeleteDataObjectCommand_Confirm_Title))
             {
                 return;
             }
 
-            foreach (var item in data)
+            if (UseSeparateContext)
             {
-                DataContext.Delete(item.Object);
+                using (var ctx = _ctxFactory())
+                {
+                    // make local copy to avoid stumbling over changing lists while iterating over them
+                    foreach (var item in GetViewModels().ToList())
+                    {
+                        var other = item.Object;
+                        var here = ctx.Find(ctx.GetInterfaceType(other), other.ID);
+                        ctx.Delete(here);
+                    }
+                    ctx.SubmitChanges();
+                }
+            }
+            else
+            {
+                // make local copy to avoid stumbling over changing lists while iterating over them
+                foreach (var item in GetViewModels().ToList())
+                {
+                    DataContext.Delete(item.Object);
+                }
             }
 
-            if (SubmitChanges) DataContext.SubmitChanges();
             if (Listener != null) Listener.Refresh();
+        }
+
+        private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsReadonly" || e.PropertyName == "AllowDelete" || e.PropertyName == "SelectedItems")
+            {
+                OnCanExecuteChanged();
+            }
         }
     }
 
@@ -278,7 +383,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             var newCtx = ctxFactory();
             var objClass = newCtx.FindPersistenceObject<DataType>(this.Type.ExportGuid);
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx,null);
+            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
             newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, Parent, objClass));
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
@@ -377,7 +482,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public ElevatedModeCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.ElevatedModeCommand_Name, CommonCommandsResources.ElevatedModeCommand_Tooltip)
         {
-            
+
         }
 
         public override System.Drawing.Image Icon

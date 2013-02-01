@@ -135,15 +135,6 @@
   <data name="ConcurrencyException_Message" xml:space="preserve">
     <value>At least one object has changed between fetch and submit changes. Please reopen the workspace and try again.</value>
   </data>
-  <data name="DeleteCommand_Name" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="DeleteCommand_Reason" xml:space="preserve">
-    <value>You have no rights to delete this object</value>
-  </data>
-  <data name="DeleteCommand_Tooltip" xml:space="preserve">
-    <value>Deletes the current object</value>
-  </data>
   <data name="FKViolationException_Caption" xml:space="preserve">
     <value>Usage Error</value>
   </data>

@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public class ControlKindHierarchyViewModel : ViewModel, IRefreshCommandListener
+    public class ControlKindHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter
     {
         public new delegate ControlKindHierarchyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
 
@@ -41,7 +41,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         protected readonly Func<IZetboxContext> ctxFactory;
         public Module Module { get; private set; }
-
 
         public override string Name
         {
@@ -143,7 +142,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, true);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, this, true);
                 }
                 return _DeleteCommand;
             }
@@ -159,5 +158,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         }
 
         #endregion
+
+        #region IDeleteCommandParameter members
+        bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
+        bool IDeleteCommandParameter.AllowDelete { get { return true; } }
+        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
+        #endregion
+
     }
 }
