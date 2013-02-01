@@ -388,38 +388,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// </summary>
         public void CreateNewItem()
         {
-            ObjectClass baseclass = ReferencedClass;
-
-            var children = new List<ObjectClass>();
-            if (baseclass.IsAbstract == false)
-            {
-                children.Add(baseclass);
-            }
-            baseclass.CollectChildClasses(children, false);
-
-            if (children.Count == 1)
-            {
-                CreateItemAndActivate(baseclass);
-            }
-            else
-            {
-                var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        typeof(ObjectClass).GetObjectClass(FrozenContext),
-                        () => children.AsQueryable(),
-                        (chosen) =>
-                        {
-                            if (chosen != null)
-                            {
-                                var targetClass = ((ObjectClass)chosen.First().Object);
-                                CreateItemAndActivate(targetClass);
-                            }
-                        },
-                    null);
-                lstMdl.ListViewModel.ShowCommands = false;
-                ViewModelFactory.ShowDialog(lstMdl);
-            }
+            NewDataObjectCommand.ChooseObjectClass(ViewModelFactory, DataContext, FrozenContext, this, ReferencedClass, CreateItemAndActivate); 
         }
 
         public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;

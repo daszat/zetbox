@@ -29,6 +29,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
@@ -238,46 +239,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// </summary>
         public void CreateNewItemAndSetValue()
         {
-            ObjectClass baseclass = ObjectReferenceModel.ReferencedClass;
+            NewDataObjectCommand.ChooseObjectClass(ViewModelFactory, DataContext, FrozenContext, this, ObjectReferenceModel.ReferencedClass, CreateNewItemAndSetValue);
+        }
 
-            var children = new List<ObjectClass>();
-            if (baseclass.IsAbstract == false)
-            {
-                children.Add(baseclass);
-            }
-            baseclass.CollectChildClasses(children, false);
+        private void CreateNewItemAndSetValue(ObjectClass targetClass)
+        {
+            var targetType = targetClass.GetDescribedInterfaceType();
+            var item = this.DataContext.Create(targetType);
+            var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
 
-            if (children.Count == 1)
-            {
-                var targetType = children.Single().GetDescribedInterfaceType();
-                var item = this.DataContext.Create(targetType);
-                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
-
-                Value = model;
-                ViewModelFactory.ShowModel(model, true);
-            }
-            else
-            {
-                var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
-                        DataContext, this,
-                        typeof(ObjectClass).GetObjectClass(FrozenContext),
-                        () => children.AsQueryable(),
-                        (chosen) =>
-                        {
-                            if (chosen != null)
-                            {
-                                var targetType = ((ObjectClass)chosen.First().Object).GetDescribedInterfaceType();
-                                var item = this.DataContext.Create(targetType);
-                                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
-
-                                Value = model;
-                                ViewModelFactory.ShowModel(model, true);
-                            }
-                        }, null);
-                lstMdl.ListViewModel.ShowCommands = false;
-
-                ViewModelFactory.ShowDialog(lstMdl);
-            }
+            Value = model;
+            ViewModelFactory.ShowModel(model, true);
         }
 
         private ICommandViewModel _createNewItemAndSetValueCommand;

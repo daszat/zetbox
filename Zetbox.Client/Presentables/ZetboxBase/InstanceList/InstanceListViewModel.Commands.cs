@@ -124,36 +124,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (!AllowAddNew) return;
 
-            ObjectClass baseclass = _type;
-
-            var children = new List<ObjectClass>();
-            if (baseclass.IsAbstract == false)
-            {
-                children.Add(baseclass);
-            }
-            baseclass.CollectChildClasses(children, false);
-
-            if (children.Count == 1)
-            {
-                CreateNewObjectAndNotify(children.Single());
-            }
-            else
-            {
-                var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
-                                        DataContext, this,
-                                        typeof(ObjectClass).GetObjectClass(FrozenContext),
-                                        () => children.AsQueryable(),
-                                        (chosen) =>
-                                        {
-                                            if (chosen != null)
-                                            {
-                                                CreateNewObjectAndNotify((ObjectClass)chosen.First().Object);
-                                            }
-                                        }, null);
-                lstMdl.ListViewModel.ShowCommands = false;
-
-                ViewModelFactory.ShowDialog(lstMdl);
-            }
+            NewDataObjectCommand.ChooseObjectClass(ViewModelFactory, DataContext, FrozenContext, this, _type, CreateNewObjectAndNotify);
         }
 
         private void CreateNewObjectAndNotify(ObjectClass type)

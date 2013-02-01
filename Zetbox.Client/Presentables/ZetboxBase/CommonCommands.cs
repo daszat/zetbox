@@ -237,6 +237,41 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
 
+        public static void ChooseObjectClass(IViewModelFactory vmFactory, IZetboxContext ctx, IFrozenContext frozenCtx, ViewModel parent, ObjectClass baseClass, Action<ObjectClass> createNewObjectAndNotify)
+        {
+
+            var children = new List<ObjectClass>();
+            if (baseClass.IsAbstract == false)
+            {
+                children.Add(baseClass);
+            }
+            baseClass.CollectChildClasses(children, false);
+
+            if (children.Count == 1)
+            {
+                createNewObjectAndNotify(children.Single());
+            }
+            else
+            {
+                var lstMdl = vmFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+                    ctx,
+                    parent,
+                    (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass.Find(frozenCtx),
+                    () => children.AsQueryable(),
+                    (chosen) =>
+                    {
+                        if (chosen != null)
+                        {
+                            createNewObjectAndNotify((ObjectClass)chosen.First().Object);
+                        }
+                    },
+                    null);
+                lstMdl.ListViewModel.ShowCommands = false;
+
+                vmFactory.ShowDialog(lstMdl);
+            }
+        }
+
         protected readonly Func<IZetboxContext> ctxFactory;
         protected ObjectClass Type { get; private set; }
         protected IRefreshCommandListener Listener { get; private set; }
