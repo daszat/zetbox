@@ -129,7 +129,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void ActivateItem(DataObjectViewModel item)
         {
-            ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, item, this.DataType, IsInlineEditable);
+            ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, item, IsInlineEditable);
             OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), new[] { item });
         }
 

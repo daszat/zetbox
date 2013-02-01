@@ -197,37 +197,23 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region OpenReference
 
-        private bool CanOpen
-        {
-            get
-            {
-                // Disables the command when outside of a "proper" DataContext/Workspace. E.g. in filters.
-                return Value != null ? ViewModelFactory.CanShowModel(Value) : false;
-            }
-        }
-
         public void OpenReference()
         {
-            if (CanOpen)
-                ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, Value, ObjectReferenceModel.ReferencedClass, false);
+            ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, Value, false);
         }
 
-        private ICommandViewModel _openReferenceCommand;
+        private OpenDataObjectCommand _openReferenceCommand;
         public ICommandViewModel OpenReferenceCommand
         {
             get
             {
                 if (_openReferenceCommand == null)
                 {
-                    _openReferenceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    _openReferenceCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Name,
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip,
-                        () => OpenReference(),
-                        () => CanOpen,
-                        null);
-                    _openReferenceCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
+                        ReferencedClass,
+                        false);
                 }
                 return _openReferenceCommand;
             }
@@ -255,7 +241,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         bool INewCommandParameter.AllowAddNew { get { return AllowCreateNewItem; } }
-        bool INewCommandParameter.IsInlineEditable { get { return false; } }
+        bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
 
         #endregion
 

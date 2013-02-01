@@ -28,23 +28,52 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.App.GUI;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
+    public interface IActivateCommandParameter : INotifyPropertyChanged
+    {
+        bool IsInlineEditable { get; }
+    }
+
     public abstract class ActivateDataObjectCommand : CommandViewModel
     {
-        protected ObjectClass Type { get; private set; }
         protected bool UseSeparateContext { get; private set; }
+
+        private IActivateCommandParameter Parameter { get { return Parent as IActivateCommandParameter; } }
+
+        protected bool IsInlineEditable { get { return Parameter == null ? false : Parameter.IsInlineEditable; } }
+        protected IRequestedEditorKinds RequestedKinds { get { return Parent as IRequestedEditorKinds; } }
+
+        protected ControlKind RequestedEditorKind
+        {
+            get
+            {
+                return RequestedKinds != null
+                    ? RequestedKinds.RequestedEditorKind
+                    : null;
+            }
+        }
+        protected ControlKind RequestedWorkspaceKind
+        {
+            get
+            {
+                return RequestedKinds != null
+                    ? RequestedKinds.RequestedWorkspaceKind
+                    : null;
+            }
+        }
 
         public ActivateDataObjectCommand(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip,
             ObjectClass type, bool useSeparateContext)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
-            this.Type = type;
             this.UseSeparateContext = useSeparateContext;
         }
 
-        public static void ActivateItem(IViewModelFactory vmFactory, IZetboxContext dataCtx, ViewModel parent, DataObjectViewModel item, ObjectClass type, bool isInlineEditable)
+        public static void ActivateItem(IViewModelFactory vmFactory, IZetboxContext dataCtx, IFrozenContext frozenCtx, ViewModel parent, DataObjectViewModel item, bool isInlineEditable)
         {
             if (item == null) return;
+
+            var type = item.Object.GetObjectClass(frozenCtx);
 
             if (type.IsSimpleObject)
             {
@@ -96,72 +125,70 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
     }
 
-    public class OpenDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
+    public interface IOpenCommandParameter : IActivateCommandParameter
     {
-        public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
+        bool AllowOpen { get; }
+        IEnumerable<ViewModel> SelectedItems { get; }
+    }
+
+    public class OpenDataObjectCommand : ActivateDataObjectCommand
+    {
+        public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext);
 
         protected readonly Func<IZetboxContext> ctxFactory;
+        protected IOpenCommandParameter Parameter { get { return Parent as IOpenCommandParameter; } }
 
         public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
-            IZetboxContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind
+            IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext
             )
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip, type, useSeparateContext)
         {
             this.ctxFactory = ctxFactory;
-            this._requestedWorkspaceKind = reqWorkspaceKind;
-            this._requestedEditorKind = reqEditorKind;
         }
 
-        private ControlKind _requestedEditorKind;
-        public ControlKind RequestedEditorKind
+        public override System.Drawing.Image Icon
         {
             get
             {
-                return _requestedEditorKind;
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext)));
             }
             set
             {
-                if (_requestedEditorKind != value)
-                {
-                    _requestedEditorKind = value;
-                    OnPropertyChanged("RequestedEditorKind");
-                }
+                base.Icon = value;
             }
         }
 
-        private ControlKind _requestedWorkspaceKind;
-        public ControlKind RequestedWorkspaceKind
+        private IEnumerable<DataObjectViewModel> GetViewModels()
         {
-            get
-            {
-                return _requestedWorkspaceKind;
-            }
-            set
-            {
-                if (_requestedWorkspaceKind != value)
-                {
-                    _requestedWorkspaceKind = value;
-                    OnPropertyChanged("RequestedWorkspaceKind");
-                }
-            }
+            return Parameter == null
+                ? Enumerable.Empty<DataObjectViewModel>()
+                : Parameter.SelectedItems.OfType<DataObjectViewModel>();
         }
 
-        public delegate void ModelCreatedEventHandler(DataObjectViewModel mdl);
-        public event ModelCreatedEventHandler ModelCreated;
-
-        protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
+        public override bool CanExecute(object data)
         {
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory(), null);
-            foreach (var item in data)
+            return Parameter != null
+                ? Parameter.AllowOpen
+                    && Parameter.SelectedItems != null
+                    && Parameter.SelectedItems.Count() > 0
+                    && Parameter.SelectedItems.All(vm => ViewModelFactory.CanShowModel(vm))
+                : true;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            if (UseSeparateContext)
             {
-                var newMdl = newWorkspace.ShowForeignModel(item, RequestedEditorKind);
-                ModelCreatedEventHandler temp = ModelCreated;
-                if (temp != null)
+                var newCtx = ctxFactory();
+                ActivateForeignItems(ViewModelFactory, newCtx, GetViewModels().Select(dovm => dovm.Object), RequestedWorkspaceKind, RequestedEditorKind, OnItemsOpened);
+            }
+            else
+            {
+                foreach (var vm in GetViewModels())
                 {
-                    temp(newMdl);
+                    ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, vm, IsInlineEditable);
                 }
             }
-            ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
         }
     }
 
@@ -300,10 +327,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
     }
 
-    public interface INewCommandParameter : INotifyPropertyChanged
+    public interface INewCommandParameter : IActivateCommandParameter
     {
         bool IsReadOnly { get; }
-        bool IsInlineEditable { get; }
         bool AllowAddNew { get; }
     }
 
@@ -354,9 +380,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected readonly Func<IZetboxContext> ctxFactory;
         protected INewCommandParameter Parameter { get { return Parent as INewCommandParameter; } }
-        protected IRequestedEditorKinds RequestedKinds { get { return Parent as IRequestedEditorKinds; } }
         protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
-        protected bool IsInlineEditable { get { return Parameter == null ? false : Parameter.IsInlineEditable; } }
+        protected ObjectClass Type { get; private set; }
 
         public NewDataObjectCommand(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext,
@@ -366,26 +391,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (this.Parameter != null)
                 this.Parameter.PropertyChanged += OnParameterChanged;
             this.ctxFactory = ctxFactory;
-        }
-
-        public ControlKind RequestedEditorKind
-        {
-            get
-            {
-                return RequestedKinds != null
-                    ? RequestedKinds.RequestedEditorKind
-                    : null;
-            }
-        }
-
-        public ControlKind RequestedWorkspaceKind
-        {
-            get
-            {
-                return RequestedKinds != null
-                    ? RequestedKinds.RequestedWorkspaceKind
-                    : null;
-            }
+            this.Type = type;
         }
 
         public override System.Drawing.Image Icon
@@ -461,7 +467,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), newObj);
 
-                ActivateItem(ViewModelFactory, newCtx, this, mdl, dtType, IsInlineEditable);
+                ActivateItem(ViewModelFactory, newCtx, FrozenContext, this, mdl, IsInlineEditable);
 
                 if (Listener != null)
                 {

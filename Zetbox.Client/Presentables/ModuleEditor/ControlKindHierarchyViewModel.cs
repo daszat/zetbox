@@ -116,7 +116,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_OpenCommand == null)
                 {
-                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this, null, null);
+                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        typeof(ControlKind).GetObjectClass(FrozenContext),
+                        true);
                 }
                 return _OpenCommand;
             }
@@ -129,7 +133,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, typeof(ControlKind).GetObjectClass(FrozenContext), true);
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        typeof(ControlKind).GetObjectClass(FrozenContext),
+                        true);
                 }
                 return _NewCommand;
             }
