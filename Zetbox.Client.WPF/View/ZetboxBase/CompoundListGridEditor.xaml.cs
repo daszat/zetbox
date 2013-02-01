@@ -55,7 +55,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             if (ViewModel.SelectedItem != null)
             {
-                ViewModel.ActivateItem(ViewModel.SelectedItem, true);
+                ViewModel.ActivateItem(ViewModel.SelectedItem);
             }
             e.Handled = true;
         }

@@ -135,8 +135,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// Activates the item for the user to edit.
         /// </summary>
         /// <param name="item">the item to activate</param>
-        /// <param name="activate">whether or not to raise the item to the top</param>
-        void ActivateItem(TElement item, bool activate);
+        void ActivateItem(TElement item);
 
         /// <summary>
         /// Stores the currently selected item of this list. 

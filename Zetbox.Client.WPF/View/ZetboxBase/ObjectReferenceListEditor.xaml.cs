@@ -35,8 +35,8 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.WPF.Commands;
-    using Zetbox.Client.WPF.Toolkit;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
@@ -55,7 +55,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             if (ViewModel.SelectedItem != null)
             {
-                ViewModel.ActivateItem(ViewModel.SelectedItem, true);
+                ViewModel.ActivateItem(ViewModel.SelectedItem);
             }
             e.Handled = true;
         }

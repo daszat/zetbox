@@ -159,7 +159,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private void CreateNewObjectAndNotify(ObjectClass type)
         {
             var workingCtx = workingCtxFactory == null ? DataContext : workingCtxFactory();
-            var obj = workingCtx.Create(DataContext.GetInterfaceType(type.GetDataType()));
+
+            var obj = workingCtx.Create(type.GetDescribedInterfaceType());
             OnObjectCreated(obj);
 
             if (isEmbedded())
@@ -169,24 +170,32 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 AddLocalInstance(mdl);
                 this.SelectedItem = mdl;
 
-                if (this.DataType.IsSimpleObject && !IsEditable)
-                {
-                    // Open in a Dialog
-                    var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, this, mdl);
-                    ViewModelFactory.ShowDialog(dlg);
-                }
-                else if (!this.DataType.IsSimpleObject)
-                {
-                    ViewModelFactory.ShowModel(mdl, true);
-                }
-                // Don't open simple objects
+                ActivateItem(mdl);
             }
             else
             {
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx, null);
-                newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, workingCtx, newWorkspace, obj), RequestedEditorKind);
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, workingCtx, newWorkspace, obj);
+                newWorkspace.ShowForeignModel(mdl, RequestedEditorKind);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
             }
+        }
+
+        public void ActivateItem(DataObjectViewModel item)
+        {
+            if (item == null) { throw new ArgumentNullException("item"); }
+
+            if (this.DataType.IsSimpleObject && !IsInlineEditable)
+            {
+                // Open in a Dialog
+                var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, this, item);
+                ViewModelFactory.ShowDialog(dlg);
+            }
+            else if (!this.DataType.IsSimpleObject)
+            {
+                ViewModelFactory.ShowModel(item, true);
+            }
+            // Don't open simple objects
         }
 
         public delegate void ObjectCreatedHandler(IDataObject obj);

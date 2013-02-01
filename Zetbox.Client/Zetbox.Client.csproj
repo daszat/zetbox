@@ -528,6 +528,7 @@
     <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WorkspaceViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx">
       <SubType>Designer</SubType>

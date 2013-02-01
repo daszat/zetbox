@@ -81,7 +81,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             throw new NotImplementedException();
         }
 
-        public void ActivateItem(CompoundObjectViewModel item, bool activate)
+        public void ActivateItem(CompoundObjectViewModel item)
         {
             throw new NotImplementedException();
         }

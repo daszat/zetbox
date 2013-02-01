@@ -460,26 +460,26 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private bool _isEditable = false;
+        private bool _isInlineEditable = false;
         /// <summary>
         /// If true, all Items are editable in the list directly. Default is false
         /// </summary>
         /// <remarks>
         /// This does not affect the details pane. 
         /// </remarks>
-        public bool IsEditable
+        public bool IsInlineEditable
         {
             get
             {
-                return _isEditable;
+                return _isInlineEditable;
             }
             set
             {
-                if (_isEditable != value)
+                if (_isInlineEditable != value)
                 {
-                    _isEditable = value;
+                    _isInlineEditable = value;
                     _displayedColumns = null;
-                    OnPropertyChanged("IsEditable");
+                    OnPropertyChanged("IsInlineEditable");
                     OnPropertyChanged("DisplayedColumns");
                 }
             }
@@ -632,7 +632,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
-            result.BuildColumns(this._type, IsEditable ? GridDisplayConfiguration.Mode.Editable : GridDisplayConfiguration.Mode.ReadOnly, IsEditable);
+            result.BuildColumns(this._type, IsInlineEditable ? GridDisplayConfiguration.Mode.Editable : GridDisplayConfiguration.Mode.ReadOnly, IsInlineEditable);
 
             DisplayedColumnsCreatedHandler temp = DisplayedColumnsCreated;
             if (temp != null)

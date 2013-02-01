@@ -438,7 +438,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             var item = this.DataContext.Create(targetType);
             var result = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
             AddItem(result);
-            ActivateItem(result, true);
+            ActivateItem(result);
         }
 
         public virtual void AddItem(DataObjectViewModel item)
@@ -496,7 +496,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             item.Delete();
         }
 
-        public void ActivateItem(DataObjectViewModel item, bool activate)
+        public void ActivateItem(DataObjectViewModel item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
@@ -508,7 +508,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
             else if (!this.ReferencedClass.IsSimpleObject)
             {
-                ViewModelFactory.ShowModel(item, activate);
+                ViewModelFactory.ShowModel(item, true);
             }
             // Don't open simple objects
         }

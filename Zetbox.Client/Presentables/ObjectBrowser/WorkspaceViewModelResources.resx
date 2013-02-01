@@ -117,12 +117,6 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-	<data name="CreateNewInstanceExternallyCommand_Name" xml:space="preserve">
-    <value>External New ...</value>
-  </data>
-	<data name="CreateNewInstanceExternallyCommand_Tooltip" xml:space="preserve">
-    <value>Create a new instance of this object class in a new window</value>
-  </data>
 	<data name="Name" xml:space="preserve">
     <value>Workspace</value>
   </data>

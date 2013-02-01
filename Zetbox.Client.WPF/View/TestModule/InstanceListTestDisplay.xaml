@@ -114,8 +114,8 @@
                 </ctrls:LabeledContainer>
                 <TextBlock FontSize="20"
                            FontWeight="Bold">UI:</TextBlock>
-                <ctrls:LabeledContainer Label="IsEditable">
-                    <CheckBox IsChecked="{Binding TestList.IsEditable}" />
+                <ctrls:LabeledContainer Label="IsInlineEditable">
+                    <CheckBox IsChecked="{Binding TestList.IsInlineEditable}" />
                 </ctrls:LabeledContainer>
                 <ctrls:LabeledContainer Label="IsMultiselect">
                     <CheckBox IsChecked="{Binding TestList.IsMultiselect}" />

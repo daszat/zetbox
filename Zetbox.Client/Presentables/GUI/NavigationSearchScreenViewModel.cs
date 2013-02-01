@@ -125,7 +125,7 @@ namespace Zetbox.Client.Presentables.GUI
             if (screen.AllowSelectColumns.HasValue) mdl.AllowSelectColumns = screen.AllowSelectColumns.Value;
             if (screen.AllowUserFilter.HasValue) mdl.AllowUserFilter = screen.AllowUserFilter.Value;
             if (screen.EnableAutoFilter.HasValue) mdl.EnableAutoFilter = screen.EnableAutoFilter.Value;
-            if (screen.IsEditable.HasValue) mdl.IsEditable = screen.IsEditable.Value;
+            if (screen.IsEditable.HasValue) mdl.IsInlineEditable = screen.IsEditable.Value;
             if (screen.IsMultiselect.HasValue) mdl.IsMultiselect = screen.IsMultiselect.Value;
             if (screen.RespectRequiredFilter.HasValue) mdl.RespectRequiredFilter = screen.RespectRequiredFilter.Value;
             if (screen.ShowFilter.HasValue) mdl.ShowFilter = screen.ShowFilter.Value;
