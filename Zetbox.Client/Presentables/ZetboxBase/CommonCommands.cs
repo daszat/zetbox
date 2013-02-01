@@ -71,6 +71,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public static void ActivateItem(IViewModelFactory vmFactory, IZetboxContext dataCtx, IFrozenContext frozenCtx, ViewModel parent, DataObjectViewModel item, bool isInlineEditable)
         {
+            if (vmFactory == null) throw new ArgumentNullException("vmFactory");
+            if (dataCtx == null) throw new ArgumentNullException("dataCtx");
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+            if (parent == null) throw new ArgumentNullException("parent");
             if (item == null) return;
 
             var type = item.Object.GetObjectClass(frozenCtx);
@@ -96,6 +100,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public static void ActivateForeignItems(IViewModelFactory vmFactory, IZetboxContext dataCtx, IEnumerable<IDataObject> items, ControlKind requestedWorkspaceKind, ControlKind requestedEditorKind, ItemsOpenedHandler callback)
         {
+            if (vmFactory == null) throw new ArgumentNullException("vmFactory");
+            if (dataCtx == null) throw new ArgumentNullException("dataCtx");
+            if (items == null || items.Count() == 0) return;
+
             var newWorkspace = vmFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(dataCtx, null);
 
             vmFactory.ShowModel(newWorkspace, requestedWorkspaceKind, true);
@@ -107,7 +115,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     .Select(i => newWorkspace.ShowForeignObject(i, requestedEditorKind))
                     .ToList(); // force evaluation, event might do it multiple times or not at all!
 
-                callback(newWorkspace, openedForeignItems);
+                if (callback != null)
+                    callback(newWorkspace, openedForeignItems);
 
                 newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
             }).Trigger();
@@ -356,6 +365,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public static void ChooseObjectClass(IViewModelFactory vmFactory, IZetboxContext ctx, IFrozenContext frozenCtx, ViewModel parent, ObjectClass baseClass, Action<ObjectClass> createNewObjectAndNotify)
         {
+            if (vmFactory == null) throw new ArgumentNullException("vmFactory");
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+            if (parent == null) throw new ArgumentNullException("parent");
+            if (baseClass == null) throw new ArgumentNullException("baseClass");
+            if (createNewObjectAndNotify == null) throw new ArgumentNullException("createNewObjectAndNotify");
 
             var children = new List<ObjectClass>();
             if (baseClass.IsAbstract == false)
