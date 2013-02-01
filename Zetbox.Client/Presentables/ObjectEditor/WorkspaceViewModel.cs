@@ -26,6 +26,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using Zetbox.API.Client;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
 
     public class WorkspaceViewModel
@@ -457,6 +458,20 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         #endregion
 
         #region Model Management
+
+        public DataObjectViewModel ShowForeignObject(IDataObject other, ControlKind requestedKind = null)
+        {
+            if (other == null)
+                return null;
+
+            var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
+            var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, here);
+            SelectedItem = vm;
+            vm.RequestedKind = requestedKind;
+            AddItem(vm);
+            return vm;
+        }
+
         /// <summary>
         /// Show a foreign model by finding and creating the equivalent model on the local DataContext.
         /// </summary>
@@ -473,18 +488,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         /// <param name="dataObject"></param>
         /// <param name="requestedKind"></param>
         /// <returns></returns>
-        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject, Zetbox.App.GUI.ControlKind requestedKind)
+        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject, ControlKind requestedKind)
         {
-            if (dataObject == null || dataObject.Object == null)
+            if (dataObject == null)
                 return null;
 
-            var other = dataObject.Object;
-            var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, here);
-            SelectedItem = vm;
-            vm.RequestedKind = requestedKind;
-            AddItem(vm);
-            return vm;
+            return ShowForeignObject(dataObject.Object, requestedKind);
         }
 
         public void ShowModel(ViewModel mdl)

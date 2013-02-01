@@ -394,7 +394,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (!isSimpleObject)
             {
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
-                newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newObj), RequestedEditorKind);
+                newWorkspace.ShowForeignObject(newObj, RequestedEditorKind);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
             }
             else if (Listener != null)
@@ -440,9 +440,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected override void DoExecute(object data)
         {
             var newCtx = ctxFactory();
-            var objClass = newCtx.FindPersistenceObject<DataType>(this.Type.ExportGuid);
+            var newObjClass = newCtx.FindPersistenceObject<DataType>(this.Type.ExportGuid);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
-            newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, Parent, objClass));
+            newWorkspace.ShowForeignObject(newObjClass);
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }

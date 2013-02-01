@@ -317,7 +317,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             var newCtx = ctxFactory(ClientIsolationLevel.PrefereClientData);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
 
-            newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, CurrentModule));
+            newWorkspace.ShowForeignObject(CurrentModule);
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
 
@@ -348,7 +348,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
             var newObj = newCtx.Create<Module>();
 
-            newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newObj));
+            newWorkspace.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newObj));
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }

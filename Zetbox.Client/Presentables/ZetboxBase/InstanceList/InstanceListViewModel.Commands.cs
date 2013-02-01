@@ -156,18 +156,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx, null);
             ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
 
+            // ShowForeignObject may take a while
             ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
             {
-                var openedItems = new List<DataObjectViewModel>();
-
-                foreach (var other in items)
-                {
-                    var here = workingCtx.Find(DataContext.GetInterfaceType(other), other.ID);
-                    var mdl = DataObjectViewModel.Fetch(ViewModelFactory, workingCtx, newWorkspace, other);
-                    mdl.RequestedKind = RequestedEditorKind;
-                    openedItems.Add(mdl);
-                    newWorkspace.ShowModel(mdl);
-                }
+                var openedItems = items.Select(i => newWorkspace.ShowForeignObject(i, RequestedEditorKind));
 
                 OnItemsOpened(newWorkspace, openedItems);
 
