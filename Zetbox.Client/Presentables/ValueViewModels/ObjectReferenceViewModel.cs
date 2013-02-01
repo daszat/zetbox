@@ -209,7 +209,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public void OpenReference()
         {
             if (CanOpen)
-                NewDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, Value, ObjectReferenceModel.ReferencedClass, false);
+                ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, Value, ObjectReferenceModel.ReferencedClass, false);
         }
 
         private ICommandViewModel _openReferenceCommand;
@@ -248,6 +248,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         ReferencedClass,
                         false);
+                    _createNewItemAndSetValueCommand.LocalModelCreated += vm => Value = vm;
                 }
                 return _createNewItemAndSetValueCommand;
             }
@@ -256,21 +257,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         bool INewCommandParameter.AllowAddNew
         {
             get { return AllowCreateNewItem; }
-        }
-
-        void INewCommandParameter.OnObjectCreated(IDataObject obj)
-        {
-            // ignore
-        }
-
-        void INewCommandParameter.OnLocalModelCreated(DataObjectViewModel vm)
-        {
-            Value = vm;
-        }
-
-        void INewCommandParameter.OnItemsOpened(ViewModel workspace, IEnumerable<DataObjectViewModel> items)
-        {
-            // ignore
         }
 
         #endregion

@@ -112,12 +112,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         this,
                         DataType,
                         workingCtxFactory != null);
+
+                    _NewCommand.ObjectCreated += OnObjectCreated;
+                    _NewCommand.LocalModelCreated += OnLocalModelCreated;
+                    _NewCommand.ItemsOpened += OnItemsOpened;
                 }
                 return _NewCommand;
             }
         }
 
-        public void OnLocalModelCreated(DataObjectViewModel vm)
+        private void OnLocalModelCreated(DataObjectViewModel vm)
         {
             AddLocalInstance(vm);
             this.SelectedItem = vm;
@@ -125,14 +129,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void ActivateItem(DataObjectViewModel item)
         {
-            NewDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, item, this.DataType, IsInlineEditable);
+            ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, item, this.DataType, IsInlineEditable);
             OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), new[] { item });
         }
 
         public delegate void ObjectCreatedHandler(IDataObject obj);
         public event ObjectCreatedHandler ObjectCreated;
 
-        public void OnObjectCreated(IDataObject obj)
+        private void OnObjectCreated(IDataObject obj)
         {
             ObjectCreatedHandler temp = ObjectCreated;
             if (temp != null)
