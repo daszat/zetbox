@@ -276,17 +276,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
-            if (type.IsSimpleObject && !isInlineEditable)
+            if (type.IsSimpleObject)
             {
-                // Open in a Dialog
-                var dlg = vmFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(dataCtx, parent, item);
-                vmFactory.ShowDialog(dlg);
+                if (isInlineEditable)
+                {
+                    // don't show simple objects, IF they are inline editable
+                }
+                else
+                {
+                    // Open in a Dialog
+                    var dlg = vmFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(dataCtx, parent, item);
+                    vmFactory.ShowDialog(dlg);
+                }
             }
-            else if (!type.IsSimpleObject)
+            else
             {
                 vmFactory.ShowModel(item, true);
             }
-            // Don't open simple objects
         }
 
         protected readonly Func<IZetboxContext> ctxFactory;
