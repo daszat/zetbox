@@ -44,22 +44,22 @@ namespace Zetbox.App.Base
         public static void NotifyDeleting(ObjectClass obj)
         {
             var ctx = obj.Context;
-            foreach (var ac in obj.AccessControlList)
+            foreach (var ac in obj.AccessControlList.ToList())
             {
                 ctx.Delete(ac);
             }
 
-            foreach (var f in obj.FilterConfigurations)
+            foreach (var f in obj.FilterConfigurations.ToList())
             {
                 ctx.Delete(f);
             }
 
-            foreach (var cls in obj.SubClasses)
+            foreach (var cls in obj.SubClasses.ToList())
             {
                 ctx.Delete(cls);
             }
 
-            foreach (var rel in obj.GetRelations())
+            foreach (var rel in obj.GetRelations().ToList())
             {
                 ctx.Delete(rel);
             }
