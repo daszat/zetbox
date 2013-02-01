@@ -69,7 +69,7 @@ namespace Zetbox.Client.Presentables
         {
             _callback = callback;
             _additionalActions = new ReadOnlyCollection<CommandViewModel>(additionalActions ?? new CommandViewModel[] { });
-            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, this, () => dataCtx, type, qry);
+            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, this, null, type, qry);
             ListViewModel.AllowAddNew = true;
             ListViewModel.ObjectCreated += ListViewModel_ObjectCreated;
             ListViewModel.ItemsDefaultAction += ListViewModel_ItemsDefaultAction;

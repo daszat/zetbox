@@ -52,15 +52,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected readonly Func<IZetboxContext> workingCtxFactory;
         protected readonly IFileOpener fileOpener;
         protected readonly ITempFileService tmpService;
-        /// <summary>
-        /// Retruns true if DataContext is the same as the working context returned by the working context factory.
-        /// This is an indicator for an embedded InstanceList (embedded in a workspace which a User must submit manually).
-        /// </summary>
-        /// <param name="workingCtx"></param>
-        /// <returns></returns>
-        protected bool isEmbedded(IZetboxContext workingCtx)
+
+        protected bool isEmbedded()
         {
-            return workingCtx == DataContext;
+            return workingCtxFactory == null;
         }
 
         /// <summary>
@@ -87,7 +82,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             : base(appCtx, dataCtx, parent)
         {
             if (dataCtx == null) throw new ArgumentNullException("dataCtx");
-            if (workingCtxFactory == null) throw new ArgumentNullException("workingCtxFactory");
             if (type == null) throw new ArgumentNullException("type");
             if (fileOpener == null) throw new ArgumentNullException("fileOpener");
             if (tmpService == null) throw new ArgumentNullException("tmpService");
@@ -324,8 +318,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public void OpenObjects(IEnumerable<DataObjectViewModel> objects)
         {
             if (objects == null) throw new ArgumentNullException("objects");
-            var workingCtx = workingCtxFactory();
-            if (isEmbedded(workingCtx))
+            if (isEmbedded())
             {
                 foreach (var item in objects)
                 {
@@ -343,6 +336,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
             else
             {
+                var workingCtx = workingCtxFactory == null ? DataContext : workingCtxFactory();
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx, null);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
 

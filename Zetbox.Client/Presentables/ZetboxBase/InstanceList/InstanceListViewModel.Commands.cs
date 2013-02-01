@@ -158,11 +158,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private void CreateNewObjectAndNotify(ObjectClass type)
         {
-            var workingCtx = workingCtxFactory();
+            var workingCtx = workingCtxFactory == null ? DataContext : workingCtxFactory();
             var obj = workingCtx.Create(DataContext.GetInterfaceType(type.GetDataType()));
             OnObjectCreated(obj);
 
-            if (isEmbedded(workingCtx))
+            if (isEmbedded())
             {
                 // TODO: Reorganize this control - it's too complex
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
@@ -208,8 +208,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_DeleteCommand == null)
                 {
-                    var deleteCtx = workingCtxFactory();
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(deleteCtx, this, this, this, !isEmbedded(deleteCtx));
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, this, !isEmbedded());
                 }
                 return _DeleteCommand;
             }
