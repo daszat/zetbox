@@ -274,7 +274,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public static void ActivateItem(IViewModelFactory vmFactory, IZetboxContext dataCtx, ViewModel parent, DataObjectViewModel item, ObjectClass type, bool isInlineEditable)
         {
-            if (item == null) { throw new ArgumentNullException("item"); }
+            if (item == null) return;
 
             if (type.IsSimpleObject)
             {
