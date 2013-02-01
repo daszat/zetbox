@@ -142,7 +142,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         private DeleteDataObjectCommand _DeleteCommand;
-        public DeleteDataObjectCommand DeleteCommand
+        public ICommandViewModel DeleteCommand
         {
             get
             {
