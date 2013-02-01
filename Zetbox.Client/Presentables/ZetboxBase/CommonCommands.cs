@@ -305,15 +305,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public static void ActivateForeignItems(IViewModelFactory vmFactory, IZetboxContext dataCtx, IEnumerable<IDataObject> items, ControlKind requestedWorkspaceKind, ControlKind requestedEditorKind, INewCommandParameters parameter)
         {
             var newWorkspace = vmFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(dataCtx, null);
+
             vmFactory.ShowModel(newWorkspace, requestedWorkspaceKind, true);
 
             // ShowForeignObject may take a while
             vmFactory.CreateDelayedTask(newWorkspace, () =>
             {
-                var openedItems = items.Select(i => newWorkspace.ShowForeignObject(i, requestedEditorKind));
+                var openedForeignItems = items
+                    .Select(i => newWorkspace.ShowForeignObject(i, requestedEditorKind))
+                    .ToList(); // force evaluation, event might do it multiple times or not at all!
 
                 if (parameter != null)
-                    parameter.OnItemsOpened(newWorkspace, openedItems);
+                    parameter.OnItemsOpened(newWorkspace, openedForeignItems);
 
                 newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
             }).Trigger();

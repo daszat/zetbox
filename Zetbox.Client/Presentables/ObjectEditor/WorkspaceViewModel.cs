@@ -464,7 +464,9 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             if (other == null)
                 return null;
 
-            var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
+            var here = DataContext == other.Context
+                ? other
+                : DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
             return ShowObject(here, requestedKind);
         }
 
