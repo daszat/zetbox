@@ -33,7 +33,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
-        : ValueViewModel<DataObjectViewModel, IDataObject>
+        : ValueViewModel<DataObjectViewModel, IDataObject>, INewCommandParameter
     {
         public new delegate ObjectReferenceViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -112,6 +112,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 if (_allowCreateNewItem != value)
                 {
                     _allowCreateNewItem = value;
+                    OnPropertyChanged("AllowAddNew");
                     OnPropertyChanged("AllowCreateNewItem");
                 }
             }
@@ -208,7 +209,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public void OpenReference()
         {
             if (CanOpen)
-                ActivateItem(Value);
+                NewDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, Value, ObjectReferenceModel.ReferencedClass, false);
         }
 
         private ICommandViewModel _openReferenceCommand;
@@ -235,50 +236,43 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region CreateNewItemAndSetValue
 
-        /// <summary>
-        /// creates a new target and references it
-        /// </summary>
-        public void CreateNewItemAndSetValue()
-        {
-            NewDataObjectCommand.ChooseObjectClass(ViewModelFactory, DataContext, FrozenContext, this, ObjectReferenceModel.ReferencedClass, CreateNewItemAndSetValue);
-        }
-
-        private void CreateNewItemAndSetValue(ObjectClass targetClass)
-        {
-            var targetType = targetClass.GetDescribedInterfaceType();
-            var item = this.DataContext.Create(targetType);
-
-            var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
-
-            Value = model;
-            ActivateItem(model);
-        }
-
-        private void ActivateItem(DataObjectViewModel model)
-        {
-            NewDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, this, model, ObjectReferenceModel.ReferencedClass, false);
-        }
-
-        private ICommandViewModel _createNewItemAndSetValueCommand;
+        private NewDataObjectCommand _createNewItemAndSetValueCommand;
         public ICommandViewModel CreateNewItemAndSetValueCommand
         {
             get
             {
                 if (_createNewItemAndSetValueCommand == null)
                 {
-                    _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Name,
-                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip,
-                        CreateNewItemAndSetValue,
-                        () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly,
-                        null);
-                    _createNewItemAndSetValueCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
+                        ReferencedClass,
+                        false);
                 }
                 return _createNewItemAndSetValueCommand;
             }
         }
+
+        bool INewCommandParameter.AllowAddNew
+        {
+            get { return AllowCreateNewItem; }
+        }
+
+        void INewCommandParameter.OnObjectCreated(IDataObject obj)
+        {
+            // ignore
+        }
+
+        void INewCommandParameter.OnLocalModelCreated(DataObjectViewModel vm)
+        {
+            Value = vm;
+        }
+
+        void INewCommandParameter.OnItemsOpened(ViewModel workspace, IEnumerable<DataObjectViewModel> items)
+        {
+            // ignore
+        }
+
         #endregion
 
         #region SelectValue

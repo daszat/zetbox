@@ -45,7 +45,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     /// </summary>
     [ViewModelDescriptor]
     public partial class InstanceListViewModel
-        : ViewModel, ILabeledViewModel, ISortableViewModel
+        : ViewModel, ILabeledViewModel, ISortableViewModel, IRequestedEditorKinds
     {
         public new delegate InstanceListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
 

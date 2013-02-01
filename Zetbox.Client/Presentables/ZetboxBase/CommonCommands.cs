@@ -225,24 +225,31 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsReadonly" || e.PropertyName == "AllowDelete" || e.PropertyName == "SelectedItems")
+            if (e.PropertyName == "IsReadOnly" || e.PropertyName == "AllowDelete" || e.PropertyName == "SelectedItems")
             {
                 OnCanExecuteChanged();
             }
         }
     }
 
-    public interface INewCommandParameters : INotifyPropertyChanged
+    public interface INewCommandParameter : INotifyPropertyChanged
     {
+        bool IsReadOnly { get; }
         bool AllowAddNew { get; }
         void OnObjectCreated(IDataObject obj);
         void OnLocalModelCreated(DataObjectViewModel vm);
         void OnItemsOpened(ViewModel workspace, IEnumerable<DataObjectViewModel> items);
     }
 
+    public interface IRequestedEditorKinds
+    {
+        ControlKind RequestedEditorKind { get; }
+        ControlKind RequestedWorkspaceKind { get; }
+    }
+
     public class NewDataObjectCommand : CommandViewModel
     {
-        public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, INewCommandParameters parameter, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener, bool useSeparateContext);
+        public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext);
 
         public static void ChooseObjectClass(IViewModelFactory vmFactory, IZetboxContext ctx, IFrozenContext frozenCtx, ViewModel parent, ObjectClass baseClass, Action<ObjectClass> createNewObjectAndNotify)
         {
@@ -302,7 +309,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public static void ActivateForeignItems(IViewModelFactory vmFactory, IZetboxContext dataCtx, IEnumerable<IDataObject> items, ControlKind requestedWorkspaceKind, ControlKind requestedEditorKind, INewCommandParameters parameter)
+        public static void ActivateForeignItems(IViewModelFactory vmFactory, IZetboxContext dataCtx, IEnumerable<IDataObject> items, ControlKind requestedWorkspaceKind, ControlKind requestedEditorKind, INewCommandParameter parameter)
         {
             var newWorkspace = vmFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(dataCtx, null);
 
@@ -324,56 +331,39 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected readonly Func<IZetboxContext> ctxFactory;
         protected ObjectClass Type { get; private set; }
-        protected INewCommandParameters Parameter { get; private set; }
-        protected IRefreshCommandListener Listener { get; private set; }
+        protected INewCommandParameter Parameter { get { return Parent as INewCommandParameter; } }
+        protected IRequestedEditorKinds RequestedKinds { get { return Parent as IRequestedEditorKinds; } }
+        protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
         protected bool UseSeparateContext { get; private set; }
 
         public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
-            IZetboxContext dataCtx, ViewModel parent, INewCommandParameters parameter, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener, bool useSeparateContext)
+            IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
         {
-            this.Parameter = parameter;
             if (this.Parameter != null)
                 this.Parameter.PropertyChanged += OnParameterChanged;
             this.Type = type;
             this.ctxFactory = ctxFactory;
-            this._requestedWorkspaceKind = reqWorkspaceKind;
-            this._requestedEditorKind = reqEditorKind;
-            this.Listener = listener;
             this.UseSeparateContext = useSeparateContext;
         }
 
-        private ControlKind _requestedEditorKind;
         public ControlKind RequestedEditorKind
         {
             get
             {
-                return _requestedEditorKind;
-            }
-            set
-            {
-                if (_requestedEditorKind != value)
-                {
-                    _requestedEditorKind = value;
-                    OnPropertyChanged("RequestedEditorKind");
-                }
+                return RequestedKinds != null
+                    ? RequestedKinds.RequestedEditorKind
+                    : null;
             }
         }
 
-        private ControlKind _requestedWorkspaceKind;
         public ControlKind RequestedWorkspaceKind
         {
             get
             {
-                return _requestedWorkspaceKind;
-            }
-            set
-            {
-                if (_requestedWorkspaceKind != value)
-                {
-                    _requestedWorkspaceKind = value;
-                    OnPropertyChanged("RequestedWorkspaceKind");
-                }
+                return RequestedKinds != null
+                    ? RequestedKinds.RequestedWorkspaceKind
+                    : null;
             }
         }
 
@@ -391,7 +381,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            return Parameter != null ? Parameter.AllowAddNew : true;
+            if (!UseSeparateContext && DataContext.IsReadonly)
+                return false;
+
+            return Parameter != null
+                ? Parameter.AllowAddNew && !Parameter.IsReadOnly
+                : true;
         }
 
         protected override void DoExecute(object data)
@@ -468,8 +463,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
         {
-            // TODO!!
-            if (e.PropertyName == "IsReadonly" || e.PropertyName == "AllowDelete" || e.PropertyName == "SelectedItems")
+            if (e.PropertyName == "IsReadOnly" || e.PropertyName == "AllowAddNew")
             {
                 OnCanExecuteChanged();
             }

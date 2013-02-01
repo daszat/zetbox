@@ -27,7 +27,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.FilterViewModels;
 
-    public partial class InstanceListViewModel : IRefreshCommandListener, IDeleteCommandParameter, INewCommandParameters
+    public partial class InstanceListViewModel : IRefreshCommandListener, IDeleteCommandParameter, INewCommandParameter
     {
         #region Commands
         protected override ObservableCollection<ICommandViewModel> CreateCommands()
@@ -110,11 +110,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        this,
                         DataType,
-                        RequestedWorkspaceKind,
-                        RequestedEditorKind,
-                        this,
                         workingCtxFactory != null);
                 }
                 return _NewCommand;

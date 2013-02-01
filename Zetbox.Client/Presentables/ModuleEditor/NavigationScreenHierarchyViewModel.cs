@@ -123,7 +123,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, null, typeof(NavigationEntry).GetObjectClass(FrozenContext), null, null, this, true);
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, typeof(NavigationEntry).GetObjectClass(FrozenContext), true);
                     _NewCommand.ObjectCreated += (obj) => ((NavigationEntry)obj).Parent = SelectedItem != null ? obj.Context.Find<NavigationEntry>(SelectedItem.ID) : null;
                 }
                 return _NewCommand;
