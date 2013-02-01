@@ -27,7 +27,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.FilterViewModels;
 
-    public partial class InstanceListViewModel : IRefreshCommandListener, IDeleteCommandParameter
+    public partial class InstanceListViewModel : IRefreshCommandListener, IDeleteCommandParameter, INewCommandParameters
     {
         #region Commands
         protected override ObservableCollection<ICommandViewModel> CreateCommands()
@@ -100,71 +100,31 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private ICommandViewModel _NewCommand;
+        private NewDataObjectCommand _NewCommand;
         public ICommandViewModel NewCommand
         {
             get
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, this,
-                        CommonCommandsResources.NewDataObjectCommand_Name,
-                        CommonCommandsResources.NewDataObjectCommand_Tooltip,
-                        NewObject,
-                        () => AllowAddNew,
-                        null);
-                    _NewCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        this,
+                        DataType,
+                        RequestedWorkspaceKind,
+                        RequestedEditorKind,
+                        this,
+                        workingCtxFactory != null);
                 }
                 return _NewCommand;
             }
         }
 
-        public void NewObject()
+        public void OnLocalModelCreated(DataObjectViewModel vm)
         {
-            if (!AllowAddNew) return;
-
-            NewDataObjectCommand.ChooseObjectClass(ViewModelFactory, DataContext, FrozenContext, this, _type, CreateNewObjectAndNotify);
-        }
-
-        private void CreateNewObjectAndNotify(ObjectClass type)
-        {
-            var workingCtx = workingCtxFactory == null ? DataContext : workingCtxFactory();
-
-            var targetType = type.GetDescribedInterfaceType();
-            var item = workingCtx.Create(targetType);
-            OnObjectCreated(item);
-
-            if (workingCtxFactory == null)
-            {
-                // TODO: Reorganize this control - it's too complex
-                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
-                AddLocalInstance(mdl);
-                this.SelectedItem = mdl;
-
-                ActivateItem(mdl);
-
-            }
-            else
-            {
-                ActivateForeignItem(workingCtx, new[] { item });
-            }
-        }
-
-        private void ActivateForeignItem(IZetboxContext workingCtx, IEnumerable<IDataObject> items)
-        {
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx, null);
-            ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
-
-            // ShowForeignObject may take a while
-            ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
-            {
-                var openedItems = items.Select(i => newWorkspace.ShowForeignObject(i, RequestedEditorKind));
-
-                OnItemsOpened(newWorkspace, openedItems);
-
-                newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
-            }).Trigger();
+            AddLocalInstance(vm);
+            this.SelectedItem = vm;
         }
 
         public void ActivateItem(DataObjectViewModel item)
@@ -176,7 +136,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public delegate void ObjectCreatedHandler(IDataObject obj);
         public event ObjectCreatedHandler ObjectCreated;
 
-        protected void OnObjectCreated(IDataObject obj)
+        public void OnObjectCreated(IDataObject obj)
         {
             ObjectCreatedHandler temp = ObjectCreated;
             if (temp != null)

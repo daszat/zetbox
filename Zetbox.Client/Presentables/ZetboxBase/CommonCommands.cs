@@ -126,12 +126,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             this._ctxFactory = ctxFactory;
         }
 
-        private System.Drawing.Image _icon;
         public override System.Drawing.Image Icon
         {
             get
             {
-                return base.Icon ?? _icon ?? (_icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext)));
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext)));
             }
             set
             {
@@ -233,9 +232,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
     }
 
+    public interface INewCommandParameters : INotifyPropertyChanged
+    {
+        bool AllowAddNew { get; }
+        void OnObjectCreated(IDataObject obj);
+        void OnLocalModelCreated(DataObjectViewModel vm);
+        void OnItemsOpened(ViewModel workspace, IEnumerable<DataObjectViewModel> items);
+    }
+
     public class NewDataObjectCommand : CommandViewModel
     {
-        public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
+        public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, INewCommandParameters parameter, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener, bool useSeparateContext);
 
         public static void ChooseObjectClass(IViewModelFactory vmFactory, IZetboxContext ctx, IFrozenContext frozenCtx, ViewModel parent, ObjectClass baseClass, Action<ObjectClass> createNewObjectAndNotify)
         {
@@ -295,19 +302,42 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        public static void ActivateForeignItems(IViewModelFactory vmFactory, IZetboxContext dataCtx, IEnumerable<IDataObject> items, ControlKind requestedWorkspaceKind, ControlKind requestedEditorKind, INewCommandParameters parameter)
+        {
+            var newWorkspace = vmFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(dataCtx, null);
+            vmFactory.ShowModel(newWorkspace, requestedWorkspaceKind, true);
+
+            // ShowForeignObject may take a while
+            vmFactory.CreateDelayedTask(newWorkspace, () =>
+            {
+                var openedItems = items.Select(i => newWorkspace.ShowForeignObject(i, requestedEditorKind));
+
+                if (parameter != null)
+                    parameter.OnItemsOpened(newWorkspace, openedItems);
+
+                newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+            }).Trigger();
+        }
+
         protected readonly Func<IZetboxContext> ctxFactory;
         protected ObjectClass Type { get; private set; }
+        protected INewCommandParameters Parameter { get; private set; }
         protected IRefreshCommandListener Listener { get; private set; }
+        protected bool UseSeparateContext { get; private set; }
 
         public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
-            IZetboxContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
+            IZetboxContext dataCtx, ViewModel parent, INewCommandParameters parameter, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener, bool useSeparateContext)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
         {
+            this.Parameter = parameter;
+            if (this.Parameter != null)
+                this.Parameter.PropertyChanged += OnParameterChanged;
             this.Type = type;
             this.ctxFactory = ctxFactory;
             this._requestedWorkspaceKind = reqWorkspaceKind;
             this._requestedEditorKind = reqEditorKind;
             this.Listener = listener;
+            this.UseSeparateContext = useSeparateContext;
         }
 
         private ControlKind _requestedEditorKind;
@@ -344,9 +374,21 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        public override System.Drawing.Image Icon
+        {
+            get
+            {
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
+            }
+            set
+            {
+                base.Icon = value;
+            }
+        }
+
         public override bool CanExecute(object data)
         {
-            return true;
+            return Parameter != null ? Parameter.AllowAddNew : true;
         }
 
         protected override void DoExecute(object data)
@@ -387,19 +429,25 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             var isSimpleObject = dtType.IsSimpleObject;
 
-            var newCtx = isSimpleObject ? DataContext : ctxFactory();
-            var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
+            var newCtx = UseSeparateContext ? ctxFactory() : DataContext; //
+            var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType())); //
+
             OnObjectCreated(newObj);
 
-            if (!isSimpleObject)
+            if (UseSeparateContext)
             {
-                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
-                newWorkspace.ShowForeignObject(newObj, RequestedEditorKind);
-                ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+                ActivateForeignItems(ViewModelFactory, newCtx, new[] { newObj }, RequestedWorkspaceKind, RequestedEditorKind, Parameter);
             }
-            else if (Listener != null)
+            else
             {
-                Listener.Refresh();
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), newObj); //
+
+                ActivateItem(ViewModelFactory, newCtx, this, mdl, dtType, false); // TODO!!!! isInlineEditable?
+
+                if (Listener != null)
+                {
+                    Listener.Refresh();
+                }
             }
         }
 
@@ -412,6 +460,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (temp != null)
             {
                 temp(obj);
+            }
+        }
+
+        private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // TODO!!
+            if (e.PropertyName == "IsReadonly" || e.PropertyName == "AllowDelete" || e.PropertyName == "SelectedItems")
+            {
+                OnCanExecuteChanged();
             }
         }
     }

@@ -323,7 +323,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
             else
             {
-                ActivateForeignItem(workingCtxFactory(), objects.Select(vm => vm.Object));
+                NewDataObjectCommand.ActivateForeignItems(ViewModelFactory, workingCtxFactory(), objects.Select(vm => vm.Object),
+                    RequestedWorkspaceKind, RequestedEditorKind, this);
             }
         }
 
@@ -334,7 +335,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// </summary>
         public event ItemsOpenedHandler ItemsOpened = null;
 
-        protected virtual void OnItemsOpened(ViewModel sender, IEnumerable<DataObjectViewModel> objects)
+        public virtual void OnItemsOpened(ViewModel sender, IEnumerable<DataObjectViewModel> objects)
         {
             var temp = ItemsOpened;
             if (temp != null)

@@ -465,12 +465,22 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 return null;
 
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, here);
+            return ShowObject(here, requestedKind);
+        }
+
+
+        public DataObjectViewModel ShowObject(IDataObject obj, ControlKind requestedKind = null)
+        {
+            var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
+            if (!Items.Contains(vm))
+            {
+                vm.RequestedKind = requestedKind;
+                AddItem(vm);
+            }
             SelectedItem = vm;
-            vm.RequestedKind = requestedKind;
-            AddItem(vm);
             return vm;
         }
+
 
         /// <summary>
         /// Show a foreign model by finding and creating the equivalent model on the local DataContext.
@@ -544,6 +554,5 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
         IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
         #endregion
-
     }
 }

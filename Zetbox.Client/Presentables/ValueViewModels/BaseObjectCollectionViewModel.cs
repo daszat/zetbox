@@ -408,6 +408,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             var result = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
 
             AddItem(result);
+
             ActivateItem(result);
         }
 
