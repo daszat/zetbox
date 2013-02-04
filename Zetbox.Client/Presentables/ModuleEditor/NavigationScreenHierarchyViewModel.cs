@@ -111,8 +111,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 {
                     _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
-                        this,
-                        true);
+                        this);
                 }
                 return _OpenCommand;
             }
@@ -133,8 +132,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        typeof(NavigationEntry).GetObjectClass(FrozenContext),
-                        true);
+                        typeof(NavigationEntry).GetObjectClass(FrozenContext));
                     _NewCommand.ObjectCreated += (obj) =>
                         ((NavigationEntry)obj).Parent = SelectedItem != null
                             ? obj.Context.Find<NavigationEntry>(SelectedItem.ID)
@@ -156,7 +154,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, true);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _DeleteCommand;
             }

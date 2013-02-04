@@ -276,7 +276,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_NewModuleCommand == null)
                 {
-                    _NewModuleCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, typeof(Module).GetObjectClass(FrozenContext), true);
+                    _NewModuleCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, typeof(Module).GetObjectClass(FrozenContext));
                 }
                 return _NewModuleCommand;
             }

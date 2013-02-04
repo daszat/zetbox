@@ -35,7 +35,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public abstract class ActivateDataObjectCommand : CommandViewModel
     {
-        protected bool UseSeparateContext { get; private set; }
+        protected bool UseSeparateContext { get { return !(ViewModelFactory.GetWorkspace(DataContext) is IContextViewModel); } }
 
         private IActivateCommandParameter Parameter { get { return Parent as IActivateCommandParameter; } }
 
@@ -61,12 +61,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public ActivateDataObjectCommand(
-            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip,
-            bool useSeparateContext)
+        public ActivateDataObjectCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
-            this.UseSeparateContext = useSeparateContext;
         }
 
         public static void ActivateItem(IViewModelFactory vmFactory, IZetboxContext dataCtx, IFrozenContext frozenCtx, ViewModel parent, DataObjectViewModel item, bool isInlineEditable)
@@ -146,15 +143,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public class OpenDataObjectCommand : ActivateDataObjectCommand
     {
-        public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, bool useSeparateContext);
+        public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent);
 
         protected readonly Func<IZetboxContext> ctxFactory;
         protected IOpenCommandParameter Parameter { get { return Parent as IOpenCommandParameter; } }
 
         public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
-            IZetboxContext dataCtx, ViewModel parent, bool useSeparateContext
-            )
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip, useSeparateContext)
+            IZetboxContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
         {
             this.ctxFactory = ctxFactory;
             if (Parameter != null)
@@ -243,21 +239,20 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public class DeleteDataObjectCommand : CommandViewModel
     {
-        public new delegate DeleteDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, bool useSeparateContext);
+        public new delegate DeleteDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent);
 
         protected IDeleteCommandParameter Parameter { get { return Parent as IDeleteCommandParameter; } }
         protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
-        protected bool UseSeparateContext { get; private set; }
+        protected bool UseSeparateContext { get { return !(ViewModelFactory.GetWorkspace(DataContext) is IContextViewModel); } }
 
         private readonly Func<IZetboxContext> _ctxFactory;
 
         public DeleteDataObjectCommand(IViewModelDependencies appCtx,
-            IZetboxContext dataCtx, ViewModel parent, bool useSeparateContext,
+            IZetboxContext dataCtx, ViewModel parent,
             Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
         {
             this.Parameter.PropertyChanged += OnParameterChanged;
-            this.UseSeparateContext = useSeparateContext;
             this._ctxFactory = ctxFactory;
         }
 
@@ -383,7 +378,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public class NewDataObjectCommand : ActivateDataObjectCommand
     {
-        public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext);
+        public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type);
 
         public static void ChooseObjectClass(IViewModelFactory vmFactory, IZetboxContext ctx, IFrozenContext frozenCtx, ViewModel parent, ObjectClass baseClass, Action<ObjectClass> createNewObjectAndNotify)
         {
@@ -432,9 +427,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected ObjectClass Type { get; private set; }
 
         public NewDataObjectCommand(
-            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type, bool useSeparateContext,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type,
             Func<IZetboxContext> ctxFactory)
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, useSeparateContext)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
         {
             if (this.Parameter != null)
                 this.Parameter.PropertyChanged += OnParameterChanged;

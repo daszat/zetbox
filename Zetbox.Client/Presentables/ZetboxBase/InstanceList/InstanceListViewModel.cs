@@ -27,6 +27,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Reflection;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Client;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
@@ -35,10 +36,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.FilterViewModels;
+    using Zetbox.Client.Presentables.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
     using ObjectEditor = Zetbox.Client.Presentables.ObjectEditor;
-    using Zetbox.Client.Presentables.GUI;
-    using Zetbox.API.Async;
 
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
@@ -47,9 +47,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     public partial class InstanceListViewModel
         : ViewModel, ILabeledViewModel, ISortableViewModel, IRequestedEditorKinds
     {
-        public new delegate InstanceListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
+        public new delegate InstanceListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, Func<IQueryable> qry);
 
-        protected readonly Func<IZetboxContext> workingCtxFactory;
         protected readonly IFileOpener fileOpener;
         protected readonly ITempFileService tmpService;
 
@@ -62,7 +61,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// <param name="tmpService"></param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="parent">Parent ViewModel</param>
-        /// <param name="workingCtxFactory">A factory for creating a working context. If the InstanceList is embedded in a workspace which the user has to submit manually, the factory should return the same context as passed in the dataCtx parameter.</param>
         /// <param name="type">the data type to model. If null, qry must be a Query of a valid DataType</param>
         /// <param name="qry">optional: the query to display. If null, Query will be constructed from type</param>
         public InstanceListViewModel(
@@ -71,7 +69,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             IFileOpener fileOpener,
             ITempFileService tmpService,
             IZetboxContext dataCtx, ViewModel parent,
-            Func<IZetboxContext> workingCtxFactory,
             ObjectClass type,
             Func<IQueryable> qry)
             : base(appCtx, dataCtx, parent)
@@ -94,8 +91,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 _query = qry;
             }
-
-            this.workingCtxFactory = workingCtxFactory;
 
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
         }

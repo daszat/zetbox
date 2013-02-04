@@ -34,7 +34,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
 
         public ImportedFileNavigationSearchScreenViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
             IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
-            : base(appCtx, dataCtx, ctxFactory, parent, screen)
+            : base(appCtx, dataCtx, parent, screen)
         {
             _ctxFactory = ctxFactory;
             base.Type = typeof(ImportedFile).GetObjectClass(FrozenContext);

@@ -56,9 +56,10 @@ namespace Zetbox.Client.Presentables
         {
             var result = base.CreatePropertyGroups();
 
-            var relListMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, this, 
-                null,
-                typeof(Relation).GetObjectClass(FrozenContext), 
+            var relListMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(
+                DataContext,
+                this,
+                typeof(Relation).GetObjectClass(FrozenContext),
                 () => DataContext.GetQuery<Relation>().Where(i => i.A.Type == Object || i.B.Type == Object));
             relListMdl.EnableAutoFilter = false;
             relListMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Relation", "Creates a new Relation", CreateRelation, null, null));

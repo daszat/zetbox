@@ -85,8 +85,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     _openReferenceCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
-                        this,
-                        false);
+                        this);
                 }
                 return _openReferenceCommand;
             }

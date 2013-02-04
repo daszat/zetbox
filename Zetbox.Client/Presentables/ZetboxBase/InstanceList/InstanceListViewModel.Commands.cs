@@ -91,11 +91,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_OpenCommand == null)
                 {
-                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        workingCtxFactory != null);
-
+                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this);
                     _OpenCommand.ItemsOpened += OnItemsOpened;
                 }
                 return _OpenCommand;
@@ -117,8 +113,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        DataType,
-                        workingCtxFactory != null);
+                        DataType);
 
                     _NewCommand.ObjectCreated += OnObjectCreated;
                     _NewCommand.LocalModelCreated += OnLocalModelCreated;
@@ -164,7 +159,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, !(workingCtxFactory == null));
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _DeleteCommand;
             }

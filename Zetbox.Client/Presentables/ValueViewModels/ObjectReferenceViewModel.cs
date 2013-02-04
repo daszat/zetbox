@@ -211,8 +211,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     _openReferenceCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
-                        this,
-                        false);
+                        this);
                 }
                 return _openReferenceCommand;
             }
@@ -243,8 +242,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        ReferencedClass,
-                        false);
+                        ReferencedClass);
                     _createNewItemAndSetValueCommand.LocalModelCreated += vm => Value = vm;
                 }
                 return _createNewItemAndSetValueCommand;

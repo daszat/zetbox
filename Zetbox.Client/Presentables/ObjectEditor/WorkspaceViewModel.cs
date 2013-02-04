@@ -187,7 +187,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, false);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _DeleteCommand;
             }

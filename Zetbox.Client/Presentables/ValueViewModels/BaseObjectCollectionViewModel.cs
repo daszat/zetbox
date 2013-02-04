@@ -317,8 +317,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     _CreateNewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        ReferencedClass,
-                        false);
+                        ReferencedClass);
 
                     _CreateNewCommand.LocalModelCreated += vm => AddItem(vm);
                 }
@@ -379,7 +378,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, false);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _DeleteCommand;
             }

@@ -33,15 +33,13 @@ namespace Zetbox.Client.Presentables.GUI
     {
         public new delegate NavigationSearchScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationSearchScreen screen);
 
-        public NavigationSearchScreenViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, Func<IZetboxContext> ctxFactory, ViewModel parent, NavigationScreen screen)
+        public NavigationSearchScreenViewModel(IViewModelDependencies dependencies,
+            IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
             : base(dependencies, dataCtx, parent, screen)
         {
-            _ctxFactory = ctxFactory;
         }
 
         public new NavigationSearchScreen Screen { get { return (NavigationSearchScreen)base.Screen; } }
-
-        private readonly Func<IZetboxContext> _ctxFactory;
 
         protected virtual Func<IQueryable> InitializeQueryFactory()
         {
@@ -110,7 +108,7 @@ namespace Zetbox.Client.Presentables.GUI
 
                 _listViewModel = ViewModelFactory
                     .CreateViewModel<InstanceListViewModel.Factory>()
-                    .Invoke(DataContext, this, _ctxFactory, Type, QueryFactory);
+                    .Invoke(DataContext, this, Type, QueryFactory);
 
                 InitializeListViewModel(_listViewModel);
             }

@@ -30,13 +30,11 @@ namespace Zetbox.Client.Presentables.TestModule
     public class InstanceListTestViewModel : NavigationScreenViewModel
     {
         public new delegate InstanceListTestViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
-        private readonly Func<IZetboxContext> _ctxFactory;
 
-        public InstanceListTestViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+        public InstanceListTestViewModel(IViewModelDependencies appCtx,
             IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
             : base(appCtx, dataCtx, parent, screen)
         {
-            _ctxFactory = ctxFactory;
         }
 
         public enum ListKinds
@@ -88,7 +86,6 @@ namespace Zetbox.Client.Presentables.TestModule
                     _TestList = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(
                         DataContext,
                         this,
-                        _ctxFactory,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => qry);
                     _TestList.EnableAutoFilter = false;
