@@ -162,11 +162,6 @@
     </Compile>
     <Compile Include="Presentables\DocumentManagement\ImportedFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DynamicFileViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\FileViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FileViewModelResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Presentables\DocumentManagement\StaticFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DocumentViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoExporter.cs" />
@@ -422,11 +417,6 @@
     <EmbeddedResource Include="Presentables\DataObjectViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DataObjectViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\DocumentManagement\FileViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\DocumentManagement\FileViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>FileViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.resx">

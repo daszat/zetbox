@@ -99,6 +99,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        public void Open()
+        {
+            OpenCommand.Execute(null);
+        }
+
         private NewDataObjectCommand _NewCommand;
         public ICommandViewModel NewCommand
         {
@@ -118,6 +123,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 }
                 return _NewCommand;
             }
+        }
+
+        public void New()
+        {
+            NewCommand.Execute(null);
         }
 
         private void OnLocalModelCreated(DataObjectViewModel vm)
@@ -155,6 +165,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 }
                 return _DeleteCommand;
             }
+        }
+
+        public void Delete()
+        {
+            DeleteCommand.Execute(null);
         }
 
         private ICommandViewModel _SelectColumnsCommand = null;

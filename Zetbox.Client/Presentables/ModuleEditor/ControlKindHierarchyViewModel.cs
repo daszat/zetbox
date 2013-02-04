@@ -97,7 +97,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         #region Commands
         private RefreshCommand _RefreshCommand;
-        public RefreshCommand RefreshCommand
+        public ICommandViewModel RefreshCommand
         {
             get
             {
@@ -110,7 +110,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         }
 
         private OpenDataObjectCommand _OpenCommand;
-        public OpenDataObjectCommand OpenCommand
+        public ICommandViewModel OpenCommand
         {
             get
             {
@@ -125,8 +125,13 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             }
         }
 
+        public void Open()
+        {
+            OpenCommand.Execute(null);
+        }
+
         private NewDataObjectCommand _NewCommand;
-        public NewDataObjectCommand NewCommand
+        public ICommandViewModel NewCommand
         {
             get
             {
@@ -142,8 +147,13 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             }
         }
 
+        public void New()
+        {
+            NewCommand.Execute(null);
+        }
+
         private DeleteDataObjectCommand _DeleteCommand;
-        public DeleteDataObjectCommand DeleteCommand
+        public ICommandViewModel DeleteCommand
         {
             get
             {
@@ -154,6 +164,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 return _DeleteCommand;
             }
         }
+
+        public void Delete()
+        {
+            DeleteCommand.Execute(null);
+        }
+
         #endregion
 
         #region IRefreshCommandListener Members

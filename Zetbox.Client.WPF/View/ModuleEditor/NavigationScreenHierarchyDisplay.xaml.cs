@@ -62,7 +62,7 @@ namespace Zetbox.Client.WPF.View.ModuleEditor
 
         private void NavTree_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.ViewModel.OpenCommand.Execute(this.ViewModel.SelectedItem);
+            this.ViewModel.Open();
         }
     }
 }

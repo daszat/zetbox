@@ -199,7 +199,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public void OpenReference()
         {
-            ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, Value, false);
+            OpenReferenceCommand.Execute(null);
         }
 
         private OpenDataObjectCommand _openReferenceCommand;
@@ -249,6 +249,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
                 return _createNewItemAndSetValueCommand;
             }
+        }
+
+        public void CreateNewItemAndSetValue()
+        {
+            CreateNewItemAndSetValueCommand.Execute(null);
         }
 
         bool INewCommandParameter.AllowAddNew { get { return AllowCreateNewItem; } }

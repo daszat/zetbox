@@ -4,14 +4,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Zetbox.Client.Presentables;
     using Zetbox.API;
-    using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.Client.Models;
     using Zetbox.App.Base;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
-    public class AnyReferencePropertyViewModel : CompoundObjectPropertyViewModel
+    public class AnyReferencePropertyViewModel : CompoundObjectPropertyViewModel, IOpenCommandParameter
     {
         public new delegate AnyReferencePropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -71,36 +71,22 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return cmds;
         }
 
-        private bool CanOpen
-        {
-            get
-            {
-                return ReferencedObject != null ? ViewModelFactory.CanShowModel(ReferencedObject) : false;
-            }
-        }
-
         public void OpenReference()
         {
-            if (CanOpen)
-                ViewModelFactory.ShowModel(ReferencedObject, true);
+            OpenReferenceCommand.Execute(null);
         }
 
-        private ICommandViewModel _openReferenceCommand;
+        private OpenDataObjectCommand _openReferenceCommand;
         public ICommandViewModel OpenReferenceCommand
         {
             get
             {
                 if (_openReferenceCommand == null)
                 {
-                    _openReferenceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    _openReferenceCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Name,
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip,
-                        () => OpenReference(),
-                        () => CanOpen,
-                        null);
-                    _openReferenceCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
+                        false);
                 }
                 return _openReferenceCommand;
             }
@@ -143,7 +129,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 null);
             ViewModelFactory.ShowDialog(selectClass);
         }
-        
+
         public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
         protected virtual void OnDataObjectSelectionTaskCreated(DataObjectSelectionTaskViewModel vmdl)
         {
@@ -153,7 +139,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 temp(this, new DataObjectSelectionTaskEventArgs(vmdl));
             }
         }
-        
+
         private ICommandViewModel _SelectValueCommand;
 
         public ICommandViewModel SelectValueCommand
@@ -192,6 +178,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             return Name;
         }
+        #endregion
+
+        #region IOpenCommandParameter members
+        bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
+        bool IOpenCommandParameter.AllowOpen { get { return true; } }
+        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems { get { return new[] { ReferencedObject }; } }
         #endregion
     }
 }

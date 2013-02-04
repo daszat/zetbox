@@ -269,18 +269,22 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             }
         }
 
-        private ICommandViewModel _NewModuleCommand = null;
+        private NewDataObjectCommand _NewModuleCommand = null;
         public ICommandViewModel NewModuleCommand
         {
             get
             {
                 if (_NewModuleCommand == null)
                 {
-                    _NewModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Module", "Creates a new Module", () => CreateNewModule(), null, null);
-                    _NewModuleCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
+                    _NewModuleCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, typeof(Module).GetObjectClass(FrozenContext), true);
                 }
                 return _NewModuleCommand;
             }
+        }
+
+        public void NewModule()
+        {
+            NewModuleCommand.Execute(null);
         }
 
         private RefreshCommand _RefreshCommand = null;
@@ -294,6 +298,13 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 }
                 return _RefreshCommand;
             }
+        }
+
+        public void Refresh()
+        {
+            _modules = null;
+            OnPropertyChanged("ModuleList");
+            OnPropertyChanged("TreeItems");
         }
 
         private ICommandViewModel _EditCurrentModuleCommand = null;
@@ -332,23 +343,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 }
                 return _ReportProblemCommand;
             }
-        }
-
-        public void Refresh()
-        {
-            _modules = null;
-            OnPropertyChanged("ModuleList");
-            OnPropertyChanged("TreeItems");
-        }
-
-        public void CreateNewModule()
-        {
-            var newCtx = ctxFactory(ClientIsolationLevel.PrefereClientData);
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
-            var newObj = newCtx.Create<Module>();
-
-            newWorkspace.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newObj));
-            ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }
 }

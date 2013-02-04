@@ -326,6 +326,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
+        public void CreateNew()
+        {
+            CreateNewCommand.Execute(null);
+        }
+
         private ICommandViewModel _AddExistingCommand = null;
         public ICommandViewModel AddExistingCommand
         {
@@ -378,6 +383,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
                 return _DeleteCommand;
             }
+        }
+
+        public void Delete()
+        {
+            DeleteCommand.Execute(null);
         }
 
         public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
