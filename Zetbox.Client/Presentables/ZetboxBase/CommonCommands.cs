@@ -62,15 +62,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public class ItemsOpenedEventArgs : EventArgs
     {
-        public ItemsOpenedEventArgs(IEnumerable<DataObjectViewModel> items)
+        public ItemsOpenedEventArgs(IEnumerable<ViewModel> items)
         {
             Items = items;
         }
-        public IEnumerable<DataObjectViewModel> Items { get; private set; }
+        public IEnumerable<ViewModel> Items { get; private set; }
     }
 
     public abstract class ActivateDataObjectCommand : CommandViewModel
     {
+        protected readonly Func<IZetboxContext> ctxFactory;
+
         protected bool UseSeparateContext { get { return !(ViewModelFactory.GetWorkspace(DataContext) is IContextViewModel); } }
 
         private IActivateCommandParameter Parameter { get { return Parent as IActivateCommandParameter; } }
@@ -97,65 +99,68 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public ActivateDataObjectCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip)
+        public ActivateDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
+            this.ctxFactory = ctxFactory;
         }
 
-        protected static void ActivateItem(IViewModelFactory vmFactory, IZetboxContext dataCtx, IFrozenContext frozenCtx, ViewModel parent, IEnumerable<DataObjectViewModel> items, bool isInlineEditable, EventHandler<ItemsOpeningEventArgs> OnItemsOpening)
+        protected void ActivateItem(IEnumerable<ViewModel> items)
         {
-            if (vmFactory == null) throw new ArgumentNullException("vmFactory");
-            if (dataCtx == null) throw new ArgumentNullException("dataCtx");
-            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
-            if (parent == null) throw new ArgumentNullException("parent");
-            if (items == null) return;
+            if (items == null || items.Count() == 0) return;
 
-            var openingArgs = new ItemsOpeningEventArgs(dataCtx, vmFactory.GetWorkspace(dataCtx) as ObjectEditorWorkspace, items);
+            var openingArgs = new ItemsOpeningEventArgs(DataContext, ViewModelFactory.GetWorkspace(DataContext) as ObjectEditorWorkspace, items);
 
-            OnItemsOpening(parent, openingArgs);
+            OnItemsOpening(this, openingArgs);
 
             foreach (var item in openingArgs.Items)
             {
                 var dovm = item as DataObjectViewModel;
-                if (dovm != null && dovm.Object.GetObjectClass(frozenCtx).IsSimpleObject)
+                if (dovm != null && dovm.Object.GetObjectClass(FrozenContext).IsSimpleObject)
                 {
-                    if (isInlineEditable)
+                    if (IsInlineEditable)
                     {
                         // don't show simple objects, IF they are inline editable
                     }
                     else
                     {
                         // Open in a Dialog
-                        var dlg = vmFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(dataCtx, parent, item);
-                        vmFactory.ShowDialog(dlg);
+                        var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, Parent, item);
+                        ViewModelFactory.ShowDialog(dlg);
                     }
                 }
                 else
                 {
-                    vmFactory.ShowModel(item, true);
+                    ViewModelFactory.ShowModel(item, true);
                 }
             }
+
+            OnItemsOpened(this, new ItemsOpenedEventArgs(openingArgs.Items));
         }
 
-        protected static void ActivateForeignItems(IViewModelFactory vmFactory, IZetboxContext dataCtx, IEnumerable<IDataObject> items, ControlKind requestedWorkspaceKind, ControlKind requestedEditorKind, EventHandler<ItemsOpenedEventArgs> callback)
+        protected void ActivateForeignItems(IZetboxContext newCtx, IEnumerable<IDataObject> items)
         {
-            if (vmFactory == null) throw new ArgumentNullException("vmFactory");
-            if (dataCtx == null) throw new ArgumentNullException("dataCtx");
+            if (newCtx == null) throw new ArgumentNullException("newCtx");
             if (items == null || items.Count() == 0) return;
 
-            var newWorkspace = vmFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(dataCtx, null);
+            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(newCtx, null);
 
-            vmFactory.ShowModel(newWorkspace, requestedWorkspaceKind, true);
+            ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
 
             // ShowForeignObject may take a while
-            vmFactory.CreateDelayedTask(newWorkspace, () =>
+            ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
             {
-                var openedForeignItems = items
-                    .Select(i => newWorkspace.ShowForeignObject(i, requestedEditorKind))
-                    .ToList(); // force evaluation, event might do it multiple times or not at all!
+                var newViewModels = items.Select(i => DataObjectViewModel.Fetch(ViewModelFactory, newCtx, this, newCtx.Find(DataContext.GetInterfaceType(i), i.ID)));
+                var openingArgs = new ItemsOpeningEventArgs(newCtx, newWorkspace, newViewModels);
 
-                if (callback != null)
-                    callback(newWorkspace, new ItemsOpenedEventArgs(openedForeignItems));
+                OnItemsOpening(newWorkspace, openingArgs);
+
+                foreach (var newItem in openingArgs.Items)
+                {
+                    newWorkspace.ShowModel(newItem);
+                }
+
+                OnItemsOpened(newWorkspace, new ItemsOpenedEventArgs(openingArgs.Items));
 
                 newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
             }).Trigger();
@@ -197,14 +202,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        protected readonly Func<IZetboxContext> ctxFactory;
         protected IOpenCommandParameter Parameter { get { return Parent as IOpenCommandParameter; } }
 
         public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
             IZetboxContext dataCtx, ViewModel parent)
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
+            : base(appCtx, ctxFactory, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
         {
-            this.ctxFactory = ctxFactory;
             if (Parameter != null)
                 Parameter.PropertyChanged += OnParameterChanged;
         }
@@ -261,12 +264,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var vModels = GetViewModels().ToList();
             if (UseSeparateContext)
             {
-                var newCtx = ctxFactory();
-                ActivateForeignItems(ViewModelFactory, newCtx, vModels.Select(dovm => dovm.Object), RequestedWorkspaceKind, RequestedEditorKind, OnItemsOpened);
+                ActivateForeignItems(ctxFactory(), vModels.Select(dovm => dovm.Object));
             }
             else
             {
-                ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, vModels, IsInlineEditable, OnItemsOpening);
+                ActivateItem(vModels);
                 OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), new ItemsOpenedEventArgs(vModels));
             }
         }
@@ -470,19 +472,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        protected readonly Func<IZetboxContext> ctxFactory;
         protected INewCommandParameter Parameter { get { return Parent as INewCommandParameter; } }
         protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
         protected ObjectClass Type { get; private set; }
 
-        public NewDataObjectCommand(
-            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type,
-            Func<IZetboxContext> ctxFactory)
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
+        public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+            IZetboxContext dataCtx, ViewModel parent, ObjectClass type)
+            : base(appCtx, ctxFactory, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
         {
             if (this.Parameter != null)
                 this.Parameter.PropertyChanged += OnParameterChanged;
-            this.ctxFactory = ctxFactory;
             this.Type = type;
         }
 
@@ -561,22 +560,22 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private void CreateItem(ObjectClass dtType)
         {
-            var newCtx = UseSeparateContext ? ctxFactory() : DataContext;
-            var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
-
-            OnObjectCreated(newObj);
-
             if (UseSeparateContext)
             {
-                ActivateForeignItems(ViewModelFactory, newCtx, new[] { newObj }, RequestedWorkspaceKind, RequestedEditorKind, OnItemsOpened);
+                var newCtx = ctxFactory();
+                var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
+                OnObjectCreated(newObj);
+                ActivateForeignItems(newCtx, new[] { newObj });
             }
             else
             {
-                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), newObj);
+                var newObj = DataContext.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
+                OnObjectCreated(newObj);
 
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), newObj);
                 OnLocalModelCreated(mdl);
 
-                ActivateItem(ViewModelFactory, newCtx, FrozenContext, this, new[] { mdl }, IsInlineEditable, OnItemsOpening);
+                ActivateItem(new[] { mdl });
 
                 OnRefresh();
             }
