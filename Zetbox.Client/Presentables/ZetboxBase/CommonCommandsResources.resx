@@ -168,6 +168,9 @@
   <data name="OpenDataObjectCommand_Name" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="OpenDataObjectCommand_SomeCanNotBeOpened" xml:space="preserve">
+    <value>Some of the objects cannot be opened.</value>
+  </data>
   <data name="OpenDataObjectCommand_Tooltip" xml:space="preserve">
     <value>Opens the current selected Object</value>
   </data>

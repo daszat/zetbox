@@ -30,7 +30,6 @@
                 <ctrls:CommandButton CommandViewModel="{Binding NewCommand}"
                                      Style="{StaticResource ImageToolbarButton}" />
                 <ctrls:CommandButton CommandViewModel="{Binding OpenCommand}"
-                                     CommandParameter="{Binding SelectedItem}"
                                      Style="{StaticResource ImageToolbarButton}" />
                 <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}"
                                      Style="{StaticResource ImageToolbarButton}" />

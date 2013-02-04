@@ -189,12 +189,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 return false;
             }
             else if (Parameter.SelectedItems == null
-              || Parameter.SelectedItems.Count() == 0
-              && Parameter.SelectedItems.Any(vm => !ViewModelFactory.CanShowModel(vm)))
+              || Parameter.SelectedItems.Count() == 0)
             {
                 Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
                 return false;
             }
+            else if (!UseSeparateContext && Parameter.SelectedItems.Any(vm => !ViewModelFactory.CanShowModel(vm)))
+            {
+                Reason = CommonCommandsResources.OpenDataObjectCommand_SomeCanNotBeOpened;
+                return false;
+            }
+
             Reason = string.Empty;
             return true;
         }
@@ -522,12 +527,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), newObj);
 
+                OnLocalModelCreated(mdl);
+
                 ActivateItem(ViewModelFactory, newCtx, FrozenContext, this, mdl, IsInlineEditable);
 
-                if (Listener != null)
-                {
-                    Listener.Refresh();
-                }
+                OnRefresh();
+            }
+        }
+
+        protected virtual void OnRefresh()
+        {
+            if (Listener != null)
+            {
+                Listener.Refresh();
             }
         }
 
@@ -607,6 +619,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public RefreshCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.RefreshCommand_Name, CommonCommandsResources.RefreshCommand_Tooltip)
         {
+        }
+
+        public override System.Drawing.Image Icon
+        {
+            get
+            {
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
+            }
+            set
+            {
+                base.Icon = value;
+            }
         }
 
         public class CanRefreshEventArgs : EventArgs

@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter, IOpenCommandParameter
+    public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter, IOpenCommandParameter, INewCommandParameter
     {
         public new delegate NavigationScreenHierarchyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
 
@@ -41,7 +41,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         protected readonly Func<IZetboxContext> ctxFactory;
         public Module Module { get; private set; }
-
 
         public override string Name
         {
@@ -183,13 +182,18 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         #region IDeleteCommandParameter members
         bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
-        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
+        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
         #endregion
 
         #region IOpenCommandParameter members
         bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
         bool IOpenCommandParameter.AllowOpen { get { return true; } }
-        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems { get { return new[] { SelectedItem }; } }
+        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
+        #endregion
+
+        #region INewCommandParameter members
+        bool INewCommandParameter.IsReadOnly { get { return false; } }
+        bool INewCommandParameter.AllowAddNew { get { return true; } }
         #endregion
     }
 }

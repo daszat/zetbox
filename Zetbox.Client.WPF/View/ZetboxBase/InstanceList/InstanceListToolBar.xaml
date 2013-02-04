@@ -39,7 +39,6 @@
                 <ctrls:WorkaroundToolBar.Resources>
                     <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
                         <ctrls:CommandButton CommandViewModel="{Binding}"
-                                             CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type ctrls:WorkaroundToolBar}}}"
                                              Style="{StaticResource ImageToolbarButton}" />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">

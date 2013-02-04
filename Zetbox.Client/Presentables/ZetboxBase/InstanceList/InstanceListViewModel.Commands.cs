@@ -74,7 +74,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _RefreshCommand.CanRefresh += (s, e) =>
                     {
                         e.CanRefresh = !FilterList.RequiredFilterMissing;
-                        e.CanRefreshReason = FilterListEntryViewModelResources.RequiredFilterMissingReason;
+                        if (!e.CanRefresh)
+                        {
+                            e.CanRefreshReason = FilterListEntryViewModelResources.RequiredFilterMissingReason;
+                        }
                     };
                 }
                 return _RefreshCommand;
@@ -227,7 +230,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         #region IDeleteCommandParameter Members
         public bool IsReadOnly { get { return false; } }
-        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return SelectedItems; } }
+        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
         #endregion
     }
 }

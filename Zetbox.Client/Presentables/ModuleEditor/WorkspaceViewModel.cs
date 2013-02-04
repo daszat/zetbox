@@ -29,7 +29,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
-    public class WorkspaceViewModel : WindowViewModel, IRefreshCommandListener
+    public class WorkspaceViewModel : WindowViewModel, IRefreshCommandListener, INewCommandParameter
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
@@ -344,5 +344,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 return _ReportProblemCommand;
             }
         }
+
+        #region INewCommandParameter members
+        bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
+        bool INewCommandParameter.IsReadOnly { get { return false; } }
+        bool INewCommandParameter.AllowAddNew { get { return true; } }
+        #endregion
     }
 }

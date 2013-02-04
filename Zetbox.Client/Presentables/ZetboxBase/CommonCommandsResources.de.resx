@@ -168,6 +168,9 @@
   <data name="OpenDataObjectCommand_Name" xml:space="preserve">
     <value>Öffnen</value>
   </data>
+  <data name="OpenDataObjectCommand_SomeCanNotBeOpened" xml:space="preserve">
+    <value>Einige der ausgewählten Datensätze können nicht geöffnet werden.</value>
+  </data>
   <data name="OpenDataObjectCommand_Tooltip" xml:space="preserve">
     <value>Öffnet den aktuell gewählten Datensatz</value>
   </data>

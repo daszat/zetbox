@@ -214,6 +214,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some of the objects cannot be opened..
+        /// </summary>
+        internal static string OpenDataObjectCommand_SomeCanNotBeOpened {
+            get {
+                return ResourceManager.GetString("OpenDataObjectCommand_SomeCanNotBeOpened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opens the current selected Object.
         /// </summary>
         internal static string OpenDataObjectCommand_Tooltip {
