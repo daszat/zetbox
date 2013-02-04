@@ -461,7 +461,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         public DataObjectViewModel ShowObject(IDataObject obj, ControlKind requestedKind = null)
         {
-            obj = DataContext == obj.Context
+            obj = obj == null || obj.Context == DataContext
                 ? obj
                 : DataContext.Find(obj.Context.GetInterfaceType(obj), obj.ID);
 

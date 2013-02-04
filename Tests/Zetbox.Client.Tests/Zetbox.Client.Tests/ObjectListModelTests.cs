@@ -82,7 +82,7 @@ namespace Zetbox.Client.Tests
             Assert.That(olm.Value.Count, Is.EqualTo(0));
 
             var dom = CreateNewDataObjectViewModel();
-            olm.AddItem(dom);
+            olm.Add(dom);
 
             Assert.That(olm.Value.Count, Is.EqualTo(1));
             Assert.That(objMock.Object.TestCollection.Count, Is.EqualTo(1));
@@ -96,7 +96,7 @@ namespace Zetbox.Client.Tests
 
             foreach (var dom in objs)
             {
-                olm.AddItem(dom);
+                olm.Add(dom);
             }
 
             Assert.That(olm.Value.Count, Is.EqualTo(objs.Length));
@@ -111,7 +111,7 @@ namespace Zetbox.Client.Tests
 
             foreach (var dom in objs)
             {
-                olm.AddItem(dom);
+                olm.Add(dom);
             }
 
             olm.MoveItemUp(objs[item]);
@@ -132,7 +132,7 @@ namespace Zetbox.Client.Tests
 
             foreach (var dom in objs)
             {
-                olm.AddItem(dom);
+                olm.Add(dom);
             }
 
             olm.MoveItemDown(objs[item]);
