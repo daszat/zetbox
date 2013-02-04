@@ -151,7 +151,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, this, !(workingCtxFactory == null));
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, !(workingCtxFactory == null));
                 }
                 return _DeleteCommand;
             }

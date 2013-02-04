@@ -221,22 +221,20 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public class DeleteDataObjectCommand : CommandViewModel
     {
-        public new delegate DeleteDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, IDeleteCommandParameter parameter, IRefreshCommandListener listener, bool useSeparateContext);
+        public new delegate DeleteDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, bool useSeparateContext);
 
-        protected IDeleteCommandParameter Parameter { get; private set; }
-        protected IRefreshCommandListener Listener { get; private set; }
+        protected IDeleteCommandParameter Parameter { get { return Parent as IDeleteCommandParameter; } }
+        protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
         protected bool UseSeparateContext { get; private set; }
 
         private readonly Func<IZetboxContext> _ctxFactory;
 
         public DeleteDataObjectCommand(IViewModelDependencies appCtx,
-            IZetboxContext dataCtx, ViewModel parent, IDeleteCommandParameter parameter, IRefreshCommandListener listener, bool useSeparateContext,
+            IZetboxContext dataCtx, ViewModel parent, bool useSeparateContext,
             Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
         {
-            this.Parameter = parameter;
             this.Parameter.PropertyChanged += OnParameterChanged;
-            this.Listener = listener;
             this.UseSeparateContext = useSeparateContext;
             this._ctxFactory = ctxFactory;
         }
@@ -260,15 +258,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            // TODO: re-enable after converting all commands
-            //if (data != null)
-            //{
-            //    Reason = string.Format(CommonCommandsResources.DeleteDataObjectCommand_ProgrammerError, data);
-            //    return false;
-            //}
-            //else
-
-            if (Parameter.IsReadOnly || DataContext.IsReadonly)
+            if (data != null)
+            {
+                Reason = string.Format(CommonCommandsResources.DeleteDataObjectCommand_ProgrammerError, data);
+                return false;
+            }
+            else if (Parameter == null)
+            {
+                Reason = string.Format(CommonCommandsResources.DeleteDataObjectCommand_ProgrammerError, "Parameter is null");
+                return false;
+            }
+            else if (Parameter.IsReadOnly || DataContext.IsReadonly)
             {
                 Reason = CommonCommandsResources.DeleteDataObjectCommand_IsReadOnly;
                 return false;
