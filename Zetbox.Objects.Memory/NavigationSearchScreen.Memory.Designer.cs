@@ -970,6 +970,64 @@ namespace Zetbox.App.GUI
         /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public bool? ShowCommands
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ShowCommands;
+                if (OnShowCommands_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnShowCommands_Getter(this, __e);
+                    __result = _ShowCommands = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ShowCommands != value)
+                {
+                    var __oldValue = _ShowCommands;
+                    var __newValue = value;
+                    if (OnShowCommands_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnShowCommands_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ShowCommands", __oldValue, __newValue);
+                    _ShowCommands = __newValue;
+                    NotifyPropertyChanged("ShowCommands", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnShowCommands_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnShowCommands_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("ShowCommands");
+				}
+            }
+        }
+        private bool? _ShowCommands;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnShowCommands_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
         public bool? ShowFilter
         {
             get
@@ -1342,6 +1400,7 @@ namespace Zetbox.App.GUI
             me.IsEditable = other.IsEditable;
             me.IsMultiselect = other.IsMultiselect;
             me.RespectRequiredFilter = other.RespectRequiredFilter;
+            me.ShowCommands = other.ShowCommands;
             me.ShowFilter = other.ShowFilter;
             me.ShowMasterDetail = other.ShowMasterDetail;
             me.ViewMethod = other.ViewMethod;
@@ -1413,6 +1472,7 @@ namespace Zetbox.App.GUI
                 case "RequestedEditorKind":
                 case "RequestedWorkspaceKind":
                 case "RespectRequiredFilter":
+                case "ShowCommands":
                 case "ShowFilter":
                 case "ShowMasterDetail":
                 case "Type":
@@ -1613,6 +1673,15 @@ namespace Zetbox.App.GUI
                     // else
                     new PropertyDescriptorMemoryImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
+                        new Guid("21b4324b-110f-48f2-a5d0-a3645d45604a"),
+                        "ShowCommands",
+                        null,
+                        obj => obj.ShowCommands,
+                        (obj, val) => obj.ShowCommands = val,
+						obj => OnShowCommands_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<NavigationSearchScreen, bool?>(
+                        lazyCtx,
                         new Guid("055fd120-c058-436b-9f9e-e6a2a0fec2e5"),
                         "ShowFilter",
                         null,
@@ -1723,6 +1792,7 @@ namespace Zetbox.App.GUI
             SetNotInitializedProperty("RequestedEditorKind");
             SetNotInitializedProperty("RequestedWorkspaceKind");
             SetNotInitializedProperty("RespectRequiredFilter");
+            SetNotInitializedProperty("ShowCommands");
             SetNotInitializedProperty("ShowFilter");
             SetNotInitializedProperty("ShowMasterDetail");
             SetNotInitializedProperty("Type");
@@ -1767,6 +1837,7 @@ namespace Zetbox.App.GUI
             binStream.Write(RequestedEditorKind != null ? RequestedEditorKind.ID : (int?)null);
             binStream.Write(RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ID : (int?)null);
             binStream.Write(this._RespectRequiredFilter);
+            binStream.Write(this._ShowCommands);
             binStream.Write(this._ShowFilter);
             binStream.Write(this._ShowMasterDetail);
             binStream.Write(Type != null ? Type.ID : (int?)null);
@@ -1793,6 +1864,7 @@ namespace Zetbox.App.GUI
             this._fk_RequestedEditorKind = binStream.ReadNullableInt32();
             this._fk_RequestedWorkspaceKind = binStream.ReadNullableInt32();
             this._RespectRequiredFilter = binStream.ReadNullableBoolean();
+            this._ShowCommands = binStream.ReadNullableBoolean();
             this._ShowFilter = binStream.ReadNullableBoolean();
             this._ShowMasterDetail = binStream.ReadNullableBoolean();
             this._fk_Type = binStream.ReadNullableInt32();
@@ -1824,6 +1896,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedEditorKind != null ? RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ExportGuid : (Guid?)null, xml, "RequestedWorkspaceKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowCommands, xml, "ShowCommands", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowFilter, xml, "ShowFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowMasterDetail, xml, "ShowMasterDetail", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.GUI");
@@ -1877,6 +1950,9 @@ namespace Zetbox.App.GUI
                 break;
             case "Zetbox.App.GUI|RespectRequiredFilter":
                 this._RespectRequiredFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Zetbox.App.GUI|ShowCommands":
+                this._ShowCommands = XmlStreamer.ReadNullableBoolean(xml);
                 break;
             case "Zetbox.App.GUI|ShowFilter":
                 this._ShowFilter = XmlStreamer.ReadNullableBoolean(xml);

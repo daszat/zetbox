@@ -2978,6 +2978,7 @@
                         FromRole="Search"
                         ToRole="RequestedWorkspaceKind" />
     <Property Name="RespectRequiredFilter" Type="Boolean" Nullable="true"  />
+    <Property Name="ShowCommands" Type="Boolean" Nullable="true"  />
     <Property Name="ShowFilter" Type="Boolean" Nullable="true"  />
     <Property Name="ShowMasterDetail" Type="Boolean" Nullable="true"  />
     <NavigationProperty Name="TypeImpl"

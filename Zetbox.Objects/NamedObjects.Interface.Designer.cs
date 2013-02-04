@@ -2492,6 +2492,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("9323c1cf-f8d6-4b29-b854-41ceb509b57e"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ShowCommands
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("21b4324b-110f-48f2-a5d0-a3645d45604a"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ShowFilter
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("055fd120-c058-436b-9f9e-e6a2a0fec2e5"); }

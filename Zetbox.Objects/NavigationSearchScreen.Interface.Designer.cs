@@ -143,6 +143,15 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Zetbox.API.DefinitionGuid("21b4324b-110f-48f2-a5d0-a3645d45604a")]
+        bool? ShowCommands {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Zetbox.API.DefinitionGuid("055fd120-c058-436b-9f9e-e6a2a0fec2e5")]
         bool? ShowFilter {
             get;

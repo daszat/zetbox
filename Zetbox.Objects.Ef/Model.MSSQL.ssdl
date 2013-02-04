@@ -2038,6 +2038,7 @@
     <Property Name="IsEditable" Type="bit" Nullable="true" />
     <Property Name="IsMultiselect" Type="bit" Nullable="true" />
     <Property Name="RespectRequiredFilter" Type="bit" Nullable="true" />
+    <Property Name="ShowCommands" Type="bit" Nullable="true" />
     <Property Name="ShowFilter" Type="bit" Nullable="true" />
     <Property Name="ShowMasterDetail" Type="bit" Nullable="true" />
     <Property Name="ViewMethod" Type="int" Nullable="true" />

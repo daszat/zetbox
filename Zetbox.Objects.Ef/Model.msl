@@ -980,6 +980,7 @@
           <ScalarProperty Name="IsEditable" ColumnName="IsEditable" />
           <ScalarProperty Name="IsMultiselect" ColumnName="IsMultiselect" />
           <ScalarProperty Name="RespectRequiredFilter" ColumnName="RespectRequiredFilter" />
+          <ScalarProperty Name="ShowCommands" ColumnName="ShowCommands" />
           <ScalarProperty Name="ShowFilter" ColumnName="ShowFilter" />
           <ScalarProperty Name="ShowMasterDetail" ColumnName="ShowMasterDetail" />
           <ScalarProperty Name="ViewMethodImpl" ColumnName="ViewMethod" />

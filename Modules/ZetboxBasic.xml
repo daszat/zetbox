@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-04T15:49:49Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-04T15:58:22Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -3705,6 +3705,42 @@ public static void isValid_RespectRequiredFilter(NavigationSearchScreen obj, Pro
     <ZetboxBase:Name>RespectRequiredFilter</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>cccc4b79-4e6d-449b-8866-c1827c4dcdc1</ZetboxBase:ObjectClass>
     <ZetboxBase:Properties_pos>1100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:BoolProperty ExportGuid="21b4324b-110f-48f2-a5d0-a3645d45604a">
+    <ZetboxBase:CategoryTags>Search</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-04T14:58:22.777681Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ShowCommands(NavigationSearchScreen obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ShowCommands(NavigationSearchScreen obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ShowCommands(NavigationSearchScreen obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ShowCommands(NavigationSearchScreen obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ShowCommands == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-04T14:58:22.777681Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>ShowCommands</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>cccc4b79-4e6d-449b-8866-c1827c4dcdc1</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1801</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>

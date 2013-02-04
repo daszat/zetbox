@@ -939,6 +939,64 @@ namespace Zetbox.App.GUI
         /// </summary>
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool? ShowCommands
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.ShowCommands;
+                if (OnShowCommands_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnShowCommands_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.ShowCommands != value)
+                {
+                    var __oldValue = Proxy.ShowCommands;
+                    var __newValue = value;
+                    if (OnShowCommands_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnShowCommands_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ShowCommands", __oldValue, __newValue);
+                    Proxy.ShowCommands = __newValue;
+                    NotifyPropertyChanged("ShowCommands", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnShowCommands_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnShowCommands_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("ShowCommands");
+				}
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnShowCommands_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public bool? ShowFilter
         {
             get
@@ -1290,6 +1348,7 @@ namespace Zetbox.App.GUI
             me.IsEditable = other.IsEditable;
             me.IsMultiselect = other.IsMultiselect;
             me.RespectRequiredFilter = other.RespectRequiredFilter;
+            me.ShowCommands = other.ShowCommands;
             me.ShowFilter = other.ShowFilter;
             me.ShowMasterDetail = other.ShowMasterDetail;
             me.ViewMethod = other.ViewMethod;
@@ -1361,6 +1420,7 @@ namespace Zetbox.App.GUI
                 case "RequestedEditorKind":
                 case "RequestedWorkspaceKind":
                 case "RespectRequiredFilter":
+                case "ShowCommands":
                 case "ShowFilter":
                 case "ShowMasterDetail":
                 case "Type":
@@ -1546,6 +1606,15 @@ namespace Zetbox.App.GUI
                     // else
                     new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
+                        new Guid("21b4324b-110f-48f2-a5d0-a3645d45604a"),
+                        "ShowCommands",
+                        null,
+                        obj => obj.ShowCommands,
+                        (obj, val) => obj.ShowCommands = val,
+						obj => OnShowCommands_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, bool?>(
+                        lazyCtx,
                         new Guid("055fd120-c058-436b-9f9e-e6a2a0fec2e5"),
                         "ShowFilter",
                         null,
@@ -1656,6 +1725,7 @@ namespace Zetbox.App.GUI
             SetNotInitializedProperty("RequestedEditorKind");
             SetNotInitializedProperty("RequestedWorkspaceKind");
             SetNotInitializedProperty("RespectRequiredFilter");
+            SetNotInitializedProperty("ShowCommands");
             SetNotInitializedProperty("ShowFilter");
             SetNotInitializedProperty("ShowMasterDetail");
             SetNotInitializedProperty("Type");
@@ -1734,6 +1804,8 @@ namespace Zetbox.App.GUI
 
             public virtual bool? RespectRequiredFilter { get; set; }
 
+            public virtual bool? ShowCommands { get; set; }
+
             public virtual bool? ShowFilter { get; set; }
 
             public virtual bool? ShowMasterDetail { get; set; }
@@ -1766,6 +1838,7 @@ namespace Zetbox.App.GUI
             binStream.Write(this.Proxy.RequestedEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedEditorKind) : (int?)null);
             binStream.Write(this.Proxy.RequestedWorkspaceKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedWorkspaceKind) : (int?)null);
             binStream.Write(this.Proxy.RespectRequiredFilter);
+            binStream.Write(this.Proxy.ShowCommands);
             binStream.Write(this.Proxy.ShowFilter);
             binStream.Write(this.Proxy.ShowMasterDetail);
             binStream.Write(this.Proxy.Type != null ? OurContext.GetIdFromProxy(this.Proxy.Type) : (int?)null);
@@ -1792,6 +1865,7 @@ namespace Zetbox.App.GUI
             binStream.Read(out this._fk_RequestedEditorKind);
             binStream.Read(out this._fk_RequestedWorkspaceKind);
             this.Proxy.RespectRequiredFilter = binStream.ReadNullableBoolean();
+            this.Proxy.ShowCommands = binStream.ReadNullableBoolean();
             this.Proxy.ShowFilter = binStream.ReadNullableBoolean();
             this.Proxy.ShowMasterDetail = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_Type);
@@ -1823,6 +1897,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedEditorKind != null ? this.Proxy.RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? this.Proxy.RequestedWorkspaceKind.ExportGuid : (Guid?)null, xml, "RequestedWorkspaceKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RespectRequiredFilter, xml, "RespectRequiredFilter", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowCommands, xml, "ShowCommands", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowFilter, xml, "ShowFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowMasterDetail, xml, "ShowMasterDetail", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Type != null ? this.Proxy.Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.GUI");
@@ -1876,6 +1951,9 @@ namespace Zetbox.App.GUI
                 break;
             case "Zetbox.App.GUI|RespectRequiredFilter":
                 this.Proxy.RespectRequiredFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Zetbox.App.GUI|ShowCommands":
+                this.Proxy.ShowCommands = XmlStreamer.ReadNullableBoolean(xml);
                 break;
             case "Zetbox.App.GUI|ShowFilter":
                 this.Proxy.ShowFilter = XmlStreamer.ReadNullableBoolean(xml);
