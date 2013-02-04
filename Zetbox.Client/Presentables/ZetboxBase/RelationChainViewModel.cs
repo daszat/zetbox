@@ -76,11 +76,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (_AddRelationCommand == null)
                 {
                     _AddRelationCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         null,
                         RelationChainViewModelResources.AddRelationCommand_Name,
                         RelationChainViewModelResources.AddRelationCommand_Tooltip,
-                        AddRelation, 
+                        AddRelation,
                         null, null);
                 }
                 return _AddRelationCommand;
@@ -108,7 +108,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var qry = DataContext.GetQuery<Relation>()
                 .Where(i => i.A.Type == lastAType || i.A.Type == lastBType || i.B.Type == lastAType || i.B.Type == lastBType)
                 .ToList()
-                .Where(i => !((i.A.Type.ImplementsIChangedBy() && i.A.Navigator != null && i.A.Navigator.Name == "ChangedBy") 
+                .Where(i => !((i.A.Type.ImplementsIChangedBy() && i.A.Navigator != null && i.A.Navigator.Name == "ChangedBy")
                            || (i.B.Type.ImplementsIChangedBy() && i.B.Navigator != null && i.B.Navigator.Name == "ChangedBy")))
                 .AsQueryable();
 
@@ -121,7 +121,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     {
                         if (chosen != null)
                         {
-                            AddItem(chosen.First());
+                            Add(chosen.First());
                         }
                     },
                     null);
@@ -151,12 +151,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             ViewModelFactory.ShowDialog(lstMdl);
         }
 
-        public override void RemoveItem(DataObjectViewModel item)
+        public override void Remove()
         {
-            if (item == null) { throw new ArgumentNullException("item"); }
+            if (SelectedItems == null || SelectedItems.Count == 0) return;
 
             EnsureValueCache();
-            var idx = ValueModel.Value.IndexOf(item.Object);
+            
+            // remove all items from the end, to avoid breaking the chain.
+            var idx = SelectedItems.Min(i => ValueModel.Value.IndexOf(i.Object));
             if (idx != -1)
             {
                 for (int i = ValueModel.Value.Count - 1; i >= idx; i--)

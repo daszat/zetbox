@@ -55,9 +55,9 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         #region Item Management
         private void ItemActivatedHandler(object sender, RoutedEventArgs e)
         {
-            if (ViewModel != null && ViewModel.SelectedItem != null)
+            if (ViewModel != null)
             {
-                ViewModel.ActivateItem(ViewModel.SelectedItem);
+                ViewModel.Open();
             }
             e.Handled = true;
         }

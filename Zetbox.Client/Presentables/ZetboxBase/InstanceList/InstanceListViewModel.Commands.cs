@@ -89,12 +89,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                if (_OpenCommand == null)
-                {
-                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this);
-                    _OpenCommand.ItemsOpened += OnItemsOpened;
-                }
+                EnsureOpenCommand();
                 return _OpenCommand;
+            }
+        }
+
+        private void EnsureOpenCommand()
+        {
+            if (_OpenCommand == null)
+            {
+                _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this);
             }
         }
 
@@ -108,18 +112,22 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                if (_NewCommand == null)
-                {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        DataType);
-
-                    _NewCommand.ObjectCreated += OnObjectCreated;
-                    _NewCommand.LocalModelCreated += OnLocalModelCreated;
-                    _NewCommand.ItemsOpened += OnItemsOpened;
-                }
+                EnsureNewCommand();
                 return _NewCommand;
+            }
+        }
+
+        private void EnsureNewCommand()
+        {
+            if (_NewCommand == null)
+            {
+                _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
+                    DataContext,
+                    this,
+                    DataType);
+
+                _NewCommand.ObjectCreated += OnObjectCreated;
+                _NewCommand.LocalModelCreated += OnLocalModelCreated;
             }
         }
 
@@ -134,11 +142,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             this.SelectedItem = vm;
         }
 
-        public void ActivateItem(DataObjectViewModel item)
-        {
-            ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, item, IsInlineEditable);
-            OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), new[] { item });
-        }
+        //public void ActivateItem(DataObjectViewModel item)
+        //{
+        //    ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, item, IsInlineEditable);
+        //    OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), new[] { item });
+        //}
 
         public delegate void ObjectCreatedHandler(IDataObject obj);
         public event ObjectCreatedHandler ObjectCreated;

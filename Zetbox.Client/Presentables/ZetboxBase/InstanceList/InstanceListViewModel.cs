@@ -306,37 +306,46 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         #region Opening items
 
-        public delegate void ItemsOpenedHandler(ViewModel sender, IEnumerable<DataObjectViewModel> objects);
+        /// <summary>
+        /// Is triggered before the selected items are opened. This can be used to redirect the open command to a different set of items.
+        /// </summary>
+        public event EventHandler<ItemsOpeningEventArgs> ItemsOpening
+        {
+            add
+            {
+                EnsureNewCommand();
+                _NewCommand.ItemsOpening += value;
+
+                EnsureOpenCommand();
+                _OpenCommand.ItemsOpening += value;
+            }
+            remove
+            {
+                _NewCommand.ItemsOpening -= value;
+                _OpenCommand.ItemsOpening -= value;
+            }
+        }
 
         /// <summary>
         /// Is triggered when items are opened in a new workspace. This can be used to give the ViewModels a context dependent finishing touch, like opening a non-default view
         /// </summary>
-        public event ItemsOpenedHandler ItemsOpened = null;
-
-        protected virtual void OnItemsOpened(ViewModel sender, IEnumerable<DataObjectViewModel> objects)
+        public event EventHandler<ItemsOpenedEventArgs> ItemsOpened
         {
-            var temp = ItemsOpened;
-            if (temp != null)
+            add
             {
-                temp(sender, objects);
+                EnsureNewCommand();
+                _NewCommand.ItemsOpened += value;
+
+                EnsureOpenCommand();
+                _OpenCommand.ItemsOpened += value;
+            }
+            remove
+            {
+                _NewCommand.ItemsOpened -= value;
+                _OpenCommand.ItemsOpened -= value;
             }
         }
 
-        public delegate void ItemsDefaultActionHandler(InstanceListViewModel sender, IEnumerable<DataObjectViewModel> objects);
-        public event ItemsDefaultActionHandler ItemsDefaultAction = null;
-
-        public void ExecItemsDefaultAction()
-        {
-            ItemsDefaultActionHandler temp = ItemsDefaultAction;
-            if (temp != null)
-            {
-                temp(this, SelectedItems);
-            }
-            else if (OpenCommand.CanExecute(null))
-            {
-                OpenCommand.Execute(null);
-            }
-        }
         #endregion
 
         #region Configuration

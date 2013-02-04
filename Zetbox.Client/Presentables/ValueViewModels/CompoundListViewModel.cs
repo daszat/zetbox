@@ -66,22 +66,22 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             get { return false; }
         }
 
-        public void AddItem(CompoundObjectViewModel item)
+        public void Add(CompoundObjectViewModel item)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveItem(CompoundObjectViewModel item)
+        public void Remove()
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteItem(CompoundObjectViewModel item)
+        public void Delete()
         {
             throw new NotImplementedException();
         }
 
-        public void ActivateItem(CompoundObjectViewModel item)
+        public void Open()
         {
             throw new NotImplementedException();
         }

@@ -34,7 +34,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     /// <summary>
     /// </summary>
     public abstract class BaseObjectCollectionViewModel<TModelCollection>
-        : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>, IDeleteCommandParameter, INewCommandParameter
+        : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>, IDeleteCommandParameter, INewCommandParameter, IOpenCommandParameter
         where TModelCollection : ICollection<IDataObject>
     {
         public new delegate BaseObjectCollectionViewModel<TModelCollection> Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -189,8 +189,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-
-
         private bool? _allowInlineAddNew = null;
         public bool AllowInlineAddNew
         {
@@ -221,6 +219,24 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     _allowAddExisting = value;
                     OnPropertyChanged("AllowAddExisting");
+                }
+            }
+        }
+
+        private bool _allowOpen = true;
+        public bool AllowOpen
+        {
+            get
+            {
+                if (DataContext.IsElevatedMode) return true;
+                return _allowOpen;
+            }
+            set
+            {
+                if (_allowOpen != value)
+                {
+                    _allowOpen = value;
+                    OnPropertyChanged("AllowOpen");
                 }
             }
         }
@@ -319,7 +335,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         ReferencedClass);
 
-                    _CreateNewCommand.LocalModelCreated += vm => AddItem(vm);
+                    _CreateNewCommand.LocalModelCreated += vm => Add(vm);
                 }
                 return _CreateNewCommand;
             }
@@ -328,6 +344,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public void CreateNew()
         {
             CreateNewCommand.Execute(null);
+        }
+
+        private OpenDataObjectCommand _OpenCommand;
+        public ICommandViewModel OpenCommand
+        {
+            get
+            {
+                EnsureOpenCommand();
+                return _OpenCommand;
+            }
+        }
+
+        private void EnsureOpenCommand()
+        {
+            if (_OpenCommand == null)
+            {
+                _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this);
+            }
+        }
+
+        public void Open()
+        {
+            OpenCommand.Execute(null);
         }
 
         private ICommandViewModel _AddExistingCommand = null;
@@ -363,7 +402,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Name,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Tooltip,
-                        () => SelectedItems.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
+                        Remove, // Collection will change while deleting!
                         () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly,
                         null);
                 }
@@ -399,7 +438,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public virtual void AddItem(DataObjectViewModel item)
+        public virtual void Add(DataObjectViewModel item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
@@ -425,7 +464,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         {
                             foreach (var obj in chosen)
                             {
-                                AddItem(obj);
+                                Add(obj);
                             }
                         }
                     },
@@ -437,26 +476,15 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             ViewModelFactory.ShowDialog(lstMdl);
         }
 
-        public virtual void RemoveItem(DataObjectViewModel item)
+        public virtual void Remove()
         {
-            if (item == null) { throw new ArgumentNullException("item"); }
+            if (SelectedItems == null || SelectedItems.Count == 0) return;
 
             EnsureValueCache();
-            ValueModel.Value.Remove(item.Object);
-        }
-
-        public virtual void DeleteItem(DataObjectViewModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            ValueModel.Value.Remove(item.Object);
-            item.Delete();
-        }
-
-        public void ActivateItem(DataObjectViewModel item)
-        {
-            ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, item, IsInlineEditable);
+            foreach (var item in SelectedItems.ToArray())
+            {
+                ValueModel.Value.Remove(item.Object);
+            }
         }
 
         #endregion
