@@ -178,11 +178,25 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            return Parameter != null
-                && Parameter.AllowOpen
-                && Parameter.SelectedItems != null
-                && Parameter.SelectedItems.Count() > 0
-                && Parameter.SelectedItems.All(vm => ViewModelFactory.CanShowModel(vm));
+            if (Parameter == null)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+            else if (!Parameter.AllowOpen)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
+                return false;
+            }
+            else if (Parameter.SelectedItems == null
+              || Parameter.SelectedItems.Count() == 0
+              && Parameter.SelectedItems.Any(vm => !ViewModelFactory.CanShowModel(vm)))
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+            Reason = string.Empty;
+            return true;
         }
 
         protected override void DoExecute(object data)
@@ -260,27 +274,27 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (data != null)
             {
-                Reason = string.Format(CommonCommandsResources.DeleteDataObjectCommand_ProgrammerError, data);
+                Reason = string.Format(CommonCommandsResources.DataObjectCommand_ProgrammerError, data);
                 return false;
             }
             else if (Parameter == null)
             {
-                Reason = string.Format(CommonCommandsResources.DeleteDataObjectCommand_ProgrammerError, "Parameter is null");
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
                 return false;
             }
             else if (Parameter.IsReadOnly || DataContext.IsReadonly)
             {
-                Reason = CommonCommandsResources.DeleteDataObjectCommand_IsReadOnly;
+                Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
                 return false;
             }
             else if (!Parameter.AllowDelete)
             {
-                Reason = CommonCommandsResources.DeleteDataObjectCommand_NotAllowed;
+                Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
                 return false;
             }
             else if (Parameter.SelectedItems == null)
             {
-                Reason = CommonCommandsResources.DeleteDataObjectCommand_NothingSelected;
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
                 return false;
             }
 
@@ -288,7 +302,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (itemsCount == 0)
             {
-                Reason = CommonCommandsResources.DeleteDataObjectCommand_NothingSelected;
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
                 return false;
             }
 
@@ -435,11 +449,28 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public override bool CanExecute(object data)
         {
             if (!UseSeparateContext && DataContext.IsReadonly)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
                 return false;
+            }
+            else if (Parameter == null)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+            else if (!Parameter.AllowAddNew)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
+                return false;
+            }
+            else if (Parameter.IsReadOnly)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
+                return false;
+            }
 
-            return Parameter != null
-                ? Parameter.AllowAddNew && !Parameter.IsReadOnly
-                : true;
+            Reason = string.Empty;
+            return true;
         }
 
         protected override void DoExecute(object data)
@@ -591,14 +622,21 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public override bool CanExecute(object data)
         {
             if (Listener == null)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
                 return false;
+            }
 
             var temp = CanRefresh;
             if (temp == null)
+            {
+                Reason = string.Empty;
                 return true;
+            }
 
             var args = new CanRefreshEventArgs();
             temp(this, args);
+            Reason = args.CanRefreshReason;
             return args.CanRefresh;
         }
 
@@ -705,9 +743,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            var result = CurrentIdentity != null && CurrentIdentity.IsAdmininistrator();
-            this.Reason = result ? CommonCommandsResources.ElevatedModeCommand_Error : string.Empty;
-            return result;
+            if (CurrentIdentity == null || !CurrentIdentity.IsAdmininistrator())
+            {
+
+                this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;
+                return false;
+            }
+
+            Reason = string.Empty;
+            return true;
         }
 
         protected override void DoExecute(object data)

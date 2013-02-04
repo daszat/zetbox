@@ -61,6 +61,42 @@ namespace Zetbox.Client.Presentables.ZetboxBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Context is read only..
+        /// </summary>
+        internal static string DataObjectCommand_IsReadOnly {
+            get {
+                return ResourceManager.GetString("DataObjectCommand_IsReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting an Object is not allowed here..
+        /// </summary>
+        internal static string DataObjectCommand_NotAllowed {
+            get {
+                return ResourceManager.GetString("DataObjectCommand_NotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nothing selected..
+        /// </summary>
+        internal static string DataObjectCommand_NothingSelected {
+            get {
+                return ResourceManager.GetString("DataObjectCommand_NothingSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Programmer&apos;s Error: &quot;{0}&quot; as parameter..
+        /// </summary>
+        internal static string DataObjectCommand_ProgrammerError {
+            get {
+                return ResourceManager.GetString("DataObjectCommand_ProgrammerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure that you want to delete these items?.
         /// </summary>
         internal static string DeleteDataObjectCommand_Confirm {
@@ -79,47 +115,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Context is read only..
-        /// </summary>
-        internal static string DeleteDataObjectCommand_IsReadOnly {
-            get {
-                return ResourceManager.GetString("DeleteDataObjectCommand_IsReadOnly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string DeleteDataObjectCommand_Name {
             get {
                 return ResourceManager.GetString("DeleteDataObjectCommand_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deleting an Object is not allowed here..
-        /// </summary>
-        internal static string DeleteDataObjectCommand_NotAllowed {
-            get {
-                return ResourceManager.GetString("DeleteDataObjectCommand_NotAllowed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nothing selected..
-        /// </summary>
-        internal static string DeleteDataObjectCommand_NothingSelected {
-            get {
-                return ResourceManager.GetString("DeleteDataObjectCommand_NothingSelected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Programmer&apos;s Error: &quot;{0}&quot; as parameter..
-        /// </summary>
-        internal static string DeleteDataObjectCommand_ProgrammerError {
-            get {
-                return ResourceManager.GetString("DeleteDataObjectCommand_ProgrammerError", resourceCulture);
             }
         }
         
