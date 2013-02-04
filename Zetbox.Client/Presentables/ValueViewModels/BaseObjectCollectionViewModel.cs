@@ -698,7 +698,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region IDeleteCommandParameter Members
-        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
         #endregion
     }
 

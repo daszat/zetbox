@@ -35,12 +35,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems
-        {
-            get { return SelectedItems; }
-        }
-
-
         void _selectedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("SelectedItem");

@@ -219,7 +219,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         bool IOpenCommandParameter.AllowOpen { get { return true; } }
-        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems
         {
             get
             {

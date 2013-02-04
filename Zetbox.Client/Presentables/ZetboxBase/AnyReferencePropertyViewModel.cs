@@ -183,7 +183,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         #region IOpenCommandParameter members
         bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
         bool IOpenCommandParameter.AllowOpen { get { return true; } }
-        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems { get { return ReferencedObject == null ? null : new[] { ReferencedObject }; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return ReferencedObject == null ? null : new[] { ReferencedObject }; } }
         #endregion
     }
 }

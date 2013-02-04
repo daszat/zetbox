@@ -134,10 +134,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
     }
 
-    public interface IOpenCommandParameter : IActivateCommandParameter
+    public interface ICommandParameter : INotifyPropertyChanged
+    {
+        IEnumerable<ViewModel> SelectedItems { get; }
+    }
+
+    public interface IOpenCommandParameter : IActivateCommandParameter, ICommandParameter
     {
         bool AllowOpen { get; }
-        IEnumerable<ViewModel> SelectedItems { get; }
     }
 
     public class OpenDataObjectCommand : ActivateDataObjectCommand
@@ -231,11 +235,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
     }
 
-    public interface IDeleteCommandParameter : INotifyPropertyChanged
+    public interface IDeleteCommandParameter : ICommandParameter, INotifyPropertyChanged
     {
         bool IsReadOnly { get; }
         bool AllowDelete { get; }
-        IEnumerable<ViewModel> SelectedItems { get; }
     }
 
     public class DeleteDataObjectCommand : CommandViewModel

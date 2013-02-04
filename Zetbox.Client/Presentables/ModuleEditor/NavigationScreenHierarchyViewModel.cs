@@ -182,13 +182,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         #region IDeleteCommandParameter members
         bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
-        IEnumerable<ViewModel> IDeleteCommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
         #endregion
 
         #region IOpenCommandParameter members
         bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
         bool IOpenCommandParameter.AllowOpen { get { return true; } }
-        IEnumerable<ViewModel> IOpenCommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
         #endregion
 
         #region INewCommandParameter members
