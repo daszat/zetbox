@@ -36,6 +36,8 @@ namespace Zetbox.DalProvider.Client
     public interface IZetboxClientContextInternals
     {
         object InvokeServerMethod<T>(T obj, string name, Type retValType, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject;
+
+        ClientIsolationLevel IsolationLevel { get; }
     }
 
     /// <summary>
@@ -1196,6 +1198,8 @@ namespace Zetbox.DalProvider.Client
             handler.ExchangeObjects(this);
             return handler.Result;
         }
+
+        public ClientIsolationLevel IsolationLevel { get { return _clientIsolationLevel; } }
 
         #endregion
 
