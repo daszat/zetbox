@@ -478,8 +478,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private void CreateItem(ObjectClass dtType)
         {
-            var isSimpleObject = dtType.IsSimpleObject;
-
             var newCtx = UseSeparateContext ? ctxFactory() : DataContext;
             var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
 
