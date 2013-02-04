@@ -662,7 +662,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return base.Icon ?? IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.otheroptions_ico.Find(FrozenContext));
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.otheroptions_ico.Find(FrozenContext)));
             }
             set
             {
