@@ -646,7 +646,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var newCtx = ctxFactory();
             var newObjClass = newCtx.FindPersistenceObject<DataType>(this.Type.ExportGuid);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
-            newWorkspace.ShowForeignObject(newObjClass);
+            newWorkspace.ShowObject(newObjClass);
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }

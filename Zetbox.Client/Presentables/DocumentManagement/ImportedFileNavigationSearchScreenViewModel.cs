@@ -76,7 +76,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
             {
                 foreach (var obj in ListViewModel.Instances)
                 {
-                    newWorkspace.ShowForeignModel(obj);
+                    newWorkspace.ShowObject(obj.Object);
                 }
                 newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
             }).Trigger();

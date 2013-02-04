@@ -327,7 +327,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             var newCtx = ctxFactory(ClientIsolationLevel.PrefereClientData);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
 
-            newWorkspace.ShowForeignObject(CurrentModule);
+            newWorkspace.ShowObject(CurrentModule);
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
 

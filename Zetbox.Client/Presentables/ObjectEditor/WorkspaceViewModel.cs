@@ -459,19 +459,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         #region Model Management
 
-        public DataObjectViewModel ShowForeignObject(IDataObject other, ControlKind requestedKind = null)
-        {
-            if (other == null)
-                return null;
-
-            var here = DataContext.Find(other.Context.GetInterfaceType(other), other.ID);
-
-            return ShowObject(here, requestedKind);
-        }
-
-
         public DataObjectViewModel ShowObject(IDataObject obj, ControlKind requestedKind = null)
         {
+            obj = DataContext == obj.Context
+                ? obj
+                : DataContext.Find(obj.Context.GetInterfaceType(obj), obj.ID);
+
             var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
             if (!Items.Contains(vm))
             {
@@ -480,31 +473,6 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
             SelectedItem = vm;
             return vm;
-        }
-
-
-        /// <summary>
-        /// Show a foreign model by finding and creating the equivalent model on the local DataContext.
-        /// </summary>
-        /// <param name="dataObject"></param>
-        /// <returns></returns>
-        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject)
-        {
-            return ShowForeignModel(dataObject, null);
-        }
-
-        /// <summary>
-        /// Show a foreign model by finding and creating the equivalent model on the local DataContext.
-        /// </summary>
-        /// <param name="dataObject"></param>
-        /// <param name="requestedKind"></param>
-        /// <returns></returns>
-        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject, ControlKind requestedKind)
-        {
-            if (dataObject == null)
-                return null;
-
-            return ShowForeignObject(dataObject.Object, requestedKind);
         }
 
         public void ShowModel(ViewModel mdl)
