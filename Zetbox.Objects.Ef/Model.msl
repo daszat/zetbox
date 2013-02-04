@@ -970,6 +970,8 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="AllowAddNew" ColumnName="AllowAddNew" />
           <ScalarProperty Name="AllowDelete" ColumnName="AllowDelete" />
+          <ScalarProperty Name="AllowExport" ColumnName="AllowExport" />
+          <ScalarProperty Name="AllowOpen" ColumnName="AllowOpen" />
           <ScalarProperty Name="AllowSelectColumns" ColumnName="AllowSelectColumns" />
           <ScalarProperty Name="AllowUserFilter" ColumnName="AllowUserFilter" />
           <ScalarProperty Name="EnableAutoFilter" ColumnName="EnableAutoFilter" />
@@ -980,8 +982,6 @@
           <ScalarProperty Name="RespectRequiredFilter" ColumnName="RespectRequiredFilter" />
           <ScalarProperty Name="ShowFilter" ColumnName="ShowFilter" />
           <ScalarProperty Name="ShowMasterDetail" ColumnName="ShowMasterDetail" />
-          <ScalarProperty Name="ShowOpenCommand" ColumnName="ShowOpenCommand" />
-          <ScalarProperty Name="ShowRefreshCommand" ColumnName="ShowRefreshCommand" />
           <ScalarProperty Name="ViewMethodImpl" ColumnName="ViewMethod" />
 	    </MappingFragment>
       </EntityTypeMapping>

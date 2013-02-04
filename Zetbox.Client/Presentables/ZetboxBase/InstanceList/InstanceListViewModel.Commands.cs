@@ -36,11 +36,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var result = base.CreateCommands();
 
             if (AllowAddNew) result.Add(NewCommand);
-            if (ShowOpenCommand) result.Add(OpenCommand);
-            if (ShowRefreshCommand) result.Add(RefreshCommand);
+            if (AllowOpen) result.Add(OpenCommand);
+            result.Add(RefreshCommand);
             if (AllowDelete) result.Add(DeleteCommand);
 
-            if (ShowExportCommand) result.Add(ExportContainerCommand);
+            if (AllowExport) result.Add(ExportContainerCommand);
 
             return result;
         }
@@ -49,16 +49,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (commandsStore == null) return;
             if (!AllowAddNew && commandsStore.Contains(NewCommand)) commandsStore.Remove(NewCommand);
-            if (!ShowOpenCommand && commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
-            if (!ShowRefreshCommand && commandsStore.Contains(RefreshCommand)) commandsStore.Remove(RefreshCommand);
+            if (!AllowOpen && commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
+            if (commandsStore.Contains(RefreshCommand)) commandsStore.Remove(RefreshCommand);
             if (!AllowDelete && commandsStore.Contains(DeleteCommand)) commandsStore.Remove(DeleteCommand);
-            if (!ShowExportCommand && commandsStore.Contains(ExportContainerCommand)) commandsStore.Remove(ExportContainerCommand);
+            if (!AllowExport && commandsStore.Contains(ExportContainerCommand)) commandsStore.Remove(ExportContainerCommand);
 
             if (AllowAddNew && !commandsStore.Contains(NewCommand)) commandsStore.Insert(0, NewCommand);
-            if (ShowOpenCommand && !commandsStore.Contains(OpenCommand)) commandsStore.Insert(AllowAddNew ? 1 : 0, OpenCommand);
-            if (ShowRefreshCommand && !commandsStore.Contains(RefreshCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
-            if (AllowDelete && !commandsStore.Contains(DeleteCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0), DeleteCommand);
-            if (ShowExportCommand && !commandsStore.Contains(ExportContainerCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0) + (AllowDelete ? 1 : 0), ExportContainerCommand);
+            if (AllowOpen && !commandsStore.Contains(OpenCommand)) commandsStore.Insert(AllowAddNew ? 1 : 0, OpenCommand);
+            if (!commandsStore.Contains(RefreshCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (AllowOpen ? 1 : 0), RefreshCommand);
+            if (AllowDelete && !commandsStore.Contains(DeleteCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (AllowOpen ? 1 : 0) + 1, DeleteCommand);
+            if (AllowExport && !commandsStore.Contains(ExportContainerCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (AllowOpen ? 1 : 0) + 1 + (AllowDelete ? 1 : 0), ExportContainerCommand);
         }
 
         private RefreshCommand _RefreshCommand;

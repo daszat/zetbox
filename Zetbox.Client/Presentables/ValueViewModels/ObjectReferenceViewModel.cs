@@ -277,7 +277,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 },
                 null);
             selectionTask.ListViewModel.AllowDelete = false;
-            selectionTask.ListViewModel.ShowOpenCommand = false;
+            selectionTask.ListViewModel.AllowOpen = false;
             selectionTask.ListViewModel.AllowAddNew = AllowCreateNewItemOnSelect;
             OnDataObjectSelectionTaskCreated(selectionTask);
 

@@ -120,6 +120,8 @@ namespace Zetbox.Client.Presentables.GUI
 
             if (screen.AllowAddNew.HasValue) mdl.AllowAddNew = screen.AllowAddNew.Value;
             if (screen.AllowDelete.HasValue) mdl.AllowDelete = screen.AllowDelete.Value;
+            if (screen.AllowExport.HasValue) mdl.AllowExport = screen.AllowExport.Value;
+            if (screen.AllowOpen.HasValue) mdl.AllowOpen = screen.AllowOpen.Value;
             if (screen.AllowSelectColumns.HasValue) mdl.AllowSelectColumns = screen.AllowSelectColumns.Value;
             if (screen.AllowUserFilter.HasValue) mdl.AllowUserFilter = screen.AllowUserFilter.Value;
             if (screen.EnableAutoFilter.HasValue) mdl.EnableAutoFilter = screen.EnableAutoFilter.Value;
@@ -128,8 +130,6 @@ namespace Zetbox.Client.Presentables.GUI
             if (screen.RespectRequiredFilter.HasValue) mdl.RespectRequiredFilter = screen.RespectRequiredFilter.Value;
             if (screen.ShowFilter.HasValue) mdl.ShowFilter = screen.ShowFilter.Value;
             if (screen.ShowMasterDetail.HasValue) mdl.ShowMasterDetail = screen.ShowMasterDetail.Value;
-            if (screen.ShowOpenCommand.HasValue) mdl.ShowOpenCommand = screen.ShowOpenCommand.Value;
-            if (screen.ShowRefreshCommand.HasValue) mdl.ShowRefreshCommand = screen.ShowRefreshCommand.Value;
 
             if (!string.IsNullOrEmpty(screen.InitialSort))
             {

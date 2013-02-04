@@ -431,7 +431,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     },
                     null);
             lstMdl.ListViewModel.AllowDelete = false;
-            lstMdl.ListViewModel.ShowOpenCommand = false;
+            lstMdl.ListViewModel.AllowOpen = false;
             lstMdl.ListViewModel.AllowAddNew = AllowAddNew || AllowAddNewWhenAddingExisting;
             OnDataObjectSelectionTaskCreated(lstMdl);
             ViewModelFactory.ShowDialog(lstMdl);

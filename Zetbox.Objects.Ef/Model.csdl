@@ -2960,6 +2960,8 @@
   <EntityType Name="NavigationSearchScreenEfImpl" BaseType="Model.NavigationScreenEfImpl">
     <Property Name="AllowAddNew" Type="Boolean" Nullable="true"  />
     <Property Name="AllowDelete" Type="Boolean" Nullable="true"  />
+    <Property Name="AllowExport" Type="Boolean" Nullable="true"  />
+    <Property Name="AllowOpen" Type="Boolean" Nullable="true"  />
     <Property Name="AllowSelectColumns" Type="Boolean" Nullable="true"  />
     <Property Name="AllowUserFilter" Type="Boolean" Nullable="true"  />
     <Property Name="EnableAutoFilter" Type="Boolean" Nullable="true"  />
@@ -2978,8 +2980,6 @@
     <Property Name="RespectRequiredFilter" Type="Boolean" Nullable="true"  />
     <Property Name="ShowFilter" Type="Boolean" Nullable="true"  />
     <Property Name="ShowMasterDetail" Type="Boolean" Nullable="true"  />
-    <Property Name="ShowOpenCommand" Type="Boolean" Nullable="true"  />
-    <Property Name="ShowRefreshCommand" Type="Boolean" Nullable="true"  />
     <NavigationProperty Name="TypeImpl"
                         Relationship="Model.FK_SearchScreen_of_Type"
                         FromRole="SearchScreen"

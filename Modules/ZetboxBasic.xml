@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-01-28T11:56:07Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-04T15:49:49Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -3277,6 +3277,78 @@ public static void isValid_AllowDelete(NavigationSearchScreen obj, PropertyIsVal
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:BoolProperty>
+  <ZetboxBase:BoolProperty ExportGuid="b7d18552-aa83-4968-97b3-ce34ff79753f">
+    <ZetboxBase:CategoryTags>Search</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-04T14:49:49.169192Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_AllowExport(NavigationSearchScreen obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_AllowExport(NavigationSearchScreen obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_AllowExport(NavigationSearchScreen obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_AllowExport(NavigationSearchScreen obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.AllowExport == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-04T14:49:28.145988Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>AllowExport</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>cccc4b79-4e6d-449b-8866-c1827c4dcdc1</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>502</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:BoolProperty ExportGuid="84a66c05-9f95-475e-aa9d-a341a0de0ba6">
+    <ZetboxBase:CategoryTags>Search</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-04T14:48:53.735108Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_AllowOpen(NavigationSearchScreen obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_AllowOpen(NavigationSearchScreen obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_AllowOpen(NavigationSearchScreen obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_AllowOpen(NavigationSearchScreen obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.AllowOpen == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2011-10-19T04:14:04.349956Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>AllowOpen</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>cccc4b79-4e6d-449b-8866-c1827c4dcdc1</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>501</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
   <ZetboxBase:BoolProperty ExportGuid="372dd9f8-3a34-473d-9c1b-b0712623abe0">
     <ZetboxBase:CategoryTags>Search</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
@@ -3705,78 +3777,6 @@ public static void isValid_ShowMasterDetail(NavigationSearchScreen obj, Property
     <ZetboxBase:Name>ShowMasterDetail</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>cccc4b79-4e6d-449b-8866-c1827c4dcdc1</ZetboxBase:ObjectClass>
     <ZetboxBase:Properties_pos>1300</ZetboxBase:Properties_pos>
-    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
-    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
-    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-  </ZetboxBase:BoolProperty>
-  <ZetboxBase:BoolProperty ExportGuid="84a66c05-9f95-475e-aa9d-a341a0de0ba6">
-    <ZetboxBase:CategoryTags>Search</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ShowOpenCommand(NavigationSearchScreen obj, PropertyGetterEventArgs&lt;bool?&gt; e)
-{
-}
-
-[Invocation]
-public static void preSet_ShowOpenCommand(NavigationSearchScreen obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
-{
-}
-
-[Invocation]
-public static void postSet_ShowOpenCommand(NavigationSearchScreen obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
-{
-}
-
-[Invocation]
-public static void isValid_ShowOpenCommand(NavigationSearchScreen obj, PropertyIsValidEventArgs e)
-{
-	e.IsValid = obj.ShowOpenCommand == ...;
-	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
-}
-
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2011-10-19T04:14:04.349956Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
-    <ZetboxBase:Name>ShowOpenCommand</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>cccc4b79-4e6d-449b-8866-c1827c4dcdc1</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>1400</ZetboxBase:Properties_pos>
-    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
-    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
-    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-  </ZetboxBase:BoolProperty>
-  <ZetboxBase:BoolProperty ExportGuid="13e637ea-d461-46da-a153-ae8af5b0b724">
-    <ZetboxBase:CategoryTags>Search</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ShowRefreshCommand(NavigationSearchScreen obj, PropertyGetterEventArgs&lt;bool?&gt; e)
-{
-}
-
-[Invocation]
-public static void preSet_ShowRefreshCommand(NavigationSearchScreen obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
-{
-}
-
-[Invocation]
-public static void postSet_ShowRefreshCommand(NavigationSearchScreen obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
-{
-}
-
-[Invocation]
-public static void isValid_ShowRefreshCommand(NavigationSearchScreen obj, PropertyIsValidEventArgs e)
-{
-	e.IsValid = obj.ShowRefreshCommand == ...;
-	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
-}
-
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2011-10-19T04:14:16.563956Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
-    <ZetboxBase:Name>ShowRefreshCommand</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>cccc4b79-4e6d-449b-8866-c1827c4dcdc1</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>1500</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>

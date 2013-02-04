@@ -35,6 +35,24 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Zetbox.API.DefinitionGuid("b7d18552-aa83-4968-97b3-ce34ff79753f")]
+        bool? AllowExport {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("84a66c05-9f95-475e-aa9d-a341a0de0ba6")]
+        bool? AllowOpen {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Zetbox.API.DefinitionGuid("372dd9f8-3a34-473d-9c1b-b0712623abe0")]
         bool? AllowSelectColumns {
             get;
@@ -136,24 +154,6 @@ namespace Zetbox.App.GUI
         /// </summary>
         [Zetbox.API.DefinitionGuid("c7978c7d-92cc-46a4-a8e8-bd9c24597dda")]
         bool? ShowMasterDetail {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Zetbox.API.DefinitionGuid("84a66c05-9f95-475e-aa9d-a341a0de0ba6")]
-        bool? ShowOpenCommand {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Zetbox.API.DefinitionGuid("13e637ea-d461-46da-a153-ae8af5b0b724")]
-        bool? ShowRefreshCommand {
             get;
             set;
         }

@@ -60,14 +60,11 @@
                 </ctrls:LabeledContainer>
                 <TextBlock FontSize="20"
                            FontWeight="Bold">Commands:</TextBlock>
-                <ctrls:LabeledContainer Label="ShowOpenCommand">
-                    <CheckBox IsChecked="{Binding TestList.ShowOpenCommand}" />
+                <ctrls:LabeledContainer Label="AllowOpen">
+                    <CheckBox IsChecked="{Binding TestList.AllowOpen}" />
                 </ctrls:LabeledContainer>
-                <ctrls:LabeledContainer Label="ShowRefreshCommand">
-                    <CheckBox IsChecked="{Binding TestList.ShowRefreshCommand}" />
-                </ctrls:LabeledContainer>
-                <ctrls:LabeledContainer Label="ShowExportCommand">
-                    <CheckBox IsChecked="{Binding TestList.ShowExportCommand}" />
+                <ctrls:LabeledContainer Label="AllowExport">
+                    <CheckBox IsChecked="{Binding TestList.AllowExport}" />
                 </ctrls:LabeledContainer>
                 <ctrls:LabeledContainer Label="ShowCommands">
                     <CheckBox IsChecked="{Binding TestList.ShowCommands}" />

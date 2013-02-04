@@ -118,7 +118,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                             },
                             null);
                         selectionTask.ListViewModel.AllowDelete = false;
-                        selectionTask.ListViewModel.ShowOpenCommand = false;
+                        selectionTask.ListViewModel.AllowOpen = false;
                         selectionTask.ListViewModel.AllowAddNew = true;
                         OnDataObjectSelectionTaskCreated(selectionTask);
 

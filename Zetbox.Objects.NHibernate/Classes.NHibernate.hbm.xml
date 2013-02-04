@@ -826,6 +826,14 @@
                   column="`AllowDelete`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="AllowExport" 
+                  column="`AllowExport`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="AllowOpen" 
+                  column="`AllowOpen`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="AllowSelectColumns" 
                   column="`AllowSelectColumns`" 
                   optimistic-lock="false"/>
@@ -870,14 +878,6 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ShowMasterDetail" 
                   column="`ShowMasterDetail`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="ShowOpenCommand" 
-                  column="`ShowOpenCommand`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="ShowRefreshCommand" 
-                  column="`ShowRefreshCommand`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Type" column="`fk_Type`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />

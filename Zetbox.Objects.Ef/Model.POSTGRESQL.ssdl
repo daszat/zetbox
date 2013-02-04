@@ -2028,6 +2028,8 @@
     <Property Name="fk_Type" Type="int4" />
     <Property Name="AllowAddNew" Type="bool" Nullable="true" />
     <Property Name="AllowDelete" Type="bool" Nullable="true" />
+    <Property Name="AllowExport" Type="bool" Nullable="true" />
+    <Property Name="AllowOpen" Type="bool" Nullable="true" />
     <Property Name="AllowSelectColumns" Type="bool" Nullable="true" />
     <Property Name="AllowUserFilter" Type="bool" Nullable="true" />
     <Property Name="EnableAutoFilter" Type="bool" Nullable="true" />
@@ -2038,8 +2040,6 @@
     <Property Name="RespectRequiredFilter" Type="bool" Nullable="true" />
     <Property Name="ShowFilter" Type="bool" Nullable="true" />
     <Property Name="ShowMasterDetail" Type="bool" Nullable="true" />
-    <Property Name="ShowOpenCommand" Type="bool" Nullable="true" />
-    <Property Name="ShowRefreshCommand" Type="bool" Nullable="true" />
     <Property Name="ViewMethod" Type="int4" Nullable="true" />
   </EntityType>
 	

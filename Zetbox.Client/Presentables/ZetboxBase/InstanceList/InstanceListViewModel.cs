@@ -364,59 +364,38 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private bool _ShowOpenCommand = true;
-        public bool ShowOpenCommand
+        private bool _allowOpen = true;
+        public bool AllowOpen
         {
             get
             {
-                return _ShowOpenCommand;
+                return _allowOpen;
             }
             set
             {
-                if (_ShowOpenCommand != value)
+                if (_allowOpen != value)
                 {
-                    _ShowOpenCommand = value;
+                    _allowOpen = value;
                     UpdateCommands();
-                    OnPropertyChanged("ShowOpenCommand");
                     OnPropertyChanged("AllowOpen");
                 }
             }
         }
 
-        bool IOpenCommandParameter.AllowOpen { get { return ShowOpenCommand; } }
-
-        private bool _ShowRefreshCommand = true;
-        public bool ShowRefreshCommand
+        private bool _allowExport = true;
+        public bool AllowExport
         {
             get
             {
-                return _ShowRefreshCommand;
+                return _allowExport;
             }
             set
             {
-                if (_ShowRefreshCommand != value)
+                if (_allowExport != value)
                 {
-                    _ShowRefreshCommand = value;
+                    _allowExport = value;
                     UpdateCommands();
-                    OnPropertyChanged("ShowRefreshCommand");
-                }
-            }
-        }
-
-        private bool _ShowExportCommand = true;
-        public bool ShowExportCommand
-        {
-            get
-            {
-                return _ShowExportCommand;
-            }
-            set
-            {
-                if (_ShowExportCommand != value)
-                {
-                    _ShowExportCommand = value;
-                    UpdateCommands();
-                    OnPropertyChanged("ShowExportCommand");
+                    OnPropertyChanged("AllowExport");
                 }
             }
         }
