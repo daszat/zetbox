@@ -1247,6 +1247,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Stagin
             SourceTables.Clear();
             ChangedBy = null;
             CreatedBy = null;
+            MigrationProject = null;
         }
         public static event ObjectEventHandler<StagingDatabase> OnNotifyDeleting_StagingDatabase;
 

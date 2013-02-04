@@ -458,6 +458,7 @@ namespace Zetbox.App.GUI
                 ParentsToDelete.Add((NHibernatePersistenceObject)Property);
             }
 
+            Property = null;
         }
         public static event ObjectEventHandler<PropertyFilterConfiguration> OnNotifyDeleting_PropertyFilterConfiguration;
 

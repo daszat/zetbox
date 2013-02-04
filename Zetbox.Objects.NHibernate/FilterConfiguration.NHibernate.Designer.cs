@@ -1435,7 +1435,9 @@ namespace Zetbox.App.GUI
 
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
             RequestedKind = null;
+            ViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<FilterConfiguration> OnNotifyDeleting_FilterConfiguration;
 

@@ -465,6 +465,7 @@ namespace Zetbox.App.GUI
                 ParentsToDelete.Add((NHibernatePersistenceObject)ObjectClass);
             }
 
+            ObjectClass = null;
         }
         public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnNotifyDeleting_ObjectClassFilterConfiguration;
 

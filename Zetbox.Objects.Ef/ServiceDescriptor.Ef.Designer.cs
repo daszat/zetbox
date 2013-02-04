@@ -1109,6 +1109,8 @@ namespace Zetbox.App.Base
             if (OnNotifyDeleting_ServiceDescriptor != null) OnNotifyDeleting_ServiceDescriptor(this);
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
+            TypeRef = null;
         }
         public static event ObjectEventHandler<ServiceDescriptor> OnNotifyDeleting_ServiceDescriptor;
 

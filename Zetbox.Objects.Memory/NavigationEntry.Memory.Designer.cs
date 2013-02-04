@@ -1706,6 +1706,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             Groups.Clear();
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
             Parent = null;
             RequestedKind = null;
             ViewModelDescriptor = null;

@@ -1539,6 +1539,7 @@ namespace Zetbox.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_TypeRef != null) OnNotifyDeleting_TypeRef(this);
             GenericArguments.Clear();
+            Assembly = null;
             ChangedBy = null;
             CreatedBy = null;
             Parent = null;

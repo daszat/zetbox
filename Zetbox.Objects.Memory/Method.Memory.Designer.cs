@@ -1994,6 +1994,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
             ChangedBy = null;
             CreatedBy = null;
             Icon = null;
+            Module = null;
+            ObjectClass = null;
         }
         public static event ObjectEventHandler<Method> OnNotifyDeleting_Method;
 

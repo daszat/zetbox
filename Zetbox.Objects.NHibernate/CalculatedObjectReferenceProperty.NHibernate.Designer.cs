@@ -683,6 +683,7 @@ namespace Zetbox.App.Base
             }
 
             Inputs.Clear();
+            ReferencedClass = null;
         }
         public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnNotifyDeleting_CalculatedObjectReferenceProperty;
 

@@ -505,6 +505,7 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)ObjectClass);
             }
 
+            ObjectClass = null;
         }
         public static event ObjectEventHandler<ObjectReferenceParameter> OnNotifyDeleting_ObjectReferenceParameter;
 

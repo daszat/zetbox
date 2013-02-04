@@ -1875,8 +1875,11 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
+            A = null;
+            B = null;
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
         }
         public static event ObjectEventHandler<Relation> OnNotifyDeleting_Relation;
 

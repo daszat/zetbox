@@ -1059,6 +1059,7 @@ namespace Zetbox.App.Base
             }
 
             ChangedBy = null;
+            ConstrainedProperty = null;
             CreatedBy = null;
         }
         public static event ObjectEventHandler<Constraint> OnNotifyDeleting_Constraint;

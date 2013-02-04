@@ -412,6 +412,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SequenceData != null) OnNotifyDeleting_SequenceData(this);
+            Sequence = null;
         }
         public static event ObjectEventHandler<SequenceData> OnNotifyDeleting_SequenceData;
 

@@ -397,6 +397,7 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)Sequence);
             }
 
+            Sequence = null;
         }
         public static event ObjectEventHandler<SequenceData> OnNotifyDeleting_SequenceData;
 

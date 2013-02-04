@@ -412,6 +412,7 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_RequiredParentChild != null) OnNotifyDeleting_RequiredParentChild(this);
+            Parent = null;
         }
         public static event ObjectEventHandler<RequiredParentChild> OnNotifyDeleting_RequiredParentChild;
 

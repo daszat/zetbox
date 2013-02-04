@@ -594,6 +594,7 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for GroupMembership_has_Group_RelationEntry
 
             Member.Clear();
+            Module = null;
         }
         public static event ObjectEventHandler<Group> OnNotifyDeleting_Group;
 

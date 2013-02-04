@@ -761,6 +761,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             // should fetch && remember parent for ViewModelDescriptor_displayedInGridBy_ControlKind_RelationEntry
 
             ChildControlKinds.Clear();
+            Module = null;
             Parent = null;
         }
         public static event ObjectEventHandler<ControlKind> OnNotifyDeleting_ControlKind;

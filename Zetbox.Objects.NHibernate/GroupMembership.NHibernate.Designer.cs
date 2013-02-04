@@ -316,6 +316,7 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)Group);
             }
 
+            Group = null;
         }
         public static event ObjectEventHandler<GroupMembership> OnNotifyDeleting_GroupMembership;
 

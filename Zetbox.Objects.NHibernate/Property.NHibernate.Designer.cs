@@ -2449,7 +2449,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             CreatedBy = null;
             DefaultValue = null;
             FilterConfiguration = null;
+            Module = null;
+            ObjectClass = null;
             RequestedKind = null;
+            ValueModelDescriptor = null;
         }
         public static event ObjectEventHandler<Property> OnNotifyDeleting_Property;
 

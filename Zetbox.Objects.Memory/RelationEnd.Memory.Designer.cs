@@ -1680,9 +1680,12 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_RelationEnd != null) OnNotifyDeleting_RelationEnd(this);
+            AParent = null;
+            BParent = null;
             ChangedBy = null;
             CreatedBy = null;
             Navigator = null;
+            Type = null;
         }
         public static event ObjectEventHandler<RelationEnd> OnNotifyDeleting_RelationEnd;
 

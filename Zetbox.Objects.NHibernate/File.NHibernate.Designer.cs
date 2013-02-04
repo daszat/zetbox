@@ -1097,6 +1097,7 @@ namespace at.dasz.DocumentManagement
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
+            Blob = null;
             ChangedBy = null;
             CreatedBy = null;
         }

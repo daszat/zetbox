@@ -585,6 +585,7 @@ namespace Zetbox.App.Test
                 ParentsToDelete.Add((NHibernatePersistenceObject)Fragebogen);
             }
 
+            Fragebogen = null;
         }
         public static event ObjectEventHandler<Antwort> OnNotifyDeleting_Antwort;
 

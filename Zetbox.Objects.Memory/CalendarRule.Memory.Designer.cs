@@ -1459,6 +1459,7 @@ namespace Zetbox.App.Calendar
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalendarRule != null) OnNotifyDeleting_CalendarRule(this);
+            Calendar = null;
             ChangedBy = null;
             CreatedBy = null;
             Module = null;

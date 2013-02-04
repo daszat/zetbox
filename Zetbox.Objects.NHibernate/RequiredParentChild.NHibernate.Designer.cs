@@ -404,6 +404,7 @@ namespace Zetbox.App.Test
                 ParentsToDelete.Add((NHibernatePersistenceObject)Parent);
             }
 
+            Parent = null;
         }
         public static event ObjectEventHandler<RequiredParentChild> OnNotifyDeleting_RequiredParentChild;
 

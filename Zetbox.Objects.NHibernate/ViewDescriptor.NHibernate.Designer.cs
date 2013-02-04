@@ -788,6 +788,8 @@ namespace Zetbox.App.GUI
 
             SupportedViewModels.Clear();
             ControlKind = null;
+            ControlRef = null;
+            Module = null;
         }
         public static event ObjectEventHandler<ViewDescriptor> OnNotifyDeleting_ViewDescriptor;
 

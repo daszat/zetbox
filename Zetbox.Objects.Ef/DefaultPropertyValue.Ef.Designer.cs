@@ -889,6 +889,7 @@ namespace Zetbox.App.Base
             if (OnNotifyDeleting_DefaultPropertyValue != null) OnNotifyDeleting_DefaultPropertyValue(this);
             ChangedBy = null;
             CreatedBy = null;
+            Property = null;
         }
         public static event ObjectEventHandler<DefaultPropertyValue> OnNotifyDeleting_DefaultPropertyValue;
 

@@ -1201,6 +1201,8 @@ namespace Zetbox.App.Base
 
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
+            ObjectClass = null;
         }
         public static event ObjectEventHandler<AccessControl> OnNotifyDeleting_AccessControl;
 

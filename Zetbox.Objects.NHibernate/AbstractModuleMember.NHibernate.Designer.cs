@@ -839,6 +839,7 @@ namespace Zetbox.App.Base
 
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
         }
         public static event ObjectEventHandler<AbstractModuleMember> OnNotifyDeleting_AbstractModuleMember;
 

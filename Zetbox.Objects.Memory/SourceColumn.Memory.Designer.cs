@@ -1891,6 +1891,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             ChangedBy = null;
             CreatedBy = null;
             References = null;
+            SourceTable = null;
         }
         public static event ObjectEventHandler<SourceColumn> OnNotifyDeleting_SourceColumn;
 

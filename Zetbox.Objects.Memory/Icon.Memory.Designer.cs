@@ -819,6 +819,8 @@ namespace Zetbox.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Icon != null) OnNotifyDeleting_Icon(this);
+            Blob = null;
+            Module = null;
         }
         public static event ObjectEventHandler<Icon> OnNotifyDeleting_Icon;
 

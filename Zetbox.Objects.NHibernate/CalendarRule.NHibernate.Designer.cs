@@ -1424,6 +1424,7 @@ namespace Zetbox.App.Calendar
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
+            Calendar = null;
             ChangedBy = null;
             CreatedBy = null;
             Module = null;

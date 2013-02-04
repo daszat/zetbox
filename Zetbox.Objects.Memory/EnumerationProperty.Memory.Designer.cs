@@ -645,6 +645,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumerationProperty != null) OnNotifyDeleting_EnumerationProperty(this);
+            Enumeration = null;
         }
         public static event ObjectEventHandler<EnumerationProperty> OnNotifyDeleting_EnumerationProperty;
 

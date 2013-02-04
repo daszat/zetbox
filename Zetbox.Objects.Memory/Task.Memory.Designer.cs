@@ -1168,6 +1168,7 @@ namespace Zetbox.App.Projekte
             if (OnNotifyDeleting_Task != null) OnNotifyDeleting_Task(this);
             ChangedBy = null;
             CreatedBy = null;
+            Projekt = null;
         }
         public static event ObjectEventHandler<Task> OnNotifyDeleting_Task;
 

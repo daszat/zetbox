@@ -1256,6 +1256,7 @@ namespace Zetbox.App.Base
             ChangedBy = null;
             CreatedBy = null;
             Data = null;
+            Module = null;
         }
         public static event ObjectEventHandler<Sequence> OnNotifyDeleting_Sequence;
 

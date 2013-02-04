@@ -771,6 +771,7 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)CompoundObjectDefinition);
             }
 
+            CompoundObjectDefinition = null;
         }
         public static event ObjectEventHandler<CompoundObjectProperty> OnNotifyDeleting_CompoundObjectProperty;
 

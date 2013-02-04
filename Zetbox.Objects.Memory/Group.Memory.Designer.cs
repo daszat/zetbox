@@ -605,6 +605,7 @@ namespace Zetbox.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_Group != null) OnNotifyDeleting_Group(this);
             Member.Clear();
+            Module = null;
         }
         public static event ObjectEventHandler<Group> OnNotifyDeleting_Group;
 

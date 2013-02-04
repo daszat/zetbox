@@ -594,6 +594,7 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Antwort != null) OnNotifyDeleting_Antwort(this);
+            Fragebogen = null;
         }
         public static event ObjectEventHandler<Antwort> OnNotifyDeleting_Antwort;
 

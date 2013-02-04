@@ -1606,9 +1606,12 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
+            AParent = null;
+            BParent = null;
             ChangedBy = null;
             CreatedBy = null;
             Navigator = null;
+            Type = null;
         }
         public static event ObjectEventHandler<RelationEnd> OnNotifyDeleting_RelationEnd;
 

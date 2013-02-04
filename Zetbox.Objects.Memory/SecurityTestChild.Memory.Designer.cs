@@ -1082,6 +1082,7 @@ namespace Zetbox.App.Test
             if (OnNotifyDeleting_SecurityTestChild != null) OnNotifyDeleting_SecurityTestChild(this);
             ChangedBy = null;
             CreatedBy = null;
+            Identity = null;
             Parent = null;
         }
         public static event ObjectEventHandler<SecurityTestChild> OnNotifyDeleting_SecurityTestChild;

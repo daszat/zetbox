@@ -1341,6 +1341,8 @@ namespace Zetbox.App.GUI
             DefaultGridCellDisplayKind = null;
             DefaultGridCellEditorKind = null;
             DefaultGridCellPreEditorKind = null;
+            Module = null;
+            ViewModelRef = null;
         }
         public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyDeleting_ViewModelDescriptor;
 

@@ -1969,6 +1969,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             ChangedBy = null;
             CreatedBy = null;
             DefaultIcon = null;
+            Module = null;
             RequestedKind = null;
         }
         public static event ObjectEventHandler<DataType> OnNotifyDeleting_DataType;

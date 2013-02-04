@@ -1487,6 +1487,7 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for ViewDescriptor_has_TypeRef_RelationEntry
 
             GenericArguments.Clear();
+            Assembly = null;
             ChangedBy = null;
             CreatedBy = null;
             Parent = null;

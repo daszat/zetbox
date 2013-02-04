@@ -571,6 +571,8 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)IsValidInvocation);
             }
 
+            GetErrorTextInvocation = null;
+            IsValidInvocation = null;
         }
         public static event ObjectEventHandler<InvokingConstraint> OnNotifyDeleting_InvokingConstraint;
 

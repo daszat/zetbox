@@ -584,6 +584,7 @@ namespace Zetbox.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_SavedListConfiguration != null) OnNotifyDeleting_SavedListConfiguration(this);
             Owner = null;
+            Type = null;
         }
         public static event ObjectEventHandler<SavedListConfiguration> OnNotifyDeleting_SavedListConfiguration;
 

@@ -1050,6 +1050,7 @@ namespace Zetbox.App.Base
             if (OnNotifyDeleting_Assembly != null) OnNotifyDeleting_Assembly(this);
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
         }
         public static event ObjectEventHandler<Assembly> OnNotifyDeleting_Assembly;
 

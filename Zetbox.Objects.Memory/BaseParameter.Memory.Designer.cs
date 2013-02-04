@@ -1550,6 +1550,7 @@ namespace Zetbox.App.Base
             if (OnNotifyDeleting_BaseParameter != null) OnNotifyDeleting_BaseParameter(this);
             ChangedBy = null;
             CreatedBy = null;
+            Method = null;
         }
         public static event ObjectEventHandler<BaseParameter> OnNotifyDeleting_BaseParameter;
 

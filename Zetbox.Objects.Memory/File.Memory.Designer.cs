@@ -1126,6 +1126,7 @@ namespace at.dasz.DocumentManagement
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_File != null) OnNotifyDeleting_File(this);
+            Blob = null;
             ChangedBy = null;
             CreatedBy = null;
         }

@@ -1270,6 +1270,7 @@ namespace Zetbox.App.Base
             if (OnNotifyDeleting_EnumerationEntry != null) OnNotifyDeleting_EnumerationEntry(this);
             ChangedBy = null;
             CreatedBy = null;
+            Enumeration = null;
         }
         public static event ObjectEventHandler<EnumerationEntry> OnNotifyDeleting_EnumerationEntry;
 

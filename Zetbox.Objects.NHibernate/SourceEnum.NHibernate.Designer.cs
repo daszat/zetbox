@@ -1061,6 +1061,8 @@ namespace Zetbox.App.SchemaMigration
 
             ChangedBy = null;
             CreatedBy = null;
+            DestinationValue = null;
+            SourceColumn = null;
         }
         public static event ObjectEventHandler<SourceEnum> OnNotifyDeleting_SourceEnum;
 

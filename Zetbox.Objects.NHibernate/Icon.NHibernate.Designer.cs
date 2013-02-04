@@ -801,6 +801,8 @@ namespace Zetbox.App.GUI
             }
             // should fetch && remember parent for Method_has_Icon_RelationEntry
 
+            Blob = null;
+            Module = null;
         }
         public static event ObjectEventHandler<Icon> OnNotifyDeleting_Icon;
 

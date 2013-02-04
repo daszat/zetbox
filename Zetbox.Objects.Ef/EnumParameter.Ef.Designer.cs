@@ -479,6 +479,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumParameter != null) OnNotifyDeleting_EnumParameter(this);
+            Enumeration = null;
         }
         public static event ObjectEventHandler<EnumParameter> OnNotifyDeleting_EnumParameter;
 
