@@ -6,12 +6,13 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.App.Base;
     using Zetbox.API.Utils;
+    using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.ZetboxBase;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
-    public class DataTypeGraphModel : Presentables.DataTypeViewModel
+    public class DataTypeGraphModel : Presentables.DataTypeViewModel, IOpenCommandParameter
     {
         public new delegate DataTypeGraphModel Factory(IZetboxContext dataCtx, DiagramViewModel parent, DataType obj);
 
@@ -77,20 +78,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             }
         }
 
-        private ICommandViewModel _open = null;
+        private OpenDataObjectCommand _open = null;
         public ICommandViewModel Open
         {
             get
             {
                 if (_open == null)
                 {
-                    _open = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, this, "Open", "Opens the current DataType", () =>
-                        {
-                            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory(), null);
-                            newWorkspace.ShowForeignModel(this);
-                            ViewModelFactory.ShowModel(newWorkspace, true);
-                        }, null, null);
+                    _open = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this);
                 }
 
                 return _open;
@@ -136,6 +131,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 return DescribedMethods.Where(m => !m.IsDefaultMethod);
             }
         }
+
+        #region IOpenCommandParameter members
+        bool IOpenCommandParameter.AllowOpen { get { return true; } }
+        bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return new[] { this }; } }
+        #endregion
     }
 
     public class DescribedMethodViewModel
