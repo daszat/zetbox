@@ -71,7 +71,7 @@ namespace Zetbox.API
             get
             {
                 return this.Context != null && !IsRecordingNotifications
-                    ? this.Context.IsReadonly || CurrentAccessRights.HasOnlyReadRightsOrNone() // when attaced -> eval. Don't look at the implementation below (CurrentAccessRights), it may be overridden
+                    ? this.Context.IsReadonly || CurrentAccessRights.HasOnlyReadRightsOrNone() // when attached -> eval. Don't look at the implementation below (CurrentAccessRights), it may be overridden
                     : false; // unattached - cannot be readonly
             }
         }
