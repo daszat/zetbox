@@ -82,7 +82,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         protected void RefreshCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            ViewModel.ReloadInstances();
+            ViewModel.Refresh();
         }
 
         #region IHasViewModel<InstanceListViewModel> Members

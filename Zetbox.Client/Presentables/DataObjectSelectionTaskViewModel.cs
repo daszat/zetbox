@@ -161,7 +161,7 @@ namespace Zetbox.Client.Presentables
 
         public void Refresh()
         {
-            ListViewModel.ReloadInstances();
+            ListViewModel.Refresh();
         }
 
         public IEnumerable<DataObjectViewModel> SelectedItems

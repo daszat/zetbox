@@ -152,7 +152,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (a != null)
                 {
                     a.RegenerateTypeRefs();
-                    ListModel.ReloadInstances();
+                    ListModel.Refresh();
                 }
             }
         }

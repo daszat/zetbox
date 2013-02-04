@@ -134,7 +134,7 @@ namespace Zetbox.Client.Presentables.GUI
                     _selectedItem = value;
                     OnPropertyChanged("SelectedItem");
                     Load();
-                    Parent.ReloadInstances();
+                    Parent.Refresh();
                 }
             }
         }

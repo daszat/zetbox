@@ -19,15 +19,16 @@ namespace Zetbox.Client.Presentables.GUI
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.Client.Presentables;
-    using Zetbox.Client.Presentables.GUI;
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
-    using Zetbox.Client.Presentables.FilterViewModels;
+    using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.DtoViewModels;
+    using Zetbox.Client.Presentables.FilterViewModels;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public abstract class NavigationReportScreenViewModel : NavigationScreenViewModel
+    public abstract class NavigationReportScreenViewModel : NavigationScreenViewModel, IRefreshCommandListener
     {
         public new delegate NavigationReportScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
@@ -62,6 +63,20 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
+        private RefreshCommand _RefreshCommand = null;
+        public ICommandViewModel RefreshCommand
+        {
+            get
+            {
+                if (_RefreshCommand == null)
+                {
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(
+                        DataContext,
+                        this);
+                }
+                return _RefreshCommand;
+            }
+        }
         public void Refresh()
         {
             _statistic = null;

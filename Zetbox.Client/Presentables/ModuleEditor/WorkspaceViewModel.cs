@@ -29,7 +29,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
-    public class WorkspaceViewModel : WindowViewModel
+    public class WorkspaceViewModel : WindowViewModel, IRefreshCommandListener
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
@@ -283,15 +283,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             }
         }
 
-        private ICommandViewModel _RefreshCommand = null;
+        private RefreshCommand _RefreshCommand = null;
         public ICommandViewModel RefreshCommand
         {
             get
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Refresh", "Refresh", () => Refresh(), null, null);
-                    _RefreshCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _RefreshCommand;
             }

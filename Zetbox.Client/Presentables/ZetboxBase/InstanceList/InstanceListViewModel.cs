@@ -752,22 +752,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return DataContext.GetQuery<T>(); // ToList would make all filter client side filter .ToList().OrderBy(obj => obj.ToString()).AsQueryable();
         }
 
-        public bool CanExecReloadInstances()
-        {
-            return !FilterList.RequiredFilterMissing;
-        }
-
-        public string CanExecReloadInstancesReason()
-        {
-            return FilterListEntryViewModelResources.RequiredFilterMissingReason;
-        }
-
         /// <summary>
         /// Reload instances from context.
         /// </summary>
-        public void ReloadInstances()
+        public void Refresh()
         {
-            if (!CanExecReloadInstances())
+            if (FilterList.RequiredFilterMissing)
                 return;
 
             try
@@ -785,7 +775,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         ZbTask _loadInstancesCoreTask;
         private ZbTask LoadInstancesCore()
         {
-            if (_loadInstancesCoreTask != null || !CanExecReloadInstances() || IsInInit) return _loadInstancesCoreTask;
+            if (_loadInstancesCoreTask != null || FilterList.RequiredFilterMissing || IsInInit) return _loadInstancesCoreTask;
 
             SetBusy();
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
@@ -904,7 +894,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             switch (e.PropertyName)
             {
                 case "SelectedItem":
-                    ReloadInstances();
+                    Refresh();
                     break;
             }
         }

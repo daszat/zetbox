@@ -5,14 +5,15 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Zetbox.API;
-    using Zetbox.App.Base;
     using QuickGraph;
+    using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+    using Zetbox.App.Base;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
     [CLSCompliant(false)]
     public class DataTypeGraph : BidirectionalGraph<DataTypeGraphModel, IEdge<DataTypeGraphModel>>
@@ -26,9 +27,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             : base(allowParallelEdges, vertexCapacity) { }
     }
 
-    
 
-    public class DiagramViewModel : ViewModel
+
+    public class DiagramViewModel : ViewModel, IRefreshCommandListener
     {
         public new delegate DiagramViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
 
@@ -162,7 +163,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             }
         }
 
-        private void Refresh()
+        public void Refresh()
         {
             _relations = null;
             if (_dataTypes != null)
@@ -325,14 +326,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         #endregion
 
         #region Commands
-        private ICommandViewModel _RefreshCommand = null;
+        private RefreshCommand _RefreshCommand = null;
         public ICommandViewModel RefreshCommand
         {
             get
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Refresh", "Refresh the DataTypes list", () => Refresh(), null, null);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _RefreshCommand;
             }

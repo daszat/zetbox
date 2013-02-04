@@ -22,12 +22,13 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Windows.Media;
     using Zetbox.API;
     using Zetbox.API.Utils;
+    using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel
+    public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel, IRefreshCommandListener
     {
         public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> source);
 
@@ -91,19 +92,16 @@ namespace Zetbox.Client.Presentables.Calendar
             From = DateTime.Today.FirstWeekDay();
         }
 
-        private ICommandViewModel _RefreshCommand = null;
+        private RefreshCommand _RefreshCommand = null;
         public ICommandViewModel RefreshCommand
         {
             get
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
-                        "Aktualisieren",
-                        "Die angezeigten Daten neu laden",
-                        Refresh,
-                        null,
-                        null);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(
+                        DataContext,
+                        this);
                 }
                 return _RefreshCommand;
             }
@@ -111,7 +109,15 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public void Refresh()
         {
-            ReloadAppointments();
+            if (_allAppointments != null)
+            {
+                foreach (var a in _allAppointments)
+                {
+                    a.PropertyChanged -= AppointmentViewModelChanged;
+                }
+                _allAppointments = null;
+            }
+            EnsureAppointments();
         }
 
         private DateTime _From = DateTime.Today.FirstWeekDay();
@@ -195,9 +201,9 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_JumpToDateCommand == null)
                 {
-                    _JumpToDateCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Anzeigen", "Zeigt das Datum im Kalender an", 
+                    _JumpToDateCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Anzeigen", "Zeigt das Datum im Kalender an",
                         JumpToDate,
-                        () => _jumpToDateMdl != null && _jumpToDateMdl.Value.HasValue, 
+                        () => _jumpToDateMdl != null && _jumpToDateMdl.Value.HasValue,
                         null);
                 }
                 return _JumpToDateCommand;
@@ -264,7 +270,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         protected virtual Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> GetSource()
         {
-            return (f,u) => new IAppointmentViewModel[] { };
+            return (f, u) => new IAppointmentViewModel[] { };
         }
 
         private IAppointmentViewModel _selectedItem;
@@ -298,18 +304,6 @@ namespace Zetbox.Client.Presentables.Calendar
 
 
         private List<IAppointmentViewModel> _allAppointments;
-        private void ReloadAppointments()
-        {
-            if (_allAppointments != null)
-            {
-                foreach (var a in _allAppointments)
-                {
-                    a.PropertyChanged -= AppointmentViewModelChanged;
-                }
-                _allAppointments = null;
-            }
-            EnsureAppointments();
-        }
 
         private void EnsureAppointments()
         {

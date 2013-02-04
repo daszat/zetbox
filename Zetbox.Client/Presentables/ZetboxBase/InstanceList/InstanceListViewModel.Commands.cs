@@ -61,22 +61,21 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (ShowExportCommand && !commandsStore.Contains(ExportContainerCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0) + (AllowDelete ? 1 : 0), ExportContainerCommand);
         }
 
-        private ICommandViewModel _RefreshCommand;
+        private RefreshCommand _RefreshCommand;
         public ICommandViewModel RefreshCommand
         {
             get
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(
                         DataContext,
-                        this,
-                        CommonCommandsResources.RefreshCommand_Name,
-                        CommonCommandsResources.RefreshCommand_Tooltip,
-                        ReloadInstances,
-                        CanExecReloadInstances,
-                        CanExecReloadInstancesReason);
-                    _RefreshCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                        this);
+                    _RefreshCommand.CanRefresh += (s, e) =>
+                    {
+                        e.CanRefresh = !FilterList.RequiredFilterMissing;
+                        e.CanRefreshReason = FilterListEntryViewModelResources.RequiredFilterMissingReason;
+                    };
                 }
                 return _RefreshCommand;
             }
@@ -208,16 +207,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             _displayedColumns = null;
             OnPropertyChanged("DisplayedColumns");
-        }
-        #endregion
-
-        #region IRefreshCommandListener Member
-        /// <summary>
-        /// Just calls ReloadInstances().
-        /// </summary>
-        void IRefreshCommandListener.Refresh()
-        {
-            ReloadInstances();
         }
         #endregion
 

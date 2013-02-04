@@ -37,7 +37,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
             else
             {
-                ReloadInstances();
+                Refresh();
             }
         }
 

@@ -103,7 +103,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this, this);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _RefreshCommand;
             }

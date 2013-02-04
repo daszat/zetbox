@@ -569,20 +569,37 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public class RefreshCommand : CommandViewModel
     {
-        public new delegate RefreshCommand Factory(IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener);
+        public new delegate RefreshCommand Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        protected IRefreshCommandListener Listener { get; private set; }
+        protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
 
-        public RefreshCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener)
+        public RefreshCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.RefreshCommand_Name, CommonCommandsResources.RefreshCommand_Tooltip)
         {
-            this.Listener = listener;
         }
 
+        public class CanRefreshEventArgs : EventArgs
+        {
+            public CanRefreshEventArgs()
+            {
+                CanRefresh = true;
+            }
+            public bool CanRefresh { get; set; }
+            public string CanRefreshReason { get; set; }
+        }
+        public event EventHandler<CanRefreshEventArgs> CanRefresh;
         public override bool CanExecute(object data)
         {
-            var result = Listener != null;
-            return result;
+            if (Listener == null)
+                return false;
+
+            var temp = CanRefresh;
+            if (temp == null)
+                return true;
+
+            var args = new CanRefreshEventArgs();
+            temp(this, args);
+            return args.CanRefresh;
         }
 
         protected override void DoExecute(object data)
