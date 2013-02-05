@@ -194,8 +194,13 @@ namespace Zetbox.Server.SchemaManagement
             if (!PreMigration(PropertyMigrationEventType.Rename, savedProp, prop))
                 return;
 
+            var tblName = objClass.GetTableRef(db);
+            var srcName = Construct.ColumnName(savedProp, prefix);
+            var dstName = Construct.ColumnName(prop, prefix);
+            Log.InfoFormat("Renaming property on '{0}' from '{1}' up to '{2}'", tblName, srcName, dstName);
+
             // TODO: What if prefix has changed
-            db.RenameColumn(objClass.GetTableRef(db), Construct.ColumnName(savedProp, prefix), Construct.ColumnName(prop, prefix));
+            db.RenameColumn(tblName, srcName, dstName);
 
             PostMigration(PropertyMigrationEventType.Rename, savedProp, prop);
         }
