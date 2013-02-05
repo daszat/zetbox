@@ -233,7 +233,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         #region IDeleteCommandParameter Members
         public bool IsReadOnly { get { return false; } }
-        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItems; } }
         #endregion
     }
 }
