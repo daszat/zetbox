@@ -415,47 +415,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type);
 
-        public static void ChooseObjectClass(IViewModelFactory vmFactory, IZetboxContext ctx, IFrozenContext frozenCtx, ViewModel parent, ObjectClass baseClass, Action<ObjectClass> createNewObjectAndNotify)
-        {
-            if (vmFactory == null) throw new ArgumentNullException("vmFactory");
-            if (ctx == null) throw new ArgumentNullException("ctx");
-            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
-            if (parent == null) throw new ArgumentNullException("parent");
-            if (baseClass == null) throw new ArgumentNullException("baseClass");
-            if (createNewObjectAndNotify == null) throw new ArgumentNullException("createNewObjectAndNotify");
-
-            var children = new List<ObjectClass>();
-            if (baseClass.IsAbstract == false)
-            {
-                children.Add(baseClass);
-            }
-            baseClass.CollectChildClasses(children, false);
-
-            if (children.Count == 1)
-            {
-                createNewObjectAndNotify(children.Single());
-            }
-            else
-            {
-                var lstMdl = vmFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
-                    ctx,
-                    parent,
-                    (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass.Find(frozenCtx),
-                    () => children.AsQueryable(),
-                    (chosen) =>
-                    {
-                        if (chosen != null)
-                        {
-                            createNewObjectAndNotify((ObjectClass)chosen.First().Object);
-                        }
-                    },
-                    null);
-                lstMdl.ListViewModel.ShowCommands = false;
-
-                vmFactory.ShowDialog(lstMdl);
-            }
-        }
-
         protected INewCommandParameter Parameter { get { return Parent as INewCommandParameter; } }
         protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
         protected ObjectClass Type { get; private set; }
