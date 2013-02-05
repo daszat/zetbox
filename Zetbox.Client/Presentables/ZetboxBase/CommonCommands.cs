@@ -470,6 +470,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
                 return false;
             }
+            else if (Type.HasAccessControlList() && !Type.GetGroupAccessRights(CurrentIdentity).HasCreateRights())
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
+                return false;
+            }
 
             Reason = string.Empty;
             return true;
