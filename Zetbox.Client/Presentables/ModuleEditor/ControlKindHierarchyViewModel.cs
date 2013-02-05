@@ -126,7 +126,8 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         public void Open()
         {
-            OpenCommand.Execute(null);
+            if (OpenCommand.CanExecute(null))
+                OpenCommand.Execute(null);
         }
 
         private NewDataObjectCommand _NewCommand;
@@ -147,7 +148,8 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         public void New()
         {
-            NewCommand.Execute(null);
+            if (NewCommand.CanExecute(null))
+                NewCommand.Execute(null);
         }
 
         private DeleteDataObjectCommand _DeleteCommand;
@@ -165,7 +167,8 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         public void Delete()
         {
-            DeleteCommand.Execute(null);
+            if (DeleteCommand.CanExecute(null))
+                DeleteCommand.Execute(null);
         }
 
         #endregion

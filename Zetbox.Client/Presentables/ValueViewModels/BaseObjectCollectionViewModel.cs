@@ -344,7 +344,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public void CreateNew()
         {
-            CreateNewCommand.Execute(null);
+            if (CreateNewCommand.CanExecute(null))
+                CreateNewCommand.Execute(null);
         }
 
         private OpenDataObjectCommand _OpenCommand;
@@ -367,7 +368,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public void Open()
         {
-            OpenCommand.Execute(null);
+            if (OpenCommand.CanExecute(null))
+                OpenCommand.Execute(null);
         }
 
         private ICommandViewModel _AddExistingCommand = null;
@@ -426,7 +428,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public void Delete()
         {
-            DeleteCommand.Execute(null);
+            if (DeleteCommand.CanExecute(null))
+                DeleteCommand.Execute(null);
         }
 
         public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;

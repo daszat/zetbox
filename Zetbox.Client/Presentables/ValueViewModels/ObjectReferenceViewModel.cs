@@ -199,7 +199,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public void OpenReference()
         {
-            OpenReferenceCommand.Execute(null);
+            if (OpenReferenceCommand.CanExecute(null))
+                OpenReferenceCommand.Execute(null);
         }
 
         private OpenDataObjectCommand _openReferenceCommand;
@@ -251,7 +252,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public void CreateNewItemAndSetValue()
         {
-            CreateNewItemAndSetValueCommand.Execute(null);
+            if (CreateNewItemAndSetValueCommand.CanExecute(null))
+                CreateNewItemAndSetValueCommand.Execute(null);
         }
 
         bool INewCommandParameter.AllowAddNew { get { return AllowCreateNewItem; } }

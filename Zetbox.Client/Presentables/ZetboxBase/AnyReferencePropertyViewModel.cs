@@ -73,7 +73,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void OpenReference()
         {
-            OpenReferenceCommand.Execute(null);
+            if (OpenReferenceCommand.CanExecute(null))
+                OpenReferenceCommand.Execute(null);
         }
 
         private OpenDataObjectCommand _openReferenceCommand;

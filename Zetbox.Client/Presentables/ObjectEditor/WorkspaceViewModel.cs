@@ -195,7 +195,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         public void Delete()
         {
-            DeleteCommand.Execute(null);
+            if (DeleteCommand.CanExecute(null))
+                DeleteCommand.Execute(null);
         }
 
         #endregion

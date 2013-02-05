@@ -284,7 +284,8 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         public void NewModule()
         {
-            NewModuleCommand.Execute(null);
+            if (NewModuleCommand.CanExecute(null))
+                NewModuleCommand.Execute(null);
         }
 
         private RefreshCommand _RefreshCommand = null;
