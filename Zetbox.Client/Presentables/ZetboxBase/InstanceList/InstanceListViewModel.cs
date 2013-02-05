@@ -409,9 +409,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private bool _isInlineEditable = false;
+        private bool? _isInlineEditable = null;
         /// <summary>
-        /// If true, all Items are editable in the list directly. Default is false
+        /// If true, all Items are editable in the list directly. By default, this is true, if the displayed data type is a simple object.
         /// </summary>
         /// <remarks>
         /// This does not affect the details pane. 
@@ -420,7 +420,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return _isInlineEditable;
+                return _isInlineEditable ?? DataType.IsSimpleObject;
             }
             set
             {
