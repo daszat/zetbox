@@ -102,6 +102,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public ActivateDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
+            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+
             this.ctxFactory = ctxFactory;
         }
 
@@ -202,12 +204,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent);
 
+        protected IEnumerable<ViewModel> SelectedItems { get { return ((ICommandParameter)Parent).SelectedItems; } }
         protected IOpenCommandParameter Parameter { get { return Parent as IOpenCommandParameter; } }
 
         public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
             IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, ctxFactory, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
         {
+            if (!(parent is ICommandParameter)) throw new ArgumentOutOfRangeException("parent", "parent needs to implement ICommandParameter");
+
             if (Parameter != null)
                 Parameter.PropertyChanged += OnParameterChanged;
         }
@@ -224,13 +229,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private IEnumerable<DataObjectViewModel> GetViewModels()
-        {
-            return Parameter == null
-                ? Enumerable.Empty<DataObjectViewModel>()
-                : Parameter.SelectedItems.OfType<DataObjectViewModel>();
-        }
-
         public override bool CanExecute(object data)
         {
             if (Parameter == null)
@@ -243,13 +241,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
                 return false;
             }
-            else if (Parameter.SelectedItems == null
-              || Parameter.SelectedItems.Count() == 0)
+            else if (SelectedItems == null
+              || SelectedItems.Count() == 0)
             {
                 Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
                 return false;
             }
-            else if (!UseSeparateContext && Parameter.SelectedItems.Any(vm => !ViewModelFactory.CanShowModel(vm)))
+            else if (!UseSeparateContext && SelectedItems.Any(vm => !ViewModelFactory.CanShowModel(vm)))
             {
                 Reason = CommonCommandsResources.OpenDataObjectCommand_SomeCanNotBeOpened;
                 return false;
@@ -261,7 +259,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected override void DoExecute(object data)
         {
-            var vModels = GetViewModels().ToList();
+            var vModels = SelectedItems.OfType<DataObjectViewModel>().ToList();
             if (UseSeparateContext)
             {
                 ActivateForeignItems(ctxFactory(), vModels.Select(dovm => dovm.Object));
@@ -295,6 +293,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected IDeleteCommandParameter Parameter { get { return Parent as IDeleteCommandParameter; } }
         protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
         protected bool UseSeparateContext { get { return !(ViewModelFactory.GetWorkspace(DataContext) is IContextViewModel); } }
+        protected IEnumerable<ViewModel> SelectedItems { get { return ((ICommandParameter)Parent).SelectedItems; } }
 
         private readonly Func<IZetboxContext> _ctxFactory;
 
@@ -303,7 +302,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
         {
-            this.Parameter.PropertyChanged += OnParameterChanged;
+            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            if (!(parent is ICommandParameter)) throw new ArgumentOutOfRangeException("parent", "parent needs to implement ICommandParameter");
+
+            if (this.Parameter != null)
+                this.Parameter.PropertyChanged += OnParameterChanged;
+
             this._ctxFactory = ctxFactory;
         }
 
@@ -317,11 +321,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 base.Icon = value;
             }
-        }
-
-        private IEnumerable<DataObjectViewModel> GetViewModels()
-        {
-            return Parameter.SelectedItems.OfType<DataObjectViewModel>();
         }
 
         public override bool CanExecute(object data)
@@ -346,13 +345,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
                 return false;
             }
-            else if (Parameter.SelectedItems == null)
+            else if (SelectedItems == null)
             {
                 Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
                 return false;
             }
 
-            var itemsCount = Parameter.SelectedItems.OfType<object>().Count();
+            var itemsCount = SelectedItems.OfType<object>().Count();
 
             if (itemsCount == 0)
             {
@@ -360,9 +359,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 return false;
             }
 
-            var dataObjectsCount = GetViewModels().Count();
+            var dataObjects = SelectedItems.OfType<DataObjectViewModel>().ToList();
 
-            if (dataObjectsCount != itemsCount || !GetViewModels().All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights()))
+            if (dataObjects.Count != itemsCount || !dataObjects.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights()))
             {
                 Reason = CommonCommandsResources.DeleteDataObjectCommand_SomeMayNotBeDeleted;
                 return false;
@@ -385,7 +384,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 using (var ctx = _ctxFactory())
                 {
                     // make local copy to avoid stumbling over changing lists while iterating over them
-                    foreach (var item in GetViewModels().ToList())
+                    foreach (var item in SelectedItems.Cast<DataObjectViewModel>().ToList())
                     {
                         var other = item.Object;
                         var here = ctx.Find(ctx.GetInterfaceType(other), other.ID);
@@ -397,7 +396,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             else
             {
                 // make local copy to avoid stumbling over changing lists while iterating over them
-                foreach (var item in GetViewModels().ToList())
+                foreach (var item in SelectedItems.Cast<DataObjectViewModel>().ToList())
                 {
                     DataContext.Delete(item.Object);
                 }
