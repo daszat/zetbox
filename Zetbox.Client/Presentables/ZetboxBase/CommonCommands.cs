@@ -107,6 +107,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             OnItemsOpening(this, openingArgs);
 
+            // abort handling the event if it is already handled
+            if (openingArgs.Handled == true)
+                return;
+
             foreach (var item in openingArgs.Items)
             {
                 var dovm = item as DataObjectViewModel;
@@ -141,6 +145,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var openingArgs = new ItemsOpeningEventArgs(newCtx, newWorkspace, newViewModels);
 
                 OnItemsOpening(newWorkspace, openingArgs);
+
+                // abort handling the event if it is already handled
+                if (openingArgs.Handled == true)
+                    return;
 
                 foreach (var newItem in openingArgs.Items)
                 {
