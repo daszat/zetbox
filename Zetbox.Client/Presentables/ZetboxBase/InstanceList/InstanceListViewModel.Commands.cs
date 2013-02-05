@@ -35,8 +35,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             var result = base.CreateCommands();
 
+            var showOpenCommand = AllowOpen && (OpenCommand == DefaultCommand);
+            var showDefaultCommand = OpenCommand != DefaultCommand;
+
             if (AllowAddNew) result.Add(NewCommand);
-            if (AllowOpen) result.Add(OpenCommand);
+            if (showOpenCommand) result.Add(OpenCommand);
+            if (showDefaultCommand) result.Add(DefaultCommand);
             result.Add(RefreshCommand);
             if (AllowDelete) result.Add(DeleteCommand);
 
@@ -48,17 +52,52 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private void UpdateCommands()
         {
             if (commandsStore == null) return;
+
+            var showOpenCommand = AllowOpen && (OpenCommand == DefaultCommand);
+            var showDefaultCommand = OpenCommand != DefaultCommand;
+
             if (!AllowAddNew && commandsStore.Contains(NewCommand)) commandsStore.Remove(NewCommand);
-            if (!AllowOpen && commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
+            if (!showOpenCommand && commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
+            if (!showDefaultCommand && commandsStore.Contains(DefaultCommand)) commandsStore.Remove(DefaultCommand);
             if (commandsStore.Contains(RefreshCommand)) commandsStore.Remove(RefreshCommand);
             if (!AllowDelete && commandsStore.Contains(DeleteCommand)) commandsStore.Remove(DeleteCommand);
             if (!AllowExport && commandsStore.Contains(ExportContainerCommand)) commandsStore.Remove(ExportContainerCommand);
 
-            if (AllowAddNew && !commandsStore.Contains(NewCommand)) commandsStore.Insert(0, NewCommand);
-            if (AllowOpen && !commandsStore.Contains(OpenCommand)) commandsStore.Insert(AllowAddNew ? 1 : 0, OpenCommand);
-            if (!commandsStore.Contains(RefreshCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (AllowOpen ? 1 : 0), RefreshCommand);
-            if (AllowDelete && !commandsStore.Contains(DeleteCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (AllowOpen ? 1 : 0) + 1, DeleteCommand);
-            if (AllowExport && !commandsStore.Contains(ExportContainerCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (AllowOpen ? 1 : 0) + 1 + (AllowDelete ? 1 : 0), ExportContainerCommand);
+            var index = 0;
+            if (AllowAddNew && !commandsStore.Contains(NewCommand)) commandsStore.Insert(index++, NewCommand);
+            if (showOpenCommand && !commandsStore.Contains(OpenCommand)) commandsStore.Insert(index++, OpenCommand);
+            if (showDefaultCommand && !commandsStore.Contains(DefaultCommand)) commandsStore.Insert(index++, DefaultCommand);
+            if (!commandsStore.Contains(RefreshCommand)) commandsStore.Insert(index++, RefreshCommand);
+            if (AllowDelete && !commandsStore.Contains(DeleteCommand)) commandsStore.Insert(index++, DeleteCommand);
+            if (AllowExport && !commandsStore.Contains(ExportContainerCommand)) commandsStore.Insert(index++, ExportContainerCommand);
+        }
+
+        private ICommandViewModel _defaultCommand;
+        public ICommandViewModel DefaultCommand
+        {
+            get
+            {
+                return _defaultCommand ?? OpenCommand;
+            }
+            set
+            {
+                if (_defaultCommand != value)
+                {
+                    if (_defaultCommand != null && commandsStore != null && commandsStore.Contains(_defaultCommand))
+                    {
+                        commandsStore.Remove(commandsStore);
+                    }
+                    _defaultCommand = value;
+                    OnPropertyChanged("DefaultCommand");
+                    UpdateCommands();
+                }
+            }
+        }
+
+        public void Default()
+        {
+            if (DefaultCommand.CanExecute(null))
+                DefaultCommand.Execute(null);
         }
 
         private RefreshCommand _RefreshCommand;

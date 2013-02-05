@@ -72,8 +72,9 @@ namespace Zetbox.Client.Presentables
             ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, this, type, qry);
             ListViewModel.AllowAddNew = true;
             ListViewModel.ObjectCreated += ListViewModel_ObjectCreated;
-            ListViewModel.ItemsOpening += ListViewModel_ItemsDefaultAction;
             ListViewModel.ViewMethod = InstanceListViewMethod.Details;
+
+            ListViewModel.DefaultCommand = this.ChooseCommand;
 
             foreach (var cmd in _additionalActions)
             {
@@ -88,15 +89,6 @@ namespace Zetbox.Client.Presentables
             // Same like choose
             var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
             Choose(new[] { mdl });
-        }
-
-        void ListViewModel_ItemsDefaultAction(object sender, ItemsOpeningEventArgs args)
-        {
-            if (args.Items != null && args.Items.Count > 0)
-            {
-                Choose(args.Items.Cast<DataObjectViewModel>());
-                args.Handled = true;
-            }
         }
 
         public InstanceListViewModel ListViewModel { get; private set; }

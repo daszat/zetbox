@@ -55,7 +55,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             if (ViewModel != null && ViewModel.SelectedItem != null)
             {
-                ViewModel.Open();
+                ViewModel.Default();
             }
 
             e.Handled = true;
