@@ -139,7 +139,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private void ContinueAddRelation()
         {
-            var lastRel = Value.Count > 0 ? (Relation)Value.LastOrDefault().Object : null;
             var lastType = GetLastClass();
             if (lastType == null) return;
 
