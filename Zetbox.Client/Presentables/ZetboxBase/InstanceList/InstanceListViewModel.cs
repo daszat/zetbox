@@ -374,6 +374,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         private bool _allowOpen = true;
+        [DefaultValue(true)]
         public bool AllowOpen
         {
             get
@@ -392,6 +393,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         private bool _allowExport = true;
+        [DefaultValue(true)]
         public bool AllowExport
         {
             get
@@ -438,6 +440,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// <summary>
         /// If true, allow multiselect of items. Default is true
         /// </summary>
+        [DefaultValue(true)]
         public bool IsMultiselect
         {
             get
@@ -458,6 +461,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// <summary>
         /// If true, allow add new Items in the list directly. Default is false
         /// </summary>
+        [DefaultValue(false)]
         public bool AllowAddNew
         {
             get
@@ -479,6 +483,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// <summary>
         /// If true, allow deleting Items in the list directly. Default is false.
         /// </summary>
+        [DefaultValue(false)]
         public bool AllowDelete
         {
             get
