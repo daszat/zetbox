@@ -29,22 +29,35 @@
         </Literal>
       </Declarations>
       <Code Language="CSharp" Kind="method body">
-        <![CDATA[private ICommandViewModel _$Name$Command = null;
+        <![CDATA[#region $Name$ command
+		private ICommandViewModel _$Name$Command = null;
         public ICommandViewModel $Name$Command
         {
             get
             {
                 if (_$Name$Command == null)
                 {
-                    _$Name$Command = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "$Label$", "$Tooltip$", $Name$, null, null);
+                    _$Name$Command = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "$Label$", "$Tooltip$", $Name$, Can$Name$, Can$Name$Reason);
                 }
                 return _$Name$Command;
             }
         }			
 
+		public bool Can$Name$()
+		{
+			return true;
+		}
+		
+		public string Can$Name$Reason()
+		{
+			return "TODO: Add error string here";
+		}
+		
 		public void $Name$()
 		{
-		}]]>
+			if(!Can$Name$()) return;
+		}
+		#endregion]]>
       </Code>
     </Snippet>
   </CodeSnippet>
