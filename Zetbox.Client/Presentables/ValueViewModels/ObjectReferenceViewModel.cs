@@ -219,15 +219,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         bool IOpenCommandParameter.AllowOpen { get { return true; } }
-        IEnumerable<ViewModel> ICommandParameter.SelectedItems
-        {
-            get
-            {
-                return ValueAsync == null
-                    ? Enumerable.Empty<ViewModel>()
-                    : new[] { ValueAsync };
-            }
-        }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return ValueAsync == null ? null : new[] { ValueAsync }; } }
 
         #endregion
 
