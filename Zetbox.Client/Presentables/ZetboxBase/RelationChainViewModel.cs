@@ -62,6 +62,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             var cmds = new ObservableCollection<ICommandViewModel>();
 
+            cmds.Add(OpenCommand);
             cmds.Add(AddRelationCommand);
             cmds.Add(RemoveCommand);
 
@@ -156,7 +157,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (SelectedItems == null || SelectedItems.Count == 0) return;
 
             EnsureValueCache();
-            
+
             // remove all items from the end, to avoid breaking the chain.
             var idx = SelectedItems.Min(i => ValueModel.Value.IndexOf(i.Object));
             if (idx != -1)

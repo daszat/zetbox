@@ -310,6 +310,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             if (AllowAddExisting) cmds.Add(AddExistingCommand);
             if (AllowAddNew) cmds.Add(CreateNewCommand);
+            if (AllowOpen) cmds.Add(OpenCommand);
             if (AllowRemove) cmds.Add(RemoveCommand);
             if (AllowDelete) cmds.Add(DeleteCommand);
 
