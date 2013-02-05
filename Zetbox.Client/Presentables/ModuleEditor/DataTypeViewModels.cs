@@ -134,7 +134,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         #region IOpenCommandParameter members
         bool IOpenCommandParameter.AllowOpen { get { return true; } }
-        bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
         IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return new[] { this }; } }
         #endregion
     }

@@ -28,11 +28,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.App.GUI;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
-    public interface IActivateCommandParameter : INotifyPropertyChanged
-    {
-        bool IsInlineEditable { get; }
-    }
-
     public class ItemsOpeningEventArgs : EventArgs
     {
         public ItemsOpeningEventArgs(IZetboxContext ctx, ObjectEditor.WorkspaceViewModel workspace, IEnumerable<ViewModel> items)
@@ -75,9 +70,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected bool UseSeparateContext { get { return !(ViewModelFactory.GetWorkspace(DataContext) is IContextViewModel); } }
 
-        private IActivateCommandParameter Parameter { get { return Parent as IActivateCommandParameter; } }
-
-        protected bool IsInlineEditable { get { return Parameter == null ? false : Parameter.IsInlineEditable; } }
         protected IRequestedEditorKinds RequestedKinds { get { return Parent as IRequestedEditorKinds; } }
 
         protected ControlKind RequestedEditorKind
@@ -120,16 +112,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var dovm = item as DataObjectViewModel;
                 if (dovm != null && dovm.Object.GetObjectClass(FrozenContext).IsSimpleObject)
                 {
-                    if (IsInlineEditable)
-                    {
-                        // don't show simple objects, IF they are inline editable
-                    }
-                    else
-                    {
-                        // Open in a Dialog
-                        var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, Parent, item);
-                        ViewModelFactory.ShowDialog(dlg);
-                    }
+                    // Open in a Dialog
+                    var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, Parent, item);
+                    ViewModelFactory.ShowDialog(dlg);
                 }
                 else
                 {
@@ -195,7 +180,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         IEnumerable<ViewModel> SelectedItems { get; }
     }
 
-    public interface IOpenCommandParameter : IActivateCommandParameter, ICommandParameter
+    public interface IOpenCommandParameter : ICommandParameter
     {
         bool AllowOpen { get; }
     }
@@ -414,7 +399,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
     }
 
-    public interface INewCommandParameter : IActivateCommandParameter
+    public interface INewCommandParameter : INotifyPropertyChanged
     {
         bool IsReadOnly { get; }
         bool AllowAddNew { get; }

@@ -255,7 +255,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         bool INewCommandParameter.AllowAddNew { get { return AllowCreateNewItem; } }
-        bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
 
         #endregion
 

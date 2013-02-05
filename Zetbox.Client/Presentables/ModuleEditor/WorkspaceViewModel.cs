@@ -346,7 +346,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         }
 
         #region INewCommandParameter members
-        bool IActivateCommandParameter.IsInlineEditable { get { return false; } }
         bool INewCommandParameter.IsReadOnly { get { return false; } }
         bool INewCommandParameter.AllowAddNew { get { return true; } }
         #endregion
