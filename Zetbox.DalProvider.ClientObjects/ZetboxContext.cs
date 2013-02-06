@@ -639,15 +639,24 @@ namespace Zetbox.DalProvider.Client
                         underlyingObject.ApplyChangesFrom(objFromServer);
                     }
 
-                    if (objFromServer.ObjectState == DataObjectState.Deleted)
+                    // reset ObjectState to new truth
+                    switch (objFromServer.ObjectState)
                     {
-                        // deleted on server
-                        obj.SetDeleted();
-                    }
-                    else
-                    {
-                        // reset ObjectState to new truth
-                        obj.SetUnmodified();
+                        case DataObjectState.Deleted:
+                            obj.SetDeleted();
+                            break;
+                        case DataObjectState.Unmodified:
+                            obj.SetUnmodified();
+                            break;
+                        case DataObjectState.New:
+                        case DataObjectState.Modified:
+                            // Nothing to do
+                            break;
+                        case DataObjectState.NotDeserialized:
+                        case DataObjectState.Detached:
+                            throw new InvalidOperationException(string.Format("Invalid state received from server: {0}", objFromServer.ObjectState));
+                        default:
+                            throw new InvalidOperationException(string.Format("Unknown state received from server: {0}", objFromServer.ObjectState));
                     }
 
                     changedObjects.Add(underlyingObject);

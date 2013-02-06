@@ -1,37 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Zetbox.API.AbstractConsumerTests;
-using NUnit.Framework;
-using Zetbox.App.Test;
-using Zetbox.API;
+﻿// This file is part of zetbox.
+//
+// Zetbox is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as
+// published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version.
+//
+// Zetbox is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace Zetbox.IntegrationTests.Methods
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using NUnit.Framework;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.App.Test;
+
     [TestFixture]
-    public class when_invoking_on_server : AbstractTestFixture
+    public abstract class when_invoking_on_server : AbstractTestFixture
     {
-        private MethodTest obj;
-        private IZetboxContext ctx;
+        protected MethodTest obj;
+        protected IZetboxContext ctx;
 
         public override void SetUp()
         {
             base.SetUp();
             ctx = GetContext();
-            obj = ctx.GetQuery<MethodTest>().FirstOrDefault();
-            if (obj == null)
+        }
+
+        public class when_invoking_on_new_object : when_invoking_on_server
+        {
+            public override void SetUp()
             {
+                base.SetUp();
+                obj = ctx.Create<MethodTest>();
+            }
+        }
+
+        public class when_invoking_on_unmodified_object : when_invoking_on_server
+        {
+            public override void SetUp()
+            {
+                base.SetUp();
+                int newID = -1;
                 using (var createCtx = GetContext())
                 {
-                    var createObj = createCtx.Create<MethodTest>();
-                    Assert.That(createObj, Is.Not.Null);
+                    var created = createCtx.Create<MethodTest>();
                     createCtx.SubmitChanges();
+                    newID = created.ID;
                 }
-                obj = ctx.GetQuery<MethodTest>().FirstOrDefault();
+                obj = ctx.Find<MethodTest>(newID);
             }
+        }
 
-            Assert.That(obj, Is.Not.Null);
+        public class when_invoking_on_modified_object : when_invoking_on_unmodified_object
+        {
+            public override void SetUp()
+            {
+                base.SetUp();
+                obj.StringProp += DateTime.Now;
+            }
         }
 
         [Test]
@@ -79,6 +115,16 @@ namespace Zetbox.IntegrationTests.Methods
             var kunde = b.ObjectProp;
             Assert.That(kunde, Is.Not.Null);
             Assert.That(kunde.Kundenname, Is.EqualTo("Kunde"));
+        }
+
+        [Test]
+        public void should_not_reset_objectstate_on_roundtrip()
+        {
+            var expectedState = obj.ObjectState;
+
+            obj.ServerMethod();
+
+            Assert.That(obj.ObjectState, Is.EqualTo(expectedState));
         }
     }
 }
