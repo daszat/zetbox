@@ -567,6 +567,8 @@ namespace Zetbox.DalProvider.Client
         {
             public int ExchangeObjects(ZetboxContextImpl ctx)
             {
+                NotifyPreSave(ctx);
+
                 var objectsToSubmit = new List<IPersistenceObject>();
                 var objectsToAdd = new List<IPersistenceObject>();
                 var objectsToDetach = new List<IPersistenceObject>();
@@ -597,11 +599,6 @@ namespace Zetbox.DalProvider.Client
                     }
                     objectsToDetach.Add(obj);
                 }
-
-                var notifySaveList = objectsToSubmit.OfType<IDataObject>().Where(o => o.ObjectState.In(DataObjectState.New, DataObjectState.Modified));
-
-                // Fire PreSave
-                notifySaveList.ForEach(o => o.NotifyPreSave());
 
                 var notificationRequests = ctx.AttachedObjects
                         .ToLookup(o => ctx.GetInterfaceType(o))
@@ -669,14 +666,27 @@ namespace Zetbox.DalProvider.Client
 
                 ctx.PlaybackNotifications();
 
-                // Fire PostSave
-                notifySaveList.ForEach(o => o.NotifyPostSave());
+                NotifyPostSave();
 
                 return objectsToSubmit.Count;
             }
 
+            protected virtual void NotifyPreSave(ZetboxContextImpl ctx)
+            {
+                // do nothing
+            }
+
+            protected virtual void NotifyPostSave()
+            {
+                // do nothing
+            }
+
+            protected virtual void UpdateModifiedState(ZetboxContextImpl ctx)
+            {
+                // Do nothing!
+            }
+
             protected abstract IEnumerable<IPersistenceObject> ExecuteServerCall(ZetboxContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests);
-            protected abstract void UpdateModifiedState(ZetboxContextImpl ctx);
         }
 
         private class SubmitChangesHandler : ExchangeObjectsHandler
@@ -692,6 +702,40 @@ namespace Zetbox.DalProvider.Client
             {
                 // Before Notifications & PostSave events. They could change data
                 ctx.IsModified = false;
+            }
+
+            private HashSet<IDataObject> notifiedObjects;
+            protected override void NotifyPreSave(ZetboxContextImpl ctx)
+            {
+                int iterations = 1;
+                notifiedObjects = new HashSet<IDataObject>();
+                for (; ; )
+                {
+                    var notified = false;
+                    foreach (var obj in ctx._objects.OfType<IDataObject>().Where(o => o.ObjectState.In(DataObjectState.New, DataObjectState.Modified) && !notifiedObjects.Contains(o)))
+                    {
+                        notifiedObjects.Add(obj);
+                        obj.NotifyPreSave();
+                        notified = true;
+                    }
+
+                    if (!notified)
+                        break;
+
+                    if (iterations++ == 10)
+                    {
+                        Logging.Facade.Warn("Long iteration when trying to NotifyPreSave");
+                    }
+                }
+            }
+
+            protected override void NotifyPostSave()
+            {
+                // Fire PostSave
+                notifiedObjects.ForEach(o => o.NotifyPostSave());
+
+                // avoid reusing list
+                notifiedObjects = null;
             }
         }
 
@@ -1193,11 +1237,6 @@ namespace Zetbox.DalProvider.Client
             }
 
             public object Result { get; private set; }
-
-            protected override void UpdateModifiedState(ZetboxContextImpl ctx)
-            {
-                // Do nothing!
-            }
         }
 
         public object InvokeServerMethod<T>(T obj, string name, Type retValType, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject
