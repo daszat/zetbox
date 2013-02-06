@@ -646,8 +646,10 @@ namespace Zetbox.DalProvider.Client
                             obj.SetUnmodified();
                             break;
                         case DataObjectState.New:
+                            FixObjStateNew(obj);
+                            break;
                         case DataObjectState.Modified:
-                            SetNewOrModified(obj);
+                            FixObjStateModified(obj);
                             break;
                         case DataObjectState.NotDeserialized:
                         case DataObjectState.Detached:
@@ -671,7 +673,12 @@ namespace Zetbox.DalProvider.Client
                 return objectsToSubmit.Count;
             }
 
-            protected virtual void SetNewOrModified(IClientObject obj)
+            protected virtual void FixObjStateNew(IClientObject obj)
+            {
+                // do nothing
+            }
+
+            protected virtual void FixObjStateModified(IClientObject obj)
             {
                 // do nothing
             }
@@ -703,9 +710,15 @@ namespace Zetbox.DalProvider.Client
                     notificationRequests);
             }
 
-            protected override void SetNewOrModified(IClientObject obj)
+            protected override void FixObjStateNew(IClientObject obj)
             {
-                throw new InvalidOperationException(string.Format("received at least one object from server that is new or modified - this can't be after a submit changes: {0}#{1}", obj.UnderlyingObject.GetType(), obj.UnderlyingObject.ID));
+                throw new InvalidOperationException(string.Format("received at least one object from server that is new - this can't be after a submit changes: {0}#{1}", obj.UnderlyingObject.GetType(), obj.UnderlyingObject.ID));
+            }
+
+            protected override void FixObjStateModified(IClientObject obj)
+            {
+                // Bad hack due to apply changes implementation
+                obj.SetUnmodified();
             }
 
             protected override void UpdateModifiedState(ZetboxContextImpl ctx)
