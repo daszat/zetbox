@@ -647,7 +647,7 @@ namespace Zetbox.DalProvider.Client
                             break;
                         case DataObjectState.New:
                         case DataObjectState.Modified:
-                            // Nothing to do
+                            SetNewOrModified(obj);
                             break;
                         case DataObjectState.NotDeserialized:
                         case DataObjectState.Detached:
@@ -669,6 +669,11 @@ namespace Zetbox.DalProvider.Client
                 NotifyPostSave();
 
                 return objectsToSubmit.Count;
+            }
+
+            protected virtual void SetNewOrModified(IClientObject obj)
+            {
+                // do nothing
             }
 
             protected virtual void NotifyPreSave(ZetboxContextImpl ctx)
@@ -696,6 +701,11 @@ namespace Zetbox.DalProvider.Client
                 return ctx.proxy.SetObjects(
                     objectsToSubmit,
                     notificationRequests);
+            }
+
+            protected override void SetNewOrModified(IClientObject obj)
+            {
+                throw new InvalidOperationException(string.Format("received at least one object from server that is new or modified - this can't be after a submit changes: {0}#{1}", obj.UnderlyingObject.GetType(), obj.UnderlyingObject.ID));
             }
 
             protected override void UpdateModifiedState(ZetboxContextImpl ctx)
