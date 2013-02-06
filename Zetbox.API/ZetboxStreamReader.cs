@@ -223,7 +223,9 @@ namespace Zetbox.API
         {
             TraceCurrentPos();
             var len = _source.ReadInt32();
-            var result = _source.ReadBytes(len);
+            var result = len == 0
+                ? new byte[0]
+                : _source.ReadBytes(len);
             SerializerTrace("read {0} bytes", len);
             return result;
         }
