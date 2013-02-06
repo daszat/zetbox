@@ -26,16 +26,6 @@ namespace Zetbox.DalProvider.Client.Mocks
     using Zetbox.App.Base;
     using Zetbox.DalProvider.Memory;
 
-    internal sealed class MemoryObjectHandler<T>
-        : BaseServerObjectHandler<T>
-        where T : class, IDataObject
-    {
-        protected override T GetObjectInstance(IZetboxContext ctx, int ID)
-        {
-            return ctx.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
-        }
-    }
-    
     internal sealed class MemoryCollectionHandler<TA, TB, TParent, TChild>
        : IServerCollectionHandler
         where TA : BasePersistenceObject
@@ -45,7 +35,7 @@ namespace Zetbox.DalProvider.Client.Mocks
     {
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
-            Guid version, 
+            Guid version,
             IZetboxContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
@@ -94,11 +84,6 @@ namespace Zetbox.DalProvider.Client.Mocks
                 ctx.ToImplementationType(aType),
                 ctx.ToImplementationType(bType),
                 endRole);
-        }
-
-        public override IServerObjectHandler GetServerObjectHandler(InterfaceType type)
-        {
-            return GetServerObjectHandlerHelper(typeof(MemoryObjectHandler<>), type);
         }
 
         public override IServerObjectSetHandler GetServerObjectSetHandler()

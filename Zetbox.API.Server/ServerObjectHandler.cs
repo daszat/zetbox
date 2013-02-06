@@ -18,12 +18,11 @@ namespace Zetbox.API.Server
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
-
     using Zetbox.API;
     using Zetbox.API.Utils;
-    using System.IO;
 
     /// <summary>
     /// This describes the common interface from the server frontend to the provider for servicing the common "Get" operations.
@@ -80,14 +79,14 @@ namespace Zetbox.API.Server
     /// <remarks>
     /// More specific actions can be implemented by attaching actions to objects and contexts.
     /// </remarks>
-    public abstract class BaseServerObjectHandler<T>
+    public sealed class ServerObjectHandler<T>
         : IServerObjectHandler
         where T : class, IDataObject
     {
         /// <summary>
         /// Events registrieren
         /// </summary>
-        protected BaseServerObjectHandler()
+        public ServerObjectHandler()
         {
         }
 
@@ -145,21 +144,16 @@ namespace Zetbox.API.Server
         /// <returns>the list of values in the property</returns>
         public IEnumerable<IStreamable> GetListOf(Guid version, IZetboxContext ctx, int ID, string property)
         {
+            if (ctx == null) throw new ArgumentNullException("ctx");
             if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
             ZetboxGeneratedVersionAttribute.Check(version);
 
-            T obj = GetObjectInstance(ctx, ID);
+            T obj = ctx.Find<T>(ID);
             if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 
             IEnumerable list = (IEnumerable)obj.GetPropertyValue<IEnumerable>(property);
             return list.Cast<IStreamable>();
         }
-
-        /// <summary>
-        /// Gibt eine typisierte Objektinstanz zurück.
-        /// </summary>
-        /// <returns>a typed object</returns>
-        protected abstract T GetObjectInstance(IZetboxContext ctx, int ID);
 
         public object InvokeServerMethod(Guid version, IZetboxContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
         {
@@ -174,7 +168,7 @@ namespace Zetbox.API.Server
             BaseServerObjectSetHandler.ApplyObjectChanges(ctx, notificationRequests, objList, entityObjects);
 
             // Call Method
-            var obj = GetObjectInstance(ctx, ID);
+            var obj = ctx.Find<T>(ID);
             var mi = obj.GetType().FindMethod(method, parameterTypes.ToArray());
             if (mi == null)
             {
@@ -196,7 +190,7 @@ namespace Zetbox.API.Server
         /// Implements the SetObject command
         /// </summary>
         public virtual IEnumerable<IPersistenceObject> SetObjects(
-            Guid version, 
+            Guid version,
             IZetboxContext ctx,
             IEnumerable<IPersistenceObject> objList,
             IEnumerable<ObjectNotificationRequest> notificationRequests)

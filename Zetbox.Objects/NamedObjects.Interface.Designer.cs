@@ -3495,6 +3495,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> ServerMethod
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("6198b2d9-c5d6-4d7d-9e4f-896f7188720c"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> ServerObjParameter
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("ee365add-736b-473b-8907-fdeb49d5ea6f"); }

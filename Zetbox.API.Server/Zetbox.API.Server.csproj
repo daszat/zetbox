@@ -132,7 +132,7 @@
       <DependentUpon>VersionInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="QueryTranslator.cs" />
-    <Compile Include="BaseServerObjectHandler.cs" />
+    <Compile Include="ServerObjectHandler.cs" />
     <Compile Include="ServerDeploymentRestrictor.cs" />
     <Compile Include="ServerObjectHandlerFactory.cs" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-04T15:58:22Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-06T14:27:59Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -8744,6 +8744,32 @@ public static void ParameterlessCanExecReason(MethodTest obj, MethodReturnEventA
     <ZetboxBase:Name>Parameterless</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="6198b2d9-c5d6-4d7d-9e4f-896f7188720c">
+    <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-06T13:27:59.367581Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ServerMethod(MethodTest obj)
+{
+}
+
+[Invocation]
+public static void ServerMethodCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ServerMethodCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-06T13:27:59.367581Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Does nothing, on the server</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>ServerMethod</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="ee365add-736b-473b-8907-fdeb49d5ea6f">
     <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
@@ -9154,11 +9180,6 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:ChangedOn>2013-01-23T12:52:24.709268Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>e5101331-312b-4518-b7f8-750ca7b61d80</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2013-01-23T12:52:24.709268Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:NotNullableConstraint ExportGuid="d0b1d81b-55fd-4054-8c72-469a81dc7b00">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:06.920932Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>e93b3fc2-2fc9-4577-9a93-a51ed2a4190f</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="749309c0-a829-4961-8215-cc50413d1c93">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:06.923932Z</ZetboxBase:ChangedOn>

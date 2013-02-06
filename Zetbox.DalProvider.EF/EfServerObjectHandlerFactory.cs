@@ -41,11 +41,6 @@ namespace Zetbox.DalProvider.Ef
                 endRole);
         }
 
-        public override IServerObjectHandler GetServerObjectHandler(InterfaceType type)
-        {
-            return GetServerObjectHandlerHelper(typeof(ServerObjectHandler<>), type);
-        }
-
         public override IServerObjectSetHandler GetServerObjectSetHandler()
         {
             return new ServerObjectSetHandler();

@@ -31,32 +31,6 @@ namespace Zetbox.DalProvider.Ef
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
 
-    public class ServerObjectHandler<T>
-        : BaseServerObjectHandler<T>
-        where T : class, IDataObject
-    {
-        /// <summary>
-        /// Gibt eine typisierte Objektinstanz zurück.
-        /// </summary>
-        /// <param baseDir="ctx"></param>
-        /// <param baseDir="ID"></param>
-        /// <returns></returns>
-        protected override T GetObjectInstance(IZetboxContext ctx, int ID)
-        {
-            if (ID < Zetbox.API.Helper.INVALIDID)
-            {
-                // new object -> look in current context
-                ObjectContext efCtx = ((EfDataContext)ctx).ObjectContext;
-                return (T)efCtx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
-                    .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
-            }
-            else
-            {
-                return ctx.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
-            }
-        }
-    }
-
     public class ServerObjectSetHandler
         : BaseServerObjectSetHandler
     {

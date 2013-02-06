@@ -574,6 +574,69 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
+        /// Does nothing, on the server
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnServerMethod_MethodTest")]
+        public virtual void ServerMethod()
+        {
+            // base.ServerMethod();
+            if (OnServerMethod_MethodTest != null)
+            {
+                OnServerMethod_MethodTest(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method MethodTest.ServerMethod");
+            }
+        }
+        public delegate void ServerMethod_Handler<T>(T obj);
+        public static event ServerMethod_Handler<MethodTest> OnServerMethod_MethodTest;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<MethodTest> OnServerMethod_MethodTest_CanExec;
+
+        [EventBasedMethod("OnServerMethod_MethodTest_CanExec")]
+        public virtual bool ServerMethodCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnServerMethod_MethodTest_CanExec != null)
+				{
+					OnServerMethod_MethodTest_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MethodTest> OnServerMethod_MethodTest_CanExecReason;
+
+        [EventBasedMethod("OnServerMethod_MethodTest_CanExecReason")]
+        public virtual string ServerMethodCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnServerMethod_MethodTest_CanExecReason != null)
+				{
+					OnServerMethod_MethodTest_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

@@ -46,5 +46,10 @@ namespace Zetbox.App.Test
 
             e.Result = input ?? newA;
         }
+
+        [Invocation]
+        public static void ServerMethod(MethodTest obj)
+        {
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-04T15:58:22Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-06T14:27:59Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -2621,8 +2621,8 @@ public static void isValid_Icon(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>484709f9-f11e-47a4-95f2-752e17a68fc8</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:BoolProperty ExportGuid="5ac29d6a-9dec-4d88-8f66-59ee7a139f4d">
-    <ZetboxBase:CategoryTags>GUI, Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Main, GUI, Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-06T13:27:43.766461Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_IsDisplayable(Method obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {

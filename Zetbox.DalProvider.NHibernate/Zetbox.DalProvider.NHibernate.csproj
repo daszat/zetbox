@@ -87,7 +87,6 @@
     <Compile Include="NHibernateQueryTranslatorProvider.cs" />
     <Compile Include="NHibernateRelationWrappers.cs" />
     <Compile Include="NHibernateServerCollectionHandler.cs" />
-    <Compile Include="NHibernateServerObjectHandler.cs" />
     <Compile Include="NHibernateServerObjectHandlerFactory.cs" />
     <Compile Include="NHibernateContext.cs" />
     <Compile Include="NHibernateProvider.cs" />

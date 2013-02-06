@@ -110,7 +110,6 @@ namespace Zetbox.DalProvider.Ef
             }
         }
 
-        internal ObjectContext ObjectContext { get { return _ctx; } }
         private readonly IPerfCounter _perfCounter;
         private readonly ISqlErrorTranslator _sqlErrorTranslator;
 
