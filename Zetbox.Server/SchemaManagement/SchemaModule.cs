@@ -57,29 +57,29 @@ namespace Zetbox.Server.SchemaManagement
                 .InstancePerDependency();
 
             builder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.OleDbProvider.OleDb()))
+                .Register(c => new LoggingSchemaProviderAdapter(new OleDbProvider.OleDb()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("OLEDB")
                 .InstancePerDependency();
             builder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.SqlProvider.SqlServer()))
+                .Register(c => new LoggingSchemaProviderAdapter(new SqlProvider.SqlServer()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("MSSQL")
                 .InstancePerDependency();
             builder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.NpgsqlProvider.Postgresql()))
+                .Register(c => new LoggingSchemaProviderAdapter(new NpgsqlProvider.Postgresql()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("POSTGRESQL")
                 .InstancePerDependency();
 
             builder
-                .RegisterType<SchemaManagement.SqlProvider.SqlErrorTranslator>()
+                .Register(c => new SqlProvider.SqlServerErrorTranslator(c.Resolve<IFrozenContext>(), new SqlProvider.SqlServer()))
                 .As<ISqlErrorTranslator>()
                 .Named<ISqlErrorTranslator>("MSSQL")
                 .SingleInstance();
 
             builder
-                .RegisterType<SchemaManagement.NpgsqlProvider.PostgresqlErrorTranslator>()
+                .Register(c => new NpgsqlProvider.PostgresqlErrorTranslator(c.Resolve<IFrozenContext>(), new NpgsqlProvider.Postgresql()))
                 .As<ISqlErrorTranslator>()
                 .Named<ISqlErrorTranslator>("POSTGRESQL")
                 .SingleInstance();

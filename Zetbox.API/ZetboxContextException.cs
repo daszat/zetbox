@@ -237,6 +237,9 @@ namespace Zetbox.API
 
         [DataMember]
         public string DatabaseError { get; set; }
+
+        [DataMember]
+        public Guid RelGuid { get; set; }
     }
 
     [Serializable]
@@ -321,6 +324,9 @@ namespace Zetbox.API
 
         [DataMember]
         public string DatabaseError { get; set; }
+
+        [DataMember]
+        public Guid IdxGuid { get; set; }
     }
 
     [Serializable]

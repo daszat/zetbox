@@ -2954,19 +2954,12 @@ namespace Zetbox.Server.SchemaManagement
         {
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = objClass.GetTableRef(db);
-            var columns = GetUCColNames(uc);
+            var columns = Construct.GetUCColNames(uc);
             Log.InfoFormat("New Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
             if (db.CheckIndexPossible(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns))
                 db.CreateIndex(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns);
             else
                 Log.WarnFormat("Cannot create Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
-        }
-
-        internal static string[] GetUCColNames(IndexConstraint uc)
-        {
-            var vt_columns = uc.Properties.OfType<ValueTypeProperty>().Select(p => Construct.ColumnName(p, null)).ToArray();
-            var columns = vt_columns.Union(uc.Properties.OfType<ObjectReferenceProperty>().Select(p => Construct.ForeignKeyColumnName(p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd)))).OrderBy(n => n).ToArray();
-            return columns;
         }
         #endregion
 
@@ -2979,7 +2972,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = objClass.GetTableRef(db);
-            var columns = GetUCColNames(uc);
+            var columns = Construct.GetUCColNames(uc);
             if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
             {
                 Log.InfoFormat("Drop Index Constraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
@@ -2998,8 +2991,8 @@ namespace Zetbox.Server.SchemaManagement
 
             if (uc.IsUnique != saved.IsUnique) return true;
 
-            var newCols = GetUCColNames(uc);
-            var savedCols = GetUCColNames(saved);
+            var newCols = Construct.GetUCColNames(uc);
+            var savedCols = Construct.GetUCColNames(saved);
             if (newCols.Length != savedCols.Length) return true;
             foreach (var c in newCols)
             {

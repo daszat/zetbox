@@ -23,9 +23,14 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
     using System.Data.SqlClient;
     using Zetbox.API;
 
-    public class SqlErrorTranslator : ISqlErrorTranslator
+    public class SqlServerErrorTranslator : SqlErrorTranslator
     {
-        public Exception Translate(Exception ex)
+        public SqlServerErrorTranslator(IFrozenContext frozenCtx, ISchemaProvider db)
+            : base(frozenCtx, db)
+        {
+        }
+
+        public override Exception Translate(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException("ex");
 
@@ -43,11 +48,11 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         {
             if (ex.Errors.OfType<SqlError>().Any(e => e.Number == 2601))
             {
-                return new UniqueConstraintViolationException(ex.Errors.OfType<SqlError>().Where(e => e.Number == 2601).Select(e => new UniqueConstraintViolationExceptionDetail(e.Message)).ToList());
+                return new UniqueConstraintViolationException(ex.Errors.OfType<SqlError>().Where(e => e.Number == 2601).Select(e => ConstructUniqueConstraintDetail(e.Message)).ToList());
             }
             else if (ex.Errors.OfType<SqlError>().Any(e => e.Number == 547))
             {
-                return new FKViolationException(ex.Errors.OfType<SqlError>().Where(e => e.Number == 547).Select(e => new FKViolationExceptionDetail(e.Message)).ToList());
+                return new FKViolationException(ex.Errors.OfType<SqlError>().Where(e => e.Number == 547).Select(e => ConstructFKDetail(e.Message)).ToList());
             }
             return ex;
         }

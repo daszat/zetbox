@@ -619,7 +619,7 @@ namespace Zetbox.Server.SchemaManagement
             foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
                 var tblName = objClass.GetTableRef(db);
-                var columns = Cases.GetUCColNames(uc);
+                var columns = Construct.GetUCColNames(uc);
                 var idxName = Construct.IndexName(tblName.Name, columns);
                 if (!db.CheckIndexExists(tblName, idxName))
                 {

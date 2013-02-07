@@ -23,9 +23,14 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
     using Npgsql;
     using Zetbox.API;
 
-    public class PostgresqlErrorTranslator : ISqlErrorTranslator
+    public class PostgresqlErrorTranslator : SqlErrorTranslator
     {
-        public Exception Translate(Exception ex)
+        public PostgresqlErrorTranslator(IFrozenContext frozenCtx, ISchemaProvider db)
+            : base(frozenCtx, db)
+        {
+        }
+
+        public override Exception Translate(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException("ex");
 
@@ -43,11 +48,11 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
             if (ex.Errors.OfType<NpgsqlError>().Any(e => e.Code == "23505"))
             {
-                return new UniqueConstraintViolationException(ex.Errors.OfType<NpgsqlError>().Where(e => e.Code == "23505").Select(e => new UniqueConstraintViolationExceptionDetail(e.Message)).ToList());
+                return new UniqueConstraintViolationException(ex.Errors.OfType<NpgsqlError>().Where(e => e.Code == "23505").Select(e => ConstructUniqueConstraintDetail(e.Message)).ToList());
             }
             else if (ex.Errors.OfType<NpgsqlError>().Any(e => e.Code == "23503"))
             {
-                return new FKViolationException(ex.Errors.OfType<NpgsqlError>().Where(e => e.Code == "23503").Select(e => new FKViolationExceptionDetail(e.Message)).ToList());
+                return new FKViolationException(ex.Errors.OfType<NpgsqlError>().Where(e => e.Code == "23503").Select(e => ConstructFKDetail(e.Message)).ToList());
             }
             return ex;
         }

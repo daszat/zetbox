@@ -107,6 +107,12 @@ namespace Zetbox.API.SchemaManagement
             return "CK_" + tblName + "_" + colName;
         }
 
+        public static string[] GetUCColNames(IndexConstraint uc)
+        {
+            var vt_columns = uc.Properties.OfType<ValueTypeProperty>().Select(p => Construct.ColumnName(p, null)).ToArray();
+            var columns = vt_columns.Union(uc.Properties.OfType<ObjectReferenceProperty>().Select(p => Construct.ForeignKeyColumnName(p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd)))).OrderBy(n => n).ToArray();
+            return columns;
+        }
         #endregion
 
         #region Column Names
