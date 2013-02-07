@@ -32,17 +32,14 @@ namespace Zetbox.Client.Reporting
     public class ReportingErrorDialog : IReportingErrorReporter
     {
         private readonly IViewModelFactory _viewModelFactory;
-        private readonly IFrozenContext _frozenCtx;
         private readonly Lazy<IZetboxContext> _lazyCtx;
 
-        public ReportingErrorDialog(IViewModelFactory vmFactory, IFrozenContext frozenCtx, Lazy<IZetboxContext> lazyCtx)
+        public ReportingErrorDialog(IViewModelFactory vmFactory, Lazy<IZetboxContext> lazyCtx)
         {
             if (vmFactory == null) throw new ArgumentNullException("vmFactory");
-            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             if (lazyCtx == null) throw new ArgumentNullException("lazyCtx");
 
             _viewModelFactory = vmFactory;
-            _frozenCtx = frozenCtx;
             _lazyCtx = lazyCtx;
         }
 
