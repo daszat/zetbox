@@ -376,6 +376,17 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ZetboxContextExceptionHandler.cs" />
+    <Compile Include="ZetboxContextExceptionHandlerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZetboxContextExceptionHandlerResources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.de.resx" />
+    <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ZetboxContextExceptionHandlerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">

@@ -28,7 +28,6 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
-    using Zetbox.Client.GUI;
 
     public class WorkspaceViewModel
         : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter, IDisposable
@@ -329,24 +328,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 }
                 catch (Exception ex)
                 {
-                    var inner = ex.GetInnerException();
-                    if (inner is ConcurrencyException)
+                    if (ZetboxContextExceptionHandler.Show(ViewModelFactory, DataContext, ex))
                     {
-                        var error = (ConcurrencyException)inner;
-                        ViewModelFactory.CreateDialog(DataContext, WorkspaceViewModelResources.ConcurrencyException_Caption)
-                            .AddTextBlock(string.Empty, WorkspaceViewModelResources.ConcurrencyException_Message)
-                            .AddMultiLineString(WorkspaceViewModelResources.DetailsLabel, string.Join("\n", error.Details.Select(e => string.Format(WorkspaceViewModelResources.ConcurrencyException_DetailFormatString, e.ObjectAsString, e.ChangedBy, e.ChangedOn))), true, true)
-                            .Show();
-                        return false;
-                    }
-                    else if (inner is FKViolationException)
-                    {
-                        ViewModelFactory.ShowMessage(WorkspaceViewModelResources.FKViolationException_Caption, WorkspaceViewModelResources.FKViolationException_Message);
-                        return false;
-                    }
-                    else if (inner is UniqueConstraintViolationException)
-                    {
-                        ViewModelFactory.ShowMessage(WorkspaceViewModelResources.UniqueConstraintViolationException_Caption, WorkspaceViewModelResources.UniqueConstraintViolationException_Message);
                         return false;
                     }
                     else

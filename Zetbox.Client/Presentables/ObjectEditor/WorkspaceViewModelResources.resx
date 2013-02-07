@@ -129,24 +129,6 @@
   <data name="CanClose_Title" xml:space="preserve">
     <value>Unsaved data</value>
   </data>
-  <data name="ConcurrencyException_Caption" xml:space="preserve">
-    <value>Concurrency Error</value>
-  </data>
-  <data name="ConcurrencyException_DetailFormatString" xml:space="preserve">
-    <value>"{0}" changed by {1} on {2}</value>
-  </data>
-  <data name="ConcurrencyException_Message" xml:space="preserve">
-    <value>At least one object has changed between fetch and submit changes. Please reopen the workspace and try again.</value>
-  </data>
-  <data name="DetailsLabel" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="FKViolationException_Caption" xml:space="preserve">
-    <value>Usage Error</value>
-  </data>
-  <data name="FKViolationException_Message" xml:space="preserve">
-    <value>The object cannot be deleted or updated because is is used by another object.</value>
-  </data>
   <data name="ItemsLabel" xml:space="preserve">
     <value>Objects:</value>
   </data>
@@ -164,12 +146,6 @@
   </data>
   <data name="SaveCommand_Tooltip" xml:space="preserve">
     <value>Saves outstanding changes to the data store.</value>
-  </data>
-  <data name="UniqueConstraintViolationException_Caption" xml:space="preserve">
-    <value>Unique Error</value>
-  </data>
-  <data name="UniqueConstraintViolationException_Message" xml:space="preserve">
-    <value>At least one value is not unique.</value>
   </data>
   <data name="VerifyContextCommand_Name" xml:space="preserve">
     <value>Verify</value>

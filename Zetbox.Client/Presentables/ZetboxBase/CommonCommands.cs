@@ -374,16 +374,26 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (UseSeparateContext)
             {
-                using (var ctx = _ctxFactory())
+                try
                 {
-                    // make local copy to avoid stumbling over changing lists while iterating over them
-                    foreach (var item in SelectedItems.Cast<DataObjectViewModel>().ToList())
+                    using (var ctx = _ctxFactory())
                     {
-                        var other = item.Object;
-                        var here = ctx.Find(ctx.GetInterfaceType(other), other.ID);
-                        ctx.Delete(here);
+                        // make local copy to avoid stumbling over changing lists while iterating over them
+                        foreach (var item in SelectedItems.Cast<DataObjectViewModel>().ToList())
+                        {
+                            var other = item.Object;
+                            var here = ctx.Find(ctx.GetInterfaceType(other), other.ID);
+                            ctx.Delete(here);
+                        }
+                        ctx.SubmitChanges();
                     }
-                    ctx.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    if (!ZetboxContextExceptionHandler.Show(ViewModelFactory, DataContext, ex))
+                    {
+                        throw;
+                    }
                 }
             }
             else

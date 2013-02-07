@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,40 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AbortCommand_Name" xml:space="preserve">
-    <value>Abbruch</value>
+  <data name="ConcurrencyException_Caption" xml:space="preserve">
+    <value>Concurrency Error</value>
   </data>
-  <data name="AbortCommand_Tooltip" xml:space="preserve">
-    <value>Schließt diesen Arbeitsbereich ohne zu Speichern</value>
+  <data name="ConcurrencyException_DetailFormatString" xml:space="preserve">
+    <value>"{0}" changed by {1} on {2}</value>
   </data>
-  <data name="CanClose" xml:space="preserve">
-    <value>Der Arbeitsbereich enthält veränderte Daten. Änderungen verwerfen?</value>
+  <data name="ConcurrencyException_Message" xml:space="preserve">
+    <value>At least one object has changed between fetch and submit changes. Please reopen the workspace and try again.</value>
   </data>
-  <data name="CanClose_Title" xml:space="preserve">
-    <value>Nicht gespeicherte Daten</value>
+  <data name="DetailsLabel" xml:space="preserve">
+    <value>Details</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Arbeitsbereich</value>
+  <data name="FKViolationException_Caption" xml:space="preserve">
+    <value>Usage Error</value>
   </data>
-  <data name="SaveAndCloseCommand_Name" xml:space="preserve">
-    <value>Speichern und schließen</value>
+  <data name="FKViolationException_DetailFormatString" xml:space="preserve">
+    <value>Database message is "{0}"</value>
   </data>
-  <data name="SaveAndCloseCommand_Tooltip" xml:space="preserve">
-    <value>Speichert ausstehenden Änderungen an den Daten und schließt den aktuellen Arbeitsbereich.</value>
+  <data name="FKViolationException_Message" xml:space="preserve">
+    <value>The object cannot be deleted or updated because is is used by another object.</value>
   </data>
-  <data name="SaveCommand_Name" xml:space="preserve">
-    <value>Speichern</value>
+  <data name="UniqueConstraintViolationException_Caption" xml:space="preserve">
+    <value>Unique Error</value>
   </data>
-  <data name="SaveCommand_Tooltip" xml:space="preserve">
-    <value>Speichert ausstehenden Änderungen an den Daten.</value>
+  <data name="UniqueConstraintViolationException_DetailFormatString" xml:space="preserve">
+    <value>Database message is "{0}"</value>
   </data>
-  <data name="VerifyContextCommand_Name" xml:space="preserve">
-    <value>Überprüfen</value>
-  </data>
-  <data name="VerifyContextCommand_Tootlip" xml:space="preserve">
-    <value>Überprüft, ob alle Daten gültig sind.</value>
-  </data>
-  <data name="ItemsLabel" xml:space="preserve">
-    <value>Datensätze:</value>
+  <data name="UniqueConstraintViolationException_Message" xml:space="preserve">
+    <value>At least one value is not unique.</value>
   </data>
 </root>

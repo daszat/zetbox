@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zetbox.Client.Presentables.ObjectEditor {
+namespace Zetbox.Client {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class WorkspaceViewModelResources {
+    internal class ZetboxContextExceptionHandlerResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal WorkspaceViewModelResources() {
+        internal ZetboxContextExceptionHandlerResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModelResources", typeof(WorkspaceViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.ZetboxContextExceptionHandlerResources", typeof(ZetboxContextExceptionHandlerResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,110 +61,92 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Abort.
+        ///   Looks up a localized string similar to Concurrency Error.
         /// </summary>
-        internal static string AbortCommand_Name {
+        internal static string ConcurrencyException_Caption {
             get {
-                return ResourceManager.GetString("AbortCommand_Name", resourceCulture);
+                return ResourceManager.GetString("ConcurrencyException_Caption", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Closes this workspace without saving.
+        ///   Looks up a localized string similar to &quot;{0}&quot; changed by {1} on {2}.
         /// </summary>
-        internal static string AbortCommand_Tooltip {
+        internal static string ConcurrencyException_DetailFormatString {
             get {
-                return ResourceManager.GetString("AbortCommand_Tooltip", resourceCulture);
+                return ResourceManager.GetString("ConcurrencyException_DetailFormatString", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Workspace contains unsaved data. Close anyway?.
+        ///   Looks up a localized string similar to At least one object has changed between fetch and submit changes. Please reopen the workspace and try again..
         /// </summary>
-        internal static string CanClose {
+        internal static string ConcurrencyException_Message {
             get {
-                return ResourceManager.GetString("CanClose", resourceCulture);
+                return ResourceManager.GetString("ConcurrencyException_Message", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unsaved data.
+        ///   Looks up a localized string similar to Details.
         /// </summary>
-        internal static string CanClose_Title {
+        internal static string DetailsLabel {
             get {
-                return ResourceManager.GetString("CanClose_Title", resourceCulture);
+                return ResourceManager.GetString("DetailsLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Objects:.
+        ///   Looks up a localized string similar to Usage Error.
         /// </summary>
-        internal static string ItemsLabel {
+        internal static string FKViolationException_Caption {
             get {
-                return ResourceManager.GetString("ItemsLabel", resourceCulture);
+                return ResourceManager.GetString("FKViolationException_Caption", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Workspace.
+        ///   Looks up a localized string similar to Database message is &quot;{0}&quot;.
         /// </summary>
-        internal static string Name {
+        internal static string FKViolationException_DetailFormatString {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("FKViolationException_DetailFormatString", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save &amp; Close.
+        ///   Looks up a localized string similar to The object cannot be deleted or updated because is is used by another object..
         /// </summary>
-        internal static string SaveAndCloseCommand_Name {
+        internal static string FKViolationException_Message {
             get {
-                return ResourceManager.GetString("SaveAndCloseCommand_Name", resourceCulture);
+                return ResourceManager.GetString("FKViolationException_Message", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saves outstanding changes to the data store and closes the current workspace..
+        ///   Looks up a localized string similar to Unique Error.
         /// </summary>
-        internal static string SaveAndCloseCommand_Tooltip {
+        internal static string UniqueConstraintViolationException_Caption {
             get {
-                return ResourceManager.GetString("SaveAndCloseCommand_Tooltip", resourceCulture);
+                return ResourceManager.GetString("UniqueConstraintViolationException_Caption", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save.
+        ///   Looks up a localized string similar to Database message is &quot;{0}&quot;.
         /// </summary>
-        internal static string SaveCommand_Name {
+        internal static string UniqueConstraintViolationException_DetailFormatString {
             get {
-                return ResourceManager.GetString("SaveCommand_Name", resourceCulture);
+                return ResourceManager.GetString("UniqueConstraintViolationException_DetailFormatString", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saves outstanding changes to the data store..
+        ///   Looks up a localized string similar to At least one value is not unique..
         /// </summary>
-        internal static string SaveCommand_Tooltip {
+        internal static string UniqueConstraintViolationException_Message {
             get {
-                return ResourceManager.GetString("SaveCommand_Tooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Verify.
-        /// </summary>
-        internal static string VerifyContextCommand_Name {
-            get {
-                return ResourceManager.GetString("VerifyContextCommand_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Verifies that all constraints are met..
-        /// </summary>
-        internal static string VerifyContextCommand_Tootlip {
-            get {
-                return ResourceManager.GetString("VerifyContextCommand_Tootlip", resourceCulture);
+                return ResourceManager.GetString("UniqueConstraintViolationException_Message", resourceCulture);
             }
         }
     }
