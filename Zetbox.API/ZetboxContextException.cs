@@ -230,7 +230,13 @@ namespace Zetbox.API
         {
         }
 
-        
+        public FKViolationExceptionDetail(string databaseError)
+        {
+            this.DatabaseError = databaseError;
+        }
+
+        [DataMember]
+        public string DatabaseError { get; set; }
     }
 
     [Serializable]
@@ -280,7 +286,7 @@ namespace Zetbox.API
         }
 
         public FKViolationException(List<FKViolationExceptionDetail> details)
-            : base(string.Format("{0} object(s) has changed between fetch and submit changes", details != null ? details.Count().ToString() : "?"))
+            : base(DEFAULT_MESSAGE)
         {
             this._details = details;
         }
@@ -308,7 +314,13 @@ namespace Zetbox.API
         {
         }
 
+        public UniqueConstraintViolationExceptionDetail(string databaseError)
+        {
+            this.DatabaseError = databaseError;
+        }
 
+        [DataMember]
+        public string DatabaseError { get; set; }
     }
 
     [Serializable]
@@ -358,7 +370,7 @@ namespace Zetbox.API
         }
 
         public UniqueConstraintViolationException(List<UniqueConstraintViolationExceptionDetail> details)
-            : base(string.Format("{0} object(s) has changed between fetch and submit changes", details != null ? details.Count().ToString() : "?"))
+            : base(DEFAULT_MESSAGE)
         {
             this._details = details;
         }

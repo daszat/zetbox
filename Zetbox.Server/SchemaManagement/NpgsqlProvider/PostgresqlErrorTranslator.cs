@@ -43,11 +43,11 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
             if (ex.Errors.OfType<NpgsqlError>().Any(e => e.Code == "23505"))
             {
-                return new UniqueConstraintViolationException();
+                return new UniqueConstraintViolationException(ex.Errors.OfType<NpgsqlError>().Where(e => e.Code == "23505").Select(e => new UniqueConstraintViolationExceptionDetail(e.Message)).ToList());
             }
             else if (ex.Errors.OfType<NpgsqlError>().Any(e => e.Code == "23503"))
             {
-                return new FKViolationException();
+                return new FKViolationException(ex.Errors.OfType<NpgsqlError>().Where(e => e.Code == "23503").Select(e => new FKViolationExceptionDetail(e.Message)).ToList());
             }
             return ex;
         }

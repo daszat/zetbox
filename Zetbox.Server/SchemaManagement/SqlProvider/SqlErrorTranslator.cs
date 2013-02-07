@@ -43,11 +43,11 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         {
             if (ex.Errors.OfType<SqlError>().Any(e => e.Number == 2601))
             {
-                return new UniqueConstraintViolationException();
+                return new UniqueConstraintViolationException(ex.Errors.OfType<SqlError>().Where(e => e.Number == 2601).Select(e => new UniqueConstraintViolationExceptionDetail(e.Message)).ToList());
             }
             else if (ex.Errors.OfType<SqlError>().Any(e => e.Number == 547))
             {
-                return new FKViolationException();
+                return new FKViolationException(ex.Errors.OfType<SqlError>().Where(e => e.Number == 547).Select(e => new FKViolationExceptionDetail(e.Message)).ToList());
             }
             return ex;
         }
