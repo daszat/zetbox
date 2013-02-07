@@ -25,6 +25,11 @@ namespace Zetbox.Client
     {
         public static bool Show(IViewModelFactory vmf, IZetboxContext ctx, Exception ex)
         {
+            if (vmf == null) throw new ArgumentNullException("vmf");
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            
+            if (ex == null) return false;
+
             var inner = ex.GetInnerException();
             if (inner is ConcurrencyException)
             {

@@ -66,16 +66,19 @@ namespace Zetbox.Client.GUI
         }
         public static DialogCreator AddMultiLineString(this DialogCreator c, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false)
         {
+            if (c == null) throw new ArgumentNullException("c");
             return AddString(c, label, value, allowNullInput, isReadOnly, Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(c.FrozenCtx));
         }
 
         public static DialogCreator AddPassword(this DialogCreator c, string label)
         {
+            if (c == null) throw new ArgumentNullException("c");
             return AddString(c, label, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(c.FrozenCtx));
         }
 
         public static DialogCreator AddTextBlock(this DialogCreator c, string label, string value)
         {
+            if (c == null) throw new ArgumentNullException("c");
             return AddString(c, label, value, allowNullInput: true, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(c.FrozenCtx));
         }
     }
