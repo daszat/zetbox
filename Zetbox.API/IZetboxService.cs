@@ -255,15 +255,19 @@ namespace Zetbox.API
 
         }
 
-        public FKViolationExceptionMessage(Exception ex)
+        public FKViolationExceptionMessage(FKViolationException ex)
             : base(ex)
         {
+            this.Details = ex.Details;
         }
-
+        
         public override ZetboxContextErrorException ToException()
         {
-            return new FKViolationException(Message);
+            return new FKViolationException(Message, Details);
         }
+
+        [DataMember]
+        public List<FKViolationExceptionDetail> Details { get; set; }
     }
 
     [Serializable]
@@ -274,14 +278,19 @@ namespace Zetbox.API
 
         }
 
-        public UniqueConstraintViolationExceptionMessage(Exception ex)
+        public UniqueConstraintViolationExceptionMessage(UniqueConstraintViolationException ex)
             : base(ex)
         {
+            this.Details = ex.Details;
         }
+        
         public override ZetboxContextErrorException ToException()
         {
-            return new UniqueConstraintViolationException(Message);
+            return new UniqueConstraintViolationException(Message, Details);
         }
+
+        [DataMember]
+        public List<UniqueConstraintViolationExceptionDetail> Details { get; set; }
     }
 
     #endregion
