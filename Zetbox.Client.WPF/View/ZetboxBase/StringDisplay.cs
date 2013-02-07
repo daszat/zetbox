@@ -33,7 +33,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.WPF.CustomControls;
     using Zetbox.Client.WPF.Converter;
 
-    public class StringDisplay : TextBlock // Simplyfiy, often used Control
+    public class StringDisplay : TextBlock // Simplify, often used Control
     {
         //    <TextBlock x:Name="txtStringDisplay"
         //               Text="{Binding FormattedValue, Mode=OneWay}"
@@ -45,6 +45,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
             // InitializeComponent
             this.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+            this.TextWrapping = System.Windows.TextWrapping.Wrap;
 
             BindingOperations.SetBinding(this, TextBlock.TextProperty, new Binding("FormattedValueAsync") { Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(this, TextBlock.ToolTipProperty, new Binding("ToolTip") { Mode = BindingMode.OneWay });
