@@ -8,14 +8,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ZetboxContextExceptionSerializationHelper" nillable="true" type="tns:ZetboxContextExceptionSerializationHelper" />
-  <xs:complexType name="FKViolationExceptionMessage">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="FKViolationExceptionMessage" nillable="true" type="tns:FKViolationExceptionMessage" />
   <xs:complexType name="UniqueConstraintViolationExceptionMessage">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
@@ -50,6 +42,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ConcurrencyExceptionDetail" nillable="true" type="tns:ConcurrencyExceptionDetail" />
+  <xs:complexType name="FKViolationExceptionMessage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FKViolationExceptionMessage" nillable="true" type="tns:FKViolationExceptionMessage" />
   <xs:simpleType name="OrderByType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="ASC">
