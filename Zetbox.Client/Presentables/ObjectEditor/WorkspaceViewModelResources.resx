@@ -132,6 +132,9 @@
   <data name="ConcurrencyException_Caption" xml:space="preserve">
     <value>Concurrency Error</value>
   </data>
+  <data name="ConcurrencyException_DetailFormatString" xml:space="preserve">
+    <value>"{0}" changed by {1} on {2}</value>
+  </data>
   <data name="ConcurrencyException_Message" xml:space="preserve">
     <value>At least one object has changed between fetch and submit changes. Please reopen the workspace and try again.</value>
   </data>

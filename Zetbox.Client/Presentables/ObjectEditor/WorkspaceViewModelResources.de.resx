@@ -174,4 +174,7 @@
   <data name="DetailsLabel" xml:space="preserve">
     <value>Details</value>
   </data>
+  <data name="ConcurrencyException_DetailFormatString" xml:space="preserve">
+    <value>"{0}" geändert von {1} am {2}</value>
+  </data>
 </root>

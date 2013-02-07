@@ -106,6 +106,15 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot; changed by {1} on {2}.
+        /// </summary>
+        internal static string ConcurrencyException_DetailFormatString {
+            get {
+                return ResourceManager.GetString("ConcurrencyException_DetailFormatString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At least one object has changed between fetch and submit changes. Please reopen the workspace and try again..
         /// </summary>
         internal static string ConcurrencyException_Message {

@@ -335,7 +335,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                         var error = (ConcurrencyException)inner;
                         ViewModelFactory.CreateDialog(DataContext, WorkspaceViewModelResources.ConcurrencyException_Caption)
                             .AddTextBlock(string.Empty, WorkspaceViewModelResources.ConcurrencyException_Message)
-                            .AddMultiLineString(WorkspaceViewModelResources.DetailsLabel, string.Join("\n", error.Details.Select(e => string.Format("{0}: {1}, {2}", e.ObjectAsString, e.ChangedBy, e.ChangedOn))), true, true)
+                            .AddMultiLineString(WorkspaceViewModelResources.DetailsLabel, string.Join("\n", error.Details.Select(e => string.Format(WorkspaceViewModelResources.ConcurrencyException_DetailFormatString, e.ObjectAsString, e.ChangedBy, e.ChangedOn))), true, true)
                             .Show();
                         return false;
                     }
