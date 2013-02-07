@@ -94,43 +94,26 @@ namespace Zetbox.API.Client
                     request();
                     break;
                 }
-                // ConcurrencyException
-                catch (FaultException<ConcurrencyException> ex)
+                catch (FaultException<ZetboxContextExceptionMessage> ex)
                 {
-                    throw ex.Detail;
+                    throw ex.Detail.Exception.ToException();
                 }
                 catch (ConcurrencyException)
                 {
                     throw;
                 }
-                // FKViolationException
-                catch (FaultException<FKViolationException> ex)
-                {
-                    throw ex.Detail;
-                }
                 catch (FKViolationException)
                 {
                     throw;
-                }
-                // UniqueConstraintViolationException
-                catch (FaultException<UniqueConstraintViolationException> ex)
-                {
-                    throw ex.Detail;
                 }
                 catch (UniqueConstraintViolationException)
                 {
                     throw;
                 }
-                // InvalidZetboxGeneratedVersionException
-                catch (FaultException<InvalidZetboxGeneratedVersionException> ex)
-                {
-                    throw ex.Detail;
-                }
                 catch (InvalidZetboxGeneratedVersionException)
                 {
                     throw;
                 }
-                // all other
                 catch (MessageSecurityException)
                 {
                     throw;

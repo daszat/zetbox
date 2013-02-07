@@ -24,98 +24,8 @@ using System.Xml.Serialization;
 
 namespace Zetbox.API
 {
-    #region Serialization helper
     [Serializable]
-    [XmlRoot(Namespace = "http://dasz.at/zetbox/ZetboxContextExceptionSerializationHelper")]
-    public class ExceptionSerializationHelperContainer
-    {
-        [XmlElement(Type = typeof(ConcurrencyExceptionSerializationHelper), ElementName = "ConcurrencyExceptionSerializationHelper")]
-        [XmlElement(Type = typeof(FKViolationExceptionSerializationHelper), ElementName = "FKViolationExceptionSerializationHelper")]
-        [XmlElement(typeof(UniqueConstraintViolationExceptionSerializationHelper), ElementName = "UniqueConstraintViolationExceptionSerializationHelper")]
-        public ZetboxContextExceptionSerializationHelper Exception { get; set; }
-    }
-
-    [Serializable]
-    public class ZetboxContextExceptionSerializationHelper
-    {
-        public ZetboxContextExceptionSerializationHelper()
-        {
-        }
-
-        public ZetboxContextExceptionSerializationHelper(Exception ex)
-        {
-            if (ex == null) throw new ArgumentNullException("ex");
-            this.Message = ex.Message;
-        }
-
-        public string Message { get; set; }
-
-        public virtual ZetboxContextException ToException()
-        {
-            throw new NotImplementedException("Must be implemented in derived classes");
-        }
-    }
-
-    [Serializable]
-    public class ConcurrencyExceptionSerializationHelper : ZetboxContextExceptionSerializationHelper
-    {
-        public ConcurrencyExceptionSerializationHelper()
-        {
-
-        }
-
-        public ConcurrencyExceptionSerializationHelper(Exception ex)
-            : base(ex)
-        {
-        }
-
-        public override ZetboxContextException ToException()
-        {
-            return new ConcurrencyException(Message);
-        }
-    }
-
-    [Serializable]
-    public class FKViolationExceptionSerializationHelper : ZetboxContextExceptionSerializationHelper
-    {
-        public FKViolationExceptionSerializationHelper()
-        {
-
-        }
-
-        public FKViolationExceptionSerializationHelper(Exception ex)
-            : base(ex)
-        {
-        }
-
-        public override ZetboxContextException ToException()
-        {
-            return new FKViolationException(Message);
-        }
-    }
-
-    [Serializable]
-    public class UniqueConstraintViolationExceptionSerializationHelper : ZetboxContextExceptionSerializationHelper
-    {
-        public UniqueConstraintViolationExceptionSerializationHelper()
-        {
-
-        }
-
-        public UniqueConstraintViolationExceptionSerializationHelper(Exception ex)
-            : base(ex)
-        {
-        }
-        public override ZetboxContextException ToException()
-        {
-            return new UniqueConstraintViolationException(Message);
-        }
-    }
-
-    #endregion
-
-    [Serializable]
-    public class ZetboxContextException
+    public abstract class ZetboxContextException
         : Exception
     {
         public ZetboxContextException()
@@ -137,11 +47,33 @@ namespace Zetbox.API
             : base(info, context)
         {
         }
+    }
 
-        public virtual void ToXmlStream(System.IO.Stream s)
+    [Serializable]
+    public abstract class ZetboxContextErrorException
+        : ZetboxContextException
+    {
+        public ZetboxContextErrorException()
+            : base()
         {
-            throw new NotImplementedException();
         }
+
+        public ZetboxContextErrorException(string message)
+            : base(message)
+        {
+        }
+
+        public ZetboxContextErrorException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        protected ZetboxContextErrorException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+
+        public abstract ZetboxContextExceptionMessage ToExceptionMessage();
     }
 
     [Serializable]
@@ -195,20 +127,52 @@ namespace Zetbox.API
     }
 
     [Serializable]
+    [DataContract]
+    public class ConcurrencyExceptionDetail
+    {
+        public ConcurrencyExceptionDetail()
+        {
+        }
+
+        public ConcurrencyExceptionDetail(Guid clsGuid, int id, string objectAsString, DateTime changedOn, string changedBy)
+        {
+            this.ClsGuid = clsGuid;
+            this.ID = id;
+            this.ObjectAsString = objectAsString;
+            this.ChangedOn = changedOn;
+            this.ChangedBy = changedBy;
+        }
+
+        [DataMember]
+        public Guid ClsGuid { get; set; }
+        [DataMember]
+        public int ID { get; set; }
+        [DataMember]
+        public string ObjectAsString { get; set; }
+        [DataMember]
+        public DateTime ChangedOn { get; set; }
+        [DataMember]
+        public string ChangedBy { get; set; }
+    }
+
+    [Serializable]
     public class ConcurrencyException
-        : ZetboxContextException
+        : ZetboxContextErrorException
     {
         private const string DEFAULT_MESSAGE = "At least one object has changed between fetch and submit changes";
 
-        [NonSerialized]
-        private IEnumerable<IDataObject> objects;
+        private static readonly List<ConcurrencyExceptionDetail> Empty = new List<ConcurrencyExceptionDetail>();
 
-        [XmlIgnore]
-        public IEnumerable<IDataObject> Objects
+        private List<ConcurrencyExceptionDetail> _details;
+        public List<ConcurrencyExceptionDetail> Details
         {
             get
             {
-                return objects;
+                return _details ?? Empty;
+            }
+            set
+            {
+                _details = value;
             }
         }
 
@@ -237,26 +201,58 @@ namespace Zetbox.API
         {
         }
 
-        public ConcurrencyException(IEnumerable<IDataObject> objects)
-            : base(string.Format("{0} object(s) has changed between fetch and submit changes", objects != null ? objects.Count().ToString() : "?"))
+        public ConcurrencyException(List<ConcurrencyExceptionDetail> details)
+            : base(string.Format("{0} object(s) has changed between fetch and submit changes", details != null ? details.Count().ToString() : "?"))
         {
-            this.objects = objects;
+            this._details = details;
         }
 
-        public override void ToXmlStream(System.IO.Stream s)
+        public ConcurrencyException(string message, List<ConcurrencyExceptionDetail> details)
+            : base(message)
         {
-            new ExceptionSerializationHelperContainer()
+            this._details = details;
+        }
+
+        public override ZetboxContextExceptionMessage ToExceptionMessage()
+        {
+            return new ZetboxContextExceptionMessage()
             {
-                Exception = new ConcurrencyExceptionSerializationHelper(this)
-            }.ToXmlStream(s);
+                Exception = new ConcurrencyExceptionMessage(this)
+            };
         }
     }
 
     [Serializable]
+    [DataContract]
+    public class FKViolationExceptionDetail
+    {
+        public FKViolationExceptionDetail()
+        {
+        }
+
+        
+    }
+
+    [Serializable]
     public class FKViolationException
-        : ZetboxContextException
+        : ZetboxContextErrorException
     {
         private const string DEFAULT_MESSAGE = "At least one foreign key constraint has been violated";
+
+        private static readonly List<FKViolationExceptionDetail> Empty = new List<FKViolationExceptionDetail>();
+
+        private List<FKViolationExceptionDetail> _details;
+        public List<FKViolationExceptionDetail> Details
+        {
+            get
+            {
+                return _details ?? Empty;
+            }
+            set
+            {
+                _details = value;
+            }
+        }
 
         public FKViolationException()
             : base(DEFAULT_MESSAGE)
@@ -283,20 +279,58 @@ namespace Zetbox.API
         {
         }
 
-        public override void ToXmlStream(System.IO.Stream s)
+        public FKViolationException(List<FKViolationExceptionDetail> details)
+            : base(string.Format("{0} object(s) has changed between fetch and submit changes", details != null ? details.Count().ToString() : "?"))
         {
-            new ExceptionSerializationHelperContainer()
+            this._details = details;
+        }
+
+        public FKViolationException(string message, List<FKViolationExceptionDetail> details)
+            : base(message)
+        {
+            this._details = details;
+        }
+
+        public override ZetboxContextExceptionMessage ToExceptionMessage()
+        {
+            return new ZetboxContextExceptionMessage()
             {
-                Exception = new FKViolationExceptionSerializationHelper(this)
-            }.ToXmlStream(s);
+                Exception = new FKViolationExceptionMessage(this)
+            };
         }
     }
 
     [Serializable]
+    [DataContract]
+    public class UniqueConstraintViolationExceptionDetail
+    {
+        public UniqueConstraintViolationExceptionDetail()
+        {
+        }
+
+
+    }
+
+    [Serializable]
     public class UniqueConstraintViolationException
-        : ZetboxContextException
+        : ZetboxContextErrorException
     {
         private const string DEFAULT_MESSAGE = "At least one unique constraint has been violated";
+
+        private static readonly List<UniqueConstraintViolationExceptionDetail> Empty = new List<UniqueConstraintViolationExceptionDetail>();
+
+        private List<UniqueConstraintViolationExceptionDetail> _details;
+        public List<UniqueConstraintViolationExceptionDetail> Details
+        {
+            get
+            {
+                return _details ?? Empty;
+            }
+            set
+            {
+                _details = value;
+            }
+        }
 
         public UniqueConstraintViolationException()
             : base(DEFAULT_MESSAGE)
@@ -323,12 +357,24 @@ namespace Zetbox.API
         {
         }
 
-        public override void ToXmlStream(System.IO.Stream s)
+        public UniqueConstraintViolationException(List<UniqueConstraintViolationExceptionDetail> details)
+            : base(string.Format("{0} object(s) has changed between fetch and submit changes", details != null ? details.Count().ToString() : "?"))
         {
-            new ExceptionSerializationHelperContainer()
+            this._details = details;
+        }
+
+        public UniqueConstraintViolationException(string message, List<UniqueConstraintViolationExceptionDetail> details)
+            : base(message)
+        {
+            this._details = details;
+        }
+
+        public override ZetboxContextExceptionMessage ToExceptionMessage()
+        {
+            return new ZetboxContextExceptionMessage()
             {
-                Exception = new UniqueConstraintViolationExceptionSerializationHelper(this)
-            }.ToXmlStream(s);
+                Exception = new UniqueConstraintViolationExceptionMessage(this)
+            };
         }
     }
 }

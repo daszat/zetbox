@@ -39,21 +39,10 @@ namespace Zetbox.Server
             var msg = ex.Message;
             Logging.Log.Error("Error in Facade: " + msg, ex);
 
-            if (ex is ConcurrencyException)
+            if (ex is ZetboxContextErrorException)
             {
-                throw new FaultException<ConcurrencyException>((ConcurrencyException)ex, msg);
-            }
-            else if (ex is FKViolationException)
-            {
-                throw new FaultException<FKViolationException>((FKViolationException)ex, msg);
-            }
-            else if (ex is UniqueConstraintViolationException)
-            {
-                throw new FaultException<UniqueConstraintViolationException>((UniqueConstraintViolationException)ex, msg);
-            }
-            else if (ex is InvalidZetboxGeneratedVersionException)
-            {
-                throw new FaultException<InvalidZetboxGeneratedVersionException>((InvalidZetboxGeneratedVersionException)ex, msg);
+                var error = (ZetboxContextErrorException)ex;
+                throw new FaultException<ZetboxContextExceptionMessage>(error.ToExceptionMessage(), msg);
             }
             else
             {

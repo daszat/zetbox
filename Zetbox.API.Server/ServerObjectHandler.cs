@@ -23,6 +23,7 @@ namespace Zetbox.API.Server
     using System.Linq.Expressions;
     using Zetbox.API;
     using Zetbox.API.Utils;
+    using Zetbox.App.Extensions;
 
     /// <summary>
     /// This describes the common interface from the server frontend to the provider for servicing the common "Get" operations.
@@ -248,7 +249,7 @@ namespace Zetbox.API.Server
                 entityObjects[obj] = obj;
             }
 
-            var concurrencyFailed = new List<IDataObject>();
+            var concurrencyFailed = new List<ConcurrencyExceptionDetail>();
             // then apply changes
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.Modified))
             {
@@ -261,7 +262,12 @@ namespace Zetbox.API.Server
                     var send = (Zetbox.App.Base.IChangedBy)obj;
                     if (Math.Abs((orig.ChangedOn - send.ChangedOn).Ticks) > 15) // postgres is only accurate down to µs (1/1000th ms), but DateTime is accurate down to 1/10th µs. Rounding errors cause invalid concurrency failures.
                     {
-                        concurrencyFailed.Add((IDataObject)obj);
+                        concurrencyFailed.Add(new ConcurrencyExceptionDetail(
+                            Guid.Empty, // TODO: There is no frozen context here. Refactor *HanderFatories to autofac modules!
+                            obj.ID,
+                            send.ToString(),
+                            orig.ChangedOn,
+                            orig.ChangedBy != null ? orig.ChangedBy.ToString() : string.Empty));
                     }
                 }
                 ctxObj.ApplyChangesFrom(obj);

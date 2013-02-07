@@ -254,25 +254,10 @@ namespace Zetbox.Server.HttpService
                 }
                 Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
             }
-            catch (FaultException<ConcurrencyException> ex)
+            catch (FaultException<ZetboxContextExceptionMessage> ex)
             {
                 SerializeException(context, ex.Detail);
                 Log.Info("Concurrency error while processing request", ex);
-            }
-            catch (FaultException<FKViolationException> ex)
-            {
-                SerializeException(context, ex.Detail);
-                Log.Info("FK violation error while processing request", ex);
-            }
-            catch (FaultException<UniqueConstraintViolationException> ex)
-            {
-                SerializeException(context, ex.Detail);
-                Log.Info("unique constraint violation error while processing request", ex);
-            }
-            catch (FaultException<InvalidZetboxGeneratedVersionException> ex)
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.PreconditionFailed;
-                Log.Info("InvalidZetboxGeneratedVersion error while processing request", ex);
             }
             catch (FaultException ex)
             {
@@ -294,11 +279,11 @@ namespace Zetbox.Server.HttpService
             }
         }
 
-        private void SerializeException(HttpContext context, ZetboxContextException ex)
+        private void SerializeException(HttpContext context, ZetboxContextExceptionMessage exContainer)
         {
             context.Response.StatusCode = (int)HttpStatusCode.Conflict;
             context.Response.ContentType = "text/xml";
-            ex.ToXmlStream(context.Response.OutputStream);
+            exContainer.ToXmlStream(context.Response.OutputStream);
             context.Response.OutputStream.Flush();            
         }
 
