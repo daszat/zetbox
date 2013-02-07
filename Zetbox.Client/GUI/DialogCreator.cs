@@ -47,21 +47,11 @@ namespace Zetbox.Client.GUI
 
     public static class DialogCreatorExtensions
     {
-        public static DialogCreator AddString(this DialogCreator c, string label)
-        {
-            return c.AddString(label, null, null);
-        }
-
-        public static DialogCreator AddString(this DialogCreator c, string label, ControlKind requestedKind)
-        {
-            return c.AddString(label, null, requestedKind);
-        }
-
-        public static DialogCreator AddString(this DialogCreator c, string label, string value, ControlKind requestedKind)
+        public static DialogCreator AddString(this DialogCreator c, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
         {
             if (c == null) throw new ArgumentNullException("c");
 
-            var mdl = new ClassValueModel<string>(label, "", false, false);
+            var mdl = new ClassValueModel<string>(label, "", allowNullInput, isReadOnly);
 
             if (value != null)
                 mdl.Value = value;
@@ -74,12 +64,19 @@ namespace Zetbox.Client.GUI
             c.ValueModels.Add(vmdl);
             return c;
         }
+        public static DialogCreator AddMultiLineString(this DialogCreator c, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false)
+        {
+            return AddString(c, label, value, allowNullInput, isReadOnly, Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(c.FrozenCtx));
+        }
 
         public static DialogCreator AddPassword(this DialogCreator c, string label)
         {
-            if (c == null) throw new ArgumentNullException("c");
+            return AddString(c, label, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(c.FrozenCtx));
+        }
 
-            return AddString(c, label, Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(c.FrozenCtx));
+        public static DialogCreator AddTextBlock(this DialogCreator c, string label, string value)
+        {
+            return AddString(c, label, value, allowNullInput: true, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(c.FrozenCtx));
         }
     }
 }

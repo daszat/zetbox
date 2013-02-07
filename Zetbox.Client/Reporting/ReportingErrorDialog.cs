@@ -53,7 +53,7 @@ namespace Zetbox.Client.Reporting
 
             if (ex != null)
             {
-                dlg.AddString("Exception", ex.ToString(), ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx));
+                dlg.AddMultiLineString("Exception", ex.ToString(), true, true);
             }
 
             if (errors != null && errors.ErrorCount > 0)
@@ -77,7 +77,7 @@ namespace Zetbox.Client.Reporting
                     sb.AppendLine(e.ToString());
                 }
 
-                dlg.AddString("Errors", sb.ToString(), ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx));
+                dlg.AddMultiLineString("Errors", sb.ToString(), true, true);
             }
 
             if (mddl != null)
@@ -92,7 +92,7 @@ namespace Zetbox.Client.Reporting
                     sb.AppendLine(string.Format("{0:000}: {1}", ++counter, line));
                 }
 
-                dlg.AddString("MDDL", sb.ToString(), ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(_frozenCtx));
+                dlg.AddMultiLineString("MDDL", sb.ToString(), true, true);
             }
 
             dlg.Show();
