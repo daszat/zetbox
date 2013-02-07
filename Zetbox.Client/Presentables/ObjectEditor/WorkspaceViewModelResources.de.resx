@@ -171,4 +171,7 @@
   <data name="UniqueConstraintViolationException_Message" xml:space="preserve">
     <value>Mindestens ein Wert ist nicht eindeutig</value>
   </data>
+  <data name="DetailsLabel" xml:space="preserve">
+    <value>Details</value>
+  </data>
 </root>

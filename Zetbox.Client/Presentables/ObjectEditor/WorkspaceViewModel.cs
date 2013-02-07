@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.Client.GUI;
 
     public class WorkspaceViewModel
         : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter, IDisposable
@@ -328,17 +329,22 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 }
                 catch (Exception ex)
                 {
-                    if (ex.GetInnerException() is ConcurrencyException)
+                    var inner = ex.GetInnerException();
+                    if (inner is ConcurrencyException)
                     {
-                        ViewModelFactory.ShowMessage(WorkspaceViewModelResources.ConcurrencyException_Message, WorkspaceViewModelResources.ConcurrencyException_Caption);
+                        var error = (ConcurrencyException)inner;
+                        ViewModelFactory.CreateDialog(DataContext, WorkspaceViewModelResources.ConcurrencyException_Caption)
+                            .AddTextBlock(string.Empty, WorkspaceViewModelResources.ConcurrencyException_Message)
+                            .AddMultiLineString(WorkspaceViewModelResources.DetailsLabel, string.Join("\n", error.Details.Select(e => string.Format("{0}: {1}, {2}", e.ObjectAsString, e.ChangedBy, e.ChangedOn))), true, true)
+                            .Show();
                         return false;
                     }
-                    else if (ex.GetInnerException() is FKViolationException)
+                    else if (inner is FKViolationException)
                     {
                         ViewModelFactory.ShowMessage(WorkspaceViewModelResources.FKViolationException_Caption, WorkspaceViewModelResources.FKViolationException_Message);
                         return false;
                     }
-                    else if (ex.GetInnerException() is UniqueConstraintViolationException)
+                    else if (inner is UniqueConstraintViolationException)
                     {
                         ViewModelFactory.ShowMessage(WorkspaceViewModelResources.UniqueConstraintViolationException_Caption, WorkspaceViewModelResources.UniqueConstraintViolationException_Message);
                         return false;

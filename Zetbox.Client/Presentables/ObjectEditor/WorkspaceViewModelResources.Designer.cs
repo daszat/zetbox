@@ -115,6 +115,15 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        internal static string DetailsLabel {
+            get {
+                return ResourceManager.GetString("DetailsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Usage Error.
         /// </summary>
         internal static string FKViolationException_Caption {
