@@ -2647,7 +2647,7 @@ namespace Zetbox.Server.SchemaManagement
             {
                 if (ac.Relations.Count == 0)
                 {
-                    Log.ErrorFormat("Unable to create RightsViewUnmaterialized: RoleMembership '{0}' has no relations", ac.Name);
+                    Log.ErrorFormat("Unable to create RightsViewUnmaterialized: RoleMembership '{0}' has no relations", ac.Description);
                     db.CreateEmptyRightsViewUnmaterialized(rightsViewUnmaterializedName);
                     return;
                 }

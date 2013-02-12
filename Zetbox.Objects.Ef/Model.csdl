@@ -1090,13 +1090,13 @@
                         FromRole="AccessControl"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Description" Type="String" Nullable="true" MaxLength="500"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_AccessControl_has_Module"
                         FromRole="AccessControl"
                         ToRole="Module" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />
+    <Property Name="Notes" Type="String" Nullable="true" MaxLength="500"  />
     <NavigationProperty Name="ObjectClassImpl"
                         Relationship="Model.FK_ObjectClass_has_AccessControlList"
                         FromRole="AccessControlList"

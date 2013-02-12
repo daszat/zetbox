@@ -21,7 +21,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="RightsImpl" ColumnName="Rights" />
 	    </MappingFragment>
       </EntityTypeMapping>

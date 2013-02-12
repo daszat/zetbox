@@ -1331,9 +1331,9 @@
     <Property Name="fk_ObjectClass" Type="int4" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Description" Type="varchar" MaxLength="500" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Notes" Type="varchar" MaxLength="500" Nullable="true" />
     <Property Name="Rights" Type="int4" Nullable="true" />
   </EntityType>
 	

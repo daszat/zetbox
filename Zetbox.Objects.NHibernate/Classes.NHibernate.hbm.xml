@@ -2914,6 +2914,7 @@
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
+<!-- ValueTypeProperty Description is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
@@ -2926,8 +2927,8 @@
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
-        <property name="Name" 
-                  column="`Name`" 
+        <property name="Notes" 
+                  column="`Notes`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />

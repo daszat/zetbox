@@ -26,13 +26,13 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void ToString(Zetbox.App.Base.AccessControl obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0} ({1}) {2}",
-                obj.Name ?? string.Empty,
-                obj.Rights != null ? obj.Rights.ToString() :  "None",
-                obj.Description ?? string.Empty);
-
+            e.Result = obj.Description;
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
 
+        [Invocation]
+        public static void get_Description(AccessControl obj, PropertyGetterEventArgs<string> e)
+        {
+        }
     }
 }

@@ -425,10 +425,11 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
-                if (OnDescription_Getter != null)
+                if (_Description_IsDirty && OnDescription_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDescription_Getter(this, __e);
+                    _Description_IsDirty = false;
                     __result = _Description = __e.Result;
                 }
                 return __result;
@@ -440,22 +441,11 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Description;
                     var __newValue = value;
-                    if (OnDescription_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnDescription_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
+			        _Description_IsDirty = false;
 
-                    if (OnDescription_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnDescription_PostSetter(this, __e);
-                    }
                 }
 				else 
 				{
@@ -464,12 +454,9 @@ namespace Zetbox.App.Base
             }
         }
         private string _Description;
+        private bool _Description_IsDirty = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, string> OnDescription_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, string> OnDescription_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, string> OnDescription_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Base.AccessControl> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -663,58 +650,58 @@ namespace Zetbox.App.Base
         /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public string Name
+        public string Notes
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _Name;
-                if (OnName_Getter != null)
+                var __result = _Notes;
+                if (OnNotes_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnName_Getter(this, __e);
-                    __result = _Name = __e.Result;
+                    OnNotes_Getter(this, __e);
+                    __result = _Notes = __e.Result;
                 }
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
+                if (_Notes != value)
                 {
-                    var __oldValue = _Name;
+                    var __oldValue = _Notes;
                     var __newValue = value;
-                    if (OnName_PreSetter != null && IsAttached)
+                    if (OnNotes_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PreSetter(this, __e);
+                        OnNotes_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("Name", __oldValue, __newValue);
-                    _Name = __newValue;
-                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    NotifyPropertyChanging("Notes", __oldValue, __newValue);
+                    _Notes = __newValue;
+                    NotifyPropertyChanged("Notes", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
-                    if (OnName_PostSetter != null && IsAttached)
+                    if (OnNotes_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PostSetter(this, __e);
+                        OnNotes_PostSetter(this, __e);
                     }
                 }
 				else 
 				{
-					SetInitializedProperty("Name");
+					SetInitializedProperty("Notes");
 				}
             }
         }
-        private string _Name;
+        private string _Notes;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, string> OnName_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, string> OnName_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, string> OnNotes_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, string> OnNotes_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, string> OnNotes_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Base.AccessControl> OnName_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Base.AccessControl> OnNotes_IsValid;
 
         /// <summary>
         /// 
@@ -920,9 +907,9 @@ namespace Zetbox.App.Base
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
-            me.Description = other.Description;
+            this.Description = otherImpl.Description;
             me.ExportGuid = other.ExportGuid;
-            me.Name = other.Name;
+            me.Notes = other.Notes;
             me.Rights = other.Rights;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -932,6 +919,7 @@ namespace Zetbox.App.Base
         public override void SetNew()
         {
             base.SetNew();
+            _Description_IsDirty = true;
         }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
@@ -992,15 +980,28 @@ namespace Zetbox.App.Base
                 case "ChangedOn":
                 case "CreatedBy":
                 case "CreatedOn":
-                case "Description":
                 case "ExportGuid":
                 case "Module":
-                case "Name":
+                case "Notes":
                 case "ObjectClass":
                 case "Rights":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
+        }
+
+        public override void Recalculate(string property)
+        {
+            switch (property)
+            {
+                case "Description":
+                    NotifyPropertyChanging(property, null, null);
+                    _Description_IsDirty = true;
+                    NotifyPropertyChanged(property, null, null);
+                    return;
+            }
+
+            base.Recalculate(property);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
@@ -1112,8 +1113,8 @@ namespace Zetbox.App.Base
                         "Description",
                         null,
                         obj => obj.Description,
-                        (obj, val) => obj.Description = val,
-						obj => OnDescription_IsValid), 
+                        null, // calculated property
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorMemoryImpl<AccessControl, Guid>(
                         lazyCtx,
@@ -1135,12 +1136,12 @@ namespace Zetbox.App.Base
                     // else
                     new PropertyDescriptorMemoryImpl<AccessControl, string>(
                         lazyCtx,
-                        new Guid("07846156-f853-4f95-ae6f-09dad6c4d71d"),
-                        "Name",
+                        new Guid("092be3b7-129f-4813-8f74-ac6c37bf67f3"),
+                        "Notes",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val,
-						obj => OnName_IsValid), 
+                        obj => obj.Notes,
+                        (obj, val) => obj.Notes = val,
+						obj => OnNotes_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<AccessControl, Zetbox.App.Base.ObjectClass>(
                         lazyCtx,
@@ -1224,11 +1225,11 @@ namespace Zetbox.App.Base
         {
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
-            SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Notes");
             SetNotInitializedProperty("ObjectClass");
             SetNotInitializedProperty("Rights");
+            _Description_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_AccessControl != null) OnNotifyCreated_AccessControl(this);
         }
@@ -1272,7 +1273,7 @@ namespace Zetbox.App.Base
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(Module != null ? Module.ID : (int?)null);
-            binStream.Write(this._Name);
+            binStream.Write(this._Notes);
             binStream.Write(ObjectClass != null ? ObjectClass.ID : (int?)null);
             binStream.Write((int?)this._Rights);
         }
@@ -1299,7 +1300,7 @@ namespace Zetbox.App.Base
                 this._ExportGuid = binStream.ReadGuid();
             }
             this._fk_Module = binStream.ReadNullableInt32();
-            this._Name = binStream.ReadString();
+            this._Notes = binStream.ReadString();
             this._fk_ObjectClass = binStream.ReadNullableInt32();
             this._Rights = (Zetbox.App.Base.AccessRights?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1321,7 +1322,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Notes, xml, "Notes", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Rights, xml, "Rights", "Zetbox.App.Base");
         }
@@ -1352,8 +1353,8 @@ namespace Zetbox.App.Base
             case "Zetbox.App.Base|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Zetbox.App.Base|Name":
-                this._Name = XmlStreamer.ReadString(xml);
+            case "Zetbox.App.Base|Notes":
+                this._Notes = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.Base|ObjectClass":
                 this._fk_guid_ObjectClass = XmlStreamer.ReadNullableGuid(xml);

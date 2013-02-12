@@ -20,14 +20,13 @@ namespace Zetbox.App.Base
         [Zetbox.API.DefinitionGuid("cb4f9bf4-97dc-4b0f-8a30-7e85b37eca69")]
         string Description {
             get;
-            set;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        [Zetbox.API.DefinitionGuid("07846156-f853-4f95-ae6f-09dad6c4d71d")]
-        string Name {
+        [Zetbox.API.DefinitionGuid("092be3b7-129f-4813-8f74-ac6c37bf67f3")]
+        string Notes {
             get;
             set;
         }

@@ -404,13 +404,7 @@ namespace Zetbox.App.Base
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.Description;
-                if (OnDescription_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnDescription_Getter(this, __e);
-                    __result = __e.Result;
-                }
+                var __result = FetchDescriptionOrDefault();
                 return __result;
             }
             set
@@ -420,22 +414,11 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = Proxy.Description;
                     var __newValue = value;
-                    if (OnDescription_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnDescription_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
+			        _Description_IsDirty = false;
 
-                    if (OnDescription_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnDescription_PostSetter(this, __e);
-                    }
                 }
 				else 
 				{
@@ -443,13 +426,25 @@ namespace Zetbox.App.Base
 				}
             }
         }
+		private bool _Description_IsDirty = false;
 
+
+        private string FetchDescriptionOrDefault()
+        {
+           var __result = Proxy.Description;
+            if (_Description_IsDirty && OnDescription_Getter != null)
+            {
+                var __e = new PropertyGetterEventArgs<string>(__result);
+                OnDescription_Getter(this, __e);
+                _Description_IsDirty = false;
+                __result = Proxy.Description = __e.Result;
+            }
+            return __result;
+        }
+
+        private bool _isDescriptionSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, string> OnDescription_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, string> OnDescription_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, string> OnDescription_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Base.AccessControl> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -629,17 +624,17 @@ namespace Zetbox.App.Base
         /// </summary>
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-        public string Name
+        public string Notes
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.Name;
-                if (OnName_Getter != null)
+                var __result = Proxy.Notes;
+                if (OnNotes_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnName_Getter(this, __e);
+                    OnNotes_Getter(this, __e);
                     __result = __e.Result;
                 }
                 return __result;
@@ -647,40 +642,40 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (Proxy.Name != value)
+                if (Proxy.Notes != value)
                 {
-                    var __oldValue = Proxy.Name;
+                    var __oldValue = Proxy.Notes;
                     var __newValue = value;
-                    if (OnName_PreSetter != null && IsAttached)
+                    if (OnNotes_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PreSetter(this, __e);
+                        OnNotes_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("Name", __oldValue, __newValue);
-                    Proxy.Name = __newValue;
-                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    NotifyPropertyChanging("Notes", __oldValue, __newValue);
+                    Proxy.Notes = __newValue;
+                    NotifyPropertyChanged("Notes", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
-                    if (OnName_PostSetter != null && IsAttached)
+                    if (OnNotes_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PostSetter(this, __e);
+                        OnNotes_PostSetter(this, __e);
                     }
                 }
 				else 
 				{
-					SetInitializedProperty("Name");
+					SetInitializedProperty("Notes");
 				}
             }
         }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, string> OnName_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, string> OnName_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, string> OnNotes_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, string> OnNotes_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, string> OnNotes_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Base.AccessControl> OnName_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Base.AccessControl> OnNotes_IsValid;
 
         /// <summary>
         /// 
@@ -872,9 +867,8 @@ namespace Zetbox.App.Base
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
-            me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
-            me.Name = other.Name;
+            me.Notes = other.Notes;
             me.Rights = other.Rights;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -884,6 +878,7 @@ namespace Zetbox.App.Base
         public override void SetNew()
         {
             base.SetNew();
+            _Description_IsDirty = true;
         }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
@@ -944,15 +939,28 @@ namespace Zetbox.App.Base
                 case "ChangedOn":
                 case "CreatedBy":
                 case "CreatedOn":
-                case "Description":
                 case "ExportGuid":
                 case "Module":
-                case "Name":
+                case "Notes":
                 case "ObjectClass":
                 case "Rights":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
+        }
+
+        public override void Recalculate(string property)
+        {
+            switch (property)
+            {
+                case "Description":
+                    NotifyPropertyChanging(property, null, null);
+                    _Description_IsDirty = true;
+                    NotifyPropertyChanged(property, null, null);
+                    return;
+            }
+
+            base.Recalculate(property);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
@@ -1047,8 +1055,8 @@ namespace Zetbox.App.Base
                         "Description",
                         null,
                         obj => obj.Description,
-                        (obj, val) => obj.Description = val,
-						obj => OnDescription_IsValid), 
+                        null, // calculated property
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorNHibernateImpl<AccessControl, Guid>(
                         lazyCtx,
@@ -1070,12 +1078,12 @@ namespace Zetbox.App.Base
                     // else
                     new PropertyDescriptorNHibernateImpl<AccessControl, string>(
                         lazyCtx,
-                        new Guid("07846156-f853-4f95-ae6f-09dad6c4d71d"),
-                        "Name",
+                        new Guid("092be3b7-129f-4813-8f74-ac6c37bf67f3"),
+                        "Notes",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val,
-						obj => OnName_IsValid), 
+                        obj => obj.Notes,
+                        (obj, val) => obj.Notes = val,
+						obj => OnNotes_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<AccessControl, Zetbox.App.Base.ObjectClass>(
                         lazyCtx,
@@ -1143,6 +1151,7 @@ namespace Zetbox.App.Base
         {
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
+            FetchDescriptionOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_AccessControl != null) OnNotifyPreSave_AccessControl(this);
@@ -1162,11 +1171,11 @@ namespace Zetbox.App.Base
         {
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
-            SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Notes");
             SetNotInitializedProperty("ObjectClass");
             SetNotInitializedProperty("Rights");
+            _Description_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_AccessControl != null) OnNotifyCreated_AccessControl(this);
         }
@@ -1234,7 +1243,7 @@ namespace Zetbox.App.Base
 
             public virtual Zetbox.App.Base.ModuleNHibernateImpl.ModuleProxy Module { get; set; }
 
-            public virtual string Name { get; set; }
+            public virtual string Notes { get; set; }
 
             public virtual Zetbox.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy ObjectClass { get; set; }
 
@@ -1268,7 +1277,7 @@ namespace Zetbox.App.Base
                 binStream.Write(this.Proxy.ExportGuid);
             }
             binStream.Write(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null);
-            binStream.Write(this.Proxy.Name);
+            binStream.Write(this.Proxy.Notes);
             binStream.Write(this.Proxy.ObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectClass) : (int?)null);
             binStream.Write((int?)Proxy.Rights);
         }
@@ -1295,7 +1304,7 @@ namespace Zetbox.App.Base
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
-            this.Proxy.Name = binStream.ReadString();
+            this.Proxy.Notes = binStream.ReadString();
             binStream.Read(out this._fk_ObjectClass);
             Proxy.Rights = (Zetbox.App.Base.AccessRights?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1317,7 +1326,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Notes, xml, "Notes", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.ObjectClass != null ? this.Proxy.ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)Proxy.Rights, xml, "Rights", "Zetbox.App.Base");
         }
@@ -1348,8 +1357,8 @@ namespace Zetbox.App.Base
             case "Zetbox.App.Base|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Zetbox.App.Base|Name":
-                this.Proxy.Name = XmlStreamer.ReadString(xml);
+            case "Zetbox.App.Base|Notes":
+                this.Proxy.Notes = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.Base|ObjectClass":
                 this._fk_guid_ObjectClass = XmlStreamer.ReadNullableGuid(xml);

@@ -497,9 +497,9 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("bebc90f3-d8cb-4224-96dc-b477db5bf321"); }
                                 }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Notes
                                 {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("07846156-f853-4f95-ae6f-09dad6c4d71d"); }
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("092be3b7-129f-4813-8f74-ac6c37bf67f3"); }
                                 }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ObjectClass
                                 {

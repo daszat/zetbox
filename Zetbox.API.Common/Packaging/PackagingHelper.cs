@@ -133,7 +133,7 @@ namespace Zetbox.App.Packaging
                 AddMetaObjects(result, () => ctx.GetQuery<Group>().Where(i => i.Module.ID == moduleID)
                     .ToList().OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
                 AddMetaObjects(result, () => ctx.GetQuery<AccessControl>().Where(i => i.Module.ID == moduleID)
-                    .ToList().OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
+                    .ToList().OrderBy(i => i.ExportGuid));
                 AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<RoleMembership_resolves_Relation_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
                     .ToList().AsQueryable().ToList().OrderBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 

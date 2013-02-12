@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-06T14:27:59Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-12T15:35:11Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -3596,12 +3596,54 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <GUI:Title>Statistik</GUI:Title>
     <GUI:ViewModelDescriptor>3643897e-b586-493c-9e23-3f37129cca03</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
+  <ZetboxBase:RoleMembership ExportGuid="1126a629-7fa7-4e5a-9e59-53a703f8e908">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-01-31T02:03:53Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Creator may delete Projetcts</ZetboxBase:Description>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>15</ZetboxBase:Rights>
+  </ZetboxBase:RoleMembership>
+  <ZetboxBase:RoleMembership ExportGuid="223373dd-35b2-47a9-be57-0a5630fb7d35">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-02-02T21:48:14Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>15</ZetboxBase:Rights>
+  </ZetboxBase:RoleMembership>
+  <ZetboxBase:RoleMembership ExportGuid="26259895-b4d4-4735-93ca-895fbe64cba3">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-02-02T21:54:25Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>1</ZetboxBase:Rights>
+  </ZetboxBase:RoleMembership>
+  <ZetboxBase:RoleMembership ExportGuid="2710dcb0-8e0f-43db-95c5-02e18c01f40f">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-02-02T21:51:49Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>15</ZetboxBase:Rights>
+  </ZetboxBase:RoleMembership>
+  <ZetboxBase:RoleMembership ExportGuid="374744d2-680a-4d51-b65e-2301dad65849">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-02-02T21:50:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>3</ZetboxBase:Rights>
+  </ZetboxBase:RoleMembership>
+  <ZetboxBase:RoleMembership ExportGuid="3f419c0f-df37-44d4-a035-5b19020ec261">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-01-30T05:49:06Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>3</ZetboxBase:Rights>
+  </ZetboxBase:RoleMembership>
   <ZetboxBase:GroupMembership ExportGuid="b4abcf53-5464-4942-a36b-bbc124315df2">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:12.610257Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-02-03T05:12:00Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Everyone is allowed to create</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>Create</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
     <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
@@ -3611,7 +3653,6 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:CreatedOn>2010-02-03T05:13:20Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Everyone is allowed to create</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>Create</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
     <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
@@ -3621,60 +3662,10 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:CreatedOn>2010-02-03T05:09:26Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Every one is allowed to create</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>Create</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
     <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
   </ZetboxBase:GroupMembership>
-  <ZetboxBase:RoleMembership ExportGuid="1126a629-7fa7-4e5a-9e59-53a703f8e908">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-01-31T02:03:53Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Creator may delete Projetcts</ZetboxBase:Description>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>Creator</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>15</ZetboxBase:Rights>
-  </ZetboxBase:RoleMembership>
-  <ZetboxBase:RoleMembership ExportGuid="223373dd-35b2-47a9-be57-0a5630fb7d35">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-02-02T21:48:14Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>Creator</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>15</ZetboxBase:Rights>
-  </ZetboxBase:RoleMembership>
-  <ZetboxBase:RoleMembership ExportGuid="2710dcb0-8e0f-43db-95c5-02e18c01f40f">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-02-02T21:51:49Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>Creator</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>15</ZetboxBase:Rights>
-  </ZetboxBase:RoleMembership>
-  <ZetboxBase:RoleMembership ExportGuid="26259895-b4d4-4735-93ca-895fbe64cba3">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-02-02T21:54:25Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>Project Member</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>1</ZetboxBase:Rights>
-  </ZetboxBase:RoleMembership>
-  <ZetboxBase:RoleMembership ExportGuid="374744d2-680a-4d51-b65e-2301dad65849">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-02-02T21:50:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>Project Member</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>3</ZetboxBase:Rights>
-  </ZetboxBase:RoleMembership>
-  <ZetboxBase:RoleMembership ExportGuid="3f419c0f-df37-44d4-a035-5b19020ec261">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-01-30T05:49:06Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>TeamMember</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>3</ZetboxBase:Rights>
-  </ZetboxBase:RoleMembership>
   <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="cb6f2ed0-bc2d-417f-a795-b5748d2131e4">
     <ZetboxBase:A>1126a629-7fa7-4e5a-9e59-53a703f8e908</ZetboxBase:A>
     <ZetboxBase:A_pos>1</ZetboxBase:A_pos>
@@ -9511,23 +9502,21 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Title>Tree Root</GUI:Title>
     <GUI:ViewModelDescriptor>dc83a83d-6884-493c-8ea4-9473de8222db</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
-  <ZetboxBase:GroupMembership ExportGuid="fc40d608-3ae9-4885-84c3-0726de05cdea">
-    <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>Everyone may create</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>8</ZetboxBase:Rights>
-    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
-  </ZetboxBase:GroupMembership>
   <ZetboxBase:RoleMembership ExportGuid="5321160a-9207-4b84-8644-5d6820221ca7">
     <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>Identity has full rights</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>15</ZetboxBase:Rights>
   </ZetboxBase:RoleMembership>
+  <ZetboxBase:GroupMembership ExportGuid="fc40d608-3ae9-4885-84c3-0726de05cdea">
+    <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>8</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
   <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="7b456c1e-f781-4b82-ab8e-fbb2b3cfb6b8">
     <ZetboxBase:A>5321160a-9207-4b84-8644-5d6820221ca7</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
