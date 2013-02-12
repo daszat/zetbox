@@ -45,7 +45,8 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
             // InitializeComponent
             this.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-            this.TextWrapping = System.Windows.TextWrapping.Wrap;
+            // Don't wrap - use a property in viewmodel instead
+            // this.TextWrapping = System.Windows.TextWrapping.Wrap;
 
             BindingOperations.SetBinding(this, TextBlock.TextProperty, new Binding("FormattedValueAsync") { Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(this, TextBlock.ToolTipProperty, new Binding("ToolTip") { Mode = BindingMode.OneWay });
