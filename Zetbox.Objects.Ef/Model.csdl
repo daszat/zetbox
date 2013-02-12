@@ -1075,7 +1075,7 @@
                         FromRole="AbstractModuleMember"
                         ToRole="Module" />
   </EntityType>
-  <EntityType Name="AccessControlEfImpl">
+  <EntityType Name="AccessControlEfImpl" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
     </Key>

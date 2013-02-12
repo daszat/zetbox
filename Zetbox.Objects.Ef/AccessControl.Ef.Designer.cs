@@ -24,7 +24,7 @@ namespace Zetbox.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="AccessControlEfImpl")]
     [System.Diagnostics.DebuggerDisplay("AccessControl")]
-    public class AccessControlEfImpl : BaseServerDataObject_EntityFramework, AccessControl, Zetbox.API.IExportableInternal
+    public abstract class AccessControlEfImpl : BaseServerDataObject_EntityFramework, AccessControl, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("f1c37bfb-e45f-4964-b6ba-672c1ec81b60");
         public override Guid ObjectClassID { get { return _objectClassID; } }

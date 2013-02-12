@@ -2887,7 +2887,7 @@
            proxy="Zetbox.App.Base.AccessControlNHibernateImpl+AccessControlProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`AccessControls`"
-           abstract="false"
+           abstract="true"
            dynamic-update="true"
            optimistic-lock="dirty"
            batch-size="100">

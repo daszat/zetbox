@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("AccessControl")]
-    public class AccessControlNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, AccessControl, Zetbox.API.IExportableInternal
+    public abstract class AccessControlNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, AccessControl, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("f1c37bfb-e45f-4964-b6ba-672c1ec81b60");
         public override Guid ObjectClassID { get { return _objectClassID; } }
