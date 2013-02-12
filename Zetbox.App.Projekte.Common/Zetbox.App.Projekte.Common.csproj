@@ -101,6 +101,8 @@
     <Compile Include="ZetboxBase\BoolDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\CompoundObjectParameterActions.cs" />
     <Compile Include="ZetboxBase\AnyReferenceActions.cs" />
+    <Compile Include="ZetboxBase\GroupMembershipActions.cs" />
+    <Compile Include="ZetboxBase\RoleMembershipActions.cs" />
     <Compile Include="ZetboxBase\DecimalDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\RecurrenceRuleActions.cs" />
     <Compile Include="ZetboxBase\SequenceActions.cs" />

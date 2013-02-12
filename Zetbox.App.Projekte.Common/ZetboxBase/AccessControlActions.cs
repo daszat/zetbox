@@ -18,6 +18,7 @@ namespace Zetbox.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Zetbox.App.Extensions;
     using Zetbox.API;
 
     [Implementor]
@@ -31,8 +32,39 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
+        public static void postSet_Rights(AccessControl obj, PropertyPostSetterEventArgs<AccessRights?> e)
+        {
+            obj.Recalculate("Description");
+        }
+
+        [Invocation]
         public static void get_Description(AccessControl obj, PropertyGetterEventArgs<string> e)
         {
+            if (obj is GroupMembership)
+            {
+                var grp = (GroupMembership)obj;
+                e.Result = string.Format("Group {0} has {1} rights", grp.Group != null ? grp.Group.Name : "<null>", obj.Rights);
+            }
+            else if (obj is RoleMembership)
+            {
+                var role = (RoleMembership)obj;
+                var navigators = new List<string>();
+                ObjectClass nextType = obj.ObjectClass;
+                foreach (var rel in role.Relations)
+                {
+                    if (rel.A.Type == nextType)
+                    {
+                        navigators.Add(rel.A.Navigator != null ? rel.A.Navigator.Name : "<?>");
+                        nextType = rel.B.Type;
+                    }
+                    else if (rel.B.Type == nextType)
+                    {
+                        navigators.Add(rel.B.Navigator != null ? rel.B.Navigator.Name : "<?>");
+                        nextType = rel.A.Type;
+                    }
+                }
+                e.Result = string.Format("{0} has {1} rights", string.Join(".", navigators), obj.Rights);
+            }
         }
     }
 }
