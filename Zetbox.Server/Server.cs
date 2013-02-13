@@ -372,6 +372,18 @@ namespace Zetbox.Server
             }
         }
 
+        public void RefreshRights()
+        {
+            using (var subContainer = container.BeginLifetimeScope())
+            {
+                var config = subContainer.Resolve<ZetboxConfig>();
+                var connectionString = config.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
+                var schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
+                schemaProvider.Open(connectionString.ConnectionString);
+                schemaProvider.ExecRefreshAllRightsProcedure();
+            }
+        }
+
         private List<IDataObject> GetParcelHack<T>(IZetboxServerContext ctx, int lastID, int count)
             where T : class, IDataObject
         {

@@ -231,6 +231,12 @@ namespace Zetbox.API.Server
                      }
                  });
 
+            builder
+                .RegisterCmdLineAction("refresh-rights", "Recalculate all right tables in the database",
+                scope =>
+                {
+                    scope.Resolve<IServer>().RefreshRights();
+                });
         }
 
         private static List<App.Base.Property> ParseProperties(string[] args, IZetboxServerContext ctx)
