@@ -114,6 +114,7 @@
                            Visibility="{Binding IsContextModified, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                            VerticalAlignment="Bottom"
                            Margin="0"
+                           MaxHeight="50"
                            TextWrapping="Wrap"
                            styles:Margin.Left="{StaticResource ItemMargin}"
                            styles:Margin.Right="{StaticResource ItemMargin}" />
