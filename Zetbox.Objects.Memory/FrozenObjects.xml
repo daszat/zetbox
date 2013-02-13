@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-12T17:03:44Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-13T10:25:48Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -12475,6 +12475,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.GUI.DialogCreator</ZetboxBase:FullName>
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="6a904f98-5f00-407c-8e7b-ac2402ab576d">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.GUI.DialogCreator+Factory</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="f5e9c38d-97af-4a75-9b42-b2601183c639">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2012-07-17T18:36:06.55328Z</ZetboxBase:ChangedOn>
@@ -12696,8 +12703,9 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="639e05e7-df7b-4bb4-a17c-06d805e357f6">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.134287Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-10-16T12:07:54Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Models.ConstantValueFilterModel</ZetboxBase:FullName>
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Models.ConstantValueFilterModel</ZetboxBase:ToStringCache>
@@ -13262,16 +13270,18 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="fb4ecca3-b9e5-4ea4-a778-82f5419bf24f">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.135287Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.AsyncListFactory</ZetboxBase:FullName>
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.AsyncListFactory</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="0bd6ac23-e735-4aa5-a8b9-cbca2462cd2f">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.135287Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-05-18T10:28:40Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.AsyncThreadManager</ZetboxBase:FullName>
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.AsyncThreadManager</ZetboxBase:ToStringCache>
@@ -13454,6 +13464,34 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2011-08-04T09:41:24Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ContainerCommand+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="1e5fa712-1769-4eff-af2d-d343a618be5c">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.CustomPropertyGroupViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>8314a3e7-5e20-47bd-ba61-c3e88eae2ffc</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="cc725861-b728-4fd0-afce-fdfd72325e4a">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.CustomPropertyGroupViewModel+Factory</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="ec708a22-2b44-42d9-a506-828d2f1b4ee7">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.DataObjectSelectionTaskCreatedEventHandler</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="654d07a4-75d3-4f82-aae8-180548875808">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.DataObjectSelectionTaskEventArgs</ZetboxBase:FullName>
+    <ZetboxBase:Parent>7dc6c87a-fed5-492b-85be-9c9e9f3a1c7e</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="312383a3-5c45-43cf-a032-5271792a4eec">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -14090,8 +14128,9 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="002b05fb-59bc-4090-86fd-b3cf0767a771">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.136287Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-05-18T10:28:40Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.IAsyncThreadManager</ZetboxBase:FullName>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.IAsyncThreadManager</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
@@ -14115,6 +14154,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:ChangedOn>2011-10-19T04:20:31.157956Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-10-19T04:20:31.157956Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.IContextViewModel</ZetboxBase:FullName>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="e6273f0d-3b2c-4270-95e1-35235c064a70">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.IgnoreViewModelDescriptorAttribute</ZetboxBase:FullName>
+    <ZetboxBase:Parent>8a98a781-9ada-4bea-8ea9-18a3046369a8</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="5aeb9e9d-eea7-458b-b641-da35bc23e242">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -14162,15 +14208,17 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="64a9e92f-3461-43ac-b31d-780fd9c63977">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.136287Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.IThreadManager</ZetboxBase:FullName>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.IThreadManager</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="2b0cfbe0-b665-488a-9492-b832e2c031d7">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.136287Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-05-18T10:28:40Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.IUiThreadManager</ZetboxBase:FullName>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.IUiThreadManager</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
@@ -14399,6 +14447,34 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ModuleEditor.DataTypeGraphModel+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ModuleEditor.DataTypeGraphModel+Factory</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="63c42528-ce71-42b1-a74d-4faa1249d5c5">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ModuleEditor.DescribedMethodViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="cd695033-d430-43a8-bc90-b6dc7aea686b">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ModuleEditor.DescribedMethodViewModel+Factory</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="4ed1e6a3-19aa-4a25-8213-bfe5c33d6760">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ModuleEditor.DescribedPropertyViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="b854a53a-b927-40b8-a8a7-5c30829d6dd5">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ModuleEditor.DescribedPropertyViewModel+Factory</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="19133b0e-3da2-4151-b542-88e000449b85">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -15137,8 +15213,9 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="91fdfdb4-7e1d-4949-952e-6da8c2b0ad48">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.140288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.SynchronousThreadManager</ZetboxBase:FullName>
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.SynchronousThreadManager</ZetboxBase:ToStringCache>
@@ -15156,6 +15233,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2012-08-02T17:56:39.365215Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.TestModule.InstanceListTestViewModel+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="19dbed4a-47be-4589-8aa7-3cb3c78f6e52">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.TestModule.InstanceListTestViewModel+ListKinds</ZetboxBase:FullName>
+    <ZetboxBase:Parent>80e14e91-1a63-4908-952f-9a3c3773c765</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="935f01dd-da91-426f-8afa-b469aec0be09">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -15222,8 +15306,9 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="ff6078cb-ed83-4730-b6fe-afc338a83fdf">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.141288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-05-18T10:28:40Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.UiThreadManager</ZetboxBase:FullName>
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.UiThreadManager</ZetboxBase:ToStringCache>
@@ -15851,6 +15936,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.WPF.UiThreadManager</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="d2b90ce2-5331-48f9-bfec-141ba624f798">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.ActivateDataObjectCommand</ZetboxBase:FullName>
+    <ZetboxBase:Parent>34a220b5-e8b0-481e-beed-8948acf5173e</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="fdca88bf-294a-486b-8e98-b4209922230b">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2012-07-18T02:04:23.535899Z</ZetboxBase:ChangedOn>
@@ -15928,10 +16020,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="19215859-3c7e-4ebc-85a4-df4534b07b99">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.137288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-05-19T09:31:58Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.DeleteDataObjectCommand</ZetboxBase:FullName>
-    <ZetboxBase:Parent>c0aabc78-a31a-473d-9618-ce2e523fa50e</ZetboxBase:Parent>
+    <ZetboxBase:Parent>34a220b5-e8b0-481e-beed-8948acf5173e</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.DeleteDataObjectCommand</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="99a08265-246e-460c-b704-6ecd92760828">
@@ -16027,6 +16119,32 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.FilterViewModel</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="fc00f185-b892-4d42-8f23-50926edd0a97">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.GroupMembershipViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="1a6d9f10-6536-441f-93fc-eff767c3ff5d">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.GroupMembershipViewModel+Factory</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="2c77a3d6-f981-498d-96bd-0f1b45722c53">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.ICommandParameter</ZetboxBase:FullName>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="3d0c0e18-b2b0-4862-b537-47bb350b2f22">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.IDeleteCommandParameter</ZetboxBase:FullName>
+  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="78d69c11-dbd4-448b-a525-b3b8436e2cbf">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.137288Z</ZetboxBase:ChangedOn>
@@ -16050,6 +16168,12 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.IListTypeFilterViewModel</ZetboxBase:FullName>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.IListTypeFilterViewModel</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="554e7423-b544-40c0-a611-8670ea274d51">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.INewCommandParameter</ZetboxBase:FullName>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="c036c72e-1fbf-42c1-adc7-c3e0d724f1f6">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -16086,16 +16210,18 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="b54a87df-7093-45f4-b174-1f7e3cbe0491">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.137288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-06-09T08:57:54Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel+ItemsDefaultActionHandler</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel+ItemsDefaultActionHandler</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="6df2baea-4245-43d7-b5d5-d8f7067c73a9">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.137288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-05-28T04:26:56Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel+ItemsOpenedHandler</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
@@ -16109,11 +16235,17 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="0b78de96-9348-4d6b-a22a-9814a3467a90">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.137288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-01-12T18:22:11Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel+ProxyList</ZetboxBase:FullName>
-    <ZetboxBase:Parent>c657f942-d5a0-4424-8387-233fdd09876e</ZetboxBase:Parent>
+    <ZetboxBase:Parent>04cccf4d-6b48-4367-a007-b07b1f464c5c</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel+ProxyList</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="bc65a0e4-7fba-43fb-b661-512d3f457ae4">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.IOpenCommandParameter</ZetboxBase:FullName>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="1354b12b-8924-41b6-b2b3-6685c8b10fa2">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -16137,6 +16269,26 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2010-05-19T09:31:58Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.IRefreshCommandListener</ZetboxBase:FullName>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.IRefreshCommandListener</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="76bc5883-70e0-42b9-8370-1e35360fda80">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.IRequestedEditorKinds</ZetboxBase:FullName>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="c972288a-9714-4d15-8571-57bd64dc1a0a">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.ItemsOpenedEventArgs</ZetboxBase:FullName>
+    <ZetboxBase:Parent>7dc6c87a-fed5-492b-85be-9c9e9f3a1c7e</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="2fafd13c-d9da-4f1f-8054-a2a07c1e6665">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.ItemsOpeningEventArgs</ZetboxBase:FullName>
+    <ZetboxBase:Parent>7dc6c87a-fed5-492b-85be-9c9e9f3a1c7e</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="de88838a-3f33-4d12-a8d3-36783b75c2cb">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -16219,10 +16371,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="67673efa-4a2f-4bf5-b5cf-88daf47604b9">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.138288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-05-19T09:31:58Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.NewDataObjectCommand</ZetboxBase:FullName>
-    <ZetboxBase:Parent>34a220b5-e8b0-481e-beed-8948acf5173e</ZetboxBase:Parent>
+    <ZetboxBase:Parent>d2b90ce2-5331-48f9-bfec-141ba624f798</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.NewDataObjectCommand</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="98b1bdd0-aab8-46fc-ab76-b3c14ac740eb">
@@ -16232,6 +16384,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.NewDataObjectCommand+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.NewDataObjectCommand+Factory</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="1d143e33-f3ca-49cb-a709-2a165c7e3484">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.NewDataObjectCommand+LocalModelCreatedHandler</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="e355e585-e94f-40a8-bd3a-02d73b58b41f">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -16261,10 +16420,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="00fee2f1-3fbc-4c07-aaa4-d9f7b868d11d">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.138288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-05-19T09:31:58Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.OpenDataObjectCommand</ZetboxBase:FullName>
-    <ZetboxBase:Parent>c0aabc78-a31a-473d-9618-ce2e523fa50e</ZetboxBase:Parent>
+    <ZetboxBase:Parent>d2b90ce2-5331-48f9-bfec-141ba624f798</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.OpenDataObjectCommand</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="8873ed7b-8d16-4cfa-9f6c-15c07e323212">
@@ -16277,8 +16436,9 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="4a8dfe2d-3d97-41a3-9035-6bd265d83235">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.138288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-09-28T10:50:54Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.OpenDataObjectCommand+ModelCreatedEventHandler</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.OpenDataObjectCommand+ModelCreatedEventHandler</ZetboxBase:ToStringCache>
@@ -16385,6 +16545,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.RefreshCommand</ZetboxBase:FullName>
     <ZetboxBase:Parent>34a220b5-e8b0-481e-beed-8948acf5173e</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ZetboxBase.RefreshCommand</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="ec6f1a26-08ee-4c32-bdf4-8b829f0a2e14">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ZetboxBase.RefreshCommand+CanRefreshEventArgs</ZetboxBase:FullName>
+    <ZetboxBase:Parent>7dc6c87a-fed5-492b-85be-9c9e9f3a1c7e</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="d04c629e-dc41-4243-aa03-e4e77dd4411e">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -16656,6 +16823,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Properties.Resources</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="b5e4902d-e636-419f-be35-dc3f88ea3528">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Reporting.ReportingErrorDialog</ZetboxBase:FullName>
+    <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="413cabb4-e306-4e6b-bd92-9216f092380e">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.142288Z</ZetboxBase:ChangedOn>
@@ -16663,6 +16837,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.ServerDomainManager</ZetboxBase:FullName>
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.ServerDomainManager</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="9ebec75c-4634-4f92-88eb-9fdc00473708">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-13T09:24:52.801902Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.ZetboxContextExceptionHandler</ZetboxBase:FullName>
+    <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="fb4692e3-443a-4854-8d24-d0a2cb09abd8">
     <ZetboxBase:Assembly>62afd077-5c95-46ce-8daa-ffda715ad3f5</ZetboxBase:Assembly>
@@ -35163,7 +35344,7 @@ public static void ObjectIsValid(Group obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Groups</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="acf18a64-5fc0-4610-b083-9893eea0776c">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-13T09:25:48.099065Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-01-30T01:58:28Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>GroupMembership</ZetboxBase:Name>
@@ -35202,7 +35383,7 @@ public static void ObjectIsValid(GroupMembership obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>27fe63e2-755c-4f8e-9831-d8d235da487d</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -60621,6 +60802,11 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:Description>ViewModel for a list of filter</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>57d63471-577c-4e27-8371-273ac18d9205</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="27fe63e2-755c-4f8e-9831-d8d235da487d">
+    <GUI:Description>ViewModel for a GroupMembership object</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>fc00f185-b892-4d42-8f23-50926edd0a97</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="0d3a2e45-9a49-4e29-afea-619baa8d3871">
     <GUI:DefaultEditorKind>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:DefaultEditorKind>
