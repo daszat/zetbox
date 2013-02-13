@@ -138,16 +138,16 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lst.Add(lstMdl);
 
                     // Assembly
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
+                    var assemblyLstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Assembly).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Assembly>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
-                    SetupViewModel(lstMdl);
-                    lstMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(DataContext,
+                    SetupViewModel(assemblyLstMdl);
+                    assemblyLstMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext,
                         this,
                         "Refresh TypeRefs", "Refreshes the TypeRefs, ViewDescriptors and ViewModelDescriptors",
-                        (i) =>
+                        () =>
                         {
-                            foreach (var mdl in i)
+                            foreach (var mdl in assemblyLstMdl.SelectedItems)
                             {
                                 var ctx = ctxFactory(ClientIsolationLevel.PrefereClientData);
 
@@ -162,8 +162,10 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                                     ctx.SubmitChanges();
                                 }
                             }
-                        }));
-                    lst.Add(lstMdl);
+                        },
+                        () => assemblyLstMdl.SelectedItems.Count > 0,
+                        () => "Nothing selected"));
+                    lst.Add(assemblyLstMdl);
 
                     // TypeRefs
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
