@@ -336,6 +336,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         ReferencedClass);
 
+                    _CreateNewCommand.ObjectCreated += OnObjectCreated;
                     _CreateNewCommand.LocalModelCreated += vm => Add(vm);
                 }
                 return _CreateNewCommand;
@@ -346,6 +347,18 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             if (CreateNewCommand.CanExecute(null))
                 CreateNewCommand.Execute(null);
+        }
+
+        public delegate void ObjectCreatedHandler(IDataObject obj);
+        public event ObjectCreatedHandler ObjectCreated;
+
+        private void OnObjectCreated(IDataObject obj)
+        {
+            ObjectCreatedHandler temp = ObjectCreated;
+            if (temp != null)
+            {
+                temp(obj);
+            }
         }
 
         private OpenDataObjectCommand _OpenCommand;
