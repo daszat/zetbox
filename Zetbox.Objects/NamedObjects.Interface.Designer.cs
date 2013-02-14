@@ -3805,6 +3805,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("89470dda-4ac6-4bb4-9221-d16f80f8d95a"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> TestEnumWithDefault
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("bfb214b1-b933-4810-b33b-98a1276b84b3"); }
+                                }
                             }
                             public static class TestStudent_Properties
                             {

@@ -2720,6 +2720,10 @@
         <property name="TestEnumProp" 
                   column="`TestEnumProp`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="TestEnumWithDefault" 
+                  column="`TestEnumWithDefault`" 
+                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
 

@@ -2524,6 +2524,7 @@
     <Property Name="MyIntProperty" Type="int" Nullable="true" />
     <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="TestEnumProp" Type="int" Nullable="false" />
+    <Property Name="TestEnumWithDefault" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="TestStudent">

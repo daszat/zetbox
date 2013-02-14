@@ -2620,6 +2620,7 @@
                         ToRole="ObjectProp" />
     <Property Name="StringProp" Type="String" Nullable="false" MaxLength="200"  />
     <Property Name="TestEnumPropImpl" Type="Int32" Nullable="false"  />
+    <Property Name="TestEnumWithDefaultImpl" Type="Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="TestStudentEfImpl">
     <Key>

@@ -428,6 +428,86 @@ namespace Zetbox.App.Test
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestObjClass> OnTestEnumProp_IsValid;
 
         /// <summary>
+        /// Tests whether enums with defaults work
+        /// </summary>
+        // enumeration property
+   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+        // implement the user-visible interface
+        public Zetbox.App.Test.TestEnum TestEnumWithDefault
+        {
+            get
+            {
+				var __value = _TestEnumWithDefault;
+				if(OnTestEnumWithDefault_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__value);
+					OnTestEnumWithDefault_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_TestEnumWithDefault != value)
+                {
+					var __oldValue = _TestEnumWithDefault;
+					var __newValue = value;
+                    if(OnTestEnumWithDefault_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+						OnTestEnumWithDefault_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+					
+                    NotifyPropertyChanging("TestEnumWithDefault", __oldValue, __newValue);
+                    _TestEnumWithDefault = value;
+                    NotifyPropertyChanged("TestEnumWithDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+					
+                    if(OnTestEnumWithDefault_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+						OnTestEnumWithDefault_PostSetter(this, e);
+                    }
+					
+                }
+            }
+        }
+
+        private Zetbox.App.Test.TestEnum _TestEnumWithDefault_store;
+        private Zetbox.App.Test.TestEnum _TestEnumWithDefault {
+            get { return _TestEnumWithDefault_store; }
+            set {
+                ReportEfPropertyChanging("TestEnumWithDefaultImpl");
+                _TestEnumWithDefault_store = value;
+                ReportEfPropertyChanged("TestEnumWithDefaultImpl");
+            }
+        }
+					
+        
+        /// <summary>EF sees only this property, for TestEnumWithDefault</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int TestEnumWithDefaultImpl
+        {
+            get
+            {
+                return (int)this.TestEnumWithDefault;
+            }
+            set
+            {
+                this.TestEnumWithDefault = (Zetbox.App.Test.TestEnum)value;
+            }
+        }
+        
+		public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumWithDefault_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumWithDefault_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumWithDefault_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.TestObjClass> OnTestEnumWithDefault_IsValid;
+
+        /// <summary>
         /// testmethod
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -505,6 +585,7 @@ namespace Zetbox.App.Test
             me.MyIntProperty = other.MyIntProperty;
             me.StringProp = other.StringProp;
             me.TestEnumProp = other.TestEnumProp;
+            me.TestEnumWithDefault = other.TestEnumWithDefault;
             this._fk_ObjectProp = otherImpl._fk_ObjectProp;
         }
         public override void SetNew()
@@ -525,6 +606,7 @@ namespace Zetbox.App.Test
                 case "ObjectProp":
                 case "StringProp":
                 case "TestEnumProp":
+                case "TestEnumWithDefault":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -619,6 +701,15 @@ namespace Zetbox.App.Test
                         obj => obj.TestEnumProp,
                         (obj, val) => obj.TestEnumProp = val,
 						obj => OnTestEnumProp_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<TestObjClass, Zetbox.App.Test.TestEnum>(
+                        lazyCtx,
+                        new Guid("bfb214b1-b933-4810-b33b-98a1276b84b3"),
+                        "TestEnumWithDefault",
+                        null,
+                        obj => obj.TestEnumWithDefault,
+                        (obj, val) => obj.TestEnumWithDefault = val,
+						obj => OnTestEnumWithDefault_IsValid), 
                     // position columns
                 };
             }
@@ -752,6 +843,7 @@ namespace Zetbox.App.Test
             }
             binStream.Write(this._StringProp);
             binStream.Write((int?)this._TestEnumProp);
+            binStream.Write((int?)this._TestEnumWithDefault);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -765,6 +857,7 @@ namespace Zetbox.App.Test
             binStream.Read(out this._fk_ObjectProp);
             this._StringProp = binStream.ReadString();
             this._TestEnumProp = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._TestEnumWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

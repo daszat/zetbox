@@ -19,5 +19,10 @@ namespace Zetbox.App.Test
 		/// </summary>
 		Second = 1,
 
+		/// <summary>
+		/// 
+		/// </summary>
+		Third = 3,
+
 	}
 }

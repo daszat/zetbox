@@ -1573,6 +1573,7 @@
           <ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
           <ScalarProperty Name="StringProp" ColumnName="StringProp" />
           <ScalarProperty Name="TestEnumPropImpl" ColumnName="TestEnumProp" />
+          <ScalarProperty Name="TestEnumWithDefaultImpl" ColumnName="TestEnumWithDefault" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

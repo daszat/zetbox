@@ -30,5 +30,14 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
+        /// <summary>
+        /// Tests whether enums with defaults work
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("bfb214b1-b933-4810-b33b-98a1276b84b3")]
+        Zetbox.App.Test.TestEnum TestEnumWithDefault {
+            get;
+            set;
+        }
     }
 }

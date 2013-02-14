@@ -410,5 +410,23 @@ namespace Zetbox.App.Test
         {
             get { throw new NotImplementedException(); }
         }
+
+
+        public TestEnum TestEnumWithDefault
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
