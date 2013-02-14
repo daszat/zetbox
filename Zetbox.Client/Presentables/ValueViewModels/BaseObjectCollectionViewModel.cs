@@ -304,6 +304,50 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region Commands
 
+        #region Opening items
+
+        /// <summary>
+        /// Is triggered before the selected items are opened. This can be used to redirect the open command to a different set of items.
+        /// </summary>
+        public event EventHandler<ItemsOpeningEventArgs> ItemsOpening
+        {
+            add
+            {
+                EnsureNewCommand();
+                _CreateNewCommand.ItemsOpening += value;
+
+                EnsureOpenCommand();
+                _OpenCommand.ItemsOpening += value;
+            }
+            remove
+            {
+                _CreateNewCommand.ItemsOpening -= value;
+                _OpenCommand.ItemsOpening -= value;
+            }
+        }
+
+        /// <summary>
+        /// Is triggered when items are opened in a new workspace. This can be used to give the ViewModels a context dependent finishing touch, like opening a non-default view
+        /// </summary>
+        public event EventHandler<ItemsOpenedEventArgs> ItemsOpened
+        {
+            add
+            {
+                EnsureNewCommand();
+                _CreateNewCommand.ItemsOpened += value;
+
+                EnsureOpenCommand();
+                _OpenCommand.ItemsOpened += value;
+            }
+            remove
+            {
+                _CreateNewCommand.ItemsOpened -= value;
+                _OpenCommand.ItemsOpened -= value;
+            }
+        }
+
+        #endregion
+
         protected override ObservableCollection<ICommandViewModel> CreateCommands()
         {
             var cmds = base.CreateCommands();
@@ -329,17 +373,22 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                if (_CreateNewCommand == null)
-                {
-                    _CreateNewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        ReferencedClass);
-
-                    _CreateNewCommand.ObjectCreated += OnObjectCreated;
-                    _CreateNewCommand.LocalModelCreated += vm => Add(vm);
-                }
+                EnsureNewCommand();
                 return _CreateNewCommand;
+            }
+        }
+
+        private void EnsureNewCommand()
+        {
+            if (_CreateNewCommand == null)
+            {
+                _CreateNewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
+                    DataContext,
+                    this,
+                    ReferencedClass);
+
+                _CreateNewCommand.ObjectCreated += OnObjectCreated;
+                _CreateNewCommand.LocalModelCreated += vm => Add(vm);
             }
         }
 
