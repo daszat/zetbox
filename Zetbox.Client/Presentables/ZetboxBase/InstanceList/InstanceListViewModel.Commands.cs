@@ -183,12 +183,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             this.SelectedItem = vm;
         }
 
-        //public void ActivateItem(DataObjectViewModel item)
-        //{
-        //    ActivateDataObjectCommand.ActivateItem(ViewModelFactory, DataContext, FrozenContext, this, item, IsInlineEditable);
-        //    OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), new[] { item });
-        //}
-
         public delegate void ObjectCreatedHandler(IDataObject obj);
         public event ObjectCreatedHandler ObjectCreated;
 
