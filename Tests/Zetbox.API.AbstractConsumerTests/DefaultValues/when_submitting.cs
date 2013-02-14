@@ -19,14 +19,60 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Zetbox.App.Base;
     using NUnit.Framework;
+    using Zetbox.App.Base;
+    using Zetbox.App.Test;
 
-    public abstract class when_submitting_without_read
+    public abstract class when_submitting_after_write
         : AbstractTestFixture
     {
         [Test]
-        public void should_persist_a_value()
+        public void should_persist_a_guid_value()
+        {
+            var ctx = GetContext();
+            var obj = ctx.Create<TypeRef>();
+            obj.FullName = "TestRef";
+            obj.Assembly = ctx.GetQuery<Assembly>().First();
+
+            // set value explicitly
+            var expectedExportGuid = obj.ExportGuid = Guid.NewGuid();
+
+            ctx.SubmitChanges();
+
+            var originalId = obj.ID;
+
+            ctx = GetContext();
+            obj = ctx.Find<TypeRef>(originalId);
+
+            Assert.That(obj.ExportGuid, Is.EqualTo(expectedExportGuid));
+        }
+
+        [Test]
+        public void should_persist_an_enum_value()
+        {
+            var ctx = GetContext();
+            var obj = ctx.Create<TestObjClass>();
+            obj.StringProp = "Some String";
+
+            // set value explicitly
+            var expectedEnum = obj.TestEnumWithDefault = TestEnum.Third;
+            
+            ctx.SubmitChanges();
+
+            var originalId = obj.ID;
+
+            ctx = GetContext();
+            obj = ctx.Find<TestObjClass>(originalId);
+
+            Assert.That(obj.TestEnumWithDefault, Is.EqualTo(expectedEnum));
+        }
+    }
+
+    public abstract class when_submitting_without_read
+           : AbstractTestFixture
+    {
+        [Test]
+        public void should_persist_a_guid_value()
         {
             var ctx = GetContext();
             var obj = ctx.Create<TypeRef>();
@@ -34,14 +80,33 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
             obj.Assembly = ctx.GetQuery<Assembly>().First();
             ctx.SubmitChanges();
 
-            // read ExportGuid after submit to not influence datastore
-            var originalExportGuid = obj.ExportGuid;
+            // read TestEnumWithDefault after submit to test server-side initialisation
+            var expectedExportGuid = obj.ExportGuid;
             var originalId = obj.ID;
 
             ctx = GetContext();
             obj = ctx.Find<TypeRef>(originalId);
 
-            Assert.That(obj.ExportGuid, Is.EqualTo(originalExportGuid));
+            Assert.That(obj.ExportGuid, Is.EqualTo(expectedExportGuid));
+        }
+
+        [Test]
+        public void should_persist_an_enum_value()
+        {
+            var ctx = GetContext();
+            var obj = ctx.Create<TestObjClass>();
+            obj.StringProp = "Some String";
+
+            ctx.SubmitChanges();
+
+            // read TestEnumWithDefault after submit to test server-side initialisation
+            var expectedEnum = obj.TestEnumWithDefault;
+            var originalId = obj.ID;
+
+            ctx = GetContext();
+            obj = ctx.Find<TestObjClass>(originalId);
+
+            Assert.That(obj.TestEnumWithDefault, Is.EqualTo(expectedEnum));
         }
     }
 
@@ -49,15 +114,15 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
         : AbstractTestFixture
     {
         [Test]
-        public void should_persist_a_value()
+        public void should_persist_a_guid_value()
         {
             var ctx = GetContext();
             var obj = ctx.Create<TypeRef>();
             obj.FullName = "TestRef";
             obj.Assembly = ctx.GetQuery<Assembly>().First();
 
-            // read ExportGuid before submit to test initialisation
-            var originalExportGuid = obj.ExportGuid;
+            // read ExportGuid before submit to test client-side initialisation
+            var expectedExportGuid = obj.ExportGuid;
 
             ctx.SubmitChanges();
 
@@ -66,7 +131,27 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
             ctx = GetContext();
             obj = ctx.Find<TypeRef>(originalId);
 
-            Assert.That(obj.ExportGuid, Is.EqualTo(originalExportGuid));
+            Assert.That(obj.ExportGuid, Is.EqualTo(expectedExportGuid));
+        }
+
+        [Test]
+        public void should_persist_an_enum_value()
+        {
+            var ctx = GetContext();
+            var obj = ctx.Create<TestObjClass>();
+            obj.StringProp = "Some String";
+
+            // read TestEnumWithDefault before submit to test client-side initialisation
+            var expectedEnum = obj.TestEnumWithDefault;
+
+            ctx.SubmitChanges();
+
+            var originalId = obj.ID;
+
+            ctx = GetContext();
+            obj = ctx.Find<TestObjClass>(originalId);
+
+            Assert.That(obj.TestEnumWithDefault, Is.EqualTo(expectedEnum));
         }
     }
 }

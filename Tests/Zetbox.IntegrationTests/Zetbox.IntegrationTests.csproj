@@ -93,6 +93,7 @@
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
+    <Compile Include="Tests\DefaultValues\when_submitting.cs" />
     <Compile Include="Tests\GetListTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
