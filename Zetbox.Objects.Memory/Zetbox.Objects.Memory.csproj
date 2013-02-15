@@ -158,6 +158,7 @@
     <Compile Include="DecimalProperty.Memory.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Memory.Designer.cs" />
     <Compile Include="Document.Memory.Designer.cs" />
+    <Compile Include="DoubleDefaultValue.Memory.Designer.cs" />
     <Compile Include="DoubleParameter.Memory.Designer.cs" />
     <Compile Include="DoubleProperty.Memory.Designer.cs" />
     <Compile Include="DynamicFile.Memory.Designer.cs" />

@@ -252,6 +252,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("74785c72-3271-4fb7-95fc-86b0baa09c8e"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> DoubleDefaultValue
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("f55c5d76-23cc-4f33-b689-b4d8332d53b5"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> DoubleParameter
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("74aa31e4-4dcf-46d5-a8b4-aa02b82bd2df"); }
@@ -970,6 +974,13 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Property
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("a2451b2f-2430-4de4-81a6-3d5ac9f0138f"); }
+                                }
+                            }
+                            public static class DoubleDefaultValue_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DoubleValue
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("aa155407-9526-443c-b8f2-727813ece828"); }
                                 }
                             }
                             public static class EnumDefaultValue_Properties

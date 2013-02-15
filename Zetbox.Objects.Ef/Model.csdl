@@ -2865,6 +2865,9 @@
                         FromRole="Document"
                         ToRole="CollectionEntry" />
   </EntityType>
+  <EntityType Name="DoubleDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
+    <Property Name="DoubleValue" Type="Double" Nullable="false"  />
+  </EntityType>
   <EntityType Name="DoubleParameterEfImpl" BaseType="Model.BaseParameterEfImpl">
   </EntityType>
   <EntityType Name="DoublePropertyEfImpl" BaseType="Model.ValueTypePropertyEfImpl">

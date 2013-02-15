@@ -161,6 +161,7 @@
     <Compile Include="DecimalProperty.Ef.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Ef.Designer.cs" />
     <Compile Include="Document.Ef.Designer.cs" />
+    <Compile Include="DoubleDefaultValue.Ef.Designer.cs" />
     <Compile Include="DoubleParameter.Ef.Designer.cs" />
     <Compile Include="DoubleProperty.Ef.Designer.cs" />
     <Compile Include="DynamicFile.Ef.Designer.cs" />

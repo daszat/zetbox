@@ -132,6 +132,7 @@
     <Compile Include="DecimalProperty.Interface.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Interface.Designer.cs" />
     <Compile Include="Document.Interface.Designer.cs" />
+    <Compile Include="DoubleDefaultValue.Interface.Designer.cs" />
     <Compile Include="DoubleParameter.Interface.Designer.cs" />
     <Compile Include="DoubleProperty.Interface.Designer.cs" />
     <Compile Include="DynamicFile.Interface.Designer.cs" />

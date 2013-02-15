@@ -173,6 +173,7 @@
     <Compile Include="DecimalProperty.NHibernate.Designer.cs" />
     <Compile Include="DefaultPropertyValue.NHibernate.Designer.cs" />
     <Compile Include="Document.NHibernate.Designer.cs" />
+    <Compile Include="DoubleDefaultValue.NHibernate.Designer.cs" />
     <Compile Include="DoubleParameter.NHibernate.Designer.cs" />
     <Compile Include="DoubleProperty.NHibernate.Designer.cs" />
     <Compile Include="DynamicFile.NHibernate.Designer.cs" />

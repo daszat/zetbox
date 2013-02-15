@@ -1639,6 +1639,7 @@
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="BoolDefaultValues_BoolValue" Type="bool" Nullable="true" />
     <Property Name="DecimalDefaultValues_DecimalValue" Type="numeric" Precision="19" Scale="5" Nullable="true" />
+    <Property Name="DoubleDefaultValues_DoubleValue" Type="float8" Nullable="true" />
     <Property Name="EnumDefaultValues_fk_EnumValue" Type="int4" />
     <Property Name="IntDefaultValues_IntValue" Type="int4" Nullable="true" />
     <Property Name="StringDefaultValues_DefaultValue" Type="varchar" MaxLength="1000" Nullable="true" />

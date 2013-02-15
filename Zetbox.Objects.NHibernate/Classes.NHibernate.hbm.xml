@@ -3866,6 +3866,22 @@
 
         </subclass>
         <subclass
+                name="Zetbox.App.Base.DoubleDefaultValueNHibernateImpl+DoubleDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Base.DoubleDefaultValueNHibernateImpl+DoubleDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="base.DoubleDefaultValues"
+                dynamic-update="true">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="DoubleValue" 
+                  column="`DoubleDefaultValues_DoubleValue`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+        <subclass
                 name="Zetbox.App.Base.EnumDefaultValueNHibernateImpl+EnumDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 proxy="Zetbox.App.Base.EnumDefaultValueNHibernateImpl+EnumDefaultValueProxy, Zetbox.Objects.NHibernateImpl"
                 discriminator-value="base.EnumDefaultValues"

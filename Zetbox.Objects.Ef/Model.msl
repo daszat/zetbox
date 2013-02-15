@@ -584,6 +584,16 @@
           <Condition ColumnName="__Discriminator" Value="base.DecimalDefaultValues" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.DoubleDefaultValueEfImpl">
+	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="DoubleValue" ColumnName="DoubleDefaultValues_DoubleValue" />
+          <Condition ColumnName="__Discriminator" Value="base.DoubleDefaultValues" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="Model.EnumDefaultValueEfImpl">
 	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
