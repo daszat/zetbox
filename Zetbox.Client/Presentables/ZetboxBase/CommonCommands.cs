@@ -289,19 +289,22 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected IEnumerable<ViewModel> SelectedItems { get { return ((ICommandParameter)Parent).SelectedItems; } }
 
         private readonly Func<IZetboxContext> _ctxFactory;
+        private readonly IZetboxContextExceptionHandler _exceptionHandler;
 
         public DeleteDataObjectCommand(IViewModelDependencies appCtx,
             IZetboxContext dataCtx, ViewModel parent,
-            Func<IZetboxContext> ctxFactory)
+            Func<IZetboxContext> ctxFactory, IZetboxContextExceptionHandler exceptionHandler)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
         {
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            if (exceptionHandler == null) throw new ArgumentNullException("exceptionHandler");
             if (!(parent is ICommandParameter)) throw new ArgumentOutOfRangeException("parent", "parent needs to implement ICommandParameter");
 
             if (this.Parameter != null)
                 this.Parameter.PropertyChanged += OnParameterChanged;
 
             this._ctxFactory = ctxFactory;
+            this._exceptionHandler = exceptionHandler;
         }
 
         public override System.Drawing.Image Icon
@@ -390,7 +393,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 }
                 catch (Exception ex)
                 {
-                    if (!ZetboxContextExceptionHandler.Show(ViewModelFactory, DataContext, ex))
+                    if (!_exceptionHandler.Show(DataContext, ex))
                     {
                         throw;
                     }

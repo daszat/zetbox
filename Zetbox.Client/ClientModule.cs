@@ -109,6 +109,11 @@ namespace Zetbox.Client
                 .InstancePerDependency();
 
             moduleBuilder
+                .RegisterType<ZetboxContextExceptionHandler>()
+                .As<IZetboxContextExceptionHandler>()
+                .SingleInstance();
+
+            moduleBuilder
                 .RegisterType<Zetbox.Client.Reporting.ReportingErrorDialog>()
                 .AsImplementedInterfaces()
                 .InstancePerDependency();

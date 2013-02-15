@@ -22,14 +22,15 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
     using Zetbox.API;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables;
+    using Zetbox.Client;
 
     [ViewModelDescriptor]
     public class CalendarWorkspaceViewModel : Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel
     {
         public new delegate CalendarWorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
-            : base(appCtx, dataCtx, parent)
+        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, IZetboxContextExceptionHandler exceptionHandler)
+            : base(appCtx, dataCtx, parent, exceptionHandler)
         {
             base.ShowModel(CalendarViewModel);
         }

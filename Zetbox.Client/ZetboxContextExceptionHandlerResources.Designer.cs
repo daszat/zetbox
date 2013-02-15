@@ -106,7 +106,8 @@ namespace Zetbox.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Database message is &quot;{0}&quot;.
+        ///   Looks up a localized string similar to {0} and {1} are in a relationship {2} {3} {4}.
+        ///(Database message is &quot;{5}&quot;).
         /// </summary>
         internal static string FKViolationException_DetailFormatString {
             get {

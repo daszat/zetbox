@@ -133,7 +133,8 @@
     <value>Verweis Fehler</value>
   </data>
   <data name="FKViolationException_DetailFormatString" xml:space="preserve">
-    <value>Datenbankmeldung ist "{0}"</value>
+    <value>{0} und {1} stehen in der Beziehung {2} {3} {4} zueinander.
+(Datenbankmeldung ist "{5}")</value>
   </data>
   <data name="FKViolationException_Message" xml:space="preserve">
     <value>Ein Datensatz kann nicht gelöscht oder geändert werden da ein anderer Datensatz von ihm abhängt.</value>

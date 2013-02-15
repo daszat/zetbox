@@ -20,14 +20,30 @@ namespace Zetbox.Client
     using Zetbox.API;
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables;
+    using Zetbox.App.Base;
 
-    public static class ZetboxContextExceptionHandler
+    public interface IZetboxContextExceptionHandler
     {
-        public static bool Show(IViewModelFactory vmf, IZetboxContext ctx, Exception ex)
+        bool Show(Zetbox.API.IZetboxContext ctx, Exception ex);
+    }
+
+    public class ZetboxContextExceptionHandler : IZetboxContextExceptionHandler
+    {
+        private readonly IViewModelFactory vmf;
+        private readonly IFrozenContext frozenCtx;
+
+        public ZetboxContextExceptionHandler(IViewModelFactory vmf, IFrozenContext frozenCtx)
         {
             if (vmf == null) throw new ArgumentNullException("vmf");
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            this.vmf = vmf;
+            this.frozenCtx = frozenCtx;
+        }
+
+        public bool Show(IZetboxContext ctx, Exception ex)
+        {
             if (ctx == null) throw new ArgumentNullException("ctx");
-            
             if (ex == null) return false;
 
             var inner = ex.GetInnerException();
@@ -43,9 +59,21 @@ namespace Zetbox.Client
             else if (inner is FKViolationException)
             {
                 var error = (FKViolationException)inner;
+                var details = string.Join("\n", error.Details.Select(e =>
+                {
+                    var rel = frozenCtx.FindPersistenceObject<Relation>(e.RelGuid);
+                    return string.Format(
+                        ZetboxContextExceptionHandlerResources.FKViolationException_DetailFormatString,
+                        rel.A.Type.Name,
+                        rel.B.Type.Name, 
+                        rel.A.RoleName, 
+                        rel.Verb,
+                        rel.B.RoleName,
+                        e.DatabaseError);
+                }));
                 vmf.CreateDialog(ctx, ZetboxContextExceptionHandlerResources.FKViolationException_Caption)
                     .AddTextBlock(string.Empty, ZetboxContextExceptionHandlerResources.FKViolationException_Message)
-                    .AddMultiLineString(ZetboxContextExceptionHandlerResources.DetailsLabel, string.Join("\n", error.Details.Select(e => string.Format(ZetboxContextExceptionHandlerResources.FKViolationException_DetailFormatString, e.DatabaseError))), true, true)
+                    .AddMultiLineString(ZetboxContextExceptionHandlerResources.DetailsLabel, details, true, true)
                     .Show();
                 return true;
             }

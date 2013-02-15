@@ -33,10 +33,16 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter, IDisposable
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
+        private readonly IZetboxContextExceptionHandler _exceptionHandler;
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, 
+            IZetboxContext dataCtx, ViewModel parent, 
+            IZetboxContextExceptionHandler exceptionHandler)
             : base(appCtx, dataCtx, parent)
         {
+            if (exceptionHandler == null) throw new ArgumentNullException("exceptionHandler");
+
+            _exceptionHandler = exceptionHandler;
             dataCtx.IsModifiedChanged += dataCtx_IsModifiedChanged;
             Items = new ObservableCollection<ViewModel>();
             Items.CollectionChanged += new NotifyCollectionChangedEventHandler(Items_CollectionChanged);
@@ -328,7 +334,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 }
                 catch (Exception ex)
                 {
-                    if (ZetboxContextExceptionHandler.Show(ViewModelFactory, DataContext, ex))
+                    if (_exceptionHandler.Show(DataContext, ex))
                     {
                         return false;
                     }

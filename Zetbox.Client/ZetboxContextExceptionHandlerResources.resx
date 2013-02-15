@@ -133,7 +133,8 @@
     <value>Usage Error</value>
   </data>
   <data name="FKViolationException_DetailFormatString" xml:space="preserve">
-    <value>Database message is "{0}"</value>
+    <value>{0} and {1} are in a relationship {2} {3} {4}.
+(Database message is "{5}")</value>
   </data>
   <data name="FKViolationException_Message" xml:space="preserve">
     <value>The object cannot be deleted or updated because is is used by another object.</value>
