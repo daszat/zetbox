@@ -1550,19 +1550,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// 
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.GUI.WidthHint? RequestedWidth
         {
             get
             {
-				var __value = _RequestedWidth;
-				if(OnRequestedWidth_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.GUI.WidthHint?>(__value);
-					OnRequestedWidth_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _RequestedWidth;
+                if(OnRequestedWidth_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.WidthHint?>(__value);
+                    OnRequestedWidth_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -1570,26 +1570,23 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_RequestedWidth != value)
                 {
-					var __oldValue = _RequestedWidth;
-					var __newValue = value;
+                    var __oldValue = _RequestedWidth;
+                    var __newValue = value;
                     if(OnRequestedWidth_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.WidthHint?>(__oldValue, __newValue);
-						OnRequestedWidth_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.WidthHint?>(__oldValue, __newValue);
+                        OnRequestedWidth_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("RequestedWidth", __oldValue, __newValue);
                     _RequestedWidth = value;
                     NotifyPropertyChanged("RequestedWidth", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnRequestedWidth_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.WidthHint?>(__oldValue, __newValue);
-						OnRequestedWidth_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.WidthHint?>(__oldValue, __newValue);
+                        OnRequestedWidth_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -1603,8 +1600,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 ReportEfPropertyChanged("RequestedWidthImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for RequestedWidth</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -1619,7 +1615,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 this.RequestedWidth = (Zetbox.App.GUI.WidthHint?)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.WidthHint?> OnRequestedWidth_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.WidthHint?> OnRequestedWidth_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.WidthHint?> OnRequestedWidth_PostSetter;

@@ -495,9 +495,15 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write((int?)this._Nullable);
-            binStream.Write((int?)this._NullableWithDefault);
+            binStream.Write(this._isNullableWithDefaultSet);
+            if (this._isNullableWithDefaultSet) {
+                binStream.Write((int?)this._NullableWithDefault);
+            }
             binStream.Write((int?)this._Standard);
-            binStream.Write((int?)this._StandardWithDefault);
+            binStream.Write(this._isStandardWithDefaultSet);
+            if (this._isStandardWithDefaultSet) {
+                binStream.Write((int?)this._StandardWithDefault);
+            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -507,9 +513,15 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._Nullable = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
-            this._NullableWithDefault = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
+            this._isNullableWithDefaultSet = binStream.ReadBoolean();
+            if (this._isNullableWithDefaultSet) {
+                this._NullableWithDefault = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
+            }
             this._Standard = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
-            this._StandardWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._isStandardWithDefaultSet = binStream.ReadBoolean();
+            if (this._isStandardWithDefaultSet) {
+                this._StandardWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

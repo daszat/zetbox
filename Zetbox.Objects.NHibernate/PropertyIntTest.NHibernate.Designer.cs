@@ -43,8 +43,8 @@ namespace Zetbox.App.Test
             : base(lazyCtx, proxy) // pass proxy to parent
         {
             this.Proxy = proxy;
-            _isStandardWithDefaultSet = Proxy.ID > 0;
             _isNullableWithDefaultSet = Proxy.ID > 0;
+            _isStandardWithDefaultSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>

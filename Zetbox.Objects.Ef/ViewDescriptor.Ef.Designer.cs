@@ -485,19 +485,19 @@ namespace Zetbox.App.GUI
         /// Which toolkit provides this View
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.GUI.Toolkit Toolkit
         {
             get
             {
-				var __value = _Toolkit;
-				if(OnToolkit_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Toolkit>(__value);
-					OnToolkit_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _Toolkit;
+                if(OnToolkit_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Toolkit>(__value);
+                    OnToolkit_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -505,26 +505,23 @@ namespace Zetbox.App.GUI
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Toolkit != value)
                 {
-					var __oldValue = _Toolkit;
-					var __newValue = value;
+                    var __oldValue = _Toolkit;
+                    var __newValue = value;
                     if(OnToolkit_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
-						OnToolkit_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
+                        OnToolkit_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("Toolkit", __oldValue, __newValue);
                     _Toolkit = value;
                     NotifyPropertyChanged("Toolkit", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnToolkit_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
-						OnToolkit_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
+                        OnToolkit_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -538,8 +535,7 @@ namespace Zetbox.App.GUI
                 ReportEfPropertyChanged("ToolkitImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for Toolkit</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -554,7 +550,7 @@ namespace Zetbox.App.GUI
                 this.Toolkit = (Zetbox.App.GUI.Toolkit)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.Toolkit> OnToolkit_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.Toolkit> OnToolkit_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.Toolkit> OnToolkit_PostSetter;

@@ -801,7 +801,10 @@ namespace Zetbox.App.Test
             binStream.Write(this.Proxy.ObjectProp != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectProp) : (int?)null);
             binStream.Write(this.Proxy.StringProp);
             binStream.Write((int?)Proxy.TestEnumProp);
-            binStream.Write((int?)Proxy.TestEnumWithDefault);
+            binStream.Write(this._isTestEnumWithDefaultSet);
+            if (this._isTestEnumWithDefaultSet) {
+                binStream.Write((int?)Proxy.TestEnumWithDefault);
+            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -815,7 +818,10 @@ namespace Zetbox.App.Test
             binStream.Read(out this._fk_ObjectProp);
             this.Proxy.StringProp = binStream.ReadString();
             Proxy.TestEnumProp = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
-            Proxy.TestEnumWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._isTestEnumWithDefaultSet = binStream.ReadBoolean();
+            if (this._isTestEnumWithDefaultSet) {
+                Proxy.TestEnumWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

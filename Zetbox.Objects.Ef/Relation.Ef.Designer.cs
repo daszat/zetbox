@@ -460,19 +460,19 @@ namespace Zetbox.App.Base
         /// The ContainmentSpecification of this Relation.
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.Base.ContainmentSpecification Containment
         {
             get
             {
-				var __value = _Containment;
-				if(OnContainment_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__value);
-					OnContainment_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _Containment;
+                if(OnContainment_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__value);
+                    OnContainment_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -480,26 +480,23 @@ namespace Zetbox.App.Base
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Containment != value)
                 {
-					var __oldValue = _Containment;
-					var __newValue = value;
+                    var __oldValue = _Containment;
+                    var __newValue = value;
                     if(OnContainment_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__oldValue, __newValue);
-						OnContainment_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__oldValue, __newValue);
+                        OnContainment_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("Containment", __oldValue, __newValue);
                     _Containment = value;
                     NotifyPropertyChanged("Containment", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnContainment_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__oldValue, __newValue);
-						OnContainment_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__oldValue, __newValue);
+                        OnContainment_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -513,8 +510,8 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("ContainmentImpl");
             }
         }
-					
-        
+        private bool _isContainmentSet = false;
+
         /// <summary>EF sees only this property, for Containment</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -529,7 +526,7 @@ namespace Zetbox.App.Base
                 this.Containment = (Zetbox.App.Base.ContainmentSpecification)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_PostSetter;
@@ -980,19 +977,19 @@ namespace Zetbox.App.Base
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.Base.StorageType Storage
         {
             get
             {
-				var __value = _Storage;
-				if(OnStorage_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.StorageType>(__value);
-					OnStorage_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _Storage;
+                if(OnStorage_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.StorageType>(__value);
+                    OnStorage_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -1000,26 +997,23 @@ namespace Zetbox.App.Base
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Storage != value)
                 {
-					var __oldValue = _Storage;
-					var __newValue = value;
+                    var __oldValue = _Storage;
+                    var __newValue = value;
                     if(OnStorage_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.StorageType>(__oldValue, __newValue);
-						OnStorage_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.StorageType>(__oldValue, __newValue);
+                        OnStorage_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("Storage", __oldValue, __newValue);
                     _Storage = value;
                     NotifyPropertyChanged("Storage", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnStorage_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.StorageType>(__oldValue, __newValue);
-						OnStorage_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.StorageType>(__oldValue, __newValue);
+                        OnStorage_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -1033,8 +1027,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("StorageImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for Storage</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -1049,7 +1042,7 @@ namespace Zetbox.App.Base
                 this.Storage = (Zetbox.App.Base.StorageType)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.StorageType> OnStorage_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.StorageType> OnStorage_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.StorageType> OnStorage_PostSetter;
@@ -1948,7 +1941,10 @@ namespace Zetbox.App.Base
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
-            binStream.Write((int?)this._Containment);
+            binStream.Write(this._isContainmentSet);
+            if (this._isContainmentSet) {
+                binStream.Write((int?)this._Containment);
+            }
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Relation_was_CreatedBy", "CreatedBy");
                 var key = r.EntityKey;
@@ -1985,7 +1981,10 @@ namespace Zetbox.App.Base
             if (this._isChangedOnSet) {
                 this._ChangedOn = binStream.ReadDateTime();
             }
-            this._Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
+            this._isContainmentSet = binStream.ReadBoolean();
+            if (this._isContainmentSet) {
+                this._Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
+            }
             binStream.Read(out this._fk_CreatedBy);
             this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
@@ -2016,6 +2015,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isContainmentSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Containment, xml, "Containment", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
@@ -2042,8 +2042,10 @@ namespace Zetbox.App.Base
                 this._isChangedOnSet = true;
                 break;
             case "Zetbox.App.Base|Containment":
+                // Import must have default value set
                 this._Containment = (Zetbox.App.Base.ContainmentSpecification)XmlStreamer.ReadNullableInt32(xml);
-               break;
+                this._isContainmentSet = true;
+                break;
             case "Zetbox.App.Base|CreatedOn":
                 // Import must have default value set
                 this._CreatedOn = XmlStreamer.ReadDateTime(xml);

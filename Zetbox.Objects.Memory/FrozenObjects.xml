@@ -30889,6 +30889,7 @@ public static void isValid_Nullable(PropertyBoolTest obj, PropertyIsValidEventAr
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Nullable</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1e6d6da7-eff6-41ca-ae12-60b46ee4ccab</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -30924,6 +30925,7 @@ public static void isValid_NullableWithDefault(PropertyBoolTest obj, PropertyIsV
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1e6d6da7-eff6-41ca-ae12-60b46ee4ccab</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -30958,6 +30960,7 @@ public static void isValid_Standard(PropertyBoolTest obj, PropertyIsValidEventAr
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Standard</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1e6d6da7-eff6-41ca-ae12-60b46ee4ccab</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -30993,6 +30996,7 @@ public static void isValid_StandardWithDefault(PropertyBoolTest obj, PropertyIsV
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1e6d6da7-eff6-41ca-ae12-60b46ee4ccab</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31027,6 +31031,7 @@ public static void isValid_Nullable(PropertyDateTimeTest obj, PropertyIsValidEve
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Nullable</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>45e3bbe8-6bab-4410-8a17-83f81300bf20</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31062,6 +31067,7 @@ public static void isValid_NullableWithDefault(PropertyDateTimeTest obj, Propert
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>45e3bbe8-6bab-4410-8a17-83f81300bf20</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31096,6 +31102,7 @@ public static void isValid_Standard(PropertyDateTimeTest obj, PropertyIsValidEve
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Standard</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>45e3bbe8-6bab-4410-8a17-83f81300bf20</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31131,6 +31138,7 @@ public static void isValid_StandardWithDefault(PropertyDateTimeTest obj, Propert
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>45e3bbe8-6bab-4410-8a17-83f81300bf20</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31165,6 +31173,7 @@ public static void isValid_Nullable(PropertyDecimalTest obj, PropertyIsValidEven
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Nullable</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>203d8613-79c5-4fbf-9bf7-0a3d13746a63</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>481d7a65-208c-4706-8d4d-64ea629a109c</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31202,6 +31211,7 @@ public static void isValid_NullableWithDefault(PropertyDecimalTest obj, Property
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>203d8613-79c5-4fbf-9bf7-0a3d13746a63</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>481d7a65-208c-4706-8d4d-64ea629a109c</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31238,6 +31248,7 @@ public static void isValid_Standard(PropertyDecimalTest obj, PropertyIsValidEven
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Standard</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>203d8613-79c5-4fbf-9bf7-0a3d13746a63</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>481d7a65-208c-4706-8d4d-64ea629a109c</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31275,6 +31286,7 @@ public static void isValid_StandardWithDefault(PropertyDecimalTest obj, Property
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>203d8613-79c5-4fbf-9bf7-0a3d13746a63</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>481d7a65-208c-4706-8d4d-64ea629a109c</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31311,6 +31323,7 @@ public static void isValid_Nullable(PropertyDoubleTest obj, PropertyIsValidEvent
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Nullable</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>fad3a1cb-80bf-4c13-abcf-489b67493818</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31346,6 +31359,7 @@ public static void isValid_NullableWithDefault(PropertyDoubleTest obj, PropertyI
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>fad3a1cb-80bf-4c13-abcf-489b67493818</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31380,6 +31394,7 @@ public static void isValid_Standard(PropertyDoubleTest obj, PropertyIsValidEvent
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Standard</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>fad3a1cb-80bf-4c13-abcf-489b67493818</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31415,6 +31430,7 @@ public static void isValid_StandardWithDefault(PropertyDoubleTest obj, PropertyI
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>fad3a1cb-80bf-4c13-abcf-489b67493818</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31449,6 +31465,7 @@ public static void isValid_Nullable(PropertyEnumTest obj, PropertyIsValidEventAr
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Nullable</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>253dfd7e-18f7-423e-bae1-ad8776b76f30</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31485,6 +31502,7 @@ public static void isValid_NullableWithDefault(PropertyEnumTest obj, PropertyIsV
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>253dfd7e-18f7-423e-bae1-ad8776b76f30</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31520,6 +31538,7 @@ public static void isValid_Standard(PropertyEnumTest obj, PropertyIsValidEventAr
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Standard</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>253dfd7e-18f7-423e-bae1-ad8776b76f30</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31556,6 +31575,7 @@ public static void isValid_StandardWithDefault(PropertyEnumTest obj, PropertyIsV
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>253dfd7e-18f7-423e-bae1-ad8776b76f30</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31591,6 +31611,7 @@ public static void isValid_Nullable(PropertyGuidTest obj, PropertyIsValidEventAr
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Nullable</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3cd78f02-b9b0-4a15-a910-d2ae25c76219</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31626,6 +31647,7 @@ public static void isValid_NullableWithDefault(PropertyGuidTest obj, PropertyIsV
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3cd78f02-b9b0-4a15-a910-d2ae25c76219</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31660,6 +31682,7 @@ public static void isValid_Standard(PropertyGuidTest obj, PropertyIsValidEventAr
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Standard</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3cd78f02-b9b0-4a15-a910-d2ae25c76219</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31695,6 +31718,7 @@ public static void isValid_StandardWithDefault(PropertyGuidTest obj, PropertyIsV
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3cd78f02-b9b0-4a15-a910-d2ae25c76219</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31729,6 +31753,7 @@ public static void isValid_Nullable(PropertyIntTest obj, PropertyIsValidEventArg
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Nullable</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>d32de06d-b6d6-4adf-974a-aca5f3fc4e2c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31764,6 +31789,7 @@ public static void isValid_NullableWithDefault(PropertyIntTest obj, PropertyIsVa
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>d32de06d-b6d6-4adf-974a-aca5f3fc4e2c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31798,6 +31824,7 @@ public static void isValid_Standard(PropertyIntTest obj, PropertyIsValidEventArg
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Standard</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>d32de06d-b6d6-4adf-974a-aca5f3fc4e2c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31833,6 +31860,7 @@ public static void isValid_StandardWithDefault(PropertyIntTest obj, PropertyIsVa
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>d32de06d-b6d6-4adf-974a-aca5f3fc4e2c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31867,6 +31895,7 @@ public static void isValid_Nullable(PropertyStringTest obj, PropertyIsValidEvent
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Nullable</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>b64e8bc4-26eb-4077-ac96-41d1ef6dcfeb</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31902,6 +31931,7 @@ public static void isValid_NullableWithDefault(PropertyStringTest obj, PropertyI
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>b64e8bc4-26eb-4077-ac96-41d1ef6dcfeb</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31936,6 +31966,7 @@ public static void isValid_Standard(PropertyStringTest obj, PropertyIsValidEvent
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Standard</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>b64e8bc4-26eb-4077-ac96-41d1ef6dcfeb</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -31971,6 +32002,7 @@ public static void isValid_StandardWithDefault(PropertyStringTest obj, PropertyI
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>b64e8bc4-26eb-4077-ac96-41d1ef6dcfeb</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>

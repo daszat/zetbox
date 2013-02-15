@@ -841,19 +841,19 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.Base.AccessRights? Rights
         {
             get
             {
-				var __value = _Rights;
-				if(OnRights_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.AccessRights?>(__value);
-					OnRights_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _Rights;
+                if(OnRights_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.AccessRights?>(__value);
+                    OnRights_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -861,26 +861,23 @@ namespace Zetbox.App.Base
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Rights != value)
                 {
-					var __oldValue = _Rights;
-					var __newValue = value;
+                    var __oldValue = _Rights;
+                    var __newValue = value;
                     if(OnRights_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
-						OnRights_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
+                        OnRights_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("Rights", __oldValue, __newValue);
                     _Rights = value;
                     NotifyPropertyChanged("Rights", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnRights_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
-						OnRights_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
+                        OnRights_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -894,8 +891,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("RightsImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for Rights</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -910,7 +906,7 @@ namespace Zetbox.App.Base
                 this.Rights = (Zetbox.App.Base.AccessRights?)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessRights?> OnRights_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessRights?> OnRights_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessRights?> OnRights_PostSetter;

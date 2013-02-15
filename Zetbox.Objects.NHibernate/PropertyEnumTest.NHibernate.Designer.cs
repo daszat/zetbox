@@ -43,8 +43,8 @@ namespace Zetbox.App.Test
             : base(lazyCtx, proxy) // pass proxy to parent
         {
             this.Proxy = proxy;
-            _isStandardWithDefaultSet = Proxy.ID > 0;
             _isNullableWithDefaultSet = Proxy.ID > 0;
+            _isStandardWithDefaultSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -538,9 +538,15 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write((int?)Proxy.Nullable);
-            binStream.Write((int?)Proxy.NullableWithDefault);
+            binStream.Write(this._isNullableWithDefaultSet);
+            if (this._isNullableWithDefaultSet) {
+                binStream.Write((int?)Proxy.NullableWithDefault);
+            }
             binStream.Write((int?)Proxy.Standard);
-            binStream.Write((int?)Proxy.StandardWithDefault);
+            binStream.Write(this._isStandardWithDefaultSet);
+            if (this._isStandardWithDefaultSet) {
+                binStream.Write((int?)Proxy.StandardWithDefault);
+            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -550,9 +556,15 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             Proxy.Nullable = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
-            Proxy.NullableWithDefault = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
+            this._isNullableWithDefaultSet = binStream.ReadBoolean();
+            if (this._isNullableWithDefaultSet) {
+                Proxy.NullableWithDefault = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
+            }
             Proxy.Standard = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
-            Proxy.StandardWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._isStandardWithDefaultSet = binStream.ReadBoolean();
+            if (this._isStandardWithDefaultSet) {
+                Proxy.StandardWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

@@ -1942,7 +1942,10 @@ namespace Zetbox.App.Base
             if (this._isChangedOnSet) {
                 binStream.Write(this.Proxy.ChangedOn);
             }
-            binStream.Write((int?)Proxy.Containment);
+            binStream.Write(this._isContainmentSet);
+            if (this._isContainmentSet) {
+                binStream.Write((int?)Proxy.Containment);
+            }
             binStream.Write(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1971,7 +1974,10 @@ namespace Zetbox.App.Base
             if (this._isChangedOnSet) {
                 this.Proxy.ChangedOn = binStream.ReadDateTime();
             }
-            Proxy.Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
+            this._isContainmentSet = binStream.ReadBoolean();
+            if (this._isContainmentSet) {
+                Proxy.Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
+            }
             binStream.Read(out this._fk_CreatedBy);
             this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
@@ -2002,6 +2008,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isContainmentSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)Proxy.Containment, xml, "Containment", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
@@ -2028,8 +2035,10 @@ namespace Zetbox.App.Base
                 this._isChangedOnSet = true;
                 break;
             case "Zetbox.App.Base|Containment":
+                // Import must have default value set
                 Proxy.Containment = (Zetbox.App.Base.ContainmentSpecification)XmlStreamer.ReadNullableInt32(xml);
-               break;
+                this._isContainmentSet = true;
+                break;
             case "Zetbox.App.Base|CreatedOn":
                 // Import must have default value set
                 this.Proxy.CreatedOn = XmlStreamer.ReadDateTime(xml);

@@ -416,19 +416,19 @@ namespace Zetbox.App.Base
         /// Deployment restrictions for this assembly
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.Base.DeploymentRestriction DeploymentRestrictions
         {
             get
             {
-				var __value = _DeploymentRestrictions;
-				if(OnDeploymentRestrictions_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.DeploymentRestriction>(__value);
-					OnDeploymentRestrictions_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _DeploymentRestrictions;
+                if(OnDeploymentRestrictions_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DeploymentRestriction>(__value);
+                    OnDeploymentRestrictions_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -436,26 +436,23 @@ namespace Zetbox.App.Base
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DeploymentRestrictions != value)
                 {
-					var __oldValue = _DeploymentRestrictions;
-					var __newValue = value;
+                    var __oldValue = _DeploymentRestrictions;
+                    var __newValue = value;
                     if(OnDeploymentRestrictions_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DeploymentRestriction>(__oldValue, __newValue);
-						OnDeploymentRestrictions_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DeploymentRestriction>(__oldValue, __newValue);
+                        OnDeploymentRestrictions_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("DeploymentRestrictions", __oldValue, __newValue);
                     _DeploymentRestrictions = value;
                     NotifyPropertyChanged("DeploymentRestrictions", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnDeploymentRestrictions_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DeploymentRestriction>(__oldValue, __newValue);
-						OnDeploymentRestrictions_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DeploymentRestriction>(__oldValue, __newValue);
+                        OnDeploymentRestrictions_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -469,8 +466,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("DeploymentRestrictionsImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for DeploymentRestrictions</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -485,7 +481,7 @@ namespace Zetbox.App.Base
                 this.DeploymentRestrictions = (Zetbox.App.Base.DeploymentRestriction)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.Base.Assembly, Zetbox.App.Base.DeploymentRestriction> OnDeploymentRestrictions_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Assembly, Zetbox.App.Base.DeploymentRestriction> OnDeploymentRestrictions_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.Assembly, Zetbox.App.Base.DeploymentRestriction> OnDeploymentRestrictions_PostSetter;

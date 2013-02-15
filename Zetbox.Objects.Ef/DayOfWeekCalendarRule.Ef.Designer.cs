@@ -44,19 +44,19 @@ namespace Zetbox.App.Calendar
         /// 
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.Base.DayOfWeek DayOfWeek
         {
             get
             {
-				var __value = _DayOfWeek;
-				if(OnDayOfWeek_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.DayOfWeek>(__value);
-					OnDayOfWeek_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _DayOfWeek;
+                if(OnDayOfWeek_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DayOfWeek>(__value);
+                    OnDayOfWeek_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -64,26 +64,23 @@ namespace Zetbox.App.Calendar
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DayOfWeek != value)
                 {
-					var __oldValue = _DayOfWeek;
-					var __newValue = value;
+                    var __oldValue = _DayOfWeek;
+                    var __newValue = value;
                     if(OnDayOfWeek_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DayOfWeek>(__oldValue, __newValue);
-						OnDayOfWeek_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DayOfWeek>(__oldValue, __newValue);
+                        OnDayOfWeek_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("DayOfWeek", __oldValue, __newValue);
                     _DayOfWeek = value;
                     NotifyPropertyChanged("DayOfWeek", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnDayOfWeek_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek>(__oldValue, __newValue);
-						OnDayOfWeek_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek>(__oldValue, __newValue);
+                        OnDayOfWeek_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -97,8 +94,7 @@ namespace Zetbox.App.Calendar
                 ReportEfPropertyChanged("DayOfWeekImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for DayOfWeek</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -113,7 +109,7 @@ namespace Zetbox.App.Calendar
                 this.DayOfWeek = (Zetbox.App.Base.DayOfWeek)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.DayOfWeekCalendarRule, Zetbox.App.Base.DayOfWeek> OnDayOfWeek_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.DayOfWeekCalendarRule, Zetbox.App.Base.DayOfWeek> OnDayOfWeek_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.DayOfWeekCalendarRule, Zetbox.App.Base.DayOfWeek> OnDayOfWeek_PostSetter;

@@ -44,19 +44,19 @@ namespace Zetbox.App.Base
         /// Style of Datetime. Can be Date, Time, or Date and Time.
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.Base.DateTimeStyles? DateTimeStyle
         {
             get
             {
-				var __value = _DateTimeStyle;
-				if(OnDateTimeStyle_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__value);
-					OnDateTimeStyle_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _DateTimeStyle;
+                if(OnDateTimeStyle_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__value);
+                    OnDateTimeStyle_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -64,26 +64,23 @@ namespace Zetbox.App.Base
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DateTimeStyle != value)
                 {
-					var __oldValue = _DateTimeStyle;
-					var __newValue = value;
+                    var __oldValue = _DateTimeStyle;
+                    var __newValue = value;
                     if(OnDateTimeStyle_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__oldValue, __newValue);
-						OnDateTimeStyle_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__oldValue, __newValue);
+                        OnDateTimeStyle_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("DateTimeStyle", __oldValue, __newValue);
                     _DateTimeStyle = value;
                     NotifyPropertyChanged("DateTimeStyle", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnDateTimeStyle_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__oldValue, __newValue);
-						OnDateTimeStyle_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__oldValue, __newValue);
+                        OnDateTimeStyle_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -97,8 +94,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("DateTimeStyleImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for DateTimeStyle</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -113,7 +109,7 @@ namespace Zetbox.App.Base
                 this.DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.Base.DateTimeParameter, Zetbox.App.Base.DateTimeStyles?> OnDateTimeStyle_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.DateTimeParameter, Zetbox.App.Base.DateTimeStyles?> OnDateTimeStyle_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.DateTimeParameter, Zetbox.App.Base.DateTimeStyles?> OnDateTimeStyle_PostSetter;

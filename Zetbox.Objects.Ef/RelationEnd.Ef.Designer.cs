@@ -810,19 +810,19 @@ namespace Zetbox.App.Base
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.Base.Multiplicity Multiplicity
         {
             get
             {
-				var __value = _Multiplicity;
-				if(OnMultiplicity_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.Multiplicity>(__value);
-					OnMultiplicity_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _Multiplicity;
+                if(OnMultiplicity_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Multiplicity>(__value);
+                    OnMultiplicity_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -830,26 +830,23 @@ namespace Zetbox.App.Base
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Multiplicity != value)
                 {
-					var __oldValue = _Multiplicity;
-					var __newValue = value;
+                    var __oldValue = _Multiplicity;
+                    var __newValue = value;
                     if(OnMultiplicity_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
-						OnMultiplicity_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
+                        OnMultiplicity_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("Multiplicity", __oldValue, __newValue);
                     _Multiplicity = value;
                     NotifyPropertyChanged("Multiplicity", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnMultiplicity_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
-						OnMultiplicity_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
+                        OnMultiplicity_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -863,8 +860,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("MultiplicityImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for Multiplicity</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -879,7 +875,7 @@ namespace Zetbox.App.Base
                 this.Multiplicity = (Zetbox.App.Base.Multiplicity)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Multiplicity> OnMultiplicity_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Multiplicity> OnMultiplicity_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Multiplicity> OnMultiplicity_PostSetter;

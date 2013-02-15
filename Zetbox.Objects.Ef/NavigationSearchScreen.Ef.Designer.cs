@@ -596,19 +596,19 @@ namespace Zetbox.App.GUI
         /// 
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.GUI.ListSortDirection? InitialSortDirection
         {
             get
             {
-				var __value = _InitialSortDirection;
-				if(OnInitialSortDirection_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__value);
-					OnInitialSortDirection_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _InitialSortDirection;
+                if(OnInitialSortDirection_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__value);
+                    OnInitialSortDirection_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -616,26 +616,23 @@ namespace Zetbox.App.GUI
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_InitialSortDirection != value)
                 {
-					var __oldValue = _InitialSortDirection;
-					var __newValue = value;
+                    var __oldValue = _InitialSortDirection;
+                    var __newValue = value;
                     if(OnInitialSortDirection_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__oldValue, __newValue);
-						OnInitialSortDirection_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__oldValue, __newValue);
+                        OnInitialSortDirection_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("InitialSortDirection", __oldValue, __newValue);
                     _InitialSortDirection = value;
                     NotifyPropertyChanged("InitialSortDirection", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnInitialSortDirection_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__oldValue, __newValue);
-						OnInitialSortDirection_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__oldValue, __newValue);
+                        OnInitialSortDirection_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -649,8 +646,7 @@ namespace Zetbox.App.GUI
                 ReportEfPropertyChanged("InitialSortDirectionImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for InitialSortDirection</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -665,7 +661,7 @@ namespace Zetbox.App.GUI
                 this.InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.ListSortDirection?> OnInitialSortDirection_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.ListSortDirection?> OnInitialSortDirection_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.ListSortDirection?> OnInitialSortDirection_PostSetter;
@@ -1399,19 +1395,19 @@ namespace Zetbox.App.GUI
         /// 
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.GUI.InstanceListViewMethod? ViewMethod
         {
             get
             {
-				var __value = _ViewMethod;
-				if(OnViewMethod_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__value);
-					OnViewMethod_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _ViewMethod;
+                if(OnViewMethod_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__value);
+                    OnViewMethod_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -1419,26 +1415,23 @@ namespace Zetbox.App.GUI
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ViewMethod != value)
                 {
-					var __oldValue = _ViewMethod;
-					var __newValue = value;
+                    var __oldValue = _ViewMethod;
+                    var __newValue = value;
                     if(OnViewMethod_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
-						OnViewMethod_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
+                        OnViewMethod_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("ViewMethod", __oldValue, __newValue);
                     _ViewMethod = value;
                     NotifyPropertyChanged("ViewMethod", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnViewMethod_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
-						OnViewMethod_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
+                        OnViewMethod_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -1452,8 +1445,7 @@ namespace Zetbox.App.GUI
                 ReportEfPropertyChanged("ViewMethodImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for ViewMethod</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -1468,7 +1460,7 @@ namespace Zetbox.App.GUI
                 this.ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.InstanceListViewMethod?> OnViewMethod_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.InstanceListViewMethod?> OnViewMethod_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.InstanceListViewMethod?> OnViewMethod_PostSetter;

@@ -732,19 +732,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         /// Kind of table mapping. Only valid on base classes. Default is TPT.
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.Base.TableMapping? TableMapping
         {
             get
             {
-				var __value = _TableMapping;
-				if(OnTableMapping_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.TableMapping?>(__value);
-					OnTableMapping_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _TableMapping;
+                if(OnTableMapping_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TableMapping?>(__value);
+                    OnTableMapping_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -752,26 +752,23 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_TableMapping != value)
                 {
-					var __oldValue = _TableMapping;
-					var __newValue = value;
+                    var __oldValue = _TableMapping;
+                    var __newValue = value;
                     if(OnTableMapping_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TableMapping?>(__oldValue, __newValue);
-						OnTableMapping_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TableMapping?>(__oldValue, __newValue);
+                        OnTableMapping_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("TableMapping", __oldValue, __newValue);
                     _TableMapping = value;
                     NotifyPropertyChanged("TableMapping", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnTableMapping_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TableMapping?>(__oldValue, __newValue);
-						OnTableMapping_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TableMapping?>(__oldValue, __newValue);
+                        OnTableMapping_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -785,8 +782,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 ReportEfPropertyChanged("TableMappingImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for TableMapping</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -801,7 +797,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 this.TableMapping = (Zetbox.App.Base.TableMapping?)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.TableMapping?> OnTableMapping_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.TableMapping?> OnTableMapping_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.TableMapping?> OnTableMapping_PostSetter;

@@ -567,19 +567,19 @@ namespace Zetbox.App.SchemaMigration
         /// 
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.SchemaMigration.ColumnType DbType
         {
             get
             {
-				var __value = _DbType;
-				if(OnDbType_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.ColumnType>(__value);
-					OnDbType_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _DbType;
+                if(OnDbType_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.ColumnType>(__value);
+                    OnDbType_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -587,26 +587,23 @@ namespace Zetbox.App.SchemaMigration
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DbType != value)
                 {
-					var __oldValue = _DbType;
-					var __newValue = value;
+                    var __oldValue = _DbType;
+                    var __newValue = value;
                     if(OnDbType_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.SchemaMigration.ColumnType>(__oldValue, __newValue);
-						OnDbType_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.SchemaMigration.ColumnType>(__oldValue, __newValue);
+                        OnDbType_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("DbType", __oldValue, __newValue);
                     _DbType = value;
                     NotifyPropertyChanged("DbType", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnDbType_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.SchemaMigration.ColumnType>(__oldValue, __newValue);
-						OnDbType_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.SchemaMigration.ColumnType>(__oldValue, __newValue);
+                        OnDbType_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -620,8 +617,7 @@ namespace Zetbox.App.SchemaMigration
                 ReportEfPropertyChanged("DbTypeImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for DbType</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -636,7 +632,7 @@ namespace Zetbox.App.SchemaMigration
                 this.DbType = (Zetbox.App.SchemaMigration.ColumnType)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.ColumnType> OnDbType_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.ColumnType> OnDbType_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.ColumnType> OnDbType_PostSetter;
@@ -1397,19 +1393,19 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// 
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Zetbox.App.SchemaMigration.MappingStatus? Status
         {
             get
             {
-				var __value = _Status;
-				if(OnStatus_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__value);
-					OnStatus_Getter(this, e);
-					__value = e.Result;
-				}
+                var __value = _Status;
+                if(OnStatus_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__value);
+                    OnStatus_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
             }
             set
@@ -1417,26 +1413,23 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Status != value)
                 {
-					var __oldValue = _Status;
-					var __newValue = value;
+                    var __oldValue = _Status;
+                    var __newValue = value;
                     if(OnStatus_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);
-						OnStatus_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);
+                        OnStatus_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-					
                     NotifyPropertyChanging("Status", __oldValue, __newValue);
                     _Status = value;
                     NotifyPropertyChanged("Status", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-					
                     if(OnStatus_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);
-						OnStatus_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);
+                        OnStatus_PostSetter(this, e);
                     }
-					
                 }
             }
         }
@@ -1450,8 +1443,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 ReportEfPropertyChanged("StatusImpl");
             }
         }
-					
-        
+
         /// <summary>EF sees only this property, for Status</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -1466,7 +1458,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 this.Status = (Zetbox.App.SchemaMigration.MappingStatus?)value;
             }
         }
-        
+
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.MappingStatus?> OnStatus_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.MappingStatus?> OnStatus_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.MappingStatus?> OnStatus_PostSetter;
