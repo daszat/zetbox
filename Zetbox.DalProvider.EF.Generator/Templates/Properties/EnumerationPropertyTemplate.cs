@@ -31,8 +31,18 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
         {
             if (list != null)
             {
-                var backingStoreName = String.Format("this._{0}", prop.Name);
-                Templates.Serialization.EnumBinarySerialization.AddToSerializers(list, prop, backingStoreName);
+                var backingName = String.Format("this._{0}", prop.Name);
+                bool hasDefaultValue = prop.DefaultValue != null;
+                string isSetFlagName = "_is" + prop.Name + "Set";
+
+                if (hasDefaultValue)
+                {
+                    Templates.Serialization.EnumWithDefaultBinarySerialization.AddToSerializers(list, prop, backingName, isSetFlagName);
+                }
+                else
+                {
+                    Templates.Serialization.EnumBinarySerialization.AddToSerializers(list, prop, backingName);
+                }
             }
         }
     }

@@ -14,10 +14,10 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-<%@ CodeTemplate Language="C#" 
-	Name="Properties.EnumerationPropertyTemplate"
-	ClassName="Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate" 
-	Inherits="Zetbox.Generator.ResourceTemplate" %>
+<%@ CodeTemplate Language="C#"
+    Name="Properties.EnumerationPropertyTemplate"
+    ClassName="Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate"
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Zetbox.API" %>
@@ -31,76 +31,70 @@
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%
 
-	string interfaceName = prop.ObjectClass.Name;
+    string interfaceName = prop.ObjectClass.Name;
 
-	string name = prop.Name;
-	string efName = name + ImplementationPropertySuffix;
-	string backingName = "_" + name;
+    string name = prop.Name;
+    string efName = name + ImplementationPropertySuffix;
+    string backingName = "_" + name;
+    string isSetFlagName = "_is" + name + "Set";
 
-	bool isNullable = prop.Constraints.OfType<NotNullableConstraint>().Count() == 0;
-	string enumType = prop.GetElementTypeString();
-	string eventName = "On" + name;
+    bool isNullable = prop.Constraints.OfType<NotNullableConstraint>().Count() == 0;
+    string enumType = prop.GetElementTypeString();
+    string eventName = "On" + name;
 
     bool isCalculated = prop.IsCalculated;
+    bool hasDefaultValue = prop.DefaultValue != null;
 
 %>
-   		// <%= this.GetType() %>
+           // <%= this.GetType() %>
         // implement the user-visible interface
         public <%= enumType %> <%= name %>
         {
             get
             {
-<%
-				if(callGetterSetterEvents)
-				{
-%>
-				var __value = <%= backingName %>;
-				if(<%= eventName %>_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<<%= enumType %>>(__value);
-					<%= eventName %>_Getter(this, e);
-					__value = e.Result;
-				}
+<% if (callGetterSetterEvents) {                                                                        %>
+                var __value = <%= backingName %>;
+                if(<%= eventName %>_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<<%= enumType %>>(__value);
+                    <%= eventName %>_Getter(this, e);
+                    __value = e.Result;
+                }
                 return __value;
-<% 
-				}
-				else
-				{
-%>
-				return <%= backingName %>;
-<%
-				}
-%>            }
+<% } else {                                                                                             %>
+                return <%= backingName %>;
+<% }                                                                                                    %>
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (<%= backingName %> != value)
                 {
-					var __oldValue = <%= backingName %>;
-					var __newValue = value;
-<% if(callGetterSetterEvents && !isCalculated) {                                                        %>
+                    var __oldValue = <%= backingName %>;
+                    var __newValue = value;
+<% if (callGetterSetterEvents && !isCalculated) {                                                       %>
                     if(<%= eventName %>_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
-						<%= eventName %>_PreSetter(this, e);
-						__newValue = e.Result;
+                        var e = new PropertyPreSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
+                        <%= eventName %>_PreSetter(this, e);
+                        __newValue = e.Result;
                     }
-<% }                                                                                                    %>					
+<% }                                                                                                    %>
                     NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
                     <%= backingName %> = value;
                     NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
 <% if(!isCalculated) {                                                                                  %>
                     if(IsAttached) UpdateChangedInfo = true;
-<% } else {                                                                                             %>					
+<% } else {                                                                                             %>
                     <%= backingName %>_IsDirty = false;
-<% }                                                                                                    %>					
+<% }                                                                                                    %>
 <% if(callGetterSetterEvents && !isCalculated) {                                                        %>
                     if(<%= eventName %>_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
-						<%= eventName %>_PostSetter(this, e);
+                        var e = new PropertyPostSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
+                        <%= eventName %>_PostSetter(this, e);
                     }
-<% }                                                                                                    %>					
+<% }                                                                                                    %>
                 }
             }
         }
@@ -108,8 +102,11 @@
 <% EfScalarPropHelper.ApplyBackingStoreDefinition(this, enumType, backingName, efName); %>
 <% if (isCalculated) {                                                                                  %>
         private bool <%= backingName %>_IsDirty = false;
-<% }                                                                                                    %>					
-        
+<% }                                                                                                    %>
+<% if (hasDefaultValue) {                                                                               %>
+        private bool <%= isSetFlagName %> = false;
+<% }                                                                                                    %>
+
         /// <summary>EF sees only this property, for <%= UglyXmlEncode(name) %></summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -124,7 +121,7 @@
                 this.<%= name %> = (<%= enumType %>)value;
             }
         }
-        
+
 <%
     AddSerialization(serializationList);
 %>
