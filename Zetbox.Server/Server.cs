@@ -251,27 +251,25 @@ namespace Zetbox.Server
         public void RunFixes()
         {
             using (Log.InfoTraceMethodCall("RunFixes"))
-            using (var subContainer = container.BeginLifetimeScope())
             {
-                var cfg = subContainer.Resolve<ZetboxConfig>();
-                var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
+                //var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
 
-                using (var db = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider))
-                {
-                    db.Open(connectionString.ConnectionString);
-                    using (Log.InfoTraceMethodCall("Testing MapColumnData"))
-                    {
-                        db.MapColumnData(new TableRef(null, "test", "Companies"), new[] { "ID" }, new TableRef(null, "test", "Companies"), new[] { "Name" },
-                        new[]{
-                                new Dictionary<object,object>() {
-                                    {1, "X"},
-                                    {2, "Y"},
-                                    {3, null},
-                                    {db.MappingDefaultSourceValue, "ZERO"},
-                                }
-                            });
-                    }
-                }
+                //using (var db = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider))
+                //{
+                //    db.Open(connectionString.ConnectionString);
+                //    using (Log.InfoTraceMethodCall("Testing MapColumnData"))
+                //    {
+                //        db.MapColumnData(new TableRef(null, "test", "Companies"), new[] { "ID" }, new TableRef(null, "test", "Companies"), new[] { "Name" },
+                //        new[]{
+                //                new Dictionary<object,object>() {
+                //                    {1, "X"},
+                //                    {2, "Y"},
+                //                    {3, null},
+                //                    {db.MappingDefaultSourceValue, "ZERO"},
+                //                }
+                //            });
+                //    }
+                //}
 
                 //using (Log.InfoTraceMethodCall("Setting Properties to TPH"))
                 //{
