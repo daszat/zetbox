@@ -415,6 +415,14 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\Serialization\EnumWithDefaultBinarySerialization.cs">
+      <DependentUpon>EnumWithDefaultBinarySerialization.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Serialization\EnumWithDefaultBinarySerialization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumWithDefaultBinarySerialization.cst</DependentUpon>
+    </Compile>
     <Compile Include="XBuildCompiler.cs" />
     <None Include="InterfaceTemplates\NamedObjects.cst">
       <Generator>Arebis Template Processor</Generator>
@@ -461,7 +469,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\Serialization\EnumBinarySerialization.cs" />
+    <Compile Include="Templates\Serialization\EnumBinarySerialization.cs">
+      <DependentUpon>EnumBinarySerialization.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Serialization\SimplePropertySerialization.cs">
       <DependentUpon>SimplePropertySerialization.cst</DependentUpon>
     </Compile>
@@ -523,6 +533,10 @@
     <None Include="Templates\ObjectClasses\TriggerFetchMethod.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>TriggerFetchMethod.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\EnumWithDefaultBinarySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EnumWithDefaultBinarySerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Zetbox.snk" />
     <None Include="InterfaceTemplates\CollectionEntries\CollectionEntries.cst">

@@ -296,12 +296,25 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
         {
             ApplyNotifyingValueProperty(prop, null);
-            Templates.Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize,
-                prop.DisableExport == true ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All,
-                prop.Module.Namespace,
-                prop.Name,
-                "Proxy." + prop.Name,
-                prop.GetElementTypeString());
+            if (prop.DefaultValue != null)
+            {
+                Templates.Serialization.EnumWithDefaultBinarySerialization.AddToSerializers(MembersToSerialize,
+                    prop.DisableExport == true ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All,
+                    prop.Module.Namespace,
+                    prop.Name,
+                    "Proxy." + prop.Name,
+                    prop.GetElementTypeString(),
+                    "_is" + prop.Name + "Set");
+            }
+            else
+            {
+                Templates.Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize,
+                    prop.DisableExport == true ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All,
+                    prop.Module.Namespace,
+                    prop.Name,
+                    "Proxy." + prop.Name,
+                    prop.GetElementTypeString());
+            }
         }
 
         protected override void ApplyListProperty(Property prop, Templates.Serialization.SerializationMembersList serList)

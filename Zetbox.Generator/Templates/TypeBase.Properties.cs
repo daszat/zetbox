@@ -136,7 +136,15 @@ namespace Zetbox.Generator.Templates
             this.WriteLine("        // enumeration property");
             this.ApplyNotifyingValueProperty(prop, null);
             var backingStoreName = String.Format("this._{0}", prop.Name);
-            Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize, prop, backingStoreName);
+            if (prop.DefaultValue != null)
+            {
+                var isSetFlagName = String.Format("_is{0}Set", prop.Name);
+                Serialization.EnumWithDefaultBinarySerialization.AddToSerializers(MembersToSerialize, prop, backingStoreName, isSetFlagName);
+            }
+            else
+            {
+                Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize, prop, backingStoreName);
+            }
         }
 
         protected virtual void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
