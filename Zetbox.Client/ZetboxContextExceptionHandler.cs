@@ -61,12 +61,13 @@ namespace Zetbox.Client
                 var error = (FKViolationException)inner;
                 var details = string.Join("\n", error.Details.Select(e =>
                 {
+                    if (e.RelGuid == default(Guid) || e.RelGuid == Guid.Empty) return e.DatabaseError;
                     var rel = frozenCtx.FindPersistenceObject<Relation>(e.RelGuid);
                     return string.Format(
                         ZetboxContextExceptionHandlerResources.FKViolationException_DetailFormatString,
                         rel.A.Type.Name,
-                        rel.B.Type.Name, 
-                        rel.A.RoleName, 
+                        rel.B.Type.Name,
+                        rel.A.RoleName,
                         rel.Verb,
                         rel.B.RoleName,
                         e.DatabaseError);
@@ -80,9 +81,20 @@ namespace Zetbox.Client
             else if (inner is UniqueConstraintViolationException)
             {
                 var error = (UniqueConstraintViolationException)inner;
+                var details = string.Join("\n", error.Details.Select(e =>
+                {
+                    if (e.IdxGuid == default(Guid) || e.IdxGuid == Guid.Empty) return e.DatabaseError;
+                    var idx = frozenCtx.FindPersistenceObject<IndexConstraint>(e.IdxGuid);
+                    return string.Format(
+                        ZetboxContextExceptionHandlerResources.UniqueConstraintViolationException_DetailFormatString, 
+                        idx.Constrained.Name,
+                        string.Join(", ", idx.Properties.Select(p => p.GetLabel())),
+                        idx.Reason,
+                        e.DatabaseError);
+                }));
                 vmf.CreateDialog(ctx, ZetboxContextExceptionHandlerResources.UniqueConstraintViolationException_Caption)
                     .AddTextBlock(string.Empty, ZetboxContextExceptionHandlerResources.UniqueConstraintViolationException_Message)
-                    .AddMultiLineString(ZetboxContextExceptionHandlerResources.DetailsLabel, string.Join("\n", error.Details.Select(e => string.Format(ZetboxContextExceptionHandlerResources.UniqueConstraintViolationException_DetailFormatString, e.DatabaseError))), true, true)
+                    .AddMultiLineString(ZetboxContextExceptionHandlerResources.DetailsLabel, details, true, true)
                     .Show();
                 return true;
             }

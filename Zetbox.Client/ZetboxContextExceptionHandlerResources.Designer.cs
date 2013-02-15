@@ -134,7 +134,8 @@ namespace Zetbox.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Database message is &quot;{0}&quot;.
+        ///   Looks up a localized string similar to Property/ies {1} of {0} has to be unique. Reason: {2}.
+        ///(Database message is &quot;{3}&quot;).
         /// </summary>
         internal static string UniqueConstraintViolationException_DetailFormatString {
             get {

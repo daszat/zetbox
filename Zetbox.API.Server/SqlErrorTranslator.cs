@@ -65,6 +65,7 @@ namespace Zetbox.API.Server
                 {
                     _index = _frozenCtx.GetQuery<IndexConstraint>()
                         .Where(i => i.IsUnique)
+                        .Where(i => i.Constrained is ObjectClass) // Only object classes can leed to an index in our database. Interfaces are just a "template"
                         .ToDictionary(i =>
                         {
                             var objClass = (ObjectClass)i.Constrained;

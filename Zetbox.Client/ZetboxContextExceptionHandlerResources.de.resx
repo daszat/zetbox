@@ -143,7 +143,8 @@
     <value>Werte nicht eindeutig</value>
   </data>
   <data name="UniqueConstraintViolationException_DetailFormatString" xml:space="preserve">
-    <value>Datenbankmeldung ist "{0}"</value>
+    <value>Eigenschaft/en {1} von {0} müssen eindeutig sein. Grund: {2}.
+(Datenbankmeldung ist "{3}")</value>
   </data>
   <data name="UniqueConstraintViolationException_Message" xml:space="preserve">
     <value>Mindestens ein Wert ist nicht eindeutig</value>

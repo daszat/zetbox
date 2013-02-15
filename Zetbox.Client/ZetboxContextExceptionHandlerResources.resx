@@ -143,7 +143,8 @@
     <value>Unique Error</value>
   </data>
   <data name="UniqueConstraintViolationException_DetailFormatString" xml:space="preserve">
-    <value>Database message is "{0}"</value>
+    <value>Property/ies {1} of {0} has to be unique. Reason: {2}.
+(Database message is "{3}")</value>
   </data>
   <data name="UniqueConstraintViolationException_Message" xml:space="preserve">
     <value>At least one value is not unique.</value>
