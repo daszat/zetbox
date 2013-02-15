@@ -25,8 +25,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
     public class PostgresqlErrorTranslator : SqlErrorTranslator
     {
-        public PostgresqlErrorTranslator(IFrozenContext frozenCtx, ISchemaProvider db)
-            : base(frozenCtx, db)
+        public PostgresqlErrorTranslator(IFrozenContext frozenCtx)
+            : base(frozenCtx)
         {
         }
 

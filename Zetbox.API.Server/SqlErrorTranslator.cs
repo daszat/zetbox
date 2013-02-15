@@ -33,12 +33,10 @@ namespace Zetbox.API.Server
     {
         private static readonly object _lock = new object();
         private IFrozenContext _frozenCtx;
-        private ISchemaProvider _db;
 
-        public SqlErrorTranslator(IFrozenContext frozenCtx, ISchemaProvider db)
+        public SqlErrorTranslator(IFrozenContext frozenCtx)
         {
             _frozenCtx = frozenCtx;
-            _db = db;
         }
 
         public abstract Exception Translate(Exception ex);
@@ -70,9 +68,14 @@ namespace Zetbox.API.Server
                         .ToDictionary(i =>
                         {
                             var objClass = (ObjectClass)i.Constrained;
-                            var tblName = objClass.GetTableRef(_db);
+                            if (objClass.GetTableMapping() == TableMapping.TPH)
+                            {
+                                objClass = objClass.GetRootClass();
+                            }
                             var columns = Construct.GetUCColNames(i);
-                            return Construct.IndexName(tblName.Name, columns);
+                            // GetTableRef needs an open ISchemaProvider!
+                            // Overkill -> construct table name for it's own
+                            return Construct.IndexName(objClass.TableName, columns);
                         });
                 }
             }

@@ -73,13 +73,13 @@ namespace Zetbox.Server.SchemaManagement
                 .InstancePerDependency();
 
             builder
-                .Register(c => new SqlProvider.SqlServerErrorTranslator(c.Resolve<IFrozenContext>(), new SqlProvider.SqlServer()))
+                .Register(c => new SqlProvider.SqlServerErrorTranslator(c.Resolve<IFrozenContext>()))
                 .As<ISqlErrorTranslator>()
                 .Named<ISqlErrorTranslator>("MSSQL")
                 .SingleInstance();
 
             builder
-                .Register(c => new NpgsqlProvider.PostgresqlErrorTranslator(c.Resolve<IFrozenContext>(), new NpgsqlProvider.Postgresql()))
+                .Register(c => new NpgsqlProvider.PostgresqlErrorTranslator(c.Resolve<IFrozenContext>()))
                 .As<ISqlErrorTranslator>()
                 .Named<ISqlErrorTranslator>("POSTGRESQL")
                 .SingleInstance();

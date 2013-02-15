@@ -25,8 +25,8 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
     public class SqlServerErrorTranslator : SqlErrorTranslator
     {
-        public SqlServerErrorTranslator(IFrozenContext frozenCtx, ISchemaProvider db)
-            : base(frozenCtx, db)
+        public SqlServerErrorTranslator(IFrozenContext frozenCtx)
+            : base(frozenCtx)
         {
         }
 
