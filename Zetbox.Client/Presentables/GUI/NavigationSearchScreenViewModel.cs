@@ -129,7 +129,7 @@ namespace Zetbox.Client.Presentables.GUI
             if (screen.IsMultiselect.HasValue) mdl.IsMultiselect = screen.IsMultiselect.Value;
             if (screen.RespectRequiredFilter.HasValue) mdl.RespectRequiredFilter = screen.RespectRequiredFilter.Value;
             if (screen.ShowCommands.HasValue) mdl.ShowCommands = screen.ShowCommands.Value;
-            if (screen.ShowFilter.HasValue) mdl.ShowFilter = screen.ShowFilter.Value;
+            if (screen.ShowFilter.HasValue) mdl.AllowFilter = screen.ShowFilter.Value;
             if (screen.ShowMasterDetail.HasValue) mdl.ShowMasterDetail = screen.ShowMasterDetail.Value;
 
             if (!string.IsNullOrEmpty(screen.InitialSort))

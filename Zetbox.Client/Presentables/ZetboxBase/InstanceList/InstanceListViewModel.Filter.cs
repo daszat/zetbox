@@ -53,11 +53,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     break;
                 case "ShowFilter":
                     OnPropertyChanged("ShowFilter");
-                    OnPropertyChanged("ShowConfig");
                     break;
                 case "AllowUserFilter":
                     OnPropertyChanged("AllowUserFilter");
                     OnPropertyChanged("ShowUtilities");
+                    break;
+                case "AllowFilter":
+                    OnPropertyChanged("AllowFilter");
+                    OnPropertyChanged("AllowUserFilter");
+                    OnPropertyChanged("ShowFilter");
+                    OnPropertyChanged("ShowUtilities");
+                    OnPropertyChanged("ShowConfig");
                     break;
             }
         }
@@ -104,17 +110,28 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 return FilterList.ShowFilter;
             }
-            set
-            {
-                FilterList.ShowFilter = value;
-            }
         }
 
         public bool ShowConfig
         {
             get
             {
-                return this.ShowFilter;
+                return this.AllowFilter;
+            }
+        }
+
+        /// <summary>
+        /// Allow the user to filter the collection
+        /// </summary>
+        public bool AllowFilter
+        {
+            get
+            {
+                return FilterList.AllowFilter;
+            }
+            set
+            {
+                FilterList.AllowFilter = value;
             }
         }
 

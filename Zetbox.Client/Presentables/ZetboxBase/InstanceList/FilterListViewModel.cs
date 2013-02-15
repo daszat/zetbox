@@ -71,20 +71,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private bool? _showFilter = null;
         public bool ShowFilter
         {
             get
             {
-                return _showFilter ?? Filter.Count() > 0;
-            }
-            set
-            {
-                if (_showFilter != value)
-                {
-                    _showFilter = value;
-                    OnPropertyChanged("ShowFilter");
-                }
+                return AllowFilter && Filter.Count() > 0;
             }
         }
 
@@ -109,6 +100,28 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        private bool _allowFilter = true;
+        /// <summary>
+        /// Allow the user to filter the collection
+        /// </summary>
+        public bool AllowFilter
+        {
+            get
+            {
+                return _allowFilter;
+            }
+            set
+            {
+                if (_allowFilter != value)
+                {
+                    _allowFilter = value;
+                    OnPropertyChanged("AllowFilter");
+                    OnPropertyChanged("ShowFilter");
+                    OnPropertyChanged("AllowUserFilter");
+                }
+            }
+        }
+
         private bool _allowUserFilter = true;
         /// <summary>
         /// Allow the user to modify the filter collection
@@ -117,7 +130,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return _allowUserFilter;
+                return _allowFilter && _allowUserFilter;
             }
             set
             {
@@ -281,6 +294,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             OnPropertyChanged("RespectRequiredFilter");
             OnPropertyChanged("HasUserFilter");
             OnPropertyChanged("Filter");
+            OnPropertyChanged("ShowFilter");
             OnPropertyChanged("FilterViewModels");
             OnPropertyChanged("FilterListEntryViewModels");
         }
@@ -301,6 +315,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             OnPropertyChanged("RespectRequiredFilter");
             OnPropertyChanged("HasUserFilter");
+            OnPropertyChanged("ShowFilter");
             OnPropertyChanged("Filter");
             OnPropertyChanged("FilterViewModels");
             OnPropertyChanged("FilterListEntryViewModels");
@@ -339,7 +354,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.AddFilterCommand,
                         InstanceListViewModelResources.AddFilterCommand_Tooltip,
                         AddFilter,
-                        () => ShowFilter && AllowUserFilter, 
+                        () => AllowFilter && AllowUserFilter, 
                         null);
                     _AddFilterCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }

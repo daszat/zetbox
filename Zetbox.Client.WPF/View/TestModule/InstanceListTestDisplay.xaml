@@ -42,8 +42,11 @@
                 </ctrls:LabeledContainer>
                 <TextBlock FontSize="20"
                            FontWeight="Bold">Filter:</TextBlock>
-                <ctrls:LabeledContainer Label="ShowFilter">
-                    <CheckBox IsChecked="{Binding TestList.ShowFilter}" />
+                <ctrls:LabeledContainer Label="AllowFilter">
+                    <CheckBox IsChecked="{Binding TestList.AllowFilter}" />
+                </ctrls:LabeledContainer>
+                <ctrls:LabeledContainer Label="AllowUserFilter">
+                    <CheckBox IsChecked="{Binding TestList.AllowUserFilter}" />
                 </ctrls:LabeledContainer>
                 <ctrls:LabeledContainer Label="EnableAutoFilter">
                     <CheckBox IsChecked="{Binding TestList.EnableAutoFilter}" />
@@ -51,12 +54,13 @@
                 <ctrls:LabeledContainer Label="RespectRequiredFilter">
                     <CheckBox IsChecked="{Binding TestList.RespectRequiredFilter}" />
                 </ctrls:LabeledContainer>
+                <ctrls:LabeledContainer Label="ShowFilter">
+                    <CheckBox IsEnabled="False"
+                              IsChecked="{Binding TestList.ShowFilter, Mode=OneWay}" />
+                </ctrls:LabeledContainer>
                 <ctrls:LabeledContainer Label="ShowConfig">
                     <CheckBox IsEnabled="False"
                               IsChecked="{Binding TestList.ShowConfig, Mode=OneWay}" />
-                </ctrls:LabeledContainer>
-                <ctrls:LabeledContainer Label="AllowUserFilter">
-                    <CheckBox IsChecked="{Binding TestList.AllowUserFilter}" />
                 </ctrls:LabeledContainer>
                 <TextBlock FontSize="20"
                            FontWeight="Bold">Commands:</TextBlock>

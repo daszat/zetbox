@@ -88,9 +88,6 @@ namespace Zetbox.Client.Presentables.TestModule
                         this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => qry);
-                    _TestList.EnableAutoFilter = false;
-                    _TestList.ShowCommands = false;
-                    _TestList.ShowFilter = false;
                     _TestList.ViewMethod = InstanceListViewMethod.Details;
                     _TestList.DisplayedColumnsCreated += new InstanceListViewModel.DisplayedColumnsCreatedHandler(_TestList_DisplayedColumnsCreated);
 
