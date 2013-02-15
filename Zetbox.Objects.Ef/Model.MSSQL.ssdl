@@ -1485,9 +1485,9 @@
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="MimeType" Type="nvarchar" MaxLength="1000" Nullable="false" />
-    <Property Name="OriginalName" Type="nvarchar" MaxLength="1000" Nullable="false" />
-    <Property Name="StoragePath" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="MimeType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="OriginalName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="StoragePath" Type="nvarchar" MaxLength="500" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Calendar">

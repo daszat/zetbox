@@ -44,8 +44,8 @@ namespace Zetbox.App.Base
         {
             this.Proxy = proxy;
             _isHasPersistentOrderSet = Proxy.ID > 0;
-            _isIsListSet = Proxy.ID > 0;
             _isIsCalculatedSet = Proxy.ID > 0;
+            _isIsListSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>

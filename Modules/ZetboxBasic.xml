@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-15T10:33:55Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-15T16:12:42Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -21749,7 +21749,7 @@ public static void isValid_Name(BaseParameter obj, PropertyIsValidEventArgs e)
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="ba5667b5-4306-42cb-8833-45932490ffe0">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Blob obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -21778,14 +21778,14 @@ public static void isValid_ChangedBy(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>ChangedBy</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>3</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>6</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>a2c8d70d-56f3-4617-a261-af7d4a8a7695</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="bd06a19d-16a6-4234-a1cd-79d09e317d92">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Blob obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -21815,7 +21815,7 @@ public static void isValid_ChangedOn(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>ChangedOn</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>1</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>4</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -21823,7 +21823,7 @@ public static void isValid_ChangedOn(Blob obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="1125d9cf-dcc5-4e70-9a3b-308b2f84ddb6">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Blob obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -21852,14 +21852,14 @@ public static void isValid_CreatedBy(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>CreatedBy</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>2</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>5</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>89e9d9d8-e041-4b67-b211-dca51fac90cd</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="9cc23a89-9bc3-4feb-bc56-82c696be80ba">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Blob obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -21889,7 +21889,7 @@ public static void isValid_CreatedOn(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>CreatedOn</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>3</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -21897,7 +21897,7 @@ public static void isValid_CreatedOn(Blob obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="0e39b312-faa7-4ee4-92a4-41773ccbd394">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Blob obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -21927,7 +21927,7 @@ public static void isValid_ExportGuid(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>ExportGuid</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>4</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>7</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -21935,7 +21935,7 @@ public static void isValid_ExportGuid(Blob obj, PropertyIsValidEventArgs e)
   </ZetboxBase:GuidProperty>
   <ZetboxBase:StringProperty ExportGuid="182a7118-5123-4d5f-b623-205e38573e8e">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_MimeType(Blob obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -21964,7 +21964,7 @@ public static void isValid_MimeType(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>MimeType</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>7</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>1</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -21972,7 +21972,7 @@ public static void isValid_MimeType(Blob obj, PropertyIsValidEventArgs e)
   </ZetboxBase:StringProperty>
   <ZetboxBase:StringProperty ExportGuid="c1f449e2-9532-4093-8667-6ba5f7372892">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_OriginalName(Blob obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -22001,7 +22001,7 @@ public static void isValid_OriginalName(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>OriginalName</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>5</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -22009,7 +22009,7 @@ public static void isValid_OriginalName(Blob obj, PropertyIsValidEventArgs e)
   </ZetboxBase:StringProperty>
   <ZetboxBase:StringProperty ExportGuid="bd8eaefd-0684-4c05-a6b5-6f4d97017e6c">
     <ZetboxBase:CategoryTags>Internal</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_StoragePath(Blob obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -22038,7 +22038,7 @@ public static void isValid_StoragePath(Blob obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>StoragePath</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>6</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>2</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -35612,16 +35612,52 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>182a7118-5123-4d5f-b623-205e38573e8e</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-03-10T00:26:17Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="8ff45b1c-5ed2-4fc2-8865-3bc59fb8db4e">
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>182a7118-5123-4d5f-b623-205e38573e8e</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>100</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:ViewReadOnlyConstraint ExportGuid="7531b640-bc34-40c0-9a45-02995e4c7e5d">
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>182a7118-5123-4d5f-b623-205e38573e8e</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ViewReadOnlyConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="a6a6d2bf-78c0-4e90-9594-f96e1f8fe95a">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.112031Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>c1f449e2-9532-4093-8667-6ba5f7372892</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-03-09T00:47:06Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="6e410ea9-1a34-432c-82bd-6a8f421e1761">
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>c1f449e2-9532-4093-8667-6ba5f7372892</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>500</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:ViewReadOnlyConstraint ExportGuid="f67e6b6d-c543-440c-8804-d40b767c7413">
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>c1f449e2-9532-4093-8667-6ba5f7372892</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ViewReadOnlyConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="d8b9b21b-f828-41e0-a4e7-e731dc9def85">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.116031Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>bd8eaefd-0684-4c05-a6b5-6f4d97017e6c</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-03-10T00:26:17Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="1fb4672c-996a-4e73-b457-a3a2d273b10a">
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>bd8eaefd-0684-4c05-a6b5-6f4d97017e6c</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>500</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:ViewReadOnlyConstraint ExportGuid="1e2b0e06-3ff3-4387-8fc9-d588d3927a4e">
+    <ZetboxBase:ChangedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>bd8eaefd-0684-4c05-a6b5-6f4d97017e6c</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T15:12:42.737351Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ViewReadOnlyConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="66dc1caa-75a3-4020-8fd6-d2049e914a04">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.119032Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>635818b4-065f-456c-b57e-4a7cdc8b3378</ZetboxBase:ConstrainedProperty>
@@ -35836,6 +35872,14 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>ba39e802-db21-40d3-8978-be947a2baaa9</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2013-01-28T10:56:07.184681Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:IntegerRangeConstraint ExportGuid="0726b8eb-cc21-4b66-8d72-2d0c57f27949">
+    <ZetboxBase:ChangedOn>2013-02-15T15:06:12.398025Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>35dd7765-0e26-4195-b687-ce814560ba34</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T15:06:12.398025Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Reason>Minimum is 1 (0 would be "no number") and .NET +/- 10^28</ZetboxBase:Reason>
+    <ZetboxBase:Max>28</ZetboxBase:Max>
+    <ZetboxBase:Min>1</ZetboxBase:Min>
+  </ZetboxBase:IntegerRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="dfd60ac8-70be-43a7-82ae-ca5e217025b1">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.281041Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>35dd7765-0e26-4195-b687-ce814560ba34</ZetboxBase:ConstrainedProperty>
@@ -36995,6 +37039,11 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:Reason>ExportGuid must be unique</ZetboxBase:Reason>
     <ZetboxBase:IsUnique>true</ZetboxBase:IsUnique>
   </ZetboxBase:IndexConstraint>
+  <ZetboxBase:IndexConstraint ExportGuid="3e718978-13c4-43e6-996c-7a6488ad02e1">
+    <ZetboxBase:Constrained>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</ZetboxBase:Constrained>
+    <ZetboxBase:Reason>The name of a data type must be unique within a module</ZetboxBase:Reason>
+    <ZetboxBase:IsUnique>true</ZetboxBase:IsUnique>
+  </ZetboxBase:IndexConstraint>
   <ZetboxBase:IndexConstraint ExportGuid="82fdcfd2-3cdf-47b2-aedd-a0a22b0e5772">
     <ZetboxBase:Constrained>74785c72-3271-4fb7-95fc-86b0baa09c8e</ZetboxBase:Constrained>
     <ZetboxBase:Reason>ExportGuid must be unique</ZetboxBase:Reason>
@@ -37096,6 +37145,14 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
   <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="2ca65426-40d6-4bb9-bb03-607e36ca0ef4">
     <ZetboxBase:A>3c59391e-5303-4505-8ea0-a9fe69fd138a</ZetboxBase:A>
     <ZetboxBase:B>9cee8923-5189-4e1e-b752-a87be1968491</ZetboxBase:B>
+  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
+  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="cd06e93e-1cee-4dd1-946f-fdd201fdfa85">
+    <ZetboxBase:A>3e718978-13c4-43e6-996c-7a6488ad02e1</ZetboxBase:A>
+    <ZetboxBase:B>083bbf12-aac6-4f5f-802a-d3701550bc84</ZetboxBase:B>
+  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
+  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="d4f79ac1-3c7c-45a1-bbe3-b1d8db3c67ed">
+    <ZetboxBase:A>3e718978-13c4-43e6-996c-7a6488ad02e1</ZetboxBase:A>
+    <ZetboxBase:B>4e1fb30b-e528-4968-95b0-f3a38eafe643</ZetboxBase:B>
   </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
   <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="7c4cd0d1-f906-49f6-9881-8e12bf6f52a6">
     <ZetboxBase:A>414a9199-e47c-4e29-94fd-a4064406009f</ZetboxBase:A>

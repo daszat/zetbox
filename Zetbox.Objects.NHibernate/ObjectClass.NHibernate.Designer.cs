@@ -43,9 +43,9 @@ namespace Zetbox.App.Base
             : base(lazyCtx, proxy) // pass proxy to parent
         {
             this.Proxy = proxy;
-            _isIsSimpleObjectSet = Proxy.ID > 0;
             _isIsAbstractSet = Proxy.ID > 0;
             _isIsFrozenObjectSet = Proxy.ID > 0;
+            _isIsSimpleObjectSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>

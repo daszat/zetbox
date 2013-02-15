@@ -1295,9 +1295,9 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="MimeType" Type="String" Nullable="false" MaxLength="1000"  />
-    <Property Name="OriginalName" Type="String" Nullable="false" MaxLength="1000"  />
-    <Property Name="StoragePath" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="MimeType" Type="String" Nullable="false" MaxLength="100"  />
+    <Property Name="OriginalName" Type="String" Nullable="false" MaxLength="500"  />
+    <Property Name="StoragePath" Type="String" Nullable="false" MaxLength="500"  />
   </EntityType>
   <EntityType Name="CalendarEfImpl">
     <Key>
