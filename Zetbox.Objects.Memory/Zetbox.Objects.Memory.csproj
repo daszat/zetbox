@@ -221,7 +221,16 @@
     <Compile Include="OrderedOneEnd.Memory.Designer.cs" />
     <Compile Include="Projekt.Memory.Designer.cs" />
     <Compile Include="Property.Memory.Designer.cs" />
+    <Compile Include="PropertyBoolTest.Memory.Designer.cs" />
+    <Compile Include="PropertyDateTimeTest.Memory.Designer.cs" />
+    <Compile Include="PropertyDecimalTest.Memory.Designer.cs" />
+    <Compile Include="PropertyDoubleTest.Memory.Designer.cs" />
+    <Compile Include="PropertyEnumTest.Memory.Designer.cs" />
     <Compile Include="PropertyFilterConfiguration.Memory.Designer.cs" />
+    <Compile Include="PropertyGuidTest.Memory.Designer.cs" />
+    <Compile Include="PropertyIntTest.Memory.Designer.cs" />
+    <Compile Include="PropertyStringTest.Memory.Designer.cs" />
+    <Compile Include="PropertyTestBase.Memory.Designer.cs" />
     <Compile Include="RangeFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="ReadOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="RecurrenceRuleTester.Memory.Designer.cs" />

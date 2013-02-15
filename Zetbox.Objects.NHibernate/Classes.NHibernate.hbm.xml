@@ -2360,6 +2360,255 @@
         <!-- define the subclasses -->
 
     </class>
+    <class name="Zetbox.App.Test.PropertyTestBaseNHibernateImpl+PropertyTestBaseProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.PropertyTestBaseNHibernateImpl+PropertyTestBaseProxy, Zetbox.Objects.NHibernateImpl"
+           discriminator-value="test.PropertyTests"
+           schema="`test`"
+           table="`PropertyTests`"
+           abstract="true"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`PropertyTests_ID_seq`</param>
+            </generator>
+        </id>
+        <discriminator column="`__Discriminator`"
+                       type="String" />
+
+
+        <!-- define the properties -->
+
+        <!-- define the subclasses -->
+        <subclass
+                name="Zetbox.App.Test.PropertyBoolTestNHibernateImpl+PropertyBoolTestProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Test.PropertyBoolTestNHibernateImpl+PropertyBoolTestProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="test.PropertyBoolTests"
+                dynamic-update="false">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Nullable" 
+                  column="`PropertyBoolTests_Nullable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NullableWithDefault" 
+                  column="`PropertyBoolTests_NullableWithDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Standard" 
+                  column="`PropertyBoolTests_Standard`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StandardWithDefault" 
+                  column="`PropertyBoolTests_StandardWithDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+        <subclass
+                name="Zetbox.App.Test.PropertyDateTimeTestNHibernateImpl+PropertyDateTimeTestProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Test.PropertyDateTimeTestNHibernateImpl+PropertyDateTimeTestProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="test.PropertyDateTimeTests"
+                dynamic-update="false">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Nullable" type="Timestamp"
+                  column="`PropertyDateTimeTests_Nullable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NullableWithDefault" type="Timestamp"
+                  column="`PropertyDateTimeTests_NullableWithDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Standard" type="Timestamp"
+                  column="`PropertyDateTimeTests_Standard`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StandardWithDefault" type="Timestamp"
+                  column="`PropertyDateTimeTests_StandardWithDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+        <subclass
+                name="Zetbox.App.Test.PropertyDecimalTestNHibernateImpl+PropertyDecimalTestProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Test.PropertyDecimalTestNHibernateImpl+PropertyDecimalTestProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="test.PropertyDecimalTests"
+                dynamic-update="false">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Nullable" 
+                  column="`PropertyDecimalTests_Nullable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NullableWithDefault" 
+                  column="`PropertyDecimalTests_NullableWithDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Standard" 
+                  column="`PropertyDecimalTests_Standard`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StandardWithDefault" 
+                  column="`PropertyDecimalTests_StandardWithDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+        <subclass
+                name="Zetbox.App.Test.PropertyDoubleTestNHibernateImpl+PropertyDoubleTestProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Test.PropertyDoubleTestNHibernateImpl+PropertyDoubleTestProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="test.PropertyDoubleTests"
+                dynamic-update="false">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Nullable" 
+                  column="`PropertyDoubleTests_Nullable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NullableWithDefault" 
+                  column="`PropertyDoubleTests_NullableWithDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Standard" 
+                  column="`PropertyDoubleTests_Standard`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StandardWithDefault" 
+                  column="`PropertyDoubleTests_StandardWithDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+        <subclass
+                name="Zetbox.App.Test.PropertyEnumTestNHibernateImpl+PropertyEnumTestProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Test.PropertyEnumTestNHibernateImpl+PropertyEnumTestProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="test.PropertyEnumTests"
+                dynamic-update="false">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Nullable" 
+                  column="`PropertyEnumTests_Nullable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NullableWithDefault" 
+                  column="`PropertyEnumTests_NullableWithDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Standard" 
+                  column="`PropertyEnumTests_Standard`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StandardWithDefault" 
+                  column="`PropertyEnumTests_StandardWithDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+        <subclass
+                name="Zetbox.App.Test.PropertyGuidTestNHibernateImpl+PropertyGuidTestProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Test.PropertyGuidTestNHibernateImpl+PropertyGuidTestProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="test.PropertyGuidTests"
+                dynamic-update="false">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Nullable" 
+                  column="`PropertyGuidTests_Nullable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NullableWithDefault" 
+                  column="`PropertyGuidTests_NullableWithDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Standard" 
+                  column="`PropertyGuidTests_Standard`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StandardWithDefault" 
+                  column="`PropertyGuidTests_StandardWithDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+        <subclass
+                name="Zetbox.App.Test.PropertyIntTestNHibernateImpl+PropertyIntTestProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Test.PropertyIntTestNHibernateImpl+PropertyIntTestProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="test.PropertyIntTests"
+                dynamic-update="false">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Nullable" 
+                  column="`PropertyIntTests_Nullable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NullableWithDefault" 
+                  column="`PropertyIntTests_NullableWithDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Standard" 
+                  column="`PropertyIntTests_Standard`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StandardWithDefault" 
+                  column="`PropertyIntTests_StandardWithDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+        <subclass
+                name="Zetbox.App.Test.PropertyStringTestNHibernateImpl+PropertyStringTestProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Test.PropertyStringTestNHibernateImpl+PropertyStringTestProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="test.PropertyStringTests"
+                dynamic-update="false">
+            
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Nullable" 
+                  column="`PropertyStringTests_Nullable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NullableWithDefault" 
+                  column="`PropertyStringTests_NullableWithDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Standard" 
+                  column="`PropertyStringTests_Standard`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StandardWithDefault" 
+                  column="`PropertyStringTests_StandardWithDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </subclass>
+
+    </class>
     <class name="Zetbox.App.Test.RecurrenceRuleTesterNHibernateImpl+RecurrenceRuleTesterProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Test.RecurrenceRuleTesterNHibernateImpl+RecurrenceRuleTesterProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"

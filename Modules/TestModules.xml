@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-15T10:00:35Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-15T10:33:55Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -4415,6 +4415,420 @@ public static void ObjectIsValid(OrderedOneEnd obj, ObjectIsValidEventArgs e)
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>OrderedOneEnds</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="1e6d6da7-eff6-41ca-ae12-60b46ee4ccab">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>PropertyBoolTest</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:BaseObjectClass>895d54f8-dc2a-4d53-a719-4d69dbb361d4</ZetboxBase:BaseObjectClass>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PropertyBoolTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PropertyBoolTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PropertyBoolTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PropertyBoolTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PropertyBoolTest obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyBoolTest obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>PropertyBoolTests</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="45e3bbe8-6bab-4410-8a17-83f81300bf20">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>PropertyDateTimeTest</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:BaseObjectClass>895d54f8-dc2a-4d53-a719-4d69dbb361d4</ZetboxBase:BaseObjectClass>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PropertyDateTimeTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PropertyDateTimeTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PropertyDateTimeTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PropertyDateTimeTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PropertyDateTimeTest obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyDateTimeTest obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>PropertyDateTimeTests</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="203d8613-79c5-4fbf-9bf7-0a3d13746a63">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>PropertyDecimalTest</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:BaseObjectClass>895d54f8-dc2a-4d53-a719-4d69dbb361d4</ZetboxBase:BaseObjectClass>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PropertyDecimalTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PropertyDecimalTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PropertyDecimalTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PropertyDecimalTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PropertyDecimalTest obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyDecimalTest obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>PropertyDecimalTests</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="fad3a1cb-80bf-4c13-abcf-489b67493818">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>PropertyDoubleTest</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:BaseObjectClass>895d54f8-dc2a-4d53-a719-4d69dbb361d4</ZetboxBase:BaseObjectClass>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PropertyDoubleTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PropertyDoubleTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PropertyDoubleTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PropertyDoubleTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PropertyDoubleTest obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyDoubleTest obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>PropertyDoubleTests</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="253dfd7e-18f7-423e-bae1-ad8776b76f30">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>PropertyEnumTest</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:BaseObjectClass>895d54f8-dc2a-4d53-a719-4d69dbb361d4</ZetboxBase:BaseObjectClass>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PropertyEnumTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PropertyEnumTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PropertyEnumTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PropertyEnumTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PropertyEnumTest obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyEnumTest obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>PropertyEnumTests</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="3cd78f02-b9b0-4a15-a910-d2ae25c76219">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>PropertyGuidTest</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:BaseObjectClass>895d54f8-dc2a-4d53-a719-4d69dbb361d4</ZetboxBase:BaseObjectClass>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PropertyGuidTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PropertyGuidTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PropertyGuidTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PropertyGuidTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PropertyGuidTest obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyGuidTest obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>PropertyGuidTests</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="d32de06d-b6d6-4adf-974a-aca5f3fc4e2c">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>PropertyIntTest</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:BaseObjectClass>895d54f8-dc2a-4d53-a719-4d69dbb361d4</ZetboxBase:BaseObjectClass>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PropertyIntTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PropertyIntTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PropertyIntTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PropertyIntTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PropertyIntTest obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyIntTest obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>PropertyIntTests</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="b64e8bc4-26eb-4077-ac96-41d1ef6dcfeb">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>PropertyStringTest</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:BaseObjectClass>895d54f8-dc2a-4d53-a719-4d69dbb361d4</ZetboxBase:BaseObjectClass>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PropertyStringTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PropertyStringTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PropertyStringTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PropertyStringTest obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PropertyStringTest obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyStringTest obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>PropertyStringTests</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="895d54f8-dc2a-4d53-a719-4d69dbb361d4">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>PropertyTestBase</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PropertyTestBase obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PropertyTestBase obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PropertyTestBase obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PropertyTestBase obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PropertyTestBase obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PropertyTestBase obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
+    <ZetboxBase:TableName>PropertyTests</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="b6c60adc-19f0-4169-8b78-53d7eaa549f7">
     <ZetboxBase:ChangedOn>2012-09-26T07:43:38.446767Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-09-26T07:43:38.446767Z</ZetboxBase:CreatedOn>
@@ -6400,6 +6814,1154 @@ public static void isValid_SomeInt(OrderedOneEnd obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:IntProperty>
+  <ZetboxBase:BoolProperty ExportGuid="4306b666-6c49-430d-8553-15719c7368f6">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Nullable(PropertyBoolTest obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Nullable(PropertyBoolTest obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Nullable(PropertyBoolTest obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Nullable(PropertyBoolTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Nullable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Nullable</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>1e6d6da7-eff6-41ca-ae12-60b46ee4ccab</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:BoolProperty ExportGuid="fab93c46-6d0c-48b5-80cf-b3a421199638">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_NullableWithDefault(PropertyBoolTest obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_NullableWithDefault(PropertyBoolTest obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_NullableWithDefault(PropertyBoolTest obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_NullableWithDefault(PropertyBoolTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.NullableWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>25174b5e-3ced-4a4d-a5d8-917091f46545</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>1e6d6da7-eff6-41ca-ae12-60b46ee4ccab</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:BoolProperty ExportGuid="bd0d8945-cf0e-4425-9e6d-e721b95d7254">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Standard(PropertyBoolTest obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Standard(PropertyBoolTest obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Standard(PropertyBoolTest obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Standard(PropertyBoolTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Standard == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Standard</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>1e6d6da7-eff6-41ca-ae12-60b46ee4ccab</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:BoolProperty ExportGuid="28a643a6-4723-4177-af27-978bc01749e1">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_StandardWithDefault(PropertyBoolTest obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StandardWithDefault(PropertyBoolTest obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StandardWithDefault(PropertyBoolTest obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StandardWithDefault(PropertyBoolTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StandardWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>598dff6d-3ff0-429c-ace6-419bb3668d0d</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>1e6d6da7-eff6-41ca-ae12-60b46ee4ccab</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="23d7a28c-4fcb-4114-ad8e-e8f153d53416">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Nullable(PropertyDateTimeTest obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Nullable(PropertyDateTimeTest obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Nullable(PropertyDateTimeTest obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Nullable(PropertyDateTimeTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Nullable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Nullable</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>45e3bbe8-6bab-4410-8a17-83f81300bf20</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="10f9b558-8b9d-42a4-bf88-f06f45796638">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_NullableWithDefault(PropertyDateTimeTest obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_NullableWithDefault(PropertyDateTimeTest obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_NullableWithDefault(PropertyDateTimeTest obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_NullableWithDefault(PropertyDateTimeTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.NullableWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>76ec877e-cae6-43bd-8e04-961ef083dbc8</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>45e3bbe8-6bab-4410-8a17-83f81300bf20</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="102b7845-5dfa-47aa-9145-480ce647cdf0">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Standard(PropertyDateTimeTest obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Standard(PropertyDateTimeTest obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Standard(PropertyDateTimeTest obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Standard(PropertyDateTimeTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Standard == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Standard</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>45e3bbe8-6bab-4410-8a17-83f81300bf20</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="ef10f84b-db3b-451e-96f6-f9b25dbd4f93">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_StandardWithDefault(PropertyDateTimeTest obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StandardWithDefault(PropertyDateTimeTest obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StandardWithDefault(PropertyDateTimeTest obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StandardWithDefault(PropertyDateTimeTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StandardWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>7116e778-636c-4655-8636-fe240fcca549</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>45e3bbe8-6bab-4410-8a17-83f81300bf20</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:DecimalProperty ExportGuid="64dd8890-2916-4862-aea7-8130a37af5f1">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Nullable(PropertyDecimalTest obj, PropertyGetterEventArgs&lt;decimal?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Nullable(PropertyDecimalTest obj, PropertyPreSetterEventArgs&lt;decimal?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Nullable(PropertyDecimalTest obj, PropertyPostSetterEventArgs&lt;decimal?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Nullable(PropertyDecimalTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Nullable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Nullable</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>203d8613-79c5-4fbf-9bf7-0a3d13746a63</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>481d7a65-208c-4706-8d4d-64ea629a109c</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Precision>0</ZetboxBase:Precision>
+    <ZetboxBase:Scale>0</ZetboxBase:Scale>
+  </ZetboxBase:DecimalProperty>
+  <ZetboxBase:DecimalProperty ExportGuid="e61715c4-d28d-4875-8fe5-6721e474bade">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_NullableWithDefault(PropertyDecimalTest obj, PropertyGetterEventArgs&lt;decimal?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_NullableWithDefault(PropertyDecimalTest obj, PropertyPreSetterEventArgs&lt;decimal?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_NullableWithDefault(PropertyDecimalTest obj, PropertyPostSetterEventArgs&lt;decimal?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_NullableWithDefault(PropertyDecimalTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.NullableWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>6fc25a3e-5be0-4bb5-8c02-ef532b60fd08</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>203d8613-79c5-4fbf-9bf7-0a3d13746a63</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>481d7a65-208c-4706-8d4d-64ea629a109c</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Precision>0</ZetboxBase:Precision>
+    <ZetboxBase:Scale>0</ZetboxBase:Scale>
+  </ZetboxBase:DecimalProperty>
+  <ZetboxBase:DecimalProperty ExportGuid="09550d54-4664-4a42-a17d-51494cd2dfe2">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Standard(PropertyDecimalTest obj, PropertyGetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Standard(PropertyDecimalTest obj, PropertyPreSetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Standard(PropertyDecimalTest obj, PropertyPostSetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Standard(PropertyDecimalTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Standard == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Standard</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>203d8613-79c5-4fbf-9bf7-0a3d13746a63</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>481d7a65-208c-4706-8d4d-64ea629a109c</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Precision>0</ZetboxBase:Precision>
+    <ZetboxBase:Scale>0</ZetboxBase:Scale>
+  </ZetboxBase:DecimalProperty>
+  <ZetboxBase:DecimalProperty ExportGuid="790555ff-0213-4308-a6ae-8a61fada1f4d">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_StandardWithDefault(PropertyDecimalTest obj, PropertyGetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StandardWithDefault(PropertyDecimalTest obj, PropertyPreSetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StandardWithDefault(PropertyDecimalTest obj, PropertyPostSetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StandardWithDefault(PropertyDecimalTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StandardWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>c1b341e3-23a5-42ea-a940-4f81f2390b7a</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>203d8613-79c5-4fbf-9bf7-0a3d13746a63</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>481d7a65-208c-4706-8d4d-64ea629a109c</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Precision>0</ZetboxBase:Precision>
+    <ZetboxBase:Scale>0</ZetboxBase:Scale>
+  </ZetboxBase:DecimalProperty>
+  <ZetboxBase:DoubleProperty ExportGuid="9c522da0-3493-4283-8957-9fd410cf61e9">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Nullable(PropertyDoubleTest obj, PropertyGetterEventArgs&lt;double?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Nullable(PropertyDoubleTest obj, PropertyPreSetterEventArgs&lt;double?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Nullable(PropertyDoubleTest obj, PropertyPostSetterEventArgs&lt;double?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Nullable(PropertyDoubleTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Nullable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Nullable</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>fad3a1cb-80bf-4c13-abcf-489b67493818</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DoubleProperty>
+  <ZetboxBase:DoubleProperty ExportGuid="948713cd-e37b-49bc-b798-40c75bb88ad3">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_NullableWithDefault(PropertyDoubleTest obj, PropertyGetterEventArgs&lt;double?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_NullableWithDefault(PropertyDoubleTest obj, PropertyPreSetterEventArgs&lt;double?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_NullableWithDefault(PropertyDoubleTest obj, PropertyPostSetterEventArgs&lt;double?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_NullableWithDefault(PropertyDoubleTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.NullableWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>2d67b2b7-7346-40ff-9905-d70af5ace971</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>fad3a1cb-80bf-4c13-abcf-489b67493818</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DoubleProperty>
+  <ZetboxBase:DoubleProperty ExportGuid="9284bbb7-5967-461d-ac65-c5c31daf0518">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Standard(PropertyDoubleTest obj, PropertyGetterEventArgs&lt;double&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Standard(PropertyDoubleTest obj, PropertyPreSetterEventArgs&lt;double&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Standard(PropertyDoubleTest obj, PropertyPostSetterEventArgs&lt;double&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Standard(PropertyDoubleTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Standard == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Standard</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>fad3a1cb-80bf-4c13-abcf-489b67493818</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DoubleProperty>
+  <ZetboxBase:DoubleProperty ExportGuid="fea98a15-11a2-46f6-a270-2522d24fe73c">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_StandardWithDefault(PropertyDoubleTest obj, PropertyGetterEventArgs&lt;double&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StandardWithDefault(PropertyDoubleTest obj, PropertyPreSetterEventArgs&lt;double&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StandardWithDefault(PropertyDoubleTest obj, PropertyPostSetterEventArgs&lt;double&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StandardWithDefault(PropertyDoubleTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StandardWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>1426eee3-766f-4721-a92d-71804accacbc</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>fad3a1cb-80bf-4c13-abcf-489b67493818</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DoubleProperty>
+  <ZetboxBase:EnumerationProperty ExportGuid="32836d4c-d488-4013-a74f-ac3c154658b8">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Nullable(PropertyEnumTest obj, PropertyGetterEventArgs&lt;Zetbox.App.Test.TestEnum?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Nullable(PropertyEnumTest obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Test.TestEnum?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Nullable(PropertyEnumTest obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Test.TestEnum?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Nullable(PropertyEnumTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Nullable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Nullable</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>253dfd7e-18f7-423e-bae1-ad8776b76f30</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
+  </ZetboxBase:EnumerationProperty>
+  <ZetboxBase:EnumerationProperty ExportGuid="813bed50-e879-4a9d-8baa-677a503a1d42">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_NullableWithDefault(PropertyEnumTest obj, PropertyGetterEventArgs&lt;Zetbox.App.Test.TestEnum?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_NullableWithDefault(PropertyEnumTest obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Test.TestEnum?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_NullableWithDefault(PropertyEnumTest obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Test.TestEnum?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_NullableWithDefault(PropertyEnumTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.NullableWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>10cf1112-4217-4c44-b4f1-bda1ec3616eb</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>253dfd7e-18f7-423e-bae1-ad8776b76f30</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
+  </ZetboxBase:EnumerationProperty>
+  <ZetboxBase:EnumerationProperty ExportGuid="3db32732-17d8-4851-84dd-3e03cff00a95">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Standard(PropertyEnumTest obj, PropertyGetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Standard(PropertyEnumTest obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Standard(PropertyEnumTest obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Standard(PropertyEnumTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Standard == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Standard</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>253dfd7e-18f7-423e-bae1-ad8776b76f30</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
+  </ZetboxBase:EnumerationProperty>
+  <ZetboxBase:EnumerationProperty ExportGuid="b2af71e1-a115-42c9-98ac-6e277afa8c24">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_StandardWithDefault(PropertyEnumTest obj, PropertyGetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StandardWithDefault(PropertyEnumTest obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StandardWithDefault(PropertyEnumTest obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StandardWithDefault(PropertyEnumTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StandardWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>6c4883f7-63ea-41ae-97bd-d342ab3c9f6a</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>253dfd7e-18f7-423e-bae1-ad8776b76f30</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
+  </ZetboxBase:EnumerationProperty>
+  <ZetboxBase:GuidProperty ExportGuid="974e7c02-bdd2-4f59-a261-efa2c1bed043">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Nullable(PropertyGuidTest obj, PropertyGetterEventArgs&lt;Guid?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Nullable(PropertyGuidTest obj, PropertyPreSetterEventArgs&lt;Guid?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Nullable(PropertyGuidTest obj, PropertyPostSetterEventArgs&lt;Guid?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Nullable(PropertyGuidTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Nullable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Nullable</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3cd78f02-b9b0-4a15-a910-d2ae25c76219</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:GuidProperty>
+  <ZetboxBase:GuidProperty ExportGuid="14dcc090-f91d-4c4b-9070-3606bd610f8d">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_NullableWithDefault(PropertyGuidTest obj, PropertyGetterEventArgs&lt;Guid?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_NullableWithDefault(PropertyGuidTest obj, PropertyPreSetterEventArgs&lt;Guid?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_NullableWithDefault(PropertyGuidTest obj, PropertyPostSetterEventArgs&lt;Guid?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_NullableWithDefault(PropertyGuidTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.NullableWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>817ccb17-087a-4f80-9011-bbd98cba9e53</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3cd78f02-b9b0-4a15-a910-d2ae25c76219</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:GuidProperty>
+  <ZetboxBase:GuidProperty ExportGuid="5cad6516-e9da-4b6e-97d7-ee91af20a1ef">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Standard(PropertyGuidTest obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Standard(PropertyGuidTest obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Standard(PropertyGuidTest obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Standard(PropertyGuidTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Standard == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Standard</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3cd78f02-b9b0-4a15-a910-d2ae25c76219</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:GuidProperty>
+  <ZetboxBase:GuidProperty ExportGuid="6d6e1b73-8b47-4d6d-879e-fa7cabbb3278">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_StandardWithDefault(PropertyGuidTest obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StandardWithDefault(PropertyGuidTest obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StandardWithDefault(PropertyGuidTest obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StandardWithDefault(PropertyGuidTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StandardWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>558b6e25-b579-4f95-861a-6bac4ef84aa9</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3cd78f02-b9b0-4a15-a910-d2ae25c76219</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:GuidProperty>
+  <ZetboxBase:IntProperty ExportGuid="5e697eb6-d998-4833-8193-7838e28945cd">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Nullable(PropertyIntTest obj, PropertyGetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Nullable(PropertyIntTest obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Nullable(PropertyIntTest obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Nullable(PropertyIntTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Nullable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Nullable</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>d32de06d-b6d6-4adf-974a-aca5f3fc4e2c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:IntProperty>
+  <ZetboxBase:IntProperty ExportGuid="6286a77c-f934-4059-b506-576c026f1e41">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_NullableWithDefault(PropertyIntTest obj, PropertyGetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_NullableWithDefault(PropertyIntTest obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_NullableWithDefault(PropertyIntTest obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_NullableWithDefault(PropertyIntTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.NullableWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>b330dc1e-4b0a-4446-9fea-996d7122ac67</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>d32de06d-b6d6-4adf-974a-aca5f3fc4e2c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:IntProperty>
+  <ZetboxBase:IntProperty ExportGuid="3fbf17a8-98c3-45d3-9da6-a398d34e8b3f">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Standard(PropertyIntTest obj, PropertyGetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Standard(PropertyIntTest obj, PropertyPreSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Standard(PropertyIntTest obj, PropertyPostSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Standard(PropertyIntTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Standard == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Standard</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>d32de06d-b6d6-4adf-974a-aca5f3fc4e2c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:IntProperty>
+  <ZetboxBase:IntProperty ExportGuid="e27dc7f9-c45f-46a1-87ef-6afdc78c2b4d">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_StandardWithDefault(PropertyIntTest obj, PropertyGetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StandardWithDefault(PropertyIntTest obj, PropertyPreSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StandardWithDefault(PropertyIntTest obj, PropertyPostSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StandardWithDefault(PropertyIntTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StandardWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>83d703ff-913b-4a81-a4d5-d4a84f08e7f3</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>d32de06d-b6d6-4adf-974a-aca5f3fc4e2c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:IntProperty>
+  <ZetboxBase:StringProperty ExportGuid="f814a77c-6daf-42f2-9eb1-bae214c6cfc9">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Nullable(PropertyStringTest obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Nullable(PropertyStringTest obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Nullable(PropertyStringTest obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Nullable(PropertyStringTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Nullable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Nullable</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>b64e8bc4-26eb-4077-ac96-41d1ef6dcfeb</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:StringProperty ExportGuid="233d8995-49ab-4026-9ef5-c08ea895396d">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_NullableWithDefault(PropertyStringTest obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_NullableWithDefault(PropertyStringTest obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_NullableWithDefault(PropertyStringTest obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_NullableWithDefault(PropertyStringTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.NullableWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>18e925c7-a58d-4bdc-b4a2-e59f64b2124d</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>NullableWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>b64e8bc4-26eb-4077-ac96-41d1ef6dcfeb</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:StringProperty ExportGuid="7c2ecfa3-d371-4a10-b848-86d1dcaa1239">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Standard(PropertyStringTest obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Standard(PropertyStringTest obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Standard(PropertyStringTest obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Standard(PropertyStringTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Standard == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Standard</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>b64e8bc4-26eb-4077-ac96-41d1ef6dcfeb</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:StringProperty ExportGuid="bab7391a-063d-48de-a4a6-bd5ecfa24f0e">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_StandardWithDefault(PropertyStringTest obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StandardWithDefault(PropertyStringTest obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StandardWithDefault(PropertyStringTest obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StandardWithDefault(PropertyStringTest obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StandardWithDefault == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>85c2c6e9-3b62-4ca6-b364-5cba9ec29c61</ZetboxBase:DefaultValue>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StandardWithDefault</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>b64e8bc4-26eb-4077-ac96-41d1ef6dcfeb</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:CompoundObjectProperty ExportGuid="404eda18-44aa-456c-aaa7-c1c45c6b7008">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T07:44:24.974428Z</ZetboxBase:ChangedOn>
@@ -9134,6 +10696,86 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Reason>TestEnum cannot be null</ZetboxBase:Reason>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="9da39bd4-6243-4b33-b38a-ac2e22e2fa89">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>bd0d8945-cf0e-4425-9e6d-e721b95d7254</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="0c6e2f10-ce05-4e1d-a2b4-284ef2953027">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>28a643a6-4723-4177-af27-978bc01749e1</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="5a4bc90f-42d9-4497-80d4-8e5b0d2a5705">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>102b7845-5dfa-47aa-9145-480ce647cdf0</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="f2350d17-53c5-4ee3-aabd-3264a3f69e17">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ef10f84b-db3b-451e-96f6-f9b25dbd4f93</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="46970ddd-2c11-46ef-a005-f648a543a0c7">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>09550d54-4664-4a42-a17d-51494cd2dfe2</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="c7a3f2c5-c96d-425c-93be-ddd74d898ff4">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>790555ff-0213-4308-a6ae-8a61fada1f4d</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="f2cb9236-eb53-4aee-81e2-083cd05b5074">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>9284bbb7-5967-461d-ac65-c5c31daf0518</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="c33ed5fe-342b-495e-871d-5af2f91f6f11">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>fea98a15-11a2-46f6-a270-2522d24fe73c</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="e699c0a6-88d1-4d09-aa1a-d975187d38ae">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>3db32732-17d8-4851-84dd-3e03cff00a95</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="5c98e997-4234-43dc-9f55-2e97aa91f003">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>b2af71e1-a115-42c9-98ac-6e277afa8c24</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="8bd577dc-e068-4e9c-9bf3-b3cc2e9f7c5c">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>5cad6516-e9da-4b6e-97d7-ee91af20a1ef</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="01648336-6631-41ba-9836-bb48f6fa331d">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>6d6e1b73-8b47-4d6d-879e-fa7cabbb3278</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="10caa5b0-9b48-47c0-bd60-201ec44d2203">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>3fbf17a8-98c3-45d3-9da6-a398d34e8b3f</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="a29c3cac-efd1-4ed3-ba03-9833a57d035a">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>e27dc7f9-c45f-46a1-87ef-6afdc78c2b4d</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="766db661-60d3-467a-adb3-5649b5787890">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>7c2ecfa3-d371-4a10-b848-86d1dcaa1239</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="c6fdd440-005d-4a4d-a76d-8ac067844587">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>bab7391a-063d-48de-a4a6-bd5ecfa24f0e</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="ac3daf8c-4f88-437f-8793-1e00cb5fca8c">
     <ZetboxBase:ChangedOn>2011-08-17T10:40:40.760023Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>09fb9f88-7a59-4dae-8cad-9fbab99f32c3</ZetboxBase:ConstrainedProperty>
@@ -9351,6 +10993,98 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:CreatedOn>2012-07-18T19:41:43.085769Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>65839be9-d3b7-4910-9812-c2d44d008c41</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="25174b5e-3ced-4a4d-a5d8-917091f46545">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>fab93c46-6d0c-48b5-80cf-b3a421199638</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>true</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="598dff6d-3ff0-429c-ace6-419bb3668d0d">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>28a643a6-4723-4177-af27-978bc01749e1</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>true</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="76ec877e-cae6-43bd-8e04-961ef083dbc8">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>10f9b558-8b9d-42a4-bf88-f06f45796638</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="7116e778-636c-4655-8636-fe240fcca549">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>ef10f84b-db3b-451e-96f6-f9b25dbd4f93</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:DecimalDefaultValue ExportGuid="6fc25a3e-5be0-4bb5-8c02-ef532b60fd08">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>e61715c4-d28d-4875-8fe5-6721e474bade</ZetboxBase:Property>
+    <ZetboxBase:DecimalValue>5.50000</ZetboxBase:DecimalValue>
+  </ZetboxBase:DecimalDefaultValue>
+  <ZetboxBase:DecimalDefaultValue ExportGuid="c1b341e3-23a5-42ea-a940-4f81f2390b7a">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>790555ff-0213-4308-a6ae-8a61fada1f4d</ZetboxBase:Property>
+    <ZetboxBase:DecimalValue>5.50000</ZetboxBase:DecimalValue>
+  </ZetboxBase:DecimalDefaultValue>
+  <ZetboxBase:DoubleDefaultValue ExportGuid="2d67b2b7-7346-40ff-9905-d70af5ace971">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>948713cd-e37b-49bc-b798-40c75bb88ad3</ZetboxBase:Property>
+    <ZetboxBase:DoubleValue>5.5</ZetboxBase:DoubleValue>
+  </ZetboxBase:DoubleDefaultValue>
+  <ZetboxBase:DoubleDefaultValue ExportGuid="1426eee3-766f-4721-a92d-71804accacbc">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>fea98a15-11a2-46f6-a270-2522d24fe73c</ZetboxBase:Property>
+    <ZetboxBase:DoubleValue>5.5</ZetboxBase:DoubleValue>
+  </ZetboxBase:DoubleDefaultValue>
+  <ZetboxBase:EnumDefaultValue ExportGuid="10cf1112-4217-4c44-b4f1-bda1ec3616eb">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>813bed50-e879-4a9d-8baa-677a503a1d42</ZetboxBase:Property>
+    <ZetboxBase:EnumValue>93bac9f3-c4c6-4ed2-9c93-0f4575200333</ZetboxBase:EnumValue>
+  </ZetboxBase:EnumDefaultValue>
+  <ZetboxBase:EnumDefaultValue ExportGuid="6c4883f7-63ea-41ae-97bd-d342ab3c9f6a">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>b2af71e1-a115-42c9-98ac-6e277afa8c24</ZetboxBase:Property>
+    <ZetboxBase:EnumValue>93bac9f3-c4c6-4ed2-9c93-0f4575200333</ZetboxBase:EnumValue>
+  </ZetboxBase:EnumDefaultValue>
+  <ZetboxBase:NewGuidDefaultValue ExportGuid="817ccb17-087a-4f80-9011-bbd98cba9e53">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>14dcc090-f91d-4c4b-9070-3606bd610f8d</ZetboxBase:Property>
+  </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:NewGuidDefaultValue ExportGuid="558b6e25-b579-4f95-861a-6bac4ef84aa9">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>6d6e1b73-8b47-4d6d-879e-fa7cabbb3278</ZetboxBase:Property>
+  </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:IntDefaultValue ExportGuid="b330dc1e-4b0a-4446-9fea-996d7122ac67">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>6286a77c-f934-4059-b506-576c026f1e41</ZetboxBase:Property>
+    <ZetboxBase:IntValue>5</ZetboxBase:IntValue>
+  </ZetboxBase:IntDefaultValue>
+  <ZetboxBase:IntDefaultValue ExportGuid="83d703ff-913b-4a81-a4d5-d4a84f08e7f3">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>e27dc7f9-c45f-46a1-87ef-6afdc78c2b4d</ZetboxBase:Property>
+    <ZetboxBase:IntValue>5</ZetboxBase:IntValue>
+  </ZetboxBase:IntDefaultValue>
+  <ZetboxBase:StringDefaultValue ExportGuid="18e925c7-a58d-4bdc-b4a2-e59f64b2124d">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>233d8995-49ab-4026-9ef5-c08ea895396d</ZetboxBase:Property>
+    <ZetboxBase:DefaultValue>five point five</ZetboxBase:DefaultValue>
+  </ZetboxBase:StringDefaultValue>
+  <ZetboxBase:StringDefaultValue ExportGuid="85c2c6e9-3b62-4ca6-b364-5cba9ec29c61">
+    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>bab7391a-063d-48de-a4a6-bd5ecfa24f0e</ZetboxBase:Property>
+    <ZetboxBase:DefaultValue>five point five</ZetboxBase:DefaultValue>
+  </ZetboxBase:StringDefaultValue>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="e4bf5846-5107-4b2b-a41b-2d56cfac94be">
     <ZetboxBase:ChangedOn>2012-08-03T11:54:45.292812Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-08-03T11:54:45.292812Z</ZetboxBase:CreatedOn>

@@ -224,7 +224,16 @@
     <Compile Include="OrderedOneEnd.Ef.Designer.cs" />
     <Compile Include="Projekt.Ef.Designer.cs" />
     <Compile Include="Property.Ef.Designer.cs" />
+    <Compile Include="PropertyBoolTest.Ef.Designer.cs" />
+    <Compile Include="PropertyDateTimeTest.Ef.Designer.cs" />
+    <Compile Include="PropertyDecimalTest.Ef.Designer.cs" />
+    <Compile Include="PropertyDoubleTest.Ef.Designer.cs" />
+    <Compile Include="PropertyEnumTest.Ef.Designer.cs" />
     <Compile Include="PropertyFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="PropertyGuidTest.Ef.Designer.cs" />
+    <Compile Include="PropertyIntTest.Ef.Designer.cs" />
+    <Compile Include="PropertyStringTest.Ef.Designer.cs" />
+    <Compile Include="PropertyTestBase.Ef.Designer.cs" />
     <Compile Include="RangeFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="ReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="RecurrenceRuleTester.Ef.Designer.cs" />

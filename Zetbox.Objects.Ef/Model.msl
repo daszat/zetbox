@@ -1310,6 +1310,88 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PropertyTestBaseEfImpl">
+      <EntityTypeMapping TypeName="Model.PropertyBoolTestEfImpl">
+	    <MappingFragment StoreEntitySet="PropertyTestBase">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nullable" ColumnName="PropertyBoolTests_Nullable" />
+          <ScalarProperty Name="NullableWithDefault" ColumnName="PropertyBoolTests_NullableWithDefault" />
+          <ScalarProperty Name="Standard" ColumnName="PropertyBoolTests_Standard" />
+          <ScalarProperty Name="StandardWithDefault" ColumnName="PropertyBoolTests_StandardWithDefault" />
+          <Condition ColumnName="__Discriminator" Value="test.PropertyBoolTests" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.PropertyDateTimeTestEfImpl">
+	    <MappingFragment StoreEntitySet="PropertyTestBase">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nullable" ColumnName="PropertyDateTimeTests_Nullable" />
+          <ScalarProperty Name="NullableWithDefault" ColumnName="PropertyDateTimeTests_NullableWithDefault" />
+          <ScalarProperty Name="Standard" ColumnName="PropertyDateTimeTests_Standard" />
+          <ScalarProperty Name="StandardWithDefault" ColumnName="PropertyDateTimeTests_StandardWithDefault" />
+          <Condition ColumnName="__Discriminator" Value="test.PropertyDateTimeTests" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.PropertyDecimalTestEfImpl">
+	    <MappingFragment StoreEntitySet="PropertyTestBase">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nullable" ColumnName="PropertyDecimalTests_Nullable" />
+          <ScalarProperty Name="NullableWithDefault" ColumnName="PropertyDecimalTests_NullableWithDefault" />
+          <ScalarProperty Name="Standard" ColumnName="PropertyDecimalTests_Standard" />
+          <ScalarProperty Name="StandardWithDefault" ColumnName="PropertyDecimalTests_StandardWithDefault" />
+          <Condition ColumnName="__Discriminator" Value="test.PropertyDecimalTests" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.PropertyDoubleTestEfImpl">
+	    <MappingFragment StoreEntitySet="PropertyTestBase">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nullable" ColumnName="PropertyDoubleTests_Nullable" />
+          <ScalarProperty Name="NullableWithDefault" ColumnName="PropertyDoubleTests_NullableWithDefault" />
+          <ScalarProperty Name="Standard" ColumnName="PropertyDoubleTests_Standard" />
+          <ScalarProperty Name="StandardWithDefault" ColumnName="PropertyDoubleTests_StandardWithDefault" />
+          <Condition ColumnName="__Discriminator" Value="test.PropertyDoubleTests" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.PropertyEnumTestEfImpl">
+	    <MappingFragment StoreEntitySet="PropertyTestBase">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NullableImpl" ColumnName="PropertyEnumTests_Nullable" />
+          <ScalarProperty Name="NullableWithDefaultImpl" ColumnName="PropertyEnumTests_NullableWithDefault" />
+          <ScalarProperty Name="StandardImpl" ColumnName="PropertyEnumTests_Standard" />
+          <ScalarProperty Name="StandardWithDefaultImpl" ColumnName="PropertyEnumTests_StandardWithDefault" />
+          <Condition ColumnName="__Discriminator" Value="test.PropertyEnumTests" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.PropertyGuidTestEfImpl">
+	    <MappingFragment StoreEntitySet="PropertyTestBase">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nullable" ColumnName="PropertyGuidTests_Nullable" />
+          <ScalarProperty Name="NullableWithDefault" ColumnName="PropertyGuidTests_NullableWithDefault" />
+          <ScalarProperty Name="Standard" ColumnName="PropertyGuidTests_Standard" />
+          <ScalarProperty Name="StandardWithDefault" ColumnName="PropertyGuidTests_StandardWithDefault" />
+          <Condition ColumnName="__Discriminator" Value="test.PropertyGuidTests" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.PropertyIntTestEfImpl">
+	    <MappingFragment StoreEntitySet="PropertyTestBase">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nullable" ColumnName="PropertyIntTests_Nullable" />
+          <ScalarProperty Name="NullableWithDefault" ColumnName="PropertyIntTests_NullableWithDefault" />
+          <ScalarProperty Name="Standard" ColumnName="PropertyIntTests_Standard" />
+          <ScalarProperty Name="StandardWithDefault" ColumnName="PropertyIntTests_StandardWithDefault" />
+          <Condition ColumnName="__Discriminator" Value="test.PropertyIntTests" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.PropertyStringTestEfImpl">
+	    <MappingFragment StoreEntitySet="PropertyTestBase">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nullable" ColumnName="PropertyStringTests_Nullable" />
+          <ScalarProperty Name="NullableWithDefault" ColumnName="PropertyStringTests_NullableWithDefault" />
+          <ScalarProperty Name="Standard" ColumnName="PropertyStringTests_Standard" />
+          <ScalarProperty Name="StandardWithDefault" ColumnName="PropertyStringTests_StandardWithDefault" />
+          <Condition ColumnName="__Discriminator" Value="test.PropertyStringTests" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="RecurrenceRuleTesterEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.RecurrenceRuleTesterEfImpl)">
 	    <MappingFragment StoreEntitySet="RecurrenceRuleTester">

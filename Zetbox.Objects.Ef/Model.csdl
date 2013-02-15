@@ -60,6 +60,7 @@
       <End Role="Projekt_Rights" EntitySet="Projekt_Rights" />
     </AssociationSet>
     <EntitySet Name="PropertyEfImpl" EntityType="Model.PropertyEfImpl" />
+    <EntitySet Name="PropertyTestBaseEfImpl" EntityType="Model.PropertyTestBaseEfImpl" />
     <EntitySet Name="RecurrenceRuleTesterEfImpl" EntityType="Model.RecurrenceRuleTesterEfImpl" />
     <EntitySet Name="RelationEfImpl" EntityType="Model.RelationEfImpl" />
     <EntitySet Name="RelationEndEfImpl" EntityType="Model.RelationEndEfImpl" />
@@ -2119,6 +2120,12 @@
                         FromRole="Property"
                         ToRole="ValueModelDescriptor" />
   </EntityType>
+  <EntityType Name="PropertyTestBaseEfImpl" Abstract="true">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
   <EntityType Name="RecurrenceRuleTesterEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -3061,11 +3068,59 @@
   <EntityType Name="OptionalPredicateFilterConfigurationEfImpl" BaseType="Model.ObjectClassFilterConfigurationEfImpl">
     <Property Name="Predicate" Type="String" Nullable="true" MaxLength="1000"  />
   </EntityType>
+  <EntityType Name="PropertyBoolTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
+    <Property Name="Nullable" Type="Boolean" Nullable="true"  />
+    <Property Name="NullableWithDefault" Type="Boolean" Nullable="true"  />
+    <Property Name="Standard" Type="Boolean" Nullable="false"  />
+    <Property Name="StandardWithDefault" Type="Boolean" Nullable="false"  />
+  </EntityType>
+  <EntityType Name="PropertyDateTimeTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
+    <Property Name="Nullable" Type="DateTime" Nullable="true"  />
+    <Property Name="NullableWithDefault" Type="DateTime" Nullable="true"  />
+    <Property Name="Standard" Type="DateTime" Nullable="false"  />
+    <Property Name="StandardWithDefault" Type="DateTime" Nullable="false"  />
+  </EntityType>
+  <EntityType Name="PropertyDecimalTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
+    <Property Name="Nullable" Type="Decimal" Nullable="true" Precision="0" Scale="0"  />
+    <Property Name="NullableWithDefault" Type="Decimal" Nullable="true" Precision="0" Scale="0"  />
+    <Property Name="Standard" Type="Decimal" Nullable="false" Precision="0" Scale="0"  />
+    <Property Name="StandardWithDefault" Type="Decimal" Nullable="false" Precision="0" Scale="0"  />
+  </EntityType>
+  <EntityType Name="PropertyDoubleTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
+    <Property Name="Nullable" Type="Double" Nullable="true"  />
+    <Property Name="NullableWithDefault" Type="Double" Nullable="true"  />
+    <Property Name="Standard" Type="Double" Nullable="false"  />
+    <Property Name="StandardWithDefault" Type="Double" Nullable="false"  />
+  </EntityType>
+  <EntityType Name="PropertyEnumTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
+    <Property Name="NullableImpl" Type="Int32" Nullable="true"  />
+    <Property Name="NullableWithDefaultImpl" Type="Int32" Nullable="true"  />
+    <Property Name="StandardImpl" Type="Int32" Nullable="false"  />
+    <Property Name="StandardWithDefaultImpl" Type="Int32" Nullable="false"  />
+  </EntityType>
   <EntityType Name="PropertyFilterConfigurationEfImpl" BaseType="Model.FilterConfigurationEfImpl" Abstract="true">
     <NavigationProperty Name="PropertyImpl"
                         Relationship="Model.FK_Property_Has_PropertyFilterConfiguration"
                         FromRole="PropertyFilterConfiguration"
                         ToRole="Property" />
+  </EntityType>
+  <EntityType Name="PropertyGuidTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
+    <Property Name="Nullable" Type="Guid" Nullable="true"  />
+    <Property Name="NullableWithDefault" Type="Guid" Nullable="true"  />
+    <Property Name="Standard" Type="Guid" Nullable="false"  />
+    <Property Name="StandardWithDefault" Type="Guid" Nullable="false"  />
+  </EntityType>
+  <EntityType Name="PropertyIntTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
+    <Property Name="Nullable" Type="Int32" Nullable="true"  />
+    <Property Name="NullableWithDefault" Type="Int32" Nullable="true"  />
+    <Property Name="Standard" Type="Int32" Nullable="false"  />
+    <Property Name="StandardWithDefault" Type="Int32" Nullable="false"  />
+  </EntityType>
+  <EntityType Name="PropertyStringTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
+    <Property Name="Nullable" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="NullableWithDefault" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Standard" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="StandardWithDefault" Type="String" Nullable="false" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="RangeFilterConfigurationEfImpl" BaseType="Model.PropertyFilterConfigurationEfImpl">
   </EntityType>

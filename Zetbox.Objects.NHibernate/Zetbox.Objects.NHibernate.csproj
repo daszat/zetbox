@@ -236,7 +236,16 @@
     <Compile Include="OrderedOneEnd.NHibernate.Designer.cs" />
     <Compile Include="Projekt.NHibernate.Designer.cs" />
     <Compile Include="Property.NHibernate.Designer.cs" />
+    <Compile Include="PropertyBoolTest.NHibernate.Designer.cs" />
+    <Compile Include="PropertyDateTimeTest.NHibernate.Designer.cs" />
+    <Compile Include="PropertyDecimalTest.NHibernate.Designer.cs" />
+    <Compile Include="PropertyDoubleTest.NHibernate.Designer.cs" />
+    <Compile Include="PropertyEnumTest.NHibernate.Designer.cs" />
     <Compile Include="PropertyFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="PropertyGuidTest.NHibernate.Designer.cs" />
+    <Compile Include="PropertyIntTest.NHibernate.Designer.cs" />
+    <Compile Include="PropertyStringTest.NHibernate.Designer.cs" />
+    <Compile Include="PropertyTestBase.NHibernate.Designer.cs" />
     <Compile Include="RangeFilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="ReadOnlyConstraint.NHibernate.Designer.cs" />
     <Compile Include="RecurrenceRuleTester.NHibernate.Designer.cs" />

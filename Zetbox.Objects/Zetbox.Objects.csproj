@@ -195,7 +195,16 @@
     <Compile Include="OrderedOneEnd.Interface.Designer.cs" />
     <Compile Include="Projekt.Interface.Designer.cs" />
     <Compile Include="Property.Interface.Designer.cs" />
+    <Compile Include="PropertyBoolTest.Interface.Designer.cs" />
+    <Compile Include="PropertyDateTimeTest.Interface.Designer.cs" />
+    <Compile Include="PropertyDecimalTest.Interface.Designer.cs" />
+    <Compile Include="PropertyDoubleTest.Interface.Designer.cs" />
+    <Compile Include="PropertyEnumTest.Interface.Designer.cs" />
     <Compile Include="PropertyFilterConfiguration.Interface.Designer.cs" />
+    <Compile Include="PropertyGuidTest.Interface.Designer.cs" />
+    <Compile Include="PropertyIntTest.Interface.Designer.cs" />
+    <Compile Include="PropertyStringTest.Interface.Designer.cs" />
+    <Compile Include="PropertyTestBase.Interface.Designer.cs" />
     <Compile Include="RangeFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="ReadOnlyConstraint.Interface.Designer.cs" />
     <Compile Include="RecurrenceRuleTester.Interface.Designer.cs" />

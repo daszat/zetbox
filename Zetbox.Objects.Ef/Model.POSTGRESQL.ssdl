@@ -64,6 +64,7 @@
       <End Role="Projekt_Rights" EntitySet="Projekt_Rights" />
     </AssociationSet>
     <EntitySet Name="Property" EntityType="Model.Store.Property" Schema="base" Table="Properties"/>
+    <EntitySet Name="PropertyTestBase" EntityType="Model.Store.PropertyTestBase" Schema="test" Table="PropertyTests"/>
     <EntitySet Name="RecurrenceRuleTester" EntityType="Model.Store.RecurrenceRuleTester" Schema="test" Table="RecurrenceRuleTester"/>
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Schema="base" Table="Relations"/>
     <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Schema="base" Table="RelationEnds"/>
@@ -2186,6 +2187,46 @@
     <Property Name="DecimalProperties_Precision" Type="int4" Nullable="true" />
     <Property Name="DecimalProperties_Scale" Type="int4" Nullable="true" />
     <Property Name="EnumerationProperties_fk_Enumeration" Type="int4" />
+  </EntityType>
+	
+  <EntityType Name="PropertyTestBase">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="__Discriminator" Type="varchar" Nullable="false" />
+    <Property Name="PropertyBoolTests_Nullable" Type="bool" Nullable="true" />
+    <Property Name="PropertyBoolTests_NullableWithDefault" Type="bool" Nullable="true" />
+    <Property Name="PropertyBoolTests_Standard" Type="bool" Nullable="true" />
+    <Property Name="PropertyBoolTests_StandardWithDefault" Type="bool" Nullable="true" />
+    <Property Name="PropertyDateTimeTests_Nullable" Type="timestamp" Nullable="true" />
+    <Property Name="PropertyDateTimeTests_NullableWithDefault" Type="timestamp" Nullable="true" />
+    <Property Name="PropertyDateTimeTests_Standard" Type="timestamp" Nullable="true" />
+    <Property Name="PropertyDateTimeTests_StandardWithDefault" Type="timestamp" Nullable="true" />
+    <Property Name="PropertyDecimalTests_Nullable" Type="numeric" Precision="0" Scale="0" Nullable="true" />
+    <Property Name="PropertyDecimalTests_NullableWithDefault" Type="numeric" Precision="0" Scale="0" Nullable="true" />
+    <Property Name="PropertyDecimalTests_Standard" Type="numeric" Precision="0" Scale="0" Nullable="true" />
+    <Property Name="PropertyDecimalTests_StandardWithDefault" Type="numeric" Precision="0" Scale="0" Nullable="true" />
+    <Property Name="PropertyDoubleTests_Nullable" Type="float8" Nullable="true" />
+    <Property Name="PropertyDoubleTests_NullableWithDefault" Type="float8" Nullable="true" />
+    <Property Name="PropertyDoubleTests_Standard" Type="float8" Nullable="true" />
+    <Property Name="PropertyDoubleTests_StandardWithDefault" Type="float8" Nullable="true" />
+    <Property Name="PropertyEnumTests_Nullable" Type="int4" Nullable="true" />
+    <Property Name="PropertyEnumTests_NullableWithDefault" Type="int4" Nullable="true" />
+    <Property Name="PropertyEnumTests_Standard" Type="int4" Nullable="true" />
+    <Property Name="PropertyEnumTests_StandardWithDefault" Type="int4" Nullable="true" />
+    <Property Name="PropertyGuidTests_Nullable" Type="uuid" Nullable="true" />
+    <Property Name="PropertyGuidTests_NullableWithDefault" Type="uuid" Nullable="true" />
+    <Property Name="PropertyGuidTests_Standard" Type="uuid" Nullable="true" />
+    <Property Name="PropertyGuidTests_StandardWithDefault" Type="uuid" Nullable="true" />
+    <Property Name="PropertyIntTests_Nullable" Type="int4" Nullable="true" />
+    <Property Name="PropertyIntTests_NullableWithDefault" Type="int4" Nullable="true" />
+    <Property Name="PropertyIntTests_Standard" Type="int4" Nullable="true" />
+    <Property Name="PropertyIntTests_StandardWithDefault" Type="int4" Nullable="true" />
+    <Property Name="PropertyStringTests_Nullable" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="PropertyStringTests_NullableWithDefault" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="PropertyStringTests_Standard" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="PropertyStringTests_StandardWithDefault" Type="varchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="RecurrenceRuleTester">
