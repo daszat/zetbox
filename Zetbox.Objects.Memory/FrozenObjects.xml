@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-15T10:33:55Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-15T12:52:47Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -31145,7 +31145,7 @@ public static void isValid_StandardWithDefault(PropertyDateTimeTest obj, Propert
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:DecimalProperty ExportGuid="64dd8890-2916-4862-aea7-8130a37af5f1">
-    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T11:52:47.770208Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Nullable(PropertyDecimalTest obj, PropertyGetterEventArgs&lt;decimal?&gt; e)
 {
@@ -31178,11 +31178,11 @@ public static void isValid_Nullable(PropertyDecimalTest obj, PropertyIsValidEven
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:Precision>0</ZetboxBase:Precision>
-    <ZetboxBase:Scale>0</ZetboxBase:Scale>
+    <ZetboxBase:Precision>19</ZetboxBase:Precision>
+    <ZetboxBase:Scale>5</ZetboxBase:Scale>
   </ZetboxBase:DecimalProperty>
   <ZetboxBase:DecimalProperty ExportGuid="e61715c4-d28d-4875-8fe5-6721e474bade">
-    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T11:52:47.770208Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_NullableWithDefault(PropertyDecimalTest obj, PropertyGetterEventArgs&lt;decimal?&gt; e)
 {
@@ -31216,11 +31216,11 @@ public static void isValid_NullableWithDefault(PropertyDecimalTest obj, Property
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:Precision>0</ZetboxBase:Precision>
-    <ZetboxBase:Scale>0</ZetboxBase:Scale>
+    <ZetboxBase:Precision>19</ZetboxBase:Precision>
+    <ZetboxBase:Scale>5</ZetboxBase:Scale>
   </ZetboxBase:DecimalProperty>
   <ZetboxBase:DecimalProperty ExportGuid="09550d54-4664-4a42-a17d-51494cd2dfe2">
-    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T11:52:47.770208Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Standard(PropertyDecimalTest obj, PropertyGetterEventArgs&lt;decimal&gt; e)
 {
@@ -31253,11 +31253,11 @@ public static void isValid_Standard(PropertyDecimalTest obj, PropertyIsValidEven
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:Precision>0</ZetboxBase:Precision>
-    <ZetboxBase:Scale>0</ZetboxBase:Scale>
+    <ZetboxBase:Precision>19</ZetboxBase:Precision>
+    <ZetboxBase:Scale>5</ZetboxBase:Scale>
   </ZetboxBase:DecimalProperty>
   <ZetboxBase:DecimalProperty ExportGuid="790555ff-0213-4308-a6ae-8a61fada1f4d">
-    <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-15T11:52:47.770208Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_StandardWithDefault(PropertyDecimalTest obj, PropertyGetterEventArgs&lt;decimal&gt; e)
 {
@@ -31291,8 +31291,8 @@ public static void isValid_StandardWithDefault(PropertyDecimalTest obj, Property
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:Precision>0</ZetboxBase:Precision>
-    <ZetboxBase:Scale>0</ZetboxBase:Scale>
+    <ZetboxBase:Precision>19</ZetboxBase:Precision>
+    <ZetboxBase:Scale>5</ZetboxBase:Scale>
   </ZetboxBase:DecimalProperty>
   <ZetboxBase:DoubleProperty ExportGuid="9c522da0-3493-4283-8957-9fd410cf61e9">
     <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>

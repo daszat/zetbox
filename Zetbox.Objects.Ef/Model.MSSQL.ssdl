@@ -2203,10 +2203,10 @@
     <Property Name="PropertyDateTimeTests_NullableWithDefault" Type="datetime2" Nullable="true" />
     <Property Name="PropertyDateTimeTests_Standard" Type="datetime2" Nullable="true" />
     <Property Name="PropertyDateTimeTests_StandardWithDefault" Type="datetime2" Nullable="true" />
-    <Property Name="PropertyDecimalTests_Nullable" Type="decimal" Precision="0" Scale="0" Nullable="true" />
-    <Property Name="PropertyDecimalTests_NullableWithDefault" Type="decimal" Precision="0" Scale="0" Nullable="true" />
-    <Property Name="PropertyDecimalTests_Standard" Type="decimal" Precision="0" Scale="0" Nullable="true" />
-    <Property Name="PropertyDecimalTests_StandardWithDefault" Type="decimal" Precision="0" Scale="0" Nullable="true" />
+    <Property Name="PropertyDecimalTests_Nullable" Type="decimal" Precision="19" Scale="5" Nullable="true" />
+    <Property Name="PropertyDecimalTests_NullableWithDefault" Type="decimal" Precision="19" Scale="5" Nullable="true" />
+    <Property Name="PropertyDecimalTests_Standard" Type="decimal" Precision="19" Scale="5" Nullable="true" />
+    <Property Name="PropertyDecimalTests_StandardWithDefault" Type="decimal" Precision="19" Scale="5" Nullable="true" />
     <Property Name="PropertyDoubleTests_Nullable" Type="float" Nullable="true" />
     <Property Name="PropertyDoubleTests_NullableWithDefault" Type="float" Nullable="true" />
     <Property Name="PropertyDoubleTests_Standard" Type="float" Nullable="true" />

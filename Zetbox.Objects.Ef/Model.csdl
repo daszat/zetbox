@@ -3081,10 +3081,10 @@
     <Property Name="StandardWithDefault" Type="DateTime" Nullable="false"  />
   </EntityType>
   <EntityType Name="PropertyDecimalTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="Nullable" Type="Decimal" Nullable="true" Precision="0" Scale="0"  />
-    <Property Name="NullableWithDefault" Type="Decimal" Nullable="true" Precision="0" Scale="0"  />
-    <Property Name="Standard" Type="Decimal" Nullable="false" Precision="0" Scale="0"  />
-    <Property Name="StandardWithDefault" Type="Decimal" Nullable="false" Precision="0" Scale="0"  />
+    <Property Name="Nullable" Type="Decimal" Nullable="true" Precision="19" Scale="5"  />
+    <Property Name="NullableWithDefault" Type="Decimal" Nullable="true" Precision="19" Scale="5"  />
+    <Property Name="Standard" Type="Decimal" Nullable="false" Precision="19" Scale="5"  />
+    <Property Name="StandardWithDefault" Type="Decimal" Nullable="false" Precision="19" Scale="5"  />
   </EntityType>
   <EntityType Name="PropertyDoubleTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
     <Property Name="Nullable" Type="Double" Nullable="true"  />
