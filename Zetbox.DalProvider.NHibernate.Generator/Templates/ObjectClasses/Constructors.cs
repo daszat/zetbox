@@ -52,7 +52,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     string implementationTypeName = typeName + implementationSuffix;
 
                     return new CompoundInitialisationDescriptor(propertyName, backingStoreName, typeName, implementationTypeName);
-                });
+                }).OrderBy(cid => cid.BackingStoreName);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public virtual void ApplyDefaultValueSetFlagInitialisers()
         {
-            foreach (var flag in valueSetFlags)
+            foreach (var flag in valueSetFlags.OrderBy(f => f))
             {
                 this.WriteObjects("            ", flag, " = Proxy.ID > 0;");
                 this.WriteLine();
