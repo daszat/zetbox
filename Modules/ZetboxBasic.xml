@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-18T15:40:17Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-18T16:52:36Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -13660,13 +13660,6 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.Calendar.CalendarLedger</ZetboxBase:FullName>
     <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
-  <ZetboxBase:TypeRef ExportGuid="7bd0d3fa-be58-42e5-bdb3-c038be73a345">
-    <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2012-02-01T23:55:49.047517Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-02-01T23:55:49.047517Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:FullName>Zetbox.Client.WPF.View.Calendar.CalendarRuleInstanceDisplay</ZetboxBase:FullName>
-    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
-  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="ff78973f-bb78-47fd-ad8b-da3f1f06d77e">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.125287Z</ZetboxBase:ChangedOn>
@@ -13674,6 +13667,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.Calendar.WeekCalendar</ZetboxBase:FullName>
     <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.WPF.View.Calendar.WeekCalendar</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="7bd0d3fa-be58-42e5-bdb3-c038be73a345">
+    <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-18T15:52:36.303696Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-02-01T23:55:49.047517Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.WPF.View.Calendar.WorkScheduleRuleInstanceDisplay</ZetboxBase:FullName>
+    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="6eb3ea15-f2c3-4f1b-9b63-7c6ea17d42a7">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>

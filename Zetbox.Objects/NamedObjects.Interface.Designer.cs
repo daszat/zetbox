@@ -4113,13 +4113,13 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("f236ecd4-d9dc-4fc3-a4a9-6da8ef1a228e"); }
                 }
-                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_Calendar_CalendarRuleInstanceDisplay
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("f9fc5f32-8dbd-4c86-8e94-2794336da0ac"); }
-                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_Calendar_WeekCalendarDisplay
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("df5134d6-18f1-43b9-96d3-9283bc2b09a8"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_Calendar_WorkScheduleRuleInstanceDisplay
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("f9fc5f32-8dbd-4c86-8e94-2794336da0ac"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_AccessDeniedDataObjectKind
                 {
