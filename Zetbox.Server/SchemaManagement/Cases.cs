@@ -2306,6 +2306,8 @@ namespace Zetbox.Server.SchemaManagement
             if (!PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
                 return;
 
+            Log.InfoFormat("Changing Table/Type to Table/Hierarchy: {0}", objClass.Name);
+
             var baseTblName = db.GetTableName(savedObjClass.GetRootClass().Module.SchemaName, savedObjClass.GetRootClass().TableName);
 
             if (savedObjClass.BaseObjectClass == null)
@@ -2590,6 +2592,8 @@ namespace Zetbox.Server.SchemaManagement
 
             if (!PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
                 return;
+
+            Log.WarnFormat("Changing Table/Hierarchy to Table/Type  is not supported yet: {0}", objClass.Name);
 
             // create new derived tables
             // copy data from base table to derived tables
