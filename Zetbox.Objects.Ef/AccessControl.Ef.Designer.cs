@@ -891,9 +891,9 @@ namespace Zetbox.App.Base
         private Zetbox.App.Base.AccessRights? _Rights {
             get { return _Rights_store; }
             set {
-                ReportEfPropertyChanging("Rights");
+                ReportEfPropertyChanging("RightsImpl");
                 _Rights_store = value;
-                ReportEfPropertyChanged("Rights");
+                ReportEfPropertyChanged("RightsImpl");
             }
         }
 

@@ -84,9 +84,9 @@ namespace Zetbox.App.Test
         private Zetbox.App.Test.TestEnum _CalculatedEnumeration {
             get { return _CalculatedEnumeration_store; }
             set {
-                ReportEfPropertyChanging("CalculatedEnumeration");
+                ReportEfPropertyChanging("CalculatedEnumerationImpl");
                 _CalculatedEnumeration_store = value;
-                ReportEfPropertyChanged("CalculatedEnumeration");
+                ReportEfPropertyChanged("CalculatedEnumerationImpl");
             }
         }
         private bool _CalculatedEnumeration_IsDirty = false;
@@ -402,9 +402,9 @@ namespace Zetbox.App.Test
         private Zetbox.App.Test.TestEnum _TestEnumProp {
             get { return _TestEnumProp_store; }
             set {
-                ReportEfPropertyChanging("TestEnumProp");
+                ReportEfPropertyChanging("TestEnumPropImpl");
                 _TestEnumProp_store = value;
-                ReportEfPropertyChanged("TestEnumProp");
+                ReportEfPropertyChanged("TestEnumPropImpl");
             }
         }
 
@@ -495,9 +495,9 @@ namespace Zetbox.App.Test
         private Zetbox.App.Test.TestEnum _TestEnumWithDefault {
             get { return _TestEnumWithDefault_store; }
             set {
-                ReportEfPropertyChanging("TestEnumWithDefault");
+                ReportEfPropertyChanging("TestEnumWithDefaultImpl");
                 _TestEnumWithDefault_store = value;
-                ReportEfPropertyChanged("TestEnumWithDefault");
+                ReportEfPropertyChanged("TestEnumWithDefaultImpl");
             }
         }
         private bool _isTestEnumWithDefaultSet = false;

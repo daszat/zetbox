@@ -522,9 +522,9 @@ namespace Zetbox.App.Base
         private Zetbox.App.Base.ContainmentSpecification _Containment {
             get { return _Containment_store; }
             set {
-                ReportEfPropertyChanging("Containment");
+                ReportEfPropertyChanging("ContainmentImpl");
                 _Containment_store = value;
-                ReportEfPropertyChanged("Containment");
+                ReportEfPropertyChanged("ContainmentImpl");
             }
         }
         private bool _isContainmentSet = false;
@@ -1044,9 +1044,9 @@ namespace Zetbox.App.Base
         private Zetbox.App.Base.StorageType _Storage {
             get { return _Storage_store; }
             set {
-                ReportEfPropertyChanging("Storage");
+                ReportEfPropertyChanging("StorageImpl");
                 _Storage_store = value;
-                ReportEfPropertyChanged("Storage");
+                ReportEfPropertyChanged("StorageImpl");
             }
         }
 

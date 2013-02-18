@@ -94,9 +94,9 @@ namespace Zetbox.App.Base
         private Zetbox.App.Base.DateTimeStyles? _DateTimeStyle {
             get { return _DateTimeStyle_store; }
             set {
-                ReportEfPropertyChanging("DateTimeStyle");
+                ReportEfPropertyChanging("DateTimeStyleImpl");
                 _DateTimeStyle_store = value;
-                ReportEfPropertyChanged("DateTimeStyle");
+                ReportEfPropertyChanged("DateTimeStyleImpl");
             }
         }
 

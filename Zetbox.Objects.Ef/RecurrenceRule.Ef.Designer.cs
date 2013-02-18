@@ -251,9 +251,9 @@ namespace Zetbox.App.Base
         private Zetbox.App.Base.DayOfWeek? _EveryDayOfWeek {
             get { return _EveryDayOfWeek_store; }
             set {
-                ReportEfPropertyChanging("EveryDayOfWeek");
+                ReportEfPropertyChanging("EveryDayOfWeekImpl");
                 _EveryDayOfWeek_store = value;
-                ReportEfPropertyChanged("EveryDayOfWeek");
+                ReportEfPropertyChanged("EveryDayOfWeekImpl");
             }
         }
 

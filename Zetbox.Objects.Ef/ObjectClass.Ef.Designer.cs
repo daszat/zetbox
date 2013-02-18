@@ -782,9 +782,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         private Zetbox.App.Base.TableMapping? _TableMapping {
             get { return _TableMapping_store; }
             set {
-                ReportEfPropertyChanging("TableMapping");
+                ReportEfPropertyChanging("TableMappingImpl");
                 _TableMapping_store = value;
-                ReportEfPropertyChanged("TableMapping");
+                ReportEfPropertyChanged("TableMappingImpl");
             }
         }
 

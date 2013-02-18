@@ -94,9 +94,9 @@ namespace Zetbox.App.Calendar
         private Zetbox.App.Base.DayOfWeek _DayOfWeek {
             get { return _DayOfWeek_store; }
             set {
-                ReportEfPropertyChanging("DayOfWeek");
+                ReportEfPropertyChanging("DayOfWeekImpl");
                 _DayOfWeek_store = value;
-                ReportEfPropertyChanged("DayOfWeek");
+                ReportEfPropertyChanged("DayOfWeekImpl");
             }
         }
 

@@ -94,9 +94,9 @@ namespace Zetbox.App.Test
         private Zetbox.App.Test.TestEnum? _Nullable {
             get { return _Nullable_store; }
             set {
-                ReportEfPropertyChanging("Nullable");
+                ReportEfPropertyChanging("NullableImpl");
                 _Nullable_store = value;
-                ReportEfPropertyChanged("Nullable");
+                ReportEfPropertyChanged("NullableImpl");
             }
         }
 
@@ -190,9 +190,9 @@ namespace Zetbox.App.Test
         private Zetbox.App.Test.TestEnum? _NullableWithDefault {
             get { return _NullableWithDefault_store; }
             set {
-                ReportEfPropertyChanging("NullableWithDefault");
+                ReportEfPropertyChanging("NullableWithDefaultImpl");
                 _NullableWithDefault_store = value;
-                ReportEfPropertyChanged("NullableWithDefault");
+                ReportEfPropertyChanged("NullableWithDefaultImpl");
             }
         }
         private bool _isNullableWithDefaultSet = false;
@@ -272,9 +272,9 @@ namespace Zetbox.App.Test
         private Zetbox.App.Test.TestEnum _Standard {
             get { return _Standard_store; }
             set {
-                ReportEfPropertyChanging("Standard");
+                ReportEfPropertyChanging("StandardImpl");
                 _Standard_store = value;
-                ReportEfPropertyChanged("Standard");
+                ReportEfPropertyChanged("StandardImpl");
             }
         }
 
@@ -365,9 +365,9 @@ namespace Zetbox.App.Test
         private Zetbox.App.Test.TestEnum _StandardWithDefault {
             get { return _StandardWithDefault_store; }
             set {
-                ReportEfPropertyChanging("StandardWithDefault");
+                ReportEfPropertyChanging("StandardWithDefaultImpl");
                 _StandardWithDefault_store = value;
-                ReportEfPropertyChanged("StandardWithDefault");
+                ReportEfPropertyChanged("StandardWithDefaultImpl");
             }
         }
         private bool _isStandardWithDefaultSet = false;

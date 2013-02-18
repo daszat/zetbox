@@ -617,9 +617,9 @@ namespace Zetbox.App.SchemaMigration
         private Zetbox.App.SchemaMigration.ColumnType _DbType {
             get { return _DbType_store; }
             set {
-                ReportEfPropertyChanging("DbType");
+                ReportEfPropertyChanging("DbTypeImpl");
                 _DbType_store = value;
-                ReportEfPropertyChanged("DbType");
+                ReportEfPropertyChanged("DbTypeImpl");
             }
         }
 
@@ -1448,9 +1448,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         private Zetbox.App.SchemaMigration.MappingStatus? _Status {
             get { return _Status_store; }
             set {
-                ReportEfPropertyChanging("Status");
+                ReportEfPropertyChanging("StatusImpl");
                 _Status_store = value;
-                ReportEfPropertyChanged("Status");
+                ReportEfPropertyChanged("StatusImpl");
             }
         }
 

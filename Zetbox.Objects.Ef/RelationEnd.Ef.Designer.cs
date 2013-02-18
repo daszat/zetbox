@@ -860,9 +860,9 @@ namespace Zetbox.App.Base
         private Zetbox.App.Base.Multiplicity _Multiplicity {
             get { return _Multiplicity_store; }
             set {
-                ReportEfPropertyChanging("Multiplicity");
+                ReportEfPropertyChanging("MultiplicityImpl");
                 _Multiplicity_store = value;
-                ReportEfPropertyChanged("Multiplicity");
+                ReportEfPropertyChanged("MultiplicityImpl");
             }
         }
 

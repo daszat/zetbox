@@ -49,6 +49,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
     public class NotifyingEnumProperty
          : Templates.Properties.NotifyingDataProperty
     {
+        private readonly string efName;
+
         public static new void Call(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, Templates.Serialization.SerializationMembersList serializationList, Property prop)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
@@ -60,18 +62,19 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
         public NotifyingEnumProperty(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, Templates.Serialization.SerializationMembersList serializationList, Property prop)
             : base(host, ctx, serializationList, prop)
         {
+            efName = name + ImplementationPropertySuffix;
         }
 
         protected override void ApplyBackingStoreDefinition()
         {
-            EfScalarPropHelper.ApplyBackingStoreDefinition(this, type, backingName, name);
+            EfScalarPropHelper.ApplyBackingStoreDefinition(this, type, backingName, efName);
         }
 
         protected override void ApplyTailTemplate()
         {
             base.ApplyTailTemplate();
             // redirect EF to an impl property exposing and casting from/to int(?)
-            EnumPropertyShim.Call(Host, ctx, type, name, name + ImplementationPropertySuffix, isNullable);
+            EnumPropertyShim.Call(Host, ctx, type, name, efName, isNullable);
         }
 
         protected override void AddSerialization(Templates.Serialization.SerializationMembersList list, string name)

@@ -466,9 +466,9 @@ namespace Zetbox.App.Base
         private Zetbox.App.Base.DeploymentRestriction _DeploymentRestrictions {
             get { return _DeploymentRestrictions_store; }
             set {
-                ReportEfPropertyChanging("DeploymentRestrictions");
+                ReportEfPropertyChanging("DeploymentRestrictionsImpl");
                 _DeploymentRestrictions_store = value;
-                ReportEfPropertyChanged("DeploymentRestrictions");
+                ReportEfPropertyChanged("DeploymentRestrictionsImpl");
             }
         }
 

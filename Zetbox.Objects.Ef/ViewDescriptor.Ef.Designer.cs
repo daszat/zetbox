@@ -535,9 +535,9 @@ namespace Zetbox.App.GUI
         private Zetbox.App.GUI.Toolkit _Toolkit {
             get { return _Toolkit_store; }
             set {
-                ReportEfPropertyChanging("Toolkit");
+                ReportEfPropertyChanging("ToolkitImpl");
                 _Toolkit_store = value;
-                ReportEfPropertyChanged("Toolkit");
+                ReportEfPropertyChanged("ToolkitImpl");
             }
         }
 

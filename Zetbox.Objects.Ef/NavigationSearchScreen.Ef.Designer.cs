@@ -646,9 +646,9 @@ namespace Zetbox.App.GUI
         private Zetbox.App.GUI.ListSortDirection? _InitialSortDirection {
             get { return _InitialSortDirection_store; }
             set {
-                ReportEfPropertyChanging("InitialSortDirection");
+                ReportEfPropertyChanging("InitialSortDirectionImpl");
                 _InitialSortDirection_store = value;
-                ReportEfPropertyChanged("InitialSortDirection");
+                ReportEfPropertyChanged("InitialSortDirectionImpl");
             }
         }
 
@@ -1450,9 +1450,9 @@ namespace Zetbox.App.GUI
         private Zetbox.App.GUI.InstanceListViewMethod? _ViewMethod {
             get { return _ViewMethod_store; }
             set {
-                ReportEfPropertyChanging("ViewMethod");
+                ReportEfPropertyChanging("ViewMethodImpl");
                 _ViewMethod_store = value;
-                ReportEfPropertyChanged("ViewMethod");
+                ReportEfPropertyChanged("ViewMethodImpl");
             }
         }
 

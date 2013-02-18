@@ -1600,9 +1600,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         private Zetbox.App.GUI.WidthHint? _RequestedWidth {
             get { return _RequestedWidth_store; }
             set {
-                ReportEfPropertyChanging("RequestedWidth");
+                ReportEfPropertyChanging("RequestedWidthImpl");
                 _RequestedWidth_store = value;
-                ReportEfPropertyChanged("RequestedWidth");
+                ReportEfPropertyChanged("RequestedWidthImpl");
             }
         }
 

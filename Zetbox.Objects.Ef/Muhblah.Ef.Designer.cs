@@ -613,9 +613,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         private Zetbox.App.Test.TestEnum _TestEnum {
             get { return _TestEnum_store; }
             set {
-                ReportEfPropertyChanging("TestEnum");
+                ReportEfPropertyChanging("TestEnumImpl");
                 _TestEnum_store = value;
-                ReportEfPropertyChanged("TestEnum");
+                ReportEfPropertyChanged("TestEnumImpl");
             }
         }
 

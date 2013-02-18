@@ -1029,9 +1029,9 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         private Zetbox.App.SchemaMigration.MappingStatus? _Status {
             get { return _Status_store; }
             set {
-                ReportEfPropertyChanging("Status");
+                ReportEfPropertyChanging("StatusImpl");
                 _Status_store = value;
-                ReportEfPropertyChanged("Status");
+                ReportEfPropertyChanged("StatusImpl");
             }
         }
 
