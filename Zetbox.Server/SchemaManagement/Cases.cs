@@ -174,6 +174,15 @@ namespace Zetbox.Server.SchemaManagement
             {
                 db.RenameTable(savedObjClass.GetTableRef(db), objClass.GetTableRef(db));
             }
+            else if (mapping == TableMapping.TPH && objClass.BaseObjectClass != null)
+            {
+                foreach (var prop in savedObjClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
+                {
+                    DoRenameValueTypePropertyName(savedObjClass, prop, string.Empty);
+                }
+
+                // FK names will be changed in DoChangeRelationName case
+            }
 
             PostMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass);
         }
@@ -197,6 +206,8 @@ namespace Zetbox.Server.SchemaManagement
             var tblName = objClass.GetTableRef(db);
             var srcName = Construct.ColumnName(savedProp, prefix);
             var dstName = Construct.ColumnName(prop, prefix);
+            if (srcName == dstName) return;
+
             Log.InfoFormat("Renaming property on '{0}' from '{1}' up to '{2}'", tblName, srcName, dstName);
 
             // TODO: What if prefix has changed
@@ -2306,7 +2317,7 @@ namespace Zetbox.Server.SchemaManagement
             if (!PreMigration(ClassMigrationEventType.ChangeMapping, savedObjClass, objClass))
                 return;
 
-            Log.InfoFormat("Changing Table/Type to Table/Hierarchy: {0}", objClass.Name);
+            Log.InfoFormat("Changing Table/Type to Table/Hierarchy: {0}", savedObjClass.Name);
 
             var baseTblName = db.GetTableName(savedObjClass.GetRootClass().Module.SchemaName, savedObjClass.GetRootClass().TableName);
 
