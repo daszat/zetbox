@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
         private string _DisplayName;
@@ -175,10 +175,10 @@ namespace Zetbox.App.Base
                         OnPassword_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Password");
-				}
+                else
+                {
+                    SetInitializedProperty("Password");
+                }
             }
         }
         private string _Password;
@@ -233,10 +233,10 @@ namespace Zetbox.App.Base
                         OnUserName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("UserName");
-				}
+                else
+                {
+                    SetInitializedProperty("UserName");
+                }
             }
         }
         private string _UserName;

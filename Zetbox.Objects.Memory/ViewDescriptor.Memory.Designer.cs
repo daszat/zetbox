@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
         // fkBackingName=_fk_ControlKind; fkGuidBackingName=_fk_guid_ControlKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -113,10 +113,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_ControlKind == null) || (value != null && value.ID == _fk_ControlKind))
-				{
-					SetInitializedProperty("ControlKind");
+                {
+                    SetInitializedProperty("ControlKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ControlKindImpl;
@@ -156,7 +156,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The control implementing this View
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
         // fkBackingName=_fk_ControlRef; fkGuidBackingName=_fk_guid_ControlRef;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -229,10 +229,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_ControlRef == null) || (value != null && value.ID == _fk_ControlRef))
-				{
-					SetInitializedProperty("ControlRef");
+                {
+                    SetInitializedProperty("ControlRef");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ControlRefImpl;
@@ -325,10 +325,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -343,7 +343,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -416,10 +416,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -539,10 +539,10 @@ namespace Zetbox.App.GUI
                         OnToolkit_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Toolkit");
-				}
+                else
+                {
+                    SetInitializedProperty("Toolkit");
+                }
             }
         }
         private Zetbox.App.GUI.Toolkit _Toolkit;

@@ -84,10 +84,10 @@ namespace Zetbox.App.Test
                         OnNullable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Nullable");
-				}
+                else
+                {
+                    SetInitializedProperty("Nullable");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum? _Nullable_store;
@@ -180,10 +180,10 @@ namespace Zetbox.App.Test
                         OnNullableWithDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NullableWithDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("NullableWithDefault");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum? _NullableWithDefault_store;
@@ -262,10 +262,10 @@ namespace Zetbox.App.Test
                         OnStandard_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Standard");
-				}
+                else
+                {
+                    SetInitializedProperty("Standard");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _Standard_store;
@@ -355,10 +355,10 @@ namespace Zetbox.App.Test
                         OnStandardWithDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("StandardWithDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("StandardWithDefault");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _StandardWithDefault_store;

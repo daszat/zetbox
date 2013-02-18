@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
         // fkBackingName=_fk_Constrained; fkGuidBackingName=_fk_guid_Constrained;
         // referencedInterface=Zetbox.App.Base.DataType; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Constraints; is list;
@@ -113,10 +113,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_Constrained == null) || (value != null && value.ID == _fk_Constrained))
-				{
-					SetInitializedProperty("Constrained");
+                {
+                    SetInitializedProperty("Constrained");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ConstrainedImpl;
@@ -225,10 +225,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -284,10 +284,10 @@ namespace Zetbox.App.Base
                         OnReason_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Reason");
-				}
+                else
+                {
+                    SetInitializedProperty("Reason");
+                }
             }
         }
         private string _Reason;

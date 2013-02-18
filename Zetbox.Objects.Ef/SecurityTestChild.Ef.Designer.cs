@@ -203,10 +203,10 @@ namespace Zetbox.App.Test
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -389,10 +389,10 @@ namespace Zetbox.App.Test
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -561,10 +561,10 @@ namespace Zetbox.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -731,13 +731,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ParentName", __oldValue, __newValue);
                     _ParentName = __newValue;
                     NotifyPropertyChanged("ParentName", __oldValue, __newValue);
-			        _ParentName_IsDirty = false;
+                    _ParentName_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ParentName");
-				}
+                else
+                {
+                    SetInitializedProperty("ParentName");
+                }
             }
         }
         private string _ParentName_store;
@@ -1041,10 +1041,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

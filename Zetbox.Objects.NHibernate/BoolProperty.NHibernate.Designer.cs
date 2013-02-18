@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.FalseIcon == null)
-				{
-					SetInitializedProperty("FalseIcon");
+                {
+                    SetInitializedProperty("FalseIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FalseIcon);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("FalseIcon");
+                {
+                    SetInitializedProperty("FalseIcon");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("FalseIcon", __oldValue, __newValue);
@@ -187,10 +187,10 @@ namespace Zetbox.App.Base
                         OnFalseLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FalseLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("FalseLabel");
+                }
             }
         }
 
@@ -234,10 +234,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.NullIcon == null)
-				{
-					SetInitializedProperty("NullIcon");
+                {
+                    SetInitializedProperty("NullIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.NullIcon);
@@ -246,10 +246,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("NullIcon");
+                {
+                    SetInitializedProperty("NullIcon");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("NullIcon", __oldValue, __newValue);
@@ -340,10 +340,10 @@ namespace Zetbox.App.Base
                         OnNullLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NullLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("NullLabel");
+                }
             }
         }
 
@@ -387,10 +387,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.TrueIcon == null)
-				{
-					SetInitializedProperty("TrueIcon");
+                {
+                    SetInitializedProperty("TrueIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TrueIcon);
@@ -399,10 +399,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("TrueIcon");
+                {
+                    SetInitializedProperty("TrueIcon");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("TrueIcon", __oldValue, __newValue);
@@ -493,10 +493,10 @@ namespace Zetbox.App.Base
                         OnTrueLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TrueLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("TrueLabel");
+                }
             }
         }
 

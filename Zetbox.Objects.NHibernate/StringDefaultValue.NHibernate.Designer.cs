@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnDefaultValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DefaultValue");
-				}
+                else
+                {
+                    SetInitializedProperty("DefaultValue");
+                }
             }
         }
 

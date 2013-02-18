@@ -245,13 +245,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
                     _CodeTemplate = __newValue;
                     NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
-			        _CodeTemplate_IsDirty = false;
+                    _CodeTemplate_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CodeTemplate");
-				}
+                else
+                {
+                    SetInitializedProperty("CodeTemplate");
+                }
             }
         }
         private string _CodeTemplate_store;
@@ -485,10 +485,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsAbstract_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsAbstract");
-				}
+                else
+                {
+                    SetInitializedProperty("IsAbstract");
+                }
             }
         }
         private bool _IsAbstract_store;
@@ -567,10 +567,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsFrozenObject_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsFrozenObject");
-				}
+                else
+                {
+                    SetInitializedProperty("IsFrozenObject");
+                }
             }
         }
         private bool _IsFrozenObject_store;
@@ -649,10 +649,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsSimpleObject_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsSimpleObject");
-				}
+                else
+                {
+                    SetInitializedProperty("IsSimpleObject");
+                }
             }
         }
         private bool _IsSimpleObject_store;
@@ -772,10 +772,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         OnTableMapping_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TableMapping");
-				}
+                else
+                {
+                    SetInitializedProperty("TableMapping");
+                }
             }
         }
         private Zetbox.App.Base.TableMapping? _TableMapping_store;
@@ -856,10 +856,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         OnTableName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TableName");
-				}
+                else
+                {
+                    SetInitializedProperty("TableName");
+                }
             }
         }
         private string _TableName_store;

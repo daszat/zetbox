@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The A-side of this Relation.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.RelationEnd; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=AParent; is reference;
@@ -113,10 +113,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
-				{
-					SetInitializedProperty("A");
+                {
+                    SetInitializedProperty("A");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -172,7 +172,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The B-side of this Relation.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.RelationEnd; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=BParent; is reference;
@@ -245,10 +245,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
-				{
-					SetInitializedProperty("B");
+                {
+                    SetInitializedProperty("B");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -304,7 +304,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -376,10 +376,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -474,10 +474,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -545,10 +545,10 @@ namespace Zetbox.App.Base
                         OnContainment_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Containment");
-				}
+                else
+                {
+                    SetInitializedProperty("Containment");
+                }
             }
         }
         private Zetbox.App.Base.ContainmentSpecification _Containment;
@@ -563,7 +563,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -635,10 +635,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -733,10 +733,10 @@ namespace Zetbox.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -792,10 +792,10 @@ namespace Zetbox.App.Base
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description;
@@ -862,10 +862,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -880,7 +880,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -953,10 +953,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -1037,10 +1037,10 @@ namespace Zetbox.App.Base
                         OnStorage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Storage");
-				}
+                else
+                {
+                    SetInitializedProperty("Storage");
+                }
             }
         }
         private Zetbox.App.Base.StorageType _Storage;
@@ -1095,10 +1095,10 @@ namespace Zetbox.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Verb");
-				}
+                else
+                {
+                    SetInitializedProperty("Verb");
+                }
             }
         }
         private string _Verb;

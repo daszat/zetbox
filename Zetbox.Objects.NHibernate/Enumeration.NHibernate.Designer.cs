@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnAreFlags_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AreFlags");
-				}
+                else
+                {
+                    SetInitializedProperty("AreFlags");
+                }
             }
         }
 

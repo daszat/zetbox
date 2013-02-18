@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnDecimalValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DecimalValue");
-				}
+                else
+                {
+                    SetInitializedProperty("DecimalValue");
+                }
             }
         }
 

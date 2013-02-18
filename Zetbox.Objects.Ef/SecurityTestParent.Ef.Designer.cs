@@ -143,10 +143,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -353,10 +353,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

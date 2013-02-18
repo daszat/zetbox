@@ -87,10 +87,10 @@ namespace Zetbox.App.Projekte
                         OnAuftragsname_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Auftragsname");
-				}
+                else
+                {
+                    SetInitializedProperty("Auftragsname");
+                }
             }
         }
         private string _Auftragsname_store;
@@ -156,10 +156,10 @@ namespace Zetbox.App.Projekte
                         OnAuftragswert_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Auftragswert");
-				}
+                else
+                {
+                    SetInitializedProperty("Auftragswert");
+                }
             }
         }
         private double? _Auftragswert_store;
@@ -341,10 +341,10 @@ namespace Zetbox.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -527,10 +527,10 @@ namespace Zetbox.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -609,10 +609,10 @@ namespace Zetbox.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -1327,10 +1327,10 @@ namespace Zetbox.App.Projekte
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

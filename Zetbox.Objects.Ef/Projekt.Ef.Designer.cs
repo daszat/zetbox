@@ -176,13 +176,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("AufwandGes", __oldValue, __newValue);
                     _AufwandGes = __newValue;
                     NotifyPropertyChanged("AufwandGes", __oldValue, __newValue);
-			        _AufwandGes_IsDirty = false;
+                    _AufwandGes_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("AufwandGes");
-				}
+                else
+                {
+                    SetInitializedProperty("AufwandGes");
+                }
             }
         }
         private double? _AufwandGes_store;
@@ -247,10 +247,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Bis");
-				}
+                else
+                {
+                    SetInitializedProperty("Bis");
+                }
             }
         }
         private DateTime? _Bis_store;
@@ -432,10 +432,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -618,10 +618,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -700,10 +700,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -772,10 +772,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKickOffAm_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("KickOffAm");
-				}
+                else
+                {
+                    SetInitializedProperty("KickOffAm");
+                }
             }
         }
         private DateTime _KickOffAm_store;
@@ -843,10 +843,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKickOffBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("KickOffBis");
-				}
+                else
+                {
+                    SetInitializedProperty("KickOffBis");
+                }
             }
         }
         private DateTime? _KickOffBis_store;
@@ -912,10 +912,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Kundenname");
-				}
+                else
+                {
+                    SetInitializedProperty("Kundenname");
+                }
             }
         }
         private string _Kundenname_store;
@@ -1030,10 +1030,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -1157,10 +1157,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                         OnVon_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Von");
-				}
+                else
+                {
+                    SetInitializedProperty("Von");
+                }
             }
         }
         private DateTime _Von_store;
@@ -1619,10 +1619,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

@@ -70,10 +70,10 @@ namespace Zetbox.App.Test
         [EdmComplexProperty()]
         public Zetbox.App.Base.AnyReferenceEfImpl AnyImpl
         {
-            get 
-			{ 
-				return _Any; 
-			}
+            get
+            {
+                return _Any;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -82,7 +82,7 @@ namespace Zetbox.App.Test
                 if (!object.Equals(_Any, value))
                 {
                     var __oldValue = _Any;
-					var __newValue = value;
+                    var __newValue = value;
 
                     NotifyPropertyChanging("Any", __oldValue, __newValue);
 
@@ -90,17 +90,17 @@ namespace Zetbox.App.Test
                     {
                         _Any.DetachFromObject(this, "Any");
                     }
-					__newValue = (Zetbox.App.Base.AnyReferenceEfImpl)__newValue.Clone();
+                    __newValue = (Zetbox.App.Base.AnyReferenceEfImpl)__newValue.Clone();
                     _Any = __newValue;
                     _Any.AttachToObject(this, "Any");
 
                     NotifyPropertyChanged("Any", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-				else
-				{
-					SetInitializedProperty("Any");
-				}
+                else
+                {
+                    SetInitializedProperty("Any");
+                }
             }
         }
            // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -153,10 +153,10 @@ namespace Zetbox.App.Test
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
         private string _DisplayName_store;
@@ -234,10 +234,10 @@ namespace Zetbox.App.Test
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -453,10 +453,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

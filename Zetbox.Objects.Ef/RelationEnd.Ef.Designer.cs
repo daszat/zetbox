@@ -433,10 +433,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -619,10 +619,10 @@ namespace Zetbox.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -701,10 +701,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -783,10 +783,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
         private bool _HasPersistentOrder_store;
@@ -850,10 +850,10 @@ namespace Zetbox.App.Base
                         OnMultiplicity_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Multiplicity");
-				}
+                else
+                {
+                    SetInitializedProperty("Multiplicity");
+                }
             }
         }
         private Zetbox.App.Base.Multiplicity _Multiplicity_store;
@@ -1077,10 +1077,10 @@ namespace Zetbox.App.Base
                         OnRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("RoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("RoleName");
+                }
             }
         }
         private string _RoleName_store;
@@ -1647,10 +1647,10 @@ namespace Zetbox.App.Base
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

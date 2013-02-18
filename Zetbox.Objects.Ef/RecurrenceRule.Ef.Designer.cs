@@ -97,10 +97,10 @@ namespace Zetbox.App.Base
                         OnDaysOffset_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DaysOffset");
-				}
+                else
+                {
+                    SetInitializedProperty("DaysOffset");
+                }
             }
         }
         private double? _DaysOffset_store;
@@ -176,10 +176,10 @@ namespace Zetbox.App.Base
                         OnEveryDay_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EveryDay");
-				}
+                else
+                {
+                    SetInitializedProperty("EveryDay");
+                }
             }
         }
         private bool _EveryDay_store;
@@ -241,10 +241,10 @@ namespace Zetbox.App.Base
                         OnEveryDayOfWeek_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EveryDayOfWeek");
-				}
+                else
+                {
+                    SetInitializedProperty("EveryDayOfWeek");
+                }
             }
         }
         private Zetbox.App.Base.DayOfWeek? _EveryDayOfWeek_store;
@@ -335,10 +335,10 @@ namespace Zetbox.App.Base
                         OnEveryMonth_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EveryMonth");
-				}
+                else
+                {
+                    SetInitializedProperty("EveryMonth");
+                }
             }
         }
         private bool _EveryMonth_store;
@@ -415,10 +415,10 @@ namespace Zetbox.App.Base
                         OnEveryQuater_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EveryQuater");
-				}
+                else
+                {
+                    SetInitializedProperty("EveryQuater");
+                }
             }
         }
         private bool _EveryQuater_store;
@@ -495,10 +495,10 @@ namespace Zetbox.App.Base
                         OnEveryYear_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EveryYear");
-				}
+                else
+                {
+                    SetInitializedProperty("EveryYear");
+                }
             }
         }
         private bool _EveryYear_store;
@@ -563,10 +563,10 @@ namespace Zetbox.App.Base
                         OnHoursOffset_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HoursOffset");
-				}
+                else
+                {
+                    SetInitializedProperty("HoursOffset");
+                }
             }
         }
         private double? _HoursOffset_store;
@@ -630,10 +630,10 @@ namespace Zetbox.App.Base
                         OnMinutesOffset_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MinutesOffset");
-				}
+                else
+                {
+                    SetInitializedProperty("MinutesOffset");
+                }
             }
         }
         private double? _MinutesOffset_store;
@@ -697,10 +697,10 @@ namespace Zetbox.App.Base
                         OnMonthsOffset_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MonthsOffset");
-				}
+                else
+                {
+                    SetInitializedProperty("MonthsOffset");
+                }
             }
         }
         private int? _MonthsOffset_store;

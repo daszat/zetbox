@@ -91,7 +91,7 @@ this.WriteObjects("                    if(IsAttached) UpdateChangedInfo = true;\
 #line 68 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
 } else { 
 #line 69 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
-this.WriteObjects("			        ",  backingName , "_IsDirty = false;\r\n");
+this.WriteObjects("                    ",  backingName , "_IsDirty = false;\r\n");
 #line 70 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
 } 
 #line 71 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
@@ -100,10 +100,10 @@ this.WriteObjects("\r\n");
 if (!isCalculated) ApplyPostSetTemplate(); 
 #line 73 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("                }\r\n");
-this.WriteObjects("				else \r\n");
-this.WriteObjects("				{\r\n");
-this.WriteObjects("					SetInitializedProperty(\"",  name , "\");\r\n");
-this.WriteObjects("				}\r\n");
+this.WriteObjects("                else\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    SetInitializedProperty(\"",  name , "\");\r\n");
+this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 #line 80 "P:\zetbox\Zetbox.Generator\Templates\Properties\NotifyingValueProperty.cst"

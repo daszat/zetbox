@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// Assembly of the Type that is displayed with this Template
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
         // fkBackingName=_fk_DisplayedTypeAssembly; fkGuidBackingName=_fk_guid_DisplayedTypeAssembly;
         // referencedInterface=Zetbox.App.Base.Assembly; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -112,10 +112,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_DisplayedTypeAssembly == null) || (value != null && value.ID == _fk_DisplayedTypeAssembly))
-				{
-					SetInitializedProperty("DisplayedTypeAssembly");
+                {
+                    SetInitializedProperty("DisplayedTypeAssembly");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DisplayedTypeAssemblyImpl;
@@ -196,10 +196,10 @@ namespace Zetbox.App.GUI
                         OnDisplayedTypeFullName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayedTypeFullName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayedTypeFullName");
+                }
             }
         }
         private string _DisplayedTypeFullName;
@@ -254,10 +254,10 @@ namespace Zetbox.App.GUI
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
         private string _DisplayName;
@@ -307,7 +307,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The visual representation of this Template
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
         // fkBackingName=_fk_VisualTree; fkGuidBackingName=_fk_guid_VisualTree;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -379,10 +379,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_VisualTree == null) || (value != null && value.ID == _fk_VisualTree))
-				{
-					SetInitializedProperty("VisualTree");
+                {
+                    SetInitializedProperty("VisualTree");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = VisualTreeImpl;

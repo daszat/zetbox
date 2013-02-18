@@ -82,10 +82,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultDisplayKind == null)
-				{
-					SetInitializedProperty("DefaultDisplayKind");
+                {
+                    SetInitializedProperty("DefaultDisplayKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultDisplayKind);
@@ -94,10 +94,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DefaultDisplayKind");
+                {
+                    SetInitializedProperty("DefaultDisplayKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultDisplayKind", __oldValue, __newValue);
@@ -177,10 +177,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultEditorKind == null)
-				{
-					SetInitializedProperty("DefaultEditorKind");
+                {
+                    SetInitializedProperty("DefaultEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultEditorKind);
@@ -189,10 +189,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DefaultEditorKind");
+                {
+                    SetInitializedProperty("DefaultEditorKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultEditorKind", __oldValue, __newValue);
@@ -272,10 +272,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultGridCellDisplayKind == null)
-				{
-					SetInitializedProperty("DefaultGridCellDisplayKind");
+                {
+                    SetInitializedProperty("DefaultGridCellDisplayKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellDisplayKind);
@@ -284,10 +284,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DefaultGridCellDisplayKind");
+                {
+                    SetInitializedProperty("DefaultGridCellDisplayKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultGridCellDisplayKind", __oldValue, __newValue);
@@ -367,10 +367,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultGridCellEditorKind == null)
-				{
-					SetInitializedProperty("DefaultGridCellEditorKind");
+                {
+                    SetInitializedProperty("DefaultGridCellEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellEditorKind);
@@ -379,10 +379,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DefaultGridCellEditorKind");
+                {
+                    SetInitializedProperty("DefaultGridCellEditorKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultGridCellEditorKind", __oldValue, __newValue);
@@ -462,10 +462,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultGridCellPreEditorKind == null)
-				{
-					SetInitializedProperty("DefaultGridCellPreEditorKind");
+                {
+                    SetInitializedProperty("DefaultGridCellPreEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellPreEditorKind);
@@ -474,10 +474,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DefaultGridCellPreEditorKind");
+                {
+                    SetInitializedProperty("DefaultGridCellPreEditorKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultGridCellPreEditorKind", __oldValue, __newValue);
@@ -568,10 +568,10 @@ namespace Zetbox.App.GUI
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
 
@@ -627,10 +627,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -693,10 +693,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -705,10 +705,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -819,10 +819,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ViewModelRef == null)
-				{
-					SetInitializedProperty("ViewModelRef");
+                {
+                    SetInitializedProperty("ViewModelRef");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelRef);
@@ -831,10 +831,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ViewModelRef");
+                {
+                    SetInitializedProperty("ViewModelRef");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);

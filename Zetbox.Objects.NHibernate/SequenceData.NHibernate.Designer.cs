@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnCurrentNumber_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CurrentNumber");
-				}
+                else
+                {
+                    SetInitializedProperty("CurrentNumber");
+                }
             }
         }
 
@@ -139,10 +139,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Sequence == null)
-				{
-					SetInitializedProperty("Sequence");
+                {
+                    SetInitializedProperty("Sequence");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.SequenceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Sequence);
@@ -151,10 +151,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Sequence");
+                {
+                    SetInitializedProperty("Sequence");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Sequence", __oldValue, __newValue);

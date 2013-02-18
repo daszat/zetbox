@@ -257,10 +257,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("StringProp");
-				}
+                else
+                {
+                    SetInitializedProperty("StringProp");
+                }
             }
         }
         private string _StringProp_store;
@@ -1117,10 +1117,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

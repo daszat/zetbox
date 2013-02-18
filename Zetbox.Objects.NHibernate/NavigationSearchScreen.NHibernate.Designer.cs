@@ -92,10 +92,10 @@ namespace Zetbox.App.GUI
                         OnAllowAddNew_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowAddNew");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowAddNew");
+                }
             }
         }
 
@@ -150,10 +150,10 @@ namespace Zetbox.App.GUI
                         OnAllowDelete_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowDelete");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowDelete");
+                }
             }
         }
 
@@ -208,10 +208,10 @@ namespace Zetbox.App.GUI
                         OnAllowExport_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowExport");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowExport");
+                }
             }
         }
 
@@ -266,10 +266,10 @@ namespace Zetbox.App.GUI
                         OnAllowOpen_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowOpen");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowOpen");
+                }
             }
         }
 
@@ -324,10 +324,10 @@ namespace Zetbox.App.GUI
                         OnAllowSelectColumns_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowSelectColumns");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowSelectColumns");
+                }
             }
         }
 
@@ -382,10 +382,10 @@ namespace Zetbox.App.GUI
                         OnAllowUserFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowUserFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowUserFilter");
+                }
             }
         }
 
@@ -440,10 +440,10 @@ namespace Zetbox.App.GUI
                         OnEnableAutoFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EnableAutoFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("EnableAutoFilter");
+                }
             }
         }
 
@@ -498,10 +498,10 @@ namespace Zetbox.App.GUI
                         OnInitialSort_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("InitialSort");
-				}
+                else
+                {
+                    SetInitializedProperty("InitialSort");
+                }
             }
         }
 
@@ -556,10 +556,10 @@ namespace Zetbox.App.GUI
                         OnInitialSortDirection_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("InitialSortDirection");
-				}
+                else
+                {
+                    SetInitializedProperty("InitialSortDirection");
+                }
             }
         }
 
@@ -614,10 +614,10 @@ namespace Zetbox.App.GUI
                         OnIsEditable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsEditable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsEditable");
+                }
             }
         }
 
@@ -672,10 +672,10 @@ namespace Zetbox.App.GUI
                         OnIsMultiselect_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsMultiselect");
-				}
+                else
+                {
+                    SetInitializedProperty("IsMultiselect");
+                }
             }
         }
 
@@ -719,10 +719,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.RequestedEditorKind == null)
-				{
-					SetInitializedProperty("RequestedEditorKind");
+                {
+                    SetInitializedProperty("RequestedEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedEditorKind);
@@ -731,10 +731,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("RequestedEditorKind");
+                {
+                    SetInitializedProperty("RequestedEditorKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
@@ -814,10 +814,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.RequestedWorkspaceKind == null)
-				{
-					SetInitializedProperty("RequestedWorkspaceKind");
+                {
+                    SetInitializedProperty("RequestedWorkspaceKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedWorkspaceKind);
@@ -826,10 +826,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("RequestedWorkspaceKind");
+                {
+                    SetInitializedProperty("RequestedWorkspaceKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
@@ -920,10 +920,10 @@ namespace Zetbox.App.GUI
                         OnRespectRequiredFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("RespectRequiredFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("RespectRequiredFilter");
+                }
             }
         }
 
@@ -978,10 +978,10 @@ namespace Zetbox.App.GUI
                         OnShowCommands_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowCommands");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowCommands");
+                }
             }
         }
 
@@ -1036,10 +1036,10 @@ namespace Zetbox.App.GUI
                         OnShowFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowFilter");
+                }
             }
         }
 
@@ -1094,10 +1094,10 @@ namespace Zetbox.App.GUI
                         OnShowMasterDetail_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowMasterDetail");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowMasterDetail");
+                }
             }
         }
 
@@ -1141,10 +1141,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Type == null)
-				{
-					SetInitializedProperty("Type");
+                {
+                    SetInitializedProperty("Type");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Type);
@@ -1153,10 +1153,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Type");
+                {
+                    SetInitializedProperty("Type");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Type", __oldValue, __newValue);
@@ -1247,10 +1247,10 @@ namespace Zetbox.App.GUI
                         OnViewMethod_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ViewMethod");
-				}
+                else
+                {
+                    SetInitializedProperty("ViewMethod");
+                }
             }
         }
 

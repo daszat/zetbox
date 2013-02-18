@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.GetErrorTextInvocation == null)
-				{
-					SetInitializedProperty("GetErrorTextInvocation");
+                {
+                    SetInitializedProperty("GetErrorTextInvocation");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.GetErrorTextInvocation);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("GetErrorTextInvocation");
+                {
+                    SetInitializedProperty("GetErrorTextInvocation");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("GetErrorTextInvocation", __oldValue, __newValue);
@@ -176,10 +176,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.IsValidInvocation == null)
-				{
-					SetInitializedProperty("IsValidInvocation");
+                {
+                    SetInitializedProperty("IsValidInvocation");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.IsValidInvocation);
@@ -188,10 +188,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("IsValidInvocation");
+                {
+                    SetInitializedProperty("IsValidInvocation");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("IsValidInvocation", __oldValue, __newValue);

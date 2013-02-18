@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
                         OnCategoryTags_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CategoryTags");
-				}
+                else
+                {
+                    SetInitializedProperty("CategoryTags");
+                }
             }
         }
         private string _CategoryTags;
@@ -98,7 +98,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -170,10 +170,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -268,10 +268,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -314,13 +314,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
                     _CodeTemplate = __newValue;
                     NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
-			        _CodeTemplate_IsDirty = false;
+                    _CodeTemplate_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CodeTemplate");
-				}
+                else
+                {
+                    SetInitializedProperty("CodeTemplate");
+                }
             }
         }
         private string _CodeTemplate;
@@ -404,7 +404,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -476,10 +476,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -574,10 +574,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -592,7 +592,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>
         /// Property can have a default value
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultValue
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultValue
         // fkBackingName=_fk_DefaultValue; fkGuidBackingName=_fk_guid_DefaultValue;
         // referencedInterface=Zetbox.App.Base.DefaultPropertyValue; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Property; is reference;
@@ -665,10 +665,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultValue == null) || (value != null && value.ID == _fk_DefaultValue))
-				{
-					SetInitializedProperty("DefaultValue");
+                {
+                    SetInitializedProperty("DefaultValue");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultValueImpl;
@@ -765,10 +765,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description;
@@ -823,10 +823,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnDisableExport_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisableExport");
-				}
+                else
+                {
+                    SetInitializedProperty("DisableExport");
+                }
             }
         }
         private bool? _DisableExport;
@@ -893,10 +893,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -911,7 +911,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FilterConfiguration
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FilterConfiguration
         // fkBackingName=_fk_FilterConfiguration; fkGuidBackingName=_fk_guid_FilterConfiguration;
         // referencedInterface=Zetbox.App.GUI.PropertyFilterConfiguration; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=Property; is reference;
@@ -984,10 +984,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noops
                 if ((value == null && _fk_FilterConfiguration == null) || (value != null && value.ID == _fk_FilterConfiguration))
-				{
-					SetInitializedProperty("FilterConfiguration");
+                {
+                    SetInitializedProperty("FilterConfiguration");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = FilterConfigurationImpl;
@@ -1084,10 +1084,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Label");
-				}
+                else
+                {
+                    SetInitializedProperty("Label");
+                }
             }
         }
         private string _Label;
@@ -1101,7 +1101,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -1174,10 +1174,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noops
                 if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -1258,10 +1258,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -1275,7 +1275,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
         // fkBackingName=_fk_ObjectClass; fkGuidBackingName=_fk_guid_ObjectClass;
         // referencedInterface=Zetbox.App.Base.DataType; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Properties; is list;
@@ -1348,10 +1348,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noops
                 if ((value == null && _fk_ObjectClass == null) || (value != null && value.ID == _fk_ObjectClass))
-				{
-					SetInitializedProperty("ObjectClass");
+                {
+                    SetInitializedProperty("ObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ObjectClassImpl;
@@ -1420,10 +1420,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("Properties_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("Properties_pos");
+                }
             }
         }
         private int? _Properties_pos;
@@ -1438,7 +1438,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>
         /// Optional requested ControlKind
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
         // fkBackingName=_fk_RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -1511,10 +1511,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noops
                 if ((value == null && _fk_RequestedKind == null) || (value != null && value.ID == _fk_RequestedKind))
-				{
-					SetInitializedProperty("RequestedKind");
+                {
+                    SetInitializedProperty("RequestedKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = RequestedKindImpl;
@@ -1595,10 +1595,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnRequestedWidth_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("RequestedWidth");
-				}
+                else
+                {
+                    SetInitializedProperty("RequestedWidth");
+                }
             }
         }
         private Zetbox.App.GUI.WidthHint? _RequestedWidth;
@@ -1612,7 +1612,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>
         /// The ViewModel to use for values of this Property
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ValueModelDescriptor
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ValueModelDescriptor
         // fkBackingName=_fk_ValueModelDescriptor; fkGuidBackingName=_fk_guid_ValueModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -1685,10 +1685,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noops
                 if ((value == null && _fk_ValueModelDescriptor == null) || (value != null && value.ID == _fk_ValueModelDescriptor))
-				{
-					SetInitializedProperty("ValueModelDescriptor");
+                {
+                    SetInitializedProperty("ValueModelDescriptor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ValueModelDescriptorImpl;

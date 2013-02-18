@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The default ControlKind to use for displaying this Presentable readonly. Defaults to DefaultKind with editing disabled.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
         // fkBackingName=_fk_DefaultDisplayKind; fkGuidBackingName=_fk_guid_DefaultDisplayKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -113,10 +113,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultDisplayKind == null) || (value != null && value.ID == _fk_DefaultDisplayKind))
-				{
-					SetInitializedProperty("DefaultDisplayKind");
+                {
+                    SetInitializedProperty("DefaultDisplayKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultDisplayKindImpl;
@@ -156,7 +156,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The default ControlKind to use for this Presentable.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
         // fkBackingName=_fk_DefaultEditorKind; fkGuidBackingName=_fk_guid_DefaultEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -229,10 +229,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultEditorKind == null) || (value != null && value.ID == _fk_DefaultEditorKind))
-				{
-					SetInitializedProperty("DefaultEditorKind");
+                {
+                    SetInitializedProperty("DefaultEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultEditorKindImpl;
@@ -272,7 +272,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The default ControlKind to use for displaying this Presentable readonly in a GridCell. Defaults to DefaultDisplayKind.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
         // fkBackingName=_fk_DefaultGridCellDisplayKind; fkGuidBackingName=_fk_guid_DefaultGridCellDisplayKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -345,10 +345,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultGridCellDisplayKind == null) || (value != null && value.ID == _fk_DefaultGridCellDisplayKind))
-				{
-					SetInitializedProperty("DefaultGridCellDisplayKind");
+                {
+                    SetInitializedProperty("DefaultGridCellDisplayKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultGridCellDisplayKindImpl;
@@ -388,7 +388,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The default ControlKind for displaying this model in a GridCell in editing mode. Defaults to DefaultKind.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
         // fkBackingName=_fk_DefaultGridCellEditorKind; fkGuidBackingName=_fk_guid_DefaultGridCellEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -461,10 +461,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultGridCellEditorKind == null) || (value != null && value.ID == _fk_DefaultGridCellEditorKind))
-				{
-					SetInitializedProperty("DefaultGridCellEditorKind");
+                {
+                    SetInitializedProperty("DefaultGridCellEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultGridCellEditorKindImpl;
@@ -504,7 +504,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// .The default ControlKind for displaying this model in a GridCell befor editing starts. Defaults to DefaultGridCellDisplayKind.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
         // fkBackingName=_fk_DefaultGridCellPreEditorKind; fkGuidBackingName=_fk_guid_DefaultGridCellPreEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -577,10 +577,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultGridCellPreEditorKind == null) || (value != null && value.ID == _fk_DefaultGridCellPreEditorKind))
-				{
-					SetInitializedProperty("DefaultGridCellPreEditorKind");
+                {
+                    SetInitializedProperty("DefaultGridCellPreEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultGridCellPreEditorKindImpl;
@@ -661,10 +661,10 @@ namespace Zetbox.App.GUI
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description;
@@ -731,10 +731,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -749,7 +749,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -822,10 +822,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -901,7 +901,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The described CLR class&amp;apos; reference
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
         // fkBackingName=_fk_ViewModelRef; fkGuidBackingName=_fk_guid_ViewModelRef;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -974,10 +974,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_ViewModelRef == null) || (value != null && value.ID == _fk_ViewModelRef))
-				{
-					SetInitializedProperty("ViewModelRef");
+                {
+                    SetInitializedProperty("ViewModelRef");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ViewModelRefImpl;

@@ -72,7 +72,7 @@ namespace Zetbox.Generator.Templates.Properties
         public override void Generate()
         {
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("	");
+this.WriteObjects("    ");
 #line 50 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 string taskName = "_triggerFetch" + name + "Task";
 
@@ -158,10 +158,10 @@ this.WriteObjects("                if (value != null && value.Context != this.Co
 this.WriteObjects("\r\n");
 this.WriteObjects("                // shortcut noops\r\n");
 this.WriteObjects("                if ((value == null && ",  fkBackingName , " == null) || (value != null && value.ID == ",  fkBackingName , "))\r\n");
-this.WriteObjects("				{\r\n");
-this.WriteObjects("					SetInitializedProperty(\"",  name , "\");\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    SetInitializedProperty(\"",  name , "\");\r\n");
 this.WriteObjects("                    return;\r\n");
-this.WriteObjects("				}\r\n");
+this.WriteObjects("                }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                // cache old value to remove inverse references later\r\n");
 this.WriteObjects("                var __oldValue = ",  implName , ";\r\n");

@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
                         OnDateTimeStyle_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DateTimeStyle");
-				}
+                else
+                {
+                    SetInitializedProperty("DateTimeStyle");
+                }
             }
         }
         private Zetbox.App.Base.DateTimeStyles? _DateTimeStyle;

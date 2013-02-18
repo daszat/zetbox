@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CompoundObject == null)
-				{
-					SetInitializedProperty("CompoundObject");
+                {
+                    SetInitializedProperty("CompoundObject");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.CompoundObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CompoundObject);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CompoundObject");
+                {
+                    SetInitializedProperty("CompoundObject");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CompoundObject", __oldValue, __newValue);

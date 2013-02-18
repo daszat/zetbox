@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
         // fkBackingName=_fk_FalseIcon; fkGuidBackingName=_fk_guid_FalseIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -113,10 +113,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_FalseIcon == null) || (value != null && value.ID == _fk_FalseIcon))
-				{
-					SetInitializedProperty("FalseIcon");
+                {
+                    SetInitializedProperty("FalseIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = FalseIconImpl;
@@ -197,10 +197,10 @@ namespace Zetbox.App.Base
                         OnFalseLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FalseLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("FalseLabel");
+                }
             }
         }
         private string _FalseLabel;
@@ -214,7 +214,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
         // fkBackingName=_fk_NullIcon; fkGuidBackingName=_fk_guid_NullIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -287,10 +287,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_NullIcon == null) || (value != null && value.ID == _fk_NullIcon))
-				{
-					SetInitializedProperty("NullIcon");
+                {
+                    SetInitializedProperty("NullIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = NullIconImpl;
@@ -371,10 +371,10 @@ namespace Zetbox.App.Base
                         OnNullLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NullLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("NullLabel");
+                }
             }
         }
         private string _NullLabel;
@@ -388,7 +388,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
         // fkBackingName=_fk_TrueIcon; fkGuidBackingName=_fk_guid_TrueIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -461,10 +461,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_TrueIcon == null) || (value != null && value.ID == _fk_TrueIcon))
-				{
-					SetInitializedProperty("TrueIcon");
+                {
+                    SetInitializedProperty("TrueIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = TrueIconImpl;
@@ -545,10 +545,10 @@ namespace Zetbox.App.Base
                         OnTrueLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TrueLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("TrueLabel");
+                }
             }
         }
         private string _TrueLabel;

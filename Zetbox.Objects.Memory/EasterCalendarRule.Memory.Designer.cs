@@ -81,10 +81,10 @@ namespace Zetbox.App.Calendar
                         OnOffset_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Offset");
-				}
+                else
+                {
+                    SetInitializedProperty("Offset");
+                }
             }
         }
         private int? _Offset;

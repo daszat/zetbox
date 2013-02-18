@@ -81,10 +81,10 @@ namespace Zetbox.App.Test
                         OnNullable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Nullable");
-				}
+                else
+                {
+                    SetInitializedProperty("Nullable");
+                }
             }
         }
         private int? _Nullable;
@@ -154,10 +154,10 @@ namespace Zetbox.App.Test
                         OnNullableWithDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NullableWithDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("NullableWithDefault");
+                }
             }
         }
         private int? _NullableWithDefault;
@@ -213,10 +213,10 @@ namespace Zetbox.App.Test
                         OnStandard_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Standard");
-				}
+                else
+                {
+                    SetInitializedProperty("Standard");
+                }
             }
         }
         private int _Standard;
@@ -283,10 +283,10 @@ namespace Zetbox.App.Test
                         OnStandardWithDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("StandardWithDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("StandardWithDefault");
+                }
             }
         }
         private int _StandardWithDefault;

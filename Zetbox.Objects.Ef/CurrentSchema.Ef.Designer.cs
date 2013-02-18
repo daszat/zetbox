@@ -87,10 +87,10 @@ namespace Zetbox.App.Base
                         OnSchema_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Schema");
-				}
+                else
+                {
+                    SetInitializedProperty("Schema");
+                }
             }
         }
         private string _Schema_store;
@@ -156,10 +156,10 @@ namespace Zetbox.App.Base
                         OnVersion_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Version");
-				}
+                else
+                {
+                    SetInitializedProperty("Version");
+                }
             }
         }
         private int _Version_store;
@@ -357,10 +357,10 @@ namespace Zetbox.App.Base
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
         private bool _HasPersistentOrder;
@@ -139,10 +139,10 @@ namespace Zetbox.App.Base
                         OnImplementorRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ImplementorRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ImplementorRoleName");
+                }
             }
         }
         private string _ImplementorRoleName;
@@ -197,10 +197,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
         private bool _IsList;
@@ -255,10 +255,10 @@ namespace Zetbox.App.Base
                         OnItemRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ItemRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ItemRoleName");
+                }
             }
         }
         private string _ItemRoleName;
@@ -272,7 +272,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedObjectClass
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedObjectClass
         // fkBackingName=_fk_ReferencedObjectClass; fkGuidBackingName=_fk_guid_ReferencedObjectClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -345,10 +345,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_ReferencedObjectClass == null) || (value != null && value.ID == _fk_ReferencedObjectClass))
-				{
-					SetInitializedProperty("ReferencedObjectClass");
+                {
+                    SetInitializedProperty("ReferencedObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ReferencedObjectClassImpl;
@@ -429,10 +429,10 @@ namespace Zetbox.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Verb");
-				}
+                else
+                {
+                    SetInitializedProperty("Verb");
+                }
             }
         }
         private string _Verb;

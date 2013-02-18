@@ -87,10 +87,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDestination_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Destination");
-				}
+                else
+                {
+                    SetInitializedProperty("Destination");
+                }
             }
         }
         private string _Destination_store;
@@ -156,10 +156,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDestinationRows_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DestinationRows");
-				}
+                else
+                {
+                    SetInitializedProperty("DestinationRows");
+                }
             }
         }
         private int _DestinationRows_store;
@@ -225,10 +225,10 @@ namespace Zetbox.App.SchemaMigration
                         OnSource_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Source");
-				}
+                else
+                {
+                    SetInitializedProperty("Source");
+                }
             }
         }
         private string _Source_store;
@@ -294,10 +294,10 @@ namespace Zetbox.App.SchemaMigration
                         OnSourceRows_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SourceRows");
-				}
+                else
+                {
+                    SetInitializedProperty("SourceRows");
+                }
             }
         }
         private int _SourceRows_store;
@@ -365,10 +365,10 @@ namespace Zetbox.App.SchemaMigration
                         OnTimestamp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Timestamp");
-				}
+                else
+                {
+                    SetInitializedProperty("Timestamp");
+                }
             }
         }
         private DateTime _Timestamp_store;
@@ -602,10 +602,10 @@ namespace Zetbox.App.SchemaMigration
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

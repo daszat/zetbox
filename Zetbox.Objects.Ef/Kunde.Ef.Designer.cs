@@ -87,10 +87,10 @@ namespace Zetbox.App.Projekte
                         OnAdresse_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Adresse");
-				}
+                else
+                {
+                    SetInitializedProperty("Adresse");
+                }
             }
         }
         private string _Adresse_store;
@@ -272,10 +272,10 @@ namespace Zetbox.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -458,10 +458,10 @@ namespace Zetbox.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -586,10 +586,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -656,10 +656,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Kundenname");
-				}
+                else
+                {
+                    SetInitializedProperty("Kundenname");
+                }
             }
         }
         private string _Kundenname_store;
@@ -725,10 +725,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnLand_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Land");
-				}
+                else
+                {
+                    SetInitializedProperty("Land");
+                }
             }
         }
         private string _Land_store;
@@ -794,10 +794,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnOrt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Ort");
-				}
+                else
+                {
+                    SetInitializedProperty("Ort");
+                }
             }
         }
         private string _Ort_store;
@@ -863,10 +863,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnPLZ_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("PLZ");
-				}
+                else
+                {
+                    SetInitializedProperty("PLZ");
+                }
             }
         }
         private string _PLZ_store;
@@ -1179,10 +1179,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

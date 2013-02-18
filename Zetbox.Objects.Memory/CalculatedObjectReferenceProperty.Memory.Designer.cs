@@ -79,7 +79,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// the referenced class of objects
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
         // fkBackingName=_fk_ReferencedClass; fkGuidBackingName=_fk_guid_ReferencedClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -152,10 +152,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_ReferencedClass == null) || (value != null && value.ID == _fk_ReferencedClass))
-				{
-					SetInitializedProperty("ReferencedClass");
+                {
+                    SetInitializedProperty("ReferencedClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ReferencedClassImpl;

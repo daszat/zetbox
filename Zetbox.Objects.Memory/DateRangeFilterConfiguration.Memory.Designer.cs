@@ -81,10 +81,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentMonthDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentMonthDefault");
+                }
             }
         }
         private bool? _IsCurrentMonthDefault;
@@ -139,10 +139,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentQuaterDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentQuaterDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentQuaterDefault");
+                }
             }
         }
         private bool? _IsCurrentQuaterDefault;
@@ -197,10 +197,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentYearDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentYearDefault");
+                }
             }
         }
         private bool? _IsCurrentYearDefault;

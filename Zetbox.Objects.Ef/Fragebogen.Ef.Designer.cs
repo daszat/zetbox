@@ -145,10 +145,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                         OnBogenNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("BogenNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("BogenNummer");
+                }
             }
         }
         private int? _BogenNummer_store;
@@ -415,10 +415,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

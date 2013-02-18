@@ -87,10 +87,10 @@ namespace Zetbox.App.Base
                         OnCategoryTags_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CategoryTags");
-				}
+                else
+                {
+                    SetInitializedProperty("CategoryTags");
+                }
             }
         }
         private string _CategoryTags_store;
@@ -272,10 +272,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -329,13 +329,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
                     _CodeTemplate = __newValue;
                     NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
-			        _CodeTemplate_IsDirty = false;
+                    _CodeTemplate_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CodeTemplate");
-				}
+                else
+                {
+                    SetInitializedProperty("CodeTemplate");
+                }
             }
         }
         private string _CodeTemplate_store;
@@ -572,10 +572,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -757,10 +757,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description_store;
@@ -826,10 +826,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnDisableExport_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisableExport");
-				}
+                else
+                {
+                    SetInitializedProperty("DisableExport");
+                }
             }
         }
         private bool? _DisableExport_store;
@@ -907,10 +907,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -1092,10 +1092,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Label");
-				}
+                else
+                {
+                    SetInitializedProperty("Label");
+                }
             }
         }
         private string _Label_store;
@@ -1264,10 +1264,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -1420,10 +1420,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("Properties_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("Properties_pos");
+                }
             }
         }
         private int? _Properties_pos_store;
@@ -1590,10 +1590,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnRequestedWidth_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("RequestedWidth");
-				}
+                else
+                {
+                    SetInitializedProperty("RequestedWidth");
+                }
             }
         }
         private Zetbox.App.GUI.WidthHint? _RequestedWidth_store;
@@ -2533,10 +2533,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

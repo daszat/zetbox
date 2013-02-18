@@ -189,10 +189,10 @@ namespace Zetbox.App.GUI
                         OnDisplayedTypeFullName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayedTypeFullName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayedTypeFullName");
+                }
             }
         }
         private string _DisplayedTypeFullName_store;
@@ -258,10 +258,10 @@ namespace Zetbox.App.GUI
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
         private string _DisplayName_store;
@@ -730,10 +730,10 @@ namespace Zetbox.App.GUI
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

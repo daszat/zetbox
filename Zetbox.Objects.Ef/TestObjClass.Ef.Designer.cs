@@ -71,13 +71,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("CalculatedEnumeration", __oldValue, __newValue);
                     _CalculatedEnumeration = __newValue;
                     NotifyPropertyChanged("CalculatedEnumeration", __oldValue, __newValue);
-			        _CalculatedEnumeration_IsDirty = false;
+                    _CalculatedEnumeration_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CalculatedEnumeration");
-				}
+                else
+                {
+                    SetInitializedProperty("CalculatedEnumeration");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _CalculatedEnumeration_store;
@@ -155,10 +155,10 @@ namespace Zetbox.App.Test
                         OnMyIntProperty_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MyIntProperty");
-				}
+                else
+                {
+                    SetInitializedProperty("MyIntProperty");
+                }
             }
         }
         private int? _MyIntProperty_store;
@@ -326,10 +326,10 @@ namespace Zetbox.App.Test
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("StringProp");
-				}
+                else
+                {
+                    SetInitializedProperty("StringProp");
+                }
             }
         }
         private string _StringProp_store;
@@ -392,10 +392,10 @@ namespace Zetbox.App.Test
                         OnTestEnumProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnumProp");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnumProp");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _TestEnumProp_store;
@@ -485,10 +485,10 @@ namespace Zetbox.App.Test
                         OnTestEnumWithDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnumWithDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnumWithDefault");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _TestEnumWithDefault_store;
@@ -833,10 +833,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

@@ -87,10 +87,10 @@ namespace Zetbox.App.Base
                         OnCurrentNumber_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CurrentNumber");
-				}
+                else
+                {
+                    SetInitializedProperty("CurrentNumber");
+                }
             }
         }
         private int _CurrentNumber_store;
@@ -408,10 +408,10 @@ namespace Zetbox.App.Base
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

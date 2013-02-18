@@ -153,16 +153,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("AufwandGes", __oldValue, __newValue);
                     Proxy.AufwandGes = __newValue;
                     NotifyPropertyChanged("AufwandGes", __oldValue, __newValue);
-			        _AufwandGes_IsDirty = false;
+                    _AufwandGes_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("AufwandGes");
-				}
+                else
+                {
+                    SetInitializedProperty("AufwandGes");
+                }
             }
         }
-		private bool _AufwandGes_IsDirty = false;
+        private bool _AufwandGes_IsDirty = false;
 
 
         private double? FetchAufwandGesOrDefault()
@@ -226,10 +226,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Bis");
-				}
+                else
+                {
+                    SetInitializedProperty("Bis");
+                }
             }
         }
 
@@ -273,10 +273,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -285,10 +285,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -378,10 +378,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
 
@@ -444,10 +444,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -456,10 +456,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -549,10 +549,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
 
@@ -627,10 +627,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -704,10 +704,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKickOffAm_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("KickOffAm");
-				}
+                else
+                {
+                    SetInitializedProperty("KickOffAm");
+                }
             }
         }
 
@@ -762,10 +762,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKickOffBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("KickOffBis");
-				}
+                else
+                {
+                    SetInitializedProperty("KickOffBis");
+                }
             }
         }
 
@@ -820,10 +820,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Kundenname");
-				}
+                else
+                {
+                    SetInitializedProperty("Kundenname");
+                }
             }
         }
 
@@ -909,10 +909,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
 
@@ -1002,10 +1002,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                         OnVon_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Von");
-				}
+                else
+                {
+                    SetInitializedProperty("Von");
+                }
             }
         }
 

@@ -81,10 +81,10 @@ namespace Zetbox.App.Projekte
                         OnAufwand_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Aufwand");
-				}
+                else
+                {
+                    SetInitializedProperty("Aufwand");
+                }
             }
         }
         private double? _Aufwand;
@@ -98,7 +98,7 @@ namespace Zetbox.App.Projekte
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -170,10 +170,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -268,10 +268,10 @@ namespace Zetbox.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -286,7 +286,7 @@ namespace Zetbox.App.Projekte
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -358,10 +358,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -456,10 +456,10 @@ namespace Zetbox.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -517,10 +517,10 @@ namespace Zetbox.App.Projekte
                         OnDatumBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DatumBis");
-				}
+                else
+                {
+                    SetInitializedProperty("DatumBis");
+                }
             }
         }
         private DateTime? _DatumBis;
@@ -577,10 +577,10 @@ namespace Zetbox.App.Projekte
                         OnDatumVon_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DatumVon");
-				}
+                else
+                {
+                    SetInitializedProperty("DatumVon");
+                }
             }
         }
         private DateTime _DatumVon;
@@ -647,10 +647,10 @@ namespace Zetbox.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -706,10 +706,10 @@ namespace Zetbox.App.Projekte
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -723,7 +723,7 @@ namespace Zetbox.App.Projekte
         /// <summary>
         /// Verknüpfung zum Projekt
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt
         // fkBackingName=_fk_Projekt; fkGuidBackingName=_fk_guid_Projekt;
         // referencedInterface=Zetbox.App.Projekte.Projekt; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=Tasks; is list;
@@ -796,10 +796,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noops
                 if ((value == null && _fk_Projekt == null) || (value != null && value.ID == _fk_Projekt))
-				{
-					SetInitializedProperty("Projekt");
+                {
+                    SetInitializedProperty("Projekt");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ProjektImpl;

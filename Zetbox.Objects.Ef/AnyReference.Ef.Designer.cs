@@ -97,10 +97,10 @@ namespace Zetbox.App.Base
                         OnObjClass_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ObjClass");
-				}
+                else
+                {
+                    SetInitializedProperty("ObjClass");
+                }
             }
         }
         private Guid? _ObjClass_store;
@@ -164,10 +164,10 @@ namespace Zetbox.App.Base
                         OnObjGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ObjGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ObjGuid");
+                }
             }
         }
         private Guid? _ObjGuid_store;
@@ -231,10 +231,10 @@ namespace Zetbox.App.Base
                         OnObjID_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ObjID");
-				}
+                else
+                {
+                    SetInitializedProperty("ObjID");
+                }
             }
         }
         private int? _ObjID_store;

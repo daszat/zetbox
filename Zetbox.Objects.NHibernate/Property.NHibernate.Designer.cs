@@ -95,10 +95,10 @@ namespace Zetbox.App.Base
                         OnCategoryTags_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CategoryTags");
-				}
+                else
+                {
+                    SetInitializedProperty("CategoryTags");
+                }
             }
         }
 
@@ -142,10 +142,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -154,10 +154,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -247,10 +247,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
 
@@ -304,16 +304,16 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
                     Proxy.CodeTemplate = __newValue;
                     NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
-			        _CodeTemplate_IsDirty = false;
+                    _CodeTemplate_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CodeTemplate");
-				}
+                else
+                {
+                    SetInitializedProperty("CodeTemplate");
+                }
             }
         }
-		private bool _CodeTemplate_IsDirty = false;
+        private bool _CodeTemplate_IsDirty = false;
 
 
         private string FetchCodeTemplateOrDefault()
@@ -403,10 +403,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -415,10 +415,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -508,10 +508,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
 
@@ -574,10 +574,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultValue == null)
-				{
-					SetInitializedProperty("DefaultValue");
+                {
+                    SetInitializedProperty("DefaultValue");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultValue);
@@ -586,10 +586,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DefaultValue");
+                {
+                    SetInitializedProperty("DefaultValue");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultValue", __oldValue, __newValue);
@@ -696,10 +696,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
 
@@ -754,10 +754,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnDisableExport_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisableExport");
-				}
+                else
+                {
+                    SetInitializedProperty("DisableExport");
+                }
             }
         }
 
@@ -813,10 +813,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -879,10 +879,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.FilterConfiguration == null)
-				{
-					SetInitializedProperty("FilterConfiguration");
+                {
+                    SetInitializedProperty("FilterConfiguration");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FilterConfiguration);
@@ -891,10 +891,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("FilterConfiguration");
+                {
+                    SetInitializedProperty("FilterConfiguration");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("FilterConfiguration", __oldValue, __newValue);
@@ -1001,10 +1001,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Label");
-				}
+                else
+                {
+                    SetInitializedProperty("Label");
+                }
             }
         }
 
@@ -1048,10 +1048,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -1060,10 +1060,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -1154,10 +1154,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
 
@@ -1201,10 +1201,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ObjectClass == null)
-				{
-					SetInitializedProperty("ObjectClass");
+                {
+                    SetInitializedProperty("ObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ObjectClass);
@@ -1213,10 +1213,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ObjectClass");
+                {
+                    SetInitializedProperty("ObjectClass");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ObjectClass", __oldValue, __newValue);
@@ -1302,10 +1302,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("Properties_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("Properties_pos");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -1349,10 +1349,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.RequestedKind == null)
-				{
-					SetInitializedProperty("RequestedKind");
+                {
+                    SetInitializedProperty("RequestedKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedKind);
@@ -1361,10 +1361,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("RequestedKind");
+                {
+                    SetInitializedProperty("RequestedKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("RequestedKind", __oldValue, __newValue);
@@ -1455,10 +1455,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         OnRequestedWidth_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("RequestedWidth");
-				}
+                else
+                {
+                    SetInitializedProperty("RequestedWidth");
+                }
             }
         }
 
@@ -1502,10 +1502,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ValueModelDescriptor == null)
-				{
-					SetInitializedProperty("ValueModelDescriptor");
+                {
+                    SetInitializedProperty("ValueModelDescriptor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ValueModelDescriptor);
@@ -1514,10 +1514,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ValueModelDescriptor");
+                {
+                    SetInitializedProperty("ValueModelDescriptor");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ValueModelDescriptor", __oldValue, __newValue);

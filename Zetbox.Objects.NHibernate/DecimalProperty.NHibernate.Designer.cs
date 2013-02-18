@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnPrecision_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Precision");
-				}
+                else
+                {
+                    SetInitializedProperty("Precision");
+                }
             }
         }
 
@@ -150,10 +150,10 @@ namespace Zetbox.App.Base
                         OnScale_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Scale");
-				}
+                else
+                {
+                    SetInitializedProperty("Scale");
+                }
             }
         }
 

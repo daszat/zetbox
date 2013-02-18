@@ -306,10 +306,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -492,10 +492,10 @@ namespace Zetbox.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -562,10 +562,10 @@ namespace Zetbox.App.Base
                         OnDeleted_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Deleted");
-				}
+                else
+                {
+                    SetInitializedProperty("Deleted");
+                }
             }
         }
         private bool? _Deleted_store;
@@ -643,10 +643,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -713,10 +713,10 @@ namespace Zetbox.App.Base
                         OnFullName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FullName");
-				}
+                else
+                {
+                    SetInitializedProperty("FullName");
+                }
             }
         }
         private string _FullName_store;
@@ -935,10 +935,10 @@ namespace Zetbox.App.Base
                         OnToStringCache_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ToStringCache");
-				}
+                else
+                {
+                    SetInitializedProperty("ToStringCache");
+                }
             }
         }
         private string _ToStringCache_store;
@@ -1534,10 +1534,10 @@ namespace Zetbox.App.Base
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

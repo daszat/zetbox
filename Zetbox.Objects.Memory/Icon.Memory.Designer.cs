@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
         // fkBackingName=_fk_Blob; fkGuidBackingName=_fk_guid_Blob;
         // referencedInterface=Zetbox.App.Base.Blob; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -113,10 +113,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_Blob == null) || (value != null && value.ID == _fk_Blob))
-				{
-					SetInitializedProperty("Blob");
+                {
+                    SetInitializedProperty("Blob");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = BlobImpl;
@@ -209,10 +209,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -268,10 +268,10 @@ namespace Zetbox.App.GUI
                         OnIconFile_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IconFile");
-				}
+                else
+                {
+                    SetInitializedProperty("IconFile");
+                }
             }
         }
         private string _IconFile;
@@ -285,7 +285,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -358,10 +358,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;

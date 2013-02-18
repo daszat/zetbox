@@ -92,10 +92,10 @@ namespace Zetbox.App.Test
                         OnFrage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Frage");
-				}
+                else
+                {
+                    SetInitializedProperty("Frage");
+                }
             }
         }
 
@@ -139,10 +139,10 @@ namespace Zetbox.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Fragebogen == null)
-				{
-					SetInitializedProperty("Fragebogen");
+                {
+                    SetInitializedProperty("Fragebogen");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Fragebogen);
@@ -151,10 +151,10 @@ namespace Zetbox.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Fragebogen");
+                {
+                    SetInitializedProperty("Fragebogen");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Fragebogen", __oldValue, __newValue);
@@ -238,10 +238,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("gute_Antworten_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("gute_Antworten_pos");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -296,10 +296,10 @@ namespace Zetbox.App.Test
                         OnFragenNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FragenNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("FragenNummer");
+                }
             }
         }
 
@@ -354,10 +354,10 @@ namespace Zetbox.App.Test
                         OnGegebeneAntwort_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("GegebeneAntwort");
-				}
+                else
+                {
+                    SetInitializedProperty("GegebeneAntwort");
+                }
             }
         }
 

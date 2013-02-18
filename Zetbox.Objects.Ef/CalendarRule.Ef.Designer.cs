@@ -318,10 +318,10 @@ namespace Zetbox.App.Calendar
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -504,10 +504,10 @@ namespace Zetbox.App.Calendar
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -586,10 +586,10 @@ namespace Zetbox.App.Calendar
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -668,10 +668,10 @@ namespace Zetbox.App.Calendar
                         OnIsWorkingDay_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsWorkingDay");
-				}
+                else
+                {
+                    SetInitializedProperty("IsWorkingDay");
+                }
             }
         }
         private bool _IsWorkingDay_store;
@@ -841,10 +841,10 @@ namespace Zetbox.App.Calendar
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -912,10 +912,10 @@ namespace Zetbox.App.Calendar
                         OnValidFrom_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ValidFrom");
-				}
+                else
+                {
+                    SetInitializedProperty("ValidFrom");
+                }
             }
         }
         private DateTime? _ValidFrom_store;
@@ -983,10 +983,10 @@ namespace Zetbox.App.Calendar
                         OnValidUntil_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ValidUntil");
-				}
+                else
+                {
+                    SetInitializedProperty("ValidUntil");
+                }
             }
         }
         private DateTime? _ValidUntil_store;
@@ -1052,10 +1052,10 @@ namespace Zetbox.App.Calendar
                         OnWorkingHours_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("WorkingHours");
-				}
+                else
+                {
+                    SetInitializedProperty("WorkingHours");
+                }
             }
         }
         private decimal _WorkingHours_store;
@@ -1463,10 +1463,10 @@ namespace Zetbox.App.Calendar
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

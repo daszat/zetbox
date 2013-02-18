@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
                         OnCurrentNumber_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CurrentNumber");
-				}
+                else
+                {
+                    SetInitializedProperty("CurrentNumber");
+                }
             }
         }
         private int _CurrentNumber;
@@ -98,7 +98,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
         // fkBackingName=_fk_Sequence; fkGuidBackingName=_fk_guid_Sequence;
         // referencedInterface=Zetbox.App.Base.Sequence; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Data; is reference;
@@ -170,10 +170,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_Sequence == null) || (value != null && value.ID == _fk_Sequence))
-				{
-					SetInitializedProperty("Sequence");
+                {
+                    SetInitializedProperty("Sequence");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = SequenceImpl;

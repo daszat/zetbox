@@ -87,10 +87,10 @@ namespace Zetbox.App.GUI
                         OnConfiguration_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Configuration");
-				}
+                else
+                {
+                    SetInitializedProperty("Configuration");
+                }
             }
         }
         private string _Configuration_store;
@@ -168,10 +168,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -613,10 +613,10 @@ namespace Zetbox.App.GUI
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

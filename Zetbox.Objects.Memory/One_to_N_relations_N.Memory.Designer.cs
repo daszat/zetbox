@@ -81,10 +81,10 @@ namespace Zetbox.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -98,7 +98,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
         // fkBackingName=_fk_OneSide; fkGuidBackingName=_fk_guid_OneSide;
         // referencedInterface=Zetbox.App.Test.One_to_N_relations_One; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=NSide; is list;
@@ -170,10 +170,10 @@ namespace Zetbox.App.Test
 
                 // shortcut noops
                 if ((value == null && _fk_OneSide == null) || (value != null && value.ID == _fk_OneSide))
-				{
-					SetInitializedProperty("OneSide");
+                {
+                    SetInitializedProperty("OneSide");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = OneSideImpl;

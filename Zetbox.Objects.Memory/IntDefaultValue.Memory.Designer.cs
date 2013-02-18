@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
                         OnIntValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IntValue");
-				}
+                else
+                {
+                    SetInitializedProperty("IntValue");
+                }
             }
         }
         private int _IntValue;

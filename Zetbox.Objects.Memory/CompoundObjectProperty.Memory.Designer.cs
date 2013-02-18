@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Definition of this Compound Object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObjectDefinition
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObjectDefinition
         // fkBackingName=_fk_CompoundObjectDefinition; fkGuidBackingName=_fk_guid_CompoundObjectDefinition;
         // referencedInterface=Zetbox.App.Base.CompoundObject; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -113,10 +113,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_CompoundObjectDefinition == null) || (value != null && value.ID == _fk_CompoundObjectDefinition))
-				{
-					SetInitializedProperty("CompoundObjectDefinition");
+                {
+                    SetInitializedProperty("CompoundObjectDefinition");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CompoundObjectDefinitionImpl;
@@ -197,10 +197,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
         private bool _HasPersistentOrder;
@@ -255,10 +255,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
         private bool _IsList;

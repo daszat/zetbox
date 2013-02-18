@@ -92,10 +92,10 @@ namespace Zetbox.App.GUI
                         OnPredicate_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Predicate");
-				}
+                else
+                {
+                    SetInitializedProperty("Predicate");
+                }
             }
         }
 

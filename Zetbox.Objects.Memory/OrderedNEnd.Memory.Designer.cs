@@ -40,7 +40,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneEnd
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneEnd
         // fkBackingName=_fk_OneEnd; fkGuidBackingName=_fk_guid_OneEnd;
         // referencedInterface=Zetbox.App.Test.OrderedOneEnd; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=NEnds; is list;
@@ -112,10 +112,10 @@ namespace Zetbox.App.Test
 
                 // shortcut noops
                 if ((value == null && _fk_OneEnd == null) || (value != null && value.ID == _fk_OneEnd))
-				{
-					SetInitializedProperty("OneEnd");
+                {
+                    SetInitializedProperty("OneEnd");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = OneEndImpl;
@@ -184,10 +184,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("NEnds_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("NEnds_pos");
+                }
             }
         }
         private int? _NEnds_pos;
@@ -243,10 +243,10 @@ namespace Zetbox.App.Test
                         OnOtherInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("OtherInt");
-				}
+                else
+                {
+                    SetInitializedProperty("OtherInt");
+                }
             }
         }
         private int? _OtherInt;

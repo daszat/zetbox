@@ -143,10 +143,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                         OnSomeInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SomeInt");
-				}
+                else
+                {
+                    SetInitializedProperty("SomeInt");
+                }
             }
         }
         private int? _SomeInt_store;
@@ -353,10 +353,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

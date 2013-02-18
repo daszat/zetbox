@@ -81,10 +81,10 @@ namespace Zetbox.App.Calendar
                         OnDay_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Day");
-				}
+                else
+                {
+                    SetInitializedProperty("Day");
+                }
             }
         }
         private int _Day;
@@ -139,10 +139,10 @@ namespace Zetbox.App.Calendar
                         OnMonth_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Month");
-				}
+                else
+                {
+                    SetInitializedProperty("Month");
+                }
             }
         }
         private int _Month;

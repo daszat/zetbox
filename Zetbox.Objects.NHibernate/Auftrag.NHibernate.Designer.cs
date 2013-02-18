@@ -95,10 +95,10 @@ namespace Zetbox.App.Projekte
                         OnAuftragsname_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Auftragsname");
-				}
+                else
+                {
+                    SetInitializedProperty("Auftragsname");
+                }
             }
         }
 
@@ -153,10 +153,10 @@ namespace Zetbox.App.Projekte
                         OnAuftragswert_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Auftragswert");
-				}
+                else
+                {
+                    SetInitializedProperty("Auftragswert");
+                }
             }
         }
 
@@ -200,10 +200,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -212,10 +212,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -305,10 +305,10 @@ namespace Zetbox.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
 
@@ -371,10 +371,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -383,10 +383,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -476,10 +476,10 @@ namespace Zetbox.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
 
@@ -554,10 +554,10 @@ namespace Zetbox.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -620,10 +620,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Kunde == null)
-				{
-					SetInitializedProperty("Kunde");
+                {
+                    SetInitializedProperty("Kunde");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Kunde);
@@ -632,10 +632,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Kunde");
+                {
+                    SetInitializedProperty("Kunde");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Kunde", __oldValue, __newValue);
@@ -715,10 +715,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Mitarbeiter == null)
-				{
-					SetInitializedProperty("Mitarbeiter");
+                {
+                    SetInitializedProperty("Mitarbeiter");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Mitarbeiter);
@@ -727,10 +727,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Mitarbeiter");
+                {
+                    SetInitializedProperty("Mitarbeiter");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Mitarbeiter", __oldValue, __newValue);
@@ -810,10 +810,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Projekt == null)
-				{
-					SetInitializedProperty("Projekt");
+                {
+                    SetInitializedProperty("Projekt");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Projekt);
@@ -822,10 +822,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Projekt");
+                {
+                    SetInitializedProperty("Projekt");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Projekt", __oldValue, __newValue);

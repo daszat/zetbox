@@ -173,10 +173,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("NEnds_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("NEnds_pos");
+                }
             }
         }
         private int? _NEnds_pos_store;
@@ -243,10 +243,10 @@ namespace Zetbox.App.Test
                         OnOtherInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("OtherInt");
-				}
+                else
+                {
+                    SetInitializedProperty("OtherInt");
+                }
             }
         }
         private int? _OtherInt_store;
@@ -461,10 +461,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

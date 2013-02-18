@@ -40,7 +40,7 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
         // fkBackingName=_fk_Calendar; fkGuidBackingName=_fk_guid_Calendar;
         // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=CalendarRules; is list;
@@ -113,10 +113,10 @@ namespace Zetbox.App.Calendar
 
                 // shortcut noops
                 if ((value == null && _fk_Calendar == null) || (value != null && value.ID == _fk_Calendar))
-				{
-					SetInitializedProperty("Calendar");
+                {
+                    SetInitializedProperty("Calendar");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CalendarImpl;
@@ -172,7 +172,7 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
@@ -244,10 +244,10 @@ namespace Zetbox.App.Calendar
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -342,10 +342,10 @@ namespace Zetbox.App.Calendar
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -360,7 +360,7 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
@@ -432,10 +432,10 @@ namespace Zetbox.App.Calendar
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -530,10 +530,10 @@ namespace Zetbox.App.Calendar
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -601,10 +601,10 @@ namespace Zetbox.App.Calendar
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -672,10 +672,10 @@ namespace Zetbox.App.Calendar
                         OnIsWorkingDay_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsWorkingDay");
-				}
+                else
+                {
+                    SetInitializedProperty("IsWorkingDay");
+                }
             }
         }
         private bool _IsWorkingDay;
@@ -690,7 +690,7 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Optional member of a module
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
@@ -763,10 +763,10 @@ namespace Zetbox.App.Calendar
 
                 // shortcut noops
                 if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -847,10 +847,10 @@ namespace Zetbox.App.Calendar
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -907,10 +907,10 @@ namespace Zetbox.App.Calendar
                         OnValidFrom_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ValidFrom");
-				}
+                else
+                {
+                    SetInitializedProperty("ValidFrom");
+                }
             }
         }
         private DateTime? _ValidFrom;
@@ -967,10 +967,10 @@ namespace Zetbox.App.Calendar
                         OnValidUntil_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ValidUntil");
-				}
+                else
+                {
+                    SetInitializedProperty("ValidUntil");
+                }
             }
         }
         private DateTime? _ValidUntil;
@@ -1025,10 +1025,10 @@ namespace Zetbox.App.Calendar
                         OnWorkingHours_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("WorkingHours");
-				}
+                else
+                {
+                    SetInitializedProperty("WorkingHours");
+                }
             }
         }
         private decimal _WorkingHours;

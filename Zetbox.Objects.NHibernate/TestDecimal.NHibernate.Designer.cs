@@ -92,10 +92,10 @@ namespace Zetbox.App.Test
                         OnLarge_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Large");
-				}
+                else
+                {
+                    SetInitializedProperty("Large");
+                }
             }
         }
 
@@ -150,10 +150,10 @@ namespace Zetbox.App.Test
                         OnNoScale_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NoScale");
-				}
+                else
+                {
+                    SetInitializedProperty("NoScale");
+                }
             }
         }
 
@@ -208,10 +208,10 @@ namespace Zetbox.App.Test
                         OnSmallDecimal_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SmallDecimal");
-				}
+                else
+                {
+                    SetInitializedProperty("SmallDecimal");
+                }
             }
         }
 

@@ -87,10 +87,10 @@ namespace Zetbox.App.GUI
                         OnAllowAddNew_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowAddNew");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowAddNew");
+                }
             }
         }
         private bool? _AllowAddNew_store;
@@ -156,10 +156,10 @@ namespace Zetbox.App.GUI
                         OnAllowDelete_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowDelete");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowDelete");
+                }
             }
         }
         private bool? _AllowDelete_store;
@@ -225,10 +225,10 @@ namespace Zetbox.App.GUI
                         OnAllowExport_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowExport");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowExport");
+                }
             }
         }
         private bool? _AllowExport_store;
@@ -294,10 +294,10 @@ namespace Zetbox.App.GUI
                         OnAllowOpen_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowOpen");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowOpen");
+                }
             }
         }
         private bool? _AllowOpen_store;
@@ -363,10 +363,10 @@ namespace Zetbox.App.GUI
                         OnAllowSelectColumns_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowSelectColumns");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowSelectColumns");
+                }
             }
         }
         private bool? _AllowSelectColumns_store;
@@ -432,10 +432,10 @@ namespace Zetbox.App.GUI
                         OnAllowUserFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowUserFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowUserFilter");
+                }
             }
         }
         private bool? _AllowUserFilter_store;
@@ -501,10 +501,10 @@ namespace Zetbox.App.GUI
                         OnEnableAutoFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EnableAutoFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("EnableAutoFilter");
+                }
             }
         }
         private bool? _EnableAutoFilter_store;
@@ -570,10 +570,10 @@ namespace Zetbox.App.GUI
                         OnInitialSort_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("InitialSort");
-				}
+                else
+                {
+                    SetInitializedProperty("InitialSort");
+                }
             }
         }
         private string _InitialSort_store;
@@ -636,10 +636,10 @@ namespace Zetbox.App.GUI
                         OnInitialSortDirection_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("InitialSortDirection");
-				}
+                else
+                {
+                    SetInitializedProperty("InitialSortDirection");
+                }
             }
         }
         private Zetbox.App.GUI.ListSortDirection? _InitialSortDirection_store;
@@ -720,10 +720,10 @@ namespace Zetbox.App.GUI
                         OnIsEditable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsEditable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsEditable");
+                }
             }
         }
         private bool? _IsEditable_store;
@@ -789,10 +789,10 @@ namespace Zetbox.App.GUI
                         OnIsMultiselect_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsMultiselect");
-				}
+                else
+                {
+                    SetInitializedProperty("IsMultiselect");
+                }
             }
         }
         private bool? _IsMultiselect_store;
@@ -1064,10 +1064,10 @@ namespace Zetbox.App.GUI
                         OnRespectRequiredFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("RespectRequiredFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("RespectRequiredFilter");
+                }
             }
         }
         private bool? _RespectRequiredFilter_store;
@@ -1133,10 +1133,10 @@ namespace Zetbox.App.GUI
                         OnShowCommands_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowCommands");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowCommands");
+                }
             }
         }
         private bool? _ShowCommands_store;
@@ -1202,10 +1202,10 @@ namespace Zetbox.App.GUI
                         OnShowFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowFilter");
+                }
             }
         }
         private bool? _ShowFilter_store;
@@ -1271,10 +1271,10 @@ namespace Zetbox.App.GUI
                         OnShowMasterDetail_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowMasterDetail");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowMasterDetail");
+                }
             }
         }
         private bool? _ShowMasterDetail_store;
@@ -1440,10 +1440,10 @@ namespace Zetbox.App.GUI
                         OnViewMethod_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ViewMethod");
-				}
+                else
+                {
+                    SetInitializedProperty("ViewMethod");
+                }
             }
         }
         private Zetbox.App.GUI.InstanceListViewMethod? _ViewMethod_store;

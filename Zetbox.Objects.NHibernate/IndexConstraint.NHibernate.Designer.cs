@@ -94,10 +94,10 @@ namespace Zetbox.App.Base
                         OnIsUnique_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsUnique");
-				}
+                else
+                {
+                    SetInitializedProperty("IsUnique");
+                }
             }
         }
 

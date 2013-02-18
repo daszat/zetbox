@@ -109,10 +109,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
                         OnTestBool_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestBool");
-				}
+                else
+                {
+                    SetInitializedProperty("TestBool");
+                }
             }
         }
         private bool? _TestBool;
@@ -222,7 +222,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_Nav
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_Nav
         // fkBackingName=_fk_TestCustomObjects_Nav; fkGuidBackingName=_fk_guid_TestCustomObjects_Nav;
         // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=MubBlah_List_Nav; is list;
@@ -294,10 +294,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 
                 // shortcut noops
                 if ((value == null && _fk_TestCustomObjects_Nav == null) || (value != null && value.ID == _fk_TestCustomObjects_Nav))
-				{
-					SetInitializedProperty("TestCustomObjects_Nav");
+                {
+                    SetInitializedProperty("TestCustomObjects_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = TestCustomObjects_NavImpl;
@@ -353,7 +353,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_One_Nav
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_One_Nav
         // fkBackingName=_fk_TestCustomObjects_One_Nav; fkGuidBackingName=_fk_guid_TestCustomObjects_One_Nav;
         // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=MuhBlah_One_Nav; is reference;
@@ -425,10 +425,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 
                 // shortcut noops
                 if ((value == null && _fk_TestCustomObjects_One_Nav == null) || (value != null && value.ID == _fk_TestCustomObjects_One_Nav))
-				{
-					SetInitializedProperty("TestCustomObjects_One_Nav");
+                {
+                    SetInitializedProperty("TestCustomObjects_One_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = TestCustomObjects_One_NavImpl;
@@ -527,10 +527,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestDateTime_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestDateTime");
-				}
+                else
+                {
+                    SetInitializedProperty("TestDateTime");
+                }
             }
         }
         private DateTime? _TestDateTime;
@@ -585,10 +585,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestEnum_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnum");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnum");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _TestEnum;
@@ -643,10 +643,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestString_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestString");
-				}
+                else
+                {
+                    SetInitializedProperty("TestString");
+                }
             }
         }
         private string _TestString;

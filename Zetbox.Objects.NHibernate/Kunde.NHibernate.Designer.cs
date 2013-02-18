@@ -95,10 +95,10 @@ namespace Zetbox.App.Projekte
                         OnAdresse_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Adresse");
-				}
+                else
+                {
+                    SetInitializedProperty("Adresse");
+                }
             }
         }
 
@@ -142,10 +142,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -154,10 +154,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -247,10 +247,10 @@ namespace Zetbox.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
 
@@ -313,10 +313,10 @@ namespace Zetbox.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -325,10 +325,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -418,10 +418,10 @@ namespace Zetbox.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
 
@@ -539,10 +539,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -616,10 +616,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Kundenname");
-				}
+                else
+                {
+                    SetInitializedProperty("Kundenname");
+                }
             }
         }
 
@@ -674,10 +674,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnLand_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Land");
-				}
+                else
+                {
+                    SetInitializedProperty("Land");
+                }
             }
         }
 
@@ -732,10 +732,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnOrt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Ort");
-				}
+                else
+                {
+                    SetInitializedProperty("Ort");
+                }
             }
         }
 
@@ -790,10 +790,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                         OnPLZ_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("PLZ");
-				}
+                else
+                {
+                    SetInitializedProperty("PLZ");
+                }
             }
         }
 

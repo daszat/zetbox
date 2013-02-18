@@ -73,16 +73,16 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("CalculatedEnumeration", __oldValue, __newValue);
                     Proxy.CalculatedEnumeration = __newValue;
                     NotifyPropertyChanged("CalculatedEnumeration", __oldValue, __newValue);
-			        _CalculatedEnumeration_IsDirty = false;
+                    _CalculatedEnumeration_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CalculatedEnumeration");
-				}
+                else
+                {
+                    SetInitializedProperty("CalculatedEnumeration");
+                }
             }
         }
-		private bool _CalculatedEnumeration_IsDirty = false;
+        private bool _CalculatedEnumeration_IsDirty = false;
 
 
         private Zetbox.App.Test.TestEnum FetchCalculatedEnumerationOrDefault()
@@ -146,10 +146,10 @@ namespace Zetbox.App.Test
                         OnMyIntProperty_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MyIntProperty");
-				}
+                else
+                {
+                    SetInitializedProperty("MyIntProperty");
+                }
             }
         }
 
@@ -193,10 +193,10 @@ namespace Zetbox.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ObjectProp == null)
-				{
-					SetInitializedProperty("ObjectProp");
+                {
+                    SetInitializedProperty("ObjectProp");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ObjectProp);
@@ -205,10 +205,10 @@ namespace Zetbox.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ObjectProp");
+                {
+                    SetInitializedProperty("ObjectProp");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ObjectProp", __oldValue, __newValue);
@@ -297,10 +297,10 @@ namespace Zetbox.App.Test
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("StringProp");
-				}
+                else
+                {
+                    SetInitializedProperty("StringProp");
+                }
             }
         }
 
@@ -355,10 +355,10 @@ namespace Zetbox.App.Test
                         OnTestEnumProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnumProp");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnumProp");
+                }
             }
         }
 
@@ -414,10 +414,10 @@ namespace Zetbox.App.Test
                         OnTestEnumWithDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnumWithDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnumWithDefault");
+                }
             }
         }
 

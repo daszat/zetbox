@@ -81,10 +81,10 @@ namespace Zetbox.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.OneEnd == null)
-				{
-					SetInitializedProperty("OneEnd");
+                {
+                    SetInitializedProperty("OneEnd");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Test.OrderedOneEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.OneEnd);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("OneEnd");
+                {
+                    SetInitializedProperty("OneEnd");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("OneEnd", __oldValue, __newValue);
@@ -180,10 +180,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("NEnds_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("NEnds_pos");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -238,10 +238,10 @@ namespace Zetbox.App.Test
                         OnOtherInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("OtherInt");
-				}
+                else
+                {
+                    SetInitializedProperty("OtherInt");
+                }
             }
         }
 

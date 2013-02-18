@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -111,7 +111,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The type implementing this invocation
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Implementor
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Implementor
         // fkBackingName=_fk_Implementor; fkGuidBackingName=_fk_guid_Implementor;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -184,10 +184,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_Implementor == null) || (value != null && value.ID == _fk_Implementor))
-				{
-					SetInitializedProperty("Implementor");
+                {
+                    SetInitializedProperty("Implementor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ImplementorImpl;
@@ -268,10 +268,10 @@ namespace Zetbox.App.Base
                         OnMemberName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MemberName");
-				}
+                else
+                {
+                    SetInitializedProperty("MemberName");
+                }
             }
         }
         private string _MemberName;

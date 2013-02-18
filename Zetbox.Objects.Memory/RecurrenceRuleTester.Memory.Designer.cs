@@ -59,10 +59,10 @@ namespace Zetbox.App.Test
         /// <summary>backing property for Rule, takes care of attaching/detaching the values</summary>
         public Zetbox.App.Base.RecurrenceRuleMemoryImpl RuleImpl
         {
-            get 
-			{ 
-				return _Rule; 
-			}
+            get
+            {
+                return _Rule;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -70,26 +70,26 @@ namespace Zetbox.App.Test
                     throw new ArgumentNullException("value");
                 if (!object.Equals(_Rule, value))
                 {
-					var __oldValue = _Rule;
-					var __newValue = value;
+                    var __oldValue = _Rule;
+                    var __newValue = value;
 
-					NotifyPropertyChanging("Rule", __oldValue, __newValue);
+                    NotifyPropertyChanging("Rule", __oldValue, __newValue);
 
-					if (_Rule != null)
-					{ 
-						_Rule.DetachFromObject(this, "Rule");
-					}
-					__newValue = (Zetbox.App.Base.RecurrenceRuleMemoryImpl)__newValue.Clone();
-					_Rule = __newValue;
-					_Rule.AttachToObject(this, "Rule");
+                    if (_Rule != null)
+                    {
+                        _Rule.DetachFromObject(this, "Rule");
+                    }
+                    __newValue = (Zetbox.App.Base.RecurrenceRuleMemoryImpl)__newValue.Clone();
+                    _Rule = __newValue;
+                    _Rule.AttachToObject(this, "Rule");
 
-					NotifyPropertyChanged("Rule", __oldValue, __newValue);
+                    NotifyPropertyChanged("Rule", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-				}
-				else
-				{
-					SetInitializedProperty("Rule");
-				}
+                }
+                else
+                {
+                    SetInitializedProperty("Rule");
+                }
             }
         }
         // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate

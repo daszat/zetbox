@@ -202,10 +202,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -272,10 +272,10 @@ namespace Zetbox.App.GUI
                         OnIconFile_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IconFile");
-				}
+                else
+                {
+                    SetInitializedProperty("IconFile");
+                }
             }
         }
         private string _IconFile_store;
@@ -807,10 +807,10 @@ namespace Zetbox.App.GUI
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

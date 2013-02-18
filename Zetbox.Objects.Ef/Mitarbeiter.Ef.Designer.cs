@@ -203,10 +203,10 @@ namespace Zetbox.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -389,10 +389,10 @@ namespace Zetbox.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -471,10 +471,10 @@ namespace Zetbox.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -543,10 +543,10 @@ namespace Zetbox.App.Projekte
                         OnGeburtstag_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Geburtstag");
-				}
+                else
+                {
+                    SetInitializedProperty("Geburtstag");
+                }
             }
         }
         private DateTime? _Geburtstag_store;
@@ -714,10 +714,10 @@ namespace Zetbox.App.Projekte
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -832,10 +832,10 @@ namespace Zetbox.App.Projekte
                         OnSVNr_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SVNr");
-				}
+                else
+                {
+                    SetInitializedProperty("SVNr");
+                }
             }
         }
         private string _SVNr_store;
@@ -901,10 +901,10 @@ namespace Zetbox.App.Projekte
                         OnTelefonNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TelefonNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("TelefonNummer");
+                }
             }
         }
         private string _TelefonNummer_store;
@@ -1298,10 +1298,10 @@ namespace Zetbox.App.Projekte
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

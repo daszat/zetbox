@@ -203,10 +203,10 @@ namespace Zetbox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -273,10 +273,10 @@ namespace Zetbox.App.SchemaMigration
                         OnComment_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Comment");
-				}
+                else
+                {
+                    SetInitializedProperty("Comment");
+                }
             }
         }
         private string _Comment_store;
@@ -354,10 +354,10 @@ namespace Zetbox.App.SchemaMigration
                         OnCompareNulls_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CompareNulls");
-				}
+                else
+                {
+                    SetInitializedProperty("CompareNulls");
+                }
             }
         }
         private bool _CompareNulls_store;
@@ -540,10 +540,10 @@ namespace Zetbox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -607,10 +607,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDbType_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DbType");
-				}
+                else
+                {
+                    SetInitializedProperty("DbType");
+                }
             }
         }
         private Zetbox.App.SchemaMigration.ColumnType _DbType_store;
@@ -691,10 +691,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description_store;
@@ -878,10 +878,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -948,10 +948,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnIsNullable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsNullable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsNullable");
+                }
             }
         }
         private bool? _IsNullable_store;
@@ -1017,10 +1017,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -1257,10 +1257,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnSize_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Size");
-				}
+                else
+                {
+                    SetInitializedProperty("Size");
+                }
             }
         }
         private int? _Size_store;
@@ -1438,10 +1438,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnStatus_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Status");
-				}
+                else
+                {
+                    SetInitializedProperty("Status");
+                }
             }
         }
         private Zetbox.App.SchemaMigration.MappingStatus? _Status_store;
@@ -1942,10 +1942,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

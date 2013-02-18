@@ -81,10 +81,10 @@ namespace Zetbox.App.Test
                         OnFrage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Frage");
-				}
+                else
+                {
+                    SetInitializedProperty("Frage");
+                }
             }
         }
         private string _Frage;
@@ -98,7 +98,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// Workaround for Case 1376
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Fragebogen
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Fragebogen
         // fkBackingName=_fk_Fragebogen; fkGuidBackingName=_fk_guid_Fragebogen;
         // referencedInterface=Zetbox.App.Test.Fragebogen; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=Antworten; is list;
@@ -170,10 +170,10 @@ namespace Zetbox.App.Test
 
                 // shortcut noops
                 if ((value == null && _fk_Fragebogen == null) || (value != null && value.ID == _fk_Fragebogen))
-				{
-					SetInitializedProperty("Fragebogen");
+                {
+                    SetInitializedProperty("Fragebogen");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = FragebogenImpl;
@@ -242,10 +242,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("gute_Antworten_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("gute_Antworten_pos");
+                }
             }
         }
         private int? _gute_Antworten_pos;
@@ -301,10 +301,10 @@ namespace Zetbox.App.Test
                         OnFragenNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FragenNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("FragenNummer");
+                }
             }
         }
         private int _FragenNummer;
@@ -359,10 +359,10 @@ namespace Zetbox.App.Test
                         OnGegebeneAntwort_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("GegebeneAntwort");
-				}
+                else
+                {
+                    SetInitializedProperty("GegebeneAntwort");
+                }
             }
         }
         private int? _GegebeneAntwort;

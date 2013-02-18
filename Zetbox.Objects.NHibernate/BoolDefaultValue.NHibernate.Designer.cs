@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnBoolValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("BoolValue");
-				}
+                else
+                {
+                    SetInitializedProperty("BoolValue");
+                }
             }
         }
 

@@ -84,10 +84,10 @@ namespace Zetbox.App.Calendar
                         OnDayOfWeek_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DayOfWeek");
-				}
+                else
+                {
+                    SetInitializedProperty("DayOfWeek");
+                }
             }
         }
         private Zetbox.App.Base.DayOfWeek _DayOfWeek_store;

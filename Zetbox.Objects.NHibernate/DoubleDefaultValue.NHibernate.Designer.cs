@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnDoubleValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DoubleValue");
-				}
+                else
+                {
+                    SetInitializedProperty("DoubleValue");
+                }
             }
         }
 

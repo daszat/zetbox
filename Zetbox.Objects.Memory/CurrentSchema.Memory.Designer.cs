@@ -81,10 +81,10 @@ namespace Zetbox.App.Base
                         OnSchema_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Schema");
-				}
+                else
+                {
+                    SetInitializedProperty("Schema");
+                }
             }
         }
         private string _Schema;
@@ -139,10 +139,10 @@ namespace Zetbox.App.Base
                         OnVersion_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Version");
-				}
+                else
+                {
+                    SetInitializedProperty("Version");
+                }
             }
         }
         private int _Version;

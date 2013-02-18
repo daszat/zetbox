@@ -14,9 +14,9 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-<%@ CodeTemplate Language="C#" 
+<%@ CodeTemplate Language="C#"
     Name="Properties.ProxyProperty"
-    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty" 
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty"
     Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -75,20 +75,20 @@
 <% if (!isCalculated) { %>
                     if(IsAttached) UpdateChangedInfo = true;
 <% } else { %>
-			        _<%= propertyName %>_IsDirty = false;
+                    _<%= propertyName %>_IsDirty = false;
 <% } %>
 
 <% if(!isCalculated) ApplyPostSetTemplate(); %>
                 }
-				else 
-				{
-					SetInitializedProperty("<%= propertyName %>");
-				}
+                else
+                {
+                    SetInitializedProperty("<%= propertyName %>");
+                }
             }
         }
-<% if (isCalculated) {  
+<% if (isCalculated) {
 %>
-		private bool _<%= propertyName %>_IsDirty = false;
+        private bool _<%= propertyName %>_IsDirty = false;
 <% } %>
 
 <% ApplyTailTemplate(); %>

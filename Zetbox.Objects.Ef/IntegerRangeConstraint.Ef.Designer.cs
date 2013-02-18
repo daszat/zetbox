@@ -87,10 +87,10 @@ namespace Zetbox.App.Base
                         OnMax_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Max");
-				}
+                else
+                {
+                    SetInitializedProperty("Max");
+                }
             }
         }
         private int _Max_store;
@@ -156,10 +156,10 @@ namespace Zetbox.App.Base
                         OnMin_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Min");
-				}
+                else
+                {
+                    SetInitializedProperty("Min");
+                }
             }
         }
         private int _Min_store;

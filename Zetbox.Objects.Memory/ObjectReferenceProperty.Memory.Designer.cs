@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                         OnEagerLoading_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EagerLoading");
-				}
+                else
+                {
+                    SetInitializedProperty("EagerLoading");
+                }
             }
         }
         private bool _EagerLoading;
@@ -152,10 +152,10 @@ namespace Zetbox.App.Base
                         OnIsInlineEditable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsInlineEditable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsInlineEditable");
+                }
             }
         }
         private bool? _IsInlineEditable;
@@ -205,7 +205,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
         // fkBackingName=_fk_RelationEnd; fkGuidBackingName=_fk_guid_RelationEnd;
         // referencedInterface=Zetbox.App.Base.RelationEnd; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Navigator; is reference;
@@ -278,10 +278,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_RelationEnd == null) || (value != null && value.ID == _fk_RelationEnd))
-				{
-					SetInitializedProperty("RelationEnd");
+                {
+                    SetInitializedProperty("RelationEnd");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = RelationEndImpl;

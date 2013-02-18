@@ -119,10 +119,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.BaseObjectClass == null)
-				{
-					SetInitializedProperty("BaseObjectClass");
+                {
+                    SetInitializedProperty("BaseObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.BaseObjectClass);
@@ -131,10 +131,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("BaseObjectClass");
+                {
+                    SetInitializedProperty("BaseObjectClass");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("BaseObjectClass", __oldValue, __newValue);
@@ -228,16 +228,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
                     Proxy.CodeTemplate = __newValue;
                     NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
-			        _CodeTemplate_IsDirty = false;
+                    _CodeTemplate_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CodeTemplate");
-				}
+                else
+                {
+                    SetInitializedProperty("CodeTemplate");
+                }
             }
         }
-		private bool _CodeTemplate_IsDirty = false;
+        private bool _CodeTemplate_IsDirty = false;
 
 
         private string FetchCodeTemplateOrDefault()
@@ -290,10 +290,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultViewModelDescriptor == null)
-				{
-					SetInitializedProperty("DefaultViewModelDescriptor");
+                {
+                    SetInitializedProperty("DefaultViewModelDescriptor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultViewModelDescriptor);
@@ -302,10 +302,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DefaultViewModelDescriptor");
+                {
+                    SetInitializedProperty("DefaultViewModelDescriptor");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultViewModelDescriptor", __oldValue, __newValue);
@@ -432,10 +432,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsAbstract_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsAbstract");
-				}
+                else
+                {
+                    SetInitializedProperty("IsAbstract");
+                }
             }
         }
 
@@ -510,10 +510,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsFrozenObject_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsFrozenObject");
-				}
+                else
+                {
+                    SetInitializedProperty("IsFrozenObject");
+                }
             }
         }
 
@@ -588,10 +588,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsSimpleObject_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsSimpleObject");
-				}
+                else
+                {
+                    SetInitializedProperty("IsSimpleObject");
+                }
             }
         }
 
@@ -700,10 +700,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         OnTableMapping_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TableMapping");
-				}
+                else
+                {
+                    SetInitializedProperty("TableMapping");
+                }
             }
         }
 
@@ -758,10 +758,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         OnTableName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TableName");
-				}
+                else
+                {
+                    SetInitializedProperty("TableName");
+                }
             }
         }
 

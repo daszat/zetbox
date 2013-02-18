@@ -40,7 +40,7 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseCalendar
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseCalendar
         // fkBackingName=_fk_BaseCalendar; fkGuidBackingName=_fk_guid_BaseCalendar;
         // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=ChildCalendar; is list;
@@ -113,10 +113,10 @@ namespace Zetbox.App.Calendar
 
                 // shortcut noops
                 if ((value == null && _fk_BaseCalendar == null) || (value != null && value.ID == _fk_BaseCalendar))
-				{
-					SetInitializedProperty("BaseCalendar");
+                {
+                    SetInitializedProperty("BaseCalendar");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = BaseCalendarImpl;
@@ -232,7 +232,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
@@ -304,10 +304,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -402,10 +402,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -480,7 +480,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
@@ -552,10 +552,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -650,10 +650,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -721,10 +721,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -739,7 +739,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         /// <summary>
         /// Optional member of a module
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
@@ -812,10 +812,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
 
                 // shortcut noops
                 if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -896,10 +896,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;

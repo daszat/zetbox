@@ -154,10 +154,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                         OnBogenNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("BogenNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("BogenNummer");
+                }
             }
         }
         private int? _BogenNummer;

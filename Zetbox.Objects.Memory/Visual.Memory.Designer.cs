@@ -153,10 +153,10 @@ namespace Zetbox.App.GUI
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description;
@@ -170,7 +170,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The Method whose return value shoud be displayed
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
         // fkBackingName=_fk_Method; fkGuidBackingName=_fk_guid_Method;
         // referencedInterface=Zetbox.App.Base.Method; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -242,10 +242,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_Method == null) || (value != null && value.ID == _fk_Method))
-				{
-					SetInitializedProperty("Method");
+                {
+                    SetInitializedProperty("Method");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = MethodImpl;
@@ -285,7 +285,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The Property to display
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
         // fkBackingName=_fk_Property; fkGuidBackingName=_fk_guid_Property;
         // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -357,10 +357,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noops
                 if ((value == null && _fk_Property == null) || (value != null && value.ID == _fk_Property))
-				{
-					SetInitializedProperty("Property");
+                {
+                    SetInitializedProperty("Property");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = PropertyImpl;

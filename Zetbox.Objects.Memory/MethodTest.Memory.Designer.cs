@@ -100,7 +100,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Zetbox.App.Test.MethodTest; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=Children; is list;
@@ -172,10 +172,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
 
                 // shortcut noops
                 if ((value == null && _fk_Parent == null) || (value != null && value.ID == _fk_Parent))
-				{
-					SetInitializedProperty("Parent");
+                {
+                    SetInitializedProperty("Parent");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ParentImpl;
@@ -272,10 +272,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("StringProp");
-				}
+                else
+                {
+                    SetInitializedProperty("StringProp");
+                }
             }
         }
         private string _StringProp;

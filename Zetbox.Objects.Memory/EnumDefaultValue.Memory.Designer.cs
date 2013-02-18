@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
         // fkBackingName=_fk_EnumValue; fkGuidBackingName=_fk_guid_EnumValue;
         // referencedInterface=Zetbox.App.Base.EnumerationEntry; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -113,10 +113,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_EnumValue == null) || (value != null && value.ID == _fk_EnumValue))
-				{
-					SetInitializedProperty("EnumValue");
+                {
+                    SetInitializedProperty("EnumValue");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = EnumValueImpl;

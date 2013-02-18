@@ -99,10 +99,10 @@ namespace Zetbox.App.Base
                         OnEagerLoading_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EagerLoading");
-				}
+                else
+                {
+                    SetInitializedProperty("EagerLoading");
+                }
             }
         }
         private bool _EagerLoading_store;
@@ -169,10 +169,10 @@ namespace Zetbox.App.Base
                         OnIsInlineEditable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsInlineEditable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsInlineEditable");
+                }
             }
         }
         private bool? _IsInlineEditable_store;

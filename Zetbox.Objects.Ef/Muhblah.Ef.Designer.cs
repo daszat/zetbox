@@ -133,10 +133,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
                         OnTestBool_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestBool");
-				}
+                else
+                {
+                    SetInitializedProperty("TestBool");
+                }
             }
         }
         private bool? _TestBool_store;
@@ -537,10 +537,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestDateTime_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestDateTime");
-				}
+                else
+                {
+                    SetInitializedProperty("TestDateTime");
+                }
             }
         }
         private DateTime? _TestDateTime_store;
@@ -603,10 +603,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestEnum_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnum");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnum");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _TestEnum_store;
@@ -687,10 +687,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestString_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestString");
-				}
+                else
+                {
+                    SetInitializedProperty("TestString");
+                }
             }
         }
         private string _TestString_store;
@@ -990,10 +990,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

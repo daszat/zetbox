@@ -87,10 +87,10 @@ namespace Zetbox.App.Test
                         OnBString_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("BString");
-				}
+                else
+                {
+                    SetInitializedProperty("BString");
+                }
             }
         }
         private string _BString_store;

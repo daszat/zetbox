@@ -92,10 +92,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentYearDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentYearDefault");
+                }
             }
         }
 

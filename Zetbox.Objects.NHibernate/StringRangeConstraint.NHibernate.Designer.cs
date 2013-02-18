@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnMaxLength_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MaxLength");
-				}
+                else
+                {
+                    SetInitializedProperty("MaxLength");
+                }
             }
         }
 
@@ -150,10 +150,10 @@ namespace Zetbox.App.Base
                         OnMinLength_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MinLength");
-				}
+                else
+                {
+                    SetInitializedProperty("MinLength");
+                }
             }
         }
 

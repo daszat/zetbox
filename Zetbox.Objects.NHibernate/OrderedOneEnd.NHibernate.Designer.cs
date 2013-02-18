@@ -127,10 +127,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                         OnSomeInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SomeInt");
-				}
+                else
+                {
+                    SetInitializedProperty("SomeInt");
+                }
             }
         }
 

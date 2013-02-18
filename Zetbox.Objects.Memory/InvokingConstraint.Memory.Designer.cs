@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
         // fkBackingName=_fk_GetErrorTextInvocation; fkGuidBackingName=_fk_guid_GetErrorTextInvocation;
         // referencedInterface=Zetbox.App.Base.ConstraintInvocation; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -113,10 +113,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_GetErrorTextInvocation == null) || (value != null && value.ID == _fk_GetErrorTextInvocation))
-				{
-					SetInitializedProperty("GetErrorTextInvocation");
+                {
+                    SetInitializedProperty("GetErrorTextInvocation");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = GetErrorTextInvocationImpl;
@@ -156,7 +156,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation
         // fkBackingName=_fk_IsValidInvocation; fkGuidBackingName=_fk_guid_IsValidInvocation;
         // referencedInterface=Zetbox.App.Base.ConstraintInvocation; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -229,10 +229,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_IsValidInvocation == null) || (value != null && value.ID == _fk_IsValidInvocation))
-				{
-					SetInitializedProperty("IsValidInvocation");
+                {
+                    SetInitializedProperty("IsValidInvocation");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = IsValidInvocationImpl;

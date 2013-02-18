@@ -92,10 +92,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDestination_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Destination");
-				}
+                else
+                {
+                    SetInitializedProperty("Destination");
+                }
             }
         }
 
@@ -150,10 +150,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDestinationRows_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DestinationRows");
-				}
+                else
+                {
+                    SetInitializedProperty("DestinationRows");
+                }
             }
         }
 
@@ -208,10 +208,10 @@ namespace Zetbox.App.SchemaMigration
                         OnSource_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Source");
-				}
+                else
+                {
+                    SetInitializedProperty("Source");
+                }
             }
         }
 
@@ -266,10 +266,10 @@ namespace Zetbox.App.SchemaMigration
                         OnSourceRows_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SourceRows");
-				}
+                else
+                {
+                    SetInitializedProperty("SourceRows");
+                }
             }
         }
 
@@ -324,10 +324,10 @@ namespace Zetbox.App.SchemaMigration
                         OnTimestamp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Timestamp");
-				}
+                else
+                {
+                    SetInitializedProperty("Timestamp");
+                }
             }
         }
 

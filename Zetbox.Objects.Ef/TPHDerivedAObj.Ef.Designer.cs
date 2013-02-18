@@ -87,10 +87,10 @@ namespace Zetbox.App.Test
                         OnAInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AInt");
-				}
+                else
+                {
+                    SetInitializedProperty("AInt");
+                }
             }
         }
         private int _AInt_store;
@@ -156,10 +156,10 @@ namespace Zetbox.App.Test
                         OnAString_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AString");
-				}
+                else
+                {
+                    SetInitializedProperty("AString");
+                }
             }
         }
         private string _AString_store;

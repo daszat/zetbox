@@ -89,10 +89,10 @@ namespace Zetbox.App.Base
                         OnDate_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Date");
-				}
+                else
+                {
+                    SetInitializedProperty("Date");
+                }
             }
         }
         private DateTime _Date_store;
@@ -158,10 +158,10 @@ namespace Zetbox.App.Base
                         OnException_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Exception");
-				}
+                else
+                {
+                    SetInitializedProperty("Exception");
+                }
             }
         }
         private string _Exception_store;
@@ -227,10 +227,10 @@ namespace Zetbox.App.Base
                         OnLevel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Level");
-				}
+                else
+                {
+                    SetInitializedProperty("Level");
+                }
             }
         }
         private string _Level_store;
@@ -296,10 +296,10 @@ namespace Zetbox.App.Base
                         OnLogger_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Logger");
-				}
+                else
+                {
+                    SetInitializedProperty("Logger");
+                }
             }
         }
         private string _Logger_store;
@@ -365,10 +365,10 @@ namespace Zetbox.App.Base
                         OnMessage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Message");
-				}
+                else
+                {
+                    SetInitializedProperty("Message");
+                }
             }
         }
         private string _Message_store;
@@ -434,10 +434,10 @@ namespace Zetbox.App.Base
                         OnThread_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Thread");
-				}
+                else
+                {
+                    SetInitializedProperty("Thread");
+                }
             }
         }
         private string _Thread_store;
@@ -683,10 +683,10 @@ namespace Zetbox.App.Base
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

@@ -14,7 +14,7 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-	<%@ CodeTemplate Language="C#"
+    <%@ CodeTemplate Language="C#"
     Name="Properties.ObjectReferencePropertyTemplate"
     ClassName="Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate"
     Inherits="Zetbox.Generator.MemberTemplate" %>
@@ -120,10 +120,10 @@
 
                 // shortcut noops
                 if ((value == null && <%= fkBackingName %> == null) || (value != null && value.ID == <%= fkBackingName %>))
-				{
-					SetInitializedProperty("<%= name %>");
+                {
+                    SetInitializedProperty("<%= name %>");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = <%= implName %>;

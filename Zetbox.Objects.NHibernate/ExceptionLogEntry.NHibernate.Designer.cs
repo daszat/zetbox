@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnDate_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Date");
-				}
+                else
+                {
+                    SetInitializedProperty("Date");
+                }
             }
         }
 
@@ -150,10 +150,10 @@ namespace Zetbox.App.Base
                         OnException_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Exception");
-				}
+                else
+                {
+                    SetInitializedProperty("Exception");
+                }
             }
         }
 
@@ -208,10 +208,10 @@ namespace Zetbox.App.Base
                         OnLevel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Level");
-				}
+                else
+                {
+                    SetInitializedProperty("Level");
+                }
             }
         }
 
@@ -266,10 +266,10 @@ namespace Zetbox.App.Base
                         OnLogger_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Logger");
-				}
+                else
+                {
+                    SetInitializedProperty("Logger");
+                }
             }
         }
 
@@ -324,10 +324,10 @@ namespace Zetbox.App.Base
                         OnMessage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Message");
-				}
+                else
+                {
+                    SetInitializedProperty("Message");
+                }
             }
         }
 
@@ -382,10 +382,10 @@ namespace Zetbox.App.Base
                         OnThread_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Thread");
-				}
+                else
+                {
+                    SetInitializedProperty("Thread");
+                }
             }
         }
 

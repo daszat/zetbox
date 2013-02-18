@@ -50,10 +50,10 @@
         [EdmComplexProperty()]
         public <%= coImplementationType %> <%= backingPropertyName %>
         {
-            get 
-			{ 
-				return <%= backingStoreName %>; 
-			}
+            get
+            {
+                return <%= backingStoreName %>;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -62,7 +62,7 @@
                 if (!object.Equals(<%= backingStoreName %>, value))
                 {
                     var __oldValue = <%= backingStoreName %>;
-					var __newValue = value;
+                    var __newValue = value;
 
                     NotifyPropertyChanging("<%= propName %>", __oldValue, __newValue);
 
@@ -70,17 +70,17 @@
                     {
                         <%= backingStoreName %>.DetachFromObject(this, "<%= propName %>");
                     }
-					__newValue = (<%= coImplementationType %>)__newValue.Clone();
+                    __newValue = (<%= coImplementationType %>)__newValue.Clone();
                     <%= backingStoreName %> = __newValue;
                     <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
 
                     NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-				else
-				{
-					SetInitializedProperty("<%= propName %>");
-				}
+                else
+                {
+                    SetInitializedProperty("<%= propName %>");
+                }
             }
         }
 <%

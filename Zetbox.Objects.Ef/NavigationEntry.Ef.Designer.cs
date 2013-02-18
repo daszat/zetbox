@@ -203,10 +203,10 @@ namespace Zetbox.App.GUI
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -329,10 +329,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnColor_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Color");
-				}
+                else
+                {
+                    SetInitializedProperty("Color");
+                }
             }
         }
         private string _Color_store;
@@ -514,10 +514,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -596,10 +596,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -906,10 +906,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("Children_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("Children_pos");
+                }
             }
         }
         private int? _Children_pos_store;
@@ -1079,10 +1079,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnTitle_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Title");
-				}
+                else
+                {
+                    SetInitializedProperty("Title");
+                }
             }
         }
         private string _Title_store;
@@ -1643,10 +1643,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

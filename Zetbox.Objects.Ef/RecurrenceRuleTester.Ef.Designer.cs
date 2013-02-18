@@ -70,10 +70,10 @@ namespace Zetbox.App.Test
         [EdmComplexProperty()]
         public Zetbox.App.Base.RecurrenceRuleEfImpl RuleImpl
         {
-            get 
-			{ 
-				return _Rule; 
-			}
+            get
+            {
+                return _Rule;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -82,7 +82,7 @@ namespace Zetbox.App.Test
                 if (!object.Equals(_Rule, value))
                 {
                     var __oldValue = _Rule;
-					var __newValue = value;
+                    var __newValue = value;
 
                     NotifyPropertyChanging("Rule", __oldValue, __newValue);
 
@@ -90,17 +90,17 @@ namespace Zetbox.App.Test
                     {
                         _Rule.DetachFromObject(this, "Rule");
                     }
-					__newValue = (Zetbox.App.Base.RecurrenceRuleEfImpl)__newValue.Clone();
+                    __newValue = (Zetbox.App.Base.RecurrenceRuleEfImpl)__newValue.Clone();
                     _Rule = __newValue;
                     _Rule.AttachToObject(this, "Rule");
 
                     NotifyPropertyChanged("Rule", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-				else
-				{
-					SetInitializedProperty("Rule");
-				}
+                else
+                {
+                    SetInitializedProperty("Rule");
+                }
             }
         }
            // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -407,10 +407,10 @@ namespace Zetbox.App.Test
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

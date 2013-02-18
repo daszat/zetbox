@@ -100,7 +100,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
         // fkBackingName=_fk_BaseObjectClass; fkGuidBackingName=_fk_guid_BaseObjectClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=SubClasses; is list;
@@ -173,10 +173,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
                 // shortcut noops
                 if ((value == null && _fk_BaseObjectClass == null) || (value != null && value.ID == _fk_BaseObjectClass))
-				{
-					SetInitializedProperty("BaseObjectClass");
+                {
+                    SetInitializedProperty("BaseObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = BaseObjectClassImpl;
@@ -260,13 +260,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
                     _CodeTemplate = __newValue;
                     NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
-			        _CodeTemplate_IsDirty = false;
+                    _CodeTemplate_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CodeTemplate");
-				}
+                else
+                {
+                    SetInitializedProperty("CodeTemplate");
+                }
             }
         }
         private string _CodeTemplate;
@@ -277,7 +277,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
         // fkBackingName=_fk_DefaultViewModelDescriptor; fkGuidBackingName=_fk_guid_DefaultViewModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -350,10 +350,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultViewModelDescriptor == null) || (value != null && value.ID == _fk_DefaultViewModelDescriptor))
-				{
-					SetInitializedProperty("DefaultViewModelDescriptor");
+                {
+                    SetInitializedProperty("DefaultViewModelDescriptor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultViewModelDescriptorImpl;
@@ -506,10 +506,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsAbstract_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsAbstract");
-				}
+                else
+                {
+                    SetInitializedProperty("IsAbstract");
+                }
             }
         }
         private bool _IsAbstract;
@@ -577,10 +577,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsFrozenObject_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsFrozenObject");
-				}
+                else
+                {
+                    SetInitializedProperty("IsFrozenObject");
+                }
             }
         }
         private bool _IsFrozenObject;
@@ -648,10 +648,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsSimpleObject_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsSimpleObject");
-				}
+                else
+                {
+                    SetInitializedProperty("IsSimpleObject");
+                }
             }
         }
         private bool _IsSimpleObject;
@@ -767,10 +767,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         OnTableMapping_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TableMapping");
-				}
+                else
+                {
+                    SetInitializedProperty("TableMapping");
+                }
             }
         }
         private Zetbox.App.Base.TableMapping? _TableMapping;
@@ -825,10 +825,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         OnTableName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TableName");
-				}
+                else
+                {
+                    SetInitializedProperty("TableName");
+                }
             }
         }
         private string _TableName;

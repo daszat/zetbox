@@ -81,10 +81,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DisplayedTypeAssembly == null)
-				{
-					SetInitializedProperty("DisplayedTypeAssembly");
+                {
+                    SetInitializedProperty("DisplayedTypeAssembly");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.AssemblyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DisplayedTypeAssembly);
@@ -93,10 +93,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DisplayedTypeAssembly");
+                {
+                    SetInitializedProperty("DisplayedTypeAssembly");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DisplayedTypeAssembly", __oldValue, __newValue);
@@ -185,10 +185,10 @@ namespace Zetbox.App.GUI
                         OnDisplayedTypeFullName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayedTypeFullName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayedTypeFullName");
+                }
             }
         }
 
@@ -243,10 +243,10 @@ namespace Zetbox.App.GUI
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
 
@@ -321,10 +321,10 @@ namespace Zetbox.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.VisualTree == null)
-				{
-					SetInitializedProperty("VisualTree");
+                {
+                    SetInitializedProperty("VisualTree");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.VisualTree);
@@ -333,10 +333,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("VisualTree");
+                {
+                    SetInitializedProperty("VisualTree");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("VisualTree", __oldValue, __newValue);

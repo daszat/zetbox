@@ -94,10 +94,10 @@ namespace Zetbox.App.Test
                         OnAreaCode_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AreaCode");
-				}
+                else
+                {
+                    SetInitializedProperty("AreaCode");
+                }
             }
         }
         private string _AreaCode;
@@ -150,10 +150,10 @@ namespace Zetbox.App.Test
                         OnNumber_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Number");
-				}
+                else
+                {
+                    SetInitializedProperty("Number");
+                }
             }
         }
         private string _Number;

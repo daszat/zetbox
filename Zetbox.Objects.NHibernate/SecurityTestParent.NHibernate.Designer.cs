@@ -127,10 +127,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
 

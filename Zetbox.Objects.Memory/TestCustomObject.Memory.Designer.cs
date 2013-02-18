@@ -87,10 +87,10 @@ namespace Zetbox.App.Test
                         OnBirthday_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Birthday");
-				}
+                else
+                {
+                    SetInitializedProperty("Birthday");
+                }
             }
         }
         private DateTime? _Birthday;
@@ -164,7 +164,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MubBlah_Nav
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MubBlah_Nav
         // fkBackingName=_fk_MubBlah_Nav; fkGuidBackingName=_fk_guid_MubBlah_Nav;
         // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=TestCustomObjects_List_Nav; is list;
@@ -236,10 +236,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
                 // shortcut noops
                 if ((value == null && _fk_MubBlah_Nav == null) || (value != null && value.ID == _fk_MubBlah_Nav))
-				{
-					SetInitializedProperty("MubBlah_Nav");
+                {
+                    SetInitializedProperty("MubBlah_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = MubBlah_NavImpl;
@@ -331,7 +331,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MuhBlah_One_Nav
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MuhBlah_One_Nav
         // fkBackingName=_fk_MuhBlah_One_Nav; fkGuidBackingName=_fk_guid_MuhBlah_One_Nav;
         // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=TestCustomObjects_One_Nav; is reference;
@@ -403,10 +403,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
                 // shortcut noops
                 if ((value == null && _fk_MuhBlah_One_Nav == null) || (value != null && value.ID == _fk_MuhBlah_One_Nav))
-				{
-					SetInitializedProperty("MuhBlah_One_Nav");
+                {
+                    SetInitializedProperty("MuhBlah_One_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = MuhBlah_One_NavImpl;
@@ -503,10 +503,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                         OnPersonName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("PersonName");
-				}
+                else
+                {
+                    SetInitializedProperty("PersonName");
+                }
             }
         }
         private string _PersonName;
@@ -537,10 +537,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values</summary>
         public Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl PhoneNumberMobileImpl
         {
-            get 
-			{ 
-				return _PhoneNumberMobile; 
-			}
+            get
+            {
+                return _PhoneNumberMobile;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -548,26 +548,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     throw new ArgumentNullException("value");
                 if (!object.Equals(_PhoneNumberMobile, value))
                 {
-					var __oldValue = _PhoneNumberMobile;
-					var __newValue = value;
+                    var __oldValue = _PhoneNumberMobile;
+                    var __newValue = value;
 
-					NotifyPropertyChanging("PhoneNumberMobile", __oldValue, __newValue);
+                    NotifyPropertyChanging("PhoneNumberMobile", __oldValue, __newValue);
 
-					if (_PhoneNumberMobile != null)
-					{ 
-						_PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
-					}
-					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl)__newValue.Clone();
-					_PhoneNumberMobile = __newValue;
-					_PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
+                    if (_PhoneNumberMobile != null)
+                    {
+                        _PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
+                    }
+                    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl)__newValue.Clone();
+                    _PhoneNumberMobile = __newValue;
+                    _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
 
-					NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
+                    NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-				}
-				else
-				{
-					SetInitializedProperty("PhoneNumberMobile");
-				}
+                }
+                else
+                {
+                    SetInitializedProperty("PhoneNumberMobile");
+                }
             }
         }
         // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -593,10 +593,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values</summary>
         public Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl PhoneNumberOfficeImpl
         {
-            get 
-			{ 
-				return _PhoneNumberOffice; 
-			}
+            get
+            {
+                return _PhoneNumberOffice;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -604,26 +604,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     throw new ArgumentNullException("value");
                 if (!object.Equals(_PhoneNumberOffice, value))
                 {
-					var __oldValue = _PhoneNumberOffice;
-					var __newValue = value;
+                    var __oldValue = _PhoneNumberOffice;
+                    var __newValue = value;
 
-					NotifyPropertyChanging("PhoneNumberOffice", __oldValue, __newValue);
+                    NotifyPropertyChanging("PhoneNumberOffice", __oldValue, __newValue);
 
-					if (_PhoneNumberOffice != null)
-					{ 
-						_PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
-					}
-					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl)__newValue.Clone();
-					_PhoneNumberOffice = __newValue;
-					_PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
+                    if (_PhoneNumberOffice != null)
+                    {
+                        _PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
+                    }
+                    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl)__newValue.Clone();
+                    _PhoneNumberOffice = __newValue;
+                    _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
 
-					NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
+                    NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-				}
-				else
-				{
-					SetInitializedProperty("PhoneNumberOffice");
-				}
+                }
+                else
+                {
+                    SetInitializedProperty("PhoneNumberOffice");
+                }
             }
         }
         // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate

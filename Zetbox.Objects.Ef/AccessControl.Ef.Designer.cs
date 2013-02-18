@@ -203,10 +203,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -389,10 +389,10 @@ namespace Zetbox.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -446,13 +446,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-			        _Description_IsDirty = false;
+                    _Description_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description_store;
@@ -527,10 +527,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -700,10 +700,10 @@ namespace Zetbox.App.Base
                         OnNotes_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Notes");
-				}
+                else
+                {
+                    SetInitializedProperty("Notes");
+                }
             }
         }
         private string _Notes_store;
@@ -881,10 +881,10 @@ namespace Zetbox.App.Base
                         OnRights_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Rights");
-				}
+                else
+                {
+                    SetInitializedProperty("Rights");
+                }
             }
         }
         private Zetbox.App.Base.AccessRights? _Rights_store;
@@ -1235,10 +1235,10 @@ namespace Zetbox.App.Base
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

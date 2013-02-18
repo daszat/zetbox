@@ -92,10 +92,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
 
@@ -150,10 +150,10 @@ namespace Zetbox.App.Base
                         OnImplementorRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ImplementorRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ImplementorRoleName");
+                }
             }
         }
 
@@ -208,10 +208,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
 
@@ -266,10 +266,10 @@ namespace Zetbox.App.Base
                         OnItemRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ItemRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ItemRoleName");
+                }
             }
         }
 
@@ -313,10 +313,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ReferencedObjectClass == null)
-				{
-					SetInitializedProperty("ReferencedObjectClass");
+                {
+                    SetInitializedProperty("ReferencedObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ReferencedObjectClass);
@@ -325,10 +325,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ReferencedObjectClass");
+                {
+                    SetInitializedProperty("ReferencedObjectClass");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ReferencedObjectClass", __oldValue, __newValue);
@@ -419,10 +419,10 @@ namespace Zetbox.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Verb");
-				}
+                else
+                {
+                    SetInitializedProperty("Verb");
+                }
             }
         }
 

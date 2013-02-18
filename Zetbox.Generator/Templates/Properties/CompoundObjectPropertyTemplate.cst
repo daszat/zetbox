@@ -44,10 +44,10 @@
         /// <summary>backing property for <%= UglyXmlEncode(propName) %>, takes care of attaching/detaching the values</summary>
         <%= GetModifiers() %> <%= coImplementationType %> <%= backingPropertyName %>
         {
-            get 
-			{ 
-				return <%= backingStoreName %>; 
-			}
+            get
+            {
+                return <%= backingStoreName %>;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -55,26 +55,26 @@
                     throw new ArgumentNullException("value");
                 if (!object.Equals(<%= backingStoreName %>, value))
                 {
-					var __oldValue = <%= backingStoreName %>;
-					var __newValue = value;
+                    var __oldValue = <%= backingStoreName %>;
+                    var __newValue = value;
 
-					NotifyPropertyChanging("<%= propName %>", __oldValue, __newValue);
+                    NotifyPropertyChanging("<%= propName %>", __oldValue, __newValue);
 
-					if (<%= backingStoreName %> != null)
-					{ 
-						<%= backingStoreName %>.DetachFromObject(this, "<%= propName %>");
-					}
-					__newValue = (<%= coImplementationType %>)__newValue.Clone();
-					<%= backingStoreName %> = __newValue;
-					<%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
+                    if (<%= backingStoreName %> != null)
+                    {
+                        <%= backingStoreName %>.DetachFromObject(this, "<%= propName %>");
+                    }
+                    __newValue = (<%= coImplementationType %>)__newValue.Clone();
+                    <%= backingStoreName %> = __newValue;
+                    <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
 
-					NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
+                    NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-				}
-				else
-				{
-					SetInitializedProperty("<%= propName %>");
-				}
+                }
+                else
+                {
+                    SetInitializedProperty("<%= propName %>");
+                }
             }
         }
 <%

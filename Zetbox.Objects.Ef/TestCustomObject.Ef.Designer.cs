@@ -93,10 +93,10 @@ namespace Zetbox.App.Test
                         OnBirthday_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Birthday");
-				}
+                else
+                {
+                    SetInitializedProperty("Birthday");
+                }
             }
         }
         private DateTime? _Birthday_store;
@@ -495,10 +495,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                         OnPersonName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("PersonName");
-				}
+                else
+                {
+                    SetInitializedProperty("PersonName");
+                }
             }
         }
         private string _PersonName_store;
@@ -545,10 +545,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         [EdmComplexProperty()]
         public Zetbox.App.Test.TestPhoneCompoundObjectEfImpl PhoneNumberMobileImpl
         {
-            get 
-			{ 
-				return _PhoneNumberMobile; 
-			}
+            get
+            {
+                return _PhoneNumberMobile;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -557,7 +557,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 if (!object.Equals(_PhoneNumberMobile, value))
                 {
                     var __oldValue = _PhoneNumberMobile;
-					var __newValue = value;
+                    var __newValue = value;
 
                     NotifyPropertyChanging("PhoneNumberMobile", __oldValue, __newValue);
 
@@ -565,17 +565,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     {
                         _PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
                     }
-					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
+                    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
                     _PhoneNumberMobile = __newValue;
                     _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
 
                     NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-				else
-				{
-					SetInitializedProperty("PhoneNumberMobile");
-				}
+                else
+                {
+                    SetInitializedProperty("PhoneNumberMobile");
+                }
             }
         }
            // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -609,10 +609,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         [EdmComplexProperty()]
         public Zetbox.App.Test.TestPhoneCompoundObjectEfImpl PhoneNumberOfficeImpl
         {
-            get 
-			{ 
-				return _PhoneNumberOffice; 
-			}
+            get
+            {
+                return _PhoneNumberOffice;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -621,7 +621,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 if (!object.Equals(_PhoneNumberOffice, value))
                 {
                     var __oldValue = _PhoneNumberOffice;
-					var __newValue = value;
+                    var __newValue = value;
 
                     NotifyPropertyChanging("PhoneNumberOffice", __oldValue, __newValue);
 
@@ -629,17 +629,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     {
                         _PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
                     }
-					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
+                    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
                     _PhoneNumberOffice = __newValue;
                     _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
 
                     NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-				else
-				{
-					SetInitializedProperty("PhoneNumberOffice");
-				}
+                else
+                {
+                    SetInitializedProperty("PhoneNumberOffice");
+                }
             }
         }
            // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -985,10 +985,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

@@ -92,10 +92,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentMonthDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentMonthDefault");
+                }
             }
         }
 

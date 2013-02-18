@@ -40,7 +40,7 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -112,10 +112,10 @@ namespace Zetbox.App.SchemaMigration
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -210,10 +210,10 @@ namespace Zetbox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -269,10 +269,10 @@ namespace Zetbox.App.SchemaMigration
                         OnComment_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Comment");
-				}
+                else
+                {
+                    SetInitializedProperty("Comment");
+                }
             }
         }
         private string _Comment;
@@ -339,10 +339,10 @@ namespace Zetbox.App.SchemaMigration
                         OnCompareNulls_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CompareNulls");
-				}
+                else
+                {
+                    SetInitializedProperty("CompareNulls");
+                }
             }
         }
         private bool _CompareNulls;
@@ -357,7 +357,7 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -429,10 +429,10 @@ namespace Zetbox.App.SchemaMigration
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -527,10 +527,10 @@ namespace Zetbox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -586,10 +586,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDbType_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DbType");
-				}
+                else
+                {
+                    SetInitializedProperty("DbType");
+                }
             }
         }
         private Zetbox.App.SchemaMigration.ColumnType _DbType;
@@ -644,10 +644,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description;
@@ -813,10 +813,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -872,10 +872,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnIsNullable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsNullable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsNullable");
+                }
             }
         }
         private bool? _IsNullable;
@@ -930,10 +930,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -947,7 +947,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for References
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for References
         // fkBackingName=_fk_References; fkGuidBackingName=_fk_guid_References;
         // referencedInterface=Zetbox.App.SchemaMigration.SourceColumn; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=Referers; is list;
@@ -1020,10 +1020,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
                 // shortcut noops
                 if ((value == null && _fk_References == null) || (value != null && value.ID == _fk_References))
-				{
-					SetInitializedProperty("References");
+                {
+                    SetInitializedProperty("References");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ReferencesImpl;
@@ -1180,10 +1180,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnSize_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Size");
-				}
+                else
+                {
+                    SetInitializedProperty("Size");
+                }
             }
         }
         private int? _Size;
@@ -1197,7 +1197,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceTable
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceTable
         // fkBackingName=_fk_SourceTable; fkGuidBackingName=_fk_guid_SourceTable;
         // referencedInterface=Zetbox.App.SchemaMigration.SourceTable; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=SourceColumn; is list;
@@ -1270,10 +1270,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
                 // shortcut noops
                 if ((value == null && _fk_SourceTable == null) || (value != null && value.ID == _fk_SourceTable))
-				{
-					SetInitializedProperty("SourceTable");
+                {
+                    SetInitializedProperty("SourceTable");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = SourceTableImpl;
@@ -1370,10 +1370,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnStatus_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Status");
-				}
+                else
+                {
+                    SetInitializedProperty("Status");
+                }
             }
         }
         private Zetbox.App.SchemaMigration.MappingStatus? _Status;

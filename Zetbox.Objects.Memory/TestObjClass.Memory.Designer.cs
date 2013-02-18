@@ -68,13 +68,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("CalculatedEnumeration", __oldValue, __newValue);
                     _CalculatedEnumeration = __newValue;
                     NotifyPropertyChanged("CalculatedEnumeration", __oldValue, __newValue);
-			        _CalculatedEnumeration_IsDirty = false;
+                    _CalculatedEnumeration_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CalculatedEnumeration");
-				}
+                else
+                {
+                    SetInitializedProperty("CalculatedEnumeration");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _CalculatedEnumeration;
@@ -126,10 +126,10 @@ namespace Zetbox.App.Test
                         OnMyIntProperty_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MyIntProperty");
-				}
+                else
+                {
+                    SetInitializedProperty("MyIntProperty");
+                }
             }
         }
         private int? _MyIntProperty;
@@ -143,7 +143,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// testtest
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
         // fkBackingName=_fk_ObjectProp; fkGuidBackingName=_fk_guid_ObjectProp;
         // referencedInterface=Zetbox.App.Projekte.Kunde; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
@@ -215,10 +215,10 @@ namespace Zetbox.App.Test
 
                 // shortcut noops
                 if ((value == null && _fk_ObjectProp == null) || (value != null && value.ID == _fk_ObjectProp))
-				{
-					SetInitializedProperty("ObjectProp");
+                {
+                    SetInitializedProperty("ObjectProp");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ObjectPropImpl;
@@ -299,10 +299,10 @@ namespace Zetbox.App.Test
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("StringProp");
-				}
+                else
+                {
+                    SetInitializedProperty("StringProp");
+                }
             }
         }
         private string _StringProp;
@@ -357,10 +357,10 @@ namespace Zetbox.App.Test
                         OnTestEnumProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnumProp");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnumProp");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _TestEnumProp;
@@ -427,10 +427,10 @@ namespace Zetbox.App.Test
                         OnTestEnumWithDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnumWithDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnumWithDefault");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _TestEnumWithDefault;

@@ -72,10 +72,10 @@ namespace Zetbox.App.Test
         /// <summary>backing property for Rule, takes care of attaching/detaching the values</summary>
         public Zetbox.App.Base.RecurrenceRuleNHibernateImpl RuleImpl
         {
-            get 
-			{ 
-				return this.Proxy.Rule; 
-			}
+            get
+            {
+                return this.Proxy.Rule;
+            }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
@@ -83,26 +83,26 @@ namespace Zetbox.App.Test
                     throw new ArgumentNullException("value");
                 if (!object.Equals(this.Proxy.Rule, value))
                 {
-					var __oldValue = this.Proxy.Rule;
-					var __newValue = value;
+                    var __oldValue = this.Proxy.Rule;
+                    var __newValue = value;
 
-					NotifyPropertyChanging("Rule", __oldValue, __newValue);
+                    NotifyPropertyChanging("Rule", __oldValue, __newValue);
 
-					if (this.Proxy.Rule != null)
-					{ 
-						this.Proxy.Rule.DetachFromObject(this, "Rule");
-					}
-					__newValue = (Zetbox.App.Base.RecurrenceRuleNHibernateImpl)__newValue.Clone();
-					this.Proxy.Rule = __newValue;
-					this.Proxy.Rule.AttachToObject(this, "Rule");
+                    if (this.Proxy.Rule != null)
+                    {
+                        this.Proxy.Rule.DetachFromObject(this, "Rule");
+                    }
+                    __newValue = (Zetbox.App.Base.RecurrenceRuleNHibernateImpl)__newValue.Clone();
+                    this.Proxy.Rule = __newValue;
+                    this.Proxy.Rule.AttachToObject(this, "Rule");
 
-					NotifyPropertyChanged("Rule", __oldValue, __newValue);
+                    NotifyPropertyChanged("Rule", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-				}
-				else
-				{
-					SetInitializedProperty("Rule");
-				}
+                }
+                else
+                {
+                    SetInitializedProperty("Rule");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate

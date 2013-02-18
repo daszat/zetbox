@@ -99,10 +99,10 @@ namespace Zetbox.App.Base
                         OnFrom_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("From");
-				}
+                else
+                {
+                    SetInitializedProperty("From");
+                }
             }
         }
         private DateTime? _From_store;
@@ -168,10 +168,10 @@ namespace Zetbox.App.Base
                         OnThru_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Thru");
-				}
+                else
+                {
+                    SetInitializedProperty("Thru");
+                }
             }
         }
         private DateTime? _Thru_store;
@@ -222,13 +222,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("TotalDays", __oldValue, __newValue);
                     _TotalDays = __newValue;
                     NotifyPropertyChanged("TotalDays", __oldValue, __newValue);
-			        _TotalDays_IsDirty = false;
+                    _TotalDays_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("TotalDays");
-				}
+                else
+                {
+                    SetInitializedProperty("TotalDays");
+                }
             }
         }
         private int? _TotalDays_store;

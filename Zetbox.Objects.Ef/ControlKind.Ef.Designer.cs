@@ -155,10 +155,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -328,10 +328,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -770,10 +770,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                     if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

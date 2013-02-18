@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
         // fkBackingName=_fk_Group; fkGuidBackingName=_fk_guid_Group;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -113,10 +113,10 @@ namespace Zetbox.App.Base
 
                 // shortcut noops
                 if ((value == null && _fk_Group == null) || (value != null && value.ID == _fk_Group))
-				{
-					SetInitializedProperty("Group");
+                {
+                    SetInitializedProperty("Group");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = GroupImpl;
