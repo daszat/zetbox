@@ -596,20 +596,21 @@ namespace Zetbox.App.GUI
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.GUI.ListSortDirection? InitialSortDirection
         {
             get
             {
-                var __value = _InitialSortDirection;
-                if(OnInitialSortDirection_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _InitialSortDirection;
+                if (OnInitialSortDirection_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__value);
-                    OnInitialSortDirection_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__result);
+                    OnInitialSortDirection_Getter(this, __e);
+                    __result = _InitialSortDirection = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -618,32 +619,36 @@ namespace Zetbox.App.GUI
                 {
                     var __oldValue = _InitialSortDirection;
                     var __newValue = value;
-                    if(OnInitialSortDirection_PreSetter != null)
+                    if (OnInitialSortDirection_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__oldValue, __newValue);
-                        OnInitialSortDirection_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__oldValue, __newValue);
+                        OnInitialSortDirection_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("InitialSortDirection", __oldValue, __newValue);
-                    _InitialSortDirection = value;
+                    _InitialSortDirection = __newValue;
                     NotifyPropertyChanged("InitialSortDirection", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnInitialSortDirection_PostSetter != null)
+
+                    if (OnInitialSortDirection_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__oldValue, __newValue);
-                        OnInitialSortDirection_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ListSortDirection?>(__oldValue, __newValue);
+                        OnInitialSortDirection_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("InitialSortDirection");
+				}
             }
         }
-
         private Zetbox.App.GUI.ListSortDirection? _InitialSortDirection_store;
         private Zetbox.App.GUI.ListSortDirection? _InitialSortDirection {
             get { return _InitialSortDirection_store; }
             set {
-                ReportEfPropertyChanging("InitialSortDirectionImpl");
+                ReportEfPropertyChanging("InitialSortDirection");
                 _InitialSortDirection_store = value;
-                ReportEfPropertyChanged("InitialSortDirectionImpl");
+                ReportEfPropertyChanged("InitialSortDirection");
             }
         }
 
@@ -661,7 +666,7 @@ namespace Zetbox.App.GUI
                 this.InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.ListSortDirection?> OnInitialSortDirection_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.ListSortDirection?> OnInitialSortDirection_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.ListSortDirection?> OnInitialSortDirection_PostSetter;
@@ -1395,20 +1400,21 @@ namespace Zetbox.App.GUI
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.GUI.InstanceListViewMethod? ViewMethod
         {
             get
             {
-                var __value = _ViewMethod;
-                if(OnViewMethod_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ViewMethod;
+                if (OnViewMethod_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__value);
-                    OnViewMethod_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__result);
+                    OnViewMethod_Getter(this, __e);
+                    __result = _ViewMethod = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -1417,32 +1423,36 @@ namespace Zetbox.App.GUI
                 {
                     var __oldValue = _ViewMethod;
                     var __newValue = value;
-                    if(OnViewMethod_PreSetter != null)
+                    if (OnViewMethod_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
-                        OnViewMethod_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
+                        OnViewMethod_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("ViewMethod", __oldValue, __newValue);
-                    _ViewMethod = value;
+                    _ViewMethod = __newValue;
                     NotifyPropertyChanged("ViewMethod", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnViewMethod_PostSetter != null)
+
+                    if (OnViewMethod_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
-                        OnViewMethod_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
+                        OnViewMethod_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ViewMethod");
+				}
             }
         }
-
         private Zetbox.App.GUI.InstanceListViewMethod? _ViewMethod_store;
         private Zetbox.App.GUI.InstanceListViewMethod? _ViewMethod {
             get { return _ViewMethod_store; }
             set {
-                ReportEfPropertyChanging("ViewMethodImpl");
+                ReportEfPropertyChanging("ViewMethod");
                 _ViewMethod_store = value;
-                ReportEfPropertyChanged("ViewMethodImpl");
+                ReportEfPropertyChanged("ViewMethod");
             }
         }
 
@@ -1460,7 +1470,7 @@ namespace Zetbox.App.GUI
                 this.ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.InstanceListViewMethod?> OnViewMethod_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.InstanceListViewMethod?> OnViewMethod_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.InstanceListViewMethod?> OnViewMethod_PostSetter;
@@ -1933,7 +1943,7 @@ namespace Zetbox.App.GUI
             binStream.Write(this._AllowUserFilter);
             binStream.Write(this._EnableAutoFilter);
             binStream.Write(this._InitialSort);
-            binStream.Write((int?)this._InitialSortDirection);
+            binStream.Write((int?)_InitialSortDirection);
             binStream.Write(this._IsEditable);
             binStream.Write(this._IsMultiselect);
             {
@@ -1955,7 +1965,7 @@ namespace Zetbox.App.GUI
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            binStream.Write((int?)this._ViewMethod);
+            binStream.Write((int?)_ViewMethod);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1972,7 +1982,7 @@ namespace Zetbox.App.GUI
             this._AllowUserFilter = binStream.ReadNullableBoolean();
             this._EnableAutoFilter = binStream.ReadNullableBoolean();
             this._InitialSort = binStream.ReadString();
-            this._InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)binStream.ReadNullableInt32();
+            _InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)binStream.ReadNullableInt32();
             this._IsEditable = binStream.ReadNullableBoolean();
             this._IsMultiselect = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_RequestedEditorKind);
@@ -1982,7 +1992,7 @@ namespace Zetbox.App.GUI
             this._ShowFilter = binStream.ReadNullableBoolean();
             this._ShowMasterDetail = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_Type);
-            this._ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
+            _ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -2004,7 +2014,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._AllowUserFilter, xml, "AllowUserFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._EnableAutoFilter, xml, "EnableAutoFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._InitialSort, xml, "InitialSort", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._InitialSortDirection, xml, "InitialSortDirection", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)_InitialSortDirection, xml, "InitialSortDirection", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._IsEditable, xml, "IsEditable", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._IsMultiselect, xml, "IsMultiselect", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedEditorKind != null ? RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Zetbox.App.GUI");
@@ -2014,7 +2024,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowFilter, xml, "ShowFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowMasterDetail, xml, "ShowMasterDetail", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._ViewMethod, xml, "ViewMethod", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)_ViewMethod, xml, "ViewMethod", "Zetbox.App.GUI");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -2048,7 +2058,7 @@ namespace Zetbox.App.GUI
                 this._InitialSort = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.GUI|InitialSortDirection":
-                this._InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)XmlStreamer.ReadNullableInt32(xml);
+                _InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.GUI|IsEditable":
                 this._IsEditable = XmlStreamer.ReadNullableBoolean(xml);
@@ -2078,7 +2088,7 @@ namespace Zetbox.App.GUI
                 this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|ViewMethod":
-                this._ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)XmlStreamer.ReadNullableInt32(xml);
+                _ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

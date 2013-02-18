@@ -44,20 +44,21 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Test.TestEnum? Nullable
         {
             get
             {
-                var __value = _Nullable;
-                if(OnNullable_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Nullable;
+                if (OnNullable_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum?>(__value);
-                    OnNullable_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum?>(__result);
+                    OnNullable_Getter(this, __e);
+                    __result = _Nullable = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -66,32 +67,36 @@ namespace Zetbox.App.Test
                 {
                     var __oldValue = _Nullable;
                     var __newValue = value;
-                    if(OnNullable_PreSetter != null)
+                    if (OnNullable_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum?>(__oldValue, __newValue);
-                        OnNullable_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum?>(__oldValue, __newValue);
+                        OnNullable_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Nullable", __oldValue, __newValue);
-                    _Nullable = value;
+                    _Nullable = __newValue;
                     NotifyPropertyChanged("Nullable", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnNullable_PostSetter != null)
+
+                    if (OnNullable_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum?>(__oldValue, __newValue);
-                        OnNullable_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum?>(__oldValue, __newValue);
+                        OnNullable_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Nullable");
+				}
             }
         }
-
         private Zetbox.App.Test.TestEnum? _Nullable_store;
         private Zetbox.App.Test.TestEnum? _Nullable {
             get { return _Nullable_store; }
             set {
-                ReportEfPropertyChanging("NullableImpl");
+                ReportEfPropertyChanging("Nullable");
                 _Nullable_store = value;
-                ReportEfPropertyChanged("NullableImpl");
+                ReportEfPropertyChanged("Nullable");
             }
         }
 
@@ -109,7 +114,7 @@ namespace Zetbox.App.Test
                 this.Nullable = (Zetbox.App.Test.TestEnum?)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum?> OnNullable_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum?> OnNullable_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum?> OnNullable_PostSetter;
@@ -120,54 +125,74 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Test.TestEnum? NullableWithDefault
         {
             get
             {
-                var __value = _NullableWithDefault;
-                if(OnNullableWithDefault_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum?>(__value);
-                    OnNullableWithDefault_Getter(this, e);
-                    __value = e.Result;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _NullableWithDefault;
+                if (!_isNullableWithDefaultSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("813bed50-e879-4a9d-8baa-677a503a1d42"));
+                    if (__p != null) {
+                        _isNullableWithDefaultSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                            if (__tmp_value == null)
+                                __result = this._NullableWithDefault = null;
+                            else
+                            __result = this._NullableWithDefault = (Zetbox.App.Test.TestEnum)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'PropertyEnumTest.NullableWithDefault'");
+                    }
                 }
-                return __value;
+                if (OnNullableWithDefault_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum?>(__result);
+                    OnNullableWithDefault_Getter(this, __e);
+                    __result = _NullableWithDefault = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isNullableWithDefaultSet = true;
                 if (_NullableWithDefault != value)
                 {
                     var __oldValue = _NullableWithDefault;
                     var __newValue = value;
-                    if(OnNullableWithDefault_PreSetter != null)
+                    if (OnNullableWithDefault_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum?>(__oldValue, __newValue);
-                        OnNullableWithDefault_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum?>(__oldValue, __newValue);
+                        OnNullableWithDefault_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("NullableWithDefault", __oldValue, __newValue);
-                    _NullableWithDefault = value;
+                    _NullableWithDefault = __newValue;
                     NotifyPropertyChanged("NullableWithDefault", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnNullableWithDefault_PostSetter != null)
+
+                    if (OnNullableWithDefault_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum?>(__oldValue, __newValue);
-                        OnNullableWithDefault_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum?>(__oldValue, __newValue);
+                        OnNullableWithDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("NullableWithDefault");
+				}
             }
         }
-
         private Zetbox.App.Test.TestEnum? _NullableWithDefault_store;
         private Zetbox.App.Test.TestEnum? _NullableWithDefault {
             get { return _NullableWithDefault_store; }
             set {
-                ReportEfPropertyChanging("NullableWithDefaultImpl");
+                ReportEfPropertyChanging("NullableWithDefault");
                 _NullableWithDefault_store = value;
-                ReportEfPropertyChanged("NullableWithDefaultImpl");
+                ReportEfPropertyChanged("NullableWithDefault");
             }
         }
         private bool _isNullableWithDefaultSet = false;
@@ -186,7 +211,7 @@ namespace Zetbox.App.Test
                 this.NullableWithDefault = (Zetbox.App.Test.TestEnum?)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum?> OnNullableWithDefault_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum?> OnNullableWithDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum?> OnNullableWithDefault_PostSetter;
@@ -197,20 +222,21 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Test.TestEnum Standard
         {
             get
             {
-                var __value = _Standard;
-                if(OnStandard_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Standard;
+                if (OnStandard_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__value);
-                    OnStandard_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__result);
+                    OnStandard_Getter(this, __e);
+                    __result = _Standard = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -219,32 +245,36 @@ namespace Zetbox.App.Test
                 {
                     var __oldValue = _Standard;
                     var __newValue = value;
-                    if(OnStandard_PreSetter != null)
+                    if (OnStandard_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
-                        OnStandard_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+                        OnStandard_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Standard", __oldValue, __newValue);
-                    _Standard = value;
+                    _Standard = __newValue;
                     NotifyPropertyChanged("Standard", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnStandard_PostSetter != null)
+
+                    if (OnStandard_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
-                        OnStandard_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+                        OnStandard_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Standard");
+				}
             }
         }
-
         private Zetbox.App.Test.TestEnum _Standard_store;
         private Zetbox.App.Test.TestEnum _Standard {
             get { return _Standard_store; }
             set {
-                ReportEfPropertyChanging("StandardImpl");
+                ReportEfPropertyChanging("Standard");
                 _Standard_store = value;
-                ReportEfPropertyChanged("StandardImpl");
+                ReportEfPropertyChanged("Standard");
             }
         }
 
@@ -262,7 +292,7 @@ namespace Zetbox.App.Test
                 this.Standard = (Zetbox.App.Test.TestEnum)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum> OnStandard_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum> OnStandard_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum> OnStandard_PostSetter;
@@ -273,54 +303,71 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Test.TestEnum StandardWithDefault
         {
             get
             {
-                var __value = _StandardWithDefault;
-                if(OnStandardWithDefault_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__value);
-                    OnStandardWithDefault_Getter(this, e);
-                    __value = e.Result;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _StandardWithDefault;
+                if (!_isStandardWithDefaultSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("b2af71e1-a115-42c9-98ac-6e277afa8c24"));
+                    if (__p != null) {
+                        _isStandardWithDefaultSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._StandardWithDefault = (Zetbox.App.Test.TestEnum)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'PropertyEnumTest.StandardWithDefault'");
+                    }
                 }
-                return __value;
+                if (OnStandardWithDefault_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__result);
+                    OnStandardWithDefault_Getter(this, __e);
+                    __result = _StandardWithDefault = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isStandardWithDefaultSet = true;
                 if (_StandardWithDefault != value)
                 {
                     var __oldValue = _StandardWithDefault;
                     var __newValue = value;
-                    if(OnStandardWithDefault_PreSetter != null)
+                    if (OnStandardWithDefault_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
-                        OnStandardWithDefault_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+                        OnStandardWithDefault_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("StandardWithDefault", __oldValue, __newValue);
-                    _StandardWithDefault = value;
+                    _StandardWithDefault = __newValue;
                     NotifyPropertyChanged("StandardWithDefault", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnStandardWithDefault_PostSetter != null)
+
+                    if (OnStandardWithDefault_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
-                        OnStandardWithDefault_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+                        OnStandardWithDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("StandardWithDefault");
+				}
             }
         }
-
         private Zetbox.App.Test.TestEnum _StandardWithDefault_store;
         private Zetbox.App.Test.TestEnum _StandardWithDefault {
             get { return _StandardWithDefault_store; }
             set {
-                ReportEfPropertyChanging("StandardWithDefaultImpl");
+                ReportEfPropertyChanging("StandardWithDefault");
                 _StandardWithDefault_store = value;
-                ReportEfPropertyChanged("StandardWithDefaultImpl");
+                ReportEfPropertyChanged("StandardWithDefault");
             }
         }
         private bool _isStandardWithDefaultSet = false;
@@ -339,7 +386,7 @@ namespace Zetbox.App.Test
                 this.StandardWithDefault = (Zetbox.App.Test.TestEnum)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum> OnStandardWithDefault_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum> OnStandardWithDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Test.PropertyEnumTest, Zetbox.App.Test.TestEnum> OnStandardWithDefault_PostSetter;
@@ -532,15 +579,15 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write((int?)this._Nullable);
+            binStream.Write((int?)_Nullable);
             binStream.Write(this._isNullableWithDefaultSet);
             if (this._isNullableWithDefaultSet) {
-                binStream.Write((int?)this._NullableWithDefault);
+                binStream.Write((int?)_NullableWithDefault);
             }
-            binStream.Write((int?)this._Standard);
+            binStream.Write((int?)_Standard);
             binStream.Write(this._isStandardWithDefaultSet);
             if (this._isStandardWithDefaultSet) {
-                binStream.Write((int?)this._StandardWithDefault);
+                binStream.Write((int?)_StandardWithDefault);
             }
         }
 
@@ -550,15 +597,15 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._Nullable = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
+            _Nullable = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
             this._isNullableWithDefaultSet = binStream.ReadBoolean();
             if (this._isNullableWithDefaultSet) {
-                this._NullableWithDefault = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
+                _NullableWithDefault = (Zetbox.App.Test.TestEnum?)binStream.ReadNullableInt32();
             }
-            this._Standard = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            _Standard = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             this._isStandardWithDefaultSet = binStream.ReadBoolean();
             if (this._isStandardWithDefaultSet) {
-                this._StandardWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+                _StandardWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null

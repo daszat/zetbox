@@ -44,20 +44,21 @@ namespace Zetbox.App.Calendar
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.DayOfWeek DayOfWeek
         {
             get
             {
-                var __value = _DayOfWeek;
-                if(OnDayOfWeek_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _DayOfWeek;
+                if (OnDayOfWeek_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DayOfWeek>(__value);
-                    OnDayOfWeek_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.DayOfWeek>(__result);
+                    OnDayOfWeek_Getter(this, __e);
+                    __result = _DayOfWeek = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -66,32 +67,36 @@ namespace Zetbox.App.Calendar
                 {
                     var __oldValue = _DayOfWeek;
                     var __newValue = value;
-                    if(OnDayOfWeek_PreSetter != null)
+                    if (OnDayOfWeek_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DayOfWeek>(__oldValue, __newValue);
-                        OnDayOfWeek_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DayOfWeek>(__oldValue, __newValue);
+                        OnDayOfWeek_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("DayOfWeek", __oldValue, __newValue);
-                    _DayOfWeek = value;
+                    _DayOfWeek = __newValue;
                     NotifyPropertyChanged("DayOfWeek", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnDayOfWeek_PostSetter != null)
+
+                    if (OnDayOfWeek_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek>(__oldValue, __newValue);
-                        OnDayOfWeek_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek>(__oldValue, __newValue);
+                        OnDayOfWeek_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DayOfWeek");
+				}
             }
         }
-
         private Zetbox.App.Base.DayOfWeek _DayOfWeek_store;
         private Zetbox.App.Base.DayOfWeek _DayOfWeek {
             get { return _DayOfWeek_store; }
             set {
-                ReportEfPropertyChanging("DayOfWeekImpl");
+                ReportEfPropertyChanging("DayOfWeek");
                 _DayOfWeek_store = value;
-                ReportEfPropertyChanged("DayOfWeekImpl");
+                ReportEfPropertyChanged("DayOfWeek");
             }
         }
 
@@ -109,7 +114,7 @@ namespace Zetbox.App.Calendar
                 this.DayOfWeek = (Zetbox.App.Base.DayOfWeek)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.DayOfWeekCalendarRule, Zetbox.App.Base.DayOfWeek> OnDayOfWeek_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.DayOfWeekCalendarRule, Zetbox.App.Base.DayOfWeek> OnDayOfWeek_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.DayOfWeekCalendarRule, Zetbox.App.Base.DayOfWeek> OnDayOfWeek_PostSetter;
@@ -331,7 +336,7 @@ namespace Zetbox.App.Calendar
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write((int?)this._DayOfWeek);
+            binStream.Write((int?)_DayOfWeek);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -340,7 +345,7 @@ namespace Zetbox.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._DayOfWeek = (Zetbox.App.Base.DayOfWeek)binStream.ReadNullableInt32();
+            _DayOfWeek = (Zetbox.App.Base.DayOfWeek)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -354,7 +359,7 @@ namespace Zetbox.App.Calendar
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream((int?)this._DayOfWeek, xml, "DayOfWeek", "Zetbox.App.Calendar");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream((int?)_DayOfWeek, xml, "DayOfWeek", "Zetbox.App.Calendar");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -364,7 +369,7 @@ namespace Zetbox.App.Calendar
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Calendar|DayOfWeek":
-                this._DayOfWeek = (Zetbox.App.Base.DayOfWeek)XmlStreamer.ReadNullableInt32(xml);
+                _DayOfWeek = (Zetbox.App.Base.DayOfWeek)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

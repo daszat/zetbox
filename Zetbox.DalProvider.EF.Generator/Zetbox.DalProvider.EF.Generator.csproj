@@ -93,6 +93,11 @@
     <Compile Include="Templates\CompoundObjects\Template.cs" />
     <Compile Include="Templates\ObjectClasses\OnPropertyChange.cs" />
     <Compile Include="Templates\Properties\EfScalarPropHelper.cs" />
+    <Compile Include="Templates\Properties\EnumPropertyShim.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnumPropertyShim.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Properties\ExportGuidProperty.cs" />
     <Compile Include="Templates\CollectionEntries\RelationEntry.cs" />
     <Compile Include="Templates\CollectionEntries\ValueCollectionEntry.cs" />
@@ -176,17 +181,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\Properties\EnumerationPropertyTemplate.cs">
-      <DependentUpon>EnumerationPropertyTemplate.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Properties\EnumerationPropertyTemplate.Designer.cs">
-      <DependentUpon>EnumerationPropertyTemplate.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Templates\Properties\IdProperty.cs" />
     <Compile Include="Templates\Properties\ListProperty.cs" />
-    <Compile Include="Templates\Properties\NotifyingDataProperty.cs" />
+    <Compile Include="Templates\Properties\NotifyingEfProperties.cs" />
     <Compile Include="Templates\Properties\NotifyingValueProperty.cs" />
     <Compile Include="Templates\Properties\ObjectListProperty.Designer.cs">
       <DependentUpon>ObjectListProperty.cst</DependentUpon>
@@ -291,13 +288,13 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntryListProperty.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Templates\Properties\EnumPropertyShim.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EnumPropertyShim.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\Properties\EfListWrapper.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>EfListWrapper.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Properties\EnumerationPropertyTemplate.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>EnumerationPropertyTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>

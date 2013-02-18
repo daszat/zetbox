@@ -416,20 +416,21 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.DeploymentRestriction? DeploymentRestriction
         {
             get
             {
-                var __value = _DeploymentRestriction;
-                if(OnDeploymentRestriction_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _DeploymentRestriction;
+                if (OnDeploymentRestriction_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DeploymentRestriction?>(__value);
-                    OnDeploymentRestriction_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.DeploymentRestriction?>(__result);
+                    OnDeploymentRestriction_Getter(this, __e);
+                    __result = _DeploymentRestriction = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -438,32 +439,36 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _DeploymentRestriction;
                     var __newValue = value;
-                    if(OnDeploymentRestriction_PreSetter != null)
+                    if (OnDeploymentRestriction_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DeploymentRestriction?>(__oldValue, __newValue);
-                        OnDeploymentRestriction_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DeploymentRestriction?>(__oldValue, __newValue);
+                        OnDeploymentRestriction_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("DeploymentRestriction", __oldValue, __newValue);
-                    _DeploymentRestriction = value;
+                    _DeploymentRestriction = __newValue;
                     NotifyPropertyChanged("DeploymentRestriction", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnDeploymentRestriction_PostSetter != null)
+
+                    if (OnDeploymentRestriction_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DeploymentRestriction?>(__oldValue, __newValue);
-                        OnDeploymentRestriction_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DeploymentRestriction?>(__oldValue, __newValue);
+                        OnDeploymentRestriction_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DeploymentRestriction");
+				}
             }
         }
-
         private Zetbox.App.Base.DeploymentRestriction? _DeploymentRestriction_store;
         private Zetbox.App.Base.DeploymentRestriction? _DeploymentRestriction {
             get { return _DeploymentRestriction_store; }
             set {
-                ReportEfPropertyChanging("DeploymentRestrictionImpl");
+                ReportEfPropertyChanging("DeploymentRestriction");
                 _DeploymentRestriction_store = value;
-                ReportEfPropertyChanged("DeploymentRestrictionImpl");
+                ReportEfPropertyChanged("DeploymentRestriction");
             }
         }
 
@@ -481,7 +486,7 @@ namespace Zetbox.App.Base
                 this.DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.ServiceDescriptor, Zetbox.App.Base.DeploymentRestriction?> OnDeploymentRestriction_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ServiceDescriptor, Zetbox.App.Base.DeploymentRestriction?> OnDeploymentRestriction_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.ServiceDescriptor, Zetbox.App.Base.DeploymentRestriction?> OnDeploymentRestriction_PostSetter;
@@ -1170,7 +1175,7 @@ namespace Zetbox.App.Base
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
-            binStream.Write((int?)this._DeploymentRestriction);
+            binStream.Write((int?)_DeploymentRestriction);
             binStream.Write(this._Description);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
@@ -1204,7 +1209,7 @@ namespace Zetbox.App.Base
             if (this._isCreatedOnSet) {
                 this._CreatedOn = binStream.ReadDateTime();
             }
-            this._DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)binStream.ReadNullableInt32();
+            _DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)binStream.ReadNullableInt32();
             this._Description = binStream.ReadString();
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
@@ -1229,7 +1234,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._DeploymentRestriction, xml, "DeploymentRestriction", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_DeploymentRestriction, xml, "DeploymentRestriction", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(TypeRef != null ? TypeRef.ExportGuid : (Guid?)null, xml, "TypeRef", "Zetbox.App.Base");
@@ -1251,7 +1256,7 @@ namespace Zetbox.App.Base
                 this._isCreatedOnSet = true;
                 break;
             case "Zetbox.App.Base|DeploymentRestriction":
-                this._DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)XmlStreamer.ReadNullableInt32(xml);
+                _DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|Description":
                 this._Description = XmlStreamer.ReadString(xml);

@@ -136,9 +136,9 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
         protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
         {
             this.WriteLine("        // enumeration property");
-            Properties.EnumerationPropertyTemplate.Call(Host, ctx,
+            Properties.NotifyingEnumProperty.Call(Host, ctx,
                 this.MembersToSerialize,
-                prop, true);
+                prop);
         }
     }
 }

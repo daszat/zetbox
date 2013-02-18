@@ -979,20 +979,21 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.SchemaMigration.MappingStatus? Status
         {
             get
             {
-                var __value = _Status;
-                if(OnStatus_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Status;
+                if (OnStatus_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__value);
-                    OnStatus_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__result);
+                    OnStatus_Getter(this, __e);
+                    __result = _Status = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -1001,32 +1002,36 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 {
                     var __oldValue = _Status;
                     var __newValue = value;
-                    if(OnStatus_PreSetter != null)
+                    if (OnStatus_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);
-                        OnStatus_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);
+                        OnStatus_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Status", __oldValue, __newValue);
-                    _Status = value;
+                    _Status = __newValue;
                     NotifyPropertyChanged("Status", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnStatus_PostSetter != null)
+
+                    if (OnStatus_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);
-                        OnStatus_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);
+                        OnStatus_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Status");
+				}
             }
         }
-
         private Zetbox.App.SchemaMigration.MappingStatus? _Status_store;
         private Zetbox.App.SchemaMigration.MappingStatus? _Status {
             get { return _Status_store; }
             set {
-                ReportEfPropertyChanging("StatusImpl");
+                ReportEfPropertyChanging("Status");
                 _Status_store = value;
-                ReportEfPropertyChanged("StatusImpl");
+                ReportEfPropertyChanged("Status");
             }
         }
 
@@ -1044,7 +1049,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 this.Status = (Zetbox.App.SchemaMigration.MappingStatus?)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.SourceTable, Zetbox.App.SchemaMigration.MappingStatus?> OnStatus_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.SourceTable, Zetbox.App.SchemaMigration.MappingStatus?> OnStatus_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.SchemaMigration.SourceTable, Zetbox.App.SchemaMigration.MappingStatus?> OnStatus_PostSetter;
@@ -1567,7 +1572,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            binStream.Write((int?)this._Status);
+            binStream.Write((int?)_Status);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1595,7 +1600,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             this._Name = binStream.ReadString();
             binStream.Read(out this._fk_StagingDatabase);
-            this._Status = (Zetbox.App.SchemaMigration.MappingStatus?)binStream.ReadNullableInt32();
+            _Status = (Zetbox.App.SchemaMigration.MappingStatus?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1618,7 +1623,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(DestinationObjectClass != null ? DestinationObjectClass.ExportGuid : (Guid?)null, xml, "DestinationObjectClass", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(StagingDatabase != null ? StagingDatabase.ExportGuid : (Guid?)null, xml, "StagingDatabase", "Zetbox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)this._Status, xml, "Status", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)_Status, xml, "Status", "Zetbox.App.SchemaMigration");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1657,7 +1662,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 this._fk_guid_StagingDatabase = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.SchemaMigration|Status":
-                this._Status = (Zetbox.App.SchemaMigration.MappingStatus?)XmlStreamer.ReadNullableInt32(xml);
+                _Status = (Zetbox.App.SchemaMigration.MappingStatus?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

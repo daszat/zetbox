@@ -841,20 +841,21 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.AccessRights? Rights
         {
             get
             {
-                var __value = _Rights;
-                if(OnRights_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Rights;
+                if (OnRights_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.AccessRights?>(__value);
-                    OnRights_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.AccessRights?>(__result);
+                    OnRights_Getter(this, __e);
+                    __result = _Rights = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -863,32 +864,36 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Rights;
                     var __newValue = value;
-                    if(OnRights_PreSetter != null)
+                    if (OnRights_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
-                        OnRights_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
+                        OnRights_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Rights", __oldValue, __newValue);
-                    _Rights = value;
+                    _Rights = __newValue;
                     NotifyPropertyChanged("Rights", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnRights_PostSetter != null)
+
+                    if (OnRights_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
-                        OnRights_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
+                        OnRights_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Rights");
+				}
             }
         }
-
         private Zetbox.App.Base.AccessRights? _Rights_store;
         private Zetbox.App.Base.AccessRights? _Rights {
             get { return _Rights_store; }
             set {
-                ReportEfPropertyChanging("RightsImpl");
+                ReportEfPropertyChanging("Rights");
                 _Rights_store = value;
-                ReportEfPropertyChanged("RightsImpl");
+                ReportEfPropertyChanged("Rights");
             }
         }
 
@@ -906,7 +911,7 @@ namespace Zetbox.App.Base
                 this.Rights = (Zetbox.App.Base.AccessRights?)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessRights?> OnRights_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessRights?> OnRights_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessRights?> OnRights_PostSetter;
@@ -1281,7 +1286,7 @@ namespace Zetbox.App.Base
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            binStream.Write((int?)this._Rights);
+            binStream.Write((int?)_Rights);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1308,7 +1313,7 @@ namespace Zetbox.App.Base
             binStream.Read(out this._fk_Module);
             this._Notes = binStream.ReadString();
             binStream.Read(out this._fk_ObjectClass);
-            this._Rights = (Zetbox.App.Base.AccessRights?)binStream.ReadNullableInt32();
+            _Rights = (Zetbox.App.Base.AccessRights?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1330,7 +1335,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Notes, xml, "Notes", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Rights, xml, "Rights", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_Rights, xml, "Rights", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1366,7 +1371,7 @@ namespace Zetbox.App.Base
                 this._fk_guid_ObjectClass = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.Base|Rights":
-                this._Rights = (Zetbox.App.Base.AccessRights?)XmlStreamer.ReadNullableInt32(xml);
+                _Rights = (Zetbox.App.Base.AccessRights?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

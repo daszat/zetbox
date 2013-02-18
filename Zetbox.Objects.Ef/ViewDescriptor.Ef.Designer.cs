@@ -485,20 +485,21 @@ namespace Zetbox.App.GUI
         /// Which toolkit provides this View
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.GUI.Toolkit Toolkit
         {
             get
             {
-                var __value = _Toolkit;
-                if(OnToolkit_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Toolkit;
+                if (OnToolkit_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Toolkit>(__value);
-                    OnToolkit_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.GUI.Toolkit>(__result);
+                    OnToolkit_Getter(this, __e);
+                    __result = _Toolkit = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -507,32 +508,36 @@ namespace Zetbox.App.GUI
                 {
                     var __oldValue = _Toolkit;
                     var __newValue = value;
-                    if(OnToolkit_PreSetter != null)
+                    if (OnToolkit_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
-                        OnToolkit_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
+                        OnToolkit_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Toolkit", __oldValue, __newValue);
-                    _Toolkit = value;
+                    _Toolkit = __newValue;
                     NotifyPropertyChanged("Toolkit", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnToolkit_PostSetter != null)
+
+                    if (OnToolkit_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
-                        OnToolkit_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
+                        OnToolkit_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Toolkit");
+				}
             }
         }
-
         private Zetbox.App.GUI.Toolkit _Toolkit_store;
         private Zetbox.App.GUI.Toolkit _Toolkit {
             get { return _Toolkit_store; }
             set {
-                ReportEfPropertyChanging("ToolkitImpl");
+                ReportEfPropertyChanging("Toolkit");
                 _Toolkit_store = value;
-                ReportEfPropertyChanged("ToolkitImpl");
+                ReportEfPropertyChanged("Toolkit");
             }
         }
 
@@ -550,7 +555,7 @@ namespace Zetbox.App.GUI
                 this.Toolkit = (Zetbox.App.GUI.Toolkit)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.Toolkit> OnToolkit_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.Toolkit> OnToolkit_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.Toolkit> OnToolkit_PostSetter;
@@ -871,7 +876,7 @@ namespace Zetbox.App.GUI
 					auxObjects.Add(relEntry);
 				}
             }
-            binStream.Write((int?)this._Toolkit);
+            binStream.Write((int?)_Toolkit);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -889,7 +894,7 @@ namespace Zetbox.App.GUI
             binStream.Read(out this._fk_Module);
 
             SupportedViewModels_was_eagerLoaded = binStream.ReadBoolean();
-            this._Toolkit = (Zetbox.App.GUI.Toolkit)binStream.ReadNullableInt32();
+            _Toolkit = (Zetbox.App.GUI.Toolkit)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -906,7 +911,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlKind != null ? ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)_Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -929,7 +934,7 @@ namespace Zetbox.App.GUI
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|Toolkit":
-                this._Toolkit = (Zetbox.App.GUI.Toolkit)XmlStreamer.ReadNullableInt32(xml);
+                _Toolkit = (Zetbox.App.GUI.Toolkit)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

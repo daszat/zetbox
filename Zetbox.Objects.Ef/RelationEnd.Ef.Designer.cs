@@ -810,20 +810,21 @@ namespace Zetbox.App.Base
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.Multiplicity Multiplicity
         {
             get
             {
-                var __value = _Multiplicity;
-                if(OnMultiplicity_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Multiplicity;
+                if (OnMultiplicity_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Multiplicity>(__value);
-                    OnMultiplicity_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.Multiplicity>(__result);
+                    OnMultiplicity_Getter(this, __e);
+                    __result = _Multiplicity = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -832,32 +833,36 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Multiplicity;
                     var __newValue = value;
-                    if(OnMultiplicity_PreSetter != null)
+                    if (OnMultiplicity_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
-                        OnMultiplicity_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
+                        OnMultiplicity_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Multiplicity", __oldValue, __newValue);
-                    _Multiplicity = value;
+                    _Multiplicity = __newValue;
                     NotifyPropertyChanged("Multiplicity", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnMultiplicity_PostSetter != null)
+
+                    if (OnMultiplicity_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
-                        OnMultiplicity_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
+                        OnMultiplicity_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Multiplicity");
+				}
             }
         }
-
         private Zetbox.App.Base.Multiplicity _Multiplicity_store;
         private Zetbox.App.Base.Multiplicity _Multiplicity {
             get { return _Multiplicity_store; }
             set {
-                ReportEfPropertyChanging("MultiplicityImpl");
+                ReportEfPropertyChanging("Multiplicity");
                 _Multiplicity_store = value;
-                ReportEfPropertyChanged("MultiplicityImpl");
+                ReportEfPropertyChanged("Multiplicity");
             }
         }
 
@@ -875,7 +880,7 @@ namespace Zetbox.App.Base
                 this.Multiplicity = (Zetbox.App.Base.Multiplicity)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Multiplicity> OnMultiplicity_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Multiplicity> OnMultiplicity_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Multiplicity> OnMultiplicity_PostSetter;
@@ -1695,7 +1700,7 @@ namespace Zetbox.App.Base
             if (this._isHasPersistentOrderSet) {
                 binStream.Write(this._HasPersistentOrder);
             }
-            binStream.Write((int?)this._Multiplicity);
+            binStream.Write((int?)_Multiplicity);
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectReferencePropertyEfImpl>("Model.FK_RelationEnd_has_Navigator", "Navigator");
                 var key = r.EntityKey;
@@ -1738,7 +1743,7 @@ namespace Zetbox.App.Base
             if (this._isHasPersistentOrderSet) {
                 this._HasPersistentOrder = binStream.ReadBoolean();
             }
-            this._Multiplicity = (Zetbox.App.Base.Multiplicity)binStream.ReadNullableInt32();
+            _Multiplicity = (Zetbox.App.Base.Multiplicity)binStream.ReadNullableInt32();
             binStream.Read(out this._fk_Navigator);
             this._RoleName = binStream.ReadString();
             binStream.Read(out this._fk_Type);
@@ -1763,7 +1768,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isHasPersistentOrderSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Multiplicity, xml, "Multiplicity", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_Multiplicity, xml, "Multiplicity", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Navigator != null ? Navigator.ExportGuid : (Guid?)null, xml, "Navigator", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.Base");
@@ -1801,7 +1806,7 @@ namespace Zetbox.App.Base
                 this._isHasPersistentOrderSet = true;
                 break;
             case "Zetbox.App.Base|Multiplicity":
-                this._Multiplicity = (Zetbox.App.Base.Multiplicity)XmlStreamer.ReadNullableInt32(xml);
+                _Multiplicity = (Zetbox.App.Base.Multiplicity)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|Navigator":
                 this._fk_guid_Navigator = XmlStreamer.ReadNullableGuid(xml);

@@ -460,54 +460,71 @@ namespace Zetbox.App.Base
         /// The ContainmentSpecification of this Relation.
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.ContainmentSpecification Containment
         {
             get
             {
-                var __value = _Containment;
-                if(OnContainment_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__value);
-                    OnContainment_Getter(this, e);
-                    __value = e.Result;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Containment;
+                if (!_isContainmentSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("eed9955a-11a3-4c25-b0bb-e01ecd14b26f"));
+                    if (__p != null) {
+                        _isContainmentSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._Containment = (Zetbox.App.Base.ContainmentSpecification)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Relation.Containment'");
+                    }
                 }
-                return __value;
+                if (OnContainment_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__result);
+                    OnContainment_Getter(this, __e);
+                    __result = _Containment = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isContainmentSet = true;
                 if (_Containment != value)
                 {
                     var __oldValue = _Containment;
                     var __newValue = value;
-                    if(OnContainment_PreSetter != null)
+                    if (OnContainment_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__oldValue, __newValue);
-                        OnContainment_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__oldValue, __newValue);
+                        OnContainment_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Containment", __oldValue, __newValue);
-                    _Containment = value;
+                    _Containment = __newValue;
                     NotifyPropertyChanged("Containment", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnContainment_PostSetter != null)
+
+                    if (OnContainment_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__oldValue, __newValue);
-                        OnContainment_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__oldValue, __newValue);
+                        OnContainment_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Containment");
+				}
             }
         }
-
         private Zetbox.App.Base.ContainmentSpecification _Containment_store;
         private Zetbox.App.Base.ContainmentSpecification _Containment {
             get { return _Containment_store; }
             set {
-                ReportEfPropertyChanging("ContainmentImpl");
+                ReportEfPropertyChanging("Containment");
                 _Containment_store = value;
-                ReportEfPropertyChanged("ContainmentImpl");
+                ReportEfPropertyChanged("Containment");
             }
         }
         private bool _isContainmentSet = false;
@@ -526,7 +543,7 @@ namespace Zetbox.App.Base
                 this.Containment = (Zetbox.App.Base.ContainmentSpecification)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_PostSetter;
@@ -977,20 +994,21 @@ namespace Zetbox.App.Base
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.StorageType Storage
         {
             get
             {
-                var __value = _Storage;
-                if(OnStorage_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Storage;
+                if (OnStorage_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.StorageType>(__value);
-                    OnStorage_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.StorageType>(__result);
+                    OnStorage_Getter(this, __e);
+                    __result = _Storage = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -999,32 +1017,36 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Storage;
                     var __newValue = value;
-                    if(OnStorage_PreSetter != null)
+                    if (OnStorage_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.StorageType>(__oldValue, __newValue);
-                        OnStorage_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.StorageType>(__oldValue, __newValue);
+                        OnStorage_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Storage", __oldValue, __newValue);
-                    _Storage = value;
+                    _Storage = __newValue;
                     NotifyPropertyChanged("Storage", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnStorage_PostSetter != null)
+
+                    if (OnStorage_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.StorageType>(__oldValue, __newValue);
-                        OnStorage_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.StorageType>(__oldValue, __newValue);
+                        OnStorage_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Storage");
+				}
             }
         }
-
         private Zetbox.App.Base.StorageType _Storage_store;
         private Zetbox.App.Base.StorageType _Storage {
             get { return _Storage_store; }
             set {
-                ReportEfPropertyChanging("StorageImpl");
+                ReportEfPropertyChanging("Storage");
                 _Storage_store = value;
-                ReportEfPropertyChanged("StorageImpl");
+                ReportEfPropertyChanged("Storage");
             }
         }
 
@@ -1042,7 +1064,7 @@ namespace Zetbox.App.Base
                 this.Storage = (Zetbox.App.Base.StorageType)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.StorageType> OnStorage_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.StorageType> OnStorage_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.StorageType> OnStorage_PostSetter;
@@ -1943,7 +1965,7 @@ namespace Zetbox.App.Base
             }
             binStream.Write(this._isContainmentSet);
             if (this._isContainmentSet) {
-                binStream.Write((int?)this._Containment);
+                binStream.Write((int?)_Containment);
             }
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Relation_was_CreatedBy", "CreatedBy");
@@ -1964,7 +1986,7 @@ namespace Zetbox.App.Base
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            binStream.Write((int?)this._Storage);
+            binStream.Write((int?)_Storage);
             binStream.Write(this._Verb);
         }
 
@@ -1983,7 +2005,7 @@ namespace Zetbox.App.Base
             }
             this._isContainmentSet = binStream.ReadBoolean();
             if (this._isContainmentSet) {
-                this._Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
+                _Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
             }
             binStream.Read(out this._fk_CreatedBy);
             this._isCreatedOnSet = binStream.ReadBoolean();
@@ -1996,7 +2018,7 @@ namespace Zetbox.App.Base
                 this._ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
-            this._Storage = (Zetbox.App.Base.StorageType)binStream.ReadNullableInt32();
+            _Storage = (Zetbox.App.Base.StorageType)binStream.ReadNullableInt32();
             this._Verb = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -2016,12 +2038,12 @@ namespace Zetbox.App.Base
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isContainmentSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Containment, xml, "Containment", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_Containment, xml, "Containment", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Storage, xml, "Storage", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_Storage, xml, "Storage", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Verb, xml, "Verb", "Zetbox.App.Base");
         }
 
@@ -2043,7 +2065,7 @@ namespace Zetbox.App.Base
                 break;
             case "Zetbox.App.Base|Containment":
                 // Import must have default value set
-                this._Containment = (Zetbox.App.Base.ContainmentSpecification)XmlStreamer.ReadNullableInt32(xml);
+                _Containment = (Zetbox.App.Base.ContainmentSpecification)XmlStreamer.ReadNullableInt32(xml);
                 this._isContainmentSet = true;
                 break;
             case "Zetbox.App.Base|CreatedOn":
@@ -2063,7 +2085,7 @@ namespace Zetbox.App.Base
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.Base|Storage":
-                this._Storage = (Zetbox.App.Base.StorageType)XmlStreamer.ReadNullableInt32(xml);
+                _Storage = (Zetbox.App.Base.StorageType)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|Verb":
                 this._Verb = XmlStreamer.ReadString(xml);

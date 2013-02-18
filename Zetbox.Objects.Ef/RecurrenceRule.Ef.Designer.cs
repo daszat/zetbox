@@ -201,20 +201,21 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         // enumeration property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.DayOfWeek? EveryDayOfWeek
         {
             get
             {
-                var __value = _EveryDayOfWeek;
-                if(OnEveryDayOfWeek_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _EveryDayOfWeek;
+                if (OnEveryDayOfWeek_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__value);
-                    OnEveryDayOfWeek_Getter(this, e);
-                    __value = e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__result);
+                    OnEveryDayOfWeek_Getter(this, __e);
+                    __result = _EveryDayOfWeek = __e.Result;
                 }
-                return __value;
+                return __result;
             }
             set
             {
@@ -223,32 +224,36 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _EveryDayOfWeek;
                     var __newValue = value;
-                    if(OnEveryDayOfWeek_PreSetter != null)
+                    if (OnEveryDayOfWeek_PreSetter != null && IsAttached)
                     {
-                        var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__oldValue, __newValue);
-                        OnEveryDayOfWeek_PreSetter(this, e);
-                        __newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__oldValue, __newValue);
+                        OnEveryDayOfWeek_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("EveryDayOfWeek", __oldValue, __newValue);
-                    _EveryDayOfWeek = value;
+                    _EveryDayOfWeek = __newValue;
                     NotifyPropertyChanged("EveryDayOfWeek", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                    if(OnEveryDayOfWeek_PostSetter != null)
+
+                    if (OnEveryDayOfWeek_PostSetter != null && IsAttached)
                     {
-                        var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__oldValue, __newValue);
-                        OnEveryDayOfWeek_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__oldValue, __newValue);
+                        OnEveryDayOfWeek_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("EveryDayOfWeek");
+				}
             }
         }
-
         private Zetbox.App.Base.DayOfWeek? _EveryDayOfWeek_store;
         private Zetbox.App.Base.DayOfWeek? _EveryDayOfWeek {
             get { return _EveryDayOfWeek_store; }
             set {
-                ReportEfPropertyChanging("EveryDayOfWeekImpl");
+                ReportEfPropertyChanging("EveryDayOfWeek");
                 _EveryDayOfWeek_store = value;
-                ReportEfPropertyChanged("EveryDayOfWeekImpl");
+                ReportEfPropertyChanged("EveryDayOfWeek");
             }
         }
 
@@ -266,7 +271,7 @@ namespace Zetbox.App.Base
                 this.EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)value;
             }
         }
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.DayOfWeek?> OnEveryDayOfWeek_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.DayOfWeek?> OnEveryDayOfWeek_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.DayOfWeek?> OnEveryDayOfWeek_PostSetter;
@@ -951,7 +956,7 @@ namespace Zetbox.App.Base
             if (this._isEveryDaySet) {
                 binStream.Write(this._EveryDay);
             }
-            binStream.Write((int?)this._EveryDayOfWeek);
+            binStream.Write((int?)_EveryDayOfWeek);
             binStream.Write(this._isEveryMonthSet);
             if (this._isEveryMonthSet) {
                 binStream.Write(this._EveryMonth);
@@ -980,7 +985,7 @@ namespace Zetbox.App.Base
             if (this._isEveryDaySet) {
                 this._EveryDay = binStream.ReadBoolean();
             }
-            this._EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)binStream.ReadNullableInt32();
+            _EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)binStream.ReadNullableInt32();
             this._isEveryMonthSet = binStream.ReadBoolean();
             if (this._isEveryMonthSet) {
                 this._EveryMonth = binStream.ReadBoolean();
@@ -1012,7 +1017,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._DaysOffset, xml, "DaysOffset", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isEveryDaySet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryDay, xml, "EveryDay", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._EveryDayOfWeek, xml, "EveryDayOfWeek", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_EveryDayOfWeek, xml, "EveryDayOfWeek", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isEveryMonthSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryMonth, xml, "EveryMonth", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isEveryQuaterSet, "Exported objects need to have all default values evaluated");
@@ -1039,7 +1044,7 @@ namespace Zetbox.App.Base
                 this._isEveryDaySet = true;
                 break;
             case "Zetbox.App.Base|EveryDayOfWeek":
-                this._EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)XmlStreamer.ReadNullableInt32(xml);
+                _EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|EveryMonth":
                 // Import must have default value set
