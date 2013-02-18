@@ -281,21 +281,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_BaseCalendar_has_ChildCalendar
-    A: ZeroOrOne Calendar as BaseCalendar
-    B: ZeroOrMore Calendar as ChildCalendar
-    Preferred Storage: MergeIntoB
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_BaseCalendar_has_ChildCalendar",
-    "BaseCalendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl),
-    "ChildCalendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl)
-    )]
-
-
-	/*
     Relation: FK_BaseObjectClass_has_SubClasses
     A: ZeroOrOne ObjectClass as BaseObjectClass
     B: ZeroOrMore ObjectClass as SubClasses
@@ -352,6 +337,21 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_BaseProperty_has_Module",
     "BaseProperty", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.PropertyEfImpl),
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_BaseWorkSchedule_has_ChildWorkSchedules
+    A: ZeroOrOne WorkSchedule as BaseWorkSchedule
+    B: ZeroOrMore WorkSchedule as ChildWorkSchedules
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_BaseWorkSchedule_has_ChildWorkSchedules",
+    "BaseWorkSchedule", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.WorkScheduleEfImpl),
+    "ChildWorkSchedules", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleEfImpl)
     )]
 
 
@@ -430,111 +430,6 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_CalculatedReference_references_ReferencedClass",
     "CalculatedReference", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl),
     "ReferencedClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Calendar_has_CalendarRules
-    A: One Calendar as Calendar
-    B: ZeroOrMore CalendarRule as CalendarRules
-    Preferred Storage: MergeIntoB
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Calendar_has_CalendarRules",
-    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl),
-    "CalendarRules", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarRuleEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Calendar_has_Module
-    A: ZeroOrMore Calendar as Calendar
-    B: ZeroOrOne Module as Module
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Calendar_has_Module",
-    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Calendar_was_ChangedBy
-    A: ZeroOrMore Calendar as Calendar
-    B: ZeroOrOne Identity as ChangedBy
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Calendar_was_ChangedBy",
-    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Calendar_was_CreatedBy
-    A: ZeroOrMore Calendar as Calendar
-    B: ZeroOrOne Identity as CreatedBy
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Calendar_was_CreatedBy",
-    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_CalendarRule_has_Module
-    A: ZeroOrMore CalendarRule as CalendarRule
-    B: ZeroOrOne Module as Module
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_CalendarRule_has_Module",
-    "CalendarRule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarRuleEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_CalendarRule_was_ChangedBy
-    A: ZeroOrMore CalendarRule as CalendarRule
-    B: ZeroOrOne Identity as ChangedBy
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_CalendarRule_was_ChangedBy",
-    "CalendarRule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarRuleEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_CalendarRule_was_CreatedBy
-    A: ZeroOrMore CalendarRule as CalendarRule
-    B: ZeroOrOne Identity as CreatedBy
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_CalendarRule_was_CreatedBy",
-    "CalendarRule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarRuleEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -3153,6 +3048,111 @@ using Zetbox.DalProvider.Ef;
     "ContextMenu", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl)
     )]
+
+	/*
+    Relation: FK_WorkSchedule_has_Module
+    A: ZeroOrMore WorkSchedule as WorkSchedule
+    B: One Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_WorkSchedule_has_Module",
+    "WorkSchedule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_WorkSchedule_has_WorkScheduleRules
+    A: One WorkSchedule as WorkSchedule
+    B: ZeroOrMore WorkScheduleRule as WorkScheduleRules
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_WorkSchedule_has_WorkScheduleRules",
+    "WorkSchedule", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.WorkScheduleEfImpl),
+    "WorkScheduleRules", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleRuleEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_WorkSchedule_was_ChangedBy
+    A: ZeroOrMore WorkSchedule as WorkSchedule
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_WorkSchedule_was_ChangedBy",
+    "WorkSchedule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_WorkSchedule_was_CreatedBy
+    A: ZeroOrMore WorkSchedule as WorkSchedule
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_WorkSchedule_was_CreatedBy",
+    "WorkSchedule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_WorkScheduleRule_has_Module
+    A: ZeroOrMore WorkScheduleRule as WorkScheduleRule
+    B: One Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_WorkScheduleRule_has_Module",
+    "WorkScheduleRule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleRuleEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_WorkScheduleRule_was_ChangedBy
+    A: ZeroOrMore WorkScheduleRule as WorkScheduleRule
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_WorkScheduleRule_was_ChangedBy",
+    "WorkScheduleRule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleRuleEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_WorkScheduleRule_was_CreatedBy
+    A: ZeroOrMore WorkScheduleRule as WorkScheduleRule
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_WorkScheduleRule_was_CreatedBy",
+    "WorkScheduleRule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleRuleEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
 
 
 // object-value association

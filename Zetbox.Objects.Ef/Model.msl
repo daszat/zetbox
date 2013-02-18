@@ -306,61 +306,6 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CalendarEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CalendarEfImpl)">
-	    <MappingFragment StoreEntitySet="Calendar">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CalendarRuleEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CalendarRuleEfImpl)">
-	    <MappingFragment StoreEntitySet="CalendarRule">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="IsWorkingDay" ColumnName="IsWorkingDay" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
-          <ScalarProperty Name="ValidUntil" ColumnName="ValidUntil" />
-          <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CommonCalendarRuleEfImpl)">
-	    <MappingFragment StoreEntitySet="CommonCalendarRule">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DayOfWeekCalendarRuleEfImpl)">
-	    <MappingFragment StoreEntitySet="DayOfWeekCalendarRule">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="DayOfWeekImpl" ColumnName="DayOfWeek" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.YearlyCalendarRuleEfImpl)">
-	    <MappingFragment StoreEntitySet="YearlyCalendarRule">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EasterCalendarRuleEfImpl)">
-	    <MappingFragment StoreEntitySet="EasterCalendarRule">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Offset" ColumnName="Offset" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.FixedYearlyCalendarRuleEfImpl)">
-	    <MappingFragment StoreEntitySet="FixedYearlyCalendarRule">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Day" ColumnName="Day" />
-          <ScalarProperty Name="Month" ColumnName="Month" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CompanyEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.CompanyEfImpl)">
 	    <MappingFragment StoreEntitySet="Company">
@@ -1751,6 +1696,79 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="WorkScheduleEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkScheduleEfImpl)">
+	    <MappingFragment StoreEntitySet="WorkSchedule">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkScheduleRuleEfImpl">
+      <EntityTypeMapping TypeName="Model.CommonWorkScheduleRuleEfImpl">
+	    <MappingFragment StoreEntitySet="WorkScheduleRule">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsWorkingDay" ColumnName="IsWorkingDay" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidUntil" ColumnName="ValidUntil" />
+          <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+          <Condition ColumnName="__Discriminator" Value="calendar.CommonWorkScheduleRules" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.DayOfWeekWorkScheduleRuleEfImpl">
+	    <MappingFragment StoreEntitySet="WorkScheduleRule">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsWorkingDay" ColumnName="IsWorkingDay" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidUntil" ColumnName="ValidUntil" />
+          <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+          <ScalarProperty Name="DayOfWeekImpl" ColumnName="DayOfWeekWorkScheduleRules_DayOfWeek" />
+          <Condition ColumnName="__Discriminator" Value="calendar.DayOfWeekWorkScheduleRules" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.EasterWorkScheduleRuleEfImpl">
+	    <MappingFragment StoreEntitySet="WorkScheduleRule">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsWorkingDay" ColumnName="IsWorkingDay" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidUntil" ColumnName="ValidUntil" />
+          <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+          <ScalarProperty Name="Offset" ColumnName="EasterWorkScheduleRules_Offset" />
+          <Condition ColumnName="__Discriminator" Value="calendar.EasterWorkScheduleRules" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="Model.FixedYearlyWorkScheduleRuleEfImpl">
+	    <MappingFragment StoreEntitySet="WorkScheduleRule">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsWorkingDay" ColumnName="IsWorkingDay" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidUntil" ColumnName="ValidUntil" />
+          <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+          <ScalarProperty Name="Day" ColumnName="FixedYearlyWorkScheduleRules_Day" />
+          <ScalarProperty Name="Month" ColumnName="FixedYearlyWorkScheduleRules_Month" />
+          <Condition ColumnName="__Discriminator" Value="calendar.FixedYearlyWorkScheduleRules" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
 
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
@@ -2791,23 +2809,6 @@
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_BaseCalendar_has_ChildCalendar
-    A: ZeroOrOne Calendar as BaseCalendar
-    B: ZeroOrMore Calendar as ChildCalendar
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_BaseCalendar_has_ChildCalendar"
-                           TypeName="Model.FK_BaseCalendar_has_ChildCalendar"
-                           StoreEntitySet="Calendar" >
-      <EndProperty Name="BaseCalendar">
-        <ScalarProperty Name="ID" ColumnName="fk_BaseCalendar"/>
-      </EndProperty>
-      <EndProperty Name="ChildCalendar">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_BaseCalendar" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_BaseObjectClass_has_SubClasses
     A: ZeroOrOne ObjectClass as BaseObjectClass
     B: ZeroOrMore ObjectClass as SubClasses
@@ -2876,6 +2877,23 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_BaseWorkSchedule_has_ChildWorkSchedules
+    A: ZeroOrOne WorkSchedule as BaseWorkSchedule
+    B: ZeroOrMore WorkSchedule as ChildWorkSchedules
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_BaseWorkSchedule_has_ChildWorkSchedules"
+                           TypeName="Model.FK_BaseWorkSchedule_has_ChildWorkSchedules"
+                           StoreEntitySet="WorkSchedule" >
+      <EndProperty Name="BaseWorkSchedule">
+        <ScalarProperty Name="ID" ColumnName="fk_BaseWorkSchedule"/>
+      </EndProperty>
+      <EndProperty Name="ChildWorkSchedules">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_BaseWorkSchedule" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_BoolProperty_has_FalseIcon
     A: ZeroOrMore BoolProperty as BoolProperty
     B: ZeroOrOne Icon as FalseIcon
@@ -2942,125 +2960,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="CalculatedObjectReferenceProperties_fk_ReferencedClass" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Calendar_has_CalendarRules
-    A: One Calendar as Calendar
-    B: ZeroOrMore CalendarRule as CalendarRules
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_Calendar_has_CalendarRules"
-                           TypeName="Model.FK_Calendar_has_CalendarRules"
-                           StoreEntitySet="CalendarRule" >
-      <EndProperty Name="Calendar">
-        <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
-      </EndProperty>
-      <EndProperty Name="CalendarRules">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Calendar" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Calendar_has_Module
-    A: ZeroOrMore Calendar as Calendar
-    B: ZeroOrOne Module as Module
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Calendar_has_Module"
-                           TypeName="Model.FK_Calendar_has_Module"
-                           StoreEntitySet="Calendar" >
-      <EndProperty Name="Module">
-        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
-      </EndProperty>
-      <EndProperty Name="Calendar">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Module" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Calendar_was_ChangedBy
-    A: ZeroOrMore Calendar as Calendar
-    B: ZeroOrOne Identity as ChangedBy
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Calendar_was_ChangedBy"
-                           TypeName="Model.FK_Calendar_was_ChangedBy"
-                           StoreEntitySet="Calendar" >
-      <EndProperty Name="ChangedBy">
-        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
-      </EndProperty>
-      <EndProperty Name="Calendar">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Calendar_was_CreatedBy
-    A: ZeroOrMore Calendar as Calendar
-    B: ZeroOrOne Identity as CreatedBy
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Calendar_was_CreatedBy"
-                           TypeName="Model.FK_Calendar_was_CreatedBy"
-                           StoreEntitySet="Calendar" >
-      <EndProperty Name="CreatedBy">
-        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
-      </EndProperty>
-      <EndProperty Name="Calendar">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_CalendarRule_has_Module
-    A: ZeroOrMore CalendarRule as CalendarRule
-    B: ZeroOrOne Module as Module
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_CalendarRule_has_Module"
-                           TypeName="Model.FK_CalendarRule_has_Module"
-                           StoreEntitySet="CalendarRule" >
-      <EndProperty Name="Module">
-        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
-      </EndProperty>
-      <EndProperty Name="CalendarRule">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Module" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_CalendarRule_was_ChangedBy
-    A: ZeroOrMore CalendarRule as CalendarRule
-    B: ZeroOrOne Identity as ChangedBy
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_CalendarRule_was_ChangedBy"
-                           TypeName="Model.FK_CalendarRule_was_ChangedBy"
-                           StoreEntitySet="CalendarRule" >
-      <EndProperty Name="ChangedBy">
-        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
-      </EndProperty>
-      <EndProperty Name="CalendarRule">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_CalendarRule_was_CreatedBy
-    A: ZeroOrMore CalendarRule as CalendarRule
-    B: ZeroOrOne Identity as CreatedBy
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_CalendarRule_was_CreatedBy"
-                           TypeName="Model.FK_CalendarRule_was_CreatedBy"
-                           StoreEntitySet="CalendarRule" >
-      <EndProperty Name="CreatedBy">
-        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
-      </EndProperty>
-      <EndProperty Name="CalendarRule">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Child_allow_Identity
@@ -5679,6 +5578,125 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Property" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_WorkSchedule_has_Module
+    A: ZeroOrMore WorkSchedule as WorkSchedule
+    B: One Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_WorkSchedule_has_Module"
+                           TypeName="Model.FK_WorkSchedule_has_Module"
+                           StoreEntitySet="WorkSchedule" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="WorkSchedule">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_WorkSchedule_has_WorkScheduleRules
+    A: One WorkSchedule as WorkSchedule
+    B: ZeroOrMore WorkScheduleRule as WorkScheduleRules
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_WorkSchedule_has_WorkScheduleRules"
+                           TypeName="Model.FK_WorkSchedule_has_WorkScheduleRules"
+                           StoreEntitySet="WorkScheduleRule" >
+      <EndProperty Name="WorkSchedule">
+        <ScalarProperty Name="ID" ColumnName="fk_WorkSchedule"/>
+      </EndProperty>
+      <EndProperty Name="WorkScheduleRules">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_WorkSchedule" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_WorkSchedule_was_ChangedBy
+    A: ZeroOrMore WorkSchedule as WorkSchedule
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_WorkSchedule_was_ChangedBy"
+                           TypeName="Model.FK_WorkSchedule_was_ChangedBy"
+                           StoreEntitySet="WorkSchedule" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="WorkSchedule">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_WorkSchedule_was_CreatedBy
+    A: ZeroOrMore WorkSchedule as WorkSchedule
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_WorkSchedule_was_CreatedBy"
+                           TypeName="Model.FK_WorkSchedule_was_CreatedBy"
+                           StoreEntitySet="WorkSchedule" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="WorkSchedule">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_WorkScheduleRule_has_Module
+    A: ZeroOrMore WorkScheduleRule as WorkScheduleRule
+    B: One Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_WorkScheduleRule_has_Module"
+                           TypeName="Model.FK_WorkScheduleRule_has_Module"
+                           StoreEntitySet="WorkScheduleRule" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="WorkScheduleRule">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_WorkScheduleRule_was_ChangedBy
+    A: ZeroOrMore WorkScheduleRule as WorkScheduleRule
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_WorkScheduleRule_was_ChangedBy"
+                           TypeName="Model.FK_WorkScheduleRule_was_ChangedBy"
+                           StoreEntitySet="WorkScheduleRule" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="WorkScheduleRule">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_WorkScheduleRule_was_CreatedBy
+    A: ZeroOrMore WorkScheduleRule as WorkScheduleRule
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_WorkScheduleRule_was_CreatedBy"
+                           TypeName="Model.FK_WorkScheduleRule_was_CreatedBy"
+                           StoreEntitySet="WorkScheduleRule" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="WorkScheduleRule">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for object-value CollectionEntrys -->

@@ -1045,8 +1045,6 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for AccessControl_has_Module_RelationEntry
             // should fetch && remember parent for Application_has_Module_RelationEntry
             // should fetch && remember parent for Property_has_Module_RelationEntry
-            // should fetch && remember parent for Calendar_has_Module_RelationEntry
-            // should fetch && remember parent for CalendarRule_has_Module_RelationEntry
             // should fetch && remember parent for ControlKind_has_Module_RelationEntry
             // should fetch && remember parent for FilterConfiguration_has_Module_RelationEntry
             // should fetch && remember parent for Group_has_Module_RelationEntry
@@ -1071,6 +1069,8 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for ServiceDescriptor_has_Module_RelationEntry
             // should fetch && remember parent for ViewDescriptor_has_Module_RelationEntry
             // should fetch && remember parent for ViewModelDescriptor_has_Module_RelationEntry
+            // should fetch && remember parent for WorkSchedule_has_Module_RelationEntry
+            // should fetch && remember parent for WorkScheduleRule_has_Module_RelationEntry
 
             ChangedBy = null;
             CreatedBy = null;

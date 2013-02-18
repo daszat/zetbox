@@ -175,7 +175,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Calendar\CalendarRuleInstanceDisplay.xaml">
+    <Page Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -568,8 +568,8 @@
     <Compile Include="View\Calendar\CalendarAllDay.xaml.cs">
       <DependentUpon>CalendarAllDay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Calendar\CalendarRuleInstanceDisplay.xaml.cs">
-      <DependentUpon>CalendarRuleInstanceDisplay.xaml</DependentUpon>
+    <Compile Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml.cs">
+      <DependentUpon>WorkScheduleRuleInstanceDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DocumentManagement\ImportedFileWithPreviewEditor.xaml.cs">
       <DependentUpon>ImportedFileWithPreviewEditor.xaml</DependentUpon>

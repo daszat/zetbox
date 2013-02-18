@@ -149,11 +149,9 @@
     <Compile Include="BoolParameter.NHibernate.Designer.cs" />
     <Compile Include="BoolProperty.NHibernate.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.NHibernate.Designer.cs" />
-    <Compile Include="Calendar.NHibernate.Designer.cs" />
-    <Compile Include="CalendarRule.NHibernate.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.NHibernate.Designer.cs" />
     <Compile Include="CLRObjectParameter.NHibernate.Designer.cs" />
-    <Compile Include="CommonCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="CommonWorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="Company.NHibernate.Designer.cs" />
     <Compile Include="CompoundObject.NHibernate.Designer.cs" />
     <Compile Include="CompoundObjectParameter.NHibernate.Designer.cs" />
@@ -167,7 +165,7 @@
     <Compile Include="DateRangeFilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="DateTimeParameter.NHibernate.Designer.cs" />
     <Compile Include="DateTimeProperty.NHibernate.Designer.cs" />
-    <Compile Include="DayOfWeekCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="DayOfWeekWorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="DecimalDefaultValue.NHibernate.Designer.cs" />
     <Compile Include="DecimalParameter.NHibernate.Designer.cs" />
     <Compile Include="DecimalProperty.NHibernate.Designer.cs" />
@@ -177,7 +175,7 @@
     <Compile Include="DoubleParameter.NHibernate.Designer.cs" />
     <Compile Include="DoubleProperty.NHibernate.Designer.cs" />
     <Compile Include="DynamicFile.NHibernate.Designer.cs" />
-    <Compile Include="EasterCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="EasterWorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="EnumDefaultValue.NHibernate.Designer.cs" />
     <Compile Include="Enumeration.NHibernate.Designer.cs" />
     <Compile Include="EnumerationEntry.NHibernate.Designer.cs" />
@@ -187,7 +185,7 @@
     <Compile Include="File.NHibernate.Designer.cs" />
     <Compile Include="FileImportConfiguration.NHibernate.Designer.cs" />
     <Compile Include="FilterConfiguration.NHibernate.Designer.cs" />
-    <Compile Include="FixedYearlyCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="FixedYearlyWorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="Fragebogen.NHibernate.Designer.cs" />
     <Compile Include="Group.NHibernate.Designer.cs" />
     <Compile Include="GroupMembership.NHibernate.Designer.cs" />
@@ -285,8 +283,10 @@
     <Compile Include="ViewModelDescriptor.NHibernate.Designer.cs" />
     <Compile Include="ViewReadOnlyConstraint.NHibernate.Designer.cs" />
     <Compile Include="Visual.NHibernate.Designer.cs" />
+    <Compile Include="WorkSchedule.NHibernate.Designer.cs" />
+    <Compile Include="WorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="YearFilterConfiguration.NHibernate.Designer.cs" />
-    <Compile Include="YearlyCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="YearlyWorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="CollectionEntries.NHibernate.Designer.cs" />
     <Compile Include="AnyReference.NHibernate.Designer.cs" />
     <Compile Include="AuditEntry.NHibernate.Designer.cs" />

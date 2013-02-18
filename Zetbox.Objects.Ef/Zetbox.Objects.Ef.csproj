@@ -137,11 +137,9 @@
     <Compile Include="BoolParameter.Ef.Designer.cs" />
     <Compile Include="BoolProperty.Ef.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Ef.Designer.cs" />
-    <Compile Include="Calendar.Ef.Designer.cs" />
-    <Compile Include="CalendarRule.Ef.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="CLRObjectParameter.Ef.Designer.cs" />
-    <Compile Include="CommonCalendarRule.Ef.Designer.cs" />
+    <Compile Include="CommonWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="Company.Ef.Designer.cs" />
     <Compile Include="CompoundObject.Ef.Designer.cs" />
     <Compile Include="CompoundObjectParameter.Ef.Designer.cs" />
@@ -155,7 +153,7 @@
     <Compile Include="DateRangeFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="DateTimeParameter.Ef.Designer.cs" />
     <Compile Include="DateTimeProperty.Ef.Designer.cs" />
-    <Compile Include="DayOfWeekCalendarRule.Ef.Designer.cs" />
+    <Compile Include="DayOfWeekWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="DecimalDefaultValue.Ef.Designer.cs" />
     <Compile Include="DecimalParameter.Ef.Designer.cs" />
     <Compile Include="DecimalProperty.Ef.Designer.cs" />
@@ -165,7 +163,7 @@
     <Compile Include="DoubleParameter.Ef.Designer.cs" />
     <Compile Include="DoubleProperty.Ef.Designer.cs" />
     <Compile Include="DynamicFile.Ef.Designer.cs" />
-    <Compile Include="EasterCalendarRule.Ef.Designer.cs" />
+    <Compile Include="EasterWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="EnumDefaultValue.Ef.Designer.cs" />
     <Compile Include="Enumeration.Ef.Designer.cs" />
     <Compile Include="EnumerationEntry.Ef.Designer.cs" />
@@ -175,7 +173,7 @@
     <Compile Include="File.Ef.Designer.cs" />
     <Compile Include="FileImportConfiguration.Ef.Designer.cs" />
     <Compile Include="FilterConfiguration.Ef.Designer.cs" />
-    <Compile Include="FixedYearlyCalendarRule.Ef.Designer.cs" />
+    <Compile Include="FixedYearlyWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="Fragebogen.Ef.Designer.cs" />
     <Compile Include="Group.Ef.Designer.cs" />
     <Compile Include="GroupMembership.Ef.Designer.cs" />
@@ -273,8 +271,10 @@
     <Compile Include="ViewModelDescriptor.Ef.Designer.cs" />
     <Compile Include="ViewReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="Visual.Ef.Designer.cs" />
+    <Compile Include="WorkSchedule.Ef.Designer.cs" />
+    <Compile Include="WorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Ef.Designer.cs" />
-    <Compile Include="YearlyCalendarRule.Ef.Designer.cs" />
+    <Compile Include="YearlyWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="CollectionEntries.Ef.Designer.cs" />
     <Compile Include="AnyReference.Ef.Designer.cs" />
     <Compile Include="AuditEntry.Ef.Designer.cs" />

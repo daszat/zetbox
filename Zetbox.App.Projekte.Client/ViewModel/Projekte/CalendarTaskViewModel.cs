@@ -77,7 +77,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 
         private void FetchOffDays(DateTime from, DateTime to, List<IAppointmentViewModel> result)
         {
-            var rules = DataContext.GetQuery<Zetbox.App.Calendar.YearlyCalendarRule>().Where(r => r.IsWorkingDay == false)
+            var rules = DataContext.GetQuery<Zetbox.App.Calendar.YearlyWorkScheduleRule>().Where(r => r.IsWorkingDay == false)
                 .ToList();
             var dt = from;
             while (dt <= to)
@@ -87,7 +87,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
                     rules.Where(r => r.AppliesTo(dt))
                     .Select(r =>
                     {
-                        return ViewModelFactory.CreateViewModel<CalendarRuleInstanceViewModel.Factory>()
+                        return ViewModelFactory.CreateViewModel<WorkScheduleRuleInstanceViewModel.Factory>()
                         .Invoke(
                             DataContext,
                             this,

@@ -19,8 +19,6 @@
     </AssociationSet>
     <EntitySet Name="BaseParameterEfImpl" EntityType="Model.BaseParameterEfImpl" />
     <EntitySet Name="BlobEfImpl" EntityType="Model.BlobEfImpl" />
-    <EntitySet Name="CalendarEfImpl" EntityType="Model.CalendarEfImpl" />
-    <EntitySet Name="CalendarRuleEfImpl" EntityType="Model.CalendarRuleEfImpl" />
     <EntitySet Name="CompanyEfImpl" EntityType="Model.CompanyEfImpl" />
     <EntitySet Name="ConstraintEfImpl" EntityType="Model.ConstraintEfImpl" />
     <EntitySet Name="ConstraintInvocationEfImpl" EntityType="Model.ConstraintInvocationEfImpl" />
@@ -97,6 +95,8 @@
     <EntitySet Name="ViewDescriptorEfImpl" EntityType="Model.ViewDescriptorEfImpl" />
     <EntitySet Name="ViewModelDescriptorEfImpl" EntityType="Model.ViewModelDescriptorEfImpl" />
     <EntitySet Name="VisualEfImpl" EntityType="Model.VisualEfImpl" />
+    <EntitySet Name="WorkScheduleEfImpl" EntityType="Model.WorkScheduleEfImpl" />
+    <EntitySet Name="WorkScheduleRuleEfImpl" EntityType="Model.WorkScheduleRuleEfImpl" />
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
     <EntitySet Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl" EntityType="Model.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl" />
     <AssociationSet Name="FK_ASide_connectsTo_BSide_A" Association="Model.FK_ASide_connectsTo_BSide_A" >
@@ -363,10 +363,6 @@
       <End Role="Auftrag" EntitySet="AuftragEfImpl" />
       <End Role="Mitarbeiter" EntitySet="MitarbeiterEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseCalendar_has_ChildCalendar" Association="Model.FK_BaseCalendar_has_ChildCalendar" >
-      <End Role="BaseCalendar" EntitySet="CalendarEfImpl" />
-      <End Role="ChildCalendar" EntitySet="CalendarEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_BaseObjectClass_has_SubClasses" Association="Model.FK_BaseObjectClass_has_SubClasses" >
       <End Role="BaseObjectClass" EntitySet="DataTypeEfImpl" />
       <End Role="SubClasses" EntitySet="DataTypeEfImpl" />
@@ -383,6 +379,10 @@
       <End Role="BaseProperty" EntitySet="PropertyEfImpl" />
       <End Role="Module" EntitySet="ModuleEfImpl" />
     </AssociationSet>
+    <AssociationSet Name="FK_BaseWorkSchedule_has_ChildWorkSchedules" Association="Model.FK_BaseWorkSchedule_has_ChildWorkSchedules" >
+      <End Role="BaseWorkSchedule" EntitySet="WorkScheduleEfImpl" />
+      <End Role="ChildWorkSchedules" EntitySet="WorkScheduleEfImpl" />
+    </AssociationSet>
     <AssociationSet Name="FK_BoolProperty_has_FalseIcon" Association="Model.FK_BoolProperty_has_FalseIcon" >
       <End Role="BoolProperty" EntitySet="PropertyEfImpl" />
       <End Role="FalseIcon" EntitySet="IconEfImpl" />
@@ -398,34 +398,6 @@
     <AssociationSet Name="FK_CalculatedReference_references_ReferencedClass" Association="Model.FK_CalculatedReference_references_ReferencedClass" >
       <End Role="CalculatedReference" EntitySet="PropertyEfImpl" />
       <End Role="ReferencedClass" EntitySet="DataTypeEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_has_CalendarRules" Association="Model.FK_Calendar_has_CalendarRules" >
-      <End Role="Calendar" EntitySet="CalendarEfImpl" />
-      <End Role="CalendarRules" EntitySet="CalendarRuleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_has_Module" Association="Model.FK_Calendar_has_Module" >
-      <End Role="Calendar" EntitySet="CalendarEfImpl" />
-      <End Role="Module" EntitySet="ModuleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_was_ChangedBy" Association="Model.FK_Calendar_was_ChangedBy" >
-      <End Role="Calendar" EntitySet="CalendarEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_was_CreatedBy" Association="Model.FK_Calendar_was_CreatedBy" >
-      <End Role="Calendar" EntitySet="CalendarEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CalendarRule_has_Module" Association="Model.FK_CalendarRule_has_Module" >
-      <End Role="CalendarRule" EntitySet="CalendarRuleEfImpl" />
-      <End Role="Module" EntitySet="ModuleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CalendarRule_was_ChangedBy" Association="Model.FK_CalendarRule_was_ChangedBy" >
-      <End Role="CalendarRule" EntitySet="CalendarRuleEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CalendarRule_was_CreatedBy" Association="Model.FK_CalendarRule_was_CreatedBy" >
-      <End Role="CalendarRule" EntitySet="CalendarRuleEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Child_allow_Identity" Association="Model.FK_Child_allow_Identity" >
       <End Role="Child" EntitySet="SecurityTestChildEfImpl" />
@@ -1043,6 +1015,34 @@
       <End Role="Visual" EntitySet="VisualEfImpl" />
       <End Role="Property" EntitySet="PropertyEfImpl" />
     </AssociationSet>
+    <AssociationSet Name="FK_WorkSchedule_has_Module" Association="Model.FK_WorkSchedule_has_Module" >
+      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
+      <End Role="Module" EntitySet="ModuleEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkSchedule_has_WorkScheduleRules" Association="Model.FK_WorkSchedule_has_WorkScheduleRules" >
+      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
+      <End Role="WorkScheduleRules" EntitySet="WorkScheduleRuleEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkSchedule_was_ChangedBy" Association="Model.FK_WorkSchedule_was_ChangedBy" >
+      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
+      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkSchedule_was_CreatedBy" Association="Model.FK_WorkSchedule_was_CreatedBy" >
+      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
+      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkScheduleRule_has_Module" Association="Model.FK_WorkScheduleRule_has_Module" >
+      <End Role="WorkScheduleRule" EntitySet="WorkScheduleRuleEfImpl" />
+      <End Role="Module" EntitySet="ModuleEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkScheduleRule_was_ChangedBy" Association="Model.FK_WorkScheduleRule_was_ChangedBy" >
+      <End Role="WorkScheduleRule" EntitySet="WorkScheduleRuleEfImpl" />
+      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkScheduleRule_was_CreatedBy" Association="Model.FK_WorkScheduleRule_was_CreatedBy" >
+      <End Role="WorkScheduleRule" EntitySet="WorkScheduleRuleEfImpl" />
+      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
 
     <FunctionImport Name="GetContinuousSequenceNumber" ReturnType="Collection(Int32)">
       <Parameter Name="seqNumber" Mode="In" Type="Guid" />
@@ -1298,70 +1298,6 @@
     <Property Name="MimeType" Type="String" Nullable="false" MaxLength="100"  />
     <Property Name="OriginalName" Type="String" Nullable="false" MaxLength="500"  />
     <Property Name="StoragePath" Type="String" Nullable="false" MaxLength="500"  />
-  </EntityType>
-  <EntityType Name="CalendarEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="BaseCalendarImpl"
-                        Relationship="Model.FK_BaseCalendar_has_ChildCalendar"
-                        FromRole="ChildCalendar"
-                        ToRole="BaseCalendar" />
-    <NavigationProperty Name="CalendarRulesImpl"
-                        Relationship="Model.FK_Calendar_has_CalendarRules"
-                        FromRole="Calendar"
-                        ToRole="CalendarRules" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_Calendar_was_ChangedBy"
-                        FromRole="Calendar"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="ChildCalendarImpl"
-                        Relationship="Model.FK_BaseCalendar_has_ChildCalendar"
-                        FromRole="BaseCalendar"
-                        ToRole="ChildCalendar" />
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_Calendar_was_CreatedBy"
-                        FromRole="Calendar"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <NavigationProperty Name="ModuleImpl"
-                        Relationship="Model.FK_Calendar_has_Module"
-                        FromRole="Calendar"
-                        ToRole="Module" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
-  </EntityType>
-  <EntityType Name="CalendarRuleEfImpl" Abstract="true">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="CalendarImpl"
-                        Relationship="Model.FK_Calendar_has_CalendarRules"
-                        FromRole="CalendarRules"
-                        ToRole="Calendar" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_CalendarRule_was_ChangedBy"
-                        FromRole="CalendarRule"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_CalendarRule_was_CreatedBy"
-                        FromRole="CalendarRule"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IsWorkingDay" Type="Boolean" Nullable="false"  />
-    <NavigationProperty Name="ModuleImpl"
-                        Relationship="Model.FK_CalendarRule_has_Module"
-                        FromRole="CalendarRule"
-                        ToRole="Module" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
-    <Property Name="ValidFrom" Type="DateTime" Nullable="true"  />
-    <Property Name="ValidUntil" Type="DateTime" Nullable="true"  />
-    <Property Name="WorkingHours" Type="Decimal" Nullable="false" Precision="10" Scale="2"  />
   </EntityType>
   <EntityType Name="CompanyEfImpl">
     <Key>
@@ -2777,6 +2713,70 @@
                         FromRole="Visual"
                         ToRole="Property" />
   </EntityType>
+  <EntityType Name="WorkScheduleEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BaseWorkScheduleImpl"
+                        Relationship="Model.FK_BaseWorkSchedule_has_ChildWorkSchedules"
+                        FromRole="ChildWorkSchedules"
+                        ToRole="BaseWorkSchedule" />
+    <NavigationProperty Name="ChangedByImpl"
+                        Relationship="Model.FK_WorkSchedule_was_ChangedBy"
+                        FromRole="WorkSchedule"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <NavigationProperty Name="ChildWorkScheduleImpl"
+                        Relationship="Model.FK_BaseWorkSchedule_has_ChildWorkSchedules"
+                        FromRole="BaseWorkSchedule"
+                        ToRole="ChildWorkSchedules" />
+    <NavigationProperty Name="CreatedByImpl"
+                        Relationship="Model.FK_WorkSchedule_was_CreatedBy"
+                        FromRole="WorkSchedule"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <NavigationProperty Name="ModuleImpl"
+                        Relationship="Model.FK_WorkSchedule_has_Module"
+                        FromRole="WorkSchedule"
+                        ToRole="Module" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
+    <NavigationProperty Name="WorkScheduleRulesImpl"
+                        Relationship="Model.FK_WorkSchedule_has_WorkScheduleRules"
+                        FromRole="WorkSchedule"
+                        ToRole="WorkScheduleRules" />
+  </EntityType>
+  <EntityType Name="WorkScheduleRuleEfImpl" Abstract="true">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedByImpl"
+                        Relationship="Model.FK_WorkScheduleRule_was_ChangedBy"
+                        FromRole="WorkScheduleRule"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <NavigationProperty Name="CreatedByImpl"
+                        Relationship="Model.FK_WorkScheduleRule_was_CreatedBy"
+                        FromRole="WorkScheduleRule"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <Property Name="IsWorkingDay" Type="Boolean" Nullable="false"  />
+    <NavigationProperty Name="ModuleImpl"
+                        Relationship="Model.FK_WorkScheduleRule_has_Module"
+                        FromRole="WorkScheduleRule"
+                        ToRole="Module" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
+    <Property Name="ValidFrom" Type="DateTime" Nullable="true"  />
+    <Property Name="ValidUntil" Type="DateTime" Nullable="true"  />
+    <Property Name="WorkingHours" Type="Decimal" Nullable="false" Precision="10" Scale="2"  />
+    <NavigationProperty Name="WorkScheduleImpl"
+                        Relationship="Model.FK_WorkSchedule_has_WorkScheduleRules"
+                        FromRole="WorkScheduleRules"
+                        ToRole="WorkSchedule" />
+  </EntityType>
 
   <!-- EntityTypes for all other classes -->
   <EntityType Name="BoolDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
@@ -2819,7 +2819,7 @@
                         FromRole="ClrObjectParameter"
                         ToRole="Type" />
   </EntityType>
-  <EntityType Name="CommonCalendarRuleEfImpl" BaseType="Model.CalendarRuleEfImpl">
+  <EntityType Name="CommonWorkScheduleRuleEfImpl" BaseType="Model.WorkScheduleRuleEfImpl">
   </EntityType>
   <EntityType Name="CompoundObjectEfImpl" BaseType="Model.DataTypeEfImpl">
     <NavigationProperty Name="DefaultPropertyViewModelDescriptorImpl"
@@ -2854,7 +2854,7 @@
   <EntityType Name="DateTimePropertyEfImpl" BaseType="Model.ValueTypePropertyEfImpl">
     <Property Name="DateTimeStyleImpl" Type="Int32" Nullable="true"  />
   </EntityType>
-  <EntityType Name="DayOfWeekCalendarRuleEfImpl" BaseType="Model.CalendarRuleEfImpl">
+  <EntityType Name="DayOfWeekWorkScheduleRuleEfImpl" BaseType="Model.WorkScheduleRuleEfImpl">
     <Property Name="DayOfWeekImpl" Type="Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="DecimalDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
@@ -2881,7 +2881,7 @@
   </EntityType>
   <EntityType Name="DynamicFileEfImpl" BaseType="Model.FileEfImpl">
   </EntityType>
-  <EntityType Name="EasterCalendarRuleEfImpl" BaseType="Model.YearlyCalendarRuleEfImpl">
+  <EntityType Name="EasterWorkScheduleRuleEfImpl" BaseType="Model.YearlyWorkScheduleRuleEfImpl">
     <Property Name="Offset" Type="Int32" Nullable="true"  />
   </EntityType>
   <EntityType Name="EnumDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
@@ -2909,7 +2909,7 @@
                         FromRole="EnumParameter"
                         ToRole="Enumeration" />
   </EntityType>
-  <EntityType Name="FixedYearlyCalendarRuleEfImpl" BaseType="Model.YearlyCalendarRuleEfImpl">
+  <EntityType Name="FixedYearlyWorkScheduleRuleEfImpl" BaseType="Model.YearlyWorkScheduleRuleEfImpl">
     <Property Name="Day" Type="Int32" Nullable="false"  />
     <Property Name="Month" Type="Int32" Nullable="false"  />
   </EntityType>
@@ -3164,7 +3164,7 @@
   <EntityType Name="YearFilterConfigurationEfImpl" BaseType="Model.PropertyFilterConfigurationEfImpl">
     <Property Name="IsCurrentYearDefault" Type="Boolean" Nullable="true"  />
   </EntityType>
-  <EntityType Name="YearlyCalendarRuleEfImpl" BaseType="Model.CalendarRuleEfImpl" Abstract="true">
+  <EntityType Name="YearlyWorkScheduleRuleEfImpl" BaseType="Model.WorkScheduleRuleEfImpl" Abstract="true">
   </EntityType>
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
@@ -4227,14 +4227,6 @@
          Type="Model.MitarbeiterEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_BaseCalendar_has_ChildCalendar" >
-    <End Role="BaseCalendar"
-         Type="Model.CalendarEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="ChildCalendar"
-         Type="Model.CalendarEfImpl" 
-         Multiplicity="*" />
-  </Association>
   <Association Name="FK_BaseObjectClass_has_SubClasses" >
     <End Role="BaseObjectClass"
          Type="Model.ObjectClassEfImpl" 
@@ -4267,6 +4259,14 @@
          Type="Model.ModuleEfImpl" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_BaseWorkSchedule_has_ChildWorkSchedules" >
+    <End Role="BaseWorkSchedule"
+         Type="Model.WorkScheduleEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="ChildWorkSchedules"
+         Type="Model.WorkScheduleEfImpl" 
+         Multiplicity="*" />
+  </Association>
   <Association Name="FK_BoolProperty_has_FalseIcon" >
     <End Role="BoolProperty"
          Type="Model.BoolPropertyEfImpl" 
@@ -4297,62 +4297,6 @@
          Multiplicity="*" />
     <End Role="ReferencedClass"
          Type="Model.ObjectClassEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Calendar_has_CalendarRules" >
-    <End Role="Calendar"
-         Type="Model.CalendarEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CalendarRules"
-         Type="Model.CalendarRuleEfImpl" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Calendar_has_Module" >
-    <End Role="Calendar"
-         Type="Model.CalendarEfImpl" 
-         Multiplicity="*" />
-    <End Role="Module"
-         Type="Model.ModuleEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Calendar_was_ChangedBy" >
-    <End Role="Calendar"
-         Type="Model.CalendarEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Calendar_was_CreatedBy" >
-    <End Role="Calendar"
-         Type="Model.CalendarEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_CalendarRule_has_Module" >
-    <End Role="CalendarRule"
-         Type="Model.CalendarRuleEfImpl" 
-         Multiplicity="*" />
-    <End Role="Module"
-         Type="Model.ModuleEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_CalendarRule_was_ChangedBy" >
-    <End Role="CalendarRule"
-         Type="Model.CalendarRuleEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_CalendarRule_was_CreatedBy" >
-    <End Role="CalendarRule"
-         Type="Model.CalendarRuleEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Child_allow_Identity" >
@@ -5585,6 +5529,62 @@
          Multiplicity="*" />
     <End Role="Property"
          Type="Model.PropertyEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_WorkSchedule_has_Module" >
+    <End Role="WorkSchedule"
+         Type="Model.WorkScheduleEfImpl" 
+         Multiplicity="*" />
+    <End Role="Module"
+         Type="Model.ModuleEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_WorkSchedule_has_WorkScheduleRules" >
+    <End Role="WorkSchedule"
+         Type="Model.WorkScheduleEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="WorkScheduleRules"
+         Type="Model.WorkScheduleRuleEfImpl" 
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_WorkSchedule_was_ChangedBy" >
+    <End Role="WorkSchedule"
+         Type="Model.WorkScheduleEfImpl" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_WorkSchedule_was_CreatedBy" >
+    <End Role="WorkSchedule"
+         Type="Model.WorkScheduleEfImpl" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_WorkScheduleRule_has_Module" >
+    <End Role="WorkScheduleRule"
+         Type="Model.WorkScheduleRuleEfImpl" 
+         Multiplicity="*" />
+    <End Role="Module"
+         Type="Model.ModuleEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_WorkScheduleRule_was_ChangedBy" >
+    <End Role="WorkScheduleRule"
+         Type="Model.WorkScheduleRuleEfImpl" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_WorkScheduleRule_was_CreatedBy" >
+    <End Role="WorkScheduleRule"
+         Type="Model.WorkScheduleRuleEfImpl" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
 

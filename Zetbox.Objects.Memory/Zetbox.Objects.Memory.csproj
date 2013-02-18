@@ -134,11 +134,9 @@
     <Compile Include="BoolParameter.Memory.Designer.cs" />
     <Compile Include="BoolProperty.Memory.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Memory.Designer.cs" />
-    <Compile Include="Calendar.Memory.Designer.cs" />
-    <Compile Include="CalendarRule.Memory.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="CLRObjectParameter.Memory.Designer.cs" />
-    <Compile Include="CommonCalendarRule.Memory.Designer.cs" />
+    <Compile Include="CommonWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="Company.Memory.Designer.cs" />
     <Compile Include="CompoundObject.Memory.Designer.cs" />
     <Compile Include="CompoundObjectParameter.Memory.Designer.cs" />
@@ -152,7 +150,7 @@
     <Compile Include="DateRangeFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="DateTimeParameter.Memory.Designer.cs" />
     <Compile Include="DateTimeProperty.Memory.Designer.cs" />
-    <Compile Include="DayOfWeekCalendarRule.Memory.Designer.cs" />
+    <Compile Include="DayOfWeekWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="DecimalDefaultValue.Memory.Designer.cs" />
     <Compile Include="DecimalParameter.Memory.Designer.cs" />
     <Compile Include="DecimalProperty.Memory.Designer.cs" />
@@ -162,7 +160,7 @@
     <Compile Include="DoubleParameter.Memory.Designer.cs" />
     <Compile Include="DoubleProperty.Memory.Designer.cs" />
     <Compile Include="DynamicFile.Memory.Designer.cs" />
-    <Compile Include="EasterCalendarRule.Memory.Designer.cs" />
+    <Compile Include="EasterWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="EnumDefaultValue.Memory.Designer.cs" />
     <Compile Include="Enumeration.Memory.Designer.cs" />
     <Compile Include="EnumerationEntry.Memory.Designer.cs" />
@@ -172,7 +170,7 @@
     <Compile Include="File.Memory.Designer.cs" />
     <Compile Include="FileImportConfiguration.Memory.Designer.cs" />
     <Compile Include="FilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="FixedYearlyCalendarRule.Memory.Designer.cs" />
+    <Compile Include="FixedYearlyWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="Fragebogen.Memory.Designer.cs" />
     <Compile Include="Group.Memory.Designer.cs" />
     <Compile Include="GroupMembership.Memory.Designer.cs" />
@@ -270,8 +268,10 @@
     <Compile Include="ViewModelDescriptor.Memory.Designer.cs" />
     <Compile Include="ViewReadOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="Visual.Memory.Designer.cs" />
+    <Compile Include="WorkSchedule.Memory.Designer.cs" />
+    <Compile Include="WorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="YearlyCalendarRule.Memory.Designer.cs" />
+    <Compile Include="YearlyWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="CollectionEntries.Memory.Designer.cs" />
     <Compile Include="AnyReference.Memory.Designer.cs" />
     <Compile Include="AuditEntry.Memory.Designer.cs" />

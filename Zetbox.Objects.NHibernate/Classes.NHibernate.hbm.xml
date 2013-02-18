@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update">
-    <class name="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl"
-           proxy="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl"
            schema="`calendar`"
-           table="`Calendars`"
+           table="`WorkSchedules`"
            abstract="false"
            dynamic-update="true"
            optimistic-lock="dirty"
@@ -13,19 +13,13 @@
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
                 <param name="schema">`calendar`</param>
-                <param name="sequence">`Calendars_ID_seq`</param>
+                <param name="sequence">`WorkSchedules_ID_seq`</param>
             </generator>
         </id>
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="BaseCalendar" column="`fk_BaseCalendar`" class="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl" />
-
-<!-- ObjectReferenceProperty -->
-        <set name="CalendarRules" batch-size="100" cascade="none" inverse="true" >
-            <key column="`fk_Calendar`" />
-            <one-to-many class="Zetbox.App.Calendar.CalendarRuleNHibernateImpl+CalendarRuleProxy, Zetbox.Objects.NHibernateImpl" />
-        </set>
+        <many-to-one name="BaseWorkSchedule" column="`fk_BaseWorkSchedule`" class="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
@@ -35,9 +29,9 @@
                   column="`ChangedOn`" 
                   optimistic-lock="true"/>
 <!-- ObjectReferenceProperty -->
-        <set name="ChildCalendar" batch-size="100" cascade="none" inverse="true" >
-            <key column="`fk_BaseCalendar`" />
-            <one-to-many class="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl" />
+        <set name="ChildWorkSchedule" batch-size="100" cascade="none" inverse="true" >
+            <key column="`fk_BaseWorkSchedule`" />
+            <one-to-many class="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
@@ -58,14 +52,21 @@
         <property name="Name" 
                   column="`Name`" 
                   optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <set name="WorkScheduleRules" batch-size="100" cascade="none" inverse="true" >
+            <key column="`fk_WorkSchedule`" />
+            <one-to-many class="Zetbox.App.Calendar.WorkScheduleRuleNHibernateImpl+WorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl" />
+        </set>
+
 
         <!-- define the subclasses -->
 
     </class>
-    <class name="Zetbox.App.Calendar.CalendarRuleNHibernateImpl+CalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-           proxy="Zetbox.App.Calendar.CalendarRuleNHibernateImpl+CalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Calendar.WorkScheduleRuleNHibernateImpl+WorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.WorkScheduleRuleNHibernateImpl+WorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+           discriminator-value="calendar.WorkScheduleRules"
            schema="`calendar`"
-           table="`CalendarRules`"
+           table="`WorkScheduleRules`"
            abstract="true"
            dynamic-update="true"
            optimistic-lock="dirty"
@@ -74,14 +75,14 @@
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
                 <param name="schema">`calendar`</param>
-                <param name="sequence">`CalendarRules_ID_seq`</param>
+                <param name="sequence">`WorkScheduleRules_ID_seq`</param>
             </generator>
         </id>
+        <discriminator column="`__Discriminator`"
+                       type="String" />
+
 
         <!-- define the properties -->
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl" />
-
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -123,99 +124,87 @@
         <property name="WorkingHours" 
                   column="`WorkingHours`" 
                   optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="WorkSchedule" column="`fk_WorkSchedule`" class="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl" />
+
 
         <!-- define the subclasses -->
-        <joined-subclass
-                name="Zetbox.App.Calendar.CommonCalendarRuleNHibernateImpl+CommonCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                proxy="Zetbox.App.Calendar.CommonCalendarRuleNHibernateImpl+CommonCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`calendar`"
-                table="`CommonCalendarRules`"
+        <subclass
+                name="Zetbox.App.Calendar.CommonWorkScheduleRuleNHibernateImpl+CommonWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Calendar.CommonWorkScheduleRuleNHibernateImpl+CommonWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="calendar.CommonWorkScheduleRules"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
-                name="Zetbox.App.Calendar.DayOfWeekCalendarRuleNHibernateImpl+DayOfWeekCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                proxy="Zetbox.App.Calendar.DayOfWeekCalendarRuleNHibernateImpl+DayOfWeekCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`calendar`"
-                table="`DayOfWeekCalendarRules`"
+        </subclass>
+        <subclass
+                name="Zetbox.App.Calendar.DayOfWeekWorkScheduleRuleNHibernateImpl+DayOfWeekWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Calendar.DayOfWeekWorkScheduleRuleNHibernateImpl+DayOfWeekWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="calendar.DayOfWeekWorkScheduleRules"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="DayOfWeek" 
-                  column="`DayOfWeek`" 
+                  column="`DayOfWeekWorkScheduleRules_DayOfWeek`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
-                name="Zetbox.App.Calendar.YearlyCalendarRuleNHibernateImpl+YearlyCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                proxy="Zetbox.App.Calendar.YearlyCalendarRuleNHibernateImpl+YearlyCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`calendar`"
-                table="`YearlyCalendarRules`"
+        </subclass>
+        <subclass
+                name="Zetbox.App.Calendar.YearlyWorkScheduleRuleNHibernateImpl+YearlyWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Calendar.YearlyWorkScheduleRuleNHibernateImpl+YearlyWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="calendar.YearlyWorkScheduleRules"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
 
             <!-- define the subclasses -->
-        <joined-subclass
-                name="Zetbox.App.Calendar.EasterCalendarRuleNHibernateImpl+EasterCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                proxy="Zetbox.App.Calendar.EasterCalendarRuleNHibernateImpl+EasterCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`calendar`"
-                table="`EasterCalendarRules`"
+        <subclass
+                name="Zetbox.App.Calendar.EasterWorkScheduleRuleNHibernateImpl+EasterWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Calendar.EasterWorkScheduleRuleNHibernateImpl+EasterWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="calendar.EasterWorkScheduleRules"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Offset" 
-                  column="`Offset`" 
+                  column="`EasterWorkScheduleRules_Offset`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
-        <joined-subclass
-                name="Zetbox.App.Calendar.FixedYearlyCalendarRuleNHibernateImpl+FixedYearlyCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                proxy="Zetbox.App.Calendar.FixedYearlyCalendarRuleNHibernateImpl+FixedYearlyCalendarRuleProxy, Zetbox.Objects.NHibernateImpl"
-                schema="`calendar`"
-                table="`FixedYearlyCalendarRules`"
+        </subclass>
+        <subclass
+                name="Zetbox.App.Calendar.FixedYearlyWorkScheduleRuleNHibernateImpl+FixedYearlyWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Calendar.FixedYearlyWorkScheduleRuleNHibernateImpl+FixedYearlyWorkScheduleRuleProxy, Zetbox.Objects.NHibernateImpl"
+                discriminator-value="calendar.FixedYearlyWorkScheduleRules"
                 dynamic-update="true">
             
-            <!-- base class reference -->
-            <key column="`ID`" />
 
             <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
         <property name="Day" 
-                  column="`Day`" 
+                  column="`FixedYearlyWorkScheduleRules_Day`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="Month" 
-                  column="`Month`" 
+                  column="`FixedYearlyWorkScheduleRules_Month`" 
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
-        </joined-subclass>
+        </subclass>
 
-        </joined-subclass>
+        </subclass>
 
     </class>
     <class name="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl"

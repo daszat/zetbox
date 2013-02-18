@@ -108,11 +108,9 @@
     <Compile Include="BoolParameter.Interface.Designer.cs" />
     <Compile Include="BoolProperty.Interface.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Interface.Designer.cs" />
-    <Compile Include="Calendar.Interface.Designer.cs" />
-    <Compile Include="CalendarRule.Interface.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Interface.Designer.cs" />
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />
-    <Compile Include="CommonCalendarRule.Interface.Designer.cs" />
+    <Compile Include="CommonWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="Company.Interface.Designer.cs" />
     <Compile Include="CompoundObject.Interface.Designer.cs" />
     <Compile Include="CompoundObjectParameter.Interface.Designer.cs" />
@@ -126,7 +124,7 @@
     <Compile Include="DateRangeFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />
-    <Compile Include="DayOfWeekCalendarRule.Interface.Designer.cs" />
+    <Compile Include="DayOfWeekWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="DecimalDefaultValue.Interface.Designer.cs" />
     <Compile Include="DecimalParameter.Interface.Designer.cs" />
     <Compile Include="DecimalProperty.Interface.Designer.cs" />
@@ -136,7 +134,7 @@
     <Compile Include="DoubleParameter.Interface.Designer.cs" />
     <Compile Include="DoubleProperty.Interface.Designer.cs" />
     <Compile Include="DynamicFile.Interface.Designer.cs" />
-    <Compile Include="EasterCalendarRule.Interface.Designer.cs" />
+    <Compile Include="EasterWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="EnumDefaultValue.Interface.Designer.cs" />
     <Compile Include="Enumeration.Interface.Designer.cs" />
     <Compile Include="EnumerationEntry.Interface.Designer.cs" />
@@ -146,7 +144,7 @@
     <Compile Include="File.Interface.Designer.cs" />
     <Compile Include="FileImportConfiguration.Interface.Designer.cs" />
     <Compile Include="FilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="FixedYearlyCalendarRule.Interface.Designer.cs" />
+    <Compile Include="FixedYearlyWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
     <Compile Include="Group.Interface.Designer.cs" />
     <Compile Include="GroupMembership.Interface.Designer.cs" />
@@ -244,8 +242,10 @@
     <Compile Include="ViewModelDescriptor.Interface.Designer.cs" />
     <Compile Include="ViewReadOnlyConstraint.Interface.Designer.cs" />
     <Compile Include="Visual.Interface.Designer.cs" />
+    <Compile Include="WorkSchedule.Interface.Designer.cs" />
+    <Compile Include="WorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="YearlyCalendarRule.Interface.Designer.cs" />
+    <Compile Include="YearlyWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="CollectionEntries.Interface.Designer.cs" />
     <Compile Include="IAuditable.Interface.Designer.cs" />
     <Compile Include="IChangedBy.Interface.Designer.cs" />

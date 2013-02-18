@@ -1942,33 +1942,60 @@ namespace Zetbox {
                         }
                         public static class Calendar
                         {
-                            // Cannot render: member names cannot be the same as their enclosing type
-                            // public static TypedGuid<global::Zetbox.App.Base.DataType> Calendar
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> CalendarRule
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("ee70b186-09ae-43a3-afb2-a632c47765b9"); }
-                            }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> CommonCalendarRule
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> CommonWorkScheduleRule
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("198bab3d-85a9-4d11-99e1-5e3f9420bdae"); }
                             }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> DayOfWeekCalendarRule
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> DayOfWeekWorkScheduleRule
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("9654967e-0182-409b-8765-65882785f607"); }
                             }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> EasterCalendarRule
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> EasterWorkScheduleRule
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("d321c926-952d-4810-904b-a57251dd5e9d"); }
                             }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> FixedYearlyCalendarRule
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> FixedYearlyWorkScheduleRule
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("632137c7-1cb1-4c60-bda6-31aa2060b39a"); }
                             }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> YearlyCalendarRule
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> WorkSchedule
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("901a2ddd-1330-4129-b8a2-92b8e655d168"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> WorkScheduleRule
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("ee70b186-09ae-43a3-afb2-a632c47765b9"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> YearlyWorkScheduleRule
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc"); }
                             }
-                            public static class Calendar_Methods
+                            public static class DayOfWeekWorkScheduleRule_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DayOfWeek
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("8755ff98-63d1-4a74-b0e3-da08a81f7f4e"); }
+                                }
+                            }
+                            public static class EasterWorkScheduleRule_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Offset
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0fdcab86-001e-429d-af31-a5d0df5e6c75"); }
+                                }
+                            }
+                            public static class FixedYearlyWorkScheduleRule_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Day
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("7d16cd01-93ce-44d2-bb69-ac06f5b61aaf"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Month
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("43be3542-1b21-4423-aeb4-f9e411b2453f"); }
+                                }
+                            }
+                            public static class WorkSchedule_Methods
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetOffDays
                                 {
@@ -1983,15 +2010,11 @@ namespace Zetbox {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("bb7592bc-26e6-463f-a806-91f56dc9fa6e"); }
                                 }
                             }
-                            public static class Calendar_Properties
+                            public static class WorkSchedule_Properties
                             {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> BaseCalendar
+                                public static TypedGuid<global::Zetbox.App.Base.Property> BaseWorkSchedule
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("17a8fbd3-5a42-4cf6-9517-0adf4142f4fe"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CalendarRules
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b16c20d8-ac72-45e8-883c-52c6f28571f2"); }
                                 }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
                                 {
@@ -2001,7 +2024,7 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("486810c7-c031-4c86-ad86-7b88530008ca"); }
                                 }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChildCalendar
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChildWorkSchedule
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("c2fc6792-bc1f-42bb-b6c3-451ab99ddbef"); }
                                 }
@@ -2025,20 +2048,20 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("49cdf3fb-639f-4c20-b9ca-9af1bbe0d4d7"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> WorkScheduleRules
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b16c20d8-ac72-45e8-883c-52c6f28571f2"); }
+                                }
                             }
-                            public static class CalendarRule_Methods
+                            public static class WorkScheduleRule_Methods
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Method> AppliesTo
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("3f50df16-1d0c-4820-aaae-ce022f73c435"); }
                                 }
                             }
-                            public static class CalendarRule_Properties
+                            public static class WorkScheduleRule_Properties
                             {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Calendar
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("115c1d4c-ddd3-4d33-ae74-a6b676fc0dfa"); }
-                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("a14bfc87-c65e-4111-8245-3fbb31189392"); }
@@ -2083,30 +2106,9 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("20370deb-580a-44e6-b201-f5740ee5e330"); }
                                 }
-                            }
-                            public static class DayOfWeekCalendarRule_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DayOfWeek
+                                public static TypedGuid<global::Zetbox.App.Base.Property> WorkSchedule
                                 {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("8755ff98-63d1-4a74-b0e3-da08a81f7f4e"); }
-                                }
-                            }
-                            public static class EasterCalendarRule_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Offset
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0fdcab86-001e-429d-af31-a5d0df5e6c75"); }
-                                }
-                            }
-                            public static class FixedYearlyCalendarRule_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Day
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("7d16cd01-93ce-44d2-bb69-ac06f5b61aaf"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Month
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("43be3542-1b21-4423-aeb4-f9e411b2453f"); }
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("115c1d4c-ddd3-4d33-ae74-a6b676fc0dfa"); }
                                 }
                             }
                         }
@@ -4571,13 +4573,13 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("f87858ba-688f-495d-99c0-b52ad117a4c2"); }
                 }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Calendar_CalendarRuleInstanceViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("bf9a6bc5-5f8d-4658-b033-cf571b4d503f"); }
-                }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Calendar_WeekCalendarViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("7fbcbbdf-1821-47dc-9332-c0ae4f6a70a1"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Calendar_WorkScheduleRuleInstanceViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("bf9a6bc5-5f8d-4658-b033-cf571b4d503f"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DataObjectSelectionTaskViewModel
                 {

@@ -23,8 +23,6 @@
     </AssociationSet>
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Schema="base" Table="BaseParameters"/>
     <EntitySet Name="Blob" EntityType="Model.Store.Blob" Schema="base" Table="Blobs"/>
-    <EntitySet Name="Calendar" EntityType="Model.Store.Calendar" Schema="calendar" Table="Calendars"/>
-    <EntitySet Name="CalendarRule" EntityType="Model.Store.CalendarRule" Schema="calendar" Table="CalendarRules"/>
     <EntitySet Name="Company" EntityType="Model.Store.Company" Schema="test" Table="Companies"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Schema="base" Table="Constraints"/>
     <EntitySet Name="ConstraintInvocation" EntityType="Model.Store.ConstraintInvocation" Schema="base" Table="ConstraintInvocations"/>
@@ -101,25 +99,15 @@
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Schema="gui" Table="ViewDescriptors"/>
     <EntitySet Name="ViewModelDescriptor" EntityType="Model.Store.ViewModelDescriptor" Schema="gui" Table="ViewModelDescriptors"/>
     <EntitySet Name="Visual" EntityType="Model.Store.Visual" Schema="gui" Table="Visuals"/>
+    <EntitySet Name="WorkSchedule" EntityType="Model.Store.WorkSchedule" Schema="calendar" Table="WorkSchedules"/>
+    <EntitySet Name="WorkScheduleRule" EntityType="Model.Store.WorkScheduleRule" Schema="calendar" Table="WorkScheduleRules"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
-    <EntitySet Name="CommonCalendarRule" EntityType="Model.Store.CommonCalendarRule" Schema="calendar" Table="CommonCalendarRules"/>
-    <!-- inherits from CalendarRule -->
-    <AssociationSet Name="FK_CommonCalendarRule_CalendarRule_ID" Association="Model.Store.FK_CommonCalendarRule_CalendarRule_ID" >
-      <End Role="A_CalendarRule" EntitySet="CalendarRule" />
-      <End Role="B_CommonCalendarRule" EntitySet="CommonCalendarRule" />
-    </AssociationSet>
     <EntitySet Name="CompoundObject" EntityType="Model.Store.CompoundObject" Schema="base" Table="CompoundObjects"/>
     <!-- inherits from DataType -->
     <AssociationSet Name="FK_CompoundObject_DataType_ID" Association="Model.Store.FK_CompoundObject_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_CompoundObject" EntitySet="CompoundObject" />
-    </AssociationSet>
-    <EntitySet Name="DayOfWeekCalendarRule" EntityType="Model.Store.DayOfWeekCalendarRule" Schema="calendar" Table="DayOfWeekCalendarRules"/>
-    <!-- inherits from CalendarRule -->
-    <AssociationSet Name="FK_DayOfWeekCalendarRule_CalendarRule_ID" Association="Model.Store.FK_DayOfWeekCalendarRule_CalendarRule_ID" >
-      <End Role="A_CalendarRule" EntitySet="CalendarRule" />
-      <End Role="B_DayOfWeekCalendarRule" EntitySet="DayOfWeekCalendarRule" />
     </AssociationSet>
     <EntitySet Name="Document" EntityType="Model.Store.Document" Schema="doc" Table="Documents"/>
     <!-- inherits from File -->
@@ -133,23 +121,11 @@
       <End Role="A_File" EntitySet="File" />
       <End Role="B_DynamicFile" EntitySet="DynamicFile" />
     </AssociationSet>
-    <EntitySet Name="EasterCalendarRule" EntityType="Model.Store.EasterCalendarRule" Schema="calendar" Table="EasterCalendarRules"/>
-    <!-- inherits from YearlyCalendarRule -->
-    <AssociationSet Name="FK_EasterCalendarRule_YearlyCalendarRule_ID" Association="Model.Store.FK_EasterCalendarRule_YearlyCalendarRule_ID" >
-      <End Role="A_YearlyCalendarRule" EntitySet="YearlyCalendarRule" />
-      <End Role="B_EasterCalendarRule" EntitySet="EasterCalendarRule" />
-    </AssociationSet>
     <EntitySet Name="Enumeration" EntityType="Model.Store.Enumeration" Schema="base" Table="Enumerations"/>
     <!-- inherits from DataType -->
     <AssociationSet Name="FK_Enumeration_DataType_ID" Association="Model.Store.FK_Enumeration_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Enumeration" EntitySet="Enumeration" />
-    </AssociationSet>
-    <EntitySet Name="FixedYearlyCalendarRule" EntityType="Model.Store.FixedYearlyCalendarRule" Schema="calendar" Table="FixedYearlyCalendarRules"/>
-    <!-- inherits from YearlyCalendarRule -->
-    <AssociationSet Name="FK_FixedYearlyCalendarRule_YearlyCalendarRule_ID" Association="Model.Store.FK_FixedYearlyCalendarRule_YearlyCalendarRule_ID" >
-      <End Role="A_YearlyCalendarRule" EntitySet="YearlyCalendarRule" />
-      <End Role="B_FixedYearlyCalendarRule" EntitySet="FixedYearlyCalendarRule" />
     </AssociationSet>
     <EntitySet Name="GroupMembership" EntityType="Model.Store.GroupMembership" Schema="base" Table="GroupMemberships"/>
     <!-- inherits from AccessControl -->
@@ -210,12 +186,6 @@
     <AssociationSet Name="FK_StaticFile_File_ID" Association="Model.Store.FK_StaticFile_File_ID" >
       <End Role="A_File" EntitySet="File" />
       <End Role="B_StaticFile" EntitySet="StaticFile" />
-    </AssociationSet>
-    <EntitySet Name="YearlyCalendarRule" EntityType="Model.Store.YearlyCalendarRule" Schema="calendar" Table="YearlyCalendarRules"/>
-    <!-- inherits from CalendarRule -->
-    <AssociationSet Name="FK_YearlyCalendarRule_CalendarRule_ID" Association="Model.Store.FK_YearlyCalendarRule_CalendarRule_ID" >
-      <End Role="A_CalendarRule" EntitySet="CalendarRule" />
-      <End Role="B_YearlyCalendarRule" EntitySet="YearlyCalendarRule" />
     </AssociationSet>
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
@@ -594,10 +564,6 @@
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseCalendar_has_ChildCalendar" Association="Model.Store.FK_BaseCalendar_has_ChildCalendar" >
-      <End Role="BaseCalendar" EntitySet="Calendar" />
-      <End Role="ChildCalendar" EntitySet="Calendar" />
-    </AssociationSet>
     <AssociationSet Name="FK_BaseObjectClass_has_SubClasses" Association="Model.Store.FK_BaseObjectClass_has_SubClasses" >
       <End Role="BaseObjectClass" EntitySet="ObjectClass" />
       <End Role="SubClasses" EntitySet="ObjectClass" />
@@ -614,6 +580,10 @@
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
+    <AssociationSet Name="FK_BaseWorkSchedule_has_ChildWorkSchedules" Association="Model.Store.FK_BaseWorkSchedule_has_ChildWorkSchedules" >
+      <End Role="BaseWorkSchedule" EntitySet="WorkSchedule" />
+      <End Role="ChildWorkSchedules" EntitySet="WorkSchedule" />
+    </AssociationSet>
     <AssociationSet Name="FK_BoolProperty_has_FalseIcon" Association="Model.Store.FK_BoolProperty_has_FalseIcon" >
       <End Role="BoolProperty" EntitySet="Property" />
       <End Role="FalseIcon" EntitySet="Icon" />
@@ -629,34 +599,6 @@
     <AssociationSet Name="FK_CalculatedReference_references_ReferencedClass" Association="Model.Store.FK_CalculatedReference_references_ReferencedClass" >
       <End Role="CalculatedReference" EntitySet="Property" />
       <End Role="ReferencedClass" EntitySet="ObjectClass" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_has_CalendarRules" Association="Model.Store.FK_Calendar_has_CalendarRules" >
-      <End Role="Calendar" EntitySet="Calendar" />
-      <End Role="CalendarRules" EntitySet="CalendarRule" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_has_Module" Association="Model.Store.FK_Calendar_has_Module" >
-      <End Role="Calendar" EntitySet="Calendar" />
-      <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_was_ChangedBy" Association="Model.Store.FK_Calendar_was_ChangedBy" >
-      <End Role="Calendar" EntitySet="Calendar" />
-      <End Role="ChangedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_was_CreatedBy" Association="Model.Store.FK_Calendar_was_CreatedBy" >
-      <End Role="Calendar" EntitySet="Calendar" />
-      <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CalendarRule_has_Module" Association="Model.Store.FK_CalendarRule_has_Module" >
-      <End Role="CalendarRule" EntitySet="CalendarRule" />
-      <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CalendarRule_was_ChangedBy" Association="Model.Store.FK_CalendarRule_was_ChangedBy" >
-      <End Role="CalendarRule" EntitySet="CalendarRule" />
-      <End Role="ChangedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CalendarRule_was_CreatedBy" Association="Model.Store.FK_CalendarRule_was_CreatedBy" >
-      <End Role="CalendarRule" EntitySet="CalendarRule" />
-      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Child_allow_Identity" Association="Model.Store.FK_Child_allow_Identity" >
       <End Role="Child" EntitySet="SecurityTestChild" />
@@ -1274,6 +1216,34 @@
       <End Role="Visual" EntitySet="Visual" />
       <End Role="Property" EntitySet="Property" />
     </AssociationSet>
+    <AssociationSet Name="FK_WorkSchedule_has_Module" Association="Model.Store.FK_WorkSchedule_has_Module" >
+      <End Role="WorkSchedule" EntitySet="WorkSchedule" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkSchedule_has_WorkScheduleRules" Association="Model.Store.FK_WorkSchedule_has_WorkScheduleRules" >
+      <End Role="WorkSchedule" EntitySet="WorkSchedule" />
+      <End Role="WorkScheduleRules" EntitySet="WorkScheduleRule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkSchedule_was_ChangedBy" Association="Model.Store.FK_WorkSchedule_was_ChangedBy" >
+      <End Role="WorkSchedule" EntitySet="WorkSchedule" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkSchedule_was_CreatedBy" Association="Model.Store.FK_WorkSchedule_was_CreatedBy" >
+      <End Role="WorkSchedule" EntitySet="WorkSchedule" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkScheduleRule_has_Module" Association="Model.Store.FK_WorkScheduleRule_has_Module" >
+      <End Role="WorkScheduleRule" EntitySet="WorkScheduleRule" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkScheduleRule_was_ChangedBy" Association="Model.Store.FK_WorkScheduleRule_was_ChangedBy" >
+      <End Role="WorkScheduleRule" EntitySet="WorkScheduleRule" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkScheduleRule_was_CreatedBy" Association="Model.Store.FK_WorkScheduleRule_was_CreatedBy" >
+      <End Role="WorkScheduleRule" EntitySet="WorkScheduleRule" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
 
     <!-- EntitySets and AssociationSet for all object-value CollectionEntrys -->
     <EntitySet Name="Kunde_EMails_CollectionEntry" EntityType="Model.Store.Kunde_EMails_CollectionEntry" Schema="projekte" Table="Kunden_EMailsCollection" />
@@ -1490,47 +1460,6 @@
     <Property Name="StoragePath" Type="varchar" MaxLength="500" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="Calendar">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_BaseCalendar" Type="int4" />
-    <Property Name="fk_Module" Type="int4" />
-    <Property Name="fk_ChangedBy" Type="int4" />
-    <Property Name="fk_CreatedBy" Type="int4" />
-    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
-    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="CalendarRule">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Calendar" Type="int4" />
-    <Property Name="fk_Module" Type="int4" />
-    <Property Name="fk_ChangedBy" Type="int4" />
-    <Property Name="fk_CreatedBy" Type="int4" />
-    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
-    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="IsWorkingDay" Type="bool" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="ValidFrom" Type="timestamp" Nullable="true" />
-    <Property Name="ValidUntil" Type="timestamp" Nullable="true" />
-    <Property Name="WorkingHours" Type="numeric" Precision="10" Scale="2" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="CommonCalendarRule">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="Company">
     <Key>
       <PropertyRef Name="ID" />
@@ -1618,14 +1547,6 @@
     <Property Name="ShowNameInLists" Type="bool" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="DayOfWeekCalendarRule">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" />
-    <Property Name="DayOfWeek" Type="int4" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="DefaultPropertyValue">
     <Key>
       <PropertyRef Name="ID" />
@@ -1658,14 +1579,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="EasterCalendarRule">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" />
-    <Property Name="Offset" Type="int4" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Enumeration">
@@ -1761,15 +1674,6 @@
     <Property Name="DateRangeFilterConfigurations_IsCurrentYearDefault" Type="bool" Nullable="true" />
     <Property Name="MonthFilterConfigurations_IsCurrentMonthDefault" Type="bool" Nullable="true" />
     <Property Name="YearFilterConfigurations_IsCurrentYearDefault" Type="bool" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="FixedYearlyCalendarRule">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" />
-    <Property Name="Day" Type="int4" Nullable="false" />
-    <Property Name="Month" Type="int4" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Fragebogen">
@@ -2649,11 +2553,43 @@
     <Property Name="Description" Type="varchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="YearlyCalendarRule">
+  <EntityType Name="WorkSchedule">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int4" Nullable="false" />
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_BaseWorkSchedule" Type="int4" />
+    <Property Name="fk_Module" Type="int4" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="WorkScheduleRule">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="__Discriminator" Type="varchar" Nullable="false" />
+    <Property Name="fk_WorkSchedule" Type="int4" />
+    <Property Name="fk_Module" Type="int4" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="IsWorkingDay" Type="bool" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="ValidFrom" Type="timestamp" Nullable="true" />
+    <Property Name="ValidUntil" Type="timestamp" Nullable="true" />
+    <Property Name="WorkingHours" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="DayOfWeekWorkScheduleRules_DayOfWeek" Type="int4" Nullable="true" />
+    <Property Name="EasterWorkScheduleRules_Offset" Type="int4" Nullable="true" />
+    <Property Name="FixedYearlyWorkScheduleRules_Day" Type="int4" Nullable="true" />
+    <Property Name="FixedYearlyWorkScheduleRules_Month" Type="int4" Nullable="true" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
@@ -3643,20 +3579,6 @@
   </Association>
 
 
-  <Association Name="FK_BaseCalendar_has_ChildCalendar">
-    <End Role="BaseCalendar" Type="Model.Store.Calendar" Multiplicity="0..1" />
-    <End Role="ChildCalendar" Type="Model.Store.Calendar" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BaseCalendar">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ChildCalendar">
-        <PropertyRef Name="fk_BaseCalendar" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_BaseObjectClass_has_SubClasses">
     <End Role="BaseObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="SubClasses" Type="Model.Store.ObjectClass" Multiplicity="*" />
@@ -3713,6 +3635,20 @@
   </Association>
 
 
+  <Association Name="FK_BaseWorkSchedule_has_ChildWorkSchedules">
+    <End Role="BaseWorkSchedule" Type="Model.Store.WorkSchedule" Multiplicity="0..1" />
+    <End Role="ChildWorkSchedules" Type="Model.Store.WorkSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaseWorkSchedule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChildWorkSchedules">
+        <PropertyRef Name="fk_BaseWorkSchedule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_BoolProperty_has_FalseIcon">
     <End Role="FalseIcon" Type="Model.Store.Icon" Multiplicity="0..1" />
     <End Role="BoolProperty" Type="Model.Store.Property" Multiplicity="*" />
@@ -3764,104 +3700,6 @@
       </Principal>
       <Dependent Role="CalculatedReference">
         <PropertyRef Name="CalculatedObjectReferenceProperties_fk_ReferencedClass" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Calendar_has_CalendarRules">
-    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="0..1" />
-    <End Role="CalendarRules" Type="Model.Store.CalendarRule" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Calendar">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CalendarRules">
-        <PropertyRef Name="fk_Calendar" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Calendar_has_Module">
-    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Module">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Calendar">
-        <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Calendar_was_ChangedBy">
-    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ChangedBy">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Calendar">
-        <PropertyRef Name="fk_ChangedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Calendar_was_CreatedBy">
-    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CreatedBy">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Calendar">
-        <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_CalendarRule_has_Module">
-    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <End Role="CalendarRule" Type="Model.Store.CalendarRule" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Module">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CalendarRule">
-        <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_CalendarRule_was_ChangedBy">
-    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="CalendarRule" Type="Model.Store.CalendarRule" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ChangedBy">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CalendarRule">
-        <PropertyRef Name="fk_ChangedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_CalendarRule_was_CreatedBy">
-    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="CalendarRule" Type="Model.Store.CalendarRule" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CreatedBy">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CalendarRule">
-        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -6023,20 +5861,106 @@
   </Association>
 
 
-
-  <!-- derived->base ObjectClass references -->
-  <Association Name="FK_CommonCalendarRule_CalendarRule_ID">
-    <End Role="A_CalendarRule" Type="Model.Store.CalendarRule" Multiplicity="1" />
-    <End Role="B_CommonCalendarRule" Type="Model.Store.CommonCalendarRule" Multiplicity="0..1" />
+  <Association Name="FK_WorkSchedule_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="WorkSchedule" Type="Model.Store.WorkSchedule" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="A_CalendarRule">
+      <Principal Role="Module">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_CommonCalendarRule">
-        <PropertyRef Name="ID" />
+      <Dependent Role="WorkSchedule">
+        <PropertyRef Name="fk_Module" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+
+
+  <Association Name="FK_WorkSchedule_has_WorkScheduleRules">
+    <End Role="WorkSchedule" Type="Model.Store.WorkSchedule" Multiplicity="0..1" />
+    <End Role="WorkScheduleRules" Type="Model.Store.WorkScheduleRule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkSchedule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkScheduleRules">
+        <PropertyRef Name="fk_WorkSchedule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_WorkSchedule_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="WorkSchedule" Type="Model.Store.WorkSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkSchedule">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_WorkSchedule_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="WorkSchedule" Type="Model.Store.WorkSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkSchedule">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_WorkScheduleRule_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="WorkScheduleRule" Type="Model.Store.WorkScheduleRule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkScheduleRule">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_WorkScheduleRule_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="WorkScheduleRule" Type="Model.Store.WorkScheduleRule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkScheduleRule">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_WorkScheduleRule_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="WorkScheduleRule" Type="Model.Store.WorkScheduleRule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkScheduleRule">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+
+  <!-- derived->base ObjectClass references -->
   <Association Name="FK_CompoundObject_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
     <End Role="B_CompoundObject" Type="Model.Store.CompoundObject" Multiplicity="0..1" />
@@ -6045,18 +5969,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_CompoundObject">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DayOfWeekCalendarRule_CalendarRule_ID">
-    <End Role="A_CalendarRule" Type="Model.Store.CalendarRule" Multiplicity="1" />
-    <End Role="B_DayOfWeekCalendarRule" Type="Model.Store.DayOfWeekCalendarRule" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_CalendarRule">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_DayOfWeekCalendarRule">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -6085,18 +5997,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EasterCalendarRule_YearlyCalendarRule_ID">
-    <End Role="A_YearlyCalendarRule" Type="Model.Store.YearlyCalendarRule" Multiplicity="1" />
-    <End Role="B_EasterCalendarRule" Type="Model.Store.EasterCalendarRule" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_YearlyCalendarRule">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_EasterCalendarRule">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Enumeration_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
     <End Role="B_Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
@@ -6105,18 +6005,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_Enumeration">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_FixedYearlyCalendarRule_YearlyCalendarRule_ID">
-    <End Role="A_YearlyCalendarRule" Type="Model.Store.YearlyCalendarRule" Multiplicity="1" />
-    <End Role="B_FixedYearlyCalendarRule" Type="Model.Store.FixedYearlyCalendarRule" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_YearlyCalendarRule">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_FixedYearlyCalendarRule">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -6237,18 +6125,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_StaticFile">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_YearlyCalendarRule_CalendarRule_ID">
-    <End Role="A_CalendarRule" Type="Model.Store.CalendarRule" Multiplicity="1" />
-    <End Role="B_YearlyCalendarRule" Type="Model.Store.YearlyCalendarRule" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_CalendarRule">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_YearlyCalendarRule">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

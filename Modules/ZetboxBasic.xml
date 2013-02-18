@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-15T16:12:42Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-18T15:40:17Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -9743,20 +9743,6 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.Presentables.Calendar.CalendarItemViewModel+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
-  <ZetboxBase:TypeRef ExportGuid="bb7be5ef-4524-40ce-9bc0-999cde72ef36">
-    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2012-02-01T23:55:26.003199Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-02-01T23:55:26.003199Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:FullName>Zetbox.Client.Presentables.Calendar.CalendarRuleInstanceViewModel</ZetboxBase:FullName>
-    <ZetboxBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</ZetboxBase:Parent>
-  </ZetboxBase:TypeRef>
-  <ZetboxBase:TypeRef ExportGuid="c9bd396c-d340-4de8-a3af-655dede3fec3">
-    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2012-02-01T23:55:26.003199Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-02-01T23:55:26.003199Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:FullName>Zetbox.Client.Presentables.Calendar.CalendarRuleInstanceViewModel+Factory</ZetboxBase:FullName>
-    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
-  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="ee1e100c-b8f6-40de-a4b4-0d631a0d4bd7">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.135287Z</ZetboxBase:ChangedOn>
@@ -9825,6 +9811,20 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.135287Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-05-28T04:26:56Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.Calendar.WeekCalendarViewModel+Factory</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="bb7be5ef-4524-40ce-9bc0-999cde72ef36">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2012-02-01T23:55:26.003199Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-02-01T23:55:26.003199Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.Calendar.WorkScheduleRuleInstanceViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="c9bd396c-d340-4de8-a3af-655dede3fec3">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2012-02-01T23:55:26.003199Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-02-01T23:55:26.003199Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.Calendar.WorkScheduleRuleInstanceViewModel+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="a1c64886-b50d-4e06-b806-dc359e605626">

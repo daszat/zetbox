@@ -169,6 +169,8 @@ namespace Zetbox.Server.SchemaManagement
             if (!PreMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass))
                 return;
 
+            Log.InfoFormat("Renaming table from '{0}' to '{1}'", savedObjClass.TableName, objClass.TableName);
+
             var mapping = objClass.GetTableMapping();
             if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
             {
@@ -176,9 +178,9 @@ namespace Zetbox.Server.SchemaManagement
             }
             else if (mapping == TableMapping.TPH && objClass.BaseObjectClass != null)
             {
-                foreach (var prop in savedObjClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
+                foreach (var prop in objClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
                 {
-                    DoRenameValueTypePropertyName(savedObjClass, prop, string.Empty);
+                    DoRenameValueTypePropertyName(objClass, prop, string.Empty);
                 }
 
                 // FK names will be changed in DoChangeRelationName case
