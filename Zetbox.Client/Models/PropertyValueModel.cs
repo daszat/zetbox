@@ -915,6 +915,9 @@ namespace Zetbox.Client.Models
 
         protected override int? GetPropertyValue()
         {
+            if (!IsPropertyInitialized())
+                return null;
+
             // Work around the fact that the conversion from enumeration to int? is not possible.
             object val = Object.GetPropertyValue<object>(Property.Name);
             if (val == null)
