@@ -25,13 +25,13 @@ namespace Zetbox.App.Calendar
     public static class CommonWorkScheduleRuleActions
     {
         [Invocation]
-        public static void ToString(WorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
+        public static void ToString(CommonWorkScheduleRule obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = e.Result + "; every day";
         }
 
         [Invocation]
-        public static void AppliesTo(WorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
+        public static void AppliesTo(CommonWorkScheduleRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
             // Always true if valid
             e.Result = obj.CheckValidDate(date);
