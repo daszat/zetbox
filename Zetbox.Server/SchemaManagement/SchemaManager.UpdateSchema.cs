@@ -336,12 +336,23 @@ namespace Zetbox.Server.SchemaManagement
                 }
             }
 
-            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>()
+            var classes = schema.GetQuery<ObjectClass>()
                 .Select(o => new { Class = o, Generation = o.AndParents(c => c.BaseObjectClass).Count() })
                 .OrderBy(o => o.Generation)
                 .ThenBy(o => o.Class.Module.Namespace)
                 .ThenBy(o => o.Class.Name)
-                .Select(o => o.Class))
+                .Select(o => o.Class)
+                .ToList();
+
+            foreach (ObjectClass objClass in classes)
+            {
+                if (Case.IsRenameObjectClassTable(objClass))
+                {
+                    Case.DoRenameObjectClassTable(objClass);
+                }
+            }
+
+            foreach (ObjectClass objClass in classes)
             {
                 Log.DebugFormat("Managing Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
@@ -349,13 +360,13 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     Case.DoNewObjectClass(objClass);
                 }
-                if (Case.IsRenameObjectClassTable(objClass))
-                {
-                    Case.DoRenameObjectClassTable(objClass);
-                }
+            }
 
+            foreach (ObjectClass objClass in classes)
+            {
                 UpdateColumns(objClass, objClass.Properties, String.Empty);
             }
+
             Log.Debug(String.Empty);
         }
 
