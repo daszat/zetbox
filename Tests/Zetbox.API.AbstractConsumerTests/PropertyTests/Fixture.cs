@@ -71,6 +71,15 @@ namespace Zetbox.API.AbstractConsumerTests.PropertyTests
             //yield return new TestCaseData(typeof(PropertyGuidTest), null, ??, new Guid("12345678-abcd-ef01-2345-6789abcdef01") , Setter<PropertyGuidTest, Guid>((i, o) => i.StandardWithDefault = o), Getter<PropertyGuidTest, Guid>(i => i.StandardWithDefault));
             yield return new TestCaseData(typeof(PropertyIntTest), null, 5, 123, Setter<PropertyIntTest, int>((i, o) => i.StandardWithDefault = o), Getter<PropertyIntTest, int>(i => i.StandardWithDefault));
             yield return new TestCaseData(typeof(PropertyStringTest), Init<PropertyStringTest>(i => i.Standard = "empty value"), "five point five", "some value", Setter<PropertyStringTest, string>((i, o) => i.StandardWithDefault = o), Getter<PropertyStringTest, string>(i => i.StandardWithDefault));
+
+            yield return new TestCaseData(typeof(PropertyBoolTest), null, true, true, Setter<PropertyBoolTest, bool?>((i, o) => i.NullableWithDefault = o), Getter<PropertyBoolTest, bool?>(i => i.NullableWithDefault));
+            // yield return new TestCaseData(typeof(PropertyDateTimeTest), null, ??, new DateTime(2012, 2, 3), Setter<PropertyDateTimeTest, DateTime?>((i, o) => i.NullableWithDefault = o), Getter<PropertyDateTimeTest, DateTime?>(i => i.NullableWithDefault));
+            yield return new TestCaseData(typeof(PropertyDecimalTest), null, 5.5m, 123.5m, Setter<PropertyDecimalTest, decimal?>((i, o) => i.NullableWithDefault = o), Getter<PropertyDecimalTest, decimal?>(i => i.NullableWithDefault));
+            yield return new TestCaseData(typeof(PropertyDoubleTest), null, 5.5, 123.5, Setter<PropertyDoubleTest, double?>((i, o) => i.NullableWithDefault = o), Getter<PropertyDoubleTest, double?>(i => i.NullableWithDefault));
+            yield return new TestCaseData(typeof(PropertyEnumTest), null, TestEnum.Third, TestEnum.Second, Setter<PropertyEnumTest, TestEnum?>((i, o) => i.NullableWithDefault = o), Getter<PropertyEnumTest, TestEnum?>(i => i.NullableWithDefault));
+            //yield return new TestCaseData(typeof(PropertyGuidTest), null, ??, new Guid("12345678-abcd-ef01-2345-6789abcdef01") , Setter<PropertyGuidTest, Guid?>((i, o) => i.NullableWithDefault = o), Getter<PropertyGuidTest, Guid?>(i => i.NullableWithDefault));
+            yield return new TestCaseData(typeof(PropertyIntTest), null, 5, 123, Setter<PropertyIntTest, int?>((i, o) => i.NullableWithDefault = o), Getter<PropertyIntTest, int?>(i => i.NullableWithDefault));
+            yield return new TestCaseData(typeof(PropertyStringTest), Init<PropertyStringTest>(i => i.Standard = "empty value"), "five point five", "some value", Setter<PropertyStringTest, string>((i, o) => i.NullableWithDefault = o), Getter<PropertyStringTest, string>(i => i.NullableWithDefault));
         }
 
         protected virtual IEnumerable<TestCaseData> OtherTestCases()
@@ -122,6 +131,18 @@ namespace Zetbox.API.AbstractConsumerTests.PropertyTests
 
         public abstract class with_default_value : Fixture
         {
+            [Test]
+            [TestCaseSource("DefaultValueTestCases")]
+            public void should_be_initialised(Type t, Action<PropertyTestBase> init, object defaultValue, object value, Action<PropertyTestBase, object> setter, Func<PropertyTestBase, object> getter)
+            {
+                var obj = (PropertyTestBase)ctx.Create(ctx.GetInterfaceType(t));
+                if (init != null) init(obj);
+
+                Assert.That(obj.IsInitialized("StandardWithDefault"), Is.True);
+                Assert.That(obj.IsInitialized("NullableWithDefault"), Is.True);
+                Assert.That(getter(obj), Is.EqualTo(defaultValue));
+            }
+
             [Test]
             [TestCaseSource("DefaultValueTestCases")]
             public void should_persist_default_value(Type t, Action<PropertyTestBase> init, object defaultValue, object value, Action<PropertyTestBase, object> setter, Func<PropertyTestBase, object> getter)
