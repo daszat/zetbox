@@ -140,15 +140,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Calendar\CalendarItemViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\CalendarItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\CalendarRuleInstanceViewModel.cs" />
     <Compile Include="Presentables\Calendar\CalendarWorkspaceViewModel.cs" />
-    <Compile Include="Presentables\Calendar\DayCalendarViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\DayCalendarViewModel.cs" />
     <Compile Include="Presentables\Calendar\IAppointmentViewModel.cs" />
-    <Compile Include="Presentables\Calendar\LedgerItemViewModel.cs" />
-    <Compile Include="Presentables\Calendar\LedgerViewModel.cs" />
-    <Compile Include="Presentables\Calendar\TimeSlotItemViewModel.cs" />
-    <Compile Include="Presentables\Calendar\WeekCalendarViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\LedgerItemViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\LedgerViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\TimeSlotItemViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModel.cs" />
     <Compile Include="Presentables\DataObjectViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

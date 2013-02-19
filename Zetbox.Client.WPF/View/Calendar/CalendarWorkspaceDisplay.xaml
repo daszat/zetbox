@@ -1,8 +1,84 @@
-﻿<Window x:Class="Zetbox.Client.WPF.View.Calendar.CalendarWorkspaceDisplay"
+﻿<ctrls:WindowView x:Class="Zetbox.Client.WPF.View.Calendar.CalendarWorkspaceDisplay"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="CalendarWorkspaceDisplay" Height="300" Width="300">
+        xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+        xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
+        xmlns:client="clr-namespace:Zetbox.Client.Presentables.Calendar;assembly=Zetbox.Client"
+        xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
+        Title="{Binding Name}"
+        Height="600"
+        Width="800"
+        IsTabStop="False"
+        commands:SmartRoutedUICommand.IsCommandSink="True">
+    <!--
+    This file is part of zetbox.
+
+    Zetbox is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    Zetbox is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+    -->
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="column0"
+                              Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Expander Grid.Column="0"
+                  Style="{StaticResource Area1Expander}"
+                  IsExpanded="{Binding ShowItemsList}"
+                  ExpandDirection="Right"
+                  Header="{Binding ItemsLabel}"
+                  Expanded="Expander_Expanded"
+                  Collapsed="Expander_Collapsed">
+            <DockPanel>
+                <ctrls:WorkaroundToolBar DockPanel.Dock="Top">
+                    <ctrls:WorkaroundToolBar.Resources>
+                        <Style TargetType="{x:Type ctrls:CommandButton}"
+                               BasedOn="{StaticResource ImageToolbarButton}" />
+                    </ctrls:WorkaroundToolBar.Resources>
+                    <ctrls:CommandButton CommandViewModel="{Binding SelectAllCommand}"
+                                         Image="/Zetbox.Client.WPF;component/Images/preferences.png" />
+                    <ctrls:CommandButton CommandViewModel="{Binding ClearAllCommand}"
+                                         Image="/Zetbox.Client.WPF;component/Images/Users.png" />
+                </ctrls:WorkaroundToolBar>
+                <ListView Width="250"
+                          ItemsSource="{Binding Items}"
+                          SelectionMode="Single"
+                          SelectedItem="{Binding SelectedItem}"
+                          BorderThickness="0"
+                          Margin="2,3,0,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type client:CalendarSelectionViewModel}">
+                            <StackPanel Orientation="Horizontal"
+                                        Background="{Binding Color}">
+                                <CheckBox IsChecked="{Binding Selected}" />
+                                <TextBlock Text="{Binding Name}"
+                                           Margin="5,0,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </DockPanel>
+        </Expander>
+
+        <GridSplitter Grid.Column="1"
+                      x:Name="gridSplitter"
+                      ResizeDirection="Columns" />
+
+        <ContentPresenter Grid.Column="2"
+                          Grid.IsSharedSizeScope="True"
+                          Content="{Binding WeekCalender}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
     </Grid>
-</Window>
+</ctrls:WindowView>
