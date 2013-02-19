@@ -107,7 +107,14 @@ namespace Zetbox.API.Server
             {
                 foreach (var f in filter)
                 {
-                    result = (IQueryable<T>)result.AddFilter(f);
+                    if (f.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
+                    {
+                        result = result.WithDeactivated<T>();
+                    }
+                    else
+                    {
+                        result = (IQueryable<T>)result.AddFilter(f);
+                    }
                 }
             }
 

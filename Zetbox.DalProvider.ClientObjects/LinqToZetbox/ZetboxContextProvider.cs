@@ -381,6 +381,12 @@ namespace Zetbox.DalProvider.Client
             {
                 _eagerLoadLists = true;
             }
+            else if (m.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
+            {
+                if (_filter == null) _filter = new LinkedList<Expression>();
+                _filter.AddFirst(Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { _type.Type }, Expression.Constant(null, typeof(IQueryable<>).MakeGenericType(_type.Type))));
+                base.Visit(m.Arguments[0]);
+            }
             else if (m.IsMethodCallExpression(typeof(IQueryable)))
             {
                 // Lets serialize, server has to ensure security

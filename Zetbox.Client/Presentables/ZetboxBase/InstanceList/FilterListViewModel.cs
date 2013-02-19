@@ -215,6 +215,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         // Add default ToString Filter only if there is no filter configuration
                         AddFilter(new ToStringFilterModel(FrozenContext));
                     }
+
+                    if (_type.ImplementsIDeactivatable())
+                    {
+                        AddFilter(new WithDeactivatedFilterModel(FrozenContext));
+                    }
                 }
             }
         }

@@ -246,6 +246,26 @@ namespace Zetbox.App.Extensions
             return false;
         }
 
+        public static bool ImplementsIDeactivatable(this ObjectClass cls)
+        {
+            return ImplementsIDeactivatable(cls, true);
+        }
+
+        public static bool ImplementsIDeactivatable(this ObjectClass cls, bool lookupInBase)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            while (cls != null)
+            {
+                // TODO: use named objects
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IDeactivatable" && o.Module.Name == "ZetboxBase") == 1)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
+
         public static IList<Property> GetAllProperties(this DataType cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }

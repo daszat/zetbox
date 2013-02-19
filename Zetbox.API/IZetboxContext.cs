@@ -540,6 +540,48 @@ namespace Zetbox.API
                 return query;
             }
         }
+
+        public static IQueryable WithEagerLoading(this IQueryable query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                return query.Provider.CreateQuery(
+                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithEagerLoading", new Type[] { query.ElementType }, query.Expression));
+            }
+            else
+            {
+                return query;
+            }
+        }
+
+        public static IQueryable<T> WithDeactivated<T>(this IQueryable<T> query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                return query.Provider.CreateQuery<T>(
+                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { typeof(T) }, query.Expression));
+            }
+            else
+            {
+                return query;
+            }
+        }
+
+        public static IQueryable WithDeactivated(this IQueryable query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                return query.Provider.CreateQuery(
+                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { query.ElementType }, query.Expression));
+            }
+            else
+            {
+                return query;
+            }
+        }
     }
 
     public static class ContextTransientStateExtensions

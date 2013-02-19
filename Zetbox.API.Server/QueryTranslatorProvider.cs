@@ -82,6 +82,9 @@ namespace Zetbox.API.Server
 
         protected abstract string ImplementationSuffix { get; }
 
+        public bool WithDeactivated { get; private set; }
+
+
         #region IQueryProvider Members
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
@@ -197,6 +200,7 @@ namespace Zetbox.API.Server
 
         private void ResetProvider()
         {
+            WithDeactivated = false;
             _Parameter = new Dictionary<ParameterExpression, ParameterExpression>();
         }
         #endregion
@@ -204,6 +208,12 @@ namespace Zetbox.API.Server
         #region Visits
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
+            if (m.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
+            {
+                // save for future use
+                WithDeactivated = true;
+            }
+
             Expression objExp = base.Visit(m.Object);
             MethodInfo newMethod = GetMethodInfo(m.Method);
             ReadOnlyCollection<Expression> args = base.VisitExpressionList(m.Arguments);
@@ -216,6 +226,11 @@ namespace Zetbox.API.Server
             else if (m.IsMethodCallExpression("WithEagerLoading", typeof(ZetboxContextQueryableExtensions)))
             {
                 // Eager Loading is done automatically on the server - ignore and continue
+                return args.Single();
+            }
+            else if (m.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
+            {
+                // already saved, remove from tree
                 return args.Single();
             }
             else if (m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("OrderByDescending") || m.IsMethodCallExpression("ThenBy") || m.IsMethodCallExpression("ThenByDescending"))
@@ -267,7 +282,7 @@ namespace Zetbox.API.Server
                 if (result.IsMethodCallExpression("OfType"))
                 {
                     var type = result.Type.FindElementTypes().Single(t => t != typeof(object));
-                    return AddSecurityFilter(result, Ctx.GetImplementationType(type).ToInterfaceType());
+                    return AddFilter(result, Ctx.GetImplementationType(type).ToInterfaceType());
                 }
                 return result;
             }
@@ -311,7 +326,7 @@ namespace Zetbox.API.Server
             {
                 var result = Source.Expression;
                 var type = c.Type.GetGenericArguments().First();
-                return AddSecurityFilter(result, IftFactory(type));
+                return AddFilter(result, IftFactory(type));
             }
             else
             {
@@ -401,7 +416,41 @@ namespace Zetbox.API.Server
         }
         #endregion
 
-        #region SecurityFilter
+        #region Filter
+        private Expression AddFilter(Expression e, InterfaceType ifType)
+        {
+            e = AddSecurityFilter(e, ifType);
+            e = AddDeactivatableFilter(e, ifType);
+            return e;
+        }
+
+        private Expression AddDeactivatableFilter(Expression e, InterfaceType ifType)
+        {
+            if (WithDeactivated) return e;
+            if (!ifType.Type.IsIDataObject()) return e;
+            if (!typeof(Zetbox.App.Base.IDeactivatable).IsAssignableFrom(ifType.Type)) return e;
+
+            // original expression type
+            var type = TranslateType(ifType.Type);
+
+            // .Where(o => o.IsDeactivated == false)
+            ParameterExpression pe_o = Expression.Parameter(type, "o");
+
+            // o.IsDeactivated == false
+            var eq_isdeactivated = Expression.Equal(
+                            Expression.PropertyOrField(pe_o, "IsDeactivated"),
+                            Expression.Constant(false),
+                            false,
+                            typeof(int).GetMethod("op_Equality"));
+
+            // o => o.IsDeactivated == false
+            var filter = Expression.Lambda(eq_isdeactivated, pe_o);
+
+            // e.Where(o => o.IsDeactivated == false)
+            var result = Expression.Call(typeof(Queryable), "Where", new Type[] { type }, e, filter);
+            return result;
+        }
+
         private Expression AddSecurityFilter(Expression e, InterfaceType ifType)
         {
             if (Identity == null || !ifType.Type.IsIDataObject()) return e;
@@ -455,7 +504,7 @@ namespace Zetbox.API.Server
                 //                typeof(int).GetMethod("op_Equality"));
 
                 // (o => o.Projekte_Rights.Any(r => r.Identity == 12))
-                var filter = Expression.Lambda(any, new ParameterExpression[] { pe_o });
+                var filter = Expression.Lambda(any, pe_o);
 
                 // e.Where(o => o.Projekte_Rights.Any(r => r.Identity == 12))
                 var result = Expression.Call(typeof(Queryable), "Where", new Type[] { type }, e, filter);
