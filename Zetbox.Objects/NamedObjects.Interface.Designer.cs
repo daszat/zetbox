@@ -3339,6 +3339,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("352a4ade-1dca-4d28-9630-66bbcc1622ea"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> DeactivatableTestObject
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("12e49195-6ff4-49cd-b3a9-37f7bc350a5e"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> Fragebogen
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("a78ff235-4511-431b-8437-939f7fecded4"); }
@@ -3505,6 +3509,17 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Name
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("4a038e35-fffb-4ba7-8009-1954c317a799"); }
+                                }
+                            }
+                            public static class DeactivatableTestObject_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> IsDeactivated
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("1d4f8d1c-e09e-47fa-a05f-2c1eb224ff16"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("c1a18acc-68e5-4df8-a7ed-58dc3eeb2e80"); }
                                 }
                             }
                             public static class Fragebogen_Properties

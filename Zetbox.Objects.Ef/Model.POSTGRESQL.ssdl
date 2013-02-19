@@ -29,6 +29,7 @@
     <EntitySet Name="ControlKind" EntityType="Model.Store.ControlKind" Schema="gui" Table="ControlKinds"/>
     <EntitySet Name="CurrentSchema" EntityType="Model.Store.CurrentSchema" Schema="base" Table="CurrentSchema"/>
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Schema="base" Table="DataTypes"/>
+    <EntitySet Name="DeactivatableTestObject" EntityType="Model.Store.DeactivatableTestObject" Schema="test" Table="DeactivatableTestObjects"/>
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.Store.DefaultPropertyValue" Schema="base" Table="DefaultPropertyValues"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Schema="base" Table="EnumerationEntries"/>
     <EntitySet Name="ExceptionLogEntry" EntityType="Model.Store.ExceptionLogEntry" Schema="base" Table="ExceptionLog"/>
@@ -1545,6 +1546,15 @@
     <Property Name="ShowIconInLists" Type="bool" Nullable="false" />
     <Property Name="ShowIdInLists" Type="bool" Nullable="false" />
     <Property Name="ShowNameInLists" Type="bool" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DeactivatableTestObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="IsDeactivated" Type="bool" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="DefaultPropertyValue">

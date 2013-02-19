@@ -154,6 +154,7 @@
     <Compile Include="DateTimeParameter.Ef.Designer.cs" />
     <Compile Include="DateTimeProperty.Ef.Designer.cs" />
     <Compile Include="DayOfWeekWorkScheduleRule.Ef.Designer.cs" />
+    <Compile Include="DeactivatableTestObject.Ef.Designer.cs" />
     <Compile Include="DecimalDefaultValue.Ef.Designer.cs" />
     <Compile Include="DecimalParameter.Ef.Designer.cs" />
     <Compile Include="DecimalProperty.Ef.Designer.cs" />

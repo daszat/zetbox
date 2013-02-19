@@ -25,6 +25,7 @@
     <EntitySet Name="ControlKindEfImpl" EntityType="Model.ControlKindEfImpl" />
     <EntitySet Name="CurrentSchemaEfImpl" EntityType="Model.CurrentSchemaEfImpl" />
     <EntitySet Name="DataTypeEfImpl" EntityType="Model.DataTypeEfImpl" />
+    <EntitySet Name="DeactivatableTestObjectEfImpl" EntityType="Model.DeactivatableTestObjectEfImpl" />
     <EntitySet Name="DefaultPropertyValueEfImpl" EntityType="Model.DefaultPropertyValueEfImpl" />
     <EntitySet Name="EnumerationEntryEfImpl" EntityType="Model.EnumerationEntryEfImpl" />
     <EntitySet Name="ExceptionLogEntryEfImpl" EntityType="Model.ExceptionLogEntryEfImpl" />
@@ -1417,6 +1418,14 @@
     <Property Name="ShowIconInLists" Type="Boolean" Nullable="false"  />
     <Property Name="ShowIdInLists" Type="Boolean" Nullable="false"  />
     <Property Name="ShowNameInLists" Type="Boolean" Nullable="false"  />
+  </EntityType>
+  <EntityType Name="DeactivatableTestObjectEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="IsDeactivated" Type="Boolean" Nullable="false"  />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
   </EntityType>
   <EntityType Name="DefaultPropertyValueEfImpl" Abstract="true">
     <Key>

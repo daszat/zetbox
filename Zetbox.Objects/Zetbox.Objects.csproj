@@ -125,6 +125,7 @@
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />
     <Compile Include="DayOfWeekWorkScheduleRule.Interface.Designer.cs" />
+    <Compile Include="DeactivatableTestObject.Interface.Designer.cs" />
     <Compile Include="DecimalDefaultValue.Interface.Designer.cs" />
     <Compile Include="DecimalParameter.Interface.Designer.cs" />
     <Compile Include="DecimalProperty.Interface.Designer.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="CollectionEntries.Interface.Designer.cs" />
     <Compile Include="IAuditable.Interface.Designer.cs" />
     <Compile Include="IChangedBy.Interface.Designer.cs" />
+    <Compile Include="IDeactivatable.Interface.Designer.cs" />
     <Compile Include="IExportable.Interface.Designer.cs" />
     <Compile Include="IInvocation.Interface.Designer.cs" />
     <Compile Include="IMigrationInfo.Interface.Designer.cs" />

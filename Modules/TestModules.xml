@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-18T16:52:36Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-19T16:38:51Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -3991,6 +3991,51 @@ public static void ObjectIsValid(Company obj, ObjectIsValidEventArgs e)
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Companies</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="12e49195-6ff4-49cd-b3a9-37f7bc350a5e">
+    <ZetboxBase:ChangedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>DeactivatableTestObject</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(DeactivatableTestObject obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(DeactivatableTestObject obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(DeactivatableTestObject obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(DeactivatableTestObject obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(DeactivatableTestObject obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(DeactivatableTestObject obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>DeactivatableTestObjects</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="a78ff235-4511-431b-8437-939f7fecded4">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:08.070755Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-01-22T00:34:11Z</ZetboxBase:CreatedOn>
@@ -5407,6 +5452,10 @@ public static void ObjectIsValid(TPHDerivedBObj obj, ObjectIsValidEventArgs e)
     <ZetboxBase:A>3a8d152e-b8d1-4439-bfe4-367731218ce9</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
   </ZetboxBase:DataType_implements_Interface_RelationEntry>
+  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="8ba978ac-5e3f-4c5b-bb4d-d4356fc9e96c">
+    <ZetboxBase:A>12e49195-6ff4-49cd-b3a9-37f7bc350a5e</ZetboxBase:A>
+    <ZetboxBase:B>606a487e-35da-4ce9-91d1-f0cd844d7a35</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_Interface_RelationEntry>
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="dcfb2e10-569d-412e-9f66-c42d6959fbe2">
     <ZetboxBase:A>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
@@ -5743,6 +5792,81 @@ public static void isValid_Name(Company obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>352a4ade-1dca-4d28-9630-66bbcc1622ea</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:BoolProperty ExportGuid="1d4f8d1c-e09e-47fa-a05f-2c1eb224ff16">
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_IsDeactivated(DeactivatableTestObject obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_IsDeactivated(DeactivatableTestObject obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_IsDeactivated(DeactivatableTestObject obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_IsDeactivated(DeactivatableTestObject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.IsDeactivated == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>9bc4e435-0b97-4bf6-86c6-9dd1f1848f71</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>If true, the item will be hidden in any search</ZetboxBase:Description>
+    <ZetboxBase:Label>Is deactivated</ZetboxBase:Label>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>IsDeactivated</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>12e49195-6ff4-49cd-b3a9-37f7bc350a5e</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:StringProperty ExportGuid="c1a18acc-68e5-4df8-a7ed-58dc3eeb2e80">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Name(DeactivatableTestObject obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(DeactivatableTestObject obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(DeactivatableTestObject obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(DeactivatableTestObject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Name</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>12e49195-6ff4-49cd-b3a9-37f7bc350a5e</ZetboxBase:ObjectClass>
     <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
@@ -10656,6 +10780,18 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:ConstrainedProperty>4a038e35-fffb-4ba7-8009-1954c317a799</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="50776d90-062d-4d90-a572-a7be156b94fb">
+    <ZetboxBase:ChangedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>1d4f8d1c-e09e-47fa-a05f-2c1eb224ff16</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="2af1fae3-4eae-406d-9206-da462ffa9252">
+    <ZetboxBase:ChangedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>c1a18acc-68e5-4df8-a7ed-58dc3eeb2e80</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>200</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="00c80ef5-4c49-4674-bfed-b46e8bc8e156">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:06.88893Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>3a91e745-0dd2-4f31-864e-eaf657ddb577</ZetboxBase:ConstrainedProperty>
@@ -10993,6 +11129,12 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:CreatedOn>2012-07-18T19:41:43.085769Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>65839be9-d3b7-4910-9812-c2d44d008c41</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="9bc4e435-0b97-4bf6-86c6-9dd1f1848f71">
+    <ZetboxBase:ChangedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T15:38:51.390311Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>1d4f8d1c-e09e-47fa-a05f-2c1eb224ff16</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
   <ZetboxBase:BoolDefaultValue ExportGuid="25174b5e-3ced-4a4d-a5d8-917091f46545">
     <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:CreatedOn>

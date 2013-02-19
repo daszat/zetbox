@@ -166,6 +166,7 @@
     <Compile Include="DateTimeParameter.NHibernate.Designer.cs" />
     <Compile Include="DateTimeProperty.NHibernate.Designer.cs" />
     <Compile Include="DayOfWeekWorkScheduleRule.NHibernate.Designer.cs" />
+    <Compile Include="DeactivatableTestObject.NHibernate.Designer.cs" />
     <Compile Include="DecimalDefaultValue.NHibernate.Designer.cs" />
     <Compile Include="DecimalParameter.NHibernate.Designer.cs" />
     <Compile Include="DecimalProperty.NHibernate.Designer.cs" />

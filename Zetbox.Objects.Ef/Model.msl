@@ -499,6 +499,15 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DeactivatableTestObjectEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DeactivatableTestObjectEfImpl)">
+	    <MappingFragment StoreEntitySet="DeactivatableTestObject">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsDeactivated" ColumnName="IsDeactivated" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="DefaultPropertyValueEfImpl">
       <EntityTypeMapping TypeName="Model.BoolDefaultValueEfImpl">
 	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
