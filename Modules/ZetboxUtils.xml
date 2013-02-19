@@ -3416,7 +3416,7 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
   </ZetboxBase:BoolDefaultValue>
   <GUI:ViewModelDescriptor ExportGuid="a78c6c62-e8ae-4625-852e-53f6a55b5d9e">
     <GUI:DefaultEditorKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:DefaultEditorKind>
-    <GUI:Description>Workspace viewmodel for the calendar</GUI:Description>
+    <GUI:Description>Workspace ViewModel for the calendar</GUI:Description>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:ViewModelRef>d34e8436-7415-477a-b43c-45aab82706db</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
@@ -3674,6 +3674,14 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Name>Zetbox.App.Calendar.WorkScheduleRuleInstanceDisplay</GUI:Name>
   </GUI:ControlKind>
+  <GUI:Application ExportGuid="85675ee6-917a-4bd6-8c76-95a08726310f">
+    <GUI:ChangedOn>2013-02-19T09:18:15.322162Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2013-02-19T09:18:15.322162Z</GUI:CreatedOn>
+    <GUI:Description>A calendar application</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Name>Calendar</GUI:Name>
+    <GUI:WorkspaceViewModel>a78c6c62-e8ae-4625-852e-53f6a55b5d9e</GUI:WorkspaceViewModel>
+  </GUI:Application>
   <ZetboxBase:Module ExportGuid="21dcfc7c-ab5c-4d04-8a41-9759b23907f9">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.648235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-10T22:14:05Z</ZetboxBase:CreatedOn>

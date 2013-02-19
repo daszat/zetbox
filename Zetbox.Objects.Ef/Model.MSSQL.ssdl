@@ -1460,7 +1460,7 @@
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>

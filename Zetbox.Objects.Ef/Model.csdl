@@ -1230,7 +1230,7 @@
                         FromRole="Application"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Description" Type="String" Nullable="true" MaxLength="200"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_Application_has_Module"
