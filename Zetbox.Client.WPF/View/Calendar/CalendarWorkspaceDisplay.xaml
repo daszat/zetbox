@@ -52,7 +52,7 @@
                     <ctrls:CommandButton CommandViewModel="{Binding ClearAllCommand}"
                                          Image="/Zetbox.Client.WPF;component/Images/Users.png" />
                 </ctrls:WorkaroundToolBar>
-                <ListView Width="250"
+                <ListView MinWidth="250"
                           ItemsSource="{Binding Items}"
                           SelectionMode="Single"
                           SelectedItem="{Binding SelectedItem}"
