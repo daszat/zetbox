@@ -24,7 +24,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
             this.Calendar = calendar;
             this.CalendarViewModel = DataObjectViewModel.Fetch(ViewModelFactory, dataCtx, parent, calendar);
-            this.Selected = isSelf;
+            this._Selected = isSelf;
             this.IsSelf = isSelf;
             this.Color = isSelf ? "#F1F5E3" : null;
         }
@@ -87,13 +87,10 @@ namespace Zetbox.Client.Presentables.Calendar
             "#FFAAFF",
         };
         private bool _shouldUpdateCalendarItems = true;
-        private Func<IZetboxContext> _ctxFactory;
 
-        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
+        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
-            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
-            _ctxFactory = ctxFactory;
         }
 
         public override string Name
@@ -281,9 +278,9 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_WeekCalender == null)
                 {
                     _WeekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
-                        .Invoke(DataContext, this, GetData);
+                        .Invoke(DataContext, this, FetchEvents);
                     _WeekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
-                    _WeekCalender.NewItemCreating += (dt, e) =>
+                    _WeekCalender.NewEventCreating += (dt, e) =>
                     {
                     };
                     _WeekCalender.Refresh();
@@ -299,10 +296,9 @@ namespace Zetbox.Client.Presentables.Calendar
                 OnPropertyChanged("SelectedItems");
             }
         }
-        private IEnumerable<EventViewModel> GetData(DateTime from, DateTime to)
+        private IEnumerable<EventViewModel> FetchEvents(DateTime from, DateTime to)
         {
             using (Logging.Client.InfoTraceMethodCall("CalendarViewModel.GetData()"))
-            using(var ctx = _ctxFactory())
             {
                 var calendars = Items.Where(i => i.Selected).Select(i => i.Calendar.ID).ToArray();
                 
@@ -313,9 +309,9 @@ namespace Zetbox.Client.Presentables.Calendar
                     predicateCalendars = predicateCalendars.OrElse<cal.Event>(i => i.Calendar.ID == localID);
                 }
 
-                var events = ctx.GetQuery<cal.Event>()
+                var events = DataContext.GetQuery<cal.Event>()
                     .Where(predicateCalendars)
-                    .Where(e => e.StartDate >= from && e.EndDate <= to)
+                    .Where(e => (e.StartDate >= from && e.StartDate <= to) || (e.EndDate >= from && e.EndDate <= to) || (e.StartDate <= from && e.EndDate >= to))
                     .ToList();
 
                 var result = new List<EventViewModel>();

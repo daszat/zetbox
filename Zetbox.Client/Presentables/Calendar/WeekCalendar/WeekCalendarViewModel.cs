@@ -329,10 +329,9 @@ namespace Zetbox.Client.Presentables.Calendar
                         DataContext,
                         this,
                         a);
+                    vmdl.IsAllDay = vmdl.IsAllDay;
                     vmdl.From = current == a.Event.StartDate ? current : current.Date;
                     vmdl.Until = current.Date == a.Event.EndDate.Date ? a.Event.EndDate : current.Date.AddDays(1);
-
-                    vmdl.IsAllDay = vmdl.From.TimeOfDay == TimeSpan.Zero && vmdl.Until.TimeOfDay == TimeSpan.Zero;
                     result.Add(vmdl);
                 }
                 return result;
@@ -355,10 +354,10 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public void NewItem(DateTime dt)
+        public void NewEvent(DateTime dt)
         {
             var result = new NewItemCreatingEventArgs();
-            OnNewItemCreating(dt, result);
+            OnNewEventCreating(dt, result);
 
             if (result.EventViewModel == null)
             {
@@ -381,10 +380,10 @@ namespace Zetbox.Client.Presentables.Calendar
         /// Fired when a new Items should be created. The receiver is responsible for createing the new Item plus the corresponding Calender Item ViewModel.
         /// If either CalendarViewModel or ObjectViewModel of the result is null, the operation will be aborted.
         /// </summary>
-        public event NewItemCreatingEventHandler NewItemCreating;
-        protected void OnNewItemCreating(DateTime dt, NewItemCreatingEventArgs e)
+        public event NewItemCreatingEventHandler NewEventCreating;
+        protected void OnNewEventCreating(DateTime dt, NewItemCreatingEventArgs e)
         {
-            var temp = NewItemCreating;
+            var temp = NewEventCreating;
             if (temp != null)
             {
                 temp(dt, e);

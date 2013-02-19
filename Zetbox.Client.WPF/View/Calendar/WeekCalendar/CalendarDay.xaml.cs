@@ -69,7 +69,7 @@ namespace Zetbox.Client.WPF.View.Calendar
             if (sender is FrameworkElement)
             {
                 var mdl = ((TimeSlotItemViewModel)((FrameworkElement)sender).DataContext);
-                ViewModel.NewTermin(mdl.DateTime);
+                ViewModel.NewEvent(mdl.DateTime);
             }
         }
 

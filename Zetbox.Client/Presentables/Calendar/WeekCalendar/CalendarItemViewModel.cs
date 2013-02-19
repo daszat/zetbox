@@ -41,8 +41,8 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             switch (e.PropertyName)
             {
-                case "From":
-                case "Until":
+                case "StartDate":
+                case "EndDate":
                     // must be handled by Calendar
                     break;
                 case "Summary":
@@ -162,7 +162,7 @@ namespace Zetbox.Client.Presentables.Calendar
             get
             {
                 // TODO: Re-implement the color feature!
-                return null;
+                return WeekCalendarViewModel.DefaultColor;
             }
         }
 
