@@ -25,19 +25,19 @@ namespace Zetbox.Client.Presentables.Calendar
 
     public class CalendarItemViewModel : ViewModel
     {
-        public new delegate CalendarItemViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IAppointmentViewModel obj);
+        public new delegate CalendarItemViewModel Factory(IZetboxContext dataCtx, ViewModel parent, EventViewModel obj);
 
-        public CalendarItemViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IAppointmentViewModel obj)
+        public CalendarItemViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, EventViewModel obj)
             : base(dependencies, dataCtx, parent)
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
             this.SlotWidth = this.OverlappingWidth = 1.0;
             this.ObjectViewModel = obj;
-            this.ObjectViewModel.PropertyChanged += AppointmentViewModelChanged;
+            this.ObjectViewModel.PropertyChanged += EventViewModelChanged;
         }
 
-        private void AppointmentViewModelChanged(object sender, PropertyChangedEventArgs e)
+        private void EventViewModelChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -45,12 +45,9 @@ namespace Zetbox.Client.Presentables.Calendar
                 case "Until":
                     // must be handled by Calendar
                     break;
-                case "Subject":
+                case "Summary":
                     OnPropertyChanged("Name");
-                    OnPropertyChanged("Text");
-                    break;
-                case "SubjectAsync":
-                    OnPropertyChanged("TextAsync");
+                    OnPropertyChanged("Summary");
                     break;
                 case "Color":
                     OnPropertyChanged("Color");
@@ -89,7 +86,7 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public IAppointmentViewModel ObjectViewModel { get; private set; }
+        public EventViewModel ObjectViewModel { get; private set; }
 
         private DateTime _From;
         public DateTime From
@@ -152,19 +149,11 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public string Text
+        public string Summary
         {
             get
             {
-                return ObjectViewModel.Subject;
-            }
-        }
-
-        public string TextAsync
-        {
-            get
-            {
-                return ObjectViewModel.SubjectAsync;
+                return  ObjectViewModel.Event.Summary;
             }
         }
 
@@ -172,7 +161,8 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return ObjectViewModel.Color;
+                // TODO: Re-implement the color feature!
+                return null;
             }
         }
 
@@ -208,7 +198,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public override string Name
         {
-            get { return Text; }
+            get { return Summary; }
         }
 
         public double ActualWidth

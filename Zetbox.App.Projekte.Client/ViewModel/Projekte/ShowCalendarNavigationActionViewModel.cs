@@ -44,7 +44,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 
         public override void Execute()
         {
-            ViewModelFactory.ShowModel(ViewModelFactory.CreateViewModel<CalendarWorkspaceViewModel.Factory>().Invoke(_ctxFactory(), null), true);
+            ViewModelFactory.ShowMessage("Syncronisation of milestones is not implemented yet", "Not implemented yet");
         }
     }
 }

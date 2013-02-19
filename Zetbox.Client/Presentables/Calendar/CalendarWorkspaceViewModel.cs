@@ -7,7 +7,11 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables;
     using Zetbox.API;
     using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
     using cal = Zetbox.App.Calendar;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.App.GUI;
+    using Zetbox.API.Utils;
 
     public class CalendarSelectionViewModel : ViewModel
     {
@@ -70,13 +74,26 @@ namespace Zetbox.Client.Presentables.Calendar
     }
 
     [ViewModelDescriptor]
-    public class CalendarWorkspaceViewModel : WindowViewModel
+    public class CalendarWorkspaceViewModel : WindowViewModel, IDeleteCommandParameter, INewCommandParameter
     {
         public new delegate CalendarWorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        public static string[] Colors = new[] { 
+            "#FFAAAA",
+            "#AAFFAA",
+            "#AAAAFF",
+            "#FFFFAA",
+            "#AAFFFF",
+            "#FFAAFF",
+        };
+        private bool _shouldUpdateCalendarItems = true;
+        private Func<IZetboxContext> _ctxFactory;
+
+        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent)
         {
+            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            _ctxFactory = ctxFactory;
         }
 
         public override string Name
@@ -92,14 +109,43 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_Items == null)
                 {
+                    var myID = CurrentIdentity != null ? CurrentIdentity.ID : 0;
                     _Items = DataContext.GetQuery<cal.Calendar>()
                         .OrderBy(i => i.Name)
                         .ToList()
-                        .Select(i => ViewModelFactory.CreateViewModel<CalendarSelectionViewModel.Factory>().Invoke(DataContext, this, i, i.Owner == CurrentIdentity))
+                        .Select(i =>
+                        {
+                            var mdl = ViewModelFactory.CreateViewModel<CalendarSelectionViewModel.Factory>().Invoke(DataContext, this, i, i.Owner != null ? i.Owner.ID == myID : false);
+                            mdl.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(item_PropertyChanged);
+                            return mdl;
+                        })
                         .ToList();
                     SelectedItem = _Items.FirstOrDefault(i => i.IsSelf);
                 }
                 return _Items;
+            }
+        }
+
+        void item_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Selected")
+            {
+                var obj = (CalendarSelectionViewModel)sender;
+                if (!obj.IsSelf)
+                {
+                    if (obj.Selected)
+                    {
+                        obj.Color = Colors[Items.Count(i => i.Selected) % Colors.Length];
+                    }
+                    else
+                    {
+                        obj.Color = null;
+                    }
+                }
+                if (_shouldUpdateCalendarItems)
+                {
+                    _WeekCalender.Refresh();
+                }
             }
         }
 
@@ -121,6 +167,111 @@ namespace Zetbox.Client.Presentables.Calendar
         }
         #endregion
 
+        #region Commands
+
+        private NewDataObjectCommand _NewCommand;
+        public ICommandViewModel NewCommand
+        {
+            get
+            {
+                if (_NewCommand == null)
+                {
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        typeof(cal.Event).GetObjectClass(FrozenContext));
+                }
+                return _NewCommand;
+            }
+        }
+
+        public void New()
+        {
+            if (NewCommand.CanExecute(null))
+                NewCommand.Execute(null);
+        }
+
+        private DeleteDataObjectCommand _DeleteCommand;
+        public ICommandViewModel DeleteCommand
+        {
+            get
+            {
+                if (_DeleteCommand == null)
+                {
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this);
+                }
+                return _DeleteCommand;
+            }
+        }
+
+        public void Delete()
+        {
+            if (DeleteCommand.CanExecute(null))
+                DeleteCommand.Execute(null);
+        }
+
+        private ICommandViewModel _SelectAllCommand = null;
+        public ICommandViewModel SelectAllCommand
+        {
+            get
+            {
+                if (_SelectAllCommand == null)
+                {
+                    _SelectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Alle", "Alle auswählen", SelectAll, null, null);
+                }
+                return _SelectAllCommand;
+            }
+        }
+
+        public void SelectAll()
+        {
+            _shouldUpdateCalendarItems = false;
+            try
+            {
+                foreach (var p in Items)
+                {
+                    p.Selected = true;
+                }
+            }
+            finally
+            {
+                _shouldUpdateCalendarItems = true;
+                _WeekCalender.Refresh();
+            }
+        }
+
+        private ICommandViewModel _ClearAllCommand = null;
+        public ICommandViewModel ClearAllCommand
+        {
+            get
+            {
+                if (_ClearAllCommand == null)
+                {
+                    _ClearAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Nur selbst", "Nur sich selbst auswählen", ClearAll, null, null);
+                }
+                return _ClearAllCommand;
+            }
+        }
+
+        public void ClearAll()
+        {
+            _shouldUpdateCalendarItems = false;
+            try
+            {
+                foreach (var p in Items)
+                {
+                    if (!p.IsSelf)
+                        p.Selected = false;
+                }
+            }
+            finally
+            {
+                _shouldUpdateCalendarItems = true;
+                _WeekCalender.Refresh();
+            }
+        }
+        #endregion
+
         #region Calendar
         private WeekCalendarViewModel _WeekCalender = null;
         public WeekCalendarViewModel WeekCalender
@@ -130,7 +281,8 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_WeekCalender == null)
                 {
                     _WeekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
-                        .Invoke(DataContext, this, null);
+                        .Invoke(DataContext, this, GetData);
+                    _WeekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
                     _WeekCalender.NewItemCreating += (dt, e) =>
                     {
                     };
@@ -139,6 +291,53 @@ namespace Zetbox.Client.Presentables.Calendar
                 return _WeekCalender;
             }
         }
+        void _WeekCalender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedItem")
+            {
+                // Me too
+                OnPropertyChanged("SelectedItems");
+            }
+        }
+        private IEnumerable<EventViewModel> GetData(DateTime from, DateTime to)
+        {
+            using (Logging.Client.InfoTraceMethodCall("CalendarViewModel.GetData()"))
+            using(var ctx = _ctxFactory())
+            {
+                var calendars = Items.Where(i => i.Selected).Select(i => i.Calendar.ID).ToArray();
+                
+                var predicateCalendars = LinqExtensions.False<cal.Event>();
+                foreach (var id in calendars)
+                {
+                    var localID = id;
+                    predicateCalendars = predicateCalendars.OrElse<cal.Event>(i => i.Calendar.ID == localID);
+                }
+
+                var events = ctx.GetQuery<cal.Event>()
+                    .Where(predicateCalendars)
+                    .Where(e => e.StartDate >= from && e.EndDate <= to)
+                    .ToList();
+
+                var result = new List<EventViewModel>();
+
+                result.AddRange(events.Select(obj =>
+                {
+                    var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, WeekCalender, obj);
+                    // Color ?
+                    return vmdl;
+                }));
+
+                return result;
+            }
+        }
         #endregion
+
+        public bool IsReadOnly { get { return false; } }
+        bool IDeleteCommandParameter.AllowDelete { get { return true; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems
+        {
+            get { return new ViewModel[] { (ViewModel)WeekCalender.SelectedItem }; /* return selected events! */ }
+        }
+        bool INewCommandParameter.AllowAddNew { get { return true; } }
     }
 }

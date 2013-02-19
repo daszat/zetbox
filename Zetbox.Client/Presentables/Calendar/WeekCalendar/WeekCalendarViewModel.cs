@@ -30,11 +30,12 @@ namespace Zetbox.Client.Presentables.Calendar
     [ViewModelDescriptor]
     public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel, IRefreshCommandListener
     {
-        public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> source);
+        public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<EventViewModel>> source);
 
-        public WeekCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> source)
+        public WeekCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<EventViewModel>> source)
             : base(dependencies, dataCtx, parent)
         {
+            if (source == null) throw new ArgumentNullException("source");
             this._Source = source;
         }
 
@@ -250,31 +251,10 @@ namespace Zetbox.Client.Presentables.Calendar
             get { return "Details"; }
         }
 
-        private Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> _Source = null;
-        public Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> Source
-        {
-            get
-            {
-                if (_Source == null)
-                {
-                    _Source = GetSource();
-                }
-                return _Source;
-            }
-            set
-            {
-                _Source = value;
-                Refresh();
-            }
-        }
+        private Func<DateTime, DateTime, IEnumerable<EventViewModel>> _Source = null;
 
-        protected virtual Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> GetSource()
-        {
-            return (f, u) => new IAppointmentViewModel[] { };
-        }
-
-        private IAppointmentViewModel _selectedItem;
-        public IAppointmentViewModel SelectedItem
+        private EventViewModel _selectedItem;
+        public EventViewModel SelectedItem
         {
             get
             {
@@ -296,18 +276,18 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        private IEnumerable<CalendarItemViewModel> FindCalendarItemViewModel(IAppointmentViewModel mdl)
+        private IEnumerable<CalendarItemViewModel> FindCalendarItemViewModel(EventViewModel mdl)
         {
             if (mdl == null) return null;
             return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl));
         }
 
 
-        private List<IAppointmentViewModel> _allAppointments;
+        private List<EventViewModel> _allAppointments;
 
         private void EnsureAppointments()
         {
-            _allAppointments = Source(From, To).ToList();
+            _allAppointments = _Source(From, To).ToList();
             foreach (var a in _allAppointments)
             {
                 a.PropertyChanged += AppointmentViewModelChanged;
@@ -333,13 +313,13 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        private List<CalendarItemViewModel> CreateCalendarItemViewModel(IAppointmentViewModel a)
+        private List<CalendarItemViewModel> CreateCalendarItemViewModel(EventViewModel a)
         {
-            if (a.From <= a.Until)
+            if (a.Event.StartDate <= a.Event.EndDate)
             {
                 List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
-                var from = a.From;
-                var until = a.Until;
+                var from = a.Event.StartDate;
+                var until = a.Event.EndDate;
                 if (from < this.From) from = this.From;
                 if (until > this.To) until = this.To;
                 for (var current = from; current < until; current = current.Date.AddDays(1))
@@ -349,8 +329,8 @@ namespace Zetbox.Client.Presentables.Calendar
                         DataContext,
                         this,
                         a);
-                    vmdl.From = current == a.From ? current : current.Date;
-                    vmdl.Until = current.Date == a.Until.Date ? a.Until : current.Date.AddDays(1);
+                    vmdl.From = current == a.Event.StartDate ? current : current.Date;
+                    vmdl.Until = current.Date == a.Event.EndDate.Date ? a.Event.EndDate : current.Date.AddDays(1);
 
                     vmdl.IsAllDay = vmdl.From.TimeOfDay == TimeSpan.Zero && vmdl.Until.TimeOfDay == TimeSpan.Zero;
                     result.Add(vmdl);
@@ -359,7 +339,7 @@ namespace Zetbox.Client.Presentables.Calendar
             }
             else
             {
-                Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", a.Subject, a.From, a.Until);
+                Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", a.Event.Summary, a.Event.StartDate, a.Event.EndDate);
                 return null;
             }
         }
@@ -380,7 +360,7 @@ namespace Zetbox.Client.Presentables.Calendar
             var result = new NewItemCreatingEventArgs();
             OnNewItemCreating(dt, result);
 
-            if (result.AppointmentViewModel == null)
+            if (result.EventViewModel == null)
             {
                 // Abort
                 return;
@@ -388,12 +368,12 @@ namespace Zetbox.Client.Presentables.Calendar
 
             EnsureAppointments();
 
-            var items = CreateCalendarItemViewModel(result.AppointmentViewModel);
+            var items = CreateCalendarItemViewModel(result.EventViewModel);
             if (items != null && items.Count > 0)
             {
                 _allItems.AddRange(items);
                 RecreateItems();
-                SelectedItem = result.AppointmentViewModel;
+                SelectedItem = result.EventViewModel;
             }
         }
 
@@ -416,7 +396,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
     public class NewItemCreatingEventArgs : EventArgs
     {
-        public IAppointmentViewModel AppointmentViewModel;
+        public EventViewModel EventViewModel;
     }
 
     public delegate void NewItemCreatingEventHandler(DateTime dt, NewItemCreatingEventArgs e);
