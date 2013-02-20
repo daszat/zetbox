@@ -88,7 +88,7 @@ namespace Zetbox.Client.Presentables.Calendar
     }
 
     [ViewModelDescriptor]
-    public class CalendarWorkspaceViewModel : WindowViewModel, IDeleteCommandParameter
+    public class CalendarWorkspaceViewModel : WindowViewModel, IDeleteCommandParameter, IRefreshCommandListener
     {
         public new delegate CalendarWorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
@@ -237,7 +237,11 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (newItem != null)
                 {
                     ctx.SubmitChanges();
-                    if(_WeekCalender != null) _WeekCalender.Refresh();
+                    if (_WeekCalender != null)
+                    {
+                        _WeekCalender.Refresh();
+                        _WeekCalender.SelectedItem = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<cal.Event>(newItem.ID));
+                    }
                 }
             }
         }
@@ -287,7 +291,7 @@ namespace Zetbox.Client.Presentables.Calendar
             finally
             {
                 _shouldUpdateCalendarItems = true;
-                if(_WeekCalender != null) _WeekCalender.Refresh();
+                if (_WeekCalender != null) _WeekCalender.Refresh();
             }
         }
 
@@ -386,7 +390,18 @@ namespace Zetbox.Client.Presentables.Calendar
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
         IEnumerable<ViewModel> ICommandParameter.SelectedItems
         {
-            get { return new ViewModel[] { (ViewModel)WeekCalender.SelectedItem }; /* return selected events! */ }
+            get
+            {
+                return new ViewModel[] { (ViewModel)WeekCalender.SelectedItem }; // return selected events!  
+            }
+        }
+
+        void IRefreshCommandListener.Refresh()
+        {
+            if (_WeekCalender != null)
+            {
+                _WeekCalender.Refresh();
+            }
         }
     }
 }
