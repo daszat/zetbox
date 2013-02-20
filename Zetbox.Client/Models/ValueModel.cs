@@ -293,11 +293,21 @@ namespace Zetbox.Client.Models
             _dateTimeStyle = dateTimeStyle;
         }
 
-        private readonly DateTimeStyles _dateTimeStyle;
-
+        private DateTimeStyles _dateTimeStyle;
         public DateTimeStyles DateTimeStyle
         {
-            get { return _dateTimeStyle; }
+            get 
+            { 
+                return _dateTimeStyle; 
+            }
+            set
+            {
+                if (_dateTimeStyle != value)
+                {
+                    _dateTimeStyle = value;
+                    OnPropertyChanged("DateTimeStyle");
+                }
+            }
         }
 
         TimeSpan? IValueModel<TimeSpan?>.Value
@@ -328,7 +338,7 @@ namespace Zetbox.Client.Models
                 }
             }
         }
-    
+
         ZbTask<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
         {
             return new ZbTask<TimeSpan?>(ZbTask.Synchron, () => ((IValueModel<TimeSpan?>)this).Value);
@@ -574,11 +584,11 @@ namespace Zetbox.Client.Models
         public CompoundObjectValueModel(IZetboxContext ctx, string label, string description, bool allowNullInput, bool isReadOnly, CompoundObject def)
             : this(
                 ctx,
-                label, 
-                description, 
-                allowNullInput, 
+                label,
+                description,
+                allowNullInput,
                 isReadOnly,
-                def != null ? (def.RequestedKind ?? (def.DefaultPropertyViewModelDescriptor != null ? def.DefaultPropertyViewModelDescriptor.DefaultEditorKind : null)) : null, 
+                def != null ? (def.RequestedKind ?? (def.DefaultPropertyViewModelDescriptor != null ? def.DefaultPropertyViewModelDescriptor.DefaultEditorKind : null)) : null,
                 def)
         {
         }

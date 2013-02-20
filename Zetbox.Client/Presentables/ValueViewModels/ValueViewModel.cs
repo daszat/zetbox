@@ -1310,8 +1310,21 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             : base(dependencies, dataCtx, parent, mdl)
         {
             DateTimeModel = (IDateTimeValueModel)mdl;
+            DateTimeModel.PropertyChanged += new PropertyChangedEventHandler(DateTimeModel_PropertyChanged);
             _timePartViewModel = ViewModelFactory.CreateViewModel<NullableTimePartPropertyViewModel.Factory>().Invoke(DataContext, this, mdl);
             _datePartViewModel = ViewModelFactory.CreateViewModel<NullableDatePartPropertyViewModel.Factory>().Invoke(DataContext, this, mdl);
+        }
+
+        void DateTimeModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "DateTimeStyle":
+                    OnPropertyChanged("DatePartVisible");
+                    OnPropertyChanged("TimePartVisible");
+                    NotifyValueChanged();
+                    break;
+            }
         }
 
         public IDateTimeValueModel DateTimeModel { get; private set; }
