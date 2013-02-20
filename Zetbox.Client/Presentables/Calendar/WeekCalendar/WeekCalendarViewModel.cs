@@ -354,50 +354,20 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public void NewEvent(DateTime dt)
+        public event NewEventHandler New;
+        public void NotifyNew(DateTime dt)
         {
-            var result = new NewItemCreatingEventArgs();
-            OnNewEventCreating(dt, result);
-
-            if (result.EventViewModel == null)
-            {
-                // Abort
-                return;
-            }
-
-            EnsureAppointments();
-
-            var items = CreateCalendarItemViewModel(result.EventViewModel);
-            if (items != null && items.Count > 0)   
-            {
-                _allItems.AddRange(items);
-                RecreateItems();
-                SelectedItem = result.EventViewModel;
-            }
-        }
-
-        /// <summary>
-        /// Fired when a new Items should be created. The receiver is responsible for createing the new Item plus the corresponding Calender Item ViewModel.
-        /// If either CalendarViewModel or ObjectViewModel of the result is null, the operation will be aborted.
-        /// </summary>
-        public event NewItemCreatingEventHandler NewEventCreating;
-        protected void OnNewEventCreating(DateTime dt, NewItemCreatingEventArgs e)
-        {
-            var temp = NewEventCreating;
+            var temp = New;
             if (temp != null)
             {
-                temp(dt, e);
+                temp(dt);
             }
         }
+
 
         public static readonly string DefaultColor = "#F1F5E3";
     }
 
-    public class NewItemCreatingEventArgs : EventArgs
-    {
-        public EventViewModel EventViewModel;
-    }
-
-    public delegate void NewItemCreatingEventHandler(DateTime dt, NewItemCreatingEventArgs e);
+    public delegate void NewEventHandler(DateTime dt);
 
 }

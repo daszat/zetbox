@@ -334,17 +334,12 @@ namespace Zetbox.Client.Presentables.Calendar
                     _WeekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
                         .Invoke(DataContext, this, FetchEvents);
                     _WeekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
-                    _WeekCalender.NewEventCreating += new NewItemCreatingEventHandler(_WeekCalender_NewEventCreating);
+                    _WeekCalender.New += New;
                     // Initial refresh
                     _WeekCalender.Refresh();
                 }
                 return _WeekCalender;
             }
-        }
-
-        void _WeekCalender_NewEventCreating(DateTime dt, NewItemCreatingEventArgs e)
-        {
-            New(dt);
         }
 
         void _WeekCalender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
