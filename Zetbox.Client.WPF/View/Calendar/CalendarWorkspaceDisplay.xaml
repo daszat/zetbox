@@ -33,6 +33,7 @@
                        BasedOn="{StaticResource ImageToolbarButton}" />
             </ctrls:WorkaroundToolBar.Resources>
             <ctrls:CommandButton CommandViewModel="{Binding NewCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding OpenCommand}" />
             <ctrls:CommandButton CommandViewModel="{Binding DeleteCommand}" />
         </ctrls:WorkaroundToolBar>
         <Grid>

@@ -354,20 +354,43 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public event NewEventHandler New;
+        public event EventHandler<NewEventArgs> New;
         public void NotifyNew(DateTime dt)
         {
             var temp = New;
             if (temp != null)
             {
-                temp(dt);
+                temp(this, new NewEventArgs(dt));
             }
         }
 
+        public event EventHandler<OpenEventArgs> Open;
+        public void NotifyOpen(EventViewModel evt)
+        {
+            var temp = Open;
+            if (temp != null)
+            {
+                temp(this, new OpenEventArgs(evt));
+            }
+        }
 
         public static readonly string DefaultColor = "#F1F5E3";
     }
 
-    public delegate void NewEventHandler(DateTime dt);
-
+    public class NewEventArgs : EventArgs
+    {
+        public NewEventArgs(DateTime dt)
+        {
+            Date = dt;
+        }
+        public DateTime Date { get; private set; }
+    }
+    public class OpenEventArgs : EventArgs
+    {
+        public OpenEventArgs(EventViewModel evt)
+        {
+            Event = evt;
+        }
+        public EventViewModel Event { get; private set; }
+    }
 }

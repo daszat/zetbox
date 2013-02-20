@@ -22,101 +22,111 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <Border Background="#E3EFFF"
-          BorderThickness="0">
-    <Grid x:Name="panelCalendarDay">
-      <ItemsControl ItemsSource="{Binding TimeSlotItems}">
-        <ItemsControl.ItemTemplate>
-          <DataTemplate DataType="{x:Type viewmdl:TimeSlotItemViewModel}">
-            <Border Background="{Binding Background}"
-                    BorderBrush="#9493CF"
-                    BorderThickness="{Binding BorderThickness, Converter={StaticResource SystemDrawingConverter}}"
-                    SnapsToDevicePixels="true"
-                    Height="22"
-                    HorizontalAlignment="Stretch">
-              <Grid x:Name="panelTimeSlotItem">
-                <!-- http://stackoverflow.com/questions/3410768/why-doesnt-wpf-border-control-have-a-mousedoubleclick-event/3411419#3411419 -->
-                <Control MouseDoubleClick="timeslot_MouseDoubleClick"
-                         MouseDown="timeslot_MouseDown"
-                         Opacity="0"
-                         x:Name="item">
-                  <Control.Template>
-                    <ControlTemplate>
-                      <Border Margin="1"
-                              BorderThickness="1,1,1,1"
-                              SnapsToDevicePixels="true"
-                              BorderBrush="#5D8CC9"
-                              Background="#10000000">
-                        <TextBlock Text="Neuer Termin"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Foreground="#A39DD8" />
-                      </Border>
-                    </ControlTemplate>
-                  </Control.Template>
-                </Control>
-              </Grid>
-            </Border>
-            <DataTemplate.Triggers>
-              <Trigger Property="IsMouseOver"
-                       Value="True">
-                <Setter Property="Opacity"
-                        Value="1"
-                        TargetName="item" />
-              </Trigger>
-            </DataTemplate.Triggers>
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-      </ItemsControl>
+    <Border Background="#E3EFFF"
+            BorderThickness="0">
+        <Grid x:Name="panelCalendarDay">
+            <ItemsControl ItemsSource="{Binding TimeSlotItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewmdl:TimeSlotItemViewModel}">
+                        <Border Background="{Binding Background}"
+                                BorderBrush="#9493CF"
+                                BorderThickness="{Binding BorderThickness, Converter={StaticResource SystemDrawingConverter}}"
+                                SnapsToDevicePixels="true"
+                                Height="22"
+                                HorizontalAlignment="Stretch">
+                            <Grid x:Name="panelTimeSlotItem">
+                                <!-- http://stackoverflow.com/questions/3410768/why-doesnt-wpf-border-control-have-a-mousedoubleclick-event/3411419#3411419 -->
+                                <Control MouseDoubleClick="timeslot_MouseDoubleClick"
+                                         MouseDown="timeslot_MouseDown"
+                                         Opacity="0"
+                                         x:Name="item">
+                                    <Control.Template>
+                                        <ControlTemplate>
+                                            <Border Margin="1"
+                                                    BorderThickness="1,1,1,1"
+                                                    SnapsToDevicePixels="true"
+                                                    BorderBrush="#5D8CC9"
+                                                    Background="#10000000">
+                                                <TextBlock Text="Neuer Termin"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           Foreground="#A39DD8" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Control.Template>
+                                </Control>
+                            </Grid>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Opacity"
+                                        Value="1"
+                                        TargetName="item" />
+                            </Trigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-      <ItemsControl ItemsSource="{Binding DayItems}">
-        <ItemsControl.ItemsPanel>
-          <ItemsPanelTemplate>
-            <Canvas IsItemsHost="True"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" />
-          </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-          <DataTemplate DataType="{x:Type viewmdl:CalendarItemViewModel}">
-            <Border MouseLeftButtonDown="CalendarItem_MouseLeftButtonDown"
-                    BorderThickness="1,1,1,1"
-                    BorderBrush="#5D8CC9"
-                    Margin="{Binding Position, Converter={StaticResource SystemDrawingConverter}}"
-                    Padding="5,3,3,3"
-                    Height="{Binding Height}"
-                    Width="{Binding Width}"
-                    HorizontalAlignment="Stretch"
-                    SnapsToDevicePixels="true"
-                    x:Name="item">
-              <Border.Background>
-                <LinearGradientBrush>
-                  <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}" Offset="0.0" />
-                  <GradientStop Color="{Binding Color}" Offset="1.0" />
-                </LinearGradientBrush>
-              </Border.Background>
-              <StackPanel>
-                <TextBlock Text="{Binding Summary}" FontWeight="Bold" />
-                <TextBlock Text="{Binding FromToText}" />
-              </StackPanel>
-            </Border>
-            <DataTemplate.Triggers>
-              <DataTrigger Binding="{Binding IsSelected}"
-                       Value="True">
-                <Setter Property="BorderThickness"
-                        Value="3,3,3,3"
-                        TargetName="item" />
-                <Setter Property="BorderBrush"
-                        Value="Black"
-                        TargetName="item" />
-                <Setter Property="Padding"
-                        Value="3,1,1,1"
-                        TargetName="item" />
-              </DataTrigger>
-            </DataTemplate.Triggers>
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-      </ItemsControl>
-    </Grid>
-  </Border>
+            <ItemsControl ItemsSource="{Binding DayItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas IsItemsHost="True"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewmdl:CalendarItemViewModel}">
+                        <!-- http://stackoverflow.com/questions/3410768/why-doesnt-wpf-border-control-have-a-mousedoubleclick-event/3411419#3411419 -->
+                        <Control MouseDoubleClick="calendarItem_MouseDoubleClick"
+                                 MouseLeftButtonDown="calendarItem_MouseLeftButtonDown">
+                            <Control.Template>
+                                <ControlTemplate>
+                                    <Border BorderThickness="1,1,1,1"
+                                            BorderBrush="#5D8CC9"
+                                            Margin="{Binding Position, Converter={StaticResource SystemDrawingConverter}}"
+                                            Padding="5,3,3,3"
+                                            Height="{Binding Height}"
+                                            Width="{Binding Width}"
+                                            HorizontalAlignment="Stretch"
+                                            SnapsToDevicePixels="true"
+                                            x:Name="item">
+                                        <Border.Background>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}"
+                                                              Offset="0.0" />
+                                                <GradientStop Color="{Binding Color}"
+                                                              Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Summary}"
+                                                       FontWeight="Bold" />
+                                            <TextBlock Text="{Binding FromToText}" />
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}"
+                                                     Value="True">
+                                            <Setter Property="BorderThickness"
+                                                    Value="3,3,3,3"
+                                                    TargetName="item" />
+                                            <Setter Property="BorderBrush"
+                                                    Value="Black"
+                                                    TargetName="item" />
+                                            <Setter Property="Padding"
+                                                    Value="3,1,1,1"
+                                                    TargetName="item" />
+                                        </DataTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Control.Template>
+                        </Control>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Border>
 </UserControl>

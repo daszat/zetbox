@@ -306,10 +306,5 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get { return DayText; }
         }
-
-        public void NotifyNew(DateTime dt)
-        {
-            WeekCalendar.NotifyNew(dt);
-        }
     }
 }

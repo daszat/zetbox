@@ -69,7 +69,7 @@ namespace Zetbox.Client.WPF.View.Calendar
             if (sender is FrameworkElement)
             {
                 var mdl = ((TimeSlotItemViewModel)((FrameworkElement)sender).DataContext);
-                ViewModel.NotifyNew(mdl.DateTime);
+                ViewModel.WeekCalendar.NotifyNew(mdl.DateTime);
             }
         }
 
@@ -81,12 +81,21 @@ namespace Zetbox.Client.WPF.View.Calendar
             }
         }
 
-        private void CalendarItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void calendarItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is FrameworkElement)
             {
                 var fe = (FrameworkElement)sender;
                 ViewModel.WeekCalendar.SelectedItem = ((CalendarItemViewModel)fe.DataContext).ObjectViewModel;
+            }
+        }
+
+        void calendarItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is FrameworkElement)
+            {
+                var mdl = ((CalendarItemViewModel)((FrameworkElement)sender).DataContext);
+                ViewModel.WeekCalendar.NotifyOpen(mdl.ObjectViewModel);
             }
         }
 

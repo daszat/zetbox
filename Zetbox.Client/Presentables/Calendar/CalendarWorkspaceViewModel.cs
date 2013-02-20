@@ -183,6 +183,54 @@ namespace Zetbox.Client.Presentables.Calendar
 
         #region Commands
 
+        #region Open command
+        private ICommandViewModel _OpenCommand = null;
+        public ICommandViewModel OpenCommand
+        {
+            get
+            {
+                if (_OpenCommand == null)
+                {
+                    _OpenCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        this, 
+                        CommonCommandsResources.OpenDataObjectCommand_Name, 
+                        CommonCommandsResources.OpenDataObjectCommand_Tooltip, 
+                        Open, 
+                        CanOpen, 
+                        CanOpenReason);
+                    _OpenCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
+                }
+                return _OpenCommand;
+            }
+        }
+
+        public bool CanOpen()
+        {
+            return _WeekCalender != null && _WeekCalender.SelectedItem != null;
+        }
+
+        public string CanOpenReason()
+        {
+            return CommonCommandsResources.DataObjectCommand_NothingSelected;
+        }
+
+        public void Open()
+        {
+            if (!CanOpen() || _WeekCalender == null) return;
+            Open(_WeekCalender.SelectedItem);
+        }
+
+        public void Open(EventViewModel evt)
+        {
+            if (evt == null) return;
+            var ctx = _ctxFactory();
+            var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
+            ws.ShowObject(evt.Object);
+            ViewModelFactory.ShowDialog(ws); // TODO: Realy? A Dialog? Discuss
+        }
+        #endregion        
+
         private ICommandViewModel _NewCommand;
         public ICommandViewModel NewCommand
         {
@@ -211,7 +259,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public string CanNewReason()
         {
-            return CanNew() ? string.Empty : "No calendar is selected";
+            return CommonCommandsResources.DataObjectCommand_NothingSelected;
         }
 
         public void New()
@@ -338,7 +386,8 @@ namespace Zetbox.Client.Presentables.Calendar
                     _WeekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
                         .Invoke(DataContext, this, FetchEvents);
                     _WeekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
-                    _WeekCalender.New += New;
+                    _WeekCalender.New += (s,e) => New(e.Date);
+                    _WeekCalender.Open += (s, e) => Open(e.Event);
                     // Initial refresh
                     _WeekCalender.Refresh();
                 }
