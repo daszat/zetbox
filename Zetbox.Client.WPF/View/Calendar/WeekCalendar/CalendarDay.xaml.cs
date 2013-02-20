@@ -64,29 +64,40 @@ namespace Zetbox.Client.WPF.View.Calendar
             }
         }
 
-        void timeslot_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        #region Select/Unselect
+        void calendarItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is FrameworkElement)
+            if (sender is FrameworkElement && e.ClickCount == 1)
             {
-                var mdl = ((TimeSlotItemViewModel)((FrameworkElement)sender).DataContext);
-                ViewModel.WeekCalendar.NotifyNew(mdl.DateTime);
+                var fe = (FrameworkElement)sender;
+                var vmdl = fe.DataContext as CalendarItemViewModel;
+                if (vmdl != null)
+                {
+                    ViewModel.WeekCalendar.SelectedItem = vmdl.ObjectViewModel;
+                }
             }
         }
 
         void timeslot_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 1)
+            if (sender is FrameworkElement && e.ClickCount == 1)
             {
                 ViewModel.WeekCalendar.SelectedItem = null;
             }
         }
+        #endregion
 
-        private void calendarItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        #region Open/New
+        void timeslot_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (sender is FrameworkElement)
             {
                 var fe = (FrameworkElement)sender;
-                ViewModel.WeekCalendar.SelectedItem = ((CalendarItemViewModel)fe.DataContext).ObjectViewModel;
+                var vmdl = fe.DataContext as TimeSlotItemViewModel;
+                if (vmdl != null)
+                {
+                    ViewModel.WeekCalendar.NotifyNew(vmdl.DateTime);
+                }
             }
         }
 
@@ -94,10 +105,15 @@ namespace Zetbox.Client.WPF.View.Calendar
         {
             if (sender is FrameworkElement)
             {
-                var mdl = ((CalendarItemViewModel)((FrameworkElement)sender).DataContext);
-                ViewModel.WeekCalendar.NotifyOpen(mdl.ObjectViewModel);
+                var fe = (FrameworkElement)sender;
+                var vmdl = fe.DataContext as CalendarItemViewModel;
+                if (vmdl != null)
+                {
+                    ViewModel.WeekCalendar.NotifyOpen(vmdl.ObjectViewModel);
+                }
             }
         }
+        #endregion
 
         #region IHasViewModel<DayCalendarViewModel> Members
 

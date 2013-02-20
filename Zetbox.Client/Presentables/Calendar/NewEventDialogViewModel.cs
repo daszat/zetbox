@@ -16,12 +16,15 @@ namespace Zetbox.Client.Presentables.Calendar
         public NewEventDialogViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
+            Result = false;
         }
 
         public override string Name
         {
             get { return "New event"; }
         }
+
+        public bool Result { get; private set; }
 
         private List<IEventInputViewModel> _inputViewModels;
         public List<IEventInputViewModel> InputViewModels        
@@ -107,6 +110,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (!CanNew()) return;
 
+            Result = true;
             Show = false;
         }
         #endregion

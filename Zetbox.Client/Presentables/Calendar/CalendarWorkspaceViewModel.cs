@@ -228,6 +228,8 @@ namespace Zetbox.Client.Presentables.Calendar
             var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
             ws.ShowObject(evt.Object);
             ViewModelFactory.ShowDialog(ws); // TODO: Realy? A Dialog? Discuss
+
+            if(_WeekCalender != null) _WeekCalender.Refresh(); // A dialog makes it easy to know when the time for a refresh has come
         }
         #endregion        
 
@@ -281,14 +283,17 @@ namespace Zetbox.Client.Presentables.Calendar
 
                 dlg.InputViewModels = args.ViewModels;
                 ViewModelFactory.ShowDialog(dlg);
-                var newItem = dlg.CreateNew();
-                if (newItem != null)
+                if (dlg.Result == true)
                 {
-                    ctx.SubmitChanges();
-                    if (_WeekCalender != null)
+                    var newItem = dlg.CreateNew();
+                    if (newItem != null)
                     {
-                        _WeekCalender.Refresh();
-                        _WeekCalender.SelectedItem = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<cal.Event>(newItem.ID));
+                        ctx.SubmitChanges();
+                        if (_WeekCalender != null)
+                        {
+                            _WeekCalender.Refresh();
+                            _WeekCalender.SelectedItem = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<cal.Event>(newItem.ID));
+                        }
                     }
                 }
             }
