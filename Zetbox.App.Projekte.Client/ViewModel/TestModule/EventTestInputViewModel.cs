@@ -8,14 +8,15 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
     using Zetbox.API;
     using Zetbox.Client.Presentables.Calendar;
     using System.ComponentModel;
+    using cal = Zetbox.App.Calendar;
 
     [ViewModelDescriptor]
-    public class EventTestInputViewModel : ViewModel, IEventInputViewModel
+    public class EventTestInputViewModel : EventInputViewModel, IEventInputViewModel
     {
-        public new delegate EventTestInputViewModel Factory(IZetboxContext dataCtx, ViewModel parent, DateTime selectedStartDate);
+        public new delegate EventTestInputViewModel Factory(IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate);
 
-        public EventTestInputViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, DateTime selectedStartDate)
-            : base(appCtx, dataCtx, parent)
+        public EventTestInputViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate)
+            : base(appCtx, dataCtx, parent, targetCalendar, selectedStartDate)
         {
             // Zetbox.App.Test.EventTestObject
         }
@@ -25,19 +26,33 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
             get { return "EventTestInputViewModel"; }
         }
 
-        public EventViewModel CreateNew()
+        public override string Error
         {
-            throw new NotImplementedException();
+            get
+            {
+                var sb = new StringBuilder();
+
+                if (!string.IsNullOrEmpty(StartDate.Error)) sb.AppendLine(StartDate.Error);
+                if (!string.IsNullOrEmpty(EndDate.Error)) sb.AppendLine(EndDate.Error);
+
+                return sb.ToString();
+            }
         }
 
-        public string Error
+        public override EventViewModel CreateNew()
         {
-            get { return "Not implemented"; }
-        }
+            var vmdl = base.CreateNew();
+            if (vmdl == null) return null;
 
-        string IDataErrorInfo.this[string columnName]
-        {
-            get { return string.Empty; }
+            var evt = vmdl.Event;
+            var obj = DataContext.Create<Zetbox.App.Test.EventTestObject>();
+
+            obj.Name = "Created on " + DateTime.Now;
+            obj.Event = evt;
+
+            evt.Summary = "A test event linking to " + obj.Name;
+            evt.Attachment.SetObject(obj);
+            return vmdl;
         }
     }
 }
