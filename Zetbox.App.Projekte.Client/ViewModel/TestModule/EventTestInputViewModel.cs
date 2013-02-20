@@ -51,6 +51,8 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
             obj.Event = evt;
 
             evt.Summary = "A test event linking to " + obj.Name;
+
+            DataContext.SubmitChanges(); // TODO: Workaround limitations of setting a any reference to a new object
             evt.Attachment.SetObject(obj);
             return vmdl;
         }
