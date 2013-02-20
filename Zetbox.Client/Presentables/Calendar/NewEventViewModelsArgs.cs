@@ -23,16 +23,24 @@ using Zetbox.API;
 
     public class NewEventViewModelsArgs
     {
-        public NewEventViewModelsArgs(IZetboxContext ctx, IViewModelFactory viewModelFactory, cal.Calendar calendar)
+        public NewEventViewModelsArgs(IZetboxContext ctx, IViewModelFactory viewModelFactory, ViewModel parent, cal.Calendar calendar, DateTime selectedStartDate)
         {
             this.DataContext = ctx;
             this.ViewModelFactory = viewModelFactory;
+            this.Parent = parent;
             this.Calendar = calendar;
+            this.SelectedStartDate = selectedStartDate;
+
+            this.ViewModels = new List<IEventInputViewModel>();
         }
 
         public IZetboxContext DataContext {get; private set;}
         public IViewModelFactory ViewModelFactory { get; private set; }
+        public ViewModel Parent { get; private set; }
+        public DateTime SelectedStartDate { get; private set; }
         public cal.Calendar Calendar { get; private set; }
-        public List<ViewModel> ViewModels { get; private set; }
+
+        public List<IEventInputViewModel> ViewModels { get; private set; }
+
     }
 }

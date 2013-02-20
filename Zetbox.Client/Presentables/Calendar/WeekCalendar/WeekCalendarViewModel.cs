@@ -368,7 +368,7 @@ namespace Zetbox.Client.Presentables.Calendar
             EnsureAppointments();
 
             var items = CreateCalendarItemViewModel(result.EventViewModel);
-            if (items != null && items.Count > 0)
+            if (items != null && items.Count > 0)   
             {
                 _allItems.AddRange(items);
                 RecreateItems();

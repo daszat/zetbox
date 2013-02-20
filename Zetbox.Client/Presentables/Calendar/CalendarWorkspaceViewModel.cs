@@ -88,7 +88,7 @@ namespace Zetbox.Client.Presentables.Calendar
     }
 
     [ViewModelDescriptor]
-    public class CalendarWorkspaceViewModel : WindowViewModel, IDeleteCommandParameter, INewCommandParameter
+    public class CalendarWorkspaceViewModel : WindowViewModel, IDeleteCommandParameter
     {
         public new delegate CalendarWorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
@@ -130,7 +130,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         .Select(i =>
                         {
                             var mdl = ViewModelFactory.CreateViewModel<CalendarSelectionViewModel.Factory>().Invoke(DataContext, this, i, i.Owner != null ? i.Owner.ID == myID : false);
-                            mdl.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(item_PropertyChanged);
+                            mdl.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(calendarItem_PropertyChanged);
                             return mdl;
                         })
                         .ToList();
@@ -140,7 +140,7 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        void item_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void calendarItem_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Selected")
             {
@@ -158,7 +158,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 }
                 if (_shouldUpdateCalendarItems)
                 {
-                    _WeekCalender.Refresh();
+                    if (_WeekCalender != null) _WeekCalender.Refresh();
                 }
             }
         }
@@ -183,26 +183,63 @@ namespace Zetbox.Client.Presentables.Calendar
 
         #region Commands
 
-        private NewDataObjectCommand _NewCommand;
+        private ICommandViewModel _NewCommand;
         public ICommandViewModel NewCommand
         {
             get
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
+                    _NewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
                         this,
-                        typeof(cal.Event).GetObjectClass(FrozenContext));
+                        CommonCommandsResources.NewDataObjectCommand_Name,
+                        CommonCommandsResources.NewDataObjectCommand_Tooltip,
+                        New,
+                        CanNew,
+                        null);
+                    _NewCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _NewCommand;
             }
         }
 
+        public bool CanNew()
+        {
+            return SelectedItem != null;
+        }
+
+        public string CanNewReason()
+        {
+            return CanNew() ? string.Empty : "No calendar is selected";
+        }
+
         public void New()
         {
-            if (NewCommand.CanExecute(null))
-                NewCommand.Execute(null);
+            New(DateTime.Now);
+        }
+
+        public void New(DateTime selectedDate)
+        {
+            if (!CanNew()) return;
+
+            using (var ctx = _ctxFactory())
+            {
+                var calendar = ctx.Find<cal.Calendar>(SelectedItem.Calendar.ID);
+                var dlg = ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null);
+
+                var args = new NewEventViewModelsArgs(ctx, ViewModelFactory, dlg, calendar, selectedDate);
+                calendar.GetNewEventViewModels(args);
+
+                dlg.InputViewModels = args.ViewModels;
+                ViewModelFactory.ShowDialog(dlg);
+                var newItem = dlg.CreateNew();
+                if (newItem != null)
+                {
+                    ctx.SubmitChanges();
+                    if(_WeekCalender != null) _WeekCalender.Refresh();
+                }
+            }
         }
 
         private DeleteDataObjectCommand _DeleteCommand;
@@ -250,7 +287,7 @@ namespace Zetbox.Client.Presentables.Calendar
             finally
             {
                 _shouldUpdateCalendarItems = true;
-                _WeekCalender.Refresh();
+                if(_WeekCalender != null) _WeekCalender.Refresh();
             }
         }
 
@@ -281,7 +318,7 @@ namespace Zetbox.Client.Presentables.Calendar
             finally
             {
                 _shouldUpdateCalendarItems = true;
-                _WeekCalender.Refresh();
+                if (_WeekCalender != null) _WeekCalender.Refresh();
             }
         }
         #endregion
@@ -298,6 +335,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         .Invoke(DataContext, this, FetchEvents);
                     _WeekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
                     _WeekCalender.NewEventCreating += new NewItemCreatingEventHandler(_WeekCalender_NewEventCreating);
+                    // Initial refresh
                     _WeekCalender.Refresh();
                 }
                 return _WeekCalender;
@@ -306,12 +344,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         void _WeekCalender_NewEventCreating(DateTime dt, NewItemCreatingEventArgs e)
         {
-            using (var ctx = _ctxFactory())
-            {
-                var calendar = ctx.Find<cal.Calendar>(SelectedItem.Calendar.ID);
-                var args = new NewEventViewModelsArgs(ctx, ViewModelFactory, calendar);
-                args.ViewModels.Add(ViewModelFactory.CreateViewModel<EventInputViewModel.Factory>().Invoke(ctx, null));
-            }
+            New(dt);
         }
 
         void _WeekCalender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -326,8 +359,10 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             using (Logging.Client.InfoTraceMethodCall("CalendarViewModel.GetData()"))
             {
+                var result = new List<EventViewModel>();
                 var calendars = Items.Where(i => i.Selected).Select(i => i.Calendar.ID).ToArray();
-                
+                if (calendars.Length == 0) return result;
+
                 var predicateCalendars = LinqExtensions.False<cal.Event>();
                 foreach (var id in calendars)
                 {
@@ -339,8 +374,6 @@ namespace Zetbox.Client.Presentables.Calendar
                     .Where(predicateCalendars)
                     .Where(e => (e.StartDate >= from && e.StartDate <= to) || (e.EndDate >= from && e.EndDate <= to) || (e.StartDate <= from && e.EndDate >= to))
                     .ToList();
-
-                var result = new List<EventViewModel>();
 
                 result.AddRange(events.Select(obj =>
                 {
@@ -360,6 +393,5 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get { return new ViewModel[] { (ViewModel)WeekCalender.SelectedItem }; /* return selected events! */ }
         }
-        bool INewCommandParameter.AllowAddNew { get { return true; } }
     }
 }

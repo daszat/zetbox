@@ -20,6 +20,7 @@ namespace Zetbox.App.Calendar
     using System.Text;
 
     using Zetbox.API;
+    using Zetbox.Client.Presentables.Calendar;
 
     [Implementor]
     public static class CalendarActions
@@ -27,6 +28,11 @@ namespace Zetbox.App.Calendar
         [Invocation]
         public static void GetNewEventViewModels(Calendar obj, object /* I'm so sorry, Zetbox.Objects.dll cannot use custom classes */ args)
         {
+            var eventArgs = (NewEventViewModelsArgs)args;
+            eventArgs.ViewModels.Insert(0, eventArgs.ViewModelFactory.CreateViewModel<EventInputViewModel.Factory>().Invoke(eventArgs.DataContext, eventArgs.Parent, eventArgs.SelectedStartDate));
+
+            // For testing only!
+            eventArgs.ViewModels.Add(eventArgs.ViewModelFactory.CreateViewModel<Zetbox.App.Projekte.Client.ViewModel.TestModule.EventTestInputViewModel.Factory>().Invoke(eventArgs.DataContext, eventArgs.Parent, eventArgs.SelectedStartDate));
         }
     }
 }
