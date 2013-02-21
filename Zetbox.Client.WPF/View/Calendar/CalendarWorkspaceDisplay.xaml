@@ -110,7 +110,8 @@
                     Grid.Row="1"
                     Background="#E3EFFF"
                     BorderBrush="#6593CF"
-                    BorderThickness="1,0,1,1">
+                    BorderThickness="1,0,1,1"
+                    x:Name="details">
                 <Expander IsExpanded="True"
                           Header="{Binding DetailsLabel}">
                     <StackPanel DataContext="{Binding CurrentView.SelectedItem}" Height="300">
@@ -147,6 +148,9 @@
                                                DataContext="{Binding PropertyModelsByName[IsAllDay]}" />
                         </Grid>
                         <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Body]}" />
+                        <ctrls:CommandButton CommandViewModel="{Binding DataContext.OpenCommand, ElementName=details}"
+                                             HorizontalAlignment="Left"
+                                             Style="{StaticResource ImageButton}"/>
                     </StackPanel>
                 </Expander>
             </Border>
