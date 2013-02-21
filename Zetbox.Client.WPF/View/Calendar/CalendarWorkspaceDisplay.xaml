@@ -70,9 +70,15 @@
                               Margin="2,3,0,0">
                         <ListView.ItemTemplate>
                             <DataTemplate DataType="{x:Type client:CalendarSelectionViewModel}">
-                                <StackPanel Orientation="Horizontal"
-                                            Background="{Binding Color}">
+                                <StackPanel Orientation="Horizontal">
                                     <CheckBox IsChecked="{Binding Selected}" />
+                                    <Border Width="{StaticResource SmallControlHeight}"
+                                            Height="{StaticResource SmallControlHeight}"
+                                            Margin="5,0,0,0"
+                                            Background="{Binding Color}"
+                                            BorderThickness="1"
+                                            BorderBrush="Black"
+                                            CornerRadius="2"/>
                                     <TextBlock Text="{Binding Name}"
                                                Margin="5,0,0,0" />
                                 </StackPanel>

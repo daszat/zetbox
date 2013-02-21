@@ -179,6 +179,12 @@ namespace Zetbox.Client.Presentables.Calendar
                 }
             }
         }
+
+        public string ItemsLabel
+        {
+            get { return "Calendars"; }
+        }
+
         #endregion
 
         #region Commands
