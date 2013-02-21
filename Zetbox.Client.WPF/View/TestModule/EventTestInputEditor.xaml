@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <TextBlock Text="This event will be created by a very complicated algorithm" />
     </Grid>
 </UserControl>

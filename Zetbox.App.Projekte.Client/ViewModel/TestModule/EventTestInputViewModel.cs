@@ -47,7 +47,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
             var evt = vmdl.Event;
             var obj = DataContext.Create<Zetbox.App.Test.EventTestObject>();
 
-            obj.Name = "Created on " + DateTime.Now;
+            obj.Name = string.Format("Created on '{0}'", DateTime.Now);
             obj.Event = evt;
 
             evt.Summary = "A test event linking to " + obj.Name;
