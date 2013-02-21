@@ -110,6 +110,8 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
             _ctxFactory = ctxFactory;
+
+            _fetchCache = new FetchCache(ViewModelFactory, DataContext, this);
         }
 
         public override string Name
@@ -147,6 +149,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         })
                         .ToList();
                     SelectedItem = _Items.FirstOrDefault(i => i.IsSelf);
+                    _fetchCache.SetCalendars(_Items.Where(i => i.Selected).Select(i => i.Calendar.ID));
                 }
                 return _Items;
             }
@@ -156,6 +159,8 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (e.PropertyName == "Selected")
             {
+                _fetchCache.SetCalendars(Items.Where(i => i.Selected).Select(i => i.Calendar.ID));
+
                 var obj = (CalendarSelectionViewModel)sender;
                 if (!obj.IsSelf)
                 {
@@ -239,7 +244,7 @@ namespace Zetbox.Client.Presentables.Calendar
             var ctx = _ctxFactory();
             var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
             var source = evt.Event.Source.GetObject(ctx);
-            if(source != null)
+            if (source != null)
                 ws.ShowObject(source);
             else
                 ws.ShowObject(evt.Event);
@@ -413,6 +418,98 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
+        private class FetchCache
+        {
+            private struct FetchCacheEntry
+            {
+                public readonly DateTime FetchTime;
+                public readonly List<EventViewModel> Events;
+
+                public FetchCacheEntry(List<EventViewModel> events)
+                {
+                    this.FetchTime = DateTime.Now;
+                    this.Events = events;
+                }
+            }
+
+            /// <summary>
+            /// Remembers all events for the specified day
+            /// </summary>
+            private readonly SortedList<DateTime, FetchCacheEntry> _cache = new SortedList<DateTime, FetchCacheEntry>();
+            private readonly List<int> _calendars = new List<int>();
+
+            private readonly IViewModelFactory ViewModelFactory;
+            private readonly IZetboxContext _ctx;
+            private readonly ViewModel _parent;
+
+            public FetchCache(IViewModelFactory vmf, IZetboxContext ctx, ViewModel parent)
+            {
+                this.ViewModelFactory = vmf;
+                this._ctx = ctx;
+                this._parent = parent;
+            }
+
+            public void SetCalendars(IEnumerable<int> ids)
+            {
+                // better implementation necessary
+                _cache.Clear();
+                _calendars.Clear();
+                _calendars.AddRange(ids);
+            }
+
+            public IEnumerable<EventViewModel> FetchEvents(DateTime from, DateTime to)
+            {
+                var result = new List<EventViewModel>();
+                if (_calendars.Count == 0) return result;
+
+                for (var curDay = from.Date; curDay <= to; curDay = curDay.AddDays(1))
+                {
+                    FetchCacheEntry entry;
+                    if (_cache.TryGetValue(curDay, out entry) && entry.FetchTime.AddMinutes(5) > DateTime.Now)
+                    {
+                        result.AddRange(entry.Events);
+                    }
+                    else
+                    {
+                        entry = new FetchCacheEntry(QueryContext(curDay, curDay.AddDays(1)));
+                        _cache.Add(curDay, entry);
+                        result.AddRange(entry.Events);
+                    }
+                }
+
+                return result;
+            }
+
+            private List<EventViewModel> QueryContext(DateTime from, DateTime to)
+            {
+                var predicateCalendars = GetCalendarPredicate();
+
+                return _ctx.GetQuery<cal.Event>()
+                    .Where(predicateCalendars)
+                    .Where(e => (e.StartDate >= from && e.StartDate <= to) || (e.EndDate >= from && e.EndDate <= to) || (e.StartDate <= from && e.EndDate >= to))
+                    .ToList()
+                    .Select(obj =>
+                    {
+                        var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, _ctx, _parent, obj);
+                        vmdl.IsReadOnly = true; // Not changeable. TODO: This should be be implicit. This is a merge server data context
+                        // Color ?
+                        return vmdl;
+                    })
+                    .ToList();
+            }
+
+            private System.Linq.Expressions.Expression<Func<cal.Event, bool>> GetCalendarPredicate()
+            {
+                var predicateCalendars = LinqExtensions.False<cal.Event>();
+                foreach (var id in _calendars)
+                {
+                    var localID = id;
+                    predicateCalendars = predicateCalendars.OrElse<cal.Event>(i => i.Calendar.ID == localID);
+                }
+                return predicateCalendars;
+            }
+        }
+
         void _WeekCalender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedItem")
@@ -421,35 +518,13 @@ namespace Zetbox.Client.Presentables.Calendar
                 OnPropertyChanged("SelectedItems");
             }
         }
+
+        private readonly FetchCache _fetchCache;
         private IEnumerable<EventViewModel> FetchEvents(DateTime from, DateTime to)
         {
-            using (Logging.Client.InfoTraceMethodCall("CalendarViewModel.GetData()"))
+            using (Logging.Client.InfoTraceMethodCall("CalendarWorkspaceViewModel.FetchEvents()"))
             {
-                var result = new List<EventViewModel>();
-                var calendars = Items.Where(i => i.Selected).Select(i => i.Calendar.ID).ToArray();
-                if (calendars.Length == 0) return result;
-
-                var predicateCalendars = LinqExtensions.False<cal.Event>();
-                foreach (var id in calendars)
-                {
-                    var localID = id;
-                    predicateCalendars = predicateCalendars.OrElse<cal.Event>(i => i.Calendar.ID == localID);
-                }
-
-                var events = DataContext.GetQuery<cal.Event>()
-                    .Where(predicateCalendars)
-                    .Where(e => (e.StartDate >= from && e.StartDate <= to) || (e.EndDate >= from && e.EndDate <= to) || (e.StartDate <= from && e.EndDate >= to))
-                    .ToList();
-
-                result.AddRange(events.Select(obj =>
-                {
-                    var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
-                    vmdl.IsReadOnly = true; // Not changeable. TODO: This should be be implicit. This is a merge server data context
-                    // Color ?
-                    return vmdl;
-                }));
-
-                return result;
+                return _fetchCache.FetchEvents(from, to);
             }
         }
         #endregion
