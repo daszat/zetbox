@@ -41,6 +41,26 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         Blurred_PartialUserInput,
     }
 
+    public class InputAcceptedEventArgs<TValue>
+        : EventArgs
+    {
+        public InputAcceptedEventArgs(TValue oldVal, TValue newVal)
+        {
+            this.OldValue = oldVal;
+            this.NewValue = newVal;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public TValue OldValue { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public TValue NewValue { get; private set; }
+    }
+
+
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
         public new delegate BaseValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -540,6 +560,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
+        public event EventHandler<InputAcceptedEventArgs<TValue>> InputAccepted;
         /// <summary>
         /// Part of the ValueViewModel state machine as described in the ZetboxGuide. 
         /// This method is called everytime valid input is received and handles 
@@ -548,6 +569,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         protected virtual void OnValidInput(string formattedValue, TValue value)
         {
             Logging.Client.DebugFormat("Received valid input [{0}] interpreted as [{1}]", formattedValue, value);
+            var oldValue = Value;
+
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
@@ -595,6 +618,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     break;
                 default:
                     throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
+            }
+            OnInputAccepted(oldValue, value);
+        }
+
+        protected virtual void OnInputAccepted(TValue oldValue, TValue newValue)
+        {
+            var temp = InputAccepted;
+            if (temp != null)
+            {
+                temp(this, new InputAcceptedEventArgs<TValue>(oldValue, newValue));
             }
         }
 
@@ -1181,31 +1214,46 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
                 else
                 {
-                    var date = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).Date;
-                    if (date == DateTime.MinValue.Date)
+                    Parent.SetValueToModel(GetNewValue(value));
+                    Parent.OnPropertyChanged("TimePart");
+                    Parent.OnPropertyChanged("TimePartString");
+                }
+            }
+
+            private DateTime? GetNewValue(TimeSpan? value)
+            {
+                DateTime? result;
+                var date = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).Date;
+                if (date == DateTime.MinValue.Date)
+                {
+                    if (value == null || value == TimeSpan.Zero)
                     {
-                        if (value == null || value == TimeSpan.Zero)
-                        {
-                            Parent.SetValueToModel(null);
-                        }
-                        else
-                        {
-                            Parent.SetValueToModel(date + (value ?? TimeSpan.Zero));
-                        }
-                        Parent.OnPropertyChanged("TimePart");
-                        Parent.OnPropertyChanged("TimePartString");
+                        result = null;
                     }
                     else
                     {
-                        Parent.SetValueToModel(date + (value ?? TimeSpan.Zero));
+                        result = date + (value ?? TimeSpan.Zero);
                     }
                 }
+                else
+                {
+                    result = date + (value ?? TimeSpan.Zero);
+                }
+                return result;
             }
 
             protected override void OnErrorChanged()
             {
                 base.OnErrorChanged();
                 Parent.OnErrorChanged();
+            }
+
+            protected override void OnInputAccepted(TimeSpan? oldValue, TimeSpan? newValue)
+            {
+                base.OnInputAccepted(oldValue, newValue);
+                var oldDate = GetNewValue(oldValue);
+                var newDate = GetNewValue(newValue);
+                Parent.OnInputAccepted(oldDate, newDate);
             }
         }
 
@@ -1276,31 +1324,46 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
                 else
                 {
-                    var time = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).TimeOfDay;
-                    if (time == DateTime.MinValue.TimeOfDay)
+                    Parent.SetValueToModel(GetNewValue(value));
+                    Parent.OnPropertyChanged("TimePart");
+                    Parent.OnPropertyChanged("TimePartString");
+                }
+            }
+
+            private DateTime? GetNewValue(DateTime? value)
+            {
+                DateTime? result;
+                var time = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).TimeOfDay;
+                if (time == DateTime.MinValue.TimeOfDay)
+                {
+                    if (value == DateTime.MinValue)
                     {
-                        if (value == DateTime.MinValue)
-                        {
-                            Parent.SetValueToModel(null);
-                        }
-                        else
-                        {
-                            Parent.SetValueToModel(value);
-                        }
-                        Parent.OnPropertyChanged("TimePart");
-                        Parent.OnPropertyChanged("TimePartString");
+                        result = null;
                     }
                     else
                     {
-                        Parent.SetValueToModel((value ?? DateTime.MinValue) + time);
+                        result = value;
                     }
                 }
+                else
+                {
+                    result = (value ?? DateTime.MinValue) + time;
+                }
+                return result;
             }
 
             protected override void OnErrorChanged()
             {
                 base.OnErrorChanged();
                 Parent.OnErrorChanged();
+            }
+
+            protected override void OnInputAccepted(DateTime? oldValue, DateTime? newValue)
+            {
+                base.OnInputAccepted(oldValue, newValue);
+                var oldDate = GetNewValue(oldValue);
+                var newDate = GetNewValue(newValue);
+                Parent.OnInputAccepted(oldDate, newDate);
             }
         }
 
@@ -1317,7 +1380,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         void DateTimeModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case "DateTimeStyle":
                     OnPropertyChanged("DatePartVisible");
