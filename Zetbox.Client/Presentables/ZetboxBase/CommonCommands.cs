@@ -386,7 +386,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         {
                             var other = item.Object;
                             var here = ctx.Find(ctx.GetInterfaceType(other), other.ID);
-                            ctx.Delete(here);
+                            DoDelete(ctx, here);
                         }
                         ctx.SubmitChanges();
                     }
@@ -404,11 +404,24 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 // make local copy to avoid stumbling over changing lists while iterating over them
                 foreach (var item in SelectedItems.Cast<DataObjectViewModel>().ToList())
                 {
-                    DataContext.Delete(item.Object);
+                    DoDelete(DataContext, item.Object);
                 }
             }
 
             if (Listener != null) Listener.Refresh();
+        }
+
+        private static void DoDelete(IZetboxContext ctx, IDataObject obj)
+        {
+            var deactivatable = obj as IDeactivatable;
+            if (deactivatable != null)
+            {
+                deactivatable.IsDeactivated = true;
+            }
+            else
+            {
+                ctx.Delete(obj);
+            }
         }
 
         private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
