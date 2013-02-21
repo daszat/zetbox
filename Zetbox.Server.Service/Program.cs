@@ -42,7 +42,11 @@ namespace Zetbox.Server.Service
         public static int Main(string[] arguments)
         {
             // Fix working directory: Services start in System32
-            Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            // Services can't have arguments, therefore we need to cwd.
+            if (arguments == null || arguments.Length == 0)
+            {
+                Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            }
 
             Logging.Configure();
 
@@ -55,6 +59,7 @@ namespace Zetbox.Server.Service
                 if (arguments.Length == 0)
                 {
                     consoleMode = false;
+                    Log.InfoFormat("Changed working directory to '{0}'", Environment.CurrentDirectory);
                 }
                 else if (arguments.Length == 1)
                 {
