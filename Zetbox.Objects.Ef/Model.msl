@@ -634,10 +634,10 @@
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="Summary" ColumnName="Summary" />
-          <ComplexProperty Name="AttachmentImpl" TypeName="Model.AnyReferenceEfImpl">
-          <ScalarProperty Name="ObjClass" ColumnName="Attachment_ObjClass" />
-          <ScalarProperty Name="ObjGuid" ColumnName="Attachment_ObjGuid" />
-          <ScalarProperty Name="ObjID" ColumnName="Attachment_ObjID" />
+          <ComplexProperty Name="SourceImpl" TypeName="Model.AnyReferenceEfImpl">
+          <ScalarProperty Name="ObjClass" ColumnName="Source_ObjClass" />
+          <ScalarProperty Name="ObjGuid" ColumnName="Source_ObjGuid" />
+          <ScalarProperty Name="ObjID" ColumnName="Source_ObjID" />
           </ComplexProperty>
           <Condition ColumnName="__Discriminator" Value="calendar.Events" />
 	    </MappingFragment>

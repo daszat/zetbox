@@ -1777,9 +1777,9 @@
     <Property Name="Location" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="StartDate" Type="timestamp" Nullable="false" />
     <Property Name="Summary" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Attachment_ObjClass" Type="uuid" Nullable="true" />
-    <Property Name="Attachment_ObjGuid" Type="uuid" Nullable="true" />
-    <Property Name="Attachment_ObjID" Type="int4" Nullable="true" />
+    <Property Name="Source_ObjClass" Type="uuid" Nullable="true" />
+    <Property Name="Source_ObjGuid" Type="uuid" Nullable="true" />
+    <Property Name="Source_ObjID" Type="int4" Nullable="true" />
   </EntityType>
     <EntityType Name="Event_Rights">
       <Key>

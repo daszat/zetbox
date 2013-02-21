@@ -30,70 +30,14 @@ namespace Zetbox.App.Calendar
         public EventMemoryImpl()
             : base(null)
         {
-            AttachmentImpl = new Zetbox.App.Base.AnyReferenceMemoryImpl(null, this, "Attachment");
+            SourceImpl = new Zetbox.App.Base.AnyReferenceMemoryImpl(null, this, "Source");
         }
 
         public EventMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            AttachmentImpl = new Zetbox.App.Base.AnyReferenceMemoryImpl(lazyCtx, this, "Attachment");
+            SourceImpl = new Zetbox.App.Base.AnyReferenceMemoryImpl(lazyCtx, this, "Source");
         }
-
-        /// <summary>
-        /// A attached data item
-        /// </summary>
-        // CompoundObject property
-        // BEGIN Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
-        // implement the user-visible interface
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Base.AnyReference Attachment
-        {
-            get { return AttachmentImpl; }
-            set { AttachmentImpl = (Zetbox.App.Base.AnyReferenceMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        /// <summary>backing store for Attachment</summary>
-        private Zetbox.App.Base.AnyReferenceMemoryImpl _Attachment;
-
-        /// <summary>backing property for Attachment, takes care of attaching/detaching the values</summary>
-        public Zetbox.App.Base.AnyReferenceMemoryImpl AttachmentImpl
-        {
-            get
-            {
-                return _Attachment;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value == null)
-                    throw new ArgumentNullException("value");
-                if (!object.Equals(_Attachment, value))
-                {
-                    var __oldValue = _Attachment;
-                    var __newValue = value;
-
-                    NotifyPropertyChanging("Attachment", __oldValue, __newValue);
-
-                    if (_Attachment != null)
-                    {
-                        _Attachment.DetachFromObject(this, "Attachment");
-                    }
-                    __newValue = (Zetbox.App.Base.AnyReferenceMemoryImpl)__newValue.Clone();
-                    _Attachment = __newValue;
-                    _Attachment.AttachToObject(this, "Attachment");
-
-                    NotifyPropertyChanged("Attachment", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-                }
-                else
-                {
-                    SetInitializedProperty("Attachment");
-                }
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnAttachment_IsValid;
 
         /// <summary>
         /// 
@@ -906,6 +850,62 @@ namespace Zetbox.App.Calendar
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnLocation_IsValid;
 
         /// <summary>
+        /// A attached data item
+        /// </summary>
+        // CompoundObject property
+        // BEGIN Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.Base.AnyReference Source
+        {
+            get { return SourceImpl; }
+            set { SourceImpl = (Zetbox.App.Base.AnyReferenceMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>backing store for Source</summary>
+        private Zetbox.App.Base.AnyReferenceMemoryImpl _Source;
+
+        /// <summary>backing property for Source, takes care of attaching/detaching the values</summary>
+        public Zetbox.App.Base.AnyReferenceMemoryImpl SourceImpl
+        {
+            get
+            {
+                return _Source;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(_Source, value))
+                {
+                    var __oldValue = _Source;
+                    var __newValue = value;
+
+                    NotifyPropertyChanging("Source", __oldValue, __newValue);
+
+                    if (_Source != null)
+                    {
+                        _Source.DetachFromObject(this, "Source");
+                    }
+                    __newValue = (Zetbox.App.Base.AnyReferenceMemoryImpl)__newValue.Clone();
+                    _Source = __newValue;
+                    _Source.AttachToObject(this, "Source");
+
+                    NotifyPropertyChanged("Source", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+                else
+                {
+                    SetInitializedProperty("Source");
+                }
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnSource_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
         // value type property
@@ -1044,12 +1044,12 @@ namespace Zetbox.App.Calendar
             me.Location = other.Location;
             me.StartDate = other.StartDate;
             me.Summary = other.Summary;
-            if (me.Attachment == null && other.Attachment != null) {
-                me.Attachment = (Zetbox.App.Base.AnyReference)other.Attachment.Clone();
-            } else if (me.Attachment != null && other.Attachment == null) {
-                me.Attachment = null;
-            } else if (me.Attachment != null && other.Attachment != null) {
-                me.Attachment.ApplyChangesFrom(other.Attachment);
+            if (me.Source == null && other.Source != null) {
+                me.Source = (Zetbox.App.Base.AnyReference)other.Source.Clone();
+            } else if (me.Source != null && other.Source == null) {
+                me.Source = null;
+            } else if (me.Source != null && other.Source != null) {
+                me.Source.ApplyChangesFrom(other.Source);
             }
             this._fk_Calendar = otherImpl._fk_Calendar;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
@@ -1105,7 +1105,6 @@ namespace Zetbox.App.Calendar
             // Do not audit calculated properties
             switch (property)
             {
-                case "Attachment":
                 case "Body":
                 case "Calendar":
                 case "ChangedBy":
@@ -1116,6 +1115,7 @@ namespace Zetbox.App.Calendar
                 case "ExportGuid":
                 case "IsAllDay":
                 case "Location":
+                case "Source":
                 case "StartDate":
                 case "Summary":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1179,15 +1179,6 @@ namespace Zetbox.App.Calendar
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // else
-                    new PropertyDescriptorMemoryImpl<Event, Zetbox.App.Base.AnyReference>(
-                        lazyCtx,
-                        new Guid("086bf775-297d-49bf-be32-95b19f5eda8a"),
-                        "Attachment",
-                        null,
-                        obj => obj.Attachment,
-                        (obj, val) => obj.Attachment = val,
-						obj => OnAttachment_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Event, string>(
                         lazyCtx,
@@ -1279,6 +1270,15 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.Location = val,
 						obj => OnLocation_IsValid), 
                     // else
+                    new PropertyDescriptorMemoryImpl<Event, Zetbox.App.Base.AnyReference>(
+                        lazyCtx,
+                        new Guid("086bf775-297d-49bf-be32-95b19f5eda8a"),
+                        "Source",
+                        null,
+                        obj => obj.Source,
+                        (obj, val) => obj.Source = val,
+						obj => OnSource_IsValid), 
+                    // else
                     new PropertyDescriptorMemoryImpl<Event, DateTime>(
                         lazyCtx,
                         new Guid("93bf17bd-4dfb-468d-84d4-75fce8214fa3"),
@@ -1359,13 +1359,13 @@ namespace Zetbox.App.Calendar
         [EventBasedMethod("OnNotifyCreated_Event")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("Attachment");
             SetNotInitializedProperty("Body");
             SetNotInitializedProperty("Calendar");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("EndDate");
             SetNotInitializedProperty("Location");
+            SetNotInitializedProperty("Source");
             SetNotInitializedProperty("StartDate");
             SetNotInitializedProperty("Summary");
             base.NotifyCreated();
@@ -1394,7 +1394,6 @@ namespace Zetbox.App.Calendar
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this.Attachment);
             binStream.Write(this._Body);
             binStream.Write(Calendar != null ? Calendar.ID : (int?)null);
             binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
@@ -1417,6 +1416,7 @@ namespace Zetbox.App.Calendar
                 binStream.Write(this._IsAllDay);
             }
             binStream.Write(this._Location);
+            binStream.Write(this.Source);
             binStream.Write(this._StartDate);
             binStream.Write(this._Summary);
         }
@@ -1427,11 +1427,6 @@ namespace Zetbox.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            {
-                // use backing store to avoid notifications
-                this.AttachmentImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AnyReferenceMemoryImpl>();
-                this.AttachmentImpl.AttachToObject(this, "Attachment");
-            }
             this._Body = binStream.ReadString();
             this._fk_Calendar = binStream.ReadNullableInt32();
             this._fk_ChangedBy = binStream.ReadNullableInt32();
@@ -1454,6 +1449,11 @@ namespace Zetbox.App.Calendar
                 this._IsAllDay = binStream.ReadBoolean();
             }
             this._Location = binStream.ReadString();
+            {
+                // use backing store to avoid notifications
+                this.SourceImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AnyReferenceMemoryImpl>();
+                this.SourceImpl.AttachToObject(this, "Source");
+            }
             this._StartDate = binStream.ReadDateTime();
             this._Summary = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1469,7 +1469,6 @@ namespace Zetbox.App.Calendar
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ExportCompoundObject(this.Attachment, xml, "Attachment", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this._Body, xml, "Body", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(Calendar != null ? Calendar.ExportGuid : (Guid?)null, xml, "Calendar", "Zetbox.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1480,6 +1479,7 @@ namespace Zetbox.App.Calendar
             System.Diagnostics.Debug.Assert(this._isIsAllDaySet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this._IsAllDay, xml, "IsAllDay", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this._Location, xml, "Location", "Zetbox.App.Calendar");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ExportCompoundObject(this.Source, xml, "Source", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this._StartDate, xml, "StartDate", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this._Summary, xml, "Summary", "Zetbox.App.Calendar");
         }
@@ -1489,9 +1489,6 @@ namespace Zetbox.App.Calendar
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.Calendar|Attachment":
-                XmlStreamer.MergeImportCompoundObject(this.AttachmentImpl, xml);
-                break;
             case "Zetbox.App.Calendar|Body":
                 this._Body = XmlStreamer.ReadString(xml);
                 break;
@@ -1523,6 +1520,9 @@ namespace Zetbox.App.Calendar
                 break;
             case "Zetbox.App.Calendar|Location":
                 this._Location = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Calendar|Source":
+                XmlStreamer.MergeImportCompoundObject(this.SourceImpl, xml);
                 break;
             case "Zetbox.App.Calendar|StartDate":
                 this._StartDate = XmlStreamer.ReadDateTime(xml);

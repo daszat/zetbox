@@ -118,21 +118,6 @@
 
 
         <!-- define the properties -->
-        <!-- CompoundObjectProperty isValue -->
-        <component name="Attachment" class="Zetbox.App.Base.AnyReferenceNHibernateImpl,Zetbox.Objects.NHibernateImpl">
-        <!-- ValueTypeProperty isValue -->
-        <property name="ObjClass" 
-                  column="`Attachment_ObjClass`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="ObjGuid" 
-                  column="`Attachment_ObjGuid`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="ObjID" 
-                  column="`Attachment_ObjID`" 
-                  optimistic-lock="false"/>
-        </component>
         <!-- ValueTypeProperty isValue -->
         <property name="Body" 
                   column="`Body`" 
@@ -170,6 +155,21 @@
         <property name="Location" 
                   column="`Location`" 
                   optimistic-lock="false"/>
+        <!-- CompoundObjectProperty isValue -->
+        <component name="Source" class="Zetbox.App.Base.AnyReferenceNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjClass" 
+                  column="`Source_ObjClass`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjGuid" 
+                  column="`Source_ObjGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjID" 
+                  column="`Source_ObjID`" 
+                  optimistic-lock="false"/>
+        </component>
         <!-- ValueTypeProperty isValue -->
         <property name="StartDate" type="Timestamp"
                   column="`StartDate`" 

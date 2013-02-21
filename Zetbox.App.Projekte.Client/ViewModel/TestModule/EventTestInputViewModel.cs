@@ -53,7 +53,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
             evt.Summary = "A test event linking to " + obj.Name;
 
             DataContext.SubmitChanges(); // TODO: Workaround limitations of setting a any reference to a new object
-            evt.Attachment.SetObject(obj);
+            evt.Source.SetObject(obj);
             return vmdl;
         }
     }

@@ -1618,9 +1618,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="AttachmentImpl"
-              Type="Model.AnyReferenceEfImpl"
-              Nullable="false" />
     <Property Name="Body" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="CalendarImpl"
                         Relationship="Model.FK_Event_of_Calendar"
@@ -1640,6 +1637,9 @@
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="IsAllDay" Type="Boolean" Nullable="false"  />
     <Property Name="Location" Type="String" Nullable="true" MaxLength="200"  />
+    <Property Name="SourceImpl"
+              Type="Model.AnyReferenceEfImpl"
+              Nullable="false" />
     <Property Name="StartDate" Type="DateTime" Nullable="false"  />
     <Property Name="Summary" Type="String" Nullable="false" MaxLength="200"  />
     <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_Events_Rights" FromRole="Event" ToRole="Event_Rights" />

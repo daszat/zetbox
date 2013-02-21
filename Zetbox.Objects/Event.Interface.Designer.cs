@@ -15,15 +15,6 @@ namespace Zetbox.App.Calendar
     {
 
         /// <summary>
-        /// A attached data item
-        /// </summary>
-        [Zetbox.API.DefinitionGuid("086bf775-297d-49bf-be32-95b19f5eda8a")]
-        Zetbox.App.Base.AnyReference Attachment {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("db075997-89bd-4b98-bf60-40eecebfc664")]
@@ -64,6 +55,15 @@ namespace Zetbox.App.Calendar
         /// </summary>
         [Zetbox.API.DefinitionGuid("3c517754-f4a4-459e-8a24-3b85e1949b21")]
         string Location {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// A attached data item
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("086bf775-297d-49bf-be32-95b19f5eda8a")]
+        Zetbox.App.Base.AnyReference Source {
             get;
             set;
         }

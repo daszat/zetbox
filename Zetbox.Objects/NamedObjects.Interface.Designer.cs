@@ -2046,10 +2046,6 @@ namespace Zetbox {
                             }
                             public static class Event_Properties
                             {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Attachment
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("086bf775-297d-49bf-be32-95b19f5eda8a"); }
-                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Body
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("db075997-89bd-4b98-bf60-40eecebfc664"); }
@@ -2089,6 +2085,10 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Location
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("3c517754-f4a4-459e-8a24-3b85e1949b21"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Source
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("086bf775-297d-49bf-be32-95b19f5eda8a"); }
                                 }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> StartDate
                                 {
