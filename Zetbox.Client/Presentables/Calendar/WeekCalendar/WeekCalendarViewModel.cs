@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel, IRefreshCommandListener
+    public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel, ICalendarDisplayViewModel, IRefreshCommandListener
     {
         public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<EventViewModel>> source);
 

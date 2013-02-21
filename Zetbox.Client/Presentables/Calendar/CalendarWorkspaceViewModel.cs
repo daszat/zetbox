@@ -158,7 +158,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 }
                 if (_shouldUpdateCalendarItems)
                 {
-                    if (_WeekCalender != null) _WeekCalender.Refresh();
+                    CurrentView.Refresh();
                 }
             }
         }
@@ -192,12 +192,12 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_OpenCommand == null)
                 {
                     _OpenCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
-                        this, 
-                        CommonCommandsResources.OpenDataObjectCommand_Name, 
-                        CommonCommandsResources.OpenDataObjectCommand_Tooltip, 
-                        Open, 
-                        CanOpen, 
+                        DataContext,
+                        this,
+                        CommonCommandsResources.OpenDataObjectCommand_Name,
+                        CommonCommandsResources.OpenDataObjectCommand_Tooltip,
+                        Open,
+                        CanOpen,
                         CanOpenReason);
                     _OpenCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
                 }
@@ -207,7 +207,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public bool CanOpen()
         {
-            return _WeekCalender != null && _WeekCalender.SelectedItem != null;
+            return CurrentView.SelectedItem != null;
         }
 
         public string CanOpenReason()
@@ -217,8 +217,8 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public void Open()
         {
-            if (!CanOpen() || _WeekCalender == null) return;
-            Open(_WeekCalender.SelectedItem);
+            if (!CanOpen()) return;
+            Open(CurrentView.SelectedItem);
         }
 
         public void Open(EventViewModel evt)
@@ -229,9 +229,9 @@ namespace Zetbox.Client.Presentables.Calendar
             ws.ShowObject(evt.Object);
             ViewModelFactory.ShowDialog(ws); // TODO: Realy? A Dialog? Discuss
 
-            if(_WeekCalender != null) _WeekCalender.Refresh(); // A dialog makes it easy to know when the time for a refresh has come
+            CurrentView.Refresh(); // A dialog makes it easy to know when the time for a refresh has come
         }
-        #endregion        
+        #endregion
 
         private ICommandViewModel _NewCommand;
         public ICommandViewModel NewCommand
@@ -289,11 +289,8 @@ namespace Zetbox.Client.Presentables.Calendar
                     if (newItem != null)
                     {
                         ctx.SubmitChanges();
-                        if (_WeekCalender != null)
-                        {
-                            _WeekCalender.Refresh();
-                            _WeekCalender.SelectedItem = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<cal.Event>(newItem.ID));
-                        }
+                        CurrentView.Refresh();
+                        CurrentView.SelectedItem = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<cal.Event>(newItem.ID));
                     }
                 }
             }
@@ -344,7 +341,7 @@ namespace Zetbox.Client.Presentables.Calendar
             finally
             {
                 _shouldUpdateCalendarItems = true;
-                if (_WeekCalender != null) _WeekCalender.Refresh();
+                CurrentView.Refresh();
             }
         }
 
@@ -375,28 +372,28 @@ namespace Zetbox.Client.Presentables.Calendar
             finally
             {
                 _shouldUpdateCalendarItems = true;
-                if (_WeekCalender != null) _WeekCalender.Refresh();
+                CurrentView.Refresh();
             }
         }
         #endregion
 
-        #region Calendar
-        private WeekCalendarViewModel _WeekCalender = null;
-        public WeekCalendarViewModel WeekCalender
+        #region CurrentView
+        private WeekCalendarViewModel _weekCalender = null;
+        public ICalendarDisplayViewModel CurrentView
         {
             get
             {
-                if (_WeekCalender == null)
+                if (_weekCalender == null)
                 {
-                    _WeekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
+                    _weekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
                         .Invoke(DataContext, this, FetchEvents);
-                    _WeekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
-                    _WeekCalender.New += (s,e) => New(e.Date);
-                    _WeekCalender.Open += (s, e) => Open(e.Event);
+                    _weekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
+                    _weekCalender.New += (s, e) => New(e.Date);
+                    _weekCalender.Open += (s, e) => Open(e.Event);
                     // Initial refresh
-                    _WeekCalender.Refresh();
+                    _weekCalender.Refresh();
                 }
-                return _WeekCalender;
+                return _weekCalender;
             }
         }
 
@@ -430,7 +427,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
                 result.AddRange(events.Select(obj =>
                 {
-                    var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, WeekCalender, obj);
+                    var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
                     // Color ?
                     return vmdl;
                 }));
@@ -446,16 +443,13 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return new ViewModel[] { (ViewModel)WeekCalender.SelectedItem }; // return selected events!  
+                return new ViewModel[] { CurrentView.SelectedItem }; // return selected events!  
             }
         }
 
         void IRefreshCommandListener.Refresh()
         {
-            if (_WeekCalender != null)
-            {
-                _WeekCalender.Refresh();
-            }
+            CurrentView.Refresh();
         }
     }
 }
