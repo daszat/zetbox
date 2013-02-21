@@ -27,6 +27,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.App.GUI;
     using Zetbox.API.Utils;
 
+    #region CalendarSelectionViewModel
     public class CalendarSelectionViewModel : ViewModel
     {
         public new delegate CalendarSelectionViewModel Factory(IZetboxContext dataCtx, Zetbox.Client.Presentables.ViewModel parent, cal.Calendar calendar, bool isSelf);
@@ -86,6 +87,7 @@ namespace Zetbox.Client.Presentables.Calendar
             get { return CalendarViewModel.Name; }
         }
     }
+    #endregion
 
     [ViewModelDescriptor]
     public class CalendarWorkspaceViewModel : WindowViewModel, IDeleteCommandParameter, IRefreshCommandListener
@@ -236,7 +238,11 @@ namespace Zetbox.Client.Presentables.Calendar
             if (evt == null) return;
             var ctx = _ctxFactory();
             var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
-            ws.ShowObject(evt.Object);
+            var source = evt.Event.Source.GetObject(ctx);
+            if(source != null)
+                ws.ShowObject(source);
+            else
+                ws.ShowObject(evt.Event);
             ViewModelFactory.ShowDialog(ws); // TODO: Realy? A Dialog? Discuss
 
             CurrentView.Refresh(); // A dialog makes it easy to know when the time for a refresh has come
