@@ -39,7 +39,9 @@ namespace Zetbox.Client.Presentables.Calendar
 
         #region Properties
         protected DateTimeValueModel startDateModel;
+
         protected DateTimeValueModel endDateModel;
+
         protected virtual void EnsureModels()
         {
             if (startDateModel == null)
@@ -61,6 +63,13 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     EnsureModels();
                     _startDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this, startDateModel);
+                    _startDate.InputAccepted += (s, e) =>
+                    {
+                        if (e.NewValue.HasValue && e.OldValue.HasValue)
+                        {
+                            endDateModel.Value = endDateModel.Value + (e.NewValue.Value - e.OldValue.Value);
+                        }
+                    };
                 }
                 return _startDate;
             }

@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calendar\CalendarActions.cs" />
+    <Compile Include="Calendar\EventActions.cs" />
     <Compile Include="CustomClientActionsModule.cs" />
     <Compile Include="DerivedReportTest\Common\DocumentStyles1.Designer.cs">
       <DependentUpon>DocumentStyles.cst</DependentUpon>
