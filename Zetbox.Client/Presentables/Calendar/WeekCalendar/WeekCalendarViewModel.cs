@@ -246,11 +246,6 @@ namespace Zetbox.Client.Presentables.Calendar
             get { return "Wochenkalender"; }
         }
 
-        public string DetailsLabel
-        {
-            get { return "Details"; }
-        }
-
         private Func<DateTime, DateTime, IEnumerable<EventViewModel>> _Source = null;
 
         private EventViewModel _selectedItem;

@@ -54,7 +54,6 @@ namespace Zetbox.Client.Presentables.Calendar
                     break;
                 case "Location":
                 case "Body":
-                case "RequestedCalendarKind":
                     // not used
                     break;
             }

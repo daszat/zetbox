@@ -115,6 +115,16 @@ namespace Zetbox.Client.Presentables.Calendar
             get { return "Calendar Workspace"; }
         }
 
+        public string DetailsLabel
+        {
+            get { return "Details"; }
+        }
+
+        public string ItemsLabel
+        {
+            get { return "Calendars"; }
+        }
+
         #region Items
         private IEnumerable<CalendarSelectionViewModel> _Items = null;
         public IEnumerable<CalendarSelectionViewModel> Items
@@ -179,12 +189,6 @@ namespace Zetbox.Client.Presentables.Calendar
                 }
             }
         }
-
-        public string ItemsLabel
-        {
-            get { return "Calendars"; }
-        }
-
         #endregion
 
         #region Commands
@@ -434,6 +438,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 result.AddRange(events.Select(obj =>
                 {
                     var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
+                    vmdl.IsReadOnly = true; // Not changeable. TODO: This should be be implicit. This is a merge server data context
                     // Color ?
                     return vmdl;
                 }));

@@ -27,10 +27,5 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get { return Event.Summary; }
         }
-
-        public ControlKind RequestedCalendarKind
-        {
-            get { return null; }
-        }
     }
 }
