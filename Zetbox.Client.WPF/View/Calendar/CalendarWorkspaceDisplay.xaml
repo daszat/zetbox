@@ -113,14 +113,14 @@
                     BorderThickness="1,0,1,1">
                 <Expander IsExpanded="True"
                           Header="{Binding DetailsLabel}">
-                    <StackPanel DataContext="{Binding CurrentView.SelectedItem}">
+                    <StackPanel DataContext="{Binding CurrentView.SelectedItem}" Height="300">
                         <StackPanel.Style>
                             <Style TargetType="{x:Type StackPanel}">
                                 <Style.Triggers>
-                                    <Trigger Property="StackPanel.DataContext"
+                                    <Trigger Property="DataContext"
                                              Value="{x:Null}">
-                                        <Setter Property="StackPanel.Visibility"
-                                                Value="Collapsed" />
+                                        <Setter Property="Visibility"
+                                                Value="Hidden" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
