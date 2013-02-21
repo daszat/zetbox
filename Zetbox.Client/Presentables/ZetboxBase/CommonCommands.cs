@@ -510,23 +510,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             ObjectClass baseclass = Type;
 
-            var children = new List<ObjectClass>();
+            var candidates = new List<ObjectClass>();
             if (baseclass.IsAbstract == false)
             {
-                children.Add(baseclass);
+                candidates.Add(baseclass);
             }
-            baseclass.CollectChildClasses(children, false);
+            baseclass.CollectChildClasses(candidates, false);
 
-            if (children.Count == 1)
+            if (candidates.Count == 1)
             {
-                CreateItem(Type);
+                CreateItem(candidates.First());
             }
             else
             {
                 var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                         DataContext, this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
-                        () => children.AsQueryable(),
+                        () => candidates.AsQueryable(),
                         (chosen) =>
                         {
                             if (chosen != null)

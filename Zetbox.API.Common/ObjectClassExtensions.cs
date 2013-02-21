@@ -72,13 +72,10 @@ namespace Zetbox.App.Extensions
             if (cls == null) throw new ArgumentNullException("cls");
             if (children == null) throw new ArgumentNullException("children");
 
-            if (cls.SubClasses.Count > 0)
+            foreach (ObjectClass oc in cls.SubClasses)
             {
-                foreach (ObjectClass oc in cls.SubClasses)
-                {
-                    if (includeAbstract || !oc.IsAbstract) children.Add(oc);
-                    CollectChildClasses(oc, children, includeAbstract);
-                };
+                if (includeAbstract || !oc.IsAbstract) children.Add(oc);
+                CollectChildClasses(oc, children, includeAbstract);
             }
         }
 
