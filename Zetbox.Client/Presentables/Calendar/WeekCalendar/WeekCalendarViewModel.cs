@@ -130,10 +130,18 @@ namespace Zetbox.Client.Presentables.Calendar
             }
             set
             {
-                if (_From != value)
+                var realValue = value.Date.FirstWeekDay();
+                if (_From != realValue)
                 {
-                    _From = value;
-                    _DayItems = null;
+                    _From = realValue;
+                    if (_DayItems != null)
+                    {
+                        for (int i = 0; i < 7; i++)
+                        {
+                            _DayItems[i].Day = realValue.AddDays(i);
+                            _DayItems[i].CalendarItems = null;
+                        }
+                    }
                     Refresh(); // Get new data
                     OnPropertyChanged("From");
                     OnPropertyChanged("To");

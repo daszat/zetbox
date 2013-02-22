@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.Calendar
         public DayCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, WeekCalendarViewModel parent, DateTime day)
             : base(dependencies, dataCtx, parent)
         {
-            this.Day = day;
+            this.Day = day.Date;
         }
 
         public WeekCalendarViewModel WeekCalendar
@@ -48,9 +48,20 @@ namespace Zetbox.Client.Presentables.Calendar
             }
             set
             {
-                if (_Day != value)
+                var realValue = value.Date;
+                if (_Day != realValue)
                 {
-                    _Day = value;
+                    _Day = realValue;
+                    OnPropertyChanged("Day");
+                    OnPropertyChanged("DayText");
+                    OnPropertyChanged("Name");
+                    if (_TimeSlotItems != null)
+                    {
+                        foreach (var ts in _TimeSlotItems)
+                        {
+                            ts.Day = _Day;
+                        }
+                    }
                 }
             }
         }
@@ -79,7 +90,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     {
                         foreach (var otherItem in WeekCalendar.DayItems)
                         {
-                            if(otherItem != this) otherItem.Zoom = false;
+                            if (otherItem != this) otherItem.Zoom = false;
                         }
                     }
                     OnPropertyChanged("Zoom");
@@ -143,7 +154,10 @@ namespace Zetbox.Client.Presentables.Calendar
             }
             set
             {
-                _CalendarItems = new List<CalendarItemViewModel>(value);
+                _CalendarItems = (value == null)
+                    ? new List<CalendarItemViewModel>()
+                    : new List<CalendarItemViewModel>(value);
+
                 foreach (var i in _CalendarItems)
                 {
                     i.DayCalendar = this;

@@ -16,11 +16,12 @@ namespace Zetbox.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Windows.Media;
 
-    public class TimeSlotItemViewModel
+    public sealed class TimeSlotItemViewModel : INotifyPropertyChanged
     {
         public TimeSlotItemViewModel()
             : this(DateTime.Today, 0, 0)
@@ -34,14 +35,69 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public TimeSlotItemViewModel(DateTime day, int hour, int minute)
         {
-            this.Day = day;
+            this.Day = day.Date;
             this.Hour = hour;
             this.Minute = minute;
         }
 
-        public int Hour { get; set; }
-        public int Minute { get; set; }
-        public DateTime Day { get; set; }
+        private DateTime _day;
+        private int _hour;
+        private int _minute;
+
+        public DateTime Day
+        {
+            get
+            {
+                return _day;
+            }
+            set
+            {
+                var realValue = value.Date;
+                if (_day != realValue)
+                {
+                    _day = realValue;
+                    OnPropertyChanged("Day");
+                    OnPropertyChanged("Background");
+                    OnPropertyChanged("DateTime");
+                }
+            }
+        }
+
+        public int Hour
+        {
+            get
+            {
+                return _hour;
+            }
+            set
+            {
+                if (_hour != value)
+                {
+                    _hour = value;
+                    OnPropertyChanged("Hour");
+                    OnPropertyChanged("Background");
+                    OnPropertyChanged("DateTime");
+                }
+            }
+        }
+
+        public int Minute
+        {
+            get
+            {
+                return _minute;
+            }
+            set
+            {
+                if (_minute != value)
+                {
+                    _minute = value;
+                    OnPropertyChanged("Minute");
+                    OnPropertyChanged("DateTime");
+                    OnPropertyChanged("BorderThickness");
+                }
+            }
+        }
 
         public string Background
         {
@@ -59,11 +115,21 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public System.Drawing.RectangleF BorderThickness 
+        public System.Drawing.RectangleF BorderThickness
         {
             get
             {
                 return new System.Drawing.RectangleF(0.0f, 0.0f, 1.0f, Minute == 0 ? 0.5f : 1.0f);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string property)
+        {
+            var temp = PropertyChanged;
+            if (temp != null)
+            {
+                temp(this, new PropertyChangedEventArgs(property));
             }
         }
     }
