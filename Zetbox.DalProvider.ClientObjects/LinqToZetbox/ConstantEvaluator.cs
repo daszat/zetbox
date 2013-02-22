@@ -19,8 +19,8 @@ namespace Zetbox.DalProvider.Client
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Reflection;
     using System.Text;
-
     using Zetbox.API;
 
     internal static class ConstantEvaluator
@@ -66,6 +66,26 @@ namespace Zetbox.DalProvider.Client
                 {
                     return e;
                 }
+                else if (e.NodeType == ExpressionType.MemberAccess)
+                {
+                    var me = (MemberExpression)e;
+                    if (me.Expression.NodeType == ExpressionType.Constant)
+                    {
+                        var obj = ((ConstantExpression)me.Expression).Value;
+                        var propertyInfo = me.Member as PropertyInfo;
+                        if (propertyInfo != null)
+                        {
+                            return Expression.Constant(propertyInfo.GetValue(obj, null), e.Type);
+                        }
+
+                        var fieldInfo = me.Member as FieldInfo;
+                        if (fieldInfo != null)
+                        {
+                            return Expression.Constant(fieldInfo.GetValue(obj), e.Type);
+                        }
+                    }
+                }
+
                 LambdaExpression lambda = Expression.Lambda(e);
                 // TODO: The following line is _the_only_ (85% of ZetboxContext.Find()) performance Hotspot for Linq2Zetbox
                 Delegate fn = lambda.Compile();
