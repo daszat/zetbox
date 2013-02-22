@@ -152,7 +152,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return  ObjectViewModel.Event.Summary;
+                return ObjectViewModel.Event.Summary;
             }
         }
 
@@ -181,7 +181,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return (ActualWidth * OverlappingWidth) + 1.0d; // Adjust for border width on meeting items, which should be only drawn once
+                return Math.Max(0.0, (ActualWidth * OverlappingWidth) + 1.0d); // Adjust for border width on meeting items, which should be only drawn once
             }
         }
 
@@ -190,8 +190,8 @@ namespace Zetbox.Client.Presentables.Calendar
             get
             {
                 var length = (Until - From).TotalHours;
-                if (length < 0.5) length = 0.5; // display at least half a line
-                return (int)(length * 44.0) + 1;
+                // display at least half a line
+                return (int)(Math.Max(0.5, length) * 44.0) + 1;
             }
         }
 

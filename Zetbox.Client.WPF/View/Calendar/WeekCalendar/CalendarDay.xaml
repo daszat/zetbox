@@ -36,25 +36,19 @@
                                 HorizontalAlignment="Stretch">
                             <Grid x:Name="panelTimeSlotItem">
                                 <!-- http://stackoverflow.com/questions/3410768/why-doesnt-wpf-border-control-have-a-mousedoubleclick-event/3411419#3411419 -->
-                                <Control MouseDoubleClick="timeslot_MouseDoubleClick"
-                                         MouseDown="timeslot_MouseDown"
-                                         Opacity="0"
-                                         x:Name="item">
-                                    <Control.Template>
-                                        <ControlTemplate>
-                                            <Border Margin="1"
-                                                    BorderThickness="1,1,1,1"
-                                                    SnapsToDevicePixels="true"
-                                                    BorderBrush="#5D8CC9"
-                                                    Background="#10000000">
-                                                <TextBlock Text="Neuer Termin"
-                                                           HorizontalAlignment="Center"
-                                                           VerticalAlignment="Center"
-                                                           Foreground="#A39DD8" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Control.Template>
-                                </Control>
+                                <Border Margin="1"
+                                        BorderThickness="1,1,1,1"
+                                        MouseLeftButtonDown="timeslot_MouseLeftButtonDown"
+                                        SnapsToDevicePixels="true"
+                                        BorderBrush="#5D8CC9"
+                                        Background="#10000000"
+                                        Opacity="0"
+                                        x:Name="item">
+                                    <TextBlock Text="Neuer Termin"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="#A39DD8" />
+                                </Border>
                             </Grid>
                         </Border>
                         <DataTemplate.Triggers>
@@ -69,64 +63,9 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <ItemsControl ItemsSource="{Binding DayItems}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas IsItemsHost="True"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type viewmdl:CalendarItemViewModel}">
-                        <!-- http://stackoverflow.com/questions/3410768/why-doesnt-wpf-border-control-have-a-mousedoubleclick-event/3411419#3411419 -->
-                        <Control MouseDoubleClick="calendarItem_MouseDoubleClick"
-                                 MouseLeftButtonDown="calendarItem_MouseLeftButtonDown">
-                            <Control.Template>
-                                <ControlTemplate>
-                                    <Border BorderThickness="1,1,1,1"
-                                            BorderBrush="#5D8CC9"
-                                            Margin="{Binding Position, Converter={StaticResource SystemDrawingConverter}}"
-                                            Padding="5,3,3,3"
-                                            Height="{Binding Height}"
-                                            Width="{Binding Width}"
-                                            HorizontalAlignment="Stretch"
-                                            SnapsToDevicePixels="true"
-                                            x:Name="item">
-                                        <Border.Background>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}"
-                                                              Offset="0.0" />
-                                                <GradientStop Color="{Binding Color}"
-                                                              Offset="1.0" />
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Summary}"
-                                                       FontWeight="Bold" />
-                                            <TextBlock Text="{Binding FromToText}" />
-                                        </StackPanel>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected}"
-                                                     Value="True">
-                                            <Setter Property="BorderThickness"
-                                                    Value="3,3,3,3"
-                                                    TargetName="item" />
-                                            <Setter Property="BorderBrush"
-                                                    Value="Black"
-                                                    TargetName="item" />
-                                            <Setter Property="Padding"
-                                                    Value="3,1,1,1"
-                                                    TargetName="item" />
-                                        </DataTrigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Control.Template>
-                        </Control>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <Canvas x:Name="items"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" />
         </Grid>
     </Border>
 </UserControl>

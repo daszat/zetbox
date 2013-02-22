@@ -30,6 +30,7 @@ using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.Calendar;
 using Zetbox.Client.WPF.Toolkit;
+using Zetbox.Client.WPF.Converter;
 
 namespace Zetbox.Client.WPF.View.Calendar
 {
@@ -53,7 +54,116 @@ namespace Zetbox.Client.WPF.View.Calendar
             if (ViewModel != null)
             {
                 ViewModel.ActualWidth = panelCalendarDay.ActualWidth;
-            }            
+                ViewModel.PropertyChanged += new PropertyChangedEventHandler(ViewModel_PropertyChanged);
+            }
+        }
+
+        void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "DayItems")
+            {
+                var borderThickness = new Thickness(1, 1, 1, 1);
+                var selectedBorderThickness = new Thickness(3, 3, 3, 3);
+                var borderBrush = new SolidColorBrush(Color.FromRgb(0x5d, 0x8c, 0xc9));
+                borderBrush.Freeze();
+                var borderPadding = new Thickness(5, 3, 3, 3);
+                var selectedBorderPadding = new Thickness(3, 1, 1, 1);
+                var isSelectedStyle = new Style()
+                {
+                    TargetType = typeof(Border),
+                    Setters =
+                    {
+                        new Setter 
+                        {
+                            Property = Border.BorderThicknessProperty,
+                            Value = borderThickness,
+                        },
+                        new Setter 
+                        {
+                            Property = Border.BorderBrushProperty,
+                            Value = borderBrush,
+                        },
+                        new Setter 
+                        {
+                            Property = Border.PaddingProperty,
+                            Value = borderPadding,
+                        }, 
+                    },
+                    Triggers = 
+                    {
+                        new DataTrigger()
+                        {
+                            Binding = new Binding() { Path = new PropertyPath("IsSelected") },
+                            Value = true,
+                            Setters =
+                            {
+                                new Setter 
+                                {
+                                    Property = Border.BorderThicknessProperty,
+                                    Value = selectedBorderThickness,
+                                },
+                                new Setter 
+                                {
+                                    Property = Border.BorderBrushProperty,
+                                    Value = Brushes.Black,
+                                },
+                                new Setter 
+                                {
+                                    Property = Border.PaddingProperty,
+                                    Value = selectedBorderPadding,
+                                },
+                            }
+                        }
+                    }
+                };
+
+                items.Children.Clear();
+                items.BeginInit();
+                try
+                {
+                    foreach (var item in ViewModel.DayItems)
+                    {
+                        var itemColor = (Color)ColorConverter.ConvertFromString(item.Color);
+                        var borderBackground = new LinearGradientBrush(LighterShadeConverter.ConvertFromColor(itemColor), itemColor, 0.0);
+                        borderBackground.Freeze();
+
+                        var border = new Border()
+                        {
+                            Height = item.Height,
+                            Width = item.Width,
+                            HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
+                            SnapsToDevicePixels = true,
+                            Background = borderBackground,
+                            DataContext = item,
+                            Style = isSelectedStyle,
+                        };
+                        Canvas.SetLeft(border, item.Position.X);
+                        Canvas.SetTop(border, item.Position.Y);
+                        border.MouseLeftButtonDown += calendarItem_MouseLeftButtonDown;
+                        border.Child = new StackPanel()
+                        {
+                            Children =
+                            {
+                                new TextBlock() 
+                                {
+                                    Text = item.Summary,
+                                    FontWeight = FontWeights.Bold,
+                                },
+                                new TextBlock() 
+                                {
+                                    Text = item.FromToText,
+                                }
+                            }
+                        };
+
+                        items.Children.Add(border);
+                    }
+                }
+                finally
+                {
+                    items.EndInit();
+                }
+            }
         }
 
         void panelCalendarDay_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -61,34 +171,39 @@ namespace Zetbox.Client.WPF.View.Calendar
             if (ViewModel != null)
             {
                 ViewModel.ActualWidth = panelCalendarDay.ActualWidth;
+                foreach (var border in items.Children.OfType<Border>())
+                {
+                    var item = (CalendarItemViewModel)border.DataContext;
+                    border.Width = item.Width;
+                    Canvas.SetLeft(border, item.Position.X);
+                }
             }
         }
 
-        #region Select/Unselect
+        #region calendarItem
         void calendarItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is FrameworkElement && e.ClickCount == 1)
+            if (sender is FrameworkElement)
             {
                 var fe = (FrameworkElement)sender;
                 var vmdl = fe.DataContext as CalendarItemViewModel;
                 if (vmdl != null)
                 {
-                    ViewModel.WeekCalendar.SelectedItem = vmdl.ObjectViewModel;
+                    if (e.ClickCount == 1)
+                    {
+                        ViewModel.WeekCalendar.SelectedItem = vmdl.ObjectViewModel;
+                    }
+                    else if (e.ClickCount == 2)
+                    {
+                        ViewModel.WeekCalendar.NotifyOpen(vmdl.ObjectViewModel);
+                    }
                 }
-            }
-        }
-
-        void timeslot_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is FrameworkElement && e.ClickCount == 1)
-            {
-                ViewModel.WeekCalendar.SelectedItem = null;
             }
         }
         #endregion
 
-        #region Open/New
-        void timeslot_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        #region timeslot
+        void timeslot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is FrameworkElement)
             {
@@ -96,20 +211,14 @@ namespace Zetbox.Client.WPF.View.Calendar
                 var vmdl = fe.DataContext as TimeSlotItemViewModel;
                 if (vmdl != null)
                 {
-                    ViewModel.WeekCalendar.NotifyNew(vmdl.DateTime);
-                }
-            }
-        }
-
-        void calendarItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is FrameworkElement)
-            {
-                var fe = (FrameworkElement)sender;
-                var vmdl = fe.DataContext as CalendarItemViewModel;
-                if (vmdl != null)
-                {
-                    ViewModel.WeekCalendar.NotifyOpen(vmdl.ObjectViewModel);
+                    if (e.ClickCount == 1)
+                    {
+                        ViewModel.WeekCalendar.SelectedItem = null;
+                    }
+                    else if (e.ClickCount == 2)
+                    {
+                        ViewModel.WeekCalendar.NotifyNew(vmdl.DateTime);
+                    }
                 }
             }
         }
