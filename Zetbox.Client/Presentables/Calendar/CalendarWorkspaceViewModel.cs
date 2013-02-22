@@ -425,7 +425,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_weekCalender == null)
                 {
                     _weekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
-                        .Invoke(DataContext, this, FetchEventsAsync);
+                        .Invoke(DataContext, this, _fetchCache.FetchEventsAsync);
                     _weekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
                     _weekCalender.New += (s, e) => New(e.Date);
                     _weekCalender.Open += (s, e) => Open(e.Event);
@@ -443,17 +443,17 @@ namespace Zetbox.Client.Presentables.Calendar
                 public static FetchCacheEntry None = default(FetchCacheEntry);
 
                 public readonly DateTime FetchTime;
-                public readonly List<EventViewModel> Events;
+                public readonly ZbTask<List<EventViewModel>> EventsTask;
 
-                public FetchCacheEntry(List<EventViewModel> events)
+                public FetchCacheEntry(ZbTask<List<EventViewModel>> events)
                 {
                     this.FetchTime = DateTime.Now;
-                    this.Events = events;
+                    this.EventsTask = events;
                 }
 
                 public static bool operator ==(FetchCacheEntry a, FetchCacheEntry b)
                 {
-                    return a.FetchTime == b.FetchTime && a.Events == b.Events;
+                    return a.FetchTime == b.FetchTime && a.EventsTask == b.EventsTask;
                 }
 
                 public static bool operator !=(FetchCacheEntry a, FetchCacheEntry b)
@@ -477,7 +477,6 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     return FetchTime.GetHashCode();
                 }
-
             }
 
             /// <summary>
@@ -510,11 +509,11 @@ namespace Zetbox.Client.Presentables.Calendar
                 _cache.Clear();
             }
 
-            public IEnumerable<EventViewModel> FetchEvents(DateTime from, DateTime to)
+            public ZbTask<IEnumerable<EventViewModel>> FetchEventsAsync(DateTime from, DateTime to)
             {
-                var result = new List<EventViewModel>();
-                if (_calendars.Count == 0) return result;
+                if (_calendars.Count == 0) return new ZbTask<IEnumerable<EventViewModel>>(ZbTask.Synchron, () => new List<EventViewModel>());
 
+                var result = new List<ZbTask<List<EventViewModel>>>();
                 for (var curDay = from.Date; curDay <= to; curDay = curDay.AddDays(1))
                 {
                     FetchCacheEntry entry;
@@ -522,7 +521,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     {
                         if (entry.FetchTime.AddMinutes(5) > DateTime.Now)
                         {
-                            result.AddRange(entry.Events);
+                            result.Add(entry.EventsTask);
                         }
                         else
                         {
@@ -533,31 +532,41 @@ namespace Zetbox.Client.Presentables.Calendar
 
                     if (entry == FetchCacheEntry.None)
                     {
-                        entry = new FetchCacheEntry(QueryContext(curDay, curDay.AddDays(1)));
+                        entry = new FetchCacheEntry(QueryContextAsync(curDay, curDay.AddDays(1)));
                         _cache.Add(curDay, entry);
-                        result.AddRange(entry.Events);
+                        result.Add(entry.EventsTask);
                     }
                 }
 
-                return result.Distinct();
+                return new ZbTask<IEnumerable<EventViewModel>>(result)
+                    .OnResult(t =>
+                    {
+                        t.Result = result.SelectMany(r => r.Result).Distinct();
+                    });
             }
 
-            private List<EventViewModel> QueryContext(DateTime from, DateTime to)
+            private ZbTask<List<EventViewModel>> QueryContextAsync(DateTime from, DateTime to)
             {
                 var predicateCalendars = GetCalendarPredicate();
 
-                return _ctx.GetQuery<cal.Event>()
+                var queryTask = _ctx.GetQuery<cal.Event>()
                     .Where(predicateCalendars)
                     .Where(e => (e.StartDate >= from && e.StartDate <= to) || (e.EndDate >= from && e.EndDate <= to) || (e.StartDate <= from && e.EndDate >= to))
-                    .ToList()
-                    .Select(obj =>
+                    .ToListAsync();
+
+                return new ZbTask<List<EventViewModel>>(queryTask)
+                    .OnResult(t =>
                     {
-                        var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, _ctx, _parent, obj);
-                        vmdl.IsReadOnly = true; // Not changeable. TODO: This should be be implicit. This is a merge server data context
-                        // Color ?
-                        return vmdl;
-                    })
-                    .ToList();
+                        t.Result = queryTask.Result
+                            .Select(obj =>
+                            {
+                                var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, _ctx, _parent, obj);
+                                vmdl.IsReadOnly = true; // Not changeable. TODO: This should be be implicit. This is a merge server data context
+                                // Color ?
+                                return vmdl;
+                            })
+                            .ToList();
+                    });
             }
 
             private System.Linq.Expressions.Expression<Func<cal.Event, bool>> GetCalendarPredicate()
@@ -582,13 +591,7 @@ namespace Zetbox.Client.Presentables.Calendar
         }
 
         private readonly FetchCache _fetchCache;
-        private ZbTask<IEnumerable<EventViewModel>> FetchEventsAsync(DateTime from, DateTime to)
-        {
-            using (Logging.Client.InfoTraceMethodCall("CalendarWorkspaceViewModel.FetchEvents()"))
-            {
-                return new ZbTask<IEnumerable<EventViewModel>>(ZbTask.Synchron, () => _fetchCache.FetchEvents(from, to));
-            }
-        }
+
         #endregion
 
         public bool IsReadOnly { get { return false; } }
