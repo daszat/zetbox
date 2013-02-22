@@ -330,6 +330,14 @@ namespace Zetbox.Client.WPF.Converter
     [ValueConversion(typeof(Color), typeof(Color))]
     public class LighterShadeConverter : IValueConverter
     {
+        public static Color ConvertFromColor(Color value, float lighter = 0.5f)
+        {
+            return Color.FromScRgb(value.ScA,
+                (1.0f - lighter) * value.ScR + lighter,
+                (1.0f - lighter) * value.ScG + lighter,
+                (1.0f - lighter) * value.ScB + lighter);
+        }
+
         public object Convert(object value, Type targetType,
                             object parameter, System.Globalization.CultureInfo culture)
         {
@@ -356,10 +364,7 @@ namespace Zetbox.Client.WPF.Converter
                 return value;
             }
 
-            return Color.FromScRgb(color.ScA,
-                (1.0f - lighter) * color.ScR + lighter,
-                (1.0f - lighter) * color.ScG + lighter,
-                (1.0f - lighter) * color.ScB + lighter);
+            return ConvertFromColor(color, lighter);
         }
 
         public object ConvertBack(object value, Type targetType,
