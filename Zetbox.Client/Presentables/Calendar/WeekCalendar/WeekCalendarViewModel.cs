@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel, ICalendarDisplayViewModel, IRefreshCommandListener
+    public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel, ICalendarDisplayViewModel
     {
         public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<EventViewModel>> source);
 
@@ -93,32 +93,24 @@ namespace Zetbox.Client.Presentables.Calendar
             From = DateTime.Today.FirstWeekDay();
         }
 
-        private RefreshCommand _RefreshCommand = null;
-        public ICommandViewModel RefreshCommand
-        {
-            get
-            {
-                if (_RefreshCommand == null)
-                {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(
-                        DataContext,
-                        this);
-                }
-                return _RefreshCommand;
-            }
-        }
+        private List<EventViewModel> _allEvents;
+        private List<CalendarItemViewModel> _allItems;
 
         public void Refresh()
         {
-            if (_allAppointments != null)
+            _allEvents = _Source(From, To).ToList();
+            _allItems = new List<CalendarItemViewModel>();
+            foreach (var a in _allEvents)
             {
-                foreach (var a in _allAppointments)
-                {
-                    a.PropertyChanged -= AppointmentViewModelChanged;
-                }
-                _allAppointments = null;
+                var items = CreateCalendarItemViewModel(a);
+                if (items != null && items.Count > 0) _allItems.AddRange(items);
             }
-            EnsureAppointments();
+
+            foreach (var day in DayItems)
+            {
+                day.CalendarItems = _allItems
+                    .Where(i => i.From.Date == day.Day);
+            }
         }
 
         private DateTime _From = DateTime.Today.FirstWeekDay();
@@ -285,37 +277,6 @@ namespace Zetbox.Client.Presentables.Calendar
             return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl));
         }
 
-
-        private List<EventViewModel> _allAppointments;
-
-        private void EnsureAppointments()
-        {
-            _allAppointments = _Source(From, To).ToList();
-            foreach (var a in _allAppointments)
-            {
-                a.PropertyChanged += AppointmentViewModelChanged;
-            }
-
-            RecreateItems();
-        }
-
-        private List<CalendarItemViewModel> _allItems;
-        private void RecreateItems()
-        {
-            _allItems = new List<CalendarItemViewModel>();
-            foreach (var a in _allAppointments)
-            {
-                var items = CreateCalendarItemViewModel(a);
-                if (items != null && items.Count > 0) _allItems.AddRange(items);
-            }
-
-            foreach (var day in DayItems)
-            {
-                day.CalendarItems = _allItems
-                    .Where(i => i.From.Date == day.Day);
-            }
-        }
-
         private List<CalendarItemViewModel> CreateCalendarItemViewModel(EventViewModel a)
         {
             if (a.Event.StartDate <= a.Event.EndDate)
@@ -343,17 +304,6 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", a.Event.Summary, a.Event.StartDate, a.Event.EndDate);
                 return null;
-            }
-        }
-
-        private void AppointmentViewModelChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "From":
-                case "Until":
-                    RecreateItems();
-                    break;
             }
         }
 

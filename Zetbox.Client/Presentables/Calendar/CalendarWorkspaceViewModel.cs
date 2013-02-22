@@ -250,6 +250,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 ws.ShowObject(evt.Event);
             ViewModelFactory.ShowDialog(ws); // TODO: Realy? A Dialog? Discuss
 
+            _fetchCache.Invalidate();
             CurrentView.Refresh(); // A dialog makes it easy to know when the time for a refresh has come
         }
         #endregion
@@ -310,10 +311,26 @@ namespace Zetbox.Client.Presentables.Calendar
                     if (newItem != null)
                     {
                         ctx.SubmitChanges();
+                        _fetchCache.Invalidate();
                         CurrentView.Refresh();
                         CurrentView.SelectedItem = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<cal.Event>(newItem.ID));
                     }
                 }
+            }
+        }
+
+        private RefreshCommand _RefreshCommand = null;
+        public ICommandViewModel RefreshCommand
+        {
+            get
+            {
+                if (_RefreshCommand == null)
+                {
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(
+                        DataContext,
+                        this);
+                }
+                return _RefreshCommand;
             }
         }
 
@@ -487,6 +504,11 @@ namespace Zetbox.Client.Presentables.Calendar
                 _calendars.AddRange(ids);
             }
 
+            public void Invalidate()
+            {
+                _cache.Clear();
+            }
+
             public IEnumerable<EventViewModel> FetchEvents(DateTime from, DateTime to)
             {
                 var result = new List<EventViewModel>();
@@ -580,6 +602,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         void IRefreshCommandListener.Refresh()
         {
+            _fetchCache.Invalidate();
             CurrentView.Refresh();
         }
     }

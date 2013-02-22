@@ -65,16 +65,10 @@
                                   Margin="{StaticResource ItemGroup1Margin}"
                                   Content="{Binding JumpToDateValue, Mode=OneWay}"
                                   ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-                <ctrls:CommandButton Height="25"
-                                     Width="100"
-                                     CommandViewModel="{Binding JumpToDateCommand}"
-                                     Background="{x:Null}"
-                                     BorderBrush="{x:Null}" />
 
                 <ctrls:CommandButton Height="25"
                                      Width="100"
-                                     Margin="10,0,0,0"
-                                     CommandViewModel="{Binding RefreshCommand}"
+                                     CommandViewModel="{Binding JumpToDateCommand}"
                                      Background="{x:Null}"
                                      BorderBrush="{x:Null}" />
 
