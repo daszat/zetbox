@@ -94,9 +94,6 @@ namespace Zetbox.Client.Presentables.Calendar
             From = DateTime.Today.FirstWeekDay();
         }
 
-        private List<EventViewModel> _allEvents;
-        private List<CalendarItemViewModel> _allItems;
-
         public void Refresh()
         {
             var taskFrom = From;
@@ -105,18 +102,13 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (From == taskFrom && To == taskTo)
                 {
-                    _allEvents = t.Result.ToList();
-                    _allItems = new List<CalendarItemViewModel>();
-                    foreach (var a in _allEvents)
-                    {
-                        var items = CreateCalendarItemViewModel(a);
-                        if (items != null && items.Count > 0) _allItems.AddRange(items);
-                    }
+                    var allItems = t.Result
+                        .SelectMany(e => CreateCalendarItemViewModels(e))
+                        .ToLookup(c => c.From.Date);
 
                     foreach (var day in DayItems)
                     {
-                        day.CalendarItems = _allItems
-                            .Where(i => i.From.Date == day.Day);
+                        day.CalendarItems = allItems[day.Day];
                     }
                 }
             });
@@ -286,7 +278,7 @@ namespace Zetbox.Client.Presentables.Calendar
             return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl));
         }
 
-        private List<CalendarItemViewModel> CreateCalendarItemViewModel(EventViewModel a)
+        private List<CalendarItemViewModel> CreateCalendarItemViewModels(EventViewModel a)
         {
             if (a.Event.StartDate <= a.Event.EndDate)
             {
@@ -312,7 +304,7 @@ namespace Zetbox.Client.Presentables.Calendar
             else
             {
                 Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", a.Event.Summary, a.Event.StartDate, a.Event.EndDate);
-                return null;
+                return new List<CalendarItemViewModel>();
             }
         }
 
