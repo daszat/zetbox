@@ -18,14 +18,15 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Zetbox.Client.Presentables;
     using Zetbox.API;
+    using Zetbox.API.Async;
+    using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using cal = Zetbox.App.Calendar;
-    using Zetbox.Client.Presentables.ZetboxBase;
     using Zetbox.App.GUI;
-    using Zetbox.API.Utils;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using cal = Zetbox.App.Calendar;
 
     #region CalendarSelectionViewModel
     public class CalendarSelectionViewModel : ViewModel
@@ -424,7 +425,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_weekCalender == null)
                 {
                     _weekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
-                        .Invoke(DataContext, this, FetchEvents);
+                        .Invoke(DataContext, this, FetchEventsAsync);
                     _weekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
                     _weekCalender.New += (s, e) => New(e.Date);
                     _weekCalender.Open += (s, e) => Open(e.Event);
@@ -581,11 +582,11 @@ namespace Zetbox.Client.Presentables.Calendar
         }
 
         private readonly FetchCache _fetchCache;
-        private IEnumerable<EventViewModel> FetchEvents(DateTime from, DateTime to)
+        private ZbTask<IEnumerable<EventViewModel>> FetchEventsAsync(DateTime from, DateTime to)
         {
             using (Logging.Client.InfoTraceMethodCall("CalendarWorkspaceViewModel.FetchEvents()"))
             {
-                return _fetchCache.FetchEvents(from, to);
+                return new ZbTask<IEnumerable<EventViewModel>>(ZbTask.Synchron, () => _fetchCache.FetchEvents(from, to));
             }
         }
         #endregion

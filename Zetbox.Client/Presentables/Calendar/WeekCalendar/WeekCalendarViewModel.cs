@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Text;
     using System.Windows.Media;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
@@ -30,9 +31,9 @@ namespace Zetbox.Client.Presentables.Calendar
     [ViewModelDescriptor]
     public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel, ICalendarDisplayViewModel
     {
-        public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<EventViewModel>> source);
+        public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, ZbTask<IEnumerable<EventViewModel>>> source);
 
-        public WeekCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<EventViewModel>> source)
+        public WeekCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, ZbTask<IEnumerable<EventViewModel>>> source)
             : base(dependencies, dataCtx, parent)
         {
             if (source == null) throw new ArgumentNullException("source");
@@ -98,19 +99,27 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public void Refresh()
         {
-            _allEvents = _Source(From, To).ToList();
-            _allItems = new List<CalendarItemViewModel>();
-            foreach (var a in _allEvents)
+            var taskFrom = From;
+            var taskTo = To;
+            _Source(From, To).OnResult(t =>
             {
-                var items = CreateCalendarItemViewModel(a);
-                if (items != null && items.Count > 0) _allItems.AddRange(items);
-            }
+                if (From == taskFrom && To == taskTo)
+                {
+                    _allEvents = t.Result.ToList();
+                    _allItems = new List<CalendarItemViewModel>();
+                    foreach (var a in _allEvents)
+                    {
+                        var items = CreateCalendarItemViewModel(a);
+                        if (items != null && items.Count > 0) _allItems.AddRange(items);
+                    }
 
-            foreach (var day in DayItems)
-            {
-                day.CalendarItems = _allItems
-                    .Where(i => i.From.Date == day.Day);
-            }
+                    foreach (var day in DayItems)
+                    {
+                        day.CalendarItems = _allItems
+                            .Where(i => i.From.Date == day.Day);
+                    }
+                }
+            });
         }
 
         private DateTime _From = DateTime.Today.FirstWeekDay();
@@ -246,7 +255,7 @@ namespace Zetbox.Client.Presentables.Calendar
             get { return "Wochenkalender"; }
         }
 
-        private Func<DateTime, DateTime, IEnumerable<EventViewModel>> _Source = null;
+        private readonly Func<DateTime, DateTime, ZbTask<IEnumerable<EventViewModel>>> _Source = null;
 
         private EventViewModel _selectedItem;
         public EventViewModel SelectedItem
