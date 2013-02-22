@@ -27,7 +27,12 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <Border Background="#E3EFFF"
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="headerBackground"
+                         Color="#E3EFFF" />
+    </UserControl.Resources>
+
+    <Border Background="{StaticResource headerBackground}"
             BorderBrush="#6593CF"
             BorderThickness="2">
         <Grid x:Name="panelWeekCalendar">
@@ -45,19 +50,19 @@
                 <ctrls:CommandButton Height="25"
                                      Width="100"
                                      CommandViewModel="{Binding PrevWeekCommand}"
-                                     Background="{x:Null}"
+                                     Background="{StaticResource headerBackground}"
                                      BorderBrush="{x:Null}" />
 
                 <ctrls:CommandButton Height="25"
                                      Width="100"
                                      CommandViewModel="{Binding ThisWeekCommand}"
-                                     Background="{x:Null}"
+                                     Background="{StaticResource headerBackground}"
                                      BorderBrush="{x:Null}" />
 
                 <ctrls:CommandButton Height="25"
                                      Width="100"
                                      CommandViewModel="{Binding NextWeekCommand}"
-                                     Background="{x:Null}"
+                                     Background="{StaticResource headerBackground}"
                                      BorderBrush="{x:Null}" />
 
                 <ContentPresenter Height="25"
@@ -69,7 +74,7 @@
                 <ctrls:CommandButton Height="25"
                                      Width="100"
                                      CommandViewModel="{Binding JumpToDateCommand}"
-                                     Background="{x:Null}"
+                                     Background="{StaticResource headerBackground}"
                                      BorderBrush="{x:Null}" />
 
                 <CheckBox IsChecked="{Binding ShowFullWeek}"
