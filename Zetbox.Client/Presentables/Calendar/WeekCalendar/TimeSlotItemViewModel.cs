@@ -38,6 +38,8 @@ namespace Zetbox.Client.Presentables.Calendar
             this.Day = day.Date;
             this.Hour = hour;
             this.Minute = minute;
+            this._background = GetBackground();
+            this._borderThickness = GetBorderThickness();
         }
 
         private DateTime _day;
@@ -56,8 +58,9 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_day != realValue)
                 {
                     _day = realValue;
+                    Background = GetBackground();
+
                     OnPropertyChanged("Day");
-                    OnPropertyChanged("Background");
                     OnPropertyChanged("DateTime");
                 }
             }
@@ -74,8 +77,9 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_hour != value)
                 {
                     _hour = value;
+                    Background = GetBackground();
+
                     OnPropertyChanged("Hour");
-                    OnPropertyChanged("Background");
                     OnPropertyChanged("DateTime");
                 }
             }
@@ -92,19 +96,34 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_minute != value)
                 {
                     _minute = value;
+                    BorderThickness = GetBorderThickness();
+
                     OnPropertyChanged("Minute");
                     OnPropertyChanged("DateTime");
-                    OnPropertyChanged("BorderThickness");
                 }
             }
         }
 
+        private string _background;
         public string Background
         {
             get
             {
-                return Day.DayOfWeek == DayOfWeek.Saturday || Day.DayOfWeek == DayOfWeek.Sunday || Hour < 8 || Hour > 16 ? "#E0FFFF" : "White";
+                return _background;
             }
+            private set
+            {
+                if (_background != value)
+                {
+                    _background = value;
+                    OnPropertyChanged("Background");
+                }
+            }
+        }
+
+        private string GetBackground()
+        {
+            return Day.DayOfWeek == DayOfWeek.Saturday || Day.DayOfWeek == DayOfWeek.Sunday || Hour < 8 || Hour > 16 ? "#E0FFFF" : "White";
         }
 
         public DateTime DateTime
@@ -115,13 +134,28 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
+        private System.Drawing.RectangleF _borderThickness;
         public System.Drawing.RectangleF BorderThickness
         {
             get
             {
-                return new System.Drawing.RectangleF(0.0f, 0.0f, 1.0f, Minute == 0 ? 0.5f : 1.0f);
+                return _borderThickness;
+            }
+            private set
+            {
+                if (_borderThickness != value)
+                {
+                    _borderThickness = value;
+                    OnPropertyChanged("BorderThickness");
+                }
             }
         }
+
+        private System.Drawing.RectangleF GetBorderThickness()
+        {
+            return new System.Drawing.RectangleF(0.0f, 0.0f, 1.0f, Minute == 0 ? 0.5f : 1.0f);
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string property)
