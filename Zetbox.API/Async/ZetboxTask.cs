@@ -57,14 +57,15 @@ namespace Zetbox.API.Async
     public class ZbTask
     {
         public static readonly SynchronizationContext Synchron = null;
-        public static readonly ZbTask NoInnerTask = null;
+        public static readonly IEnumerable<ZbTask> NoInnerTasks = null;
 
         private readonly object _lockObject = new object();
         protected object SyncRoot { get { return _lockObject; } }
 
         protected readonly List<Action> asyncContinuationActions = new List<Action>();
         protected readonly List<Action> resultActions = new List<Action>();
-        protected readonly ZbTask innerZbTask;
+        protected readonly List<ZbTask> innerZbTasks;
+        protected int numRunningTasks;
 
         public ZbTaskState State
         {
@@ -97,37 +98,61 @@ namespace Zetbox.API.Async
         /// <summary>
         /// This constructor only initializes the internal state of the ZbTask, without starting any execution.
         /// </summary>
-        protected ZbTask(SynchronizationContext syncContext, ZbTask innerTask)
+        protected ZbTask(SynchronizationContext syncContext, IEnumerable<ZbTask> innerTasks)
         {
-            if (syncContext != null && innerTask != null && syncContext != innerTask._syncContext) throw new ArgumentOutOfRangeException("syncContext", "SynchronizationContext differs between this and inner Task");
+            if (innerTasks == null)
+                innerTasks = Enumerable.Empty<ZbTask>();
 
-            this._syncContext = syncContext ?? (innerTask != null ? innerTask._syncContext : null);
-            this.innerZbTask = innerTask;
+            this.innerZbTasks = innerTasks.ToList();
+
+            if (this.innerZbTasks.Count > 0
+                && this.innerZbTasks.Any(t => t.SyncContext != this.innerZbTasks[0].SyncContext)) throw new ArgumentOutOfRangeException("innerTasks", "Not all inner Tasks have the same SynchronizationContext");
+
+            if (syncContext != null
+                && this.innerZbTasks.Any(t => t.SyncContext != syncContext)) throw new ArgumentOutOfRangeException("syncContext", "SynchronizationContext differs between this and inner Tasks");
+
+            this._syncContext = syncContext ?? (this.innerZbTasks.Count() > 0 ? this.innerZbTasks[0]._syncContext : null);
+            this.numRunningTasks = this.innerZbTasks.Count;
         }
 
         protected void ExecuteOrChainTask(Action task)
         {
-            if (innerZbTask != null)
+            if (innerZbTasks.Count > 0)
             {
                 if (task == null)
                 {
                     // attach to innerZbTask directly
-                    innerZbTask
-                        .ContinueWith(t =>
+                    innerZbTasks.ForEach(innerTask =>
+                        innerTask.ContinueWith(t =>
                         {
-                            // Set State to Running for completeness' sake
-                            lock (_lockObject) State = ZbTaskState.Running;
-                            // but since this task has nothing to do, execute continuations immediately
-                            CallAsyncContinuations();
-                            lock (_lockObject) State = ZbTaskState.ResultEventsPosted;
+                            if (Interlocked.Decrement(ref numRunningTasks) == 0)
+                            {
+                                // Set State to Running for completeness' sake
+                                lock (_lockObject) State = ZbTaskState.Running;
+                                // but since this task has nothing to do, execute continuations immediately
+                                CallAsyncContinuations();
+                                lock (_lockObject) State = ZbTaskState.ResultEventsPosted;
+                            }
                         })
-                        .OnResult(t => CallResultActions());
+                        .OnResult(t =>
+                        {
+                            if (Interlocked.CompareExchange(ref numRunningTasks, 0, 0) == 0)
+                            {
+                                CallResultActions();
+                            }
+                        }));
                 }
                 else
                 {
                     // has to be deferred until the innerZbTask has run
-                    innerZbTask
-                        .OnResult(t => ExecuteTask(task));
+                    innerZbTasks.ForEach(innerTask =>
+                        innerTask.OnResult(t =>
+                        {
+                            if (Interlocked.Decrement(ref numRunningTasks) == 0)
+                            {
+                                ExecuteTask(task);
+                            }
+                        }));
                 }
             }
             else
@@ -196,25 +221,37 @@ namespace Zetbox.API.Async
         }
 
         public ZbTask(Action task)
-            : this(SynchronizationContext.Current, NoInnerTask)
+            : this(SynchronizationContext.Current, NoInnerTasks)
         {
             ExecuteOrChainTask(task);
         }
 
         public ZbTask(ZbTask innerTask)
-            : this(innerTask != null ? innerTask._syncContext : Synchron, innerTask)
+            : this(innerTask != null ? innerTask._syncContext : Synchron, new[] { innerTask })
+        {
+            ExecuteOrChainTask(null);
+        }
+
+        public ZbTask(IEnumerable<ZbTask> innerTasks)
+            : this(innerTasks != null && innerTasks.Count() > 0 ? innerTasks.First()._syncContext : Synchron, innerTasks)
         {
             ExecuteOrChainTask(null);
         }
 
         public ZbTask(ZbTask innerTask, Action task)
-            : this(innerTask != null ? innerTask._syncContext : Synchron, innerTask)
+            : this(innerTask != null ? innerTask._syncContext : Synchron, new[] { innerTask })
+        {
+            ExecuteOrChainTask(task);
+        }
+
+        public ZbTask(IEnumerable<ZbTask> innerTasks, Action task)
+            : this(innerTasks != null && innerTasks.Count() > 0 ? innerTasks.First()._syncContext : Synchron, innerTasks)
         {
             ExecuteOrChainTask(task);
         }
 
         public ZbTask(SynchronizationContext syncContext, Action task)
-            : this(syncContext, NoInnerTask)
+            : this(syncContext, NoInnerTasks)
         {
             ExecuteOrChainTask(task);
         }
@@ -284,7 +321,8 @@ namespace Zetbox.API.Async
 
         public void Wait()
         {
-            if (innerZbTask != null) innerZbTask.Wait();
+            if (innerZbTasks.Count > 0) innerZbTasks.ForEach(it => it.Wait());
+
             CallResultActions();
         }
 
@@ -363,13 +401,13 @@ namespace Zetbox.API.Async
         /// <summary>
         /// This constructor only initializes the internal state of the ZbTask, without starting any execution.
         /// </summary>
-        protected ZbTask(SynchronizationContext syncContext, ZbTask innerTask)
-            : base(syncContext, innerTask)
+        protected ZbTask(SynchronizationContext syncContext, IEnumerable<ZbTask> innerTasks)
+            : base(syncContext, innerTasks)
         {
         }
 
         public ZbTask(Func<TResult> task)
-            : base(SynchronizationContext.Current, NoInnerTask)
+            : base(SynchronizationContext.Current, NoInnerTasks)
         {
             ExecuteOrChainTask(task);
         }
@@ -380,20 +418,32 @@ namespace Zetbox.API.Async
             // ExecuteOrChainTask is called by base constructor
         }
 
+        public ZbTask(IEnumerable<ZbTask> innerTasks)
+            : base(innerTasks)
+        {
+            // ExecuteOrChainTask is called by base constructor
+        }
+
         public ZbTask(ZbTask innerTask, Func<TResult> task)
-            : base(innerTask != null ? innerTask.SyncContext : Synchron, innerTask)
+            : base(innerTask != null ? innerTask.SyncContext : Synchron, new[] { innerTask })
+        {
+            ExecuteOrChainTask(task);
+        }
+
+        public ZbTask(IEnumerable<ZbTask> innerTasks, Func<TResult> task)
+            : this(innerTasks != null && innerTasks.Count() > 0 ? innerTasks.First().SyncContext : Synchron, innerTasks)
         {
             ExecuteOrChainTask(task);
         }
 
         public ZbTask(SynchronizationContext syncContext, Func<TResult> task)
-            : base(syncContext, NoInnerTask)
+            : base(syncContext, NoInnerTasks)
         {
             ExecuteOrChainTask(task);
         }
 
         public ZbTask(TResult result)
-            : base(ZbTask.Synchron, NoInnerTask)
+            : base(ZbTask.Synchron, NoInnerTasks)
         {
             _result = result;
             State = ZbTaskState.Finished;
@@ -443,7 +493,7 @@ namespace Zetbox.API.Async
         /// <param name="innerTaskFactory">The task which will create the task we'll be acting on.</param>
         /// <param name="task">the transformation we have to do.</param>
         public ZbFutureTask(ZbTask<ZbTask<TIntermediate>> innerTaskFactory, Func<TIntermediate, TResult> task)
-            : base(innerTaskFactory != null ? innerTaskFactory.SyncContext : Synchron, innerTaskFactory)
+            : base(innerTaskFactory != null ? innerTaskFactory.SyncContext : Synchron, new[] { innerTaskFactory })
         {
             if (innerTaskFactory == null) throw new ArgumentNullException("innerTaskFactory");
 
