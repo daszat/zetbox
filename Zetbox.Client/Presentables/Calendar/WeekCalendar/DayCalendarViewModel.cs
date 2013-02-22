@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.Calendar
         public DayCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, WeekCalendarViewModel parent, DateTime day)
             : base(dependencies, dataCtx, parent)
         {
-            this.Day = day.Date;
+            this._Day = day.Date;
         }
 
         public WeekCalendarViewModel WeekCalendar
@@ -158,12 +158,15 @@ namespace Zetbox.Client.Presentables.Calendar
                     ? new List<CalendarItemViewModel>()
                     : new List<CalendarItemViewModel>(value);
 
-                foreach (var i in _CalendarItems)
+                if (_CalendarItems.Count > 0)
                 {
-                    i.DayCalendar = this;
-                }
+                    foreach (var i in _CalendarItems)
+                    {
+                        i.DayCalendar = this;
+                    }
 
-                CalcOverlapping();
+                    CalcOverlapping();
+                }
                 OnPropertyChanged("CalendarItems");
                 OnPropertyChanged("DayItems");
                 OnPropertyChanged("AllDayItems");
