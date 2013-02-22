@@ -418,10 +418,12 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        private class FetchCache
+        private sealed class FetchCache
         {
             private struct FetchCacheEntry
             {
+                public static FetchCacheEntry None = default(FetchCacheEntry);
+
                 public readonly DateTime FetchTime;
                 public readonly List<EventViewModel> Events;
 
@@ -430,6 +432,34 @@ namespace Zetbox.Client.Presentables.Calendar
                     this.FetchTime = DateTime.Now;
                     this.Events = events;
                 }
+
+                public static bool operator ==(FetchCacheEntry a, FetchCacheEntry b)
+                {
+                    return a.FetchTime == b.FetchTime && a.Events == b.Events;
+                }
+
+                public static bool operator !=(FetchCacheEntry a, FetchCacheEntry b)
+                {
+                    return !(a == b);
+                }
+
+                public override bool Equals(object obj)
+                {
+                    if (obj is FetchCacheEntry)
+                    {
+                        return this == (FetchCacheEntry)obj;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                public override int GetHashCode()
+                {
+                    return FetchTime.GetHashCode();
+                }
+
             }
 
             /// <summary>
@@ -465,11 +495,20 @@ namespace Zetbox.Client.Presentables.Calendar
                 for (var curDay = from.Date; curDay <= to; curDay = curDay.AddDays(1))
                 {
                     FetchCacheEntry entry;
-                    if (_cache.TryGetValue(curDay, out entry) && entry.FetchTime.AddMinutes(5) > DateTime.Now)
+                    if (_cache.TryGetValue(curDay, out entry))
                     {
-                        result.AddRange(entry.Events);
+                        if (entry.FetchTime.AddMinutes(5) > DateTime.Now)
+                        {
+                            result.AddRange(entry.Events);
+                        }
+                        else
+                        {
+                            _cache.Remove(curDay);
+                            entry = FetchCacheEntry.None;
+                        }
                     }
-                    else
+
+                    if (entry == FetchCacheEntry.None)
                     {
                         entry = new FetchCacheEntry(QueryContext(curDay, curDay.AddDays(1)));
                         _cache.Add(curDay, entry);
