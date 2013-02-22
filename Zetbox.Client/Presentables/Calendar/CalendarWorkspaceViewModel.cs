@@ -513,7 +513,23 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_calendars.Count == 0) return new ZbTask<IEnumerable<EventViewModel>>(ZbTask.Synchron, () => new List<EventViewModel>());
 
+                // make primary task first
+                var result = MakeFetchTask(from, to);
+                result.OnResult(
+                    t =>
+                    {
+                        var range = (to - from);
+                        MakeFetchTask(from - range, to - range);
+                        MakeFetchTask(from + range, to + range);
+                    });
+
+                return result;
+            }
+
+            private ZbTask<IEnumerable<EventViewModel>> MakeFetchTask(DateTime from, DateTime to)
+            {
                 var result = new List<ZbTask<List<EventViewModel>>>();
+
                 for (var curDay = from.Date; curDay <= to; curDay = curDay.AddDays(1))
                 {
                     FetchCacheEntry entry;
@@ -541,7 +557,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 return new ZbTask<IEnumerable<EventViewModel>>(result)
                     .OnResult(t =>
                     {
-                        t.Result = result.SelectMany(r => r.Result).Distinct();
+                        t.Result = result.Distinct().SelectMany(r => r.Result).Distinct();
                     });
             }
 
