@@ -539,7 +539,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     }
                 }
 
-                return result;
+                return result.Distinct();
             }
 
             private List<EventViewModel> QueryContext(DateTime from, DateTime to)
