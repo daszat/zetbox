@@ -1165,12 +1165,18 @@ namespace Zetbox.DalProvider.Client
             }
             private set
             {
-                _isModified = value;
-                // Allways invoke event, as others are temporary interessed in seeing changes on individual objects
-                EventHandler temp = IsModifiedChanged;
-                if (temp != null)
+                if (_isModified != value)
                 {
-                    temp(this, EventArgs.Empty);
+                    if (value == true && IsolationLevel == ClientIsolationLevel.PrefereClientData)
+                    {
+                        _isModified = value;
+                    }
+
+                    EventHandler temp = IsModifiedChanged;
+                    if (temp != null)
+                    {
+                        temp(this, EventArgs.Empty);
+                    }
                 }
             }
         }
