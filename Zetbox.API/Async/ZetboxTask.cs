@@ -103,7 +103,9 @@ namespace Zetbox.API.Async
             if (innerTasks == null)
                 innerTasks = Enumerable.Empty<ZbTask>();
 
-            this.innerZbTasks = innerTasks.ToList();
+            this.innerZbTasks = innerTasks
+                .Where(t => t != null)
+                .ToList();
 
             if (this.innerZbTasks.Count > 0
                 && this.innerZbTasks.Any(t => t.SyncContext != this.innerZbTasks[0].SyncContext)) throw new ArgumentOutOfRangeException("innerTasks", "Not all inner Tasks have the same SynchronizationContext");
