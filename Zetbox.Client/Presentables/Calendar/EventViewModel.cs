@@ -10,6 +10,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.Models;
 
     [ViewModelDescriptor]
     public class EventViewModel : DataObjectViewModel
@@ -40,18 +41,37 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
+        private NullableDateTimePropertyViewModel _startDateVmdl;
+        private NullableDateTimePropertyViewModel _endDateVmdl;
+
         protected override void OnPropertyModelsByNameCreated()
         {
             base.OnPropertyModelsByNameCreated();
 
-            var startDateVmdl = (NullableDateTimePropertyViewModel)PropertyModelsByName["StartDate"];
-            startDateVmdl.InputAccepted += (s, e) =>
+            _startDateVmdl = (NullableDateTimePropertyViewModel)PropertyModelsByName["StartDate"];
+            _endDateVmdl = (NullableDateTimePropertyViewModel)PropertyModelsByName["EndDate"];
+
+            SetDateTimeStyle(Event.IsAllDay);
+
+            _startDateVmdl.InputAccepted += (s, e) =>
             {
                 if (e.NewValue.HasValue && e.OldValue.HasValue)
                 {
                     Event.EndDate = Event.EndDate + (e.NewValue.Value - e.OldValue.Value);
                 }
             };
+
+            var allDayVmdl = (NullableBoolPropertyViewModel)PropertyModelsByName["IsAllDay"];
+            allDayVmdl.InputAccepted += (s, e) =>
+            {
+                SetDateTimeStyle(e.NewValue == true);
+            };
+        }
+
+        private void SetDateTimeStyle(bool isAllDay)
+        {
+            _startDateVmdl.DateTimeStyle = isAllDay ? Zetbox.App.Base.DateTimeStyles.Date : App.Base.DateTimeStyles.DateTime;
+            _endDateVmdl.DateTimeStyle = isAllDay ? Zetbox.App.Base.DateTimeStyles.Date : App.Base.DateTimeStyles.DateTime;
         }
 
         public override string Name

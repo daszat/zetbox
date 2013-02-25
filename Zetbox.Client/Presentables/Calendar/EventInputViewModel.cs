@@ -38,22 +38,6 @@ namespace Zetbox.Client.Presentables.Calendar
         }
 
         #region Properties
-        protected DateTimeValueModel startDateModel;
-
-        protected DateTimeValueModel endDateModel;
-
-        protected virtual void EnsureModels()
-        {
-            if (startDateModel == null)
-            {
-                startDateModel = new DateTimeValueModel("Von", "", false, false) { Value = SelectedStartDate };
-            }
-            if (endDateModel == null)
-            {
-                endDateModel = new DateTimeValueModel("Bis", "", false, false) { Value = SelectedStartDate.AddHours(1) };
-            }
-        }
-
         private NullableDateTimePropertyViewModel _startDate = null;
         public NullableDateTimePropertyViewModel StartDate
         {
@@ -61,13 +45,12 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_startDate == null)
                 {
-                    EnsureModels();
-                    _startDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this, startDateModel);
+                    _startDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this, new DateTimeValueModel("Von", "", false, false) { Value = SelectedStartDate });
                     _startDate.InputAccepted += (s, e) =>
                     {
                         if (e.NewValue.HasValue && e.OldValue.HasValue)
                         {
-                            endDateModel.Value = endDateModel.Value + (e.NewValue.Value - e.OldValue.Value);
+                            EndDate.Value = EndDate.Value.Value + (e.NewValue.Value - e.OldValue.Value);
                         }
                     };
                 }
@@ -82,8 +65,7 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_endDate == null)
                 {
-                    EnsureModels();
-                    _endDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this, endDateModel);
+                    _endDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this, new DateTimeValueModel("Bis", "", false, false) { Value = SelectedStartDate.AddHours(1) });
                 }
                 return _endDate;
             }
@@ -107,9 +89,8 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (e.PropertyName == "Value")
             {
-                EnsureModels();
-                startDateModel.DateTimeStyle = IsAllDay.Value == true ? Zetbox.App.Base.DateTimeStyles.Date : App.Base.DateTimeStyles.DateTime;
-                endDateModel.DateTimeStyle = IsAllDay.Value == true ? Zetbox.App.Base.DateTimeStyles.Date : App.Base.DateTimeStyles.DateTime;
+                StartDate.DateTimeStyle = IsAllDay.Value == true ? Zetbox.App.Base.DateTimeStyles.Date : App.Base.DateTimeStyles.DateTime;
+                EndDate.DateTimeStyle = IsAllDay.Value == true ? Zetbox.App.Base.DateTimeStyles.Date : App.Base.DateTimeStyles.DateTime;
             }
         }
 

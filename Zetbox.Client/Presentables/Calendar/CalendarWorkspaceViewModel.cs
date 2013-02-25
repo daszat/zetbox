@@ -443,6 +443,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     _weekCalender.New += (s, e) => New(e.Date);
                     _weekCalender.Open += (s, e) => Open(e.Event);
                     // Initial refresh
+                    _fetchCache.SetCalendars(Items.Where(i => i.Selected).Select(i => i.Calendar.ID));
                     _weekCalender.Refresh();
                 }
                 return _weekCalender;

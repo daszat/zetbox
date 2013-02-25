@@ -46,7 +46,18 @@ namespace Zetbox.Client.WPF.View.Calendar
             if (sender is FrameworkElement)
             {
                 var fe = (FrameworkElement)sender;
-                ViewModel.WeekCalendar.SelectedItem = ((CalendarItemViewModel)fe.DataContext).EventViewModel;
+                var vmdl = fe.DataContext as CalendarItemViewModel;
+                if (vmdl != null)
+                {
+                    if (e.ClickCount == 1)
+                    {
+                        ViewModel.WeekCalendar.SelectedItem = vmdl.EventViewModel;
+                    }
+                    else if (e.ClickCount == 2)
+                    {
+                        ViewModel.WeekCalendar.NotifyOpen(vmdl.EventViewModel);
+                    }
+                }
             }
         }
 

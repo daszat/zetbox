@@ -278,32 +278,36 @@ namespace Zetbox.Client.Presentables.Calendar
             return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.EventViewModel == mdl));
         }
 
-        private List<CalendarItemViewModel> CreateCalendarItemViewModels(EventViewModel a)
+        private List<CalendarItemViewModel> CreateCalendarItemViewModels(EventViewModel evt)
         {
-            if (a.Event.StartDate <= a.Event.EndDate)
+            if (evt.Event.StartDate <= evt.Event.EndDate)
             {
                 List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
-                var from = a.Event.StartDate;
-                var until = a.Event.EndDate;
+                var from = evt.Event.StartDate;
+                var until = evt.Event.EndDate;
                 if (from < this.From) from = this.From;
                 if (until > this.To) until = this.To;
+                if (evt.Event.IsAllDay)
+                {
+                    until = until.AddDays(1);
+                }
+
                 for (var current = from; current < until; current = current.Date.AddDays(1))
                 {
                     var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
                     .Invoke(
                         DataContext,
                         this,
-                        a);
-                    vmdl.IsAllDay = vmdl.IsAllDay;
-                    vmdl.From = current == a.Event.StartDate ? current : current.Date;
-                    vmdl.Until = current.Date == a.Event.EndDate.Date ? a.Event.EndDate : current.Date.AddDays(1);
+                        evt);
+                    vmdl.From = current == evt.Event.StartDate ? current : current.Date;
+                    vmdl.Until = current.Date == evt.Event.EndDate.Date ? evt.Event.EndDate : current.Date.AddDays(1);
                     result.Add(vmdl);
                 }
                 return result;
             }
             else
             {
-                Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", a.Event.Summary, a.Event.StartDate, a.Event.EndDate);
+                Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", evt.Event.Summary, evt.Event.StartDate, evt.Event.EndDate);
                 return new List<CalendarItemViewModel>();
             }
         }

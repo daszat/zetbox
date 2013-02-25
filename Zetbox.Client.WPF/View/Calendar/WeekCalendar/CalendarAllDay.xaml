@@ -50,7 +50,7 @@
               </LinearGradientBrush>
             </Border.Background>
             <StackPanel>
-              <TextBlock Text="{Binding Text}" FontWeight="Bold" />
+              <TextBlock Text="{Binding Summary}" FontWeight="Bold" />
             </StackPanel>
           </Border>
           <DataTemplate.Triggers>

@@ -131,20 +131,11 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        private bool _isAllDay = false;
         public bool IsAllDay
         {
             get
             {
-                return _isAllDay;
-            }
-            set
-            {
-                if (_isAllDay != value)
-                {
-                    _isAllDay = value;
-                    OnPropertyChanged("IsAllDay");
-                }
+                return EventViewModel.Event.IsAllDay;
             }
         }
 
