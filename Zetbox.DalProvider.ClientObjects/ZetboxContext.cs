@@ -1170,7 +1170,7 @@ namespace Zetbox.DalProvider.Client
             {
                 if (_isModified != value)
                 {
-                    if (value == true && _clientIsolationLevel == ClientIsolationLevel.PrefereClientData)
+                    if (value != true || _clientIsolationLevel == ClientIsolationLevel.PrefereClientData)
                     {
                         _isModified = value;
                     }
