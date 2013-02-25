@@ -770,6 +770,9 @@ namespace Zetbox.DalProvider.Client
         public int SubmitChanges()
         {
             CheckDisposed();
+            if (_clientIsolationLevel == ClientIsolationLevel.MergeServerData)
+                throw new InvalidOperationException("A MergeServerData DataContext cannot be saved");
+
             int result = 0;
             var ticks = _perfCounter.IncrementSubmitChanges();
             try
@@ -1167,7 +1170,7 @@ namespace Zetbox.DalProvider.Client
             {
                 if (_isModified != value)
                 {
-                    if (value == true && IsolationLevel == ClientIsolationLevel.PrefereClientData)
+                    if (value == true && _clientIsolationLevel == ClientIsolationLevel.PrefereClientData)
                     {
                         _isModified = value;
                     }
