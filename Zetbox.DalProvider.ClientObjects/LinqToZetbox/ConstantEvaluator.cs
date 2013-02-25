@@ -137,24 +137,30 @@ namespace Zetbox.DalProvider.Client
             {
                 if (e.Method != null)
                     return e.Method.Invoke(null, new[] { EvaluateToValue(e.Operand) });
-                else if (e.NodeType == ExpressionType.Convert)
-                    return EvaluateToValue(e.Operand);
-                else if (e.NodeType == ExpressionType.Decrement)
-                    return ((dynamic)(EvaluateToValue(e.Operand))) - 1;
-                else if (e.NodeType == ExpressionType.Increment)
-                    return ((dynamic)(EvaluateToValue(e.Operand))) + 1;
-                else if (e.NodeType == ExpressionType.Negate)
-                    return -((dynamic)(EvaluateToValue(e.Operand)));
-                else if (e.NodeType == ExpressionType.Not)
-                    return !((bool)(EvaluateToValue(e.Operand)));
-                else if (e.NodeType == ExpressionType.OnesComplement)
-                    return ~((dynamic)(EvaluateToValue(e.Operand)));
-                else if (e.NodeType == ExpressionType.UnaryPlus)
-                    return +((dynamic)(EvaluateToValue(e.Operand)));
-                else if (e.NodeType == ExpressionType.Unbox)
-                    return EvaluateToValue(e.Operand);
                 else
-                    return EvaluateToValue(e.Operand);
+                {
+                    switch (e.NodeType)
+                    {
+                        case ExpressionType.Convert:
+                            return EvaluateToValue(e.Operand);
+                        case ExpressionType.Decrement:
+                            return ((dynamic)(EvaluateToValue(e.Operand))) - 1;
+                        case ExpressionType.Increment:
+                            return ((dynamic)(EvaluateToValue(e.Operand))) + 1;
+                        case ExpressionType.Negate:
+                            return -((dynamic)(EvaluateToValue(e.Operand)));
+                        case ExpressionType.Not:
+                            return !((bool)(EvaluateToValue(e.Operand)));
+                        case ExpressionType.OnesComplement:
+                            return ~((dynamic)(EvaluateToValue(e.Operand)));
+                        case ExpressionType.UnaryPlus:
+                            return +((dynamic)(EvaluateToValue(e.Operand)));
+                        case ExpressionType.Unbox:
+                            return EvaluateToValue(e.Operand);
+                        default:
+                            return EvaluateLambda(Expression.Lambda(e));
+                    }
+                }
             }
 
             private object EvaluateBinary(BinaryExpression e)
