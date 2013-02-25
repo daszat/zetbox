@@ -44,9 +44,14 @@ namespace Zetbox.API
                 case ExpressionType.Not:
                 case ExpressionType.Convert:
                 case ExpressionType.ConvertChecked:
+                case ExpressionType.Decrement:
+                case ExpressionType.Increment:
+                case ExpressionType.OnesComplement:
                 case ExpressionType.ArrayLength:
                 case ExpressionType.Quote:
                 case ExpressionType.TypeAs:
+                case ExpressionType.UnaryPlus:
+                case ExpressionType.Unbox:
                     {
                         VisitUnary((UnaryExpression)e);
                         break;
