@@ -41,8 +41,8 @@ namespace Zetbox.Client.Presentables.Calendar
             this.Calendar = calendar;
             this._Selected = isSelf;
             this.IsSelf = isSelf;
-            this.Color = isSelf ? "#F1F5E3" : null;
         }
+
 
         public cal.Calendar Calendar { get; private set; }
         private CalendarViewModel _calendarViewModel;
@@ -53,8 +53,19 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_calendarViewModel == null)
                 {
                     _calendarViewModel = (CalendarViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, Parent, Calendar);
+                    _calendarViewModel.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_calendarViewModel_PropertyChanged);
                 }
                 return _calendarViewModel;
+            }
+        }
+
+        void _calendarViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "Color":
+                    OnPropertyChanged("Color");
+                    break;
             }
         }
         public bool IsSelf { get; private set; }
@@ -76,20 +87,11 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        private string _Color;
         public string Color
         {
             get
             {
-                return _Color;
-            }
-            set
-            {
-                if (_Color != value)
-                {
-                    CalendarViewModel.Color = _Color = value;
-                    OnPropertyChanged("Color");
-                }
+                return CalendarViewModel.Color;
             }
         }
 
@@ -106,13 +108,25 @@ namespace Zetbox.Client.Presentables.Calendar
         public new delegate CalendarWorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
         public static string[] Colors = new[] { 
+            "#F1F5E3",
+
             "#FFAAAA",
             "#AAFFAA",
             "#AAAAFF",
-            "#FFFFAA",
             "#AAFFFF",
             "#FFAAFF",
+        
+            "#FFCCCC",
+            "#CCFFCC",
+            "#CCCCFF",
+            "#CCFFFF",
+            "#FFCCFF",
+
+            "#69dba4",
+            "#ffcc88",
+            "#b5ff88",
         };
+
         private bool _shouldUpdateCalendarItems = true;
         private Func<IZetboxContext> _ctxFactory;
 
@@ -150,11 +164,13 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     var myID = CurrentIdentity != null ? CurrentIdentity.ID : 0;
                     _Items = DataContext.GetQuery<cal.Calendar>()
-                        .OrderBy(i => i.Name)
                         .ToList()
-                        .Select(i =>
+                        .OrderBy(i => i.Owner != null && i.Owner.ID == myID ?  1 : 2)
+                        .ThenBy(i => i.Name)
+                        .Select((i, idx) =>
                         {
                             var mdl = ViewModelFactory.CreateViewModel<CalendarSelectionViewModel.Factory>().Invoke(DataContext, this, i, i.Owner != null ? i.Owner.ID == myID : false);
+                            mdl.CalendarViewModel.Color = Colors[idx % Colors.Length];
                             mdl.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(calendarItem_PropertyChanged);
                             return mdl;
                         })
@@ -171,19 +187,6 @@ namespace Zetbox.Client.Presentables.Calendar
             if (e.PropertyName == "Selected")
             {
                 _fetchCache.SetCalendars(Items.Where(i => i.Selected).Select(i => i.Calendar.ID));
-
-                var obj = (CalendarSelectionViewModel)sender;
-                if (!obj.IsSelf)
-                {
-                    if (obj.Selected)
-                    {
-                        obj.Color = Colors[Items.Count(i => i.Selected) % Colors.Length];
-                    }
-                    else
-                    {
-                        obj.Color = null;
-                    }
-                }
                 if (_shouldUpdateCalendarItems)
                 {
                     CurrentView.Refresh();
