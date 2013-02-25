@@ -1390,14 +1390,34 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
+        private DateTimeStyles? _dateTimeStyle;
+        public DateTimeStyles DateTimeStyle
+        {
+            get
+            {
+                return _dateTimeStyle ?? DateTimeModel.DateTimeStyle;
+            }
+            set
+            {
+                if (_dateTimeStyle != value)
+                {
+                    _dateTimeStyle = value;
+                    OnPropertyChanged("DateTimeStyle");
+                    OnPropertyChanged("TimePartVisible");
+                    OnPropertyChanged("TimePartVisible");
+                    NotifyValueChanged();
+                }
+            }
+        }
+
         public IDateTimeValueModel DateTimeModel { get; private set; }
         private readonly NullableTimePartPropertyViewModel _timePartViewModel;
         private readonly NullableDatePartPropertyViewModel _datePartViewModel;
-
+                
         protected override string FormatValue(DateTime? value)
         {
             if (value == null) return string.Empty;
-            switch (DateTimeModel.DateTimeStyle)
+            switch (DateTimeStyle)
             {
                 case DateTimeStyles.Date:
                     return value.Value.ToShortDateString();
@@ -1412,7 +1432,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return DateTimeModel.DateTimeStyle == DateTimeStyles.Date || DateTimeModel.DateTimeStyle == DateTimeStyles.DateTime;
+                return DateTimeStyle == DateTimeStyles.Date || DateTimeStyle == DateTimeStyles.DateTime;
             }
         }
 
@@ -1420,7 +1440,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return DateTimeModel.DateTimeStyle == DateTimeStyles.Time || DateTimeModel.DateTimeStyle == DateTimeStyles.DateTime;
+                return DateTimeStyle == DateTimeStyles.Time || DateTimeStyle == DateTimeStyles.DateTime;
             }
         }
 

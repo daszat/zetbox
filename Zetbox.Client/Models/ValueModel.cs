@@ -300,14 +300,6 @@ namespace Zetbox.Client.Models
             { 
                 return _dateTimeStyle; 
             }
-            set
-            {
-                if (_dateTimeStyle != value)
-                {
-                    _dateTimeStyle = value;
-                    OnPropertyChanged("DateTimeStyle");
-                }
-            }
         }
 
         TimeSpan? IValueModel<TimeSpan?>.Value
