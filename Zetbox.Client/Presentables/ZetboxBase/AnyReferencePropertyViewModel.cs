@@ -154,7 +154,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         ObjectReferenceViewModelResources.SelectValueCommand_Name,
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
                         () => SelectValue(),
-                        () => AllowSelectValue && !DataContext.IsReadonly && !IsReadOnly,
+                        () => AllowSelectValue && !IsReadOnly,
                         null);
                     _SelectValueCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext));
                 }

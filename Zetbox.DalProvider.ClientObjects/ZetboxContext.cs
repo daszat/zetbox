@@ -135,7 +135,13 @@ namespace Zetbox.DalProvider.Client
             }
         }
 
-        public bool IsReadonly { get { return false; } }
+        public bool IsReadonly
+        {
+            get
+            {
+                return _clientIsolationLevel != ClientIsolationLevel.PrefereClientData;
+            }
+        }
 
         /// <summary>
         /// Allways full, managed on the server side
@@ -770,8 +776,8 @@ namespace Zetbox.DalProvider.Client
         public int SubmitChanges()
         {
             CheckDisposed();
-            if (_clientIsolationLevel == ClientIsolationLevel.MergeServerData)
-                throw new InvalidOperationException("A MergeServerData DataContext cannot be saved");
+            if (IsReadonly)
+                throw new ReadOnlyContextException();
 
             int result = 0;
             var ticks = _perfCounter.IncrementSubmitChanges();
@@ -1168,12 +1174,9 @@ namespace Zetbox.DalProvider.Client
             }
             private set
             {
-                if (_isModified != value)
+                if (!IsReadonly && _isModified != value)
                 {
-                    if (value != true || _clientIsolationLevel == ClientIsolationLevel.PrefereClientData)
-                    {
-                        _isModified = value;
-                    }
+                    _isModified = value;
 
                     EventHandler temp = IsModifiedChanged;
                     if (temp != null)

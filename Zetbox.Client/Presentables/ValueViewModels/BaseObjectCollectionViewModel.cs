@@ -447,7 +447,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Name,
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip,
                         () => AddExistingItem(),
-                        () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly,
+                        () => AllowAddExisting && !IsReadOnly,
                         null);
                     _AddExistingCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext));
                 }

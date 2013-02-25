@@ -422,7 +422,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return _isInlineEditable ?? DataType.IsSimpleObject;
+                return !DataContext.IsReadonly && (_isInlineEditable ?? DataType.IsSimpleObject);
             }
             set
             {

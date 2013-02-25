@@ -285,8 +285,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected IDeleteCommandParameter Parameter { get { return Parent as IDeleteCommandParameter; } }
         protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
-        protected bool UseSeparateContext { get { return !(ViewModelFactory.GetWorkspace(DataContext) is IContextViewModel); } }
         protected IEnumerable<ViewModel> SelectedItems { get { return ((ICommandParameter)Parent).SelectedItems; } }
+
+        protected bool UseSeparateContext
+        {
+            get
+            {
+                return DataContext.IsReadonly;
+            }
+        }
 
         private readonly Func<IZetboxContext> _ctxFactory;
         private readonly IZetboxContextExceptionHandler _exceptionHandler;
@@ -331,7 +338,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
                 return false;
             }
-            else if (Parameter.IsReadOnly || DataContext.IsReadonly)
+            else if (Parameter.IsReadOnly)
             {
                 Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
                 return false;
@@ -476,12 +483,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            if (!UseSeparateContext && DataContext.IsReadonly)
-            {
-                Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
-                return false;
-            }
-            else if (Parameter == null)
+            if (Parameter == null)
             {
                 Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
                 return false;

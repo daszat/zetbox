@@ -122,7 +122,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             get
             {
                 if (DataContext.IsElevatedMode && !IsReadOnly) return Highlight.Bad; // May be true for calculated properties                
-                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
+                // Reflect readonly only on changable context
+                if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
                 if (Parent != null && Parent.Highlight != Highlight.None) return Parent.Highlight;
                 return Highlight.None;
             }
@@ -133,7 +134,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             get
             {
                 if (DataContext.IsElevatedMode && !IsReadOnly) return Highlight.Bad; // May be true for calculated properties                
-                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
+                // Reflect readonly only on changable context
+                if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
                 if (Parent != null && Parent.HighlightAsync != Highlight.None) return Parent.HighlightAsync;
                 return Highlight.None;
             }
@@ -231,7 +233,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         ValueViewModelResources.ClearValueCommand_Name,
                         ValueViewModelResources.ClearValueCommand_Tooltip,
                         () => ClearValue(),
-                        () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly,
+                        () => AllowNullInput && !IsReadOnly,
                         null);
                     //_ClearValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.
                 }

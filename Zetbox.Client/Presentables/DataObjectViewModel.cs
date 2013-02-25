@@ -459,7 +459,9 @@ namespace Zetbox.Client.Presentables
             get
             {
                 if (DataContext.IsElevatedMode) return Highlight.Bad;
-                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
+                if (Object.CurrentAccessRights.HasOnlyReadRightsOrNone()) return Highlight.Deactivated;
+                // Reflect readonly only on changable context
+                if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
                 return Highlight.None;
             }
         }
@@ -469,7 +471,9 @@ namespace Zetbox.Client.Presentables
             get
             {
                 if (DataContext.IsElevatedMode) return Highlight.Bad;
-                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
+                if (Object.CurrentAccessRights.HasOnlyReadRightsOrNone()) return Highlight.Deactivated;
+                // Reflect readonly only on changable context
+                if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
                 return Highlight.None;
             }
         }
