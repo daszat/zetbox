@@ -436,6 +436,18 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
+        void _WeekCalender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedItem")
+            {
+                // Me too
+                OnPropertyChanged("SelectedItems");
+            }
+        }
+        #endregion
+
+        #region Cache
+        private readonly FetchCache _fetchCache;
         private sealed class FetchCache
         {
             private struct FetchCacheEntry
@@ -596,18 +608,6 @@ namespace Zetbox.Client.Presentables.Calendar
                 return predicateCalendars;
             }
         }
-
-        void _WeekCalender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "SelectedItem")
-            {
-                // Me too
-                OnPropertyChanged("SelectedItems");
-            }
-        }
-
-        private readonly FetchCache _fetchCache;
-
         #endregion
 
         public bool IsReadOnly { get { return false; } }
