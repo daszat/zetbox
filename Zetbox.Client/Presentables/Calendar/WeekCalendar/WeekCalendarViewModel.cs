@@ -114,6 +114,8 @@ namespace Zetbox.Client.Presentables.Calendar
                         day.CalendarItems = allItems[day.Day];
                     }
                 }
+                FindCalendarItemViewModel(_selectedItem)
+                    .ForEach(i => i.IsSelected = true);
             });
         }
 
@@ -263,12 +265,12 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_selectedItem != value)
                 {
-                    var vivms = FindCalendarItemViewModel(_selectedItem);
-                    if (vivms != null) vivms.ForEach(i => i.IsSelected = false);
+                    FindCalendarItemViewModel(_selectedItem)
+                        .ForEach(i => i.IsSelected = false);
 
                     _selectedItem = value;
-                    vivms = FindCalendarItemViewModel(_selectedItem);
-                    if (vivms != null) vivms.ForEach(i => i.IsSelected = true);
+                    FindCalendarItemViewModel(_selectedItem)
+                        .ForEach(i => i.IsSelected = true);
 
                     OnPropertyChanged("SelectedItem");
                 }
@@ -277,7 +279,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         private IEnumerable<CalendarItemViewModel> FindCalendarItemViewModel(EventViewModel mdl)
         {
-            if (mdl == null) return null;
+            if (mdl == null) Enumerable.Empty<CalendarItemViewModel>();
             return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.EventViewModel == mdl));
         }
 
