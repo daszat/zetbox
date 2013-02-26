@@ -48,6 +48,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_NextWeekCommand == null)
                 {
                     _NextWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Nächste", "", NextWeek, null, null);
+                    _NextWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.forward_png.Find(FrozenContext));
                 }
                 return _NextWeekCommand;
             }
@@ -66,6 +67,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_PrevWeekCommand == null)
                 {
                     _PrevWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Vorherige", "", PrevWeek, null, null);
+                    _PrevWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.back_png.Find(FrozenContext));
                 }
                 return _PrevWeekCommand;
             }
@@ -84,6 +86,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_ThisWeekCommand == null)
                 {
                     _ThisWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Heute", "", ThisWeek, null, null);
+                    _ThisWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.date_png.Find(FrozenContext));
                 }
                 return _ThisWeekCommand;
             }

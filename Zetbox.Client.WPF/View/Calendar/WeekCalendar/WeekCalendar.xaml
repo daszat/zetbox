@@ -48,20 +48,22 @@
                         Grid.Column="0"
                         Margin="5,0,0,0">
                 <ctrls:CommandButton Height="25"
-                                     Width="100"
+                                     Width="25"
                                      CommandViewModel="{Binding PrevWeekCommand}"
+                                     Style="{StaticResource ImageOnlyButton}"
+                                     Background="{StaticResource headerBackground}"
+                                     BorderBrush="{x:Null}" />
+
+                <ctrls:CommandButton Height="25"
+                                     Width="25"
+                                     CommandViewModel="{Binding NextWeekCommand}"
+                                     Style="{StaticResource ImageOnlyButton}"
                                      Background="{StaticResource headerBackground}"
                                      BorderBrush="{x:Null}" />
 
                 <ctrls:CommandButton Height="25"
                                      Width="100"
                                      CommandViewModel="{Binding ThisWeekCommand}"
-                                     Background="{StaticResource headerBackground}"
-                                     BorderBrush="{x:Null}" />
-
-                <ctrls:CommandButton Height="25"
-                                     Width="100"
-                                     CommandViewModel="{Binding NextWeekCommand}"
                                      Background="{StaticResource headerBackground}"
                                      BorderBrush="{x:Null}" />
 
