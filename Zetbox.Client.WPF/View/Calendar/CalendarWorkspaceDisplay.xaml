@@ -127,6 +127,14 @@
                                 </Style.Triggers>
                             </Style>
                         </StackPanel.Style>
+                        <StackPanel.Background>
+                            <LinearGradientBrush>
+                                <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}"
+                                              Offset="-0.5" />
+                                <GradientStop Color="{Binding Color}"
+                                              Offset="1.0" />
+                            </LinearGradientBrush>
+                        </StackPanel.Background>
                         <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Summary]}" />
                         <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Location]}" />
                         <Grid>
