@@ -214,6 +214,16 @@ namespace Zetbox.Client.Presentables.Calendar
 
         #region Commands
 
+        protected override System.Collections.ObjectModel.ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var result = base.CreateCommands();
+            result.Add(NewCommand);
+            result.Add(OpenCommand);
+            result.Add(RefreshCommand);
+            result.Add(DeleteCommand);
+            return result;
+        }
+
         #region Open command
         private ICommandViewModel _OpenCommand = null;
         public ICommandViewModel OpenCommand

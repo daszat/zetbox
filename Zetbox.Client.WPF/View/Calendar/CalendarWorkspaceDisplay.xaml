@@ -3,7 +3,8 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                   xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
-                  xmlns:client="clr-namespace:Zetbox.Client.Presentables.Calendar;assembly=Zetbox.Client"
+                  xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+                  xmlns:calendar="clr-namespace:Zetbox.Client.Presentables.Calendar;assembly=Zetbox.Client"
                   xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                   Title="{Binding Name}"
                   Height="600"
@@ -27,16 +28,16 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
     <DockPanel>
-        <ctrls:WorkaroundToolBar DockPanel.Dock="Top">
-            <ctrls:WorkaroundToolBar.Resources>
-                <Style TargetType="{x:Type ctrls:CommandButton}"
-                       BasedOn="{StaticResource ImageToolbarButton}" />
-            </ctrls:WorkaroundToolBar.Resources>
-            <ctrls:CommandButton CommandViewModel="{Binding NewCommand}" />
-            <ctrls:CommandButton CommandViewModel="{Binding OpenCommand}" />
-            <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}" />
-            <ctrls:CommandButton CommandViewModel="{Binding DeleteCommand}" />
-        </ctrls:WorkaroundToolBar>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ctrls:WorkaroundToolBar ItemsSource="{Binding Commands}">
+                <ctrls:WorkaroundToolBar.Resources>
+                    <DataTemplate DataType="{x:Type client:CommandViewModel}">
+                        <ctrls:CommandButton CommandViewModel="{Binding}"
+                                             Style="{StaticResource ImageToolbarButton}" />
+                    </DataTemplate>
+                </ctrls:WorkaroundToolBar.Resources>
+            </ctrls:WorkaroundToolBar>
+        </ToolBarTray>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="column0"
@@ -76,7 +77,7 @@
                               BorderThickness="0"
                               Margin="2,3,0,0">
                         <ListView.ItemTemplate>
-                            <DataTemplate DataType="{x:Type client:CalendarSelectionViewModel}">
+                            <DataTemplate DataType="{x:Type calendar:CalendarSelectionViewModel}">
                                 <StackPanel Orientation="Horizontal">
                                     <CheckBox IsChecked="{Binding Selected}" />
                                     <Border Width="{StaticResource SmallControlHeight}"
@@ -106,7 +107,7 @@
                               Grid.IsSharedSizeScope="True"
                               Content="{Binding CurrentView}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-            
+
             <Border Grid.Column="2"
                     Grid.Row="1"
                     Background="#E3EFFF"
@@ -115,7 +116,8 @@
                     x:Name="details">
                 <Expander IsExpanded="True"
                           Header="{Binding DetailsLabel}">
-                    <StackPanel DataContext="{Binding CurrentView.SelectedItem}" Height="300">
+                    <StackPanel DataContext="{Binding CurrentView.SelectedItem}"
+                                Height="300">
                         <StackPanel.Style>
                             <Style TargetType="{x:Type StackPanel}">
                                 <Style.Triggers>
@@ -159,7 +161,7 @@
                         <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Body]}" />
                         <ctrls:CommandButton CommandViewModel="{Binding DataContext.OpenCommand, ElementName=details}"
                                              HorizontalAlignment="Left"
-                                             Style="{StaticResource ImageButton}"/>
+                                             Style="{StaticResource ImageButton}" />
                     </StackPanel>
                 </Expander>
             </Border>
