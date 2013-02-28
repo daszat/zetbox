@@ -7,6 +7,7 @@
 /Zetbox.Server.HttpService/Client
 /Zetbox.Server.HttpService/Common
 /Zetbox.Complete.suo
+/Zetbox.Complete.userprefs
 obj
 bin
 *.csproj.user
