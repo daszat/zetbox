@@ -9,6 +9,4 @@
       <Module>Zetbox.Unix.Module, Zetbox.Unix</Module>
     </Modules>
   </Server>
-  <AssemblySearchPaths EnableShadowCopy="true">    
-  </AssemblySearchPaths>
 </ZetboxConfig>

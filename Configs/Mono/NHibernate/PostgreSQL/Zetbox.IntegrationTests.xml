@@ -25,11 +25,4 @@
       <Module>Zetbox.Client.WPF.WPFModule, Zetbox.Client.WPF</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths>
-    <string>Common/Core</string>
-    <string>Server/Core</string>
-    <string>Server/NH</string>
-    <string>Common/App.Zetbox</string>
-    <string>Server/App.Zetbox</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

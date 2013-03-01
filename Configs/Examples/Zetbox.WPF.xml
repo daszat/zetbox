@@ -16,12 +16,4 @@
       <Module>Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths>
-    <string>Common\Core</string>
-    <string>Client\Core</string>
-    <string>Client\WPF</string>
-    <string>Common\App.Zetbox</string>
-    <string>Client\App.Zetbox</string>
-    <string>Common\Microsoft</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

@@ -7,7 +7,4 @@
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths>
-    <string>..\Client\Core</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

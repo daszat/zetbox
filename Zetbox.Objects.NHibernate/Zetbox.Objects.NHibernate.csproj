@@ -75,14 +75,17 @@
     <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -91,14 +94,17 @@
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>
+      <Private>False</Private>
     </ProjectReference>
     <Reference Include="Zetbox.DalProvider.Base">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Common">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -109,18 +115,22 @@
     <Reference Include="Zetbox.API.Server">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Server\Zetbox.API.Server.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.DalProvider.NHibernate">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Server\Zetbox.DalProvider.NHibernate.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Server\NHibernate.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.DalProvider.Base">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

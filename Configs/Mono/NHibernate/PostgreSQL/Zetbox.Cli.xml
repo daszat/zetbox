@@ -19,13 +19,4 @@
       <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
     </Modules>
   </Server>
-  <AssemblySearchPaths>
-    <string>Common/Core</string>
-    <string>Server/Core</string>
-    <string>Server/Npgsql.Linux</string>
-    <string>Server/NH</string>
-    <string>Server/Linux</string>
-    <string>Common/App.Zetbox</string>
-    <string>Server/App.Zetbox</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

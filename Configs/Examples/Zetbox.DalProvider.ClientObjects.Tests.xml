@@ -5,10 +5,4 @@
     <DocumentStore>DocumentStore\Client\</DocumentStore>
     <Modules />
   </Client>
-  <AssemblySearchPaths>
-    <string>..\Common\Core</string>
-    <string>..\Client\Core</string>
-    <string>..\Common\App.Zetbox</string>
-    <string>..\Client\App.Zetbox</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

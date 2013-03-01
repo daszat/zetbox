@@ -21,6 +21,4 @@
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths>
-  </AssemblySearchPaths>
 </ZetboxConfig>

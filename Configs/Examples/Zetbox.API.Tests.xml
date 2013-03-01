@@ -20,10 +20,4 @@
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths>
-    <!-- default probe path -->
-    <string>..\..\..\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>..\Common</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

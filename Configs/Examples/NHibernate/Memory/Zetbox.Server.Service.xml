@@ -13,12 +13,4 @@
 	  <Module>Zetbox.Server.Wcf.WcfModule, Zetbox.Server.Wcf</Module>
     </Modules>
   </Server>
-  <AssemblySearchPaths>
-    <string>Common\Core</string>
-    <string>Server\Core</string>
-    <string>Server\NH</string>
-    <string>Server\EF</string>
-    <string>Common\App.Zetbox</string>
-    <string>Server\App.Zetbox</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

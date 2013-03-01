@@ -8,6 +8,4 @@
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
     </Modules>
   </Server>
-  <AssemblySearchPaths>
-  </AssemblySearchPaths>
 </ZetboxConfig>

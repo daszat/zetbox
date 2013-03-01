@@ -10,5 +10,4 @@
       <Module>Zetbox.Client.WPF.WPFModule, Zetbox.Client.WPF</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths />
 </ZetboxConfig>
