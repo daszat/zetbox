@@ -239,7 +239,7 @@ namespace PrepareEnv
                     if (Directory.Exists(bootstrapperSource))
                     {
                         // Bootstrapper has to be available in the web root
-                        CopyFolder(bootstrapperSource, PathX.Combine(envConfig.BinaryTarget, "HttpService", "Bootstrapper"));
+                        CopyFolder(bootstrapperSource, Path.Combine(envConfig.BinaryTarget, "HttpService", "Bootstrapper"));
                     }
                 }
 
@@ -289,10 +289,10 @@ namespace PrepareEnv
                 }
 
                 // Replace fallback binaries when generated ones are available
-                foreach (var generatedSource in new[] { PathX.Combine(envConfig.BinarySource,"Common", "Core.Generated"),
-                    PathX.Combine(envConfig.BinarySource, "Client", "Core.Generated"),
-                    PathX.Combine(envConfig.BinarySource, "Server", "EF.Generated"),
-                    PathX.Combine(envConfig.BinarySource, "Server", "NH.Generated") })
+                foreach (var generatedSource in new[] { Path.Combine(envConfig.BinarySource,"Common", "Core.Generated"),
+                    Path.Combine(envConfig.BinarySource, "Client", "Core.Generated"),
+                    Path.Combine(envConfig.BinarySource, "Server", "EF.Generated"),
+                    Path.Combine(envConfig.BinarySource, "Server", "NH.Generated") })
                 {
                     var generatedSourcePaths = ExpandPath(generatedSource);
 
@@ -316,9 +316,9 @@ namespace PrepareEnv
 
         private static void ReplaceNpgsql(string sourcePath, string targetPath)
         {
-            var httpServiceExists = Directory.Exists(PathX.Combine(targetPath, "HttpService", "bin"));
-            var npgsqlMonoSource = ExpandPath(PathX.Combine(sourcePath, "Server", "Npgsql.Mono")).FirstOrDefault(p => Directory.Exists(p));
-            var npgsqlMsSource = ExpandPath(PathX.Combine(sourcePath, "Server", "Npgsql.Microsoft")).FirstOrDefault(p => Directory.Exists(p));
+            var httpServiceExists = Directory.Exists(Path.Combine(targetPath, "HttpService", "bin"));
+            var npgsqlMonoSource = ExpandPath(Path.Combine(sourcePath, "Server", "Npgsql.Mono")).FirstOrDefault(p => Directory.Exists(p));
+            var npgsqlMsSource = ExpandPath(Path.Combine(sourcePath, "Server", "Npgsql.Microsoft")).FirstOrDefault(p => Directory.Exists(p));
 
             LogAction("deploying Npgsql");
             switch (Environment.OSVersion.Platform)
@@ -340,10 +340,10 @@ namespace PrepareEnv
                     {
                         Copy(
                             Path.Combine(npgsqlMonoSource, "Npgsql.dll"),
-                            PathX.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
+                            Path.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
                             true);
                         // installed in mono's GAC
-                        Delete(PathX.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"));
+                        Delete(Path.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"));
                     }
                     break;
                 case PlatformID.Win32NT:
@@ -364,11 +364,11 @@ namespace PrepareEnv
                     {
                         Copy(
                             Path.Combine(npgsqlMsSource, "Npgsql.dll"),
-                            PathX.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
+                            Path.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
                             true);
                         Copy(
                             Path.Combine(npgsqlMsSource, "Mono.Security.dll"),
-                            PathX.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"),
+                            Path.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"),
                             true);
                     }
                     break;
@@ -745,7 +745,7 @@ namespace PrepareEnv
             // canonicalize slashiness in paths from the configuration
             if (!string.IsNullOrEmpty(input))
             {
-                input = PathX.Combine(input.Split('\\', '/'));
+                input = Path.Combine(input.Split('\\', '/'));
             }
 
             return input;
