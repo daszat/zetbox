@@ -228,12 +228,47 @@ namespace PrepareEnv
                 var sourcePaths = ExpandPath(envConfig.BinarySource);
                 var isWildcard = sourcePaths.Count() > 1;
 
+                var copiedCommonFiles = new List<string>();
+                var additionalCopiedFiles = new List<string>();
                 foreach (var source in sourcePaths)
                 {
-                    LogAction("copying Binaries from " + source);
+                    LogAction("copying common Binaries from " + source);
                     if (isWildcard && !Directory.Exists(source)) continue;
 
-                    CopyFolder(source, envConfig.BinaryTarget);
+                    if (Directory.Exists(Path.Combine(source, "Common")))
+                    {
+                        var copiedPaths = CopyFolder(Path.Combine(source, "Common"), Path.Combine(envConfig.BinaryTarget, "Common"));
+                        copiedCommonFiles.AddRange(copiedPaths.Select(s => Path.GetFileName(s)));
+                    }
+                }
+
+                foreach (var source in sourcePaths)
+                {
+                    LogAction("copying client and server Binaries from " + source);
+                    if (isWildcard && !Directory.Exists(source)) continue;
+
+                    if (Directory.Exists(Path.Combine(source, "Server")))
+                    {
+                        var copiedPaths = CopyFolder(Path.Combine(source, "Server"), Path.Combine(envConfig.BinaryTarget, "Server"), copiedCommonFiles, null, CopyMode.RestoreHierarchie);
+                        additionalCopiedFiles.AddRange(copiedPaths.Select(s => Path.GetFileName(s)));
+                    }
+
+                    if (Directory.Exists(Path.Combine(source, "Client")))
+                    {
+                        var copiedPaths = CopyFolder(Path.Combine(source, "Client"), Path.Combine(envConfig.BinaryTarget, "Client"), copiedCommonFiles, null, CopyMode.RestoreHierarchie);
+                        additionalCopiedFiles.AddRange(copiedPaths.Select(s => Path.GetFileName(s)));
+                    }
+                }
+
+                additionalCopiedFiles.AddRange(copiedCommonFiles);
+
+                foreach (var source in sourcePaths)
+                {
+                    LogAction("copying executables from " + source);
+                    CopyTopFiles(source, envConfig.BinaryTarget, additionalCopiedFiles);
+
+                    LogAction("copying Bootstrapper from " + source);
+                    if (isWildcard && !Directory.Exists(source)) continue;
 
                     var bootstrapperSource = Path.Combine(source, "Bootstrapper");
                     if (Directory.Exists(bootstrapperSource))
@@ -280,12 +315,12 @@ namespace PrepareEnv
                     LogAction("copying Binaries from " + source);
                     if (isWildcard && !Directory.Exists(source)) continue;
 
-                    CopyFolder(source, envConfig.TestsTarget, "*.exe", CopyMode.Flat); // does not handle sattelite assemblies
-                    CopyFolder(source, envConfig.TestsTarget, "*.exe.config", CopyMode.Flat);
-                    CopyFolder(source, envConfig.TestsTarget, "*.dll", CopyMode.Flat); // does not handle sattelite assemblies
-                    CopyFolder(source, envConfig.TestsTarget, "*.dll.config", CopyMode.Flat);
-                    CopyFolder(source, envConfig.TestsTarget, "*.pdb", CopyMode.Flat);
-                    CopyFolder(source, envConfig.TestsTarget, "*.mdb", CopyMode.Flat);
+                    CopyFolder(source, envConfig.TestsTarget, null, "*.exe", CopyMode.Flat); // does not handle sattelite assemblies
+                    CopyFolder(source, envConfig.TestsTarget, null, "*.exe.config", CopyMode.Flat);
+                    CopyFolder(source, envConfig.TestsTarget, null, "*.dll", CopyMode.Flat); // does not handle sattelite assemblies
+                    CopyFolder(source, envConfig.TestsTarget, null, "*.dll.config", CopyMode.Flat);
+                    CopyFolder(source, envConfig.TestsTarget, null, "*.pdb", CopyMode.Flat);
+                    CopyFolder(source, envConfig.TestsTarget, null, "*.mdb", CopyMode.Flat);
                 }
 
                 // Replace fallback binaries when generated ones are available
@@ -302,7 +337,7 @@ namespace PrepareEnv
                         if (Directory.Exists(path))
                         {
                             LogDetail("found");
-                            CopyTopFiles(path, envConfig.TestsTarget);
+                            CopyTopFiles(path, envConfig.TestsTarget, null);
                         }
                         else
                         {
@@ -330,7 +365,7 @@ namespace PrepareEnv
                         return;
                     }
                     Copy(
-                        Path.Combine(npgsqlMonoSource, "Npgsql.dll"),
+                        GetAssemblyResourceStream("Npgsql"),
                         Path.Combine(targetPath, "Npgsql.dll"),
                         true);
                     // installed in mono's GAC
@@ -339,7 +374,7 @@ namespace PrepareEnv
                     if (httpServiceExists)
                     {
                         Copy(
-                            Path.Combine(npgsqlMonoSource, "Npgsql.dll"),
+                            GetAssemblyResourceStream("Npgsql"),
                             Path.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
                             true);
                         // installed in mono's GAC
@@ -353,21 +388,21 @@ namespace PrepareEnv
                         return;
                     }
                     Copy(
-                        Path.Combine(npgsqlMsSource, "Npgsql.dll"),
+                        GetAssemblyResourceStream("Npgsql"),
                         Path.Combine(targetPath, "Npgsql.dll"),
                         true);
                     Copy(
-                        Path.Combine(npgsqlMsSource, "Mono.Security.dll"),
+                        GetAssemblyResourceStream("Mono.Security"),
                         Path.Combine(targetPath, "Mono.Security.dll"),
                         true);
                     if (httpServiceExists)
                     {
                         Copy(
-                            Path.Combine(npgsqlMsSource, "Npgsql.dll"),
+                            GetAssemblyResourceStream("Npgsql"),
                             Path.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
                             true);
                         Copy(
-                            Path.Combine(npgsqlMsSource, "Mono.Security.dll"),
+                            GetAssemblyResourceStream("Mono.Security"),
                             Path.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"),
                             true);
                     }
@@ -409,7 +444,7 @@ namespace PrepareEnv
                 LogAction("copying Binaries from " + sourcePath);
                 if (isWildcard && !Directory.Exists(sourcePath)) continue;
 
-                CopyFolder(sourcePath, target, null, copyMode);
+                CopyFolder(sourcePath, target, null, null, copyMode);
             }
         }
 
@@ -623,12 +658,11 @@ namespace PrepareEnv
                 var path = Path.GetDirectoryName(baseSource);
                 var filter = Path.GetFileName(baseSource);
 
-                result.AddRange(Directory.GetDirectories(path, filter).Select(i => Path.Combine(i, tail)));
+                result.AddRange(Directory.GetDirectories(path, filter).Select(i => Path.Combine(i, tail)).Where(i => Directory.Exists(i)));
             }
-            else
-            {
+
+            if (result.Count == 0)
                 result.Add(source);
-            }
 
             return result;
         }
@@ -648,14 +682,9 @@ namespace PrepareEnv
             Flat,
         }
 
-        private static void CopyFolder(string sourceDir, string targetDir)
+        private static List<string> CopyFolder(string sourceDir, string targetDir, IEnumerable<string> filesToIgnore = null, string filter = null, CopyMode mode = CopyMode.RestoreHierarchie)
         {
-            CopyFolder(sourceDir, targetDir, null, CopyMode.RestoreHierarchie);
-        }
-
-        private static void CopyFolder(string sourceDir, string targetDir, string filter, CopyMode mode)
-        {
-            CopyTopFiles(sourceDir, targetDir, filter);
+            var result = CopyTopFiles(sourceDir, targetDir, filesToIgnore, filter);
             foreach (var folder in Directory.GetDirectories(sourceDir))
             {
                 string target;
@@ -670,24 +699,25 @@ namespace PrepareEnv
                     default:
                         throw new NotSupportedException("CopyMode " + mode + " is not supported yet");
                 }
-                CopyFolder(folder, target, filter, mode);
+                result.AddRange(CopyFolder(folder, target, filesToIgnore, filter, mode));
             }
+            return result;
         }
 
-        private static void CopyTopFiles(string sourceDir, string targetDir)
-        {
-            CopyTopFiles(sourceDir, targetDir, null);
-        }
-
-        private static void CopyTopFiles(string sourceDir, string targetDir, string filter)
+        private static List<string> CopyTopFiles(string sourceDir, string targetDir, IEnumerable<string> filesToIgnore = null, string filter = null)
         {
             EnsureDirectory(targetDir);
             var files = string.IsNullOrEmpty(filter) ? Directory.GetFiles(sourceDir) : Directory.GetFiles(sourceDir, filter);
             foreach (var file in files)
             {
-                var target = Path.Combine(targetDir, Path.GetFileName(file));
+                var fileName = Path.GetFileName(file);
+                if (filesToIgnore != null && filesToIgnore.Contains(fileName))
+                    continue;
+
+                var target = Path.Combine(targetDir, fileName);
                 Copy(file, target, true);
             }
+            return files.ToList();
         }
 
         private static IEnumerable<string> FindDirs(string dirName, string baseDirectory)
@@ -727,6 +757,21 @@ namespace PrepareEnv
             File.Copy(sourceFileName, destFileName, overwrite);
         }
 
+        private static void Copy(Stream sourceStream, string destFileName, bool overwrite)
+        {
+            LogDetail("copying stream => [{0}]", destFileName);
+
+            using (var destStream = new FileStream(destFileName, overwrite ? FileMode.Create : FileMode.CreateNew))
+            {
+                var buf = new byte[1024 * 8];
+                int count;
+                while ((count = sourceStream.Read(buf, 0, buf.Length)) > 0)
+                {
+                    destStream.Write(buf, 0, count);
+                }
+            }
+        }
+
         private static void Delete(string path)
         {
             LogDetail("deleting [{0}]", path);
@@ -745,7 +790,7 @@ namespace PrepareEnv
             // canonicalize slashiness in paths from the configuration
             if (!string.IsNullOrEmpty(input))
             {
-                input = Path.Combine(input.Split('\\', '/'));
+                input = Path.GetPathRoot(input) + Path.Combine(input.Replace(Path.GetPathRoot(input), "").Split('\\', '/'));
             }
 
             return input;
