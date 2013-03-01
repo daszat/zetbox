@@ -27,9 +27,9 @@ namespace Zetbox.Cli
     using Zetbox.API.Utils;
 
     /// <summary>
-    /// Mainprogramm
+    /// Mainprogram
     /// </summary>
-    public static class Program
+    public class Program : MarshalByRefObject
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Cli");
 
@@ -39,9 +39,37 @@ namespace Zetbox.Cli
 
             Log.InfoFormat("Starting Zetbox CLI with args [{0}]", String.Join(" ", arguments));
 
+            var config = ExtractConfig(ref arguments);
+
+            Program cli;
+
+            if (config.IsFallback)
+            {
+                var fallbackDomainSetup = new AppDomainSetup()
+                {
+                    PrivateBinPath = string.Join(";", new[] {
+                            Path.Combine("Common","Fallback"),
+                            Path.Combine("Server","Fallback"),
+                            AppDomain.CurrentDomain.RelativeSearchPath
+                        }.Where(s => !string.IsNullOrWhiteSpace(s)))
+                };
+
+                var fallbackDomain = AppDomain.CreateDomain("FallbackDomain", null, fallbackDomainSetup);
+                cli = (Program)fallbackDomain.CreateInstanceAndUnwrap(typeof(Program).Assembly.FullName, typeof(Program).FullName);
+            }
+            else
+            {
+                cli = new Program();
+            }
+
+            return cli.Run(arguments, config);
+        }
+
+        public int Run(string[] arguments, ZetboxConfig config)
+        {
             try
             {
-                var config = ExtractConfig(ref arguments);
+                Logging.Configure();
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
