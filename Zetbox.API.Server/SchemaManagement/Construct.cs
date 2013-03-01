@@ -22,7 +22,7 @@ namespace Zetbox.API.SchemaManagement
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    
+
     /// <summary>
     /// A collection of naming policies.
     /// </summary>
@@ -109,6 +109,8 @@ namespace Zetbox.API.SchemaManagement
 
         public static string[] GetUCColNames(IndexConstraint uc)
         {
+            if (uc == null) throw new ArgumentNullException("uc");
+
             var vt_columns = uc.Properties.OfType<ValueTypeProperty>().Select(p => Construct.ColumnName(p, null)).ToArray();
             var columns = vt_columns.Union(uc.Properties.OfType<ObjectReferenceProperty>().Select(p => Construct.ForeignKeyColumnName(p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd)))).OrderBy(n => n).ToArray();
             return columns;
@@ -174,7 +176,7 @@ namespace Zetbox.API.SchemaManagement
 
         public static string ColumnName(Property prop, string parentPropName)
         {
-            if (prop == null) { throw new ArgumentNullException("prop"); }
+            if (prop == null) throw new ArgumentNullException("prop");
 
             var cls = prop.ObjectClass as ObjectClass;
 
@@ -190,11 +192,15 @@ namespace Zetbox.API.SchemaManagement
 
         public static string ListPositionColumnName(ValueTypeProperty prop)
         {
+            if (prop == null) throw new ArgumentNullException("prop");
+
             return prop.Name + Zetbox.API.Helper.PositionSuffix;
         }
 
         public static string ListPositionColumnName(CompoundObjectProperty prop)
         {
+            if (prop == null) throw new ArgumentNullException("prop");
+
             return prop.Name + Zetbox.API.Helper.PositionSuffix;
         }
 
@@ -269,6 +275,8 @@ namespace Zetbox.API.SchemaManagement
 
         public static string DiscriminatorValue(ObjectClass cls)
         {
+            if (cls == null) throw new ArgumentNullException("cls");
+
             return string.Format("{0}.{1}", cls.Module.SchemaName, cls.TableName);
         }
 
