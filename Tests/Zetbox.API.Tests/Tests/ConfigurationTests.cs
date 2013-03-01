@@ -31,8 +31,6 @@ namespace Zetbox.API.Tests
     public class ConfigurationTests
         : AbstractApiTestFixture
     {
-        readonly static string ConfigFile = "Zetbox.API.Tests.xml";
-
         protected string defaultDest = Path.Combine("Configs", "DefaultConfig.xml");
         public override void SetUp()
         {
@@ -58,8 +56,6 @@ namespace Zetbox.API.Tests
         private void CheckConfig(ZetboxConfig cfg)
         {
             Assert.That(cfg.ConfigName, Is.Not.Empty, "ConfigName");
-            Assert.That(cfg.AssemblySearchPaths, Is.Not.Null, "AssemblySearchPaths");
-
             Assert.That(cfg.Client, Is.Not.Null, "Client");
 
             Assert.That(cfg.Server, Is.Not.Null, "Server");
@@ -73,50 +69,23 @@ namespace Zetbox.API.Tests
         [Test]
         public void DefaultLoading()
         {
-            var config = ZetboxConfig.FromFile(String.Empty, "DefaultConfig.xml");
+            var config = ZetboxConfig.FromFile(HostType.Client, String.Empty, "DefaultConfig.xml");
 
             Assert.That(config, Is.Not.Null, "Configuration");
             Assert.That(config.ConfigFilePath, Is.Not.Empty, "ConfigFilePath");
             Assert.That(config.ConfigName, Is.Not.Empty, "ConfigName");
+            Assert.That(config.HostType, Is.EqualTo(HostType.Client), "HostType");
         }
 
         [Test]
         public void LoadFile()
         {
-            var config = ZetboxConfig.FromFile("TestConfig.xml", "DoesNotExist.xml");
+            var config = ZetboxConfig.FromFile(HostType.Client, "TestConfig.xml", "DoesNotExist.xml");
 
             Assert.That(config, Is.Not.Null, "Configuration");
             Assert.That(config.ConfigFilePath, Is.EqualTo("TestConfig.xml"), "ConfigFilePath");
             Assert.That(config.ConfigName, Is.Not.Empty, "ConfigName");
-        }
-
-        [Test]
-        public void FromStream()
-        {
-            var filename = ZetboxConfig.GetDefaultConfigName(ConfigFile);
-            Assert.That(filename, Is.Not.Empty);
-            Assert.That(File.Exists(filename), Is.True, String.Format("configfile {0} doesn't exist", filename));
-
-            using (FileStream s = File.OpenRead(filename))
-            {
-
-                ZetboxConfig cfg = ZetboxConfig.FromStream(s);
-                Assert.That(cfg, Is.Not.Null);
-                Assert.That(cfg.ConfigFilePath, Is.Null);
-                CheckConfig(cfg);
-            }
-        }
-
-        [Test]
-        public void FromTextReader()
-        {
-            using (FileStream s = File.OpenRead(ZetboxConfig.GetDefaultConfigName(ConfigFile)))
-            {
-                TextReader rd = new StreamReader(s);
-                ZetboxConfig cfg = ZetboxConfig.FromStream(rd);
-                Assert.That(cfg.ConfigFilePath, Is.Null);
-                CheckConfig(cfg);
-            }
+            Assert.That(config.HostType, Is.EqualTo(HostType.Client), "HostType");
         }
 
         [Test]
@@ -127,7 +96,7 @@ namespace Zetbox.API.Tests
             {
                 File.Delete(filename);
             }
-            var config = ZetboxConfig.FromFile(String.Empty, "DefaultConfig.xml");
+            var config = ZetboxConfig.FromFile(HostType.None, String.Empty, "DefaultConfig.xml");
             config.ToFile(filename);
             Assert.That(File.Exists(filename), Is.True);
             Assert.That(new FileInfo(filename).Length, Is.GreaterThan(0));

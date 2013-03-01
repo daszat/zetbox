@@ -72,7 +72,7 @@ namespace Zetbox.ConfigEditor.ViewModels
                     }
                     else
                     {
-                        if(_cfg.Client != null)
+                        if (_cfg.Client != null)
                             _deletedClientConfig = _cfg.Client;
                         _cfg.Client = null;
                     }
@@ -134,23 +134,6 @@ namespace Zetbox.ConfigEditor.ViewModels
                     _serverViewModel = new ServerConfigViewModel(_cfg.Server);
                 }
                 return _serverViewModel;
-            }
-        }
-
-        private AssemblySearchPathsViewModel _assemblySearchPathsViewModel;
-        public AssemblySearchPathsViewModel AssemblySearchPaths
-        {
-            get
-            {
-                if (_assemblySearchPathsViewModel == null)
-                {
-                    if (_cfg.AssemblySearchPaths == null)
-                    {
-                        _cfg.AssemblySearchPaths = new ZetboxConfig.AssemblySearchPathArray();
-                    }
-                    _assemblySearchPathsViewModel = new AssemblySearchPathsViewModel(_cfg.AssemblySearchPaths);
-                }
-                return _assemblySearchPathsViewModel;
             }
         }
         #endregion

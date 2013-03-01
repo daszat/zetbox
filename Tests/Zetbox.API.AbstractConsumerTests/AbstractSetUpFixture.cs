@@ -62,7 +62,7 @@ namespace Zetbox.API.AbstractConsumerTests
             }
             using (Log.InfoTraceMethodCall("Starting up"))
             {
-                var config = ZetboxConfig.FromFile(null, GetConfigFile());
+                var config = ZetboxConfig.FromFile(GetHostType(), null, GetConfigFile());
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 

@@ -12,16 +12,9 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Zetbox.API.Configuration;
 
 namespace Zetbox.API
 {
-
     /// <summary>
     /// Which kind of host to be
     /// </summary>

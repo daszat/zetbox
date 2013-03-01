@@ -7,7 +7,7 @@
       <xs:element minOccurs="0" maxOccurs="1" name="ConfigName" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="Server" nillable="true" type="tns:ServerConfig" />
       <xs:element minOccurs="0" maxOccurs="1" name="Client" nillable="true" type="tns:ClientConfig" />
-      <xs:element minOccurs="0" maxOccurs="1" name="AssemblySearchPaths" type="tns:AssemblySearchPaths" />
+      <xs:element minOccurs="0" maxOccurs="1" default="true" name="EnableShadowCopy" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ServerConfig">
@@ -73,11 +73,5 @@
       <xs:element minOccurs="0" maxOccurs="1" name="UICulture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfModule" />
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="AssemblySearchPaths">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" type="xs:string" />
-    </xs:sequence>
-    <xs:attribute name="EnableShadowCopy" type="xs:boolean" use="required" />
   </xs:complexType>
 </xs:schema>

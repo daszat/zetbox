@@ -86,15 +86,9 @@ namespace Zetbox.API
                 if (_isInitialised) return;
                 _isInitialised = true;
 
-                if (config.AssemblySearchPaths == null)
-                {
-                    Log.Info("Not initialising: no AssemblySearchPaths set.");
-                    return;
-                }
-
                 Log.DebugFormat("Initializing {0}", AppDomain.CurrentDomain.FriendlyName);
                 InitialiseTargetAssemblyFolder(config);
-                InitialiseSearchPath(config.AssemblySearchPaths.Paths, config.IsFallback == false);
+                InitialiseSearchPath(config.HostType, config.IsFallback == false);
 
                 // Start resolving Assemblies
                 AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
@@ -102,25 +96,15 @@ namespace Zetbox.API
             }
         }
 
-        private static void InitialiseSearchPath(string[] paths, bool loadGeneratedAssemblies)
+        private static void InitialiseSearchPath(HostType type, bool loadGeneratedAssemblies)
         {
-            foreach (var path in paths ?? new string[] { })
+            foreach (var path in new string[] { "Common", type.ToString() })
             {
                 var rootedPath = QualifySearchPath(path);
 
-                // Thank you WIN32: There is no canonical path representation
-                // See: http://stackoverflow.com/questions/1816691/how-do-i-resolve-a-canonical-filename-in-windows
-                // instead we're hacking a little bit
-                var tmpPath = Path.Combine(rootedPath, "x").Replace('\\', '/').ToLowerInvariant();
-                if (tmpPath.EndsWith(".generated/x") || tmpPath.EndsWith(".fallback/x"))
-                {
-                    continue;
-                }
-
                 Log.DebugFormat("Added searchpath [{0}]", rootedPath);
-                AssemblyLoader.SearchPath.Add(rootedPath);
-
                 AssemblyLoader.SearchPath.Add(Path.Combine(rootedPath, loadGeneratedAssemblies ? "Generated" : "Fallback"));
+                AssemblyLoader.SearchPath.Add(rootedPath);
             }
         }
 
@@ -135,7 +119,7 @@ namespace Zetbox.API
         /// <param name="config">must not be null</param>
         private static void InitialiseTargetAssemblyFolder(ZetboxConfig config)
         {
-            EnableShadowCopy = config.AssemblySearchPaths == null ? false : config.AssemblySearchPaths.EnableShadowCopy;
+            EnableShadowCopy = config.EnableShadowCopy;
             if (EnableShadowCopy)
             {
                 TargetAssemblyFolder = Path.Combine(config.TempFolder, "bin");
@@ -250,7 +234,6 @@ namespace Zetbox.API
             }
             return null;
         }
-
 
         private static string PdbFromDll(string dllFile)
         {

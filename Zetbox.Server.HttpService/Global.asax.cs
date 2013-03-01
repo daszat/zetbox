@@ -72,6 +72,7 @@ namespace Zetbox.Server.HttpService
             var configsPath = Path.Combine(zbBasePath, "Configs");
 
             var config = ZetboxConfig.FromFile(
+                HostType.Server,
                 string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile),
                 ZetboxConfig.GetDefaultConfigName("Zetbox.Server.HttpService.xml", configsPath));
 

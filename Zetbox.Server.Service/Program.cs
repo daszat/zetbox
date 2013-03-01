@@ -142,7 +142,7 @@ namespace Zetbox.Server.Service
             {
                 configFilePath = String.Empty;
             }
-            return ZetboxConfig.FromFile(configFilePath, "Zetbox.Server.Service.xml");
+            return ZetboxConfig.FromFile(HostType.Server, configFilePath, "Zetbox.Server.Service.xml");
         }
     }
 }

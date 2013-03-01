@@ -121,11 +121,6 @@
       <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Server\Zetbox.Server.csproj">
-      <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
-      <Name>Zetbox.Server</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>Zetbox.API.Common</Name>

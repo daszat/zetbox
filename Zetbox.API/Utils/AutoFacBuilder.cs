@@ -94,24 +94,13 @@ namespace Zetbox.API.Utils
 
         private static IEnumerable<string> GetAssemblyFiles(ZetboxConfig config)
         {
-            var paths = new List<string>() { "." };
-            if (config.AssemblySearchPaths != null && config.AssemblySearchPaths.Paths != null)
+            foreach (var searchPath in AssemblyLoader.SearchPath.Select(p => AssemblyLoader.QualifySearchPath(p)))
             {
-                paths.AddRange(config.AssemblySearchPaths.Paths);
-            }
+                // Don't report an error - fallback case. Dev Environments require this! Directory may not exist yet. 
+                if (config.IsFallback && !Directory.Exists(searchPath))
+                    continue;
 
-            foreach (var searchPath in paths.Select(p => AssemblyLoader.QualifySearchPath(p)))
-            {
-                if (config.IsFallback && !Directory.Exists(searchPath)) continue; // Don't report an error - fallback case. Dev Environments requiere this! Directory may not exits yet. 
-
-                var files = Directory.GetFiles(searchPath, "*.dll").ToList();
-                var additionalPath = Path.Combine(searchPath, (config.IsFallback ? "Fallback" : "Generated"));
-                if (Directory.Exists(additionalPath))
-                {
-                    files.AddRange(Directory.GetFiles(additionalPath, "*.dll"));
-                }
-
-                foreach (var file in files.Where(f => !f.ToLowerInvariant().EndsWith(".resources.dll")))
+                foreach (var file in Directory.GetFiles(searchPath, "*.dll").Where(f => !f.ToLowerInvariant().EndsWith(".resources.dll")))
                 {
                     yield return file;
                 }

@@ -121,7 +121,7 @@ namespace Zetbox.Client.WPF
                     string configFilePath;
                     var args = HandleCommandline(e.Args, out configFilePath);
 
-                    var config = ZetboxConfig.FromFile(configFilePath, GetConfigFileName());
+                    var config = ZetboxConfig.FromFile(HostType.Client, configFilePath, GetConfigFileName());
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                     InitCulture(config);

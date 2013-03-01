@@ -62,6 +62,7 @@ namespace Zetbox.API.Configuration
         {
             this.AdditionalCommandlineOptions = new Dictionary<object, List<string>>();
             this.AdditionalCommandlineActions = new List<Action<Autofac.ILifetimeScope>>();
+            this.EnableShadowCopy = true;
         }
 
         /// <summary>
@@ -94,27 +95,9 @@ namespace Zetbox.API.Configuration
         [XmlIgnore]
         public bool ClientSpecified { get { return Client != null; } }
 
-        /// <summary>
-        /// Location (Path) to Assemblies
-        /// <see cref="AssemblyLoader.SearchPath"/>
-        /// </summary>
-        [XmlElement(IsNullable = false)]
-        public AssemblySearchPathArray AssemblySearchPaths { get; set; }
-
-        [XmlType("AssemblySearchPaths")]
-        [Serializable]
-        public class AssemblySearchPathArray
-        {
-            public AssemblySearchPathArray()
-            {
-                EnableShadowCopy = true;
-            }
-
-            [XmlAttribute("EnableShadowCopy")]
-            public bool EnableShadowCopy { get; set; }
-            [XmlElement("string")]
-            public string[] Paths { get; set; }
-        }
+        [XmlElement("EnableShadowCopy")]
+        [DefaultValue(true)]
+        public bool EnableShadowCopy { get; set; }
 
         [Serializable]
         public class Module
@@ -136,7 +119,11 @@ namespace Zetbox.API.Configuration
         public List<Action<Autofac.ILifetimeScope>> AdditionalCommandlineActions { get; set; }
 
         [XmlIgnore]
+        [DefaultValue(false)]
         public bool IsFallback { get; set; }
+
+        [XmlIgnore]
+        public HostType HostType { get; set; }
 
         /// <summary>
         /// Server Configuration
@@ -339,32 +326,13 @@ namespace Zetbox.API.Configuration
         }
 
         /// <summary>
-        /// Deserialize from a Stream
-        /// </summary>
-        /// <param name="s">Stream with XML</param>
-        /// <returns>Current Configuration</returns>
-        public static ZetboxConfig FromStream(Stream s)
-        {
-            return (ZetboxConfig)xml.Deserialize(s);
-        }
-
-        /// <summary>
         /// Deserialize from a TextReader
         /// </summary>
-        /// <param name="s">Stream with XML</param>
-        /// <returns>Current Configuration</returns>
-        public static ZetboxConfig FromStream(TextReader s)
-        {
-            return (ZetboxConfig)xml.Deserialize(s);
-        }
-
-        /// <summary>
-        /// Deserialize from a TextReader
-        /// </summary>
+        /// <param name="type">The current host type. Determines where we look for assemblies.</param>
         /// <param name="filename">configuration file w/ or w/o path</param>
         /// <param name="fallbackBaseName">A configuration name to search in the %zenv% environmentvariable, if none is specified in the first parameter</param>
         /// <returns>Current Configuration</returns>
-        public static ZetboxConfig FromFile(string filename, string fallbackBaseName)
+        public static ZetboxConfig FromFile(HostType type, string filename, string fallbackBaseName)
         {
             filename = String.IsNullOrEmpty(filename) ? GetDefaultConfigName(fallbackBaseName) : filename;
 
@@ -375,6 +343,7 @@ namespace Zetbox.API.Configuration
             {
                 ZetboxConfig result = (ZetboxConfig)xml.Deserialize(r);
                 result.ConfigFilePath = filename;
+                result.HostType = type;
                 return result;
             }
         }

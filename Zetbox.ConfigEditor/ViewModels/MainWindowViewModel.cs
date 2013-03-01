@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Win32;
 using System.Windows;
+using Microsoft.Win32;
+using Zetbox.API;
 using Zetbox.API.Configuration;
 
 namespace Zetbox.ConfigEditor.ViewModels
@@ -89,7 +90,7 @@ namespace Zetbox.ConfigEditor.ViewModels
 
         public void Open(string path)
         {
-            Config = new ConfigViewModel(ZetboxConfig.FromFile(path, string.Empty), path);
+            Config = new ConfigViewModel(ZetboxConfig.FromFile(HostType.None, path, string.Empty), path);
             Config.Repair();
             SaveCommand.OnCanExecuteChanged();
             SaveAsCommand.OnCanExecuteChanged();

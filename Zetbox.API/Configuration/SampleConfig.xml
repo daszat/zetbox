@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>Default Server Configuration</ConfigName>
+  <EnableShadowConfig>true</EnableShadowConfig>
   <Server StartServer="false">
     <ConnectionStrings>
       <Database Name="Zetbox" Schema="MSSQL" Provider="NHibernate.Dialect.MsSql2005Dialect">Data Source=.\SQLEXPRESS;Initial Catalog=zetbox;Integrated Security=True;MultipleActiveResultSets=true;</Database>
@@ -37,12 +38,4 @@
       <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths enableShadowCopy="true">
-    <!-- default probe path -->
-    <string>P:\Zetbox\bin\CodeGen\bin\Debug</string>
-    <!-- Fallback path for local development -->
-    <string>P:\Zetbox\bin\Debug\bin\server\fallback</string>
-    <!-- Fallback path for CC.net on srv2008 -->
-    <string>f:\CruiseControl.Net\Projects\Zetbox\bin\Debug\bin\Server\Fallback</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

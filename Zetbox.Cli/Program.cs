@@ -134,13 +134,8 @@ namespace Zetbox.Cli
                 args = args.Except(fallbackOpts).ToArray();
             }
 
-            var cfg = ZetboxConfig.FromFile(configFilePath, "Zetbox.Cli.xml");
+            var cfg = ZetboxConfig.FromFile(HostType.Server, configFilePath, "Zetbox.Cli.xml");
             cfg.IsFallback = isFallback;
-            cfg.AssemblySearchPaths = new ZetboxConfig.AssemblySearchPathArray()
-            {
-                EnableShadowCopy = cfg.AssemblySearchPaths.EnableShadowCopy,
-                Paths = new[] { "Common", "Server" },
-            };
             return cfg;
         }
     }

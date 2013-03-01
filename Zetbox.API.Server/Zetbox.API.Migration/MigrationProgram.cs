@@ -136,7 +136,7 @@ namespace Zetbox.API.Migration
 
             try
             {
-                return ZetboxConfig.FromFile(configFilePath, "");
+                return ZetboxConfig.FromFile(HostType.Server, configFilePath, "");
             }
             catch (Exception ex)
             {
