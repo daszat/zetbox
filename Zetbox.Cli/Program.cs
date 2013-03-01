@@ -41,36 +41,8 @@ namespace Zetbox.Cli
 
             var config = ExtractConfig(ref arguments);
 
-            Program cli;
-
-            if (config.IsFallback)
-            {
-                var fallbackDomainSetup = new AppDomainSetup()
-                {
-                    PrivateBinPath = string.Join(";", new[] {
-                            Path.Combine("Common","Fallback"),
-                            Path.Combine("Server","Fallback"),
-                            AppDomain.CurrentDomain.RelativeSearchPath
-                        }.Where(s => !string.IsNullOrWhiteSpace(s)))
-                };
-
-                var fallbackDomain = AppDomain.CreateDomain("FallbackDomain", null, fallbackDomainSetup);
-                cli = (Program)fallbackDomain.CreateInstanceAndUnwrap(typeof(Program).Assembly.FullName, typeof(Program).FullName);
-            }
-            else
-            {
-                cli = new Program();
-            }
-
-            return cli.Run(arguments, config);
-        }
-
-        public int Run(string[] arguments, ZetboxConfig config)
-        {
             try
             {
-                Logging.Configure();
-
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 using (var container = CreateMasterContainer(config))
@@ -164,6 +136,11 @@ namespace Zetbox.Cli
 
             var cfg = ZetboxConfig.FromFile(configFilePath, "Zetbox.Cli.xml");
             cfg.IsFallback = isFallback;
+            cfg.AssemblySearchPaths = new ZetboxConfig.AssemblySearchPathArray()
+            {
+                EnableShadowCopy = cfg.AssemblySearchPaths.EnableShadowCopy,
+                Paths = new[] { "Common", "Server" },
+            };
             return cfg;
         }
     }

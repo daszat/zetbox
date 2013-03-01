@@ -48,7 +48,7 @@ namespace Zetbox.DalProvider.Memory.Generator.Templates
             // DAL Provider
             this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.Memory"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Memory.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Memory.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
@@ -63,7 +63,7 @@ namespace Zetbox.DalProvider.Memory.Generator.Templates
 
         protected override string GetRelativeOutputPath()
         {
-            return @"Common\Core";
+            return @"Common";
         }
     }
 }

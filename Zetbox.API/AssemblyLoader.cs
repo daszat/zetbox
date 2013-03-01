@@ -120,14 +120,7 @@ namespace Zetbox.API
                 Log.DebugFormat("Added searchpath [{0}]", rootedPath);
                 AssemblyLoader.SearchPath.Add(rootedPath);
 
-                if (loadGeneratedAssemblies)
-                {
-                    AssemblyLoader.SearchPath.Add(rootedPath + ".Generated");
-                }
-                else
-                {
-                    AssemblyLoader.SearchPath.Add(rootedPath + ".Fallback");
-                }
+                AssemblyLoader.SearchPath.Add(Path.Combine(rootedPath, loadGeneratedAssemblies ? "Generated" : "Fallback"));
             }
         }
 

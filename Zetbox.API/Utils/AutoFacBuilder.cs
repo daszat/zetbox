@@ -105,7 +105,7 @@ namespace Zetbox.API.Utils
                 if (config.IsFallback && !Directory.Exists(searchPath)) continue; // Don't report an error - fallback case. Dev Environments requiere this! Directory may not exits yet. 
 
                 var files = Directory.GetFiles(searchPath, "*.dll").ToList();
-                var additionalPath = searchPath + (config.IsFallback ? ".Fallback" : ".Generated");
+                var additionalPath = Path.Combine(searchPath, (config.IsFallback ? "Fallback" : "Generated"));
                 if (Directory.Exists(additionalPath))
                 {
                     files.AddRange(Directory.GetFiles(additionalPath, "*.dll"));
