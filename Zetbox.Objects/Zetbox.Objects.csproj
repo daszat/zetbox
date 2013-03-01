@@ -76,17 +76,14 @@
     <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>

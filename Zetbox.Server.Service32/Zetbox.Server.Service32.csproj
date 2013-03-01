@@ -72,12 +72,10 @@
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Server.Service\Zetbox.Server.Service.csproj">
       <Project>{4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545}</Project>
       <Name>Zetbox.Server.Service</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
