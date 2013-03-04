@@ -141,17 +141,17 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public override string Name
         {
-            get { return "Calendar Workspace"; }
+            get { return CalendarResource.WorkspaceName; }
         }
 
         public string DetailsLabel
         {
-            get { return "Details"; }
+            get { return CalendarResource.DetailsLabel; }
         }
 
         public string ItemsLabel
         {
-            get { return "Calendars"; }
+            get { return CalendarResource.CalendarItemsLabel; }
         }
 
         #region Items

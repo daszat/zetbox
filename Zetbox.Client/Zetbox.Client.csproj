@@ -140,6 +140,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\Calendar\CalendarResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalendarResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\Calendar\CalendarViewModel.cs" />
     <Compile Include="Presentables\Calendar\ICalendarDisplayViewModel.cs" />
     <Compile Include="Presentables\Calendar\NewEventDialogViewModel.cs" />
@@ -390,6 +395,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ZetboxContextExceptionHandlerResources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Presentables\Calendar\CalendarResource.de.resx" />
+    <EmbeddedResource Include="Presentables\Calendar\CalendarResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CalendarResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.de.resx" />
     <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
