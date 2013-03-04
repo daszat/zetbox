@@ -51,6 +51,12 @@
     <NoWarn>1591,1584,1574</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Arebis.CodeGeneration, Version=1.3.0.0, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
+      <HintPath>..\packages\Arebis.CodeGenerator.1.3.0.0\lib\net40\Arebis.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Arebis.CodeGenerator, Version=1.3.0.0, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
+      <HintPath>..\packages\Arebis.CodeGenerator.1.3.0.0\lib\net40\Arebis.CodeGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
     </Reference>
@@ -140,10 +146,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Calendar\CalendarResource.Designer.cs">
+    <Compile Include="Presentables\Calendar\CalendarResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CalendarResource.resx</DependentUpon>
+      <DependentUpon>CalendarResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\Calendar\CalendarViewModel.cs" />
     <Compile Include="Presentables\Calendar\ICalendarDisplayViewModel.cs" />
@@ -383,7 +389,18 @@
     <Compile Include="Presentables\DataObjectSelectionTaskViewModel.cs" />
     <Compile Include="Presentables\ObjectEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\WindowViewModel.cs" />
+    <Compile Include="Reporting\Calendar\Events.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Events.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Calendar\EventsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\ReportingErrorDialog.cs" />
+    <Compile Include="Reporting\ReportingHost.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="ClientHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -395,10 +412,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ZetboxContextExceptionHandlerResources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Presentables\Calendar\CalendarResource.de.resx" />
-    <EmbeddedResource Include="Presentables\Calendar\CalendarResource.resx">
+    <EmbeddedResource Include="Presentables\Calendar\CalendarResources.de.resx" />
+    <EmbeddedResource Include="Presentables\Calendar\CalendarResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CalendarResource.Designer.cs</LastGenOutput>
+      <LastGenOutput>CalendarResources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\Calendar\EventsResources.de.resx" />
+    <EmbeddedResource Include="Reporting\Calendar\EventsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EventsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.de.resx" />
     <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.resx">
@@ -596,6 +618,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Reporting\Calendar\Events.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Events.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Zetbox.snk" />
     <None Include="PresentableModelsDiagram.cd" />
     <None Include="Properties\Settings.settings">

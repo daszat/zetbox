@@ -118,15 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CalendarItemsLabel" xml:space="preserve">
-    <value>Calendars</value>
+    <value>Kalender</value>
   </data>
   <data name="DetailsLabel" xml:space="preserve">
     <value>Details</value>
   </data>
   <data name="NextEventsLabel" xml:space="preserve">
-    <value>Upcomming events</value>
+    <value>Nächste Termine</value>
+  </data>
+  <data name="PrintCommandGroup_Label" xml:space="preserve">
+    <value>Drucken</value>
+  </data>
+  <data name="PrintCommandGroup_Tooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PrintMonthCommand_Label" xml:space="preserve">
+    <value>Monat</value>
+  </data>
+  <data name="PrintMonthCommand_Tooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PrintThisWeekCommand_Label" xml:space="preserve">
+    <value>Diese Woche</value>
+  </data>
+  <data name="PrintThisWeekCommand_Tooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PrintTodayCommand_Label" xml:space="preserve">
+    <value>Heute</value>
+  </data>
+  <data name="PrintTodayCommand_Tooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PrintTwoWeeksCommand_Label" xml:space="preserve">
+    <value>2 Wochen</value>
+  </data>
+  <data name="PrintTwoWeeksCommand_Tooltip" xml:space="preserve">
+    <value />
   </data>
   <data name="WorkspaceName" xml:space="preserve">
-    <value>Calendar Workspace</value>
+    <value>Kalender</value>
   </data>
 </root>

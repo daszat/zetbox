@@ -27,6 +27,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ZetboxBase;
     using cal = Zetbox.App.Calendar;
+    using Zetbox.Client.Reporting;
 
     #region CalendarSelectionViewModel
     public class CalendarSelectionViewModel : ViewModel
@@ -129,29 +130,31 @@ namespace Zetbox.Client.Presentables.Calendar
 
         private bool _shouldUpdateCalendarItems = true;
         private Func<IZetboxContext> _ctxFactory;
+        private Func<ReportingHost> _rptFactory;
 
-        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
+        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory, Func<ReportingHost> rptFactory)
             : base(appCtx, dataCtx, parent)
         {
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
             _ctxFactory = ctxFactory;
+            _rptFactory = rptFactory;
 
             _fetchCache = new FetchCache(ViewModelFactory, DataContext, this);
         }
 
         public override string Name
         {
-            get { return CalendarResource.WorkspaceName; }
+            get { return CalendarResources.WorkspaceName; }
         }
 
         public string DetailsLabel
         {
-            get { return CalendarResource.DetailsLabel; }
+            get { return CalendarResources.DetailsLabel; }
         }
 
         public string ItemsLabel
         {
-            get { return CalendarResource.CalendarItemsLabel; }
+            get { return CalendarResources.CalendarItemsLabel; }
         }
 
         #region Items
@@ -221,6 +224,7 @@ namespace Zetbox.Client.Presentables.Calendar
             result.Add(OpenCommand);
             result.Add(RefreshCommand);
             result.Add(DeleteCommand);
+            result.Add(PrintCommandGroup);
             return result;
         }
 
@@ -437,6 +441,139 @@ namespace Zetbox.Client.Presentables.Calendar
                 CurrentView.Refresh();
             }
         }
+
+        #region Print Commands
+        protected void Print(DateTime from, DateTime to)
+        {
+            var events = _fetchCache.FetchEventsAsync(from, to).Result;
+            using (var rpt = _rptFactory())
+            {
+                Reporting.Calendar.Events.Call(rpt, events, from, to);
+                rpt.Open("Events.pdf");
+            }
+        }
+
+        private ContainerCommand _printCommandGroup;
+        public ContainerCommand PrintCommandGroup
+        {
+            get
+            {
+                if (_printCommandGroup == null)
+                {
+                    _printCommandGroup = ViewModelFactory.CreateViewModel<ContainerCommand.Factory>().Invoke(DataContext, this, 
+                        CalendarResources.PrintCommandGroup_Label, 
+                        CalendarResources.PrintCommandGroup_Tooltip,
+                        PrintTodayCommand,
+                        PrintThisWeekCommand,
+                        PrintTwoWeeksCommand,
+                        PrintMonthCommand
+                        );
+                }
+                return _printCommandGroup;
+            }
+        }
+
+        #region PrintToday command
+        private ICommandViewModel _PrintTodayCommand = null;
+        public ICommandViewModel PrintTodayCommand
+        {
+            get
+            {
+                if (_PrintTodayCommand == null)
+                {
+                    _PrintTodayCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, 
+                        this, 
+                        CalendarResources.PrintTodayCommand_Label,
+                        CalendarResources.PrintTodayCommand_Tooltip, 
+                        PrintToday, 
+                        null, null);
+                }
+                return _PrintTodayCommand;
+            }
+        }
+
+        public void PrintToday()
+        {
+            Print(DateTime.Today, DateTime.Today.AddDays(1));
+        }
+        #endregion
+
+        #region PrintThisWeek command
+        private ICommandViewModel _PrintThisWeekCommand = null;
+        public ICommandViewModel PrintThisWeekCommand
+        {
+            get
+            {
+                if (_PrintThisWeekCommand == null)
+                {
+                    _PrintThisWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        CalendarResources.PrintThisWeekCommand_Label,
+                        CalendarResources.PrintThisWeekCommand_Tooltip, 
+                        PrintThisWeek, 
+                        null, null);
+                }
+                return _PrintThisWeekCommand;
+            }
+        }
+
+        public void PrintThisWeek()
+        {
+            var start = DateTime.Today.FirstWeekDay();
+            Print(start, start.AddDays(7));
+        }
+        #endregion
+
+        #region PrintTwoWeeks command
+        private ICommandViewModel _PrintTwoWeeksCommand = null;
+        public ICommandViewModel PrintTwoWeeksCommand
+        {
+            get
+            {
+                if (_PrintTwoWeeksCommand == null)
+                {
+                    _PrintTwoWeeksCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        CalendarResources.PrintTwoWeeksCommand_Label,
+                        CalendarResources.PrintTwoWeeksCommand_Tooltip, 
+                        PrintTwoWeeks, 
+                        null, null);
+                }
+                return _PrintTwoWeeksCommand;
+            }
+        }
+
+        public void PrintTwoWeeks()
+        {
+            var start = DateTime.Today.FirstWeekDay();
+            Print(start, start.AddDays(14));
+        }
+        #endregion
+
+        #region PrintMonth command
+        private ICommandViewModel _PrintMonthCommand = null;
+        public ICommandViewModel PrintMonthCommand
+        {
+            get
+            {
+                if (_PrintMonthCommand == null)
+                {
+                    _PrintMonthCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        CalendarResources.PrintMonthCommand_Label,
+                        CalendarResources.PrintMonthCommand_Tooltip, 
+                        PrintMonth,
+                        null, null);
+                }
+                return _PrintMonthCommand;
+            }
+        }
+
+        public void PrintMonth()
+        {
+            var start = DateTime.Today.FirstMonthDay();
+            Print(start, start.AddMonths(1));
+        }
+        #endregion
+
+        #endregion
         #endregion
 
         #region CurrentView

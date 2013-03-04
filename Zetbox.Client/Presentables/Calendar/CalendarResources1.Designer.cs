@@ -22,14 +22,14 @@ namespace Zetbox.Client.Presentables.Calendar {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CalendarResource {
+    internal class CalendarResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CalendarResource() {
+        internal CalendarResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Zetbox.Client.Presentables.Calendar {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.Calendar.CalendarResource", typeof(CalendarResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.Calendar.CalendarResources", typeof(CalendarResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -84,6 +84,96 @@ namespace Zetbox.Client.Presentables.Calendar {
         internal static string NextEventsLabel {
             get {
                 return ResourceManager.GetString("NextEventsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print.
+        /// </summary>
+        internal static string PrintCommandGroup_Label {
+            get {
+                return ResourceManager.GetString("PrintCommandGroup_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PrintCommandGroup_Tooltip {
+            get {
+                return ResourceManager.GetString("PrintCommandGroup_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        internal static string PrintMonthCommand_Label {
+            get {
+                return ResourceManager.GetString("PrintMonthCommand_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PrintMonthCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("PrintMonthCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This week.
+        /// </summary>
+        internal static string PrintThisWeekCommand_Label {
+            get {
+                return ResourceManager.GetString("PrintThisWeekCommand_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PrintThisWeekCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("PrintThisWeekCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today.
+        /// </summary>
+        internal static string PrintTodayCommand_Label {
+            get {
+                return ResourceManager.GetString("PrintTodayCommand_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PrintTodayCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("PrintTodayCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 weeks.
+        /// </summary>
+        internal static string PrintTwoWeeksCommand_Label {
+            get {
+                return ResourceManager.GetString("PrintTwoWeeksCommand_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PrintTwoWeeksCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("PrintTwoWeeksCommand_Tooltip", resourceCulture);
             }
         }
         

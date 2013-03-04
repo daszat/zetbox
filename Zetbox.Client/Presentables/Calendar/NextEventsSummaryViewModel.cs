@@ -30,7 +30,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return CalendarResource.NextEventsLabel;
+                return CalendarResources.NextEventsLabel;
             }
         }
 

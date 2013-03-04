@@ -1,0 +1,90 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Calendar.Events"
+    ClassName="Zetbox.Client.Reporting.Calendar.Events"
+    Inherits="Zetbox.API.Common.Reporting.ReportTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Zetbox.Client.Presentables.Calendar" %>
+<%@ Parameter Name="events" Type="IEnumerable<EventViewModel>" %>
+<%@ Parameter Name="start" Type="DateTime" %>
+<%@ Parameter Name="end" Type="DateTime" %>
+
+
+\document  {
+    \section [
+        PageSetup
+        {
+            Orientation = Portrait
+            PageFormat = A4
+            TopMargin = 40
+            StartingNumber = 1
+        }
+    ] {
+        \primaryfooter {
+            \table {
+                \columns {
+                    \column [ Width = "8cm" ]
+                    \column [ Width = "8cm" Format { Alignment = Right }
+                    ]
+                }
+                \rows {
+                    \row {
+                        \cell { <%= FormatDate(DateTime.Today) %> }
+                        \cell { Seite \field(Page) von \field(SectionPages) }
+                    }
+                }
+            }
+        }
+
+        \paragraph [ Format { Font { Size = 30  Bold = True } } ] { <%= EventsResources.Heading %> }
+    
+        \paragraph [ 
+            Style = "Heading2"
+            Format { 
+                Borders { Bottom { Width = 1 } } 
+                SpaceAfter = "1cm"
+            }
+        ] { <%= string.Format(EventsResources.HeadingSublineFormat, FormatDate(start),FormatDate(end)) %> }
+
+        \table [ 
+            Borders { Width = 0.25 Color = 0xFFAAAAAA } 
+        ] {
+            \columns {
+                \column [ Width = "5cm" ]
+                \column [ Width = "2.5cm" Format { Alignment = Right } ]
+                \column [ Width = "2.5cm" Format { Alignment = Right } ]
+                \column [ Width = "6cm" ]
+            }
+            \rows {
+                \row [ 
+                    HeadingFormat = True 
+                    Format { Font { Bold = True } }
+                ] {
+                    \cell { Calendar }
+                    \cell { Start }
+                    \cell { End }
+                    \cell { Summary }
+                }
+
+<% foreach (var e in events) { %>
+                \row {
+                    \cell { <%= Format(e.Event.Calendar.Name) %> }
+                    \cell { <%= Format(e.Event.StartDate) %> }    
+                    \cell { <%= Format(e.Event.EndDate) %> }    
+                    \cell { <%= Format(e.Event.Summary) %> }    
+                }
+                \row {
+                    \cell [ Format { Font { Bold = True } } ] { Location }    
+                    \cell [  MergeRight = 2 ] { <%= Format(e.Event.Location) %> }    
+                }
+                \row {
+                    \cell [  MergeRight = 3 ] { <%= Format(e.Event.Body) %> }    
+                }
+<% } %>
+
+            }
+        }
+
+    } <%/* section */%>
+}
