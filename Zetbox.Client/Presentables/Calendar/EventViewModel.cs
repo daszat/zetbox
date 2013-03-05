@@ -11,6 +11,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Models;
+    using Zetbox.API.Utils;
 
     [ViewModelDescriptor]
     public class EventViewModel : DataObjectViewModel
@@ -118,6 +119,40 @@ namespace Zetbox.Client.Presentables.Calendar
                     _color = value;
                     OnPropertyChanged("Color");
                 }
+            }
+        }
+
+        public List<CalendarItemViewModel> CreateCalendarItemViewModels(DateTime displayFrom, DateTime displayTo)
+        {
+            if (Event.StartDate <= Event.EndDate)
+            {
+                List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
+                var from = Event.StartDate;
+                var until = Event.EndDate;
+                if (from < displayFrom) from = displayFrom;
+                if (until > displayTo) until = displayTo;
+                if (Event.IsAllDay)
+                {
+                    until = until.AddDays(1);
+                }
+
+                for (var current = from; current < until; current = current.Date.AddDays(1))
+                {
+                    var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
+                    .Invoke(
+                        DataContext,
+                        this,
+                        this);
+                    vmdl.From = current == Event.StartDate ? current : current.Date;
+                    vmdl.Until = current.Date == Event.EndDate.Date ? Event.EndDate : current.Date.AddDays(1);
+                    result.Add(vmdl);
+                }
+                return result;
+            }
+            else
+            {
+                Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", Event.Summary, Event.StartDate, Event.EndDate);
+                return new List<CalendarItemViewModel>();
             }
         }
     }

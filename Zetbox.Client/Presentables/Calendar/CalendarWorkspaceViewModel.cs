@@ -448,7 +448,7 @@ namespace Zetbox.Client.Presentables.Calendar
             var events = _fetchCache.FetchEventsAsync(from, to).Result;
             using (var rpt = _rptFactory())
             {
-                Reporting.Calendar.Events.Call(rpt, events, from, to);
+                Reporting.Calendar.Events.Call(rpt, events.SelectMany(e => e.CreateCalendarItemViewModels(from, to)) , from, to);
                 rpt.Open("Events.pdf");
             }
         }
@@ -466,8 +466,8 @@ namespace Zetbox.Client.Presentables.Calendar
                         PrintTodayCommand,
                         PrintThisWeekCommand,
                         PrintTwoWeeksCommand,
-                        PrintMonthCommand
-                        );
+                        PrintMonthCommand);
+                    _printCommandGroup.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
                 return _printCommandGroup;
             }

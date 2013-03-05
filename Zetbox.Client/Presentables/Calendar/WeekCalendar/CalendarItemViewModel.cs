@@ -22,6 +22,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Text;
     using Zetbox.API;
     using Zetbox.Client.Presentables;
+    using Zetbox.App.Calendar;
 
     public class CalendarItemViewModel : ViewModel
     {
@@ -35,6 +36,7 @@ namespace Zetbox.Client.Presentables.Calendar
             this.SlotWidth = this.OverlappingWidth = 1.0;
             this.EventViewModel = obj;
             this.EventViewModel.PropertyChanged += EventViewModelChanged;
+            this.Event = obj.Event;
         }
 
         private void EventViewModelChanged(object sender, PropertyChangedEventArgs e)
@@ -86,6 +88,7 @@ namespace Zetbox.Client.Presentables.Calendar
         }
 
         public EventViewModel EventViewModel { get; private set; }
+        public Event Event { get; private set; }
 
         private DateTime _From;
         public DateTime From

@@ -120,6 +120,16 @@ namespace Zetbox.API.Common.Reporting
             return dt.ToShortDateString();
         }
 
+        protected virtual string FormatLongDate(DateTime? dt)
+        {
+            return dt != null ? FormatLongDate(dt.Value) : string.Empty;
+        }
+
+        protected virtual string FormatLongDate(DateTime dt)
+        {
+            return dt.ToLongDateString();
+        }
+
         protected virtual string Today()
         {
             return FormatDate(DateTime.Today);
