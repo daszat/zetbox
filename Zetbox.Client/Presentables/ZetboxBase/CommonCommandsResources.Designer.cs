@@ -70,7 +70,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleting an Object is not allowed here..
+        ///   Looks up a localized string similar to Not allowed..
         /// </summary>
         internal static string DataObjectCommand_NotAllowed {
             get {

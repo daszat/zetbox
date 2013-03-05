@@ -297,7 +297,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CommonCommandsResources.NewDataObjectCommand_Tooltip,
                         New,
                         CanNew,
-                        null);
+                        CanNewReason);
                     _NewCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _NewCommand;
@@ -306,12 +306,14 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public bool CanNew()
         {
-            return SelectedItem != null;
+            return SelectedItem != null && SelectedItem.CalendarViewModel.CanWrite;
         }
 
         public string CanNewReason()
         {
-            return CommonCommandsResources.DataObjectCommand_NothingSelected;
+            if(SelectedItem == null ) return CommonCommandsResources.DataObjectCommand_NothingSelected;
+            if(!SelectedItem.CalendarViewModel.CanWrite) return CommonCommandsResources.DataObjectCommand_NotAllowed;
+            return string.Empty;
         }
 
         public void New()

@@ -33,6 +33,11 @@ namespace Zetbox.Client.Presentables.Calendar
                 case "Name":
                     OnPropertyChanged("Name");
                     break;
+                case "Owner":
+                case "Writers":
+                case "GroupWriters":
+                    OnPropertyChanged("CanWrite");
+                    break;
             }
         }
 
@@ -55,6 +60,23 @@ namespace Zetbox.Client.Presentables.Calendar
                     _color = value;
                     OnPropertyChanged("Color");
                 }
+            }
+        }
+
+        private bool? _canWrite;
+        public bool CanWrite
+        {
+            get
+            {
+                if (_canWrite == null)
+                {
+                    var myID = CurrentIdentity != null ? CurrentIdentity.ID : 0;
+                    _canWrite = (Calendar.Owner != null && Calendar.Owner.ID == CurrentIdentity.ID)
+                             || (Calendar.Writers.Any(w => w.ID == myID))
+                             || (Calendar.GroupWriters.Any(grp => grp.Member.Any(w => w.ID == myID)));
+                }
+
+                return _canWrite.Value;
             }
         }
     }

@@ -121,7 +121,7 @@
     <value>Context is read only.</value>
   </data>
   <data name="DataObjectCommand_NotAllowed" xml:space="preserve">
-    <value>Deleting an Object is not allowed here.</value>
+    <value>Not allowed.</value>
   </data>
   <data name="DataObjectCommand_NothingSelected" xml:space="preserve">
     <value>Nothing selected.</value>
