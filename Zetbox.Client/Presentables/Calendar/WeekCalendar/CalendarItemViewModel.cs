@@ -138,6 +138,9 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
+                // Fixing items that are midnight to midnight
+                if (From.TimeOfDay == TimeSpan.Zero && Until.TimeOfDay == TimeSpan.Zero)
+                    return true;
                 return EventViewModel.Event.IsAllDay;
             }
         }

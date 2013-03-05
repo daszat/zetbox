@@ -487,6 +487,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CalendarResources.PrintTodayCommand_Tooltip, 
                         PrintToday, 
                         null, null);
+                    _PrintTodayCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
                 return _PrintTodayCommand;
             }
@@ -511,6 +512,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CalendarResources.PrintThisWeekCommand_Tooltip, 
                         PrintThisWeek, 
                         null, null);
+                    _PrintThisWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
                 return _PrintThisWeekCommand;
             }
@@ -536,6 +538,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CalendarResources.PrintTwoWeeksCommand_Tooltip, 
                         PrintTwoWeeks, 
                         null, null);
+                    _PrintTwoWeeksCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
                 return _PrintTwoWeeksCommand;
             }
@@ -561,6 +564,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         CalendarResources.PrintMonthCommand_Tooltip, 
                         PrintMonth,
                         null, null);
+                    _PrintMonthCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
                 return _PrintMonthCommand;
             }

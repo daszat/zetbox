@@ -77,5 +77,14 @@ namespace Zetbox.Client.Reporting.Calendar {
                 return ResourceManager.GetString("HeadingSublineFormat", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page.
+        /// </summary>
+        internal static string Page {
+            get {
+                return ResourceManager.GetString("Page", resourceCulture);
+            }
+        }
     }
 }

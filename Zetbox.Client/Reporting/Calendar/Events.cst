@@ -31,7 +31,7 @@
                 \rows {
                     \row {
                         \cell { <%= FormatDate(DateTime.Today) %> }
-                        \cell { Seite \field(Page) von \field(SectionPages) }
+                        \cell { <%= EventsResources.Page %> \field(Page)/\field(SectionPages) }
                     }
                 }
             }
@@ -65,18 +65,18 @@
                 ] {
                     \cell [ MergeRight = 2 ] { <%= FormatLongDate(grp.Key) %> }
                 }
-<% foreach (var e in grp.OrderBy(g => g.From)) { %>
-                \row [ Format { Font { Bold = True } } ] {
+<% foreach (var e in grp.OrderByDescending(g => g.IsAllDay).ThenBy(g => g.From)) { %>
+                \row {
                     \cell { 
                         <% if(!e.IsAllDay) { %>
-                            <%= FormatTime(e.Event.StartDate) %> - <%= FormatTime(e.Event.EndDate) %> 
+                            \bold{ <%= FormatTime(e.From) %> - <%= FormatTime(e.Until) %> }
                         <% } %> 
                     }
                     \cell { <%= Format(e.Event.Calendar.Name) %> }
                     \cell { 
-                        <%= Format(e.Event.Summary) %> 
+                        \bold{ <%= Format(e.Event.Summary) %> }
                         <% if(!string.IsNullOrWhiteSpace(e.Event.Location)) { %> \linebreak (<%= Format(e.Event.Location) %>) <% } %>
-                        <% if(!string.IsNullOrWhiteSpace(e.Event.Body)) { %> \linebreak <%= Format(e.Event.Body) %> <% } %>
+                        <% if(!string.IsNullOrWhiteSpace(e.Event.Body)) { %> \linebreak <%= FormatTextfield(e.Event.Body) %> <% } %>
                     }    
                 }
 <% } %>

@@ -55,7 +55,7 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("                \\rows {\r\n");
 this.WriteObjects("                    \\row {\r\n");
 this.WriteObjects("                        \\cell { ",  FormatDate(DateTime.Today) , " }\r\n");
-this.WriteObjects("                        \\cell { Seite \\field(Page) von \\field(SectionPages) }\r\n");
+this.WriteObjects("                        \\cell { ",  EventsResources.Page , " \\field(Page)/\\field(SectionPages) }\r\n");
 this.WriteObjects("                    }\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
@@ -92,15 +92,15 @@ this.WriteObjects("                ] {\r\n");
 this.WriteObjects("                    \\cell [ MergeRight = 2 ] { ",  FormatLongDate(grp.Key) , " }\r\n");
 this.WriteObjects("                }\r\n");
 #line 68 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"
-foreach (var e in grp.OrderBy(g => g.From)) { 
+foreach (var e in grp.OrderByDescending(g => g.IsAllDay).ThenBy(g => g.From)) { 
 #line 69 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"
-this.WriteObjects("                \\row [ Format { Font { Bold = True } } ] {\r\n");
+this.WriteObjects("                \\row {\r\n");
 this.WriteObjects("                    \\cell { \r\n");
 this.WriteObjects("                        ");
 #line 71 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"
 if(!e.IsAllDay) { 
 #line 72 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"
-this.WriteObjects("                            ",  FormatTime(e.Event.StartDate) , " - ",  FormatTime(e.Event.EndDate) , " \r\n");
+this.WriteObjects("                            \\bold{ ",  FormatTime(e.From) , " - ",  FormatTime(e.Until) , " }\r\n");
 this.WriteObjects("                        ");
 #line 73 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"
 } 
@@ -109,7 +109,7 @@ this.WriteObjects(" \r\n");
 this.WriteObjects("                    }\r\n");
 this.WriteObjects("                    \\cell { ",  Format(e.Event.Calendar.Name) , " }\r\n");
 this.WriteObjects("                    \\cell { \r\n");
-this.WriteObjects("                        ",  Format(e.Event.Summary) , " \r\n");
+this.WriteObjects("                        \\bold{ ",  Format(e.Event.Summary) , " }\r\n");
 this.WriteObjects("                        ");
 #line 78 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"
 if(!string.IsNullOrWhiteSpace(e.Event.Location)) { 
@@ -122,7 +122,7 @@ this.WriteObjects("                        ");
 #line 79 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"
 if(!string.IsNullOrWhiteSpace(e.Event.Body)) { 
 #line 79 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"
-this.WriteObjects(" \\linebreak ",  Format(e.Event.Body) , " ");
+this.WriteObjects(" \\linebreak ",  FormatTextfield(e.Event.Body) , " ");
 #line 79 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"
 } 
 #line 80 "P:\zetbox\Zetbox.Client\Reporting\Calendar\Events.cst"

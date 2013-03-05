@@ -123,4 +123,7 @@
   <data name="HeadingSublineFormat" xml:space="preserve">
     <value>from {0} until {1}</value>
   </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
 </root>
