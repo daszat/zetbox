@@ -60,6 +60,15 @@ namespace Zetbox.App.Calendar
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("2eb0c6f4-c5bc-4b9a-8677-ec2598c74beb")]
+        Zetbox.App.Base.RecurrenceRule Recurrence {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// A attached data item
         /// </summary>
         [Zetbox.API.DefinitionGuid("086bf775-297d-49bf-be32-95b19f5eda8a")]
@@ -82,6 +91,15 @@ namespace Zetbox.App.Calendar
         /// </summary>
         [Zetbox.API.DefinitionGuid("e0cbb876-3119-4e90-afc5-6e97b67e2005")]
         string Summary {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// A hash used by a sync provider
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("b9095bc6-a8cb-422e-8320-e1c07c8c6252")]
+        string SyncHash {
             get;
             set;
         }

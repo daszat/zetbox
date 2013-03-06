@@ -1637,11 +1637,15 @@
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="IsAllDay" Type="Boolean" Nullable="false"  />
     <Property Name="Location" Type="String" Nullable="true" MaxLength="200"  />
+    <Property Name="RecurrenceImpl"
+              Type="Model.RecurrenceRuleEfImpl"
+              Nullable="false" />
     <Property Name="SourceImpl"
               Type="Model.AnyReferenceEfImpl"
               Nullable="false" />
     <Property Name="StartDate" Type="DateTime" Nullable="false"  />
     <Property Name="Summary" Type="String" Nullable="false" MaxLength="200"  />
+    <Property Name="SyncHash" Type="String" Nullable="true" MaxLength="500"  />
     <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_Events_Rights" FromRole="Event" ToRole="Event_Rights" />
   </EntityType>
   <EntityType Name="Event_Rights">

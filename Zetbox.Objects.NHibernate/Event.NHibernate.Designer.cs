@@ -43,6 +43,15 @@ namespace Zetbox.App.Calendar
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            if (this.Proxy.Recurrence == null)
+            {
+                this.Proxy.Recurrence = new Zetbox.App.Base.RecurrenceRuleNHibernateImpl(this, "Recurrence", lazyCtx, null);
+            }
+            else
+            {
+                this.Proxy.Recurrence.AttachToObject(this, "Recurrence");
+            }
+
             if (this.Proxy.Source == null)
             {
                 this.Proxy.Source = new Zetbox.App.Base.AnyReferenceNHibernateImpl(this, "Source", lazyCtx, null);
@@ -829,6 +838,57 @@ namespace Zetbox.App.Calendar
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnLocation_IsValid;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // CompoundObject property
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        public Zetbox.App.Base.RecurrenceRule Recurrence
+        {
+            get { return RecurrenceImpl; }
+            set { RecurrenceImpl = (Zetbox.App.Base.RecurrenceRuleNHibernateImpl)value; }
+        }
+
+        /// <summary>backing property for Recurrence, takes care of attaching/detaching the values</summary>
+        public Zetbox.App.Base.RecurrenceRuleNHibernateImpl RecurrenceImpl
+        {
+            get
+            {
+                return this.Proxy.Recurrence;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(this.Proxy.Recurrence, value))
+                {
+                    var __oldValue = this.Proxy.Recurrence;
+                    var __newValue = value;
+
+                    NotifyPropertyChanging("Recurrence", __oldValue, __newValue);
+
+                    if (this.Proxy.Recurrence != null)
+                    {
+                        this.Proxy.Recurrence.DetachFromObject(this, "Recurrence");
+                    }
+                    __newValue = (Zetbox.App.Base.RecurrenceRuleNHibernateImpl)__newValue.Clone();
+                    this.Proxy.Recurrence = __newValue;
+                    this.Proxy.Recurrence.AttachToObject(this, "Recurrence");
+
+                    NotifyPropertyChanged("Recurrence", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+                else
+                {
+                    SetInitializedProperty("Recurrence");
+                }
+            }
+        }
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnRecurrence_IsValid;
+
+        /// <summary>
         /// A attached data item
         /// </summary>
         // CompoundObject property
@@ -995,6 +1055,64 @@ namespace Zetbox.App.Calendar
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnSummary_IsValid;
 
+        /// <summary>
+        /// A hash used by a sync provider
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string SyncHash
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.SyncHash;
+                if (OnSyncHash_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnSyncHash_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.SyncHash != value)
+                {
+                    var __oldValue = Proxy.SyncHash;
+                    var __newValue = value;
+                    if (OnSyncHash_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnSyncHash_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("SyncHash", __oldValue, __newValue);
+                    Proxy.SyncHash = __newValue;
+                    NotifyPropertyChanged("SyncHash", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnSyncHash_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnSyncHash_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("SyncHash");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.Event, string> OnSyncHash_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Event, string> OnSyncHash_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.Event, string> OnSyncHash_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnSyncHash_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(Event);
@@ -1016,6 +1134,14 @@ namespace Zetbox.App.Calendar
             me.Location = other.Location;
             me.StartDate = other.StartDate;
             me.Summary = other.Summary;
+            me.SyncHash = other.SyncHash;
+            if (me.Recurrence == null && other.Recurrence != null) {
+                me.Recurrence = (Zetbox.App.Base.RecurrenceRule)other.Recurrence.Clone();
+            } else if (me.Recurrence != null && other.Recurrence == null) {
+                me.Recurrence = null;
+            } else if (me.Recurrence != null && other.Recurrence != null) {
+                me.Recurrence.ApplyChangesFrom(other.Recurrence);
+            }
             if (me.Source == null && other.Source != null) {
                 me.Source = (Zetbox.App.Base.AnyReference)other.Source.Clone();
             } else if (me.Source != null && other.Source == null) {
@@ -1087,9 +1213,11 @@ namespace Zetbox.App.Calendar
                 case "ExportGuid":
                 case "IsAllDay":
                 case "Location":
+                case "Recurrence":
                 case "Source":
                 case "StartDate":
                 case "Summary":
+                case "SyncHash":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -1227,6 +1355,15 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.Location = val,
 						obj => OnLocation_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<Event, Zetbox.App.Base.RecurrenceRule>(
+                        lazyCtx,
+                        new Guid("2eb0c6f4-c5bc-4b9a-8677-ec2598c74beb"),
+                        "Recurrence",
+                        null,
+                        obj => obj.Recurrence,
+                        (obj, val) => obj.Recurrence = val,
+						obj => OnRecurrence_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<Event, Zetbox.App.Base.AnyReference>(
                         lazyCtx,
                         new Guid("086bf775-297d-49bf-be32-95b19f5eda8a"),
@@ -1253,6 +1390,15 @@ namespace Zetbox.App.Calendar
                         obj => obj.Summary,
                         (obj, val) => obj.Summary = val,
 						obj => OnSummary_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<Event, string>(
+                        lazyCtx,
+                        new Guid("b9095bc6-a8cb-422e-8320-e1c07c8c6252"),
+                        "SyncHash",
+                        null,
+                        obj => obj.SyncHash,
+                        (obj, val) => obj.SyncHash = val,
+						obj => OnSyncHash_IsValid), 
                     // position columns
                 };
             }
@@ -1326,9 +1472,11 @@ namespace Zetbox.App.Calendar
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("EndDate");
             SetNotInitializedProperty("Location");
+            SetNotInitializedProperty("Recurrence");
             SetNotInitializedProperty("Source");
             SetNotInitializedProperty("StartDate");
             SetNotInitializedProperty("Summary");
+            SetNotInitializedProperty("SyncHash");
             base.NotifyCreated();
             if (OnNotifyCreated_Event != null) OnNotifyCreated_Event(this);
         }
@@ -1397,11 +1545,15 @@ namespace Zetbox.App.Calendar
 
             public virtual string Location { get; set; }
 
+            public virtual Zetbox.App.Base.RecurrenceRuleNHibernateImpl Recurrence { get; set; }
+
             public virtual Zetbox.App.Base.AnyReferenceNHibernateImpl Source { get; set; }
 
             public virtual DateTime StartDate { get; set; }
 
             public virtual string Summary { get; set; }
+
+            public virtual string SyncHash { get; set; }
 
             public virtual ICollection<Event_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
 
@@ -1453,9 +1605,11 @@ namespace Zetbox.App.Calendar
                 binStream.Write(this.Proxy.IsAllDay);
             }
             binStream.Write(this.Proxy.Location);
+            binStream.Write(this.Recurrence);
             binStream.Write(this.Source);
             binStream.Write(this.Proxy.StartDate);
             binStream.Write(this.Proxy.Summary);
+            binStream.Write(this.Proxy.SyncHash);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1488,11 +1642,17 @@ namespace Zetbox.App.Calendar
             this.Proxy.Location = binStream.ReadString();
             {
                 // use backing store to avoid notifications
+                this.RecurrenceImpl = binStream.ReadCompoundObject<Zetbox.App.Base.RecurrenceRuleNHibernateImpl>();
+                this.RecurrenceImpl.AttachToObject(this, "Recurrence");
+            }
+            {
+                // use backing store to avoid notifications
                 this.SourceImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AnyReferenceNHibernateImpl>();
                 this.SourceImpl.AttachToObject(this, "Source");
             }
             this.Proxy.StartDate = binStream.ReadDateTime();
             this.Proxy.Summary = binStream.ReadString();
+            this.Proxy.SyncHash = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1516,9 +1676,11 @@ namespace Zetbox.App.Calendar
             System.Diagnostics.Debug.Assert(this._isIsAllDaySet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.IsAllDay, xml, "IsAllDay", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.Location, xml, "Location", "Zetbox.App.Calendar");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ExportCompoundObject(this.Recurrence, xml, "Recurrence", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ExportCompoundObject(this.Source, xml, "Source", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.StartDate, xml, "StartDate", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.Summary, xml, "Summary", "Zetbox.App.Calendar");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.SyncHash, xml, "SyncHash", "Zetbox.App.Calendar");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1558,6 +1720,9 @@ namespace Zetbox.App.Calendar
             case "Zetbox.App.Calendar|Location":
                 this.Proxy.Location = XmlStreamer.ReadString(xml);
                 break;
+            case "Zetbox.App.Calendar|Recurrence":
+                XmlStreamer.MergeImportCompoundObject(this.RecurrenceImpl, xml);
+                break;
             case "Zetbox.App.Calendar|Source":
                 XmlStreamer.MergeImportCompoundObject(this.SourceImpl, xml);
                 break;
@@ -1566,6 +1731,9 @@ namespace Zetbox.App.Calendar
                 break;
             case "Zetbox.App.Calendar|Summary":
                 this.Proxy.Summary = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Calendar|SyncHash":
+                this.Proxy.SyncHash = XmlStreamer.ReadString(xml);
                 break;
             }
         }

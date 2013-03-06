@@ -1777,6 +1777,19 @@
     <Property Name="Location" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="StartDate" Type="timestamp" Nullable="false" />
     <Property Name="Summary" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="SyncHash" Type="varchar" MaxLength="500" Nullable="true" />
+    <Property Name="Recurrence_Count" Type="int4" Nullable="true" />
+    <Property Name="Recurrence_DaysOffset" Type="float8" Nullable="true" />
+    <Property Name="Recurrence_EveryDay" Type="bool" Nullable="false" />
+    <Property Name="Recurrence_EveryDayOfWeek" Type="int4" Nullable="true" />
+    <Property Name="Recurrence_EveryMonth" Type="bool" Nullable="false" />
+    <Property Name="Recurrence_EveryQuater" Type="bool" Nullable="false" />
+    <Property Name="Recurrence_EveryYear" Type="bool" Nullable="false" />
+    <Property Name="Recurrence_HoursOffset" Type="float8" Nullable="true" />
+    <Property Name="Recurrence_Interval" Type="int4" Nullable="true" />
+    <Property Name="Recurrence_MinutesOffset" Type="float8" Nullable="true" />
+    <Property Name="Recurrence_MonthsOffset" Type="int4" Nullable="true" />
+    <Property Name="Recurrence_Until" Type="timestamp" Nullable="true" />
     <Property Name="Source_ObjClass" Type="uuid" Nullable="true" />
     <Property Name="Source_ObjGuid" Type="uuid" Nullable="true" />
     <Property Name="Source_ObjID" Type="int4" Nullable="true" />

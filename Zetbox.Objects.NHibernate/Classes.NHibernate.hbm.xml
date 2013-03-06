@@ -156,6 +156,57 @@
                   column="`Location`" 
                   optimistic-lock="false"/>
         <!-- CompoundObjectProperty isValue -->
+        <component name="Recurrence" class="Zetbox.App.Base.RecurrenceRuleNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="Count" 
+                  column="`Recurrence_Count`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="DaysOffset" 
+                  column="`Recurrence_DaysOffset`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryDay" 
+                  column="`Recurrence_EveryDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryDayOfWeek" 
+                  column="`Recurrence_EveryDayOfWeek`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryMonth" 
+                  column="`Recurrence_EveryMonth`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryQuater" 
+                  column="`Recurrence_EveryQuater`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EveryYear" 
+                  column="`Recurrence_EveryYear`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="HoursOffset" 
+                  column="`Recurrence_HoursOffset`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Interval" 
+                  column="`Recurrence_Interval`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="MinutesOffset" 
+                  column="`Recurrence_MinutesOffset`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="MonthsOffset" 
+                  column="`Recurrence_MonthsOffset`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Until" type="Timestamp"
+                  column="`Recurrence_Until`" 
+                  optimistic-lock="false"/>
+        </component>
+        <!-- CompoundObjectProperty isValue -->
         <component name="Source" class="Zetbox.App.Base.AnyReferenceNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
         <property name="ObjClass" 
@@ -177,6 +228,10 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Summary" 
                   column="`Summary`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="SyncHash" 
+                  column="`SyncHash`" 
                   optimistic-lock="false"/>
 
         <!-- map rights -->

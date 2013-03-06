@@ -2086,6 +2086,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("3c517754-f4a4-459e-8a24-3b85e1949b21"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Recurrence
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("2eb0c6f4-c5bc-4b9a-8677-ec2598c74beb"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Source
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("086bf775-297d-49bf-be32-95b19f5eda8a"); }
@@ -2097,6 +2101,10 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Summary
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("e0cbb876-3119-4e90-afc5-6e97b67e2005"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> SyncHash
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b9095bc6-a8cb-422e-8320-e1c07c8c6252"); }
                                 }
                             }
                             public static class FixedYearlyWorkScheduleRule_Properties
