@@ -47,6 +47,11 @@ namespace Zetbox.API
 
             ParentProperty = property;
             ParentObject = obj;
+
+            if (_frozenContext == null && obj is BasePersistenceObject)
+            {
+                _frozenContext = ((BasePersistenceObject)obj).FrozenContext;
+            }
         }
 
         public virtual void DetachFromObject(IPersistenceObject obj, string property)
