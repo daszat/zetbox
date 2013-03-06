@@ -20,6 +20,7 @@ namespace Zetbox.App.Base
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Extensions;
+    using Zetbox.API.Utils;
 
     [Implementor]
     public class RecurrenceRuleActions
@@ -27,19 +28,35 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void ToString(RecurrenceRule obj, MethodReturnEventArgs<string> e)
         {
+            var interval = obj.Interval ?? 1;
+            if (interval <= 0)
+            {
+                interval = 1;
+            }
+
             var sb = new StringBuilder();
-            if (obj.EveryYear) sb.Append("every year");
-            else if (obj.EveryQuater) sb.Append("every quater");
-            else if (obj.EveryMonth) sb.Append("every month");
-            else if (obj.EveryDayOfWeek.HasValue) sb.Append("every " + obj.EveryDayOfWeek.ToString());
-            else if (obj.EveryDay) sb.Append("every day");
+            if (obj.EveryYear) sb.AppendFormat("every {0} year", interval);
+            else if (obj.EveryQuater) sb.AppendFormat("every {0} quater", interval);
+            else if (obj.EveryMonth) sb.AppendFormat("every {0} month", interval);
+            else if (obj.EveryDayOfWeek.HasValue) sb.AppendFormat("every {0} {1}", interval, obj.EveryDayOfWeek.ToString());
+            else if (obj.EveryDay) sb.AppendFormat("every {0} day", interval);
 
-            if (obj.MonthsOffset.HasValue || obj.DaysOffset.HasValue || obj.HoursOffset.HasValue || obj.MinutesOffset.HasValue) sb.Append(" + offset: ");
+            if (obj.MonthsOffset.HasValue || obj.DaysOffset.HasValue || obj.HoursOffset.HasValue || obj.MinutesOffset.HasValue) sb.Append(" + offset:");
 
-            if (obj.MonthsOffset.HasValue) sb.Append(obj.MonthsOffset.Value.ToString() + " months ");
-            if (obj.DaysOffset.HasValue) sb.Append(obj.DaysOffset.Value.ToString() + " days ");
-            if (obj.HoursOffset.HasValue) sb.Append(obj.HoursOffset.Value.ToString() + " hours ");
-            if (obj.MinutesOffset.HasValue) sb.Append(obj.MinutesOffset.Value.ToString() + " minutes ");
+            if (obj.MonthsOffset.HasValue) sb.AppendFormat(" {0} months", obj.MonthsOffset.Value);
+            if (obj.DaysOffset.HasValue) sb.AppendFormat(" {0} days", obj.DaysOffset.Value);
+            if (obj.HoursOffset.HasValue) sb.AppendFormat(" {0} hours", obj.HoursOffset.Value);
+            if (obj.MinutesOffset.HasValue) sb.AppendFormat(" {0} minutes", obj.MinutesOffset.Value);
+
+            if (obj.Until.HasValue)
+            {
+                sb.AppendFormat(" until {0}", obj.Until);
+            } 
+            else if (obj.Count.HasValue)
+            {
+                sb.AppendFormat(" {0} times", obj.Count);
+            }
+                        
             if (sb.Length == 0)
             {
                 sb.Append("not defined");
@@ -56,26 +73,33 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
         {
+            var interval = obj.Interval ?? 1;
+            if(interval <= 0)
+            {
+                Logging.Log.WarnFormat("{0} has an invalid interval of {1}", obj, interval);
+                interval = 1;
+            }
+
             if (obj.EveryYear)
             {
-                dt = dt.FirstYearDay().AddYears(1);
+                dt = dt.FirstYearDay().AddYears(1 * interval);
             }
             else if (obj.EveryQuater)
             {
-                dt = dt.FirstQuaterDay().AddMonths(3);
+                dt = dt.FirstQuaterDay().AddMonths(3 * interval);
             }
             else if (obj.EveryMonth)
             {
-                dt = dt.FirstMonthDay().AddMonths(1);
+                dt = dt.FirstMonthDay().AddMonths(1 * interval);
             }
             else if (obj.EveryDayOfWeek.HasValue)
             {
                 // Assuming Monday is the first day of week
-                dt = dt.FirstWeekDay().AddDays((((int)obj.EveryDayOfWeek - 1) % 7)).AddDays(7);
+                dt = dt.FirstWeekDay().AddDays((((int)obj.EveryDayOfWeek - 1) % 7)).AddDays(7 * interval);
             }
             else if (obj.EveryDay)
             {
-                dt = dt.Date.AddDays(1);
+                dt = dt.Date.AddDays(1 * interval);
             }
 
             e.Result = dt
