@@ -2870,6 +2870,10 @@
         <!-- CompoundObjectProperty isValue -->
         <component name="Rule" class="Zetbox.App.Base.RecurrenceRuleNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
+        <property name="Count" 
+                  column="`Rule_Count`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="DaysOffset" 
                   column="`Rule_DaysOffset`" 
                   optimistic-lock="false"/>
@@ -2898,12 +2902,20 @@
                   column="`Rule_HoursOffset`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="Interval" 
+                  column="`Rule_Interval`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="MinutesOffset" 
                   column="`Rule_MinutesOffset`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="MonthsOffset" 
                   column="`Rule_MonthsOffset`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Until" type="Timestamp"
+                  column="`Rule_Until`" 
                   optimistic-lock="false"/>
         </component>
 

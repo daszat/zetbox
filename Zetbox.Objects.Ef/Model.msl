@@ -1418,6 +1418,7 @@
 	    <MappingFragment StoreEntitySet="RecurrenceRuleTester">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ComplexProperty Name="RuleImpl" TypeName="Model.RecurrenceRuleEfImpl">
+          <ScalarProperty Name="Count" ColumnName="Rule_Count" />
           <ScalarProperty Name="DaysOffset" ColumnName="Rule_DaysOffset" />
           <ScalarProperty Name="EveryDay" ColumnName="Rule_EveryDay" />
           <ScalarProperty Name="EveryDayOfWeekImpl" ColumnName="Rule_EveryDayOfWeek" />
@@ -1425,8 +1426,10 @@
           <ScalarProperty Name="EveryQuater" ColumnName="Rule_EveryQuater" />
           <ScalarProperty Name="EveryYear" ColumnName="Rule_EveryYear" />
           <ScalarProperty Name="HoursOffset" ColumnName="Rule_HoursOffset" />
+          <ScalarProperty Name="Interval" ColumnName="Rule_Interval" />
           <ScalarProperty Name="MinutesOffset" ColumnName="Rule_MinutesOffset" />
           <ScalarProperty Name="MonthsOffset" ColumnName="Rule_MonthsOffset" />
+          <ScalarProperty Name="Until" ColumnName="Rule_Until" />
           </ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>

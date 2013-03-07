@@ -6048,6 +6048,7 @@
     <Property Name="TotalDays" Type="Int32" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="RecurrenceRuleEfImpl" >
+    <Property Name="Count" Type="Int32" Nullable="true"  />
     <Property Name="DaysOffset" Type="Double" Nullable="true"  />
     <Property Name="EveryDay" Type="Boolean" Nullable="false"  />
     <Property Name="EveryDayOfWeekImpl" Type="Int32" Nullable="true"  />
@@ -6055,8 +6056,10 @@
     <Property Name="EveryQuater" Type="Boolean" Nullable="false"  />
     <Property Name="EveryYear" Type="Boolean" Nullable="false"  />
     <Property Name="HoursOffset" Type="Double" Nullable="true"  />
+    <Property Name="Interval" Type="Int32" Nullable="true"  />
     <Property Name="MinutesOffset" Type="Double" Nullable="true"  />
     <Property Name="MonthsOffset" Type="Int32" Nullable="true"  />
+    <Property Name="Until" Type="DateTime" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="TestPhoneCompoundObjectEfImpl" >
     <Property Name="AreaCode" Type="String" Nullable="true" MaxLength="50"  />

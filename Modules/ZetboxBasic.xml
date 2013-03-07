@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-04T11:22:52Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-06T10:10:14Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -28154,6 +28154,43 @@ public static void isValid_ObjectClass(Property obj, PropertyIsValidEventArgs e)
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>f6a0541f-8f37-4599-ab35-15b6360185b0</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:IntProperty ExportGuid="7f058fb2-9be2-4a0e-b756-3a998b213056">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-06T09:03:56.014588Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Count(RecurrenceRule obj, PropertyGetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Count(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Count(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Count(RecurrenceRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Count == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-06T09:03:56.014588Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Specifies how often the recurrence will be repeated. The start date counts as the first one</ZetboxBase:Description>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>Count</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3d4ec88b-fe8e-452e-a71d-03143a75aeb0</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>19</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:IntProperty>
   <ZetboxBase:DoubleProperty ExportGuid="88432827-66cb-4992-8691-f6c540c0df16">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T07:37:59.180362Z</ZetboxBase:ChangedOn>
@@ -28418,6 +28455,43 @@ public static void isValid_HoursOffset(RecurrenceRule obj, PropertyIsValidEventA
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:DoubleProperty>
+  <ZetboxBase:IntProperty ExportGuid="aec74e19-3b6c-43b9-b663-0ba73371660f">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-06T09:03:56.014588Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Interval(RecurrenceRule obj, PropertyGetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Interval(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Interval(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Interval(RecurrenceRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Interval == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-06T08:58:57.716526Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Specifies how often the recurrence rule repeats, null is equivalent to 1</ZetboxBase:Description>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>Interval</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3d4ec88b-fe8e-452e-a71d-03143a75aeb0</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>10</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:IntProperty>
   <ZetboxBase:DoubleProperty ExportGuid="1cb89bb7-45d9-4968-aed1-3b57eb9717a0">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T08:10:11.60589Z</ZetboxBase:ChangedOn>
@@ -28457,7 +28531,7 @@ public static void isValid_MinutesOffset(RecurrenceRule obj, PropertyIsValidEven
   </ZetboxBase:DoubleProperty>
   <ZetboxBase:IntProperty ExportGuid="4f83f1b5-2856-420a-89aa-b38504b2fc06">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-09-26T08:10:11.60589Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-06T08:58:57.716526Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_MonthsOffset(RecurrenceRule obj, PropertyGetterEventArgs&lt;int?&gt; e)
 {
@@ -28486,12 +28560,50 @@ public static void isValid_MonthsOffset(RecurrenceRule obj, PropertyIsValidEvent
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>MonthsOffset</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3d4ec88b-fe8e-452e-a71d-03143a75aeb0</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>10</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>11</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:IntProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="50842a43-7237-46b4-90c9-6d47455c6178">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-06T09:01:18.450575Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Until(RecurrenceRule obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Until(RecurrenceRule obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Until(RecurrenceRule obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Until(RecurrenceRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Until == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-06T09:01:18.450575Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Recurrents ends at this date, including this date</ZetboxBase:Description>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>Until</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3d4ec88b-fe8e-452e-a71d-03143a75aeb0</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>18</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d4429d3c-8fd1-468e-88d5-17abfd658d04">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
@@ -36908,6 +37020,14 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>bdaacacd-c8cb-45cf-a329-28f942337273</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:IntegerRangeConstraint ExportGuid="58d44e64-7cb9-4294-81fd-1324b3da33c3">
+    <ZetboxBase:ChangedOn>2013-03-06T09:06:11.470335Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>7f058fb2-9be2-4a0e-b756-3a998b213056</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-03-06T09:06:11.470335Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Reason>Must be a positive number and greater than 0</ZetboxBase:Reason>
+    <ZetboxBase:Max>2000000000</ZetboxBase:Max>
+    <ZetboxBase:Min>1</ZetboxBase:Min>
+  </ZetboxBase:IntegerRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="ea59e616-549f-488e-8705-c27f4be87587">
     <ZetboxBase:ChangedOn>2012-09-26T08:42:29.318721Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>aa9da83f-fbbf-44d0-8e7c-71f306e3481b</ZetboxBase:ConstrainedProperty>
@@ -36928,6 +37048,14 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>4638ca9a-aa2b-4ef2-9450-9b5bb39f0de4</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2012-09-26T08:41:35.657652Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:IntegerRangeConstraint ExportGuid="a87022f4-8c43-4de6-b143-64f9d6fd4c46">
+    <ZetboxBase:ChangedOn>2013-03-06T09:10:14.491235Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>aec74e19-3b6c-43b9-b663-0ba73371660f</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-03-06T09:10:14.491235Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Reason>Must be a positive number and greater than 0</ZetboxBase:Reason>
+    <ZetboxBase:Max>2000000000</ZetboxBase:Max>
+    <ZetboxBase:Min>1</ZetboxBase:Min>
+  </ZetboxBase:IntegerRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="7f9c6bc6-7fa1-47df-82c1-dc7f31b98361">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.804071Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>d4429d3c-8fd1-468e-88d5-17abfd658d04</ZetboxBase:ConstrainedProperty>

@@ -2345,6 +2345,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Rule_Count" Type="int" Nullable="true" />
     <Property Name="Rule_DaysOffset" Type="float" Nullable="true" />
     <Property Name="Rule_EveryDay" Type="bit" Nullable="false" />
     <Property Name="Rule_EveryDayOfWeek" Type="int" Nullable="true" />
@@ -2352,8 +2353,10 @@
     <Property Name="Rule_EveryQuater" Type="bit" Nullable="false" />
     <Property Name="Rule_EveryYear" Type="bit" Nullable="false" />
     <Property Name="Rule_HoursOffset" Type="float" Nullable="true" />
+    <Property Name="Rule_Interval" Type="int" Nullable="true" />
     <Property Name="Rule_MinutesOffset" Type="float" Nullable="true" />
     <Property Name="Rule_MonthsOffset" Type="int" Nullable="true" />
+    <Property Name="Rule_Until" Type="datetime2" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Relation">

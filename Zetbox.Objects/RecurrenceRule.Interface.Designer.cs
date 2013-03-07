@@ -15,6 +15,15 @@ namespace Zetbox.App.Base
     {
 
         /// <summary>
+        /// Specifies how often the recurrence will be repeated. The start date counts as the first one
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("7f058fb2-9be2-4a0e-b756-3a998b213056")]
+        int? Count {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("88432827-66cb-4992-8691-f6c540c0df16")]
@@ -78,6 +87,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// Specifies how often the recurrence rule repeats, null is equivalent to 1
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("aec74e19-3b6c-43b9-b663-0ba73371660f")]
+        int? Interval {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("1cb89bb7-45d9-4968-aed1-3b57eb9717a0")]
@@ -91,6 +109,15 @@ namespace Zetbox.App.Base
         /// </summary>
         [Zetbox.API.DefinitionGuid("4f83f1b5-2856-420a-89aa-b38504b2fc06")]
         int? MonthsOffset {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Recurrents ends at this date, including this date
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("50842a43-7237-46b4-90c9-6d47455c6178")]
+        DateTime? Until {
             get;
             set;
         }
