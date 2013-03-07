@@ -134,6 +134,7 @@
     <Compile Include="BoolParameter.Memory.Designer.cs" />
     <Compile Include="BoolProperty.Memory.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Memory.Designer.cs" />
+    <Compile Include="Calendar.Memory.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="CLRObjectParameter.Memory.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.Memory.Designer.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="EnumerationEntry.Memory.Designer.cs" />
     <Compile Include="EnumerationProperty.Memory.Designer.cs" />
     <Compile Include="EnumParameter.Memory.Designer.cs" />
+    <Compile Include="Event.Memory.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Memory.Designer.cs" />
     <Compile Include="File.Memory.Designer.cs" />
     <Compile Include="FileImportConfiguration.Memory.Designer.cs" />

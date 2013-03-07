@@ -450,6 +450,9 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for Auftrag_CreatedBy_Identity_RelationEntry
             // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
             // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
+            // should fetch && remember parent for Calendar_has_Identity_RelationEntry
+            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
+            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
             // should fetch && remember parent for SecurityTestChild_allow_Identity_RelationEntry
             // should fetch && remember parent for FileImportConfiguration_of_Identity_RelationEntry
             // should fetch && remember parent for Constraint_was_Identity_RelationEntry
@@ -462,6 +465,8 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for Blob_was_Identity_RelationEntry
             // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
             // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for Event_was_Identity_RelationEntry
+            // should fetch && remember parent for Event_was_Identity_RelationEntry
             // should fetch && remember parent for File_was_Identity_RelationEntry
             // should fetch && remember parent for File_was_Identity_RelationEntry
             // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry

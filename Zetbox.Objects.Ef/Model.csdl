@@ -19,6 +19,12 @@
     </AssociationSet>
     <EntitySet Name="BaseParameterEfImpl" EntityType="Model.BaseParameterEfImpl" />
     <EntitySet Name="BlobEfImpl" EntityType="Model.BlobEfImpl" />
+    <EntitySet Name="CalendarEfImpl" EntityType="Model.CalendarEfImpl" />
+    <EntitySet Name="Calendar_Rights" EntityType="Model.Calendar_Rights" />
+    <AssociationSet Name="FK_Calendars_Rights" Association="Model.FK_Calendars_Rights">
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+      <End Role="Calendar_Rights" EntitySet="Calendar_Rights" />
+    </AssociationSet>
     <EntitySet Name="CompanyEfImpl" EntityType="Model.CompanyEfImpl" />
     <EntitySet Name="ConstraintEfImpl" EntityType="Model.ConstraintEfImpl" />
     <EntitySet Name="ConstraintInvocationEfImpl" EntityType="Model.ConstraintInvocationEfImpl" />
@@ -28,6 +34,12 @@
     <EntitySet Name="DeactivatableTestObjectEfImpl" EntityType="Model.DeactivatableTestObjectEfImpl" />
     <EntitySet Name="DefaultPropertyValueEfImpl" EntityType="Model.DefaultPropertyValueEfImpl" />
     <EntitySet Name="EnumerationEntryEfImpl" EntityType="Model.EnumerationEntryEfImpl" />
+    <EntitySet Name="EventEfImpl" EntityType="Model.EventEfImpl" />
+    <EntitySet Name="Event_Rights" EntityType="Model.Event_Rights" />
+    <AssociationSet Name="FK_Events_Rights" Association="Model.FK_Events_Rights">
+      <End Role="Event" EntitySet="EventEfImpl" />
+      <End Role="Event_Rights" EntitySet="Event_Rights" />
+    </AssociationSet>
     <EntitySet Name="ExceptionLogEntryEfImpl" EntityType="Model.ExceptionLogEntryEfImpl" />
     <EntitySet Name="FileEfImpl" EntityType="Model.FileEfImpl" />
     <EntitySet Name="FileImportConfigurationEfImpl" EntityType="Model.FileImportConfigurationEfImpl" />
@@ -116,6 +128,42 @@
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.FK_CalculatedReference_dependsOn_InputProperties_B" >
       <End Role="InputProperties" EntitySet="PropertyEfImpl" />
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl" />
+    </AssociationSet>
+    <EntitySet Name="Calendar_shared_r_Group_RelationEntryEfImpl" EntityType="Model.Calendar_shared_r_Group_RelationEntryEfImpl" />
+    <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_A" Association="Model.FK_Calendar_shared_r_GroupReaders_A" >
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Group_RelationEntryEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_B" Association="Model.FK_Calendar_shared_r_GroupReaders_B" >
+      <End Role="GroupReaders" EntitySet="GroupEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Group_RelationEntryEfImpl" />
+    </AssociationSet>
+    <EntitySet Name="Calendar_shared_r_Identity_RelationEntryEfImpl" EntityType="Model.Calendar_shared_r_Identity_RelationEntryEfImpl" />
+    <AssociationSet Name="FK_Calendar_shared_r_Readers_A" Association="Model.FK_Calendar_shared_r_Readers_A" >
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Identity_RelationEntryEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_r_Readers_B" Association="Model.FK_Calendar_shared_r_Readers_B" >
+      <End Role="Readers" EntitySet="IdentityEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Identity_RelationEntryEfImpl" />
+    </AssociationSet>
+    <EntitySet Name="Calendar_shared_w_Group_RelationEntryEfImpl" EntityType="Model.Calendar_shared_w_Group_RelationEntryEfImpl" />
+    <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_A" Association="Model.FK_Calendar_shared_w_GroupWriters_A" >
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Group_RelationEntryEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_B" Association="Model.FK_Calendar_shared_w_GroupWriters_B" >
+      <End Role="GroupWriters" EntitySet="GroupEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Group_RelationEntryEfImpl" />
+    </AssociationSet>
+    <EntitySet Name="Calendar_shared_w_Identity_RelationEntryEfImpl" EntityType="Model.Calendar_shared_w_Identity_RelationEntryEfImpl" />
+    <AssociationSet Name="FK_Calendar_shared_w_Writers_A" Association="Model.FK_Calendar_shared_w_Writers_A" >
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Identity_RelationEntryEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_w_Writers_B" Association="Model.FK_Calendar_shared_w_Writers_B" >
+      <End Role="Writers" EntitySet="IdentityEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Identity_RelationEntryEfImpl" />
     </AssociationSet>
     <EntitySet Name="DataType_implements_Interface_RelationEntryEfImpl" EntityType="Model.DataType_implements_Interface_RelationEntryEfImpl" />
     <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_A" Association="Model.FK_DataType_implements_ImplementedInterfaces_A" >
@@ -400,6 +448,18 @@
       <End Role="CalculatedReference" EntitySet="PropertyEfImpl" />
       <End Role="ReferencedClass" EntitySet="DataTypeEfImpl" />
     </AssociationSet>
+    <AssociationSet Name="FK_Calendar_has_Owner" Association="Model.FK_Calendar_has_Owner" >
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+      <End Role="Owner" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_was_ChangedBy" Association="Model.FK_Calendar_was_ChangedBy" >
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_was_CreatedBy" Association="Model.FK_Calendar_was_CreatedBy" >
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
     <AssociationSet Name="FK_Child_allow_Identity" Association="Model.FK_Child_allow_Identity" >
       <End Role="Child" EntitySet="SecurityTestChildEfImpl" />
       <End Role="Identity" EntitySet="IdentityEfImpl" />
@@ -523,6 +583,18 @@
     <AssociationSet Name="FK_EnumParameter_has_Enumeration" Association="Model.FK_EnumParameter_has_Enumeration" >
       <End Role="EnumParameter" EntitySet="BaseParameterEfImpl" />
       <End Role="Enumeration" EntitySet="DataTypeEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_of_Calendar" Association="Model.FK_Event_of_Calendar" >
+      <End Role="Event" EntitySet="EventEfImpl" />
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_was_ChangedBy" Association="Model.FK_Event_was_ChangedBy" >
+      <End Role="Event" EntitySet="EventEfImpl" />
+      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_was_CreatedBy" Association="Model.FK_Event_was_CreatedBy" >
+      <End Role="Event" EntitySet="EventEfImpl" />
+      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_File_has_Blob" Association="Model.FK_File_has_Blob" >
       <End Role="File" EntitySet="FileEfImpl" />
@@ -1300,6 +1372,68 @@
     <Property Name="OriginalName" Type="String" Nullable="false" MaxLength="500"  />
     <Property Name="StoragePath" Type="String" Nullable="false" MaxLength="500"  />
   </EntityType>
+  <EntityType Name="CalendarEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedByImpl"
+                        Relationship="Model.FK_Calendar_was_ChangedBy"
+                        FromRole="Calendar"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <NavigationProperty Name="CreatedByImpl"
+                        Relationship="Model.FK_Calendar_was_CreatedBy"
+                        FromRole="Calendar"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <NavigationProperty Name="GroupReadersImpl"
+                        Relationship="Model.FK_Calendar_shared_r_GroupReaders_A"
+                        FromRole="Calendar"
+                        ToRole="CollectionEntry" />
+    <NavigationProperty Name="GroupWritersImpl"
+                        Relationship="Model.FK_Calendar_shared_w_GroupWriters_A"
+                        FromRole="Calendar"
+                        ToRole="CollectionEntry" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
+    <NavigationProperty Name="OwnerImpl"
+                        Relationship="Model.FK_Calendar_has_Owner"
+                        FromRole="Calendar"
+                        ToRole="Owner" />
+    <NavigationProperty Name="ReadersImpl"
+                        Relationship="Model.FK_Calendar_shared_r_Readers_A"
+                        FromRole="Calendar"
+                        ToRole="CollectionEntry" />
+    <NavigationProperty Name="WritersImpl"
+                        Relationship="Model.FK_Calendar_shared_w_Writers_A"
+                        FromRole="Calendar"
+                        ToRole="CollectionEntry" />
+    <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_Calendars_Rights" FromRole="Calendar" ToRole="Calendar_Rights" />
+  </EntityType>
+  <EntityType Name="Calendar_Rights">
+    <Key>
+	  <PropertyRef Name="ID" />
+	  <PropertyRef Name="Identity" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Identity" Type="Int32" Nullable="false" />
+    <Property Name="Right" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Calendars_Rights">
+    <End Role="Calendar" Type="Model.CalendarEfImpl" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Calendar_Rights" Type="Model.Calendar_Rights" Multiplicity="*" />
+    <ReferentialConstraint>
+	  <Principal Role="Calendar">
+	    <PropertyRef Name="ID" />
+	  </Principal>
+	  <Dependent Role="Calendar_Rights">
+	    <PropertyRef Name="ID" />
+	  </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="CompanyEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -1307,7 +1441,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="1000"  />
   </EntityType>
-  <EntityType Name="ConstraintEfImpl">
+  <EntityType Name="ConstraintEfImpl" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1474,6 +1608,57 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
     <Property Name="Value" Type="Int32" Nullable="false"  />
   </EntityType>
+  <EntityType Name="EventEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Body" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <NavigationProperty Name="CalendarImpl"
+                        Relationship="Model.FK_Event_of_Calendar"
+                        FromRole="Event"
+                        ToRole="Calendar" />
+    <NavigationProperty Name="ChangedByImpl"
+                        Relationship="Model.FK_Event_was_ChangedBy"
+                        FromRole="Event"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <NavigationProperty Name="CreatedByImpl"
+                        Relationship="Model.FK_Event_was_CreatedBy"
+                        FromRole="Event"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="EndDate" Type="DateTime" Nullable="false"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <Property Name="IsAllDay" Type="Boolean" Nullable="false"  />
+    <Property Name="Location" Type="String" Nullable="true" MaxLength="200"  />
+    <Property Name="StartDate" Type="DateTime" Nullable="false"  />
+    <Property Name="Summary" Type="String" Nullable="false" MaxLength="200"  />
+    <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_Events_Rights" FromRole="Event" ToRole="Event_Rights" />
+  </EntityType>
+  <EntityType Name="Event_Rights">
+    <Key>
+	  <PropertyRef Name="ID" />
+	  <PropertyRef Name="Identity" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Identity" Type="Int32" Nullable="false" />
+    <Property Name="Right" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Events_Rights">
+    <End Role="Event" Type="Model.EventEfImpl" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Event_Rights" Type="Model.Event_Rights" Multiplicity="*" />
+    <ReferentialConstraint>
+	  <Principal Role="Event">
+	    <PropertyRef Name="ID" />
+	  </Principal>
+	  <Dependent Role="Event_Rights">
+	    <PropertyRef Name="ID" />
+	  </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="ExceptionLogEntryEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -1623,7 +1808,7 @@
     <Property Name="Password" Type="String" Nullable="true" MaxLength="100"  />
     <Property Name="UserName" Type="String" Nullable="true" MaxLength="100"  />
   </EntityType>
-  <EntityType Name="InstanceConstraintEfImpl">
+  <EntityType Name="InstanceConstraintEfImpl" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3263,6 +3448,176 @@
   </Association>
   
   <!--
+    Relation: FK_Calendar_shared_r_GroupReaders
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Group as GroupReaders
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="Calendar_shared_r_Group_RelationEntryEfImpl" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="AImpl"
+                        Relationship="Model.FK_Calendar_shared_r_GroupReaders_A"
+                        FromRole="CollectionEntry"
+                        ToRole="Calendar" />
+
+    <!-- B -->
+    <NavigationProperty Name="BImpl"
+                        Relationship="Model.FK_Calendar_shared_r_GroupReaders_B"
+                        FromRole="CollectionEntry"
+                        ToRole="GroupReaders" />
+  </EntityType>
+  <Association Name="FK_Calendar_shared_r_GroupReaders_A" >
+    <End Role="Calendar"
+         Type="Model.CalendarEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Calendar_shared_r_Group_RelationEntryEfImpl"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Calendar_shared_r_GroupReaders_B" >
+    <End Role="GroupReaders"
+         Type="Model.GroupEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Calendar_shared_r_Group_RelationEntryEfImpl"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_Calendar_shared_r_Readers
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Identity as Readers
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="Calendar_shared_r_Identity_RelationEntryEfImpl" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="AImpl"
+                        Relationship="Model.FK_Calendar_shared_r_Readers_A"
+                        FromRole="CollectionEntry"
+                        ToRole="Calendar" />
+
+    <!-- B -->
+    <NavigationProperty Name="BImpl"
+                        Relationship="Model.FK_Calendar_shared_r_Readers_B"
+                        FromRole="CollectionEntry"
+                        ToRole="Readers" />
+  </EntityType>
+  <Association Name="FK_Calendar_shared_r_Readers_A" >
+    <End Role="Calendar"
+         Type="Model.CalendarEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Calendar_shared_r_Identity_RelationEntryEfImpl"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Calendar_shared_r_Readers_B" >
+    <End Role="Readers"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Calendar_shared_r_Identity_RelationEntryEfImpl"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_Calendar_shared_w_GroupWriters
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Group as GroupWriters
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="Calendar_shared_w_Group_RelationEntryEfImpl" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="AImpl"
+                        Relationship="Model.FK_Calendar_shared_w_GroupWriters_A"
+                        FromRole="CollectionEntry"
+                        ToRole="Calendar" />
+
+    <!-- B -->
+    <NavigationProperty Name="BImpl"
+                        Relationship="Model.FK_Calendar_shared_w_GroupWriters_B"
+                        FromRole="CollectionEntry"
+                        ToRole="GroupWriters" />
+  </EntityType>
+  <Association Name="FK_Calendar_shared_w_GroupWriters_A" >
+    <End Role="Calendar"
+         Type="Model.CalendarEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Calendar_shared_w_Group_RelationEntryEfImpl"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Calendar_shared_w_GroupWriters_B" >
+    <End Role="GroupWriters"
+         Type="Model.GroupEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Calendar_shared_w_Group_RelationEntryEfImpl"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_Calendar_shared_w_Writers
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Identity as Writers
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="Calendar_shared_w_Identity_RelationEntryEfImpl" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="AImpl"
+                        Relationship="Model.FK_Calendar_shared_w_Writers_A"
+                        FromRole="CollectionEntry"
+                        ToRole="Calendar" />
+
+    <!-- B -->
+    <NavigationProperty Name="BImpl"
+                        Relationship="Model.FK_Calendar_shared_w_Writers_B"
+                        FromRole="CollectionEntry"
+                        ToRole="Writers" />
+  </EntityType>
+  <Association Name="FK_Calendar_shared_w_Writers_A" >
+    <End Role="Calendar"
+         Type="Model.CalendarEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Calendar_shared_w_Identity_RelationEntryEfImpl"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Calendar_shared_w_Writers_B" >
+    <End Role="Writers"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Calendar_shared_w_Identity_RelationEntryEfImpl"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
     Relation: FK_DataType_implements_ImplementedInterfaces
     A: ZeroOrMore DataType as DataType
     B: ZeroOrMore Interface as ImplementedInterfaces
@@ -4308,6 +4663,30 @@
          Type="Model.ObjectClassEfImpl" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_Calendar_has_Owner" >
+    <End Role="Calendar"
+         Type="Model.CalendarEfImpl" 
+         Multiplicity="*" />
+    <End Role="Owner"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Calendar_was_ChangedBy" >
+    <End Role="Calendar"
+         Type="Model.CalendarEfImpl" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Calendar_was_CreatedBy" >
+    <End Role="Calendar"
+         Type="Model.CalendarEfImpl" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Child_allow_Identity" >
     <End Role="Child"
          Type="Model.SecurityTestChildEfImpl" 
@@ -4554,6 +4933,30 @@
          Multiplicity="*" />
     <End Role="Enumeration"
          Type="Model.EnumerationEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Event_of_Calendar" >
+    <End Role="Event"
+         Type="Model.EventEfImpl" 
+         Multiplicity="*" />
+    <End Role="Calendar"
+         Type="Model.CalendarEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Event_was_ChangedBy" >
+    <End Role="Event"
+         Type="Model.EventEfImpl" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Event_was_CreatedBy" >
+    <End Role="Event"
+         Type="Model.EventEfImpl" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_File_has_Blob" >

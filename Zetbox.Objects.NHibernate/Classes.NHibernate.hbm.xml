@@ -1,6 +1,186 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update">
+    <class name="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`calendar`"
+           table="`Calendars`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`Calendars_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=Calendar_shared_r_Group_RelationEntry -->
+        <!-- relEnd=Calendar otherEnd=GroupReaders -->
+        <set name="GroupReaders" table="`Calendar_shared_r_GroupReaders`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_Calendar`" />
+            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl+Calendar_shared_r_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=Calendar_shared_w_Group_RelationEntry -->
+        <!-- relEnd=Calendar otherEnd=GroupWriters -->
+        <set name="GroupWriters" table="`Calendar_shared_w_GroupWriters`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_Calendar`" />
+            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl+Calendar_shared_w_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Owner" column="`fk_Owner`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=Calendar_shared_r_Identity_RelationEntry -->
+        <!-- relEnd=Calendar otherEnd=Readers -->
+        <set name="Readers" table="`Calendar_shared_r_Readers`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_Calendar`" />
+            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl+Calendar_shared_r_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=Calendar_shared_w_Identity_RelationEntry -->
+        <!-- relEnd=Calendar otherEnd=Writers -->
+        <set name="Writers" table="`Calendar_shared_w_Writers`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_Calendar`" />
+            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl+Calendar_shared_w_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+
+        <!-- map rights -->
+        <set name="SecurityRightsCollectionImpl"
+             schema="`calendar`"
+             table="`Calendars_Rights`"
+             lazy="true"
+             fetch="select" 
+             batch-size="100" >
+            <key column="`ID`" />
+            <composite-element class="Zetbox.App.Calendar.Calendar_RightsNHibernateImpl, Zetbox.Objects.NHibernateImpl">
+                <property name="Identity" column="`Identity`" />
+                <property name="Right" column="`Right`" />
+            </composite-element>
+        </set>
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.Calendar.EventNHibernateImpl+EventProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.EventNHibernateImpl+EventProxy, Zetbox.Objects.NHibernateImpl"
+           discriminator-value="calendar.Events"
+           schema="`calendar`"
+           table="`Events`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`Events_ID_seq`</param>
+            </generator>
+        </id>
+        <discriminator column="`__Discriminator`"
+                       type="String" />
+
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Body" 
+                  column="`Body`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EndDate" type="Timestamp"
+                  column="`EndDate`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsAllDay" 
+                  column="`IsAllDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Location" 
+                  column="`Location`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StartDate" type="Timestamp"
+                  column="`StartDate`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Summary" 
+                  column="`Summary`" 
+                  optimistic-lock="false"/>
+
+        <!-- map rights -->
+        <set name="SecurityRightsCollectionImpl"
+             schema="`calendar`"
+             table="`Events_Rights`"
+             lazy="true"
+             fetch="select" 
+             batch-size="100" >
+            <key column="`ID`" />
+            <composite-element class="Zetbox.App.Calendar.Event_RightsNHibernateImpl, Zetbox.Objects.NHibernateImpl">
+                <property name="Identity" column="`Identity`" />
+                <property name="Right" column="`Right`" />
+            </composite-element>
+        </set>
+
+        <!-- define the subclasses -->
+
+    </class>
     <class name="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl"
            schema="`calendar`"
@@ -3567,7 +3747,7 @@
            discriminator-value="base.Constraints"
            schema="`base`"
            table="`Constraints`"
-           abstract="false"
+           abstract="true"
            dynamic-update="true"
            optimistic-lock="dirty"
            batch-size="100">
@@ -4400,7 +4580,7 @@
            proxy="Zetbox.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`InstanceConstraint`"
-           abstract="false"
+           abstract="true"
            dynamic-update="false"
            optimistic-lock="none"
            batch-size="100">

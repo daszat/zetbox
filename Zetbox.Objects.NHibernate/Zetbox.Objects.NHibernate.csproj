@@ -149,6 +149,7 @@
     <Compile Include="BoolParameter.NHibernate.Designer.cs" />
     <Compile Include="BoolProperty.NHibernate.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.NHibernate.Designer.cs" />
+    <Compile Include="Calendar.NHibernate.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.NHibernate.Designer.cs" />
     <Compile Include="CLRObjectParameter.NHibernate.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.NHibernate.Designer.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="EnumerationEntry.NHibernate.Designer.cs" />
     <Compile Include="EnumerationProperty.NHibernate.Designer.cs" />
     <Compile Include="EnumParameter.NHibernate.Designer.cs" />
+    <Compile Include="Event.NHibernate.Designer.cs" />
     <Compile Include="ExceptionLogEntry.NHibernate.Designer.cs" />
     <Compile Include="File.NHibernate.Designer.cs" />
     <Compile Include="FileImportConfiguration.NHibernate.Designer.cs" />

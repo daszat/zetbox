@@ -16694,7 +16694,7 @@ public static void ObjectIsValid(CalculatedObjectReferenceProperty obj, ObjectIs
     <ZetboxBase:TableName>CalculatedObjectReferenceProperties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="87ccfb15-e731-448e-9a0a-3f8b73f767a7">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-09-08T05:41:24Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Item is readonly on client but changable on the server</ZetboxBase:Description>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -16737,7 +16737,7 @@ public static void ObjectIsValid(ClientReadOnlyConstraint obj, ObjectIsValidEven
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ClientReadOnlyConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="012dfab4-934b-443e-853a-11a5da5b0627">
@@ -16932,7 +16932,7 @@ public static void ObjectIsValid(CompoundObjectProperty obj, ObjectIsValidEventA
     <ZetboxBase:TableName>CompoundObjectProperties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="ac1d5ac9-d909-438f-a4f5-f64ea6904944">
-    <ZetboxBase:ChangedOn>2013-01-08T13:08:46.17706Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -16972,9 +16972,9 @@ public static void ObjectIsValid(Constraint obj, ObjectIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
     <ZetboxBase:TableName>Constraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
@@ -18186,7 +18186,7 @@ public static void ObjectIsValid(Identity obj, ObjectIsValidEventArgs e)
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
   </ZetboxBase:Interface>
   <ZetboxBase:ObjectClass ExportGuid="1d5a58e9-fba6-4ef8-b3b7-9966a4dcba83">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-06-01T10:45:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>IndexConstraint</ZetboxBase:Name>
@@ -18228,11 +18228,11 @@ public static void ObjectIsValid(IndexConstraint obj, ObjectIsValidEventArgs e)
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IndexConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="aa0a3dcf-fadf-4d53-8fbd-102a9770357c">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-09-08T05:42:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>The item can only be set during initialization</ZetboxBase:Description>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -18275,11 +18275,11 @@ public static void ObjectIsValid(InitOnlyConstraint obj, ObjectIsValidEventArgs 
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>InitOnlyConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="25a83f49-3cff-4baf-850d-8d185bb329ec">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-01-05T19:37:36Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>InstanceConstraint</ZetboxBase:Name>
@@ -18318,9 +18318,9 @@ public static void ObjectIsValid(InstanceConstraint obj, ObjectIsValidEventArgs 
 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultViewModelDescriptor>
-    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>InstanceConstraint</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="5295bddf-aecc-449e-92b9-1906a1499d62">
@@ -18371,7 +18371,7 @@ public static void ObjectIsValid(IntDefaultValue obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>IntDefaultValues</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="31b03f62-b0d6-49ab-81e9-f912077d4e49">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -18414,7 +18414,7 @@ public static void ObjectIsValid(IntegerRangeConstraint obj, ObjectIsValidEventA
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IntegerRangeConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="7ea88d99-88f0-44a7-b0a3-da725e57595d">
@@ -18562,7 +18562,7 @@ public static void ObjectIsValid(IntProperty obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>IntProperties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="f5965ba1-6d47-4a4a-a143-eff28d7c66ad">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-25T02:32:08Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -18605,11 +18605,11 @@ public static void ObjectIsValid(InvokingConstraint obj, ObjectIsValidEventArgs 
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>InvokingConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="ed8f30ad-186f-48ee-8dd5-a153d24dfada">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -18652,11 +18652,11 @@ public static void ObjectIsValid(IsValidIdentifierConstraint obj, ObjectIsValidE
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IsValidIdentifierConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="94916227-138b-49e5-b62e-b982a45a5c21">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -18699,7 +18699,7 @@ public static void ObjectIsValid(IsValidNamespaceConstraint obj, ObjectIsValidEv
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IsValidNamespaceConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="ef79c0b9-55e0-45ad-8233-1ff8f852661f">
@@ -18750,7 +18750,7 @@ public static void ObjectIsValid(Method obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Methods</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="2667704b-ea27-44ff-a6b2-0ef42ffccedc">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -18793,7 +18793,7 @@ public static void ObjectIsValid(MethodInvocationConstraint obj, ObjectIsValidEv
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>MethodInvocationConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="8a1ace7c-77f2-4b48-9b0b-bcb68c660d11">
@@ -18903,7 +18903,7 @@ public static void ObjectIsValid(NewGuidDefaultValue obj, ObjectIsValidEventArgs
     <ZetboxBase:TableName>NewGuidDefaultValues</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="8604ef0c-f933-4f66-b7df-21d27c9003b2">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -18946,7 +18946,7 @@ public static void ObjectIsValid(NotNullableConstraint obj, ObjectIsValidEventAr
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>NotNullableConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="20888dfc-1fbc-47c8-9f3c-c6a30a5c0048">
@@ -19190,7 +19190,7 @@ public static void ObjectIsValid(Property obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Properties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="c83424ff-71bd-449a-81c7-4b6439fa28c6">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-09-08T05:39:17Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Abstract base class for read only constraints</ZetboxBase:Description>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -19233,7 +19233,7 @@ public static void ObjectIsValid(ReadOnlyConstraint obj, ObjectIsValidEventArgs 
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ReadOnlyConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:CompoundObject ExportGuid="3d4ec88b-fe8e-452e-a71d-03143a75aeb0">
@@ -19678,7 +19678,7 @@ public static void ObjectIsValid(StringProperty obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>StringProperties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="7bb90dc3-2b8c-4cff-ba8e-435ff386a4cf">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -19721,7 +19721,7 @@ public static void ObjectIsValid(StringRangeConstraint obj, ObjectIsValidEventAr
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>StringRangeConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:Enumeration ExportGuid="99069ad4-268a-4375-90ff-346b70f077f1">
@@ -19831,7 +19831,7 @@ public static void ObjectIsValid(ValueTypeProperty obj, ObjectIsValidEventArgs e
     <ZetboxBase:TableName>ValueTypeProperties</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="3ccd892a-17f7-4cf5-95bd-b25b3f6fa785">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-18T16:32:28.897544Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-09-08T05:40:34Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Item is readonly in view but changable on the server/client</ZetboxBase:Description>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -19874,7 +19874,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ViewReadOnlyConstraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="003de5e3-31fd-4b97-9756-d18cecf441e6">

@@ -22,6 +22,76 @@
                      column="`fk_InputProperties`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
+    <class name="Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl+Calendar_shared_r_Group_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl+Calendar_shared_r_Group_RelationEntryProxy"
+           table="`Calendar_shared_r_GroupReaders`"
+           schema="`calendar`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`Calendar_shared_r_GroupReaders_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Calendar`" />
+        <many-to-one name="B"
+                     column="`fk_GroupReaders`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl+Calendar_shared_r_Identity_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl+Calendar_shared_r_Identity_RelationEntryProxy"
+           table="`Calendar_shared_r_Readers`"
+           schema="`calendar`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`Calendar_shared_r_Readers_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Calendar`" />
+        <many-to-one name="B"
+                     column="`fk_Readers`" />
+    </class>
+    <class name="Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl+Calendar_shared_w_Group_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl+Calendar_shared_w_Group_RelationEntryProxy"
+           table="`Calendar_shared_w_GroupWriters`"
+           schema="`calendar`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`Calendar_shared_w_GroupWriters_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Calendar`" />
+        <many-to-one name="B"
+                     column="`fk_GroupWriters`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl+Calendar_shared_w_Identity_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl+Calendar_shared_w_Identity_RelationEntryProxy"
+           table="`Calendar_shared_w_Writers`"
+           schema="`calendar`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`Calendar_shared_w_Writers_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Calendar`" />
+        <many-to-one name="B"
+                     column="`fk_Writers`" />
+    </class>
     <class name="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
            proxy="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
            table="`DataType_implements_ImplementedInterfaces`"

@@ -23,6 +23,12 @@
     </AssociationSet>
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Schema="base" Table="BaseParameters"/>
     <EntitySet Name="Blob" EntityType="Model.Store.Blob" Schema="base" Table="Blobs"/>
+    <EntitySet Name="Calendar" EntityType="Model.Store.Calendar" Schema="calendar" Table="Calendars"/>
+    <EntitySet Name="Calendar_Rights" EntityType="Model.Store.Calendar_Rights" Schema="calendar" Table="Calendars_Rights"/>
+    <AssociationSet Name="FK_Calendars_Rights" Association="Model.Store.FK_Calendars_Rights">
+      <End Role="Calendar" EntitySet="Calendar" />
+      <End Role="Calendar_Rights" EntitySet="Calendar_Rights" />
+    </AssociationSet>
     <EntitySet Name="Company" EntityType="Model.Store.Company" Schema="test" Table="Companies"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Schema="base" Table="Constraints"/>
     <EntitySet Name="ConstraintInvocation" EntityType="Model.Store.ConstraintInvocation" Schema="base" Table="ConstraintInvocations"/>
@@ -32,6 +38,12 @@
     <EntitySet Name="DeactivatableTestObject" EntityType="Model.Store.DeactivatableTestObject" Schema="test" Table="DeactivatableTestObjects"/>
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.Store.DefaultPropertyValue" Schema="base" Table="DefaultPropertyValues"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Schema="base" Table="EnumerationEntries"/>
+    <EntitySet Name="Event" EntityType="Model.Store.Event" Schema="calendar" Table="Events"/>
+    <EntitySet Name="Event_Rights" EntityType="Model.Store.Event_Rights" Schema="calendar" Table="Events_Rights"/>
+    <AssociationSet Name="FK_Events_Rights" Association="Model.Store.FK_Events_Rights">
+      <End Role="Event" EntitySet="Event" />
+      <End Role="Event_Rights" EntitySet="Event_Rights" />
+    </AssociationSet>
     <EntitySet Name="ExceptionLogEntry" EntityType="Model.Store.ExceptionLogEntry" Schema="base" Table="ExceptionLog"/>
     <EntitySet Name="File" EntityType="Model.Store.File" Schema="doc" Table="Files"/>
     <EntitySet Name="FileImportConfiguration" EntityType="Model.Store.FileImportConfiguration" Schema="doc" Table="FileImportConfigurations"/>
@@ -220,6 +232,70 @@
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.Store.FK_CalculatedReference_dependsOn_InputProperties_B" >
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
       <End Role="InputProperties" EntitySet="Property" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Calendar_shared_r_GroupReaders
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Group as GroupReaders
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="Calendar_shared_r_Group_RelationEntry" EntityType="Model.Store.Calendar_shared_r_Group_RelationEntry" Schema="calendar" Table="Calendar_shared_r_GroupReaders" />
+    <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_A" Association="Model.Store.FK_Calendar_shared_r_GroupReaders_A" >
+      <End Role="Calendar" EntitySet="Calendar" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Group_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_B" Association="Model.Store.FK_Calendar_shared_r_GroupReaders_B" >
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Group_RelationEntry" />
+      <End Role="GroupReaders" EntitySet="Group" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Calendar_shared_r_Readers
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Identity as Readers
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="Calendar_shared_r_Identity_RelationEntry" EntityType="Model.Store.Calendar_shared_r_Identity_RelationEntry" Schema="calendar" Table="Calendar_shared_r_Readers" />
+    <AssociationSet Name="FK_Calendar_shared_r_Readers_A" Association="Model.Store.FK_Calendar_shared_r_Readers_A" >
+      <End Role="Calendar" EntitySet="Calendar" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Identity_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_r_Readers_B" Association="Model.Store.FK_Calendar_shared_r_Readers_B" >
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Identity_RelationEntry" />
+      <End Role="Readers" EntitySet="Identity" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Calendar_shared_w_GroupWriters
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Group as GroupWriters
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="Calendar_shared_w_Group_RelationEntry" EntityType="Model.Store.Calendar_shared_w_Group_RelationEntry" Schema="calendar" Table="Calendar_shared_w_GroupWriters" />
+    <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_A" Association="Model.Store.FK_Calendar_shared_w_GroupWriters_A" >
+      <End Role="Calendar" EntitySet="Calendar" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Group_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_B" Association="Model.Store.FK_Calendar_shared_w_GroupWriters_B" >
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Group_RelationEntry" />
+      <End Role="GroupWriters" EntitySet="Group" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Calendar_shared_w_Writers
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Identity as Writers
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="Calendar_shared_w_Identity_RelationEntry" EntityType="Model.Store.Calendar_shared_w_Identity_RelationEntry" Schema="calendar" Table="Calendar_shared_w_Writers" />
+    <AssociationSet Name="FK_Calendar_shared_w_Writers_A" Association="Model.Store.FK_Calendar_shared_w_Writers_A" >
+      <End Role="Calendar" EntitySet="Calendar" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Identity_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_w_Writers_B" Association="Model.Store.FK_Calendar_shared_w_Writers_B" >
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Identity_RelationEntry" />
+      <End Role="Writers" EntitySet="Identity" />
     </AssociationSet>
     
     <!-- 
@@ -601,6 +677,18 @@
       <End Role="CalculatedReference" EntitySet="Property" />
       <End Role="ReferencedClass" EntitySet="ObjectClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_Calendar_has_Owner" Association="Model.Store.FK_Calendar_has_Owner" >
+      <End Role="Calendar" EntitySet="Calendar" />
+      <End Role="Owner" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_was_ChangedBy" Association="Model.Store.FK_Calendar_was_ChangedBy" >
+      <End Role="Calendar" EntitySet="Calendar" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_was_CreatedBy" Association="Model.Store.FK_Calendar_was_CreatedBy" >
+      <End Role="Calendar" EntitySet="Calendar" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Child_allow_Identity" Association="Model.Store.FK_Child_allow_Identity" >
       <End Role="Child" EntitySet="SecurityTestChild" />
       <End Role="Identity" EntitySet="Identity" />
@@ -724,6 +812,18 @@
     <AssociationSet Name="FK_EnumParameter_has_Enumeration" Association="Model.Store.FK_EnumParameter_has_Enumeration" >
       <End Role="EnumParameter" EntitySet="BaseParameter" />
       <End Role="Enumeration" EntitySet="Enumeration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_of_Calendar" Association="Model.Store.FK_Event_of_Calendar" >
+      <End Role="Event" EntitySet="Event" />
+      <End Role="Calendar" EntitySet="Calendar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_was_ChangedBy" Association="Model.Store.FK_Event_was_ChangedBy" >
+      <End Role="Event" EntitySet="Event" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_was_CreatedBy" Association="Model.Store.FK_Event_was_CreatedBy" >
+      <End Role="Event" EntitySet="Event" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_File_has_Blob" Association="Model.Store.FK_File_has_Blob" >
       <End Role="File" EntitySet="File" />
@@ -1461,6 +1561,43 @@
     <Property Name="StoragePath" Type="varchar" MaxLength="500" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="Calendar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Owner" Type="int4" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+    <EntityType Name="Calendar_Rights">
+      <Key>
+        <PropertyRef Name="ID" />
+        <PropertyRef Name="Identity" />
+      </Key>
+      <Property Name="ID" Type="int4" Nullable="false" />
+      <Property Name="Identity" Type="int4" Nullable="false" />
+      <Property Name="Right" Type="int4" Nullable="false" />
+    </EntityType>
+    <Association Name="FK_Calendars_Rights">
+      <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="Calendar_Rights" Type="Model.Store.Calendar_Rights" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="Calendar">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="Calendar_Rights">
+          <PropertyRef Name="ID" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+	
   <EntityType Name="Company">
     <Key>
       <PropertyRef Name="ID" />
@@ -1616,6 +1753,49 @@
     <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Value" Type="int4" Nullable="false" />
   </EntityType>
+	
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="__Discriminator" Type="varchar" Nullable="false" />
+    <Property Name="fk_Calendar" Type="int4" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="Body" Type="varchar" Nullable="true" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="EndDate" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="IsAllDay" Type="bool" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="200" Nullable="true" />
+    <Property Name="StartDate" Type="timestamp" Nullable="false" />
+    <Property Name="Summary" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+    <EntityType Name="Event_Rights">
+      <Key>
+        <PropertyRef Name="ID" />
+        <PropertyRef Name="Identity" />
+      </Key>
+      <Property Name="ID" Type="int4" Nullable="false" />
+      <Property Name="Identity" Type="int4" Nullable="false" />
+      <Property Name="Right" Type="int4" Nullable="false" />
+    </EntityType>
+    <Association Name="FK_Events_Rights">
+      <End Role="Event" Type="Model.Store.Event" Multiplicity="1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="Event_Rights" Type="Model.Store.Event_Rights" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="Event">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="Event_Rights">
+          <PropertyRef Name="ID" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
 	
   <EntityType Name="ExceptionLogEntry">
     <Key>
@@ -2681,6 +2861,160 @@
   </Association>
 
 	
+  <EntityType Name="Calendar_shared_r_Group_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="fk_Calendar" Type="int4" Nullable="true" />
+    <Property Name="fk_GroupReaders" Type="int4" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_r_GroupReaders_A">
+    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_r_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_r_GroupReaders_B">
+    <End Role="GroupReaders" Type="Model.Store.Group" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_r_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupReaders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_GroupReaders" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="Calendar_shared_r_Identity_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Calendar" Type="int4" Nullable="true" />
+    <Property Name="fk_Readers" Type="int4" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_r_Readers_A">
+    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_r_Identity_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_r_Readers_B">
+    <End Role="Readers" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_r_Identity_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Readers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Readers" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="Calendar_shared_w_Group_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="fk_Calendar" Type="int4" Nullable="true" />
+    <Property Name="fk_GroupWriters" Type="int4" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_w_GroupWriters_A">
+    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_w_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_w_GroupWriters_B">
+    <End Role="GroupWriters" Type="Model.Store.Group" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_w_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupWriters">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_GroupWriters" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="Calendar_shared_w_Identity_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Calendar" Type="int4" Nullable="true" />
+    <Property Name="fk_Writers" Type="int4" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_w_Writers_A">
+    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_w_Identity_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_w_Writers_B">
+    <End Role="Writers" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_w_Identity_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Writers" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
   <EntityType Name="DataType_implements_Interface_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -3715,6 +4049,48 @@
   </Association>
 
 
+  <Association Name="FK_Calendar_has_Owner">
+    <End Role="Owner" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owner">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Calendar">
+        <PropertyRef Name="fk_Owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Calendar_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Calendar">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Calendar_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Calendar">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Child_allow_Identity">
     <End Role="Identity" Type="Model.Store.Identity" Multiplicity="0..1" />
     <End Role="Child" Type="Model.Store.SecurityTestChild" Multiplicity="*" />
@@ -4144,6 +4520,48 @@
       </Principal>
       <Dependent Role="EnumParameter">
         <PropertyRef Name="EnumParameters_fk_Enumeration" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Event_of_Calendar">
+    <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="0..1" />
+    <End Role="Event" Type="Model.Store.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Event_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Event" Type="Model.Store.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Event_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Event" Type="Model.Store.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

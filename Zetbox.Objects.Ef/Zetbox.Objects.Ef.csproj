@@ -137,6 +137,7 @@
     <Compile Include="BoolParameter.Ef.Designer.cs" />
     <Compile Include="BoolProperty.Ef.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Ef.Designer.cs" />
+    <Compile Include="Calendar.Ef.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="CLRObjectParameter.Ef.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.Ef.Designer.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="EnumerationEntry.Ef.Designer.cs" />
     <Compile Include="EnumerationProperty.Ef.Designer.cs" />
     <Compile Include="EnumParameter.Ef.Designer.cs" />
+    <Compile Include="Event.Ef.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Ef.Designer.cs" />
     <Compile Include="File.Ef.Designer.cs" />
     <Compile Include="FileImportConfiguration.Ef.Designer.cs" />

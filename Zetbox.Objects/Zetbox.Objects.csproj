@@ -108,6 +108,7 @@
     <Compile Include="BoolParameter.Interface.Designer.cs" />
     <Compile Include="BoolProperty.Interface.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Interface.Designer.cs" />
+    <Compile Include="Calendar.Interface.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Interface.Designer.cs" />
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.Interface.Designer.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="EnumerationEntry.Interface.Designer.cs" />
     <Compile Include="EnumerationProperty.Interface.Designer.cs" />
     <Compile Include="EnumParameter.Interface.Designer.cs" />
+    <Compile Include="Event.Interface.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Interface.Designer.cs" />
     <Compile Include="File.Interface.Designer.cs" />
     <Compile Include="FileImportConfiguration.Interface.Designer.cs" />

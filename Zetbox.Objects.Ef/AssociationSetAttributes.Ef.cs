@@ -434,6 +434,123 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_Calendar_has_Owner
+    A: ZeroOrMore Calendar as Calendar
+    B: One Identity as Owner
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Calendar_has_Owner",
+    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "Owner", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Calendar_shared_r_GroupReaders
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Group as GroupReaders
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_r_GroupReaders_A",
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_r_GroupReaders_B",
+    "GroupReaders", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.GroupEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryEfImpl)
+    )]
+
+	/*
+    Relation: FK_Calendar_shared_r_Readers
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Identity as Readers
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_r_Readers_A",
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_r_Readers_B",
+    "Readers", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryEfImpl)
+    )]
+
+	/*
+    Relation: FK_Calendar_shared_w_GroupWriters
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Group as GroupWriters
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_w_GroupWriters_A",
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_w_GroupWriters_B",
+    "GroupWriters", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.GroupEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryEfImpl)
+    )]
+
+	/*
+    Relation: FK_Calendar_shared_w_Writers
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Identity as Writers
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_w_Writers_A",
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_w_Writers_B",
+    "Writers", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryEfImpl)
+    )]
+
+	/*
+    Relation: FK_Calendar_was_ChangedBy
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Calendar_was_ChangedBy",
+    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Calendar_was_CreatedBy
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Calendar_was_CreatedBy",
+    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Child_allow_Identity
     A: ZeroOrMore SecurityTestChild as Child
     B: One Identity as Identity
@@ -931,6 +1048,51 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_EnumParameter_has_Enumeration",
     "EnumParameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.EnumParameterEfImpl),
     "Enumeration", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.EnumerationEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Event_of_Calendar
+    A: ZeroOrMore Event as Event
+    B: One Calendar as Calendar
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Event_of_Calendar",
+    "Event", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.EventEfImpl),
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Event_was_ChangedBy
+    A: ZeroOrMore Event as Event
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Event_was_ChangedBy",
+    "Event", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.EventEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Event_was_CreatedBy
+    A: ZeroOrMore Event as Event
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Event_was_CreatedBy",
+    "Event", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.EventEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -3195,6 +3357,20 @@ using Zetbox.DalProvider.Ef;
 	"Auftrag_Rights", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
 	typeof(Zetbox.App.Projekte.Auftrag_RightsEfImpl))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Calendars_Rights", 
+	"Calendar", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
+	typeof(Zetbox.App.Calendar.CalendarEfImpl), 
+	"Calendar_Rights", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
+	typeof(Zetbox.App.Calendar.Calendar_RightsEfImpl))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Events_Rights", 
+	"Event", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
+	typeof(Zetbox.App.Calendar.EventEfImpl), 
+	"Event_Rights", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
+	typeof(Zetbox.App.Calendar.Event_RightsEfImpl))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Projekte_Rights", 
 	"Projekt", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
