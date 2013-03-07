@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-26T15:14:24Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-04T11:22:52Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -11431,6 +11431,12 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:ViewModelRef>5055641c-53a5-484b-b16f-2c203d05484f</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="6dace7b6-5ff2-4fb7-9b0b-328a16355986">
+    <GUI:DefaultEditorKind>8455ee76-f3c5-4d73-8d3f-d79200b95976</GUI:DefaultEditorKind>
+    <GUI:Description>NavScreenViewModel for testing next events summary display</GUI:Description>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:ViewModelRef>cbe8316e-491f-43be-a33d-2e93a8fbe2b8</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="62c6636c-0cd5-4081-9aaa-c044f05e8020">
     <GUI:ControlKind>aa843e93-7f18-45c5-8608-4470aba9f18a</GUI:ControlKind>
     <GUI:ControlRef>4f2b6801-1ca5-40bc-9b44-412a911907c5</GUI:ControlRef>
@@ -11440,6 +11446,12 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
   <GUI:ViewDescriptor ExportGuid="d2376da7-7632-496d-a2c6-ed5bc8545250">
     <GUI:ControlKind>b2be0e95-d69e-44ff-8d19-2ccd70da2512</GUI:ControlKind>
     <GUI:ControlRef>83fcfe5f-c8db-4ba3-87aa-36594602e3d8</GUI:ControlRef>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="02b7be0a-e2e2-4836-ac5b-dd370268a6ae">
+    <GUI:ControlKind>8455ee76-f3c5-4d73-8d3f-d79200b95976</GUI:ControlKind>
+    <GUI:ControlRef>0a55d134-2456-4858-9305-77e0c67cd16f</GUI:ControlRef>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -11514,6 +11526,15 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Children_pos>0</GUI:Children_pos>
     <GUI:Title>Invoices</GUI:Title>
     <GUI:ViewModelDescriptor>ebc13c2a-0375-46e6-9fc2-a4ee5afc3568</GUI:ViewModelDescriptor>
+  </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="0b4a070d-e10e-4909-927f-a1db9c433421">
+    <GUI:ChangedOn>2013-03-04T10:23:33.711051Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2013-03-04T10:23:33.711051Z</GUI:CreatedOn>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Parent>c727bd24-60b2-4ea9-901f-4d65672563a1</GUI:Parent>
+    <GUI:Children_pos>4</GUI:Children_pos>
+    <GUI:Title>Next Events</GUI:Title>
+    <GUI:ViewModelDescriptor>6dace7b6-5ff2-4fb7-9b0b-328a16355986</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
   <GUI:NavigationSearchScreen ExportGuid="4bea55e1-5b77-4e4c-93ee-0c61f9bcb69b">
     <GUI:ChangedOn>2012-08-21T11:03:12.337521Z</GUI:ChangedOn>
@@ -11630,6 +11651,11 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:B>e20bcbaa-6660-4a03-bc46-0690b7988c67</ZetboxBase:B>
     <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
   </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
+  <GUI:ControlKind ExportGuid="8455ee76-f3c5-4d73-8d3f-d79200b95976">
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Name>Zetbox.App.Test.NextEventsTestNavScreenDisplay</GUI:Name>
+    <GUI:Parent>b2be0e95-d69e-44ff-8d19-2ccd70da2512</GUI:Parent>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="aa843e93-7f18-45c5-8608-4470aba9f18a">
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Name>Zetbox.App.Test.NewEventTestDialog</GUI:Name>
