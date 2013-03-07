@@ -3414,6 +3414,12 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:Property>09cfc4e1-c106-46ec-825d-31226d8df335</ZetboxBase:Property>
     <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
   </ZetboxBase:BoolDefaultValue>
+  <GUI:ViewModelDescriptor ExportGuid="a78c6c62-e8ae-4625-852e-53f6a55b5d9e">
+    <GUI:DefaultEditorKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:DefaultEditorKind>
+    <GUI:Description>Workspace viewmodel for the calendar</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelRef>d34e8436-7415-477a-b43c-45aab82706db</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="7fbcbbdf-1821-47dc-9332-c0ae4f6a70a1">
     <GUI:DefaultEditorKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:DefaultEditorKind>
     <GUI:Description>ViewModel for Week Calendar Display</GUI:Description>
@@ -3426,6 +3432,12 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:ViewModelRef>bb7be5ef-4524-40ce-9bc0-999cde72ef36</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewDescriptor ExportGuid="0cde1819-061a-4552-911b-e979a57b8e69">
+    <GUI:ControlKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:ControlKind>
+    <GUI:ControlRef>48830a19-148c-4852-8cc2-d9a03fda07d4</GUI:ControlRef>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="cc2521f1-6368-4cc8-94f1-eb9e7080211b">
     <GUI:ControlKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:ControlKind>
     <GUI:ControlRef>ff78973f-bb78-47fd-ad8b-da3f1f06d77e</GUI:ControlRef>
@@ -3650,6 +3662,10 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:B>385c829b-02d6-48d0-8184-b3b5df6c25be</ZetboxBase:B>
     <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
   </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
+  <GUI:ControlKind ExportGuid="6bf65558-8687-492d-8fdc-f35fe928e647">
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Name>Zetbox.App.Calendar.CalendarWorkspaceDisplay</GUI:Name>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="df5134d6-18f1-43b9-96d3-9283bc2b09a8">
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Name>Zetbox.App.Calendar.WeekCalendarDisplay</GUI:Name>
@@ -13649,6 +13665,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>77ce1e5b-f244-4279-af13-b3e75b55f933</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:Assembly ExportGuid="7cb69b2a-fa97-4efa-bdfb-5e7e183c4a6b">
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>GraphSharp.Controls, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82</ZetboxBase:Name>
+  </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="c218dca0-cb1a-4d74-aaf0-0180604c4f4c">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:07.857986Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -13705,6 +13728,20 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>Zetbox.Client.WPF.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
   </ZetboxBase:Assembly>
+  <ZetboxBase:TypeRef ExportGuid="5b4205d1-8860-45f2-816c-78f01b42fce4">
+    <ZetboxBase:Assembly>7cb69b2a-fa97-4efa-bdfb-5e7e183c4a6b</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>GraphSharp.Controls.GraphCanvas</ZetboxBase:FullName>
+    <ZetboxBase:Parent>7b31af0f-f119-47c7-be66-b1c63e043b8f</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="30da93a6-247f-4b4d-bb0c-d29431d767ec">
+    <ZetboxBase:Assembly>7cb69b2a-fa97-4efa-bdfb-5e7e183c4a6b</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>GraphSharp.Controls.GraphLayout`3</ZetboxBase:FullName>
+    <ZetboxBase:Parent>5b4205d1-8860-45f2-816c-78f01b42fce4</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="c9a57c25-3cc3-456c-9127-8703072d0036">
     <ZetboxBase:Assembly>c218dca0-cb1a-4d74-aaf0-0180604c4f4c</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.143288Z</ZetboxBase:ChangedOn>
@@ -13783,6 +13820,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>System.Windows.Controls.DataTemplateSelector</ZetboxBase:FullName>
     <ZetboxBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>System.Windows.Controls.DataTemplateSelector</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="61d80f71-4f3e-45c8-9628-5cdd9bdf960b">
+    <ZetboxBase:Assembly>8ab0933e-9dda-4ae5-9cd8-d87aefe9b555</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>System.Windows.Controls.DockPanel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>7b31af0f-f119-47c7-be66-b1c63e043b8f</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="f7493cb1-e0cc-4be0-8626-ef9c58290af8">
     <ZetboxBase:Assembly>8ab0933e-9dda-4ae5-9cd8-d87aefe9b555</ZetboxBase:Assembly>
@@ -14151,6 +14195,12 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.GUI.ViewDescriptorAttribute</ZetboxBase:FullName>
     <ZetboxBase:Parent>8a98a781-9ada-4bea-8ea9-18a3046369a8</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.GUI.ViewDescriptorAttribute</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="5aa028a4-1ca1-44cd-bdfb-a43ab6799954">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:16.858637Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T09:05:16.858637Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.IZetboxContextExceptionHandler</ZetboxBase:FullName>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="3fc0507f-d0f8-41ca-9f24-02da16b7f478">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -14980,6 +15030,20 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.135287Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-05-28T04:26:56Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.Calendar.CalendarItemViewModel+Factory</ZetboxBase:FullName>
+    <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="d34e8436-7415-477a-b43c-45aab82706db">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:16.858637Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T09:05:16.858637Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.Calendar.CalendarWorkspaceViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>def10a59-ea6c-4adc-9c47-f9ad2cf44156</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="327d7aa5-863e-4b6c-88b7-28bf1f5ea969">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:16.858637Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T09:05:16.858637Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.Calendar.CalendarWorkspaceViewModel+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="ee1e100c-b8f6-40de-a4b4-0d631a0d4bd7">
@@ -18899,6 +18963,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.Calendar.CalendarLedger</ZetboxBase:FullName>
     <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="48830a19-148c-4852-8cc2-d9a03fda07d4">
+    <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.WPF.View.Calendar.CalendarWorkspaceDisplay</ZetboxBase:FullName>
+    <ZetboxBase:Parent>ee07bd36-41ee-43df-8099-f4dd0c355902</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="ff78973f-bb78-47fd-ad8b-da3f1f06d77e">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.125287Z</ZetboxBase:ChangedOn>
@@ -19075,10 +19146,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="f62bf5a2-943e-4ff7-b2f8-02546b2aed8a">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.144288Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.GridCells.StringValue</ZetboxBase:FullName>
-    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
+    <ZetboxBase:Parent>63bc0dd1-0823-4c5a-8357-a6c0a324e2da</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.WPF.View.GridCells.StringValue</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="7c38e2a6-75c1-4c2a-897b-f33573133b46">
@@ -19114,39 +19185,39 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="5b286939-6ef9-4804-b651-c6429df8f9c5">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.126287Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-07-24T10:02:03Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.GUI.NavigationScreenDisplay</ZetboxBase:FullName>
-    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
+    <ZetboxBase:Parent>4281d8b6-2a16-4e4b-8105-cd7063e92272</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.WPF.View.GUI.NavigationScreenDisplay</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="3d5d7029-9622-400c-bc17-5105ff4835ee">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-10-19T05:35:47.607347Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-10-19T05:35:47.607347Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.GUI.NavigationSearchScreenDisplay</ZetboxBase:FullName>
-    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
+    <ZetboxBase:Parent>4281d8b6-2a16-4e4b-8105-cd7063e92272</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="cd8a2a4b-eae1-4586-a036-66100a2e92a8">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2012-08-21T10:24:21.822223Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-08-21T10:24:21.822223Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.GUI.NavigationTabbedLeftScreenDisplay</ZetboxBase:FullName>
-    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
+    <ZetboxBase:Parent>4281d8b6-2a16-4e4b-8105-cd7063e92272</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="c563f05a-fc75-44db-9438-60dbea11cf7c">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2012-08-08T08:56:21.610837Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-08-08T08:56:21.610837Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.GUI.NavigationTabbedScreenDisplay</ZetboxBase:FullName>
-    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
+    <ZetboxBase:Parent>4281d8b6-2a16-4e4b-8105-cd7063e92272</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="eda21add-921b-4493-aa61-2f8342b8acd9">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2012-08-21T10:24:21.822223Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-08-21T10:24:21.822223Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.GUI.NavigationTreeScreenDisplay</ZetboxBase:FullName>
-    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
+    <ZetboxBase:Parent>4281d8b6-2a16-4e4b-8105-cd7063e92272</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="793f3c6c-37dc-4ac9-a924-6190929ca7eb">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
@@ -19219,11 +19290,11 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="eb5829a3-caf4-457d-9d42-517a976e70f7">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2012-07-17T18:36:29.772608Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-07-03T06:39:57Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Deleted>true</ZetboxBase:Deleted>
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.ModuleEditor.DataTypeGraphLayout</ZetboxBase:FullName>
-    <ZetboxBase:Parent>ae298f44-b0e5-444d-99f6-29ca1d3583bf</ZetboxBase:Parent>
+    <ZetboxBase:Parent>30da93a6-247f-4b4d-bb0c-d29431d767ec</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.WPF.View.ModuleEditor.DataTypeGraphLayout</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="3e6cd159-fdaf-48fe-9147-05014ffc0d8e">
@@ -19574,10 +19645,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="92fb7c93-822b-41f7-b25b-dd44e0fb3516">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.130287Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.ZetboxBase.DataObjectLineDisplay</ZetboxBase:FullName>
-    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
+    <ZetboxBase:Parent>61d80f71-4f3e-45c8-9628-5cdd9bdf960b</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.WPF.View.ZetboxBase.DataObjectLineDisplay</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="fb290a14-69e5-46ec-9b49-2d4b86c6cdb8">
@@ -19761,10 +19832,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="ca9d1de3-4beb-4b94-b5a7-920ad2919c7c">
     <ZetboxBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</ZetboxBase:Assembly>
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:13.130287Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-01-25T02:15:15Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.WPF.View.ZetboxBase.SingleLineDisplay</ZetboxBase:FullName>
-    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
+    <ZetboxBase:Parent>61d80f71-4f3e-45c8-9628-5cdd9bdf960b</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.WPF.View.ZetboxBase.SingleLineDisplay</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="3e9153f9-1a71-4c1e-9022-948aa7db6e11">
@@ -19841,6 +19912,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.WPF.CustomControls.PropertyEditor</ZetboxBase:FullName>
     <ZetboxBase:Parent>950b505b-54b5-44ae-a155-c06c96727d0a</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="4281d8b6-2a16-4e4b-8105-cd7063e92272">
+    <ZetboxBase:Assembly>6d952d0f-6165-447d-b797-1feabd7fba8e</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-19T09:05:28.401297Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.WPF.CustomControls.TracingUserControl</ZetboxBase:FullName>
+    <ZetboxBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="562a3a20-007d-464f-bf35-169f4c7e6c93">
     <ZetboxBase:Assembly>6d952d0f-6165-447d-b797-1feabd7fba8e</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.126287Z</ZetboxBase:ChangedOn>
@@ -19849,6 +19927,24 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:Parent>ee07bd36-41ee-43df-8099-f4dd0c355902</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.WPF.CustomControls.WindowView</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="9fd1ddbf-3044-4132-89cb-564540ebeda8">
+    <ZetboxBase:A>30da93a6-247f-4b4d-bb0c-d29431d767ec</ZetboxBase:A>
+    <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
+    <ZetboxBase:B>ffe69f19-23ca-4bd7-9501-a428e6040e80</ZetboxBase:B>
+    <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
+  </ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="403180ed-0199-47d8-a15d-70437fa277a0">
+    <ZetboxBase:A>30da93a6-247f-4b4d-bb0c-d29431d767ec</ZetboxBase:A>
+    <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
+    <ZetboxBase:B>6dc00d38-c171-472d-aba6-159175930fdb</ZetboxBase:B>
+    <ZetboxBase:B_pos>2</ZetboxBase:B_pos>
+  </ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="77405623-d6bc-43af-a32f-8b5268a23fc1">
+    <ZetboxBase:A>30da93a6-247f-4b4d-bb0c-d29431d767ec</ZetboxBase:A>
+    <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
+    <ZetboxBase:B>cc0b9637-7e9f-4537-9e45-292f85e8dbe8</ZetboxBase:B>
+    <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
+  </ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="1ee5aa13-6f4b-4168-bd11-e5ea80cde73f">
     <ZetboxBase:A>4100b7f8-c34a-4c15-9212-57127bb652ff</ZetboxBase:A>
     <ZetboxBase:A_pos>2</ZetboxBase:A_pos>
@@ -62954,6 +63050,12 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.App.TimeRecords.WorkEffortAccount_has_Mitarbeiter_RelationEntry</ZetboxBase:FullName>
     <ZetboxBase:ToStringCache>Zetbox.App.TimeRecords.WorkEffortAccount_has_Mitarbeiter_RelationEntry</ZetboxBase:ToStringCache>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="9fd1ddbf-3044-4132-89cb-564540ebeda8">
+    <ZetboxBase:A>30da93a6-247f-4b4d-bb0c-d29431d767ec</ZetboxBase:A>
+    <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
+    <ZetboxBase:B>ffe69f19-23ca-4bd7-9501-a428e6040e80</ZetboxBase:B>
+    <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
+  </ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="52655ead-93b2-48c9-94f2-2982d2242402">
     <ZetboxBase:A>4100b7f8-c34a-4c15-9212-57127bb652ff</ZetboxBase:A>
     <ZetboxBase:A_pos>1</ZetboxBase:A_pos>

@@ -3414,6 +3414,12 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:Property>09cfc4e1-c106-46ec-825d-31226d8df335</ZetboxBase:Property>
     <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
   </ZetboxBase:BoolDefaultValue>
+  <GUI:ViewModelDescriptor ExportGuid="a78c6c62-e8ae-4625-852e-53f6a55b5d9e">
+    <GUI:DefaultEditorKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:DefaultEditorKind>
+    <GUI:Description>Workspace viewmodel for the calendar</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelRef>d34e8436-7415-477a-b43c-45aab82706db</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="7fbcbbdf-1821-47dc-9332-c0ae4f6a70a1">
     <GUI:DefaultEditorKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:DefaultEditorKind>
     <GUI:Description>ViewModel for Week Calendar Display</GUI:Description>
@@ -3426,6 +3432,12 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:ViewModelRef>bb7be5ef-4524-40ce-9bc0-999cde72ef36</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewDescriptor ExportGuid="0cde1819-061a-4552-911b-e979a57b8e69">
+    <GUI:ControlKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:ControlKind>
+    <GUI:ControlRef>48830a19-148c-4852-8cc2-d9a03fda07d4</GUI:ControlRef>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="cc2521f1-6368-4cc8-94f1-eb9e7080211b">
     <GUI:ControlKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:ControlKind>
     <GUI:ControlRef>ff78973f-bb78-47fd-ad8b-da3f1f06d77e</GUI:ControlRef>
@@ -3650,6 +3662,10 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:B>385c829b-02d6-48d0-8184-b3b5df6c25be</ZetboxBase:B>
     <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
   </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
+  <GUI:ControlKind ExportGuid="6bf65558-8687-492d-8fdc-f35fe928e647">
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Name>Zetbox.App.Calendar.CalendarWorkspaceDisplay</GUI:Name>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="df5134d6-18f1-43b9-96d3-9283bc2b09a8">
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Name>Zetbox.App.Calendar.WeekCalendarDisplay</GUI:Name>
