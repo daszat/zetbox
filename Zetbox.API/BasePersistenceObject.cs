@@ -45,7 +45,7 @@ namespace Zetbox.API
         {
             get
             {
-                if (_frozenContext == null)
+                if (_frozenContext == null && _lazyCtx != null)
                 {
                     _frozenContext = _lazyCtx();
                 }
