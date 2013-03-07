@@ -140,7 +140,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\Calendar\NewEventDialogViewModel.cs" />
     <Compile Include="Presentables\Calendar\EventViewModel.cs" />
+    <Compile Include="Presentables\Calendar\EventInputViewModel.cs" />
+    <Compile Include="Presentables\Calendar\NewEventViewModelsArgs.cs" />
     <Compile Include="Presentables\Calendar\WeekCalendar\CalendarItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\CalendarRuleInstanceViewModel.cs" />
     <Compile Include="Presentables\Calendar\CalendarWorkspaceViewModel.cs" />

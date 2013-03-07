@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-19T16:38:51Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-20T12:02:29Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -4036,6 +4036,51 @@ public static void ObjectIsValid(DeactivatableTestObject obj, ObjectIsValidEvent
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DeactivatableTestObjects</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="1be8e748-c714-42f9-aeb1-c9f180b2f126">
+    <ZetboxBase:ChangedOn>2013-02-20T08:44:36.980599Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-20T08:44:36.980599Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>EventTestObject</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(EventTestObject obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(EventTestObject obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(EventTestObject obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(EventTestObject obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(EventTestObject obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(EventTestObject obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>EventTestObjects</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="a78ff235-4511-431b-8437-939f7fecded4">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:08.070755Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-01-22T00:34:11Z</ZetboxBase:CreatedOn>
@@ -5868,6 +5913,77 @@ public static void isValid_Name(DeactivatableTestObject obj, PropertyIsValidEven
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>12e49195-6ff4-49cd-b3a9-37f7bc350a5e</ZetboxBase:ObjectClass>
     <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:ObjectReferenceProperty ExportGuid="adf59fe9-12fe-413e-8dc7-d9190aa6bf13">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Event(EventTestObject obj, PropertyGetterEventArgs&lt;Zetbox.App.Calendar.Event&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Event(EventTestObject obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Calendar.Event&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Event(EventTestObject obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Calendar.Event&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Event(EventTestObject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Event == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Event</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>1be8e748-c714-42f9-aeb1-c9f180b2f126</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
+    <ZetboxBase:RelationEnd>4d849d02-6c18-4ad4-bca8-287649559042</ZetboxBase:RelationEnd>
+  </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:StringProperty ExportGuid="57f6c265-b768-40e8-b546-bd410439d354">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-20T08:44:36.980599Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Name(EventTestObject obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(EventTestObject obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(EventTestObject obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(EventTestObject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-20T08:44:36.980599Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Name</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>1be8e748-c714-42f9-aeb1-c9f180b2f126</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -9758,6 +9874,16 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
+  <ZetboxBase:Relation ExportGuid="1c36d11a-0118-4403-b485-e2b0e9fa2484">
+    <ZetboxBase:A>4d849d02-6c18-4ad4-bca8-287649559042</ZetboxBase:A>
+    <ZetboxBase:B>3cfd2fef-f235-43ab-a1c4-b35b3713d0b2</ZetboxBase:B>
+    <ZetboxBase:ChangedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:Containment>0</ZetboxBase:Containment>
+    <ZetboxBase:CreatedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Storage>1</ZetboxBase:Storage>
+    <ZetboxBase:Verb>of</ZetboxBase:Verb>
+  </ZetboxBase:Relation>
   <ZetboxBase:Relation ExportGuid="0f425937-0d1e-4887-ae65-a162b45fc93e">
     <ZetboxBase:A>63e9fb7e-c2d4-41d6-a7f3-b368db9bee61</ZetboxBase:A>
     <ZetboxBase:B>02b5aadd-4c68-40e6-8a88-c7d2575103b9</ZetboxBase:B>
@@ -9948,6 +10074,25 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:Navigator>ae20c23b-0cfa-422a-9f8d-797e9f70bf82</ZetboxBase:Navigator>
     <ZetboxBase:RoleName>gute_Antworten</ZetboxBase:RoleName>
     <ZetboxBase:Type>e5577f89-58d1-4983-ab35-60e6624780df</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="3cfd2fef-f235-43ab-a1c4-b35b3713d0b2">
+    <ZetboxBase:BParent>1c36d11a-0118-4403-b485-e2b0e9fa2484</ZetboxBase:BParent>
+    <ZetboxBase:ChangedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>2</ZetboxBase:Multiplicity>
+    <ZetboxBase:RoleName>Event</ZetboxBase:RoleName>
+    <ZetboxBase:Type>fd0b9bf4-0891-4317-9d2e-d08a410d5c4c</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="4d849d02-6c18-4ad4-bca8-287649559042">
+    <ZetboxBase:AParent>1c36d11a-0118-4403-b485-e2b0e9fa2484</ZetboxBase:AParent>
+    <ZetboxBase:ChangedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
+    <ZetboxBase:Navigator>adf59fe9-12fe-413e-8dc7-d9190aa6bf13</ZetboxBase:Navigator>
+    <ZetboxBase:RoleName>Test</ZetboxBase:RoleName>
+    <ZetboxBase:Type>1be8e748-c714-42f9-aeb1-c9f180b2f126</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
   <ZetboxBase:RelationEnd ExportGuid="63e9fb7e-c2d4-41d6-a7f3-b368db9bee61">
     <ZetboxBase:AParent>0f425937-0d1e-4887-ae65-a162b45fc93e</ZetboxBase:AParent>
@@ -10792,6 +10937,23 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:MaxLength>200</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="4e0d8355-05ae-4bc5-bfe1-58015603c753">
+    <ZetboxBase:ChangedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>adf59fe9-12fe-413e-8dc7-d9190aa6bf13</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-20T08:45:30.436657Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="3f8c2358-18ec-415b-a1e2-8cd1c74560c2">
+    <ZetboxBase:ChangedOn>2013-02-20T08:44:36.980599Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>57f6c265-b768-40e8-b546-bd410439d354</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-20T08:44:36.980599Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="6b7d20fe-ff1e-43cb-a0de-32a9fe69473c">
+    <ZetboxBase:ChangedOn>2013-02-20T08:44:36.980599Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>57f6c265-b768-40e8-b546-bd410439d354</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-02-20T08:44:36.980599Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>200</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="00c80ef5-4c49-4674-bfed-b46e8bc8e156">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:06.88893Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>3a91e745-0dd2-4f31-864e-eaf657ddb577</ZetboxBase:ConstrainedProperty>
@@ -11258,11 +11420,23 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:CreatedOn>2013-01-02T14:02:40.368367Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>73f5e7ac-1dfc-4149-9995-8e3b04a95614</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <GUI:ViewModelDescriptor ExportGuid="998ed5d2-852d-49e5-82fb-723cd2c034b5">
+    <GUI:DefaultEditorKind>aa843e93-7f18-45c5-8608-4470aba9f18a</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for creating/editing a Test-Event</GUI:Description>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:ViewModelRef>529c4b47-b9b3-42fe-9269-b7226e51eb2b</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="7f6730fe-c856-4ce2-a72c-5503e1162890">
     <GUI:Description>Test screen for InstanceList</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:ViewModelRef>5055641c-53a5-484b-b16f-2c203d05484f</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewDescriptor ExportGuid="62c6636c-0cd5-4081-9aaa-c044f05e8020">
+    <GUI:ControlKind>aa843e93-7f18-45c5-8608-4470aba9f18a</GUI:ControlKind>
+    <GUI:ControlRef>4f2b6801-1ca5-40bc-9b44-412a911907c5</GUI:ControlRef>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="d2376da7-7632-496d-a2c6-ed5bc8545250">
     <GUI:ControlKind>b2be0e95-d69e-44ff-8d19-2ccd70da2512</GUI:ControlKind>
     <GUI:ControlRef>83fcfe5f-c8db-4ba3-87aa-36594602e3d8</GUI:ControlRef>
@@ -11456,6 +11630,10 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:B>e20bcbaa-6660-4a03-bc46-0690b7988c67</ZetboxBase:B>
     <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
   </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
+  <GUI:ControlKind ExportGuid="aa843e93-7f18-45c5-8608-4470aba9f18a">
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:Name>Zetbox.App.Test.NewEventTestDialog</GUI:Name>
+  </GUI:ControlKind>
   <GUI:Application ExportGuid="cc212e26-f676-4dd0-885a-ae23c5f8faa4">
     <GUI:ChangedOn>2012-08-02T18:02:21.424417Z</GUI:ChangedOn>
     <GUI:CreatedOn>2012-08-02T18:01:23.976673Z</GUI:CreatedOn>

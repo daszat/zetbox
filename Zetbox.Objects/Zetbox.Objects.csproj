@@ -143,6 +143,7 @@
     <Compile Include="EnumerationProperty.Interface.Designer.cs" />
     <Compile Include="EnumParameter.Interface.Designer.cs" />
     <Compile Include="Event.Interface.Designer.cs" />
+    <Compile Include="EventTestObject.Interface.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Interface.Designer.cs" />
     <Compile Include="File.Interface.Designer.cs" />
     <Compile Include="FileImportConfiguration.Interface.Designer.cs" />

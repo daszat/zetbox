@@ -861,6 +861,69 @@ namespace Zetbox.App.Calendar
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnWriters_IsValid;
 
+        /// <summary>
+        /// Gets a list of ViewModels that can create a new event. Multiple implementations can support different kind of events
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetNewEventViewModels_Calendar")]
+        public virtual void GetNewEventViewModels(System.Object args)
+        {
+            // base.GetNewEventViewModels();
+            if (OnGetNewEventViewModels_Calendar != null)
+            {
+                OnGetNewEventViewModels_Calendar(this, args);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method Calendar.GetNewEventViewModels");
+            }
+        }
+        public delegate void GetNewEventViewModels_Handler<T>(T obj, System.Object args);
+        public static event GetNewEventViewModels_Handler<Calendar> OnGetNewEventViewModels_Calendar;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Calendar> OnGetNewEventViewModels_Calendar_CanExec;
+
+        [EventBasedMethod("OnGetNewEventViewModels_Calendar_CanExec")]
+        public virtual bool GetNewEventViewModelsCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetNewEventViewModels_Calendar_CanExec != null)
+				{
+					OnGetNewEventViewModels_Calendar_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Calendar> OnGetNewEventViewModels_Calendar_CanExecReason;
+
+        [EventBasedMethod("OnGetNewEventViewModels_Calendar_CanExecReason")]
+        public virtual string GetNewEventViewModelsCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetNewEventViewModels_Calendar_CanExecReason != null)
+				{
+					OnGetNewEventViewModels_Calendar_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
         public override Type GetImplementedInterface()
         {
             return typeof(Calendar);

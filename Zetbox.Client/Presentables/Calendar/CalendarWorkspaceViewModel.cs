@@ -1,3 +1,17 @@
+// This file is part of zetbox.
+//
+// Zetbox is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as
+// published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version.
+//
+// Zetbox is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 namespace Zetbox.Client.Presentables.Calendar
 {
     using System;
@@ -87,10 +101,13 @@ namespace Zetbox.Client.Presentables.Calendar
             "#FFAAFF",
         };
         private bool _shouldUpdateCalendarItems = true;
+        private Func<IZetboxContext> _ctxFactory;
 
-        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent)
         {
+            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            _ctxFactory = ctxFactory;
         }
 
         public override string Name
@@ -280,14 +297,23 @@ namespace Zetbox.Client.Presentables.Calendar
                     _WeekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
                         .Invoke(DataContext, this, FetchEvents);
                     _WeekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
-                    _WeekCalender.NewEventCreating += (dt, e) =>
-                    {
-                    };
+                    _WeekCalender.NewEventCreating += new NewItemCreatingEventHandler(_WeekCalender_NewEventCreating);
                     _WeekCalender.Refresh();
                 }
                 return _WeekCalender;
             }
         }
+
+        void _WeekCalender_NewEventCreating(DateTime dt, NewItemCreatingEventArgs e)
+        {
+            using (var ctx = _ctxFactory())
+            {
+                var calendar = ctx.Find<cal.Calendar>(SelectedItem.Calendar.ID);
+                var args = new NewEventViewModelsArgs(ctx, ViewModelFactory, calendar);
+                args.ViewModels.Add(ViewModelFactory.CreateViewModel<EventInputViewModel.Factory>().Invoke(ctx, null));
+            }
+        }
+
         void _WeekCalender_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedItem")

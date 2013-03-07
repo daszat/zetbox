@@ -43,6 +43,15 @@ namespace Zetbox.App.Calendar
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            if (this.Proxy.Attachment == null)
+            {
+                this.Proxy.Attachment = new Zetbox.App.Base.AnyReferenceNHibernateImpl(this, "Attachment", lazyCtx, null);
+            }
+            else
+            {
+                this.Proxy.Attachment.AttachToObject(this, "Attachment");
+            }
+
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
@@ -51,6 +60,57 @@ namespace Zetbox.App.Calendar
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly EventProxy Proxy;
+
+        /// <summary>
+        /// A attached data item
+        /// </summary>
+        // CompoundObject property
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        public Zetbox.App.Base.AnyReference Attachment
+        {
+            get { return AttachmentImpl; }
+            set { AttachmentImpl = (Zetbox.App.Base.AnyReferenceNHibernateImpl)value; }
+        }
+
+        /// <summary>backing property for Attachment, takes care of attaching/detaching the values</summary>
+        public Zetbox.App.Base.AnyReferenceNHibernateImpl AttachmentImpl
+        {
+            get
+            {
+                return this.Proxy.Attachment;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(this.Proxy.Attachment, value))
+                {
+                    var __oldValue = this.Proxy.Attachment;
+                    var __newValue = value;
+
+                    NotifyPropertyChanging("Attachment", __oldValue, __newValue);
+
+                    if (this.Proxy.Attachment != null)
+                    {
+                        this.Proxy.Attachment.DetachFromObject(this, "Attachment");
+                    }
+                    __newValue = (Zetbox.App.Base.AnyReferenceNHibernateImpl)__newValue.Clone();
+                    this.Proxy.Attachment = __newValue;
+                    this.Proxy.Attachment.AttachToObject(this, "Attachment");
+
+                    NotifyPropertyChanged("Attachment", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+                else
+                {
+                    SetInitializedProperty("Attachment");
+                }
+            }
+        }
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnAttachment_IsValid;
 
         /// <summary>
         /// 
@@ -956,6 +1016,13 @@ namespace Zetbox.App.Calendar
             me.Location = other.Location;
             me.StartDate = other.StartDate;
             me.Summary = other.Summary;
+            if (me.Attachment == null && other.Attachment != null) {
+                me.Attachment = (Zetbox.App.Base.AnyReference)other.Attachment.Clone();
+            } else if (me.Attachment != null && other.Attachment == null) {
+                me.Attachment = null;
+            } else if (me.Attachment != null && other.Attachment != null) {
+                me.Attachment.ApplyChangesFrom(other.Attachment);
+            }
             this._fk_Calendar = otherImpl._fk_Calendar;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -1010,6 +1077,7 @@ namespace Zetbox.App.Calendar
             // Do not audit calculated properties
             switch (property)
             {
+                case "Attachment":
                 case "Body":
                 case "Calendar":
                 case "ChangedBy":
@@ -1068,6 +1136,15 @@ namespace Zetbox.App.Calendar
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorNHibernateImpl<Event, Zetbox.App.Base.AnyReference>(
+                        lazyCtx,
+                        new Guid("086bf775-297d-49bf-be32-95b19f5eda8a"),
+                        "Attachment",
+                        null,
+                        obj => obj.Attachment,
+                        (obj, val) => obj.Attachment = val,
+						obj => OnAttachment_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Event, string>(
                         lazyCtx,
@@ -1243,6 +1320,7 @@ namespace Zetbox.App.Calendar
         [EventBasedMethod("OnNotifyCreated_Event")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Attachment");
             SetNotInitializedProperty("Body");
             SetNotInitializedProperty("Calendar");
             SetNotInitializedProperty("ChangedBy");
@@ -1277,6 +1355,7 @@ namespace Zetbox.App.Calendar
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
+            // should fetch && remember parent for EventTestObject_of_Event_RelationEntry
 
             Calendar = null;
             ChangedBy = null;
@@ -1297,6 +1376,8 @@ namespace Zetbox.App.Calendar
 
             public virtual Type ZetboxWrapper { get { return typeof(EventNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(EventProxy); } }
+
+            public virtual Zetbox.App.Base.AnyReferenceNHibernateImpl Attachment { get; set; }
 
             public virtual string Body { get; set; }
 
@@ -1350,6 +1431,7 @@ namespace Zetbox.App.Calendar
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this.Attachment);
             binStream.Write(this.Proxy.Body);
             binStream.Write(this.Proxy.Calendar != null ? OurContext.GetIdFromProxy(this.Proxy.Calendar) : (int?)null);
             binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
@@ -1382,6 +1464,11 @@ namespace Zetbox.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            {
+                // use backing store to avoid notifications
+                this.AttachmentImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AnyReferenceNHibernateImpl>();
+                this.AttachmentImpl.AttachToObject(this, "Attachment");
+            }
             this.Proxy.Body = binStream.ReadString();
             binStream.Read(out this._fk_Calendar);
             binStream.Read(out this._fk_ChangedBy);
@@ -1419,6 +1506,7 @@ namespace Zetbox.App.Calendar
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ExportCompoundObject(this.Attachment, xml, "Attachment", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.Body, xml, "Body", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.Calendar != null ? this.Proxy.Calendar.ExportGuid : (Guid?)null, xml, "Calendar", "Zetbox.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1438,6 +1526,9 @@ namespace Zetbox.App.Calendar
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Calendar|Attachment":
+                XmlStreamer.MergeImportCompoundObject(this.AttachmentImpl, xml);
+                break;
             case "Zetbox.App.Calendar|Body":
                 this.Proxy.Body = XmlStreamer.ReadString(xml);
                 break;

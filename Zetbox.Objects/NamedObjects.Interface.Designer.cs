@@ -1976,6 +1976,13 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc"); }
                             }
+                            public static class Calendar_Methods
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> GetNewEventViewModels
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("cbb06469-f6fb-4e2e-a434-7f91cdb8c09a"); }
+                                }
+                            }
                             public static class Calendar_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
@@ -2039,6 +2046,10 @@ namespace Zetbox {
                             }
                             public static class Event_Properties
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Attachment
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("086bf775-297d-49bf-be32-95b19f5eda8a"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Body
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("db075997-89bd-4b98-bf60-40eecebfc664"); }
@@ -3447,6 +3458,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("12e49195-6ff4-49cd-b3a9-37f7bc350a5e"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> EventTestObject
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("1be8e748-c714-42f9-aeb1-c9f180b2f126"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> Fragebogen
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("a78ff235-4511-431b-8437-939f7fecded4"); }
@@ -3624,6 +3639,17 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Name
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("c1a18acc-68e5-4df8-a7ed-58dc3eeb2e80"); }
+                                }
+                            }
+                            public static class EventTestObject_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Event
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("adf59fe9-12fe-413e-8dc7-d9190aa6bf13"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("57f6c265-b768-40e8-b546-bd410439d354"); }
                                 }
                             }
                             public static class Fragebogen_Properties
@@ -4236,6 +4262,14 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("6bf65558-8687-492d-8fdc-f35fe928e647"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_Calendar_EventInputEditor
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("5fc3d661-81de-4fb6-a012-aa67971a08c7"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_Calendar_NewEventDialog
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("916f91a3-aba5-4d61-9a45-297c02d77e83"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_Calendar_WeekCalendarDisplay
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("df5134d6-18f1-43b9-96d3-9283bc2b09a8"); }
@@ -4524,6 +4558,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("42d263e9-0108-4068-a38c-e550299cf966"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_Test_NewEventTestDialog
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("aa843e93-7f18-45c5-8608-4470aba9f18a"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_DocumentManagement_DocumentWithPreviewEditor
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("24338f74-ec90-48a5-90ff-b9830082cb12"); }
@@ -4688,6 +4726,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("4d307461-610a-4403-92b9-bb686dacf276"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_App_Projekte_Client_ViewModel_TestModule_EventTestInputViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("998ed5d2-852d-49e5-82fb-723cd2c034b5"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ActionViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("3d779eaf-1c37-4c3b-822b-0b1af0926802"); }
@@ -4700,9 +4742,17 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("a78c6c62-e8ae-4625-852e-53f6a55b5d9e"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Calendar_EventInputViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("d2d3ee27-4721-4d7b-b072-37be379a926e"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Calendar_EventViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("590f80a4-27f2-4fb4-b7d3-4b80d13dec75"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Calendar_NewEventDialogViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("6fe82f61-0bd8-4efa-9830-673f8153a96c"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Calendar_WeekCalendarViewModel
                 {

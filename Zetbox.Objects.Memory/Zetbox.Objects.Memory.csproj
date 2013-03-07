@@ -169,6 +169,7 @@
     <Compile Include="EnumerationProperty.Memory.Designer.cs" />
     <Compile Include="EnumParameter.Memory.Designer.cs" />
     <Compile Include="Event.Memory.Designer.cs" />
+    <Compile Include="EventTestObject.Memory.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Memory.Designer.cs" />
     <Compile Include="File.Memory.Designer.cs" />
     <Compile Include="FileImportConfiguration.Memory.Designer.cs" />

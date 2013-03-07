@@ -59,5 +59,10 @@ namespace Zetbox.App.Calendar
 
         [Zetbox.API.DefinitionGuid("e52271a9-ca1a-486d-95c0-795a502af48e")]
         ICollection<Zetbox.App.Base.Identity> Writers { get; }
+
+        /// <summary>
+        /// Gets a list of ViewModels that can create a new event. Multiple implementations can support different kind of events
+        /// </summary>
+        void GetNewEventViewModels(System.Object args);
     }
 }

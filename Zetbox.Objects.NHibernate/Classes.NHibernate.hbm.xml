@@ -118,6 +118,21 @@
 
 
         <!-- define the properties -->
+        <!-- CompoundObjectProperty isValue -->
+        <component name="Attachment" class="Zetbox.App.Base.AnyReferenceNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjClass" 
+                  column="`Attachment_ObjClass`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjGuid" 
+                  column="`Attachment_ObjGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjID" 
+                  column="`Attachment_ObjID`" 
+                  optimistic-lock="false"/>
+        </component>
         <!-- ValueTypeProperty isValue -->
         <property name="Body" 
                   column="`Body`" 
@@ -2226,6 +2241,34 @@
         <property name="IsDeactivated" 
                   column="`IsDeactivated`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.Test.EventTestObjectNHibernateImpl+EventTestObjectProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.EventTestObjectNHibernateImpl+EventTestObjectProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`EventTestObjects`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`EventTestObjects_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Event" column="`fk_Event`" class="Zetbox.App.Calendar.EventNHibernateImpl+EventProxy, Zetbox.Objects.NHibernateImpl" />
+
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 

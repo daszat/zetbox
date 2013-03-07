@@ -166,6 +166,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Calendar\NewEventDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calendar\EventInputEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Calendar\WeekCalendar\CalendarAllDay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +247,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ModuleEditor\GraphTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestModule\EventTestInputEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -568,6 +580,12 @@
     <Compile Include="StartupScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Calendar\NewEventDialog.xaml.cs">
+      <DependentUpon>NewEventDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\EventInputEditor.xaml.cs">
+      <DependentUpon>EventInputEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Calendar\WeekCalendar\CalendarAllDay.xaml.cs">
       <DependentUpon>CalendarAllDay.xaml</DependentUpon>
     </Compile>
@@ -617,6 +635,9 @@
     <Compile Include="View\ModuleEditor\Converter\GraphConverterHelper.cs" />
     <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
       <DependentUpon>DiagramDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TestModule\EventTestInputEditor.xaml.cs">
+      <DependentUpon>EventTestInputEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TestModule\InstanceListTestDisplay.xaml.cs">
       <DependentUpon>InstanceListTestDisplay.xaml</DependentUpon>

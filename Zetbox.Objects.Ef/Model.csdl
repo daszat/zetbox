@@ -40,6 +40,7 @@
       <End Role="Event" EntitySet="EventEfImpl" />
       <End Role="Event_Rights" EntitySet="Event_Rights" />
     </AssociationSet>
+    <EntitySet Name="EventTestObjectEfImpl" EntityType="Model.EventTestObjectEfImpl" />
     <EntitySet Name="ExceptionLogEntryEfImpl" EntityType="Model.ExceptionLogEntryEfImpl" />
     <EntitySet Name="FileEfImpl" EntityType="Model.FileEfImpl" />
     <EntitySet Name="FileImportConfigurationEfImpl" EntityType="Model.FileImportConfigurationEfImpl" />
@@ -1024,6 +1025,10 @@
       <End Role="Template" EntitySet="TemplateEfImpl" />
       <End Role="VisualTree" EntitySet="VisualEfImpl" />
     </AssociationSet>
+    <AssociationSet Name="FK_Test_of_Event" Association="Model.FK_Test_of_Event" >
+      <End Role="Test" EntitySet="EventTestObjectEfImpl" />
+      <End Role="Event" EntitySet="EventEfImpl" />
+    </AssociationSet>
     <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.FK_TestObjClass_has_ObjectProp" >
       <End Role="TestObjClass" EntitySet="TestObjClassEfImpl" />
       <End Role="ObjectProp" EntitySet="KundeEfImpl" />
@@ -1613,6 +1618,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="AttachmentImpl"
+              Type="Model.AnyReferenceEfImpl"
+              Nullable="false" />
     <Property Name="Body" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="CalendarImpl"
                         Relationship="Model.FK_Event_of_Calendar"
@@ -1659,6 +1667,17 @@
 	  </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="EventTestObjectEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EventImpl"
+                        Relationship="Model.FK_Test_of_Event"
+                        FromRole="Test"
+                        ToRole="Event" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
+  </EntityType>
   <EntityType Name="ExceptionLogEntryEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -5813,6 +5832,14 @@
          Multiplicity="*" />
     <End Role="VisualTree"
          Type="Model.VisualEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Test_of_Event" >
+    <End Role="Test"
+         Type="Model.EventTestObjectEfImpl" 
+         Multiplicity="*" />
+    <End Role="Event"
+         Type="Model.EventEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_TestObjClass_has_ObjectProp" >

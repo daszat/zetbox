@@ -172,6 +172,7 @@
     <Compile Include="EnumerationProperty.Ef.Designer.cs" />
     <Compile Include="EnumParameter.Ef.Designer.cs" />
     <Compile Include="Event.Ef.Designer.cs" />
+    <Compile Include="EventTestObject.Ef.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Ef.Designer.cs" />
     <Compile Include="File.Ef.Designer.cs" />
     <Compile Include="FileImportConfiguration.Ef.Designer.cs" />

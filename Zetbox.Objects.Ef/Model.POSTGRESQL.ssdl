@@ -44,6 +44,7 @@
       <End Role="Event" EntitySet="Event" />
       <End Role="Event_Rights" EntitySet="Event_Rights" />
     </AssociationSet>
+    <EntitySet Name="EventTestObject" EntityType="Model.Store.EventTestObject" Schema="test" Table="EventTestObjects"/>
     <EntitySet Name="ExceptionLogEntry" EntityType="Model.Store.ExceptionLogEntry" Schema="base" Table="ExceptionLog"/>
     <EntitySet Name="File" EntityType="Model.Store.File" Schema="doc" Table="Files"/>
     <EntitySet Name="FileImportConfiguration" EntityType="Model.Store.FileImportConfiguration" Schema="doc" Table="FileImportConfigurations"/>
@@ -1253,6 +1254,10 @@
       <End Role="Template" EntitySet="Template" />
       <End Role="VisualTree" EntitySet="Visual" />
     </AssociationSet>
+    <AssociationSet Name="FK_Test_of_Event" Association="Model.Store.FK_Test_of_Event" >
+      <End Role="Test" EntitySet="EventTestObject" />
+      <End Role="Event" EntitySet="Event" />
+    </AssociationSet>
     <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.Store.FK_TestObjClass_has_ObjectProp" >
       <End Role="TestObjClass" EntitySet="TestObjClass" />
       <End Role="ObjectProp" EntitySet="Kunde" />
@@ -1772,6 +1777,9 @@
     <Property Name="Location" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="StartDate" Type="timestamp" Nullable="false" />
     <Property Name="Summary" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Attachment_ObjClass" Type="uuid" Nullable="true" />
+    <Property Name="Attachment_ObjGuid" Type="uuid" Nullable="true" />
+    <Property Name="Attachment_ObjID" Type="int4" Nullable="true" />
   </EntityType>
     <EntityType Name="Event_Rights">
       <Key>
@@ -1796,6 +1804,15 @@
         </Dependent>
       </ReferentialConstraint>
     </Association>
+	
+  <EntityType Name="EventTestObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Event" Type="int4" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
 	
   <EntityType Name="ExceptionLogEntry">
     <Key>
@@ -6060,6 +6077,20 @@
       </Principal>
       <Dependent Role="Template">
         <PropertyRef Name="fk_VisualTree" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Test_of_Event">
+    <End Role="Event" Type="Model.Store.Event" Multiplicity="0..1" />
+    <End Role="Test" Type="Model.Store.EventTestObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Test">
+        <PropertyRef Name="fk_Event" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

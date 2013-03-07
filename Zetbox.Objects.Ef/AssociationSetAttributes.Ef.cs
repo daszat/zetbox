@@ -2882,6 +2882,21 @@ using Zetbox.DalProvider.Ef;
     )]
 
 	/*
+    Relation: FK_Test_of_Event
+    A: ZeroOrMore EventTestObject as Test
+    B: One Event as Event
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Test_of_Event",
+    "Test", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.EventTestObjectEfImpl),
+    "Event", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.EventEfImpl)
+    )]
+
+
+	/*
     Relation: FK_TestObjClass_has_ObjectProp
     A: ZeroOrMore TestObjClass as TestObjClass
     B: ZeroOrOne Kunde as ObjectProp

@@ -184,6 +184,7 @@
     <Compile Include="EnumerationProperty.NHibernate.Designer.cs" />
     <Compile Include="EnumParameter.NHibernate.Designer.cs" />
     <Compile Include="Event.NHibernate.Designer.cs" />
+    <Compile Include="EventTestObject.NHibernate.Designer.cs" />
     <Compile Include="ExceptionLogEntry.NHibernate.Designer.cs" />
     <Compile Include="File.NHibernate.Designer.cs" />
     <Compile Include="FileImportConfiguration.NHibernate.Designer.cs" />
