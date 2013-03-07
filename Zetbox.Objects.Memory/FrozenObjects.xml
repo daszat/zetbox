@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-25T11:24:38Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-26T15:14:24Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -9,8 +9,9 @@
     <ZetboxBase:SchemaName>calendar</ZetboxBase:SchemaName>
   </ZetboxBase:Module>
   <ZetboxBase:ObjectClass ExportGuid="1450be5f-2266-4367-8a56-1f0bee5699c4">
-    <ZetboxBase:ChangedOn>2013-02-25T10:24:38.898972Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:09:18.802138Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:15:19.121645Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>bc63e83e-d074-45fe-81eb-0b6d331fb0db</GUI:DefaultIcon>
     <ZetboxBase:Description>A container item for events</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>Calendar</ZetboxBase:Name>
@@ -55,8 +56,9 @@ public static void ObjectIsValid(Calendar obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Calendars</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="198bab3d-85a9-4d11-99e1-5e3f9420bdae">
-    <ZetboxBase:ChangedOn>2013-02-18T14:40:17.940556Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:10:56Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every day</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>CommonWorkScheduleRule</ZetboxBase:Name>
@@ -98,12 +100,13 @@ public static void ObjectIsValid(CommonCalendarRule obj, ObjectIsValidEventArgs 
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>CommonWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="9654967e-0182-409b-8765-65882785f607">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:00.795143Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:12:28Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every day of week</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>DayOfWeekWorkScheduleRule</ZetboxBase:Name>
@@ -145,12 +148,13 @@ public static void ObjectIsValid(DayOfWeekCalendarRule obj, ObjectIsValidEventAr
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DayOfWeekWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="d321c926-952d-4810-904b-a57251dd5e9d">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:00.795143Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:30:54Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every year, n days relative to easter.</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>EasterWorkScheduleRule</ZetboxBase:Name>
@@ -192,12 +196,13 @@ public static void ObjectIsValid(EasterCalendarRule obj, ObjectIsValidEventArgs 
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>EasterWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="fd0b9bf4-0891-4317-9d2e-d08a410d5c4c">
-    <ZetboxBase:ChangedOn>2013-02-19T13:55:13.102645Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:10:58.169821Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:19:47.715007Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>46c8448b-f9d8-4574-95c2-a1180c3aeaf0</GUI:DefaultIcon>
     <ZetboxBase:Description>A calendar event</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>Event</ZetboxBase:Name>
@@ -243,8 +248,9 @@ public static void ObjectIsValid(Event obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Events</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="632137c7-1cb1-4c60-bda6-31aa2060b39a">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:38.377293Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:27:48Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every year on the same date</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>FixedYearlyWorkScheduleRule</ZetboxBase:Name>
@@ -286,12 +292,13 @@ public static void ObjectIsValid(FixedYearlyCalendarRule obj, ObjectIsValidEvent
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>FixedYearlyWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="901a2ddd-1330-4129-b8a2-92b8e655d168">
-    <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:11:45.762543Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T09:25:54Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>bc63e83e-d074-45fe-81eb-0b6d331fb0db</GUI:DefaultIcon>
     <ZetboxBase:Description>A WorkSchedule describing recurrent working hours</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>WorkSchedule</ZetboxBase:Name>
@@ -336,8 +343,9 @@ public static void ObjectIsValid(Calendar obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>WorkSchedules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="ee70b186-09ae-43a3-afb2-a632c47765b9">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:51.149023Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T09:24:32Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>Abstract base class for WorkSchedule Rules describing recurrent working hours</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>WorkScheduleRule</ZetboxBase:Name>
@@ -378,13 +386,14 @@ public static void ObjectIsValid(CalendarRule obj, ObjectIsValidEventArgs e)
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
     <ZetboxBase:TableName>WorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:38.377293Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:25:45Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every year. This class is abstract.</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>YearlyWorkScheduleRule</ZetboxBase:Name>
@@ -426,7 +435,7 @@ public static void ObjectIsValid(YearlyCalendarRule obj, ObjectIsValidEventArgs 
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>YearlyWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="9e0463d8-4e0d-45b3-936e-14eac4d15490">
@@ -5387,8 +5396,9 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <ZetboxBase:SchemaName>gui</ZetboxBase:SchemaName>
   </ZetboxBase:Module>
   <ZetboxBase:ObjectClass ExportGuid="896187c2-2714-4430-8adb-6532612d7e0f">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:11:06.398292Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-07-20T07:40:55Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>fdbaa130-0be2-400b-9a4d-94d2ccaf00b7</GUI:DefaultIcon>
     <ZetboxBase:Description>Represents a Zetbox Application</ZetboxBase:Description>
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>Application</ZetboxBase:Name>
@@ -21158,18 +21168,6 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:B>59136763-5a94-4ae5-b9ab-6d679e86245a</ZetboxBase:B>
     <ZetboxBase:B_pos>2147483647</ZetboxBase:B_pos>
   </ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
-  <GUI:Icon ExportGuid="8cc615e1-6277-4c98-b987-d7b0c555a052">
-    <GUI:Blob>ee87d2e4-36ff-4547-8cb0-9828cf90288e</GUI:Blob>
-    <GUI:IconFile>warning.ico</GUI:IconFile>
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-  </GUI:Icon>
-  <ZetboxBase:Blob ExportGuid="ee87d2e4-36ff-4547-8cb0-9828cf90288e">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:12.213235Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-01-07T22:47:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MimeType>image/x-icon</ZetboxBase:MimeType>
-    <ZetboxBase:OriginalName>warning.ico</ZetboxBase:OriginalName>
-    <ZetboxBase:StoragePath>2011\01\07\(ee87d2e4-36ff-4547-8cb0-9828cf90288e) - warning.ico</ZetboxBase:StoragePath>
-  </ZetboxBase:Blob>
   <GUI:ViewModelDescriptor ExportGuid="bec5adb5-06fe-4c4f-8d72-69d4c359cb08">
     <GUI:DefaultEditorKind>7e30f1de-076c-42d3-80b2-9c1111a6cdfb</GUI:DefaultEditorKind>
     <GUI:Description>A list of errors from the currently active DataObjects</GUI:Description>
@@ -64704,6 +64702,11 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:B>ea1df580-d4e4-421e-a449-f3d3fd5356c2</ZetboxBase:B>
     <ZetboxBase:B_pos>2147483647</ZetboxBase:B_pos>
   </ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <GUI:Icon ExportGuid="41aa8db8-5a1e-41a0-85b1-229029d7794d">
+    <GUI:Blob>6cf45df2-a24c-4c47-ad43-7f2585aa2b02</GUI:Blob>
+    <GUI:IconFile>AccessDenied.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
   <GUI:Icon ExportGuid="fdbaa130-0be2-400b-9a4d-94d2ccaf00b7">
     <GUI:Blob>9b017852-5120-46d8-9d64-f8f3e9036388</GUI:Blob>
     <GUI:IconFile>app.ico</GUI:IconFile>
@@ -64717,6 +64720,11 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
   <GUI:Icon ExportGuid="5750d096-cf4d-4757-9228-62df7697d758">
     <GUI:Blob>e5e80fe1-c27d-483c-b9ad-8a54d362e026</GUI:Blob>
     <GUI:IconFile>cab.ico</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
+  <GUI:Icon ExportGuid="bc63e83e-d074-45fe-81eb-0b6d331fb0db">
+    <GUI:Blob>c7292299-0a3a-4222-8128-ff7f3ce9304d</GUI:Blob>
+    <GUI:IconFile>cal.png</GUI:IconFile>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
   </GUI:Icon>
   <GUI:Icon ExportGuid="ab326b2e-6cbb-421e-ba3a-0b40ae09c002">
@@ -64734,6 +64742,26 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:IconFile>Code_WebService.ico</GUI:IconFile>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
   </GUI:Icon>
+  <GUI:Icon ExportGuid="46c8448b-f9d8-4574-95c2-a1180c3aeaf0">
+    <GUI:Blob>2e71caaf-3e3f-442e-9f22-564604eb2d06</GUI:Blob>
+    <GUI:IconFile>date.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
+  <GUI:Icon ExportGuid="4a822a4e-cc58-46f6-a2bb-88b98c2a82d4">
+    <GUI:Blob>5741fbfa-38e6-45ad-9d21-101c16b1f557</GUI:Blob>
+    <GUI:IconFile>day1.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
+  <GUI:Icon ExportGuid="e5a9360e-da15-4009-969a-595debbfad20">
+    <GUI:Blob>1c477a85-2fbb-4dae-8904-f665b032fa5d</GUI:Blob>
+    <GUI:IconFile>days5.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
+  <GUI:Icon ExportGuid="c8134075-53e5-4d6f-a31e-2ff7585e487d">
+    <GUI:Blob>ce121b74-0b3d-4940-a8b6-c9b28cdbfb8a</GUI:Blob>
+    <GUI:IconFile>days7.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
   <GUI:Icon ExportGuid="84e97f4c-ceca-49d6-be50-aaa92b5b1ba8">
     <GUI:Blob>a8e3de3f-0352-4600-91e1-a9abb94cc14b</GUI:Blob>
     <GUI:IconFile>delete.png</GUI:IconFile>
@@ -64747,6 +64775,11 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
   <GUI:Icon ExportGuid="f1f14c5c-4cbd-499e-a388-3cf56aa80a11">
     <GUI:Blob>9d33d87f-0a44-46a5-87e0-c3c48e673aac</GUI:Blob>
     <GUI:IconFile>fileopen.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
+  <GUI:Icon ExportGuid="6a992747-2739-4d72-902d-38810394780f">
+    <GUI:Blob>61d5bfef-10e1-4bc3-b1f3-ce31049410b7</GUI:Blob>
+    <GUI:IconFile>forward.png</GUI:IconFile>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
   </GUI:Icon>
   <GUI:Icon ExportGuid="1b618ac3-cd62-4425-8bb3-4dba99172b1a">
@@ -64804,6 +64837,16 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:IconFile>Resource_Bitmap.ico</GUI:IconFile>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
   </GUI:Icon>
+  <GUI:Icon ExportGuid="d78f970f-76be-47eb-8e04-72ed7d3c3fb7">
+    <GUI:Blob>440862ec-045e-499b-9f82-c6e4c3a2b688</GUI:Blob>
+    <GUI:IconFile>save.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
+  <GUI:Icon ExportGuid="ec9facf9-7adb-49de-846c-27f6e53e39bd">
+    <GUI:Blob>6de91bc2-d905-4ecb-af08-34f603e09dee</GUI:Blob>
+    <GUI:IconFile>save_all.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
   <GUI:Icon ExportGuid="dbb2f49e-48f4-49fc-a9a6-53a403f8ac4b">
     <GUI:Blob>47458e1b-28ba-47c0-a9a8-55cc3b18d3be</GUI:Blob>
     <GUI:IconFile>search.png</GUI:IconFile>
@@ -64844,6 +64887,18 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:IconFile>VSProject_genericproject.ico</GUI:IconFile>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
   </GUI:Icon>
+  <GUI:Icon ExportGuid="26947a85-20f2-4cfc-ae07-5b418acb2685">
+    <GUI:Blob>0b37d3fe-3f05-4fe0-bf63-b149314a7b42</GUI:Blob>
+    <GUI:IconFile>warning.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
+  <ZetboxBase:Blob ExportGuid="6cf45df2-a24c-4c47-ad43-7f2585aa2b02">
+    <ZetboxBase:ChangedOn>2013-02-26T14:04:48.607684Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T14:04:48.607684Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>AccessDenied.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(6cf45df2-a24c-4c47-ad43-7f2585aa2b02) - AccessDenied.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
   <ZetboxBase:Blob ExportGuid="9b017852-5120-46d8-9d64-f8f3e9036388">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:48.578085Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-02-01T17:58:09Z</ZetboxBase:CreatedOn>
@@ -64864,6 +64919,13 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
     <ZetboxBase:OriginalName>cab.png</ZetboxBase:OriginalName>
     <ZetboxBase:StoragePath>2011\02\01\(e5e80fe1-c27d-483c-b9ad-8a54d362e026) - cab.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="c7292299-0a3a-4222-8128-ff7f3ce9304d">
+    <ZetboxBase:ChangedOn>2013-02-26T14:06:30.258498Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T14:06:30.258498Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>cal.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(c7292299-0a3a-4222-8128-ff7f3ce9304d) - cal.png</ZetboxBase:StoragePath>
   </ZetboxBase:Blob>
   <ZetboxBase:Blob ExportGuid="3da83c20-966a-42f7-8e6d-ba49ac536b8c">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.884046Z</ZetboxBase:ChangedOn>
@@ -64886,6 +64948,34 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:OriginalName>code_webservice.png</ZetboxBase:OriginalName>
     <ZetboxBase:StoragePath>2011\02\01\(e0985823-3a8f-42af-b7b0-84c41191c7f9) - code_webservice.png</ZetboxBase:StoragePath>
   </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="2e71caaf-3e3f-442e-9f22-564604eb2d06">
+    <ZetboxBase:ChangedOn>2013-02-26T14:07:36.271273Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T14:07:36.271273Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>date.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(2e71caaf-3e3f-442e-9f22-564604eb2d06) - date.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="5741fbfa-38e6-45ad-9d21-101c16b1f557">
+    <ZetboxBase:ChangedOn>2013-02-26T14:06:48.984569Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T14:06:48.984569Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>1day.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(5741fbfa-38e6-45ad-9d21-101c16b1f557) - 1day.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="1c477a85-2fbb-4dae-8904-f665b032fa5d">
+    <ZetboxBase:ChangedOn>2013-02-26T14:06:57.521057Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T14:06:57.521057Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>5days.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(1c477a85-2fbb-4dae-8904-f665b032fa5d) - 5days.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="ce121b74-0b3d-4940-a8b6-c9b28cdbfb8a">
+    <ZetboxBase:ChangedOn>2013-02-26T14:07:03.377392Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T14:07:03.377392Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>7days.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(ce121b74-0b3d-4940-a8b6-c9b28cdbfb8a) - 7days.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
   <ZetboxBase:Blob ExportGuid="a8e3de3f-0352-4600-91e1-a9abb94cc14b">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:12.223235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-02-03T02:01:37Z</ZetboxBase:CreatedOn>
@@ -64906,6 +64996,13 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
     <ZetboxBase:OriginalName>fileopen.png</ZetboxBase:OriginalName>
     <ZetboxBase:StoragePath>2011\02\01\(9d33d87f-0a44-46a5-87e0-c3c48e673aac) - fileopen.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="61d5bfef-10e1-4bc3-b1f3-ce31049410b7">
+    <ZetboxBase:ChangedOn>2013-02-26T13:59:39.26699Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T13:59:39.26699Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>forward.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(61d5bfef-10e1-4bc3-b1f3-ce31049410b7) - forward.png</ZetboxBase:StoragePath>
   </ZetboxBase:Blob>
   <ZetboxBase:Blob ExportGuid="0e837b70-7304-40cb-9289-ddde067dbd3d">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:48.319071Z</ZetboxBase:ChangedOn>
@@ -64984,6 +65081,20 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:OriginalName>resource_bitmap.png</ZetboxBase:OriginalName>
     <ZetboxBase:StoragePath>2011\02\01\(48e46ca0-727e-425a-bc0c-ef217ee27676) - resource_bitmap.png</ZetboxBase:StoragePath>
   </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="440862ec-045e-499b-9f82-c6e4c3a2b688">
+    <ZetboxBase:ChangedOn>2013-02-26T14:03:20.24763Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T14:03:20.24763Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>filesave.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(440862ec-045e-499b-9f82-c6e4c3a2b688) - filesave.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="6de91bc2-d905-4ecb-af08-34f603e09dee">
+    <ZetboxBase:ChangedOn>2013-02-26T14:03:38.465672Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T14:03:38.465672Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>save_all.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(6de91bc2-d905-4ecb-af08-34f603e09dee) - save_all.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
   <ZetboxBase:Blob ExportGuid="47458e1b-28ba-47c0-a9a8-55cc3b18d3be">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:12.253237Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-02-01T18:39:35Z</ZetboxBase:CreatedOn>
@@ -65039,6 +65150,13 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
     <ZetboxBase:OriginalName>generic_project.png</ZetboxBase:OriginalName>
     <ZetboxBase:StoragePath>2011\02\01\(d8889b90-b98a-4b21-ba37-a5233daf1e6e) - generic_project.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="0b37d3fe-3f05-4fe0-bf63-b149314a7b42">
+    <ZetboxBase:ChangedOn>2013-02-26T14:01:24.742023Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-26T14:01:24.742023Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>messagebox_warning.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2013\02\26\(0b37d3fe-3f05-4fe0-bf63-b149314a7b42) - messagebox_warning.png</ZetboxBase:StoragePath>
   </ZetboxBase:Blob>
   <GUI:ViewModelDescriptor ExportGuid="3d779eaf-1c37-4c3b-822b-0b1af0926802">
     <GUI:DefaultEditorKind>364aaaf3-0f61-4642-a0e3-bd812935cf44</GUI:DefaultEditorKind>

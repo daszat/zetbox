@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-25T11:24:38Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-26T15:14:24Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -9,8 +9,9 @@
     <ZetboxBase:SchemaName>calendar</ZetboxBase:SchemaName>
   </ZetboxBase:Module>
   <ZetboxBase:ObjectClass ExportGuid="1450be5f-2266-4367-8a56-1f0bee5699c4">
-    <ZetboxBase:ChangedOn>2013-02-25T10:24:38.898972Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:09:18.802138Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:15:19.121645Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>bc63e83e-d074-45fe-81eb-0b6d331fb0db</GUI:DefaultIcon>
     <ZetboxBase:Description>A container item for events</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>Calendar</ZetboxBase:Name>
@@ -55,8 +56,9 @@ public static void ObjectIsValid(Calendar obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Calendars</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="198bab3d-85a9-4d11-99e1-5e3f9420bdae">
-    <ZetboxBase:ChangedOn>2013-02-18T14:40:17.940556Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:10:56Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every day</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>CommonWorkScheduleRule</ZetboxBase:Name>
@@ -98,12 +100,13 @@ public static void ObjectIsValid(CommonCalendarRule obj, ObjectIsValidEventArgs 
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>CommonWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="9654967e-0182-409b-8765-65882785f607">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:00.795143Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:12:28Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every day of week</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>DayOfWeekWorkScheduleRule</ZetboxBase:Name>
@@ -145,12 +148,13 @@ public static void ObjectIsValid(DayOfWeekCalendarRule obj, ObjectIsValidEventAr
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DayOfWeekWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="d321c926-952d-4810-904b-a57251dd5e9d">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:00.795143Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:30:54Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every year, n days relative to easter.</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>EasterWorkScheduleRule</ZetboxBase:Name>
@@ -192,12 +196,13 @@ public static void ObjectIsValid(EasterCalendarRule obj, ObjectIsValidEventArgs 
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>EasterWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="fd0b9bf4-0891-4317-9d2e-d08a410d5c4c">
-    <ZetboxBase:ChangedOn>2013-02-19T13:55:13.102645Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:10:58.169821Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:19:47.715007Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>46c8448b-f9d8-4574-95c2-a1180c3aeaf0</GUI:DefaultIcon>
     <ZetboxBase:Description>A calendar event</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>Event</ZetboxBase:Name>
@@ -243,8 +248,9 @@ public static void ObjectIsValid(Event obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Events</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="632137c7-1cb1-4c60-bda6-31aa2060b39a">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:38.377293Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:27:48Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every year on the same date</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>FixedYearlyWorkScheduleRule</ZetboxBase:Name>
@@ -286,12 +292,13 @@ public static void ObjectIsValid(FixedYearlyCalendarRule obj, ObjectIsValidEvent
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>FixedYearlyWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="901a2ddd-1330-4129-b8a2-92b8e655d168">
-    <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:11:45.762543Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T09:25:54Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>bc63e83e-d074-45fe-81eb-0b6d331fb0db</GUI:DefaultIcon>
     <ZetboxBase:Description>A WorkSchedule describing recurrent working hours</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>WorkSchedule</ZetboxBase:Name>
@@ -336,8 +343,9 @@ public static void ObjectIsValid(Calendar obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>WorkSchedules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="ee70b186-09ae-43a3-afb2-a632c47765b9">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:51.149023Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T09:24:32Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>Abstract base class for WorkSchedule Rules describing recurrent working hours</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>WorkScheduleRule</ZetboxBase:Name>
@@ -378,13 +386,14 @@ public static void ObjectIsValid(CalendarRule obj, ObjectIsValidEventArgs e)
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
     <ZetboxBase:TableName>WorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc">
-    <ZetboxBase:ChangedOn>2013-02-18T14:39:38.377293Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:25:45Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>4a822a4e-cc58-46f6-a2bb-88b98c2a82d4</GUI:DefaultIcon>
     <ZetboxBase:Description>This rule applies every year. This class is abstract.</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>YearlyWorkScheduleRule</ZetboxBase:Name>
@@ -426,7 +435,7 @@ public static void ObjectIsValid(YearlyCalendarRule obj, ObjectIsValidEventArgs 
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>YearlyWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="9e0463d8-4e0d-45b3-936e-14eac4d15490">

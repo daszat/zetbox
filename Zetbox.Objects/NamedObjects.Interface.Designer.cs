@@ -4581,15 +4581,12 @@ namespace Zetbox {
             }
             public static class Icons
             {
-                public static class GUI
-                {
-                    public static TypedGuid<global::Zetbox.App.GUI.Icon> warning_ico
-                    {
-                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8cc615e1-6277-4c98-b987-d7b0c555a052"); }
-                    }
-                }
                 public static class ZetboxBase
                 {
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> AccessDenied_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("41aa8db8-5a1e-41a0-85b1-229029d7794d"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> app_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fdbaa130-0be2-400b-9a4d-94d2ccaf00b7"); }
@@ -4601,6 +4598,10 @@ namespace Zetbox {
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> cab_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5750d096-cf4d-4757-9228-62df7697d758"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> cal_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bc63e83e-d074-45fe-81eb-0b6d331fb0db"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> Code_ClassCS_ico
                     {
@@ -4614,6 +4615,22 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e2c2a9a4-a16b-477d-829c-3c83049a6ee9"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> date_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("46c8448b-f9d8-4574-95c2-a1180c3aeaf0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> day1_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4a822a4e-cc58-46f6-a2bb-88b98c2a82d4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> days5_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e5a9360e-da15-4009-969a-595debbfad20"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> days7_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c8134075-53e5-4d6f-a31e-2ff7585e487d"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> delete_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("84e97f4c-ceca-49d6-be50-aaa92b5b1ba8"); }
@@ -4625,6 +4642,10 @@ namespace Zetbox {
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> fileopen_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f1f14c5c-4cbd-499e-a388-3cf56aa80a11"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> forward_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6a992747-2739-4d72-902d-38810394780f"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> idr_dll_ico
                     {
@@ -4670,6 +4691,14 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1cb8d37f-c885-4cf0-8845-8e7333696505"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> save_all_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ec9facf9-7adb-49de-846c-27f6e53e39bd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> save_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d78f970f-76be-47eb-8e04-72ed7d3c3fb7"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> search_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dbb2f49e-48f4-49fc-a9a6-53a403f8ac4b"); }
@@ -4701,6 +4730,10 @@ namespace Zetbox {
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> VSProject_genericproject_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1710903b-aa64-4a26-a9fe-cd97fa91d67f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> warning_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("26947a85-20f2-4cfc-ae07-5b418acb2685"); }
                     }
                 }
             }
