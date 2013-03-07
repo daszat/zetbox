@@ -352,18 +352,11 @@ namespace PrepareEnv
         private static void ReplaceNpgsql(string sourcePath, string targetPath)
         {
             var httpServiceExists = Directory.Exists(Path.Combine(targetPath, "HttpService", "bin"));
-            var npgsqlMonoSource = ExpandPath(Path.Combine(sourcePath, "Server", "Npgsql.Mono")).FirstOrDefault(p => Directory.Exists(p));
-            var npgsqlMsSource = ExpandPath(Path.Combine(sourcePath, "Server", "Npgsql.Microsoft")).FirstOrDefault(p => Directory.Exists(p));
 
             LogAction("deploying Npgsql");
             switch (Environment.OSVersion.Platform)
             {
                 case PlatformID.Unix:
-                    if (string.IsNullOrEmpty(npgsqlMonoSource))
-                    {
-                        LogAction(string.Format("Missing source path for Mono Npgsql: {0}/Server/Npgsql.Mono", sourcePath));
-                        return;
-                    }
                     Copy(
                         GetAssemblyResourceStream("Npgsql"),
                         Path.Combine(targetPath, "Npgsql.dll"),
@@ -382,11 +375,6 @@ namespace PrepareEnv
                     }
                     break;
                 case PlatformID.Win32NT:
-                    if (string.IsNullOrEmpty(npgsqlMonoSource))
-                    {
-                        LogAction(string.Format("Missing source path for MS Npgsql: {0}\\Server\\Npgsql.Microsoft", sourcePath));
-                        return;
-                    }
                     Copy(
                         GetAssemblyResourceStream("Npgsql"),
                         Path.Combine(targetPath, "Npgsql.dll"),
