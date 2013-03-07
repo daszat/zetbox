@@ -96,8 +96,9 @@ namespace Zetbox.API.Utils
         {
             foreach (var searchPath in AssemblyLoader.SearchPath.Select(p => AssemblyLoader.QualifySearchPath(p)))
             {
-                // Don't report an error - fallback case. Dev Environments require this! Directory may not exist yet. 
-                if (config.IsFallback && !Directory.Exists(searchPath))
+                // Ignore unknown directories
+                // Tests, bootstrapping, fallback and other situations might not have a full set of DLLs
+                if (!Directory.Exists(searchPath))
                     continue;
 
                 foreach (var file in Directory.GetFiles(searchPath, "*.dll").Where(f => !f.ToLowerInvariant().EndsWith(".resources.dll")))
