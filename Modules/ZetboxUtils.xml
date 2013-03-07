@@ -196,7 +196,7 @@ public static void ObjectIsValid(EasterCalendarRule obj, ObjectIsValidEventArgs 
     <ZetboxBase:TableName>EasterWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="fd0b9bf4-0891-4317-9d2e-d08a410d5c4c">
-    <ZetboxBase:ChangedOn>2013-02-18T16:19:47.715007Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-02-19T13:55:13.102645Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:19:47.715007Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>A calendar event</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
@@ -235,7 +235,7 @@ public static void ObjectIsValid(Event obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>590f80a4-27f2-4fb4-b7d3-4b80d13dec75</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
@@ -3419,6 +3419,11 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <GUI:Description>Workspace ViewModel for the calendar</GUI:Description>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:ViewModelRef>d34e8436-7415-477a-b43c-45aab82706db</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="590f80a4-27f2-4fb4-b7d3-4b80d13dec75">
+    <GUI:Description>ViewModel for a calendar event with special extensions</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelRef>bc3afbb3-b6bd-4ee8-b9fc-1ec7b951332c</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="7fbcbbdf-1821-47dc-9332-c0ae4f6a70a1">
     <GUI:DefaultEditorKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:DefaultEditorKind>
