@@ -17,6 +17,7 @@ namespace Zetbox.Microsoft
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Net.Mail;
@@ -24,11 +25,10 @@ namespace Zetbox.Microsoft
     using System.Text;
     using Autofac;
     using Zetbox.API;
+    using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.Client.Presentables;
     using Outlook = global::Microsoft.Office.Interop.Outlook;
-    using Zetbox.API.Configuration;
-using System.ComponentModel;
 
     /// <summary>
     /// Sends MailMessages using Outlook
