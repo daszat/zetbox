@@ -262,6 +262,17 @@ namespace PrepareEnv
 
                 additionalCopiedFiles.AddRange(copiedCommonFiles);
 
+                LogAction("copying HttpService and associated binaries");
+                foreach (var source in sourcePaths)
+                {
+                    LogDetail("copying from " + source);
+                    CopyFolder(Path.Combine(source, "HttpService"), Path.Combine(envConfig.BinaryTarget, "HttpService"));
+                    LogDetail("copying from deployed Common");
+                    CopyFolder(Path.Combine(envConfig.BinaryTarget, "Common"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin"));
+                    LogDetail("copying from deployed Server");
+                    CopyFolder(Path.Combine(envConfig.BinaryTarget, "Server"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin"));
+                }
+
                 foreach (var source in sourcePaths)
                 {
                     LogAction("copying executables from " + source);
