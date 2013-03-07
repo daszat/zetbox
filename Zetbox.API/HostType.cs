@@ -23,6 +23,10 @@ namespace Zetbox.API
         Client,
         Server,
         /// <summary>
+        /// A special type of server
+        /// </summary>
+        AspNet,
+        /// <summary>
         /// no predefined personality. This is used only in very rare cases.
         /// </summary>
         None

@@ -94,8 +94,25 @@ namespace Zetbox.API.Utils
 
         private static IEnumerable<string> GetAssemblyFiles(ZetboxConfig config)
         {
+            string hostTypeDir = string.Empty;
+            switch (config.HostType)
+            {
+                case HostType.AspNet:
+                    hostTypeDir = "bin";
+                    break;
+                case HostType.Client:
+                case HostType.Server:
+                case HostType.None:
+                default:
+                    break;
+            }
+
+            var basePath = string.IsNullOrWhiteSpace(hostTypeDir)
+                ? AppDomain.CurrentDomain.BaseDirectory
+                : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, hostTypeDir);
+
             // searches first in the AppBase and then in the configured search path
-            foreach (var searchPath in new[] { AppDomain.CurrentDomain.BaseDirectory }.Concat(AssemblyLoader.SearchPath).Select(p => AssemblyLoader.QualifySearchPath(p)))
+            foreach (var searchPath in new[] { basePath }.Concat(AssemblyLoader.SearchPath).Select(p => AssemblyLoader.QualifySearchPath(p)))
             {
                 // Ignore unknown directories
                 // Tests, bootstrapping, fallback and other situations might not have a full set of DLLs

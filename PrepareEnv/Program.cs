@@ -268,9 +268,9 @@ namespace PrepareEnv
                     LogDetail("copying from " + source);
                     CopyFolder(Path.Combine(source, "HttpService"), Path.Combine(envConfig.BinaryTarget, "HttpService"));
                     LogDetail("copying from deployed Common");
-                    CopyFolder(Path.Combine(envConfig.BinaryTarget, "Common"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin"));
+                    CopyFolder(Path.Combine(envConfig.BinaryTarget, "Common"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Common"));
                     LogDetail("copying from deployed Server");
-                    CopyFolder(Path.Combine(envConfig.BinaryTarget, "Server"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin"));
+                    CopyFolder(Path.Combine(envConfig.BinaryTarget, "Server"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Server"));
                 }
 
                 foreach (var source in sourcePaths)

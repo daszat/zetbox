@@ -98,7 +98,31 @@ namespace Zetbox.API
 
         private static void InitialiseSearchPath(HostType type, bool loadGeneratedAssemblies)
         {
-            foreach (var path in new string[] { "Common", type.ToString() })
+            string hostTypePrefix = string.Empty;
+            string hostTypePath = string.Empty;
+            switch (type)
+            {
+                case HostType.Client:
+                    hostTypePath = "Client";
+                    break;
+                case HostType.Server:
+                    hostTypePath = "Server";
+                    break;
+                case HostType.AspNet:
+                    hostTypePrefix = "bin";
+                    hostTypePath = "Server";
+                    break;
+                case HostType.None:
+                default:
+                    break;
+            }
+            var common = string.IsNullOrWhiteSpace(hostTypePrefix)
+                ? "Common"
+                : Path.Combine(hostTypePrefix, "Common");
+            hostTypePath = string.IsNullOrWhiteSpace(hostTypePrefix)
+                ? hostTypePath
+                : Path.Combine(hostTypePrefix, hostTypePath);
+            foreach (var path in new string[] { common, hostTypePath })
             {
                 var rootedPath = QualifySearchPath(path);
 
