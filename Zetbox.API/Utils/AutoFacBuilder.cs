@@ -94,7 +94,8 @@ namespace Zetbox.API.Utils
 
         private static IEnumerable<string> GetAssemblyFiles(ZetboxConfig config)
         {
-            foreach (var searchPath in AssemblyLoader.SearchPath.Select(p => AssemblyLoader.QualifySearchPath(p)))
+            // searches first in the AppBase and then in the configured search path
+            foreach (var searchPath in new[] { AppDomain.CurrentDomain.BaseDirectory }.Concat(AssemblyLoader.SearchPath).Select(p => AssemblyLoader.QualifySearchPath(p)))
             {
                 // Ignore unknown directories
                 // Tests, bootstrapping, fallback and other situations might not have a full set of DLLs
