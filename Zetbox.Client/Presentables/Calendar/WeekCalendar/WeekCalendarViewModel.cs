@@ -275,7 +275,7 @@ namespace Zetbox.Client.Presentables.Calendar
         private IEnumerable<CalendarItemViewModel> FindCalendarItemViewModel(EventViewModel mdl)
         {
             if (mdl == null) return null;
-            return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl));
+            return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.EventViewModel == mdl));
         }
 
         private List<CalendarItemViewModel> CreateCalendarItemViewModels(EventViewModel a)

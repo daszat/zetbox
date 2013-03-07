@@ -33,8 +33,8 @@ namespace Zetbox.Client.Presentables.Calendar
             if (obj == null) throw new ArgumentNullException("obj");
 
             this.SlotWidth = this.OverlappingWidth = 1.0;
-            this.ObjectViewModel = obj;
-            this.ObjectViewModel.PropertyChanged += EventViewModelChanged;
+            this.EventViewModel = obj;
+            this.EventViewModel.PropertyChanged += EventViewModelChanged;
         }
 
         private void EventViewModelChanged(object sender, PropertyChangedEventArgs e)
@@ -85,7 +85,7 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        public EventViewModel ObjectViewModel { get; private set; }
+        public EventViewModel EventViewModel { get; private set; }
 
         private DateTime _From;
         public DateTime From
@@ -152,7 +152,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return ObjectViewModel.Event.Summary;
+                return EventViewModel.Event.Summary;
             }
         }
 
@@ -160,8 +160,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                // TODO: Re-implement the color feature!
-                return WeekCalendarViewModel.DefaultColor;
+                return EventViewModel.Color;
             }
         }
 

@@ -46,7 +46,7 @@ namespace Zetbox.Client.WPF.View.Calendar
             if (sender is FrameworkElement)
             {
                 var fe = (FrameworkElement)sender;
-                ViewModel.WeekCalendar.SelectedItem = ((CalendarItemViewModel)fe.DataContext).ObjectViewModel;
+                ViewModel.WeekCalendar.SelectedItem = ((CalendarItemViewModel)fe.DataContext).EventViewModel;
             }
         }
 

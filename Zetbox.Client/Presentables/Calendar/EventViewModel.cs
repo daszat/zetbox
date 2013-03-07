@@ -24,6 +24,22 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public Event Event { get; private set; }
 
+        protected override void OnObjectPropertyChanged(string propName)
+        {
+            base.OnObjectPropertyChanged(propName);
+            switch(propName)
+            {
+                case "Calendar":
+                    if (_calendarViewModel != null)
+                    {
+                        _calendarViewModel.PropertyChanged -= _calendarViewModel_PropertyChanged;
+                        _calendarViewModel = null;
+                        OnPropertyChanged("CalendarViewModel");
+                    }
+                    break;
+            }
+        }
+
         protected override void OnPropertyModelsByNameCreated()
         {
             base.OnPropertyModelsByNameCreated();
@@ -41,6 +57,48 @@ namespace Zetbox.Client.Presentables.Calendar
         public override string Name
         {
             get { return Event.Summary; }
+        }
+
+        private CalendarViewModel _calendarViewModel;
+        public CalendarViewModel CalendarViewModel
+        {
+            get
+            {
+                if (_calendarViewModel == null)
+                {
+                    _calendarViewModel = (CalendarViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, Parent, Event.Calendar);
+                    _calendarViewModel.PropertyChanged += _calendarViewModel_PropertyChanged;
+                }
+                return _calendarViewModel;
+            }
+        }
+
+        void _calendarViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "Color":
+                    if(string.IsNullOrWhiteSpace(_color))
+                        OnPropertyChanged("Color");
+                    break;
+            }
+        }
+
+        private string _color;
+        public string Color
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(_color) ? CalendarViewModel.Color : _color;
+            }
+            set
+            {
+                if (_color != value)
+                {
+                    _color = value;
+                    OnPropertyChanged("Color");
+                }
+            }
         }
     }
 }

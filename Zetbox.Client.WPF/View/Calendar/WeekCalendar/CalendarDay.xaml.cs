@@ -191,11 +191,11 @@ namespace Zetbox.Client.WPF.View.Calendar
                 {
                     if (e.ClickCount == 1)
                     {
-                        ViewModel.WeekCalendar.SelectedItem = vmdl.ObjectViewModel;
+                        ViewModel.WeekCalendar.SelectedItem = vmdl.EventViewModel;
                     }
                     else if (e.ClickCount == 2)
                     {
-                        ViewModel.WeekCalendar.NotifyOpen(vmdl.ObjectViewModel);
+                        ViewModel.WeekCalendar.NotifyOpen(vmdl.EventViewModel);
                     }
                 }
             }

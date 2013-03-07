@@ -39,14 +39,24 @@ namespace Zetbox.Client.Presentables.Calendar
             if (calendar == null) throw new ArgumentNullException("calendar");
 
             this.Calendar = calendar;
-            this.CalendarViewModel = DataObjectViewModel.Fetch(ViewModelFactory, dataCtx, parent, calendar);
             this._Selected = isSelf;
             this.IsSelf = isSelf;
             this.Color = isSelf ? "#F1F5E3" : null;
         }
 
         public cal.Calendar Calendar { get; private set; }
-        public DataObjectViewModel CalendarViewModel { get; private set; }
+        private CalendarViewModel _calendarViewModel;
+        public CalendarViewModel CalendarViewModel
+        {
+            get
+            {
+                if (_calendarViewModel == null)
+                {
+                    _calendarViewModel = (CalendarViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, Parent, Calendar);
+                }
+                return _calendarViewModel;
+            }
+        }
         public bool IsSelf { get; private set; }
 
         private bool _Selected = false;
@@ -77,7 +87,7 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_Color != value)
                 {
-                    _Color = value;
+                    CalendarViewModel.Color = _Color = value;
                     OnPropertyChanged("Color");
                 }
             }
@@ -590,7 +600,6 @@ namespace Zetbox.Client.Presentables.Calendar
                             {
                                 var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, _ctx, _parent, obj);
                                 vmdl.IsReadOnly = true; // Not changeable. TODO: This should be be implicit. This is a merge server data context
-                                // Color ?
                                 return vmdl;
                             })
                             .ToList();
