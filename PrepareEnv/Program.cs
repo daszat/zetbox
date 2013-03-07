@@ -324,10 +324,9 @@ namespace PrepareEnv
                 }
 
                 // Replace fallback binaries when generated ones are available
-                foreach (var generatedSource in new[] { Path.Combine(envConfig.BinarySource,"Common", "Core.Generated"),
-                    Path.Combine(envConfig.BinarySource, "Client", "Core.Generated"),
-                    Path.Combine(envConfig.BinarySource, "Server", "EF.Generated"),
-                    Path.Combine(envConfig.BinarySource, "Server", "NH.Generated") })
+                foreach (var generatedSource in new[] { Path.Combine(envConfig.BinarySource, "Common", "Generated"),
+                    Path.Combine(envConfig.BinarySource, "Client", "Generated"),
+                    Path.Combine(envConfig.BinarySource, "Server", "Generated") })
                 {
                     var generatedSourcePaths = ExpandPath(generatedSource);
 
