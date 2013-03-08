@@ -232,8 +232,8 @@ namespace PrepareEnv
                 var additionalCopiedFiles = new List<string>();
                 foreach (var source in sourcePaths)
                 {
-                    LogAction("copying common Binaries from " + source);
                     if (isWildcard && !Directory.Exists(source)) continue;
+                    LogAction("copying common Binaries from " + source);
 
                     if (Directory.Exists(Path.Combine(source, "Common")))
                     {
@@ -244,8 +244,9 @@ namespace PrepareEnv
 
                 foreach (var source in sourcePaths)
                 {
-                    LogAction("copying client and server Binaries from " + source);
                     if (isWildcard && !Directory.Exists(source)) continue;
+
+                    LogAction("copying Binaries from " + source);
 
                     if (Directory.Exists(Path.Combine(source, "Server")))
                     {
@@ -257,6 +258,16 @@ namespace PrepareEnv
                     {
                         var copiedPaths = CopyFolder(Path.Combine(source, "Client"), Path.Combine(envConfig.BinaryTarget, "Client"), copiedCommonFiles, null, CopyMode.RestoreHierarchie);
                         additionalCopiedFiles.AddRange(copiedPaths.Select(s => Path.GetFileName(s)));
+                    }
+
+                    if (Directory.Exists(Path.Combine(source, "Modules")))
+                    {
+                        var copiedPaths = CopyFolder(Path.Combine(source, "Modules"), Path.Combine(envConfig.BinaryTarget, "Modules"));
+                    }
+
+                    if (Directory.Exists(Path.Combine(source, "Data")))
+                    {
+                        var copiedPaths = CopyFolder(Path.Combine(source, "Data"), Path.Combine(envConfig.BinaryTarget, "Data"));
                     }
                 }
 
@@ -294,18 +305,17 @@ namespace PrepareEnv
                     }
                 }
 
-                var moduleTarget = Path.Combine(envConfig.BinaryTarget, "Modules");
+                // The following will be needed when deploying
                 if (Directory.Exists("Modules"))
                 {
-                    LogAction("copying Modules");
-                    CopyFolder("Modules", moduleTarget);
+                    LogAction("copying local Modules");
+                    CopyFolder("Modules", Path.Combine(envConfig.BinaryTarget, "Modules"));
                 }
 
-                var dataTarget = Path.Combine(envConfig.BinaryTarget, "Data");
                 if (Directory.Exists("Data"))
                 {
-                    LogAction("copying Data");
-                    CopyFolder("Data", dataTarget);
+                    LogAction("copying local Data");
+                    CopyFolder("Data", Path.Combine(envConfig.BinaryTarget, "Data"));
                 }
 
                 ReplaceNpgsql(envConfig.BinarySource, envConfig.BinaryTarget);
