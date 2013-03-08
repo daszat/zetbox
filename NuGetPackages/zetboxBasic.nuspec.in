@@ -90,6 +90,8 @@
     <!-- Server-side Components -->
     <file src="Server\Zetbox.API.Server.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.App.Projekte.Server.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.DalProvider.Client.Generator.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.DalProvider.Memory.Generator.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.Generator.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.Server.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.Server.Wcf.dll" target="zetbox\Server" />
