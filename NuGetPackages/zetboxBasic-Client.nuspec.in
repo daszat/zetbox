@@ -17,7 +17,7 @@
       <dependency id="zetboxBasic" version="[1.0.$REVNUM$.$DIRTY$]" />
       <dependency id="zetboxBasic-Common" version="[1.0.$REVNUM$.$DIRTY$]" />
 
-      <dependency id="GraphSharp" version="[1.1.0.0,2)" />
+      <dependency id="GraphSharp" version="[1.1.0.0]" />
     </dependencies>
   </metadata>
   <files>

@@ -16,11 +16,11 @@
     <dependencies>
       <dependency id="zetboxBasic" version="[1.0.$REVNUM$.$DIRTY$]" />
 
-      <dependency id="Arebis.CodeGenerator" version="[1.3,2.0)" />
-      <dependency id="Autofac" version="[2.6.3.862,3)" />
-      <dependency id="log4net" version="[2.0.0,3)" />
-      <dependency id="Mono.Cecil" version="[0.9.5.4,1)" />
-      <dependency id="PDFsharp-MigraDoc-GDI-dasz" version="[1.32.3886.0,2)" />
+      <dependency id="Arebis.CodeGenerator" version="[1.3.0.0]" />
+      <dependency id="Autofac" version="[2.6.3.862]" />
+      <dependency id="log4net" version="[2.0.0]" />
+      <dependency id="Mono.Cecil" version="[0.9.5.4]" />
+      <dependency id="PDFsharp-MigraDoc-GDI-dasz" version="[1.32.3886.0]" />
     </dependencies>
   </metadata>
   <files>

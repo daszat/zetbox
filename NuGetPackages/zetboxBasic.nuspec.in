@@ -50,6 +50,22 @@
     <file src="Common\Fallback\Zetbox.Objects.dll" target="zetbox\Common\Fallback" />
     <file src="Common\Fallback\Zetbox.Objects.MemoryImpl.dll" target="zetbox\Common\Fallback" />
 
+    <!-- Common Dependencies -->
+    <file src="Common\Arebis.CodeGeneration.dll" target="zetbox\Common" />
+    <file src="Common\Arebis.CodeGenerator.dll" target="zetbox\Common" />
+    <file src="Common\Autofac.dll" target="zetbox\Common" />
+    <file src="Common\Autofac.Configuration.dll" target="zetbox\Common" />
+    <file src="Common\log4net.dll" target="zetbox\Common" />
+    <file src="Common\MigraDoc.DocumentObjectModel.dll" target="zetbox\Common" />
+    <file src="Common\MigraDoc.Rendering.dll" target="zetbox\Common" />
+    <file src="Common\MigraDoc.RtfRendering.dll" target="zetbox\Common" />
+    <file src="Common\Mono.Cecil.dll" target="zetbox\Common" />
+    <file src="Common\Mono.Cecil.Mdb.dll" target="zetbox\Common" />
+    <file src="Common\Mono.Cecil.Pdb.dll" target="zetbox\Common" />
+    <file src="Common\Mono.Cecil.Rocks.dll" target="zetbox\Common" />
+    <file src="Common\PdfSharp.Charting.dll" target="zetbox\Common" />
+    <file src="Common\PdfSharp.dll" target="zetbox\Common" />
+
     <!-- Client-side Components -->
     <file src="Client\Zetbox.API.Client.dll" target="zetbox\Client" />
     <file src="Client\Zetbox.API.Client.dll.config" target="zetbox\Client" />
@@ -60,6 +76,16 @@
     <file src="Client\Zetbox.Client.WPF.Toolkit.dll" target="zetbox\Client" />
     <file src="Client\Zetbox.DalProvider.ClientObjects.dll" target="zetbox\Client" />
     <file src="Client\Zetbox.Microsoft.dll" target="zetbox\Client" />
+    <file src="Client\WPFSamplesLib.dll" target="zetbox\Client" />
+
+    <!-- Client-side Dependencies -->
+    <file src="Client\GraphSharp.Controls.dll" target="zetbox\Client" />
+    <file src="Client\GraphSharp.dll" target="zetbox\Client" />
+    <file src="Client\QuickGraph.Data.dll" target="zetbox\Client" />
+    <file src="Client\QuickGraph.dll" target="zetbox\Client" />
+    <file src="Client\QuickGraph.Graphviz.dll" target="zetbox\Client" />
+    <file src="Client\QuickGraph.Serialization.dll" target="zetbox\Client" />
+    <file src="Client\WPFExtensions.dll" target="zetbox\Client" />
 
     <!-- Server-side Components -->
     <file src="Server\Zetbox.API.Server.dll" target="zetbox\Server" />
@@ -67,9 +93,11 @@
     <file src="Server\Zetbox.Generator.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.Server.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.Server.Wcf.dll" target="zetbox\Server" />
-
-    <file src="Server\Mono.Posix.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.Unix.dll" target="zetbox\Server" />
+
+    <!-- Server-side Dependencies -->
+    <file src="Server\Autofac.Integration.Wcf.dll" target="zetbox\Server" />
+    <file src="Server\Mono.Posix.dll" target="zetbox\Server" />
 
     <file src="..\..\Configs\Examples\**" target="Configs/Examples" />
 
