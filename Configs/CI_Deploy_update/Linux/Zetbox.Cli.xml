@@ -7,6 +7,7 @@
     <CodeGenOutputPath>../bin/CodeGen</CodeGenOutputPath>
     <CodeGenBinaryOutputPath>
       <string>./</string>
+      <string>./HttpService/bin</string>
     </CodeGenBinaryOutputPath>
     <CodeGenArchivePath>../Backup</CodeGenArchivePath>
     <Modules>
