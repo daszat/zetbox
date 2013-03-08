@@ -18,8 +18,15 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Server\EF\**" target="zetbox/Server/EF" />
-    <file src="Server\EF.Fallback\**" target="zetbox/Server/EF.Fallback" />
+    <file src="Server\Zetbox.DalProvider.Ef.dll" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.Ef.pdb" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.Ef.xml" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.EF.Generator.dll" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.EF.Generator.pdb" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.EF.Generator.xml" target="zetbox/Server" />
+
+    <file src="Server\Fallback\Zetbox.Objects.EfImpl.dll" target="zetbox/Server/Fallback" />
+    <file src="Server\Fallback\Zetbox.Objects.EfImpl.pdb" target="zetbox/Server/Fallback" />
 
     <!-- this is required to avoid being seen as empty package by nuget -->
     <!-- see #595 and #2590 on the nuget issue tracker                  -->

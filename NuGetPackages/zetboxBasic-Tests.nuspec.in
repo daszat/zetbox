@@ -16,6 +16,7 @@
       <dependency id="NUnit" version="[2.6,3)" />
       <dependency id="NUnit.Runners" version="[2.6,3)" />
       <dependency id="zetboxBasic-Common" version="[1.0.$REVNUM$.$DIRTY$]" />
+      <!-- "everything" -->
     </dependencies>
   </metadata>
   <files>

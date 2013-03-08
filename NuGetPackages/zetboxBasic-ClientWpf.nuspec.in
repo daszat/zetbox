@@ -18,7 +18,9 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Client\WPF\Zetbox.Client.WPF.Toolkit.dll" target="lib\net40" />
+    <file src="Client\Zetbox.Client.WPF.Toolkit.dll" target="lib\net40" />
+    <file src="Client\Zetbox.Client.WPF.Toolkit.pdb" target="lib\net40" />
+    <file src="Client\Zetbox.Client.WPF.Toolkit.xml" target="lib\net40" />
 
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>
