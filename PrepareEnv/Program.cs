@@ -265,13 +265,18 @@ namespace PrepareEnv
                 LogAction("copying HttpService and associated binaries");
                 foreach (var source in sourcePaths)
                 {
-                    LogDetail("copying from " + source);
-                    CopyFolder(Path.Combine(source, "HttpService"), Path.Combine(envConfig.BinaryTarget, "HttpService"));
-                    LogDetail("copying from deployed Common");
-                    CopyFolder(Path.Combine(envConfig.BinaryTarget, "Common"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Common"));
-                    LogDetail("copying from deployed Server");
-                    CopyFolder(Path.Combine(envConfig.BinaryTarget, "Server"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Server"));
+                    if (isWildcard && !Directory.Exists(source)) continue;
+
+                    if (Directory.Exists(Path.Combine(source, "HttpService")))
+                    {
+                        LogDetail("copying from " + source);
+                        CopyFolder(Path.Combine(source, "HttpService"), Path.Combine(envConfig.BinaryTarget, "HttpService"));
+                    }
                 }
+                LogDetail("copying from deployed Common");
+                CopyFolder(Path.Combine(envConfig.BinaryTarget, "Common"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Common"));
+                LogDetail("copying from deployed Server");
+                CopyFolder(Path.Combine(envConfig.BinaryTarget, "Server"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Server"));
 
                 foreach (var source in sourcePaths)
                 {
