@@ -203,14 +203,16 @@
   <PropertyGroup>
     <!-- deploys the compiled binaries into the local inetpub for debugging -->
     <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\Common"
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\Server"
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin\Common"
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin\Server"
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\Client"
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Bootstrapper" "$(ProjectDir)\Bootstrapper"
 del "$(ProjectDir)\bin\Zetbox.Objects.*"
     </PostBuildEvent>
     <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
-bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Bootstrapper} "$(ProjectDir)"'
+bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server} "$(ProjectDir)/bin"'
+bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Client,Bootstrapper} "$(ProjectDir)"'
+bash -c 'rm -f "$(ProjectDir)"/bin/Zetbox.Objects.*'
      </PostBuildEvent>
   </PropertyGroup>
   <!--
@@ -232,11 +234,6 @@ bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Boots
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin\Common"
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin\Server"
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\Client"
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Bootstrapper" "$(ProjectDir)\Bootstrapper"
-del "$(ProjectDir)\bin\Zetbox.Objects.*"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
