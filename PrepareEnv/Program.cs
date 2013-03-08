@@ -262,12 +262,12 @@ namespace PrepareEnv
 
                     if (Directory.Exists(Path.Combine(source, "Modules")))
                     {
-                        var copiedPaths = CopyFolder(Path.Combine(source, "Modules"), Path.Combine(envConfig.BinaryTarget, "Modules"));
+                        CopyFolder(Path.Combine(source, "Modules"), Path.Combine(envConfig.BinaryTarget, "Modules"));
                     }
 
                     if (Directory.Exists(Path.Combine(source, "Data")))
                     {
-                        var copiedPaths = CopyFolder(Path.Combine(source, "Data"), Path.Combine(envConfig.BinaryTarget, "Data"));
+                        CopyFolder(Path.Combine(source, "Data"), Path.Combine(envConfig.BinaryTarget, "Data"));
                     }
                 }
 
