@@ -24,9 +24,9 @@ namespace Zetbox.API.Tests
     using System.Reflection;
     using System.Text;
     using Autofac;
-    using Zetbox.API.Mocks;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
+    using Zetbox.API.Mocks;
 
     [TestFixture]
     public class HelperTest : AbstractApiTestFixture
@@ -349,8 +349,6 @@ namespace Zetbox.API.Tests
 
         #endregion
 
-        // see https://bugzilla.novell.com/show_bug.cgi?id=670331
-#if !MONO
         [TestCase(typeof(IEnumerable<string>), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable) })]
         [TestCase(typeof(IList<string>), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable) })]
         [TestCase(typeof(TestSequence), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable<int>), typeof(IEnumerable) })]
@@ -401,7 +399,6 @@ namespace Zetbox.API.Tests
             var result = typeof(FgmTestClass).FindGenericMethod(methodName, typeArguments, null);
             Assert.That(result, Is.Null); // TODO: implement extension lookup in FindGenericMethod
         }
-#endif
     }
 
     public class FgmTestClass
