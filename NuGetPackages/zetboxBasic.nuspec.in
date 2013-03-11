@@ -102,7 +102,6 @@
 
     <!-- Server-side Dependencies -->
     <file src="Server\Autofac.Integration.Wcf.dll" target="zetbox\Server" />
-    <file src="Server\Autofac.Integration.Web.dll" target="zetbox\Server" />
     <file src="Server\Mono.Posix.dll" target="zetbox\Server" />
 
     <file src="..\..\Configs\Examples\**" target="Configs/Examples" />
@@ -113,8 +112,18 @@
     <file src="..\..\Modules\**" target="zetbox/Modules" />
     <file src="..\..\Data\**" target="zetbox/Data" />
 
+    <!-- HttpService loose files -->
     <file src="HttpService\**" target="zetbox/HttpService" exclude="HttpService\bin\**" />
+
+    <!-- HttpService Component -->
     <file src="HttpService\bin\Zetbox.Server.HttpService.dll" target="zetbox/HttpService/bin" />
+
+    <!-- HttpService Dependencies -->
+    <file src="HttpService\bin\Zetbox.Server.HttpService.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\Autofac.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\Autofac.Configuration.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\log4net.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\Zetbox.API.dll" target="zetbox/HttpService/bin" />
 
     <file src="*.targets" target="tools" />
 
