@@ -31,6 +31,9 @@
     <file src="Zetbox.WPF.exe" target="zetbox" />
     <file src="Zetbox.WPF.exe.config" target="zetbox" />
 
+    <file src="PrepareEnv.exe" target="zetbox" />
+    <file src="PrepareEnv.exe.config" target="zetbox" />
+
     <file src="ZbDeploy.cmd" target="zetbox" />
     <file src="ZbLocalPull.cmd" target="zetbox" />
     <file src="ZbPublish.cmd" target="zetbox" />
