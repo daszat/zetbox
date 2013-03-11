@@ -666,9 +666,10 @@ namespace PrepareEnv
                 var split = source.Split('*');
                 if (split.Length != 2) throw new ArgumentOutOfRangeException("source", "only one wildcard is supported yet");
 
-                var baseSource = split[0] + "*";
-                var tail = split[1].TrimStart(Path.DirectorySeparatorChar).TrimStart(Path.AltDirectorySeparatorChar);
+                var baseSource = Path.Combine(split[0].TrimEnd('/').TrimEnd('\\'), "*");
+                var tail = split[1].TrimStart('/').TrimStart('\\');
                 var path = Path.GetDirectoryName(baseSource);
+                path = string.IsNullOrWhiteSpace(path) ? "." : path;
                 var filter = Path.GetFileName(baseSource);
 
                 result.AddRange(Directory.GetDirectories(path, filter).Select(i => Path.Combine(i, tail)).Where(i => Directory.Exists(i)));
