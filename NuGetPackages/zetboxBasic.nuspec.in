@@ -122,6 +122,7 @@
     <file src="HttpService\bin\Zetbox.Server.HttpService.dll" target="zetbox/HttpService/bin" />
     <file src="HttpService\bin\Autofac.dll" target="zetbox/HttpService/bin" />
     <file src="HttpService\bin\Autofac.Configuration.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\Autofac.Integration.Web.dll" target="zetbox/HttpService/bin" />
     <file src="HttpService\bin\log4net.dll" target="zetbox/HttpService/bin" />
     <file src="HttpService\bin\Zetbox.API.dll" target="zetbox/HttpService/bin" />
 
