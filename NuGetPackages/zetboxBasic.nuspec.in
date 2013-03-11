@@ -102,6 +102,7 @@
 
     <!-- Server-side Dependencies -->
     <file src="Server\Autofac.Integration.Wcf.dll" target="zetbox\Server" />
+    <file src="Server\Autofac.Integration.Web.dll" target="zetbox\Server" />
     <file src="Server\Mono.Posix.dll" target="zetbox\Server" />
 
     <file src="..\..\Configs\Examples\**" target="Configs/Examples" />
