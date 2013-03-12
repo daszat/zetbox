@@ -579,8 +579,36 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             }
         }
 
+        private List<string> FindReferencingCheckConstraints(TableRef tblName, string colName)
+        {
+            return ExecuteReader(@"
+                SELECT OBJECT_NAME(referencing_id) AS referencing_entity_name
+                    FROM sys.sql_expression_dependencies AS sed
+                    WHERE referenced_schema_name = @schema
+	                    AND referenced_entity_name = @tblName
+	                    AND COL_NAME(referenced_id, referenced_minor_id) = @colName",
+                new Dictionary<string, object>()
+                {
+                    { "@schema", tblName.Schema },
+                    { "@tblName", tblName.Name },
+                    { "@colName", colName },
+                })
+                .Select(r => (string)r[0])
+                .ToList();
+        }
+
         public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
         {
+            // sp_rename cannot cope when check constraints reference the column. wtf?
+            // Workaround_UpdateTPHNotNullCheckConstraint will recreate the constraints for us.
+            foreach (var constraintName in FindReferencingCheckConstraints(tblName, oldColName))
+            {
+                if (CheckCheckConstraintExists(tblName, constraintName))
+                {
+                    DropCheckConstraint(tblName, constraintName);
+                }
+            }
+
             // Do not qualify new name as it will stay part of the original table
             ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.{1}', '{2}', 'COLUMN'", FormatSchemaName(tblName), QuoteIdentifier(oldColName), newColName));
         }
@@ -839,23 +867,28 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 }) > 0;
         }
 
-        public override bool CheckTriggerExists(TableRef objName, string triggerName)
+        public override IEnumerable<TriggerRef> GetTriggerNames()
         {
-            if (objName == null) throw new ArgumentNullException("objName");
+            return ExecuteReader("SELECT s.name, o.name FROM sys.objects o JOIN sys.schemas s ON o.schema_id = s.schema_id WHERE o.type = N'TR'")
+                .Select(rd => new TriggerRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
+        }
+
+        public override bool CheckTriggerExists(TriggerRef triggerName)
+        {
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
 
             return (int)ExecuteScalar(
-                "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')",
+                "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND type IN (N'TR')",
                 new Dictionary<string, object>(){
-                    { "@trigger", FormatSchemaName(new TriggerRef(objName.Database, objName.Schema, triggerName)) },
-                    { "@parent", FormatSchemaName(objName) },
+                    { "@trigger", FormatSchemaName(triggerName) },
                 }) > 0;
         }
 
-        public override void DropTrigger(TableRef objName, string triggerName)
+        public override void DropTrigger(TriggerRef triggerName)
         {
-            if (objName == null) throw new ArgumentNullException("objName");
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
 
-            ExecuteNonQuery(string.Format("DROP TRIGGER {0}", FormatSchemaName(new TriggerRef(objName.Database, objName.Schema, triggerName))));
+            ExecuteNonQuery(string.Format("DROP TRIGGER {0}", FormatSchemaName(triggerName)));
         }
 
         public override IEnumerable<ProcRef> GetProcedureNames()
@@ -1050,19 +1083,21 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 : -1;
         }
 
-        public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
+        public override void CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
-            if (tblList == null)
-                throw new ArgumentNullException("tblList");
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblList == null) throw new ArgumentNullException("tblList");
+            if (triggerName.Database != tblName.Database || triggerName.Schema != tblName.Schema) throw new ArgumentOutOfRangeException("tblName", string.Format("tblName and triggerName must reference the same database and schema, but don't: tbl:{0}.{1} != trg:{2}.{3}", tblName.Database, tblName.Schema, triggerName.Database, triggerName.Schema));
 
-            Log.DebugFormat("Creating trigger to update rights [{0}]", triggerName);
+            Log.DebugFormat("Creating trigger to update rights [{0}]", FormatSchemaName(triggerName));
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat(@"CREATE TRIGGER [{0}]
 ON {1}
 AFTER UPDATE, INSERT, DELETE AS
 BEGIN
-SET NOCOUNT ON", triggerName, FormatSchemaName(tblName));
+SET NOCOUNT ON", triggerName.Name, FormatSchemaName(tblName));
             sb.AppendLine();
 
             // optimaziation

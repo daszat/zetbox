@@ -46,6 +46,8 @@ namespace Zetbox.Server.SchemaManagement
                         gmf.PreMigration(db);
                     }
 
+                    DropVolatileObjects();
+
                     UpdateDatabaseSchemas();
                     UpdateTables();
                     UpdateRelations();
@@ -58,7 +60,8 @@ namespace Zetbox.Server.SchemaManagement
 
                     UpdateProcedures();
 
-                    Workaround_UpdateTPHNotNullCheckConstraint();
+                    CreateFinalCheckConstraints();
+                    CreateFinalRightsInfrastructure();
 
                     SaveSchema(schema);
 
@@ -77,6 +80,57 @@ namespace Zetbox.Server.SchemaManagement
                     Log.Error("An error ocurred while updating the schema", ex);
                     throw;
                 }
+            }
+        }
+
+        private void CreateFinalRightsInfrastructure()
+        {
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
+            {
+                if (!objClass.NeedsRightsTable()) continue;
+
+                var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
+                var tblName = objClass.GetTableRef(db);
+                var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
+                var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
+
+                if (db.CheckViewExists(rightsViewUnmaterializedName)) continue;
+
+                Log.InfoFormat("New ObjectClass Security Rules: {0}", objClass.Name);
+
+                Case.DoCreateOrReplaceUpdateRightsTrigger(objClass);
+                Case.DoCreateRightsViewUnmaterialized(objClass);
+                if (!db.CheckProcedureExists(refreshRightsOnProcedureName))
+                    db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
+                // Either the procedure has to be called, then it was done by the respective case
+                // or, we just removed it to keep the dependency away, then nothing has changed.
+                //db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
+            }
+        }
+
+        private void CreateFinalCheckConstraints()
+        {
+            // this does more than required (dropping already existing), but good enough for now.
+            // has to be revisited if someone else creates check constraints.
+            Workaround_UpdateTPHNotNullCheckConstraint();
+        }
+
+        private void DropVolatileObjects()
+        {
+            foreach (var triggerName in db.GetTriggerNames())
+            {
+                db.DropTrigger(triggerName);
+            }
+
+            foreach (var viewName in db.GetViewNames())
+            {
+                db.DropView(viewName);
+            }
+
+            // only drop refreshrights procedures
+            foreach (var procName in db.GetProcedureNames().Where(procRef => procRef.Name.StartsWith(Construct.SecurityRulesRefreshRightsOnProcedurePrefix())))
+            {
+                db.DropProcedure(procName);
             }
         }
 

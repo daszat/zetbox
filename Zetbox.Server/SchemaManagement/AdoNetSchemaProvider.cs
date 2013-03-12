@@ -564,8 +564,9 @@ namespace Zetbox.Server.SchemaManagement
                 FormatSchemaName(viewName)));
         }
 
-        public abstract bool CheckTriggerExists(TableRef objName, string triggerName);
-        public abstract void DropTrigger(TableRef objName, string triggerName);
+        public abstract IEnumerable<TriggerRef> GetTriggerNames();
+        public abstract bool CheckTriggerExists(TriggerRef triggerName);
+        public abstract void DropTrigger(TriggerRef triggerName);
 
         public ProcRef GetProcedureName(string schemaName, string procName)
         {
@@ -738,7 +739,7 @@ namespace Zetbox.Server.SchemaManagement
         public abstract void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName);
         public abstract void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName);
 
-        public abstract void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols);
+        public abstract void CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols);
         public abstract void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls);
         public abstract void CreateEmptyRightsViewUnmaterialized(TableRef viewName);
         public abstract void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);

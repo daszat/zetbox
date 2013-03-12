@@ -839,10 +839,21 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 });
         }
 
-        public override bool CheckTriggerExists(TableRef objName, string triggerName)
+        public override IEnumerable<TriggerRef> GetTriggerNames()
         {
-            if (objName == null)
-                throw new ArgumentNullException("objName");
+            return ExecuteReader(@"SELECT n.nspname, p.proname
+                FROM pg_proc p
+                    JOIN pg_namespace n ON p.pronamespace = n.oid
+                    JOIN pg_type t ON p.prorettype = t.oid
+                WHERE t.typname = 'trigger'")
+                .Select(rd => new TriggerRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
+        }
+
+        public override bool CheckTriggerExists(TriggerRef triggerName)
+        {
+            if (triggerName == null)
+                throw new ArgumentNullException("triggerName");
+
             return (bool)ExecuteScalar(@"
                 SELECT count(*) > 0
                 FROM pg_proc p
@@ -850,18 +861,17 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                     JOIN pg_type t ON p.prorettype = t.oid
                 WHERE t.typname = 'trigger' AND n.nspname = @schema AND p.proname = @trigger",
                 new Dictionary<string, object>(){
-                    { "@schema", objName.Schema },
-                    { "@trigger", triggerName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
+                    { "@schema", triggerName.Schema },
+                    { "@trigger", triggerName.Name.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
 
-        public override void DropTrigger(TableRef objName, string triggerName)
+        public override void DropTrigger(TriggerRef triggerName)
         {
-            if (objName == null) throw new ArgumentNullException("objName");
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
 
-            ExecuteNonQuery(String.Format("DROP FUNCTION {0}.{1}() CASCADE",
-                QuoteIdentifier(objName.Schema),
-                QuoteIdentifier(triggerName)));
+            ExecuteNonQuery(String.Format("DROP FUNCTION {0}() CASCADE",
+                FormatSchemaName(triggerName)));
         }
 
         public override bool CheckProcedureExists(ProcRef procName)
@@ -1144,20 +1154,16 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier("ID")));     // 5
         }
 
-        public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
+        public override void CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
-            if (String.IsNullOrEmpty(triggerName))
-                throw new ArgumentNullException("triggerName");
-            if (tblName == null)
-                throw new ArgumentNullException("tblName");
-            if (tblList == null)
-                throw new ArgumentNullException("tblList");
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblList == null) throw new ArgumentNullException("tblList");
+            if (triggerName.Database != tblName.Database || triggerName.Schema != tblName.Schema) throw new ArgumentOutOfRangeException("tblName", string.Format("tblName and triggerName must reference the same database and schema, but don't: tbl:{0}.{1} != trg:{2}.{3}", tblName.Database, tblName.Schema, triggerName.Database, triggerName.Schema));
 
             StringBuilder sb = new StringBuilder();
             sb.Append("CREATE OR REPLACE FUNCTION ");
-            sb.Append(QuoteIdentifier(tblName.Schema));
-            sb.Append(".");
-            sb.Append(QuoteIdentifier(triggerName));
+            sb.Append(FormatSchemaName(triggerName));
             sb.Append("()");
             sb.AppendLine();
             sb.Append(@"  RETURNS trigger AS
@@ -1252,9 +1258,9 @@ END$BODY$
                 CREATE TRIGGER {0} AFTER INSERT OR UPDATE OR DELETE
                     ON {1} FOR EACH ROW
                     EXECUTE PROCEDURE {2}.{0}()",
-                QuoteIdentifier(triggerName),
+                QuoteIdentifier(triggerName.Name),
                 FormatSchemaName(tblName),
-                QuoteIdentifier(tblName.Schema)
+                QuoteIdentifier(triggerName.Schema)
                 ));
         }
 
@@ -1324,7 +1330,7 @@ FROM (", FormatSchemaName(viewName));
             Log.DebugFormat("Creating refresh rights procedure for \"{0}\"", tblName);
             ExecuteNonQuery(String.Format(
                 @"
-CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS
+CREATE FUNCTION {0}(IN refreshID integer) RETURNS void AS
 $BODY$BEGIN
     IF (refreshID IS NULL) THEN
             -- Admin Only: ALTER TABLE {1} DISABLE TRIGGER ALL;

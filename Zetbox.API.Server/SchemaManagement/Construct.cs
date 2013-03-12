@@ -250,10 +250,16 @@ namespace Zetbox.API.SchemaManagement
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return objClass.TableName + "_Rights_unmaterialized";
         }
+
+        public static string SecurityRulesRefreshRightsOnProcedurePrefix()
+        {
+            return "RefreshRightsOn_";
+        }
+
         public static string SecurityRulesRefreshRightsOnProcedureName(ObjectClass objClass)
         {
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
-            return "RefreshRightsOn_" + objClass.TableName;
+            return SecurityRulesRefreshRightsOnProcedurePrefix() + objClass.TableName;
         }
 
         public static string SecurityRulesRefreshAllRightsProcedureName()

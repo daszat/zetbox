@@ -61,7 +61,7 @@ namespace Zetbox.Server.SchemaManagement
                     CheckInheritance();
                     Log.Debug(String.Empty);
 
-                    if(withRepair)
+                    if (withRepair)
                         Workaround_UpdateTPHNotNullCheckConstraint();
 
                     CheckExtraRelations();
@@ -141,13 +141,13 @@ namespace Zetbox.Server.SchemaManagement
                 Log.DebugFormat("Table: {0}", objClass.TableName);
                 if (repair)
                 {
-                    Case.DoCreateUpdateRightsTrigger(objClass);
+                    Case.DoCreateOrReplaceUpdateRightsTrigger(objClass);
                 }
                 else
                 {
-                    var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
                     var tblName = objClass.GetTableRef(db);
-                    if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
+                    var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(objClass));
+                    if (!db.CheckTriggerExists(updateRightsTriggerName))
                     {
                         Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
                     }
@@ -166,9 +166,9 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
-                    var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
                     var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-                    if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
+                    var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(rel));
+                    if (!db.CheckTriggerExists(updateRightsTriggerName))
                     {
                         Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
                     }

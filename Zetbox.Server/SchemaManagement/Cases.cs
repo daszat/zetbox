@@ -2646,7 +2646,7 @@ namespace Zetbox.Server.SchemaManagement
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
-            DoCreateUpdateRightsTrigger(objClass);
+            DoCreateOrReplaceUpdateRightsTrigger(objClass);
             DoCreateRightsViewUnmaterialized(objClass);
             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
             db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
@@ -2664,7 +2664,6 @@ namespace Zetbox.Server.SchemaManagement
                 db.CreateEmptyRightsViewUnmaterialized(rightsViewUnmaterializedName);
                 return;
             }
-
 
             List<ACL> viewAcls = new List<ACL>();
             foreach (var ac in objClass.AccessControlList.OfType<RoleMembership>())
@@ -2694,12 +2693,13 @@ namespace Zetbox.Server.SchemaManagement
             db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName, viewAcls);
         }
 
-        public void DoCreateUpdateRightsTrigger(ObjectClass objClass)
+        public void DoCreateOrReplaceUpdateRightsTrigger(ObjectClass objClass)
         {
-            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
             var tblName = objClass.GetTableRef(db);
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
-                db.DropTrigger(tblName, updateRightsTriggerName);
+            var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(objClass));
+
+            if (db.CheckTriggerExists(updateRightsTriggerName))
+                db.DropTrigger(updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
             tblList.Add(new RightsTrigger()
@@ -2754,10 +2754,11 @@ namespace Zetbox.Server.SchemaManagement
 
         public void DoCreateUpdateRightsTrigger(Relation rel)
         {
-            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
-                db.DropTrigger(tblName, updateRightsTriggerName);
+            var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(rel));
+
+            if (db.CheckTriggerExists(updateRightsTriggerName))
+                db.DropTrigger(updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
 
@@ -2843,6 +2844,8 @@ namespace Zetbox.Server.SchemaManagement
             if (db.CheckViewExists(rightsViewUnmaterializedName))
                 db.DropView(rightsViewUnmaterializedName);
             DoCreateRightsViewUnmaterialized(objClass);
+
+            DoCreateOrReplaceUpdateRightsTrigger(objClass);
             db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
         }
         #endregion
@@ -2860,12 +2863,12 @@ namespace Zetbox.Server.SchemaManagement
             var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
-            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
+            var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(objClass));
 
             Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.Name);
 
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
-                db.DropTrigger(tblName, updateRightsTriggerName);
+            if (db.CheckTriggerExists(updateRightsTriggerName))
+                db.DropTrigger(updateRightsTriggerName);
 
             if (db.CheckProcedureExists(db.GetProcedureName(objClass.Module.SchemaName, refreshRightsOnProcedureName)))
                 db.DropProcedure(db.GetProcedureName(objClass.Module.SchemaName, refreshRightsOnProcedureName));

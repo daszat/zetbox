@@ -139,6 +139,11 @@ namespace Zetbox.Server.SchemaManagement
             return _provider.GetTableNames();
         }
 
+        public IEnumerable<TriggerRef> GetTriggerNames()
+        {
+            return _provider.GetTriggerNames();
+        }
+
         public IEnumerable<TableRef> GetViewNames()
         {
             return _provider.GetViewNames();
@@ -224,9 +229,9 @@ namespace Zetbox.Server.SchemaManagement
             return _provider.CheckViewExists(viewName);
         }
 
-        public bool CheckTriggerExists(TableRef objName, string triggerName)
+        public bool CheckTriggerExists(TriggerRef triggerName)
         {
-            return _provider.CheckTriggerExists(objName, triggerName);
+            return _provider.CheckTriggerExists(triggerName);
         }
 
         public bool CheckProcedureExists(ProcRef procName)
@@ -346,10 +351,10 @@ namespace Zetbox.Server.SchemaManagement
             _provider.DropFKConstraint(tblName, constraintName);
         }
 
-        public void DropTrigger(TableRef objName, string triggerName)
+        public void DropTrigger(TriggerRef triggerName)
         {
             Log.DebugFormat("Dropping trigger [{0}]", triggerName);
-            _provider.DropTrigger(objName, triggerName);
+            _provider.DropTrigger(triggerName);
         }
 
         public void DropView(TableRef viewName)
@@ -420,7 +425,7 @@ namespace Zetbox.Server.SchemaManagement
             _provider.CreateIndex(tblName, idxName, unique, clustered, columns);
         }
 
-        public void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
+        public void CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
             _provider.CreateUpdateRightsTrigger(triggerName, tblName, tblList, dependingCols);
         }
@@ -636,6 +641,5 @@ namespace Zetbox.Server.SchemaManagement
         {
             return _provider.QuoteIdentifier(name);
         }
-
     }
 }

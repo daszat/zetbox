@@ -290,6 +290,11 @@ namespace Zetbox.API.Server
         {
         }
 
+        public TriggerRef(TableRef tblName, string name)
+            : base(tblName.Database, tblName.Schema, name)
+        {
+        }
+
         int IComparable<TriggerRef>.CompareTo(TriggerRef other)
         {
             return ((IComparable<DboRef>)this).CompareTo(other);
@@ -661,8 +666,6 @@ namespace Zetbox.API.Server
 
         bool CheckTableExists(TableRef tblName);
         IEnumerable<TableRef> GetTableNames();
-        IEnumerable<TableRef> GetViewNames();
-        string GetViewDefinition(TableRef view);
 
         void CreateTable(TableRef tblName, IEnumerable<Column> cols);
         void CreateTable(TableRef tblName, bool idAsIdentityColumn);
@@ -767,11 +770,14 @@ namespace Zetbox.API.Server
 
         #region Other DB Objects (Views, Triggers, Procedures)
 
+        IEnumerable<TableRef> GetViewNames();
         bool CheckViewExists(TableRef viewName);
+        string GetViewDefinition(TableRef view);
         void DropView(TableRef viewName);
 
-        bool CheckTriggerExists(TableRef objName, string triggerName);
-        void DropTrigger(TableRef objName, string triggerName);
+        IEnumerable<TriggerRef> GetTriggerNames();
+        bool CheckTriggerExists(TriggerRef triggerName);
+        void DropTrigger(TriggerRef triggerName);
 
         ProcRef GetProcedureName(string schemaName, string procName);
         IEnumerable<ProcRef> GetProcedureNames();
@@ -817,7 +823,7 @@ namespace Zetbox.API.Server
         /// <param name="tblName"></param>
         /// <param name="tblList"></param>
         /// <param name="dependingCols">List of columns triggering a rights update. Typically a list of fk_ cols.</param>
-        void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols);
+        void CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols);
         void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls);
         void CreateEmptyRightsViewUnmaterialized(TableRef viewName);
         void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);
@@ -854,5 +860,6 @@ namespace Zetbox.API.Server
         /// <param name="type">A Type to locate the Resource's Assembly</param>
         /// <param name="scriptResourceNameFormat">the Resource path to locate the SQL script. "{0}" is replaced by the ConfigName.</param>
         void ExecuteSqlResource(Type type, string scriptResourceNameFormat);
+
     }
 }
