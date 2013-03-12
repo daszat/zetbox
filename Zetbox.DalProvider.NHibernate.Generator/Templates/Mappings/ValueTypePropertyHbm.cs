@@ -19,6 +19,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
     using System.Collections.Generic;
     using System.Linq;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -36,7 +37,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             string implementationSuffix,
             bool needsConcurrency)
         {
-            if (_host == null) { throw new ArgumentNullException("_host"); }
+            if (_host == null) throw new ArgumentNullException("_host");
+            if (prop == null) throw new ArgumentNullException("prop");
 
             // shortcut unmapped properties
             if (prop.IsCalculated)
@@ -45,7 +47,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             }
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
-            columnName = string.IsNullOrEmpty(columnName) ? propName : columnName;
+            columnName = string.IsNullOrEmpty(columnName) ? Construct.ColumnName(prop, prefix) : prefix + columnName;
             var optimisticLock = needsConcurrency && propName == "ChangedOn";
 
             string typeAttr = String.Empty;
@@ -69,7 +71,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 ceClassAttr = String.Empty;
             }
 
-            string ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
+            string ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
             string listPositionColumnName = Construct.ListPositionColumnName(prop);
 
             Call(_host,

@@ -76,15 +76,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultPropertyViewModelDescriptor == null)
-				{
-					SetInitializedProperty("DefaultPropertyViewModelDescriptor");
+                {
+                    SetInitializedProperty("DefaultPropertyViewModelDescriptor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultPropertyViewModelDescriptor);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DefaultPropertyViewModelDescriptor");
+                {
+                    SetInitializedProperty("DefaultPropertyViewModelDescriptor");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultPropertyViewModelDescriptor_PostSetter != null && IsAttached)
                 {
@@ -343,12 +344,6 @@ namespace Zetbox.App.Base
             var me = (CompoundObject)this;
 
             this._fk_DefaultPropertyViewModelDescriptor = otherImpl._fk_DefaultPropertyViewModelDescriptor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

@@ -54,7 +54,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectViewModel>> Members
 
-        protected override string InitialSortProperty {get { return null;}}
+        protected override string InitialSortProperty { get { return null; } }
 
 
         public bool HasPersistentOrder
@@ -79,9 +79,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_MoveItemUpCommand == null)
                 {
-                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Up", "Moves the item up", 
+                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Up", "Moves the item up",
                         MoveItemUp,
-                        CanMove, 
+                        CanMove,
                         null);
                 }
                 return _MoveItemUpCommand;
@@ -116,9 +116,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_MoveItemDownCommand == null)
                 {
-                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Down", "Moves the item down", 
+                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Down", "Moves the item down",
                         MoveItemDown,
-                        CanMove, 
+                        CanMove,
                         null);
                 }
                 return _MoveItemDownCommand;
@@ -150,7 +150,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             base.OnPropertyChanged(propertyName);
 
-            switch(propertyName)
+            switch (propertyName)
             {
                 case "SortProperty":
                     OnPropertyChanged("IsSorting");
@@ -173,9 +173,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_ClearSortCommand == null)
                 {
-                    _ClearSortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Clear sort", "Clear the current sorting", 
-                        ClearSort, 
-                        () => IsSorting, 
+                    _ClearSortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Clear sort", "Clear the current sorting",
+                        ClearSort,
+                        () => IsSorting,
                         null);
                 }
                 return _ClearSortCommand;

@@ -77,15 +77,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Constrained == null)
-				{
-					SetInitializedProperty("Constrained");
+                {
+                    SetInitializedProperty("Constrained");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Constrained);
@@ -94,10 +94,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Constrained");
+                {
+                    SetInitializedProperty("Constrained");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Constrained", __oldValue, __newValue);
@@ -144,6 +144,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Constrained", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnConstrained_PostSetter != null && IsAttached)
                 {
@@ -203,6 +204,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -210,10 +212,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -279,6 +281,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Reason", __oldValue, __newValue);
                     Proxy.Reason = __newValue;
                     NotifyPropertyChanged("Reason", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnReason_PostSetter != null && IsAttached)
                     {
@@ -286,10 +289,10 @@ namespace Zetbox.App.Base
                         OnReason_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Reason");
-				}
+                else
+                {
+                    SetInitializedProperty("Reason");
+                }
             }
         }
 
@@ -443,12 +446,6 @@ namespace Zetbox.App.Base
             me.ExportGuid = other.ExportGuid;
             me.Reason = other.Reason;
             this._fk_Constrained = otherImpl._fk_Constrained;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

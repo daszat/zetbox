@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Int Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IntProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="IntPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IntProperty")]
     public class IntPropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, IntProperty
     {
@@ -367,11 +367,6 @@ namespace Zetbox.App.Base
             var otherImpl = (IntPropertyEfImpl)obj;
             var me = (IntProperty)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

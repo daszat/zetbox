@@ -43,8 +43,8 @@ namespace Zetbox.App.GUI
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
-            _isCreatedOnSet = Proxy.ID > 0;
             _isChangedOnSet = Proxy.ID > 0;
+            _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
         }
 
@@ -79,15 +79,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -96,10 +96,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -123,6 +123,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -180,6 +181,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -187,10 +189,10 @@ namespace Zetbox.App.GUI
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
 
@@ -291,6 +293,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Color", __oldValue, __newValue);
                     Proxy.Color = __newValue;
                     NotifyPropertyChanged("Color", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnColor_PostSetter != null && IsAttached)
                     {
@@ -298,10 +301,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnColor_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Color");
-				}
+                else
+                {
+                    SetInitializedProperty("Color");
+                }
             }
         }
 
@@ -340,15 +343,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -357,10 +360,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -384,6 +387,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -441,6 +445,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -448,10 +453,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
 
@@ -518,6 +523,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -525,10 +531,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -617,15 +623,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -634,10 +640,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -661,6 +667,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -711,15 +718,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Parent == null)
-				{
-					SetInitializedProperty("Parent");
+                {
+                    SetInitializedProperty("Parent");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
@@ -728,10 +735,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Parent");
+                {
+                    SetInitializedProperty("Parent");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Parent", __oldValue, __newValue);
@@ -778,6 +785,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnParent_PostSetter != null && IsAttached)
                 {
@@ -813,12 +821,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Children_pos", __oldValue, __newValue);
                     Proxy.Children_pos = __newValue;
                     NotifyPropertyChanged("Children_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("Children_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("Children_pos");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -828,6 +837,101 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntry> OnParent_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnParent_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+        // fkBackingName=this.Proxy.RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
+        // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable; does call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.GUI.ControlKind RequestedKind
+        {
+            get
+            {
+                Zetbox.App.GUI.ControlKindNHibernateImpl __value = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedKind);
+
+                if (OnRequestedKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(__value);
+                    OnRequestedKind_Getter(this, e);
+                    __value = (Zetbox.App.GUI.ControlKindNHibernateImpl)e.Result;
+                }
+
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.RequestedKind == null)
+                {
+                    SetInitializedProperty("RequestedKind");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedKind);
+                var __newValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                {
+                    SetInitializedProperty("RequestedKind");
+                    return;
+                }
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("RequestedKind", __oldValue, __newValue);
+
+                if (OnRequestedKind_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedKind_PreSetter(this, e);
+                    __newValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)e.Result;
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.RequestedKind = null;
+                }
+                else
+                {
+                    this.Proxy.RequestedKind = __newValue.Proxy;
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+                if (OnRequestedKind_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedKind_PostSetter(this, e);
+                }
+            }
+        }
+
+        /// <summary>Backing store for RequestedKind's id, used on dehydration only</summary>
+        private int? _fk_RequestedKind = null;
+
+        /// <summary>Backing store for RequestedKind's guid, used on import only</summary>
+        private Guid? _fk_guid_RequestedKind = null;
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.ControlKind> OnRequestedKind_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.ControlKind> OnRequestedKind_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.ControlKind> OnRequestedKind_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnRequestedKind_IsValid;
 
         /// <summary>
         /// The title of this screen
@@ -865,6 +969,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Title", __oldValue, __newValue);
                     Proxy.Title = __newValue;
                     NotifyPropertyChanged("Title", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTitle_PostSetter != null && IsAttached)
                     {
@@ -872,10 +977,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnTitle_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Title");
-				}
+                else
+                {
+                    SetInitializedProperty("Title");
+                }
             }
         }
 
@@ -914,15 +1019,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ViewModelDescriptor == null)
-				{
-					SetInitializedProperty("ViewModelDescriptor");
+                {
+                    SetInitializedProperty("ViewModelDescriptor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelDescriptor);
@@ -931,10 +1036,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ViewModelDescriptor");
+                {
+                    SetInitializedProperty("ViewModelDescriptor");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ViewModelDescriptor", __oldValue, __newValue);
@@ -958,6 +1063,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ViewModelDescriptor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnViewModelDescriptor_PostSetter != null && IsAttached)
                 {
@@ -1066,13 +1172,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             this._fk_Module = otherImpl._fk_Module;
             this.Children_pos = otherImpl.Children_pos;
             this._fk_Parent = otherImpl._fk_Parent;
+            this._fk_RequestedKind = otherImpl._fk_RequestedKind;
             this._fk_ViewModelDescriptor = otherImpl._fk_ViewModelDescriptor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -1119,6 +1220,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         NotifyPropertyChanged("Parent", __oldValue, __newValue);
                     }
                     break;
+                case "RequestedKind":
+                    {
+                        var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedKind);
+                        var __newValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)parentObj;
+                        NotifyPropertyChanging("RequestedKind", __oldValue, __newValue);
+                        this.Proxy.RequestedKind = __newValue == null ? null : __newValue.Proxy;
+                        NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
+                    }
+                    break;
                 case "ViewModelDescriptor":
                     {
                         var __oldValue = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelDescriptor);
@@ -1150,6 +1260,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 case "ExportGuid":
                 case "Module":
                 case "Parent":
+                case "RequestedKind":
                 case "Title":
                 case "ViewModelDescriptor":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1204,6 +1315,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 this.Parent = ((Zetbox.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.NavigationEntry>(_fk_Parent.Value));
             else
                 this.Parent = null;
+
+            if (_fk_guid_RequestedKind.HasValue)
+                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value));
+            else
+            if (_fk_RequestedKind.HasValue)
+                this.RequestedKind = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value));
+            else
+                this.RequestedKind = null;
 
             if (_fk_guid_ViewModelDescriptor.HasValue)
                 this.ViewModelDescriptor = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ViewModelDescriptor.Value));
@@ -1317,6 +1436,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         (obj, val) => obj.Parent = val,
 						obj => OnParent_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<NavigationEntry, Zetbox.App.GUI.ControlKind>(
+                        lazyCtx,
+                        new Guid("9355f2c4-5b4f-47cc-b767-161548d79478"),
+                        "RequestedKind",
+                        null,
+                        obj => obj.RequestedKind,
+                        (obj, val) => obj.RequestedKind = val,
+						obj => OnRequestedKind_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<NavigationEntry, string>(
                         lazyCtx,
                         new Guid("3d5d6b12-ab8a-4bda-8487-6f987cee1fae"),
@@ -1415,6 +1543,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Parent");
+            SetNotInitializedProperty("RequestedKind");
             SetNotInitializedProperty("Title");
             SetNotInitializedProperty("ViewModelDescriptor");
             base.NotifyCreated();
@@ -1428,6 +1557,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationEntry != null) OnNotifyDeleting_NavigationEntry(this);
 
+            // FK_NavEntry_have_RequestedKind
+            if (RequestedKind != null) {
+                ((NHibernatePersistenceObject)RequestedKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedKind);
+            }
             // FK_NavigationScreen_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
@@ -1458,7 +1592,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             Groups.Clear();
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
             Parent = null;
+            RequestedKind = null;
             ViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<NavigationEntry> OnNotifyDeleting_NavigationEntry;
@@ -1500,6 +1636,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             public virtual Zetbox.App.Base.ModuleNHibernateImpl.ModuleProxy Module { get; set; }
 
             public virtual Zetbox.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy Parent { get; set; }
+
+            public virtual Zetbox.App.GUI.ControlKindNHibernateImpl.ControlKindProxy RequestedKind { get; set; }
 
             public virtual string Title { get; set; }
 
@@ -1548,6 +1686,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             binStream.Write(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null);
             binStream.Write(this.Proxy.Parent != null ? OurContext.GetIdFromProxy(this.Proxy.Parent) : (int?)null);
             binStream.Write(this.Proxy.Children_pos);
+            binStream.Write(this.Proxy.RequestedKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedKind) : (int?)null);
             binStream.Write(this.Proxy.Title);
             binStream.Write(this.Proxy.ViewModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelDescriptor) : (int?)null);
         }
@@ -1578,6 +1717,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             binStream.Read(out this._fk_Module);
             binStream.Read(out this._fk_Parent);
             this.Proxy.Children_pos = binStream.ReadNullableInt32();
+            binStream.Read(out this._fk_RequestedKind);
             this.Proxy.Title = binStream.ReadString();
             binStream.Read(out this._fk_ViewModelDescriptor);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1601,6 +1741,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Parent != null ? this.Proxy.Parent.ExportGuid : (Guid?)null, xml, "Parent", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Children_pos, xml, "Children_pos", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedKind != null ? this.Proxy.RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Title, xml, "Title", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ViewModelDescriptor != null ? this.Proxy.ViewModelDescriptor.ExportGuid : (Guid?)null, xml, "ViewModelDescriptor", "Zetbox.App.GUI");
         }
@@ -1636,6 +1777,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 break;
             case "Zetbox.App.GUI|Children_pos":
                 this.Proxy.Children_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Zetbox.App.GUI|RequestedKind":
+                this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|Title":
                 this.Proxy.Title = XmlStreamer.ReadString(xml);

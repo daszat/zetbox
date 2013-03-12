@@ -42,7 +42,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             ICompoundCollectionValueModel mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
-            var notifier = mdl.UnderlyingCollection as INotifyCollectionChanged;
+            var notifier = mdl.Value as INotifyCollectionChanged;
             if (notifier != null)
             {
                 notifier.CollectionChanged += (sender, e) =>
@@ -61,10 +61,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             public string Identity { get { return _identity; } }
             private readonly string _timestamp;
             public string Timestamp { get { return _timestamp; } }
+            private readonly DateTime _sortKey;
+            public DateTime SortKey { get { return _sortKey; } }
+
             public JournalEntryKey(string identity, DateTime timestamp)
             {
                 this._identity = identity;
                 this._timestamp = timestamp.ToString();
+                this._sortKey = timestamp;
             }
 
             public override string ToString()
@@ -93,11 +97,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (_journalEntries == null)
                 {
-                    var notifier = this.ValueModel.UnderlyingCollection as INotifyCollectionChanged;
+                    var notifier = this.ValueModel.Value as INotifyCollectionChanged;
                     if (notifier != null)
                         notifier.CollectionChanged += (sender, e) => _journalEntries = null;
 
-                    _journalEntries = ((IEnumerable<AuditEntry>)this.ValueModel.UnderlyingCollection) // cast to correct interface
+                    _journalEntries = this.ValueModel.Value
                         .OfType<AuditEntry>()
                         .GroupBy(e =>
                         {
@@ -105,7 +109,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                             return new JournalEntryKey(e.Identity, new DateTime(ts.Year, ts.Month, ts.Day, ts.Hour, ts.Minute, 0));
                         })
                         .Select(g => new KeyValuePair<JournalEntryKey, string>(g.Key, string.Join("\n", g.Select(e => string.Format(e.MessageFormat, e.PropertyName, e.OldValue, e.NewValue)).ToArray())))
-                        .OrderByDescending(p => p.Key.Timestamp)
+                        .OrderByDescending(p => p.Key.SortKey)
                         .ToList();
 
                 }

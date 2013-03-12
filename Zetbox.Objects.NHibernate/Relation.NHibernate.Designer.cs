@@ -43,8 +43,9 @@ namespace Zetbox.App.Base
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
-            _isCreatedOnSet = Proxy.ID > 0;
             _isChangedOnSet = Proxy.ID > 0;
+            _isContainmentSet = Proxy.ID > 0;
+            _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
         }
 
@@ -79,15 +80,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
-				{
-					SetInitializedProperty("A");
+                {
+                    SetInitializedProperty("A");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -96,10 +97,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("A");
+                {
+                    SetInitializedProperty("A");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -139,6 +140,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnA_PostSetter != null && IsAttached)
                 {
@@ -189,15 +191,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
-				{
-					SetInitializedProperty("B");
+                {
+                    SetInitializedProperty("B");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.RelationEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -206,10 +208,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("B");
+                {
+                    SetInitializedProperty("B");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -249,6 +251,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnB_PostSetter != null && IsAttached)
                 {
@@ -299,15 +302,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -316,10 +319,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -343,6 +346,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -400,6 +404,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -407,10 +412,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
 
@@ -451,7 +456,7 @@ namespace Zetbox.App.Base
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.Containment;
+                var __result = FetchContainmentOrDefault();
                 if (OnContainment_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<Zetbox.App.Base.ContainmentSpecification>(__result);
@@ -463,6 +468,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isContainmentSet = true;
                 if (Proxy.Containment != value)
                 {
                     var __oldValue = Proxy.Containment;
@@ -476,6 +482,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Containment", __oldValue, __newValue);
                     Proxy.Containment = __newValue;
                     NotifyPropertyChanged("Containment", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnContainment_PostSetter != null && IsAttached)
                     {
@@ -483,13 +490,32 @@ namespace Zetbox.App.Base
                         OnContainment_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Containment");
-				}
+                else
+                {
+                    SetInitializedProperty("Containment");
+                }
             }
         }
 
+
+        private Zetbox.App.Base.ContainmentSpecification FetchContainmentOrDefault()
+        {
+            var __result = Proxy.Containment;
+                if (!_isContainmentSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("eed9955a-11a3-4c25-b0bb-e01ecd14b26f"));
+                    if (__p != null) {
+                        _isContainmentSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.Containment = (Zetbox.App.Base.ContainmentSpecification)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.Relation.Containment'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isContainmentSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Relation, Zetbox.App.Base.ContainmentSpecification> OnContainment_PreSetter;
@@ -525,15 +551,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -542,10 +568,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -569,6 +595,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -626,6 +653,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -633,10 +661,10 @@ namespace Zetbox.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
 
@@ -702,6 +730,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -709,10 +738,10 @@ namespace Zetbox.App.Base
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
 
@@ -760,6 +789,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -767,10 +797,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -828,15 +858,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -845,10 +875,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -872,6 +902,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -930,6 +961,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Storage", __oldValue, __newValue);
                     Proxy.Storage = __newValue;
                     NotifyPropertyChanged("Storage", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnStorage_PostSetter != null && IsAttached)
                     {
@@ -937,10 +969,10 @@ namespace Zetbox.App.Base
                         OnStorage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Storage");
-				}
+                else
+                {
+                    SetInitializedProperty("Storage");
+                }
             }
         }
 
@@ -987,6 +1019,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Verb", __oldValue, __newValue);
                     Proxy.Verb = __newValue;
                     NotifyPropertyChanged("Verb", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVerb_PostSetter != null && IsAttached)
                     {
@@ -994,10 +1027,10 @@ namespace Zetbox.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Verb");
-				}
+                else
+                {
+                    SetInitializedProperty("Verb");
+                }
             }
         }
 
@@ -1480,12 +1513,6 @@ namespace Zetbox.App.Base
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Module = otherImpl._fk_Module;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -1784,6 +1811,7 @@ namespace Zetbox.App.Base
         public override void NotifyPreSave()
         {
             FetchChangedOnOrDefault();
+            FetchContainmentOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
@@ -1805,7 +1833,6 @@ namespace Zetbox.App.Base
             SetNotInitializedProperty("A");
             SetNotInitializedProperty("B");
             SetNotInitializedProperty("ChangedBy");
-            SetNotInitializedProperty("Containment");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
@@ -1848,8 +1875,11 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
+            A = null;
+            B = null;
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
         }
         public static event ObjectEventHandler<Relation> OnNotifyDeleting_Relation;
 
@@ -1912,7 +1942,10 @@ namespace Zetbox.App.Base
             if (this._isChangedOnSet) {
                 binStream.Write(this.Proxy.ChangedOn);
             }
-            binStream.Write((int?)Proxy.Containment);
+            binStream.Write(this._isContainmentSet);
+            if (this._isContainmentSet) {
+                binStream.Write((int?)Proxy.Containment);
+            }
             binStream.Write(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1941,7 +1974,10 @@ namespace Zetbox.App.Base
             if (this._isChangedOnSet) {
                 this.Proxy.ChangedOn = binStream.ReadDateTime();
             }
-            Proxy.Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
+            this._isContainmentSet = binStream.ReadBoolean();
+            if (this._isContainmentSet) {
+                Proxy.Containment = (Zetbox.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
+            }
             binStream.Read(out this._fk_CreatedBy);
             this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
@@ -1972,6 +2008,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isContainmentSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)Proxy.Containment, xml, "Containment", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
@@ -1998,8 +2035,10 @@ namespace Zetbox.App.Base
                 this._isChangedOnSet = true;
                 break;
             case "Zetbox.App.Base|Containment":
+                // Import must have default value set
                 Proxy.Containment = (Zetbox.App.Base.ContainmentSpecification)XmlStreamer.ReadNullableInt32(xml);
-               break;
+                this._isContainmentSet = true;
+                break;
             case "Zetbox.App.Base|CreatedOn":
                 // Import must have default value set
                 this.Proxy.CreatedOn = XmlStreamer.ReadDateTime(xml);

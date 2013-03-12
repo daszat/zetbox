@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PrepareEnv</RootNamespace>
     <AssemblyName>PrepareEnv</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
@@ -59,9 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnvConfig.cs" />
-    <Compile Include="PathX.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
@@ -71,6 +71,7 @@
     <Compile Include="SchemaProvider\ISchemaProvider.cs" />
     <Compile Include="SchemaProvider\Postgresql.cs" />
     <Compile Include="SchemaProvider\SqlServer.cs" />
+    <None Include="UpdateCodeFromSchema.cmd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Examples\01 DevEnvConfig.xml">
@@ -104,14 +105,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Examples\env.xml">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MSBuildVersioning.targets" />
+  <Import Project="..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

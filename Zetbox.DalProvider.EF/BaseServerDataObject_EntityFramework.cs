@@ -220,12 +220,6 @@ namespace Zetbox.DalProvider.Ef
             }
         }
 
-        // Case: 668
-        public ObjectContext GetEFContext()
-        {
-            return _relationships.GetPrivatePropertyValue<ObjectContext>("Context");
-        }
-
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             // EF keeps tabs for us, so we do nothing.

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for ValueType Properties. This class is abstract.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ValueTypeProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="ValueTypePropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ValueTypeProperty")]
     public abstract class ValueTypePropertyEfImpl : Zetbox.App.Base.PropertyEfImpl, ValueTypeProperty
     {
@@ -91,6 +91,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     _HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -98,10 +99,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
         private bool _HasPersistentOrder_store;
@@ -172,6 +173,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsCalculated", __oldValue, __newValue);
                     _IsCalculated = __newValue;
                     NotifyPropertyChanged("IsCalculated", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCalculated_PostSetter != null && IsAttached)
                     {
@@ -179,10 +181,10 @@ namespace Zetbox.App.Base
                         OnIsCalculated_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCalculated");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCalculated");
+                }
             }
         }
         private bool _IsCalculated_store;
@@ -253,6 +255,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -260,10 +263,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
         private bool _IsList_store;
@@ -613,11 +616,6 @@ namespace Zetbox.App.Base
             me.HasPersistentOrder = other.HasPersistentOrder;
             me.IsCalculated = other.IsCalculated;
             me.IsList = other.IsList;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

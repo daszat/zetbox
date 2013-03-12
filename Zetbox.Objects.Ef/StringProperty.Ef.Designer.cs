@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for String Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="StringProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="StringPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("StringProperty")]
     public class StringPropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, StringProperty
     {
@@ -367,11 +367,6 @@ namespace Zetbox.App.Base
             var otherImpl = (StringPropertyEfImpl)obj;
             var me = (StringProperty)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

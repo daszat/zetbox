@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// A from and until DateTime Value
     /// </summary>
-    [EdmComplexType(NamespaceName="Model", Name="DateTimeRange")]
+    [EdmComplexType(NamespaceName="Model", Name="DateTimeRangeEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DateTimeRange")]
     public class DateTimeRangeEfImpl : BaseServerCompoundObject_EntityFramework, DateTimeRange, ICompoundObject
     {
@@ -80,6 +80,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _From;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnFrom_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -89,6 +91,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("From", __oldValue, __newValue);
                     _From = __newValue;
                     NotifyPropertyChanged("From", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFrom_PostSetter != null && IsAttached)
                     {
@@ -96,10 +99,10 @@ namespace Zetbox.App.Base
                         OnFrom_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("From");
-				}
+                else
+                {
+                    SetInitializedProperty("From");
+                }
             }
         }
         private DateTime? _From_store;
@@ -107,7 +110,7 @@ namespace Zetbox.App.Base
             get { return _From_store; }
             set {
                 ReportEfPropertyChanging("From");
-                _From_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _From_store = value;
                 ReportEfPropertyChanged("From");
             }
         }
@@ -146,6 +149,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Thru;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnThru_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -155,6 +160,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Thru", __oldValue, __newValue);
                     _Thru = __newValue;
                     NotifyPropertyChanged("Thru", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnThru_PostSetter != null && IsAttached)
                     {
@@ -162,10 +168,10 @@ namespace Zetbox.App.Base
                         OnThru_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Thru");
-				}
+                else
+                {
+                    SetInitializedProperty("Thru");
+                }
             }
         }
         private DateTime? _Thru_store;
@@ -173,7 +179,7 @@ namespace Zetbox.App.Base
             get { return _Thru_store; }
             set {
                 ReportEfPropertyChanging("Thru");
-                _Thru_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _Thru_store = value;
                 ReportEfPropertyChanged("Thru");
             }
         }
@@ -216,13 +222,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("TotalDays", __oldValue, __newValue);
                     _TotalDays = __newValue;
                     NotifyPropertyChanged("TotalDays", __oldValue, __newValue);
-			        _TotalDays_IsDirty = false;
+                    _TotalDays_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("TotalDays");
-				}
+                else
+                {
+                    SetInitializedProperty("TotalDays");
+                }
             }
         }
         private int? _TotalDays_store;
@@ -315,6 +321,34 @@ namespace Zetbox.App.Base
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.Export(xml, modules);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._From, xml, "From", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Thru, xml, "Thru", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._TotalDays, xml, "TotalDays", "Zetbox.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+            base.MergeImport(xml);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|From":
+                this._From = XmlStreamer.ReadNullableDateTime(xml);
+                break;
+            case "Zetbox.App.Base|Thru":
+                this._Thru = XmlStreamer.ReadNullableDateTime(xml);
+                break;
+            case "Zetbox.App.Base|TotalDays":
+                this._TotalDays = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
         }
 
         #endregion

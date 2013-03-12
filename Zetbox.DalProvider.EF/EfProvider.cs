@@ -28,9 +28,12 @@ namespace Zetbox.DalProvider.Ef
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.API.Server.PerfCounter;
+    using System.ComponentModel;
 
     public interface IEfActionsManager : ICustomActionsManager { }
 
+    [Feature]
+    [Description("Entity Framework (EF) provider")]
     public class EfProvider
         : Autofac.Module
     {
@@ -42,35 +45,22 @@ namespace Zetbox.DalProvider.Ef
         {
             base.Load(moduleBuilder);
 
-            // As we are using the concrete Assembly baseDir in our connection string, this should not be needed anymore
-            //var serverAssembly = Assembly.Load(ServerAssembly);
-            //if (serverAssembly == null)
-            //    throw new InvalidOperationException("Unable to load Zetbox.Objects.EfImpl Assembly, no Entity Framework Metadata will be loaded");
-
-            //// force-load a few assemblies to the reflection-only context so the DAL provider can find them
-            //// this uses the AssemblyLoader directly because Assembly.ReflectionOnlyLoad doesn't go through all 
-            //// the moves of resolving AssemblyNames to files. See http://stackoverflow.com/questions/570117/
-            //var reflectedInterfaceAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(Zetbox.API.Helper.InterfaceAssembly);
-            //if (reflectedInterfaceAssembly == null)
-            //    throw new InvalidOperationException("Unable to load Zetbox.Objects Assembly for reflection, no Entity Framework Metadata will be loaded");
-            //var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(EfProvider.ServerAssembly);
-            //if (reflectedServerAssembly == null)
-            //    throw new InvalidOperationException("Unable to load Zetbox.Objects.EfImpl Assembly for reflection, no Entity Framework Metadata will be loaded");
-
             moduleBuilder
                 .Register(c =>
                 {
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
+                        var cfg = c.Resolve<ZetboxConfig>();
                         return new EfDataContext(
                             c.Resolve<IMetaDataResolver>(),
                             null,
-                            c.Resolve<ZetboxConfig>(),
+                            cfg,
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
-                            c.Resolve<IPerfCounter>()
+                            c.Resolve<IPerfCounter>(),
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
                             );
                     }
                 })
@@ -89,14 +79,16 @@ namespace Zetbox.DalProvider.Ef
                     lock (_lock)
                     {
                         var param = p.OfType<ConstantParameter>().FirstOrDefault();
+                        var cfg = c.Resolve<ZetboxConfig>();
                         return new EfDataContext(
                             c.Resolve<IMetaDataResolver>(),
                             param != null ? (Zetbox.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
-                            c.Resolve<ZetboxConfig>(),
+                            cfg,
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
-                            c.Resolve<IPerfCounter>()
+                            c.Resolve<IPerfCounter>(),
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
                             );
                     }
                 })
@@ -114,14 +106,16 @@ namespace Zetbox.DalProvider.Ef
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
+                        var cfg = c.Resolve<ZetboxConfig>();
                         var result = new EfDataContext(
                             c.Resolve<CachingMetaDataResolver>(),
                             null,
-                            c.Resolve<ZetboxConfig>(),
+                            cfg,
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
-                            c.Resolve<IPerfCounter>()
+                            c.Resolve<IPerfCounter>(),
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
                             );
                         return result;
                     }
@@ -139,6 +133,8 @@ namespace Zetbox.DalProvider.Ef
                 .As(typeof(IServerObjectHandlerFactory));
 
             moduleBuilder.RegisterType<EfImplementationType>();
+
+            moduleBuilder.RegisterModule((Autofac.Module)Activator.CreateInstance(Type.GetType("Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl", true)));
         }
     }
 }

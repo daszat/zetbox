@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Max", __oldValue, __newValue);
                     Proxy.Max = __newValue;
                     NotifyPropertyChanged("Max", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMax_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnMax_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Max");
-				}
+                else
+                {
+                    SetInitializedProperty("Max");
+                }
             }
         }
 
@@ -141,6 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Min", __oldValue, __newValue);
                     Proxy.Min = __newValue;
                     NotifyPropertyChanged("Min", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMin_PostSetter != null && IsAttached)
                     {
@@ -148,10 +150,10 @@ namespace Zetbox.App.Base
                         OnMin_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Min");
-				}
+                else
+                {
+                    SetInitializedProperty("Min");
+                }
             }
         }
 
@@ -302,12 +304,6 @@ namespace Zetbox.App.Base
 
             me.Max = other.Max;
             me.Min = other.Min;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

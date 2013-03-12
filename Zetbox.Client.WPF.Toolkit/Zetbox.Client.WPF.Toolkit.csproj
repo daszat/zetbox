@@ -10,54 +10,58 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zetbox.Client.WPF.Toolkit</RootNamespace>
     <AssemblyName>Zetbox.Client.WPF.Toolkit</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Client\WPF\</OutputPath>
+    <OutputPath>..\bin\Debug\Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Client\WPF\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Client\WPF\</OutputPath>
+    <OutputPath>..\bin\Release\Client\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Client\WPF\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Client\WPF\</OutputPath>
+    <OutputPath>..\bin\Debug\Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Client\WPF\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration, Version=2.6.3.862, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -70,12 +74,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -88,10 +87,6 @@
     </Reference>
     <Reference Include="WPFExtensions">
       <HintPath>..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -104,33 +99,36 @@
     <Compile Include="Converter\EmptyCountToCollapsedConverter.cs" />
     <Compile Include="Converter\EmptyStringToCollapsedConverter.cs" />
     <Compile Include="Converter\FormattingToFontWeightConverter.cs" />
-    <Compile Include="Converter\HighlightConverter.cs" />
     <Compile Include="Converter\DebugConverter.cs" />
-    <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="Converter\ImageCtrlConverter.cs" />
     <Compile Include="Converter\ObjectStateConverter.cs" />
     <Compile Include="CustomControls\ContentAdorner.cs" />
+    <Compile Include="CustomControls\CustomControlsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomControlsResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\DtoDisplayer.xaml.cs">
       <DependentUpon>DtoDisplayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\LabeledContainer.cs" />
+    <Compile Include="CustomControls\LabeledView.cs" />
+    <Compile Include="CustomControls\LabeledViewHorizontal.cs" />
+    <Compile Include="CustomControls\TracingUserControl.cs" />
+    <Compile Include="CustomControls\ZetboxDatePicker.cs" />
+    <Compile Include="CustomControls\ZoomBorder.cs" />
+    <Compile Include="Styles\Controls.cs" />
+    <Compile Include="Styles\Defaults.cs" />
+    <Compile Include="Styles\Margin.cs" />
     <Compile Include="WpfDelayedTask.cs" />
-    <Compile Include="CustomControls\LabeledViewHorizontal.xaml.cs">
-      <DependentUpon>LabeledViewHorizontal.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TypeNameTemplateSelector.cs" />
     <Compile Include="CustomControls\CommandButton.cs" />
     <Compile Include="CustomControls\PropertyEditor.cs" />
     <Compile Include="CustomControls\ZetboxDataGrid.cs" />
     <Compile Include="CustomControls\DropDownButton.cs" />
-    <Compile Include="CustomControls\LabeledContainer.xaml.cs">
-      <DependentUpon>LabeledContainer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CustomControls\ErrorReporter.xaml.cs">
       <DependentUpon>ErrorReporter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\LabeledView.xaml.cs">
-      <DependentUpon>LabeledView.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\WindowView.cs" />
     <Compile Include="CustomControls\WorkaroundToolBar.cs" />
@@ -149,27 +147,23 @@
     <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
       <Name>Zetbox.API.Client</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Zetbox.API</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Zetbox.Client</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>
-      <Private>False</Private>
+      <Private>false</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>Zetbox.API.Common</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -180,30 +174,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomControls\LabeledViewHorizontal.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CustomControls\LabeledContainer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="CustomControls\ErrorReporter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomControls\LabeledView.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="CustomControls\CustomControlsResources.de.resx" />
+    <EmbeddedResource Include="CustomControls\CustomControlsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomControlsResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Zetbox.Client.WPF.CustomControls</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\printer.png" />
   </ItemGroup>
@@ -215,7 +204,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MSBuildVersioning.targets" />
+  <Import Project="..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>

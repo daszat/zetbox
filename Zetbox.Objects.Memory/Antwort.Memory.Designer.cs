@@ -73,6 +73,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Frage", __oldValue, __newValue);
                     _Frage = __newValue;
                     NotifyPropertyChanged("Frage", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFrage_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Test
                         OnFrage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Frage");
-				}
+                else
+                {
+                    SetInitializedProperty("Frage");
+                }
             }
         }
         private string _Frage;
@@ -97,7 +98,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// Workaround for Case 1376
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Fragebogen
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Fragebogen
         // fkBackingName=_fk_Fragebogen; fkGuidBackingName=_fk_guid_Fragebogen;
         // referencedInterface=Zetbox.App.Test.Fragebogen; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=Antworten; is list;
@@ -115,8 +116,44 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Fragebogen;
+        private int? __fk_FragebogenCache;
 
+        private int? _fk_Fragebogen {
+            get
+            {
+                return __fk_FragebogenCache;
+            }
+            set
+            {
+                __fk_FragebogenCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchFragebogenTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> _triggerFetchFragebogenTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen> TriggerFetchFragebogenAsync()
+        {
+            if (_triggerFetchFragebogenTask != null) return _triggerFetchFragebogenTask;
+
+            if (_fk_Fragebogen.HasValue)
+                _triggerFetchFragebogenTask = Context.FindAsync<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
+            else
+                _triggerFetchFragebogenTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchFragebogenTask.OnResult(t =>
+            {
+                if (OnFragebogen_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.Fragebogen>(t.Result);
+                    OnFragebogen_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchFragebogenTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -124,32 +161,19 @@ namespace Zetbox.App.Test
         {
             get
             {
-                Zetbox.App.Test.FragebogenMemoryImpl __value;
-                if (_fk_Fragebogen.HasValue)
-                    __value = (Zetbox.App.Test.FragebogenMemoryImpl)Context.Find<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
-                else
-                    __value = null;
-
-                if (OnFragebogen_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.Fragebogen>(__value);
-                    OnFragebogen_Getter(this, e);
-                    __value = (Zetbox.App.Test.FragebogenMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Test.FragebogenMemoryImpl)TriggerFetchFragebogenAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Fragebogen == null) || (value != null && value.ID == _fk_Fragebogen))
-				{
-					SetInitializedProperty("Fragebogen");
+                {
+                    SetInitializedProperty("Fragebogen");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = FragebogenImpl;
@@ -186,6 +210,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Fragebogen", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnFragebogen_PostSetter != null && IsAttached)
                 {
@@ -214,12 +239,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("gute_Antworten_pos", __oldValue, __newValue);
                     _gute_Antworten_pos = __newValue;
                     NotifyPropertyChanged("gute_Antworten_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("gute_Antworten_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("gute_Antworten_pos");
+                }
             }
         }
         private int? _gute_Antworten_pos;
@@ -267,6 +293,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("FragenNummer", __oldValue, __newValue);
                     _FragenNummer = __newValue;
                     NotifyPropertyChanged("FragenNummer", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFragenNummer_PostSetter != null && IsAttached)
                     {
@@ -274,10 +301,10 @@ namespace Zetbox.App.Test
                         OnFragenNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FragenNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("FragenNummer");
+                }
             }
         }
         private int _FragenNummer;
@@ -324,6 +351,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("GegebeneAntwort", __oldValue, __newValue);
                     _GegebeneAntwort = __newValue;
                     NotifyPropertyChanged("GegebeneAntwort", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnGegebeneAntwort_PostSetter != null && IsAttached)
                     {
@@ -331,10 +359,10 @@ namespace Zetbox.App.Test
                         OnGegebeneAntwort_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("GegebeneAntwort");
-				}
+                else
+                {
+                    SetInitializedProperty("GegebeneAntwort");
+                }
             }
         }
         private int? _GegebeneAntwort;
@@ -362,11 +390,6 @@ namespace Zetbox.App.Test
             me.GegebeneAntwort = other.GegebeneAntwort;
             this.gute_Antworten_pos = otherImpl.gute_Antworten_pos;
             this._fk_Fragebogen = otherImpl._fk_Fragebogen;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -409,6 +432,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Fragebogen":
+                return TriggerFetchFragebogenAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -560,6 +594,7 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Antwort != null) OnNotifyDeleting_Antwort(this);
+            Fragebogen = null;
         }
         public static event ObjectEventHandler<Antwort> OnNotifyDeleting_Antwort;
 

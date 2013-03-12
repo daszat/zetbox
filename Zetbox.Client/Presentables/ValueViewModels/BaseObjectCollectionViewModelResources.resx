@@ -129,12 +129,6 @@
   <data name="CreateNewCommand_Tooltip" xml:space="preserve">
     <value>Creates a new Item suitable for adding to the list.</value>
   </data>
-  <data name="DeleteCommand_Name" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="DeleteCommand_Tooltip" xml:space="preserve">
-    <value>Delete selection from data store</value>
-  </data>
   <data name="MoreItems" xml:space="preserve">
     <value>({0}): {1}...</value>
   </data>

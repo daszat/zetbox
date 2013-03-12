@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Visual")]
+    [EdmEntityType(NamespaceName="Model", Name="VisualEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Visual")]
     public class VisualEfImpl : BaseServerDataObject_EntityFramework, Visual
     {
@@ -82,7 +82,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -132,7 +131,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -179,6 +177,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -186,10 +185,10 @@ namespace Zetbox.App.GUI
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description_store;
@@ -253,7 +252,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnMethod_Getter != null)
                 {
@@ -265,7 +263,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.MethodEfImpl> r
@@ -300,6 +298,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Method", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -355,7 +354,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnProperty_Getter != null)
                 {
@@ -367,7 +365,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.PropertyEfImpl> r
@@ -402,6 +400,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Property", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -427,11 +426,6 @@ namespace Zetbox.App.GUI
             me.Description = other.Description;
             this._fk_Method = otherImpl._fk_Method;
             this._fk_Property = otherImpl._fk_Property;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -649,12 +643,13 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -670,12 +665,14 @@ namespace Zetbox.App.GUI
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Description);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.MethodEfImpl>("Model.FK_Visual_has_Method", "Method").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.MethodEfImpl>("Model.FK_Visual_has_Method", "Method");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_Visual_has_Property", "Property").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_Visual_has_Property", "Property");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

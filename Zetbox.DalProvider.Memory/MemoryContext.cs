@@ -23,6 +23,7 @@ namespace Zetbox.DalProvider.Memory
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.API.Async;
 
     public interface IMemoryActionsManager : ICustomActionsManager { }
 
@@ -32,15 +33,13 @@ namespace Zetbox.DalProvider.Memory
         // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.DalProvider.Memory");
 
         // private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
-        private readonly Func<IFrozenContext> _lazyCtx;
         private readonly FuncCache<Type, MemoryImplementationType> _implTypeFactoryCache;
         private readonly MemoryImplementationType.MemoryFactory _implTypeFactory;
 
         public MemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory)
-            : base(iftFactory)
+            : base(iftFactory, lazyCtx)
         {
-            _lazyCtx = lazyCtx;
-            _implTypeFactoryCache = new FuncCache<Type, MemoryImplementationType>(t=>implTypeFactory(t));
+            _implTypeFactoryCache = new FuncCache<Type, MemoryImplementationType>(t => implTypeFactory(t));
             _implTypeFactory = t => _implTypeFactoryCache.Invoke(t);
         }
 
@@ -78,18 +77,32 @@ namespace Zetbox.DalProvider.Memory
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
             // TODO: replace with generated switch factory
-            return Activator.CreateInstance(this.ToImplementationType(ifType).Type, _lazyCtx);
+            return Activator.CreateInstance(this.ToImplementationType(ifType).Type, lazyCtx);
         }
 
-        public override ImplementationType ToImplementationType(InterfaceType t)
+        private Dictionary<InterfaceType, ImplementationType> _toImplementationTypeMemo = new Dictionary<InterfaceType, ImplementationType>();
+        public override ImplementationType ToImplementationType(InterfaceType ift)
         {
             // TODO: replace with generated switch factory
-            return GetImplementationType(Type.GetType(t.Type.FullName + "Memory" + Zetbox.API.Helper.ImplementationSuffix + "," + MemoryProvider.GeneratedAssemblyName));
+            ImplementationType result;
+            if (!_toImplementationTypeMemo.TryGetValue(ift, out result))
+            {
+                var typeName = ift.Type.FullName + "Memory" + Zetbox.API.Helper.ImplementationSuffix + "," + MemoryProvider.GeneratedAssemblyName;
+                var t = Type.GetType(typeName);
+                _toImplementationTypeMemo[ift] = result = GetImplementationType(t);
+            }
+            return result;
         }
 
+        private Dictionary<string, InterfaceType> _getInterfaceTypeMemo = new Dictionary<string, InterfaceType>();
         public override InterfaceType GetInterfaceType(string typeName)
         {
-            return IftFactory(Type.GetType(typeName + "," + typeof(Zetbox.App.Base.ObjectClass).Assembly.FullName, true));
+            InterfaceType result;
+            if (!_getInterfaceTypeMemo.TryGetValue(typeName, out result))
+            {
+                _getInterfaceTypeMemo[typeName] = result = IftFactory(Type.GetType(typeName + "," + typeof(Zetbox.App.Base.ObjectClass).Assembly.FullName, true));
+            }
+            return result;
         }
 
         public override ImplementationType GetImplementationType(Type t)
@@ -100,23 +113,34 @@ namespace Zetbox.DalProvider.Memory
         /// <summary>Only implemented for the parent==null case.</summary>
         IList<T> IReadOnlyZetboxContext.FetchRelation<T>(Guid relId, RelationEndRole endRole, IDataObject parent)
         {
-            if (parent == null)
+            var t = ((IReadOnlyZetboxContext)this).FetchRelationAsync<T>(relId, endRole, parent);
+            t.Wait();
+            return t.Result;
+        }
+
+        /// <summary>Only implemented for the parent==null case.</summary>
+        ZbTask<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole endRole, IDataObject parent)
+        {
+            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
-                return GetPersistenceObjectQuery(IftFactory(typeof(T))).Cast<T>().ToList();
-            }
-            else
-            {
-                // TODO: #1571 This method expects IF Types, but Impl types are passed
-                switch (endRole)
+                if (parent == null)
                 {
-                    case RelationEndRole.A:
-                        return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.AObject == parent).ToList();
-                    case RelationEndRole.B:
-                        return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.BObject == parent).ToList();
-                    default:
-                        throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                    return GetPersistenceObjectQuery(IftFactory(typeof(T))).Cast<T>().ToList();
                 }
-            }
+                else
+                {
+                    // TODO: #1571 This method expects IF Types, but Impl types are passed
+                    switch (endRole)
+                    {
+                        case RelationEndRole.A:
+                            return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.AObject == parent).ToList();
+                        case RelationEndRole.B:
+                            return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.BObject == parent).ToList();
+                        default:
+                            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                    }
+                }
+            });
         }
     }
 }

@@ -9,12 +9,13 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Zetbox.Objects.EfImpl</RootNamespace>
     <AssemblyName>Zetbox.Objects.EfImpl</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->
-    <RelativeOutputPath>Server\EF</RelativeOutputPath>
+    <RelativeOutputPath>Server</RelativeOutputPath>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,8 +27,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\EF.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\EF.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -40,8 +41,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Server\EF.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\EF.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Server\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -56,8 +57,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\EF.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\EF.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -73,17 +74,17 @@
     <Reference Include="System.Xml" />
     <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\log4net.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Autofac.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase">
@@ -97,12 +98,12 @@
     </ProjectReference>
     <Reference Include="Zetbox.DalProvider.Base">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Base.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Common">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.Common.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Data" />
@@ -111,12 +112,12 @@
     </Reference>
     <Reference Include="Zetbox.DalProvider.Ef">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Server\EF\Zetbox.DalProvider.Ef.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.DalProvider.Ef.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Server">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Server\Core\Zetbox.API.Server.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.API.Server.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -136,11 +137,9 @@
     <Compile Include="BoolParameter.Ef.Designer.cs" />
     <Compile Include="BoolProperty.Ef.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Ef.Designer.cs" />
-    <Compile Include="Calendar.Ef.Designer.cs" />
-    <Compile Include="CalendarRule.Ef.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="CLRObjectParameter.Ef.Designer.cs" />
-    <Compile Include="CommonCalendarRule.Ef.Designer.cs" />
+    <Compile Include="CommonWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="Company.Ef.Designer.cs" />
     <Compile Include="CompoundObject.Ef.Designer.cs" />
     <Compile Include="CompoundObjectParameter.Ef.Designer.cs" />
@@ -154,15 +153,18 @@
     <Compile Include="DateRangeFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="DateTimeParameter.Ef.Designer.cs" />
     <Compile Include="DateTimeProperty.Ef.Designer.cs" />
-    <Compile Include="DayOfWeekCalendarRule.Ef.Designer.cs" />
+    <Compile Include="DayOfWeekWorkScheduleRule.Ef.Designer.cs" />
+    <Compile Include="DeactivatableTestObject.Ef.Designer.cs" />
+    <Compile Include="DecimalDefaultValue.Ef.Designer.cs" />
     <Compile Include="DecimalParameter.Ef.Designer.cs" />
     <Compile Include="DecimalProperty.Ef.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Ef.Designer.cs" />
     <Compile Include="Document.Ef.Designer.cs" />
+    <Compile Include="DoubleDefaultValue.Ef.Designer.cs" />
     <Compile Include="DoubleParameter.Ef.Designer.cs" />
     <Compile Include="DoubleProperty.Ef.Designer.cs" />
     <Compile Include="DynamicFile.Ef.Designer.cs" />
-    <Compile Include="EasterCalendarRule.Ef.Designer.cs" />
+    <Compile Include="EasterWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="EnumDefaultValue.Ef.Designer.cs" />
     <Compile Include="Enumeration.Ef.Designer.cs" />
     <Compile Include="EnumerationEntry.Ef.Designer.cs" />
@@ -172,7 +174,7 @@
     <Compile Include="File.Ef.Designer.cs" />
     <Compile Include="FileImportConfiguration.Ef.Designer.cs" />
     <Compile Include="FilterConfiguration.Ef.Designer.cs" />
-    <Compile Include="FixedYearlyCalendarRule.Ef.Designer.cs" />
+    <Compile Include="FixedYearlyWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="Fragebogen.Ef.Designer.cs" />
     <Compile Include="Group.Ef.Designer.cs" />
     <Compile Include="GroupMembership.Ef.Designer.cs" />
@@ -221,9 +223,19 @@
     <Compile Include="OrderedOneEnd.Ef.Designer.cs" />
     <Compile Include="Projekt.Ef.Designer.cs" />
     <Compile Include="Property.Ef.Designer.cs" />
+    <Compile Include="PropertyBoolTest.Ef.Designer.cs" />
+    <Compile Include="PropertyDateTimeTest.Ef.Designer.cs" />
+    <Compile Include="PropertyDecimalTest.Ef.Designer.cs" />
+    <Compile Include="PropertyDoubleTest.Ef.Designer.cs" />
+    <Compile Include="PropertyEnumTest.Ef.Designer.cs" />
     <Compile Include="PropertyFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="PropertyGuidTest.Ef.Designer.cs" />
+    <Compile Include="PropertyIntTest.Ef.Designer.cs" />
+    <Compile Include="PropertyStringTest.Ef.Designer.cs" />
+    <Compile Include="PropertyTestBase.Ef.Designer.cs" />
     <Compile Include="RangeFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="ReadOnlyConstraint.Ef.Designer.cs" />
+    <Compile Include="RecurrenceRuleTester.Ef.Designer.cs" />
     <Compile Include="Relation.Ef.Designer.cs" />
     <Compile Include="RelationEnd.Ef.Designer.cs" />
     <Compile Include="RequiredParent.Ef.Designer.cs" />
@@ -251,18 +263,24 @@
     <Compile Include="TestDecimal.Ef.Designer.cs" />
     <Compile Include="TestObjClass.Ef.Designer.cs" />
     <Compile Include="TestStudent.Ef.Designer.cs" />
+    <Compile Include="TPHBaseObj.Ef.Designer.cs" />
+    <Compile Include="TPHDerivedAObj.Ef.Designer.cs" />
+    <Compile Include="TPHDerivedBObj.Ef.Designer.cs" />
     <Compile Include="TypeRef.Ef.Designer.cs" />
     <Compile Include="ValueTypeProperty.Ef.Designer.cs" />
     <Compile Include="ViewDescriptor.Ef.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Ef.Designer.cs" />
     <Compile Include="ViewReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="Visual.Ef.Designer.cs" />
+    <Compile Include="WorkSchedule.Ef.Designer.cs" />
+    <Compile Include="WorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Ef.Designer.cs" />
-    <Compile Include="YearlyCalendarRule.Ef.Designer.cs" />
+    <Compile Include="YearlyWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="CollectionEntries.Ef.Designer.cs" />
     <Compile Include="AnyReference.Ef.Designer.cs" />
     <Compile Include="AuditEntry.Ef.Designer.cs" />
     <Compile Include="DateTimeRange.Ef.Designer.cs" />
+    <Compile Include="RecurrenceRule.Ef.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Ef.Designer.cs" />
     <Compile Include="AssemblyInfo.Ef.cs" />
     <Compile Include="Module.Ef.cs" />

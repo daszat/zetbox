@@ -33,13 +33,11 @@ namespace Zetbox.DalProvider.Ef
 
         /// <summary>
         /// Creates the Connectionstring.
-        /// <remarks>Format is: metadata=res://*;provider={provider};provider connection string='{Provider Connectionstring}'</remarks>
         /// </summary>
         /// <returns></returns>
         private static string BuildConnectionString(ZetboxConfig config)
         {
             // Build connectionString
-            // metadata=res://*;provider=System.Data.SqlClient;provider connection string='Data Source=.\SQLEXPRESS;Initial Catalog=Zetbox;Integrated Security=True;MultipleActiveResultSets=true;'
             var connectionString = config.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("metadata=res://Zetbox.Objects.EfImpl/Zetbox.Objects.EfImpl.Model.csdl|res://Zetbox.Objects.EfImpl/Zetbox.Objects.EfImpl.Model.msl|res://Zetbox.Objects.EfImpl/Zetbox.Objects.EfImpl.Model.{0}.ssdl;", connectionString.SchemaProvider);

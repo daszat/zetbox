@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zetbox.Client.WPF</RootNamespace>
     <AssemblyName>Zetbox.Client.WPF</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -34,12 +34,13 @@
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Client\WPF</OutputPath>
+    <OutputPath>..\bin\Debug\Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -51,7 +52,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Client\WPF</OutputPath>
+    <OutputPath>..\bin\Release\Client\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -62,7 +63,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Client\WPF</OutputPath>
+    <OutputPath>..\bin\Debug\Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -78,17 +79,37 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=2.6.1.841, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Configuration">
-      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.Configuration.dll</HintPath>
+    <Reference Include="Autofac.Configuration, Version=2.6.3.862, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphSharp, Version=1.0.2.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
+      <HintPath>..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphSharp.Controls, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.Controls.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
-      <Private>False</Private>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Data, Version=3.6.61114.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -99,13 +120,8 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -126,9 +142,6 @@
     <Reference Include="WPFExtensions">
       <HintPath>..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="AppResources.xaml">
@@ -139,11 +152,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\Simple\Styles.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Styles\BigFontStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles\Simple\Views.xaml">
+    <Page Include="Styles\CustomControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,7 +174,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Calendar\CalendarRuleInstanceDisplay.xaml">
+    <Page Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,6 +210,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\GUI\NavigationTabbedLeftScreenDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\GUI\NavigationTreeScreenDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\GUI\NavigationReportScreenDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -205,7 +226,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\GUI\SavedListConfiguratorDisplay.xaml">
+    <Page Include="View\GUI\NavigationTabbedScreenDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModuleEditor\DiagramDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModuleEditor\GraphTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestModule\InstanceListTestDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\InstanceList\SavedListConfiguratorDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,15 +258,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ZetboxBase\FilterListDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\FilterListDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ZetboxBase\FilterListEntryDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\FilterListEntryDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ZetboxBase\InstanceListHeader.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceListHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -275,12 +316,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\GridCells\MultilineStringValue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\GUI\MultiLineEditorDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -299,12 +334,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\ActionDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ZetboxBase\AuditJournalDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -312,10 +341,6 @@
     <Page Include="View\ZetboxBase\CompoundObjectPropertyEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\CommandDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -327,10 +352,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\SingleLineDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ZetboxBase\ObjectReferenceListGridEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -339,11 +360,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\InstanceGridHorizontalDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceGridHorizontalDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\InstanceGridDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceGridDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -351,11 +372,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\ObjectReferenceDropdownEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\InstanceListHorizontalDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceListHorizontalDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -386,36 +403,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ZetboxBase\ObjectReferenceListEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\DataObjectLineDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\EnumSelectionView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\NullableBoolValueView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\NullablePropertyTextBoxView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ZetboxBase\ObjectReferenceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -457,19 +444,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxBase\InstanceListDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceList\InstanceListDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\GridCells\ReferenceEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\GridCells\StringValue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -583,12 +564,11 @@
     <Compile Include="StartupScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Styles\Simple\Module.cs" />
     <Compile Include="View\Calendar\CalendarAllDay.xaml.cs">
       <DependentUpon>CalendarAllDay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Calendar\CalendarRuleInstanceDisplay.xaml.cs">
-      <DependentUpon>CalendarRuleInstanceDisplay.xaml</DependentUpon>
+    <Compile Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml.cs">
+      <DependentUpon>WorkScheduleRuleInstanceDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DocumentManagement\ImportedFileWithPreviewEditor.xaml.cs">
       <DependentUpon>ImportedFileWithPreviewEditor.xaml</DependentUpon>
@@ -608,13 +588,40 @@
     <Compile Include="View\Filters\DateRangeFilterEditor.xaml.cs">
       <DependentUpon>DateRangeFilterEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GridCells\MultilineStringValue.cs" />
+    <Compile Include="View\GridCells\StringValue.cs" />
+    <Compile Include="View\GUI\NavigationTabbedLeftScreenDisplay.xaml.cs">
+      <DependentUpon>NavigationTabbedLeftScreenDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GUI\NavigationTreeScreenDisplay.xaml.cs">
+      <DependentUpon>NavigationTreeScreenDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GUI\NavigationReportScreenDisplay.xaml.cs">
       <DependentUpon>NavigationReportScreenDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GUI\NavigationSearchScreenDisplay.xaml.cs">
       <DependentUpon>NavigationSearchScreenDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GUI\SavedListConfiguratorDisplay.xaml.cs">
+    <Compile Include="View\GUI\NavigationTabbedScreenDisplay.xaml.cs">
+      <DependentUpon>NavigationTabbedScreenDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModuleEditor\Converter\EdgeRouteToLabelConverter.cs" />
+    <Compile Include="View\ModuleEditor\Converter\EdgeRouteToPathConverter.cs" />
+    <Compile Include="View\ModuleEditor\Converter\GraphConverterHelper.cs" />
+    <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
+      <DependentUpon>DiagramDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TestModule\InstanceListTestDisplay.xaml.cs">
+      <DependentUpon>InstanceListTestDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\ActionDisplay.cs" />
+    <Compile Include="View\ZetboxBase\CommandDisplay.cs" />
+    <Compile Include="View\ZetboxBase\DataObjectLineDisplay.cs" />
+    <Compile Include="View\ZetboxBase\EnumSelectionView.cs" />
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml.cs">
+      <DependentUpon>InstanceListToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\InstanceList\SavedListConfiguratorDisplay.xaml.cs">
       <DependentUpon>SavedListConfiguratorDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\AccessDeniedDisplay.xaml.cs">
@@ -623,22 +630,27 @@
     <Compile Include="View\ZetboxBase\AnyReferencePropertyEditor.xaml.cs">
       <DependentUpon>AnyReferencePropertyEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\FilterListDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\FilterListDisplay.xaml.cs">
       <DependentUpon>FilterListDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\FilterListEntryDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\FilterListEntryDisplay.xaml.cs">
       <DependentUpon>FilterListEntryDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\InstanceCollectionBase.cs" />
-    <Compile Include="View\ZetboxBase\InstanceListHeader.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceCollectionBase.cs" />
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListHeader.xaml.cs">
       <DependentUpon>InstanceListHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZetboxBase\NullableBoolValueView.cs" />
+    <Compile Include="View\ZetboxBase\NullablePropertyTextBoxView.cs" />
+    <Compile Include="View\ZetboxBase\ObjectReferenceDropdownEditor.cs" />
+    <Compile Include="View\ZetboxBase\ObjectReferenceEditor.cs" />
     <Compile Include="View\ZetboxBase\PropertiesPrewiewDisplay.xaml.cs">
       <DependentUpon>PropertiesPrewiewDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\PropertySelectionTaskDialog.xaml.cs">
       <DependentUpon>PropertySelectionTaskDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZetboxBase\SingleLineDisplay.cs" />
     <Compile Include="View\ZetboxBase\StringDisplay.cs" />
     <Compile Include="WpfToolkitResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -681,9 +693,6 @@
     <Compile Include="View\Filters\SingleValueFilterEditor.xaml.cs">
       <DependentUpon>SingleValueFilterEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GridCells\MultilineStringValue.xaml.cs">
-      <DependentUpon>MultilineStringValue.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\GUI\MultiLineEditorDialog.xaml.cs">
       <DependentUpon>MultiLineEditorDialog.xaml</DependentUpon>
     </Compile>
@@ -693,17 +702,11 @@
     <Compile Include="View\GUI\NavigatorDisplay.xaml.cs">
       <DependentUpon>NavigatorDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\ActionDisplay.xaml.cs">
-      <DependentUpon>ActionDisplay.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ZetboxBase\AuditJournalDisplay.xaml.cs">
       <DependentUpon>AuditJournalDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\CommandDisplay.xaml.cs">
-      <DependentUpon>CommandDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\CommandLinkDisplay.xaml.cs">
       <DependentUpon>CommandLinkDisplay.xaml</DependentUpon>
@@ -711,30 +714,24 @@
     <Compile Include="View\ZetboxBase\CompoundListGridEditor.xaml.cs">
       <DependentUpon>CompoundListGridEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\SingleLineDisplay.xaml.cs">
-      <DependentUpon>SingleLineDisplay.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ZetboxBase\ObjectReferenceListGridEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListGridEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\ObjectReferenceCollectionGridEditor.xaml.cs">
       <DependentUpon>ObjectReferenceCollectionGridEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\InstanceGridHorizontalDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceGridHorizontalDisplay.xaml.cs">
       <DependentUpon>InstanceGridHorizontalDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\InstanceGridBaseDisplay.cs" />
-    <Compile Include="View\ZetboxBase\InstanceGridDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceGridBaseDisplay.cs" />
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceGridDisplay.xaml.cs">
       <DependentUpon>InstanceGridDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\NullablePasswordTextBoxView.xaml.cs">
       <DependentUpon>NullablePasswordTextBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\ObjectReferenceDropdownEditor.xaml.cs">
-      <DependentUpon>ObjectReferenceDropdownEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\InstanceListBaseDisplay.cs" />
-    <Compile Include="View\ZetboxBase\InstanceListHorizontalDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListBaseDisplay.cs" />
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListHorizontalDisplay.xaml.cs">
       <DependentUpon>InstanceListHorizontalDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\NullableDateTimeValueEditor.xaml.cs">
@@ -755,21 +752,6 @@
     </Compile>
     <Compile Include="View\ZetboxBase\ObjectReferenceListEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\DataObjectLineDisplay.xaml.cs">
-      <DependentUpon>DataObjectLineDisplay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\EnumSelectionView.xaml.cs">
-      <DependentUpon>EnumSelectionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\NullableBoolValueView.xaml.cs">
-      <DependentUpon>NullableBoolValueView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\NullablePropertyTextBoxView.xaml.cs">
-      <DependentUpon>NullablePropertyTextBoxView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ZetboxBase\ObjectReferenceEditor.xaml.cs">
-      <DependentUpon>ObjectReferenceEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\ParameterInputTaskDialog.xaml.cs">
       <DependentUpon>ParameterInputTaskDialog.xaml</DependentUpon>
@@ -792,14 +774,11 @@
     <Compile Include="View\ModuleEditor\WorkspaceDisplay.xaml.cs">
       <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxBase\InstanceListDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceList\InstanceListDisplay.xaml.cs">
       <DependentUpon>InstanceListDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GridCells\ReferenceEditor.xaml.cs">
       <DependentUpon>ReferenceEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\GridCells\StringValue.xaml.cs">
-      <DependentUpon>StringValue.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GUI\DashboardDisplay.xaml.cs">
       <DependentUpon>DashboardDisplay.xaml</DependentUpon>
@@ -863,37 +842,31 @@
     <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
       <Name>Zetbox.API.Client</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Zetbox.API</Name>
-      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Client.WPF.Toolkit\Zetbox.Client.WPF.Toolkit.csproj">
       <Project>{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}</Project>
       <Name>Zetbox.Client.WPF.Toolkit</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Zetbox.Client</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>
-      <Private>False</Private>
+      <Private>false</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>Zetbox.API.Common</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\WPFLibrary\WPFSamplesLib.csproj">
       <Project>{E4BBC94F-B837-4668-A127-E36E6DE012F5}</Project>
       <Name>WPFSamplesLib</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -942,7 +915,11 @@
   <ItemGroup>
     <Resource Include="Images\DropDown.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\FloppyDisk.png" />
+    <Resource Include="Images\preferences.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\AccessDenied.png" />
   </ItemGroup>
@@ -961,7 +938,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MSBuildVersioning.targets" />
+  <Import Project="..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>

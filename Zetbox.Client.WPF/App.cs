@@ -21,23 +21,26 @@ namespace Zetbox.Client.WPF
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using System.Security.Authentication;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
     using System.Windows.Input;
     using System.Windows.Markup;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
     using System.Windows.Threading;
     using Autofac;
     using Autofac.Features.Metadata;
+    using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
     using Zetbox.API;
     using Zetbox.API.Client;
+    using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.Converter;
     using Zetbox.Client.WPF.Toolkit;
-    using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -118,10 +121,11 @@ namespace Zetbox.Client.WPF
                     string configFilePath;
                     var args = HandleCommandline(e.Args, out configFilePath);
 
-                    var config = ZetboxConfig.FromFile(configFilePath, "Zetbox.WPF.xml");
+                    var config = ZetboxConfig.FromFile(HostType.Client, configFilePath, GetConfigFileName());
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                     InitCulture(config);
+                    InfoLoggingProxyDecorator.SetUiThread(System.Threading.Thread.CurrentThread);
                     InitializeClient(args, config);
                 }
             }
@@ -132,20 +136,11 @@ namespace Zetbox.Client.WPF
                 // unable to start, exit
                 System.Environment.Exit(1);
             }
+        }
 
-            // The WPFToolkit library is not translated and does not support changeing the DateTimePickerTextbox.Watermark.
-            // Therefore, we have to replace the underlying ResourceManager.
-            try
-            {
-                var srType = typeof(Microsoft.Windows.Controls.DatePicker).Assembly.GetTypes().Single(t => t.Name == "SR");
-                var resourceManagerField = srType.GetField("_resourceManager", BindingFlags.Static | BindingFlags.NonPublic);
-                resourceManagerField.SetValue(null, WpfToolkitResources.ResourceManager);
-            }
-            catch (Exception /* ex */)
-            {
-                // ignore this
-                //ShowExceptionReporter(ex);
-            }
+        protected virtual string GetConfigFileName()
+        {
+            return "Zetbox.WPF.xml";
         }
 
         // Move to another method to avoid loading Zetbox.Objects
@@ -160,66 +155,38 @@ namespace Zetbox.Client.WPF
                 serverDomain = new ServerDomainManager();
                 serverDomain.Start(config);
             }
-            else
-            {
-                StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_NoServerStart);
-            }
-
 
             container = CreateMasterContainer(config);
+            API.AppDomainInitializer.InitializeFrom(container);
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
 
-            // Make Gendarme happy
-            var resources = this.Resources;
-
-            resources.BeginInit();
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/AppResources.xaml", UriKind.Relative) });
-
-            // Create icon converter
-            var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<Func<IZetboxContext>>());
-            resources["IconConverter"] = iconConverter;
-            resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
-
-            // Init all Converter that are not using a Context
-            var templateSelectorFactory = container.Resolve<Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
-            resources["defaultTemplateSelector"] = templateSelectorFactory(null);
-            resources["listItemTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.SingleLineKind");
-            resources["dashBoardTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.DashboardKind");
-
-            // Manually add DefaultStyles and DefaultViews
-            // Otherwise converter are unknown
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultStyles.xaml", UriKind.Relative) });
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
-
-            // Load registrated dictionaries from autofac
-            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
-            {
-                resources.MergedDictionaries.Add(dict);
-            }
-
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) });
-            // Load registrated dictionaries from autofac
-            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
-            {
-                resources.MergedDictionaries.Add(dict);
-            }
-
-            resources.EndInit();
-
-            // Init credentials explicit
-            StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
-            container.Resolve<ICredentialsResolver>().EnsureCredentials();
-
-            StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
-
-            // Tell icon converter that everything is initialized
-            iconConverter.Initialized();
+            LoadStyles(this.Resources);
 
             // Focus nightmare
             // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
             EventManager.RegisterClassHandler(typeof(Window), Window.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
             EventManager.RegisterClassHandler(typeof(Zetbox.Client.WPF.View.ZetboxBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
+
+            // Init credentials explicit
+            StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
+            var idResolver = container.Resolve<IIdentityResolver>();
+            var credResolver = container.Resolve<ICredentialsResolver>();
+            while (idResolver.GetCurrent() == null)
+            {
+                try
+                {
+                    credResolver.InvalidCredentials();
+                }
+                catch (AuthenticationException)
+                {
+                    MessageBox.Show(WpfToolkitResources.App_InvalidCredentials, WpfToolkitResources.App_InvalidCredentials_Caption, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    Environment.Exit(1);
+                }
+            }
+            credResolver.Freeze();
+
+            StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
 
             wpfResourcesInitialized = true;
 
@@ -244,6 +211,48 @@ namespace Zetbox.Client.WPF
             launcher.Show(args);
         }
 
+        private void LoadStyles(ResourceDictionary targetResources)
+        {
+            targetResources.BeginInit();
+            // Basic resources
+            targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/AppResources.xaml", UriKind.Relative) }));
+
+            // Init all Converter that need a constructor
+            var templateSelectorFactory = container.Resolve<Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
+            targetResources["defaultTemplateSelector"] = templateSelectorFactory(null);
+            targetResources["listItemTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.SingleLineKind");
+            targetResources["dashBoardTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.DashboardKind");
+
+            // Manually add DefaultStyles and DefaultViews to enable override through Autofac
+            targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultStyles.xaml", UriKind.Relative) }));
+            targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) }));
+            // Load registrated dictionaries from autofac
+            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
+            {
+                targetResources.MergedDictionaries.Add(Freeze(dict));
+            }
+
+            // For testing only!!!!
+            // targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/BigFontStyles.xaml", UriKind.Relative) }));
+
+            targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) }));
+            targetResources.MergedDictionaries.Add(Freeze(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/CustomControls.xaml", UriKind.Relative) }));
+            // Load registrated dictionaries from autofac
+            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
+            {
+                targetResources.MergedDictionaries.Add(Freeze(dict));
+            }
+
+            targetResources.EndInit();
+        }
+
+        private static ResourceDictionary Freeze(ResourceDictionary dict)
+        {
+            foreach (var i in dict.OfType<Freezable>())
+                i.Freeze();
+            return dict;
+        }
+
         protected virtual void InitializeSplashScreenImageResource()
         {
             if (!this.Resources.Contains("SplashScreenImage"))
@@ -257,9 +266,9 @@ namespace Zetbox.Client.WPF
         void FocusFixLoaded(object sender, RoutedEventArgs e)
         {
             var element = e.Source as FrameworkElement;
-            element.Dispatcher.Invoke(new Action(() =>
+            element.Dispatcher.BeginInvoke(new Action(() =>
             {
-                var firstTxt = element.FindVisualChild<InfoTextBox>();
+                var firstTxt = element.FindVisualChild<InfoTextBox>() ?? element.FindVisualChild<TextBox>();
                 if (firstTxt != null)
                 {
                     Keyboard.Focus(firstTxt);

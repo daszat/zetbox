@@ -17,19 +17,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Models;
-    using System.Collections.ObjectModel;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
     public class RelationChainViewModel
-           : ObjectListViewModel
+        : ObjectListViewModel
     {
         public new delegate RelationChainViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -62,6 +61,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             var cmds = new ObservableCollection<ICommandViewModel>();
 
+            cmds.Add(OpenCommand);
             cmds.Add(AddRelationCommand);
             cmds.Add(RemoveCommand);
 
@@ -76,15 +76,31 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (_AddRelationCommand == null)
                 {
                     _AddRelationCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         null,
                         RelationChainViewModelResources.AddRelationCommand_Name,
                         RelationChainViewModelResources.AddRelationCommand_Tooltip,
-                        AddRelation, 
-                        null, null);
+                        AddRelation,
+                        CanAddRelation,
+                        CanAddRelationReason);
                 }
                 return _AddRelationCommand;
             }
+        }
+
+        public bool CanAddRelation()
+        {
+            return (Value.Count == 0 && StartingObjectClass == null) || GetLastClass() != null;
+        }
+
+        public string CanAddRelationReason()
+        {
+            if ((Value.Count > 0 || StartingObjectClass != null) && GetLastClass() == null)
+            {
+                return RelationChainViewModelResources.AddRelationCommand_ChainInvalidReason;
+            }
+
+            return string.Empty;
         }
 
         public void AddRelation()
@@ -99,16 +115,37 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        private ObjectClass GetLastClass()
+        {
+            var relations = Value.Select(dovm => dovm.Object).Cast<Relation>();
+            ObjectClass nextType = StartingObjectClass.Object as ObjectClass;
+            foreach (var rel in relations)
+            {
+                if (rel.A.Type == nextType)
+                {
+                    nextType = rel.B.Type;
+                }
+                else if (rel.B.Type == nextType)
+                {
+                    nextType = rel.A.Type;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return nextType;
+        }
+
         private void ContinueAddRelation()
         {
-            var lastRel = Value.Count > 0 ? (Relation)Value.LastOrDefault().Object : null;
-            var lastAType = lastRel != null ? lastRel.A.Type : (ObjectClass)StartingObjectClass.Object;
-            var lastBType = lastRel != null ? lastRel.B.Type : (ObjectClass)StartingObjectClass.Object;
+            var lastType = GetLastClass();
+            if (lastType == null) return;
 
             var qry = DataContext.GetQuery<Relation>()
-                .Where(i => i.A.Type == lastAType || i.A.Type == lastBType || i.B.Type == lastAType || i.B.Type == lastBType)
+                .Where(i => i.A.Type == lastType || i.B.Type == lastType)
                 .ToList()
-                .Where(i => !((i.A.Type.ImplementsIChangedBy() && i.A.Navigator != null && i.A.Navigator.Name == "ChangedBy") 
+                .Where(i => !((i.A.Type.ImplementsIChangedBy() && i.A.Navigator != null && i.A.Navigator.Name == "ChangedBy")
                            || (i.B.Type.ImplementsIChangedBy() && i.B.Navigator != null && i.B.Navigator.Name == "ChangedBy")))
                 .AsQueryable();
 
@@ -121,7 +158,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     {
                         if (chosen != null)
                         {
-                            AddItem(chosen.First());
+                            Add(chosen.First());
                         }
                     },
                     null);
@@ -151,12 +188,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             ViewModelFactory.ShowDialog(lstMdl);
         }
 
-        public override void RemoveItem(DataObjectViewModel item)
+        public override void Remove()
         {
-            if (item == null) { throw new ArgumentNullException("item"); }
+            if (SelectedItems == null || SelectedItems.Count == 0) return;
 
             EnsureValueCache();
-            var idx = ValueModel.Value.IndexOf(item.Object);
+
+            // remove all items from the end, to avoid breaking the chain.
+            var idx = SelectedItems.Min(i => ValueModel.Value.IndexOf(i.Object));
             if (idx != -1)
             {
                 for (int i = ValueModel.Value.Count - 1; i >= idx; i--)

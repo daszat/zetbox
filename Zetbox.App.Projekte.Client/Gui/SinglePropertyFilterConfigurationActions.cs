@@ -32,26 +32,28 @@ namespace Zetbox.App.GUI
     public static class SinglePropertyFilterConfigurationActions
     {
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
+        public static void CreateFilterModel(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = new SingleValueFilterModel();
+            var prop = obj.Property;
+
             mdl.Label = obj.GetLabel();
             mdl.Required = obj.Required;
-            mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
+            mdl.ValueSource = FilterValueSource.FromProperty(prop);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
             mdl.RequestedKind = obj.RequestedKind;
 
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
-            if (obj.Property is StringProperty)
+            mdl.FilterArguments.Add(new FilterArgumentConfig(prop.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ prop.ValueModelDescriptor));
+            if (prop is StringProperty)
             {
                 mdl.Operator = FilterOperators.Contains;
             }
-            else if (obj.Property is EnumerationProperty)
+            else if (prop is EnumerationProperty)
             {
                 mdl.RefreshOnFilterChanged = true;
             }
-            else if (obj.Property is ObjectReferenceProperty)
+            else if (prop is ObjectReferenceProperty)
             {
                 mdl.RefreshOnFilterChanged = true;
             }

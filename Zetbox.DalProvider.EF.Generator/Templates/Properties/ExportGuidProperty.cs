@@ -42,5 +42,12 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
         {
             EfScalarPropHelper.ApplyBackingStoreDefinition(this, type, backingName, name);
         }
+
+        protected override void ApplyInitializeGuidOnGetTemplate()
+        {
+            WriteObjects("                if (", backingName, "_store == Guid.Empty) {\r\n");
+            WriteObjects("                    __result = ", backingName, "_store = Guid.NewGuid();\r\n");
+            WriteObjects("                }\r\n");
+        }
     }
 }

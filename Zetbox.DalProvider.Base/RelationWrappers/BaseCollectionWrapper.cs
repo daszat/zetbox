@@ -70,12 +70,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         /// </summary>
         protected virtual TEntry GetEntryOrDefault(TItem item)
         {
-            var result = Collection.FirstOrDefault(e => Object.Equals(ItemFromEntry(e), item));
-            if (result != null && ParentObject.Context != null)
-            {
-                result.AttachToContext(ParentObject.Context);
-            }
-            return result;
+            return Collection.FirstOrDefault(e => Object.Equals(ItemFromEntry(e), item));
         }
 
         /// <summary>
@@ -103,7 +98,6 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         /// <param name="entry">the new entry</param>
         protected virtual void OnEntryAdding(TEntry entry)
         {
-            entry.AttachToContext(ParentObject.Context);
         }
 
         /// <summary>

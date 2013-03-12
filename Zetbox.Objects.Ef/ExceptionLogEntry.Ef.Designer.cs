@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Logentry for exceptions
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ExceptionLogEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="ExceptionLogEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ExceptionLogEntry")]
     public class ExceptionLogEntryEfImpl : BaseServerDataObject_EntityFramework, ExceptionLogEntry
     {
@@ -70,6 +70,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Date;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnDate_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -79,6 +81,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Date", __oldValue, __newValue);
                     _Date = __newValue;
                     NotifyPropertyChanged("Date", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDate_PostSetter != null && IsAttached)
                     {
@@ -86,10 +89,10 @@ namespace Zetbox.App.Base
                         OnDate_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Date");
-				}
+                else
+                {
+                    SetInitializedProperty("Date");
+                }
             }
         }
         private DateTime _Date_store;
@@ -97,7 +100,7 @@ namespace Zetbox.App.Base
             get { return _Date_store; }
             set {
                 ReportEfPropertyChanging("Date");
-                _Date_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _Date_store = value;
                 ReportEfPropertyChanged("Date");
             }
         }
@@ -147,6 +150,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Exception", __oldValue, __newValue);
                     _Exception = __newValue;
                     NotifyPropertyChanged("Exception", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnException_PostSetter != null && IsAttached)
                     {
@@ -154,10 +158,10 @@ namespace Zetbox.App.Base
                         OnException_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Exception");
-				}
+                else
+                {
+                    SetInitializedProperty("Exception");
+                }
             }
         }
         private string _Exception_store;
@@ -215,6 +219,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Level", __oldValue, __newValue);
                     _Level = __newValue;
                     NotifyPropertyChanged("Level", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnLevel_PostSetter != null && IsAttached)
                     {
@@ -222,10 +227,10 @@ namespace Zetbox.App.Base
                         OnLevel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Level");
-				}
+                else
+                {
+                    SetInitializedProperty("Level");
+                }
             }
         }
         private string _Level_store;
@@ -283,6 +288,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Logger", __oldValue, __newValue);
                     _Logger = __newValue;
                     NotifyPropertyChanged("Logger", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnLogger_PostSetter != null && IsAttached)
                     {
@@ -290,10 +296,10 @@ namespace Zetbox.App.Base
                         OnLogger_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Logger");
-				}
+                else
+                {
+                    SetInitializedProperty("Logger");
+                }
             }
         }
         private string _Logger_store;
@@ -351,6 +357,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Message", __oldValue, __newValue);
                     _Message = __newValue;
                     NotifyPropertyChanged("Message", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMessage_PostSetter != null && IsAttached)
                     {
@@ -358,10 +365,10 @@ namespace Zetbox.App.Base
                         OnMessage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Message");
-				}
+                else
+                {
+                    SetInitializedProperty("Message");
+                }
             }
         }
         private string _Message_store;
@@ -419,6 +426,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Thread", __oldValue, __newValue);
                     _Thread = __newValue;
                     NotifyPropertyChanged("Thread", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnThread_PostSetter != null && IsAttached)
                     {
@@ -426,10 +434,10 @@ namespace Zetbox.App.Base
                         OnThread_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Thread");
-				}
+                else
+                {
+                    SetInitializedProperty("Thread");
+                }
             }
         }
         private string _Thread_store;
@@ -466,11 +474,6 @@ namespace Zetbox.App.Base
             me.Logger = other.Logger;
             me.Message = other.Message;
             me.Thread = other.Thread;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -677,12 +680,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

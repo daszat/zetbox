@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// A test class for persistently ordered 1:N relations
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="OrderedNEnd")]
+    [EdmEntityType(NamespaceName="Model", Name="OrderedNEndEfImpl")]
     [System.Diagnostics.DebuggerDisplay("OrderedNEnd")]
     public class OrderedNEndEfImpl : BaseServerDataObject_EntityFramework, OrderedNEnd
     {
@@ -85,7 +85,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnOneEnd_Getter != null)
                 {
@@ -97,7 +96,7 @@ namespace Zetbox.App.Test
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.OrderedOneEndEfImpl> r
@@ -144,6 +143,7 @@ namespace Zetbox.App.Test
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("NEnds", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -170,12 +170,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("NEnds_pos", __oldValue, __newValue);
                     _NEnds_pos = __newValue;
                     NotifyPropertyChanged("NEnds_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("NEnds_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("NEnds_pos");
+                }
             }
         }
         private int? _NEnds_pos_store;
@@ -234,6 +235,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("OtherInt", __oldValue, __newValue);
                     _OtherInt = __newValue;
                     NotifyPropertyChanged("OtherInt", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnOtherInt_PostSetter != null && IsAttached)
                     {
@@ -241,10 +243,10 @@ namespace Zetbox.App.Test
                         OnOtherInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("OtherInt");
-				}
+                else
+                {
+                    SetInitializedProperty("OtherInt");
+                }
             }
         }
         private int? _OtherInt_store;
@@ -278,11 +280,6 @@ namespace Zetbox.App.Test
             me.OtherInt = other.OtherInt;
             this.NEnds_pos = otherImpl.NEnds_pos;
             this._fk_OneEnd = otherImpl._fk_OneEnd;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -461,12 +458,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -481,8 +479,9 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.OrderedOneEndEfImpl>("Model.FK_OneEnd_hasMany_NEnds", "OneEnd").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.OrderedOneEndEfImpl>("Model.FK_OneEnd_hasMany_NEnds", "OneEnd");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._NEnds_pos);
             binStream.Write(this._OtherInt);

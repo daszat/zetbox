@@ -21,6 +21,7 @@ using Zetbox.API;
 
 namespace Zetbox.App.Projekte.Common
 {
+    // not a feature, will be loaded by client/server module
     public class CustomCommonActionsModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)

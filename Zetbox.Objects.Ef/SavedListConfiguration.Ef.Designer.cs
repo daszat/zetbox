@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// A configuration object for instance lists
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SavedListConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="SavedListConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SavedListConfiguration")]
     public class SavedListConfigurationEfImpl : BaseServerDataObject_EntityFramework, SavedListConfiguration, Zetbox.API.IExportableInternal
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Configuration", __oldValue, __newValue);
                     _Configuration = __newValue;
                     NotifyPropertyChanged("Configuration", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnConfiguration_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.GUI
                         OnConfiguration_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Configuration");
-				}
+                else
+                {
+                    SetInitializedProperty("Configuration");
+                }
             }
         }
         private string _Configuration_store;
@@ -159,6 +160,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -166,10 +168,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -234,7 +236,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnOwner_Getter != null)
                 {
@@ -246,7 +247,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -281,6 +282,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Owner", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -337,7 +339,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnType_Getter != null)
                 {
@@ -349,7 +350,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
@@ -384,6 +385,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Type", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -410,11 +412,6 @@ namespace Zetbox.App.GUI
             me.ExportGuid = other.ExportGuid;
             this._fk_Owner = otherImpl._fk_Owner;
             this._fk_Type = otherImpl._fk_Type;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -587,6 +584,7 @@ namespace Zetbox.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_SavedListConfiguration != null) OnNotifyDeleting_SavedListConfiguration(this);
             Owner = null;
+            Type = null;
         }
         public static event ObjectEventHandler<SavedListConfiguration> OnNotifyDeleting_SavedListConfiguration;
 
@@ -612,12 +610,13 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -637,12 +636,14 @@ namespace Zetbox.App.GUI
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_LstCfg_of_Owner", "Owner").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_LstCfg_of_Owner", "Owner");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_LstCfg_has_Type", "Type").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_LstCfg_has_Type", "Type");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

@@ -29,8 +29,9 @@ namespace Zetbox.Client.WPF.View
     using System.Windows.Media.Imaging;
     using System.Windows.Shapes;
     using Zetbox.Client.GUI;
-    using Zetbox.Client.WPF.CustomControls;
     using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for SelectDestinationPropertyDialog.xaml
@@ -48,7 +49,7 @@ namespace Zetbox.Client.WPF.View
 
         public PropertySelectionTaskViewModel ViewModel
         {
-            get { return (PropertySelectionTaskViewModel)DataContext; }
+            get { return (PropertySelectionTaskViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

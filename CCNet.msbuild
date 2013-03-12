@@ -1,7 +1,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Build">
     <Message Importance="high" Text="clean temp output" />
-    <RemoveDir Directories="bin;Zetbox.Server.HttpService\Common;Zetbox.Server.HttpService\Bootstrapper;Zetbox.Server.HttpService\Client;Zetbox.Server.HttpService\Server" />
+    <RemoveDir Directories="bin;Zetbox.Server.HttpService\Common;Zetbox.Server.HttpService\Bootstrapper;Zetbox.Server.HttpService\Client;Zetbox.Server.HttpService\Server;$(USERPROFILE)\AppData\Temp\zetbox" />
     <MakeDir Directories="bin" />
 
     <Message Importance="high" Text="Create temp dir for database backup" />
@@ -10,8 +10,11 @@
     <Message Importance="high" Text="rebuild required projects" />
     <MSBuild Projects="Zetbox.Complete.sln" Targets="Rebuild" Properties="Configuration=Minimal" />
 
-	<!-- reset and generate -->
-    <Exec Command="!ResetDatabase Configs\$(zenv)\Zetbox.Server.Service.xml" />
+	<!-- reset -->
+    <Exec Command="!ResetDatabase Configs\$(zenv)\Zetbox.Cli.xml" />
+
+	<!-- generate -->
+    <Exec Command="!Generate Configs\$(zenv)\Zetbox.Cli.xml" />
 
     <Message Importance="high" Text="Backup and remove old generated code" />
     <ItemGroup>

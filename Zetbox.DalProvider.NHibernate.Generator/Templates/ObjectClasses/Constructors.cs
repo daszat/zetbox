@@ -52,19 +52,20 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     string implementationTypeName = typeName + implementationSuffix;
 
                     return new CompoundInitialisationDescriptor(propertyName, backingStoreName, typeName, implementationTypeName);
-                });
+                }).OrderBy(cid => cid.BackingStoreName);
             }
         }
 
-        public virtual void ApplyCompoundObjectPropertyInitialisers()
+        public virtual void ApplyCompoundObjectPropertyInitialisers(string lazyCtxProperty)
         {
+            var lazyCtxParam = string.IsNullOrEmpty(lazyCtxProperty) ? "null" : lazyCtxProperty;
             foreach (var desc in compoundObjectInitialisers) //.Where(cop => !cop.IsList).OrderBy(cop => cop.Name))
             {
                 this.WriteObjects("            if (", desc.BackingStoreName, " == null)");
                 this.WriteLine();
                 this.WriteObjects("            {");
                 this.WriteLine();
-                this.WriteObjects("                ", desc.BackingStoreName, " = new ", desc.ImplementationTypeName, "(this, \"", desc.PropertyName, "\", null, null);");
+                this.WriteObjects("                ", desc.BackingStoreName, " = new ", desc.ImplementationTypeName, "(this, \"", desc.PropertyName, "\", ", lazyCtxParam,", null);");
                 this.WriteLine();
                 this.WriteObjects("            }");
                 this.WriteLine();
@@ -83,7 +84,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public virtual void ApplyDefaultValueSetFlagInitialisers()
         {
-            foreach (var flag in valueSetFlags)
+            foreach (var flag in valueSetFlags.OrderBy(f => f))
             {
                 this.WriteObjects("            ", flag, " = Proxy.ID > 0;");
                 this.WriteLine();

@@ -27,6 +27,7 @@ namespace Zetbox.Client.Models
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables;
+    using Zetbox.API.Async;
 
     public interface IValueModel : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -68,6 +69,14 @@ namespace Zetbox.Client.Models
         void SetUntypedValue(object val);
 
         /// <summary>
+        /// Returns true, if a ViewModel or other users should report errors.
+        /// </summary>
+        /// <remarks>
+        /// A property value model would return false if the object has been deleted.
+        /// </remarks>
+        bool ReportErrors { get; }
+
+        /// <summary>
         /// DefaultKind override from the underlying Value model.
         /// </summary>
         ControlKind RequestedKind { get; }
@@ -76,6 +85,7 @@ namespace Zetbox.Client.Models
     public interface IValueModel<TValue> : IValueModel
     {
         TValue Value { get; set; }
+        ZbTask<TValue> GetValueAsync();
     }
 
     public interface IEnumerationValueModel : IValueModel<int?>
@@ -118,12 +128,7 @@ namespace Zetbox.Client.Models
         CompoundObject CompoundObjectDefinition { get; }
     }
 
-    public interface IListValueModel<TValue> : IValueModel<IList<TValue>>, INotifyCollectionChanged
-    {
-        IEnumerable UnderlyingCollection { get; }
-    }
-
-    public interface ICompoundCollectionValueModel : IListValueModel<ICompoundObject>
+    public interface ICompoundCollectionValueModel : IValueModel<IList<ICompoundObject>>, INotifyCollectionChanged
     {
         CompoundObject CompoundObjectDefinition { get; }
     }
@@ -133,7 +138,6 @@ namespace Zetbox.Client.Models
     {
         ObjectClass ReferencedClass { get; }
         RelationEnd RelEnd { get; }
-        IEnumerable UnderlyingCollection { get; }
         bool? IsInlineEditable { get; }
     }
 }

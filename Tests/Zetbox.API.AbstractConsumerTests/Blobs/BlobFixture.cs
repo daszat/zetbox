@@ -58,6 +58,7 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
             data = new MemoryStream();
             var sw = new StreamWriter(data);
             sw.Write(txt_data);
+            sw.Flush();
 
             using (IZetboxContext ctx = GetContext())
             {

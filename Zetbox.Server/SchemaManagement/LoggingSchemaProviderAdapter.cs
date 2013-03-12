@@ -20,6 +20,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
@@ -191,6 +192,11 @@ namespace Zetbox.Server.SchemaManagement
         public bool CheckTableContainsData(TableRef tblName)
         {
             return _provider.CheckTableContainsData(tblName);
+        }
+
+        public bool CheckTableContainsData(TableRef tblName, IEnumerable<string> discriminatorFilter)
+        {
+            return _provider.CheckTableContainsData(tblName, discriminatorFilter);
         }
 
         public bool CheckColumnContainsNulls(TableRef tblName, string colName)
@@ -376,6 +382,24 @@ namespace Zetbox.Server.SchemaManagement
             _provider.CopyColumnData(srcTblName, srcColName, tblName, colName);
         }
 
+        public void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName, string discriminatorValue)
+        {
+            _provider.CopyColumnData(srcTblName, srcColName, tblName, colName, discriminatorValue);
+        }
+
+        public void MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings)
+        {
+            _provider.MapColumnData(srcTblName, srcColNames, tblName, colNames, mappings);
+        }
+
+        public object MappingDefaultSourceValue
+        {
+            get
+            {
+                return _provider.MappingDefaultSourceValue;
+            }
+        }
+
         public void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             _provider.MigrateFKs(srcTblName, srcColName, tblName, colName);
@@ -469,6 +493,26 @@ namespace Zetbox.Server.SchemaManagement
         public void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values)
         {
             _provider.WriteTableData(destTbl, colNames, values);
+        }
+
+        public void WriteDefaultValue(TableRef tblName, string colName, object value)
+        {
+            _provider.WriteDefaultValue(tblName, colName, value);
+        }
+
+        public void WriteDefaultValue(TableRef tblName, string colName, object value, IEnumerable<string> discriminatorFilter)
+        {
+            _provider.WriteDefaultValue(tblName, colName, value, discriminatorFilter);
+        }
+
+        public void WriteGuidDefaultValue(TableRef tblName, string colName)
+        {
+            _provider.WriteGuidDefaultValue(tblName, colName);
+        }
+
+        public void WriteGuidDefaultValue(TableRef tblName, string colName, IEnumerable<string> discriminatorFilter)
+        {
+            _provider.WriteGuidDefaultValue(tblName, colName, discriminatorFilter);
         }
 
         public void RefreshDbStats()
@@ -567,5 +611,31 @@ namespace Zetbox.Server.SchemaManagement
         {
             return _provider.CheckIndexPossible(tblName, idxName, unique, clustered, columns);
         }
+
+        public bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            return _provider.CheckCheckConstraintPossible(tblName, colName, newConstraintName, checkExpressions);
+        }
+
+        public bool CheckCheckConstraintExists(TableRef tblName, string constraintName)
+        {
+            return _provider.CheckCheckConstraintExists(tblName, constraintName);
+        }
+
+        public void CreateCheckConstraint(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            _provider.CreateCheckConstraint(tblName, colName, newConstraintName, checkExpressions);
+        }
+
+        public void DropCheckConstraint(TableRef tblName, string constraintName)
+        {
+            _provider.DropCheckConstraint(tblName, constraintName);
+        }
+
+        public string QuoteIdentifier(string name)
+        {
+            return _provider.QuoteIdentifier(name);
+        }
+
     }
 }

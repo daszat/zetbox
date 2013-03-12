@@ -50,11 +50,11 @@ foreach(var rel in relations)
 }
 
 /// <summary>Generate a single Property with the specified parameters</summary>
-private void GenerateProperty(string propertyName, bool needPositionStorage, string positionColumnName)
+private void GenerateProperty(string columnName, bool needPositionStorage, string positionColumnName)
 {
 
 #line 48 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
-this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" />\r\n");
+this.WriteObjects("    <Property Name=\"",  columnName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" />\r\n");
 #line 51 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
 if (needPositionStorage)
 	{

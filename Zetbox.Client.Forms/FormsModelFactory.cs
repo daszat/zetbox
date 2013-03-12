@@ -34,7 +34,7 @@ namespace Zetbox.Client.Forms
 
         private List<WorkspaceView> _workspaces = new List<WorkspaceView>();
 
-        public FormsModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
+        public FormsModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
             : base(container, metaCtx, cfg, perfCounter, dialogFactory)
         {
         }
@@ -63,7 +63,6 @@ namespace Zetbox.Client.Forms
         protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
         {
             var control = (IFormsView)view;
-            control.SetRenderer(_renderer);
             control.SetDataContext(mdl);
             if (asDialog)
             {
@@ -76,8 +75,6 @@ namespace Zetbox.Client.Forms
                     control.Activate();
             }
         }
-
-        private Renderer _renderer = new Renderer();
 
         public override void CreateTimer(TimeSpan tickLength, Action action)
         {

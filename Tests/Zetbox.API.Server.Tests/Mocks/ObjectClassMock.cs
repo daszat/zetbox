@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Zetbox.App.GUI;
+using Zetbox.API.Async;
 
 namespace Zetbox.API.Server.Mocks
 {
@@ -214,6 +215,10 @@ namespace Zetbox.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
+        public ZbTask TriggerFetch(string propName)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region IPersistenceObject Members
@@ -261,7 +266,7 @@ namespace Zetbox.API.Server.Mocks
             if (PropertyChangedWithValue != null) PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
-        public void AttachToContext(IZetboxContext ctx)
+        public void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
             throw new NotImplementedException();
         }
@@ -316,16 +321,6 @@ namespace Zetbox.API.Server.Mocks
         }
 
         public void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ToStream(System.Xml.XmlWriter xml)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }
@@ -508,5 +503,12 @@ namespace Zetbox.API.Server.Mocks
         }
         #endregion
 
+
+
+        public App.Base.TableMapping? TableMapping
+        {
+            get;
+            set;
+        }
     }
 }

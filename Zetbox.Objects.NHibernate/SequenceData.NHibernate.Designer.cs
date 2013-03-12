@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
                     Proxy.CurrentNumber = __newValue;
                     NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCurrentNumber_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnCurrentNumber_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CurrentNumber");
-				}
+                else
+                {
+                    SetInitializedProperty("CurrentNumber");
+                }
             }
         }
 
@@ -133,15 +134,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Sequence == null)
-				{
-					SetInitializedProperty("Sequence");
+                {
+                    SetInitializedProperty("Sequence");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.SequenceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Sequence);
@@ -150,10 +151,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Sequence");
+                {
+                    SetInitializedProperty("Sequence");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Sequence", __oldValue, __newValue);
@@ -193,6 +194,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Sequence", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnSequence_PostSetter != null && IsAttached)
                 {
@@ -227,12 +229,6 @@ namespace Zetbox.App.Base
 
             me.CurrentNumber = other.CurrentNumber;
             this._fk_Sequence = otherImpl._fk_Sequence;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -401,6 +397,7 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)Sequence);
             }
 
+            Sequence = null;
         }
         public static event ObjectEventHandler<SequenceData> OnNotifyDeleting_SequenceData;
 

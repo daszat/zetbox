@@ -250,12 +250,6 @@ namespace Zetbox.App.Base
             var me = (StringParameter)this;
 
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

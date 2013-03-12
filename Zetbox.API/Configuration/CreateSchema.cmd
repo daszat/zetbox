@@ -1,2 +1,2 @@
 @echo off
-xsd ..\..\bin\Debug\Common\Core\Zetbox.API.dll  /type:Zetbox.API.Configuration.ZetboxConfig
+xsd ..\..\bin\Debug\Common\Zetbox.API.dll  /type:Zetbox.API.Configuration.ZetboxConfig

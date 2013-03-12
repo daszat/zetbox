@@ -28,6 +28,7 @@ namespace Zetbox.API.Server
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.API.Async;
 
     public delegate IZetboxContext ServerZetboxContextFactory(Identity identity);
 
@@ -141,8 +142,7 @@ namespace Zetbox.API.Server
 
             CheckCreateRights(obj);
 
-            // call Attach on Subitems
-            obj.AttachToContext(this);
+            obj.AttachToContext(this, lazyCtx);
 
             OnChanged();
 
@@ -173,8 +173,7 @@ namespace Zetbox.API.Server
 
             ((BaseServerPersistenceObject)obj).SetNew();
 
-            // call Attach on Subitems
-            obj.AttachToContext(this);
+            obj.AttachToContext(this, lazyCtx);
 
             OnChanged();
         }
@@ -234,9 +233,9 @@ namespace Zetbox.API.Server
             {
                 ((IDataObject)obj).NotifyDeleting();
             }
-            
+
             DoDeleteObject(obj);
-         
+
             OnObjectDeleted(obj);
         }
 
@@ -251,7 +250,7 @@ namespace Zetbox.API.Server
         /// <returns>IQueryable</returns>
         public abstract IQueryable<T> GetQuery<T>() where T : class, IDataObject;
 
-        public List<IDataObject> GetAllHack<T>()
+        private List<IDataObject> GetAllHack<T>()
             where T : class, IDataObject
         {
             // The query translator cannot properly handle the IDataObject cast:
@@ -268,7 +267,7 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public List<IDataObject> GetAll(InterfaceType t)
         {
-            var mi = this.GetType().FindGenericMethod("GetAllHack", new[] { t.Type }, new Type[0]);
+            var mi = this.GetType().FindGenericMethod(true, "GetAllHack", new[] { t.Type }, new Type[0]);
             return (List<IDataObject>)mi.Invoke(this, new object[0]);
         }
 
@@ -290,14 +289,36 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public virtual List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
-            CheckDisposed();
-            if (obj == null) { throw new ArgumentNullException("obj"); }
+            return GetListOfAsync<T>(obj, propertyName).Result;
+        }
 
-            return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
+        /// <summary>
+        /// Returns the List referenced by the given Name.
+        /// </summary>
+        /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
+        /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
+        /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
+        /// <returns>A List of Objects</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public virtual ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
+        {
+            CheckDisposed();
+            return new ZbTask<List<T>>(ZbTask.Synchron, () =>
+            {
+                if (obj == null) { throw new ArgumentNullException("obj"); }
+
+                return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
+            });
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public abstract IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry;
+        public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry
+        {
+            return FetchRelationAsync<T>(relationId, endRole, parent).Result;
+        }
+
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -357,12 +378,15 @@ namespace Zetbox.API.Server
                 // Update IChangedBy 
                 if (obj is Zetbox.App.Base.IChangedBy && state != DataObjectState.Deleted)
                 {
+                    // if the object is new, ChangedBy/ChangedOn has to be set even if nothing else changed
+                    var updateChangedInfo = obj is BaseNotifyingObject && ((BaseNotifyingObject)obj).UpdateChangedInfo || state == DataObjectState.New;
                     var cb = (Zetbox.App.Base.IChangedBy)obj;
                     if (obj.ObjectState == DataObjectState.New)
                     {
                         cb.CreatedOn = now;
                     }
-                    cb.ChangedOn = now;
+                    if (updateChangedInfo)
+                        cb.ChangedOn = now;
 
                     if (this.identityStore != null)
                     {
@@ -375,7 +399,8 @@ namespace Zetbox.API.Server
                         {
                             cb.CreatedBy = localIdentity;
                         }
-                        cb.ChangedBy = localIdentity;
+                        if (updateChangedInfo)
+                            cb.ChangedBy = localIdentity;
                     }
                 }
 
@@ -532,7 +557,23 @@ namespace Zetbox.API.Server
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public abstract IDataObject Find(InterfaceType ifType, int ID);
+        public abstract ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID);
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
+        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        public IDataObject Find(InterfaceType ifType, int ID)
+        {
+            var t = FindAsync(ifType, ID);
+            t.Wait();
+            return t.Result;
+        }
 
         /// <summary>
         /// Find the Object of the given type by ID
@@ -542,7 +583,22 @@ namespace Zetbox.API.Server
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public abstract T Find<T>(int ID) where T : class, IDataObject;
+        public T Find<T>(int ID) where T : class, IDataObject
+        {
+            var t = FindAsync<T>(ID);
+            t.Wait();
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        public abstract ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject;
 
         /// <summary>
         /// Find the Persistence Object of the given type by ID
@@ -631,7 +687,8 @@ namespace Zetbox.API.Server
             using (var file = File.Open(path, FileMode.Create, FileAccess.Write))
             {
                 file.SetLength(0);
-                s.CopyTo(file);
+                s.CopyAllTo(file);
+                Logging.Log.DebugFormat("Wrote '{0}' bytes to disk", file.Length);
             }
             File.SetAttributes(path, FileAttributes.ReadOnly);
             return storagePath;
@@ -667,6 +724,16 @@ namespace Zetbox.API.Server
             var storagePath = BuildStoragePath(blob.ExportGuid, blob.CreatedOn, blob.OriginalName);
             string path = Path.Combine(config.Server.DocumentStore, storagePath);
             return new FileInfo(path);
+        }
+
+        public ZbTask<Stream> GetStreamAsync(int ID)
+        {
+            return new ZbTask<Stream>(GetStream(ID));
+        }
+
+        public ZbTask<FileInfo> GetFileInfoAsync(int ID)
+        {
+            return new ZbTask<FileInfo>(GetFileInfo(ID));
         }
 
         /// <inheritdoc />

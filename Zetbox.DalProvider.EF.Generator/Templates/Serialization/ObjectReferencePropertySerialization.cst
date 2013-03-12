@@ -43,8 +43,9 @@
         case SerializerDirection.ToStream:
 %>
             {
-                var key = this.RelationshipManager.GetRelatedReference<<%= clsFullName %>>("Model.<%= assocName %>", "<%= targetRoleName %>").EntityKey;
-                <%= streamName %>.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<<%= clsFullName %>>("Model.<%= assocName %>", "<%= targetRoleName %>");
+                var key = r.EntityKey;
+                <%= streamName %>.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
 <%
             break;

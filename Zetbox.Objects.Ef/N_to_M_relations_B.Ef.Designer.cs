@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// The B-Side class for the N_to_M_relations Tests
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="N_to_M_relations_B")]
+    [EdmEntityType(NamespaceName="Model", Name="N_to_M_relations_BEfImpl")]
     [System.Diagnostics.DebuggerDisplay("N_to_M_relations_B")]
     public class N_to_M_relations_BEfImpl : BaseServerDataObject_EntityFramework, N_to_M_relations_B
     {
@@ -82,7 +82,6 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -129,6 +128,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -136,10 +136,10 @@ namespace Zetbox.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -171,11 +171,6 @@ namespace Zetbox.App.Test
             var me = (N_to_M_relations_B)this;
 
             me.Name = other.Name;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -348,12 +343,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

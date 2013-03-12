@@ -51,6 +51,49 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
+        // value list property
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
+        public ICollection<string> StringCollection
+        {
+            get
+            {
+                if (_StringCollection == null)
+                {
+                    _StringCollection = new ClientValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntry, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl>>(
+                            this.Context,
+                            this,
+                            () => { this.NotifyPropertyChanged("StringCollection", null, null); if(OnStringCollection_PostSetter != null && IsAttached) OnStringCollection_PostSetter(this); },
+                            StringCollectionCollection);
+                }
+                return _StringCollection;
+            }
+        }
+
+        private ProjectedCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl.Muhblah_StringCollection_CollectionEntryProxy, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl> StringCollectionCollection
+        {
+            get {
+                if (_StringCollectionCollection == null)
+                {
+                    _StringCollectionCollection = new ProjectedCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl.Muhblah_StringCollection_CollectionEntryProxy, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl>(
+                        () => this.Proxy.StringCollection,
+                        p => (Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                        d => (Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl.Muhblah_StringCollection_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
+                }
+                return _StringCollectionCollection;
+            }
+        }
+
+        private ClientValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntry, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl>> _StringCollection;
+        private ProjectedCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl.Muhblah_StringCollection_CollectionEntryProxy, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl> _StringCollectionCollection;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
+public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnStringCollection_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.Muhblah> OnStringCollection_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public bool? TestBool
@@ -84,6 +127,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("TestBool", __oldValue, __newValue);
                     Proxy.TestBool = __newValue;
                     NotifyPropertyChanged("TestBool", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestBool_PostSetter != null && IsAttached)
                     {
@@ -91,10 +135,10 @@ namespace Zetbox.App.Test
                         OnTestBool_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestBool");
-				}
+                else
+                {
+                    SetInitializedProperty("TestBool");
+                }
             }
         }
 
@@ -199,15 +243,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.TestCustomObjects_Nav == null)
-				{
-					SetInitializedProperty("TestCustomObjects_Nav");
+                {
+                    SetInitializedProperty("TestCustomObjects_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_Nav);
@@ -216,10 +260,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("TestCustomObjects_Nav");
+                {
+                    SetInitializedProperty("TestCustomObjects_Nav");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("TestCustomObjects_Nav", __oldValue, __newValue);
@@ -266,6 +310,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnTestCustomObjects_Nav_PostSetter != null && IsAttached)
                 {
@@ -314,15 +359,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.TestCustomObjects_One_Nav == null)
-				{
-					SetInitializedProperty("TestCustomObjects_One_Nav");
+                {
+                    SetInitializedProperty("TestCustomObjects_One_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_One_Nav);
@@ -331,10 +376,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("TestCustomObjects_One_Nav");
+                {
+                    SetInitializedProperty("TestCustomObjects_One_Nav");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("TestCustomObjects_One_Nav", __oldValue, __newValue);
@@ -374,6 +419,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TestCustomObjects_One_Nav", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnTestCustomObjects_One_Nav_PostSetter != null && IsAttached)
                 {
@@ -430,6 +476,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestDateTime", __oldValue, __newValue);
                     Proxy.TestDateTime = __newValue;
                     NotifyPropertyChanged("TestDateTime", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestDateTime_PostSetter != null && IsAttached)
                     {
@@ -437,10 +484,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestDateTime_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestDateTime");
-				}
+                else
+                {
+                    SetInitializedProperty("TestDateTime");
+                }
             }
         }
 
@@ -487,6 +534,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestEnum", __oldValue, __newValue);
                     Proxy.TestEnum = __newValue;
                     NotifyPropertyChanged("TestEnum", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestEnum_PostSetter != null && IsAttached)
                     {
@@ -494,10 +542,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestEnum_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnum");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnum");
+                }
             }
         }
 
@@ -544,6 +592,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     Proxy.TestString = __newValue;
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestString_PostSetter != null && IsAttached)
                     {
@@ -551,10 +600,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestString_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestString");
-				}
+                else
+                {
+                    SetInitializedProperty("TestString");
+                }
             }
         }
 
@@ -583,12 +632,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             me.TestString = other.TestString;
             this._fk_TestCustomObjects_Nav = otherImpl._fk_TestCustomObjects_Nav;
             this._fk_TestCustomObjects_One_Nav = otherImpl._fk_TestCustomObjects_One_Nav;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -687,6 +730,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorNHibernateImpl<Muhblah, ICollection<string>>(
+                        lazyCtx,
+                        new Guid("b89fc0d2-8603-40d7-8649-61431a9fb09b"),
+                        "StringCollection",
+                        null,
+                        obj => obj.StringCollection,
+                        null, // lists are read-only properties
+                        obj => OnStringCollection_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Muhblah, bool?>(
                         lazyCtx,
@@ -838,6 +890,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
+            foreach(NHibernatePersistenceObject x in StringCollectionCollection) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
 
             // FK_MB_Lst_Role_hasOther_TCO_Role
             if (TestCustomObjects_Nav != null) {
@@ -855,6 +911,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 ChildrenToDelete.Add(x);
             }
 
+            StringCollection.Clear();
             TestCustomObjects_List_Nav.Clear();
             TestCustomObjects_ManyList_Nav.Clear();
             TestCustomObjects_Nav = null;
@@ -869,6 +926,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             public MuhblahProxy()
             {
+                StringCollection = new Collection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl.Muhblah_StringCollection_CollectionEntryProxy>();
                 TestCustomObjects_List_Nav = new Collection<Zetbox.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy>();
                 TestCustomObjects_ManyList_Nav = new Collection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy>();
             }
@@ -877,6 +935,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 
             public virtual Type ZetboxWrapper { get { return typeof(MuhblahNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(MuhblahProxy); } }
+
+            public virtual ICollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryNHibernateImpl.Muhblah_StringCollection_CollectionEntryProxy> StringCollection { get; set; }
+
+            public virtual int? StringCollection_pos { get; set; }
 
             public virtual bool? TestBool { get; set; }
 
@@ -906,6 +968,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this.StringCollectionCollection);
             binStream.Write(this.Proxy.TestBool);
             binStream.Write(this.Proxy.TestCustomObjects_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.TestCustomObjects_Nav) : (int?)null);
             binStream.Write(this.Proxy.TestCustomObjects_One_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.TestCustomObjects_One_Nav) : (int?)null);

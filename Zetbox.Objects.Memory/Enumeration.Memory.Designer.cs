@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("AreFlags", __oldValue, __newValue);
                     _AreFlags = __newValue;
                     NotifyPropertyChanged("AreFlags", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAreFlags_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Base
                         OnAreFlags_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AreFlags");
-				}
+                else
+                {
+                    SetInitializedProperty("AreFlags");
+                }
             }
         }
         private bool _AreFlags;
@@ -108,25 +109,44 @@ namespace Zetbox.App.Base
             {
                 if (_EnumerationEntries == null)
                 {
-                    List<Zetbox.App.Base.EnumerationEntry> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Base.EnumerationEntry>(this, "EnumerationEntries");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Base.EnumerationEntry>();
-                    }
-    
-                    _EnumerationEntries = new OneNRelationList<Zetbox.App.Base.EnumerationEntry>(
-                        "Enumeration",
-                        "EnumerationEntries_pos",
-                        this,
-                        () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
-                        serverList);
+                    TriggerFetchEnumerationEntriesAsync().Wait();
                 }
                 return _EnumerationEntries;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchEnumerationEntriesTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumerationEntriesAsync()
+        {
+            if (_triggerFetchEnumerationEntriesTask != null) return _triggerFetchEnumerationEntriesTask;
+
+            List<Zetbox.App.Base.EnumerationEntry> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchEnumerationEntriesTask = Context.GetListOfAsync<Zetbox.App.Base.EnumerationEntry>(this, "EnumerationEntries")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchEnumerationEntriesTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.Base.EnumerationEntry>();
+                });
+            }
+    
+            _triggerFetchEnumerationEntriesTask.OnResult(t =>
+            {
+                _EnumerationEntries = new OneNRelationList<Zetbox.App.Base.EnumerationEntry>(
+                    "Enumeration",
+                    "EnumerationEntries_pos",
+                    this,
+                    () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchEnumerationEntriesTask;    
         }
     
         private OneNRelationList<Zetbox.App.Base.EnumerationEntry> _EnumerationEntries;
@@ -593,11 +613,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
 
             me.AreFlags = other.AreFlags;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -629,6 +644,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "EnumerationEntries":
+                return TriggerFetchEnumerationEntriesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

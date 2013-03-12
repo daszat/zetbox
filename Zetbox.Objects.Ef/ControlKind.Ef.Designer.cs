@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// The ControlKind specifies the toolkit-independent kind or type of control that should display a given Presentable.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ControlKind")]
+    [EdmEntityType(NamespaceName="Model", Name="ControlKindEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ControlKind")]
     public class ControlKindEfImpl : BaseServerDataObject_EntityFramework, ControlKind, Zetbox.API.IExportableInternal
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -148,6 +147,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -155,10 +155,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -224,7 +224,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -236,7 +235,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
@@ -271,6 +270,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -320,6 +320,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -327,10 +328,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -395,7 +396,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnParent_Getter != null)
                 {
@@ -407,7 +407,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
@@ -454,6 +454,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("ChildControlKinds", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -544,11 +545,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             me.Name = other.Name;
             this._fk_Module = otherImpl._fk_Module;
             this._fk_Parent = otherImpl._fk_Parent;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -744,6 +740,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             base.NotifyDeleting();
             if (OnNotifyDeleting_ControlKind != null) OnNotifyDeleting_ControlKind(this);
             ChildControlKinds.Clear();
+            Module = null;
             Parent = null;
         }
         public static event ObjectEventHandler<ControlKind> OnNotifyDeleting_ControlKind;
@@ -770,12 +767,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -794,13 +792,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_ControlKind_has_Module", "Module").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_ControlKind_has_Module", "Module");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._Name);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ChildControlKinds_have_a_Parent", "Parent").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ChildControlKinds_have_a_Parent", "Parent");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

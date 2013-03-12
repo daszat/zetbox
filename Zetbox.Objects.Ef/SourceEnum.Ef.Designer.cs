@@ -22,7 +22,7 @@ namespace Zetbox.App.SchemaMigration
     /// <summary>
     /// Mapps an Enum
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SourceEnum")]
+    [EdmEntityType(NamespaceName="Model", Name="SourceEnumEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SourceEnum")]
     public class SourceEnumEfImpl : BaseServerDataObject_EntityFramework, SourceEnum, Zetbox.API.IExportableInternal
     {
@@ -85,7 +85,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -97,7 +96,7 @@ namespace Zetbox.App.SchemaMigration
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -132,6 +131,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -184,6 +184,8 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -193,6 +195,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -200,10 +203,10 @@ namespace Zetbox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -211,7 +214,7 @@ namespace Zetbox.App.SchemaMigration
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _ChangedOn_store = value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -268,7 +271,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -280,7 +282,7 @@ namespace Zetbox.App.SchemaMigration
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -315,6 +317,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -367,6 +370,8 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -376,6 +381,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -383,10 +389,10 @@ namespace Zetbox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -394,7 +400,7 @@ namespace Zetbox.App.SchemaMigration
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _CreatedOn_store = value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -452,7 +458,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnDestinationValue_Getter != null)
                 {
@@ -464,7 +469,7 @@ namespace Zetbox.App.SchemaMigration
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.EnumerationEntryEfImpl> r
@@ -499,6 +504,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DestinationValue", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -560,6 +566,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -567,10 +574,10 @@ namespace Zetbox.App.SchemaMigration
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -636,7 +643,6 @@ namespace Zetbox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnSourceColumn_Getter != null)
                 {
@@ -648,7 +654,7 @@ namespace Zetbox.App.SchemaMigration
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl> r
@@ -695,6 +701,7 @@ namespace Zetbox.App.SchemaMigration
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("EnumEntries", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -744,6 +751,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("SourceValue", __oldValue, __newValue);
                     _SourceValue = __newValue;
                     NotifyPropertyChanged("SourceValue", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSourceValue_PostSetter != null && IsAttached)
                     {
@@ -751,10 +759,10 @@ namespace Zetbox.App.SchemaMigration
                         OnSourceValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SourceValue");
-				}
+                else
+                {
+                    SetInitializedProperty("SourceValue");
+                }
             }
         }
         private string _SourceValue_store;
@@ -793,11 +801,6 @@ namespace Zetbox.App.SchemaMigration
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_DestinationValue = otherImpl._fk_DestinationValue;
             this._fk_SourceColumn = otherImpl._fk_SourceColumn;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1026,6 +1029,8 @@ namespace Zetbox.App.SchemaMigration
             if (OnNotifyDeleting_SourceEnum != null) OnNotifyDeleting_SourceEnum(this);
             ChangedBy = null;
             CreatedBy = null;
+            DestinationValue = null;
+            SourceColumn = null;
         }
         public static event ObjectEventHandler<SourceEnum> OnNotifyDeleting_SourceEnum;
 
@@ -1051,12 +1056,13 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -1071,32 +1077,36 @@ namespace Zetbox.App.SchemaMigration
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SourceEnum_was_ChangedBy", "ChangedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SourceEnum_was_ChangedBy", "ChangedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SourceEnum_was_CreatedBy", "CreatedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_SourceEnum_was_CreatedBy", "CreatedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.EnumerationEntryEfImpl>("Model.FK_SourceEnum_mapps_to_DestinationValue", "DestinationValue").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.EnumerationEntryEfImpl>("Model.FK_SourceEnum_mapps_to_DestinationValue", "DestinationValue");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>("Model.FK_SourceColumn_may_have_EnumEntries", "SourceColumn").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>("Model.FK_SourceColumn_may_have_EnumEntries", "SourceColumn");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._SourceValue);
         }

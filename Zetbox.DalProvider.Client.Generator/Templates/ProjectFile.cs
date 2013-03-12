@@ -48,21 +48,21 @@ namespace Zetbox.DalProvider.Client.Generator.Templates
             // DAL Provider
             this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.ClientObjects"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Client\Core\Zetbox.DalProvider.ClientObjects.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Client\Zetbox.DalProvider.ClientObjects.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // Client API
             this.WriteLine(@"    <Reference Include=""Zetbox.API.Client"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Client\Core\Zetbox.API.Client.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Client\Zetbox.API.Client.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
 
         protected override string GetRelativeOutputPath()
         {
-            return @"Client\Core";
+            return @"Client";
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Zetbox.App.Test
             this.Proxy = proxy;
             if (this.Proxy.Any == null)
             {
-                this.Proxy.Any = new Zetbox.App.Base.AnyReferenceNHibernateImpl(this, "Any", null, null);
+                this.Proxy.Any = new Zetbox.App.Base.AnyReferenceNHibernateImpl(this, "Any", lazyCtx, null);
             }
             else
             {
@@ -73,36 +73,37 @@ namespace Zetbox.App.Test
         /// <summary>backing property for Any, takes care of attaching/detaching the values</summary>
         public Zetbox.App.Base.AnyReferenceNHibernateImpl AnyImpl
         {
-            get 
-			{ 
-				return this.Proxy.Any; 
-			}
+            get
+            {
+                return this.Proxy.Any;
+            }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if (!object.Equals(this.Proxy.Any, value))
                 {
-					var __oldValue = this.Proxy.Any;
-					var __newValue = value;
+                    var __oldValue = this.Proxy.Any;
+                    var __newValue = value;
 
-					NotifyPropertyChanging("Any", __oldValue, __newValue);
+                    NotifyPropertyChanging("Any", __oldValue, __newValue);
 
-					if (this.Proxy.Any != null)
-					{ 
-						this.Proxy.Any.DetachFromObject(this, "Any");
-					}
-					__newValue = (Zetbox.App.Base.AnyReferenceNHibernateImpl)__newValue.Clone();
-					this.Proxy.Any = __newValue;
-					this.Proxy.Any.AttachToObject(this, "Any");
+                    if (this.Proxy.Any != null)
+                    {
+                        this.Proxy.Any.DetachFromObject(this, "Any");
+                    }
+                    __newValue = (Zetbox.App.Base.AnyReferenceNHibernateImpl)__newValue.Clone();
+                    this.Proxy.Any = __newValue;
+                    this.Proxy.Any.AttachToObject(this, "Any");
 
-					NotifyPropertyChanged("Any", __oldValue, __newValue);
-				}
-				else
-				{
-					SetInitializedProperty("Any");
-				}
+                    NotifyPropertyChanged("Any", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+                else
+                {
+                    SetInitializedProperty("Any");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -144,6 +145,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     Proxy.DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -151,10 +153,10 @@ namespace Zetbox.App.Test
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
 
@@ -202,6 +204,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -209,10 +212,10 @@ namespace Zetbox.App.Test
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -263,12 +266,6 @@ namespace Zetbox.App.Test
             } else if (me.Any != null && other.Any != null) {
                 me.Any.ApplyChangesFrom(other.Any);
             }
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -492,7 +489,7 @@ namespace Zetbox.App.Test
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this.Any, xml, "Any", "Zetbox.App.Test");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ExportCompoundObject(this.Any, xml, "Any", "Zetbox.App.Test");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this.Proxy.DisplayName, xml, "DisplayName", "Zetbox.App.Test");
         }
 
@@ -502,7 +499,7 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Test|Any":
-                XmlStreamer.FromStream(this.AnyImpl, xml);
+                XmlStreamer.MergeImportCompoundObject(this.AnyImpl, xml);
                 break;
             case "Zetbox.App.Test|DisplayName":
                 this.Proxy.DisplayName = XmlStreamer.ReadString(xml);

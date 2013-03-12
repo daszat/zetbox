@@ -65,5 +65,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 ? DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, _roleMembership.ObjectClass)
                 : null;
         }
+
+        #region Highlight
+        public override Highlight Highlight
+        {
+            get
+            {
+                return new Highlight(null, "#008000", System.Drawing.FontStyle.Regular, null);
+            }
+        }
+
+        public override Highlight HighlightAsync
+        {
+            get
+            {
+                return this.Highlight;
+            }
+        }        
+        #endregion
     }
 }

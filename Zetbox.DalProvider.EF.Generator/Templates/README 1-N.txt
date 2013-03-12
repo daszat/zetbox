@@ -165,7 +165,7 @@ Finally the various parts have to be defined in the EDMX:
 
 	<EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
 		<EntitySetMapping Name="Module">
-			<EntityTypeMapping TypeName="IsTypeOf(Model.Module)">
+			<EntityTypeMapping TypeName="Model.Module">
 				<MappingFragment StoreEntitySet="Module">
 					<ScalarProperty Name="ID" ColumnName="ID" />
 					<ScalarProperty Name="Namespace" ColumnName="Namespace" />
@@ -175,7 +175,7 @@ Finally the various parts have to be defined in the EDMX:
 			</EntityTypeMapping>
 		</EntitySetMapping>
 		<EntitySetMapping Name="Assembly">
-			<EntityTypeMapping TypeName="IsTypeOf(Model.Assembly)">
+			<EntityTypeMapping TypeName="Model.Assembly">
 				<MappingFragment StoreEntitySet="Assembly">
 					<ScalarProperty Name="ID" ColumnName="ID" />
 					<ScalarProperty Name="Name" ColumnName="Name" />

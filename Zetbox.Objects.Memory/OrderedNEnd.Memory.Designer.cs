@@ -40,7 +40,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneEnd
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneEnd
         // fkBackingName=_fk_OneEnd; fkGuidBackingName=_fk_guid_OneEnd;
         // referencedInterface=Zetbox.App.Test.OrderedOneEnd; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=NEnds; is list;
@@ -58,8 +58,44 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_OneEnd;
+        private int? __fk_OneEndCache;
 
+        private int? _fk_OneEnd {
+            get
+            {
+                return __fk_OneEndCache;
+            }
+            set
+            {
+                __fk_OneEndCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchOneEndTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> _triggerFetchOneEndTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> TriggerFetchOneEndAsync()
+        {
+            if (_triggerFetchOneEndTask != null) return _triggerFetchOneEndTask;
+
+            if (_fk_OneEnd.HasValue)
+                _triggerFetchOneEndTask = Context.FindAsync<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
+            else
+                _triggerFetchOneEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchOneEndTask.OnResult(t =>
+            {
+                if (OnOneEnd_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.OrderedOneEnd>(t.Result);
+                    OnOneEnd_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchOneEndTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -67,32 +103,19 @@ namespace Zetbox.App.Test
         {
             get
             {
-                Zetbox.App.Test.OrderedOneEndMemoryImpl __value;
-                if (_fk_OneEnd.HasValue)
-                    __value = (Zetbox.App.Test.OrderedOneEndMemoryImpl)Context.Find<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
-                else
-                    __value = null;
-
-                if (OnOneEnd_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.OrderedOneEnd>(__value);
-                    OnOneEnd_Getter(this, e);
-                    __value = (Zetbox.App.Test.OrderedOneEndMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Test.OrderedOneEndMemoryImpl)TriggerFetchOneEndAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_OneEnd == null) || (value != null && value.ID == _fk_OneEnd))
-				{
-					SetInitializedProperty("OneEnd");
+                {
+                    SetInitializedProperty("OneEnd");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = OneEndImpl;
@@ -129,6 +152,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("OneEnd", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnOneEnd_PostSetter != null && IsAttached)
                 {
@@ -157,12 +181,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("NEnds_pos", __oldValue, __newValue);
                     _NEnds_pos = __newValue;
                     NotifyPropertyChanged("NEnds_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("NEnds_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("NEnds_pos");
+                }
             }
         }
         private int? _NEnds_pos;
@@ -210,6 +235,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("OtherInt", __oldValue, __newValue);
                     _OtherInt = __newValue;
                     NotifyPropertyChanged("OtherInt", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnOtherInt_PostSetter != null && IsAttached)
                     {
@@ -217,10 +243,10 @@ namespace Zetbox.App.Test
                         OnOtherInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("OtherInt");
-				}
+                else
+                {
+                    SetInitializedProperty("OtherInt");
+                }
             }
         }
         private int? _OtherInt;
@@ -246,11 +272,6 @@ namespace Zetbox.App.Test
             me.OtherInt = other.OtherInt;
             this.NEnds_pos = otherImpl.NEnds_pos;
             this._fk_OneEnd = otherImpl._fk_OneEnd;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -291,6 +312,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "OneEnd":
+                return TriggerFetchOneEndAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

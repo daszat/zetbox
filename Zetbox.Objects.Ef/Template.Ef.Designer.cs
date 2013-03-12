@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Template")]
+    [EdmEntityType(NamespaceName="Model", Name="TemplateEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Template")]
     public class TemplateEfImpl : BaseServerDataObject_EntityFramework, Template
     {
@@ -85,7 +85,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnDisplayedTypeAssembly_Getter != null)
                 {
@@ -97,7 +96,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.AssemblyEfImpl> r
@@ -132,6 +131,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -181,6 +181,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, __newValue);
                     _DisplayedTypeFullName = __newValue;
                     NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayedTypeFullName_PostSetter != null && IsAttached)
                     {
@@ -188,10 +189,10 @@ namespace Zetbox.App.GUI
                         OnDisplayedTypeFullName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayedTypeFullName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayedTypeFullName");
+                }
             }
         }
         private string _DisplayedTypeFullName_store;
@@ -249,6 +250,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -256,10 +258,10 @@ namespace Zetbox.App.GUI
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
         private string _DisplayName_store;
@@ -320,7 +322,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -373,7 +374,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnVisualTree_Getter != null)
                 {
@@ -385,7 +385,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.VisualEfImpl> r
@@ -420,6 +420,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -509,11 +510,6 @@ namespace Zetbox.App.GUI
             me.DisplayName = other.DisplayName;
             this._fk_DisplayedTypeAssembly = otherImpl._fk_DisplayedTypeAssembly;
             this._fk_VisualTree = otherImpl._fk_VisualTree;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -731,12 +727,13 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -751,14 +748,16 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.AssemblyEfImpl>("Model.FK_Template_has_DisplayedTypeAssembly", "DisplayedTypeAssembly").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.AssemblyEfImpl>("Model.FK_Template_has_DisplayedTypeAssembly", "DisplayedTypeAssembly");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._DisplayedTypeFullName);
             binStream.Write(this._DisplayName);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>("Model.FK_Template_has_VisualTree", "VisualTree").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>("Model.FK_Template_has_VisualTree", "VisualTree");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

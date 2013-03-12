@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
         // fkBackingName=_fk_Constrained; fkGuidBackingName=_fk_guid_Constrained;
         // referencedInterface=Zetbox.App.Base.DataType; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Constraints; is list;
@@ -58,9 +58,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Constrained;
+        private int? __fk_ConstrainedCache;
+
+        private int? _fk_Constrained {
+            get
+            {
+                return __fk_ConstrainedCache;
+            }
+            set
+            {
+                __fk_ConstrainedCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchConstrainedTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Constrained = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> _triggerFetchConstrainedTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> TriggerFetchConstrainedAsync()
+        {
+            if (_triggerFetchConstrainedTask != null) return _triggerFetchConstrainedTask;
+
+            if (_fk_Constrained.HasValue)
+                _triggerFetchConstrainedTask = Context.FindAsync<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
+            else
+                _triggerFetchConstrainedTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchConstrainedTask.OnResult(t =>
+            {
+                if (OnConstrained_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DataType>(t.Result);
+                    OnConstrained_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchConstrainedTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.DataTypeMemoryImpl __value;
-                if (_fk_Constrained.HasValue)
-                    __value = (Zetbox.App.Base.DataTypeMemoryImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
-                else
-                    __value = null;
-
-                if (OnConstrained_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.DataType>(__value);
-                    OnConstrained_Getter(this, e);
-                    __value = (Zetbox.App.Base.DataTypeMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.DataTypeMemoryImpl)TriggerFetchConstrainedAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Constrained == null) || (value != null && value.ID == _fk_Constrained))
-				{
-					SetInitializedProperty("Constrained");
+                {
+                    SetInitializedProperty("Constrained");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ConstrainedImpl;
@@ -130,6 +153,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Constrained", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnConstrained_PostSetter != null && IsAttached)
                 {
@@ -193,6 +217,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -200,10 +225,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -251,6 +276,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Reason", __oldValue, __newValue);
                     _Reason = __newValue;
                     NotifyPropertyChanged("Reason", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnReason_PostSetter != null && IsAttached)
                     {
@@ -258,10 +284,10 @@ namespace Zetbox.App.Base
                         OnReason_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Reason");
-				}
+                else
+                {
+                    SetInitializedProperty("Reason");
+                }
             }
         }
         private string _Reason;
@@ -416,11 +442,6 @@ namespace Zetbox.App.Base
             me.Reason = other.Reason;
             this._fk_Constrained = otherImpl._fk_Constrained;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -461,6 +482,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Constrained":
+                return TriggerFetchConstrainedAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

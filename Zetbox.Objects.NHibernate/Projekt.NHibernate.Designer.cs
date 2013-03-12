@@ -52,6 +52,49 @@ namespace Zetbox.App.Projekte
         internal readonly ProjektProxy Proxy;
 
         /// <summary>
+        /// Eine Liste der Änderungen an diesem Datensatz.
+        /// </summary>
+        // CompoundObject list property
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
+        public ICollection<Zetbox.App.Base.AuditEntry> AuditJournal
+        {
+            get
+            {
+                if (_AuditJournal == null)
+                {
+                    _AuditJournal = new ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl>>(
+                            this.Context,
+                            this,
+                            () => { this.NotifyPropertyChanged("AuditJournal", null, null); if(OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); },
+                            AuditJournalCollection);
+                }
+                return _AuditJournal;
+            }
+        }
+
+        private ProjectedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl> AuditJournalCollection
+        {
+            get {
+                if (_AuditJournalCollection == null)
+                {
+                    _AuditJournalCollection = new ProjectedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl>(
+                        () => this.Proxy.AuditJournal,
+                        p => (Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                        d => (Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
+                }
+                return _AuditJournalCollection;
+            }
+        }
+
+        private ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl>> _AuditJournal;
+        private ProjectedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl> _AuditJournalCollection;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_IsValid;
+
+        /// <summary>
         /// Aufträge
         /// </summary>
         // object list property
@@ -110,16 +153,16 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("AufwandGes", __oldValue, __newValue);
                     Proxy.AufwandGes = __newValue;
                     NotifyPropertyChanged("AufwandGes", __oldValue, __newValue);
-			        _AufwandGes_IsDirty = false;
+                    _AufwandGes_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("AufwandGes");
-				}
+                else
+                {
+                    SetInitializedProperty("AufwandGes");
+                }
             }
         }
-		private bool _AufwandGes_IsDirty = false;
+        private bool _AufwandGes_IsDirty = false;
 
 
         private double? FetchAufwandGesOrDefault()
@@ -175,6 +218,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("Bis", __oldValue, __newValue);
                     Proxy.Bis = __newValue;
                     NotifyPropertyChanged("Bis", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBis_PostSetter != null && IsAttached)
                     {
@@ -182,10 +226,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Bis");
-				}
+                else
+                {
+                    SetInitializedProperty("Bis");
+                }
             }
         }
 
@@ -224,15 +268,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -241,10 +285,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -268,6 +312,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -325,6 +370,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -332,10 +378,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
 
@@ -393,15 +439,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -410,10 +456,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -437,6 +483,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -494,6 +541,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -501,10 +549,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
 
@@ -571,6 +619,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -578,10 +627,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -647,6 +696,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("KickOffAm", __oldValue, __newValue);
                     Proxy.KickOffAm = __newValue;
                     NotifyPropertyChanged("KickOffAm", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnKickOffAm_PostSetter != null && IsAttached)
                     {
@@ -654,10 +704,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKickOffAm_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("KickOffAm");
-				}
+                else
+                {
+                    SetInitializedProperty("KickOffAm");
+                }
             }
         }
 
@@ -704,6 +754,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("KickOffBis", __oldValue, __newValue);
                     Proxy.KickOffBis = __newValue;
                     NotifyPropertyChanged("KickOffBis", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnKickOffBis_PostSetter != null && IsAttached)
                     {
@@ -711,10 +762,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKickOffBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("KickOffBis");
-				}
+                else
+                {
+                    SetInitializedProperty("KickOffBis");
+                }
             }
         }
 
@@ -761,6 +812,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("Kundenname", __oldValue, __newValue);
                     Proxy.Kundenname = __newValue;
                     NotifyPropertyChanged("Kundenname", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnKundenname_PostSetter != null && IsAttached)
                     {
@@ -768,10 +820,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Kundenname");
-				}
+                else
+                {
+                    SetInitializedProperty("Kundenname");
+                }
             }
         }
 
@@ -849,6 +901,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -856,10 +909,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
 
@@ -941,6 +994,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                     NotifyPropertyChanging("Von", __oldValue, __newValue);
                     Proxy.Von = __newValue;
                     NotifyPropertyChanged("Von", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVon_PostSetter != null && IsAttached)
                     {
@@ -948,10 +1002,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                         OnVon_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Von");
-				}
+                else
+                {
+                    SetInitializedProperty("Von");
+                }
             }
         }
 
@@ -1049,12 +1103,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             me.Von = other.Von;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -1174,6 +1222,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorNHibernateImpl<Projekt, ICollection<Zetbox.App.Base.AuditEntry>>(
+                        lazyCtx,
+                        new Guid("4bef0e48-79c8-4776-a5de-bbb250599a40"),
+                        "AuditJournal",
+                        null,
+                        obj => obj.AuditJournal,
+                        null, // lists are read-only properties
+                        obj => OnAuditJournal_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<Projekt, ICollection<Zetbox.App.Projekte.Auftrag>>(
                         lazyCtx,
@@ -1395,6 +1452,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Projekt != null) OnNotifyDeleting_Projekt(this);
+            foreach(NHibernatePersistenceObject x in AuditJournalCollection) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
 
             // FK_Projekt_has_Auftraege ZeroOrMore
             foreach(NHibernatePersistenceObject x in Auftraege) {
@@ -1417,6 +1478,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
+            AuditJournal.Clear();
             Auftraege.Clear();
             Mitarbeiter.Clear();
             Tasks.Clear();
@@ -1432,6 +1494,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         {
             public ProjektProxy()
             {
+                AuditJournal = new Collection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy>();
                 Auftraege = new Collection<Zetbox.App.Projekte.AuftragNHibernateImpl.AuftragProxy>();
                 Mitarbeiter = new Collection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy>();
                 Tasks = new Collection<Zetbox.App.Projekte.TaskNHibernateImpl.TaskProxy>();
@@ -1441,6 +1504,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
 
             public virtual Type ZetboxWrapper { get { return typeof(ProjektNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(ProjektProxy); } }
+
+            public virtual ICollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy> AuditJournal { get; set; }
+
+            public virtual int? AuditJournal_pos { get; set; }
 
             public virtual ICollection<Zetbox.App.Projekte.AuftragNHibernateImpl.AuftragProxy> Auftraege { get; set; }
 
@@ -1502,6 +1569,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this.AuditJournalCollection);
             binStream.Write(this.Proxy.AufwandGes);
             binStream.Write(this.Proxy.Bis);
             binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
@@ -1565,6 +1633,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ExportCollectionEntries(this.AuditJournalCollection, xml, "AuditJournal", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this.Proxy.AufwandGes, xml, "AufwandGes", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Bis, xml, "Bis", "Zetbox.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1583,6 +1652,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Projekte|AuditJournal":
+                XmlStreamer.MergeImportCollectionEntries(this, this.AuditJournalCollection, xml);
+                break;
             case "Zetbox.App.Projekte|AufwandGes":
                 this.Proxy.AufwandGes = XmlStreamer.ReadNullableDouble(xml);
                 break;

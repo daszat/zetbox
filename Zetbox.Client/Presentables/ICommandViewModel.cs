@@ -73,7 +73,7 @@ namespace Zetbox.Client.Presentables
         /// <summary>
         /// Gets an optional Icon for the Command
         /// </summary>
-        Zetbox.App.GUI.Icon Icon { get; set; }
+        System.Drawing.Image Icon { get; set; }
     }
 
     /// <summary>
@@ -224,6 +224,11 @@ namespace Zetbox.Client.Presentables
                 {
                     _executingCache = value;
                     OnExecutingChanged();
+
+                    if (Executing)
+                        SetBusy();
+                    else
+                        ClearBusy();
                 }
             }
         }
@@ -363,7 +368,7 @@ namespace Zetbox.Client.Presentables
         {
             if (canExecute == null) return true;
             var canExec = canExecute();
-            if (getReason != null) 
+            if (getReason != null)
             {
                 base.Reason = canExec ? string.Empty : getReason();
             }
@@ -419,9 +424,12 @@ namespace Zetbox.Client.Presentables
 
     public abstract class ItemCommandViewModel<T> : CommandViewModel
     {
-        public ItemCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel progressDisplayer, string label, string tooltip)
+        private readonly bool _ignoreOtherItemTypes;
+
+        public ItemCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel progressDisplayer, string label, string tooltip, bool ignoreOtherItemTypes = true)
             : base(appCtx, dataCtx, progressDisplayer, label, tooltip)
         {
+            _ignoreOtherItemTypes = ignoreOtherItemTypes;
         }
 
         public override bool CanExecute(object data)
@@ -432,7 +440,8 @@ namespace Zetbox.Client.Presentables
             }
             else if (data is IEnumerable)
             {
-                return ((IEnumerable)data).OfType<T>().Count() > 0;
+                var numT = ((IEnumerable)data).OfType<T>().Count();
+                return numT > 0 && (_ignoreOtherItemTypes || ((IEnumerable<T>)data).Count() == numT);
             }
             else return (data is T);
         }

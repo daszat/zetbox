@@ -76,15 +76,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.GetErrorTextInvocation == null)
-				{
-					SetInitializedProperty("GetErrorTextInvocation");
+                {
+                    SetInitializedProperty("GetErrorTextInvocation");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.GetErrorTextInvocation);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("GetErrorTextInvocation");
+                {
+                    SetInitializedProperty("GetErrorTextInvocation");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("GetErrorTextInvocation", __oldValue, __newValue);
@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("GetErrorTextInvocation", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnGetErrorTextInvocation_PostSetter != null && IsAttached)
                 {
@@ -170,15 +171,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.IsValidInvocation == null)
-				{
-					SetInitializedProperty("IsValidInvocation");
+                {
+                    SetInitializedProperty("IsValidInvocation");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.IsValidInvocation);
@@ -187,10 +188,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("IsValidInvocation");
+                {
+                    SetInitializedProperty("IsValidInvocation");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("IsValidInvocation", __oldValue, __newValue);
@@ -214,6 +215,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("IsValidInvocation", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnIsValidInvocation_PostSetter != null && IsAttached)
                 {
@@ -376,12 +378,6 @@ namespace Zetbox.App.Base
 
             this._fk_GetErrorTextInvocation = otherImpl._fk_GetErrorTextInvocation;
             this._fk_IsValidInvocation = otherImpl._fk_IsValidInvocation;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -575,6 +571,8 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)IsValidInvocation);
             }
 
+            GetErrorTextInvocation = null;
+            IsValidInvocation = null;
         }
         public static event ObjectEventHandler<InvokingConstraint> OnNotifyDeleting_InvokingConstraint;
 

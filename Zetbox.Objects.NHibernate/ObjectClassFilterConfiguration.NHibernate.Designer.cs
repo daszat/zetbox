@@ -76,15 +76,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ObjectClass == null)
-				{
-					SetInitializedProperty("ObjectClass");
+                {
+                    SetInitializedProperty("ObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ObjectClass);
@@ -93,10 +93,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ObjectClass");
+                {
+                    SetInitializedProperty("ObjectClass");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ObjectClass", __oldValue, __newValue);
@@ -143,6 +143,7 @@ namespace Zetbox.App.GUI
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ObjectClass", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnObjectClass_PostSetter != null && IsAttached)
                 {
@@ -170,16 +171,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_ObjectClassFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_ObjectClassFilterConfiguration != null)
             {
-                OnCreateFilterModel_ObjectClassFilterConfiguration(this, e);
+                OnCreateFilterModel_ObjectClassFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -304,12 +305,6 @@ namespace Zetbox.App.GUI
             var me = (ObjectClassFilterConfiguration)this;
 
             this._fk_ObjectClass = otherImpl._fk_ObjectClass;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -470,6 +465,7 @@ namespace Zetbox.App.GUI
                 ParentsToDelete.Add((NHibernatePersistenceObject)ObjectClass);
             }
 
+            ObjectClass = null;
         }
         public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnNotifyDeleting_ObjectClassFilterConfiguration;
 

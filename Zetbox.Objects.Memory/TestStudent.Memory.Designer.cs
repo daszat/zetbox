@@ -73,6 +73,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -105,15 +106,26 @@ namespace Zetbox.App.Test
 			{
 				if (_Testbogen == null)
 				{
-					Context.FetchRelation<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
-					_Testbogen 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchTestbogenAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Test.Fragebogen>)_Testbogen;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchTestbogenTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchTestbogenAsync()
+        {
+            if (_triggerFetchTestbogenTask != null) return _triggerFetchTestbogenTask;
+			_triggerFetchTestbogenTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
+			_triggerFetchTestbogenTask.OnResult(r => 
+            {
+                _Testbogen 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchTestbogenTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Testbogen;
 
@@ -132,11 +144,6 @@ namespace Zetbox.App.Test
             var me = (TestStudent)this;
 
             me.Name = other.Name;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -169,6 +176,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Testbogen":
+                return TriggerFetchTestbogenAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

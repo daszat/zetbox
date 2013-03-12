@@ -49,7 +49,7 @@ namespace Zetbox.Generator.InterfaceTemplates
 
         protected override string GetRelativeOutputPath()
         {
-            return @"Common\Core";
+            return @"Common";
         }
     }
 }

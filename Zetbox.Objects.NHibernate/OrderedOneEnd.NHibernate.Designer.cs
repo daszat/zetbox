@@ -119,6 +119,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                     NotifyPropertyChanging("SomeInt", __oldValue, __newValue);
                     Proxy.SomeInt = __newValue;
                     NotifyPropertyChanged("SomeInt", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSomeInt_PostSetter != null && IsAttached)
                     {
@@ -126,10 +127,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                         OnSomeInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SomeInt");
-				}
+                else
+                {
+                    SetInitializedProperty("SomeInt");
+                }
             }
         }
 
@@ -153,12 +154,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
             var me = (OrderedOneEnd)this;
 
             me.SomeInt = other.SomeInt;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

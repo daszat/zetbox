@@ -40,7 +40,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Current File Content
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
         // fkBackingName=_fk_Blob; fkGuidBackingName=_fk_guid_Blob;
         // referencedInterface=Zetbox.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace at.dasz.DocumentManagement
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Blob;
+        private int? __fk_BlobCache;
+
+        private int? _fk_Blob {
+            get
+            {
+                return __fk_BlobCache;
+            }
+            set
+            {
+                __fk_BlobCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBlobTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Blob = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob> _triggerFetchBlobTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob> TriggerFetchBlobAsync()
+        {
+            if (_triggerFetchBlobTask != null) return _triggerFetchBlobTask;
+
+            if (_fk_Blob.HasValue)
+                _triggerFetchBlobTask = Context.FindAsync<Zetbox.App.Base.Blob>(_fk_Blob.Value);
+            else
+                _triggerFetchBlobTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchBlobTask.OnResult(t =>
+            {
+                if (OnBlob_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Blob>(t.Result);
+                    OnBlob_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchBlobTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                Zetbox.App.Base.BlobMemoryImpl __value;
-                if (_fk_Blob.HasValue)
-                    __value = (Zetbox.App.Base.BlobMemoryImpl)Context.Find<Zetbox.App.Base.Blob>(_fk_Blob.Value);
-                else
-                    __value = null;
-
-                if (OnBlob_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Blob>(__value);
-                    OnBlob_Getter(this, e);
-                    __value = (Zetbox.App.Base.BlobMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.BlobMemoryImpl)TriggerFetchBlobAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Blob == null) || (value != null && value.ID == _fk_Blob))
-				{
-					SetInitializedProperty("Blob");
+                {
+                    SetInitializedProperty("Blob");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = BlobImpl;
@@ -114,6 +137,7 @@ namespace at.dasz.DocumentManagement
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Blob", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnBlob_PostSetter != null && IsAttached)
                 {
@@ -132,7 +156,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
@@ -150,8 +174,44 @@ namespace at.dasz.DocumentManagement
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ChangedBy;
+        private int? __fk_ChangedByCache;
 
+        private int? _fk_ChangedBy {
+            get
+            {
+                return __fk_ChangedByCache;
+            }
+            set
+            {
+                __fk_ChangedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        {
+            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+
+            if (_fk_ChangedBy.HasValue)
+                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchChangedByTask.OnResult(t =>
+            {
+                if (OnChangedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnChangedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchChangedByTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -159,32 +219,19 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_ChangedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-                else
-                    __value = null;
-
-                if (OnChangedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnChangedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -205,6 +252,7 @@ namespace at.dasz.DocumentManagement
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -259,6 +307,8 @@ namespace at.dasz.DocumentManagement
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -268,6 +318,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -275,10 +326,10 @@ namespace at.dasz.DocumentManagement
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -293,7 +344,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
@@ -311,8 +362,44 @@ namespace at.dasz.DocumentManagement
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CreatedBy;
+        private int? __fk_CreatedByCache;
 
+        private int? _fk_CreatedBy {
+            get
+            {
+                return __fk_CreatedByCache;
+            }
+            set
+            {
+                __fk_CreatedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        {
+            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+
+            if (_fk_CreatedBy.HasValue)
+                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchCreatedByTask.OnResult(t =>
+            {
+                if (OnCreatedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnCreatedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCreatedByTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -320,32 +407,19 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_CreatedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-                else
-                    __value = null;
-
-                if (OnCreatedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnCreatedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -366,6 +440,7 @@ namespace at.dasz.DocumentManagement
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -420,6 +495,8 @@ namespace at.dasz.DocumentManagement
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -429,6 +506,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -436,10 +514,10 @@ namespace at.dasz.DocumentManagement
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -499,6 +577,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -506,10 +585,10 @@ namespace at.dasz.DocumentManagement
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -557,6 +636,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -564,10 +644,10 @@ namespace at.dasz.DocumentManagement
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -788,11 +868,6 @@ namespace at.dasz.DocumentManagement
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -855,6 +930,21 @@ namespace at.dasz.DocumentManagement
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Blob":
+                return TriggerFetchBlobAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -1036,6 +1126,7 @@ namespace at.dasz.DocumentManagement
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_File != null) OnNotifyDeleting_File(this);
+            Blob = null;
             ChangedBy = null;
             CreatedBy = null;
         }

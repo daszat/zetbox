@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Describes the currently loaded physical database schema
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CurrentSchema")]
+    [EdmEntityType(NamespaceName="Model", Name="CurrentSchemaEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CurrentSchema")]
     public class CurrentSchemaEfImpl : BaseServerDataObject_EntityFramework, CurrentSchema
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Schema", __oldValue, __newValue);
                     _Schema = __newValue;
                     NotifyPropertyChanged("Schema", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSchema_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnSchema_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Schema");
-				}
+                else
+                {
+                    SetInitializedProperty("Schema");
+                }
             }
         }
         private string _Schema_store;
@@ -147,6 +148,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Version", __oldValue, __newValue);
                     _Version = __newValue;
                     NotifyPropertyChanged("Version", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVersion_PostSetter != null && IsAttached)
                     {
@@ -154,10 +156,10 @@ namespace Zetbox.App.Base
                         OnVersion_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Version");
-				}
+                else
+                {
+                    SetInitializedProperty("Version");
+                }
             }
         }
         private int _Version_store;
@@ -190,11 +192,6 @@ namespace Zetbox.App.Base
 
             me.Schema = other.Schema;
             me.Version = other.Version;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -357,12 +354,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

@@ -76,15 +76,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DisplayedTypeAssembly == null)
-				{
-					SetInitializedProperty("DisplayedTypeAssembly");
+                {
+                    SetInitializedProperty("DisplayedTypeAssembly");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.AssemblyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DisplayedTypeAssembly);
@@ -93,10 +93,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("DisplayedTypeAssembly");
+                {
+                    SetInitializedProperty("DisplayedTypeAssembly");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DisplayedTypeAssembly", __oldValue, __newValue);
@@ -120,6 +120,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDisplayedTypeAssembly_PostSetter != null && IsAttached)
                 {
@@ -176,6 +177,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, __newValue);
                     Proxy.DisplayedTypeFullName = __newValue;
                     NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayedTypeFullName_PostSetter != null && IsAttached)
                     {
@@ -183,10 +185,10 @@ namespace Zetbox.App.GUI
                         OnDisplayedTypeFullName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayedTypeFullName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayedTypeFullName");
+                }
             }
         }
 
@@ -233,6 +235,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     Proxy.DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -240,10 +243,10 @@ namespace Zetbox.App.GUI
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
 
@@ -313,15 +316,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.VisualTree == null)
-				{
-					SetInitializedProperty("VisualTree");
+                {
+                    SetInitializedProperty("VisualTree");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.VisualTree);
@@ -330,10 +333,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("VisualTree");
+                {
+                    SetInitializedProperty("VisualTree");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("VisualTree", __oldValue, __newValue);
@@ -357,6 +360,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnVisualTree_PostSetter != null && IsAttached)
                 {
@@ -456,12 +460,6 @@ namespace Zetbox.App.GUI
             me.DisplayName = other.DisplayName;
             this._fk_DisplayedTypeAssembly = otherImpl._fk_DisplayedTypeAssembly;
             this._fk_VisualTree = otherImpl._fk_VisualTree;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="InstanceConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="InstanceConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("InstanceConstraint")]
     public class InstanceConstraintEfImpl : BaseServerDataObject_EntityFramework, InstanceConstraint, Zetbox.API.IExportableInternal
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnConstrained_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.DataTypeEfImpl> r
@@ -145,6 +144,7 @@ namespace Zetbox.App.Base
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Constraints", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -206,6 +206,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -213,10 +214,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -275,6 +276,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Reason", __oldValue, __newValue);
                     _Reason = __newValue;
                     NotifyPropertyChanged("Reason", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnReason_PostSetter != null && IsAttached)
                     {
@@ -282,10 +284,10 @@ namespace Zetbox.App.Base
                         OnReason_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Reason");
-				}
+                else
+                {
+                    SetInitializedProperty("Reason");
+                }
             }
         }
         private string _Reason_store;
@@ -447,11 +449,6 @@ namespace Zetbox.App.Base
             me.ExportGuid = other.ExportGuid;
             me.Reason = other.Reason;
             this._fk_Constrained = otherImpl._fk_Constrained;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -633,12 +630,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -653,8 +651,9 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.DataTypeEfImpl>("Model.FK_Constraint_on_Constrained", "Constrained").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.DataTypeEfImpl>("Model.FK_Constraint_on_Constrained", "Constrained");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {

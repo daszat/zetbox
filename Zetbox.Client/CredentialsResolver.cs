@@ -18,19 +18,23 @@ namespace Zetbox.Client
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
+    using System.Security.Authentication;
     using System.Security.Principal;
     using System.Text;
+    using System.Threading;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Common;
+    using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.Client.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.API.Utils;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -53,14 +57,13 @@ namespace Zetbox.Client
             // Using Windows Credentials, they are already set by the operating system
         }
 
-        public void InitCredentials(System.ServiceModel.Description.ClientCredentials c)
+        public void SetCredentialsTo(System.ServiceModel.Description.ClientCredentials c)
         {
             // Gracefully do nothing
             // Set implicity by WindowsAuthentication
         }
 
-
-        public void InitWebRequest(WebRequest req)
+        public void SetCredentialsTo(WebRequest req)
         {
             if (req == null) throw new ArgumentNullException("req");
 
@@ -69,13 +72,20 @@ namespace Zetbox.Client
 
         public void InvalidCredentials()
         {
-            // Exit application, server won't talk to us
-            Environment.Exit(1);
+            throw new AuthenticationException(string.Format("You are not authorized to access this application. (username={0})",
+                Thread.CurrentPrincipal.Identity != null ? Thread.CurrentPrincipal.Identity.Name : "<empty>"));
+        }
+
+        public void Freeze()
+        {
+            // doesn't need to do anything.
         }
     }
 
     public class BasicAuthCredentialsResolver : ICredentialsResolver
     {
+        [Feature]
+        [Description("Credential resolver for basic authentication")]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)
@@ -115,7 +125,7 @@ namespace Zetbox.Client
         private bool _isEnsuringCredentials = false;
         public void EnsureCredentials()
         {
-            lock (_lock) // singelton, once is enougth
+            lock (_lock) // singleton, once is enough
             {
                 if (_isEnsuringCredentials)
                 {
@@ -130,10 +140,10 @@ namespace Zetbox.Client
                         using (var ctx = _ctxFactory())
                         {
                             var dlgOK = false;
-                            _vmf.CreateDialog(CredentialsResolverResources.DialogTitle)
+                            _vmf.CreateDialog(ctx, CredentialsResolverResources.DialogTitle)
                                 .AddString(CredentialsResolverResources.UserNameLabel)
                                 .AddPassword(CredentialsResolverResources.PasswordLabel)
-                                .Show((p) =>
+                                .Show(p =>
                                 {
                                     this.UserName = (string)p[0];
                                     this.Password = (string)p[1];
@@ -155,7 +165,7 @@ namespace Zetbox.Client
             }
         }
 
-        public void InitCredentials(System.ServiceModel.Description.ClientCredentials c)
+        public void SetCredentialsTo(System.ServiceModel.Description.ClientCredentials c)
         {
             if (c == null) throw new ArgumentNullException("c");
 
@@ -164,7 +174,7 @@ namespace Zetbox.Client
             c.UserName.Password = Password;
         }
 
-        public void InitWebRequest(WebRequest req)
+        public void SetCredentialsTo(WebRequest req)
         {
             if (req == null) throw new ArgumentNullException("req");
 
@@ -175,9 +185,20 @@ namespace Zetbox.Client
 
         public void InvalidCredentials()
         {
+            if (_isFrozen)
+            {
+                Logging.Client.Fatal("Exiting due to invalid credentials after freezing.");
+                Environment.Exit(1);
+            }
             // Reset username/password
             UserName = null;
             Password = null;
+        }
+
+        private bool _isFrozen = false;
+        public void Freeze()
+        {
+            _isFrozen = true;
         }
 
         internal string GetUsername()
@@ -207,6 +228,10 @@ namespace Zetbox.Client
             {
                 var userName = _credentialResolver.GetUsername();
                 result = Resolve(userName);
+                if (result == null)
+                {
+                    _credentialResolver.InvalidCredentials();
+                }
             }
             return result;
         }

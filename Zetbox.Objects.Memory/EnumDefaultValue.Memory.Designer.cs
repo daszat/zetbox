@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
         // fkBackingName=_fk_EnumValue; fkGuidBackingName=_fk_guid_EnumValue;
         // referencedInterface=Zetbox.App.Base.EnumerationEntry; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_EnumValue;
+        private int? __fk_EnumValueCache;
+
+        private int? _fk_EnumValue {
+            get
+            {
+                return __fk_EnumValueCache;
+            }
+            set
+            {
+                __fk_EnumValueCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchEnumValueTask = null;
+            }
+        }
 
         private Guid? _fk_guid_EnumValue = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry> _triggerFetchEnumValueTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry> TriggerFetchEnumValueAsync()
+        {
+            if (_triggerFetchEnumValueTask != null) return _triggerFetchEnumValueTask;
+
+            if (_fk_EnumValue.HasValue)
+                _triggerFetchEnumValueTask = Context.FindAsync<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value);
+            else
+                _triggerFetchEnumValueTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchEnumValueTask.OnResult(t =>
+            {
+                if (OnEnumValue_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.EnumerationEntry>(t.Result);
+                    OnEnumValue_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchEnumValueTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.EnumerationEntryMemoryImpl __value;
-                if (_fk_EnumValue.HasValue)
-                    __value = (Zetbox.App.Base.EnumerationEntryMemoryImpl)Context.Find<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value);
-                else
-                    __value = null;
-
-                if (OnEnumValue_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.EnumerationEntry>(__value);
-                    OnEnumValue_Getter(this, e);
-                    __value = (Zetbox.App.Base.EnumerationEntryMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.EnumerationEntryMemoryImpl)TriggerFetchEnumValueAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_EnumValue == null) || (value != null && value.ID == _fk_EnumValue))
-				{
-					SetInitializedProperty("EnumValue");
+                {
+                    SetInitializedProperty("EnumValue");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = EnumValueImpl;
@@ -114,6 +137,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("EnumValue", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnEnumValue_PostSetter != null && IsAttached)
                 {
@@ -206,11 +230,6 @@ namespace Zetbox.App.Base
 
             this._fk_EnumValue = otherImpl._fk_EnumValue;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -249,6 +268,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "EnumValue":
+                return TriggerFetchEnumValueAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -363,6 +393,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumDefaultValue != null) OnNotifyDeleting_EnumDefaultValue(this);
+            EnumValue = null;
         }
         public static event ObjectEventHandler<EnumDefaultValue> OnNotifyDeleting_EnumDefaultValue;
 

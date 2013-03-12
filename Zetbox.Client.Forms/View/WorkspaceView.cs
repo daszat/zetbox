@@ -61,7 +61,7 @@ namespace Zetbox.Client.Forms.View
                     label1.Text = _dataContextCache.SelectedItem.ToString();
                     // TODO: dispose cleared controls
                     _viewPanel.Controls.Clear();
-                    Renderer.ShowModel(DataContext.SelectedItem, _viewPanel);
+                    //ViewModel.ShowModel(DataContext.SelectedItem, _viewPanel);
                 }
             }
         }
@@ -185,12 +185,6 @@ namespace Zetbox.Client.Forms.View
         void IFormsView.SetDataContext(INotifyPropertyChanged mdl)
         {
             this.DataContext = (WorkspaceViewModel)mdl;
-        }
-
-        internal Renderer Renderer { get; private set; }
-        void IFormsView.SetRenderer(Renderer r)
-        {
-            Renderer = r;
         }
 
         #endregion

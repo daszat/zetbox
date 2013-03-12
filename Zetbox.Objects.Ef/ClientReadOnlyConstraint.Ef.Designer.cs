@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Item is readonly on client but changable on the server
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ClientReadOnlyConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="ClientReadOnlyConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ClientReadOnlyConstraint")]
     public class ClientReadOnlyConstraintEfImpl : Zetbox.App.Base.ReadOnlyConstraintEfImpl, ClientReadOnlyConstraint
     {
@@ -178,11 +178,6 @@ namespace Zetbox.App.Base
             var otherImpl = (ClientReadOnlyConstraintEfImpl)obj;
             var me = (ClientReadOnlyConstraint)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

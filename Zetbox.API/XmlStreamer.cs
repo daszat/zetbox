@@ -13,11 +13,12 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using System.Collections;
+using Zetbox.API.Utils;
 
 namespace Zetbox.API
 {
@@ -56,6 +57,11 @@ namespace Zetbox.API
         {
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
+            if (val.Kind == DateTimeKind.Unspecified)
+            {
+                Logging.Exporter.WarnOnce("Converting DateTimeKind.Unspecified to local while writing XML");
+                val = DateTime.SpecifyKind(val, DateTimeKind.Local);
+            }
             xml.WriteElementString(name, ns, XmlConvert.ToString(val, XmlDateTimeSerializationMode.Utc));
         }
         public static void ToStream(DateTime? val, XmlWriter xml, string name, string ns)
@@ -63,6 +69,11 @@ namespace Zetbox.API
             if (!val.HasValue) return;
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
+            if (val.Value.Kind == DateTimeKind.Unspecified)
+            {
+                Logging.Exporter.WarnOnce("Converting DateTimeKind.Unspecified to local while writing XML");
+                val = DateTime.SpecifyKind(val.Value, DateTimeKind.Local);
+            }
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value, XmlDateTimeSerializationMode.Utc));
         }
 
@@ -246,23 +257,6 @@ namespace Zetbox.API
         #region Collection Entries
         private delegate void CallXmlFunction<T, X>(T obj, X xml);
 
-        public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
-            where T : IStreamable
-        {
-            WriteCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.ToStream(x));
-        }
-
-        public static void FromStreamCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml, string name, string ns)
-            where T : IValueCollectionEntry, IStreamable, new()
-        {
-            if (xml == null) { throw new ArgumentNullException("xml"); }
-            // collection entries do not have sub-lists
-            if (xml.LocalName == name && xml.NamespaceURI == ns)
-            {
-                ReadCollectionEntries<T>(parent, val, xml, (obj, x) => obj.FromStream(x));
-            }
-        }
-
         public static void ExportCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
             where T : IExportableValueCollectionEntryInternal
         {
@@ -345,19 +339,19 @@ namespace Zetbox.API
         #endregion
 
         #region ICompoundObject
-        public static void ToStream(ICompoundObject val, XmlWriter xml, string name, string ns)
+        public static void ExportCompoundObject(ICompoundObject val, XmlWriter xml, string name, string ns)
         {
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
             if (val != null)
             {
                 xml.WriteStartElement(name, ns);
-                val.ToStream(xml);
+                val.Export(xml, new string[] { "*" });
                 xml.WriteEndElement();
             }
         }
 
-        public static void FromStream(ICompoundObject val, XmlReader xml)
+        public static void MergeImportCompoundObject(ICompoundObject val, XmlReader xml)
         {
             if (xml == null) { throw new ArgumentNullException("xml"); }
             if (val == null) { throw new ArgumentNullException("val"); }
@@ -367,7 +361,7 @@ namespace Zetbox.API
                 while (entries.Read())
                 {
                     // compound objects do not have sub-lists
-                    val.FromStream(xml);
+                    val.MergeImport(xml);
                 }
             }
         }

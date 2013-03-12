@@ -22,9 +22,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
     using System.Text;
     using Arebis.CodeGeneration;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.App.Base;
-    using Zetbox.Generator;
     using Zetbox.App.Extensions;
+    using Zetbox.Generator;
 
     public partial class ObjectClassHbm
     {
@@ -91,7 +92,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
             bool needsConcurrency = cls.ImplementsIChangedBy(true);
 
-            return new object[] { interfaceName, implementationName, schemaName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, needsConcurrency, qualifiedRightsClassName };
+            return new object[] { interfaceName, implementationName, schemaName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, needsConcurrency, qualifiedRightsClassName, cls.GetTableMapping() };
         }
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)
@@ -99,11 +100,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             PropertiesHbm.Call(Host, ctx, String.Empty, properties, needsConcurrency);
         }
 
-        protected virtual void ApplyJoinedSubclasses(List<ObjectClass> subClasses)
+        protected virtual void ApplySubclasses(List<ObjectClass> subClasses)
         {
             foreach (var subClass in subClasses.OrderBy(cls => cls.Name))
             {
-                JoinedSubclassHbm.Call(Host, ctx, subClass);
+                SubclassHbm.Call(Host, ctx, subClass);
             }
         }
     }

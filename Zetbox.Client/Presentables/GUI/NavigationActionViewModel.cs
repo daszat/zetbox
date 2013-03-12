@@ -40,6 +40,28 @@ namespace Zetbox.Client.Presentables.GUI
 
         public new NavigationAction Screen { get { return (NavigationAction)base.Screen; } }
 
+        public override bool IsScreen
+        {
+            get { return false; }
+        }
+
+        public override bool IsContainer
+        {
+            get { return false; }
+        }
+
+        public override NavigationEntryViewModel SelectedEntry
+        {
+            get
+            {
+                return null;
+            }
+            set
+            {
+                // intentionally empty
+            }
+        }
+
         private ICommandViewModel _ExecuteCommand = null;
         public override ICommandViewModel ExecuteCommand
         {
@@ -47,9 +69,9 @@ namespace Zetbox.Client.Presentables.GUI
             {
                 if (_ExecuteCommand == null)
                 {
-                    _ExecuteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, Name, "", 
-                        Execute, 
-                        CanExecute, 
+                    _ExecuteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, Name, "",
+                        Execute,
+                        CanExecute,
                         GetReason);
                 }
                 return _ExecuteCommand;

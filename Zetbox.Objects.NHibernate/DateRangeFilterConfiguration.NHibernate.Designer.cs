@@ -84,6 +84,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentMonthDefault", __oldValue, __newValue);
                     Proxy.IsCurrentMonthDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentMonthDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentMonthDefault_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentMonthDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentMonthDefault");
+                }
             }
         }
 
@@ -141,6 +142,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentQuaterDefault", __oldValue, __newValue);
                     Proxy.IsCurrentQuaterDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentQuaterDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentQuaterDefault_PostSetter != null && IsAttached)
                     {
@@ -148,10 +150,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentQuaterDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentQuaterDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentQuaterDefault");
+                }
             }
         }
 
@@ -198,6 +200,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentYearDefault", __oldValue, __newValue);
                     Proxy.IsCurrentYearDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentYearDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentYearDefault_PostSetter != null && IsAttached)
                     {
@@ -205,10 +208,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentYearDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentYearDefault");
+                }
             }
         }
 
@@ -224,16 +227,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_DateRangeFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_DateRangeFilterConfiguration != null)
             {
-                OnCreateFilterModel_DateRangeFilterConfiguration(this, e);
+                OnCreateFilterModel_DateRangeFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -360,12 +363,6 @@ namespace Zetbox.App.GUI
             me.IsCurrentMonthDefault = other.IsCurrentMonthDefault;
             me.IsCurrentQuaterDefault = other.IsCurrentQuaterDefault;
             me.IsCurrentYearDefault = other.IsCurrentYearDefault;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

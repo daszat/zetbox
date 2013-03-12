@@ -53,7 +53,7 @@
 <% } %>
         {
             this.Proxy = proxy;
-<% ApplyCompoundObjectPropertyInitialisers(); %>
+<% ApplyCompoundObjectPropertyInitialisers("lazyCtx"); %>
 <% ApplyDefaultValueSetFlagInitialisers(); %>
         }
 

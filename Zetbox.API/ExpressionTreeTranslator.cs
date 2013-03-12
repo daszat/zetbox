@@ -36,9 +36,14 @@ namespace Zetbox.API
                 case ExpressionType.Not:
                 case ExpressionType.Convert:
                 case ExpressionType.ConvertChecked:
+                case ExpressionType.Decrement:
+                case ExpressionType.Increment:
+                case ExpressionType.OnesComplement:
                 case ExpressionType.ArrayLength:
                 case ExpressionType.Quote:
                 case ExpressionType.TypeAs:
+                case ExpressionType.UnaryPlus:
+                case ExpressionType.Unbox:
                     {
                         return VisitUnary((UnaryExpression)e);
                     }
@@ -141,7 +146,7 @@ namespace Zetbox.API
 
         protected virtual ElementInit VisitElementInitializer(ElementInit initializer)
         {
-            return Expression.ElementInit(initializer.AddMethod, 
+            return Expression.ElementInit(initializer.AddMethod,
                 this.VisitExpressionList(initializer.Arguments));
         }
 

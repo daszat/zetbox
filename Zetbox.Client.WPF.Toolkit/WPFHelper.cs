@@ -25,12 +25,11 @@ namespace Zetbox.Client.WPF.Toolkit
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media;
+    using Zetbox.App.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.CustomControls;
     using Zetbox.Client.WPF.Toolkit;
-    using Microsoft.Windows.Controls;
-    using Zetbox.App.GUI;
 
     public static class WPFHelper
     {
@@ -47,14 +46,14 @@ namespace Zetbox.Client.WPF.Toolkit
         /// <summary>
         /// MinWidth for most controls is 100 plus some margins
         /// </summary>
-        public static readonly double WIDTH_SMALL = 120; 
+        public static readonly double WIDTH_SMALL = 120;
         public static readonly double WIDTH_MEDIUM = 200;
         public static readonly double WIDTH_LARGE = 300;
         public static readonly double WIDTH_HUGE = 500;
         /// <summary>
         /// Not implemented, using content??
         /// </summary>
-        public static readonly double WIDTH_STRECH = double.NaN; 
+        public static readonly double WIDTH_STRECH = double.NaN;
 
         /// <summary>
         /// http://stackoverflow.com/questions/980120/finding-control-within-wpf-itemscontrol
@@ -107,6 +106,37 @@ namespace Zetbox.Client.WPF.Toolkit
             }
         }
 
+        /// <summary>
+        /// See http://social.msdn.microsoft.com/Forums/en-US/wpf/thread/e6643abc-4457-44aa-a3ee-dd389c88bd86/ and https://connect.microsoft.com/VisualStudio/feedback/details/619658/wpf-virtualized-control-disconnecteditem-reference-when-datacontext-switch
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <returns></returns>
+        public static object SanitizeDataContext(object dc)
+        {
+            if (dc != null && dc.GetType().FullName.Equals("MS.Internal.NamedObject"))
+            {
+                return null;
+            }
+            else
+            {
+                return dc;
+            }
+        }
+
+        public static string GetGridColMemberSourcePath(DependencyObject obj)
+        {
+            return (string)obj.GetValue(GridColMemberSourcePathProperty);
+        }
+
+        public static void SetGridColMemberSourcePath(DependencyObject obj, string value)
+        {
+            obj.SetValue(GridColMemberSourcePathProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for GridColMemberSourcePath.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty GridColMemberSourcePathProperty =
+            DependencyProperty.RegisterAttached("GridColMemberSourcePath", typeof(string), typeof(WPFHelper));
+
         public static void RefreshGridView(DataGrid lst, GridDisplayConfiguration cfg, DependencyProperty sortProperty)
         {
             lst.Columns.Clear();
@@ -137,6 +167,8 @@ namespace Zetbox.Client.WPF.Toolkit
                 if (desc.RequestedWidthAbsolute != null) col.Width = desc.RequestedWidthAbsolute.Value;
                 else if (desc.RequestedWidth != App.GUI.WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
 
+                SetGridColMemberSourcePath(col, desc.Path);
+
                 var needEditor = desc.ControlKind != desc.GridPreEditKind;
 
                 var editorFactory = needEditor ? new FrameworkElementFactory(typeof(ContentPresenter)) : null;
@@ -144,24 +176,24 @@ namespace Zetbox.Client.WPF.Toolkit
                 switch (desc.Type)
                 {
                     case ColumnDisplayModel.ColumnType.MethodModel:
-                        if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Path)), Mode = BindingMode.OneWay });
+                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Path)), Mode = BindingMode.OneWay });
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         {
                             // Only database properties can be sorted
                             // TODO: On the client side, maybe also Calculated Properties and ViewModels Properties
-                            if (sortProperty != null) col.SetValue(sortProperty, desc.Name);
+                            if (sortProperty != null) col.SetValue(sortProperty, desc.Path);
 
-                            var tmp = desc.Name.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
-                            var binding = "Object." + string.Join(".Value.", tmp.ToArray());
+                            var tmp = desc.Path.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
+                            var binding = "Object." + string.Join(".ValueAsync.", tmp.ToArray());
                             if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
-                    case ColumnDisplayModel.ColumnType.Property:
-                        if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
-                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
+                    case ColumnDisplayModel.ColumnType.ViewModelProperty:
+                        if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Path), Mode = BindingMode.OneWay });
+                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Path), Mode = BindingMode.OneWay });
                         break;
                 }
                 if (needEditor)
@@ -216,24 +248,26 @@ namespace Zetbox.Client.WPF.Toolkit
                 if (desc.RequestedWidthAbsolute != null) col.Width = desc.RequestedWidthAbsolute.Value;
                 else if (desc.RequestedWidth != WidthHint.Default) col.Width = TranslateWidth(desc.RequestedWidth);
 
+                SetGridColMemberSourcePath(col, desc.Path);
+
                 DataTemplate result = new DataTemplate();
                 var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
                 switch (desc.Type)
                 {
                     case ColumnDisplayModel.ColumnType.MethodModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Path)), Mode = BindingMode.OneWay });
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         {
-                            if (sortProperty != null) col.SetValue(sortProperty, desc.Name);
+                            if (sortProperty != null) col.SetValue(sortProperty, desc.Path);
 
-                            var tmp = desc.Name.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
-                            var binding = string.Join(".Value.", tmp.ToArray());
+                            var tmp = desc.Path.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
+                            var binding = string.Join(".ValueAsync.", tmp.ToArray());
                             cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
-                    case ColumnDisplayModel.ColumnType.Property:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
+                    case ColumnDisplayModel.ColumnType.ViewModelProperty:
+                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Path), Mode = BindingMode.OneWay });
                         break;
                 }
                 cpFef.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);

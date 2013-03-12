@@ -63,11 +63,11 @@ namespace Zetbox.Generator.Templates.CompoundObjects
             string clsName = this.GetTypeName();
 
             // attach compound to parent object
-            this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property) : this(false, parent, property) {}");
+            this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property) : this(null, parent, property) {} // TODO: pass parent's lazyCtx");
             this.WriteLine();
-            this.WriteObjects("        public ", clsName, "(bool ignore, IPersistenceObject parent, string property)");
+            this.WriteObjects("        public ", clsName, "(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)");
             this.WriteLine();
-            this.WriteObjects("            : base(null) // TODO: pass parent's lazyCtx");
+            this.WriteObjects("            : base(lazyCtx)");
             this.WriteLine();
             this.WriteObjects("        {");
             this.WriteLine();
@@ -80,7 +80,8 @@ namespace Zetbox.Generator.Templates.CompoundObjects
                     .Properties
                     .OfType<CompoundObjectProperty>(),
                 ImplementationSuffix,
-                ImplementationPropertySuffix);
+                ImplementationPropertySuffix,
+                "lazyCtx");
 
             this.WriteObjects("        }");
             this.WriteLine();

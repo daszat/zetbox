@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CompleteTests</RootNamespace>
     <AssemblyName>CompleteTests</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartAction>Program</StartAction>
     <StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
@@ -18,6 +18,7 @@
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,7 +72,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="CompleteTests.PartCoverSettings.xml" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj">
@@ -98,9 +101,9 @@
       <Project>{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}</Project>
       <Name>Zetbox.DalProvider.ClientObjects.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zetbox.DalProvider.EF.Tests\Zetbox.DalProvider.Ef.Tests.csproj">
+    <ProjectReference Include="..\Zetbox.DalProvider.EF.Tests\Zetbox.DalProvider.EF.Tests.csproj">
       <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666F}</Project>
-      <Name>Zetbox.DalProvider.Ef.Tests</Name>
+      <Name>Zetbox.DalProvider.EF.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.DalProvider.Memory.Tests\Zetbox.DalProvider.Memory.Tests.csproj">
       <Project>{CF5E170F-DC31-4AAE-AFFC-8BECA0B366EF}</Project>
@@ -113,14 +116,6 @@
     <ProjectReference Include="..\Zetbox.Server.Tests\Zetbox.Server.Tests.csproj">
       <Project>{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}</Project>
       <Name>Zetbox.Server.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Tests.Utilities.MsSql\Zetbox.Tests.Utilities.MsSql.csproj">
-      <Project>{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}</Project>
-      <Name>Zetbox.Tests.Utilities.MsSql</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Tests.Utilities.PostgreSql\Zetbox.Tests.Utilities.PostgreSql.csproj">
-      <Project>{C0992804-A195-4087-B77C-910ABEAB74B9}</Project>
-      <Name>Zetbox.Tests.Utilities.PostgreSql</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

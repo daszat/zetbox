@@ -76,15 +76,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CompoundObject == null)
-				{
-					SetInitializedProperty("CompoundObject");
+                {
+                    SetInitializedProperty("CompoundObject");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.CompoundObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CompoundObject);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CompoundObject");
+                {
+                    SetInitializedProperty("CompoundObject");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CompoundObject", __oldValue, __newValue);
@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CompoundObject", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCompoundObject_PostSetter != null && IsAttached)
                 {
@@ -345,12 +346,6 @@ namespace Zetbox.App.Base
 
             this._fk_CompoundObject = otherImpl._fk_CompoundObject;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -510,6 +505,7 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)CompoundObject);
             }
 
+            CompoundObject = null;
         }
         public static event ObjectEventHandler<CompoundObjectParameter> OnNotifyDeleting_CompoundObjectParameter;
 

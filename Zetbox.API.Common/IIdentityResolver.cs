@@ -23,9 +23,22 @@ namespace Zetbox.API.Common
     using System.Runtime.Serialization;
     using Zetbox.API.Utils;
 
+    /// <summary>
+    /// Resolve the client's identity.
+    /// </summary>
     public interface IIdentityResolver
     {
+        /// <summary>
+        /// Retrieves the zetbox identity of the current user.
+        /// </summary>
+        /// <returns>a Identity or null if none was found.</returns>
         Identity GetCurrent();
+
+        /// <summary>
+        /// Retrieves the zetbox identity of the specified security principal.
+        /// </summary>
+        /// <param name="identity">a security principal</param>
+        /// <returns>a Identity or null if none was found.</returns>
         Identity Resolve(IIdentity identity);
     }
 
@@ -91,7 +104,7 @@ namespace Zetbox.API.Common
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             string id = name.ToLower();
 
-            Identity result;
+            Identity result = null;
 
             if (cache.ContainsKey(id))
             {
@@ -99,8 +112,14 @@ namespace Zetbox.API.Common
             }
             else
             {
-                result = cache[id] = ResolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
-
+                try
+                {
+                    result = cache[id] = ResolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.Warn("Exception while resolving Identity", ex);
+                }
                 if (result == null)
                 {
                     Logging.Log.WarnFormat("Unable to resolve Identity {0}", name);

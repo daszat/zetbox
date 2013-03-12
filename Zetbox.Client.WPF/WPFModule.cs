@@ -23,7 +23,11 @@ namespace Zetbox.Client.WPF
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.Client.Presentables;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
+    [Feature]
+    [Description("Client Toolkit Module for WPF")]
     public class WPFModule : Module
     {
         protected override void Load(ContainerBuilder builder)

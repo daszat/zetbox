@@ -85,6 +85,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     _HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -92,10 +93,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
         private bool _HasPersistentOrder;
@@ -155,6 +156,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsCalculated", __oldValue, __newValue);
                     _IsCalculated = __newValue;
                     NotifyPropertyChanged("IsCalculated", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCalculated_PostSetter != null && IsAttached)
                     {
@@ -162,10 +164,10 @@ namespace Zetbox.App.Base
                         OnIsCalculated_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCalculated");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCalculated");
+                }
             }
         }
         private bool _IsCalculated;
@@ -225,6 +227,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -232,10 +235,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
         private bool _IsList;
@@ -578,11 +581,6 @@ namespace Zetbox.App.Base
             me.IsCalculated = other.IsCalculated;
             me.IsList = other.IsList;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -605,6 +603,15 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

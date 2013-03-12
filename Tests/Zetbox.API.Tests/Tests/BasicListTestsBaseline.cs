@@ -33,8 +33,6 @@ namespace Zetbox.API.Tests
         }
     }
 
-    // see https://bugzilla.novell.com/show_bug.cgi?id=670331
-#if !MONO
     [TestFixture(0, TypeArgs = new[] { typeof(List<Item>) })]
     [TestFixture(1, TypeArgs = new[] { typeof(List<Item>) })]
     [TestFixture(10, TypeArgs = new[] { typeof(List<Item>) })]
@@ -61,5 +59,4 @@ namespace Zetbox.API.Tests
             return result;
         }
     }
-#endif
 }

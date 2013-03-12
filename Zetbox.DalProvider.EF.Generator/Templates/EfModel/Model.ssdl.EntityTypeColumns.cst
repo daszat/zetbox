@@ -23,6 +23,7 @@
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.SchemaManagement" %>
 <%@ Import Namespace="Zetbox.API.Server" %>
 <%@ Import Namespace="Zetbox.App.Base" %>
 <%@ Import Namespace="Zetbox.App.Extensions" %>
@@ -46,7 +47,7 @@
 		{
 			ApplyEntityTypeColumnDefs(
 				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.Name),
-				Construct.NestedColumnName(p, prefix),
+				Construct.ColumnName(p, prefix),
 				schemaProvider);
 		}
 		else if (p is ObjectReferenceProperty)
@@ -55,7 +56,7 @@
 		}
 		else
 		{
-			string propertyName = Construct.NestedColumnName(p, prefix);
+			string columnName = Construct.ColumnName(p, prefix);
 			string sqlTypeName = schemaProvider.DbTypeToNative(DbTypeMapper.GetDbTypeForProperty(p.GetType()));
 			
 			string maxLengthAttr = String.Empty;
@@ -81,10 +82,10 @@
 			if (p.IsValueTypePropertySingle())
 			{
 				// must have one space at the end
-				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
+				nullableAttr = String.Format("Nullable=\"{0}\" ", IsRealNullable(p).ToString().ToLowerInvariant());
 			}
 %>
-    <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= precScaleAttr %><%= nullableAttr %>/>
+    <Property Name="<%= columnName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= precScaleAttr %><%= nullableAttr %>/>
 <%
 		}
 	}

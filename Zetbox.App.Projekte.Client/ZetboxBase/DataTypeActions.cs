@@ -38,17 +38,17 @@ namespace Zetbox.App.Base
         public static void NotifyDeleting(DataType obj)
         {
             var ctx = obj.Context;
-            foreach (var prop in obj.Properties)
+            foreach (var prop in obj.Properties.ToList())
             {
                 ctx.Delete(prop);
             }
 
-            foreach (var m in obj.Methods)
+            foreach (var m in obj.Methods.ToList())
             {
                 ctx.Delete(m);
             }
 
-            foreach (var c in obj.Constraints)
+            foreach (var c in obj.Constraints.ToList())
             {
                 ctx.Delete(c);
             }

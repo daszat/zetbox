@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for DateTime Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DateTimeParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="DateTimeParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DateTimeParameter")]
     public class DateTimeParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, DateTimeParameter
     {
@@ -44,48 +44,52 @@ namespace Zetbox.App.Base
         /// Style of Datetime. Can be Date, Time, or Date and Time.
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.DateTimeStyles? DateTimeStyle
         {
             get
             {
-				var __value = _DateTimeStyle;
-				if(OnDateTimeStyle_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__value);
-					OnDateTimeStyle_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _DateTimeStyle;
+                if (OnDateTimeStyle_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__result);
+                    OnDateTimeStyle_Getter(this, __e);
+                    __result = _DateTimeStyle = __e.Result;
+                }
+                return __result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DateTimeStyle != value)
                 {
-					var __oldValue = _DateTimeStyle;
-					var __newValue = value;
-                    if(OnDateTimeStyle_PreSetter != null)
+                    var __oldValue = _DateTimeStyle;
+                    var __newValue = value;
+                    if (OnDateTimeStyle_PreSetter != null && IsAttached)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__oldValue, __newValue);
-						OnDateTimeStyle_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__oldValue, __newValue);
+                        OnDateTimeStyle_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
-					
                     NotifyPropertyChanging("DateTimeStyle", __oldValue, __newValue);
-                    _DateTimeStyle = value;
+                    _DateTimeStyle = __newValue;
                     NotifyPropertyChanged("DateTimeStyle", __oldValue, __newValue);
-                    if(OnDateTimeStyle_PostSetter != null)
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnDateTimeStyle_PostSetter != null && IsAttached)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__oldValue, __newValue);
-						OnDateTimeStyle_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DateTimeStyles?>(__oldValue, __newValue);
+                        OnDateTimeStyle_PostSetter(this, __e);
                     }
-                    
+                }
+                else
+                {
+                    SetInitializedProperty("DateTimeStyle");
                 }
             }
         }
-
         private Zetbox.App.Base.DateTimeStyles? _DateTimeStyle_store;
         private Zetbox.App.Base.DateTimeStyles? _DateTimeStyle {
             get { return _DateTimeStyle_store; }
@@ -95,7 +99,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("DateTimeStyleImpl");
             }
         }
-        
+
         /// <summary>EF sees only this property, for DateTimeStyle</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -110,7 +114,7 @@ namespace Zetbox.App.Base
                 this.DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)value;
             }
         }
-        
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.DateTimeParameter, Zetbox.App.Base.DateTimeStyles?> OnDateTimeStyle_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.DateTimeParameter, Zetbox.App.Base.DateTimeStyles?> OnDateTimeStyle_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.DateTimeParameter, Zetbox.App.Base.DateTimeStyles?> OnDateTimeStyle_PostSetter;
@@ -320,11 +324,6 @@ namespace Zetbox.App.Base
 
             me.DateTimeStyle = other.DateTimeStyle;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -463,7 +462,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write((int?)((Zetbox.App.Base.DateTimeParameter)this).DateTimeStyle);
+            binStream.Write((int?)_DateTimeStyle);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -472,7 +471,7 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            ((Zetbox.App.Base.DateTimeParameter)this).DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)binStream.ReadNullableInt32();
+            _DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -486,7 +485,7 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.DateTimeParameter)this).DateTimeStyle, xml, "DateTimeStyle", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_DateTimeStyle, xml, "DateTimeStyle", "Zetbox.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -496,7 +495,7 @@ namespace Zetbox.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Base|DateTimeStyle":
-                ((Zetbox.App.Base.DateTimeParameter)this).DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)XmlStreamer.ReadNullableInt32(xml);
+                _DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

@@ -104,5 +104,12 @@ namespace Zetbox.App.Base
         {
             e.Result = string.Format("Base.Classes.{0}.{1}", obj.Module.Namespace, obj.Name);
         }
+
+        [Invocation]
+        public static void isValid_TableMapping(ObjectClass obj, PropertyIsValidEventArgs e)
+        {
+            e.IsValid = obj.TableMapping == null || (obj.TableMapping != null && obj.BaseObjectClass == null);
+            e.Error = e.IsValid ? string.Empty : "TableMapping is valid only on base classes.";
+        }
     }
 }

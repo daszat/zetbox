@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IsValidIdentifierConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="IsValidIdentifierConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IsValidIdentifierConstraint")]
     public class IsValidIdentifierConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, IsValidIdentifierConstraint
     {
@@ -178,11 +178,6 @@ namespace Zetbox.App.Base
             var otherImpl = (IsValidIdentifierConstraintEfImpl)obj;
             var me = (IsValidIdentifierConstraint)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

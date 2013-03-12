@@ -42,11 +42,6 @@ namespace Zetbox.DalProvider.NHibernate
                 endRole);
         }
 
-        public override IServerObjectHandler GetServerObjectHandler(InterfaceType type)
-        {
-            return GetServerObjectHandlerHelper(typeof(NHibernateServerObjectHandler<>), type);
-        }
-
         public override IServerObjectSetHandler GetServerObjectSetHandler()
         {
             return new NHibernateServerObjectSetHandler();

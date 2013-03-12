@@ -46,6 +46,11 @@ namespace Zetbox.API
     {
         protected abstract void SetModified();
 
+        protected virtual bool ShouldSetModified(string property)
+        {
+            return property != "ObjectState" && property != "ID";
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
 
@@ -64,11 +69,6 @@ namespace Zetbox.API
             {
                 OnPropertyChanging(property, oldValue, newValue);
             }
-        }
-
-        protected virtual bool ShouldSetModified(string property)
-        {
-            return property != "ObjectState" && property != "ID";
         }
 
         /// <summary>
@@ -127,6 +127,8 @@ namespace Zetbox.API
             if (PropertyChangedWithValue != null)
                 PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
+
+        #region Notification recording
 
         protected sealed class Notification
         {
@@ -187,6 +189,8 @@ namespace Zetbox.API
                 return notifications != null;
             }
         }
+
+        #endregion
 
         #region Auditing
 
@@ -253,9 +257,25 @@ namespace Zetbox.API
         }
         #endregion
 
+        #region Recalculation handling
+
         public virtual void Recalculate(string propName)
         {
-            throw new ArgumentOutOfRangeException("propName", string.Format("There is no calculated property '{0}' that could be re calculated", propName));
+            throw new ArgumentOutOfRangeException("propName", string.Format("There is no calculated property '{0}' that could be recalculated", propName));
         }
+
+        /// <summary>
+        /// Setting his to true causes ChangedOn/By be updated on submit IFF the Object is modified.
+        /// </summary>
+        /// <remarks>
+        /// All "normal" properties should set this when being changed. Recalculations should not.
+        /// </remarks>
+        public bool UpdateChangedInfo
+        {
+            get;
+            protected set;
+        }
+
+        #endregion
     }
 }

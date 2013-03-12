@@ -21,11 +21,15 @@ namespace Zetbox.API.Server.PerfCounter
     using System.Text;
     using Autofac;
     using Zetbox.API.PerfCounter;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     // server-side clone of Zetbox.API.Client.PerfCounter.ResetOnReadAppender
     public class ResetOnReadAppender : MemoryAppender
     {
         #region Autofac Module
+        [Feature]
+        [Description("PerfCounter: read & save data internal, but reset global data.")]
         public class Module : Autofac.Module
         {
             protected override void Load(ContainerBuilder moduleBuilder)

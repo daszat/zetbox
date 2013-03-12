@@ -84,7 +84,6 @@
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
 <% if (callGetterSetterEvents) { %>
                 if (<%= eventName %>_Getter != null)
@@ -98,7 +97,7 @@
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<<%= referencedImplementation %>> r
@@ -153,6 +152,7 @@
                     __newValue.NotifyPropertyChanged("<%= inverseNavigatorName %>", null, null);
                 }
 <% } %>
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 

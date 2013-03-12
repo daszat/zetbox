@@ -76,15 +76,15 @@ namespace Zetbox.App.Test
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.OneEnd == null)
-				{
-					SetInitializedProperty("OneEnd");
+                {
+                    SetInitializedProperty("OneEnd");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Test.OrderedOneEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.OneEnd);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("OneEnd");
+                {
+                    SetInitializedProperty("OneEnd");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("OneEnd", __oldValue, __newValue);
@@ -143,6 +143,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("OneEnd", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnOneEnd_PostSetter != null && IsAttached)
                 {
@@ -176,12 +177,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("NEnds_pos", __oldValue, __newValue);
                     Proxy.NEnds_pos = __newValue;
                     NotifyPropertyChanged("NEnds_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("NEnds_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("NEnds_pos");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -228,6 +230,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("OtherInt", __oldValue, __newValue);
                     Proxy.OtherInt = __newValue;
                     NotifyPropertyChanged("OtherInt", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnOtherInt_PostSetter != null && IsAttached)
                     {
@@ -235,10 +238,10 @@ namespace Zetbox.App.Test
                         OnOtherInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("OtherInt");
-				}
+                else
+                {
+                    SetInitializedProperty("OtherInt");
+                }
             }
         }
 
@@ -264,12 +267,6 @@ namespace Zetbox.App.Test
             me.OtherInt = other.OtherInt;
             this.NEnds_pos = otherImpl.NEnds_pos;
             this._fk_OneEnd = otherImpl._fk_OneEnd;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

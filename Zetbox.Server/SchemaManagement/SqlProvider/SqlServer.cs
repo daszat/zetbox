@@ -21,13 +21,16 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
     using System.Data.SqlClient;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Migration;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
+    using System.Globalization;
 
     public class SqlServer
         : AdoNetSchemaProvider<SqlConnection, SqlTransaction, SqlCommand>
@@ -153,9 +156,14 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         #region SQL Infrastructure
 
-        protected override string QuoteIdentifier(string name)
+        public override string QuoteIdentifier(string name)
         {
             return "[" + name + "]";
+        }
+
+        protected override string FormatBool(bool p)
+        {
+            return p ? "1" : "0";
         }
 
         protected string GetColumnDefinition(Column col)
@@ -510,6 +518,10 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 {
                     defValue = ((IntDefaultConstraint)constr).Value.ToString();
                 }
+                else if (constr is DecimalDefaultConstraint)
+                {
+                    defValue = ((DecimalDefaultConstraint)constr).Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
+                }
                 else if (constr is BoolDefaultConstraint)
                 {
                     defValue = ((BoolDefaultConstraint)constr).Value ? "1" : "0";
@@ -623,6 +635,25 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             return (int)ExecuteScalar(String.Format(
                 "SELECT COUNT(*) FROM (SELECT TOP 1 * FROM {0}) AS data",
                 FormatSchemaName(tbl))) > 0;
+        }
+
+        public override bool CheckTableContainsData(TableRef tbl, IEnumerable<string> discriminatorFilter)
+        {
+            if (discriminatorFilter == null)
+            {
+                return CheckTableContainsData(tbl);
+            }
+            else
+            {
+                var parameters = ToAdoParameters(discriminatorFilter);
+
+                return (int)ExecuteScalar(string.Format(
+                    "SELECT COUNT(*) FROM (SELECT TOP 1 * FROM {0} WHERE {1} IN ({2})) AS data",
+                    FormatSchemaName(tbl),
+                    QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                    string.Join(",", parameters.Keys)),
+                    parameters) > 0;
+            }
         }
 
         public override bool CheckColumnContainsNulls(TableRef tbl, string colName)
@@ -776,6 +807,25 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery(string.Format("DROP INDEX [{0}] ON {1}", idxName, FormatSchemaName(tblName)));
         }
 
+        public override bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            return (int)ExecuteScalar(String.Format(
+                "SELECT COUNT(*) FROM (SELECT TOP 1 * FROM {0} WHERE NOT {1}) AS data",
+                FormatSchemaName(tblName),
+                FormatCheckExpression(colName, checkExpressions))) == 0;
+        }
+
+        public override bool CheckCheckConstraintExists(TableRef tblName, string constraintName)
+        {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (string.IsNullOrEmpty(constraintName)) throw new ArgumentNullException("constraintName");
+
+            return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@constraint_name) AND type IN (N'C')",
+                new Dictionary<string, object>() {
+                    { "@constraint_name", FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, constraintName)) },
+                }) > 0;
+        }
+
         #endregion
 
         #region Other DB Objects (Views, Triggers, Procedures)
@@ -920,6 +970,54 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             Log.DebugFormat("Copying data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
             ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[{1}] FROM {2} dest INNER JOIN {3} src ON dest.ID = src.ID",
                 colName, srcColName, FormatSchemaName(tblName), FormatSchemaName(srcTblName)));
+        }
+
+        public override void CopyColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, string discriminatorValue)
+        {
+            if (srcColNames == null) throw new ArgumentNullException("srcColNames");
+            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (srcColNames.Length != colNames.Length) throw new ArgumentOutOfRangeException("colNames", "need the same number of columns in srcColNames and colNames");
+
+            var assignments = srcColNames.Zip(colNames, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst))).ToList();
+            if (discriminatorValue != null)
+            {
+                assignments.Add(string.Format("{0} = '{1}'", QuoteIdentifier(TableMapper.DiscriminatorColumnName), discriminatorValue));
+            }
+
+            if (assignments.Count > 0)
+            {
+                ExecuteNonQuery(string.Format(
+                    "UPDATE dest SET {2} FROM {1} dest INNER JOIN {0} src ON dest.{3} = src.{3}",
+                    FormatSchemaName(srcTblName),     // 0
+                    FormatSchemaName(tblName),        // 1
+                    string.Join(", ", assignments),   // 2
+                    QuoteIdentifier("ID")));          // 3
+            }
+        }
+
+        public override void MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings)
+        {
+            if (srcColNames == null) throw new ArgumentNullException("srcColNames");
+            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (srcColNames.Length != colNames.Length) throw new ArgumentOutOfRangeException("colNames", "need the same number of columns in srcColNames and colNames");
+            if (mappings == null) mappings = new Dictionary<object, object>[srcColNames.Length];
+            if (mappings.Length != srcColNames.Length) throw new ArgumentOutOfRangeException("mappings", "need the same number of columns in srcColNames and mappings");
+
+            var assignments = new List<string>();
+            for (int i = 0; i < srcColNames.Length; i++)
+            {
+                assignments.Add(string.Format("{1} = {0}", CreateMappingMap("src." + QuoteIdentifier(srcColNames[i]), mappings[i]), QuoteIdentifier(colNames[i])));
+            }
+
+            if (assignments.Count > 0)
+            {
+                ExecuteNonQuery(string.Format(
+                    "UPDATE dest SET {2} FROM {1} dest INNER JOIN {0} src ON dest.{3} = src.{3}",
+                    FormatSchemaName(srcTblName),     // 0
+                    FormatSchemaName(tblName),        // 1
+                    string.Join(", ", assignments),   // 2
+                    QuoteIdentifier("ID")));          // 3
+            }
         }
 
         public override void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
@@ -1129,13 +1227,13 @@ FROM (", viewName.Schema, viewName.Name);
         public override void ExecRefreshAllRightsProcedure()
         {
             Log.DebugFormat("Refreshing all rights");
-            ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
+            ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
         public override void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("CREATE PROCEDURE {0} (@ID INT = NULL) AS BEGIN", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
+            sb.AppendFormat("CREATE PROCEDURE {0} (@ID INT = NULL) AS BEGIN", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName())));
             sb.AppendLine();
             sb.AppendLine("SET NOCOUNT OFF");
             sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("EXEC {0} @ID", FormatSchemaName(i))).ToArray()));
@@ -1399,6 +1497,64 @@ END";
             }
 
             cmd.ExecuteNonQuery();
+        }
+
+        public override void WriteDefaultValue(TableRef tblName, string colName, object value)
+        {
+            ExecuteNonQuery(String.Format("UPDATE {0} SET {1} = @val WHERE {1} IS NULL",
+                                FormatSchemaName(tblName),
+                                QuoteIdentifier(colName)),
+                             new Dictionary<string, object>() { { "@val", value } });
+        }
+
+        public override void WriteDefaultValue(TableRef tblName, string colName, object value, IEnumerable<string> discriminatorFilter)
+        {
+            if (discriminatorFilter == null)
+            {
+                WriteGuidDefaultValue(tblName, colName);
+            }
+            else
+            {
+                var parameters = ToAdoParameters(discriminatorFilter);
+                var discriminatorParams = string.Join(",", parameters.Keys);
+                parameters["@val"] = value;
+
+                ExecuteNonQuery(String.Format(
+                    "UPDATE {0} SET {1} = @val WHERE {1} IS NULL AND {2} IN ({3})",
+                        FormatSchemaName(tblName),
+                        QuoteIdentifier(colName),
+                        QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                        discriminatorParams),
+                     parameters);
+            }
+        }
+
+        public override void WriteGuidDefaultValue(TableRef tblName, string colName)
+        {
+            ExecuteNonQuery(String.Format(
+                "UPDATE {0} SET {1} = NEWID() WHERE {1} IS NULL",
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(colName)));
+        }
+
+        public override void WriteGuidDefaultValue(TableRef tblName, string colName, IEnumerable<string> discriminatorFilter)
+        {
+            if (discriminatorFilter == null)
+            {
+                WriteGuidDefaultValue(tblName, colName);
+            }
+            else
+            {
+                var parameters = ToAdoParameters(discriminatorFilter);
+
+                ExecuteNonQuery(String.Format(
+                    "UPDATE {0} SET {1} = NEWID() WHERE {1} IS NULL AND {2} IN ({3})",
+                        FormatSchemaName(tblName),
+                        QuoteIdentifier(colName),
+                        QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                        string.Join(",", parameters.Keys)),
+                     parameters);
+            }
         }
 
         public override void RefreshDbStats()

@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Antwort")]
+    [EdmEntityType(NamespaceName="Model", Name="AntwortEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Antwort")]
     public class AntwortEfImpl : BaseServerDataObject_EntityFramework, Antwort
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Frage", __oldValue, __newValue);
                     _Frage = __newValue;
                     NotifyPropertyChanged("Frage", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFrage_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Test
                         OnFrage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Frage");
-				}
+                else
+                {
+                    SetInitializedProperty("Frage");
+                }
             }
         }
         private string _Frage_store;
@@ -153,7 +154,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnFragebogen_Getter != null)
                 {
@@ -165,7 +165,7 @@ namespace Zetbox.App.Test
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.FragebogenEfImpl> r
@@ -212,6 +212,7 @@ namespace Zetbox.App.Test
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Antworten", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -238,12 +239,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("gute_Antworten_pos", __oldValue, __newValue);
                     _gute_Antworten_pos = __newValue;
                     NotifyPropertyChanged("gute_Antworten_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("gute_Antworten_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("gute_Antworten_pos");
+                }
             }
         }
         private int? _gute_Antworten_pos_store;
@@ -302,6 +304,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("FragenNummer", __oldValue, __newValue);
                     _FragenNummer = __newValue;
                     NotifyPropertyChanged("FragenNummer", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFragenNummer_PostSetter != null && IsAttached)
                     {
@@ -309,10 +312,10 @@ namespace Zetbox.App.Test
                         OnFragenNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FragenNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("FragenNummer");
+                }
             }
         }
         private int _FragenNummer_store;
@@ -370,6 +373,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("GegebeneAntwort", __oldValue, __newValue);
                     _GegebeneAntwort = __newValue;
                     NotifyPropertyChanged("GegebeneAntwort", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnGegebeneAntwort_PostSetter != null && IsAttached)
                     {
@@ -377,10 +381,10 @@ namespace Zetbox.App.Test
                         OnGegebeneAntwort_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("GegebeneAntwort");
-				}
+                else
+                {
+                    SetInitializedProperty("GegebeneAntwort");
+                }
             }
         }
         private int? _GegebeneAntwort_store;
@@ -416,11 +420,6 @@ namespace Zetbox.App.Test
             me.GegebeneAntwort = other.GegebeneAntwort;
             this.gute_Antworten_pos = otherImpl.gute_Antworten_pos;
             this._fk_Fragebogen = otherImpl._fk_Fragebogen;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -595,6 +594,7 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Antwort != null) OnNotifyDeleting_Antwort(this);
+            Fragebogen = null;
         }
         public static event ObjectEventHandler<Antwort> OnNotifyDeleting_Antwort;
 
@@ -620,12 +620,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -641,8 +642,9 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Frage);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.FragebogenEfImpl>("Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten", "Ein_Fragebogen").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.FragebogenEfImpl>("Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten", "Ein_Fragebogen");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._gute_Antworten_pos);
             binStream.Write(this._FragenNummer);

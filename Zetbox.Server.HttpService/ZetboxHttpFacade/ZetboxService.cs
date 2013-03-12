@@ -93,7 +93,16 @@ namespace Zetbox.Server.HttpService
                 string username;
                 try
                 {
-                    username = scope.Resolve<IIdentityResolver>().GetCurrent().DisplayName;
+                    var id = scope.Resolve<IIdentityResolver>().GetCurrent();
+                    if (id != null)
+                    {
+                        username = id.DisplayName;
+                    }
+                    else
+                    {
+                        Log.Error("Error while trying to resolve user - not found");
+                        username = "(unknown)";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -168,7 +177,7 @@ namespace Zetbox.Server.HttpService
                             var result = service.GetBlobStream(version, ID);
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
-                            result.CopyTo(context.Response.OutputStream);
+                            result.CopyAllTo(context.Response.OutputStream);
                             break;
                         }
                     case "SetBlobStream": // BlobResponse SetBlobStream(BlobMessage blob)
@@ -192,7 +201,7 @@ namespace Zetbox.Server.HttpService
                             using (var dataStream = new MemoryStream())
                             {
                                 writer.Write(result.ID);
-                                result.BlobInstance.CopyTo(dataStream);
+                                result.BlobInstance.CopyAllTo(dataStream);
                                 writer.Write(dataStream.ToArray());
                             }
                             break;
@@ -245,15 +254,10 @@ namespace Zetbox.Server.HttpService
                 }
                 Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
             }
-            catch (FaultException<ConcurrencyException> cex)
+            catch (FaultException<ZetboxContextExceptionMessage> ex)
             {
-                context.Response.StatusCode = (int)HttpStatusCode.Conflict;
-                Log.Info("Concurrency error while processing request", cex);
-            }
-            catch (FaultException<InvalidZetboxGeneratedVersionException> vex)
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.PreconditionFailed;
-                Log.Info("InvalidZetboxGeneratedVersion error while processing request", vex);
+                SerializeException(context, ex.Detail);
+                Log.Info("Concurrency error while processing request", ex);
             }
             catch (FaultException ex)
             {
@@ -275,6 +279,14 @@ namespace Zetbox.Server.HttpService
             }
         }
 
+        private void SerializeException(HttpContext context, ZetboxContextExceptionMessage exContainer)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.Conflict;
+            context.Response.ContentType = "text/xml";
+            exContainer.ToXmlStream(context.Response.OutputStream);
+            context.Response.OutputStream.Flush();            
+        }
+
         private void SendByteArray(HttpContext context, byte[] result, ZetboxStreamWriter.Factory writerFactory)
         {
             context.Response.StatusCode = (int)HttpStatusCode.OK;
@@ -282,6 +294,7 @@ namespace Zetbox.Server.HttpService
             using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
             {
                 writer.Write(result);
+                writer.Flush();
             }
         }
     }

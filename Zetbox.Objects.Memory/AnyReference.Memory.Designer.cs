@@ -36,9 +36,9 @@ namespace Zetbox.App.Base
             : base(lazyCtx)
         {
         }
-        public AnyReferenceMemoryImpl(IPersistenceObject parent, string property) : this(false, parent, property) {}
-        public AnyReferenceMemoryImpl(bool ignore, IPersistenceObject parent, string property)
-            : base(null) // TODO: pass parent's lazyCtx
+        public AnyReferenceMemoryImpl(IPersistenceObject parent, string property) : this(null, parent, property) {} // TODO: pass parent's lazyCtx
+        public AnyReferenceMemoryImpl(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)
+            : base(lazyCtx)
         {
             AttachToObject(parent, property);
         }
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ObjClass", __oldValue, __newValue);
                     _ObjClass = __newValue;
                     NotifyPropertyChanged("ObjClass", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnObjClass_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnObjClass_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ObjClass");
-				}
+                else
+                {
+                    SetInitializedProperty("ObjClass");
+                }
             }
         }
         private Guid? _ObjClass;
@@ -134,6 +135,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ObjGuid", __oldValue, __newValue);
                     _ObjGuid = __newValue;
                     NotifyPropertyChanged("ObjGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnObjGuid_PostSetter != null && IsAttached)
                     {
@@ -141,10 +143,10 @@ namespace Zetbox.App.Base
                         OnObjGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ObjGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ObjGuid");
+                }
             }
         }
         private Guid? _ObjGuid;
@@ -189,6 +191,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ObjID", __oldValue, __newValue);
                     _ObjID = __newValue;
                     NotifyPropertyChanged("ObjID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnObjID_PostSetter != null && IsAttached)
                     {
@@ -196,10 +199,10 @@ namespace Zetbox.App.Base
                         OnObjID_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ObjID");
-				}
+                else
+                {
+                    SetInitializedProperty("ObjID");
+                }
             }
         }
         private int? _ObjID;
@@ -413,6 +416,30 @@ namespace Zetbox.App.Base
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.Export(xml, modules);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ObjClass, xml, "ObjClass", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ObjGuid, xml, "ObjGuid", "Zetbox.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+            base.MergeImport(xml);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|ObjClass":
+                this._ObjClass = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.Base|ObjGuid":
+                this._ObjGuid = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion

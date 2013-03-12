@@ -188,6 +188,8 @@ namespace Zetbox.API
 
         public override void PutBlob(Guid guid, string filename, Stream blob)
         {
+            if (blob == null) throw new ArgumentNullException("blob");
+
             string destName;
             if(!string.IsNullOrEmpty(filename))
             {
@@ -200,7 +202,7 @@ namespace Zetbox.API
             using (var fs = File.OpenWrite(destName))
             {
                 fs.SetLength(0);
-                blob.CopyTo(fs);
+                blob.CopyAllTo(fs);
             }
         }
 

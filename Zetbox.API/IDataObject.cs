@@ -19,6 +19,7 @@ namespace Zetbox.API
     using System.ComponentModel;
     using System.IO;
     using System.Xml;
+using Zetbox.API.Async;
 
     /// <summary>
     /// Data Object State
@@ -85,14 +86,23 @@ namespace Zetbox.API
     [System.Flags]
     public enum AccessRights
     {
+        // Internal bits
         None = 0x00,
         Read = 0x01,
         Write = 0x02,
         Delete = 0x04,
         Create = 0x08,
 
-        Full = Read | Write | Delete | Create,
+        // Aggregations
         Change = Read | Write,
+        Full = Read | Write | Delete | Create,
+
+        // Visible to user
+        // UI_Read = Read,
+        // UI_Change = Change,
+        // UI_Delete = Delete,
+        // UI_Create = Create,
+        // UI_Full = Full,
     }
 
     public static class AccessRightsExtensions
@@ -217,19 +227,6 @@ namespace Zetbox.API
         IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr);
 
         /// <summary>
-        /// Serialize this Object to a XmlWriter
-        /// </summary>
-        /// <param name="xml">XmlWriter to serialize to</param>
-        void ToStream(XmlWriter xml);
-
-        /// <summary>
-        /// Deserialize this Object from a XmlReader
-        /// </summary>
-        /// <param name="xml">XmlReader to deserialize from.</param>
-        /// <returns>Returns a list of objects that were in-place serialized. This ensures that they can be processed like everything else in the stream. May return null to indicate absence of additional objects.</returns>
-        IEnumerable<IPersistenceObject> FromStream(XmlReader xml);
-
-        /// <summary>
         /// Reloads Relations from internal storage into the providers caches.
         /// Should be called after de-serializing and attaching an object graph 
         /// to notify the provider of all references within the graph.
@@ -300,7 +297,8 @@ namespace Zetbox.API
         /// Attach this object to a context. This method is called by the context.
         /// </summary>
         /// <param name="ctx">Context to attach this object to.</param>
-        void AttachToContext(IZetboxContext ctx);
+        /// <param name="lazyFrozenContext">lazyFrozenContext to attach to the object</param>
+        void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext);
 
         /// <summary>
         /// Detach this Object from a Context. This method is called by the context.
@@ -333,6 +331,13 @@ namespace Zetbox.API
         /// </summary>
         /// <param name="propName">Name of the property to recalc</param>
         void Recalculate(string propName);
+
+        /// <summary>
+        /// Fetch a property async
+        /// </summary>
+        /// <param name="propName">Name of the property to fetch</param>
+        /// <returns></returns>
+        ZbTask TriggerFetch(string propName);
 
         #region //// INTERNALS /////
         // TODO: move to separate interface
@@ -403,6 +408,19 @@ namespace Zetbox.API
         void ApplyChangesFrom(ICompoundObject other);
 
         Guid CompoundObjectID { get; }
+
+        /// <summary>
+        /// Serialize this Object to a XmlWriter
+        /// </summary>
+        /// <param name="xml">XmlWriter to serialize to</param>
+        /// <param name="modules">a list of modules to filter the output</param>
+        void Export(XmlWriter xml, string[] modules);
+
+        /// <summary>
+        /// Deserialize this Object from a XmlReader
+        /// </summary>
+        /// <param name="xml">XmlReader to deserialize to.</param>
+        void MergeImport(XmlReader xml);
     }
 
     /// <summary>

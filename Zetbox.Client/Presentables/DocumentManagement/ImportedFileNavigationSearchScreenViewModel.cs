@@ -34,7 +34,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
 
         public ImportedFileNavigationSearchScreenViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
             IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
-            : base(appCtx, dataCtx, ctxFactory, parent, screen)
+            : base(appCtx, dataCtx, parent, screen)
         {
             _ctxFactory = ctxFactory;
             base.Type = typeof(ImportedFile).GetObjectClass(FrozenContext);
@@ -60,7 +60,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Label,
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Tooltip,
                         OpenAll, null, null);
-                    _OpenAllCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
+                    _OpenAllCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
                 }
                 return _OpenAllCommand;
             }
@@ -76,10 +76,9 @@ namespace Zetbox.Client.Presentables.DocumentManagement
             {
                 foreach (var obj in ListViewModel.Instances)
                 {
-                    newWorkspace.ShowForeignModel(obj);
+                    newWorkspace.ShowObject(obj.Object);
                 }
                 newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
-                newWorkspace.IsBusy = false;
             }).Trigger();
         }
     }

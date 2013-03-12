@@ -36,11 +36,12 @@ namespace Zetbox.Client.Forms
         [STAThread]
         static void Main()
         {
-            var config = ZetboxConfig.FromFile(null, "DefaultFormsConfig.xml");
+            var config = ZetboxConfig.FromFile(HostType.Client, null, "Zetbox.Forms.xml");
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
             container = builder.Build();
+            API.AppDomainInitializer.InitializeFrom(container);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

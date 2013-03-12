@@ -84,6 +84,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentMonthDefault", __oldValue, __newValue);
                     Proxy.IsCurrentMonthDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentMonthDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentMonthDefault_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentMonthDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentMonthDefault");
+                }
             }
         }
 
@@ -110,16 +111,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_MonthFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_MonthFilterConfiguration != null)
             {
-                OnCreateFilterModel_MonthFilterConfiguration(this, e);
+                OnCreateFilterModel_MonthFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -244,12 +245,6 @@ namespace Zetbox.App.GUI
             var me = (MonthFilterConfiguration)this;
 
             me.IsCurrentMonthDefault = other.IsCurrentMonthDefault;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

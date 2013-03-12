@@ -45,8 +45,7 @@ namespace Zetbox.API
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        [FaultContract(typeof(ConcurrencyException))]
-        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
+        [FaultContract(typeof(ZetboxContextExceptionMessage))]
         byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>
@@ -191,4 +190,108 @@ namespace Zetbox.API
         [DataMember(Name = "Expression")]
         public SerializableExpression Expression { get; set; }
     }
+
+    #region Exception messages
+    [Serializable]
+    [XmlRoot(Namespace = "http://dasz.at/zetbox/ZetboxContextExceptionMessage")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/")]
+    [KnownType(typeof(ConcurrencyExceptionMessage))]
+    [KnownType(typeof(FKViolationExceptionMessage))]
+    [KnownType(typeof(UniqueConstraintViolationExceptionMessage))]
+    public class ZetboxContextExceptionMessage
+    {
+        [XmlElement(typeof(ConcurrencyExceptionMessage), ElementName = "ConcurrencyException")]
+        [XmlElement(typeof(FKViolationExceptionMessage), ElementName = "FKViolationException")]
+        [XmlElement(typeof(UniqueConstraintViolationExceptionMessage), ElementName = "UniqueConstraintViolationException")]
+        [DataMember]
+        public ZetboxContextExceptionSerializationHelper Exception { get; set; }
+    }
+
+    [Serializable]
+    public abstract class ZetboxContextExceptionSerializationHelper
+    {
+        public ZetboxContextExceptionSerializationHelper()
+        {
+        }
+
+        public ZetboxContextExceptionSerializationHelper(Exception ex)
+        {
+            if (ex == null) throw new ArgumentNullException("ex");
+            this.Message = ex.Message;
+        }
+
+        public string Message { get; set; }
+
+        public abstract ZetboxContextErrorException ToException();
+    }
+
+    [Serializable]
+    public class ConcurrencyExceptionMessage : ZetboxContextExceptionSerializationHelper
+    {
+        public ConcurrencyExceptionMessage()
+        {
+        }
+
+        public ConcurrencyExceptionMessage(ConcurrencyException ex)
+            : base(ex)
+        {
+            this.Details = ex.Details;
+        }
+
+        public override ZetboxContextErrorException ToException()
+        {
+            return new ConcurrencyException(Message, Details);
+        }
+
+        [DataMember]
+        public List<ConcurrencyExceptionDetail> Details { get; set; }
+    }
+
+    [Serializable]
+    public class FKViolationExceptionMessage : ZetboxContextExceptionSerializationHelper
+    {
+        public FKViolationExceptionMessage()
+        {
+
+        }
+
+        public FKViolationExceptionMessage(FKViolationException ex)
+            : base(ex)
+        {
+            this.Details = ex.Details;
+        }
+        
+        public override ZetboxContextErrorException ToException()
+        {
+            return new FKViolationException(Message, Details);
+        }
+
+        [DataMember]
+        public List<FKViolationExceptionDetail> Details { get; set; }
+    }
+
+    [Serializable]
+    public class UniqueConstraintViolationExceptionMessage : ZetboxContextExceptionSerializationHelper
+    {
+        public UniqueConstraintViolationExceptionMessage()
+        {
+
+        }
+
+        public UniqueConstraintViolationExceptionMessage(UniqueConstraintViolationException ex)
+            : base(ex)
+        {
+            this.Details = ex.Details;
+        }
+        
+        public override ZetboxContextErrorException ToException()
+        {
+            return new UniqueConstraintViolationException(Message, Details);
+        }
+
+        [DataMember]
+        public List<UniqueConstraintViolationExceptionDetail> Details { get; set; }
+    }
+
+    #endregion
 }

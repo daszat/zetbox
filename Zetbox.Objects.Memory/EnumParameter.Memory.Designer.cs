@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Enumeration
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Enumeration
         // fkBackingName=_fk_Enumeration; fkGuidBackingName=_fk_guid_Enumeration;
         // referencedInterface=Zetbox.App.Base.Enumeration; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Enumeration;
+        private int? __fk_EnumerationCache;
+
+        private int? _fk_Enumeration {
+            get
+            {
+                return __fk_EnumerationCache;
+            }
+            set
+            {
+                __fk_EnumerationCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchEnumerationTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Enumeration = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration> _triggerFetchEnumerationTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration> TriggerFetchEnumerationAsync()
+        {
+            if (_triggerFetchEnumerationTask != null) return _triggerFetchEnumerationTask;
+
+            if (_fk_Enumeration.HasValue)
+                _triggerFetchEnumerationTask = Context.FindAsync<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
+            else
+                _triggerFetchEnumerationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchEnumerationTask.OnResult(t =>
+            {
+                if (OnEnumeration_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Enumeration>(t.Result);
+                    OnEnumeration_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchEnumerationTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.EnumerationMemoryImpl __value;
-                if (_fk_Enumeration.HasValue)
-                    __value = (Zetbox.App.Base.EnumerationMemoryImpl)Context.Find<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
-                else
-                    __value = null;
-
-                if (OnEnumeration_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Enumeration>(__value);
-                    OnEnumeration_Getter(this, e);
-                    __value = (Zetbox.App.Base.EnumerationMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.EnumerationMemoryImpl)TriggerFetchEnumerationAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Enumeration == null) || (value != null && value.ID == _fk_Enumeration))
-				{
-					SetInitializedProperty("Enumeration");
+                {
+                    SetInitializedProperty("Enumeration");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = EnumerationImpl;
@@ -114,6 +137,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Enumeration", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnEnumeration_PostSetter != null && IsAttached)
                 {
@@ -332,11 +356,6 @@ namespace Zetbox.App.Base
 
             this._fk_Enumeration = otherImpl._fk_Enumeration;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -375,6 +394,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Enumeration":
+                return TriggerFetchEnumerationAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -489,6 +519,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumParameter != null) OnNotifyDeleting_EnumParameter(this);
+            Enumeration = null;
         }
         public static event ObjectEventHandler<EnumParameter> OnNotifyDeleting_EnumParameter;
 

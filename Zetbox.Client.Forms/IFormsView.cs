@@ -24,7 +24,6 @@ namespace Zetbox.Client.Forms
 {
     internal interface IFormsView
     {
-        void SetRenderer(Renderer r);
         void SetDataContext(INotifyPropertyChanged mdl);
         void Activate();
         void Show();

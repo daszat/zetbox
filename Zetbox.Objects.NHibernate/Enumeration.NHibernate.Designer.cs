@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("AreFlags", __oldValue, __newValue);
                     Proxy.AreFlags = __newValue;
                     NotifyPropertyChanged("AreFlags", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAreFlags_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnAreFlags_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AreFlags");
-				}
+                else
+                {
+                    SetInitializedProperty("AreFlags");
+                }
             }
         }
 
@@ -597,12 +598,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             var me = (Enumeration)this;
 
             me.AreFlags = other.AreFlags;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

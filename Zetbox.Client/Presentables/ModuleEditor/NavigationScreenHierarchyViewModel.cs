@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
-    public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener
+    public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter, IOpenCommandParameter, INewCommandParameter
     {
         public new delegate NavigationScreenHierarchyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
 
@@ -41,7 +41,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         protected readonly Func<IZetboxContext> ctxFactory;
         public Module Module { get; private set; }
-
 
         public override string Name
         {
@@ -91,57 +90,84 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         #region Commands
         private RefreshCommand _RefreshCommand;
-        public RefreshCommand RefreshCommand
+        public ICommandViewModel RefreshCommand
         {
             get
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this, this);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _RefreshCommand;
             }
         }
 
         private OpenDataObjectCommand _OpenCommand;
-        public OpenDataObjectCommand OpenCommand
+        public ICommandViewModel OpenCommand
         {
             get
             {
                 if (_OpenCommand == null)
                 {
-                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this, null, null);
+                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
+                        DataContext,
+                        this);
                 }
                 return _OpenCommand;
             }
         }
 
+        public void Open()
+        {
+            if (OpenCommand.CanExecute(null))
+                OpenCommand.Execute(null);
+        }
+
         private NewDataObjectCommand _NewCommand;
-        public NewDataObjectCommand NewCommand
+        public ICommandViewModel NewCommand
         {
             get
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, typeof(NavigationEntry).GetObjectClass(FrozenContext), null, null, this);
-                    _NewCommand.ObjectCreated += (obj) => ((NavigationEntry)obj).Parent = SelectedItem != null ? obj.Context.Find<NavigationEntry>(SelectedItem.ID) : null;
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        typeof(NavigationEntry).GetObjectClass(FrozenContext));
+                    _NewCommand.ObjectCreated += (obj) =>
+                        ((NavigationEntry)obj).Parent = SelectedItem != null
+                            ? obj.Context.Find<NavigationEntry>(SelectedItem.ID)
+                            : null;
                 }
                 return _NewCommand;
             }
         }
 
+        public void New()
+        {
+            if (NewCommand.CanExecute(null))
+                NewCommand.Execute(null);
+        }
+
         private DeleteDataObjectCommand _DeleteCommand;
-        public DeleteDataObjectCommand DeleteCommand
+        public ICommandViewModel DeleteCommand
         {
             get
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, true);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _DeleteCommand;
             }
         }
+
+        public void Delete()
+        {
+            if (DeleteCommand.CanExecute(null))
+                DeleteCommand.Execute(null);
+        }
+
         #endregion
 
         #region IRefreshCommandListener Members
@@ -152,6 +178,21 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             OnPropertyChanged("RootScreens");
         }
 
+        #endregion
+
+        #region IDeleteCommandParameter members
+        bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
+        bool IDeleteCommandParameter.AllowDelete { get { return true; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
+        #endregion
+
+        #region IOpenCommandParameter members
+        bool IOpenCommandParameter.AllowOpen { get { return true; } }
+        #endregion
+
+        #region INewCommandParameter members
+        bool INewCommandParameter.IsReadOnly { get { return false; } }
+        bool INewCommandParameter.AllowAddNew { get { return true; } }
         #endregion
     }
 }

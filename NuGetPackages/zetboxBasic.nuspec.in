@@ -15,28 +15,126 @@
     <tags>Platform Database ORM Applications</tags>
   </metadata>
   <files>
-    <file src="*.dll" target="zetbox" />
-    <file src="*.exe" target="zetbox" />
-    <file src="*.config" target="zetbox" />
-    <file src="*.xml" target="zetbox" />
-    <file src="*.cmd" target="zetbox" />
-    <file src="..\..\Configs\Examples\**" target="Configs/Examples" />
-    <file src="**\*.resources.dll" target="zetbox" exclude="Tests\**" />
+    <!-- Executables and scripts -->
+    <file src="Zetbox.Cli.exe" target="zetbox" />
+    <file src="Zetbox.Cli.exe.config" target="zetbox" />
 
-    <file src="Common\**" target="zetbox/Common" exclude="**\*.resources.dll;Common\Core.Generated\**" />
-    <file src="Client\**" target="zetbox/Client" exclude="**\*.resources.dll;Client\Core.Generated\**" />
-    <file src="Server\**" target="zetbox/Server" exclude="**\*.resources.dll;Server\EF*\**;Server\NH*\**" />
+    <file src="Zetbox.ConfigEditor.exe" target="zetbox" />
+    <file src="Zetbox.ConfigEditor.exe.config" target="zetbox" />
+
+    <file src="Zetbox.Server.Service.exe" target="zetbox" />
+    <file src="Zetbox.Server.Service.exe.config" target="zetbox" />
+
+    <file src="Zetbox.Server.Service32.exe" target="zetbox" />
+    <file src="Zetbox.Server.Service32.exe.config" target="zetbox" />
+
+    <file src="Zetbox.WPF.exe" target="zetbox" />
+    <file src="Zetbox.WPF.exe.config" target="zetbox" />
+
+    <file src="PrepareEnv.exe" target="zetbox" />
+    <file src="PrepareEnv.exe.config" target="zetbox" />
+
+    <file src="ZbDeploy.cmd" target="zetbox" />
+    <file src="ZbLocalPull.cmd" target="zetbox" />
+    <file src="ZbPublish.cmd" target="zetbox" />
+    <file src="ZbReset.cmd" target="zetbox" />
+
+    <!-- Bootstrapper -->
+    <file src="Bootstrapper\Zetbox.Client.Bootstrapper.exe" target="zetbox/Bootstrapper" />
+    <file src="Bootstrapper\Zetbox.Client.Bootstrapper.exe.config" target="zetbox/Bootstrapper" />
+
+    <!-- Common Components -->
+    <file src="Common\Zetbox.API.Common.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.API.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.App.Projekte.Common.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.Dalprovider.Base.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.Dalprovider.Memory.dll" target="zetbox\Common" />
+
+    <file src="Common\Fallback\Zetbox.Objects.dll" target="zetbox\Common\Fallback" />
+    <file src="Common\Fallback\Zetbox.Objects.MemoryImpl.dll" target="zetbox\Common\Fallback" />
+
+    <!-- Common Dependencies -->
+    <file src="Common\Arebis.CodeGeneration.dll" target="zetbox\Common" />
+    <file src="Common\Arebis.CodeGenerator.dll" target="zetbox\Common" />
+    <file src="Common\Autofac.dll" target="zetbox\Common" />
+    <file src="Common\Autofac.Configuration.dll" target="zetbox\Common" />
+    <file src="Common\log4net.dll" target="zetbox\Common" />
+    <file src="Common\MigraDoc.DocumentObjectModel.dll" target="zetbox\Common" />
+    <file src="Common\MigraDoc.Rendering.dll" target="zetbox\Common" />
+    <file src="Common\MigraDoc.RtfRendering.dll" target="zetbox\Common" />
+    <file src="Common\Mono.Cecil.dll" target="zetbox\Common" />
+    <file src="Common\Mono.Cecil.Mdb.dll" target="zetbox\Common" />
+    <file src="Common\Mono.Cecil.Pdb.dll" target="zetbox\Common" />
+    <file src="Common\Mono.Cecil.Rocks.dll" target="zetbox\Common" />
+    <file src="Common\PdfSharp.Charting.dll" target="zetbox\Common" />
+    <file src="Common\PdfSharp.dll" target="zetbox\Common" />
+
+    <!-- Client-side Components -->
+    <file src="Client\Zetbox.API.Client.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.API.Client.dll.config" target="zetbox\Client" />
+    <file src="Client\Zetbox.App.Projekte.Client.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.Client.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.Client.WPF.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.Client.WPF.dll.config" target="zetbox\Client" />
+    <file src="Client\Zetbox.Client.WPF.Toolkit.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.DalProvider.ClientObjects.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.Microsoft.dll" target="zetbox\Client" />
+    <file src="Client\WPFSamplesLib.dll" target="zetbox\Client" />
+
+    <!-- Client-side Dependencies -->
+    <file src="Client\GraphSharp.Controls.dll" target="zetbox\Client" />
+    <file src="Client\GraphSharp.dll" target="zetbox\Client" />
+    <file src="Client\QuickGraph.Data.dll" target="zetbox\Client" />
+    <file src="Client\QuickGraph.dll" target="zetbox\Client" />
+    <file src="Client\QuickGraph.Graphviz.dll" target="zetbox\Client" />
+    <file src="Client\QuickGraph.Serialization.dll" target="zetbox\Client" />
+    <file src="Client\WPFExtensions.dll" target="zetbox\Client" />
+
+    <!-- Server-side Components -->
+    <file src="Server\Zetbox.API.Server.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.App.Projekte.Server.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.DalProvider.Client.Generator.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.DalProvider.Memory.Generator.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.Generator.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.Server.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.Server.Wcf.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.Unix.dll" target="zetbox\Server" />
+
+    <!-- Server-side Dependencies -->
+    <file src="Server\Autofac.Integration.Wcf.dll" target="zetbox\Server" />
+    <file src="Server\Mono.Posix.dll" target="zetbox\Server" />
+
+    <file src="..\..\Configs\Examples\**" target="Configs/Examples" />
+
+    <!-- DISCUSS: satellite assemblies should go to separate nupkg -->
+    <file src="**\*.resources.dll" target="zetbox" exclude="Tests\**" />
 
     <file src="..\..\Modules\**" target="zetbox/Modules" />
     <file src="..\..\Data\**" target="zetbox/Data" />
 
-    <file src="Bootstrapper\**" target="zetbox/Bootstrapper" exclude="**\*.resources.dll" />
-    <file src="HttpService\**" target="zetbox/HttpService" exclude="**\*.resources.dll" />
+    <!-- HttpService loose files -->
+    <file src="HttpService\**" target="zetbox/HttpService" exclude="HttpService\bin\**" />
+
+    <!-- HttpService Component -->
+    <file src="HttpService\bin\Zetbox.Server.HttpService.dll" target="zetbox/HttpService/bin" />
+
+    <!-- HttpService Dependencies -->
+    <file src="HttpService\bin\Zetbox.Server.HttpService.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\Autofac.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\Autofac.Configuration.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\Autofac.Integration.Web.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\log4net.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\Zetbox.API.dll" target="zetbox/HttpService/bin" />
 
     <file src="*.targets" target="tools" />
 
     <file src="Init-zetboxBasic.ps1" target="tools/Init.ps1" />
-    <file src="Env.xml" target="tools" />
+    <file src="env.xml" target="tools" />
     <file src="PrepareEnv.exe" target="tools" />
+    <file src="PrepareEnv.exe.config" target="tools" />
+
+    <!-- this is required to avoid being seen as empty package by nuget -->
+    <!-- see #595 and #2590 on the nuget issue tracker                  -->
+    <file src="README.zetbox.txt" target="content" />
   </files>
 </package>

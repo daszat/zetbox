@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// A test class for persistently ordered 1:N relations
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="OrderedOneEnd")]
+    [EdmEntityType(NamespaceName="Model", Name="OrderedOneEndEfImpl")]
     [System.Diagnostics.DebuggerDisplay("OrderedOneEnd")]
     public class OrderedOneEndEfImpl : BaseServerDataObject_EntityFramework, OrderedOneEnd
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -136,6 +135,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                     NotifyPropertyChanging("SomeInt", __oldValue, __newValue);
                     _SomeInt = __newValue;
                     NotifyPropertyChanged("SomeInt", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSomeInt_PostSetter != null && IsAttached)
                     {
@@ -143,10 +143,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                         OnSomeInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SomeInt");
-				}
+                else
+                {
+                    SetInitializedProperty("SomeInt");
+                }
             }
         }
         private int? _SomeInt_store;
@@ -178,11 +178,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
             var me = (OrderedOneEnd)this;
 
             me.SomeInt = other.SomeInt;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -355,12 +350,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

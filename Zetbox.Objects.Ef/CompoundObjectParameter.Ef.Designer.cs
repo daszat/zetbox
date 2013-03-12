@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for a CompoundObject Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CompoundObjectParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="CompoundObjectParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CompoundObjectParameter")]
     public class CompoundObjectParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, CompoundObjectParameter
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnCompoundObject_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.CompoundObjectEfImpl> r
@@ -133,6 +132,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CompoundObject", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -346,11 +346,6 @@ namespace Zetbox.App.Base
 
             this._fk_CompoundObject = otherImpl._fk_CompoundObject;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -484,6 +479,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObjectParameter != null) OnNotifyDeleting_CompoundObjectParameter(this);
+            CompoundObject = null;
         }
         public static event ObjectEventHandler<CompoundObjectParameter> OnNotifyDeleting_CompoundObjectParameter;
 
@@ -498,8 +494,9 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.CompoundObjectEfImpl>("Model.FK_CPParameter_has_CompoundObject", "CompoundObject").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.CompoundObjectEfImpl>("Model.FK_CPParameter_has_CompoundObject", "CompoundObject");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

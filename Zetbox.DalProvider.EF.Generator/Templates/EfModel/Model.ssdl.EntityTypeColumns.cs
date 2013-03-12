@@ -22,12 +22,28 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
     using Zetbox.API;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
+    using Zetbox.API.Common;
+    using Zetbox.App.Extensions;
 
     public partial class ModelSsdlEntityTypeColumns
     {
         protected virtual void ApplyEntityTypeColumnDefs(IEnumerable<Property> properties, string prefix, ISchemaProvider schemaProvider)
         {
             Call(Host, ctx, properties, prefix, schemaProvider);
+        }
+
+        protected virtual bool IsRealNullable(Property p)
+        {
+            var cls = p.ObjectClass as ObjectClass;
+            if(cls == null)
+            {
+                return p.IsNullable();
+            } 
+            else 
+            {
+                // Has to be nullalbe when not the base class in TPH hierarchies
+                return (cls.GetTableMapping() == TableMapping.TPH && cls.BaseObjectClass != null) || p.IsNullable();
+            }
         }
     }
 }

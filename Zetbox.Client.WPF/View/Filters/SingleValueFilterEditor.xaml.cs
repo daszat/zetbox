@@ -29,6 +29,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.FilterViewModels;
 using Zetbox.Client.Presentables.ZetboxBase;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.Filters
 {
@@ -46,7 +47,7 @@ namespace Zetbox.Client.WPF.View.Filters
 
         public SingleValueFilterViewModel ViewModel
         {
-            get { return (SingleValueFilterViewModel)DataContext; }
+            get { return (SingleValueFilterViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

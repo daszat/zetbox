@@ -1,43 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+<?xml version="1.0" encoding="Windows-1252"?>
+<ZetboxConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dasz.at/Zetbox/">
   <ConfigName>$safesolutionname$ Client Tests Configuration</ConfigName>
   <Server StartServer="false">
+    <ConnectionStrings />
+    <Modules />
+    <ClientFilesLocations />
   </Server>
-  <Client StartClient="false" ThrowErrors="false">
+  <Client>
     <Culture>de-AT</Culture>
     <UICulture>de-AT</UICulture>
-    <DocumentStore>.\DocumentStore\Client\</DocumentStore>
-    <DevelopmentEnvironment>false</DevelopmentEnvironment>
     <Modules>
-      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
-      <Module>Zetbox.API.Common.ApiCommonModule, Zetbox.API.Common</Module>
-      <Module>Zetbox.API.Client.ClientApiModule, Zetbox.API.Client</Module>
-      <Module>Zetbox.API.Client.HttpClientModule, Zetbox.API.Client</Module>
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
-      <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
-      <Module>Zetbox.Objects.ClientModule, Zetbox.Objects.ClientImpl</Module>
-      <Module>Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl</Module>
-      <Module>Zetbox.DalProvider.Client.ClientProvider, Zetbox.DalProvider.ClientObjects</Module>
-      <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
-      <Module>Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client</Module>
-      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
-      <Module>Zetbox.Tests.Utilities.PostgreSql.UtilityModule, Zetbox.Tests.Utilities.PostgreSql</Module>
-
-      <!-- application specific modules -->
-      <Module>$safesolutionname$.Common.CommonModule, $safesolutionname$.Common</Module>
-      <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
+      <Module>Zetbox.API.Client.HttpClientModule, Zetbox.API.Client</Module>
+      <Module NotOnFallback="true">$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths>
-    <string>Client\Core.Generated</string>
-    <string>Common\Core.Generated</string>
-    <string>Common\Core</string>
-    <string>Client\Core</string>
-    <string>Client\WPF</string>
-    <string>Common\App.Zetbox</string>
-    <string>Client\App.Zetbox</string>
-    <string>Common\Microsoft</string>
-    <string>Common\App.$safesolutionname$</string>
-    <string>Client\App.$safesolutionname$</string>
+  <AssemblySearchPaths EnableShadowCopy="true">
   </AssemblySearchPaths>
 </ZetboxConfig>

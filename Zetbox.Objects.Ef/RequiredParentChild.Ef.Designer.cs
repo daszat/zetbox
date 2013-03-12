@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// Testclass for the required_parent tests: child
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="RequiredParentChild")]
+    [EdmEntityType(NamespaceName="Model", Name="RequiredParentChildEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RequiredParentChild")]
     public class RequiredParentChildEfImpl : BaseServerDataObject_EntityFramework, RequiredParentChild
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -153,7 +154,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnParent_Getter != null)
                 {
@@ -165,7 +165,7 @@ namespace Zetbox.App.Test
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.RequiredParentEfImpl> r
@@ -212,6 +212,7 @@ namespace Zetbox.App.Test
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Children", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -236,11 +237,6 @@ namespace Zetbox.App.Test
 
             me.Name = other.Name;
             this._fk_Parent = otherImpl._fk_Parent;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -383,6 +379,7 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_RequiredParentChild != null) OnNotifyDeleting_RequiredParentChild(this);
+            Parent = null;
         }
         public static event ObjectEventHandler<RequiredParentChild> OnNotifyDeleting_RequiredParentChild;
 
@@ -408,12 +405,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -429,8 +427,9 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Name);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.RequiredParentEfImpl>("Model.FK_Parent_of_Children", "Parent").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.RequiredParentEfImpl>("Model.FK_Parent_of_Children", "Parent");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

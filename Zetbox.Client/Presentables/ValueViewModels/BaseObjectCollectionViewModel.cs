@@ -22,21 +22,19 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
-    using System.Linq.Dynamic;
     using System.Text;
-
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
-    using Zetbox.App.GUI;
-    using Zetbox.API.Client;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     /// <summary>
     /// </summary>
     public abstract class BaseObjectCollectionViewModel<TModelCollection>
-        : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>
+        : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>, IDeleteCommandParameter, INewCommandParameter, IOpenCommandParameter
         where TModelCollection : ICollection<IDataObject>
     {
         public new delegate BaseObjectCollectionViewModel<TModelCollection> Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -191,8 +189,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-
-
         private bool? _allowInlineAddNew = null;
         public bool AllowInlineAddNew
         {
@@ -223,6 +219,24 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     _allowAddExisting = value;
                     OnPropertyChanged("AllowAddExisting");
+                }
+            }
+        }
+
+        private bool _allowOpen = true;
+        public bool AllowOpen
+        {
+            get
+            {
+                if (DataContext.IsElevatedMode) return true;
+                return _allowOpen;
+            }
+            set
+            {
+                if (_allowOpen != value)
+                {
+                    _allowOpen = value;
+                    OnPropertyChanged("AllowOpen");
                 }
             }
         }
@@ -290,12 +304,57 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region Commands
 
+        #region Opening items
+
+        /// <summary>
+        /// Is triggered before the selected items are opened. This can be used to redirect the open command to a different set of items.
+        /// </summary>
+        public event EventHandler<ItemsOpeningEventArgs> ItemsOpening
+        {
+            add
+            {
+                EnsureNewCommand();
+                _CreateNewCommand.ItemsOpening += value;
+
+                EnsureOpenCommand();
+                _OpenCommand.ItemsOpening += value;
+            }
+            remove
+            {
+                _CreateNewCommand.ItemsOpening -= value;
+                _OpenCommand.ItemsOpening -= value;
+            }
+        }
+
+        /// <summary>
+        /// Is triggered when items are opened in a new workspace. This can be used to give the ViewModels a context dependent finishing touch, like opening a non-default view
+        /// </summary>
+        public event EventHandler<ItemsOpenedEventArgs> ItemsOpened
+        {
+            add
+            {
+                EnsureNewCommand();
+                _CreateNewCommand.ItemsOpened += value;
+
+                EnsureOpenCommand();
+                _OpenCommand.ItemsOpened += value;
+            }
+            remove
+            {
+                _CreateNewCommand.ItemsOpened -= value;
+                _OpenCommand.ItemsOpened -= value;
+            }
+        }
+
+        #endregion
+
         protected override ObservableCollection<ICommandViewModel> CreateCommands()
         {
             var cmds = base.CreateCommands();
 
             if (AllowAddExisting) cmds.Add(AddExistingCommand);
             if (AllowAddNew) cmds.Add(CreateNewCommand);
+            if (AllowOpen) cmds.Add(OpenCommand);
             if (AllowRemove) cmds.Add(RemoveCommand);
             if (AllowDelete) cmds.Add(DeleteCommand);
 
@@ -309,25 +368,70 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             return cmds;
         }
 
-        private ICommandViewModel _CreateNewCommand = null;
+        private NewDataObjectCommand _CreateNewCommand = null;
         public ICommandViewModel CreateNewCommand
         {
             get
             {
-                if (_CreateNewCommand == null)
-                {
-                    _CreateNewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        BaseObjectCollectionViewModelResources.CreateNewCommand_Name,
-                        BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip,
-                        () => CreateNewItem(),
-                        () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly,
-                        null);
-                    _CreateNewCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
-                }
+                EnsureNewCommand();
                 return _CreateNewCommand;
             }
+        }
+
+        private void EnsureNewCommand()
+        {
+            if (_CreateNewCommand == null)
+            {
+                _CreateNewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
+                    DataContext,
+                    this,
+                    ReferencedClass);
+
+                _CreateNewCommand.ObjectCreated += OnObjectCreated;
+                _CreateNewCommand.LocalModelCreated += vm => Add(vm);
+            }
+        }
+
+        public void CreateNew()
+        {
+            if (CreateNewCommand.CanExecute(null))
+                CreateNewCommand.Execute(null);
+        }
+
+        public delegate void ObjectCreatedHandler(IDataObject obj);
+        public event ObjectCreatedHandler ObjectCreated;
+
+        private void OnObjectCreated(IDataObject obj)
+        {
+            ObjectCreatedHandler temp = ObjectCreated;
+            if (temp != null)
+            {
+                temp(obj);
+            }
+        }
+
+        private OpenDataObjectCommand _OpenCommand;
+        public ICommandViewModel OpenCommand
+        {
+            get
+            {
+                EnsureOpenCommand();
+                return _OpenCommand;
+            }
+        }
+
+        private void EnsureOpenCommand()
+        {
+            if (_OpenCommand == null)
+            {
+                _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this);
+            }
+        }
+
+        public void Open()
+        {
+            if (OpenCommand.CanExecute(null))
+                OpenCommand.Execute(null);
         }
 
         private ICommandViewModel _AddExistingCommand = null;
@@ -343,9 +447,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Name,
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip,
                         () => AddExistingItem(),
-                        () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly,
+                        () => AllowAddExisting && !IsReadOnly,
                         null);
-                    _AddExistingCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext);
+                    _AddExistingCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext));
                 }
                 return _AddExistingCommand;
             }
@@ -363,7 +467,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         this,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Name,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Tooltip,
-                        () => SelectedItems.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
+                        Remove, // Collection will change while deleting!
                         () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly,
                         null);
                 }
@@ -371,78 +475,36 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        private ICommandViewModel _DeleteCommand = null;
+        private DeleteDataObjectCommand _DeleteCommand;
         public ICommandViewModel DeleteCommand
         {
             get
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        BaseObjectCollectionViewModelResources.DeleteCommand_Name,
-                        BaseObjectCollectionViewModelResources.DeleteCommand_Tooltip,
-                        () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly,
-                        null);
-                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _DeleteCommand;
             }
         }
 
-        /// <summary>
-        /// Creates a new Item suitable for adding to the list. This may prompt 
-        /// the user to choose a type of item to add or enter an initial value.
-        /// </summary>
-        public void CreateNewItem()
+        public void Delete()
         {
-            ObjectClass baseclass = ReferencedClass;
+            if (DeleteCommand.CanExecute(null))
+                DeleteCommand.Execute(null);
+        }
 
-            var children = new List<ObjectClass>();
-            if (baseclass.IsAbstract == false)
+        public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
+        protected virtual void OnDataObjectSelectionTaskCreated(DataObjectSelectionTaskViewModel vmdl)
+        {
+            var temp = DataObjectSelectionTaskCreated;
+            if (temp != null)
             {
-                children.Add(baseclass);
-            }
-            baseclass.CollectChildClasses(FrozenContext, children, false);
-
-            if (children.Count == 1)
-            {
-                CreateItemAndActivate(baseclass);
-            }
-            else
-            {
-                var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        typeof(ObjectClass).GetObjectClass(FrozenContext),
-                        () => children.AsQueryable(),
-                        (chosen) =>
-                        {
-                            if (chosen != null)
-                            {
-                                var targetClass = ((ObjectClass)chosen.First().Object);
-                                CreateItemAndActivate(targetClass);
-                            }
-                        },
-                    null);
-                lstMdl.ListViewModel.ShowCommands = false;
-
-                ViewModelFactory.ShowDialog(lstMdl);
+                temp(this, new DataObjectSelectionTaskEventArgs(vmdl));
             }
         }
 
-        private void CreateItemAndActivate(ObjectClass targetClass)
-        {
-            var targetType = targetClass.GetDescribedInterfaceType();
-            var item = this.DataContext.Create(targetType);
-            var result = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
-            AddItem(result);
-            ActivateItem(result, true);
-        }
-
-        public virtual void AddItem(DataObjectViewModel item)
+        public virtual void Add(DataObjectViewModel item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
@@ -466,52 +528,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     {
                         if (chosen != null)
                         {
-                            foreach(var obj in chosen)
+                            foreach (var obj in chosen)
                             {
-                                AddItem(obj);
+                                Add(obj);
                             }
                         }
                     },
                     null);
             lstMdl.ListViewModel.AllowDelete = false;
-            lstMdl.ListViewModel.ShowOpenCommand = false;
+            lstMdl.ListViewModel.AllowOpen = false;
             lstMdl.ListViewModel.AllowAddNew = AllowAddNew || AllowAddNewWhenAddingExisting;
-
+            OnDataObjectSelectionTaskCreated(lstMdl);
             ViewModelFactory.ShowDialog(lstMdl);
         }
 
-        public virtual void RemoveItem(DataObjectViewModel item)
+        public virtual void Remove()
         {
-            if (item == null) { throw new ArgumentNullException("item"); }
+            if (SelectedItems == null || SelectedItems.Count == 0) return;
 
             EnsureValueCache();
-            ValueModel.Value.Remove(item.Object);
-        }
-
-        public virtual void DeleteItem(DataObjectViewModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            ValueModel.Value.Remove(item.Object);
-            item.Delete();
-        }
-
-        public void ActivateItem(DataObjectViewModel item, bool activate)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            if (this.ReferencedClass.IsSimpleObject && !IsInlineEditable)
+            foreach (var item in SelectedItems.ToArray())
             {
-                // Open in a Dialog
-                var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, this, item);
-                ViewModelFactory.ShowDialog(dlg);
+                ValueModel.Value.Remove(item.Object);
             }
-            else if (!this.ReferencedClass.IsSimpleObject)
-            {
-                ViewModelFactory.ShowModel(item, activate);
-            }
-            // Don't open simple objects
         }
 
         #endregion
@@ -519,36 +558,66 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region GotFromDerivedClasses
-        private SortedWrapper _wrapper = null;
 
-        private ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
-
-        protected override IReadOnlyObservableList<DataObjectViewModel> GetValueFromModel()
+        protected void EnsureValueCache()
         {
-            EnsureValueCache();
-            return _valueCache;
+            GetValueFromModel().Wait();
         }
 
-        private IDelayedTask _valueLoader;
+        ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
+        SortedWrapper _wrapper;
+        private ZbTask<IReadOnlyObservableList<DataObjectViewModel>> _fetchValueTask;
+        protected override ZbTask<IReadOnlyObservableList<DataObjectViewModel>> GetValueFromModel()
+        {
+            if (_fetchValueTask == null)
+            {
+                SetBusy();
+                _fetchValueTask = new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
+                    .OnResult(t =>
+                    {
+                        _wrapper = new SortedWrapper(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
+                        _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
+                            _wrapper,
+                            obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
+                            mdl => mdl.Object);
+                        _valueCache.CollectionChanged += ValueListChanged;
+                        t.Result = _valueCache;
+                    });
+                // TODO: Split here to avoid a stackoverflow exception!
+                // -> OnPropertyChanged("ValueProxiesAsync") triggers ValueProxiesAsync.get
+                // -> ValueProxiesAsync.get is calling GetValueFromModel()
+                // -> _fetchValueTask has not been assigned yet!
+                _fetchValueTask.OnResult(t =>
+                {
+                    OnPropertyChanged("Value");
+                    OnPropertyChanged("ValueAsync");
+                    OnPropertyChanged("ValueProxiesAsync");
+                    ClearBusy();
+                });
+            };
+            return _fetchValueTask;
+        }
 
+        //private IDelayedTask _valueLoader;
         public override IReadOnlyObservableList<DataObjectViewModel> Value
         {
             get
             {
-                if (_valueLoader == null)
-                {
-                    _valueLoader = ViewModelFactory.CreateDelayedTask(this, () =>
-                    {
-                        EnsureValueCache();
-                        OnPropertyChanged("Value");
-                    });
-                    _valueLoader.Trigger();
-                }
+                GetValueFromModel().Wait();
                 return _valueCache;
             }
             set
             {
                 throw new NotSupportedException();
+            }
+        }
+
+        public override IReadOnlyObservableList<DataObjectViewModel> ValueAsync
+        {
+            get
+            {
+                GetValueFromModel();
+                return _valueCache;
             }
         }
 
@@ -559,18 +628,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected abstract string InitialSortProperty { get; }
 
-        protected void EnsureValueCache()
-        {
-            if (_wrapper == null)
-            {
-                _wrapper = new SortedWrapper(ObjectCollectionModel.UnderlyingCollection, ObjectCollectionModel, InitialSortProperty);
-                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
-                    _wrapper,
-                    obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
-                    mdl => mdl.Object);
-                _valueCache.CollectionChanged += ValueListChanged;
-            }
-        }
         #endregion
 
         #region Utilities and UI callbacks
@@ -607,15 +664,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 foreach (var obj in e.OldItems.OfType<INotifyPropertyChanged>())
                 {
                     obj.PropertyChanged -= AnyPropertyChangedHandler;
-
-                    // Delete dependent objects when they leave our scope
-                    if (obj is DataObjectViewModel && !AllowRemove && AllowDelete)
-                    {
-                        // Case 2282: Sorting Lists will delete 1:n Entries
-                        // This is evil, as it would delete an Object during 
-                        // resort of an ObjectRefList.
-                        // ((DataObjectViewModel)obj).Delete();
-                    }
                 }
             }
 
@@ -624,6 +672,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         private void AnyPropertyChangedHandler(object sender, EventArgs e)
         {
+            OnPropertyChanged("ValueAsync");
             OnPropertyChanged("Value");
         }
 
@@ -662,28 +711,30 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             return result;
         }
 
-        private IDelayedTask _proxyLoader;
+        //private IDelayedTask _proxyLoader;
+        //private ZbTask _proxyLoader;
         private BaseObjectCollectionViewModelProxyList _proxyInstances = null;
+        private bool _proxyInstancesLoading = false;
         /// <summary>
         /// Allow instances to be added external
         /// </summary>
-        public BaseObjectCollectionViewModelProxyList ValueProxies
+        public BaseObjectCollectionViewModelProxyList ValueProxiesAsync
         {
             get
             {
-                if (_proxyLoader == null)
+                if (!_proxyInstancesLoading)
                 {
-                    _proxyLoader = ViewModelFactory.CreateDelayedTask(this, () =>
-                    {
-                        EnsureValueCache();
-                        _proxyInstances = new BaseObjectCollectionViewModelProxyList(
-                            ObjectCollectionModel,
-                            ObjectCollectionModel.Value,
-                            (vm) => GetProxy(vm),
-                            (p) => GetObjectFromProxy(p).Object);
-                        OnPropertyChanged("ValueProxies");
-                    });
-                    _proxyLoader.Trigger();
+                    _proxyInstancesLoading = true;
+                    GetValueFromModel()
+                        .OnResult(t =>
+                        {
+                            _proxyInstances = new BaseObjectCollectionViewModelProxyList(
+                                ObjectCollectionModel,
+                                ObjectCollectionModel.Value,
+                                (vm) => GetProxy(vm),
+                                (p) => GetObjectFromProxy(p).Object);
+                            OnPropertyChanged("ValueProxiesAsync");
+                        });
                 }
                 return _proxyInstances;
             }
@@ -719,7 +770,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             EnsureValueCache();
             _wrapper.Sort(propName, direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-            OnPropertyChanged("ValueProxies");
+            OnPropertyChanged("ValueProxiesAsync");
         }
 
         public string SortProperty { get { return _sortProperty; } }
@@ -737,6 +788,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             throw new NotSupportedException();
         }
+        #endregion
+
+        #region IDeleteCommandParameter Members
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItems; } }
         #endregion
     }
 

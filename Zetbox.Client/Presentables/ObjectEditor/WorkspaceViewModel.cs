@@ -26,16 +26,23 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using Zetbox.API.Client;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
 
     public class WorkspaceViewModel
-        : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDisposable
+        : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter, IDisposable
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
+        private readonly IZetboxContextExceptionHandler _exceptionHandler;
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, 
+            IZetboxContext dataCtx, ViewModel parent, 
+            IZetboxContextExceptionHandler exceptionHandler)
             : base(appCtx, dataCtx, parent)
         {
+            if (exceptionHandler == null) throw new ArgumentNullException("exceptionHandler");
+
+            _exceptionHandler = exceptionHandler;
             dataCtx.IsModifiedChanged += dataCtx_IsModifiedChanged;
             Items = new ObservableCollection<ViewModel>();
             Items.CollectionChanged += new NotifyCollectionChangedEventHandler(Items_CollectionChanged);
@@ -178,28 +185,26 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         #endregion
 
         #region DeleteCommand
-        private ICommandViewModel _DeleteCommand = null;
+
+        private DeleteDataObjectCommand _DeleteCommand;
         public ICommandViewModel DeleteCommand
         {
             get
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        WorkspaceViewModelResources.DeleteCommand_Name,
-                        WorkspaceViewModelResources.DeleteCommand_Tooltip,
-                        Delete);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _DeleteCommand;
             }
         }
 
-        public void Delete(IEnumerable<DataObjectViewModel> items)
+        public void Delete()
         {
-            items.ForEach(i => i.Delete());
+            if (DeleteCommand.CanExecute(null))
+                DeleteCommand.Execute(null);
         }
+
         #endregion
 
         #region Save Context
@@ -329,9 +334,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 }
                 catch (Exception ex)
                 {
-                    if (ex.GetInnerException() is ConcurrencyException)
+                    if (_exceptionHandler.Show(DataContext, ex))
                     {
-                        ViewModelFactory.ShowMessage(WorkspaceViewModelResources.ConcurrencyException_Message, WorkspaceViewModelResources.ConcurrencyException_Caption);
                         return false;
                     }
                     else
@@ -347,7 +351,6 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
             return false;
         }
-
 
         #endregion
 
@@ -451,33 +454,20 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         #endregion
 
         #region Model Management
-        /// <summary>
-        /// Show a foreign model by finding and creating the equivalent model on the local DataContext.
-        /// </summary>
-        /// <param name="dataObject"></param>
-        /// <returns></returns>
-        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject)
-        {
-            return ShowForeignModel(dataObject, null);
-        }
 
-        /// <summary>
-        /// Show a foreign model by finding and creating the equivalent model on the local DataContext.
-        /// </summary>
-        /// <param name="dataObject"></param>
-        /// <param name="requestedKind"></param>
-        /// <returns></returns>
-        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject, Zetbox.App.GUI.ControlKind requestedKind)
+        public DataObjectViewModel ShowObject(IDataObject obj, ControlKind requestedKind = null)
         {
-            if (dataObject == null || dataObject.Object == null)
-                return null;
+            obj = obj == null || obj.Context == DataContext
+                ? obj
+                : DataContext.Find(obj.Context.GetInterfaceType(obj), obj.ID);
 
-            var other = dataObject.Object;
-            var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, here);
+            var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
+            if (!Items.Contains(vm))
+            {
+                vm.RequestedKind = requestedKind;
+                AddItem(vm);
+            }
             SelectedItem = vm;
-            vm.RequestedKind = requestedKind;
-            AddItem(vm);
             return vm;
         }
 
@@ -522,6 +512,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             ViewModelFactory.OnIMultipleInstancesManagerDisposed(DataContext, this);
         }
 
+        #endregion
+
+        #region IDeleteCommandParameter members
+        bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
+        bool IDeleteCommandParameter.AllowDelete { get { return true; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
         #endregion
     }
 }

@@ -76,15 +76,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.EnumValue == null)
-				{
-					SetInitializedProperty("EnumValue");
+                {
+                    SetInitializedProperty("EnumValue");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.EnumerationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.EnumValue);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("EnumValue");
+                {
+                    SetInitializedProperty("EnumValue");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("EnumValue", __oldValue, __newValue);
@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("EnumValue", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnEnumValue_PostSetter != null && IsAttached)
                 {
@@ -218,12 +219,6 @@ namespace Zetbox.App.Base
             var me = (EnumDefaultValue)this;
 
             this._fk_EnumValue = otherImpl._fk_EnumValue;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -384,6 +379,7 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)EnumValue);
             }
 
+            EnumValue = null;
         }
         public static event ObjectEventHandler<EnumDefaultValue> OnNotifyDeleting_EnumDefaultValue;
 

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Represents an Identity
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Identity")]
+    [EdmEntityType(NamespaceName="Model", Name="IdentityEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Identity")]
     public class IdentityEfImpl : BaseServerDataObject_EntityFramework, Identity
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
         private string _DisplayName_store;
@@ -150,7 +151,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -197,6 +197,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Password", __oldValue, __newValue);
                     _Password = __newValue;
                     NotifyPropertyChanged("Password", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPassword_PostSetter != null && IsAttached)
                     {
@@ -204,10 +205,10 @@ namespace Zetbox.App.Base
                         OnPassword_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Password");
-				}
+                else
+                {
+                    SetInitializedProperty("Password");
+                }
             }
         }
         private string _Password_store;
@@ -265,6 +266,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("UserName", __oldValue, __newValue);
                     _UserName = __newValue;
                     NotifyPropertyChanged("UserName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnUserName_PostSetter != null && IsAttached)
                     {
@@ -272,10 +274,10 @@ namespace Zetbox.App.Base
                         OnUserName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("UserName");
-				}
+                else
+                {
+                    SetInitializedProperty("UserName");
+                }
             }
         }
         private string _UserName_store;
@@ -309,11 +311,6 @@ namespace Zetbox.App.Base
             me.DisplayName = other.DisplayName;
             me.Password = other.Password;
             me.UserName = other.UserName;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -508,12 +505,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

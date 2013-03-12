@@ -165,7 +165,7 @@ namespace Zetbox.API.Utils
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("key");
+                    throw new ArgumentOutOfRangeException("key", key, "No such key found");
                 }
             }
             set

@@ -73,6 +73,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -97,7 +98,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
         // fkBackingName=_fk_OneSide; fkGuidBackingName=_fk_guid_OneSide;
         // referencedInterface=Zetbox.App.Test.One_to_N_relations_One; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=NSide; is list;
@@ -115,8 +116,44 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_OneSide;
+        private int? __fk_OneSideCache;
 
+        private int? _fk_OneSide {
+            get
+            {
+                return __fk_OneSideCache;
+            }
+            set
+            {
+                __fk_OneSideCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchOneSideTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One> _triggerFetchOneSideTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One> TriggerFetchOneSideAsync()
+        {
+            if (_triggerFetchOneSideTask != null) return _triggerFetchOneSideTask;
+
+            if (_fk_OneSide.HasValue)
+                _triggerFetchOneSideTask = Context.FindAsync<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
+            else
+                _triggerFetchOneSideTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchOneSideTask.OnResult(t =>
+            {
+                if (OnOneSide_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.One_to_N_relations_One>(t.Result);
+                    OnOneSide_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchOneSideTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -124,32 +161,19 @@ namespace Zetbox.App.Test
         {
             get
             {
-                Zetbox.App.Test.One_to_N_relations_OneMemoryImpl __value;
-                if (_fk_OneSide.HasValue)
-                    __value = (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)Context.Find<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
-                else
-                    __value = null;
-
-                if (OnOneSide_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.One_to_N_relations_One>(__value);
-                    OnOneSide_Getter(this, e);
-                    __value = (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)TriggerFetchOneSideAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_OneSide == null) || (value != null && value.ID == _fk_OneSide))
-				{
-					SetInitializedProperty("OneSide");
+                {
+                    SetInitializedProperty("OneSide");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = OneSideImpl;
@@ -186,6 +210,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("OneSide", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnOneSide_PostSetter != null && IsAttached)
                 {
@@ -215,11 +240,6 @@ namespace Zetbox.App.Test
 
             me.Name = other.Name;
             this._fk_OneSide = otherImpl._fk_OneSide;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -260,6 +280,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "OneSide":
+                return TriggerFetchOneSideAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

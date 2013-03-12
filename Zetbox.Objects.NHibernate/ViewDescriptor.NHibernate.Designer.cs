@@ -77,15 +77,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ControlKind == null)
-				{
-					SetInitializedProperty("ControlKind");
+                {
+                    SetInitializedProperty("ControlKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ControlKind);
@@ -94,10 +94,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ControlKind");
+                {
+                    SetInitializedProperty("ControlKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ControlKind", __oldValue, __newValue);
@@ -121,6 +121,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ControlKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnControlKind_PostSetter != null && IsAttached)
                 {
@@ -171,15 +172,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ControlRef == null)
-				{
-					SetInitializedProperty("ControlRef");
+                {
+                    SetInitializedProperty("ControlRef");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ControlRef);
@@ -188,10 +189,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ControlRef");
+                {
+                    SetInitializedProperty("ControlRef");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ControlRef", __oldValue, __newValue);
@@ -215,6 +216,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ControlRef", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnControlRef_PostSetter != null && IsAttached)
                 {
@@ -274,6 +276,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -281,10 +284,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -342,15 +345,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -359,10 +362,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -386,6 +389,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -475,6 +479,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Toolkit", __oldValue, __newValue);
                     Proxy.Toolkit = __newValue;
                     NotifyPropertyChanged("Toolkit", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnToolkit_PostSetter != null && IsAttached)
                     {
@@ -482,10 +487,10 @@ namespace Zetbox.App.GUI
                         OnToolkit_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Toolkit");
-				}
+                else
+                {
+                    SetInitializedProperty("Toolkit");
+                }
             }
         }
 
@@ -513,12 +518,6 @@ namespace Zetbox.App.GUI
             this._fk_ControlKind = otherImpl._fk_ControlKind;
             this._fk_ControlRef = otherImpl._fk_ControlRef;
             this._fk_Module = otherImpl._fk_Module;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -789,6 +788,8 @@ namespace Zetbox.App.GUI
 
             SupportedViewModels.Clear();
             ControlKind = null;
+            ControlRef = null;
+            Module = null;
         }
         public static event ObjectEventHandler<ViewDescriptor> OnNotifyDeleting_ViewDescriptor;
 

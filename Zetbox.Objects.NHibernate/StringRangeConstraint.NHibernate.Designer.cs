@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MaxLength", __oldValue, __newValue);
                     Proxy.MaxLength = __newValue;
                     NotifyPropertyChanged("MaxLength", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMaxLength_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnMaxLength_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MaxLength");
-				}
+                else
+                {
+                    SetInitializedProperty("MaxLength");
+                }
             }
         }
 
@@ -141,6 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MinLength", __oldValue, __newValue);
                     Proxy.MinLength = __newValue;
                     NotifyPropertyChanged("MinLength", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMinLength_PostSetter != null && IsAttached)
                     {
@@ -148,10 +150,10 @@ namespace Zetbox.App.Base
                         OnMinLength_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MinLength");
-				}
+                else
+                {
+                    SetInitializedProperty("MinLength");
+                }
             }
         }
 
@@ -302,12 +304,6 @@ namespace Zetbox.App.Base
 
             me.MaxLength = other.MaxLength;
             me.MinLength = other.MinLength;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

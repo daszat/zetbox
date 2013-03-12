@@ -28,6 +28,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.Calendar;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.Calendar
 {
@@ -54,7 +55,7 @@ namespace Zetbox.Client.WPF.View.Calendar
 
         public WeekCalendarViewModel ViewModel
         {
-            get { return (WeekCalendarViewModel)DataContext; }
+            get { return (WeekCalendarViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

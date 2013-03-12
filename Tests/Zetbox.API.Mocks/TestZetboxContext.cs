@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Zetbox.API.Async;
 
 namespace Zetbox.API.Mocks
 {
@@ -42,7 +43,7 @@ namespace Zetbox.API.Mocks
         }
     }
 
-    public class TestZetboxContext : IZetboxContext, IZetboxContextInternals
+    public class TestZetboxContext : IZetboxContext, IZetboxContextInternals, IFrozenContext
     {
         private readonly InterfaceType.Factory _iftFactory;
         public TestZetboxContext(InterfaceType.Factory iftFactory)
@@ -54,7 +55,7 @@ namespace Zetbox.API.Mocks
 
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
-            obj.AttachToContext(this);
+            obj.AttachToContext(this, null);
             return obj;
         }
 
@@ -85,6 +86,16 @@ namespace Zetbox.API.Mocks
         }
 
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationEntry
+        {
+            throw new NotImplementedException();
+        }
+
+        public ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject
+        {
+            throw new NotImplementedException();
+        }
+
+        public ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationEntry
         {
             throw new NotImplementedException();
         }
@@ -165,6 +176,11 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
+        public ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject
         {
             throw new NotImplementedException();
@@ -196,6 +212,11 @@ namespace Zetbox.API.Mocks
         }
 
         public T Find<T>(int ID) where T : class, IDataObject
+        {
+            throw new NotImplementedException();
+        }
+
+        public ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject
         {
             throw new NotImplementedException();
         }
@@ -269,6 +290,16 @@ namespace Zetbox.API.Mocks
         public System.IO.FileInfo GetFileInfo(int ID)
         {
             throw new NotImplementedException();
+        }
+
+        public ZbTask<System.IO.Stream> GetStreamAsync(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
+        public ZbTask<System.IO.FileInfo> GetFileInfoAsync(int ID)
+        {
+            throw new NotSupportedException();
         }
 
         public InterfaceType GetInterfaceType(Type t)

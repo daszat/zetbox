@@ -37,12 +37,26 @@ namespace Zetbox.Generator.Templates.Properties
                 ctx, serializationList, prop);
         }
 
-        private Property _prop;
+        protected readonly string className;
+        protected readonly bool isNullable;
+        protected readonly bool hasDefaultValue;
+        protected readonly Guid propExportGuid;
 
         public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
-            : base(_host, ctx, serializationList, prop.GetElementTypeString(), prop.Name, prop.Module.Namespace, "_" + prop.Name, prop.IsCalculated(), prop.DisableExport == true)
+            : this(_host, ctx, serializationList, prop.GetElementTypeString(), prop.Name, prop.Module.Namespace, "_" + prop.Name, prop.IsCalculated(), prop.DisableExport == true, prop.ObjectClass.Name, prop.IsNullable(), prop.DefaultValue != null && !prop.IsCalculated(), prop.ExportGuid)
         {
-            _prop = prop;
+        }
+
+        public NotifyingDataProperty(
+            Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList,
+            string type, string name, string modulenamespace, string backingName, bool isCalculated, bool disableExport,
+            string className, bool isNullable, bool hasDefaultValue, Guid propExportGuid)
+            : base(_host, ctx, serializationList, type, name, modulenamespace, backingName, isCalculated, disableExport)
+        {
+            this.className = className;
+            this.isNullable = isNullable;
+            this.hasDefaultValue = hasDefaultValue;
+            this.propExportGuid = propExportGuid;
         }
 
         private string EventName
@@ -53,7 +67,7 @@ namespace Zetbox.Generator.Templates.Properties
             }
         }
 
-        private string IsSetFlagName
+        protected string IsSetFlagName
         {
             get
             {
@@ -61,27 +75,19 @@ namespace Zetbox.Generator.Templates.Properties
             }
         }
 
-        private bool HasDefaultValue
-        {
-            get
-            {
-                return _prop.DefaultValue != null && !isCalculated;
-            }
-        }
-
         protected override void ApplyOnGetTemplate()
         {
             base.ApplyOnGetTemplate();
 
-            if (HasDefaultValue)
+            if (hasDefaultValue)
             {
                 ComputeDefaultValue.Call(Host, ctx,
-                    _prop.ObjectClass.Name,
-                    _prop.ObjectClass.Name,
-                    _prop.Name,
-                    this._prop.IsNullable(),
+                    className,
+                    className,
+                    name,
+                    isNullable,
                     IsSetFlagName,
-                    _prop.ExportGuid,
+                    propExportGuid,
                     type,
                     backingName);
             }
@@ -101,7 +107,7 @@ namespace Zetbox.Generator.Templates.Properties
         protected override void ApplyOnAllSetTemplate()
         {
             base.ApplyOnAllSetTemplate();
-            if (HasDefaultValue)
+            if (hasDefaultValue)
             {
                 // this has to happen before the value comparison, because we 
                 // need to flag the *intent* of setting this property, even if the value set is == the default value
@@ -139,7 +145,7 @@ namespace Zetbox.Generator.Templates.Properties
         protected override void ApplyTailTemplate()
         {
             base.ApplyTailTemplate();
-            if (HasDefaultValue)
+            if (hasDefaultValue)
             {
                 this.WriteObjects("        private bool ", IsSetFlagName, " = false;\r\n");
             }
@@ -149,11 +155,11 @@ namespace Zetbox.Generator.Templates.Properties
         {
             if (list != null)
             {
-                if (HasDefaultValue)
+                if (hasDefaultValue)
                 {
                     list.Add("Serialization.SimplePropertyWithDefaultSerialization",
                         disableExport ? Templates.Serialization.SerializerType.Binary : Serialization.SerializerType.All,
-                        _prop.Module.Namespace,
+                        modulenamespace,
                         name,
                         type,
                         backingName,
@@ -163,7 +169,7 @@ namespace Zetbox.Generator.Templates.Properties
                 {
                     list.Add("Serialization.SimplePropertySerialization",
                         disableExport ? Serialization.SerializerType.Binary : Serialization.SerializerType.All,
-                        _prop.Module.Namespace,
+                        modulenamespace,
                         name,
                         type,
                         backingName);

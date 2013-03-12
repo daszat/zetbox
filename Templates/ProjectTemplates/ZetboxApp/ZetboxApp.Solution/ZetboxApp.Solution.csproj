@@ -42,7 +42,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.CoreUtility">
-      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,7 +49,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ZetboxApp.Server.Migrations\DemoMigrationFragments.cs" />
+    <None Include="ZetboxApp.Server.Migrations\MigrationsModule.cs" />
+    <None Include="ZetboxApp.Server.Migrations\AssemblyInfo.cs" />
+    <None Include="ZetboxApp.Client.Tests\packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ZetboxApp.Client.Tests\SetUpFixture.cs" />
+    <None Include="ZetboxApp.Client.WPF\packages.config" />
+    <None Include="ZetboxApp.Client\packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ZetboxApp.Common\packages.config" />
+    <None Include="ZetboxApp.Server.Migrations\packages.config" />
+    <None Include="ZetboxApp.Server\packages.config" />
     <None Include="ZetboxApp.WPF\app.config">
       <SubType>Designer</SubType>
     </None>
@@ -130,6 +142,12 @@
     <None Include="ZetboxApp.Bootstrapper\ZetboxApp.Bootstrapper.ico" />
   </ItemGroup>
   <ItemGroup>
+    <VSTemplate Include="ZetboxApp.Server.Migrations\ZetboxApp.Server.Migrations.vstemplate" />
+    <None Include="ZetboxApp.Server.Migrations\ZetboxApp.Server.Migrations.ico" />
+    <None Include="ZetboxApp.Server.Migrations\ProjectTemplate.csproj">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ZetboxApp.WPF\packages.config" />
     <None Include="ZetboxApp.WPF\ZetboxApp.WPF.ico" />
     <None Include="ZetboxApp.WPF\AppIcon.ico" />
     <None Include="ZetboxApp.WPF\SplashScreenImage.png" />
@@ -141,7 +159,9 @@
     </VSTemplate>
     <None Include="ZetboxApp.Solution.ico" />
     <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.ico" />
-    <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.vstemplate" />
+    <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.vstemplate">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ZetboxApp.Client.Tests\ProjectTemplate.csproj">
       <SubType>Designer</SubType>
     </Content>
@@ -152,6 +172,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\VSSDK\Microsoft.VsSDK.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

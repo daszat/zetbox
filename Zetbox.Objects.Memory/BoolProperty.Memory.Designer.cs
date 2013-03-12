@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
         // fkBackingName=_fk_FalseIcon; fkGuidBackingName=_fk_guid_FalseIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_FalseIcon;
+        private int? __fk_FalseIconCache;
+
+        private int? _fk_FalseIcon {
+            get
+            {
+                return __fk_FalseIconCache;
+            }
+            set
+            {
+                __fk_FalseIconCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchFalseIconTask = null;
+            }
+        }
 
         private Guid? _fk_guid_FalseIcon = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchFalseIconTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchFalseIconAsync()
+        {
+            if (_triggerFetchFalseIconTask != null) return _triggerFetchFalseIconTask;
+
+            if (_fk_FalseIcon.HasValue)
+                _triggerFetchFalseIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
+            else
+                _triggerFetchFalseIconTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchFalseIconTask.OnResult(t =>
+            {
+                if (OnFalseIcon_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(t.Result);
+                    OnFalseIcon_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchFalseIconTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.GUI.IconMemoryImpl __value;
-                if (_fk_FalseIcon.HasValue)
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
-                else
-                    __value = null;
-
-                if (OnFalseIcon_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(__value);
-                    OnFalseIcon_Getter(this, e);
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchFalseIconAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_FalseIcon == null) || (value != null && value.ID == _fk_FalseIcon))
-				{
-					SetInitializedProperty("FalseIcon");
+                {
+                    SetInitializedProperty("FalseIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = FalseIconImpl;
@@ -114,6 +137,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("FalseIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnFalseIcon_PostSetter != null && IsAttached)
                 {
@@ -165,6 +189,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("FalseLabel", __oldValue, __newValue);
                     _FalseLabel = __newValue;
                     NotifyPropertyChanged("FalseLabel", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFalseLabel_PostSetter != null && IsAttached)
                     {
@@ -172,10 +197,10 @@ namespace Zetbox.App.Base
                         OnFalseLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FalseLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("FalseLabel");
+                }
             }
         }
         private string _FalseLabel;
@@ -189,7 +214,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
         // fkBackingName=_fk_NullIcon; fkGuidBackingName=_fk_guid_NullIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -207,9 +232,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_NullIcon;
+        private int? __fk_NullIconCache;
+
+        private int? _fk_NullIcon {
+            get
+            {
+                return __fk_NullIconCache;
+            }
+            set
+            {
+                __fk_NullIconCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchNullIconTask = null;
+            }
+        }
 
         private Guid? _fk_guid_NullIcon = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchNullIconTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchNullIconAsync()
+        {
+            if (_triggerFetchNullIconTask != null) return _triggerFetchNullIconTask;
+
+            if (_fk_NullIcon.HasValue)
+                _triggerFetchNullIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
+            else
+                _triggerFetchNullIconTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchNullIconTask.OnResult(t =>
+            {
+                if (OnNullIcon_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(t.Result);
+                    OnNullIcon_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchNullIconTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -217,32 +278,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.GUI.IconMemoryImpl __value;
-                if (_fk_NullIcon.HasValue)
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
-                else
-                    __value = null;
-
-                if (OnNullIcon_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(__value);
-                    OnNullIcon_Getter(this, e);
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchNullIconAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_NullIcon == null) || (value != null && value.ID == _fk_NullIcon))
-				{
-					SetInitializedProperty("NullIcon");
+                {
+                    SetInitializedProperty("NullIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = NullIconImpl;
@@ -263,6 +311,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("NullIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnNullIcon_PostSetter != null && IsAttached)
                 {
@@ -314,6 +363,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("NullLabel", __oldValue, __newValue);
                     _NullLabel = __newValue;
                     NotifyPropertyChanged("NullLabel", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnNullLabel_PostSetter != null && IsAttached)
                     {
@@ -321,10 +371,10 @@ namespace Zetbox.App.Base
                         OnNullLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NullLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("NullLabel");
+                }
             }
         }
         private string _NullLabel;
@@ -338,7 +388,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
         // fkBackingName=_fk_TrueIcon; fkGuidBackingName=_fk_guid_TrueIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -356,9 +406,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_TrueIcon;
+        private int? __fk_TrueIconCache;
+
+        private int? _fk_TrueIcon {
+            get
+            {
+                return __fk_TrueIconCache;
+            }
+            set
+            {
+                __fk_TrueIconCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchTrueIconTask = null;
+            }
+        }
 
         private Guid? _fk_guid_TrueIcon = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchTrueIconTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchTrueIconAsync()
+        {
+            if (_triggerFetchTrueIconTask != null) return _triggerFetchTrueIconTask;
+
+            if (_fk_TrueIcon.HasValue)
+                _triggerFetchTrueIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
+            else
+                _triggerFetchTrueIconTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchTrueIconTask.OnResult(t =>
+            {
+                if (OnTrueIcon_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(t.Result);
+                    OnTrueIcon_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchTrueIconTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -366,32 +452,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.GUI.IconMemoryImpl __value;
-                if (_fk_TrueIcon.HasValue)
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
-                else
-                    __value = null;
-
-                if (OnTrueIcon_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(__value);
-                    OnTrueIcon_Getter(this, e);
-                    __value = (Zetbox.App.GUI.IconMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchTrueIconAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_TrueIcon == null) || (value != null && value.ID == _fk_TrueIcon))
-				{
-					SetInitializedProperty("TrueIcon");
+                {
+                    SetInitializedProperty("TrueIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = TrueIconImpl;
@@ -412,6 +485,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TrueIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnTrueIcon_PostSetter != null && IsAttached)
                 {
@@ -463,6 +537,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("TrueLabel", __oldValue, __newValue);
                     _TrueLabel = __newValue;
                     NotifyPropertyChanged("TrueLabel", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTrueLabel_PostSetter != null && IsAttached)
                     {
@@ -470,10 +545,10 @@ namespace Zetbox.App.Base
                         OnTrueLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TrueLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("TrueLabel");
+                }
             }
         }
         private string _TrueLabel;
@@ -818,11 +893,6 @@ namespace Zetbox.App.Base
             this._fk_NullIcon = otherImpl._fk_NullIcon;
             this._fk_TrueIcon = otherImpl._fk_TrueIcon;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -884,6 +954,21 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "FalseIcon":
+                return TriggerFetchFalseIconAsync();
+            case "NullIcon":
+                return TriggerFetchNullIconAsync();
+            case "TrueIcon":
+                return TriggerFetchTrueIconAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

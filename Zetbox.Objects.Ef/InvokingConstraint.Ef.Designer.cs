@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="InvokingConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="InvokingConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("InvokingConstraint")]
     public class InvokingConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, InvokingConstraint
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnGetErrorTextInvocation_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ConstraintInvocationEfImpl> r
@@ -133,6 +132,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("GetErrorTextInvocation", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -189,7 +189,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnIsValidInvocation_Getter != null)
                 {
@@ -201,7 +200,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ConstraintInvocationEfImpl> r
@@ -236,6 +235,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("IsValidInvocation", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -386,11 +386,6 @@ namespace Zetbox.App.Base
 
             this._fk_GetErrorTextInvocation = otherImpl._fk_GetErrorTextInvocation;
             this._fk_IsValidInvocation = otherImpl._fk_IsValidInvocation;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -544,6 +539,8 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_InvokingConstraint != null) OnNotifyDeleting_InvokingConstraint(this);
+            GetErrorTextInvocation = null;
+            IsValidInvocation = null;
         }
         public static event ObjectEventHandler<InvokingConstraint> OnNotifyDeleting_InvokingConstraint;
 
@@ -558,15 +555,17 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_GetErrorTextInvocation", "GetErrorTextInvocation").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_GetErrorTextInvocation", "GetErrorTextInvocation");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(GetErrorTextInvocation);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_IsValidInvocation", "IsValidInvocation").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_IsValidInvocation", "IsValidInvocation");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(IsValidInvocation);

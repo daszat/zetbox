@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="RoleMembership")]
+    [EdmEntityType(NamespaceName="Model", Name="RoleMembershipEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RoleMembership")]
     public class RoleMembershipEfImpl : Zetbox.App.Base.AccessControlEfImpl, RoleMembership
     {
@@ -82,7 +82,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -102,11 +101,6 @@ namespace Zetbox.App.Base
             var otherImpl = (RoleMembershipEfImpl)obj;
             var me = (RoleMembership)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

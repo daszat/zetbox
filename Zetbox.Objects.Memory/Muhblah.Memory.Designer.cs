@@ -40,6 +40,34 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
+        // value list property
+		// Zetbox.Generator.Templates.Properties.ValueCollectionProperty
+		public ICollection<string> StringCollection
+		{
+			get
+			{
+				if (_StringCollection == null)
+				{
+				    _StringCollection 
+				        = new ClientValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntry, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl>>(
+							this.Context,
+				            this, 
+				            () => { this.NotifyPropertyChanged("StringCollection", null, null); if(OnStringCollection_PostSetter != null && IsAttached) OnStringCollection_PostSetter(this); },
+				            _StringCollectionCollection);
+				}
+				return _StringCollection;
+			}
+		}
+
+		private ClientValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntry, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl>> _StringCollection;
+		private ObservableCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl> _StringCollectionCollection = new ObservableCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryMemoryImpl>();
+public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnStringCollection_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.Muhblah> OnStringCollection_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
         public bool? TestBool
@@ -73,6 +101,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("TestBool", __oldValue, __newValue);
                     _TestBool = __newValue;
                     NotifyPropertyChanged("TestBool", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestBool_PostSetter != null && IsAttached)
                     {
@@ -80,10 +109,10 @@ namespace Zetbox.App.Test
                         OnTestBool_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestBool");
-				}
+                else
+                {
+                    SetInitializedProperty("TestBool");
+                }
             }
         }
         private bool? _TestBool;
@@ -108,25 +137,44 @@ namespace Zetbox.App.Test
             {
                 if (_TestCustomObjects_List_Nav == null)
                 {
-                    List<Zetbox.App.Test.TestCustomObject> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Test.TestCustomObject>(this, "TestCustomObjects_List_Nav");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Test.TestCustomObject>();
-                    }
-    
-                    _TestCustomObjects_List_Nav = new OneNRelationList<Zetbox.App.Test.TestCustomObject>(
-                        "MubBlah_Nav",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null); if(OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); },
-                        serverList);
+                    TriggerFetchTestCustomObjects_List_NavAsync().Wait();
                 }
                 return _TestCustomObjects_List_Nav;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchTestCustomObjects_List_NavTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_List_NavAsync()
+        {
+            if (_triggerFetchTestCustomObjects_List_NavTask != null) return _triggerFetchTestCustomObjects_List_NavTask;
+
+            List<Zetbox.App.Test.TestCustomObject> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchTestCustomObjects_List_NavTask = Context.GetListOfAsync<Zetbox.App.Test.TestCustomObject>(this, "TestCustomObjects_List_Nav")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchTestCustomObjects_List_NavTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.Test.TestCustomObject>();
+                });
+            }
+    
+            _triggerFetchTestCustomObjects_List_NavTask.OnResult(t =>
+            {
+                _TestCustomObjects_List_Nav = new OneNRelationList<Zetbox.App.Test.TestCustomObject>(
+                    "MubBlah_Nav",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null); if(OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchTestCustomObjects_List_NavTask;    
         }
     
         private OneNRelationList<Zetbox.App.Test.TestCustomObject> _TestCustomObjects_List_Nav;
@@ -146,15 +194,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 			{
 				if (_TestCustomObjects_ManyList_Nav == null)
 				{
-					Context.FetchRelation<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.A, this);
-					_TestCustomObjects_ManyList_Nav 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchTestCustomObjects_ManyList_NavAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Test.TestCustomObject>)_TestCustomObjects_ManyList_Nav;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchTestCustomObjects_ManyList_NavTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_ManyList_NavAsync()
+        {
+            if (_triggerFetchTestCustomObjects_ManyList_NavTask != null) return _triggerFetchTestCustomObjects_ManyList_NavTask;
+			_triggerFetchTestCustomObjects_ManyList_NavTask = Context.FetchRelationAsync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.A, this);
+			_triggerFetchTestCustomObjects_ManyList_NavTask.OnResult(r => 
+            {
+                _TestCustomObjects_ManyList_Nav 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchTestCustomObjects_ManyList_NavTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>> _TestCustomObjects_ManyList_Nav;
 
@@ -163,7 +222,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_Nav
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_Nav
         // fkBackingName=_fk_TestCustomObjects_Nav; fkGuidBackingName=_fk_guid_TestCustomObjects_Nav;
         // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=MubBlah_List_Nav; is list;
@@ -181,8 +240,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_TestCustomObjects_Nav;
+        private int? __fk_TestCustomObjects_NavCache;
 
+        private int? _fk_TestCustomObjects_Nav {
+            get
+            {
+                return __fk_TestCustomObjects_NavCache;
+            }
+            set
+            {
+                __fk_TestCustomObjects_NavCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchTestCustomObjects_NavTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_NavTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> TriggerFetchTestCustomObjects_NavAsync()
+        {
+            if (_triggerFetchTestCustomObjects_NavTask != null) return _triggerFetchTestCustomObjects_NavTask;
+
+            if (_fk_TestCustomObjects_Nav.HasValue)
+                _triggerFetchTestCustomObjects_NavTask = Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
+            else
+                _triggerFetchTestCustomObjects_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchTestCustomObjects_NavTask.OnResult(t =>
+            {
+                if (OnTestCustomObjects_Nav_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestCustomObject>(t.Result);
+                    OnTestCustomObjects_Nav_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchTestCustomObjects_NavTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -190,32 +285,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                Zetbox.App.Test.TestCustomObjectMemoryImpl __value;
-                if (_fk_TestCustomObjects_Nav.HasValue)
-                    __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
-                else
-                    __value = null;
-
-                if (OnTestCustomObjects_Nav_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestCustomObject>(__value);
-                    OnTestCustomObjects_Nav_Getter(this, e);
-                    __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)TriggerFetchTestCustomObjects_NavAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_TestCustomObjects_Nav == null) || (value != null && value.ID == _fk_TestCustomObjects_Nav))
-				{
-					SetInitializedProperty("TestCustomObjects_Nav");
+                {
+                    SetInitializedProperty("TestCustomObjects_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = TestCustomObjects_NavImpl;
@@ -252,6 +334,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnTestCustomObjects_Nav_PostSetter != null && IsAttached)
                 {
@@ -270,7 +353,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_One_Nav
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_One_Nav
         // fkBackingName=_fk_TestCustomObjects_One_Nav; fkGuidBackingName=_fk_guid_TestCustomObjects_One_Nav;
         // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=MuhBlah_One_Nav; is reference;
@@ -288,8 +371,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_TestCustomObjects_One_Nav;
+        private int? __fk_TestCustomObjects_One_NavCache;
 
+        private int? _fk_TestCustomObjects_One_Nav {
+            get
+            {
+                return __fk_TestCustomObjects_One_NavCache;
+            }
+            set
+            {
+                __fk_TestCustomObjects_One_NavCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchTestCustomObjects_One_NavTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_One_NavTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> TriggerFetchTestCustomObjects_One_NavAsync()
+        {
+            if (_triggerFetchTestCustomObjects_One_NavTask != null) return _triggerFetchTestCustomObjects_One_NavTask;
+
+            if (_fk_TestCustomObjects_One_Nav.HasValue)
+                _triggerFetchTestCustomObjects_One_NavTask = Context.FindAsync<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
+            else
+                _triggerFetchTestCustomObjects_One_NavTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchTestCustomObjects_One_NavTask.OnResult(t =>
+            {
+                if (OnTestCustomObjects_One_Nav_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestCustomObject>(t.Result);
+                    OnTestCustomObjects_One_Nav_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchTestCustomObjects_One_NavTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -297,32 +416,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                Zetbox.App.Test.TestCustomObjectMemoryImpl __value;
-                if (_fk_TestCustomObjects_One_Nav.HasValue)
-                    __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
-                else
-                    __value = null;
-
-                if (OnTestCustomObjects_One_Nav_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestCustomObject>(__value);
-                    OnTestCustomObjects_One_Nav_Getter(this, e);
-                    __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Test.TestCustomObjectMemoryImpl)TriggerFetchTestCustomObjects_One_NavAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_TestCustomObjects_One_Nav == null) || (value != null && value.ID == _fk_TestCustomObjects_One_Nav))
-				{
-					SetInitializedProperty("TestCustomObjects_One_Nav");
+                {
+                    SetInitializedProperty("TestCustomObjects_One_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = TestCustomObjects_One_NavImpl;
@@ -359,6 +465,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TestCustomObjects_One_Nav", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnTestCustomObjects_One_Nav_PostSetter != null && IsAttached)
                 {
@@ -401,6 +508,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 {
                     var __oldValue = _TestDateTime;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnTestDateTime_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -410,6 +519,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestDateTime", __oldValue, __newValue);
                     _TestDateTime = __newValue;
                     NotifyPropertyChanged("TestDateTime", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestDateTime_PostSetter != null && IsAttached)
                     {
@@ -417,10 +527,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestDateTime_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestDateTime");
-				}
+                else
+                {
+                    SetInitializedProperty("TestDateTime");
+                }
             }
         }
         private DateTime? _TestDateTime;
@@ -467,6 +577,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestEnum", __oldValue, __newValue);
                     _TestEnum = __newValue;
                     NotifyPropertyChanged("TestEnum", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestEnum_PostSetter != null && IsAttached)
                     {
@@ -474,10 +585,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestEnum_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnum");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnum");
+                }
             }
         }
         private Zetbox.App.Test.TestEnum _TestEnum;
@@ -524,6 +635,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     _TestString = __newValue;
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestString_PostSetter != null && IsAttached)
                     {
@@ -531,10 +643,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestString_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestString");
-				}
+                else
+                {
+                    SetInitializedProperty("TestString");
+                }
             }
         }
         private string _TestString;
@@ -557,17 +669,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             var otherImpl = (MuhblahMemoryImpl)obj;
             var me = (Muhblah)this;
 
+            SynchronizeCollections(this._StringCollectionCollection, otherImpl._StringCollectionCollection);
             me.TestBool = other.TestBool;
             me.TestDateTime = other.TestDateTime;
             me.TestEnum = other.TestEnum;
             me.TestString = other.TestString;
             this._fk_TestCustomObjects_Nav = otherImpl._fk_TestCustomObjects_Nav;
             this._fk_TestCustomObjects_One_Nav = otherImpl._fk_TestCustomObjects_One_Nav;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -634,6 +742,23 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "TestCustomObjects_List_Nav":
+                return TriggerFetchTestCustomObjects_List_NavAsync();
+            case "TestCustomObjects_ManyList_Nav":
+                return TriggerFetchTestCustomObjects_ManyList_NavAsync();
+            case "TestCustomObjects_Nav":
+                return TriggerFetchTestCustomObjects_NavAsync();
+            case "TestCustomObjects_One_Nav":
+                return TriggerFetchTestCustomObjects_One_NavAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -666,6 +791,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<Muhblah, ICollection<string>>(
+                        lazyCtx,
+                        new Guid("b89fc0d2-8603-40d7-8649-61431a9fb09b"),
+                        "StringCollection",
+                        null,
+                        obj => obj.StringCollection,
+                        null, // lists are read-only properties
+                        obj => OnStringCollection_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Muhblah, bool?>(
                         lazyCtx,
@@ -817,6 +951,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
+            StringCollection.Clear();
             TestCustomObjects_List_Nav.Clear();
             TestCustomObjects_ManyList_Nav.Clear();
             TestCustomObjects_Nav = null;
@@ -834,11 +969,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this._StringCollectionCollection);
             binStream.Write(this._TestBool);
             binStream.Write(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null);
             binStream.Write(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null);
             binStream.Write(this._TestDateTime);
-            binStream.Write((int?)((Zetbox.App.Test.Muhblah)this).TestEnum);
+            binStream.Write((int?)this._TestEnum);
             binStream.Write(this._TestString);
         }
 
@@ -848,11 +984,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.ReadCollectionEntries(this, this._StringCollectionCollection);
             this._TestBool = binStream.ReadNullableBoolean();
             this._fk_TestCustomObjects_Nav = binStream.ReadNullableInt32();
             this._fk_TestCustomObjects_One_Nav = binStream.ReadNullableInt32();
             this._TestDateTime = binStream.ReadNullableDateTime();
-            ((Zetbox.App.Test.Muhblah)this).TestEnum = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._TestEnum = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             this._TestString = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null

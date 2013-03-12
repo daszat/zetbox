@@ -28,6 +28,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.DocumentManagement;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
@@ -47,7 +48,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
 
         public new DocumentViewModel ViewModel
         {
-            get { return (DocumentViewModel)DataContext; }
+            get { return (DocumentViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

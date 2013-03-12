@@ -23,6 +23,7 @@
 <%@ Import Namespace="System.Diagnostics" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.SchemaManagement" %>
 <%@ Import Namespace="Zetbox.API.Server" %>
 <%@ Import Namespace="Zetbox.App.Base" %>
 <%@ Import Namespace="Zetbox.App.Extensions" %>
@@ -110,7 +111,7 @@
 			// Nullable Complex types are not supported by EF
 %>
     <Property Name="<%= p.Name + ImplementationPropertySuffix %>"
-              Type="Model.<%= prop.CompoundObjectDefinition.Name %>"
+              Type="Model.<%= prop.CompoundObjectDefinition.Name %>EfImpl"
               Nullable="false" />
 <%
 			}

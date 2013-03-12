@@ -26,7 +26,11 @@ namespace Zetbox.DalProvider.Memory
     using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
     using Zetbox.App.Packaging;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
+    // Not a feature, will be loaded by ApiCommon module
+    [Description("Memory provider")]
     public class MemoryProvider
         : Autofac.Module
     {
@@ -54,6 +58,8 @@ namespace Zetbox.DalProvider.Memory
                     manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .InstancePerDependency();
+
+            moduleBuilder.RegisterModule((Autofac.Module)Activator.CreateInstance(Type.GetType("Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl", true)));
 
             try
             {

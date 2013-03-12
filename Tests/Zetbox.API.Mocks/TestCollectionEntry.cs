@@ -87,17 +87,6 @@ namespace Zetbox.API.Mocks
             if (xml == null) throw new ArgumentNullException("xml");
         }
 
-        public virtual void ToStream(System.Xml.XmlWriter xml)
-        {
-            if (xml == null) throw new ArgumentNullException("xml");
-        }
-
-        public virtual IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            if (xml == null) throw new ArgumentNullException("xml");
-            return null;
-        }
-
         public void ReloadReferences()
         {
         }
@@ -127,7 +116,7 @@ namespace Zetbox.API.Mocks
                 PropertyChangingWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
-        public void AttachToContext(IZetboxContext ctx)
+        public void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
             Context = ctx;
         }

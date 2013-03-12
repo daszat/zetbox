@@ -73,6 +73,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentMonthDefault", __oldValue, __newValue);
                     _IsCurrentMonthDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentMonthDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentMonthDefault_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentMonthDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentMonthDefault");
+                }
             }
         }
         private bool? _IsCurrentMonthDefault;
@@ -130,6 +131,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentQuaterDefault", __oldValue, __newValue);
                     _IsCurrentQuaterDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentQuaterDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentQuaterDefault_PostSetter != null && IsAttached)
                     {
@@ -137,10 +139,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentQuaterDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentQuaterDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentQuaterDefault");
+                }
             }
         }
         private bool? _IsCurrentQuaterDefault;
@@ -187,6 +189,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentYearDefault", __oldValue, __newValue);
                     _IsCurrentYearDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentYearDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentYearDefault_PostSetter != null && IsAttached)
                     {
@@ -194,10 +197,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentYearDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentYearDefault");
+                }
             }
         }
         private bool? _IsCurrentYearDefault;
@@ -213,16 +216,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_DateRangeFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_DateRangeFilterConfiguration != null)
             {
-                OnCreateFilterModel_DateRangeFilterConfiguration(this, e);
+                OnCreateFilterModel_DateRangeFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -350,11 +353,6 @@ namespace Zetbox.App.GUI
             me.IsCurrentQuaterDefault = other.IsCurrentQuaterDefault;
             me.IsCurrentYearDefault = other.IsCurrentYearDefault;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -377,6 +375,15 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

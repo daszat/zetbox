@@ -84,6 +84,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Frage", __oldValue, __newValue);
                     Proxy.Frage = __newValue;
                     NotifyPropertyChanged("Frage", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFrage_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Test
                         OnFrage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Frage");
-				}
+                else
+                {
+                    SetInitializedProperty("Frage");
+                }
             }
         }
 
@@ -133,15 +134,15 @@ namespace Zetbox.App.Test
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Fragebogen == null)
-				{
-					SetInitializedProperty("Fragebogen");
+                {
+                    SetInitializedProperty("Fragebogen");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Fragebogen);
@@ -150,10 +151,10 @@ namespace Zetbox.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Fragebogen");
+                {
+                    SetInitializedProperty("Fragebogen");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Fragebogen", __oldValue, __newValue);
@@ -200,6 +201,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Fragebogen", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnFragebogen_PostSetter != null && IsAttached)
                 {
@@ -233,12 +235,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("gute_Antworten_pos", __oldValue, __newValue);
                     Proxy.gute_Antworten_pos = __newValue;
                     NotifyPropertyChanged("gute_Antworten_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("gute_Antworten_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("gute_Antworten_pos");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -285,6 +288,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("FragenNummer", __oldValue, __newValue);
                     Proxy.FragenNummer = __newValue;
                     NotifyPropertyChanged("FragenNummer", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFragenNummer_PostSetter != null && IsAttached)
                     {
@@ -292,10 +296,10 @@ namespace Zetbox.App.Test
                         OnFragenNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FragenNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("FragenNummer");
+                }
             }
         }
 
@@ -342,6 +346,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("GegebeneAntwort", __oldValue, __newValue);
                     Proxy.GegebeneAntwort = __newValue;
                     NotifyPropertyChanged("GegebeneAntwort", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnGegebeneAntwort_PostSetter != null && IsAttached)
                     {
@@ -349,10 +354,10 @@ namespace Zetbox.App.Test
                         OnGegebeneAntwort_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("GegebeneAntwort");
-				}
+                else
+                {
+                    SetInitializedProperty("GegebeneAntwort");
+                }
             }
         }
 
@@ -380,12 +385,6 @@ namespace Zetbox.App.Test
             me.GegebeneAntwort = other.GegebeneAntwort;
             this.gute_Antworten_pos = otherImpl.gute_Antworten_pos;
             this._fk_Fragebogen = otherImpl._fk_Fragebogen;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -586,6 +585,7 @@ namespace Zetbox.App.Test
                 ParentsToDelete.Add((NHibernatePersistenceObject)Fragebogen);
             }
 
+            Fragebogen = null;
         }
         public static event ObjectEventHandler<Antwort> OnNotifyDeleting_Antwort;
 

@@ -21,7 +21,11 @@ namespace Zetbox.Generator
     using System.Text;
     using Autofac;
     using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
+    [Feature]
+    [Description("Basic generator infrastructure using MS Build")]
     public sealed class GeneratorModule
         : Module
     {
@@ -60,6 +64,8 @@ namespace Zetbox.Generator
         }
     }
 
+    [Feature]
+    [Description("Basic generator infrastructure using XBuild")]
     public sealed class XBuildGeneratorModule
        : Module
     {

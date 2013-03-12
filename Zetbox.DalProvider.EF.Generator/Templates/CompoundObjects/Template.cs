@@ -35,7 +35,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
 
         protected override void ApplyClassAttributeTemplate()
         {
-            WriteLine("    [EdmComplexType(NamespaceName=\"Model\", Name=\"{0}\")]", this.CompoundObjectType.Name);
+            WriteLine("    [EdmComplexType(NamespaceName=\"Model\", Name=\"{0}EfImpl\")]", this.CompoundObjectType.Name);
         }
 
         /// <returns>The base class to inherit from.</returns>
@@ -63,7 +63,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
                     .Properties
                     .OfType<CompoundObjectProperty>(),
                 ImplementationSuffix,
-                ImplementationPropertySuffix);
+                ImplementationPropertySuffix,
+                null);
 
             this.WriteLine();
             this.WriteObjects("        }");
@@ -84,7 +85,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
                     .Properties
                     .OfType<CompoundObjectProperty>(),
                 ImplementationSuffix,
-                ImplementationPropertySuffix);
+                ImplementationPropertySuffix,
+                null);
 
             this.WriteObjects("        }");
             this.WriteLine();
@@ -102,7 +104,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
                     .Properties
                     .OfType<CompoundObjectProperty>(),
                 ImplementationSuffix,
-                ImplementationPropertySuffix);
+                ImplementationPropertySuffix,
+                "lazyCtx");
 
             this.WriteLine();
             this.WriteObjects("        }");
@@ -123,7 +126,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
                     .Properties
                     .OfType<CompoundObjectProperty>(),
                 ImplementationSuffix,
-                ImplementationPropertySuffix);
+                ImplementationPropertySuffix,
+                "lazyCtx");
 
             this.WriteObjects("        }");
             this.WriteLine();
@@ -132,9 +136,9 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
         protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
         {
             this.WriteLine("        // enumeration property");
-            Properties.EnumerationPropertyTemplate.Call(Host, ctx,
+            Properties.NotifyingEnumProperty.Call(Host, ctx,
                 this.MembersToSerialize,
-                prop, true);
+                prop);
         }
     }
 }

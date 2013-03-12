@@ -22,7 +22,7 @@ namespace Zetbox.App.Projekte
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Auftrag")]
+    [EdmEntityType(NamespaceName="Model", Name="AuftragEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Auftrag")]
     public class AuftragEfImpl : BaseServerDataObject_EntityFramework, Auftrag, Zetbox.API.IExportableInternal
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Auftragsname", __oldValue, __newValue);
                     _Auftragsname = __newValue;
                     NotifyPropertyChanged("Auftragsname", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAuftragsname_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Projekte
                         OnAuftragsname_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Auftragsname");
-				}
+                else
+                {
+                    SetInitializedProperty("Auftragsname");
+                }
             }
         }
         private string _Auftragsname_store;
@@ -147,6 +148,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Auftragswert", __oldValue, __newValue);
                     _Auftragswert = __newValue;
                     NotifyPropertyChanged("Auftragswert", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAuftragswert_PostSetter != null && IsAttached)
                     {
@@ -154,10 +156,10 @@ namespace Zetbox.App.Projekte
                         OnAuftragswert_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Auftragswert");
-				}
+                else
+                {
+                    SetInitializedProperty("Auftragswert");
+                }
             }
         }
         private double? _Auftragswert_store;
@@ -221,7 +223,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -233,7 +234,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -268,6 +269,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -320,6 +322,8 @@ namespace Zetbox.App.Projekte
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -329,6 +333,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -336,10 +341,10 @@ namespace Zetbox.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -347,7 +352,7 @@ namespace Zetbox.App.Projekte
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _ChangedOn_store = value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -404,7 +409,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -416,7 +420,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -451,6 +455,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -503,6 +508,8 @@ namespace Zetbox.App.Projekte
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -512,6 +519,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -519,10 +527,10 @@ namespace Zetbox.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -530,7 +538,7 @@ namespace Zetbox.App.Projekte
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _CreatedOn_store = value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -593,6 +601,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -600,10 +609,10 @@ namespace Zetbox.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -669,7 +678,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnKunde_Getter != null)
                 {
@@ -681,7 +689,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Projekte.KundeEfImpl> r
@@ -716,6 +724,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Kunde", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -772,7 +781,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnMitarbeiter_Getter != null)
                 {
@@ -784,7 +792,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Projekte.MitarbeiterEfImpl> r
@@ -819,6 +827,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Mitarbeiter", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -875,7 +884,6 @@ namespace Zetbox.App.Projekte
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnProjekt_Getter != null)
                 {
@@ -887,7 +895,7 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Projekte.ProjektEfImpl> r
@@ -934,6 +942,7 @@ namespace Zetbox.App.Projekte
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Auftraege", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -1029,11 +1038,6 @@ namespace Zetbox.App.Projekte
             this._fk_Kunde = otherImpl._fk_Kunde;
             this._fk_Mitarbeiter = otherImpl._fk_Mitarbeiter;
             this._fk_Projekt = otherImpl._fk_Projekt;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1320,12 +1324,13 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -1376,16 +1381,18 @@ namespace Zetbox.App.Projekte
             binStream.Write(this._Auftragsname);
             binStream.Write(this._Auftragswert);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Auftrag_ChangedBy_ChangedBy", "ChangedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Auftrag_ChangedBy_ChangedBy", "ChangedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Auftrag_CreatedBy_CreatedBy", "CreatedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Auftrag_CreatedBy_CreatedBy", "CreatedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1396,16 +1403,19 @@ namespace Zetbox.App.Projekte
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.KundeEfImpl>("Model.FK_Auftrag_has_Kunde", "Kunde").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.KundeEfImpl>("Model.FK_Auftrag_has_Kunde", "Kunde");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.MitarbeiterEfImpl>("Model.FK_Auftrag_has_Mitarbeiter", "Mitarbeiter").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.MitarbeiterEfImpl>("Model.FK_Auftrag_has_Mitarbeiter", "Mitarbeiter");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>("Model.FK_Projekt_has_Auftraege", "Projekt").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>("Model.FK_Projekt_has_Auftraege", "Projekt");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

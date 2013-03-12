@@ -20,6 +20,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
@@ -60,6 +61,9 @@ namespace Zetbox.Server.SchemaManagement
                     CheckInheritance();
                     Log.Debug(String.Empty);
 
+                    if(withRepair)
+                        Workaround_UpdateTPHNotNullCheckConstraint();
+
                     CheckExtraRelations();
 
                     if (withRepair)
@@ -88,14 +92,14 @@ namespace Zetbox.Server.SchemaManagement
                     {
                         Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
-                        if (db.CheckTableExists(db.GetTableName(objClass.Module.SchemaName, objClass.TableName)))
+                        if (db.CheckTableExists(objClass.GetTableRef(db)))
                         {
-                            Log.DebugFormat("  Table: {0}", objClass.TableName);
+                            Log.DebugFormat("  Table: {0}", objClass.GetTableRef(db));
                             CheckColumns(objClass, objClass.Properties, String.Empty);
                         }
                         else
                         {
-                            Log.WarnFormat("Table '{0}' is missing", objClass.TableName);
+                            Log.WarnFormat("Table '{0}' is missing", objClass.GetTableRef(db));
                             if (repair)
                             {
                                 Log.Info("Fixing");
@@ -142,7 +146,7 @@ namespace Zetbox.Server.SchemaManagement
                 else
                 {
                     var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
-                    var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+                    var tblName = objClass.GetTableRef(db);
                     if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
                     {
                         Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
@@ -190,15 +194,18 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass != null).OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-                string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
-                var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
-                if (!db.CheckFKConstraintExists(tblName, assocName))
+                if (objClass.GetTableMapping() == TableMapping.TPT)
                 {
-                    Log.WarnFormat("FK Constraint to BaseClass is missing on Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-                    if (repair)
+                    Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+                    string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
+                    var tblName = objClass.GetTableRef(db);
+                    if (!db.CheckFKConstraintExists(tblName, assocName))
                     {
-                        Case.DoNewObjectClassInheritance(objClass);
+                        Log.WarnFormat("FK Constraint to BaseClass is missing on Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+                        if (repair)
+                        {
+                            Case.DoNewObjectClassInheritance(objClass);
+                        }
                     }
                 }
             }
@@ -244,12 +251,12 @@ namespace Zetbox.Server.SchemaManagement
 
         private void GetExistingColumnNames(ObjectClass objClass, ICollection<Property> properties, string prefix, List<string> columns)
         {
-            columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => Construct.NestedColumnName(p, prefix)).ToArray());
+            columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => Construct.ColumnName(p, prefix)).ToArray());
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                columns.Add(Construct.NestedColumnName(sprop, prefix));
-                GetExistingColumnNames(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix), columns);
+                columns.Add(Construct.ColumnName(sprop, prefix));
+                GetExistingColumnNames(objClass, sprop.CompoundObjectDefinition.Properties, Construct.ColumnName(sprop, prefix), columns);
             }
         }
         private void GetRelationColumnNames(ObjectClass objClass, List<string> columns)
@@ -269,14 +276,24 @@ namespace Zetbox.Server.SchemaManagement
 
         private void CheckExtraColumns(ObjectClass objClass)
         {
+            if (objClass.GetTableMapping() == TableMapping.TPH && objClass.BaseObjectClass != null) return; // Check only base TPH classes
+
             Log.Debug("Extra Columns: ");
             List<string> columns = new List<string>();
-            GetExistingColumnNames(objClass, objClass.Properties, String.Empty, columns);
-            GetRelationColumnNames(objClass, columns);
+            List<ObjectClass> classes = new List<ObjectClass>(new[] { objClass });
 
-            foreach (string propName in db.GetTableColumnNames(db.GetTableName(objClass.Module.SchemaName, objClass.TableName)))
+            if (objClass.GetTableMapping() == TableMapping.TPH)
+                objClass.CollectChildClasses(classes, true);
+
+            foreach (var cls in classes)
             {
-                if (propName == "ID")
+                GetExistingColumnNames(cls, cls.Properties, String.Empty, columns);
+                GetRelationColumnNames(cls, columns);
+            }
+
+            foreach (string propName in db.GetTableColumnNames(objClass.GetTableRef(db)))
+            {
+                if (propName == "ID" || propName == TableMapper.DiscriminatorColumnName)
                     continue;
                 if (!columns.Contains(propName))
                 {
@@ -328,9 +345,11 @@ namespace Zetbox.Server.SchemaManagement
                 relationNames.Add(Construct.SecurityRulesFKName(objClass));
             }
 
+            // Quote Identifier to meet the exact name in database. PG will short those names when they exceed 63 chars
+            relationNames = relationNames.Select(n => db.QuoteIdentifier(n)).ToList();
             foreach (var rel in db.GetFKConstraintNames())
             {
-                if (!relationNames.Contains(rel.ConstraintName))
+                if (!relationNames.Contains(db.QuoteIdentifier(rel.ConstraintName)))
                 {
                     Log.WarnFormat("'{0}' on table '{1}' found in database but no relation object was defined", rel.ConstraintName, rel.TableName);
                     if (repair)
@@ -369,14 +388,17 @@ namespace Zetbox.Server.SchemaManagement
         {
             if (rel.HasStorage(role))
             {
-                var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+                var tblName = relEnd.Type.GetTableRef(db);
                 RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-                var refTblName = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
+                var refTblName = otherEnd.Type.GetTableRef(db);
                 string colName = Construct.ForeignKeyColumnName(otherEnd);
                 string assocName = rel.GetRelationAssociationName(role);
                 string idxName = Construct.IndexName(tblName.Name, colName);
+                var realIsNullable = otherEnd.IsNullable();
+                if (realIsNullable == false)
+                    realIsNullable = relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null;
 
-                CheckColumn(tblName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+                CheckColumn(tblName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, 0, realIsNullable, null);
                 if (!db.CheckFKConstraintExists(tblName, assocName))
                 {
                     Log.WarnFormat("FK Constraint '{0}' is missing", assocName);
@@ -417,14 +439,18 @@ namespace Zetbox.Server.SchemaManagement
                     return;
             }
 
-            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
-            var refTblName = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
+            var tblName = relEnd.Type.GetTableRef(db);
+            var refTblName = otherEnd.Type.GetTableRef(db);
             bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
             string colName = Construct.ForeignKeyColumnName(otherEnd);
             string indexName = Construct.ListPositionColumnName(otherEnd);
 
-            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+            var realIsNullable = otherEnd.IsNullable();
+            if (realIsNullable == false)
+                realIsNullable = relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null;
+
+            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, realIsNullable, null);
 
             if (!db.CheckFKConstraintExists(tblName, assocName))
             {
@@ -463,8 +489,8 @@ namespace Zetbox.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
 
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
-            string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+            string fkAName = Construct.ForeignKeyColumnName(rel.A);
+            string fkBName = Construct.ForeignKeyColumnName(rel.B);
             string assocAName = rel.GetRelationAssociationName(RelationEndRole.A);
             string assocBName = rel.GetRelationAssociationName(RelationEndRole.B);
             string fkAIndex = fkAName + Zetbox.API.Helper.PositionSuffix;
@@ -489,7 +515,7 @@ namespace Zetbox.Server.SchemaManagement
                 Log.WarnFormat("FK Constraint '{0}' for A is missing for [{1}]", assocAName, assocName);
                 if (repair)
                 {
-                    db.CreateFKConstraint(tblName, db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), fkAName, assocAName, true);
+                    db.CreateFKConstraint(tblName, rel.A.Type.GetTableRef(db), fkAName, assocAName, true);
                 }
             }
             if (!db.CheckFKConstraintExists(tblName, assocBName))
@@ -497,7 +523,7 @@ namespace Zetbox.Server.SchemaManagement
                 Log.WarnFormat("FK Constraint '{0}' for B is missing for [{1}]", assocBName, assocName);
                 if (repair)
                 {
-                    db.CreateFKConstraint(tblName, db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), fkBName, assocBName, true);
+                    db.CreateFKConstraint(tblName, rel.B.Type.GetTableRef(db), fkBName, assocBName, true);
                 }
             }
 
@@ -569,7 +595,7 @@ namespace Zetbox.Server.SchemaManagement
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
-                if (db.CheckTableExists(db.GetTableName(objClass.Module.SchemaName, objClass.TableName)))
+                if (db.CheckTableExists(objClass.GetTableRef(db)))
                 {
                     Log.DebugFormat("  Table: {0}", objClass.TableName);
                     CheckColumns(objClass, objClass.Properties, String.Empty);
@@ -592,8 +618,8 @@ namespace Zetbox.Server.SchemaManagement
         {
             foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
-                var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
-                var columns = Cases.GetUCColNames(uc);
+                var tblName = objClass.GetTableRef(db);
+                var columns = Construct.GetUCColNames(uc);
                 var idxName = Construct.IndexName(tblName.Name, columns);
                 if (!db.CheckIndexExists(tblName, idxName))
                 {
@@ -610,7 +636,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             if (objClass.NeedsRightsTable())
             {
-                var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+                var tblName = objClass.GetTableRef(db);
                 var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
                 var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
                 var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
@@ -654,11 +680,11 @@ namespace Zetbox.Server.SchemaManagement
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
-                var fkName = "fk_" + prop.ObjectClass.Name;
+                var fkName = Construct.ForeignKeyColumnName(prop);
                 var valPropName = prop.Name;
                 var valPropIndexName = prop.Name + "Index";
                 var assocName = prop.GetAssociationName();
-                var refTblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+                var refTblName = objClass.GetTableRef(db);
                 bool hasPersistentOrder = prop.HasPersistentOrder;
                 if (db.CheckTableExists(tblName))
                 {
@@ -703,21 +729,21 @@ namespace Zetbox.Server.SchemaManagement
             .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
-                var fkName = "fk_" + prop.ObjectClass.Name;
+                var fkName = Construct.ForeignKeyColumnName(prop);
                 var basePropName = prop.Name;
                 var valPropIndexName = prop.Name + "Index";
                 var assocName = prop.GetAssociationName();
-                var refTblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+                var refTblName = objClass.GetTableRef(db);
                 bool hasPersistentOrder = prop.HasPersistentOrder;
                 if (db.CheckTableExists(tblName))
                 {
                     Log.DebugFormat("{0}", prop.Name);
 
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
-                    // TODO: Support neested CompoundObject
+                    // TODO: Support nested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
-                        CheckColumn(tblName, Construct.NestedColumnName(p.Name, basePropName), p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));
+                        CheckColumn(tblName, Construct.ColumnName(p, basePropName), p.GetDbType(), p.GetSize(), p.GetScale(), true, null);
                     }
                     if (hasPersistentOrder)
                     {
@@ -753,7 +779,7 @@ namespace Zetbox.Server.SchemaManagement
             {
                 // TODO: Add DataType Check
                 {
-                    bool colIsNullable = db.GetIsColumnNullable(tblName, colName);
+                    var colIsNullable = db.GetIsColumnNullable(tblName, colName);
                     if (colIsNullable != isNullable)
                     {
                         Log.WarnFormat("Column '{0}'.'{1}' nullable mismatch. Column is {2} but should be {3}", tblName, colName,
@@ -848,19 +874,30 @@ namespace Zetbox.Server.SchemaManagement
         private void CheckColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
         {
             Log.Debug("  Columns: ");
+            var tblName = objClass.GetTableRef(db);
+            var mapping = objClass.GetTableMapping();
+
+            if (mapping == TableMapping.TPH && objClass.BaseObjectClass == null)
+            {
+                CheckColumn(tblName, TableMapper.DiscriminatorColumnName, System.Data.DbType.String, TableMapper.DiscriminatorColumnSize, 0, false, null);
+            }
+
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>()
                 .Where(p => !p.IsList)
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
-                var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
-                var colName = Construct.NestedColumnName(prop, prefix);
+                var colName = Construct.ColumnName(prop, prefix);
                 Log.DebugFormat("    {0}", colName);
-                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), SchemaManager.GetDefaultConstraint(prop));
+
+                var realIsNullable = prop.IsNullable();
+                if (realIsNullable == false)
+                    realIsNullable = mapping == TableMapping.TPH && objClass.BaseObjectClass != null;
+                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), realIsNullable, SchemaManager.GetDefaultConstraint(prop));
             }
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                CheckColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
+                CheckColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.ColumnName(sprop, prefix));
             }
         }
     }

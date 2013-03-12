@@ -32,50 +32,52 @@ namespace Zetbox.App.Extensions
         public static Type GuessParameterType(this BaseParameter param)
         {
             if (param == null) { throw new ArgumentNullException("param"); }
+            var isNullable = param.IsNullable;
+            var isList = param.IsList;
 
             if (param is BoolParameter && param.IsList)
                 return typeof(IEnumerable<bool>);
-            else if (param is BoolParameter && !param.IsList && !param.IsNullable)
+            else if (param is BoolParameter && !isList && !isNullable)
                 return typeof(bool);
-            else if (param is BoolParameter && !param.IsList && param.IsNullable)
+            else if (param is BoolParameter && !isList && isNullable)
                 return typeof(bool?);
 
             else if (param is CLRObjectParameter)
             {
                 var p = param as CLRObjectParameter;
                 Type t = Type.GetType(p.Type.FullName + (p.Type.Assembly != null ? ", " + p.Type.Assembly.Name : String.Empty), true);
-                if (param.IsList)
+                if (isList)
                     t = typeof(IEnumerable<>).MakeGenericType(t);
 
                 return t;
             }
 
-            else if (param is DateTimeParameter && param.IsList)
+            else if (param is DateTimeParameter && isList)
                 return typeof(IEnumerable<DateTime>);
-            else if (param is DateTimeParameter && !param.IsList && !param.IsNullable)
+            else if (param is DateTimeParameter && !isList && !isNullable)
                 return typeof(DateTime);
-            else if (param is DateTimeParameter && !param.IsList && param.IsNullable)
+            else if (param is DateTimeParameter && !isList && isNullable)
                 return typeof(DateTime?);
 
-            else if (param is DoubleParameter && param.IsList)
+            else if (param is DoubleParameter && isList)
                 return typeof(IEnumerable<double>);
-            else if (param is DoubleParameter && !param.IsList && !param.IsNullable)
+            else if (param is DoubleParameter && !isList && !isNullable)
                 return typeof(double);
-            else if (param is DoubleParameter && !param.IsList && param.IsNullable)
+            else if (param is DoubleParameter && !isList && isNullable)
                 return typeof(double?);
 
-            else if (param is IntParameter && param.IsList)
+            else if (param is IntParameter && isList)
                 return typeof(IEnumerable<int>);
-            else if (param is IntParameter && !param.IsList && !param.IsNullable)
+            else if (param is IntParameter && !isList && !isNullable)
                 return typeof(int);
-            else if (param is IntParameter && !param.IsList && param.IsNullable)
+            else if (param is IntParameter && !isList && isNullable)
                 return typeof(int?);
 
-            else if (param is DecimalParameter && param.IsList)
+            else if (param is DecimalParameter && isList)
                 return typeof(IEnumerable<decimal>);
-            else if (param is DecimalParameter && !param.IsList && !param.IsNullable)
+            else if (param is DecimalParameter && !isList && !isNullable)
                 return typeof(decimal);
-            else if (param is DecimalParameter && !param.IsList && param.IsNullable)
+            else if (param is DecimalParameter && !isList && isNullable)
                 return typeof(decimal?);
 
             else if (param is ObjectReferenceParameter)
@@ -84,7 +86,7 @@ namespace Zetbox.App.Extensions
                 // TEMP
                 if (p.ObjectClass == null) return null;
                 Type t = Type.GetType(p.ObjectClass.Module.Namespace + "." + p.ObjectClass.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
-                if (param.IsList)
+                if (isList)
                     t = typeof(IEnumerable<>).MakeGenericType(t);
 
                 return t;
@@ -94,9 +96,9 @@ namespace Zetbox.App.Extensions
             {
                 var p = param as EnumParameter;
                 Type t = Type.GetType(p.Enumeration.Module.Namespace + "." + p.Enumeration.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
-                if (param.IsList)
+                if (isList)
                     t = typeof(IEnumerable<>).MakeGenericType(t);
-                else if (param.IsNullable)
+                else if (isNullable)
                     t = typeof(Nullable<>).MakeGenericType(t);
 
                 return t;
@@ -106,15 +108,15 @@ namespace Zetbox.App.Extensions
             {
                 var p = param as CompoundObjectParameter;
                 Type t = Type.GetType(p.CompoundObject.Module.Namespace + "." + p.CompoundObject.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
-                if (param.IsList)
+                if (isList)
                     t = typeof(IEnumerable<>).MakeGenericType(t);
 
                 return t;
             }
 
-            else if (param is StringParameter && param.IsList)
+            else if (param is StringParameter && isList)
                 return typeof(IEnumerable<string>);
-            else if (param is StringParameter && !param.IsList)
+            else if (param is StringParameter && !isList)
                 return typeof(string);
             else
                 return null;

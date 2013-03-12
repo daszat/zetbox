@@ -73,6 +73,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowAddNew", __oldValue, __newValue);
                     _AllowAddNew = __newValue;
                     NotifyPropertyChanged("AllowAddNew", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowAddNew_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.GUI
                         OnAllowAddNew_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowAddNew");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowAddNew");
+                }
             }
         }
         private bool? _AllowAddNew;
@@ -130,6 +131,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowDelete", __oldValue, __newValue);
                     _AllowDelete = __newValue;
                     NotifyPropertyChanged("AllowDelete", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowDelete_PostSetter != null && IsAttached)
                     {
@@ -137,10 +139,10 @@ namespace Zetbox.App.GUI
                         OnAllowDelete_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowDelete");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowDelete");
+                }
             }
         }
         private bool? _AllowDelete;
@@ -150,6 +152,122 @@ namespace Zetbox.App.GUI
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowDelete_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnAllowDelete_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public bool? AllowExport
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _AllowExport;
+                if (OnAllowExport_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnAllowExport_Getter(this, __e);
+                    __result = _AllowExport = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_AllowExport != value)
+                {
+                    var __oldValue = _AllowExport;
+                    var __newValue = value;
+                    if (OnAllowExport_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnAllowExport_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("AllowExport", __oldValue, __newValue);
+                    _AllowExport = __newValue;
+                    NotifyPropertyChanged("AllowExport", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnAllowExport_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnAllowExport_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("AllowExport");
+                }
+            }
+        }
+        private bool? _AllowExport;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowExport_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowExport_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowExport_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnAllowExport_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public bool? AllowOpen
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _AllowOpen;
+                if (OnAllowOpen_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnAllowOpen_Getter(this, __e);
+                    __result = _AllowOpen = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_AllowOpen != value)
+                {
+                    var __oldValue = _AllowOpen;
+                    var __newValue = value;
+                    if (OnAllowOpen_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnAllowOpen_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("AllowOpen", __oldValue, __newValue);
+                    _AllowOpen = __newValue;
+                    NotifyPropertyChanged("AllowOpen", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnAllowOpen_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnAllowOpen_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("AllowOpen");
+                }
+            }
+        }
+        private bool? _AllowOpen;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowOpen_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowOpen_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowOpen_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnAllowOpen_IsValid;
 
         /// <summary>
         /// 
@@ -187,6 +305,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowSelectColumns", __oldValue, __newValue);
                     _AllowSelectColumns = __newValue;
                     NotifyPropertyChanged("AllowSelectColumns", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowSelectColumns_PostSetter != null && IsAttached)
                     {
@@ -194,10 +313,10 @@ namespace Zetbox.App.GUI
                         OnAllowSelectColumns_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowSelectColumns");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowSelectColumns");
+                }
             }
         }
         private bool? _AllowSelectColumns;
@@ -244,6 +363,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowUserFilter", __oldValue, __newValue);
                     _AllowUserFilter = __newValue;
                     NotifyPropertyChanged("AllowUserFilter", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowUserFilter_PostSetter != null && IsAttached)
                     {
@@ -251,10 +371,10 @@ namespace Zetbox.App.GUI
                         OnAllowUserFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowUserFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowUserFilter");
+                }
             }
         }
         private bool? _AllowUserFilter;
@@ -301,6 +421,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("EnableAutoFilter", __oldValue, __newValue);
                     _EnableAutoFilter = __newValue;
                     NotifyPropertyChanged("EnableAutoFilter", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnEnableAutoFilter_PostSetter != null && IsAttached)
                     {
@@ -308,10 +429,10 @@ namespace Zetbox.App.GUI
                         OnEnableAutoFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EnableAutoFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("EnableAutoFilter");
+                }
             }
         }
         private bool? _EnableAutoFilter;
@@ -358,6 +479,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("InitialSort", __oldValue, __newValue);
                     _InitialSort = __newValue;
                     NotifyPropertyChanged("InitialSort", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnInitialSort_PostSetter != null && IsAttached)
                     {
@@ -365,10 +487,10 @@ namespace Zetbox.App.GUI
                         OnInitialSort_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("InitialSort");
-				}
+                else
+                {
+                    SetInitializedProperty("InitialSort");
+                }
             }
         }
         private string _InitialSort;
@@ -415,6 +537,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("InitialSortDirection", __oldValue, __newValue);
                     _InitialSortDirection = __newValue;
                     NotifyPropertyChanged("InitialSortDirection", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnInitialSortDirection_PostSetter != null && IsAttached)
                     {
@@ -422,10 +545,10 @@ namespace Zetbox.App.GUI
                         OnInitialSortDirection_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("InitialSortDirection");
-				}
+                else
+                {
+                    SetInitializedProperty("InitialSortDirection");
+                }
             }
         }
         private Zetbox.App.GUI.ListSortDirection? _InitialSortDirection;
@@ -472,6 +595,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsEditable", __oldValue, __newValue);
                     _IsEditable = __newValue;
                     NotifyPropertyChanged("IsEditable", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsEditable_PostSetter != null && IsAttached)
                     {
@@ -479,10 +603,10 @@ namespace Zetbox.App.GUI
                         OnIsEditable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsEditable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsEditable");
+                }
             }
         }
         private bool? _IsEditable;
@@ -529,6 +653,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsMultiselect", __oldValue, __newValue);
                     _IsMultiselect = __newValue;
                     NotifyPropertyChanged("IsMultiselect", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsMultiselect_PostSetter != null && IsAttached)
                     {
@@ -536,10 +661,10 @@ namespace Zetbox.App.GUI
                         OnIsMultiselect_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsMultiselect");
-				}
+                else
+                {
+                    SetInitializedProperty("IsMultiselect");
+                }
             }
         }
         private bool? _IsMultiselect;
@@ -553,7 +678,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
         // fkBackingName=_fk_RequestedEditorKind; fkGuidBackingName=_fk_guid_RequestedEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -571,9 +696,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_RequestedEditorKind;
+        private int? __fk_RequestedEditorKindCache;
+
+        private int? _fk_RequestedEditorKind {
+            get
+            {
+                return __fk_RequestedEditorKindCache;
+            }
+            set
+            {
+                __fk_RequestedEditorKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchRequestedEditorKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_RequestedEditorKind = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchRequestedEditorKindTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchRequestedEditorKindAsync()
+        {
+            if (_triggerFetchRequestedEditorKindTask != null) return _triggerFetchRequestedEditorKindTask;
+
+            if (_fk_RequestedEditorKind.HasValue)
+                _triggerFetchRequestedEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value);
+            else
+                _triggerFetchRequestedEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchRequestedEditorKindTask.OnResult(t =>
+            {
+                if (OnRequestedEditorKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
+                    OnRequestedEditorKind_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchRequestedEditorKindTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -581,32 +742,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.GUI.ControlKindMemoryImpl __value;
-                if (_fk_RequestedEditorKind.HasValue)
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value);
-                else
-                    __value = null;
-
-                if (OnRequestedEditorKind_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(__value);
-                    OnRequestedEditorKind_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedEditorKindAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_RequestedEditorKind == null) || (value != null && value.ID == _fk_RequestedEditorKind))
-				{
-					SetInitializedProperty("RequestedEditorKind");
+                {
+                    SetInitializedProperty("RequestedEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = RequestedEditorKindImpl;
@@ -627,6 +775,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnRequestedEditorKind_PostSetter != null && IsAttached)
                 {
@@ -645,7 +794,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
         // fkBackingName=_fk_RequestedWorkspaceKind; fkGuidBackingName=_fk_guid_RequestedWorkspaceKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -663,9 +812,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_RequestedWorkspaceKind;
+        private int? __fk_RequestedWorkspaceKindCache;
+
+        private int? _fk_RequestedWorkspaceKind {
+            get
+            {
+                return __fk_RequestedWorkspaceKindCache;
+            }
+            set
+            {
+                __fk_RequestedWorkspaceKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchRequestedWorkspaceKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_RequestedWorkspaceKind = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchRequestedWorkspaceKindTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchRequestedWorkspaceKindAsync()
+        {
+            if (_triggerFetchRequestedWorkspaceKindTask != null) return _triggerFetchRequestedWorkspaceKindTask;
+
+            if (_fk_RequestedWorkspaceKind.HasValue)
+                _triggerFetchRequestedWorkspaceKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value);
+            else
+                _triggerFetchRequestedWorkspaceKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchRequestedWorkspaceKindTask.OnResult(t =>
+            {
+                if (OnRequestedWorkspaceKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
+                    OnRequestedWorkspaceKind_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchRequestedWorkspaceKindTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -673,32 +858,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.GUI.ControlKindMemoryImpl __value;
-                if (_fk_RequestedWorkspaceKind.HasValue)
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value);
-                else
-                    __value = null;
-
-                if (OnRequestedWorkspaceKind_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(__value);
-                    OnRequestedWorkspaceKind_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedWorkspaceKindAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_RequestedWorkspaceKind == null) || (value != null && value.ID == _fk_RequestedWorkspaceKind))
-				{
-					SetInitializedProperty("RequestedWorkspaceKind");
+                {
+                    SetInitializedProperty("RequestedWorkspaceKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = RequestedWorkspaceKindImpl;
@@ -719,6 +891,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnRequestedWorkspaceKind_PostSetter != null && IsAttached)
                 {
@@ -770,6 +943,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("RespectRequiredFilter", __oldValue, __newValue);
                     _RespectRequiredFilter = __newValue;
                     NotifyPropertyChanged("RespectRequiredFilter", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnRespectRequiredFilter_PostSetter != null && IsAttached)
                     {
@@ -777,10 +951,10 @@ namespace Zetbox.App.GUI
                         OnRespectRequiredFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("RespectRequiredFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("RespectRequiredFilter");
+                }
             }
         }
         private bool? _RespectRequiredFilter;
@@ -790,6 +964,64 @@ namespace Zetbox.App.GUI
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnRespectRequiredFilter_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnRespectRequiredFilter_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public bool? ShowCommands
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ShowCommands;
+                if (OnShowCommands_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnShowCommands_Getter(this, __e);
+                    __result = _ShowCommands = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ShowCommands != value)
+                {
+                    var __oldValue = _ShowCommands;
+                    var __newValue = value;
+                    if (OnShowCommands_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnShowCommands_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ShowCommands", __oldValue, __newValue);
+                    _ShowCommands = __newValue;
+                    NotifyPropertyChanged("ShowCommands", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnShowCommands_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnShowCommands_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ShowCommands");
+                }
+            }
+        }
+        private bool? _ShowCommands;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnShowCommands_IsValid;
 
         /// <summary>
         /// 
@@ -827,6 +1059,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ShowFilter", __oldValue, __newValue);
                     _ShowFilter = __newValue;
                     NotifyPropertyChanged("ShowFilter", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowFilter_PostSetter != null && IsAttached)
                     {
@@ -834,10 +1067,10 @@ namespace Zetbox.App.GUI
                         OnShowFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowFilter");
+                }
             }
         }
         private bool? _ShowFilter;
@@ -884,6 +1117,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ShowMasterDetail", __oldValue, __newValue);
                     _ShowMasterDetail = __newValue;
                     NotifyPropertyChanged("ShowMasterDetail", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowMasterDetail_PostSetter != null && IsAttached)
                     {
@@ -891,10 +1125,10 @@ namespace Zetbox.App.GUI
                         OnShowMasterDetail_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowMasterDetail");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowMasterDetail");
+                }
             }
         }
         private bool? _ShowMasterDetail;
@@ -908,121 +1142,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public bool? ShowOpenCommand
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ShowOpenCommand;
-                if (OnShowOpenCommand_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<bool?>(__result);
-                    OnShowOpenCommand_Getter(this, __e);
-                    __result = _ShowOpenCommand = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ShowOpenCommand != value)
-                {
-                    var __oldValue = _ShowOpenCommand;
-                    var __newValue = value;
-                    if (OnShowOpenCommand_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
-                        OnShowOpenCommand_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("ShowOpenCommand", __oldValue, __newValue);
-                    _ShowOpenCommand = __newValue;
-                    NotifyPropertyChanged("ShowOpenCommand", __oldValue, __newValue);
-
-                    if (OnShowOpenCommand_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
-                        OnShowOpenCommand_PostSetter(this, __e);
-                    }
-                }
-				else 
-				{
-					SetInitializedProperty("ShowOpenCommand");
-				}
-            }
-        }
-        private bool? _ShowOpenCommand;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnShowOpenCommand_IsValid;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public bool? ShowRefreshCommand
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ShowRefreshCommand;
-                if (OnShowRefreshCommand_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<bool?>(__result);
-                    OnShowRefreshCommand_Getter(this, __e);
-                    __result = _ShowRefreshCommand = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ShowRefreshCommand != value)
-                {
-                    var __oldValue = _ShowRefreshCommand;
-                    var __newValue = value;
-                    if (OnShowRefreshCommand_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
-                        OnShowRefreshCommand_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("ShowRefreshCommand", __oldValue, __newValue);
-                    _ShowRefreshCommand = __newValue;
-                    NotifyPropertyChanged("ShowRefreshCommand", __oldValue, __newValue);
-
-                    if (OnShowRefreshCommand_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
-                        OnShowRefreshCommand_PostSetter(this, __e);
-                    }
-                }
-				else 
-				{
-					SetInitializedProperty("ShowRefreshCommand");
-				}
-            }
-        }
-        private bool? _ShowRefreshCommand;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnShowRefreshCommand_IsValid;
-
-        /// <summary>
-        /// 
-        /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
         // fkBackingName=_fk_Type; fkGuidBackingName=_fk_guid_Type;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -1040,9 +1160,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Type;
+        private int? __fk_TypeCache;
+
+        private int? _fk_Type {
+            get
+            {
+                return __fk_TypeCache;
+            }
+            set
+            {
+                __fk_TypeCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchTypeTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Type = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchTypeTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchTypeAsync()
+        {
+            if (_triggerFetchTypeTask != null) return _triggerFetchTypeTask;
+
+            if (_fk_Type.HasValue)
+                _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
+            else
+                _triggerFetchTypeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchTypeTask.OnResult(t =>
+            {
+                if (OnType_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(t.Result);
+                    OnType_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchTypeTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1050,32 +1206,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.Base.ObjectClassMemoryImpl __value;
-                if (_fk_Type.HasValue)
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
-                else
-                    __value = null;
-
-                if (OnType_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(__value);
-                    OnType_Getter(this, e);
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchTypeAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Type == null) || (value != null && value.ID == _fk_Type))
-				{
-					SetInitializedProperty("Type");
+                {
+                    SetInitializedProperty("Type");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = TypeImpl;
@@ -1096,6 +1239,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Type", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnType_PostSetter != null && IsAttached)
                 {
@@ -1147,6 +1291,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ViewMethod", __oldValue, __newValue);
                     _ViewMethod = __newValue;
                     NotifyPropertyChanged("ViewMethod", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnViewMethod_PostSetter != null && IsAttached)
                     {
@@ -1154,10 +1299,10 @@ namespace Zetbox.App.GUI
                         OnViewMethod_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ViewMethod");
-				}
+                else
+                {
+                    SetInitializedProperty("ViewMethod");
+                }
             }
         }
         private Zetbox.App.GUI.InstanceListViewMethod? _ViewMethod;
@@ -1245,6 +1390,8 @@ namespace Zetbox.App.GUI
 
             me.AllowAddNew = other.AllowAddNew;
             me.AllowDelete = other.AllowDelete;
+            me.AllowExport = other.AllowExport;
+            me.AllowOpen = other.AllowOpen;
             me.AllowSelectColumns = other.AllowSelectColumns;
             me.AllowUserFilter = other.AllowUserFilter;
             me.EnableAutoFilter = other.EnableAutoFilter;
@@ -1253,19 +1400,13 @@ namespace Zetbox.App.GUI
             me.IsEditable = other.IsEditable;
             me.IsMultiselect = other.IsMultiselect;
             me.RespectRequiredFilter = other.RespectRequiredFilter;
+            me.ShowCommands = other.ShowCommands;
             me.ShowFilter = other.ShowFilter;
             me.ShowMasterDetail = other.ShowMasterDetail;
-            me.ShowOpenCommand = other.ShowOpenCommand;
-            me.ShowRefreshCommand = other.ShowRefreshCommand;
             me.ViewMethod = other.ViewMethod;
             this._fk_RequestedEditorKind = otherImpl._fk_RequestedEditorKind;
             this._fk_RequestedWorkspaceKind = otherImpl._fk_RequestedWorkspaceKind;
             this._fk_Type = otherImpl._fk_Type;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1319,6 +1460,8 @@ namespace Zetbox.App.GUI
             {
                 case "AllowAddNew":
                 case "AllowDelete":
+                case "AllowExport":
+                case "AllowOpen":
                 case "AllowSelectColumns":
                 case "AllowUserFilter":
                 case "EnableAutoFilter":
@@ -1329,10 +1472,9 @@ namespace Zetbox.App.GUI
                 case "RequestedEditorKind":
                 case "RequestedWorkspaceKind":
                 case "RespectRequiredFilter":
+                case "ShowCommands":
                 case "ShowFilter":
                 case "ShowMasterDetail":
-                case "ShowOpenCommand":
-                case "ShowRefreshCommand":
                 case "Type":
                 case "ViewMethod":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1340,6 +1482,21 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "RequestedEditorKind":
+                return TriggerFetchRequestedEditorKindAsync();
+            case "RequestedWorkspaceKind":
+                return TriggerFetchRequestedWorkspaceKindAsync();
+            case "Type":
+                return TriggerFetchTypeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -1405,6 +1562,24 @@ namespace Zetbox.App.GUI
                         obj => obj.AllowDelete,
                         (obj, val) => obj.AllowDelete = val,
 						obj => OnAllowDelete_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<NavigationSearchScreen, bool?>(
+                        lazyCtx,
+                        new Guid("b7d18552-aa83-4968-97b3-ce34ff79753f"),
+                        "AllowExport",
+                        null,
+                        obj => obj.AllowExport,
+                        (obj, val) => obj.AllowExport = val,
+						obj => OnAllowExport_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<NavigationSearchScreen, bool?>(
+                        lazyCtx,
+                        new Guid("84a66c05-9f95-475e-aa9d-a341a0de0ba6"),
+                        "AllowOpen",
+                        null,
+                        obj => obj.AllowOpen,
+                        (obj, val) => obj.AllowOpen = val,
+						obj => OnAllowOpen_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
@@ -1498,6 +1673,15 @@ namespace Zetbox.App.GUI
                     // else
                     new PropertyDescriptorMemoryImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
+                        new Guid("21b4324b-110f-48f2-a5d0-a3645d45604a"),
+                        "ShowCommands",
+                        null,
+                        obj => obj.ShowCommands,
+                        (obj, val) => obj.ShowCommands = val,
+						obj => OnShowCommands_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<NavigationSearchScreen, bool?>(
+                        lazyCtx,
                         new Guid("055fd120-c058-436b-9f9e-e6a2a0fec2e5"),
                         "ShowFilter",
                         null,
@@ -1513,24 +1697,6 @@ namespace Zetbox.App.GUI
                         obj => obj.ShowMasterDetail,
                         (obj, val) => obj.ShowMasterDetail = val,
 						obj => OnShowMasterDetail_IsValid), 
-                    // else
-                    new PropertyDescriptorMemoryImpl<NavigationSearchScreen, bool?>(
-                        lazyCtx,
-                        new Guid("84a66c05-9f95-475e-aa9d-a341a0de0ba6"),
-                        "ShowOpenCommand",
-                        null,
-                        obj => obj.ShowOpenCommand,
-                        (obj, val) => obj.ShowOpenCommand = val,
-						obj => OnShowOpenCommand_IsValid), 
-                    // else
-                    new PropertyDescriptorMemoryImpl<NavigationSearchScreen, bool?>(
-                        lazyCtx,
-                        new Guid("13e637ea-d461-46da-a153-ae8af5b0b724"),
-                        "ShowRefreshCommand",
-                        null,
-                        obj => obj.ShowRefreshCommand,
-                        (obj, val) => obj.ShowRefreshCommand = val,
-						obj => OnShowRefreshCommand_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<NavigationSearchScreen, Zetbox.App.Base.ObjectClass>(
                         lazyCtx,
@@ -1614,6 +1780,8 @@ namespace Zetbox.App.GUI
         {
             SetNotInitializedProperty("AllowAddNew");
             SetNotInitializedProperty("AllowDelete");
+            SetNotInitializedProperty("AllowExport");
+            SetNotInitializedProperty("AllowOpen");
             SetNotInitializedProperty("AllowSelectColumns");
             SetNotInitializedProperty("AllowUserFilter");
             SetNotInitializedProperty("EnableAutoFilter");
@@ -1624,10 +1792,9 @@ namespace Zetbox.App.GUI
             SetNotInitializedProperty("RequestedEditorKind");
             SetNotInitializedProperty("RequestedWorkspaceKind");
             SetNotInitializedProperty("RespectRequiredFilter");
+            SetNotInitializedProperty("ShowCommands");
             SetNotInitializedProperty("ShowFilter");
             SetNotInitializedProperty("ShowMasterDetail");
-            SetNotInitializedProperty("ShowOpenCommand");
-            SetNotInitializedProperty("ShowRefreshCommand");
             SetNotInitializedProperty("Type");
             SetNotInitializedProperty("ViewMethod");
             base.NotifyCreated();
@@ -1658,22 +1825,23 @@ namespace Zetbox.App.GUI
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._AllowAddNew);
             binStream.Write(this._AllowDelete);
+            binStream.Write(this._AllowExport);
+            binStream.Write(this._AllowOpen);
             binStream.Write(this._AllowSelectColumns);
             binStream.Write(this._AllowUserFilter);
             binStream.Write(this._EnableAutoFilter);
             binStream.Write(this._InitialSort);
-            binStream.Write((int?)((Zetbox.App.GUI.NavigationSearchScreen)this).InitialSortDirection);
+            binStream.Write((int?)this._InitialSortDirection);
             binStream.Write(this._IsEditable);
             binStream.Write(this._IsMultiselect);
             binStream.Write(RequestedEditorKind != null ? RequestedEditorKind.ID : (int?)null);
             binStream.Write(RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ID : (int?)null);
             binStream.Write(this._RespectRequiredFilter);
+            binStream.Write(this._ShowCommands);
             binStream.Write(this._ShowFilter);
             binStream.Write(this._ShowMasterDetail);
-            binStream.Write(this._ShowOpenCommand);
-            binStream.Write(this._ShowRefreshCommand);
             binStream.Write(Type != null ? Type.ID : (int?)null);
-            binStream.Write((int?)((Zetbox.App.GUI.NavigationSearchScreen)this).ViewMethod);
+            binStream.Write((int?)this._ViewMethod);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1684,22 +1852,23 @@ namespace Zetbox.App.GUI
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._AllowAddNew = binStream.ReadNullableBoolean();
             this._AllowDelete = binStream.ReadNullableBoolean();
+            this._AllowExport = binStream.ReadNullableBoolean();
+            this._AllowOpen = binStream.ReadNullableBoolean();
             this._AllowSelectColumns = binStream.ReadNullableBoolean();
             this._AllowUserFilter = binStream.ReadNullableBoolean();
             this._EnableAutoFilter = binStream.ReadNullableBoolean();
             this._InitialSort = binStream.ReadString();
-            ((Zetbox.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)binStream.ReadNullableInt32();
+            this._InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)binStream.ReadNullableInt32();
             this._IsEditable = binStream.ReadNullableBoolean();
             this._IsMultiselect = binStream.ReadNullableBoolean();
             this._fk_RequestedEditorKind = binStream.ReadNullableInt32();
             this._fk_RequestedWorkspaceKind = binStream.ReadNullableInt32();
             this._RespectRequiredFilter = binStream.ReadNullableBoolean();
+            this._ShowCommands = binStream.ReadNullableBoolean();
             this._ShowFilter = binStream.ReadNullableBoolean();
             this._ShowMasterDetail = binStream.ReadNullableBoolean();
-            this._ShowOpenCommand = binStream.ReadNullableBoolean();
-            this._ShowRefreshCommand = binStream.ReadNullableBoolean();
             this._fk_Type = binStream.ReadNullableInt32();
-            ((Zetbox.App.GUI.NavigationSearchScreen)this).ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
+            this._ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1715,22 +1884,23 @@ namespace Zetbox.App.GUI
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._AllowAddNew, xml, "AllowAddNew", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._AllowDelete, xml, "AllowDelete", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._AllowExport, xml, "AllowExport", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._AllowOpen, xml, "AllowOpen", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._AllowSelectColumns, xml, "AllowSelectColumns", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._AllowUserFilter, xml, "AllowUserFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._EnableAutoFilter, xml, "EnableAutoFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._InitialSort, xml, "InitialSort", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)((Zetbox.App.GUI.NavigationSearchScreen)this).InitialSortDirection, xml, "InitialSortDirection", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._InitialSortDirection, xml, "InitialSortDirection", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._IsEditable, xml, "IsEditable", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._IsMultiselect, xml, "IsMultiselect", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedEditorKind != null ? RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ExportGuid : (Guid?)null, xml, "RequestedWorkspaceKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowCommands, xml, "ShowCommands", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowFilter, xml, "ShowFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowMasterDetail, xml, "ShowMasterDetail", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowOpenCommand, xml, "ShowOpenCommand", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)((Zetbox.App.GUI.NavigationSearchScreen)this).ViewMethod, xml, "ViewMethod", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._ViewMethod, xml, "ViewMethod", "Zetbox.App.GUI");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -1745,6 +1915,12 @@ namespace Zetbox.App.GUI
             case "Zetbox.App.GUI|AllowDelete":
                 this._AllowDelete = XmlStreamer.ReadNullableBoolean(xml);
                 break;
+            case "Zetbox.App.GUI|AllowExport":
+                this._AllowExport = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Zetbox.App.GUI|AllowOpen":
+                this._AllowOpen = XmlStreamer.ReadNullableBoolean(xml);
+                break;
             case "Zetbox.App.GUI|AllowSelectColumns":
                 this._AllowSelectColumns = XmlStreamer.ReadNullableBoolean(xml);
                 break;
@@ -1758,7 +1934,7 @@ namespace Zetbox.App.GUI
                 this._InitialSort = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.GUI|InitialSortDirection":
-                ((Zetbox.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)XmlStreamer.ReadNullableInt32(xml);
+                this._InitialSortDirection = (Zetbox.App.GUI.ListSortDirection?)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.GUI|IsEditable":
                 this._IsEditable = XmlStreamer.ReadNullableBoolean(xml);
@@ -1775,23 +1951,20 @@ namespace Zetbox.App.GUI
             case "Zetbox.App.GUI|RespectRequiredFilter":
                 this._RespectRequiredFilter = XmlStreamer.ReadNullableBoolean(xml);
                 break;
+            case "Zetbox.App.GUI|ShowCommands":
+                this._ShowCommands = XmlStreamer.ReadNullableBoolean(xml);
+                break;
             case "Zetbox.App.GUI|ShowFilter":
                 this._ShowFilter = XmlStreamer.ReadNullableBoolean(xml);
                 break;
             case "Zetbox.App.GUI|ShowMasterDetail":
                 this._ShowMasterDetail = XmlStreamer.ReadNullableBoolean(xml);
                 break;
-            case "Zetbox.App.GUI|ShowOpenCommand":
-                this._ShowOpenCommand = XmlStreamer.ReadNullableBoolean(xml);
-                break;
-            case "Zetbox.App.GUI|ShowRefreshCommand":
-                this._ShowRefreshCommand = XmlStreamer.ReadNullableBoolean(xml);
-                break;
             case "Zetbox.App.GUI|Type":
                 this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|ViewMethod":
-                ((Zetbox.App.GUI.NavigationSearchScreen)this).ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)XmlStreamer.ReadNullableInt32(xml);
+                this._ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

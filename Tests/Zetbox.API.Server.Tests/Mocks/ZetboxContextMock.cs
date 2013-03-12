@@ -20,6 +20,7 @@ using Zetbox.API.Common;
 using Zetbox.API.Configuration;
 using Zetbox.API.Server.Tests;
 using Zetbox.App.Base;
+using Zetbox.API.Async;
 
 namespace Zetbox.API.Server.Mocks
 {
@@ -94,21 +95,6 @@ namespace Zetbox.API.Server.Mocks
         }
 
         public override int SubmitRestore()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IDataObject Find(InterfaceType ifType, int ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override T Find<T>(int ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
             throw new NotImplementedException();
         }
@@ -193,6 +179,21 @@ namespace Zetbox.API.Server.Mocks
         protected override bool IsTransactionRunning
         {
             get { throw new NotImplementedException(); }
+        }
+
+        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ZbTask<T> FindAsync<T>(int ID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

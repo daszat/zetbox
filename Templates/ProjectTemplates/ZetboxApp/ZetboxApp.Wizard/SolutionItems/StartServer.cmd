@@ -4,5 +4,5 @@ echo Run the development server.
 echo ********************************************************************************
 
 cd bin\Debug
-Zetbox.Server.Service.exe
+Zetbox.Server.Service.exe /console
 cd ..\..

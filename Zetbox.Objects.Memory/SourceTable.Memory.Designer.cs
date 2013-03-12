@@ -40,7 +40,7 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -58,8 +58,44 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ChangedBy;
+        private int? __fk_ChangedByCache;
 
+        private int? _fk_ChangedBy {
+            get
+            {
+                return __fk_ChangedByCache;
+            }
+            set
+            {
+                __fk_ChangedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        {
+            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+
+            if (_fk_ChangedBy.HasValue)
+                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchChangedByTask.OnResult(t =>
+            {
+                if (OnChangedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnChangedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchChangedByTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -67,32 +103,19 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_ChangedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-                else
-                    __value = null;
-
-                if (OnChangedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnChangedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -113,6 +136,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -167,6 +191,8 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -176,6 +202,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -183,10 +210,10 @@ namespace Zetbox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -234,6 +261,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Comment", __oldValue, __newValue);
                     _Comment = __newValue;
                     NotifyPropertyChanged("Comment", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnComment_PostSetter != null && IsAttached)
                     {
@@ -241,10 +269,10 @@ namespace Zetbox.App.SchemaMigration
                         OnComment_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Comment");
-				}
+                else
+                {
+                    SetInitializedProperty("Comment");
+                }
             }
         }
         private string _Comment;
@@ -258,7 +286,7 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -276,8 +304,44 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CreatedBy;
+        private int? __fk_CreatedByCache;
 
+        private int? _fk_CreatedBy {
+            get
+            {
+                return __fk_CreatedByCache;
+            }
+            set
+            {
+                __fk_CreatedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        {
+            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+
+            if (_fk_CreatedBy.HasValue)
+                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchCreatedByTask.OnResult(t =>
+            {
+                if (OnCreatedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnCreatedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCreatedByTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -285,32 +349,19 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_CreatedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-                else
-                    __value = null;
-
-                if (OnCreatedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnCreatedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -331,6 +382,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -385,6 +437,8 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -394,6 +448,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -401,10 +456,10 @@ namespace Zetbox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -452,6 +507,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -459,10 +515,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description;
@@ -476,7 +532,7 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DestinationObjectClass
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DestinationObjectClass
         // fkBackingName=_fk_DestinationObjectClass; fkGuidBackingName=_fk_guid_DestinationObjectClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -494,9 +550,45 @@ namespace Zetbox.App.SchemaMigration
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DestinationObjectClass;
+        private int? __fk_DestinationObjectClassCache;
+
+        private int? _fk_DestinationObjectClass {
+            get
+            {
+                return __fk_DestinationObjectClassCache;
+            }
+            set
+            {
+                __fk_DestinationObjectClassCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDestinationObjectClassTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DestinationObjectClass = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchDestinationObjectClassTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchDestinationObjectClassAsync()
+        {
+            if (_triggerFetchDestinationObjectClassTask != null) return _triggerFetchDestinationObjectClassTask;
+
+            if (_fk_DestinationObjectClass.HasValue)
+                _triggerFetchDestinationObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value);
+            else
+                _triggerFetchDestinationObjectClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchDestinationObjectClassTask.OnResult(t =>
+            {
+                if (OnDestinationObjectClass_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(t.Result);
+                    OnDestinationObjectClass_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDestinationObjectClassTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -504,32 +596,19 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                Zetbox.App.Base.ObjectClassMemoryImpl __value;
-                if (_fk_DestinationObjectClass.HasValue)
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value);
-                else
-                    __value = null;
-
-                if (OnDestinationObjectClass_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(__value);
-                    OnDestinationObjectClass_Getter(this, e);
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchDestinationObjectClassAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_DestinationObjectClass == null) || (value != null && value.ID == _fk_DestinationObjectClass))
-				{
-					SetInitializedProperty("DestinationObjectClass");
+                {
+                    SetInitializedProperty("DestinationObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DestinationObjectClassImpl;
@@ -550,6 +629,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DestinationObjectClass", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDestinationObjectClass_PostSetter != null && IsAttached)
                 {
@@ -613,6 +693,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -620,10 +701,10 @@ namespace Zetbox.App.SchemaMigration
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -671,6 +752,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -678,10 +760,10 @@ namespace Zetbox.App.SchemaMigration
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -706,25 +788,44 @@ namespace Zetbox.App.SchemaMigration
             {
                 if (_SourceColumn == null)
                 {
-                    List<Zetbox.App.SchemaMigration.SourceColumn> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.SchemaMigration.SourceColumn>(this, "SourceColumn");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.SchemaMigration.SourceColumn>();
-                    }
-    
-                    _SourceColumn = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
-                        "SourceTable",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("SourceColumn", null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
-                        serverList);
+                    TriggerFetchSourceColumnAsync().Wait();
                 }
                 return _SourceColumn;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchSourceColumnTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchSourceColumnAsync()
+        {
+            if (_triggerFetchSourceColumnTask != null) return _triggerFetchSourceColumnTask;
+
+            List<Zetbox.App.SchemaMigration.SourceColumn> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchSourceColumnTask = Context.GetListOfAsync<Zetbox.App.SchemaMigration.SourceColumn>(this, "SourceColumn")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchSourceColumnTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.SchemaMigration.SourceColumn>();
+                });
+            }
+    
+            _triggerFetchSourceColumnTask.OnResult(t =>
+            {
+                _SourceColumn = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
+                    "SourceTable",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("SourceColumn", null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchSourceColumnTask;    
         }
     
         private OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn> _SourceColumn;
@@ -736,7 +837,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StagingDatabase
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StagingDatabase
         // fkBackingName=_fk_StagingDatabase; fkGuidBackingName=_fk_guid_StagingDatabase;
         // referencedInterface=Zetbox.App.SchemaMigration.StagingDatabase; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=SourceTables; is list;
@@ -754,9 +855,45 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_StagingDatabase;
+        private int? __fk_StagingDatabaseCache;
+
+        private int? _fk_StagingDatabase {
+            get
+            {
+                return __fk_StagingDatabaseCache;
+            }
+            set
+            {
+                __fk_StagingDatabaseCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchStagingDatabaseTask = null;
+            }
+        }
 
         private Guid? _fk_guid_StagingDatabase = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.StagingDatabase> _triggerFetchStagingDatabaseTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.StagingDatabase> TriggerFetchStagingDatabaseAsync()
+        {
+            if (_triggerFetchStagingDatabaseTask != null) return _triggerFetchStagingDatabaseTask;
+
+            if (_fk_StagingDatabase.HasValue)
+                _triggerFetchStagingDatabaseTask = Context.FindAsync<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value);
+            else
+                _triggerFetchStagingDatabaseTask = new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.StagingDatabase>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchStagingDatabaseTask.OnResult(t =>
+            {
+                if (OnStagingDatabase_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.StagingDatabase>(t.Result);
+                    OnStagingDatabase_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchStagingDatabaseTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -764,32 +901,19 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl __value;
-                if (_fk_StagingDatabase.HasValue)
-                    __value = (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value);
-                else
-                    __value = null;
-
-                if (OnStagingDatabase_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.SchemaMigration.StagingDatabase>(__value);
-                    OnStagingDatabase_Getter(this, e);
-                    __value = (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)TriggerFetchStagingDatabaseAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_StagingDatabase == null) || (value != null && value.ID == _fk_StagingDatabase))
-				{
-					SetInitializedProperty("StagingDatabase");
+                {
+                    SetInitializedProperty("StagingDatabase");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = StagingDatabaseImpl;
@@ -826,6 +950,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("StagingDatabase", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnStagingDatabase_PostSetter != null && IsAttached)
                 {
@@ -877,6 +1002,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     NotifyPropertyChanging("Status", __oldValue, __newValue);
                     _Status = __newValue;
                     NotifyPropertyChanged("Status", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnStatus_PostSetter != null && IsAttached)
                     {
@@ -884,10 +1010,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnStatus_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Status");
-				}
+                else
+                {
+                    SetInitializedProperty("Status");
+                }
             }
         }
         private Zetbox.App.SchemaMigration.MappingStatus? _Status;
@@ -1048,11 +1174,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             this._fk_DestinationObjectClass = otherImpl._fk_DestinationObjectClass;
             this._fk_StagingDatabase = otherImpl._fk_StagingDatabase;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -1139,6 +1260,25 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DestinationObjectClass":
+                return TriggerFetchDestinationObjectClassAsync();
+            case "SourceColumn":
+                return TriggerFetchSourceColumnAsync();
+            case "StagingDatabase":
+                return TriggerFetchStagingDatabaseAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -1381,6 +1521,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             ChangedBy = null;
             CreatedBy = null;
             DestinationObjectClass = null;
+            StagingDatabase = null;
         }
         public static event ObjectEventHandler<SourceTable> OnNotifyDeleting_SourceTable;
 
@@ -1413,7 +1554,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             binStream.Write(this._Name);
             binStream.Write(StagingDatabase != null ? StagingDatabase.ID : (int?)null);
-            binStream.Write((int?)((Zetbox.App.SchemaMigration.SourceTable)this).Status);
+            binStream.Write((int?)this._Status);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1441,7 +1582,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             this._Name = binStream.ReadString();
             this._fk_StagingDatabase = binStream.ReadNullableInt32();
-            ((Zetbox.App.SchemaMigration.SourceTable)this).Status = (Zetbox.App.SchemaMigration.MappingStatus?)binStream.ReadNullableInt32();
+            this._Status = (Zetbox.App.SchemaMigration.MappingStatus?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1464,7 +1605,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(DestinationObjectClass != null ? DestinationObjectClass.ExportGuid : (Guid?)null, xml, "DestinationObjectClass", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(StagingDatabase != null ? StagingDatabase.ExportGuid : (Guid?)null, xml, "StagingDatabase", "Zetbox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)((Zetbox.App.SchemaMigration.SourceTable)this).Status, xml, "Status", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream((int?)this._Status, xml, "Status", "Zetbox.App.SchemaMigration");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1503,7 +1644,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 this._fk_guid_StagingDatabase = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.SchemaMigration|Status":
-                ((Zetbox.App.SchemaMigration.SourceTable)this).Status = (Zetbox.App.SchemaMigration.MappingStatus?)XmlStreamer.ReadNullableInt32(xml);
+                this._Status = (Zetbox.App.SchemaMigration.MappingStatus?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

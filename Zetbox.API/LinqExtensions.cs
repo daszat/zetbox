@@ -179,9 +179,13 @@ namespace Zetbox.API
 
             type = orderBy.Type.GetGenericArguments()[0].GetGenericArguments()[1];
             return queryable.Provider.CreateQuery<T>(
-                Expression.Call(typeof(Queryable), "OrderBy",
-                new Type[] { queryable.ElementType, type },
-                queryable.Expression, orderBy));
+                Expression.Call(
+                    typeof(Queryable),
+                    "OrderBy",
+                    new Type[] { queryable.ElementType, type },
+                    queryable.Expression,
+                    orderBy)
+                );
         }
 
         /// <summary>
@@ -444,7 +448,7 @@ namespace Zetbox.API
             object value = pInfo.GetValue(obj, null);
             if (value != null)
             {
-                if (value.GetType().IsGenericType && value.GetType().GetGenericTypeDefinition() == typeof(ReadOnlyCollection<>))
+                if (value.GetType().IsGenericType && typeof(ReadOnlyCollection<object>).IsAssignableFrom(value.GetType().GetGenericTypeDefinition().MakeGenericType(typeof(object))))
                 {
                     int count = (int)value.GetType().InvokeMember("get_Count", BindingFlags.InvokeMethod, null, value, null, CultureInfo.InvariantCulture);
                     if (count == 0)

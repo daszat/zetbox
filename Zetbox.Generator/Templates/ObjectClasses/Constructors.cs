@@ -24,9 +24,9 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
     public partial class Constructors
     {
-        public virtual void ApplyCompoundObjectPropertyInitialisers()
+        public virtual void ApplyCompoundObjectPropertyInitialisers(string lazyCtxProperty)
         {
-            Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, compoundObjectProperties, ImplementationSuffix, ImplementationPropertySuffix);
+            Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, compoundObjectProperties, ImplementationSuffix, ImplementationPropertySuffix, lazyCtxProperty);
         }
     }
 }

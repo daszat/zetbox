@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IsValidNamespaceConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="IsValidNamespaceConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IsValidNamespaceConstraint")]
     public class IsValidNamespaceConstraintEfImpl : Zetbox.App.Base.IsValidIdentifierConstraintEfImpl, IsValidNamespaceConstraint
     {
@@ -178,11 +178,6 @@ namespace Zetbox.App.Base
             var otherImpl = (IsValidNamespaceConstraintEfImpl)obj;
             var me = (IsValidNamespaceConstraint)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

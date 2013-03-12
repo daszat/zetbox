@@ -28,6 +28,7 @@ namespace Zetbox.App.Extensions
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
@@ -44,9 +45,9 @@ namespace Zetbox.App.Extensions
 
         private struct MethodKey
         {
-            public MethodKey(string @namespace, string typeName, string methodName)
+            public MethodKey(string @namespace, string typeName, string methodName, Type[] paramTypes)
             {
-                key = string.Format("{0}.{1}Actions.{2}", @namespace, typeName, methodName);
+                key = string.Format("{0}.{1}Actions.{2}({3})", @namespace, typeName, methodName, string.Join(", ", paramTypes.Select(t => t.FullName)));
             }
 
             private string key;
@@ -108,18 +109,20 @@ namespace Zetbox.App.Extensions
                 if (_initImpls.ContainsKey(implType)) return;
                 try
                 {
-                    Log.InfoFormat("Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name);
-                    Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
-
-                    ReflectMethods(ctx);
-                    CreateInvokeInfosForDataTypes(ctx);
-
-                    foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
+                    using (Log.InfoTraceMethodCallFormat("Init", "Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name))
                     {
-                        Log.Warn(string.Format("Couldn't find any method for Invocation {0}", key));
-                    }
+                        Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
-                    Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
+                        ReflectMethods(ctx);
+                        CreateInvokeInfosForDataTypes(ctx);
+
+                        foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
+                        {
+                            Log.Warn(string.Format("Couldn't find any method for Invocation {0}", key));
+                        }
+
+                        Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
+                    }
                 }
                 finally
                 {
@@ -161,7 +164,7 @@ namespace Zetbox.App.Extensions
                             {
                                 if (m.GetCustomAttributes(typeof(Invocation), false).Length != 0)
                                 {
-                                    var key = new MethodKey(t.Namespace, t.Name.Substring(0, t.Name.Length - "Actions".Length), m.Name);
+                                    var key = new MethodKey(t.Namespace, t.Name.Substring(0, t.Name.Length - "Actions".Length), m.Name, m.GetParameters().Select(p => p.ParameterType).ToArray());
                                     if (_reflectedMethods.ContainsKey(key))
                                     {
                                         _reflectedMethods[key].Add(m);
@@ -170,10 +173,6 @@ namespace Zetbox.App.Extensions
                                     {
                                         _reflectedMethods[key] = new List<MethodInfo>() { m };
                                     }
-                                }
-                                else if (m.GetCustomAttributes(typeof(Zetbox.API.Constraint), false).Length != 0)
-                                {
-                                    // TODO: Check if Invoking Constraint is valid
                                 }
                                 else
                                 {
@@ -196,6 +195,10 @@ namespace Zetbox.App.Extensions
                             Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing. Multiple Errors:", assembly.Name), lex);
                         }
                     }
+                }
+                catch (FileNotFoundException ex)
+                {
+                    Log.Warn(String.Format("Error while processing Assembly [{0}]. FileNotFound: {1}. Ignoring and continuing.", assembly.Name, ex.FileName));
                 }
                 catch (Exception ex)
                 {
@@ -320,26 +323,56 @@ namespace Zetbox.App.Extensions
         {
             if (implType == null) throw new ArgumentNullException("implType");
             if (dt == null) throw new ArgumentNullException("dt");
-
+            var dtType = Type.GetType(string.Format("{0}.{1}, {2}", dt.Module.Namespace, dt.Name, Helper.InterfaceAssembly), false);
+            if (dtType == null) throw new ArgumentOutOfRangeException("dt", string.Format("Cannot find type '{0}'", string.Format("{0}.{1}", dt.Module.Namespace, dt.Name)));
 
             // Reflected Methods
             // New style
             foreach (var method in GetAllMethods(dt))
             {
-                foreach (var methodSuffix in new[] { string.Empty, "CanExec", "CanExecReason" })
+                var returnParam = method.Parameter.SingleOrDefault(p => p.IsReturnParameter);
+                var infrastructureParameters = returnParam == null
+                    ? new Type[] { dtType }
+                    : new Type[] { dtType, typeof(MethodReturnEventArgs<>).MakeGenericType(returnParam.GuessParameterType()) };
+
+                Type[] paramTypes = infrastructureParameters
+                    .Concat(method.Parameter
+                        .Where(p => !p.IsReturnParameter)
+                        .Select(p => p.GuessParameterType()))
+                    .ToArray();
+
+                var key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name, paramTypes);
+                if (_reflectedMethods.ContainsKey(key))
                 {
-                    var key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name + methodSuffix);
+                    var methodInfos = _reflectedMethods[key];
+
+                    // May be null on Methods without events like server side invocations or "embedded" methods
+                    // or null if not found
+                    var attr = FindEventBasedMethodAttribute(method, implType); // The Method
+                    if (attr != null)
+                    {
+                        foreach (var mi in methodInfos)
+                        {
+                            CreateInvokeInfo(implType, mi, attr.EventName);
+                        }
+                    }
+
+                    _attachedMethods[key] = true;
+                }
+
+                foreach (var data in new[] {
+                    new { Suffix = "CanExec", ReturnType = typeof(MethodReturnEventArgs<bool>) },
+                    new { Suffix = "CanExecReason", ReturnType = typeof(MethodReturnEventArgs<string>) }
+                })
+                {
+                    key = new MethodKey(dt.Module.Namespace, dt.Name, method.Name + data.Suffix, new[] { dtType, data.ReturnType });
                     if (_reflectedMethods.ContainsKey(key))
                     {
                         var methodInfos = _reflectedMethods[key];
 
-                        // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                        // May be null on Methods without events like server side invocations or "embedded" methods
                         // or null if not found
-                        EventBasedMethodAttribute attr;
-                        if (string.IsNullOrEmpty(methodSuffix))
-                            attr = FindEventBasedMethodAttribute(method, implType); // The Method
-                        else
-                            attr = FindEventBasedMethodAttribute(method, methodSuffix, implType); // For can execute & reason
+                        var attr = FindEventBasedMethodAttribute(method, data.Suffix, implType);
                         if (attr != null)
                         {
                             foreach (var mi in methodInfos)
@@ -355,29 +388,47 @@ namespace Zetbox.App.Extensions
 
             if (dt is ObjectClass)
             {
-                CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave");
-                CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave");
-                CreateDefaultMethodInvocations(implType, dt, "NotifyCreated");
-                CreateDefaultMethodInvocations(implType, dt, "NotifyDeleting");
+                CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave", new[] { dtType });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave", new[] { dtType });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyCreated", new[] { dtType });
+                CreateDefaultMethodInvocations(implType, dt, "NotifyDeleting", new[] { dtType });
             }
 
-            CreateDefaultMethodInvocations(implType, dt, "ToString");
-            CreateDefaultMethodInvocations(implType, dt, "ObjectIsValid");
+            CreateDefaultMethodInvocations(implType, dt, "ToString", new[] { dtType, typeof(MethodReturnEventArgs<string>) });
+            CreateDefaultMethodInvocations(implType, dt, "ObjectIsValid", new[] { dtType, typeof(ObjectIsValidEventArgs) });
 
             // Reflected Properties
             // New style
             foreach (Property prop in dt.Properties)
             {
-                CreatePropertyInvocations(implType, prop, "get_", "Getter");
-                CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter");
-                CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter");
-                CreatePropertyInvocations(implType, prop, "isValid_", "IsValid");
+                if (!prop.GetIsList())
+                {
+                    CreatePropertyInvocations(implType, prop, "get_", "Getter",
+                        new[] { dtType, typeof(PropertyGetterEventArgs<>).MakeGenericType(dtType.GetPropertyType(prop.Name)) });
+                }
+
+                if (!prop.IsCalculated() && !prop.GetIsList())
+                {
+                    CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter",
+                        new[] { dtType, typeof(PropertyPreSetterEventArgs<>).MakeGenericType(dtType.GetPropertyType(prop.Name)) });
+                    CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter",
+                        new[] { dtType, typeof(PropertyPostSetterEventArgs<>).MakeGenericType(dtType.GetPropertyType(prop.Name)) });
+                }
+
+                if (prop.GetIsList())
+                {
+                    // change notification
+                    CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter", new[] { dtType });
+                }
+
+                CreatePropertyInvocations(implType, prop, "isValid_", "IsValid",
+                    new[] { dtType, typeof(PropertyIsValidEventArgs) });
             }
         }
 
-        private void CreateDefaultMethodInvocations(Type implType, DataType dt, string methodName)
+        private void CreateDefaultMethodInvocations(Type implType, DataType dt, string methodName, Type[] paramTypes)
         {
-            var key = new MethodKey(dt.Module.Namespace, dt.Name, methodName);
+            var key = new MethodKey(dt.Module.Namespace, dt.Name, methodName, paramTypes);
             if (_reflectedMethods.ContainsKey(key))
             {
                 var methodInfos = _reflectedMethods[key];
@@ -389,9 +440,9 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        private void CreatePropertyInvocations(Type implType, Property prop, string methodPrefix, string invocationType)
+        private void CreatePropertyInvocations(Type implType, Property prop, string methodPrefix, string invocationType, Type[] paramTypes)
         {
-            var key = new MethodKey(prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, string.Format("{0}{1}", methodPrefix, prop.Name));
+            var key = new MethodKey(prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, string.Format("{0}{1}", methodPrefix, prop.Name), paramTypes);
             if (_reflectedMethods.ContainsKey(key))
             {
                 var methodInfos = _reflectedMethods[key];

@@ -51,25 +51,44 @@ namespace Zetbox.App.Test
             {
                 if (_Children == null)
                 {
-                    List<Zetbox.App.Test.RequiredParentChild> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Test.RequiredParentChild>(this, "Children");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Test.RequiredParentChild>();
-                    }
-    
-                    _Children = new OneNRelationList<Zetbox.App.Test.RequiredParentChild>(
-                        "Parent",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
-                        serverList);
+                    TriggerFetchChildrenAsync().Wait();
                 }
                 return _Children;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+
+            List<Zetbox.App.Test.RequiredParentChild> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchChildrenTask = Context.GetListOfAsync<Zetbox.App.Test.RequiredParentChild>(this, "Children")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchChildrenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.Test.RequiredParentChild>();
+                });
+            }
+    
+            _triggerFetchChildrenTask.OnResult(t =>
+            {
+                _Children = new OneNRelationList<Zetbox.App.Test.RequiredParentChild>(
+                    "Parent",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchChildrenTask;    
         }
     
         private OneNRelationList<Zetbox.App.Test.RequiredParentChild> _Children;
@@ -114,6 +133,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.RequiredParent> O
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -121,10 +141,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.RequiredParent> O
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -148,11 +168,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.RequiredParent> O
             var me = (RequiredParent)this;
 
             me.Name = other.Name;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -185,6 +200,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.RequiredParent> O
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

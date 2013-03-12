@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Item is readonly in view but changable on the server/client
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ViewReadOnlyConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="ViewReadOnlyConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ViewReadOnlyConstraint")]
     public class ViewReadOnlyConstraintEfImpl : Zetbox.App.Base.ReadOnlyConstraintEfImpl, ViewReadOnlyConstraint
     {
@@ -178,11 +178,6 @@ namespace Zetbox.App.Base
             var otherImpl = (ViewReadOnlyConstraintEfImpl)obj;
             var me = (ViewReadOnlyConstraint)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

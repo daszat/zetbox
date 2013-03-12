@@ -26,7 +26,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
     public class TreeItemInstanceListViewModel : InstanceListViewModel
     {
-        public new delegate TreeItemInstanceListViewModel Factory(IZetboxContext dataCtx, ViewModel parent/*, Func<IZetboxContext> workingCtxFactory // not needed, injected by AutoFac */, ObjectClass type, Func<IQueryable> qry);
+        public new delegate TreeItemInstanceListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, Func<IQueryable> qry);
 
         public TreeItemInstanceListViewModel(
             IViewModelDependencies appCtx,
@@ -34,10 +34,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             IFileOpener fileOpener,
             ITempFileService tmpService,
             IZetboxContext dataCtx, ViewModel parent,
-            Func<IZetboxContext> workingCtxFactory,
             ObjectClass type,
             Func<IQueryable> qry)
-            : base(appCtx, config, fileOpener, tmpService, dataCtx, parent, workingCtxFactory, type, qry)
+            : base(appCtx, config, fileOpener, tmpService, dataCtx, parent, type, qry)
         {
         }
 

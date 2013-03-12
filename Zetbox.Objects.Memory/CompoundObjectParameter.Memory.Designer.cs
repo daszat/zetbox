@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
         // fkBackingName=_fk_CompoundObject; fkGuidBackingName=_fk_guid_CompoundObject;
         // referencedInterface=Zetbox.App.Base.CompoundObject; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CompoundObject;
+        private int? __fk_CompoundObjectCache;
+
+        private int? _fk_CompoundObject {
+            get
+            {
+                return __fk_CompoundObjectCache;
+            }
+            set
+            {
+                __fk_CompoundObjectCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCompoundObjectTask = null;
+            }
+        }
 
         private Guid? _fk_guid_CompoundObject = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject> _triggerFetchCompoundObjectTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject> TriggerFetchCompoundObjectAsync()
+        {
+            if (_triggerFetchCompoundObjectTask != null) return _triggerFetchCompoundObjectTask;
+
+            if (_fk_CompoundObject.HasValue)
+                _triggerFetchCompoundObjectTask = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);
+            else
+                _triggerFetchCompoundObjectTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchCompoundObjectTask.OnResult(t =>
+            {
+                if (OnCompoundObject_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.CompoundObject>(t.Result);
+                    OnCompoundObject_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCompoundObjectTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.CompoundObjectMemoryImpl __value;
-                if (_fk_CompoundObject.HasValue)
-                    __value = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);
-                else
-                    __value = null;
-
-                if (OnCompoundObject_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.CompoundObject>(__value);
-                    OnCompoundObject_Getter(this, e);
-                    __value = (Zetbox.App.Base.CompoundObjectMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.CompoundObjectMemoryImpl)TriggerFetchCompoundObjectAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_CompoundObject == null) || (value != null && value.ID == _fk_CompoundObject))
-				{
-					SetInitializedProperty("CompoundObject");
+                {
+                    SetInitializedProperty("CompoundObject");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CompoundObjectImpl;
@@ -114,6 +137,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CompoundObject", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCompoundObject_PostSetter != null && IsAttached)
                 {
@@ -332,11 +356,6 @@ namespace Zetbox.App.Base
 
             this._fk_CompoundObject = otherImpl._fk_CompoundObject;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -375,6 +394,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "CompoundObject":
+                return TriggerFetchCompoundObjectAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -489,6 +519,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObjectParameter != null) OnNotifyDeleting_CompoundObjectParameter(this);
+            CompoundObject = null;
         }
         public static event ObjectEventHandler<CompoundObjectParameter> OnNotifyDeleting_CompoundObjectParameter;
 

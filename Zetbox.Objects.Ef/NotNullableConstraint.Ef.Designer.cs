@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NotNullableConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="NotNullableConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NotNullableConstraint")]
     public class NotNullableConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, NotNullableConstraint
     {
@@ -178,11 +178,6 @@ namespace Zetbox.App.Base
             var otherImpl = (NotNullableConstraintEfImpl)obj;
             var me = (NotNullableConstraint)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

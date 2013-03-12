@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Decimal Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DecimalProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="DecimalPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DecimalProperty")]
     public class DecimalPropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, DecimalProperty
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Precision", __oldValue, __newValue);
                     _Precision = __newValue;
                     NotifyPropertyChanged("Precision", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPrecision_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnPrecision_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Precision");
-				}
+                else
+                {
+                    SetInitializedProperty("Precision");
+                }
             }
         }
         private int _Precision_store;
@@ -147,6 +148,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Scale", __oldValue, __newValue);
                     _Scale = __newValue;
                     NotifyPropertyChanged("Scale", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnScale_PostSetter != null && IsAttached)
                     {
@@ -154,10 +156,10 @@ namespace Zetbox.App.Base
                         OnScale_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Scale");
-				}
+                else
+                {
+                    SetInitializedProperty("Scale");
+                }
             }
         }
         private int _Scale_store;
@@ -505,11 +507,6 @@ namespace Zetbox.App.Base
 
             me.Precision = other.Precision;
             me.Scale = other.Scale;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

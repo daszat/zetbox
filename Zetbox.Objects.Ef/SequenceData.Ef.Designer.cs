@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SequenceData")]
+    [EdmEntityType(NamespaceName="Model", Name="SequenceDataEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SequenceData")]
     public class SequenceDataEfImpl : BaseServerDataObject_EntityFramework, SequenceData
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
                     _CurrentNumber = __newValue;
                     NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCurrentNumber_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnCurrentNumber_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CurrentNumber");
-				}
+                else
+                {
+                    SetInitializedProperty("CurrentNumber");
+                }
             }
         }
         private int _CurrentNumber_store;
@@ -153,7 +154,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnSequence_Getter != null)
                 {
@@ -165,7 +165,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.SequenceEfImpl> r
@@ -212,6 +212,7 @@ namespace Zetbox.App.Base
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Data", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -236,11 +237,6 @@ namespace Zetbox.App.Base
 
             me.CurrentNumber = other.CurrentNumber;
             this._fk_Sequence = otherImpl._fk_Sequence;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -383,6 +379,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SequenceData != null) OnNotifyDeleting_SequenceData(this);
+            Sequence = null;
         }
         public static event ObjectEventHandler<SequenceData> OnNotifyDeleting_SequenceData;
 
@@ -408,12 +405,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -429,8 +427,9 @@ namespace Zetbox.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._CurrentNumber);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.SequenceEfImpl>("Model.FK_Sequence_has_Data", "Sequence").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.SequenceEfImpl>("Model.FK_Sequence_has_Data", "Sequence");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

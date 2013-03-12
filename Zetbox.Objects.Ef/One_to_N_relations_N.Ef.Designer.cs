@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// The N-Side of the classes for the One_to_N_relations Tests
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="One_to_N_relations_N")]
+    [EdmEntityType(NamespaceName="Model", Name="One_to_N_relations_NEfImpl")]
     [System.Diagnostics.DebuggerDisplay("One_to_N_relations_N")]
     public class One_to_N_relations_NEfImpl : BaseServerDataObject_EntityFramework, One_to_N_relations_N
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -153,7 +154,6 @@ namespace Zetbox.App.Test
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnOneSide_Getter != null)
                 {
@@ -165,7 +165,7 @@ namespace Zetbox.App.Test
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.One_to_N_relations_OneEfImpl> r
@@ -212,6 +212,7 @@ namespace Zetbox.App.Test
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("NSide", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -236,11 +237,6 @@ namespace Zetbox.App.Test
 
             me.Name = other.Name;
             this._fk_OneSide = otherImpl._fk_OneSide;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -409,12 +405,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -430,8 +427,9 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Name);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.One_to_N_relations_OneEfImpl>("Model.FK_OneSide_connectsTo_NSide", "OneSide").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.One_to_N_relations_OneEfImpl>("Model.FK_OneSide_connectsTo_NSide", "OneSide");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

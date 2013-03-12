@@ -22,6 +22,8 @@ using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
 using Zetbox.API.Utils;
+using Zetbox.API.Async;
+using System.Linq.Expressions;
 
 namespace Zetbox.API
 {
@@ -151,7 +153,7 @@ namespace Zetbox.API
             }
         }
 
-        public static void CopyTo(this System.IO.Stream src, System.IO.Stream dest)
+        public static void CopyAllTo(this System.IO.Stream src, System.IO.Stream dest)
         {
             if (src == null) throw new ArgumentNullException("src");
             if (dest == null) throw new ArgumentNullException("dest");
@@ -178,6 +180,15 @@ namespace Zetbox.API
             }
             return result;
         }
+
+        public static ZbTask TriggerFetch<TObject, TProperty>(this TObject obj, Expression<Func<TObject, TProperty>> property)
+            where TObject : IDataObject
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (property == null) throw new ArgumentNullException("property");
+            return obj.TriggerFetch(((MemberExpression)property.Body).Member.Name);
+        }
+
     }
 
     public static class TypeExtensions
@@ -361,7 +372,7 @@ namespace Zetbox.API
         /// <summary>
         /// Returns the Type of the named property's values
         /// Uses Reflection.
-        /// Supports extended access syntax Propertyname.NeestedProperty[DictKey1].Propertyname2
+        /// Supports extended access syntax Propertyname.NestedProperty[DictKey1].Propertyname2
         /// </summary>
         /// <param name="obj">Object where the type of a property should be checked</param>
         /// <param name="propName">Propertyname as string.</param>
@@ -406,7 +417,7 @@ namespace Zetbox.API
         /// Checks if a Property exists.
         /// Does not throw exceptions.
         /// Uses Reflection.
-        /// Supports extended access syntax Name.NeestedProperty[DictKey1].PropertyName2
+        /// Supports extended access syntax Name.NestedProperty[DictKey1].PropertyName2
         /// </summary>
         /// <param name="obj">Object where the existens of a property should be checked</param>
         /// <param name="propName">Propertyname as string.</param>
@@ -489,7 +500,7 @@ namespace Zetbox.API
         /// <summary>
         /// Returns a Property Value from a given Object. Uses Reflection.
         /// Throws a ArgumentOutOfRangeException if the Property is not found.
-        /// Supports extended access syntax Name.NeestedProperty[DictKey1].PropertyName2
+        /// Supports extended access syntax Name.NestedProperty[DictKey1].PropertyName2
         /// </summary>
         /// <typeparam name="T">Type of the Property</typeparam>
         /// <param name="obj">Object from where the Property Value is returned</param>
@@ -622,7 +633,9 @@ namespace Zetbox.API
                 if (obj == null) { throw new ArgumentNullException("obj"); }
 
                 XmlSerializer xml = new XmlSerializer(obj.GetType());
-                xml.Serialize(new StreamWriter(s), obj);
+                var sw = new StreamWriter(s);
+                xml.Serialize(sw, obj);
+                sw.Flush();
             }
         }
 
@@ -662,6 +675,27 @@ namespace Zetbox.API
             {
                 using (var ms = new MemoryStream(xmlByteArray))
                 using (var sr = new StreamReader(ms))
+                {
+                    var xml = new XmlSerializer(typeof(T));
+                    return (T)xml.Deserialize(sr);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Converts a XML byte array to a Objekt.
+        /// </summary>
+        /// <typeparam name="T">Type of the Object.</typeparam>
+        /// <param name="stream">Input stream.</param>
+        /// <returns>Returns a Object or throws an XML-Exception (see MSDN, XmlSerializer)</returns>
+        public static T FromXmlStream<T>(this System.IO.Stream stream)
+            where T : new()
+        {
+            if (stream == null) throw new ArgumentNullException("stream");
+
+            using (Logging.Log.DebugTraceMethodCallFormat("FromXmlStream<T>", "T = {1}", typeof(T).FullName))
+            {
+                using (var sr = new StreamReader(stream))
                 {
                     var xml = new XmlSerializer(typeof(T));
                     return (T)xml.Deserialize(sr);
@@ -1251,6 +1285,60 @@ namespace Zetbox.API
                 obj = parentSelector(obj);
             }
             return result;
+        }
+
+        /// <summary>
+        /// Yield all elements that can be reached by recursively applying the childrenSelector.
+        /// </summary>
+        /// <typeparam name="T">type of elements</typeparam>
+        /// <param name="obj">root node</param>
+        /// <param name="childrenSelector">transform a node into a list of child nodes</param>
+        /// <returns>A lazily evaluated enumeration of obj and all children</returns>
+        public static IEnumerable<T> AndChildren<T>(this T obj, Func<T, IEnumerable<T>> childrenSelector)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (childrenSelector == null) throw new ArgumentNullException("parentsSelector");
+
+            yield return obj;
+
+            var parents = childrenSelector(obj);
+            foreach (var p in parents)
+            {
+                foreach (var o in p.AndChildren(childrenSelector))
+                {
+                    yield return o;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns the string with at most "maxLength" characters
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="maxLength"></param>
+        /// <returns></returns>
+        public static string MaxLength(this string str, int maxLength)
+        {
+            return MaxLength(str, maxLength, string.Empty);
+        }
+
+        /// <summary>
+        /// Returns the string with at most "maxLength" characters. If the length is exceeded, suffix is added.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="maxLength"></param>
+        /// <param name="suffix">Suffix to add when string length exceedes maxLength</param>
+        /// <returns></returns>
+        public static string MaxLength(this string str, int maxLength, string suffix)
+        {
+            if (!string.IsNullOrEmpty(str) && str.Length > maxLength)
+            {
+                return str.Substring(0, maxLength) + suffix;
+            }
+            else
+            {
+                return str;
+            }
         }
     }
 

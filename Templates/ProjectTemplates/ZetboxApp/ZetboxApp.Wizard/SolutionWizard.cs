@@ -24,7 +24,7 @@ namespace ZetboxApp.Wizard
         {
             get
             {
-                return _solutionName;
+                return _solutionName ?? string.Empty;
             }
         }
 
@@ -93,12 +93,17 @@ namespace ZetboxApp.Wizard
             var config = _solution.SolutionBuild.SolutionConfigurations.Item("Linux.Debug");
             foreach (SolutionContext ctx in config.SolutionContexts)
             {
-                if (ctx.ProjectName.EndsWith(".WPF.csproj"))
-                {
-                    ctx.ShouldBuild = false;
-                }
+                ctx.ShouldBuild = !ctx.ProjectName.EndsWith(".WPF.csproj");
+            }
+
+
+            var fallbackConfig = _solution.SolutionBuild.SolutionConfigurations.Item("Fallback");
+            foreach (SolutionContext ctx in fallbackConfig.SolutionContexts)
+            {
+                ctx.ShouldBuild = ctx.ProjectName.EndsWith(".Migrations.csproj");
             }
         }
+
 
         private void AddImportTargets()
         {
@@ -126,7 +131,7 @@ namespace ZetboxApp.Wizard
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\common.targets", null);
                 }
-                else if (prjName.EndsWith(".Client"))
+                else if (prjName.EndsWith(".Client") || prjName.EndsWith(".Client.Tests"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\client.targets", null);
                 }
@@ -138,9 +143,13 @@ namespace ZetboxApp.Wizard
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\wpf.targets", null);
                 }
-                else if (prjName.EndsWith(".Server"))
+                else if (prjName.EndsWith(".Server") || prjName.EndsWith(".Server.Tests"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\server.targets", null);
+                }
+                else if (prjName.EndsWith(".Server.Migrations"))
+                {
+                    msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\fallback.targets", null);
                 }
 
                 msBuildProj.Save(fileName);
@@ -181,7 +190,7 @@ namespace ZetboxApp.Wizard
 
             foreach (Project prj in _solution.Projects)
             {
-                VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;      
+                VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;
                 if (prj.Name.EndsWith(".Common"))
                 {
                 }
@@ -254,6 +263,7 @@ namespace ZetboxApp.Wizard
                         if (".xml".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
                             ".txt".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
                             ".cmd".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
+                            ".config".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
                             ".gitignore".Equals(relFilePath, StringComparison.InvariantCultureIgnoreCase))
                         {
                             var sr = new StreamReader(s);

@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Filter configuration for filtering on a single value of a Property 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SinglePropertyFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="SinglePropertyFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SinglePropertyFilterConfiguration")]
     public class SinglePropertyFilterConfigurationEfImpl : Zetbox.App.GUI.PropertyFilterConfigurationEfImpl, SinglePropertyFilterConfiguration
     {
@@ -45,16 +45,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_SinglePropertyFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_SinglePropertyFilterConfiguration != null)
             {
-                OnCreateFilterModel_SinglePropertyFilterConfiguration(this, e);
+                OnCreateFilterModel_SinglePropertyFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -178,11 +178,6 @@ namespace Zetbox.App.GUI
             var otherImpl = (SinglePropertyFilterConfigurationEfImpl)obj;
             var me = (SinglePropertyFilterConfiguration)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

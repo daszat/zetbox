@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Zetbox.API;
+using Zetbox.API.SchemaManagement;
 using Zetbox.API.Server;
 using Zetbox.App.Base;
 using Zetbox.App.Extensions;
@@ -40,7 +41,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
         public override void Generate()
         {
-#line 37 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 38 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 /*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
 	 */
@@ -53,7 +54,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 		{
 			ApplyEntityTypeColumnDefs(
 				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.Name),
-				Construct.NestedColumnName(p, prefix),
+				Construct.ColumnName(p, prefix),
 				schemaProvider);
 		}
 		else if (p is ObjectReferenceProperty)
@@ -62,7 +63,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 		}
 		else
 		{
-			string propertyName = Construct.NestedColumnName(p, prefix);
+			string columnName = Construct.ColumnName(p, prefix);
 			string sqlTypeName = schemaProvider.DbTypeToNative(DbTypeMapper.GetDbTypeForProperty(p.GetType()));
 			
 			string maxLengthAttr = String.Empty;
@@ -88,12 +89,12 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 			if (p.IsValueTypePropertySingle())
 			{
 				// must have one space at the end
-				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
+				nullableAttr = String.Format("Nullable=\"{0}\" ", IsRealNullable(p).ToString().ToLowerInvariant());
 			}
 
-#line 87 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
-this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  precScaleAttr , "",  nullableAttr , "/>\r\n");
-#line 89 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 88 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+this.WriteObjects("    <Property Name=\"",  columnName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  precScaleAttr , "",  nullableAttr , "/>\r\n");
+#line 90 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 	}
 

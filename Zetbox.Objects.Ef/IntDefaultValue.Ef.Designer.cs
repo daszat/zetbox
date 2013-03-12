@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Sets an integer property with the configured default value
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IntDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="IntDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IntDefaultValue")]
     public class IntDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, IntDefaultValue
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IntValue", __oldValue, __newValue);
                     _IntValue = __newValue;
                     NotifyPropertyChanged("IntValue", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIntValue_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnIntValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IntValue");
-				}
+                else
+                {
+                    SetInitializedProperty("IntValue");
+                }
             }
         }
         private int _IntValue_store;
@@ -184,11 +185,6 @@ namespace Zetbox.App.Base
             var me = (IntDefaultValue)this;
 
             me.IntValue = other.IntValue;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

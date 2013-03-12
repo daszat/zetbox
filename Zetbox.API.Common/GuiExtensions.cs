@@ -254,7 +254,7 @@ namespace Zetbox.App.Extensions
             return result;
         }
 
-        public static ViewModelDescriptor GetViewModelDescriptor(this TypeRef tr)
+        private static ViewModelDescriptor GetViewModelDescriptor(this TypeRef tr)
         {
             if (tr == null) { throw new ArgumentNullException("tr"); }
 
@@ -270,6 +270,33 @@ namespace Zetbox.App.Extensions
                 tr = tr.Parent;
             }
             return result;
+        }
+
+        public static ViewModelDescriptor GetViewModelDescriptor(object mdl, IReadOnlyZetboxContext frozenCtx)
+        {
+            if (mdl == null) throw new ArgumentNullException("mdl");
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            Type mdlType = mdl.GetType();
+            while (mdlType != null)
+            {
+                var typeRef = mdlType.ToRef(frozenCtx);
+                if (typeRef != null)
+                    return typeRef.GetViewModelDescriptor();
+
+                mdlType = mdlType.BaseType;
+            }
+
+            if (mdl.GetType().IsGenericType)
+            {
+                Logging.Log.ErrorFormat("Unable to resolve TypeRef of given ViewModel '{0}'. You have to manually create a generic TypeRef.", mdl.GetType());
+            }
+            else
+            {
+                Logging.Log.ErrorFormat("Unable to resolve TypeRef of given ViewModel '{0}'. Regenerate Assembly Refs.", mdl.GetType());
+            }
+
+            return null;
         }
 
 

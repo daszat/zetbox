@@ -5,7 +5,7 @@ echo Changes to the object model are generated.
 echo Use this to create a clean environment.
 echo ********************************************************************************
 
-set config=Configs\Local\Fallback\Zetbox.Server.Service.xml
+set config=
 
 if .%1. == .. GOTO GOON
 
@@ -17,7 +17,7 @@ call "ZbInstall" %config%
 
 cd bin\Debug
 
-Zetbox.Server.Service.exe %config% -wipe
+Zetbox.Cli.exe %config% -fallback -wipe
 IF ERRORLEVEL 1 GOTO FAIL1
 
 cd ..\..

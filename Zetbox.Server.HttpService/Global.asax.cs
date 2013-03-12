@@ -19,17 +19,16 @@ namespace Zetbox.Server.HttpService
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Web;
     using System.Web.Security;
     using System.Web.SessionState;
     using Autofac;
     using Autofac.Configuration;
-    using Autofac.Integration.Wcf;
     using Autofac.Integration.Web;
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using System.Text.RegularExpressions;
 
     public class Global : System.Web.HttpApplication, IContainerProviderAccessor
     {
@@ -54,7 +53,9 @@ namespace Zetbox.Server.HttpService
 
             // Store root container for WCF & ASP.NET
             var container = builder.Build();
-            AutofacHostFactory.Container = container;
+
+            API.AppDomainInitializer.InitializeFrom(container);
+
             _containerProvider = new ContainerProvider(container);
         }
 
@@ -71,6 +72,7 @@ namespace Zetbox.Server.HttpService
             var configsPath = Path.Combine(zbBasePath, "Configs");
 
             var config = ZetboxConfig.FromFile(
+                HostType.AspNet,
                 string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile),
                 ZetboxConfig.GetDefaultConfigName("Zetbox.Server.HttpService.xml", configsPath));
 

@@ -86,6 +86,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -93,10 +94,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -154,15 +155,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Implementor == null)
-				{
-					SetInitializedProperty("Implementor");
+                {
+                    SetInitializedProperty("Implementor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Implementor);
@@ -171,10 +172,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Implementor");
+                {
+                    SetInitializedProperty("Implementor");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Implementor", __oldValue, __newValue);
@@ -198,6 +199,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Implementor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnImplementor_PostSetter != null && IsAttached)
                 {
@@ -256,6 +258,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MemberName", __oldValue, __newValue);
                     Proxy.MemberName = __newValue;
                     NotifyPropertyChanged("MemberName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMemberName_PostSetter != null && IsAttached)
                     {
@@ -263,10 +266,10 @@ namespace Zetbox.App.Base
                         OnMemberName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MemberName");
-				}
+                else
+                {
+                    SetInitializedProperty("MemberName");
+                }
             }
         }
 
@@ -341,70 +344,6 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
-        /// <summary>
-        /// 
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnGetMemberName_ConstraintInvocation")]
-        public virtual string GetMemberName()
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetMemberName_ConstraintInvocation != null)
-            {
-                OnGetMemberName_ConstraintInvocation(this, e);
-            }
-            else
-            {
-                throw new NotImplementedException("No handler registered on ConstraintInvocation.GetMemberName");
-            }
-            return e.Result;
-        }
-        public delegate void GetMemberName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-        public static event GetMemberName_Handler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation;
-        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-		// CanExec
-		public static event CanExecMethodEventHandler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation_CanExec;
-
-        [EventBasedMethod("OnGetMemberName_ConstraintInvocation_CanExec")]
-        public virtual bool GetMemberNameCanExec
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<bool>();
-				if (OnGetMemberName_ConstraintInvocation_CanExec != null)
-				{
-					OnGetMemberName_ConstraintInvocation_CanExec(this, e);
-				}
-				else
-				{
-					e.Result = true;
-				}
-				return e.Result;
-			}
-        }
-
-		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation_CanExecReason;
-
-        [EventBasedMethod("OnGetMemberName_ConstraintInvocation_CanExecReason")]
-        public virtual string GetMemberNameCanExecReason
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<string>();
-				if (OnGetMemberName_ConstraintInvocation_CanExecReason != null)
-				{
-					OnGetMemberName_ConstraintInvocation_CanExecReason(this, e);
-				}
-				else
-				{
-					e.Result = string.Empty;
-				}
-				return e.Result;
-			}
-        }
-        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-
         public override Type GetImplementedInterface()
         {
             return typeof(ConstraintInvocation);
@@ -420,12 +359,6 @@ namespace Zetbox.App.Base
             me.ExportGuid = other.ExportGuid;
             me.MemberName = other.MemberName;
             this._fk_Implementor = otherImpl._fk_Implementor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

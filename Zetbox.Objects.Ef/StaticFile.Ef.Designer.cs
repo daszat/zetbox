@@ -22,7 +22,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Static file. Content cannot be changed
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="StaticFile")]
+    [EdmEntityType(NamespaceName="Model", Name="StaticFileEfImpl")]
     [System.Diagnostics.DebuggerDisplay("StaticFile")]
     public class StaticFileEfImpl : at.dasz.DocumentManagement.FileEfImpl, StaticFile
     {
@@ -239,11 +239,6 @@ namespace at.dasz.DocumentManagement
             var otherImpl = (StaticFileEfImpl)obj;
             var me = (StaticFile)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

@@ -61,12 +61,6 @@ namespace Zetbox.App.Test
             var me = (AnotherTest)this;
 
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

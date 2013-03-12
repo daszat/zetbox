@@ -62,12 +62,6 @@ namespace Zetbox.Client.Forms.View
             this.DataContext = (TModel)mdl;
         }
 
-        internal Renderer Renderer { get; private set; }
-        void IFormsView.SetRenderer(Renderer r)
-        {
-            Renderer = r;
-        }
-
         public void Activate()
         {
             Control win = this;

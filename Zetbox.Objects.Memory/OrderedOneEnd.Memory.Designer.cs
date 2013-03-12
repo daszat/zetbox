@@ -51,25 +51,44 @@ namespace Zetbox.App.Test
             {
                 if (_NEnds == null)
                 {
-                    List<Zetbox.App.Test.OrderedNEnd> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Test.OrderedNEnd>(this, "NEnds");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Test.OrderedNEnd>();
-                    }
-    
-                    _NEnds = new OneNRelationList<Zetbox.App.Test.OrderedNEnd>(
-                        "OneEnd",
-                        "NEnds_pos",
-                        this,
-                        () => { this.NotifyPropertyChanged("NEnds", null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
-                        serverList);
+                    TriggerFetchNEndsAsync().Wait();
                 }
                 return _NEnds;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchNEndsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchNEndsAsync()
+        {
+            if (_triggerFetchNEndsTask != null) return _triggerFetchNEndsTask;
+
+            List<Zetbox.App.Test.OrderedNEnd> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchNEndsTask = Context.GetListOfAsync<Zetbox.App.Test.OrderedNEnd>(this, "NEnds")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchNEndsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.Test.OrderedNEnd>();
+                });
+            }
+    
+            _triggerFetchNEndsTask.OnResult(t =>
+            {
+                _NEnds = new OneNRelationList<Zetbox.App.Test.OrderedNEnd>(
+                    "OneEnd",
+                    "NEnds_pos",
+                    this,
+                    () => { this.NotifyPropertyChanged("NEnds", null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchNEndsTask;    
         }
     
         private OneNRelationList<Zetbox.App.Test.OrderedNEnd> _NEnds;
@@ -114,6 +133,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                     NotifyPropertyChanging("SomeInt", __oldValue, __newValue);
                     _SomeInt = __newValue;
                     NotifyPropertyChanged("SomeInt", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSomeInt_PostSetter != null && IsAttached)
                     {
@@ -121,10 +141,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
                         OnSomeInt_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SomeInt");
-				}
+                else
+                {
+                    SetInitializedProperty("SomeInt");
+                }
             }
         }
         private int? _SomeInt;
@@ -148,11 +168,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
             var me = (OrderedOneEnd)this;
 
             me.SomeInt = other.SomeInt;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -185,6 +200,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "NEnds":
+                return TriggerFetchNEndsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

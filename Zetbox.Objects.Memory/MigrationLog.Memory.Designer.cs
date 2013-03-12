@@ -73,6 +73,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Destination", __oldValue, __newValue);
                     _Destination = __newValue;
                     NotifyPropertyChanged("Destination", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDestination_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDestination_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Destination");
-				}
+                else
+                {
+                    SetInitializedProperty("Destination");
+                }
             }
         }
         private string _Destination;
@@ -130,6 +131,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("DestinationRows", __oldValue, __newValue);
                     _DestinationRows = __newValue;
                     NotifyPropertyChanged("DestinationRows", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDestinationRows_PostSetter != null && IsAttached)
                     {
@@ -137,10 +139,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDestinationRows_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DestinationRows");
-				}
+                else
+                {
+                    SetInitializedProperty("DestinationRows");
+                }
             }
         }
         private int _DestinationRows;
@@ -187,6 +189,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Source", __oldValue, __newValue);
                     _Source = __newValue;
                     NotifyPropertyChanged("Source", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSource_PostSetter != null && IsAttached)
                     {
@@ -194,10 +197,10 @@ namespace Zetbox.App.SchemaMigration
                         OnSource_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Source");
-				}
+                else
+                {
+                    SetInitializedProperty("Source");
+                }
             }
         }
         private string _Source;
@@ -244,6 +247,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("SourceRows", __oldValue, __newValue);
                     _SourceRows = __newValue;
                     NotifyPropertyChanged("SourceRows", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSourceRows_PostSetter != null && IsAttached)
                     {
@@ -251,10 +255,10 @@ namespace Zetbox.App.SchemaMigration
                         OnSourceRows_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SourceRows");
-				}
+                else
+                {
+                    SetInitializedProperty("SourceRows");
+                }
             }
         }
         private int _SourceRows;
@@ -292,6 +296,8 @@ namespace Zetbox.App.SchemaMigration
                 {
                     var __oldValue = _Timestamp;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnTimestamp_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -301,6 +307,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Timestamp", __oldValue, __newValue);
                     _Timestamp = __newValue;
                     NotifyPropertyChanged("Timestamp", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTimestamp_PostSetter != null && IsAttached)
                     {
@@ -308,10 +315,10 @@ namespace Zetbox.App.SchemaMigration
                         OnTimestamp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Timestamp");
-				}
+                else
+                {
+                    SetInitializedProperty("Timestamp");
+                }
             }
         }
         private DateTime _Timestamp;
@@ -340,11 +347,6 @@ namespace Zetbox.App.SchemaMigration
             me.SourceRows = other.SourceRows;
             me.Timestamp = other.Timestamp;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -369,6 +371,15 @@ namespace Zetbox.App.SchemaMigration
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

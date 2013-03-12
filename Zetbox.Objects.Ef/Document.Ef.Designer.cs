@@ -22,7 +22,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Document with revisions
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Document")]
+    [EdmEntityType(NamespaceName="Model", Name="DocumentEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Document")]
     public class DocumentEfImpl : at.dasz.DocumentManagement.FileEfImpl, Document
     {
@@ -82,7 +82,6 @@ namespace at.dasz.DocumentManagement
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -289,11 +288,6 @@ namespace at.dasz.DocumentManagement
             var otherImpl = (DocumentEfImpl)obj;
             var me = (Document)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

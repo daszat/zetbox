@@ -39,7 +39,7 @@ namespace Zetbox.App.GUI
         }
 
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.OptionalPredicateFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e)
+        public static void CreateFilterModel(Zetbox.App.GUI.OptionalPredicateFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = new OptionalPredicateFilterModel();
             mdl.Label = obj.Label;

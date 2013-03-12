@@ -1,10 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>Memory DalProvider Test Configuration</ConfigName>  
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>..\..\..\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>..\Common</string>
-  </SourceFileLocation>
 </ZetboxConfig>

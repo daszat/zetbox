@@ -51,33 +51,55 @@ namespace Zetbox.App.Test
             {
                 if (_Antworten == null)
                 {
-                    List<Zetbox.App.Test.Antwort> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        if (AntwortenIds != null)
-                        {
-                            serverList = AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList();
-                            AntwortenIds = null; // allow id list to be garbage collected
-                        }
-                        else
-                        {
-                            serverList = Context.GetListOf<Zetbox.App.Test.Antwort>(this, "Antworten");
-                        }
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Test.Antwort>();
-                    }
-    
-                    _Antworten = new OneNRelationList<Zetbox.App.Test.Antwort>(
-                        "Fragebogen",
-                        "gute_Antworten_pos",
-                        this,
-                        () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
-                        serverList);
+                    TriggerFetchAntwortenAsync().Wait();
                 }
                 return _Antworten;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchAntwortenTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchAntwortenAsync()
+        {
+            if (_triggerFetchAntwortenTask != null) return _triggerFetchAntwortenTask;
+
+            List<Zetbox.App.Test.Antwort> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                if (AntwortenIds != null)
+                {
+                    _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                    {
+                        serverList = AntwortenIds.Select(id => Context.Find<Zetbox.App.Test.Antwort>(id)).ToList();
+                        AntwortenIds = null; // allow id list to be garbage collected
+                    });
+                }
+                else
+                {
+                    _triggerFetchAntwortenTask = Context.GetListOfAsync<Zetbox.App.Test.Antwort>(this, "Antworten")
+                        .OnResult(t =>
+                        {
+                            serverList = t.Result;
+                        });
+                }
+            }
+            else
+            {
+                _triggerFetchAntwortenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.Test.Antwort>();
+                });
+            }
+    
+            _triggerFetchAntwortenTask.OnResult(t =>
+            {
+                _Antworten = new OneNRelationList<Zetbox.App.Test.Antwort>(
+                    "Fragebogen",
+                    "gute_Antworten_pos",
+                    this,
+                    () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchAntwortenTask;    
         }
     
         private OneNRelationList<Zetbox.App.Test.Antwort> _Antworten;
@@ -124,6 +146,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                     NotifyPropertyChanging("BogenNummer", __oldValue, __newValue);
                     _BogenNummer = __newValue;
                     NotifyPropertyChanged("BogenNummer", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBogenNummer_PostSetter != null && IsAttached)
                     {
@@ -131,10 +154,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                         OnBogenNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("BogenNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("BogenNummer");
+                }
             }
         }
         private int? _BogenNummer;
@@ -156,15 +179,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
 			{
 				if (_Student == null)
 				{
-					Context.FetchRelation<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
-					_Student 
-						= new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterBSideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchStudentAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Test.TestStudent>)_Student;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchStudentTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
+        {
+            if (_triggerFetchStudentTask != null) return _triggerFetchStudentTask;
+			_triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
+			_triggerFetchStudentTask.OnResult(r => 
+            {
+                _Student 
+				= new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterBSideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchStudentTask;
+        }
 
 		private ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Student;
 
@@ -183,11 +217,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             var me = (Fragebogen)this;
 
             me.BogenNummer = other.BogenNummer;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -221,6 +250,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Antworten":
+                return TriggerFetchAntwortenAsync();
+            case "Student":
+                return TriggerFetchStudentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

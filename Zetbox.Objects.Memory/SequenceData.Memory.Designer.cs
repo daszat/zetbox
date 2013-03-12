@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
                     _CurrentNumber = __newValue;
                     NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCurrentNumber_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Base
                         OnCurrentNumber_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CurrentNumber");
-				}
+                else
+                {
+                    SetInitializedProperty("CurrentNumber");
+                }
             }
         }
         private int _CurrentNumber;
@@ -97,7 +98,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
         // fkBackingName=_fk_Sequence; fkGuidBackingName=_fk_guid_Sequence;
         // referencedInterface=Zetbox.App.Base.Sequence; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Data; is reference;
@@ -115,8 +116,44 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Sequence;
+        private int? __fk_SequenceCache;
 
+        private int? _fk_Sequence {
+            get
+            {
+                return __fk_SequenceCache;
+            }
+            set
+            {
+                __fk_SequenceCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchSequenceTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> _triggerFetchSequenceTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> TriggerFetchSequenceAsync()
+        {
+            if (_triggerFetchSequenceTask != null) return _triggerFetchSequenceTask;
+
+            if (_fk_Sequence.HasValue)
+                _triggerFetchSequenceTask = Context.FindAsync<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
+            else
+                _triggerFetchSequenceTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchSequenceTask.OnResult(t =>
+            {
+                if (OnSequence_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Sequence>(t.Result);
+                    OnSequence_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchSequenceTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -124,32 +161,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.SequenceMemoryImpl __value;
-                if (_fk_Sequence.HasValue)
-                    __value = (Zetbox.App.Base.SequenceMemoryImpl)Context.Find<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
-                else
-                    __value = null;
-
-                if (OnSequence_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Sequence>(__value);
-                    OnSequence_Getter(this, e);
-                    __value = (Zetbox.App.Base.SequenceMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.SequenceMemoryImpl)TriggerFetchSequenceAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Sequence == null) || (value != null && value.ID == _fk_Sequence))
-				{
-					SetInitializedProperty("Sequence");
+                {
+                    SetInitializedProperty("Sequence");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = SequenceImpl;
@@ -186,6 +210,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Sequence", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnSequence_PostSetter != null && IsAttached)
                 {
@@ -215,11 +240,6 @@ namespace Zetbox.App.Base
 
             me.CurrentNumber = other.CurrentNumber;
             this._fk_Sequence = otherImpl._fk_Sequence;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -260,6 +280,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Sequence":
+                return TriggerFetchSequenceAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -381,6 +412,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SequenceData != null) OnNotifyDeleting_SequenceData(this);
+            Sequence = null;
         }
         public static event ObjectEventHandler<SequenceData> OnNotifyDeleting_SequenceData;
 

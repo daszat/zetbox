@@ -49,14 +49,14 @@ namespace Zetbox.Generator.Templates
             // DAL Provider Base
             this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.Base"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Base.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // common functionality for all
             this.WriteLine(@"    <Reference Include=""Zetbox.API.Common"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.Common.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
@@ -64,10 +64,12 @@ namespace Zetbox.Generator.Templates
         /// <summary>
         /// Returns the output path relative to the ZetboxAPIPath. This is only relevant for projects which are 
         /// compiled in the IDE, as the generator will override the values here.
+        /// 
+        /// This method MUST be overridden.
         /// </summary>
         protected virtual string GetRelativeOutputPath()
         {
-            return "Unconfigured";
+            throw new InvalidOperationException("GetRelativeOutputPath is not overridden");
         }
 
         /// <summary>

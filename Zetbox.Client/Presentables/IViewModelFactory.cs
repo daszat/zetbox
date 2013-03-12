@@ -58,6 +58,6 @@ namespace Zetbox.Client.Presentables
 
         IPerfCounter PerfCounter { get; }
 
-        DialogCreator CreateDialog(string title);
+        DialogCreator CreateDialog(IZetboxContext ctx, string title);
     }
 }

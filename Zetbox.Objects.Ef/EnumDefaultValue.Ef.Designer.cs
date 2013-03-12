@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Sets an enumeration property with an configured default value
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="EnumDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="EnumDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("EnumDefaultValue")]
     public class EnumDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, EnumDefaultValue
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnEnumValue_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.EnumerationEntryEfImpl> r
@@ -133,6 +132,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("EnumValue", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -219,11 +219,6 @@ namespace Zetbox.App.Base
             var me = (EnumDefaultValue)this;
 
             this._fk_EnumValue = otherImpl._fk_EnumValue;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -358,6 +353,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumDefaultValue != null) OnNotifyDeleting_EnumDefaultValue(this);
+            EnumValue = null;
         }
         public static event ObjectEventHandler<EnumDefaultValue> OnNotifyDeleting_EnumDefaultValue;
 
@@ -372,8 +368,9 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.EnumerationEntryEfImpl>("Model.FK_EnumDefaultValue_defaults_to_EnumValue", "EnumValue").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.EnumerationEntryEfImpl>("Model.FK_EnumDefaultValue_defaults_to_EnumValue", "EnumValue");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

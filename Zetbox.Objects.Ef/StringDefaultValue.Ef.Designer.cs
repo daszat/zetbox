@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Sets an string property with the configured default value
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="StringDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="StringDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("StringDefaultValue")]
     public class StringDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, StringDefaultValue
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DefaultValue", __oldValue, __newValue);
                     _DefaultValue = __newValue;
                     NotifyPropertyChanged("DefaultValue", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDefaultValue_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnDefaultValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DefaultValue");
-				}
+                else
+                {
+                    SetInitializedProperty("DefaultValue");
+                }
             }
         }
         private string _DefaultValue_store;
@@ -184,11 +185,6 @@ namespace Zetbox.App.Base
             var me = (StringDefaultValue)this;
 
             me.DefaultValue = other.DefaultValue;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

@@ -88,7 +88,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     /// </summary>
     public interface IFormattedValueViewModel : IValueViewModel
     {
+        /// <summary>
+        /// Notify the view model of receiving the focus.
+        /// </summary>
         void Focus();
+        /// <summary>
+        /// Notify the view model of losing the focus.
+        /// </summary>
         void Blur();
 
         string FormattedValue { get; set; }
@@ -111,26 +117,24 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// Adds the given item to the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
         /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
-        void AddItem(TElement item);
+        void Add(TElement item);
 
         /// <summary>
-        /// Remove the given item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// Remove the currently selected item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
         /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
-        void RemoveItem(TElement item);
+        void Remove();
 
         /// <summary>
-        /// Permanentely delete the given item from the data store.
+        /// Permanentely delete the currently selected item from the data store.
         /// Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/> on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
-        void DeleteItem(TElement item);
+        void Delete();
 
         /// <summary>
-        /// Activates the item for the user to edit.
+        /// Opens the currently selected item for the user to edit.
         /// </summary>
-        /// <param name="item">the item to activate</param>
-        /// <param name="activate">whether or not to raise the item to the top</param>
-        void ActivateItem(TElement item, bool activate);
+        void Open();
 
         /// <summary>
         /// Stores the currently selected item of this list. 

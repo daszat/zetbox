@@ -25,6 +25,8 @@ namespace Zetbox.API
     using System.Text;
 
     using Zetbox.API.Utils;
+    using System.Threading.Tasks;
+    using Zetbox.API.Async;
 
     /// <summary>
     /// A temporary data context without permanent backing store.
@@ -36,6 +38,7 @@ namespace Zetbox.API
         protected readonly FuncCache<Type, InterfaceType> iftFactoryCache;
         private readonly InterfaceType.Factory _iftFactory;
         protected InterfaceType.Factory IftFactory { get { return _iftFactory; } }
+        protected readonly Func<IFrozenContext> lazyCtx;
 
         /// <summary>Empty stand-in for object classes without instances.</summary>
         /// <remarks>Used by GetPersistenceObjectQuery()</remarks>
@@ -55,12 +58,13 @@ namespace Zetbox.API
         /// <summary>
         /// Initializes a new instance of the BaseMemoryContext class, using the specified assemblies for interfaces and implementation.
         /// </summary>
-        protected BaseMemoryContext(InterfaceType.Factory iftFactory)
+        protected BaseMemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx)
         {
             this.objects = new ContextCache<int>(this, item => item.ID);
             this.iftFactoryCache = new FuncCache<Type, InterfaceType>(t => iftFactory(t));
             this._iftFactory = t => iftFactoryCache.Invoke(t);
             ZetboxContextDebuggerSingleton.Created(this);
+            this.lazyCtx = lazyCtx;
         }
 
         /// <inheritdoc />
@@ -87,13 +91,7 @@ namespace Zetbox.API
 
             // Attach & set Objectstate to Unmodified
             objects.Add(obj);
-            // TODO: Since providers are not required to use BasePersistenceObject
-            // this doesn't work. Improve IDataObject interface to contain this too?
-            //((BasePersistenceObject)obj).SetUnmodified();
-
-            // Call Objects Attach Method to ensure, that every Child Object is also attached
-            obj.AttachToContext(this);
-
+            obj.AttachToContext(this, lazyCtx);
             return obj;
         }
 
@@ -112,15 +110,8 @@ namespace Zetbox.API
 
             // Attach & set Objectstate to Unmodified
             objects.Add(obj);
-            // TODO: Since providers are not required to use BasePersistenceObject
-            // this doesn't work. Improve IDataObject interface to contain this too?
-            //((BasePersistenceObject)obj).SetUnmodified();
-
-
             ((BasePersistenceObject)obj).SetNew();
-
-            // Call Objects Attach Method to ensure, that every Child Object is also attached
-            obj.AttachToContext(this);
+            obj.AttachToContext(this, lazyCtx);
         }
 
         /// <inheritdoc />
@@ -159,7 +150,6 @@ namespace Zetbox.API
             //CheckInterfaceAssembly("T", typeof(T));
             return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>();
         }
-
         /// <inheritdoc />
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
@@ -214,19 +204,36 @@ namespace Zetbox.API
             throw new NotImplementedException();
         }
 
+        /// <summary>Not implemented.</summary>
+        ZbTask<List<T>> IReadOnlyZetboxContext.GetListOfAsync<T>(IDataObject obj, string propertyName)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>Only implemented for the parent==null case.</summary>
         IList<T> IReadOnlyZetboxContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {
-            if (parent == null)
+            var t = ((IReadOnlyZetboxContext)this).FetchRelationAsync<T>(relId, role, parent);
+            t.Wait();
+            return t.Result;
+        }
+
+        /// <summary>Only implemented for the parent==null case.</summary>
+        ZbTask<IList<T>> IReadOnlyZetboxContext.FetchRelationAsync<T>(Guid relId, RelationEndRole role, IDataObject parent)
+        {
+            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
-                CheckDisposed();
-                //CheckInterfaceAssembly("T", typeof(T));
-                return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>().ToList();
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+                if (parent == null)
+                {
+                    CheckDisposed();
+                    //CheckInterfaceAssembly("T", typeof(T));
+                    return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>().ToList();
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            });
         }
 
         /// <inheritdoc />
@@ -378,20 +385,40 @@ namespace Zetbox.API
         /// <inheritdoc />
         public IDataObject Find(InterfaceType ifType, int ID)
         {
-            CheckDisposed();
-            //CheckInterfaceAssembly("ifType", ifType.Type);
+            var t = FindAsync(ifType, ID);
+            t.Wait();
+            return t.Result;
+        }
 
-            return (IDataObject)objects.Lookup(ifType, ID);
+        /// <inheritdoc />
+        public ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
+        {
+            CheckDisposed();
+
+            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
+            {
+                return (IDataObject)objects.Lookup(ifType, ID);
+            });
         }
 
         /// <inheritdoc />
         public T Find<T>(int ID)
             where T : class, IDataObject
         {
-            CheckDisposed();
-            //CheckInterfaceAssembly("T", typeof(T));
+            var t = FindAsync<T>(ID);
+            t.Wait();
+            return t.Result;
+        }
 
-            return (T)Find(_iftFactory(typeof(T)), ID);
+        public ZbTask<T> FindAsync<T>(int ID)
+            where T : class, IDataObject
+        {
+            CheckDisposed();
+
+            return new ZbTask<T>(ZbTask.Synchron, () =>
+            {
+                return (T)Find(_iftFactory(typeof(T)), ID);
+            });
         }
 
         /// <inheritdoc />
@@ -533,6 +560,18 @@ namespace Zetbox.API
 
         /// <summary>Not implemented.</summary>
         System.IO.FileInfo IReadOnlyZetboxContext.GetFileInfo(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not implemented.</summary>
+        ZbTask<System.IO.Stream> IReadOnlyZetboxContext.GetStreamAsync(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not implemented.</summary>
+        ZbTask<System.IO.FileInfo> IReadOnlyZetboxContext.GetFileInfoAsync(int ID)
         {
             throw new NotSupportedException();
         }

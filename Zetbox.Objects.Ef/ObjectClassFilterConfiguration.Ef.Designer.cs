@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Abstract base class for ObjectClass Filter
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ObjectClassFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="ObjectClassFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ObjectClassFilterConfiguration")]
     public abstract class ObjectClassFilterConfigurationEfImpl : Zetbox.App.GUI.FilterConfigurationEfImpl, ObjectClassFilterConfiguration
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnObjectClass_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
@@ -145,6 +144,7 @@ namespace Zetbox.App.GUI
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("FilterConfigurations", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -160,16 +160,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_ObjectClassFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_ObjectClassFilterConfiguration != null)
             {
-                OnCreateFilterModel_ObjectClassFilterConfiguration(this, e);
+                OnCreateFilterModel_ObjectClassFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -294,11 +294,6 @@ namespace Zetbox.App.GUI
             var me = (ObjectClassFilterConfiguration)this;
 
             this._fk_ObjectClass = otherImpl._fk_ObjectClass;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -433,6 +428,7 @@ namespace Zetbox.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectClassFilterConfiguration != null) OnNotifyDeleting_ObjectClassFilterConfiguration(this);
+            ObjectClass = null;
         }
         public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnNotifyDeleting_ObjectClassFilterConfiguration;
 
@@ -447,8 +443,9 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjectClass_Has_FilterConfigurations", "ObjectClass").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjectClass_Has_FilterConfigurations", "ObjectClass");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

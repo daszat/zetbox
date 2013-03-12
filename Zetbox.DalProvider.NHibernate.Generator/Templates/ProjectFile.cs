@@ -47,28 +47,28 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates
             // Server API
             this.WriteLine(@"    <Reference Include=""Zetbox.API.Server"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\Core\Zetbox.API.Server.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.API.Server.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // DAL Provider
             this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.NHibernate"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\NH\Zetbox.DalProvider.NHibernate.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.DalProvider.NHibernate.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // NHibernate
             this.WriteLine(@"    <Reference Include=""NHibernate"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\NH\NHibernate.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\NHibernate.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // Base Provider
             this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.Base"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Base.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
@@ -84,7 +84,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates
 
         protected override string GetRelativeOutputPath()
         {
-            return @"Server\NH";
+            return @"Server";
         }
     }
 }

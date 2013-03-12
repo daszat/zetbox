@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Filter configuration for filtering on an instance with an user selectable, optional and constant predicate
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="OptionalPredicateFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="OptionalPredicateFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("OptionalPredicateFilterConfiguration")]
     public class OptionalPredicateFilterConfigurationEfImpl : Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl, OptionalPredicateFilterConfiguration
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Predicate", __oldValue, __newValue);
                     _Predicate = __newValue;
                     NotifyPropertyChanged("Predicate", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPredicate_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.GUI
                         OnPredicate_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Predicate");
-				}
+                else
+                {
+                    SetInitializedProperty("Predicate");
+                }
             }
         }
         private string _Predicate_store;
@@ -113,16 +114,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_OptionalPredicateFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_OptionalPredicateFilterConfiguration != null)
             {
-                OnCreateFilterModel_OptionalPredicateFilterConfiguration(this, e);
+                OnCreateFilterModel_OptionalPredicateFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -247,11 +248,6 @@ namespace Zetbox.App.GUI
             var me = (OptionalPredicateFilterConfiguration)this;
 
             me.Predicate = other.Predicate;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

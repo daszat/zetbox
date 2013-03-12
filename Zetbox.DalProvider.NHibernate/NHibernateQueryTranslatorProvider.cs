@@ -62,7 +62,7 @@ using Zetbox.API.Server.PerfCounter;
         protected override Type TranslateType(Type type)
         {
             var result = base.TranslateType(type);
-            if (_implChecker.IsImplementationType(result))
+            if (_implChecker.IsImplementationType(result) && !type.IsICompoundObject())
                 result = _ctx.ToProxyType(_ctx.GetImplementationType(result));
             return result;
         }

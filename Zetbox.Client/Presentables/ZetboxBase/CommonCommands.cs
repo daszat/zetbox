@@ -17,172 +17,494 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.App.Base;
-    using Zetbox.App.GUI;
-    using Zetbox.App.Extensions;
-    using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
     using Zetbox.API.Client;
     using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
-    public class OpenDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
+    public class ItemsOpeningEventArgs : EventArgs
     {
-        public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
+        public ItemsOpeningEventArgs(IZetboxContext ctx, ObjectEditor.WorkspaceViewModel workspace, IEnumerable<ViewModel> items)
+        {
+            DataContext = ctx;
+            Workspace = workspace;
+            Items = items.ToList();
+        }
 
+        /// <summary>
+        /// The current data context.
+        /// </summary>
+        public IZetboxContext DataContext { get; private set; }
+        /// <summary>
+        /// The target workspace.
+        /// </summary>
+        public ObjectEditor.WorkspaceViewModel Workspace { get; private set; }
+        /// <summary>
+        /// Modify the Items collection to modify the actually openend items.
+        /// </summary>
+        public List<ViewModel> Items { get; set; }
+        /// <summary>
+        /// Set this to true to suppress running the default ItemsOpen implementation.
+        /// </summary>
+        public bool Handled { get; set; }
+    }
+
+    public class ItemsOpenedEventArgs : EventArgs
+    {
+        public ItemsOpenedEventArgs(IEnumerable<ViewModel> items)
+        {
+            Items = items;
+        }
+        public IEnumerable<ViewModel> Items { get; private set; }
+    }
+
+    public abstract class ActivateDataObjectCommand : CommandViewModel
+    {
         protected readonly Func<IZetboxContext> ctxFactory;
+
+        protected bool UseSeparateContext { get { return !(ViewModelFactory.GetWorkspace(DataContext) is IContextViewModel); } }
+
+        protected IRequestedEditorKinds RequestedKinds { get { return Parent as IRequestedEditorKinds; } }
+
+        protected ControlKind RequestedEditorKind
+        {
+            get
+            {
+                return RequestedKinds != null
+                    ? RequestedKinds.RequestedEditorKind
+                    : null;
+            }
+        }
+        protected ControlKind RequestedWorkspaceKind
+        {
+            get
+            {
+                return RequestedKinds != null
+                    ? RequestedKinds.RequestedWorkspaceKind
+                    : null;
+            }
+        }
+
+        public ActivateDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip)
+            : base(appCtx, dataCtx, parent, label, tooltip)
+        {
+            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+
+            this.ctxFactory = ctxFactory;
+        }
+
+        protected void ActivateItem(IEnumerable<ViewModel> items)
+        {
+            if (items == null || items.Count() == 0) return;
+
+            var openingArgs = new ItemsOpeningEventArgs(DataContext, ViewModelFactory.GetWorkspace(DataContext) as ObjectEditorWorkspace, items);
+
+            OnItemsOpening(this, openingArgs);
+
+            // abort handling the event if it is already handled
+            if (openingArgs.Handled == true)
+                return;
+
+            foreach (var item in openingArgs.Items)
+            {
+                var dovm = item as DataObjectViewModel;
+                if (dovm != null && dovm.Object.GetObjectClass(FrozenContext).IsSimpleObject)
+                {
+                    // Open in a Dialog
+                    var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, Parent, item);
+                    ViewModelFactory.ShowDialog(dlg);
+                }
+                else
+                {
+                    ViewModelFactory.ShowModel(item, true);
+                }
+            }
+
+            OnItemsOpened(this, new ItemsOpenedEventArgs(openingArgs.Items));
+        }
+
+        protected void ActivateForeignItems(IZetboxContext newCtx, IEnumerable<IDataObject> items)
+        {
+            if (newCtx == null) throw new ArgumentNullException("newCtx");
+            if (items == null || items.Count() == 0) return;
+
+            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(newCtx, null);
+
+            ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+
+            // ShowForeignObject may take a while
+            ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+            {
+                var newViewModels = items.Select(i => DataObjectViewModel.Fetch(ViewModelFactory, newCtx, this, newCtx.Find(DataContext.GetInterfaceType(i), i.ID)));
+                var openingArgs = new ItemsOpeningEventArgs(newCtx, newWorkspace, newViewModels);
+
+                OnItemsOpening(newWorkspace, openingArgs);
+
+                // abort handling the event if it is already handled
+                if (openingArgs.Handled == true)
+                    return;
+
+                foreach (var newItem in openingArgs.Items)
+                {
+                    newWorkspace.ShowModel(newItem);
+                }
+
+                OnItemsOpened(newWorkspace, new ItemsOpenedEventArgs(openingArgs.Items));
+
+                newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+            }).Trigger();
+        }
+
+
+        public event EventHandler<ItemsOpeningEventArgs> ItemsOpening;
+        protected void OnItemsOpening(object workspace, ItemsOpeningEventArgs args)
+        {
+            var temp = ItemsOpening;
+            if (temp != null)
+            {
+                temp(workspace, args);
+            }
+        }
+
+        public event EventHandler<ItemsOpenedEventArgs> ItemsOpened;
+        protected void OnItemsOpened(object workspace, ItemsOpenedEventArgs args)
+        {
+            var temp = ItemsOpened;
+            if (temp != null)
+            {
+                temp(workspace, args);
+            }
+        }
+    }
+
+    public interface ICommandParameter : INotifyPropertyChanged
+    {
+        IEnumerable<ViewModel> SelectedItems { get; }
+    }
+
+    public interface IOpenCommandParameter : ICommandParameter
+    {
+        bool AllowOpen { get; }
+    }
+
+    public class OpenDataObjectCommand : ActivateDataObjectCommand
+    {
+        public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent);
+
+        protected IEnumerable<ViewModel> SelectedItems { get { return ((ICommandParameter)Parent).SelectedItems; } }
+        protected IOpenCommandParameter Parameter { get { return Parent as IOpenCommandParameter; } }
 
         public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
-            IZetboxContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind
-            )
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
+            IZetboxContext dataCtx, ViewModel parent)
+            : base(appCtx, ctxFactory, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
         {
-            this.ctxFactory = ctxFactory;
-            this._requestedWorkspaceKind = reqWorkspaceKind;
-            this._requestedEditorKind = reqEditorKind;
+            if (!(parent is ICommandParameter)) throw new ArgumentOutOfRangeException("parent", "parent needs to implement ICommandParameter");
+
+            if (Parameter != null)
+                Parameter.PropertyChanged += OnParameterChanged;
         }
 
-        private ControlKind _requestedEditorKind;
-        public ControlKind RequestedEditorKind
+        public override System.Drawing.Image Icon
         {
             get
             {
-                return _requestedEditorKind;
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext)));
             }
             set
             {
-                if (_requestedEditorKind != value)
-                {
-                    _requestedEditorKind = value;
-                    OnPropertyChanged("RequestedEditorKind");
-                }
-            }
-        }
-
-        private ControlKind _requestedWorkspaceKind;
-        public ControlKind RequestedWorkspaceKind
-        {
-            get
-            {
-                return _requestedWorkspaceKind;
-            }
-            set
-            {
-                if (_requestedWorkspaceKind != value)
-                {
-                    _requestedWorkspaceKind = value;
-                    OnPropertyChanged("RequestedWorkspaceKind");
-                }
-            }
-        }
-
-        public delegate void ModelCreatedEventHandler(DataObjectViewModel mdl);
-        public event ModelCreatedEventHandler ModelCreated;
-
-        protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
-        {
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory(), null);
-            foreach (var item in data)
-            {
-                var newMdl = newWorkspace.ShowForeignModel(item, RequestedEditorKind);
-                ModelCreatedEventHandler temp = ModelCreated;
-                if (temp != null)
-                {
-                    temp(newMdl);
-                }
-            }
-            ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
-        }
-    }
-
-    public class DeleteDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
-    {
-        public new delegate DeleteDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges);
-
-        protected IRefreshCommandListener Listener { get; private set; }
-        protected bool SubmitChanges { get; private set; }
-
-        public DeleteDataObjectCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges)
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
-        {
-            this.Listener = listener;
-            this.SubmitChanges = submitChanges;
-            this.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
-        }
-
-        protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
-        {
-            if (SubmitChanges && !ViewModelFactory.GetDecisionFromUser(CommonCommandsResources.DeleteDataObjectCommand_Confirm, CommonCommandsResources.DeleteDataObjectCommand_Confirm_Title))
-            {
-                return;
-            }
-
-            foreach (var item in data)
-            {
-                DataContext.Delete(item.Object);
-            }
-
-            if (SubmitChanges) DataContext.SubmitChanges();
-            if (Listener != null) Listener.Refresh();
-        }
-    }
-
-    public class NewDataObjectCommand : CommandViewModel
-    {
-        public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
-
-        protected readonly Func<IZetboxContext> ctxFactory;
-        protected ObjectClass Type { get; private set; }
-        protected IRefreshCommandListener Listener { get; private set; }
-
-        public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
-            IZetboxContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
-            : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
-        {
-            this.Type = type;
-            this.ctxFactory = ctxFactory;
-            this._requestedWorkspaceKind = reqWorkspaceKind;
-            this._requestedEditorKind = reqEditorKind;
-            this.Listener = listener;
-        }
-
-        private ControlKind _requestedEditorKind;
-        public ControlKind RequestedEditorKind
-        {
-            get
-            {
-                return _requestedEditorKind;
-            }
-            set
-            {
-                if (_requestedEditorKind != value)
-                {
-                    _requestedEditorKind = value;
-                    OnPropertyChanged("RequestedEditorKind");
-                }
-            }
-        }
-
-        private ControlKind _requestedWorkspaceKind;
-        public ControlKind RequestedWorkspaceKind
-        {
-            get
-            {
-                return _requestedWorkspaceKind;
-            }
-            set
-            {
-                if (_requestedWorkspaceKind != value)
-                {
-                    _requestedWorkspaceKind = value;
-                    OnPropertyChanged("RequestedWorkspaceKind");
-                }
+                base.Icon = value;
             }
         }
 
         public override bool CanExecute(object data)
         {
+            if (Parameter == null)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+            else if (!Parameter.AllowOpen)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
+                return false;
+            }
+            else if (SelectedItems == null
+              || SelectedItems.Count() == 0)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+            else if (!UseSeparateContext && SelectedItems.Any(vm => !ViewModelFactory.CanShowModel(vm)))
+            {
+                Reason = CommonCommandsResources.OpenDataObjectCommand_SomeCanNotBeOpened;
+                return false;
+            }
+
+            Reason = string.Empty;
+            return true;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            var vModels = SelectedItems.OfType<DataObjectViewModel>().ToList();
+            if (UseSeparateContext)
+            {
+                ActivateForeignItems(ctxFactory(), vModels.Select(dovm => dovm.Object));
+            }
+            else
+            {
+                ActivateItem(vModels);
+                OnItemsOpened(ViewModelFactory.GetWorkspace(DataContext), new ItemsOpenedEventArgs(vModels));
+            }
+        }
+
+        private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "AllowOpen" || e.PropertyName == "SelectedItems")
+            {
+                OnCanExecuteChanged();
+            }
+        }
+    }
+
+    public interface IDeleteCommandParameter : ICommandParameter, INotifyPropertyChanged
+    {
+        bool IsReadOnly { get; }
+        bool AllowDelete { get; }
+    }
+
+    public class DeleteDataObjectCommand : CommandViewModel
+    {
+        public new delegate DeleteDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent);
+
+        protected IDeleteCommandParameter Parameter { get { return Parent as IDeleteCommandParameter; } }
+        protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
+        protected IEnumerable<ViewModel> SelectedItems { get { return ((ICommandParameter)Parent).SelectedItems; } }
+
+        protected bool UseSeparateContext
+        {
+            get
+            {
+                return DataContext.IsReadonly;
+            }
+        }
+
+        private readonly Func<IZetboxContext> _ctxFactory;
+        private readonly IZetboxContextExceptionHandler _exceptionHandler;
+
+        public DeleteDataObjectCommand(IViewModelDependencies appCtx,
+            IZetboxContext dataCtx, ViewModel parent,
+            Func<IZetboxContext> ctxFactory, IZetboxContextExceptionHandler exceptionHandler)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
+        {
+            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            if (exceptionHandler == null) throw new ArgumentNullException("exceptionHandler");
+            if (!(parent is ICommandParameter)) throw new ArgumentOutOfRangeException("parent", "parent needs to implement ICommandParameter");
+
+            if (this.Parameter != null)
+                this.Parameter.PropertyChanged += OnParameterChanged;
+
+            this._ctxFactory = ctxFactory;
+            this._exceptionHandler = exceptionHandler;
+        }
+
+        public override System.Drawing.Image Icon
+        {
+            get
+            {
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext)));
+            }
+            set
+            {
+                base.Icon = value;
+            }
+        }
+
+        public override bool CanExecute(object data)
+        {
+            if (data != null)
+            {
+                Reason = string.Format(CommonCommandsResources.DataObjectCommand_ProgrammerError, data);
+                return false;
+            }
+            else if (Parameter == null)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+            else if (Parameter.IsReadOnly)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
+                return false;
+            }
+            else if (!Parameter.AllowDelete)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
+                return false;
+            }
+            else if (SelectedItems == null)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+
+            var itemsCount = SelectedItems.OfType<object>().Count();
+
+            if (itemsCount == 0)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+
+            var dataObjects = SelectedItems.OfType<DataObjectViewModel>().ToList();
+
+            if (dataObjects.Count != itemsCount || !dataObjects.All(dovm => dovm.Object.CurrentAccessRights.HasDeleteRights()))
+            {
+                Reason = CommonCommandsResources.DeleteDataObjectCommand_SomeMayNotBeDeleted;
+                return false;
+            }
+
+            // whew!
+            Reason = string.Empty;
+            return true;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            if (UseSeparateContext && !ViewModelFactory.GetDecisionFromUser(CommonCommandsResources.DeleteDataObjectCommand_Confirm, CommonCommandsResources.DeleteDataObjectCommand_Confirm_Title))
+            {
+                return;
+            }
+
+            if (UseSeparateContext)
+            {
+                try
+                {
+                    using (var ctx = _ctxFactory())
+                    {
+                        // make local copy to avoid stumbling over changing lists while iterating over them
+                        foreach (var item in SelectedItems.Cast<DataObjectViewModel>().ToList())
+                        {
+                            var other = item.Object;
+                            var here = ctx.Find(ctx.GetInterfaceType(other), other.ID);
+                            DoDelete(ctx, here);
+                        }
+                        ctx.SubmitChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (!_exceptionHandler.Show(DataContext, ex))
+                    {
+                        throw;
+                    }
+                }
+            }
+            else
+            {
+                // make local copy to avoid stumbling over changing lists while iterating over them
+                foreach (var item in SelectedItems.Cast<DataObjectViewModel>().ToList())
+                {
+                    DoDelete(DataContext, item.Object);
+                }
+            }
+
+            if (Listener != null) Listener.Refresh();
+        }
+
+        private static void DoDelete(IZetboxContext ctx, IDataObject obj)
+        {
+            var deactivatable = obj as IDeactivatable;
+            if (deactivatable != null)
+            {
+                deactivatable.IsDeactivated = true;
+            }
+            else
+            {
+                ctx.Delete(obj);
+            }
+        }
+
+        private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsReadOnly" || e.PropertyName == "AllowDelete" || e.PropertyName == "SelectedItems")
+            {
+                OnCanExecuteChanged();
+            }
+        }
+    }
+
+    public interface INewCommandParameter : INotifyPropertyChanged
+    {
+        bool IsReadOnly { get; }
+        bool AllowAddNew { get; }
+    }
+
+    public interface IRequestedEditorKinds
+    {
+        ControlKind RequestedEditorKind { get; }
+        ControlKind RequestedWorkspaceKind { get; }
+    }
+
+    public class NewDataObjectCommand : ActivateDataObjectCommand
+    {
+        public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type);
+
+        protected INewCommandParameter Parameter { get { return Parent as INewCommandParameter; } }
+        protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
+        protected ObjectClass Type { get; private set; }
+
+        public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+            IZetboxContext dataCtx, ViewModel parent, ObjectClass type)
+            : base(appCtx, ctxFactory, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
+        {
+            if (this.Parameter != null)
+                this.Parameter.PropertyChanged += OnParameterChanged;
+            this.Type = type;
+        }
+
+        public override System.Drawing.Image Icon
+        {
+            get
+            {
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext)));
+            }
+            set
+            {
+                base.Icon = value;
+            }
+        }
+
+        public override bool CanExecute(object data)
+        {
+            if (Parameter == null)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+            else if (!Parameter.AllowAddNew)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
+                return false;
+            }
+            else if (Parameter.IsReadOnly)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
+                return false;
+            }
+            else if (Type.HasAccessControlList() && !Type.GetGroupAccessRights(CurrentIdentity).HasCreateRights())
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
+                return false;
+            }
+
+            Reason = string.Empty;
             return true;
         }
 
@@ -190,23 +512,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             ObjectClass baseclass = Type;
 
-            var children = new List<ObjectClass>();
+            var candidates = new List<ObjectClass>();
             if (baseclass.IsAbstract == false)
             {
-                children.Add(baseclass);
+                candidates.Add(baseclass);
             }
-            baseclass.CollectChildClasses(FrozenContext, children, false);
+            baseclass.CollectChildClasses(candidates, false);
 
-            if (children.Count == 1)
+            if (candidates.Count == 1)
             {
-                CreateItem(Type);
+                CreateItem(candidates.First());
             }
             else
             {
                 var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                         DataContext, this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
-                        () => children.AsQueryable(),
+                        () => candidates.AsQueryable(),
                         (chosen) =>
                         {
                             if (chosen != null)
@@ -222,19 +544,30 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         private void CreateItem(ObjectClass dtType)
         {
-            var isSimpleObject = dtType.IsSimpleObject;
-
-            var newCtx = isSimpleObject ? DataContext : ctxFactory();
-            var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
-            OnObjectCreated(newObj);
-
-            if (!isSimpleObject)
+            if (UseSeparateContext)
             {
-                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
-                newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newObj), RequestedEditorKind);
-                ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+                var newCtx = ctxFactory();
+                var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
+                OnObjectCreated(newObj);
+                ActivateForeignItems(newCtx, new[] { newObj });
             }
-            else if (Listener != null)
+            else
+            {
+                var newObj = DataContext.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
+                OnObjectCreated(newObj);
+
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), newObj);
+                OnLocalModelCreated(mdl);
+
+                ActivateItem(new[] { mdl });
+
+                OnRefresh();
+            }
+        }
+
+        protected virtual void OnRefresh()
+        {
+            if (Listener != null)
             {
                 Listener.Refresh();
             }
@@ -242,13 +575,31 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public delegate void ObjectCreatedHandler(IDataObject obj);
         public event ObjectCreatedHandler ObjectCreated;
-
         protected void OnObjectCreated(IDataObject obj)
         {
             ObjectCreatedHandler temp = ObjectCreated;
             if (temp != null)
             {
                 temp(obj);
+            }
+        }
+
+        public delegate void LocalModelCreatedHandler(DataObjectViewModel vm);
+        public event LocalModelCreatedHandler LocalModelCreated;
+        protected void OnLocalModelCreated(DataObjectViewModel vm)
+        {
+            LocalModelCreatedHandler temp = LocalModelCreated;
+            if (temp != null)
+            {
+                temp(vm);
+            }
+        }
+
+        private void OnParameterChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsReadOnly" || e.PropertyName == "AllowAddNew" || e.PropertyName == "IsInlineEditable")
+            {
+                OnCanExecuteChanged();
             }
         }
     }
@@ -277,9 +628,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected override void DoExecute(object data)
         {
             var newCtx = ctxFactory();
-            var objClass = newCtx.FindPersistenceObject<DataType>(this.Type.ExportGuid);
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx,null);
-            newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, Parent, objClass));
+            var newObjClass = newCtx.FindPersistenceObject<DataType>(this.Type.ExportGuid);
+            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
+            newWorkspace.ShowObject(newObjClass);
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }
@@ -291,20 +642,56 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public class RefreshCommand : CommandViewModel
     {
-        public new delegate RefreshCommand Factory(IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener);
+        public new delegate RefreshCommand Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        protected IRefreshCommandListener Listener { get; private set; }
+        protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
 
-        public RefreshCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener)
+        public RefreshCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.RefreshCommand_Name, CommonCommandsResources.RefreshCommand_Tooltip)
         {
-            this.Listener = listener;
         }
 
+        public override System.Drawing.Image Icon
+        {
+            get
+            {
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext)));
+            }
+            set
+            {
+                base.Icon = value;
+            }
+        }
+
+        public class CanRefreshEventArgs : EventArgs
+        {
+            public CanRefreshEventArgs()
+            {
+                CanRefresh = true;
+            }
+            public bool CanRefresh { get; set; }
+            public string CanRefreshReason { get; set; }
+        }
+        public event EventHandler<CanRefreshEventArgs> CanRefresh;
         public override bool CanExecute(object data)
         {
-            var result = Listener != null;
-            return result;
+            if (Listener == null)
+            {
+                Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
+                return false;
+            }
+
+            var temp = CanRefresh;
+            if (temp == null)
+            {
+                Reason = string.Empty;
+                return true;
+            }
+
+            var args = new CanRefreshEventArgs();
+            temp(this, args);
+            Reason = args.CanRefreshReason;
+            return args.CanRefresh;
         }
 
         protected override void DoExecute(object data)
@@ -377,14 +764,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public ElevatedModeCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.ElevatedModeCommand_Name, CommonCommandsResources.ElevatedModeCommand_Tooltip)
         {
-            
+
         }
 
-        public override Icon Icon
+        public override System.Drawing.Image Icon
         {
             get
             {
-                return base.Icon ?? NamedObjects.Gui.Icons.ZetboxBase.otheroptions_ico.Find(FrozenContext);
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.otheroptions_ico.Find(FrozenContext)));
             }
             set
             {
@@ -410,9 +797,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            var result = CurrentIdentity != null && CurrentIdentity.IsAdmininistrator();
-            this.Reason = result ? CommonCommandsResources.ElevatedModeCommand_Error : string.Empty;
-            return result;
+            if (CurrentIdentity == null || !CurrentIdentity.IsAdmininistrator())
+            {
+
+                this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;
+                return false;
+            }
+
+            Reason = string.Empty;
+            return true;
         }
 
         protected override void DoExecute(object data)

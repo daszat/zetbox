@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// A placeholder for data object references in interfaces
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ObjectReferencePlaceholderProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="ObjectReferencePlaceholderPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ObjectReferencePlaceholderProperty")]
     public class ObjectReferencePlaceholderPropertyEfImpl : Zetbox.App.Base.PropertyEfImpl, ObjectReferencePlaceholderProperty
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     _HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
         private bool _HasPersistentOrder_store;
@@ -147,6 +148,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ImplementorRoleName", __oldValue, __newValue);
                     _ImplementorRoleName = __newValue;
                     NotifyPropertyChanged("ImplementorRoleName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnImplementorRoleName_PostSetter != null && IsAttached)
                     {
@@ -154,10 +156,10 @@ namespace Zetbox.App.Base
                         OnImplementorRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ImplementorRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ImplementorRoleName");
+                }
             }
         }
         private string _ImplementorRoleName_store;
@@ -215,6 +217,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -222,10 +225,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
         private bool _IsList_store;
@@ -283,6 +286,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ItemRoleName", __oldValue, __newValue);
                     _ItemRoleName = __newValue;
                     NotifyPropertyChanged("ItemRoleName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnItemRoleName_PostSetter != null && IsAttached)
                     {
@@ -290,10 +294,10 @@ namespace Zetbox.App.Base
                         OnItemRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ItemRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ItemRoleName");
+                }
             }
         }
         private string _ItemRoleName_store;
@@ -316,9 +320,9 @@ namespace Zetbox.App.Base
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
     /*
-    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
-    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjectReferencePlaceholderProperty
-    B: One ObjectClass as ReferencedObjectClass
+    Relation: FK_ObjRefPlaceholderProp_ofType_ReferencedClass
+    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjRefPlaceholderProp
+    B: One ObjectClass as ReferencedClass
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -343,7 +347,7 @@ namespace Zetbox.App.Base
         private Guid? _fk_guid_ReferencedObjectClass = null;
 
         // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass", "ReferencedObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjRefPlaceholderProp_ofType_ReferencedClass", "ReferencedClass")]
         public Zetbox.App.Base.ObjectClassEfImpl ReferencedObjectClassImpl
         {
             get
@@ -351,14 +355,13 @@ namespace Zetbox.App.Base
                 Zetbox.App.Base.ObjectClassEfImpl __value;
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>(
-                        "Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass",
-                        "ReferencedObjectClass");
+                        "Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass",
+                        "ReferencedClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnReferencedObjectClass_Getter != null)
                 {
@@ -370,13 +373,13 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>(
-                        "Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass",
-                        "ReferencedObjectClass");
+                        "Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass",
+                        "ReferencedClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -405,6 +408,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ReferencedObjectClass", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -454,6 +458,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Verb", __oldValue, __newValue);
                     _Verb = __newValue;
                     NotifyPropertyChanged("Verb", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVerb_PostSetter != null && IsAttached)
                     {
@@ -461,10 +466,10 @@ namespace Zetbox.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Verb");
-				}
+                else
+                {
+                    SetInitializedProperty("Verb");
+                }
             }
         }
         private string _Verb_store;
@@ -817,11 +822,6 @@ namespace Zetbox.App.Base
             me.Verb = other.Verb;
             this._fk_ReferencedObjectClass = otherImpl._fk_ReferencedObjectClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -1010,6 +1010,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferencePlaceholderProperty != null) OnNotifyDeleting_ObjectReferencePlaceholderProperty(this);
+            ReferencedObjectClass = null;
         }
         public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnNotifyDeleting_ObjectReferencePlaceholderProperty;
 
@@ -1028,8 +1029,9 @@ namespace Zetbox.App.Base
             binStream.Write(this._IsList);
             binStream.Write(this._ItemRoleName);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass", "ReferencedObjectClass").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass", "ReferencedClass");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(ReferencedObjectClass);

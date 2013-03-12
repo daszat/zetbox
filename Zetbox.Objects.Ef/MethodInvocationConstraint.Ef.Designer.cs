@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="MethodInvocationConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="MethodInvocationConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("MethodInvocationConstraint")]
     public class MethodInvocationConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, MethodInvocationConstraint
     {
@@ -178,11 +178,6 @@ namespace Zetbox.App.Base
             var otherImpl = (MethodInvocationConstraintEfImpl)obj;
             var me = (MethodInvocationConstraint)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

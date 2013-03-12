@@ -12,16 +12,9 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Zetbox.API.Configuration;
 
 namespace Zetbox.API
 {
-
     /// <summary>
     /// Which kind of host to be
     /// </summary>
@@ -29,6 +22,10 @@ namespace Zetbox.API
     {
         Client,
         Server,
+        /// <summary>
+        /// A special type of server
+        /// </summary>
+        AspNet,
         /// <summary>
         /// no predefined personality. This is used only in very rare cases.
         /// </summary>

@@ -21,9 +21,9 @@ namespace Zetbox.Server.SchemaManagement
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Text;
-
     using Zetbox.API;
     using Zetbox.API.Configuration;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
@@ -43,16 +43,18 @@ namespace Zetbox.Server.SchemaManagement
         private bool repair = false;
         private readonly Cases Case;
         private readonly ZetboxConfig config;
+        private readonly IEnumerable<IGlobalMigrationFragment> _globalMigrationFragments;
         #endregion
 
         #region Constructor
 
-        public SchemaManager(ISchemaProvider provider, IZetboxContext schema, IZetboxContext savedSchema, ZetboxConfig config)
+        public SchemaManager(ISchemaProvider provider, IZetboxContext schema, IZetboxContext savedSchema, ZetboxConfig config, IEnumerable<IGlobalMigrationFragment> globalMigrationFragments, IEnumerable<IMigrationFragment> migrationFragments)
         {
             this.config = config;
             this.schema = schema;
             this.db = provider;
-            this.Case = new Cases(schema, provider, savedSchema);
+            this._globalMigrationFragments = globalMigrationFragments;
+            this.Case = new Cases(schema, provider, savedSchema, migrationFragments);
         }
 
         #endregion
@@ -76,7 +78,7 @@ namespace Zetbox.Server.SchemaManagement
 
             Log.InfoFormat("== {0} ==", reportName);
             Log.InfoFormat("Date: {0}", DateTime.Now);
-            Log.InfoFormat("Database: {0}", connectionString.ConnectionString);
+            Log.InfoFormat("Database: {0}", db.GetSafeConnectionString(connectionString.ConnectionString));
             Log.Info(String.Empty);
         }
 
@@ -151,7 +153,7 @@ namespace Zetbox.Server.SchemaManagement
 
                     viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = db.GetTableName(nextRelEnd.Type.Module.SchemaName, nextRelEnd.Type.TableName);
+                    viewRel.JoinTableName = nextRelEnd.Type.GetTableRef(db);
                     viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
 
@@ -162,7 +164,7 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = db.GetTableName(nextRelEnd.Type.Module.SchemaName, nextRelEnd.Type.TableName);
+                    viewRel.JoinTableName = nextRelEnd.Type.GetTableRef(db);
                     string localCol = string.Empty;
                     string fkCol = string.Empty;
                     if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoA)
@@ -206,22 +208,38 @@ namespace Zetbox.Server.SchemaManagement
         public static DefaultConstraint GetDefaultConstraint(Property prop)
         {
             if (prop == null) throw new ArgumentNullException("prop");
-            if (prop.DefaultValue is Zetbox.App.Base.NewGuidDefaultValue)
+            var objClass = prop.ObjectClass as ObjectClass;
+
+            // Only TPT or TPH base columns can have default constraints
+            // And only member of object classes - no CP objects!
+            var defaultPossibleValue = objClass != null && (objClass.GetTableMapping() == TableMapping.TPT || objClass.BaseObjectClass == null); 
+            if(!defaultPossibleValue) return null;
+
+            var defValue = prop.DefaultValue;
+            if (defValue is Zetbox.App.Base.NewGuidDefaultValue)
             {
                 return new NewGuidDefaultConstraint();
             }
-            else if (prop.DefaultValue is Zetbox.App.Base.CurrentDateTimeDefaultValue)
+            else if (defValue is Zetbox.App.Base.CurrentDateTimeDefaultValue)
             {
                 var dtProp = (DateTimeProperty)prop;
                 return new DateTimeDefaultConstraint() { Precision = dtProp.DateTimeStyle == DateTimeStyles.Date ? DateTimeDefaultConstraintPrecision.Date : DateTimeDefaultConstraintPrecision.Time };
             }
-            else if (prop.DefaultValue is Zetbox.App.Base.BoolDefaultValue)
+            else if (defValue is Zetbox.App.Base.BoolDefaultValue)
             {
-                return new BoolDefaultConstraint() { Value = ((Zetbox.App.Base.BoolDefaultValue)prop.DefaultValue).BoolValue };
+                return new BoolDefaultConstraint() { Value = ((Zetbox.App.Base.BoolDefaultValue)defValue).BoolValue };
             }
-            else if (prop.DefaultValue is Zetbox.App.Base.IntDefaultValue)
+            else if (defValue is Zetbox.App.Base.IntDefaultValue)
             {
-                return new IntDefaultConstraint() { Value = ((Zetbox.App.Base.IntDefaultValue)prop.DefaultValue).IntValue };
+                return new IntDefaultConstraint() { Value = ((Zetbox.App.Base.IntDefaultValue)defValue).IntValue };
+            }
+            else if (defValue is Zetbox.App.Base.DecimalDefaultValue)
+            {
+                return new DecimalDefaultConstraint() { Value = ((Zetbox.App.Base.DecimalDefaultValue)defValue).DecimalValue };
+            }
+            else if (defValue is Zetbox.App.Base.EnumDefaultValue)
+            {
+                return new IntDefaultConstraint() { Value = ((Zetbox.App.Base.EnumDefaultValue)defValue).EnumValue.Value };
             }
             else
             {

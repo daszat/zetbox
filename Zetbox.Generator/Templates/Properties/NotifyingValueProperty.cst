@@ -14,9 +14,9 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-<%@ CodeTemplate Language="C#" 
+<%@ CodeTemplate Language="C#"
     Name="Properties.NotifyingValueProperty"
-    ClassName="Zetbox.Generator.Templates.Properties.NotifyingValueProperty" 
+    ClassName="Zetbox.Generator.Templates.Properties.NotifyingValueProperty"
     Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Zetbox.API" %>
@@ -63,16 +63,18 @@
                     NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
                     <%= backingName %> = __newValue;
                     NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
-<% if (isCalculated) { %>
-			        <%= backingName %>_IsDirty = false;
+<% if (!isCalculated) { %>
+                    if(IsAttached) UpdateChangedInfo = true;
+<% } else { %>
+                    <%= backingName %>_IsDirty = false;
 <% } %>
 
 <% if (!isCalculated) ApplyPostSetTemplate(); %>
                 }
-				else 
-				{
-					SetInitializedProperty("<%= name %>");
-				}
+                else
+                {
+                    SetInitializedProperty("<%= name %>");
+                }
             }
         }
 <% ApplyBackingStoreDefinition(); %>

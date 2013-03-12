@@ -15,17 +15,16 @@
 
 namespace Zetbox.API.Client
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
+    using System.ComponentModel;
     using Autofac;
     using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Configuration;
 
     public sealed class ClientApiModule
         : Autofac.Module
     {
+
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
@@ -33,6 +32,7 @@ namespace Zetbox.API.Client
             moduleBuilder
                 .Register<ProxyImplementation>(c => new ProxyImplementation(
                     c.Resolve<InterfaceType.Factory>(),
+                    c.Resolve<UnattachedObjectFactory>(),
                     c.Resolve<Zetbox.API.Client.ZetboxService.IZetboxService>(),
                     c.Resolve<IPerfCounter>(),
                     c.Resolve<ZetboxStreamReader.Factory>(),
@@ -63,6 +63,8 @@ namespace Zetbox.API.Client
         }
     }
 
+    [Feature]
+    [Description("HTTP Proxy implementation")]
     public sealed class HttpClientModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
@@ -75,6 +77,8 @@ namespace Zetbox.API.Client
         }
     }
 
+    [Feature]
+    [Description("WCF Proxy implementation")]
     public sealed class WcfClientModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
@@ -85,7 +89,7 @@ namespace Zetbox.API.Client
                 .AsImplementedInterfaces()
                 .OnActivated(args =>
                 {
-                    args.Context.Resolve<ICredentialsResolver>().InitCredentials(args.Instance.ClientCredentials);
+                    args.Context.Resolve<ICredentialsResolver>().SetCredentialsTo(args.Instance.ClientCredentials);
                 })
                 .InstancePerLifetimeScope();
         }

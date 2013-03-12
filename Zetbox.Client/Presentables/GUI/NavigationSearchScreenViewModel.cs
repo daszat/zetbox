@@ -33,15 +33,13 @@ namespace Zetbox.Client.Presentables.GUI
     {
         public new delegate NavigationSearchScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationSearchScreen screen);
 
-        public NavigationSearchScreenViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, Func<IZetboxContext> ctxFactory, ViewModel parent, NavigationScreen screen)
+        public NavigationSearchScreenViewModel(IViewModelDependencies dependencies,
+            IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
             : base(dependencies, dataCtx, parent, screen)
         {
-            _ctxFactory = ctxFactory;
         }
 
         public new NavigationSearchScreen Screen { get { return (NavigationSearchScreen)base.Screen; } }
-
-        private readonly Func<IZetboxContext> _ctxFactory;
 
         protected virtual Func<IQueryable> InitializeQueryFactory()
         {
@@ -110,7 +108,7 @@ namespace Zetbox.Client.Presentables.GUI
 
                 _listViewModel = ViewModelFactory
                     .CreateViewModel<InstanceListViewModel.Factory>()
-                    .Invoke(DataContext, this, _ctxFactory, Type, QueryFactory);
+                    .Invoke(DataContext, this, Type, QueryFactory);
 
                 InitializeListViewModel(_listViewModel);
             }
@@ -122,16 +120,17 @@ namespace Zetbox.Client.Presentables.GUI
 
             if (screen.AllowAddNew.HasValue) mdl.AllowAddNew = screen.AllowAddNew.Value;
             if (screen.AllowDelete.HasValue) mdl.AllowDelete = screen.AllowDelete.Value;
+            if (screen.AllowExport.HasValue) mdl.AllowExport = screen.AllowExport.Value;
+            if (screen.AllowOpen.HasValue) mdl.AllowOpen = screen.AllowOpen.Value;
             if (screen.AllowSelectColumns.HasValue) mdl.AllowSelectColumns = screen.AllowSelectColumns.Value;
             if (screen.AllowUserFilter.HasValue) mdl.AllowUserFilter = screen.AllowUserFilter.Value;
             if (screen.EnableAutoFilter.HasValue) mdl.EnableAutoFilter = screen.EnableAutoFilter.Value;
-            if (screen.IsEditable.HasValue) mdl.IsEditable = screen.IsEditable.Value;
+            if (screen.IsEditable.HasValue) mdl.IsInlineEditable = screen.IsEditable.Value;
             if (screen.IsMultiselect.HasValue) mdl.IsMultiselect = screen.IsMultiselect.Value;
             if (screen.RespectRequiredFilter.HasValue) mdl.RespectRequiredFilter = screen.RespectRequiredFilter.Value;
-            if (screen.ShowFilter.HasValue) mdl.ShowFilter = screen.ShowFilter.Value;
+            if (screen.ShowCommands.HasValue) mdl.ShowCommands = screen.ShowCommands.Value;
+            if (screen.ShowFilter.HasValue) mdl.AllowFilter = screen.ShowFilter.Value;
             if (screen.ShowMasterDetail.HasValue) mdl.ShowMasterDetail = screen.ShowMasterDetail.Value;
-            if (screen.ShowOpenCommand.HasValue) mdl.ShowOpenCommand = screen.ShowOpenCommand.Value;
-            if (screen.ShowRefreshCommand.HasValue) mdl.ShowRefreshCommand = screen.ShowRefreshCommand.Value;
 
             if (!string.IsNullOrEmpty(screen.InitialSort))
             {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Enum Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="EnumParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="EnumParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("EnumParameter")]
     public class EnumParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, EnumParameter
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnEnumeration_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.EnumerationEfImpl> r
@@ -133,6 +132,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Enumeration", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -346,11 +346,6 @@ namespace Zetbox.App.Base
 
             this._fk_Enumeration = otherImpl._fk_Enumeration;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -484,6 +479,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumParameter != null) OnNotifyDeleting_EnumParameter(this);
+            Enumeration = null;
         }
         public static event ObjectEventHandler<EnumParameter> OnNotifyDeleting_EnumParameter;
 
@@ -498,8 +494,9 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.EnumerationEfImpl>("Model.FK_EnumParameter_has_Enumeration", "Enumeration").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.EnumerationEfImpl>("Model.FK_EnumParameter_has_Enumeration", "Enumeration");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

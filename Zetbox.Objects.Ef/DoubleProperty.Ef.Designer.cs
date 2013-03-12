@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Double Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DoubleProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="DoublePropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DoubleProperty")]
     public class DoublePropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, DoubleProperty
     {
@@ -367,11 +367,6 @@ namespace Zetbox.App.Base
             var otherImpl = (DoublePropertyEfImpl)obj;
             var me = (DoubleProperty)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

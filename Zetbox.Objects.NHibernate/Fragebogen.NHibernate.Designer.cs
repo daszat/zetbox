@@ -121,6 +121,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                     NotifyPropertyChanging("BogenNummer", __oldValue, __newValue);
                     Proxy.BogenNummer = __newValue;
                     NotifyPropertyChanged("BogenNummer", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBogenNummer_PostSetter != null && IsAttached)
                     {
@@ -128,10 +129,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                         OnBogenNummer_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("BogenNummer");
-				}
+                else
+                {
+                    SetInitializedProperty("BogenNummer");
+                }
             }
         }
 
@@ -186,12 +187,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             var me = (Fragebogen)this;
 
             me.BogenNummer = other.BogenNummer;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

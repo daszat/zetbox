@@ -39,7 +39,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         protected override void ApplyClassAttributeTemplate()
         {
-            WriteLine("    [EdmEntityType(NamespaceName=\"Model\", Name=\"{0}\")]", this.DataType.Name);
+            WriteLine("    [EdmEntityType(NamespaceName=\"Model\", Name=\"{0}EfImpl\")]", this.DataType.Name);
         }
 
         protected override string GetBaseClass()
@@ -57,9 +57,9 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
         protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
         {
             this.WriteLine("        // enumeration property");
-            Properties.EnumerationPropertyTemplate.Call(Host, ctx,
+            Properties.NotifyingEnumProperty.Call(Host, ctx,
                 this.MembersToSerialize,
-                prop, true);
+                prop);
         }
 
         protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop)

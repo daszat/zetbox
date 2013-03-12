@@ -48,15 +48,26 @@ namespace Zetbox.App.GUI
 			{
 				if (_Children == null)
 				{
-					Context.FetchRelation<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(new Guid("4d4e1ffd-f362-40e2-9fe1-0711ded83241"), RelationEndRole.A, this);
-					_Children 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchChildrenAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_Children;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+			_triggerFetchChildrenTask = Context.FetchRelationAsync<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(new Guid("4d4e1ffd-f362-40e2-9fe1-0711ded83241"), RelationEndRole.A, this);
+			_triggerFetchChildrenTask.OnResult(r => 
+            {
+                _Children 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchChildrenTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>> _Children;
 
@@ -73,15 +84,26 @@ namespace Zetbox.App.GUI
 			{
 				if (_ContextMenu == null)
 				{
-					Context.FetchRelation<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(new Guid("358c14b9-fef5-495d-8d44-04e84186830e"), RelationEndRole.A, this);
-					_ContextMenu 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchContextMenuAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_ContextMenu;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchContextMenuTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchContextMenuAsync()
+        {
+            if (_triggerFetchContextMenuTask != null) return _triggerFetchContextMenuTask;
+			_triggerFetchContextMenuTask = Context.FetchRelationAsync<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(new Guid("358c14b9-fef5-495d-8d44-04e84186830e"), RelationEndRole.A, this);
+			_triggerFetchContextMenuTask.OnResult(r => 
+            {
+                _ContextMenu 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchContextMenuTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>> _ContextMenu;
 
@@ -123,6 +145,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -130,10 +153,10 @@ namespace Zetbox.App.GUI
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description;
@@ -147,7 +170,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The Method whose return value shoud be displayed
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
         // fkBackingName=_fk_Method; fkGuidBackingName=_fk_guid_Method;
         // referencedInterface=Zetbox.App.Base.Method; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -165,8 +188,44 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Method;
+        private int? __fk_MethodCache;
 
+        private int? _fk_Method {
+            get
+            {
+                return __fk_MethodCache;
+            }
+            set
+            {
+                __fk_MethodCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchMethodTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method> _triggerFetchMethodTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method> TriggerFetchMethodAsync()
+        {
+            if (_triggerFetchMethodTask != null) return _triggerFetchMethodTask;
+
+            if (_fk_Method.HasValue)
+                _triggerFetchMethodTask = Context.FindAsync<Zetbox.App.Base.Method>(_fk_Method.Value);
+            else
+                _triggerFetchMethodTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchMethodTask.OnResult(t =>
+            {
+                if (OnMethod_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Method>(t.Result);
+                    OnMethod_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchMethodTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -174,32 +233,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.Base.MethodMemoryImpl __value;
-                if (_fk_Method.HasValue)
-                    __value = (Zetbox.App.Base.MethodMemoryImpl)Context.Find<Zetbox.App.Base.Method>(_fk_Method.Value);
-                else
-                    __value = null;
-
-                if (OnMethod_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Method>(__value);
-                    OnMethod_Getter(this, e);
-                    __value = (Zetbox.App.Base.MethodMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.MethodMemoryImpl)TriggerFetchMethodAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Method == null) || (value != null && value.ID == _fk_Method))
-				{
-					SetInitializedProperty("Method");
+                {
+                    SetInitializedProperty("Method");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = MethodImpl;
@@ -220,6 +266,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Method", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnMethod_PostSetter != null && IsAttached)
                 {
@@ -238,7 +285,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The Property to display
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
         // fkBackingName=_fk_Property; fkGuidBackingName=_fk_guid_Property;
         // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -256,8 +303,44 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Property;
+        private int? __fk_PropertyCache;
 
+        private int? _fk_Property {
+            get
+            {
+                return __fk_PropertyCache;
+            }
+            set
+            {
+                __fk_PropertyCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchPropertyTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> _triggerFetchPropertyTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> TriggerFetchPropertyAsync()
+        {
+            if (_triggerFetchPropertyTask != null) return _triggerFetchPropertyTask;
+
+            if (_fk_Property.HasValue)
+                _triggerFetchPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
+            else
+                _triggerFetchPropertyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchPropertyTask.OnResult(t =>
+            {
+                if (OnProperty_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Property>(t.Result);
+                    OnProperty_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchPropertyTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -265,32 +348,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.Base.PropertyMemoryImpl __value;
-                if (_fk_Property.HasValue)
-                    __value = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_Property.Value);
-                else
-                    __value = null;
-
-                if (OnProperty_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Property>(__value);
-                    OnProperty_Getter(this, e);
-                    __value = (Zetbox.App.Base.PropertyMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchPropertyAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Property == null) || (value != null && value.ID == _fk_Property))
-				{
-					SetInitializedProperty("Property");
+                {
+                    SetInitializedProperty("Property");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = PropertyImpl;
@@ -311,6 +381,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Property", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnProperty_PostSetter != null && IsAttached)
                 {
@@ -341,11 +412,6 @@ namespace Zetbox.App.GUI
             me.Description = other.Description;
             this._fk_Method = otherImpl._fk_Method;
             this._fk_Property = otherImpl._fk_Property;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -408,6 +474,23 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "ContextMenu":
+                return TriggerFetchContextMenuAsync();
+            case "Method":
+                return TriggerFetchMethodAsync();
+            case "Property":
+                return TriggerFetchPropertyAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -76,15 +76,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Group == null)
-				{
-					SetInitializedProperty("Group");
+                {
+                    SetInitializedProperty("Group");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Group);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Group");
+                {
+                    SetInitializedProperty("Group");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Group", __oldValue, __newValue);
@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Group", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnGroup_PostSetter != null && IsAttached)
                 {
@@ -155,12 +156,6 @@ namespace Zetbox.App.Base
             var me = (GroupMembership)this;
 
             this._fk_Group = otherImpl._fk_Group;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -321,6 +316,7 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)Group);
             }
 
+            Group = null;
         }
         public static event ObjectEventHandler<GroupMembership> OnNotifyDeleting_GroupMembership;
 

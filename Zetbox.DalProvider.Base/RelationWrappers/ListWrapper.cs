@@ -36,7 +36,6 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
 
         protected override IEnumerable<TA> GetItems()
         {
-            Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.A);
         }
 
@@ -47,7 +46,6 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
 
         protected override TA ItemFromEntry(TEntry entry)
         {
-            entry.AttachToContext(ParentObject.Context);
             return entry.A;
         }
 
@@ -103,7 +101,6 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
 
         protected override IEnumerable<TB> GetItems()
         {
-            Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.B);
         }
 
@@ -114,7 +111,6 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
 
         protected override TB ItemFromEntry(TEntry entry)
         {
-            entry.AttachToContext(ParentObject.Context);
             return entry.B;
         }
 

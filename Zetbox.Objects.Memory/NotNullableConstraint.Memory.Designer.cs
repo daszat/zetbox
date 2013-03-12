@@ -176,11 +176,6 @@ namespace Zetbox.App.Base
             var me = (NotNullableConstraint)this;
 
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -189,6 +184,15 @@ namespace Zetbox.App.Base
         #region Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

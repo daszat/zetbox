@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
         // fkBackingName=_fk_Group; fkGuidBackingName=_fk_guid_Group;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Group;
+        private int? __fk_GroupCache;
+
+        private int? _fk_Group {
+            get
+            {
+                return __fk_GroupCache;
+            }
+            set
+            {
+                __fk_GroupCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchGroupTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Group = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> _triggerFetchGroupTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> TriggerFetchGroupAsync()
+        {
+            if (_triggerFetchGroupTask != null) return _triggerFetchGroupTask;
+
+            if (_fk_Group.HasValue)
+                _triggerFetchGroupTask = Context.FindAsync<Zetbox.App.Base.Group>(_fk_Group.Value);
+            else
+                _triggerFetchGroupTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchGroupTask.OnResult(t =>
+            {
+                if (OnGroup_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Group>(t.Result);
+                    OnGroup_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchGroupTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.GroupMemoryImpl __value;
-                if (_fk_Group.HasValue)
-                    __value = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_Group.Value);
-                else
-                    __value = null;
-
-                if (OnGroup_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Group>(__value);
-                    OnGroup_Getter(this, e);
-                    __value = (Zetbox.App.Base.GroupMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.GroupMemoryImpl)TriggerFetchGroupAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Group == null) || (value != null && value.ID == _fk_Group))
-				{
-					SetInitializedProperty("Group");
+                {
+                    SetInitializedProperty("Group");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = GroupImpl;
@@ -114,6 +137,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Group", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnGroup_PostSetter != null && IsAttached)
                 {
@@ -142,11 +166,6 @@ namespace Zetbox.App.Base
             var me = (GroupMembership)this;
 
             this._fk_Group = otherImpl._fk_Group;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -186,6 +205,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Group":
+                return TriggerFetchGroupAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -300,6 +330,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_GroupMembership != null) OnNotifyDeleting_GroupMembership(this);
+            Group = null;
         }
         public static event ObjectEventHandler<GroupMembership> OnNotifyDeleting_GroupMembership;
 

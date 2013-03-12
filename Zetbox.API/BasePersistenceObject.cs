@@ -31,20 +31,21 @@ namespace Zetbox.API
     public abstract class BasePersistenceObject
         : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo, ICustomTypeDescriptor, ISortKey<int>
     {
-        // TODO 4.0: replace Func<> with Lazy<>
-        // http://www.davidhayden.me/2010/01/auto-factories-in-autofac-for-lazy-instantiation-lazydependencymodule.html
+        // TODO: Remove this
         protected BasePersistenceObject(Func<IFrozenContext> lazyCtx)
         {
             _lazyCtx = lazyCtx;
         }
 
-        private readonly Func<IFrozenContext> _lazyCtx;
+        // TODO 4.0: replace Func<> with Lazy<>
+        // http://www.davidhayden.me/2010/01/auto-factories-in-autofac-for-lazy-instantiation-lazydependencymodule.html
+        private Func<IFrozenContext> _lazyCtx;
         private IFrozenContext _frozenContext;
-        protected IFrozenContext FrozenContext
+        public IFrozenContext FrozenContext
         {
             get
             {
-                if (_frozenContext == null)
+                if (_frozenContext == null && _lazyCtx != null)
                 {
                     _frozenContext = _lazyCtx();
                 }
@@ -70,7 +71,7 @@ namespace Zetbox.API
             get
             {
                 return this.Context != null && !IsRecordingNotifications
-                    ? this.Context.IsReadonly || CurrentAccessRights.HasOnlyReadRightsOrNone() // when attaced -> eval. Don't look at the implementation below (CurrentAccessRights), it may be overridden
+                    ? this.Context.IsReadonly || CurrentAccessRights.HasOnlyReadRightsOrNone() // when attached -> eval. Don't look at the implementation below (CurrentAccessRights), it may be overridden
                     : false; // unattached - cannot be readonly
             }
         }
@@ -131,8 +132,12 @@ namespace Zetbox.API
         /// Attach this Object to a Context. This Method is called by the Context.
         /// </summary>
         /// <param name="ctx">Context to attach this Object to.</param>
-        public virtual void AttachToContext(IZetboxContext ctx)
+        /// <param name="lazyFrozenContext">lazyFrozenContext to attach to the object</param>
+        public virtual void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
+            if (lazyFrozenContext != null)
+                _lazyCtx = lazyFrozenContext;
+
             if (this.Context != null && this.Context != ctx)
                 throw new WrongZetboxContextException("Object cannot be attached to a new Context while attached to another Context.");
 
@@ -274,28 +279,6 @@ namespace Zetbox.API
                 throw new InvalidOperationException("Deserializing attached objects is not allowed");
 
             sr.ReadConverter(i => this.ID = i);
-            return null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xml"></param>
-        public virtual void ToStream(XmlWriter xml)
-        {
-            if (xml == null)
-                throw new ArgumentNullException("xml");
-        }
-
-        /// <summary>
-        /// Base method for deserializing this Object from XML.
-        /// </summary>
-        /// <param name="xml">Stream to serialize from</param>
-        public virtual IEnumerable<IPersistenceObject> FromStream(XmlReader xml)
-        {
-            if (xml == null)
-                throw new ArgumentNullException("xml");
-
             return null;
         }
 

@@ -21,6 +21,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
     using System.Text;
     using Arebis.CodeGeneration;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.Generator;

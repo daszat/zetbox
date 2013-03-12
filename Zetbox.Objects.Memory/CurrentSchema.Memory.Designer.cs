@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Schema", __oldValue, __newValue);
                     _Schema = __newValue;
                     NotifyPropertyChanged("Schema", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSchema_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Base
                         OnSchema_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Schema");
-				}
+                else
+                {
+                    SetInitializedProperty("Schema");
+                }
             }
         }
         private string _Schema;
@@ -130,6 +131,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Version", __oldValue, __newValue);
                     _Version = __newValue;
                     NotifyPropertyChanged("Version", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVersion_PostSetter != null && IsAttached)
                     {
@@ -137,10 +139,10 @@ namespace Zetbox.App.Base
                         OnVersion_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Version");
-				}
+                else
+                {
+                    SetInitializedProperty("Version");
+                }
             }
         }
         private int _Version;
@@ -166,11 +168,6 @@ namespace Zetbox.App.Base
             me.Schema = other.Schema;
             me.Version = other.Version;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -192,6 +189,15 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

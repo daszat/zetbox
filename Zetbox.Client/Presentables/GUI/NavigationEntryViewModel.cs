@@ -66,13 +66,45 @@ namespace Zetbox.Client.Presentables.GUI
         {
             if (screen == null) throw new ArgumentNullException("screen");
 
-            if (CurrentIdentity == null) throw new UnresolvableIdentityException();
-
-            if (screen.Groups.Count != 0 && !CurrentIdentity.IsAdmininistrator() && !screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
-                throw new InvalidOperationException("The current identity is not allowed to see this screen. The screen should not be displayed! Check your filters.");
-
             _screen = screen;
             _screen.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_screen_PropertyChanged);
+        }
+
+        private bool? _hasAccess = null;
+        public bool HasAccess
+        {
+            get
+            {
+                if (_hasAccess == null)
+                {
+                    if (CurrentIdentity == null)
+                    {
+                        _hasAccess = false;
+                    }
+                    else if (_screen.Groups.Count != 0 && !CurrentIdentity.IsAdmininistrator() && !_screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
+                    {
+                        _hasAccess = false;
+                    }
+                    else
+                    {
+                        _hasAccess = true;
+                    }
+                }
+                return _hasAccess.Value;
+            }
+        }
+
+        public override ControlKind RequestedKind
+        {
+            get
+            {
+                if (!HasAccess) return NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_AccessDeniedDataObjectKind.Find(FrozenContext);
+                return _screen.RequestedKind ?? base.RequestedKind;
+            }
+            set
+            {
+                base.RequestedKind = value;
+            }
         }
 
         void _screen_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -111,7 +143,18 @@ namespace Zetbox.Client.Presentables.GUI
                 // Don't call base, since it's readonly, deactivated would be returned
                 // Deactivated on !IsEnabled is OK
                 if (!IsEnabled) return Highlight.Deactivated;
-                return null;
+                return Highlight.None;
+            }
+        }
+
+        public override Highlight HighlightAsync
+        {
+            get
+            {
+                // Don't call base, since it's readonly, deactivated would be returned
+                // Deactivated on !IsEnabled is OK
+                if (!IsEnabled) return Highlight.Deactivated;
+                return Highlight.None;
             }
         }
 
@@ -157,7 +200,7 @@ namespace Zetbox.Client.Presentables.GUI
         {
             get
             {
-                if (_childrenRO == null)
+                if (HasAccess && _childrenRO == null)
                 {
                     _children = new ObservableCollection<NavigationEntryViewModel>();
                     foreach (var s in _screen.Children.Where(c => c.Groups.Count == 0 || CurrentIdentity.IsAdmininistrator() || c.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))))
@@ -175,7 +218,7 @@ namespace Zetbox.Client.Presentables.GUI
         {
             get
             {
-                if (_additionalCommandsRW == null)
+                if (HasAccess && _additionalCommandsRW == null)
                 {
                     _additionalCommandsRW = new ObservableCollection<CommandViewModel>(CreateAdditionalCommands());
                 }
@@ -198,7 +241,7 @@ namespace Zetbox.Client.Presentables.GUI
 
         protected virtual List<CommandViewModel> CreateAdditionalCommands()
         {
-            return new List<CommandViewModel>(); 
+            return new List<CommandViewModel>();
         }
 
         public string Color
@@ -215,7 +258,90 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
+        /// <summary>
+        /// Indicates that a Nav-Entry can be displayed. A Search screen would return true, a Action would return false
+        /// </summary>
+        public abstract bool IsScreen
+        {
+            get;
+        }
 
+        /// <summary>
+        /// Indicates that a navigation entry should stay visible, contains, and "renders" its children itself.
+        /// </summary>
+        /// <remarks>
+        /// Tabbed screens are examples for Containers.
+        /// </remarks>
+        public abstract bool IsContainer { get; }
+
+        /// <summary>
+        /// The currently selected child entry on this NavigationEntry.
+        /// </summary>
+        public abstract NavigationEntryViewModel SelectedEntry
+        {
+            get;
+            set;
+        }
+
+        private NavigationEntryViewModel _current;
+        /// <summary>
+        /// The currently displayed entry in this part of the hierarchy.
+        /// </summary>
+        public NavigationEntryViewModel CurrentScreen
+        {
+            get
+            {
+                if (_current == null)
+                    _current = GetInitialScreen();
+                return _current;
+            }
+            set
+            {
+                if (_current != value)
+                {
+                    _current = value;
+                    UpdateContainer();
+                    OnPropertyChanged("CurrentScreen");
+                }
+            }
+        }
+
+        protected virtual NavigationEntryViewModel GetInitialScreen()
+        {
+            return this;
+        }
+
+        private void UpdateContainer()
+        {
+            // select the top-most container that is within this container, or the current screen
+            ContainerScreen = CurrentScreen
+                .AndParents(s => s.ParentScreen)
+                .TakeWhile(s => s != this.ParentScreen)
+                .Where(s => s.IsContainer)
+                .LastOrDefault()
+                ?? CurrentScreen;
+        }
+
+        private NavigationEntryViewModel _container;
+        /// <summary>
+        /// The top-most container of the CurrentScreen
+        /// </summary>
+        public NavigationEntryViewModel ContainerScreen
+        {
+            get
+            {
+                if (_container == null) UpdateContainer();
+                return _container;
+            }
+            private set
+            {
+                if (_container != value)
+                {
+                    _container = value;
+                    OnPropertyChanged("ContainerScreen");
+                }
+            }
+        }
 
         #region ReportProblemCommand
         private ICommandViewModel _ReportProblemCommand = null;

@@ -24,9 +24,58 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using System.Collections;
+    using System.Data;
 
     public partial class ModelSsdl
     {
+        private string _int32DbType;
+        protected string int32DbType
+        {
+            get
+            {
+                InitInt32Type();
+                return _int32DbType;
+            }
+        }
+
+        private void InitInt32Type()
+        {
+            if (_int32DbType == null)
+                _int32DbType = schemaProvider.DbTypeToNative(DbType.Int32);
+        }
+
+        private string _guidDbType;
+        protected string guidDbType
+        {
+            get
+            {
+                InitGuidType();
+                return _guidDbType;
+            }
+        }
+
+        private void InitGuidType()
+        {
+            if (_guidDbType == null)
+                _guidDbType = schemaProvider.DbTypeToNative(DbType.Guid);
+        }
+
+        private string _nvarcharDbType;
+        protected string nvarcharDbType
+        {
+            get
+            {
+                InitnvarcharType();
+                return _nvarcharDbType;
+            }
+        }
+
+        private void InitnvarcharType()
+        {
+            if (_nvarcharDbType == null)
+                _nvarcharDbType = schemaProvider.DbTypeToNative(DbType.String);
+        }
+
         // ContextBound Objects are not allowed to have Generic Methods
         // See MSDN: http://msdn.microsoft.com/en-us/library/system.contextboundobject.aspx
         private static class ModelSsdlHelper
@@ -70,6 +119,14 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
                 ModelSsdlHelper.RetrieveAndSortPropertiesOfType<CompoundObjectProperty>(cls.Properties, p => !p.IsList).Cast<Property>(),
                 String.Empty,
                 schemaProvider);
+
+            if (cls.GetTableMapping() == TableMapping.TPH)
+            {
+                foreach (var subCls in cls.SubClasses.OrderBy(c => c.Module.Name).ThenBy(c => c.Name))
+                {
+                    ApplyEntityTypeColumnDefs(subCls);
+                }
+            }
         }
 
         protected virtual void ApplyEntityTypeColumnDefs(CompoundObjectProperty prop)
@@ -80,6 +137,15 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
                 new Property[] { prop },
                 String.Empty,
                 schemaProvider);
+        }
+
+        protected IEnumerable<ObjectClass> GetEntityTypes()
+        {
+            
+            return ctx.GetQuery<ObjectClass>()
+                .ToList()
+                .Where(c => c.GetTableMapping() == TableMapping.TPT || (c.GetTableMapping() == TableMapping.TPH && c.BaseObjectClass == null))
+                .OrderBy(cls => cls.Name);
         }
     }
 }

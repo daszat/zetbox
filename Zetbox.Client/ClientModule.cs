@@ -22,39 +22,30 @@ namespace Zetbox.Client
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
+    using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.App.Extensions;
     using Zetbox.Client.Presentables;
-    using Zetbox.API.Common;
+    using Zetbox.API.Common.GUI;
+    using System.ComponentModel;
 
+    [Feature]
+    [Description("The Client Module")]
     public sealed class ClientModule : Module
     {
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IViewModelFactory f, IUiThreadManager ui, IAsyncThreadManager async, IFrozenContext frozenCtx, IIdentityResolver idResolver)
+            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IIdentityResolver idResolver, IIconConverter iconConverter)
             {
                 Factory = f;
-                UiThread = ui;
-                AsyncThread = async;
                 FrozenContext = frozenCtx;
                 IdentityResolver = idResolver;
+                IconConverter = iconConverter;
             }
 
             #region IViewModelDependencies Members
 
             public IViewModelFactory Factory
-            {
-                get;
-                private set;
-            }
-
-            public IUiThreadManager UiThread
-            {
-                get;
-                private set;
-            }
-
-            public IAsyncThreadManager AsyncThread
             {
                 get;
                 private set;
@@ -73,28 +64,32 @@ namespace Zetbox.Client
             }
 
             #endregion
+
+
+            public IIconConverter IconConverter
+            {
+                get;
+                private set;
+            }
         }
 
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder
-                .Register<SynchronousThreadManager>(c => new SynchronousThreadManager())
-                .As<IAsyncThreadManager>()
-                .As<IUiThreadManager>();
+            moduleBuilder.RegisterModule<Zetbox.API.Common.ApiCommonModule>();
+            moduleBuilder.RegisterModule<Zetbox.API.Client.ClientApiModule>();
 
             moduleBuilder
                 .Register<ViewModelDependencies>(c => new ViewModelDependencies(
-                    c.Resolve<IViewModelFactory>(), 
-                    c.Resolve<IUiThreadManager>(), 
-                    c.Resolve<IAsyncThreadManager>(), 
-                    c.Resolve<IFrozenContext>(), 
-                    c.Resolve<IIdentityResolver>()))
+                    c.Resolve<IViewModelFactory>(),
+                    c.Resolve<IFrozenContext>(),
+                    c.Resolve<IIdentityResolver>(),
+                    c.Resolve<IIconConverter>()))
                 .As<IViewModelDependencies>();
 
             moduleBuilder
-                .Register<ThreadPrincipalResolver>(c=> new ThreadPrincipalResolver(c.Resolve<Func<IReadOnlyZetboxContext>>()))
+                .Register<ThreadPrincipalResolver>(c => new ThreadPrincipalResolver(c.Resolve<Func<IReadOnlyZetboxContext>>()))
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();
 
@@ -112,8 +107,21 @@ namespace Zetbox.Client
                 .RegisterType<Zetbox.Client.GUI.DialogCreator>()
                 .AsSelf()
                 .InstancePerDependency();
-            
+
+            moduleBuilder
+                .RegisterType<ZetboxContextExceptionHandler>()
+                .As<IZetboxContextExceptionHandler>()
+                .SingleInstance();
+
+            moduleBuilder
+                .RegisterType<Zetbox.Client.Reporting.ReportingErrorDialog>()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
+
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
+
+            moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.DalProvider.Client.ClientProvider, Zetbox.DalProvider.ClientObjects", true)));
+            moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client", true)));
         }
     }
 }

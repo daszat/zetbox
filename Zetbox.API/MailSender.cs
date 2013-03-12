@@ -21,6 +21,8 @@ namespace Zetbox.API
     using System.Text;
     using System.Net.Mail;
     using Autofac;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     public interface IMailSender
     {
@@ -57,6 +59,8 @@ namespace Zetbox.API
             client.Send(msg);
         }
 
+        [Feature]
+        [Description("Mailsender that uses System.Net.Mail.SmtpClient")]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)
@@ -112,6 +116,8 @@ namespace Zetbox.API
             System.Diagnostics.Process.Start(si);       
         }
 
+        [Feature]
+        [Description("Mailsender that uses the mailto:// uri handler")]
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)

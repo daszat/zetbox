@@ -87,6 +87,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Aufwand", __oldValue, __newValue);
                     Proxy.Aufwand = __newValue;
                     NotifyPropertyChanged("Aufwand", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAufwand_PostSetter != null && IsAttached)
                     {
@@ -94,10 +95,10 @@ namespace Zetbox.App.Projekte
                         OnAufwand_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Aufwand");
-				}
+                else
+                {
+                    SetInitializedProperty("Aufwand");
+                }
             }
         }
 
@@ -136,15 +137,15 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -153,10 +154,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -180,6 +181,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -237,6 +239,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -244,10 +247,10 @@ namespace Zetbox.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
 
@@ -305,15 +308,15 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -322,10 +325,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -349,6 +352,7 @@ namespace Zetbox.App.Projekte
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -406,6 +410,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -413,10 +418,10 @@ namespace Zetbox.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
 
@@ -482,6 +487,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("DatumBis", __oldValue, __newValue);
                     Proxy.DatumBis = __newValue;
                     NotifyPropertyChanged("DatumBis", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDatumBis_PostSetter != null && IsAttached)
                     {
@@ -489,10 +495,10 @@ namespace Zetbox.App.Projekte
                         OnDatumBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DatumBis");
-				}
+                else
+                {
+                    SetInitializedProperty("DatumBis");
+                }
             }
         }
 
@@ -539,6 +545,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("DatumVon", __oldValue, __newValue);
                     Proxy.DatumVon = __newValue;
                     NotifyPropertyChanged("DatumVon", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDatumVon_PostSetter != null && IsAttached)
                     {
@@ -546,10 +553,10 @@ namespace Zetbox.App.Projekte
                         OnDatumVon_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DatumVon");
-				}
+                else
+                {
+                    SetInitializedProperty("DatumVon");
+                }
             }
         }
 
@@ -597,6 +604,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -604,10 +612,10 @@ namespace Zetbox.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -673,6 +681,7 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -680,10 +689,10 @@ namespace Zetbox.App.Projekte
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
 
@@ -722,15 +731,15 @@ namespace Zetbox.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Projekt == null)
-				{
-					SetInitializedProperty("Projekt");
+                {
+                    SetInitializedProperty("Projekt");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Projekt);
@@ -739,10 +748,10 @@ namespace Zetbox.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Projekt");
+                {
+                    SetInitializedProperty("Projekt");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Projekt", __oldValue, __newValue);
@@ -789,6 +798,7 @@ namespace Zetbox.App.Projekte
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Projekt", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnProjekt_PostSetter != null && IsAttached)
                 {
@@ -833,12 +843,6 @@ namespace Zetbox.App.Projekte
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Projekt = otherImpl._fk_Projekt;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -1138,6 +1142,7 @@ namespace Zetbox.App.Projekte
 
             ChangedBy = null;
             CreatedBy = null;
+            Projekt = null;
         }
         public static event ObjectEventHandler<Task> OnNotifyDeleting_Task;
 

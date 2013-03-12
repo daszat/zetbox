@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// An optional default ViewModelDescriptor for Properties of this type
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultPropertyViewModelDescriptor
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultPropertyViewModelDescriptor
         // fkBackingName=_fk_DefaultPropertyViewModelDescriptor; fkGuidBackingName=_fk_guid_DefaultPropertyViewModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultPropertyViewModelDescriptor;
+        private int? __fk_DefaultPropertyViewModelDescriptorCache;
+
+        private int? _fk_DefaultPropertyViewModelDescriptor {
+            get
+            {
+                return __fk_DefaultPropertyViewModelDescriptorCache;
+            }
+            set
+            {
+                __fk_DefaultPropertyViewModelDescriptorCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultPropertyViewModelDescriptorTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultPropertyViewModelDescriptor = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchDefaultPropertyViewModelDescriptorTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> TriggerFetchDefaultPropertyViewModelDescriptorAsync()
+        {
+            if (_triggerFetchDefaultPropertyViewModelDescriptorTask != null) return _triggerFetchDefaultPropertyViewModelDescriptorTask;
+
+            if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
+                _triggerFetchDefaultPropertyViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
+            else
+                _triggerFetchDefaultPropertyViewModelDescriptorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchDefaultPropertyViewModelDescriptorTask.OnResult(t =>
+            {
+                if (OnDefaultPropertyViewModelDescriptor_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(t.Result);
+                    OnDefaultPropertyViewModelDescriptor_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDefaultPropertyViewModelDescriptorTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.GUI.ViewModelDescriptorMemoryImpl __value;
-                if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
-                    __value = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
-                else
-                    __value = null;
-
-                if (OnDefaultPropertyViewModelDescriptor_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(__value);
-                    OnDefaultPropertyViewModelDescriptor_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchDefaultPropertyViewModelDescriptorAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultPropertyViewModelDescriptor == null) || (value != null && value.ID == _fk_DefaultPropertyViewModelDescriptor))
-				{
-					SetInitializedProperty("DefaultPropertyViewModelDescriptor");
+                {
+                    SetInitializedProperty("DefaultPropertyViewModelDescriptor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultPropertyViewModelDescriptorImpl;
@@ -114,6 +137,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultPropertyViewModelDescriptor_PostSetter != null && IsAttached)
                 {
@@ -331,11 +355,6 @@ namespace Zetbox.App.Base
 
             this._fk_DefaultPropertyViewModelDescriptor = otherImpl._fk_DefaultPropertyViewModelDescriptor;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -374,6 +393,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DefaultPropertyViewModelDescriptor":
+                return TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

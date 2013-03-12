@@ -26,7 +26,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Extensions;
 
     [ViewModelDescriptor]
-    public class DataTypeViewModel 
+    public class DataTypeViewModel
         : DataObjectViewModel
     {
         public new delegate DataTypeViewModel Factory(IZetboxContext dataCtx, ViewModel parent, DataType dt);
@@ -57,6 +57,26 @@ namespace Zetbox.Client.Presentables
             }
 
             return result;
+        }
+
+        public string DescribedType
+        {
+            get
+            {
+                return _dataType.GetDataTypeString();
+            }
+        }
+
+        protected override void OnObjectPropertyChanged(string propName)
+        {
+            base.OnObjectPropertyChanged(propName);
+            switch (propName)
+            {
+                case "Name":
+                case "Module":
+                    OnPropertyChanged("DescribedType");
+                    break;
+            }
         }
     }
 }

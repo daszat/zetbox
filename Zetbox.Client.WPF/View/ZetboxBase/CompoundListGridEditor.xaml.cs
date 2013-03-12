@@ -35,9 +35,8 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.WPF.Commands;
-    using Microsoft.Windows.Controls;
-    using Zetbox.Client.WPF.Toolkit;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
@@ -54,9 +53,9 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         private void ItemActivatedHandler(object sender, RoutedEventArgs e)
         {
-            if (ViewModel.SelectedItem != null)
+            if (ViewModel != null)
             {
-                ViewModel.ActivateItem(ViewModel.SelectedItem, true);
+                ViewModel.Open();
             }
             e.Handled = true;
         }
@@ -80,7 +79,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public CompoundListViewModel ViewModel
         {
-            get { return (CompoundListViewModel)DataContext; }
+            get { return (CompoundListViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

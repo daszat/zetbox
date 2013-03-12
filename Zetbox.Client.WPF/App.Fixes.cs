@@ -147,7 +147,86 @@ namespace Zetbox.Client.WPF
             //PrintControlKindTypes();
             //FixupCallImplementInterfaces(ctx);
             //RegenerateTypeRefs(ctxFactory());
+            //CreateTestClasses(ctxFactory);
         }
+
+        //private static void CreateTestClasses(Func<IZetboxContext> ctxFactory)
+        //{
+        //    using (var ctx = ctxFactory())
+        //    {
+        //        var baseCls = ctx.Create<ObjectClass>();
+        //        baseCls.Name = "PropertyTestBase";
+        //        baseCls.TableName = "PropertyTests";
+        //        baseCls.TableMapping = TableMapping.TPH;
+        //        baseCls.Module = ctx.FindPersistenceObject<Zetbox.App.Base.Module>(new Guid("81e8ce31-65eb-46fe-ba86-de7452692d5b")); // TestModule
+        //        baseCls.IsSimpleObject = true;
+        //        baseCls.IsAbstract = true;
+
+        //        foreach (var data in new[]{
+        //                new { Type = typeof(IntProperty), Name="Int",
+        //                    DefaultValue = typeof(IntDefaultValue), AssignDefaultValue = new Action<DefaultPropertyValue>( v => ((IntDefaultValue)v).IntValue = 5 ) },
+        //                new { Type = typeof(DoubleProperty), Name="Double",
+        //                    DefaultValue = typeof(DoubleDefaultValue), AssignDefaultValue  = new Action<DefaultPropertyValue>( v => ((DoubleDefaultValue)v).DoubleValue = 5.5 )  },
+        //                new { Type = typeof(StringProperty), Name="String",
+        //                    DefaultValue = typeof(StringDefaultValue), AssignDefaultValue  = new Action<DefaultPropertyValue>( v => ((StringDefaultValue)v).DefaultValue = "five point five" ) },
+        //                new { Type = typeof(DecimalProperty), Name="Decimal",
+        //                    DefaultValue = typeof(DecimalDefaultValue), AssignDefaultValue  = new Action<DefaultPropertyValue>( v => ((DecimalDefaultValue)v).DecimalValue = 5.5m ) },
+        //                new { Type = typeof(EnumerationProperty), Name="Enum",
+        //                    DefaultValue = typeof(EnumDefaultValue), AssignDefaultValue  = new Action<DefaultPropertyValue>( v => ((EnumDefaultValue)v).EnumValue = ctx.FindPersistenceObject<EnumerationEntry>(new Guid("93bac9f3-c4c6-4ed2-9c93-0f4575200333"))) }, // TestEnum.Third
+        //                new { Type = typeof(BoolProperty), Name = "Bool",
+        //                    DefaultValue = typeof(BoolDefaultValue), AssignDefaultValue  = new Action<DefaultPropertyValue>( v => ((BoolDefaultValue)v).BoolValue = true) },
+        //                new { Type = typeof(DateTimeProperty), Name = "DateTime",
+        //                    DefaultValue = typeof(CurrentDateTimeDefaultValue), AssignDefaultValue =  new Action<DefaultPropertyValue>(v => {}) },
+        //                new { Type = typeof(GuidProperty), Name = "Guid",
+        //                    DefaultValue = typeof(NewGuidDefaultValue), AssignDefaultValue =  new Action<DefaultPropertyValue>(v => {}) },
+        //            })
+        //        {
+        //            var cls = ctx.Create<ObjectClass>();
+        //            cls.Name = "Property" + data.Name + "Test";
+        //            cls.TableName = "Property" + data.Name + "Tests";
+        //            cls.IsSimpleObject = true;
+
+        //            cls.BaseObjectClass = baseCls;
+        //            cls.Module = baseCls.Module;
+
+        //            var standard = (Property)ctx.Create(ctx.GetInterfaceType(data.Type));
+        //            var nullable = (Property)ctx.Create(ctx.GetInterfaceType(data.Type));
+        //            var standardWithDefault = (Property)ctx.Create(ctx.GetInterfaceType(data.Type));
+        //            var nullableWithDefault = (Property)ctx.Create(ctx.GetInterfaceType(data.Type));
+
+        //            standard.Name = "Standard";
+        //            standard.ObjectClass = cls;
+        //            standard.Module = cls.Module;
+        //            standard.Constraints.Add(ctx.Create<NotNullableConstraint>());
+
+        //            nullable.Name = "Nullable";
+        //            nullable.ObjectClass = cls;
+        //            nullable.Module = cls.Module;
+
+        //            standardWithDefault.Name = "StandardWithDefault";
+        //            standardWithDefault.ObjectClass = cls;
+        //            standardWithDefault.Module = cls.Module;
+        //            standardWithDefault.Constraints.Add(ctx.Create<NotNullableConstraint>());
+        //            standardWithDefault.DefaultValue = (DefaultPropertyValue)ctx.Create(ctx.GetInterfaceType(data.DefaultValue));
+        //            data.AssignDefaultValue(standardWithDefault.DefaultValue);
+
+        //            nullableWithDefault.Name = "NullableWithDefault";
+        //            nullableWithDefault.ObjectClass = cls;
+        //            nullableWithDefault.Module = cls.Module;
+        //            nullableWithDefault.DefaultValue = (DefaultPropertyValue)ctx.Create(ctx.GetInterfaceType(data.DefaultValue));
+        //            data.AssignDefaultValue(nullableWithDefault.DefaultValue);
+
+        //            if (data.Type == typeof(EnumerationProperty))
+        //            {
+        //                ((EnumerationProperty)standard).Enumeration = ctx.FindPersistenceObject<Enumeration>(new Guid("67b48828-e7d2-4432-a942-88e96d74b40a"));
+        //                ((EnumerationProperty)nullable).Enumeration = ctx.FindPersistenceObject<Enumeration>(new Guid("67b48828-e7d2-4432-a942-88e96d74b40a"));
+        //                ((EnumerationProperty)standardWithDefault).Enumeration = ctx.FindPersistenceObject<Enumeration>(new Guid("67b48828-e7d2-4432-a942-88e96d74b40a"));
+        //                ((EnumerationProperty)nullableWithDefault).Enumeration = ctx.FindPersistenceObject<Enumeration>(new Guid("67b48828-e7d2-4432-a942-88e96d74b40a"));
+        //            }
+        //        }
+        //        ctx.SubmitChanges();
+        //    }
+        //}
 
         //private static void ImportIcons(IZetboxContext ctx)
         //{

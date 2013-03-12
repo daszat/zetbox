@@ -121,6 +121,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -128,10 +129,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -189,15 +190,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -206,10 +207,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -233,6 +234,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -291,6 +293,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -298,10 +301,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
 
@@ -340,15 +343,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Parent == null)
-				{
-					SetInitializedProperty("Parent");
+                {
+                    SetInitializedProperty("Parent");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
@@ -357,10 +360,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Parent");
+                {
+                    SetInitializedProperty("Parent");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Parent", __oldValue, __newValue);
@@ -407,6 +410,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnParent_PostSetter != null && IsAttached)
                 {
@@ -509,12 +513,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             me.Name = other.Name;
             this._fk_Module = otherImpl._fk_Module;
             this._fk_Parent = otherImpl._fk_Parent;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -751,6 +749,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
             // should fetch && remember parent for DataType_may_request_ControlKind_RelationEntry
             // should fetch && remember parent for FilterConfiguration_has_ControlKind_RelationEntry
+            // should fetch && remember parent for NavigationEntry_have_ControlKind_RelationEntry
             // should fetch && remember parent for ViewModelDescriptor_has_ControlKind_RelationEntry
             // should fetch && remember parent for Property_may_request_ControlKind_RelationEntry
             // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry
@@ -762,6 +761,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             // should fetch && remember parent for ViewModelDescriptor_displayedInGridBy_ControlKind_RelationEntry
 
             ChildControlKinds.Clear();
+            Module = null;
             Parent = null;
         }
         public static event ObjectEventHandler<ControlKind> OnNotifyDeleting_ControlKind;

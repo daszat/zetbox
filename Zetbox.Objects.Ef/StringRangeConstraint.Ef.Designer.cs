@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="StringRangeConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="StringRangeConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("StringRangeConstraint")]
     public class StringRangeConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, StringRangeConstraint
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MaxLength", __oldValue, __newValue);
                     _MaxLength = __newValue;
                     NotifyPropertyChanged("MaxLength", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMaxLength_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnMaxLength_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MaxLength");
-				}
+                else
+                {
+                    SetInitializedProperty("MaxLength");
+                }
             }
         }
         private int? _MaxLength_store;
@@ -147,6 +148,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MinLength", __oldValue, __newValue);
                     _MinLength = __newValue;
                     NotifyPropertyChanged("MinLength", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMinLength_PostSetter != null && IsAttached)
                     {
@@ -154,10 +156,10 @@ namespace Zetbox.App.Base
                         OnMinLength_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MinLength");
-				}
+                else
+                {
+                    SetInitializedProperty("MinLength");
+                }
             }
         }
         private int _MinLength_store;
@@ -316,11 +318,6 @@ namespace Zetbox.App.Base
 
             me.MaxLength = other.MaxLength;
             me.MinLength = other.MinLength;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

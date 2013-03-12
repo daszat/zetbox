@@ -56,7 +56,7 @@ this.WriteObjects("        </set>\r\n");
 #line 40 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 this.WriteObjects("        <!-- ValueTypeProperty isValue -->\r\n");
 this.WriteObjects("        <property name=\"",  propName , "\" ",  typeAttr , "\r\n");
-this.WriteObjects("                  column=\"`",  prefix , "",  columnName , "`\" \r\n");
+this.WriteObjects("                  column=\"`",  columnName , "`\" \r\n");
 this.WriteObjects("                  optimistic-lock=\"",  optimisticLock ? "true" : "false" , "\"/>\r\n");
 #line 44 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 }                                                                                

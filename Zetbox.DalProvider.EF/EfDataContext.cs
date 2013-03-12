@@ -26,13 +26,14 @@ namespace Zetbox.DalProvider.Ef
     using System.Reflection;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
+    using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.API.Server.PerfCounter;
 
     /// <summary>
     /// Entityframework IZetboxContext implementation
@@ -82,17 +83,35 @@ namespace Zetbox.DalProvider.Ef
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter)
+        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter, ISqlErrorTranslator sqlErrorTranslator)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
+            if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
+
             _ctx = new EfObjectContext(config);
             _implTypeFactory = implTypeFactory;
             _perfCounter = perfCounter;
+            _sqlErrorTranslator = sqlErrorTranslator;
+
+            _ctx.ObjectMaterialized += new ObjectMaterializedEventHandler(_ctx_ObjectMaterialized);
+
+            // Do the hamster dance.
+            // See http://social.msdn.microsoft.com/Forums/en-US/adodotnetentityframework/thread/6b6d72f0-d894-4ae4-84f6-ec69e043e79a for details.
+            // This initialises the EfObjectContext to a functional state.
+            GetQuery<ObjectClass>();
         }
 
-        internal ObjectContext ObjectContext { get { return _ctx; } }
-        private IPerfCounter _perfCounter;
+        void _ctx_ObjectMaterialized(object sender, ObjectMaterializedEventArgs e)
+        {
+            if (e.Entity is IPersistenceObject)
+            {
+                ((IPersistenceObject)e.Entity).AttachToContext(this, lazyCtx);
+            }
+        }
+
+        private readonly IPerfCounter _perfCounter;
+        private readonly ISqlErrorTranslator _sqlErrorTranslator;
 
         private class QueryCacheEntry
         {
@@ -119,7 +138,7 @@ namespace Zetbox.DalProvider.Ef
             if (intf == null)
                 throw new ArgumentNullException("intf");
             var rootType = intf.GetRootType();
-            return rootType.Type.Name;
+            return rootType.Type.Name + "EfImpl";
         }
 
         /// <summary>
@@ -226,17 +245,20 @@ namespace Zetbox.DalProvider.Ef
         }
 
         // TODO: Create new override
-        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
+        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
             CheckDisposed();
-            if (parent == null)
+            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
-                return this.GetPersistenceObjectQuery<T>().ToList();
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+                if (parent == null)
+                {
+                    return this.GetPersistenceObjectQuery<T>().ToList();
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            });
         }
 
         /// <summary>
@@ -268,12 +290,6 @@ namespace Zetbox.DalProvider.Ef
                     .Select(e => e.Entity)
                     .OfType<IPersistenceObject>()
                     .ToList();
-                foreach (var obj in result)
-                {
-                    // Attach entities if the where loaded by EF
-                    if (obj.Context == null) 
-                        obj.AttachToContext(this);
-                }
                 return result;
             }
         }
@@ -299,6 +315,15 @@ namespace Zetbox.DalProvider.Ef
 
                 NotifyChanging(notifySaveList);
 
+                // Detach all rights entities as they are managed by the triggers in the database
+                foreach (var right in _ctx.ObjectStateManager
+                    .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted)
+                    .Where(e => e.IsRelationship == false && e.EntitySet.Name.EndsWith("_Rights") && (e.Entity is IDataObject) == false)
+                    .ToList())
+                {
+                    _ctx.Detach(right.Entity);
+                }
+
                 try
                 {
                     result = _ctx.SaveChanges();
@@ -307,14 +332,17 @@ namespace Zetbox.DalProvider.Ef
                 catch (OptimisticConcurrencyException cex)
                 {
                     Logging.Log.Error("OptimisticConcurrencyException during SubmitChanges", cex);
+                    foreach (var stateEntry in cex.StateEntries)
+                    {
+                        Logging.Log.ErrorFormat("  -> {0} ({1})", stateEntry.EntitySet, string.Join(", ", stateEntry.EntityKey.EntityKeyValues.Select(i => i.ToString())));
+                    }
                     throw new ConcurrencyException(cex);
                 }
                 catch (UpdateException updex)
                 {
                     Logging.Log.Error("UpdateException during SubmitChanges", updex);
-                    if (updex.InnerException == null)
-                        throw;
-                    throw updex.InnerException;
+                    if (updex.InnerException == null) throw;
+                    throw _sqlErrorTranslator.Translate(updex.InnerException);
                 }
 
                 NotifyChanged(notifySaveList);
@@ -459,7 +487,7 @@ namespace Zetbox.DalProvider.Ef
             string entityName = GetEntityName(GetInterfaceType(obj));
 
             _ctx.AttachTo(entityName, obj);
-                        
+
             if (obj.ID < _newIDCounter)// Check ID <-> newIDCounter
             {
                 _newIDCounter = obj.ID;
@@ -521,19 +549,22 @@ namespace Zetbox.DalProvider.Ef
         /// <param baseDir="ifType">Object Type of the Object to find.</param>
         /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public override IDataObject Find(InterfaceType ifType, int ID)
+        public override ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            try
+            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
             {
-                // See Case 552
-                return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { ifType.Type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
-            }
-            catch (TargetInvocationException tiex)
-            {
-                // unwrap "business" exception
-                throw tiex.InnerException;
-            }
+                try
+                {
+                    // See Case 552
+                    return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { ifType.Type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
+                }
+                catch (TargetInvocationException tiex)
+                {
+                    // unwrap "business" exception
+                    throw tiex.InnerException;
+                }
+            });
         }
 
         /// <summary>
@@ -544,35 +575,17 @@ namespace Zetbox.DalProvider.Ef
         /// <typeparam baseDir="T">Object Type of the Object to find.</typeparam>
         /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public override T Find<T>(int ID)
+        public override ZbTask<T> FindAsync<T>(int ID)
         {
             CheckDisposed();
-            try
+
+            return new ZbTask<T>(ZbTask.Synchron, () =>
             {
                 var result = AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
-                    ?? GetQuery<T>().First(o => o.ID == ID);
-                // Some objects are loaded by EF another way, I dind't find.
-                // So the objects was not attached to this context
-                // Fix this.
-                if (result.Context == null) result.AttachToContext(this);
+                    ?? (T)EfFindById(GetInterfaceType(typeof(T)), ID);
+                if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
                 return result;
-            }
-            catch (InvalidOperationException)
-            {
-                // if the IOEx happened because there is no such object, we 
-                // want to report this with an ArgumentOutOfRangeException, 
-                // else, we just want to pass the exception on.
-                // Since we do not want to rely on the exception string, 
-                // we have to check whether there is _any_ object with that ID
-                if (GetQuery<T>().Count(o => o.ID == ID) == 0)
-                {
-                    throw new ArgumentOutOfRangeException("ID", ID, "No such object");
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            });
         }
 
         /// <summary>
@@ -610,32 +623,25 @@ namespace Zetbox.DalProvider.Ef
         public override T FindPersistenceObject<T>(int ID)
         {
             CheckDisposed();
-            try
-            {
-                var result = AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
-                    ?? GetPersistenceObjectQuery<T>().First(o => o.ID == ID);
-                // Some objects are loaded by EF another way, I dind't find.
-                // So the objects was not attached to this context
-                // Fix this.
-                if (result.Context == null) result.AttachToContext(this);
-                return result;
-            }
-            catch (InvalidOperationException)
-            {
-                // if the IOEx happened because there is no such object, we 
-                // want to report this with an ArgumentOutOfRangeException, 
-                // else, we just want to pass the exception on.
-                // Since we do not want to rely on the exception string, 
-                // we have to check whether there is _any_ object with that ID
-                if (!GetPersistenceObjectQuery<T>().Any(o => o.ID == ID))
-                {
-                    throw new ArgumentOutOfRangeException("ID", ID, "No such object");
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
+            return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                ?? (T)EfFindById(GetInterfaceType(typeof(T)), ID);
+        }
+
+        private IPersistenceObject EfFindById(InterfaceType ifType, int ID)
+        {
+            if (ID <= Zetbox.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID", ID, "Cannot ask EntityFramework for INVALIDID"); }
+
+            var key = new EntityKey(string.Format("Entities.{0}", GetEntityName(ifType)), "ID", ID);
+            object result = null;
+            _ctx.TryGetObjectByKey(key, out result);
+            return (IPersistenceObject)result;
+        }
+
+        private IPersistenceObject EfFindByExportGuid(InterfaceType ifType, Guid exportGuid)
+        {
+            var sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(ifType));
+            return _ctx.CreateQuery<BaseServerDataObject_EntityFramework>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
         }
 
         /// <summary>
@@ -673,12 +679,8 @@ namespace Zetbox.DalProvider.Ef
             {
                 // TODO: Case #1174
                 var tmp = GetPersistenceObjectQuery<Zetbox.App.Base.ObjectClass>().FirstOrDefault();
-                string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(iftFactory(typeof(T))));
-                result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
+                result = (T)EfFindByExportGuid(GetInterfaceType(typeof(T)), exportGuid);
             }
-
-            if (result != null && result.Context == null)
-                result.AttachToContext(this);
             return result;
         }
 
@@ -730,11 +732,6 @@ namespace Zetbox.DalProvider.Ef
                 var tmp = SelectByExportGuid<T>(guidStrings.Skip(offset).Take(100).ToArray());
                 result = result == null ? tmp : result.Concat(tmp);
                 offset += 100;
-            }
-
-            foreach (IPersistenceObject obj in result)
-            {
-                obj.AttachToContext(this);
             }
 
             return result;

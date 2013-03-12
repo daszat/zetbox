@@ -23,12 +23,12 @@ namespace Zetbox.Server.SchemaManagement
     using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
 
+    // No feature, loaded by server module
     public class SchemaModule : Module
     {
-        public static object NoWcfKey { get { return "nowcf"; } }
-
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
@@ -43,29 +43,46 @@ namespace Zetbox.Server.SchemaManagement
                     schemaProvider.Open(connectionString.ConnectionString);
                     SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
+                    var globalMigrationFragments = c.Resolve<IEnumerable<IGlobalMigrationFragment>>();
+                    var migrationFragments = c.Resolve<IEnumerable<IMigrationFragment>>();
+
                     return new SchemaManagement.SchemaManager(
                         schemaProvider,
                         p.Named<IZetboxContext>("newSchema"),
                         ctx,
-                        cfg);
+                        cfg,
+                        globalMigrationFragments,
+                        migrationFragments);
                 })
                 .InstancePerDependency();
 
             builder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.OleDbProvider.OleDb()))
+                .Register(c => new LoggingSchemaProviderAdapter(new OleDbProvider.OleDb()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("OLEDB")
                 .InstancePerDependency();
             builder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.SqlProvider.SqlServer()))
+                .Register(c => new LoggingSchemaProviderAdapter(new SqlProvider.SqlServer()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("MSSQL")
                 .InstancePerDependency();
             builder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.NpgsqlProvider.Postgresql()))
+                .Register(c => new LoggingSchemaProviderAdapter(new NpgsqlProvider.Postgresql()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("POSTGRESQL")
                 .InstancePerDependency();
+
+            builder
+                .Register(c => new SqlProvider.SqlServerErrorTranslator(c.Resolve<IFrozenContext>()))
+                .As<ISqlErrorTranslator>()
+                .Named<ISqlErrorTranslator>("MSSQL")
+                .SingleInstance();
+
+            builder
+                .Register(c => new NpgsqlProvider.PostgresqlErrorTranslator(c.Resolve<IFrozenContext>()))
+                .As<ISqlErrorTranslator>()
+                .Named<ISqlErrorTranslator>("POSTGRESQL")
+                .SingleInstance();
         }
     }
 }

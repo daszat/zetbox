@@ -22,6 +22,7 @@ namespace Zetbox.API.Client
     using System.IO;
     using System.Linq;
     using System.Net;
+    using System.Security.Authentication;
     using System.Text;
 
     public sealed class HttpServiceClient
@@ -63,58 +64,61 @@ namespace Zetbox.API.Client
 
         private byte[] MakeRequest(Uri destination, Action<ZetboxStreamWriter> sendRequest)
         {
-            do
+            var req = InitializeRequest(destination);
+
+            using (var reqStream = req.GetRequestStream())
+            using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
             {
-                var req = InitializeRequest(destination);
+                sendRequest(reqWriter);
+            }
+            try
+            {
+                using (var response = req.GetResponse())
+                using (var input = _readerFactory(new BinaryReader(response.GetResponseStream())))
+                {
+                    return input.ReadByteArray();
+                }
+            }
+            catch (WebException ex)
+            {
+                var errorMsg = String.Format("Error when accessing server({0}): {1}", destination, ex.Status);
+                Log.Error(errorMsg);
+                var httpResponse = ex.Response as HttpWebResponse;
+                if (httpResponse != null)
+                {
+                    if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        _credentialsResolver.InvalidCredentials();
+                        throw new AuthenticationException("Authentication failed", ex);
+                    }
+                    else if (httpResponse.StatusCode == HttpStatusCode.Conflict)
+                    {
+                        var exToThrow = httpResponse
+                            .GetResponseStream()
+                            .FromXmlStream<ZetboxContextExceptionMessage>()
+                            .Exception
+                            .ToException();
+                        Log.Debug("Received an exception", exToThrow);
+                        throw exToThrow;
+                    }
+                    else if (httpResponse.StatusCode == HttpStatusCode.PreconditionFailed)
+                    {
+                        throw new InvalidZetboxGeneratedVersionException();
+                    }
 
-                using (var reqStream = req.GetRequestStream())
-                using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
-                {
-                    sendRequest(reqWriter);
-                }
-                try
-                {
-                    using (var response = req.GetResponse())
-                    using (var input = _readerFactory(new BinaryReader(response.GetResponseStream())))
+                    Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
+                    foreach (var header in ex.Response.Headers)
                     {
-                        return input.ReadByteArray();
+                        var headerString = header.ToString();
+                        Log.ErrorFormat("{0}: {1}", headerString, ex.Response.Headers[headerString]);
                     }
                 }
-                catch (WebException ex)
+                else
                 {
-                    var errorMsg = String.Format("Error when accessing server({0}): {1}", destination, ex.Status);
-                    Log.Error(errorMsg);
-                    var httpResponse = ex.Response as HttpWebResponse;
-                    if (httpResponse != null)
-                    {
-                        if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
-                        {
-                            _credentialsResolver.InvalidCredentials();
-                            continue; // Try it again
-                        }
-                        else if (httpResponse.StatusCode == HttpStatusCode.Conflict)
-                        {
-                            throw new ConcurrencyException();
-                        }
-                        else if (httpResponse.StatusCode == HttpStatusCode.PreconditionFailed)
-                        {
-                            throw new InvalidZetboxGeneratedVersionException();
-                        }
-
-                        Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
-                        foreach (var header in ex.Response.Headers)
-                        {
-                            var headerString = header.ToString();
-                            Log.ErrorFormat("{0}: {1}", headerString, ex.Response.Headers[headerString]);
-                        }
-                    }
-                    else
-                    {
-                        Log.Error("No headers");
-                    }
-                    throw new IOException(errorMsg, ex);
+                    Log.Error("No headers");
                 }
-            } while (true);
+                throw new IOException(errorMsg, ex);
+            }
         }
 
         private WebRequest InitializeRequest(Uri destination)
@@ -133,7 +137,7 @@ namespace Zetbox.API.Client
                 httpWebRequest.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             }
 
-            _credentialsResolver.InitWebRequest(req);
+            _credentialsResolver.SetCredentialsTo(req);
             return req;
         }
 
@@ -208,7 +212,7 @@ namespace Zetbox.API.Client
                 using (var stream = response.GetResponseStream())
                 {
                     var result = new MemoryStream();
-                    stream.CopyTo(result);
+                    stream.CopyAllTo(result);
                     return result;
                 }
             }
@@ -232,7 +236,7 @@ namespace Zetbox.API.Client
                 reqWriter.Write(request.Version);
                 reqWriter.Write(request.FileName);
                 reqWriter.Write(request.MimeType);
-                request.Stream.CopyTo(upload);
+                request.Stream.CopyAllTo(upload);
                 reqWriter.Write(upload.ToArray());
                 reqWriter.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
             }

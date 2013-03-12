@@ -10,20 +10,7 @@
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
-      <Module>Zetbox.Objects.NHibernateModule, Zetbox.Objects.NHibernateImpl</Module>
       <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>
-      <Module>Zetbox.Tests.Utilities.MsSql.UtilityModule, Zetbox.Tests.Utilities.MsSql</Module>
     </Modules>
   </Server>
-  <AssemblySearchPaths>
-    <string>Common\Core</string>
-    <string>Common\Core.Generated</string>
-    <string>Common\Core.Fallback</string>
-    <string>Server\Core</string>
-    <string>Server\NH</string>
-    <string>Server\NH.Generated</string>
-    <string>Server\NH.Fallback</string>
-    <string>Common\App.Zetbox</string>
-    <string>Server\App.Zetbox</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

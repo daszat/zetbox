@@ -151,15 +151,9 @@ namespace Zetbox.Generator.Templates.ObjectClasses
             ApplyChangesFromMethod.Call(Host, ctx, DataType, GetTypeName());
         }
 
-        protected override void ApplyAttachToContextMethod()
-        {
-            base.ApplyAttachToContextMethod();
-            ObjectClasses.AttachToContextTemplate.Call(Host, ctx, ObjectClass);
-        }
-
         protected override void ApplySetNewMethod()
         {
-            base.ApplyAttachToContextMethod();
+            base.ApplySetNewMethod();
 
             this.WriteLine("        public override void SetNew()");
             this.WriteLine("        {");
@@ -186,9 +180,14 @@ namespace Zetbox.Generator.Templates.ObjectClasses
             base.ApplyClassTailTemplate();
             ApplyUpdateParentTemplate();
             ApplyOnPropertyChangeTemplate();
+            ApplyTriggerFetchTemplate();
             ReloadReferences.Call(Host, ctx, this.DataType);
             CustomTypeDescriptor.Call(Host, ctx, this.ObjectClass, DataType.Name, GetTypeName());
             DefaultMethods.Call(Host, ctx, this.DataType);
+        }
+
+        protected virtual void ApplyTriggerFetchTemplate()
+        {
         }
 
         protected virtual void ApplyUpdateParentTemplate()

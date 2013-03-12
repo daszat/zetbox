@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Max", __oldValue, __newValue);
                     _Max = __newValue;
                     NotifyPropertyChanged("Max", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMax_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Base
                         OnMax_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Max");
-				}
+                else
+                {
+                    SetInitializedProperty("Max");
+                }
             }
         }
         private int _Max;
@@ -130,6 +131,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Min", __oldValue, __newValue);
                     _Min = __newValue;
                     NotifyPropertyChanged("Min", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMin_PostSetter != null && IsAttached)
                     {
@@ -137,10 +139,10 @@ namespace Zetbox.App.Base
                         OnMin_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Min");
-				}
+                else
+                {
+                    SetInitializedProperty("Min");
+                }
             }
         }
         private int _Min;
@@ -292,11 +294,6 @@ namespace Zetbox.App.Base
             me.Max = other.Max;
             me.Min = other.Min;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -318,6 +315,15 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

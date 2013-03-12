@@ -22,6 +22,7 @@ namespace Zetbox.Client.Models
     using System.ComponentModel;
     using System.Linq;
     using System.Linq.Dynamic;
+    using System.Linq.Expressions;
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
@@ -29,7 +30,7 @@ namespace Zetbox.Client.Models
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
     using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
-using System.Linq.Expressions;
+    using System.Text.RegularExpressions;
 
     public class FilterEvaluator
     {
@@ -86,12 +87,12 @@ using System.Linq.Expressions;
     public abstract class FilterModel
         : IUIFilterModel
     {
-        public static FilterModel FromProperty(IFrozenContext frozenCtx, Property prop)
+        public static FilterModel FromProperty(IZetboxContext ctx, IFrozenContext frozenCtx, Property prop)
         {
-            return FromProperty(frozenCtx, new[] { prop });
+            return FromProperty(ctx, frozenCtx, new[] { prop });
         }
 
-        public static FilterModel FromProperty(IFrozenContext frozenCtx, IEnumerable<Property> props)
+        public static FilterModel FromProperty(IZetboxContext ctx, IFrozenContext frozenCtx, IEnumerable<Property> props)
         {
             var last = props.Last();
             var label = string.Join(", ", props.Select(i => i.GetLabel()).ToArray());
@@ -113,7 +114,7 @@ using System.Linq.Expressions;
             }
             else
             {
-                return SingleValueFilterModel.Create(frozenCtx, label, props);
+                return SingleValueFilterModel.Create(ctx, frozenCtx, label, props);
             }
         }
 
@@ -166,7 +167,7 @@ using System.Linq.Expressions;
             var p = GetPredicate();
             if (!string.IsNullOrEmpty(p))
             {
-                return DynamicExpression.ParseLambda(src.ElementType, typeof(bool), p, FilterArgumentValues);
+                return System.Linq.Dynamic.DynamicExpression.ParseLambda(src.ElementType, typeof(bool), p, FilterArgumentValues);
             }
             else
             {
@@ -272,6 +273,34 @@ using System.Linq.Expressions;
         }
     }
 
+    public class WithDeactivatedFilterModel : FilterModel
+    {
+        public WithDeactivatedFilterModel(IReadOnlyZetboxContext frozenCtx)
+            : base()
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+            base.IsServerSideFilter = true;
+            base.Label = FilterModelsResources.WithDeactivatedFilterModel_Label;
+            base.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
+            var valueMdl = new BoolValueModel(base.Label, FilterModelsResources.WithDeactivatedFilterModel_Description, false, false);
+            valueMdl.Value = false;
+            base.FilterArguments.Add(new FilterArgumentConfig(
+                valueMdl,
+                ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(frozenCtx)
+            ));
+
+            base.RefreshOnFilterChanged = true;
+        }
+
+        public override IQueryable GetQuery(IQueryable src)
+        {
+            if ((bool)FilterArgument.Value.GetUntypedValue() == true)
+                return src.WithDeactivated();
+            else
+                return src;
+        }
+    }
+
     public class SingleValueFilterModel : FilterModel
     {
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef)
@@ -333,7 +362,7 @@ using System.Linq.Expressions;
             return fmdl;
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, CompoundObject cpObj, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IFilterValueSource predicate, CompoundObject cpObj, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -348,7 +377,7 @@ using System.Linq.Expressions;
                 CompoundObjectDefinition = cpObj,
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
-                new CompoundObjectValueModel(label, "", true, false, requestedArgumentKind, cpObj),
+                new CompoundObjectValueModel(ctx, label, "", true, false, requestedArgumentKind, cpObj),
                 cpObj.DefaultPropertyViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(frozenCtx)));
             return fmdl;            
         }
@@ -420,22 +449,22 @@ using System.Linq.Expressions;
             return fmdl;
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, Property prop)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, Property prop)
         {
-            return Create(frozenCtx, label, new[] { prop });
+            return Create(ctx, frozenCtx, label, new[] { prop });
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IEnumerable<Property> props)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props)
         {
-            return Create(frozenCtx, label, props, null, null);
+            return Create(ctx, frozenCtx, label, props, null, null);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, Property prop, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, Property prop, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
-            return Create(frozenCtx, label, new[] { prop }, requestedKind, requestedArgumentKind);
+            return Create(ctx, frozenCtx, label, new[] { prop }, requestedKind, requestedArgumentKind);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
             var predicate = FilterValueSource.FromProperty(props);
             var last = props.Last();
@@ -469,7 +498,7 @@ using System.Linq.Expressions;
             }
             else if (last is CompoundObjectProperty)
             {
-                return Create(frozenCtx, label, predicate, ((CompoundObjectProperty)last).CompoundObjectDefinition, requestedKind, requestedArgumentKind);
+                return Create(ctx, frozenCtx, label, predicate, ((CompoundObjectProperty)last).CompoundObjectDefinition, requestedKind, requestedArgumentKind);
             }
             else
             {
@@ -528,7 +557,8 @@ using System.Linq.Expressions;
         protected string[] GetStringParts()
         {
             var str = (string)FilterArgument.Value.GetUntypedValue();
-            return str.Split(',', ' ', ';').Select(i => i.Trim()).Where(i => !string.IsNullOrEmpty(i)).ToArray();
+            string pattern = @"(?<match>[^\s,;""]+)|\""(?<match>[^""]*)"""; 
+            return Regex.Matches(str, pattern).Cast<Match>().Select(m => m.Groups["match"].Value).ToArray();
         }
     }
 
@@ -980,73 +1010,5 @@ using System.Linq.Expressions;
                 return (bool)FilterArgument.Value.GetUntypedValue() == true;
             }
         }
-    }
-
-    public class ConstantValueFilterModel : IFilterModel
-    {
-        public ConstantValueFilterModel(string predicate, params object[] values)
-            : this(true, predicate, values)
-        {
-        }
-
-        public ConstantValueFilterModel(bool isServerSideFilter, string predicate, params object[] values)
-        {
-            this.IsServerSideFilter = isServerSideFilter;
-            this.predicate = predicate;
-            this.values = values;
-        }
-
-        private string predicate;
-        private object[] values;
-
-        #region IFilterModel Members
-
-        public IQueryable GetQuery(IQueryable src)
-        {
-            return src.Where(predicate, values);
-        }
-
-        public LambdaExpression GetExpression(IQueryable src)
-        {
-            if (src == null) throw new ArgumentNullException("src");
-            return DynamicExpression.ParseLambda(src.ElementType, typeof(bool), predicate);
-        }
-
-        public IEnumerable GetResult(IEnumerable src)
-        {
-            return src.AsQueryable().Where(predicate, values);
-        }
-
-        public bool IsServerSideFilter
-        {
-            get;
-            private set;
-        }
-
-        IFilterValueSource IFilterModel.ValueSource
-        {
-            get
-            {
-                return null;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
-        }
-
-
-        public bool Enabled
-        {
-            get { return true; }
-        }
-
-        public bool Required
-        {
-            get { return false; }
-        }
-
-
-        #endregion
     }
 }

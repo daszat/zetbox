@@ -10,56 +10,58 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zetbox.App.Projekte.Common</RootNamespace>
     <AssemblyName>Zetbox.App.Projekte.Common</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Common\App.Zetbox\</OutputPath>
+    <OutputPath>..\bin\Debug\Common\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\Common\App.Zetbox\Zetbox.App.Projekte.Common.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Common\App.Zetbox\</OutputPath>
+    <OutputPath>..\bin\Release\Common\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Release\Common\App.Zetbox\Zetbox.App.Projekte.Common.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Common\App.Zetbox\</OutputPath>
+    <OutputPath>..\bin\Debug\Common\</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\Common\App.Zetbox\Zetbox.App.Projekte.Common.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Common\Zetbox.App.Projekte.Common.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration">
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -71,13 +73,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calendar\CalendarActions.cs" />
-    <Compile Include="Calendar\CalendarRuleActions.cs" />
-    <Compile Include="Calendar\CommonCalendarRuleActions.cs" />
-    <Compile Include="Calendar\DayOfWeekCalendarRuleActions.cs" />
-    <Compile Include="Calendar\EasterCalendarRuleActions.cs" />
-    <Compile Include="Calendar\FixedYearlyCalendarRuleActions.cs" />
-    <Compile Include="Calendar\YearlyCalendarRuleActions.cs" />
+    <Compile Include="Calendar\WorkScheduleActions.cs" />
+    <Compile Include="Calendar\WorkScheduleRuleActions.cs" />
+    <Compile Include="Calendar\CommonWorkScheduleRuleActions.cs" />
+    <Compile Include="Calendar\DayOfWeekWorkScheduleRuleActions.cs" />
+    <Compile Include="Calendar\EasterWorkScheduleRuleActions.cs" />
+    <Compile Include="Calendar\FixedYearlyWorkScheduleRuleActions.cs" />
+    <Compile Include="Calendar\YearlyWorkScheduleRuleActions.cs" />
     <Compile Include="DocumentManagement\FileImportService.cs" />
     <Compile Include="DocumentManagement\ImportedFileActions.cs" />
     <Compile Include="Gui\FilterConfigurationActions.cs" />
@@ -85,8 +87,11 @@
     <Compile Include="Gui\NavigationEntryActions.cs" />
     <Compile Include="Gui\ViewDescriptorActions.cs" />
     <Compile Include="Gui\ViewModelDescriptorActions.cs" />
+    <Compile Include="TestModule\MethodTestActions.cs" />
+    <Compile Include="TestModule\RecurrenceRuleTesterActions.cs" />
     <Compile Include="TestModule\SecurityTestParentActions.cs" />
     <Compile Include="TestModule\SecurityTestChildActions.cs" />
+    <Compile Include="TestModule\TestObjClassActions.cs" />
     <Compile Include="ZetboxBase\BaseParameterActions.cs" />
     <Compile Include="ZetboxBase\AssemblyActions.cs" />
     <Compile Include="ZetboxBase\BoolPropertyActions.cs" />
@@ -95,6 +100,11 @@
     <Compile Include="ZetboxBase\BoolDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\CompoundObjectParameterActions.cs" />
     <Compile Include="ZetboxBase\AnyReferenceActions.cs" />
+    <Compile Include="ZetboxBase\DoubleDefaultValueActions.cs" />
+    <Compile Include="ZetboxBase\GroupMembershipActions.cs" />
+    <Compile Include="ZetboxBase\RoleMembershipActions.cs" />
+    <Compile Include="ZetboxBase\DecimalDefaultValueActions.cs" />
+    <Compile Include="ZetboxBase\RecurrenceRuleActions.cs" />
     <Compile Include="ZetboxBase\SequenceActions.cs" />
     <Compile Include="ZetboxBase\DateTimeRangeActions.cs" />
     <Compile Include="ZetboxBase\ValueTypePropertyActions.cs" />
@@ -126,7 +136,6 @@
     <Compile Include="ZetboxBase\DataTypeActions.cs" />
     <Compile Include="ZetboxBase\DecimalParameterActions.cs" />
     <Compile Include="ZetboxBase\ToStringHelper.cs" />
-    <Compile Include="CustomCommonActions_ZetboxBase.Constraints.cs" />
     <Compile Include="CustomCommonActionsModule.cs" />
     <Compile Include="DocumentManagement\DocumentActions.cs" />
     <Compile Include="DocumentManagement\StaticFileActions.cs" />
@@ -135,7 +144,6 @@
     <Compile Include="Gui\ControlKindActions.cs" />
     <Compile Include="Gui\IconActions.cs" />
     <Compile Include="ZetboxBase\ClientReadOnlyConstraintActions.cs" />
-    <Compile Include="ZetboxBase\ConstraintInvocationActions.cs" />
     <Compile Include="ZetboxBase\EnumDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\CurrentDateTimeDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\NewGuidDefaultValueActions.cs" />
@@ -148,7 +156,6 @@
     <Compile Include="ZetboxBase\ObjectClassActions.cs" />
     <Compile Include="ZetboxBase\ReadOnlyConstraintActions.cs" />
     <Compile Include="ZetboxBase\IndexConstraintActions.cs" />
-    <Compile Include="ZetboxBase\InvokingConstraintActions.cs" />
     <Compile Include="ZetboxBase\InitOnlyConstraintActions.cs" />
     <Compile Include="ZetboxBase\ViewReadOnlyConstraintActions.cs" />
     <Compile Include="ZetboxBase\IsValidIdentifierConstraintActions.cs" />
@@ -175,7 +182,6 @@
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Zetbox.API</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
@@ -185,7 +191,6 @@
     <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>Zetbox.API.Common</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -201,7 +206,7 @@
     <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb" DestinationFolder="$(OutputPath)\..\Client" />
   </Target>
   -->
-  <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MSBuildVersioning.targets" />
+  <Import Project="..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>

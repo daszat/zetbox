@@ -55,14 +55,14 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates
             // EF Provider infrastructure
             this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.Ef"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\EF\Zetbox.DalProvider.Ef.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.DalProvider.Ef.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // Server API
             this.WriteLine(@"    <Reference Include=""Zetbox.API.Server"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\Core\Zetbox.API.Server.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.API.Server.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
@@ -96,7 +96,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates
 
         protected override string GetRelativeOutputPath()
         {
-            return @"Server\EF";
+            return @"Server";
         }
     }
 }

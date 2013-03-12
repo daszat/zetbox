@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// Assembly of the Type that is displayed with this Template
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
         // fkBackingName=_fk_DisplayedTypeAssembly; fkGuidBackingName=_fk_guid_DisplayedTypeAssembly;
         // referencedInterface=Zetbox.App.Base.Assembly; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -58,8 +58,44 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DisplayedTypeAssembly;
+        private int? __fk_DisplayedTypeAssemblyCache;
 
+        private int? _fk_DisplayedTypeAssembly {
+            get
+            {
+                return __fk_DisplayedTypeAssemblyCache;
+            }
+            set
+            {
+                __fk_DisplayedTypeAssemblyCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDisplayedTypeAssemblyTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly> _triggerFetchDisplayedTypeAssemblyTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly> TriggerFetchDisplayedTypeAssemblyAsync()
+        {
+            if (_triggerFetchDisplayedTypeAssemblyTask != null) return _triggerFetchDisplayedTypeAssemblyTask;
+
+            if (_fk_DisplayedTypeAssembly.HasValue)
+                _triggerFetchDisplayedTypeAssemblyTask = Context.FindAsync<Zetbox.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
+            else
+                _triggerFetchDisplayedTypeAssemblyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchDisplayedTypeAssemblyTask.OnResult(t =>
+            {
+                if (OnDisplayedTypeAssembly_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Assembly>(t.Result);
+                    OnDisplayedTypeAssembly_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDisplayedTypeAssemblyTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -67,32 +103,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.Base.AssemblyMemoryImpl __value;
-                if (_fk_DisplayedTypeAssembly.HasValue)
-                    __value = (Zetbox.App.Base.AssemblyMemoryImpl)Context.Find<Zetbox.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
-                else
-                    __value = null;
-
-                if (OnDisplayedTypeAssembly_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Assembly>(__value);
-                    OnDisplayedTypeAssembly_Getter(this, e);
-                    __value = (Zetbox.App.Base.AssemblyMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.AssemblyMemoryImpl)TriggerFetchDisplayedTypeAssemblyAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_DisplayedTypeAssembly == null) || (value != null && value.ID == _fk_DisplayedTypeAssembly))
-				{
-					SetInitializedProperty("DisplayedTypeAssembly");
+                {
+                    SetInitializedProperty("DisplayedTypeAssembly");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DisplayedTypeAssemblyImpl;
@@ -113,6 +136,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDisplayedTypeAssembly_PostSetter != null && IsAttached)
                 {
@@ -164,6 +188,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, __newValue);
                     _DisplayedTypeFullName = __newValue;
                     NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayedTypeFullName_PostSetter != null && IsAttached)
                     {
@@ -171,10 +196,10 @@ namespace Zetbox.App.GUI
                         OnDisplayedTypeFullName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayedTypeFullName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayedTypeFullName");
+                }
             }
         }
         private string _DisplayedTypeFullName;
@@ -221,6 +246,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -228,10 +254,10 @@ namespace Zetbox.App.GUI
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
         private string _DisplayName;
@@ -253,15 +279,26 @@ namespace Zetbox.App.GUI
 			{
 				if (_Menu == null)
 				{
-					Context.FetchRelation<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(new Guid("81ff3089-57da-478c-8be5-fd23abc222a2"), RelationEndRole.A, this);
-					_Menu 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchMenuAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_Menu;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchMenuTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchMenuAsync()
+        {
+            if (_triggerFetchMenuTask != null) return _triggerFetchMenuTask;
+			_triggerFetchMenuTask = Context.FetchRelationAsync<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(new Guid("81ff3089-57da-478c-8be5-fd23abc222a2"), RelationEndRole.A, this);
+			_triggerFetchMenuTask.OnResult(r => 
+            {
+                _Menu 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchMenuTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>> _Menu;
 
@@ -270,7 +307,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The visual representation of this Template
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
         // fkBackingName=_fk_VisualTree; fkGuidBackingName=_fk_guid_VisualTree;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -288,8 +325,44 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_VisualTree;
+        private int? __fk_VisualTreeCache;
 
+        private int? _fk_VisualTree {
+            get
+            {
+                return __fk_VisualTreeCache;
+            }
+            set
+            {
+                __fk_VisualTreeCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchVisualTreeTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> _triggerFetchVisualTreeTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual> TriggerFetchVisualTreeAsync()
+        {
+            if (_triggerFetchVisualTreeTask != null) return _triggerFetchVisualTreeTask;
+
+            if (_fk_VisualTree.HasValue)
+                _triggerFetchVisualTreeTask = Context.FindAsync<Zetbox.App.GUI.Visual>(_fk_VisualTree.Value);
+            else
+                _triggerFetchVisualTreeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchVisualTreeTask.OnResult(t =>
+            {
+                if (OnVisualTree_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Visual>(t.Result);
+                    OnVisualTree_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchVisualTreeTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -297,32 +370,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.GUI.VisualMemoryImpl __value;
-                if (_fk_VisualTree.HasValue)
-                    __value = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_VisualTree.Value);
-                else
-                    __value = null;
-
-                if (OnVisualTree_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Visual>(__value);
-                    OnVisualTree_Getter(this, e);
-                    __value = (Zetbox.App.GUI.VisualMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.VisualMemoryImpl)TriggerFetchVisualTreeAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_VisualTree == null) || (value != null && value.ID == _fk_VisualTree))
-				{
-					SetInitializedProperty("VisualTree");
+                {
+                    SetInitializedProperty("VisualTree");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = VisualTreeImpl;
@@ -343,6 +403,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnVisualTree_PostSetter != null && IsAttached)
                 {
@@ -438,11 +499,6 @@ namespace Zetbox.App.GUI
             this._fk_DisplayedTypeAssembly = otherImpl._fk_DisplayedTypeAssembly;
             this._fk_VisualTree = otherImpl._fk_VisualTree;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -504,6 +560,21 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DisplayedTypeAssembly":
+                return TriggerFetchDisplayedTypeAssemblyAsync();
+            case "Menu":
+                return TriggerFetchMenuAsync();
+            case "VisualTree":
+                return TriggerFetchVisualTreeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -21,6 +21,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
     using System.Data.OleDb;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API;
@@ -121,14 +122,14 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        private string Quote(string val)
+        public string QuoteIdentifier(string val)
         {
             return string.Format("{0}{1}{2}", quotePrefix ?? string.Empty, val, quoteSuffix ?? string.Empty);
         }
 
-        private string FormatTableName(TableRef tbl)
+        private string FormatSchemaName(DboRef dbo)
         {
-            return String.Format("[{0}].[{1}]", tbl.Schema, tbl.Name);
+            return String.Format("{0}.{1}", QuoteIdentifier(dbo.Schema), QuoteIdentifier(dbo.Name));
         }
 
         public bool CheckTableExists(TableRef tblName)
@@ -187,7 +188,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         public bool CheckTableContainsData(TableRef tblName)
         {
-            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM {0}", FormatTableName(tblName), db, tx)))
+            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM {0}", FormatSchemaName(tblName), db, tx)))
             {
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;
@@ -407,6 +408,29 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
                 colName, srcColName, tblName, srcTblName);
         }
 
+        public void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName, string discriminatorValue)
+        {
+            if (srcColName == null) throw new ArgumentNullException("srcColName");
+            if (colName == null) throw new ArgumentNullException("colName");
+            if (srcColName.Length != colName.Length) throw new ArgumentOutOfRangeException("colName", "need the same number of columns in srcColName and colName");
+
+            var assignments = srcColName.Zip(colName, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst))).ToList();
+            if (discriminatorValue != null)
+            {
+                assignments.Add(string.Format("{0} = '{1}'", QuoteIdentifier(TableMapper.DiscriminatorColumnName), discriminatorValue));
+            }
+
+            if (assignments.Count > 0)
+            {
+                ExecuteNonQuery(string.Format(
+                    "UPDATE dest SET {2} FROM {1} dest INNER JOIN {0} src ON dest.{3} = src.{3}",
+                    FormatSchemaName(srcTblName),     // 0
+                    FormatSchemaName(tblName),        // 1
+                    string.Join(", ", assignments),   // 2
+                    QuoteIdentifier("ID")));          // 3
+            }
+        }
+
         public void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             Log.DebugFormat("Migrating FK data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
@@ -435,7 +459,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
             var sb = new StringBuilder();
             sb.AppendLine("SELECT ");
-            colNames.ForEach(i => sb.Append(Quote(i) + ","));
+            colNames.ForEach(i => sb.Append(QuoteIdentifier(i) + ","));
             sb.Remove(sb.Length - 1, 1);
             sb.AppendLine(" FROM " + tbl.Name);
 
@@ -480,9 +504,9 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
                 throw new ArgumentNullException("values");
 
             var sb = new StringBuilder();
-            sb.AppendLine(string.Format("INSERT INTO {0} (", Quote(tbl.Name)));
+            sb.AppendLine(string.Format("INSERT INTO {0} (", QuoteIdentifier(tbl.Name)));
 
-            colNames.ForEach(i => sb.Append(Quote(i) + ","));
+            colNames.ForEach(i => sb.Append(QuoteIdentifier(i) + ","));
             sb.Remove(sb.Length - 1, 1);
 
             sb.AppendLine(") VALUES (");
@@ -804,54 +828,126 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         bool ISchemaProvider.CheckSchemaExists(string schemaName)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         IEnumerable<string> ISchemaProvider.GetSchemaNames()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.CreateSchema(string schemaName)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.DropSchema(string schemaName, bool force)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         ProcRef ISchemaProvider.GetFunctionName(string schemaName, string funcName)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>Not supported.</summary>
         IEnumerable<ProcRef> ISchemaProvider.GetFunctionNames()
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         bool ISchemaProvider.CheckFunctionExists(ProcRef funcName)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.DropFunction(ProcRef funcName)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.DblinkConnect(TableRef tblNamE)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
         bool ISchemaProvider.CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             throw new NotSupportedException();
         }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpression)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateCheckConstraint(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpression)
+        {
+            throw new NotSupportedException();
+        }
+
+        bool ISchemaProvider.CheckCheckConstraintExists(TableRef tblName, string constraintName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropCheckConstraint(TableRef tblName, string constraintName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckTableContainsData(TableRef tblName, IEnumerable<string> discriminatorFilter)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.WriteDefaultValue(TableRef tblName, string colName, object value)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.WriteDefaultValue(TableRef tblName, string colName, object value, IEnumerable<string> discriminatorFilter)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.WriteGuidDefaultValue(TableRef tblName, string colName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.WriteGuidDefaultValue(TableRef tblName, string colName, IEnumerable<string> discriminatorFilter)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings)
+        {
+            throw new NotSupportedException();
+        }
+
+        private static readonly object _MappingDefaultSourceValue = new object();
+        public object MappingDefaultSourceValue { get { return _MappingDefaultSourceValue; } }
     }
 }

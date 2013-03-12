@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DateTimeStyle", __oldValue, __newValue);
                     _DateTimeStyle = __newValue;
                     NotifyPropertyChanged("DateTimeStyle", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDateTimeStyle_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Base
                         OnDateTimeStyle_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DateTimeStyle");
-				}
+                else
+                {
+                    SetInitializedProperty("DateTimeStyle");
+                }
             }
         }
         private Zetbox.App.Base.DateTimeStyles? _DateTimeStyle;
@@ -297,11 +298,6 @@ namespace Zetbox.App.Base
 
             me.DateTimeStyle = other.DateTimeStyle;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -322,6 +318,15 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -441,7 +446,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write((int?)((Zetbox.App.Base.DateTimeParameter)this).DateTimeStyle);
+            binStream.Write((int?)this._DateTimeStyle);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -450,7 +455,7 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            ((Zetbox.App.Base.DateTimeParameter)this).DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)binStream.ReadNullableInt32();
+            this._DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -464,7 +469,7 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.DateTimeParameter)this).DateTimeStyle, xml, "DateTimeStyle", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._DateTimeStyle, xml, "DateTimeStyle", "Zetbox.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -474,7 +479,7 @@ namespace Zetbox.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Base|DateTimeStyle":
-                ((Zetbox.App.Base.DateTimeParameter)this).DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)XmlStreamer.ReadNullableInt32(xml);
+                this._DateTimeStyle = (Zetbox.App.Base.DateTimeStyles?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

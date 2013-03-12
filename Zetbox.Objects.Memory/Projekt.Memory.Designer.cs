@@ -38,6 +38,34 @@ namespace Zetbox.App.Projekte
         }
 
         /// <summary>
+        /// Eine Liste der Änderungen an diesem Datensatz.
+        /// </summary>
+        // CompoundObject list property
+		// Zetbox.Generator.Templates.Properties.ValueCollectionProperty
+		public ICollection<Zetbox.App.Base.AuditEntry> AuditJournal
+		{
+			get
+			{
+				if (_AuditJournal == null)
+				{
+				    _AuditJournal 
+				        = new ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl>>(
+							this.Context,
+				            this, 
+				            () => { this.NotifyPropertyChanged("AuditJournal", null, null); if(OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); },
+				            _AuditJournalCollection);
+				}
+				return _AuditJournal;
+			}
+		}
+
+		private ClientValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl>> _AuditJournal;
+		private ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl> _AuditJournalCollection = new ObservableCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryMemoryImpl>();
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_IsValid;
+
+        /// <summary>
         /// Aufträge
         /// </summary>
         // object list property
@@ -51,25 +79,44 @@ namespace Zetbox.App.Projekte
             {
                 if (_Auftraege == null)
                 {
-                    List<Zetbox.App.Projekte.Auftrag> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Projekte.Auftrag>(this, "Auftraege");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Projekte.Auftrag>();
-                    }
-    
-                    _Auftraege = new OneNRelationList<Zetbox.App.Projekte.Auftrag>(
-                        "Projekt",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("Auftraege", null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
-                        serverList);
+                    TriggerFetchAuftraegeAsync().Wait();
                 }
                 return _Auftraege;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchAuftraegeTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchAuftraegeAsync()
+        {
+            if (_triggerFetchAuftraegeTask != null) return _triggerFetchAuftraegeTask;
+
+            List<Zetbox.App.Projekte.Auftrag> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchAuftraegeTask = Context.GetListOfAsync<Zetbox.App.Projekte.Auftrag>(this, "Auftraege")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchAuftraegeTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.Projekte.Auftrag>();
+                });
+            }
+    
+            _triggerFetchAuftraegeTask.OnResult(t =>
+            {
+                _Auftraege = new OneNRelationList<Zetbox.App.Projekte.Auftrag>(
+                    "Projekt",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("Auftraege", null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchAuftraegeTask;    
         }
     
         private OneNRelationList<Zetbox.App.Projekte.Auftrag> _Auftraege;
@@ -109,13 +156,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("AufwandGes", __oldValue, __newValue);
                     _AufwandGes = __newValue;
                     NotifyPropertyChanged("AufwandGes", __oldValue, __newValue);
-			        _AufwandGes_IsDirty = false;
+                    _AufwandGes_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("AufwandGes");
-				}
+                else
+                {
+                    SetInitializedProperty("AufwandGes");
+                }
             }
         }
         private double? _AufwandGes;
@@ -150,6 +197,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _Bis;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnBis_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -159,6 +208,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("Bis", __oldValue, __newValue);
                     _Bis = __newValue;
                     NotifyPropertyChanged("Bis", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBis_PostSetter != null && IsAttached)
                     {
@@ -166,10 +216,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Bis");
-				}
+                else
+                {
+                    SetInitializedProperty("Bis");
+                }
             }
         }
         private DateTime? _Bis;
@@ -183,7 +233,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -201,8 +251,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ChangedBy;
+        private int? __fk_ChangedByCache;
 
+        private int? _fk_ChangedBy {
+            get
+            {
+                return __fk_ChangedByCache;
+            }
+            set
+            {
+                __fk_ChangedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        {
+            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+
+            if (_fk_ChangedBy.HasValue)
+                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchChangedByTask.OnResult(t =>
+            {
+                if (OnChangedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnChangedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchChangedByTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -210,32 +296,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_ChangedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-                else
-                    __value = null;
-
-                if (OnChangedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnChangedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -256,6 +329,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -310,6 +384,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -319,6 +395,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -326,10 +403,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -344,7 +421,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -362,8 +439,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CreatedBy;
+        private int? __fk_CreatedByCache;
 
+        private int? _fk_CreatedBy {
+            get
+            {
+                return __fk_CreatedByCache;
+            }
+            set
+            {
+                __fk_CreatedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        {
+            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+
+            if (_fk_CreatedBy.HasValue)
+                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchCreatedByTask.OnResult(t =>
+            {
+                if (OnCreatedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnCreatedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCreatedByTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -371,32 +484,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_CreatedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-                else
-                    __value = null;
-
-                if (OnCreatedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnCreatedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -417,6 +517,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -471,6 +572,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -480,6 +583,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -487,10 +591,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -550,6 +654,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -557,10 +662,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -599,6 +704,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _KickOffAm;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnKickOffAm_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -608,6 +715,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("KickOffAm", __oldValue, __newValue);
                     _KickOffAm = __newValue;
                     NotifyPropertyChanged("KickOffAm", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnKickOffAm_PostSetter != null && IsAttached)
                     {
@@ -615,10 +723,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKickOffAm_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("KickOffAm");
-				}
+                else
+                {
+                    SetInitializedProperty("KickOffAm");
+                }
             }
         }
         private DateTime _KickOffAm;
@@ -656,6 +764,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     var __oldValue = _KickOffBis;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnKickOffBis_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -665,6 +775,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("KickOffBis", __oldValue, __newValue);
                     _KickOffBis = __newValue;
                     NotifyPropertyChanged("KickOffBis", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnKickOffBis_PostSetter != null && IsAttached)
                     {
@@ -672,10 +783,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKickOffBis_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("KickOffBis");
-				}
+                else
+                {
+                    SetInitializedProperty("KickOffBis");
+                }
             }
         }
         private DateTime? _KickOffBis;
@@ -722,6 +833,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("Kundenname", __oldValue, __newValue);
                     _Kundenname = __newValue;
                     NotifyPropertyChanged("Kundenname", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnKundenname_PostSetter != null && IsAttached)
                     {
@@ -729,10 +841,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Kundenname");
-				}
+                else
+                {
+                    SetInitializedProperty("Kundenname");
+                }
             }
         }
         private string _Kundenname;
@@ -754,15 +866,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 			{
 				if (_Mitarbeiter == null)
 				{
-					Context.FetchRelation<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.A, this);
-					_Mitarbeiter 
-						= new ObservableBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchMitarbeiterAsync().Wait();
 				}
 				return (IList<Zetbox.App.Projekte.Mitarbeiter>)_Mitarbeiter;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchMitarbeiterTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchMitarbeiterAsync()
+        {
+            if (_triggerFetchMitarbeiterTask != null) return _triggerFetchMitarbeiterTask;
+			_triggerFetchMitarbeiterTask = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.A, this);
+			_triggerFetchMitarbeiterTask.OnResult(r => 
+            {
+                _Mitarbeiter 
+				= new ObservableBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchMitarbeiterTask;
+        }
 
 		private ObservableBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>> _Mitarbeiter;
 
@@ -804,6 +927,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -811,10 +935,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -839,25 +963,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             {
                 if (_Tasks == null)
                 {
-                    List<Zetbox.App.Projekte.Task> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.Projekte.Task>(this, "Tasks");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.Projekte.Task>();
-                    }
-    
-                    _Tasks = new OneNRelationList<Zetbox.App.Projekte.Task>(
-                        "Projekt",
-                        null,
-                        this,
-                        () => { this.NotifyPropertyChanged("Tasks", null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
-                        serverList);
+                    TriggerFetchTasksAsync().Wait();
                 }
                 return _Tasks;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchTasksTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchTasksAsync()
+        {
+            if (_triggerFetchTasksTask != null) return _triggerFetchTasksTask;
+
+            List<Zetbox.App.Projekte.Task> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchTasksTask = Context.GetListOfAsync<Zetbox.App.Projekte.Task>(this, "Tasks")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchTasksTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.Projekte.Task>();
+                });
+            }
+    
+            _triggerFetchTasksTask.OnResult(t =>
+            {
+                _Tasks = new OneNRelationList<Zetbox.App.Projekte.Task>(
+                    "Projekt",
+                    null,
+                    this,
+                    () => { this.NotifyPropertyChanged("Tasks", null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchTasksTask;    
         }
     
         private OneNRelationList<Zetbox.App.Projekte.Task> _Tasks;
@@ -893,6 +1036,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 {
                     var __oldValue = _Von;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnVon_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -902,6 +1047,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                     NotifyPropertyChanging("Von", __oldValue, __newValue);
                     _Von = __newValue;
                     NotifyPropertyChanged("Von", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVon_PostSetter != null && IsAttached)
                     {
@@ -909,10 +1055,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                         OnVon_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Von");
-				}
+                else
+                {
+                    SetInitializedProperty("Von");
+                }
             }
         }
         private DateTime _Von;
@@ -1009,13 +1155,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             me.Kundenname = other.Kundenname;
             me.Name = other.Name;
             me.Von = other.Von;
+            SynchronizeCollections(this._AuditJournalCollection, otherImpl._AuditJournalCollection);
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1103,6 +1245,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Auftraege":
+                return TriggerFetchAuftraegeAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Mitarbeiter":
+                return TriggerFetchMitarbeiterAsync();
+            case "Tasks":
+                return TriggerFetchTasksAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -1135,6 +1296,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<Projekt, ICollection<Zetbox.App.Base.AuditEntry>>(
+                        lazyCtx,
+                        new Guid("4bef0e48-79c8-4776-a5de-bbb250599a40"),
+                        "AuditJournal",
+                        null,
+                        obj => obj.AuditJournal,
+                        null, // lists are read-only properties
+                        obj => OnAuditJournal_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<Projekt, ICollection<Zetbox.App.Projekte.Auftrag>>(
                         lazyCtx,
@@ -1352,6 +1522,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Projekt != null) OnNotifyDeleting_Projekt(this);
+            AuditJournal.Clear();
             Auftraege.Clear();
             Mitarbeiter.Clear();
             Tasks.Clear();
@@ -1370,6 +1541,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this._AuditJournalCollection);
             binStream.Write(this._AufwandGes);
             binStream.Write(this._Bis);
             binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
@@ -1399,6 +1571,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.ReadCollectionEntries(this, this._AuditJournalCollection);
             this._AufwandGes = binStream.ReadNullableDouble();
             this._Bis = binStream.ReadNullableDateTime();
             this._fk_ChangedBy = binStream.ReadNullableInt32();
@@ -1433,6 +1606,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ExportCollectionEntries(this._AuditJournalCollection.OrderBy(i => i.Value), xml, "AuditJournal", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._AufwandGes, xml, "AufwandGes", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._Bis, xml, "Bis", "Zetbox.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1451,6 +1625,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Projekte|AuditJournal":
+                XmlStreamer.MergeImportCollectionEntries(this, this._AuditJournalCollection, xml);
+                break;
             case "Zetbox.App.Projekte|AufwandGes":
                 this._AufwandGes = XmlStreamer.ReadNullableDouble(xml);
                 break;

@@ -62,7 +62,7 @@ namespace Zetbox.Client.Presentables
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("IsReadOnly");
-            OnPropertyChanged("Highlight");
+            OnHighlightChanged();
         }
 
         #region Property Management
@@ -194,28 +194,41 @@ namespace Zetbox.Client.Presentables
         protected virtual List<PropertyGroupViewModel> CreatePropertyGroups()
         {
             FetchPropertyModels();
+            var isAdmin = CurrentIdentity != null ? CurrentIdentity.IsAdmininistrator() : false;
             return _propertyList
                         .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? Properties.Resources.Uncategorised : p.CategoryTags)
-                                            .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                                            .Select(s => new { Category = s, Property = p }))
-                        .GroupBy(x => x.Category, x => x.Property)
+                                            .Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(s => new { Category = s.Trim(), SortKey = GetCategorySortKey(s.Trim()), Property = p }))
+                        .Where(x => isAdmin || x.Category != "Hidden")
+                        .GroupBy(x => x.SortKey, x => x)
                         .OrderBy(group => group.Key)
-                        .Select<IGrouping<string, Property>, PropertyGroupViewModel>(group =>
+                        .Select(group =>
                         {
-                            var lst = group.Select(p => _propertyModels[p]).Cast<ViewModel>().ToList();
+                            var lst = group.Select(p => _propertyModels[p.Property]).Cast<ViewModel>().ToList();
 
                             if (lst.Count == 1)
                             {
-                                return ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, group.Key, lst);
+                                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
+                                    DataContext, this, group.First().Category, lst);
                             }
                             else
                             {
-                                return ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, group.Key, lst);
+                                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
+                                    DataContext, this, group.First().Category, lst);
                             }
                         })
                         .ToList();
+        }
+
+        private string GetCategorySortKey(string cat)
+        {
+            switch(cat)
+            {
+                case "Summary": return "1|Summary";
+                case "Main": return "2|Main";
+                default: return "3|" + cat;
+                case "Meta": return "4|Meta";
+            }
         }
 
         public LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel> PropertyGroupsByName
@@ -233,7 +246,9 @@ namespace Zetbox.Client.Presentables
             {
                 if (_selectedPropertyGroup == null && PropertyGroups.Count > 0)
                 {
-                    _selectedPropertyGroup = PropertyGroupsByName.ContainsKey("Summary") ? PropertyGroupsByName["Summary"] : PropertyGroups.FirstOrDefault();
+                    var main = PropertyGroupsByName.ContainsKey("Main") ? PropertyGroupsByName["Main"] : null;
+                    var summary = PropertyGroupsByName.ContainsKey("Summary") ? PropertyGroupsByName["Summary"] : null;
+                    _selectedPropertyGroup = main ?? summary ?? PropertyGroups.FirstOrDefault();
                 }
                 return _selectedPropertyGroup;
             }
@@ -320,16 +335,6 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        private string _longNameCache;
-        public string LongName
-        {
-            get
-            {
-                InitialiseToStringCache();
-                return _longNameCache;
-            }
-        }
-
         public override string ToString()
         {
             return Name;
@@ -408,26 +413,21 @@ namespace Zetbox.Client.Presentables
             if (_nameCache == null)
             {
                 _nameCache = _object.ToString();
-                _longNameCache = String.Format("{0}: {1}",
-                    _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName,
-                    _nameCache);
             }
         }
 
         protected void UpdateToStringCache()
         {
             _nameCache = null;
-            _longNameCache = null;
             OnPropertyChanged("Name");
-            OnPropertyChanged("LongName");
         }
 
-        private Icon _iconCache = null;
+        private System.Drawing.Image _iconCache = null;
         /// <summary>
         /// Override this to present a custom icon
         /// </summary>
         /// <returns>an <see cref="Icon"/> describing the desired icon</returns>
-        public override Icon Icon
+        public override System.Drawing.Image Icon
         {
             get
             {
@@ -435,11 +435,11 @@ namespace Zetbox.Client.Presentables
                 {
                     if (_object is Icon)
                     {
-                        _iconCache = (Icon)_object;
+                        _iconCache = IconConverter.ToImage((Icon)_object);
                     }
                     else
                     {
-                        _iconCache = _object.GetObjectClass(FrozenContext).DefaultIcon;
+                        _iconCache = IconConverter.ToImage(_object.GetObjectClass(FrozenContext).DefaultIcon);
                     }
                 }
                 return _iconCache;
@@ -459,8 +459,22 @@ namespace Zetbox.Client.Presentables
             get
             {
                 if (DataContext.IsElevatedMode) return Highlight.Bad;
-                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
-                return null;
+                if (Object.CurrentAccessRights.HasOnlyReadRightsOrNone()) return Highlight.Deactivated;
+                // Reflect readonly only on changable context
+                if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
+                return Highlight.None;
+            }
+        }
+
+        public override Highlight HighlightAsync
+        {
+            get
+            {
+                if (DataContext.IsElevatedMode) return Highlight.Bad;
+                if (Object.CurrentAccessRights.HasOnlyReadRightsOrNone()) return Highlight.Deactivated;
+                // Reflect readonly only on changable context
+                if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
+                return Highlight.None;
             }
         }
 
@@ -511,7 +525,11 @@ namespace Zetbox.Client.Presentables
 
         public string Error
         {
-            get { return String.Join("\n", PropertyModels.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray()); }
+            get
+            {
+                if (Object.CurrentAccessRights.HasNoRights()) return string.Empty;
+                else return string.Join("\n", PropertyModels.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
+            }
         }
 
         public string this[string columnName]

@@ -36,10 +36,5 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         string GetCodeTemplate();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        string GetMemberName();
     }
 }

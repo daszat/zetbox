@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// Test class for methods
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="MethodTest")]
+    [EdmEntityType(NamespaceName="Model", Name="MethodTestEfImpl")]
     [System.Diagnostics.DebuggerDisplay("MethodTest")]
     public class MethodTestEfImpl : BaseServerDataObject_EntityFramework, MethodTest
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -142,7 +141,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnParent_Getter != null)
                 {
@@ -154,7 +152,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.MethodTestEfImpl> r
@@ -201,6 +199,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Children", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -250,6 +249,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     _StringProp = __newValue;
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
@@ -257,10 +257,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("StringProp");
-				}
+                else
+                {
+                    SetInitializedProperty("StringProp");
+                }
             }
         }
         private string _StringProp_store;
@@ -596,6 +596,196 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
+        /// Does nothing, on the server
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnServerMethod_MethodTest")]
+        public virtual void ServerMethod()
+        {
+            // base.ServerMethod();
+            if (OnServerMethod_MethodTest != null)
+            {
+                OnServerMethod_MethodTest(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method MethodTest.ServerMethod");
+            }
+        }
+        public delegate void ServerMethod_Handler<T>(T obj);
+        public static event ServerMethod_Handler<MethodTest> OnServerMethod_MethodTest;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<MethodTest> OnServerMethod_MethodTest_CanExec;
+
+        [EventBasedMethod("OnServerMethod_MethodTest_CanExec")]
+        public virtual bool ServerMethodCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnServerMethod_MethodTest_CanExec != null)
+				{
+					OnServerMethod_MethodTest_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MethodTest> OnServerMethod_MethodTest_CanExecReason;
+
+        [EventBasedMethod("OnServerMethod_MethodTest_CanExecReason")]
+        public virtual string ServerMethodCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnServerMethod_MethodTest_CanExecReason != null)
+				{
+					OnServerMethod_MethodTest_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnServerObjParameter_MethodTest")]
+        public virtual Zetbox.App.Test.TestObjClass ServerObjParameter(Zetbox.App.Test.TestObjClass input)
+        {
+            var e = new MethodReturnEventArgs<Zetbox.App.Test.TestObjClass>();
+            if (OnServerObjParameter_MethodTest != null)
+            {
+                OnServerObjParameter_MethodTest(this, e, input);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on MethodTest.ServerObjParameter");
+            }
+            return e.Result;
+        }
+        public delegate void ServerObjParameter_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Test.TestObjClass> ret, Zetbox.App.Test.TestObjClass input);
+        public static event ServerObjParameter_Handler<MethodTest> OnServerObjParameter_MethodTest;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<MethodTest> OnServerObjParameter_MethodTest_CanExec;
+
+        [EventBasedMethod("OnServerObjParameter_MethodTest_CanExec")]
+        public virtual bool ServerObjParameterCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnServerObjParameter_MethodTest_CanExec != null)
+				{
+					OnServerObjParameter_MethodTest_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MethodTest> OnServerObjParameter_MethodTest_CanExecReason;
+
+        [EventBasedMethod("OnServerObjParameter_MethodTest_CanExecReason")]
+        public virtual string ServerObjParameterCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnServerObjParameter_MethodTest_CanExecReason != null)
+				{
+					OnServerObjParameter_MethodTest_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnServerParameterless_MethodTest")]
+        public virtual void ServerParameterless()
+        {
+            // base.ServerParameterless();
+            if (OnServerParameterless_MethodTest != null)
+            {
+                OnServerParameterless_MethodTest(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method MethodTest.ServerParameterless");
+            }
+        }
+        public delegate void ServerParameterless_Handler<T>(T obj);
+        public static event ServerParameterless_Handler<MethodTest> OnServerParameterless_MethodTest;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<MethodTest> OnServerParameterless_MethodTest_CanExec;
+
+        [EventBasedMethod("OnServerParameterless_MethodTest_CanExec")]
+        public virtual bool ServerParameterlessCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnServerParameterless_MethodTest_CanExec != null)
+				{
+					OnServerParameterless_MethodTest_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MethodTest> OnServerParameterless_MethodTest_CanExecReason;
+
+        [EventBasedMethod("OnServerParameterless_MethodTest_CanExecReason")]
+        public virtual string ServerParameterlessCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnServerParameterless_MethodTest_CanExecReason != null)
+				{
+					OnServerParameterless_MethodTest_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -735,11 +925,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
 
             me.StringProp = other.StringProp;
             this._fk_Parent = otherImpl._fk_Parent;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -929,12 +1114,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -949,8 +1135,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MethodTestEfImpl>("Model.FK_Parent_has_Children", "Parent").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MethodTestEfImpl>("Model.FK_Parent_has_Children", "Parent");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._StringProp);
         }

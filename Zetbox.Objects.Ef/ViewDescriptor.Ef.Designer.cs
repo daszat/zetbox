@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ViewDescriptor")]
+    [EdmEntityType(NamespaceName="Model", Name="ViewDescriptorEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
     public class ViewDescriptorEfImpl : BaseServerDataObject_EntityFramework, ViewDescriptor, Zetbox.API.IExportableInternal
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnControlKind_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
@@ -133,6 +132,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ControlKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -189,7 +189,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnControlRef_Getter != null)
                 {
@@ -201,7 +200,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
@@ -236,6 +235,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ControlRef", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -297,6 +297,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -304,10 +305,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -373,7 +374,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -385,7 +385,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
@@ -420,6 +420,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -472,7 +473,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -485,48 +485,52 @@ namespace Zetbox.App.GUI
         /// Which toolkit provides this View
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.GUI.Toolkit Toolkit
         {
             get
             {
-				var __value = _Toolkit;
-				if(OnToolkit_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Toolkit>(__value);
-					OnToolkit_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Toolkit;
+                if (OnToolkit_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.GUI.Toolkit>(__result);
+                    OnToolkit_Getter(this, __e);
+                    __result = _Toolkit = __e.Result;
+                }
+                return __result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Toolkit != value)
                 {
-					var __oldValue = _Toolkit;
-					var __newValue = value;
-                    if(OnToolkit_PreSetter != null)
+                    var __oldValue = _Toolkit;
+                    var __newValue = value;
+                    if (OnToolkit_PreSetter != null && IsAttached)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
-						OnToolkit_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
+                        OnToolkit_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
-					
                     NotifyPropertyChanging("Toolkit", __oldValue, __newValue);
-                    _Toolkit = value;
+                    _Toolkit = __newValue;
                     NotifyPropertyChanged("Toolkit", __oldValue, __newValue);
-                    if(OnToolkit_PostSetter != null)
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnToolkit_PostSetter != null && IsAttached)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
-						OnToolkit_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Toolkit>(__oldValue, __newValue);
+                        OnToolkit_PostSetter(this, __e);
                     }
-                    
+                }
+                else
+                {
+                    SetInitializedProperty("Toolkit");
                 }
             }
         }
-
         private Zetbox.App.GUI.Toolkit _Toolkit_store;
         private Zetbox.App.GUI.Toolkit _Toolkit {
             get { return _Toolkit_store; }
@@ -536,7 +540,7 @@ namespace Zetbox.App.GUI
                 ReportEfPropertyChanged("ToolkitImpl");
             }
         }
-        
+
         /// <summary>EF sees only this property, for Toolkit</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -551,7 +555,7 @@ namespace Zetbox.App.GUI
                 this.Toolkit = (Zetbox.App.GUI.Toolkit)value;
             }
         }
-        
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.Toolkit> OnToolkit_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.Toolkit> OnToolkit_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.Toolkit> OnToolkit_PostSetter;
@@ -575,11 +579,6 @@ namespace Zetbox.App.GUI
             this._fk_ControlKind = otherImpl._fk_ControlKind;
             this._fk_ControlRef = otherImpl._fk_ControlRef;
             this._fk_Module = otherImpl._fk_Module;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -795,6 +794,8 @@ namespace Zetbox.App.GUI
             if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
             SupportedViewModels.Clear();
             ControlKind = null;
+            ControlRef = null;
+            Module = null;
         }
         public static event ObjectEventHandler<ViewDescriptor> OnNotifyDeleting_ViewDescriptor;
 
@@ -820,12 +821,13 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -840,12 +842,14 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewDescriptor_is_a_ControlKind", "ControlKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_ViewDescriptor_is_a_ControlKind", "ControlKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_View_has_ControlRef", "ControlRef").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_View_has_ControlRef", "ControlRef");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(ControlRef);
@@ -855,8 +859,9 @@ namespace Zetbox.App.GUI
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_ViewDescriptor_has_Module", "Module").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_ViewDescriptor_has_Module", "Module");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
 
             binStream.Write(eagerLoadLists);
@@ -871,7 +876,7 @@ namespace Zetbox.App.GUI
 					auxObjects.Add(relEntry);
 				}
             }
-            binStream.Write((int?)((Zetbox.App.GUI.ViewDescriptor)this).Toolkit);
+            binStream.Write((int?)_Toolkit);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -889,7 +894,7 @@ namespace Zetbox.App.GUI
             binStream.Read(out this._fk_Module);
 
             SupportedViewModels_was_eagerLoaded = binStream.ReadBoolean();
-            ((Zetbox.App.GUI.ViewDescriptor)this).Toolkit = (Zetbox.App.GUI.Toolkit)binStream.ReadNullableInt32();
+            _Toolkit = (Zetbox.App.GUI.Toolkit)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -906,7 +911,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlKind != null ? ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)((Zetbox.App.GUI.ViewDescriptor)this).Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)_Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -929,7 +934,7 @@ namespace Zetbox.App.GUI
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|Toolkit":
-                ((Zetbox.App.GUI.ViewDescriptor)this).Toolkit = (Zetbox.App.GUI.Toolkit)XmlStreamer.ReadNullableInt32(xml);
+                _Toolkit = (Zetbox.App.GUI.Toolkit)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

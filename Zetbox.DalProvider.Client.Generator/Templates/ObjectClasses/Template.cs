@@ -60,5 +60,15 @@ namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
                 base.ApplyMethodTemplate(m, index);
             }
         }
+
+        protected override void ApplyTriggerFetchTemplate()
+        {
+            var propNames = this.DataType.Properties
+                .OfType<ObjectReferenceProperty>()
+                .Select(p => p.Name)
+                .OrderBy(p => p)
+                .ToList();
+            Templates.ObjectClasses.TriggerFetchMethod.Call(Host, propNames);
+        }
     }
 }

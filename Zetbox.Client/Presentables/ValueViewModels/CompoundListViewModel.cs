@@ -24,13 +24,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Linq;
     using System.Linq.Dynamic;
     using System.Text;
-
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.Client.Models;
     using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
 
     public class CompoundListViewModel
         : ValueViewModel<IReadOnlyObservableList<CompoundObjectViewModel>, IList<ICompoundObject>>, IValueListViewModel<CompoundObjectViewModel, IReadOnlyObservableList<CompoundObjectViewModel>>
@@ -66,22 +66,22 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             get { return false; }
         }
 
-        public void AddItem(CompoundObjectViewModel item)
+        public void Add(CompoundObjectViewModel item)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveItem(CompoundObjectViewModel item)
+        public void Remove()
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteItem(CompoundObjectViewModel item)
+        public void Delete()
         {
             throw new NotImplementedException();
         }
 
-        public void ActivateItem(CompoundObjectViewModel item, bool activate)
+        public void Open()
         {
             throw new NotImplementedException();
         }
@@ -106,7 +106,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return GetValueFromModel();
+                GetValueFromModel().Wait();
+                return _valueCache;
             }
             set
             {
@@ -114,17 +115,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override IReadOnlyObservableList<CompoundObjectViewModel> GetValueFromModel()
+        public override IReadOnlyObservableList<CompoundObjectViewModel> ValueAsync
         {
-            if (_valueCache == null)
+            get
             {
-                _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
-                    ValueModel, ValueModel.Value,
-                    obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj),
-                    mdl => mdl.Object);
-                //_valueCache.CollectionChanged += ValueListChanged;
+                GetValueFromModel();
+                return _valueCache;
             }
-            return _valueCache;
+        }
+
+        protected override ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> GetValueFromModel()
+        {
+            return new ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>>(ZbTask.Synchron, () =>
+            {
+                if (_valueCache == null)
+                {
+                    _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
+                        ValueModel, ValueModel.Value,
+                        obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj),
+                        mdl => mdl.Object);
+                    //_valueCache.CollectionChanged += ValueListChanged;
+                }
+                return _valueCache;
+            });
         }
 
         protected override void SetValueToModel(IReadOnlyObservableList<CompoundObjectViewModel> value)
@@ -229,7 +242,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         public CompoundObjectViewModel Object { get; set; }
-        public App.GUI.Icon Icon
+        public System.Drawing.Image Icon
         {
             get { return Object != null ? Object.Icon : null; }
         }
@@ -238,7 +251,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return Object != null ? Object.Highlight : null;
+                return Object != null ? Object.Highlight : Highlight.None;
             }
         }
     }

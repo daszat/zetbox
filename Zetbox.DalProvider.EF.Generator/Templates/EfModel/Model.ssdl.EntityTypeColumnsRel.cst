@@ -42,10 +42,10 @@
 }
 
 /// <summary>Generate a single Property with the specified parameters</summary>
-private void GenerateProperty(string propertyName, bool needPositionStorage, string positionColumnName)
+private void GenerateProperty(string columnName, bool needPositionStorage, string positionColumnName)
 {
 %>
-    <Property Name="<%= propertyName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" />
+    <Property Name="<%= columnName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" />
 <%
    			
 	if (needPositionStorage)

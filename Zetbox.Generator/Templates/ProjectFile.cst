@@ -35,12 +35,13 @@
     <OutputType>Library</OutputType>
     <RootNamespace><%= GetAssemblyName() %></RootNamespace>
     <AssemblyName><%= GetAssemblyName() %></AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->
     <RelativeOutputPath><%= GetRelativeOutputPath() %></RelativeOutputPath>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,8 +53,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath() %>.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath() %>.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath() %>\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath() %>\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -66,8 +67,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\<%= GetRelativeOutputPath() %>.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath() %>.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\<%= GetRelativeOutputPath() %>\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath() %>\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -82,8 +83,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath() %>.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath() %>.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath() %>\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath() %>\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -100,17 +101,17 @@
     <Reference Include="System.Xml" />
     <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\log4net.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Autofac.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase">

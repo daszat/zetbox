@@ -43,10 +43,64 @@ namespace Zetbox.App.Test
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            _isTestEnumWithDefaultSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly TestObjClassProxy Proxy;
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public Zetbox.App.Test.TestEnum CalculatedEnumeration
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchCalculatedEnumerationOrDefault();
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.CalculatedEnumeration != value)
+                {
+                    var __oldValue = Proxy.CalculatedEnumeration;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CalculatedEnumeration", __oldValue, __newValue);
+                    Proxy.CalculatedEnumeration = __newValue;
+                    NotifyPropertyChanged("CalculatedEnumeration", __oldValue, __newValue);
+                    _CalculatedEnumeration_IsDirty = false;
+
+                }
+                else
+                {
+                    SetInitializedProperty("CalculatedEnumeration");
+                }
+            }
+        }
+        private bool _CalculatedEnumeration_IsDirty = false;
+
+
+        private Zetbox.App.Test.TestEnum FetchCalculatedEnumerationOrDefault()
+        {
+           var __result = Proxy.CalculatedEnumeration;
+            if (_CalculatedEnumeration_IsDirty && OnCalculatedEnumeration_Getter != null)
+            {
+                var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__result);
+                OnCalculatedEnumeration_Getter(this, __e);
+                _CalculatedEnumeration_IsDirty = false;
+                __result = Proxy.CalculatedEnumeration = __e.Result;
+            }
+            return __result;
+        }
+
+        private bool _isCalculatedEnumerationSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnCalculatedEnumeration_Getter;
 
         /// <summary>
         /// test
@@ -84,6 +138,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("MyIntProperty", __oldValue, __newValue);
                     Proxy.MyIntProperty = __newValue;
                     NotifyPropertyChanged("MyIntProperty", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMyIntProperty_PostSetter != null && IsAttached)
                     {
@@ -91,10 +146,10 @@ namespace Zetbox.App.Test
                         OnMyIntProperty_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MyIntProperty");
-				}
+                else
+                {
+                    SetInitializedProperty("MyIntProperty");
+                }
             }
         }
 
@@ -133,15 +188,15 @@ namespace Zetbox.App.Test
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ObjectProp == null)
-				{
-					SetInitializedProperty("ObjectProp");
+                {
+                    SetInitializedProperty("ObjectProp");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ObjectProp);
@@ -150,10 +205,10 @@ namespace Zetbox.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ObjectProp");
+                {
+                    SetInitializedProperty("ObjectProp");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ObjectProp", __oldValue, __newValue);
@@ -177,6 +232,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ObjectProp", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnObjectProp_PostSetter != null && IsAttached)
                 {
@@ -233,6 +289,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     Proxy.StringProp = __newValue;
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
@@ -240,10 +297,10 @@ namespace Zetbox.App.Test
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("StringProp");
-				}
+                else
+                {
+                    SetInitializedProperty("StringProp");
+                }
             }
         }
 
@@ -290,6 +347,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("TestEnumProp", __oldValue, __newValue);
                     Proxy.TestEnumProp = __newValue;
                     NotifyPropertyChanged("TestEnumProp", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestEnumProp_PostSetter != null && IsAttached)
                     {
@@ -297,10 +355,10 @@ namespace Zetbox.App.Test
                         OnTestEnumProp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestEnumProp");
-				}
+                else
+                {
+                    SetInitializedProperty("TestEnumProp");
+                }
             }
         }
 
@@ -310,6 +368,84 @@ namespace Zetbox.App.Test
 		public static event PropertyPostSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumProp_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestObjClass> OnTestEnumProp_IsValid;
+
+        /// <summary>
+        /// Tests whether enums with defaults work
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public Zetbox.App.Test.TestEnum TestEnumWithDefault
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchTestEnumWithDefaultOrDefault();
+                if (OnTestEnumWithDefault_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__result);
+                    OnTestEnumWithDefault_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isTestEnumWithDefaultSet = true;
+                if (Proxy.TestEnumWithDefault != value)
+                {
+                    var __oldValue = Proxy.TestEnumWithDefault;
+                    var __newValue = value;
+                    if (OnTestEnumWithDefault_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+                        OnTestEnumWithDefault_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("TestEnumWithDefault", __oldValue, __newValue);
+                    Proxy.TestEnumWithDefault = __newValue;
+                    NotifyPropertyChanged("TestEnumWithDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTestEnumWithDefault_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+                        OnTestEnumWithDefault_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("TestEnumWithDefault");
+                }
+            }
+        }
+
+
+        private Zetbox.App.Test.TestEnum FetchTestEnumWithDefaultOrDefault()
+        {
+            var __result = Proxy.TestEnumWithDefault;
+                if (!_isTestEnumWithDefaultSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("bfb214b1-b933-4810-b33b-98a1276b84b3"));
+                    if (__p != null) {
+                        _isTestEnumWithDefaultSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.TestEnumWithDefault = (Zetbox.App.Test.TestEnum)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Test.TestObjClass.TestEnumWithDefault'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isTestEnumWithDefaultSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumWithDefault_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumWithDefault_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumWithDefault_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.TestObjClass> OnTestEnumWithDefault_IsValid;
 
         /// <summary>
         /// testmethod
@@ -389,17 +525,13 @@ namespace Zetbox.App.Test
             me.MyIntProperty = other.MyIntProperty;
             me.StringProp = other.StringProp;
             me.TestEnumProp = other.TestEnumProp;
+            me.TestEnumWithDefault = other.TestEnumWithDefault;
             this._fk_ObjectProp = otherImpl._fk_ObjectProp;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
             base.SetNew();
+            _CalculatedEnumeration_IsDirty = true;
         }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
@@ -433,9 +565,24 @@ namespace Zetbox.App.Test
                 case "ObjectProp":
                 case "StringProp":
                 case "TestEnumProp":
+                case "TestEnumWithDefault":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
+        }
+
+        public override void Recalculate(string property)
+        {
+            switch (property)
+            {
+                case "CalculatedEnumeration":
+                    NotifyPropertyChanging(property, null, null);
+                    _CalculatedEnumeration_IsDirty = true;
+                    NotifyPropertyChanged(property, null, null);
+                    return;
+            }
+
+            base.Recalculate(property);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
@@ -466,6 +613,15 @@ namespace Zetbox.App.Test
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorNHibernateImpl<TestObjClass, Zetbox.App.Test.TestEnum>(
+                        lazyCtx,
+                        new Guid("e5101331-312b-4518-b7f8-750ca7b61d80"),
+                        "CalculatedEnumeration",
+                        null,
+                        obj => obj.CalculatedEnumeration,
+                        null, // calculated property
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorNHibernateImpl<TestObjClass, int?>(
                         lazyCtx,
@@ -502,6 +658,15 @@ namespace Zetbox.App.Test
                         obj => obj.TestEnumProp,
                         (obj, val) => obj.TestEnumProp = val,
 						obj => OnTestEnumProp_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<TestObjClass, Zetbox.App.Test.TestEnum>(
+                        lazyCtx,
+                        new Guid("bfb214b1-b933-4810-b33b-98a1276b84b3"),
+                        "TestEnumWithDefault",
+                        null,
+                        obj => obj.TestEnumWithDefault,
+                        (obj, val) => obj.TestEnumWithDefault = val,
+						obj => OnTestEnumWithDefault_IsValid), 
                     // position columns
                 };
             }
@@ -549,6 +714,8 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyPreSave_TestObjClass")]
         public override void NotifyPreSave()
         {
+            FetchCalculatedEnumerationOrDefault();
+            FetchTestEnumWithDefaultOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_TestObjClass != null) OnNotifyPreSave_TestObjClass(this);
         }
@@ -569,6 +736,7 @@ namespace Zetbox.App.Test
             SetNotInitializedProperty("ObjectProp");
             SetNotInitializedProperty("StringProp");
             SetNotInitializedProperty("TestEnumProp");
+            _CalculatedEnumeration_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_TestObjClass != null) OnNotifyCreated_TestObjClass(this);
         }
@@ -604,6 +772,8 @@ namespace Zetbox.App.Test
             public virtual Type ZetboxWrapper { get { return typeof(TestObjClassNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(TestObjClassProxy); } }
 
+            public virtual Zetbox.App.Test.TestEnum CalculatedEnumeration { get; set; }
+
             public virtual int? MyIntProperty { get; set; }
 
             public virtual Zetbox.App.Projekte.KundeNHibernateImpl.KundeProxy ObjectProp { get; set; }
@@ -611,6 +781,8 @@ namespace Zetbox.App.Test
             public virtual string StringProp { get; set; }
 
             public virtual Zetbox.App.Test.TestEnum TestEnumProp { get; set; }
+
+            public virtual Zetbox.App.Test.TestEnum TestEnumWithDefault { get; set; }
 
         }
 
@@ -624,10 +796,15 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write((int?)Proxy.CalculatedEnumeration);
             binStream.Write(this.Proxy.MyIntProperty);
             binStream.Write(this.Proxy.ObjectProp != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectProp) : (int?)null);
             binStream.Write(this.Proxy.StringProp);
             binStream.Write((int?)Proxy.TestEnumProp);
+            binStream.Write(this._isTestEnumWithDefaultSet);
+            if (this._isTestEnumWithDefaultSet) {
+                binStream.Write((int?)Proxy.TestEnumWithDefault);
+            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -636,10 +813,15 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            Proxy.CalculatedEnumeration = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             this.Proxy.MyIntProperty = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_ObjectProp);
             this.Proxy.StringProp = binStream.ReadString();
             Proxy.TestEnumProp = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._isTestEnumWithDefaultSet = binStream.ReadBoolean();
+            if (this._isTestEnumWithDefaultSet) {
+                Proxy.TestEnumWithDefault = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

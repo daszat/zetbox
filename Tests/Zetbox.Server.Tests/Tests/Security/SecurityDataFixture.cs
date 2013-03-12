@@ -21,12 +21,12 @@ namespace Zetbox.Server.Tests.Security
     using System.Linq;
     using System.Text;
     using Autofac;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
     using Zetbox.App.Projekte;
-    using NUnit.Framework;
 
     public abstract class SecurityDataFixture : AbstractServerTestFixture
     {
@@ -193,7 +193,7 @@ namespace Zetbox.Server.Tests.Security
             if (identity3_low != null) { var id = ctx.Find<Identity>(identity3_low.ID); id.Groups.Clear(); ctx.Delete(id); }
 
             identity1 = null;
-            identity2= null;
+            identity2 = null;
             identity3_low = null;
             ctx.SubmitChanges();
         }

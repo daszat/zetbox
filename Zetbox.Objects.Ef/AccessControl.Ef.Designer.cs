@@ -22,9 +22,9 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="AccessControl")]
+    [EdmEntityType(NamespaceName="Model", Name="AccessControlEfImpl")]
     [System.Diagnostics.DebuggerDisplay("AccessControl")]
-    public class AccessControlEfImpl : BaseServerDataObject_EntityFramework, AccessControl, Zetbox.API.IExportableInternal
+    public abstract class AccessControlEfImpl : BaseServerDataObject_EntityFramework, AccessControl, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("f1c37bfb-e45f-4964-b6ba-672c1ec81b60");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -85,7 +85,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -97,7 +96,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -132,6 +131,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -184,6 +184,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -193,6 +195,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -200,10 +203,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -211,7 +214,7 @@ namespace Zetbox.App.Base
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _ChangedOn_store = value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -268,7 +271,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -280,7 +282,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -315,6 +317,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -367,6 +370,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -376,6 +381,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -383,10 +389,10 @@ namespace Zetbox.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -394,7 +400,7 @@ namespace Zetbox.App.Base
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _CreatedOn_store = value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -421,10 +427,11 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
-                if (OnDescription_Getter != null)
+                if (_Description_IsDirty && OnDescription_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDescription_Getter(this, __e);
+                    _Description_IsDirty = false;
                     __result = _Description = __e.Result;
                 }
                 return __result;
@@ -436,26 +443,16 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Description;
                     var __newValue = value;
-                    if (OnDescription_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnDescription_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    _Description_IsDirty = false;
 
-                    if (OnDescription_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnDescription_PostSetter(this, __e);
-                    }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description_store;
@@ -467,12 +464,9 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("Description");
             }
         }
+        private bool _Description_IsDirty = false;
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, string> OnDescription_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, string> OnDescription_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, string> OnDescription_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Base.AccessControl> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -525,6 +519,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -532,10 +527,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -601,7 +596,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -613,7 +607,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
@@ -648,6 +642,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -666,65 +661,66 @@ namespace Zetbox.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-        public string Name
+        public string Notes
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _Name;
-                if (OnName_Getter != null)
+                var __result = _Notes;
+                if (OnNotes_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnName_Getter(this, __e);
-                    __result = _Name = __e.Result;
+                    OnNotes_Getter(this, __e);
+                    __result = _Notes = __e.Result;
                 }
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
+                if (_Notes != value)
                 {
-                    var __oldValue = _Name;
+                    var __oldValue = _Notes;
                     var __newValue = value;
-                    if (OnName_PreSetter != null && IsAttached)
+                    if (OnNotes_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PreSetter(this, __e);
+                        OnNotes_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("Name", __oldValue, __newValue);
-                    _Name = __newValue;
-                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    NotifyPropertyChanging("Notes", __oldValue, __newValue);
+                    _Notes = __newValue;
+                    NotifyPropertyChanged("Notes", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
-                    if (OnName_PostSetter != null && IsAttached)
+                    if (OnNotes_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PostSetter(this, __e);
+                        OnNotes_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Notes");
+                }
             }
         }
-        private string _Name_store;
-        private string _Name {
-            get { return _Name_store; }
+        private string _Notes_store;
+        private string _Notes {
+            get { return _Notes_store; }
             set {
-                ReportEfPropertyChanging("Name");
-                _Name_store = value;
-                ReportEfPropertyChanged("Name");
+                ReportEfPropertyChanging("Notes");
+                _Notes_store = value;
+                ReportEfPropertyChanged("Notes");
             }
         }
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, string> OnName_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, string> OnName_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, string> OnNotes_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, string> OnNotes_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, string> OnNotes_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Base.AccessControl> OnName_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Base.AccessControl> OnNotes_IsValid;
 
         /// <summary>
         /// 
@@ -772,7 +768,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnObjectClass_Getter != null)
                 {
@@ -784,7 +779,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
@@ -831,6 +826,7 @@ namespace Zetbox.App.Base
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("AccessControlList", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -845,48 +841,52 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.AccessRights? Rights
         {
             get
             {
-				var __value = _Rights;
-				if(OnRights_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.AccessRights?>(__value);
-					OnRights_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Rights;
+                if (OnRights_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.AccessRights?>(__result);
+                    OnRights_Getter(this, __e);
+                    __result = _Rights = __e.Result;
+                }
+                return __result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Rights != value)
                 {
-					var __oldValue = _Rights;
-					var __newValue = value;
-                    if(OnRights_PreSetter != null)
+                    var __oldValue = _Rights;
+                    var __newValue = value;
+                    if (OnRights_PreSetter != null && IsAttached)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
-						OnRights_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
+                        OnRights_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
-					
                     NotifyPropertyChanging("Rights", __oldValue, __newValue);
-                    _Rights = value;
+                    _Rights = __newValue;
                     NotifyPropertyChanged("Rights", __oldValue, __newValue);
-                    if(OnRights_PostSetter != null)
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnRights_PostSetter != null && IsAttached)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
-						OnRights_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.AccessRights?>(__oldValue, __newValue);
+                        OnRights_PostSetter(this, __e);
                     }
-                    
+                }
+                else
+                {
+                    SetInitializedProperty("Rights");
                 }
             }
         }
-
         private Zetbox.App.Base.AccessRights? _Rights_store;
         private Zetbox.App.Base.AccessRights? _Rights {
             get { return _Rights_store; }
@@ -896,7 +896,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("RightsImpl");
             }
         }
-        
+
         /// <summary>EF sees only this property, for Rights</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -911,7 +911,7 @@ namespace Zetbox.App.Base
                 this.Rights = (Zetbox.App.Base.AccessRights?)value;
             }
         }
-        
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessRights?> OnRights_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessRights?> OnRights_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessRights?> OnRights_PostSetter;
@@ -932,23 +932,18 @@ namespace Zetbox.App.Base
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
-            me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
-            me.Name = other.Name;
+            me.Notes = other.Notes;
             me.Rights = other.Rights;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Module = otherImpl._fk_Module;
             this._fk_ObjectClass = otherImpl._fk_ObjectClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
+            _Description_IsDirty = true;
         }
         #region Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
@@ -963,15 +958,30 @@ namespace Zetbox.App.Base
                 case "ChangedOn":
                 case "CreatedBy":
                 case "CreatedOn":
-                case "Description":
                 case "ExportGuid":
                 case "Module":
-                case "Name":
+                case "Notes":
                 case "ObjectClass":
                 case "Rights":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
+        }
+
+        public override void Recalculate(string property)
+        {
+            switch (property)
+            {
+                case "Description":
+                    NotifyPropertyChanging(property, null, null);
+                    ReportEfPropertyChanging("Description");
+                    _Description_IsDirty = true;
+                    ReportEfPropertyChanged("Description");
+                    NotifyPropertyChanged(property, null, null);
+                    return;
+            }
+
+            base.Recalculate(property);
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
@@ -1066,8 +1076,8 @@ namespace Zetbox.App.Base
                         "Description",
                         null,
                         obj => obj.Description,
-                        (obj, val) => obj.Description = val,
-						obj => OnDescription_IsValid), 
+                        null, // calculated property
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorEfImpl<AccessControl, Guid>(
                         lazyCtx,
@@ -1089,12 +1099,12 @@ namespace Zetbox.App.Base
                     // else
                     new PropertyDescriptorEfImpl<AccessControl, string>(
                         lazyCtx,
-                        new Guid("07846156-f853-4f95-ae6f-09dad6c4d71d"),
-                        "Name",
+                        new Guid("092be3b7-129f-4813-8f74-ac6c37bf67f3"),
+                        "Notes",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val,
-						obj => OnName_IsValid), 
+                        obj => obj.Notes,
+                        (obj, val) => obj.Notes = val,
+						obj => OnNotes_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<AccessControl, Zetbox.App.Base.ObjectClass>(
                         lazyCtx,
@@ -1178,11 +1188,11 @@ namespace Zetbox.App.Base
         {
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
-            SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Notes");
             SetNotInitializedProperty("ObjectClass");
             SetNotInitializedProperty("Rights");
+            _Description_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_AccessControl != null) OnNotifyCreated_AccessControl(this);
         }
@@ -1195,6 +1205,8 @@ namespace Zetbox.App.Base
             if (OnNotifyDeleting_AccessControl != null) OnNotifyDeleting_AccessControl(this);
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
+            ObjectClass = null;
         }
         public static event ObjectEventHandler<AccessControl> OnNotifyDeleting_AccessControl;
 
@@ -1220,12 +1232,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -1240,16 +1253,18 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_AccessControl_was_ChangedBy", "ChangedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_AccessControl_was_ChangedBy", "ChangedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_AccessControl_was_CreatedBy", "CreatedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_AccessControl_was_CreatedBy", "CreatedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1261,15 +1276,17 @@ namespace Zetbox.App.Base
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_AccessControl_has_Module", "Module").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_AccessControl_has_Module", "Module");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            binStream.Write(this._Name);
+            binStream.Write(this._Notes);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjectClass_has_AccessControlList", "ObjectClass").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_ObjectClass_has_AccessControlList", "ObjectClass");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            binStream.Write((int?)((Zetbox.App.Base.AccessControl)this).Rights);
+            binStream.Write((int?)_Rights);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1294,9 +1311,9 @@ namespace Zetbox.App.Base
                 this._ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
-            this._Name = binStream.ReadString();
+            this._Notes = binStream.ReadString();
             binStream.Read(out this._fk_ObjectClass);
-            ((Zetbox.App.Base.AccessControl)this).Rights = (Zetbox.App.Base.AccessRights?)binStream.ReadNullableInt32();
+            _Rights = (Zetbox.App.Base.AccessRights?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1316,9 +1333,9 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Notes, xml, "Notes", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.AccessControl)this).Rights, xml, "Rights", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_Rights, xml, "Rights", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1347,14 +1364,14 @@ namespace Zetbox.App.Base
             case "Zetbox.App.Base|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Zetbox.App.Base|Name":
-                this._Name = XmlStreamer.ReadString(xml);
+            case "Zetbox.App.Base|Notes":
+                this._Notes = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.Base|ObjectClass":
                 this._fk_guid_ObjectClass = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.Base|Rights":
-                ((Zetbox.App.Base.AccessControl)this).Rights = (Zetbox.App.Base.AccessRights?)XmlStreamer.ReadNullableInt32(xml);
+                _Rights = (Zetbox.App.Base.AccessRights?)XmlStreamer.ReadNullableInt32(xml);
                break;
             }
         }

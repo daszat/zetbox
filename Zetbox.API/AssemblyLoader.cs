@@ -38,6 +38,7 @@ namespace Zetbox.API
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.AssemblyLoader");
         private readonly static object _lock = new object();
+        private readonly static HashSet<string> _missingAssemblies = new HashSet<string>();
 
         /// <summary>
         /// Initializes the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path.
@@ -85,15 +86,9 @@ namespace Zetbox.API
                 if (_isInitialised) return;
                 _isInitialised = true;
 
-                if (config.AssemblySearchPaths == null)
-                {
-                    Log.Info("Not initialising: no AssemblySearchPaths set.");
-                    return;
-                }
-
                 Log.DebugFormat("Initializing {0}", AppDomain.CurrentDomain.FriendlyName);
                 InitialiseTargetAssemblyFolder(config);
-                InitialiseSearchPath(config.AssemblySearchPaths.Paths);
+                InitialiseSearchPath(config.HostType, config.IsFallback == false);
 
                 // Start resolving Assemblies
                 AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
@@ -101,23 +96,54 @@ namespace Zetbox.API
             }
         }
 
-        private static void InitialiseSearchPath(string[] paths)
+        private static void InitialiseSearchPath(HostType type, bool loadGeneratedAssemblies)
         {
-            foreach (var path in paths ?? new string[] { })
+            string hostTypePrefix = string.Empty;
+            string hostTypePath = string.Empty;
+            switch (type)
             {
-                var rootedPath = Path.IsPathRooted(path)
-                    ? path
-                    : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+                case HostType.Client:
+                    hostTypePath = "Client";
+                    break;
+                case HostType.Server:
+                    hostTypePath = "Server";
+                    break;
+                case HostType.AspNet:
+                    hostTypePrefix = "bin";
+                    hostTypePath = "Server";
+                    break;
+                case HostType.None:
+                default:
+                    break;
+            }
+            var common = string.IsNullOrWhiteSpace(hostTypePrefix)
+                ? "Common"
+                : Path.Combine(hostTypePrefix, "Common");
+            hostTypePath = string.IsNullOrWhiteSpace(hostTypePrefix)
+                ? hostTypePath
+                : Path.Combine(hostTypePrefix, hostTypePath);
+            foreach (var path in new string[] { common, hostTypePath })
+            {
+                var rootedPath = QualifySearchPath(path);
 
                 Log.DebugFormat("Added searchpath [{0}]", rootedPath);
+                AssemblyLoader.SearchPath.Add(Path.Combine(rootedPath, loadGeneratedAssemblies ? "Generated" : "Fallback"));
                 AssemblyLoader.SearchPath.Add(rootedPath);
             }
+        }
+
+        public static string QualifySearchPath(string path)
+        {
+            var rootedPath = Path.IsPathRooted(path)
+                ? path
+                : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            return rootedPath;
         }
 
         /// <param name="config">must not be null</param>
         private static void InitialiseTargetAssemblyFolder(ZetboxConfig config)
         {
-            EnableShadowCopy = config.AssemblySearchPaths == null ? false : config.AssemblySearchPaths.EnableShadowCopy;
+            EnableShadowCopy = config.EnableShadowCopy;
             if (EnableShadowCopy)
             {
                 TargetAssemblyFolder = Path.Combine(config.TempFolder, "bin");
@@ -233,7 +259,6 @@ namespace Zetbox.API
             return null;
         }
 
-
         private static string PdbFromDll(string dllFile)
         {
             var parts = dllFile.Split('.');
@@ -257,6 +282,8 @@ namespace Zetbox.API
             {
                 try
                 {
+                    if (_missingAssemblies.Contains(name)) return null; // shortcut
+
                     AssemblyName assemblyName = new AssemblyName(name);
                     string baseName = assemblyName.Name;
 
@@ -269,7 +296,10 @@ namespace Zetbox.API
 
                     // assembly could not be found?
                     if (String.IsNullOrEmpty(sourceDll))
+                    {
+                        _missingAssemblies.Add(name);
                         return null;
+                    }
 
                     // Copy files to destination folder, unless the target file exists
                     // the folder should have been cleared on initialisation and once
@@ -345,8 +375,6 @@ namespace Zetbox.API
                 }
             }
         }
-
-
     }
 
     public class AssemblyLoaderInitializer : MarshalByRefObject

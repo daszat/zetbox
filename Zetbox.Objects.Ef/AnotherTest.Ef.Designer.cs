@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="AnotherTest")]
+    [EdmEntityType(NamespaceName="Model", Name="AnotherTestEfImpl")]
     [System.Diagnostics.DebuggerDisplay("AnotherTest")]
     public class AnotherTestEfImpl : BaseServerDataObject_EntityFramework, AnotherTest
     {
@@ -52,11 +52,6 @@ namespace Zetbox.App.Test
             var otherImpl = (AnotherTestEfImpl)obj;
             var me = (AnotherTest)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -163,12 +158,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

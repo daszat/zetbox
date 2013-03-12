@@ -103,15 +103,15 @@ this.WriteObjects("                return __value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
+this.WriteObjects("                if (this.IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                // shortcut noop with nulls\r\n");
 this.WriteObjects("                if (value == null && this.Proxy.",  name , " == null)\r\n");
-this.WriteObjects("				{\r\n");
-this.WriteObjects("					SetInitializedProperty(\"",  name , "\");\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    SetInitializedProperty(\"",  name , "\");\r\n");
 this.WriteObjects("                    return;\r\n");
-this.WriteObjects("				}\r\n");
+this.WriteObjects("                }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                // cache old value to remove inverse references later\r\n");
 this.WriteObjects("                var __oldValue = (",  referencedImplementation , ")OurContext.AttachAndWrap(this.Proxy.",  name , ");\r\n");
@@ -120,10 +120,10 @@ this.WriteObjects("\r\n");
 this.WriteObjects("                // shortcut noop on objects\r\n");
 this.WriteObjects("                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.\r\n");
 this.WriteObjects("                if (__oldValue == __newValue)\r\n");
-this.WriteObjects("				{\r\n");
-this.WriteObjects("					SetInitializedProperty(\"",  name , "\");\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    SetInitializedProperty(\"",  name , "\");\r\n");
 this.WriteObjects("                    return;\r\n");
-this.WriteObjects("				}\r\n");
+this.WriteObjects("                }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                // Changing Event fires before anything is touched\r\n");
 this.WriteObjects("                NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
@@ -211,34 +211,35 @@ this.WriteObjects("                }\r\n");
 #line 159 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                // everything is done. fire the Changed event\r\n");
 this.WriteObjects("                NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
+this.WriteObjects("                if(IsAttached) UpdateChangedInfo = true;\r\n");
 this.WriteObjects("\r\n");
-#line 162 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (callGetterSetterEvents) { 
 #line 163 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+if (callGetterSetterEvents) { 
+#line 164 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (",  eventName , "_PostSetter != null && IsAttached)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyPostSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  eventName , "_PostSetter(this, e);\r\n");
 this.WriteObjects("                }\r\n");
-#line 168 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-} 
 #line 169 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+} 
+#line 170 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>Backing store for ",  UglyXmlEncode(name) , "'s id, used on dehydration only</summary>\r\n");
 this.WriteObjects("        private int? ",  fkBackingName , " = null;\r\n");
 this.WriteObjects("\r\n");
-#line 175 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (relDataTypeExportable) { 
 #line 176 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+if (relDataTypeExportable) { 
+#line 177 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        /// <summary>Backing store for ",  UglyXmlEncode(name) , "'s guid, used on import only</summary>\r\n");
 this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\r\n");
-#line 178 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-} 
 #line 179 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+} 
+#line 180 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("\r\n");
-#line 181 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 182 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
 
     if (!String.IsNullOrEmpty(positionPropertyName))
@@ -248,7 +249,7 @@ AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
             "int?", positionPropertyName, moduleNamespace, false, disableExport);
     }
 
-#line 190 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 191 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , " for ",  name , "\r\n");
 
         }

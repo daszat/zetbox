@@ -14,7 +14,7 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-	<%@ CodeTemplate Language="C#"
+    <%@ CodeTemplate Language="C#"
     Name="Properties.ObjectReferencePropertyTemplate"
     ClassName="Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate"
     Inherits="Zetbox.Generator.MemberTemplate" %>
@@ -46,6 +46,9 @@
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%@ Parameter Name="isCalculated" Type="bool" %>
 <%@ Parameter Name="disableExport" Type="bool" %>
+<%
+    string taskName = "_triggerFetch" + name + "Task";
+%>
         // BEGIN <%= this.GetType() %> for <%= name %>
         // fkBackingName=<%= fkBackingName %>; fkGuidBackingName=<%= fkGuidBackingName %>;
         // referencedInterface=<%= referencedInterface %>; moduleNamespace=<%= moduleNamespace %>;
@@ -58,11 +61,49 @@
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 <% DelegatingProperty.Call(Host, ctx, name, referencedInterface, implName, referencedImplementation); %>
 
-        private int? <%= fkBackingName %>;
+        private int? _<%= fkBackingName %>Cache;
+
+        private int? <%= fkBackingName %> {
+            get
+            {
+                return _<%= fkBackingName %>Cache;
+            }
+            set
+            {
+                _<%= fkBackingName %>Cache = value;
+                // Recreate task to clear it's cache
+                <%= taskName %> = null;
+            }
+        }
 
 <% if (relDataTypeExportable) { %>
         private Guid? <%= fkGuidBackingName %> = null;
 <% } %>
+
+        Zetbox.API.Async.ZbTask<<%= referencedInterface %>> <%= taskName %>;
+        public Zetbox.API.Async.ZbTask<<%= referencedInterface %>> TriggerFetch<%= name %>Async()
+        {
+            if (<%= taskName %> != null) return <%= taskName %>;
+
+            if (<%= fkBackingName %>.HasValue)
+                <%= taskName %> = Context.FindAsync<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
+            else
+                <%= taskName %> = new Zetbox.API.Async.ZbTask<<%= referencedInterface %>>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+<% if (callGetterSetterEvents) {                                                                    %>
+            <%= taskName %>.OnResult(t =>
+            {
+                if (<%= eventName %>_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(t.Result);
+                    <%= eventName %>_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+<% }                                                                                                %>
+
+            return <%= taskName %>;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -70,39 +111,19 @@
         {
             get
             {
-                <%= referencedImplementation %> __value;
-                if (<%= fkBackingName %>.HasValue)
-                    __value = (<%= referencedImplementation %>)Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
-                else
-                    __value = null;
-
-<%
-                if (callGetterSetterEvents)
-                {
-%>
-                if (<%= eventName %>_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
-                    <%= eventName %>_Getter(this, e);
-                    __value = (<%= referencedImplementation %>)e.Result;
-                }
-<%
-                }
-%>
-
-                return __value;
+                return (<%= referencedImplementation %>)TriggerFetch<%= name %>Async().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && <%= fkBackingName %> == null) || (value != null && value.ID == <%= fkBackingName %>))
-				{
-					SetInitializedProperty("<%= name %>");
+                {
+                    SetInitializedProperty("<%= name %>");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = <%= implName %>;
@@ -111,28 +132,19 @@
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
 
-<%
-                if (callGetterSetterEvents)
-                {
-%>
+<% if (callGetterSetterEvents) {                                                                    %>
                 if (<%= eventName %>_PreSetter != null && IsAttached)
                 {
                     var e = new PropertyPreSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PreSetter(this, e);
                     __newValue = (<%= referencedImplementation %>)e.Result;
                 }
-<%
-                }
-%>
+<% }                                                                                                %>
 
                 // next, set the local reference
                 <%= fkBackingName %> = __newValue == null ? (int?)null : __newValue.ID;
 
-<%
-    if (!String.IsNullOrEmpty(inverseNavigatorName))
-    {
-
-%>
+<% if (!String.IsNullOrEmpty(inverseNavigatorName)) {                                               %>
                 // now fixup redundant, inverse references
                 // The inverse navigator will also fire events when changed, so should
                 // only be touched after setting the local value above.
@@ -140,62 +152,38 @@
                 //       before the local value is changed
                 if (__oldValue != null)
                 {
-<%
-        if (inverseNavigatorIsList)
-        {
-            // TODO: check whether __oldValue is loaded before potentially triggering a DB Call
-%>
+<%      if (inverseNavigatorIsList) {                                                               %>
+<%          // TODO: check whether __oldValue is loaded before potentially triggering a DB Call     %>
                     // remove from old list
                     (__oldValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>).RemoveWithoutClearParent(this);
-<%
-        }
-        else
-        {
-%>
+<%      } else {                                                                                    %>
                     // unset old reference
                     __oldValue.<%= inverseNavigatorName %> = null;
-<%
-        }
-%>
+<%      }                                                                                           %>
                 }
 
                 if (__newValue != null)
                 {
-<%
-        if (inverseNavigatorIsList)
-        {
-%>
+<%      if (inverseNavigatorIsList) {                                                               %>
                     // add to new list
                     (__newValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>).AddWithoutSetParent(this);
-<%
-        }
-        else
-        {
-%>
+<%      } else {                                                                                    %>
                     // set new reference
                     __newValue.<%= inverseNavigatorName %> = this;
-<%
-        }
-%>
+<%      }                                                                                           %>
                 }
-<%
-    }
-%>
+<% }                                                                                                %>
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
-<%
-                if (callGetterSetterEvents)
-                {
-%>
+<% if (callGetterSetterEvents) {                                                                    %>
                 if (<%= eventName %>_PostSetter != null && IsAttached)
                 {
                     var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PostSetter(this, e);
                 }
-<%
-                }
-%>
+<% }                                                                                                %>
             }
         }
 <%

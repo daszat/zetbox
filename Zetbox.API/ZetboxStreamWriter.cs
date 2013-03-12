@@ -545,7 +545,8 @@ namespace Zetbox.API
             else
             {
                 _dest.Write(bytes.Length);
-                _dest.Write(bytes);
+                if (bytes.Length > 0)
+                    _dest.Write(bytes);
             }
         }
 

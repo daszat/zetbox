@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Sets an boolean property with an configured default value
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="BoolDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="BoolDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("BoolDefaultValue")]
     public class BoolDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, BoolDefaultValue
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("BoolValue", __oldValue, __newValue);
                     _BoolValue = __newValue;
                     NotifyPropertyChanged("BoolValue", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBoolValue_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnBoolValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("BoolValue");
-				}
+                else
+                {
+                    SetInitializedProperty("BoolValue");
+                }
             }
         }
         private bool _BoolValue_store;
@@ -184,11 +185,6 @@ namespace Zetbox.App.Base
             var me = (BoolDefaultValue)this;
 
             me.BoolValue = other.BoolValue;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

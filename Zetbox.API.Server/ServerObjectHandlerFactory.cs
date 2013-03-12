@@ -92,7 +92,10 @@ namespace Zetbox.API.Server
         public abstract IServerCollectionHandler GetServerCollectionHandler(IZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
 
         /// <inheritdoc/>
-        public abstract IServerObjectHandler GetServerObjectHandler(InterfaceType type);
+        public IServerObjectHandler GetServerObjectHandler(InterfaceType type)
+        {
+            return GetServerObjectHandlerHelper(typeof(ServerObjectHandler<>), type);
+        }
 
         /// <inheritdoc/>
         public abstract IServerObjectSetHandler GetServerObjectSetHandler();

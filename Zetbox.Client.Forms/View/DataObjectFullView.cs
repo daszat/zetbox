@@ -68,7 +68,7 @@ namespace Zetbox.Client.Forms.View
 
                 _propertyPanel.Controls.Add(containerPanel, 0, i);
 
-                Renderer.ShowModel(DataContext.PropertyModels[i], containerPanel);
+                //Renderer.ShowModel(DataContext.PropertyModels[i], containerPanel);
             }
         }
 

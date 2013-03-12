@@ -62,13 +62,14 @@ namespace Zetbox.API.AbstractConsumerTests
             }
             using (Log.InfoTraceMethodCall("Starting up"))
             {
-                var config = ZetboxConfig.FromFile(null, GetConfigFile());
+                var config = ZetboxConfig.FromFile(GetHostType(), null, GetConfigFile());
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 ContainerBuilder builder;
                 switch (GetHostType())
                 {
+                    case HostType.AspNet:
                     case HostType.Server:
                         Log.Info("Adding Server Modules");
                         builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
@@ -114,45 +115,21 @@ namespace Zetbox.API.AbstractConsumerTests
                 .RegisterType<NopFileOpener>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
+
+            builder
+                .RegisterType<MockCredentialsResolver>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
         }
 
         protected virtual void SetUp(IContainer container)
         {
+            API.AppDomainInitializer.InitializeFrom(container);
             var config = container.Resolve<ZetboxConfig>();
             if (config.Server != null)
             {
                 config.Server.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());
                 Log.InfoFormat("Setting Server.DocumentStore=[{0}]", config.Server.DocumentStore);
-
-                var resetter = container.Resolve<IEnumerable<IDatabaseResetter>>().SingleOrDefault();
-                if (resetter != null && config.Server.ConnectionStrings != null)
-                {
-                    Log.Info("Forcing test connection string");
-                    for (int i = 0; i < config.Server.ConnectionStrings.Length; i++)
-                    {
-                        config.Server.ConnectionStrings[i].ConnectionString = resetter.ForceTestDB(config.Server.ConnectionStrings[i].ConnectionString);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Call this to reset the configured databases.
-        /// </summary>
-        /// <param name="container"></param>
-        protected void ResetDatabase(IContainer container)
-        {
-            foreach (var resetter in container.Resolve<IEnumerable<IDatabaseResetter>>())
-            {
-                try
-                {
-                    resetter.ResetDatabase();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Failed to reset database", ex);
-                    throw;
-                }
             }
         }
 

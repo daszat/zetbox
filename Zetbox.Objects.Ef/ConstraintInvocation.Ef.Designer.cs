@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ConstraintInvocation")]
+    [EdmEntityType(NamespaceName="Model", Name="ConstraintInvocationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ConstraintInvocation")]
     public class ConstraintInvocationEfImpl : BaseServerDataObject_EntityFramework, ConstraintInvocation, Zetbox.API.IExportableInternal
     {
@@ -91,6 +91,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -98,10 +99,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -167,7 +168,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnImplementor_Getter != null)
                 {
@@ -179,7 +179,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
@@ -214,6 +214,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Implementor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -263,6 +264,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MemberName", __oldValue, __newValue);
                     _MemberName = __newValue;
                     NotifyPropertyChanged("MemberName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMemberName_PostSetter != null && IsAttached)
                     {
@@ -270,10 +272,10 @@ namespace Zetbox.App.Base
                         OnMemberName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MemberName");
-				}
+                else
+                {
+                    SetInitializedProperty("MemberName");
+                }
             }
         }
         private string _MemberName_store;
@@ -356,70 +358,6 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
-        /// <summary>
-        /// 
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnGetMemberName_ConstraintInvocation")]
-        public virtual string GetMemberName()
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetMemberName_ConstraintInvocation != null)
-            {
-                OnGetMemberName_ConstraintInvocation(this, e);
-            }
-            else
-            {
-                throw new NotImplementedException("No handler registered on ConstraintInvocation.GetMemberName");
-            }
-            return e.Result;
-        }
-        public delegate void GetMemberName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-        public static event GetMemberName_Handler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation;
-        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-		// CanExec
-		public static event CanExecMethodEventHandler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation_CanExec;
-
-        [EventBasedMethod("OnGetMemberName_ConstraintInvocation_CanExec")]
-        public virtual bool GetMemberNameCanExec
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<bool>();
-				if (OnGetMemberName_ConstraintInvocation_CanExec != null)
-				{
-					OnGetMemberName_ConstraintInvocation_CanExec(this, e);
-				}
-				else
-				{
-					e.Result = true;
-				}
-				return e.Result;
-			}
-        }
-
-		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation_CanExecReason;
-
-        [EventBasedMethod("OnGetMemberName_ConstraintInvocation_CanExecReason")]
-        public virtual string GetMemberNameCanExecReason
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<string>();
-				if (OnGetMemberName_ConstraintInvocation_CanExecReason != null)
-				{
-					OnGetMemberName_ConstraintInvocation_CanExecReason(this, e);
-				}
-				else
-				{
-					e.Result = string.Empty;
-				}
-				return e.Result;
-			}
-        }
-        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-
         public override Type GetImplementedInterface()
         {
             return typeof(ConstraintInvocation);
@@ -435,11 +373,6 @@ namespace Zetbox.App.Base
             me.ExportGuid = other.ExportGuid;
             me.MemberName = other.MemberName;
             this._fk_Implementor = otherImpl._fk_Implementor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -621,12 +554,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -645,8 +579,9 @@ namespace Zetbox.App.Base
                 binStream.Write(this._ExportGuid);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_ConstraintInvocation_has_TypeRef", "TypeRef").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_ConstraintInvocation_has_TypeRef", "TypeRef");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._MemberName);
         }

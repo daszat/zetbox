@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DateTimeStyle", __oldValue, __newValue);
                     Proxy.DateTimeStyle = __newValue;
                     NotifyPropertyChanged("DateTimeStyle", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDateTimeStyle_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnDateTimeStyle_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DateTimeStyle");
-				}
+                else
+                {
+                    SetInitializedProperty("DateTimeStyle");
+                }
             }
         }
 
@@ -433,12 +434,6 @@ namespace Zetbox.App.Base
             var me = (DateTimeProperty)this;
 
             me.DateTimeStyle = other.DateTimeStyle;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

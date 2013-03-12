@@ -21,14 +21,14 @@
     <MetadataSource Address="http://localhost:6666/ZetboxService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="ZetboxService3.xsd" MetadataType="Schema" ID="e32f884f-6792-47d6-b49e-dd2b52f53b02" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?xsd=xsd3" />
+    <MetadataFile FileName="ZetboxService9.xsd" MetadataType="Schema" ID="4f2ed54b-d8cc-440b-bde8-5867c4e04488" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?xsd=xsd1" />
+    <MetadataFile FileName="ZetboxService8.xsd" MetadataType="Schema" ID="dbf7e6bc-ce94-4a69-bc54-d208248b1076" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?xsd=xsd0" />
+    <MetadataFile FileName="ZetboxService1.wsdl" MetadataType="Wsdl" ID="e8527279-c618-4985-b4d6-31823d771836" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?wsdl=wsdl0" />
+    <MetadataFile FileName="ZetboxService.wsdl" MetadataType="Wsdl" ID="1cb1aa8c-5537-4e1d-8d57-be05dff2849a" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService" />
     <MetadataFile FileName="ZetboxService1.xsd" MetadataType="Schema" ID="f438205f-1d09-426c-9d76-e5ff5455a3ce" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?xsd=xsd2" />
     <MetadataFile FileName="ZetboxService2.xsd" MetadataType="Schema" ID="b2011d06-4c9b-4977-b41f-06dc636969a1" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?xsd=xsd5" />
-    <MetadataFile FileName="ZetboxService9.xsd" MetadataType="Schema" ID="4f2ed54b-d8cc-440b-bde8-5867c4e04488" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?xsd=xsd1" />
     <MetadataFile FileName="ZetboxService4.xsd" MetadataType="Schema" ID="406f2182-49e1-438f-862a-389aee9805ef" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?xsd=xsd4" />
-    <MetadataFile FileName="ZetboxService.wsdl" MetadataType="Wsdl" ID="1cb1aa8c-5537-4e1d-8d57-be05dff2849a" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService" />
-    <MetadataFile FileName="ZetboxService8.xsd" MetadataType="Schema" ID="dbf7e6bc-ce94-4a69-bc54-d208248b1076" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?xsd=xsd0" />
-    <MetadataFile FileName="ZetboxService3.xsd" MetadataType="Schema" ID="e32f884f-6792-47d6-b49e-dd2b52f53b02" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?xsd=xsd3" />
-    <MetadataFile FileName="ZetboxService1.wsdl" MetadataType="Wsdl" ID="e8527279-c618-4985-b4d6-31823d771836" SourceId="1" SourceUrl="http://localhost:6666/ZetboxService?wsdl=wsdl0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

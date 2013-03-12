@@ -21,7 +21,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator
     using System.Text;
     using Autofac;
     using Zetbox.Generator;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
+    [Feature]
+    [Description("nHibernate (NH) generator")]
     public sealed class NHibernateGeneratorProvider
         : Autofac.Module
     {

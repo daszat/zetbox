@@ -48,15 +48,27 @@ namespace Zetbox.App.Base
 			{
 				if (_Inputs == null)
 				{
-					if (!Inputs_was_eagerLoaded) Context.FetchRelation<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
-					_Inputs 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchInputsAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Base.Property>)_Inputs;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchInputsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchInputsAsync()
+        {
+            if (_triggerFetchInputsTask != null) return _triggerFetchInputsTask;
+			if (!Inputs_was_eagerLoaded) _triggerFetchInputsTask = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
+            else _triggerFetchInputsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
+			_triggerFetchInputsTask.OnResult(r => 
+            {
+                _Inputs 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchInputsTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>> _Inputs;
 		
@@ -67,7 +79,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// the referenced class of objects
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
         // fkBackingName=_fk_ReferencedClass; fkGuidBackingName=_fk_guid_ReferencedClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -85,9 +97,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ReferencedClass;
+        private int? __fk_ReferencedClassCache;
+
+        private int? _fk_ReferencedClass {
+            get
+            {
+                return __fk_ReferencedClassCache;
+            }
+            set
+            {
+                __fk_ReferencedClassCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchReferencedClassTask = null;
+            }
+        }
 
         private Guid? _fk_guid_ReferencedClass = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchReferencedClassTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchReferencedClassAsync()
+        {
+            if (_triggerFetchReferencedClassTask != null) return _triggerFetchReferencedClassTask;
+
+            if (_fk_ReferencedClass.HasValue)
+                _triggerFetchReferencedClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
+            else
+                _triggerFetchReferencedClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchReferencedClassTask.OnResult(t =>
+            {
+                if (OnReferencedClass_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(t.Result);
+                    OnReferencedClass_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchReferencedClassTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -95,32 +143,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.ObjectClassMemoryImpl __value;
-                if (_fk_ReferencedClass.HasValue)
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
-                else
-                    __value = null;
-
-                if (OnReferencedClass_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(__value);
-                    OnReferencedClass_Getter(this, e);
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchReferencedClassAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_ReferencedClass == null) || (value != null && value.ID == _fk_ReferencedClass))
-				{
-					SetInitializedProperty("ReferencedClass");
+                {
+                    SetInitializedProperty("ReferencedClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ReferencedClassImpl;
@@ -141,6 +176,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ReferencedClass", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnReferencedClass_PostSetter != null && IsAttached)
                 {
@@ -485,11 +521,6 @@ namespace Zetbox.App.Base
 
             this._fk_ReferencedClass = otherImpl._fk_ReferencedClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -539,6 +570,19 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Inputs":
+                return TriggerFetchInputsAsync();
+            case "ReferencedClass":
+                return TriggerFetchReferencedClassAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -663,6 +707,7 @@ namespace Zetbox.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalculatedObjectReferenceProperty != null) OnNotifyDeleting_CalculatedObjectReferenceProperty(this);
             Inputs.Clear();
+            ReferencedClass = null;
         }
         public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnNotifyDeleting_CalculatedObjectReferenceProperty;
 

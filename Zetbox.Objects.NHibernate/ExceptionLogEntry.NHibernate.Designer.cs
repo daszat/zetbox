@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Date", __oldValue, __newValue);
                     Proxy.Date = __newValue;
                     NotifyPropertyChanged("Date", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDate_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnDate_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Date");
-				}
+                else
+                {
+                    SetInitializedProperty("Date");
+                }
             }
         }
 
@@ -141,6 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Exception", __oldValue, __newValue);
                     Proxy.Exception = __newValue;
                     NotifyPropertyChanged("Exception", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnException_PostSetter != null && IsAttached)
                     {
@@ -148,10 +150,10 @@ namespace Zetbox.App.Base
                         OnException_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Exception");
-				}
+                else
+                {
+                    SetInitializedProperty("Exception");
+                }
             }
         }
 
@@ -198,6 +200,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Level", __oldValue, __newValue);
                     Proxy.Level = __newValue;
                     NotifyPropertyChanged("Level", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnLevel_PostSetter != null && IsAttached)
                     {
@@ -205,10 +208,10 @@ namespace Zetbox.App.Base
                         OnLevel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Level");
-				}
+                else
+                {
+                    SetInitializedProperty("Level");
+                }
             }
         }
 
@@ -255,6 +258,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Logger", __oldValue, __newValue);
                     Proxy.Logger = __newValue;
                     NotifyPropertyChanged("Logger", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnLogger_PostSetter != null && IsAttached)
                     {
@@ -262,10 +266,10 @@ namespace Zetbox.App.Base
                         OnLogger_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Logger");
-				}
+                else
+                {
+                    SetInitializedProperty("Logger");
+                }
             }
         }
 
@@ -312,6 +316,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Message", __oldValue, __newValue);
                     Proxy.Message = __newValue;
                     NotifyPropertyChanged("Message", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMessage_PostSetter != null && IsAttached)
                     {
@@ -319,10 +324,10 @@ namespace Zetbox.App.Base
                         OnMessage_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Message");
-				}
+                else
+                {
+                    SetInitializedProperty("Message");
+                }
             }
         }
 
@@ -369,6 +374,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Thread", __oldValue, __newValue);
                     Proxy.Thread = __newValue;
                     NotifyPropertyChanged("Thread", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnThread_PostSetter != null && IsAttached)
                     {
@@ -376,10 +382,10 @@ namespace Zetbox.App.Base
                         OnThread_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Thread");
-				}
+                else
+                {
+                    SetInitializedProperty("Thread");
+                }
             }
         }
 
@@ -408,12 +414,6 @@ namespace Zetbox.App.Base
             me.Logger = other.Logger;
             me.Message = other.Message;
             me.Thread = other.Thread;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

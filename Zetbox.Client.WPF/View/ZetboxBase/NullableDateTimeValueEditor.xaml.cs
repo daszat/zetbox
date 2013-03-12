@@ -31,9 +31,9 @@ namespace Zetbox.Client.WPF.View
     using System.Windows.Shapes;
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.Client.WPF.View.ZetboxBase;
     using Zetbox.Client.WPF.CustomControls;
-    using Microsoft.Windows.Controls;
+    using Zetbox.Client.WPF.Toolkit;
+    using Zetbox.Client.WPF.View.ZetboxBase;
 
     /// <summary>
     /// Interaction logic for NullableDateTimeValueEditor.xaml
@@ -44,13 +44,9 @@ namespace Zetbox.Client.WPF.View
         public NullableDateTimeValueEditor()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-
             InitializeComponent();
-
-            txtDate.GotKeyboardFocus += (s, e) => ViewModel.Focus();
-            txtDate.LostKeyboardFocus += (s, e) => ViewModel.Blur();
-            txtTime.GotKeyboardFocus += (s, e) => ViewModel.Focus();
-            txtTime.LostKeyboardFocus += (s, e) => ViewModel.Blur();
+            SetupFocusManagement(txtDate, () => ViewModel);
+            SetupFocusManagement(txtTime, () => ViewModel);
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -81,7 +77,7 @@ namespace Zetbox.Client.WPF.View
 
         public NullableDateTimePropertyViewModel ViewModel
         {
-            get { return (NullableDateTimePropertyViewModel)DataContext; }
+            get { return (NullableDateTimePropertyViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion
@@ -93,12 +89,6 @@ namespace Zetbox.Client.WPF.View
                 if (ViewModel == null) return null;
                 return ViewModel.DatePartVisible ? (FrameworkElement)txtDate : (FrameworkElement)txtTime;
             }
-        }
-
-        protected override void OnHighlightChanged()
-        {
-            if (ViewModel.DatePartVisible) SetHighlightValue(txtDate);
-            if (ViewModel.TimePartVisible) SetHighlightValue(txtTime);
         }
 
         // The DatePicker handles the Enter-KeyDown event, but we have to bubble it to our consumers, 

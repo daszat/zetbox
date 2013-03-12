@@ -84,6 +84,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowAddNew", __oldValue, __newValue);
                     Proxy.AllowAddNew = __newValue;
                     NotifyPropertyChanged("AllowAddNew", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowAddNew_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.GUI
                         OnAllowAddNew_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowAddNew");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowAddNew");
+                }
             }
         }
 
@@ -141,6 +142,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowDelete", __oldValue, __newValue);
                     Proxy.AllowDelete = __newValue;
                     NotifyPropertyChanged("AllowDelete", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowDelete_PostSetter != null && IsAttached)
                     {
@@ -148,10 +150,10 @@ namespace Zetbox.App.GUI
                         OnAllowDelete_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowDelete");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowDelete");
+                }
             }
         }
 
@@ -161,6 +163,122 @@ namespace Zetbox.App.GUI
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowDelete_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnAllowDelete_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool? AllowExport
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.AllowExport;
+                if (OnAllowExport_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnAllowExport_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.AllowExport != value)
+                {
+                    var __oldValue = Proxy.AllowExport;
+                    var __newValue = value;
+                    if (OnAllowExport_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnAllowExport_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("AllowExport", __oldValue, __newValue);
+                    Proxy.AllowExport = __newValue;
+                    NotifyPropertyChanged("AllowExport", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnAllowExport_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnAllowExport_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("AllowExport");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowExport_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowExport_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowExport_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnAllowExport_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool? AllowOpen
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.AllowOpen;
+                if (OnAllowOpen_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnAllowOpen_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.AllowOpen != value)
+                {
+                    var __oldValue = Proxy.AllowOpen;
+                    var __newValue = value;
+                    if (OnAllowOpen_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnAllowOpen_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("AllowOpen", __oldValue, __newValue);
+                    Proxy.AllowOpen = __newValue;
+                    NotifyPropertyChanged("AllowOpen", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnAllowOpen_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnAllowOpen_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("AllowOpen");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowOpen_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowOpen_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnAllowOpen_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnAllowOpen_IsValid;
 
         /// <summary>
         /// 
@@ -198,6 +316,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowSelectColumns", __oldValue, __newValue);
                     Proxy.AllowSelectColumns = __newValue;
                     NotifyPropertyChanged("AllowSelectColumns", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowSelectColumns_PostSetter != null && IsAttached)
                     {
@@ -205,10 +324,10 @@ namespace Zetbox.App.GUI
                         OnAllowSelectColumns_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowSelectColumns");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowSelectColumns");
+                }
             }
         }
 
@@ -255,6 +374,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("AllowUserFilter", __oldValue, __newValue);
                     Proxy.AllowUserFilter = __newValue;
                     NotifyPropertyChanged("AllowUserFilter", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAllowUserFilter_PostSetter != null && IsAttached)
                     {
@@ -262,10 +382,10 @@ namespace Zetbox.App.GUI
                         OnAllowUserFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AllowUserFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("AllowUserFilter");
+                }
             }
         }
 
@@ -312,6 +432,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("EnableAutoFilter", __oldValue, __newValue);
                     Proxy.EnableAutoFilter = __newValue;
                     NotifyPropertyChanged("EnableAutoFilter", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnEnableAutoFilter_PostSetter != null && IsAttached)
                     {
@@ -319,10 +440,10 @@ namespace Zetbox.App.GUI
                         OnEnableAutoFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EnableAutoFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("EnableAutoFilter");
+                }
             }
         }
 
@@ -369,6 +490,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("InitialSort", __oldValue, __newValue);
                     Proxy.InitialSort = __newValue;
                     NotifyPropertyChanged("InitialSort", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnInitialSort_PostSetter != null && IsAttached)
                     {
@@ -376,10 +498,10 @@ namespace Zetbox.App.GUI
                         OnInitialSort_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("InitialSort");
-				}
+                else
+                {
+                    SetInitializedProperty("InitialSort");
+                }
             }
         }
 
@@ -426,6 +548,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("InitialSortDirection", __oldValue, __newValue);
                     Proxy.InitialSortDirection = __newValue;
                     NotifyPropertyChanged("InitialSortDirection", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnInitialSortDirection_PostSetter != null && IsAttached)
                     {
@@ -433,10 +556,10 @@ namespace Zetbox.App.GUI
                         OnInitialSortDirection_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("InitialSortDirection");
-				}
+                else
+                {
+                    SetInitializedProperty("InitialSortDirection");
+                }
             }
         }
 
@@ -483,6 +606,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsEditable", __oldValue, __newValue);
                     Proxy.IsEditable = __newValue;
                     NotifyPropertyChanged("IsEditable", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsEditable_PostSetter != null && IsAttached)
                     {
@@ -490,10 +614,10 @@ namespace Zetbox.App.GUI
                         OnIsEditable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsEditable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsEditable");
+                }
             }
         }
 
@@ -540,6 +664,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsMultiselect", __oldValue, __newValue);
                     Proxy.IsMultiselect = __newValue;
                     NotifyPropertyChanged("IsMultiselect", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsMultiselect_PostSetter != null && IsAttached)
                     {
@@ -547,10 +672,10 @@ namespace Zetbox.App.GUI
                         OnIsMultiselect_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsMultiselect");
-				}
+                else
+                {
+                    SetInitializedProperty("IsMultiselect");
+                }
             }
         }
 
@@ -589,15 +714,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.RequestedEditorKind == null)
-				{
-					SetInitializedProperty("RequestedEditorKind");
+                {
+                    SetInitializedProperty("RequestedEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedEditorKind);
@@ -606,10 +731,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("RequestedEditorKind");
+                {
+                    SetInitializedProperty("RequestedEditorKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
@@ -633,6 +758,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnRequestedEditorKind_PostSetter != null && IsAttached)
                 {
@@ -683,15 +809,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.RequestedWorkspaceKind == null)
-				{
-					SetInitializedProperty("RequestedWorkspaceKind");
+                {
+                    SetInitializedProperty("RequestedWorkspaceKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedWorkspaceKind);
@@ -700,10 +826,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("RequestedWorkspaceKind");
+                {
+                    SetInitializedProperty("RequestedWorkspaceKind");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
@@ -727,6 +853,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnRequestedWorkspaceKind_PostSetter != null && IsAttached)
                 {
@@ -785,6 +912,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("RespectRequiredFilter", __oldValue, __newValue);
                     Proxy.RespectRequiredFilter = __newValue;
                     NotifyPropertyChanged("RespectRequiredFilter", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnRespectRequiredFilter_PostSetter != null && IsAttached)
                     {
@@ -792,10 +920,10 @@ namespace Zetbox.App.GUI
                         OnRespectRequiredFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("RespectRequiredFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("RespectRequiredFilter");
+                }
             }
         }
 
@@ -805,6 +933,64 @@ namespace Zetbox.App.GUI
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnRespectRequiredFilter_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnRespectRequiredFilter_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool? ShowCommands
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.ShowCommands;
+                if (OnShowCommands_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnShowCommands_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.ShowCommands != value)
+                {
+                    var __oldValue = Proxy.ShowCommands;
+                    var __newValue = value;
+                    if (OnShowCommands_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnShowCommands_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ShowCommands", __oldValue, __newValue);
+                    Proxy.ShowCommands = __newValue;
+                    NotifyPropertyChanged("ShowCommands", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnShowCommands_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnShowCommands_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ShowCommands");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowCommands_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnShowCommands_IsValid;
 
         /// <summary>
         /// 
@@ -842,6 +1028,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ShowFilter", __oldValue, __newValue);
                     Proxy.ShowFilter = __newValue;
                     NotifyPropertyChanged("ShowFilter", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowFilter_PostSetter != null && IsAttached)
                     {
@@ -849,10 +1036,10 @@ namespace Zetbox.App.GUI
                         OnShowFilter_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowFilter");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowFilter");
+                }
             }
         }
 
@@ -899,6 +1086,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ShowMasterDetail", __oldValue, __newValue);
                     Proxy.ShowMasterDetail = __newValue;
                     NotifyPropertyChanged("ShowMasterDetail", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowMasterDetail_PostSetter != null && IsAttached)
                     {
@@ -906,10 +1094,10 @@ namespace Zetbox.App.GUI
                         OnShowMasterDetail_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowMasterDetail");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowMasterDetail");
+                }
             }
         }
 
@@ -919,120 +1107,6 @@ namespace Zetbox.App.GUI
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowMasterDetail_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnShowMasterDetail_IsValid;
-
-        /// <summary>
-        /// 
-        /// </summary>
-
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-        public bool? ShowOpenCommand
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = Proxy.ShowOpenCommand;
-                if (OnShowOpenCommand_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<bool?>(__result);
-                    OnShowOpenCommand_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (Proxy.ShowOpenCommand != value)
-                {
-                    var __oldValue = Proxy.ShowOpenCommand;
-                    var __newValue = value;
-                    if (OnShowOpenCommand_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
-                        OnShowOpenCommand_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("ShowOpenCommand", __oldValue, __newValue);
-                    Proxy.ShowOpenCommand = __newValue;
-                    NotifyPropertyChanged("ShowOpenCommand", __oldValue, __newValue);
-
-                    if (OnShowOpenCommand_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
-                        OnShowOpenCommand_PostSetter(this, __e);
-                    }
-                }
-				else 
-				{
-					SetInitializedProperty("ShowOpenCommand");
-				}
-            }
-        }
-
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnShowOpenCommand_IsValid;
-
-        /// <summary>
-        /// 
-        /// </summary>
-
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-        public bool? ShowRefreshCommand
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = Proxy.ShowRefreshCommand;
-                if (OnShowRefreshCommand_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<bool?>(__result);
-                    OnShowRefreshCommand_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (Proxy.ShowRefreshCommand != value)
-                {
-                    var __oldValue = Proxy.ShowRefreshCommand;
-                    var __newValue = value;
-                    if (OnShowRefreshCommand_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
-                        OnShowRefreshCommand_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("ShowRefreshCommand", __oldValue, __newValue);
-                    Proxy.ShowRefreshCommand = __newValue;
-                    NotifyPropertyChanged("ShowRefreshCommand", __oldValue, __newValue);
-
-                    if (OnShowRefreshCommand_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
-                        OnShowRefreshCommand_PostSetter(this, __e);
-                    }
-                }
-				else 
-				{
-					SetInitializedProperty("ShowRefreshCommand");
-				}
-            }
-        }
-
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationSearchScreen> OnShowRefreshCommand_IsValid;
 
         /// <summary>
         /// 
@@ -1062,15 +1136,15 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Type == null)
-				{
-					SetInitializedProperty("Type");
+                {
+                    SetInitializedProperty("Type");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Type);
@@ -1079,10 +1153,10 @@ namespace Zetbox.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("Type");
+                {
+                    SetInitializedProperty("Type");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Type", __oldValue, __newValue);
@@ -1106,6 +1180,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Type", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnType_PostSetter != null && IsAttached)
                 {
@@ -1164,6 +1239,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ViewMethod", __oldValue, __newValue);
                     Proxy.ViewMethod = __newValue;
                     NotifyPropertyChanged("ViewMethod", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnViewMethod_PostSetter != null && IsAttached)
                     {
@@ -1171,10 +1247,10 @@ namespace Zetbox.App.GUI
                         OnViewMethod_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ViewMethod");
-				}
+                else
+                {
+                    SetInitializedProperty("ViewMethod");
+                }
             }
         }
 
@@ -1262,6 +1338,8 @@ namespace Zetbox.App.GUI
 
             me.AllowAddNew = other.AllowAddNew;
             me.AllowDelete = other.AllowDelete;
+            me.AllowExport = other.AllowExport;
+            me.AllowOpen = other.AllowOpen;
             me.AllowSelectColumns = other.AllowSelectColumns;
             me.AllowUserFilter = other.AllowUserFilter;
             me.EnableAutoFilter = other.EnableAutoFilter;
@@ -1270,20 +1348,13 @@ namespace Zetbox.App.GUI
             me.IsEditable = other.IsEditable;
             me.IsMultiselect = other.IsMultiselect;
             me.RespectRequiredFilter = other.RespectRequiredFilter;
+            me.ShowCommands = other.ShowCommands;
             me.ShowFilter = other.ShowFilter;
             me.ShowMasterDetail = other.ShowMasterDetail;
-            me.ShowOpenCommand = other.ShowOpenCommand;
-            me.ShowRefreshCommand = other.ShowRefreshCommand;
             me.ViewMethod = other.ViewMethod;
             this._fk_RequestedEditorKind = otherImpl._fk_RequestedEditorKind;
             this._fk_RequestedWorkspaceKind = otherImpl._fk_RequestedWorkspaceKind;
             this._fk_Type = otherImpl._fk_Type;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -1337,6 +1408,8 @@ namespace Zetbox.App.GUI
             {
                 case "AllowAddNew":
                 case "AllowDelete":
+                case "AllowExport":
+                case "AllowOpen":
                 case "AllowSelectColumns":
                 case "AllowUserFilter":
                 case "EnableAutoFilter":
@@ -1347,10 +1420,9 @@ namespace Zetbox.App.GUI
                 case "RequestedEditorKind":
                 case "RequestedWorkspaceKind":
                 case "RespectRequiredFilter":
+                case "ShowCommands":
                 case "ShowFilter":
                 case "ShowMasterDetail":
-                case "ShowOpenCommand":
-                case "ShowRefreshCommand":
                 case "Type":
                 case "ViewMethod":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1423,6 +1495,24 @@ namespace Zetbox.App.GUI
                         obj => obj.AllowDelete,
                         (obj, val) => obj.AllowDelete = val,
 						obj => OnAllowDelete_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, bool?>(
+                        lazyCtx,
+                        new Guid("b7d18552-aa83-4968-97b3-ce34ff79753f"),
+                        "AllowExport",
+                        null,
+                        obj => obj.AllowExport,
+                        (obj, val) => obj.AllowExport = val,
+						obj => OnAllowExport_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, bool?>(
+                        lazyCtx,
+                        new Guid("84a66c05-9f95-475e-aa9d-a341a0de0ba6"),
+                        "AllowOpen",
+                        null,
+                        obj => obj.AllowOpen,
+                        (obj, val) => obj.AllowOpen = val,
+						obj => OnAllowOpen_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
@@ -1516,6 +1606,15 @@ namespace Zetbox.App.GUI
                     // else
                     new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
+                        new Guid("21b4324b-110f-48f2-a5d0-a3645d45604a"),
+                        "ShowCommands",
+                        null,
+                        obj => obj.ShowCommands,
+                        (obj, val) => obj.ShowCommands = val,
+						obj => OnShowCommands_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, bool?>(
+                        lazyCtx,
                         new Guid("055fd120-c058-436b-9f9e-e6a2a0fec2e5"),
                         "ShowFilter",
                         null,
@@ -1531,24 +1630,6 @@ namespace Zetbox.App.GUI
                         obj => obj.ShowMasterDetail,
                         (obj, val) => obj.ShowMasterDetail = val,
 						obj => OnShowMasterDetail_IsValid), 
-                    // else
-                    new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, bool?>(
-                        lazyCtx,
-                        new Guid("84a66c05-9f95-475e-aa9d-a341a0de0ba6"),
-                        "ShowOpenCommand",
-                        null,
-                        obj => obj.ShowOpenCommand,
-                        (obj, val) => obj.ShowOpenCommand = val,
-						obj => OnShowOpenCommand_IsValid), 
-                    // else
-                    new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, bool?>(
-                        lazyCtx,
-                        new Guid("13e637ea-d461-46da-a153-ae8af5b0b724"),
-                        "ShowRefreshCommand",
-                        null,
-                        obj => obj.ShowRefreshCommand,
-                        (obj, val) => obj.ShowRefreshCommand = val,
-						obj => OnShowRefreshCommand_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<NavigationSearchScreen, Zetbox.App.Base.ObjectClass>(
                         lazyCtx,
@@ -1632,6 +1713,8 @@ namespace Zetbox.App.GUI
         {
             SetNotInitializedProperty("AllowAddNew");
             SetNotInitializedProperty("AllowDelete");
+            SetNotInitializedProperty("AllowExport");
+            SetNotInitializedProperty("AllowOpen");
             SetNotInitializedProperty("AllowSelectColumns");
             SetNotInitializedProperty("AllowUserFilter");
             SetNotInitializedProperty("EnableAutoFilter");
@@ -1642,10 +1725,9 @@ namespace Zetbox.App.GUI
             SetNotInitializedProperty("RequestedEditorKind");
             SetNotInitializedProperty("RequestedWorkspaceKind");
             SetNotInitializedProperty("RespectRequiredFilter");
+            SetNotInitializedProperty("ShowCommands");
             SetNotInitializedProperty("ShowFilter");
             SetNotInitializedProperty("ShowMasterDetail");
-            SetNotInitializedProperty("ShowOpenCommand");
-            SetNotInitializedProperty("ShowRefreshCommand");
             SetNotInitializedProperty("Type");
             SetNotInitializedProperty("ViewMethod");
             base.NotifyCreated();
@@ -1698,6 +1780,10 @@ namespace Zetbox.App.GUI
 
             public virtual bool? AllowDelete { get; set; }
 
+            public virtual bool? AllowExport { get; set; }
+
+            public virtual bool? AllowOpen { get; set; }
+
             public virtual bool? AllowSelectColumns { get; set; }
 
             public virtual bool? AllowUserFilter { get; set; }
@@ -1718,13 +1804,11 @@ namespace Zetbox.App.GUI
 
             public virtual bool? RespectRequiredFilter { get; set; }
 
+            public virtual bool? ShowCommands { get; set; }
+
             public virtual bool? ShowFilter { get; set; }
 
             public virtual bool? ShowMasterDetail { get; set; }
-
-            public virtual bool? ShowOpenCommand { get; set; }
-
-            public virtual bool? ShowRefreshCommand { get; set; }
 
             public virtual Zetbox.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy Type { get; set; }
 
@@ -1742,6 +1826,8 @@ namespace Zetbox.App.GUI
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this.Proxy.AllowAddNew);
             binStream.Write(this.Proxy.AllowDelete);
+            binStream.Write(this.Proxy.AllowExport);
+            binStream.Write(this.Proxy.AllowOpen);
             binStream.Write(this.Proxy.AllowSelectColumns);
             binStream.Write(this.Proxy.AllowUserFilter);
             binStream.Write(this.Proxy.EnableAutoFilter);
@@ -1752,10 +1838,9 @@ namespace Zetbox.App.GUI
             binStream.Write(this.Proxy.RequestedEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedEditorKind) : (int?)null);
             binStream.Write(this.Proxy.RequestedWorkspaceKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedWorkspaceKind) : (int?)null);
             binStream.Write(this.Proxy.RespectRequiredFilter);
+            binStream.Write(this.Proxy.ShowCommands);
             binStream.Write(this.Proxy.ShowFilter);
             binStream.Write(this.Proxy.ShowMasterDetail);
-            binStream.Write(this.Proxy.ShowOpenCommand);
-            binStream.Write(this.Proxy.ShowRefreshCommand);
             binStream.Write(this.Proxy.Type != null ? OurContext.GetIdFromProxy(this.Proxy.Type) : (int?)null);
             binStream.Write((int?)Proxy.ViewMethod);
         }
@@ -1768,6 +1853,8 @@ namespace Zetbox.App.GUI
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.AllowAddNew = binStream.ReadNullableBoolean();
             this.Proxy.AllowDelete = binStream.ReadNullableBoolean();
+            this.Proxy.AllowExport = binStream.ReadNullableBoolean();
+            this.Proxy.AllowOpen = binStream.ReadNullableBoolean();
             this.Proxy.AllowSelectColumns = binStream.ReadNullableBoolean();
             this.Proxy.AllowUserFilter = binStream.ReadNullableBoolean();
             this.Proxy.EnableAutoFilter = binStream.ReadNullableBoolean();
@@ -1778,10 +1865,9 @@ namespace Zetbox.App.GUI
             binStream.Read(out this._fk_RequestedEditorKind);
             binStream.Read(out this._fk_RequestedWorkspaceKind);
             this.Proxy.RespectRequiredFilter = binStream.ReadNullableBoolean();
+            this.Proxy.ShowCommands = binStream.ReadNullableBoolean();
             this.Proxy.ShowFilter = binStream.ReadNullableBoolean();
             this.Proxy.ShowMasterDetail = binStream.ReadNullableBoolean();
-            this.Proxy.ShowOpenCommand = binStream.ReadNullableBoolean();
-            this.Proxy.ShowRefreshCommand = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_Type);
             Proxy.ViewMethod = (Zetbox.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1799,6 +1885,8 @@ namespace Zetbox.App.GUI
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.AllowAddNew, xml, "AllowAddNew", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.AllowDelete, xml, "AllowDelete", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.AllowExport, xml, "AllowExport", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.AllowOpen, xml, "AllowOpen", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.AllowSelectColumns, xml, "AllowSelectColumns", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.AllowUserFilter, xml, "AllowUserFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.EnableAutoFilter, xml, "EnableAutoFilter", "Zetbox.App.GUI");
@@ -1809,10 +1897,9 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedEditorKind != null ? this.Proxy.RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? this.Proxy.RequestedWorkspaceKind.ExportGuid : (Guid?)null, xml, "RequestedWorkspaceKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RespectRequiredFilter, xml, "RespectRequiredFilter", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowCommands, xml, "ShowCommands", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowFilter, xml, "ShowFilter", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowMasterDetail, xml, "ShowMasterDetail", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowOpenCommand, xml, "ShowOpenCommand", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowRefreshCommand, xml, "ShowRefreshCommand", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Type != null ? this.Proxy.Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)Proxy.ViewMethod, xml, "ViewMethod", "Zetbox.App.GUI");
         }
@@ -1828,6 +1915,12 @@ namespace Zetbox.App.GUI
                 break;
             case "Zetbox.App.GUI|AllowDelete":
                 this.Proxy.AllowDelete = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Zetbox.App.GUI|AllowExport":
+                this.Proxy.AllowExport = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Zetbox.App.GUI|AllowOpen":
+                this.Proxy.AllowOpen = XmlStreamer.ReadNullableBoolean(xml);
                 break;
             case "Zetbox.App.GUI|AllowSelectColumns":
                 this.Proxy.AllowSelectColumns = XmlStreamer.ReadNullableBoolean(xml);
@@ -1859,17 +1952,14 @@ namespace Zetbox.App.GUI
             case "Zetbox.App.GUI|RespectRequiredFilter":
                 this.Proxy.RespectRequiredFilter = XmlStreamer.ReadNullableBoolean(xml);
                 break;
+            case "Zetbox.App.GUI|ShowCommands":
+                this.Proxy.ShowCommands = XmlStreamer.ReadNullableBoolean(xml);
+                break;
             case "Zetbox.App.GUI|ShowFilter":
                 this.Proxy.ShowFilter = XmlStreamer.ReadNullableBoolean(xml);
                 break;
             case "Zetbox.App.GUI|ShowMasterDetail":
                 this.Proxy.ShowMasterDetail = XmlStreamer.ReadNullableBoolean(xml);
-                break;
-            case "Zetbox.App.GUI|ShowOpenCommand":
-                this.Proxy.ShowOpenCommand = XmlStreamer.ReadNullableBoolean(xml);
-                break;
-            case "Zetbox.App.GUI|ShowRefreshCommand":
-                this.Proxy.ShowRefreshCommand = XmlStreamer.ReadNullableBoolean(xml);
                 break;
             case "Zetbox.App.GUI|Type":
                 this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);

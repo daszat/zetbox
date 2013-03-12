@@ -71,6 +71,11 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
             get { return Name; }
         }
 
+        string IAppointmentViewModel.SubjectAsync
+        {
+            get { return Name; }
+        }
+
         DateTime IAppointmentViewModel.From
         {
             get { return Task.DatumVon; }

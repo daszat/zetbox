@@ -71,7 +71,7 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            this.Proxy = proxy;\r\n");
 this.WriteObjects("            AttachToObject(parent, property);\r\n");
 #line 57 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
-ApplyCompoundObjectPropertyInitialisers(); 
+ApplyCompoundObjectPropertyInitialisers("lazyCtx"); 
 #line 58 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");

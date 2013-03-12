@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
         // fkBackingName=_fk_ObjectClass; fkGuidBackingName=_fk_guid_ObjectClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=FilterConfigurations; is list;
@@ -58,9 +58,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ObjectClass;
+        private int? __fk_ObjectClassCache;
+
+        private int? _fk_ObjectClass {
+            get
+            {
+                return __fk_ObjectClassCache;
+            }
+            set
+            {
+                __fk_ObjectClassCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchObjectClassTask = null;
+            }
+        }
 
         private Guid? _fk_guid_ObjectClass = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchObjectClassTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchObjectClassAsync()
+        {
+            if (_triggerFetchObjectClassTask != null) return _triggerFetchObjectClassTask;
+
+            if (_fk_ObjectClass.HasValue)
+                _triggerFetchObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
+            else
+                _triggerFetchObjectClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchObjectClassTask.OnResult(t =>
+            {
+                if (OnObjectClass_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(t.Result);
+                    OnObjectClass_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchObjectClassTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.Base.ObjectClassMemoryImpl __value;
-                if (_fk_ObjectClass.HasValue)
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
-                else
-                    __value = null;
-
-                if (OnObjectClass_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(__value);
-                    OnObjectClass_Getter(this, e);
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchObjectClassAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_ObjectClass == null) || (value != null && value.ID == _fk_ObjectClass))
-				{
-					SetInitializedProperty("ObjectClass");
+                {
+                    SetInitializedProperty("ObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ObjectClassImpl;
@@ -130,6 +153,7 @@ namespace Zetbox.App.GUI
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ObjectClass", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnObjectClass_PostSetter != null && IsAttached)
                 {
@@ -150,16 +174,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_ObjectClassFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_ObjectClassFilterConfiguration != null)
             {
-                OnCreateFilterModel_ObjectClassFilterConfiguration(this, e);
+                OnCreateFilterModel_ObjectClassFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -285,11 +309,6 @@ namespace Zetbox.App.GUI
 
             this._fk_ObjectClass = otherImpl._fk_ObjectClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -328,6 +347,17 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ObjectClass":
+                return TriggerFetchObjectClassAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -442,6 +472,7 @@ namespace Zetbox.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectClassFilterConfiguration != null) OnNotifyDeleting_ObjectClassFilterConfiguration(this);
+            ObjectClass = null;
         }
         public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnNotifyDeleting_ObjectClassFilterConfiguration;
 

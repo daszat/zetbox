@@ -49,7 +49,7 @@ namespace Zetbox.Client.Presentables
         protected readonly Autofac.ILifetimeScope Container;
         protected readonly IFrozenContext FrozenContext;
         protected readonly ZetboxConfig Configuration;
-        protected readonly Func<DialogCreator> DialogFactory;
+        protected readonly DialogCreator.Factory DialogFactory;
 
         private struct VMCacheKey
         {
@@ -83,7 +83,7 @@ namespace Zetbox.Client.Presentables
 
         private readonly Dictionary<VMCacheKey, object> _viewModelFactoryCache;
 
-        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, Func<DialogCreator> dialogFactory)
+        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
         {
             if (container == null) throw new ArgumentNullException("container");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
@@ -158,40 +158,41 @@ namespace Zetbox.Client.Presentables
         public TModelFactory CreateViewModel<TModelFactory>(BaseParameter param) where TModelFactory : class
         {
             if (param == null) { throw new ArgumentNullException("param"); }
+            var isList = param.IsList;
             Type t;
-            if (param is BoolParameter && !param.IsList)
+            if (param is BoolParameter && !isList)
             {
                 t = typeof(NullableBoolPropertyViewModel);
             }
-            else if (param is DateTimeParameter && !param.IsList)
+            else if (param is DateTimeParameter && !isList)
             {
                 t = typeof(NullableDateTimePropertyViewModel);
             }
-            else if (param is DoubleParameter && !param.IsList)
+            else if (param is DoubleParameter && !isList)
             {
                 t = typeof(NullableStructValueViewModel<double>);
             }
-            else if (param is IntParameter && !param.IsList)
+            else if (param is IntParameter && !isList)
             {
                 t = typeof(NullableStructValueViewModel<int>);
             }
-            else if (param is DecimalParameter && !param.IsList)
+            else if (param is DecimalParameter && !isList)
             {
                 t = typeof(NullableDecimalPropertyViewModel);
             }
-            else if (param is StringParameter && !param.IsList)
+            else if (param is StringParameter && !isList)
             {
                 t = typeof(ClassValueViewModel<string>);
             }
-            else if (param is ObjectReferenceParameter && !param.IsList)
+            else if (param is ObjectReferenceParameter && !isList)
             {
                 t = typeof(ObjectReferenceViewModel);
             }
-            else if (param is EnumParameter && !param.IsList)
+            else if (param is EnumParameter && !isList)
             {
                 t = typeof(EnumerationValueViewModel);
             }
-            else if (param is CompoundObjectParameter && !param.IsList)
+            else if (param is CompoundObjectParameter && !isList)
             {
                 var compObj = ((CompoundObjectParameter)param).CompoundObject;
                 if (compObj.DefaultPropertyViewModelDescriptor != null)
@@ -319,10 +320,9 @@ namespace Zetbox.Client.Presentables
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
 
-            ViewModelDescriptor pmd = mdl
-                .GetType()
-                .ToRef(FrozenContext)
-                .GetViewModelDescriptor();
+            var pmd = GuiExtensions.GetViewModelDescriptor(mdl, FrozenContext);
+
+            if (pmd == null) return null;
 
             var vDesc = mdl.RequestedKind != null
                 ? pmd.GetViewDescriptor(Toolkit, mdl.RequestedKind)
@@ -342,12 +342,11 @@ namespace Zetbox.Client.Presentables
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
             if (kind == null) { throw new ArgumentNullException("kind"); }
 
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext)
-                .GetViewModelDescriptor();
+            var pmd = GuiExtensions.GetViewModelDescriptor(mdl, FrozenContext);
 
-            var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
+            if (pmd == null) return null;
 
-            return CreateSpecificView(mdl, vDesc);
+            return CreateSpecificView(mdl, pmd.GetViewDescriptor(Toolkit, kind));
         }
 
         /// <summary>
@@ -613,9 +612,9 @@ namespace Zetbox.Client.Presentables
             private set;
         }
 
-        public DialogCreator CreateDialog(string title)
+        public DialogCreator CreateDialog(IZetboxContext ctx, string title)
         {
-            var result = DialogFactory();
+            var result = DialogFactory(ctx);
             result.Title = title;
             return result;
         }

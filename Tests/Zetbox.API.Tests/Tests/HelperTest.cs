@@ -24,9 +24,9 @@ namespace Zetbox.API.Tests
     using System.Reflection;
     using System.Text;
     using Autofac;
-    using Zetbox.API.Mocks;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
+    using Zetbox.API.Mocks;
 
     [TestFixture]
     public class HelperTest : AbstractApiTestFixture
@@ -44,7 +44,7 @@ namespace Zetbox.API.Tests
         {
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(true));
             ((TestDataObjectImpl)obj).ID = 1;
-            obj.AttachToContext(scope.Resolve<IZetboxContext>());
+            obj.AttachToContext(scope.Resolve<IZetboxContext>(), scope.Resolve<Func<IFrozenContext>>());
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(false));
         }
 
@@ -53,7 +53,7 @@ namespace Zetbox.API.Tests
         {
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(false));
             ((TestDataObjectImpl)obj).ID = 1;
-            obj.AttachToContext(scope.Resolve<IZetboxContext>());
+            obj.AttachToContext(scope.Resolve<IZetboxContext>(), scope.Resolve<Func<IFrozenContext>>());
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(true));
         }
 
@@ -349,8 +349,6 @@ namespace Zetbox.API.Tests
 
         #endregion
 
-        // see https://bugzilla.novell.com/show_bug.cgi?id=670331
-#if !MONO
         [TestCase(typeof(IEnumerable<string>), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable) })]
         [TestCase(typeof(IList<string>), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable) })]
         [TestCase(typeof(TestSequence), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable<int>), typeof(IEnumerable) })]
@@ -401,7 +399,6 @@ namespace Zetbox.API.Tests
             var result = typeof(FgmTestClass).FindGenericMethod(methodName, typeArguments, null);
             Assert.That(result, Is.Null); // TODO: implement extension lookup in FindGenericMethod
         }
-#endif
     }
 
     public class FgmTestClass

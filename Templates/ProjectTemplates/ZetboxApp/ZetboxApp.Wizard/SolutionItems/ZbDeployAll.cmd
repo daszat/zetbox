@@ -8,16 +8,18 @@ echo ***************************************************************************
 set config=
 
 if .%1. == .. GOTO GOON
-
 set config=%1
 
 :GOON
 
 call "ZbInstall.cmd" %config%
 
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m /p:Configuration=Fallback $safesolutionname$.sln
+IF ERRORLEVEL 1 GOTO FAIL
+
 cd bin\Debug
 
-Zetbox.Server.Service.exe %config% -deploy-update -generate
+Zetbox.Cli.exe %config% -fallback -deploy-update -generate -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

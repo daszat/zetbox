@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Abstract base class for Navigation Entries
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NavigationEntry")]
+    [EdmEntityType(NamespaceName="Model", Name="NavigationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NavigationEntry")]
     public abstract class NavigationEntryEfImpl : BaseServerDataObject_EntityFramework, NavigationEntry, Zetbox.API.IExportableInternal
     {
@@ -85,7 +85,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -97,7 +96,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -132,6 +131,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -184,6 +184,8 @@ namespace Zetbox.App.GUI
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -193,6 +195,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -200,10 +203,10 @@ namespace Zetbox.App.GUI
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -211,7 +214,7 @@ namespace Zetbox.App.GUI
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _ChangedOn_store = value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -269,7 +272,6 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -319,6 +321,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Color", __oldValue, __newValue);
                     _Color = __newValue;
                     NotifyPropertyChanged("Color", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnColor_PostSetter != null && IsAttached)
                     {
@@ -326,10 +329,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnColor_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Color");
-				}
+                else
+                {
+                    SetInitializedProperty("Color");
+                }
             }
         }
         private string _Color_store;
@@ -393,7 +396,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -405,7 +407,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -440,6 +442,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -492,6 +495,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -501,6 +506,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -508,10 +514,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -519,7 +525,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _CreatedOn_store = value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -582,6 +588,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -589,10 +596,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -654,7 +661,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -709,7 +715,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -721,7 +726,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
@@ -756,6 +761,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -812,7 +818,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnParent_Getter != null)
                 {
@@ -824,7 +829,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.NavigationEntryEfImpl> r
@@ -871,6 +876,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("Children", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -897,12 +903,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Children_pos", __oldValue, __newValue);
                     _Children_pos = __newValue;
                     NotifyPropertyChanged("Children_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("Children_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("Children_pos");
+                }
             }
         }
         private int? _Children_pos_store;
@@ -921,6 +928,109 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntry> OnParent_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnParent_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_NavEntry_have_RequestedKind
+    A: ZeroOrMore NavigationEntry as NavEntry
+    B: ZeroOrOne ControlKind as RequestedKind
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+        // fkBackingName=_fk_RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
+        // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.GUI.ControlKind RequestedKind
+        {
+            get { return RequestedKindImpl; }
+            set { RequestedKindImpl = (Zetbox.App.GUI.ControlKindEfImpl)value; }
+        }
+
+        private int? _fk_RequestedKind;
+
+        private Guid? _fk_guid_RequestedKind = null;
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_NavEntry_have_RequestedKind", "RequestedKind")]
+        public Zetbox.App.GUI.ControlKindEfImpl RequestedKindImpl
+        {
+            get
+            {
+                Zetbox.App.GUI.ControlKindEfImpl __value;
+                EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>(
+                        "Model.FK_NavEntry_have_RequestedKind",
+                        "RequestedKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                __value = r.Value;
+                if (OnRequestedKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(__value);
+                    OnRequestedKind_Getter(this, e);
+                    __value = (Zetbox.App.GUI.ControlKindEfImpl)e.Result;
+                }
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>(
+                        "Model.FK_NavEntry_have_RequestedKind",
+                        "RequestedKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Zetbox.App.GUI.ControlKindEfImpl __oldValue = (Zetbox.App.GUI.ControlKindEfImpl)r.Value;
+                Zetbox.App.GUI.ControlKindEfImpl __newValue = (Zetbox.App.GUI.ControlKindEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("RequestedKind", __oldValue, __newValue);
+
+                if (OnRequestedKind_PreSetter != null)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedKind_PreSetter(this, e);
+                    __newValue = (Zetbox.App.GUI.ControlKindEfImpl)e.Result;
+                }
+
+                r.Value = (Zetbox.App.GUI.ControlKindEfImpl)__newValue;
+
+                if (OnRequestedKind_PostSetter != null)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedKind_PostSetter(this, e);
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.ControlKind> OnRequestedKind_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.ControlKind> OnRequestedKind_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.ControlKind> OnRequestedKind_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnRequestedKind_IsValid;
 
         /// <summary>
         /// The title of this screen
@@ -961,6 +1071,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Title", __oldValue, __newValue);
                     _Title = __newValue;
                     NotifyPropertyChanged("Title", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTitle_PostSetter != null && IsAttached)
                     {
@@ -968,10 +1079,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnTitle_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Title");
-				}
+                else
+                {
+                    SetInitializedProperty("Title");
+                }
             }
         }
         private string _Title_store;
@@ -1036,7 +1147,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnViewModelDescriptor_Getter != null)
                 {
@@ -1048,7 +1158,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r
@@ -1083,6 +1193,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ViewModelDescriptor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -1179,12 +1290,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             this._fk_Module = otherImpl._fk_Module;
             this.Children_pos = otherImpl.Children_pos;
             this._fk_Parent = otherImpl._fk_Parent;
+            this._fk_RequestedKind = otherImpl._fk_RequestedKind;
             this._fk_ViewModelDescriptor = otherImpl._fk_ViewModelDescriptor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1207,6 +1314,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 case "ExportGuid":
                 case "Module":
                 case "Parent":
+                case "RequestedKind":
                 case "Title":
                 case "ViewModelDescriptor":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1261,6 +1369,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 ParentImpl = (Zetbox.App.GUI.NavigationEntryEfImpl)Context.Find<Zetbox.App.GUI.NavigationEntry>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+
+            if (_fk_guid_RequestedKind.HasValue)
+                RequestedKindImpl = (Zetbox.App.GUI.ControlKindEfImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value);
+            else
+            if (_fk_RequestedKind.HasValue)
+                RequestedKindImpl = (Zetbox.App.GUI.ControlKindEfImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
+            else
+                RequestedKindImpl = null;
 
             if (_fk_guid_ViewModelDescriptor.HasValue)
                 ViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ViewModelDescriptor.Value);
@@ -1374,6 +1490,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         (obj, val) => obj.Parent = val,
 						obj => OnParent_IsValid), 
                     // else
+                    new PropertyDescriptorEfImpl<NavigationEntry, Zetbox.App.GUI.ControlKind>(
+                        lazyCtx,
+                        new Guid("9355f2c4-5b4f-47cc-b767-161548d79478"),
+                        "RequestedKind",
+                        null,
+                        obj => obj.RequestedKind,
+                        (obj, val) => obj.RequestedKind = val,
+						obj => OnRequestedKind_IsValid), 
+                    // else
                     new PropertyDescriptorEfImpl<NavigationEntry, string>(
                         lazyCtx,
                         new Guid("3d5d6b12-ab8a-4bda-8487-6f987cee1fae"),
@@ -1469,6 +1594,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Parent");
+            SetNotInitializedProperty("RequestedKind");
             SetNotInitializedProperty("Title");
             SetNotInitializedProperty("ViewModelDescriptor");
             base.NotifyCreated();
@@ -1485,7 +1611,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             Groups.Clear();
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
             Parent = null;
+            RequestedKind = null;
             ViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<NavigationEntry> OnNotifyDeleting_NavigationEntry;
@@ -1512,12 +1640,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -1532,8 +1661,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_NavigationScreen_was_ChangedBy", "ChangedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_NavigationScreen_was_ChangedBy", "ChangedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
@@ -1541,8 +1671,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             binStream.Write(this._Color);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_NavigationScreen_was_CreatedBy", "CreatedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_NavigationScreen_was_CreatedBy", "CreatedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1566,18 +1697,29 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 				}
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_NavigationScreen_has_Module", "Module").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_NavigationScreen_has_Module", "Module");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.NavigationEntryEfImpl>("Model.FK_Parent_navigates_to_Children", "Parent").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.NavigationEntryEfImpl>("Model.FK_Parent_navigates_to_Children", "Parent");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._Children_pos);
+            {
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_NavEntry_have_RequestedKind", "RequestedKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
+            }
+            if (auxObjects != null) {
+                auxObjects.Add(RequestedKind);
+            }
             binStream.Write(this._Title);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_Screen_modeled_by_ViewModelDescriptor", "ViewModelDescriptor").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_Screen_modeled_by_ViewModelDescriptor", "ViewModelDescriptor");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 
@@ -1607,6 +1749,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             binStream.Read(out this._fk_Module);
             binStream.Read(out this._fk_Parent);
             this._Children_pos = binStream.ReadNullableInt32();
+            binStream.Read(out this._fk_RequestedKind);
             this._Title = binStream.ReadString();
             binStream.Read(out this._fk_ViewModelDescriptor);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1630,6 +1773,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Parent != null ? Parent.ExportGuid : (Guid?)null, xml, "Parent", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Children_pos, xml, "Children_pos", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedKind != null ? RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Title, xml, "Title", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ViewModelDescriptor != null ? ViewModelDescriptor.ExportGuid : (Guid?)null, xml, "ViewModelDescriptor", "Zetbox.App.GUI");
         }
@@ -1665,6 +1809,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 break;
             case "Zetbox.App.GUI|Children_pos":
                 this._Children_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Zetbox.App.GUI|RequestedKind":
+                this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|Title":
                 this._Title = XmlStreamer.ReadString(xml);

@@ -85,6 +85,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -92,10 +93,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -110,7 +111,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The type implementing this invocation
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Implementor
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Implementor
         // fkBackingName=_fk_Implementor; fkGuidBackingName=_fk_guid_Implementor;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -128,9 +129,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Implementor;
+        private int? __fk_ImplementorCache;
+
+        private int? _fk_Implementor {
+            get
+            {
+                return __fk_ImplementorCache;
+            }
+            set
+            {
+                __fk_ImplementorCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchImplementorTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Implementor = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchImplementorTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchImplementorAsync()
+        {
+            if (_triggerFetchImplementorTask != null) return _triggerFetchImplementorTask;
+
+            if (_fk_Implementor.HasValue)
+                _triggerFetchImplementorTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_Implementor.Value);
+            else
+                _triggerFetchImplementorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchImplementorTask.OnResult(t =>
+            {
+                if (OnImplementor_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(t.Result);
+                    OnImplementor_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchImplementorTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -138,32 +175,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.TypeRefMemoryImpl __value;
-                if (_fk_Implementor.HasValue)
-                    __value = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_Implementor.Value);
-                else
-                    __value = null;
-
-                if (OnImplementor_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(__value);
-                    OnImplementor_Getter(this, e);
-                    __value = (Zetbox.App.Base.TypeRefMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchImplementorAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Implementor == null) || (value != null && value.ID == _fk_Implementor))
-				{
-					SetInitializedProperty("Implementor");
+                {
+                    SetInitializedProperty("Implementor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ImplementorImpl;
@@ -184,6 +208,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Implementor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnImplementor_PostSetter != null && IsAttached)
                 {
@@ -235,6 +260,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MemberName", __oldValue, __newValue);
                     _MemberName = __newValue;
                     NotifyPropertyChanged("MemberName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMemberName_PostSetter != null && IsAttached)
                     {
@@ -242,10 +268,10 @@ namespace Zetbox.App.Base
                         OnMemberName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MemberName");
-				}
+                else
+                {
+                    SetInitializedProperty("MemberName");
+                }
             }
         }
         private string _MemberName;
@@ -320,70 +346,6 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
-        /// <summary>
-        /// 
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnGetMemberName_ConstraintInvocation")]
-        public virtual string GetMemberName()
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetMemberName_ConstraintInvocation != null)
-            {
-                OnGetMemberName_ConstraintInvocation(this, e);
-            }
-            else
-            {
-                throw new NotImplementedException("No handler registered on ConstraintInvocation.GetMemberName");
-            }
-            return e.Result;
-        }
-        public delegate void GetMemberName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-        public static event GetMemberName_Handler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation;
-        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-		// CanExec
-		public static event CanExecMethodEventHandler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation_CanExec;
-
-        [EventBasedMethod("OnGetMemberName_ConstraintInvocation_CanExec")]
-        public virtual bool GetMemberNameCanExec
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<bool>();
-				if (OnGetMemberName_ConstraintInvocation_CanExec != null)
-				{
-					OnGetMemberName_ConstraintInvocation_CanExec(this, e);
-				}
-				else
-				{
-					e.Result = true;
-				}
-				return e.Result;
-			}
-        }
-
-		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation_CanExecReason;
-
-        [EventBasedMethod("OnGetMemberName_ConstraintInvocation_CanExecReason")]
-        public virtual string GetMemberNameCanExecReason
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<string>();
-				if (OnGetMemberName_ConstraintInvocation_CanExecReason != null)
-				{
-					OnGetMemberName_ConstraintInvocation_CanExecReason(this, e);
-				}
-				else
-				{
-					e.Result = string.Empty;
-				}
-				return e.Result;
-			}
-        }
-        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
-
         public override Type GetImplementedInterface()
         {
             return typeof(ConstraintInvocation);
@@ -399,11 +361,6 @@ namespace Zetbox.App.Base
             me.ExportGuid = other.ExportGuid;
             me.MemberName = other.MemberName;
             this._fk_Implementor = otherImpl._fk_Implementor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -445,6 +402,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Implementor":
+                return TriggerFetchImplementorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

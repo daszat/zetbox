@@ -9,12 +9,13 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Zetbox.Objects</RootNamespace>
     <AssemblyName>Zetbox.Objects</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->
-    <RelativeOutputPath>Common\Core</RelativeOutputPath>
+    <RelativeOutputPath>Common</RelativeOutputPath>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,8 +27,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Core.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Core.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -40,8 +41,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Common\Core.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Core.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Common\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -56,8 +57,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Core.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Core.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -74,17 +75,17 @@
     <Reference Include="System.Xml" />
     <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\log4net.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Autofac.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase">
@@ -107,11 +108,9 @@
     <Compile Include="BoolParameter.Interface.Designer.cs" />
     <Compile Include="BoolProperty.Interface.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Interface.Designer.cs" />
-    <Compile Include="Calendar.Interface.Designer.cs" />
-    <Compile Include="CalendarRule.Interface.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Interface.Designer.cs" />
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />
-    <Compile Include="CommonCalendarRule.Interface.Designer.cs" />
+    <Compile Include="CommonWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="Company.Interface.Designer.cs" />
     <Compile Include="CompoundObject.Interface.Designer.cs" />
     <Compile Include="CompoundObjectParameter.Interface.Designer.cs" />
@@ -125,15 +124,18 @@
     <Compile Include="DateRangeFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />
-    <Compile Include="DayOfWeekCalendarRule.Interface.Designer.cs" />
+    <Compile Include="DayOfWeekWorkScheduleRule.Interface.Designer.cs" />
+    <Compile Include="DeactivatableTestObject.Interface.Designer.cs" />
+    <Compile Include="DecimalDefaultValue.Interface.Designer.cs" />
     <Compile Include="DecimalParameter.Interface.Designer.cs" />
     <Compile Include="DecimalProperty.Interface.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Interface.Designer.cs" />
     <Compile Include="Document.Interface.Designer.cs" />
+    <Compile Include="DoubleDefaultValue.Interface.Designer.cs" />
     <Compile Include="DoubleParameter.Interface.Designer.cs" />
     <Compile Include="DoubleProperty.Interface.Designer.cs" />
     <Compile Include="DynamicFile.Interface.Designer.cs" />
-    <Compile Include="EasterCalendarRule.Interface.Designer.cs" />
+    <Compile Include="EasterWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="EnumDefaultValue.Interface.Designer.cs" />
     <Compile Include="Enumeration.Interface.Designer.cs" />
     <Compile Include="EnumerationEntry.Interface.Designer.cs" />
@@ -143,7 +145,7 @@
     <Compile Include="File.Interface.Designer.cs" />
     <Compile Include="FileImportConfiguration.Interface.Designer.cs" />
     <Compile Include="FilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="FixedYearlyCalendarRule.Interface.Designer.cs" />
+    <Compile Include="FixedYearlyWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
     <Compile Include="Group.Interface.Designer.cs" />
     <Compile Include="GroupMembership.Interface.Designer.cs" />
@@ -192,9 +194,19 @@
     <Compile Include="OrderedOneEnd.Interface.Designer.cs" />
     <Compile Include="Projekt.Interface.Designer.cs" />
     <Compile Include="Property.Interface.Designer.cs" />
+    <Compile Include="PropertyBoolTest.Interface.Designer.cs" />
+    <Compile Include="PropertyDateTimeTest.Interface.Designer.cs" />
+    <Compile Include="PropertyDecimalTest.Interface.Designer.cs" />
+    <Compile Include="PropertyDoubleTest.Interface.Designer.cs" />
+    <Compile Include="PropertyEnumTest.Interface.Designer.cs" />
     <Compile Include="PropertyFilterConfiguration.Interface.Designer.cs" />
+    <Compile Include="PropertyGuidTest.Interface.Designer.cs" />
+    <Compile Include="PropertyIntTest.Interface.Designer.cs" />
+    <Compile Include="PropertyStringTest.Interface.Designer.cs" />
+    <Compile Include="PropertyTestBase.Interface.Designer.cs" />
     <Compile Include="RangeFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="ReadOnlyConstraint.Interface.Designer.cs" />
+    <Compile Include="RecurrenceRuleTester.Interface.Designer.cs" />
     <Compile Include="Relation.Interface.Designer.cs" />
     <Compile Include="RelationEnd.Interface.Designer.cs" />
     <Compile Include="RequiredParent.Interface.Designer.cs" />
@@ -222,17 +234,23 @@
     <Compile Include="TestDecimal.Interface.Designer.cs" />
     <Compile Include="TestObjClass.Interface.Designer.cs" />
     <Compile Include="TestStudent.Interface.Designer.cs" />
+    <Compile Include="TPHBaseObj.Interface.Designer.cs" />
+    <Compile Include="TPHDerivedAObj.Interface.Designer.cs" />
+    <Compile Include="TPHDerivedBObj.Interface.Designer.cs" />
     <Compile Include="TypeRef.Interface.Designer.cs" />
     <Compile Include="ValueTypeProperty.Interface.Designer.cs" />
     <Compile Include="ViewDescriptor.Interface.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Interface.Designer.cs" />
     <Compile Include="ViewReadOnlyConstraint.Interface.Designer.cs" />
     <Compile Include="Visual.Interface.Designer.cs" />
+    <Compile Include="WorkSchedule.Interface.Designer.cs" />
+    <Compile Include="WorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Interface.Designer.cs" />
-    <Compile Include="YearlyCalendarRule.Interface.Designer.cs" />
+    <Compile Include="YearlyWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="CollectionEntries.Interface.Designer.cs" />
     <Compile Include="IAuditable.Interface.Designer.cs" />
     <Compile Include="IChangedBy.Interface.Designer.cs" />
+    <Compile Include="IDeactivatable.Interface.Designer.cs" />
     <Compile Include="IExportable.Interface.Designer.cs" />
     <Compile Include="IInvocation.Interface.Designer.cs" />
     <Compile Include="IMigrationInfo.Interface.Designer.cs" />
@@ -252,12 +270,14 @@
     <Compile Include="MappingStatus.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />
     <Compile Include="StorageType.Interface.Designer.cs" />
+    <Compile Include="TableMapping.Interface.Designer.cs" />
     <Compile Include="TestEnum.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />
     <Compile Include="WidthHint.Interface.Designer.cs" />
     <Compile Include="AnyReference.Interface.Designer.cs" />
     <Compile Include="AuditEntry.Interface.Designer.cs" />
     <Compile Include="DateTimeRange.Interface.Designer.cs" />
+    <Compile Include="RecurrenceRule.Interface.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Interface.Designer.cs" />
     <Compile Include="AssemblyInfo.Interface.cs" />
     <Compile Include="Module.Interface.cs" />

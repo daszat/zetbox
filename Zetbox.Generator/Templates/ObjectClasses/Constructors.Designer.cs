@@ -43,7 +43,7 @@ this.WriteObjects("        public ",  className , "()\r\n");
 this.WriteObjects("            : base(null)\r\n");
 this.WriteObjects("        {\r\n");
 #line 37 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-ApplyCompoundObjectPropertyInitialisers(); 
+ApplyCompoundObjectPropertyInitialisers(null); 
 #line 38 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
@@ -51,7 +51,7 @@ this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx
 this.WriteObjects("            : base(lazyCtx)\r\n");
 this.WriteObjects("        {\r\n");
 #line 43 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-ApplyCompoundObjectPropertyInitialisers(); 
+ApplyCompoundObjectPropertyInitialisers("lazyCtx"); 
 #line 44 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 

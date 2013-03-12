@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ANewObjectClass")]
+    [EdmEntityType(NamespaceName="Model", Name="ANewObjectClassEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ANewObjectClass")]
     public class ANewObjectClassEfImpl : BaseServerDataObject_EntityFramework, ANewObjectClass
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     _TestString = __newValue;
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestString_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Test
                         OnTestString_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestString");
-				}
+                else
+                {
+                    SetInitializedProperty("TestString");
+                }
             }
         }
         private string _TestString_store;
@@ -121,11 +122,6 @@ namespace Zetbox.App.Test
             var me = (ANewObjectClass)this;
 
             me.TestString = other.TestString;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -277,12 +273,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;

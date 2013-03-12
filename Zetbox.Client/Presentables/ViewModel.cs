@@ -19,14 +19,14 @@ namespace Zetbox.Client.Presentables
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
     using Zetbox.API.Common;
+    using Zetbox.API.Common.GUI;
+    using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
-    using Zetbox.Client.Presentables.ValueViewModels;
 
     public interface IViewModelDependencies
     {
@@ -34,15 +34,6 @@ namespace Zetbox.Client.Presentables
         /// The <see cref="ViewModelFactory"/> of this GUI.
         /// </summary>
         IViewModelFactory Factory { get; }
-
-        /// <summary>
-        /// A <see cref="IThreadManager"/> for the UI Thread
-        /// </summary>
-        IUiThreadManager UiThread { get; }
-        /// <summary>
-        /// A <see cref="IThreadManager"/> for asynchronous Tasks
-        /// </summary>
-        IAsyncThreadManager AsyncThread { get; }
 
         /// <summary>
         /// FrozenContext for resolving meta data
@@ -53,12 +44,31 @@ namespace Zetbox.Client.Presentables
         /// The current Identity Resolver
         /// </summary>
         IIdentityResolver IdentityResolver { get; }
+
+        /// <summary>
+        /// IIconConverter instance
+        /// </summary>
+        IIconConverter IconConverter { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public sealed class ViewModelDescriptorAttribute : Attribute
     {
         public ViewModelDescriptorAttribute()
+        {
+        }
+    }
+
+    /// <summary>
+    /// This is a marker attribute to document the fact that the attributed class does not need a VMD in the database.
+    /// </summary>
+    /// <remarks>
+    /// Useful when extending a existing ViewModel, or for internally used ViewModels.
+    /// </remarks>
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public sealed class IgnoreViewModelDescriptorAttribute : Attribute
+    {
+        public IgnoreViewModelDescriptorAttribute()
         {
         }
     }
@@ -78,15 +88,6 @@ namespace Zetbox.Client.Presentables
         private readonly IViewModelDependencies _dependencies;
 
         /// <summary>
-        /// A <see cref="IThreadManager"/> for the UI Thread
-        /// </summary>
-        protected IUiThreadManager UI { get { return _dependencies.UiThread; } }
-        /// <summary>
-        /// A <see cref="IThreadManager"/> for asynchronous Tasks
-        /// </summary>
-        protected IAsyncThreadManager Async { get { return _dependencies.AsyncThread; } }
-
-        /// <summary>
         /// FrozenContext for resolving meta data
         /// </summary>
         protected IFrozenContext FrozenContext { get { return _dependencies.FrozenContext; } }
@@ -95,6 +96,11 @@ namespace Zetbox.Client.Presentables
         /// The factory from where new models should be created
         /// </summary>
         public IViewModelFactory ViewModelFactory { get { return _dependencies.Factory; } }
+
+        /// <summary>
+        /// The IconConverter instance
+        /// </summary>
+        public IIconConverter IconConverter { get { return _dependencies.IconConverter; } }
 
         /// <summary>
         /// A <see cref="IZetboxContext"/> to access the current user's data
@@ -124,14 +130,14 @@ namespace Zetbox.Client.Presentables
             _dependencies = dependencies;
             DataContext = dataCtx;
 
-            if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight") OnPropertyChanged("Highlight"); };
+            if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight" || e.PropertyName == "HighlightAsync") OnHighlightChanged(); };
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
         }
 
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("IsEnabled");
-            OnPropertyChanged("Highlight");
+            OnHighlightChanged();
         }
 
         #region Public interface
@@ -155,21 +161,36 @@ namespace Zetbox.Client.Presentables
             set { _RequestedKind = value; OnPropertyChanged("ControlKind"); }
         }
 
-        private bool _isBusy = false;
+        private int _isBusy = 0;
         public bool IsBusy
         {
             get
             {
-                return _isBusy;
+                return _isBusy > 0;
             }
-            set
+        }
+
+        public void SetBusy()
+        {
+            _isBusy++;
+            OnPropertyChanged("IsBusy");
+
+            if (_isBusy == 1)
+                OnPropertyChanged("IsEnabled");
+        }
+
+        public void ClearBusy()
+        {
+            _isBusy--;
+            if (_isBusy == 0)
+                OnPropertyChanged("IsEnabled");
+
+            if (_isBusy < 0)
             {
-                if (_isBusy != value)
-                {
-                    _isBusy = value;
-                    OnPropertyChanged("IsBusy");
-                }
+                _isBusy = 0;
+                Logging.Log.Warn("ClearBusy called too often or without a prev. SetBusy call");
             }
+            OnPropertyChanged("IsBusy");
         }
 
         private bool _isEnabled = true;
@@ -177,6 +198,7 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
+                if (IsBusy) return false;
                 if (DataContext.IsElevatedMode) return true;
                 return _isEnabled;
             }
@@ -186,7 +208,7 @@ namespace Zetbox.Client.Presentables
                 {
                     _isEnabled = value;
                     OnPropertyChanged("IsEnabled");
-                    OnPropertyChanged("Highlight");
+                    OnHighlightChanged();
                 }
             }
         }
@@ -246,7 +268,7 @@ namespace Zetbox.Client.Presentables
         /// Signifies that a model is in "design" mode or really accessing the data store.
         /// </summary>
         /// In design mode, no data store is used and only mock data is shown. 
-        /// No <see cref="IZetboxContext"/>s or <see cref="IThreadManager"/>s are available.
+        /// No <see cref="IZetboxContext"/>s is available.
         public bool IsInDesignMode { get; private set; }
 
         #endregion
@@ -281,14 +303,30 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
                 if (!IsEnabled) return Highlight.Deactivated;
-                return null;
+                if (Parent != null && Parent.Highlight != Highlight.None) return Parent.Highlight;
+                return Highlight.None;
             }
         }
 
-        private Icon _icon;
-        public virtual Icon Icon
+        public virtual Highlight HighlightAsync
+        {
+            get
+            {
+                if (!IsEnabled) return Highlight.Deactivated;
+                if (Parent != null && Parent.HighlightAsync != Highlight.None) return Parent.HighlightAsync;
+                return Highlight.None;
+            }
+        }
+
+        public void OnHighlightChanged()
+        {
+            OnPropertyChanged("Highlight");
+            OnPropertyChanged("HighlightAsync");
+        }
+
+        private System.Drawing.Image _icon;
+        public virtual System.Drawing.Image Icon
         {
             get
             {
@@ -299,17 +337,31 @@ namespace Zetbox.Client.Presentables
                 if (_icon != value)
                 {
                     _icon = value;
-                    OnPropertyChanged("Icon");
+                    OnIconChanged();
                 }
             }
+        }
+        public virtual System.Drawing.Image IconAsync
+        {
+            get
+            {
+                return Icon;
+            }
+        }
+
+        public void OnIconChanged()
+        {
+            OnPropertyChanged("Icon");
+            OnPropertyChanged("IconAsync");
         }
         #endregion
 
     }
 
-    public sealed class Highlight
+    public struct Highlight
     {
         #region Static Highlight States
+        public static readonly Highlight None = new Highlight(HighlightState.None);
         public static readonly Highlight Good = new Highlight(HighlightState.Good);
         public static readonly Highlight Neutral = new Highlight(HighlightState.Neutral);
         public static readonly Highlight Bad = new Highlight(HighlightState.Bad);
@@ -327,11 +379,6 @@ namespace Zetbox.Client.Presentables
         public static readonly Highlight Note = new Highlight(HighlightState.Note);
         #endregion
 
-        public Highlight()
-            : this(HighlightState.None)
-        {
-        }
-
         public Highlight(HighlightState state)
             : this(state, null, null, System.Drawing.FontStyle.Regular, null)
         {
@@ -343,6 +390,7 @@ namespace Zetbox.Client.Presentables
         }
 
         public Highlight(HighlightState state, string gridBackground, string gridForeground, System.Drawing.FontStyle gridFontStyle, string panelBackground)
+            : this()
         {
             this.State = state;
             this.GridBackground = gridBackground;
@@ -356,6 +404,63 @@ namespace Zetbox.Client.Presentables
         public string GridForeground { get; private set; }
         public System.Drawing.FontStyle GridFontStyle { get; private set; }
         public string PanelBackground { get; private set; }
+
+        public override int GetHashCode()
+        {
+            return State.GetHashCode() +
+                (GridBackground ?? string.Empty).GetHashCode() +
+                (GridForeground ?? string.Empty).GetHashCode() +
+                GridFontStyle.GetHashCode() +
+                (PanelBackground ?? string.Empty).GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            // If parameter cannot be cast to ThreeDPoint return false:
+            var b = obj as Highlight?;
+            if (b.HasValue == false)
+            {
+                return false;
+            }
+
+            // Return true if the fields match:
+            return this.State == b.Value.State &&
+                this.GridBackground == b.Value.GridBackground &&
+                this.GridForeground == b.Value.GridForeground &&
+                this.GridFontStyle == b.Value.GridFontStyle &&
+                this.PanelBackground == b.Value.PanelBackground;
+        }
+
+        public static bool operator ==(Highlight a, Highlight b)
+        {
+            // If both are null, or both are same instance, return true.
+            if (System.Object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            // If one is null, but not both, return false.
+            if (((object)a == null) || ((object)b == null))
+            {
+                return false;
+            }
+
+            return a.State == b.State &&
+                a.GridBackground == b.GridBackground &&
+                a.GridForeground == b.GridForeground &&
+                a.GridFontStyle == b.GridFontStyle &&
+                a.PanelBackground == b.PanelBackground;
+        }
+
+        public static bool operator !=(Highlight a, Highlight b)
+        {
+            return !(a == b);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} ({1}/{2}/{3}/{4})", State, GridBackground, GridForeground, GridFontStyle, PanelBackground);
+        }
     }
 
     internal class DesignerDependencies : IViewModelDependencies
@@ -365,23 +470,17 @@ namespace Zetbox.Client.Presentables
             get { throw new NotImplementedException(); }
         }
 
-        private IUiThreadManager _thread = new SynchronousThreadManager();
-        public IUiThreadManager UiThread
-        {
-            get { return _thread; }
-        }
-
-        public IAsyncThreadManager AsyncThread
-        {
-            get { throw new InvalidOperationException("No asynchronous operations allowed in Design mode"); }
-        }
-
         public IFrozenContext FrozenContext
         {
             get { throw new NotImplementedException(); }
         }
 
         public IIdentityResolver IdentityResolver
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IIconConverter IconConverter
         {
             get { throw new NotImplementedException(); }
         }

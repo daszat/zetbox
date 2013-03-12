@@ -73,6 +73,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -97,7 +98,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Zetbox.App.Test.RequiredParent; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=Children; is list;
@@ -115,8 +116,44 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Parent;
+        private int? __fk_ParentCache;
 
+        private int? _fk_Parent {
+            get
+            {
+                return __fk_ParentCache;
+            }
+            set
+            {
+                __fk_ParentCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchParentTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> _triggerFetchParentTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> TriggerFetchParentAsync()
+        {
+            if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
+
+            if (_fk_Parent.HasValue)
+                _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
+            else
+                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchParentTask.OnResult(t =>
+            {
+                if (OnParent_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.RequiredParent>(t.Result);
+                    OnParent_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchParentTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -124,32 +161,19 @@ namespace Zetbox.App.Test
         {
             get
             {
-                Zetbox.App.Test.RequiredParentMemoryImpl __value;
-                if (_fk_Parent.HasValue)
-                    __value = (Zetbox.App.Test.RequiredParentMemoryImpl)Context.Find<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
-                else
-                    __value = null;
-
-                if (OnParent_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.RequiredParent>(__value);
-                    OnParent_Getter(this, e);
-                    __value = (Zetbox.App.Test.RequiredParentMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Test.RequiredParentMemoryImpl)TriggerFetchParentAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Parent == null) || (value != null && value.ID == _fk_Parent))
-				{
-					SetInitializedProperty("Parent");
+                {
+                    SetInitializedProperty("Parent");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ParentImpl;
@@ -186,6 +210,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnParent_PostSetter != null && IsAttached)
                 {
@@ -215,11 +240,6 @@ namespace Zetbox.App.Test
 
             me.Name = other.Name;
             this._fk_Parent = otherImpl._fk_Parent;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -260,6 +280,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -381,6 +412,7 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_RequiredParentChild != null) OnNotifyDeleting_RequiredParentChild(this);
+            Parent = null;
         }
         public static event ObjectEventHandler<RequiredParentChild> OnNotifyDeleting_RequiredParentChild;
 

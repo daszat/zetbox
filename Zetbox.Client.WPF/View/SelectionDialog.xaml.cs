@@ -28,6 +28,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View
 {
@@ -46,7 +47,7 @@ namespace Zetbox.Client.WPF.View
 
         public DataObjectSelectionTaskViewModel ViewModel
         {
-            get { return (DataObjectSelectionTaskViewModel)DataContext; }
+            get { return (DataObjectSelectionTaskViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

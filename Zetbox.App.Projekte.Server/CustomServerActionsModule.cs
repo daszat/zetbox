@@ -22,12 +22,18 @@ namespace Zetbox.App.Projekte.Server
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Server;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
+    // Will be loaded by ServerModule
+    [Description("Zetbox server actions")]
     public class CustomServerActionsModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
+
+            moduleBuilder.RegisterModule<Zetbox.App.Projekte.Common.CustomCommonActionsModule>();
 
             moduleBuilder.RegisterZetboxImplementors(typeof(CustomServerActionsModule).Assembly);
 

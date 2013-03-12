@@ -40,7 +40,8 @@
               Style="{StaticResource addedMargins}">
             <ctrls:CommandButton CommandViewModel="{Binding CloseCommand}"
                                  Style="{StaticResource addedMargins}"
-                                 IsDefault="True"/>
+                                 IsDefault="True"
+                                 IsCancel="True"/>
           
         </Grid>
 

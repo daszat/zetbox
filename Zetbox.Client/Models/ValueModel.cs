@@ -27,52 +27,55 @@ namespace Zetbox.Client.Models
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
+    using Zetbox.API.Async;
 
     public static class BaseParameterExtensionsThisShouldBeMovedToAZetboxMethod
     {
-        public static IValueModel GetValueModel(this BaseParameter parameter, bool allowNullInput)
+        public static IValueModel GetValueModel(this BaseParameter parameter, IZetboxContext ctx, bool allowNullInput)
         {
             if (parameter == null)
                 throw new ArgumentNullException("parameter");
 
             var lb = parameter.GetLabel();
+            var description = parameter.Description;
+            var isList = parameter.IsList;
 
-            if (parameter is BoolParameter && !parameter.IsList)
+            if (parameter is BoolParameter && !isList)
             {
-                return new BoolValueModel(lb, parameter.Description, allowNullInput, false);
+                return new BoolValueModel(lb, description, allowNullInput, false);
             }
-            else if (parameter is DateTimeParameter && !parameter.IsList)
+            else if (parameter is DateTimeParameter && !isList)
             {
                 var dtp = (DateTimeParameter)parameter;
-                return new DateTimeValueModel(lb, parameter.Description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime);
+                return new DateTimeValueModel(lb, description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime);
             }
-            else if (parameter is DoubleParameter && !parameter.IsList)
+            else if (parameter is DoubleParameter && !isList)
             {
-                return new NullableStructValueModel<double>(lb, parameter.Description, allowNullInput, false);
+                return new NullableStructValueModel<double>(lb, description, allowNullInput, false);
             }
-            else if (parameter is IntParameter && !parameter.IsList)
+            else if (parameter is IntParameter && !isList)
             {
-                return new NullableStructValueModel<int>(lb, parameter.Description, allowNullInput, false);
+                return new NullableStructValueModel<int>(lb, description, allowNullInput, false);
             }
-            else if (parameter is DecimalParameter && !parameter.IsList)
+            else if (parameter is DecimalParameter && !isList)
             {
-                return new DecimalValueModel(lb, parameter.Description, allowNullInput, false);
+                return new DecimalValueModel(lb, description, allowNullInput, false);
             }
-            else if (parameter is StringParameter && !parameter.IsList)
+            else if (parameter is StringParameter && !isList)
             {
-                return new ClassValueModel<string>(lb, parameter.Description, allowNullInput, false);
+                return new ClassValueModel<string>(lb, description, allowNullInput, false);
             }
-            else if (parameter is ObjectReferenceParameter && !parameter.IsList)
+            else if (parameter is ObjectReferenceParameter && !isList)
             {
-                return new ObjectReferenceValueModel(lb, parameter.Description, allowNullInput, false, ((ObjectReferenceParameter)parameter).ObjectClass);
+                return new ObjectReferenceValueModel(lb, description, allowNullInput, false, ((ObjectReferenceParameter)parameter).ObjectClass);
             }
-            else if (parameter is EnumParameter && !parameter.IsList)
+            else if (parameter is EnumParameter && !isList)
             {
-                return new EnumerationValueModel(lb, parameter.Description, allowNullInput, false, ((EnumParameter)parameter).Enumeration);
+                return new EnumerationValueModel(lb, description, allowNullInput, false, ((EnumParameter)parameter).Enumeration);
             }
-            else if (parameter is CompoundObjectParameter && !parameter.IsList)
+            else if (parameter is CompoundObjectParameter && !isList)
             {
-                return new CompoundObjectValueModel(lb, parameter.Description, allowNullInput, false, ((CompoundObjectParameter)parameter).CompoundObject);
+                return new CompoundObjectValueModel(ctx, lb, description, allowNullInput, false, ((CompoundObjectParameter)parameter).CompoundObject);
             }
             else
             {
@@ -113,6 +116,8 @@ namespace Zetbox.Client.Models
         public abstract object GetUntypedValue();
 
         public abstract void SetUntypedValue(object val);
+
+        public bool ReportErrors { get { return true; } }
 
         public ControlKind RequestedKind { get; private set; }
         #endregion
@@ -206,6 +211,7 @@ namespace Zetbox.Client.Models
         #region IValueModel<TValue> Members
 
         public abstract TValue Value { get; set; }
+        public abstract ZbTask<TValue> GetValueAsync();
 
         #endregion
 
@@ -253,10 +259,17 @@ namespace Zetbox.Client.Models
             }
         }
 
+        public override ZbTask<TValue?> GetValueAsync()
+        {
+            return new ZbTask<TValue?>(ZbTask.Synchron, () => Value);
+        }
+
         public override void ClearValue()
         {
-            if (AllowNullInput) Value = null;
-            else throw new NotSupportedException();
+            if (this.AllowNullInput)
+                this.Value = null;
+            else
+                throw new InvalidOperationException("Does not allow null values");
         }
     }
 
@@ -280,11 +293,13 @@ namespace Zetbox.Client.Models
             _dateTimeStyle = dateTimeStyle;
         }
 
-        private readonly DateTimeStyles _dateTimeStyle;
-
+        private DateTimeStyles _dateTimeStyle;
         public DateTimeStyles DateTimeStyle
         {
-            get { return _dateTimeStyle; }
+            get 
+            { 
+                return _dateTimeStyle; 
+            }
         }
 
         TimeSpan? IValueModel<TimeSpan?>.Value
@@ -314,6 +329,11 @@ namespace Zetbox.Client.Models
                     this.Value = DateTime.MinValue.Add(value.Value);
                 }
             }
+        }
+
+        ZbTask<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
+        {
+            return new ZbTask<TimeSpan?>(ZbTask.Synchron, () => ((IValueModel<TimeSpan?>)this).Value);
         }
     }
 
@@ -401,10 +421,17 @@ namespace Zetbox.Client.Models
             }
         }
 
+        public override ZbTask<TValue> GetValueAsync()
+        {
+            return new ZbTask<TValue>(ZbTask.Synchron, () => Value);
+        }
+
         public override void ClearValue()
         {
-            if (AllowNullInput) Value = null;
-            else throw new NotSupportedException();
+            if (this.AllowNullInput)
+                this.Value = null;
+            else
+                throw new InvalidOperationException("Does not allow null values");
         }
     }
 
@@ -487,14 +514,6 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public IEnumerable UnderlyingCollection
-        {
-            get
-            {
-                return valueCache;
-            }
-        }
-
         protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             NotifyCollectionChangedEventHandler temp = _CollectionChanged;
@@ -554,21 +573,26 @@ namespace Zetbox.Client.Models
 
     public class CompoundObjectValueModel : ClassValueModel<ICompoundObject>, ICompoundObjectValueModel
     {
-        public CompoundObjectValueModel(string label, string description, bool allowNullInput, bool isReadOnly, CompoundObject def)
+        public CompoundObjectValueModel(IZetboxContext ctx, string label, string description, bool allowNullInput, bool isReadOnly, CompoundObject def)
             : this(
-                label, 
-                description, 
-                allowNullInput, 
-                isReadOnly, 
-                def.RequestedKind ?? (def.DefaultPropertyViewModelDescriptor != null ? def.DefaultPropertyViewModelDescriptor.DefaultEditorKind : null), 
+                ctx,
+                label,
+                description,
+                allowNullInput,
+                isReadOnly,
+                def != null ? (def.RequestedKind ?? (def.DefaultPropertyViewModelDescriptor != null ? def.DefaultPropertyViewModelDescriptor.DefaultEditorKind : null)) : null,
                 def)
         {
         }
 
-        public CompoundObjectValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, CompoundObject def)
+        public CompoundObjectValueModel(IZetboxContext ctx, string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, CompoundObject def)
             : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (def == null) throw new ArgumentNullException("def");
+
             this.CompoundObjectDefinition = def;
+            this.Value = ctx.CreateCompoundObject(ctx.GetInterfaceType(def.GetDataType()));
         }
 
         #region IObjectReferenceValueModel Members
@@ -578,95 +602,6 @@ namespace Zetbox.Client.Models
             get;
             private set;
         }
-        #endregion
-    }
-
-    public class ListValueModel<TValue, TCollection>
-        : ClassValueModel<TCollection>, IListValueModel<TValue>
-        where TCollection : class, IList<TValue>
-    {
-        protected TCollection valueCache;
-
-        public ListValueModel(string label, string description, bool allowNullInput, bool isReadOnly, TCollection collection)
-            : this(label, description, allowNullInput, isReadOnly, null, collection)
-        {
-        }
-
-        public ListValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, TCollection collection)
-            : base(label, description, allowNullInput, isReadOnly, requestedKind)
-        {
-            if (collection == null) throw new ArgumentNullException("collection");
-
-            valueCache = collection;
-            if (collection is INotifyCollectionChanged)
-            {
-                ((INotifyCollectionChanged)collection).CollectionChanged += ValueCollectionChanged;
-            }
-        }
-
-        #region IValueModel<TValue> Members
-
-        /// <summary>
-        /// Gets or sets the value of the property presented by this model
-        /// </summary>
-        public override TCollection Value
-        {
-            get
-            {
-                return valueCache;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
-        }
-
-        IList<TValue> IValueModel<IList<TValue>>.Value
-        {
-            get
-            {
-                return valueCache;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
-        }
-
-        public IEnumerable UnderlyingCollection
-        {
-            get
-            {
-                return valueCache;
-            }
-        }
-
-        protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            NotifyCollectionChangedEventHandler temp = _CollectionChanged;
-            if (temp != null)
-            {
-                temp(sender, e);
-            }
-        }
-
-        #endregion
-
-        #region INotifyCollectionChanged Members
-
-        private event NotifyCollectionChangedEventHandler _CollectionChanged;
-        public event NotifyCollectionChangedEventHandler CollectionChanged
-        {
-            add
-            {
-                _CollectionChanged += value;
-            }
-            remove
-            {
-                _CollectionChanged -= value;
-            }
-        }
-
         #endregion
     }
 

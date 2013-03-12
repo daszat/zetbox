@@ -18,24 +18,22 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Linq;
+    using System.Linq.Dynamic;
+    using System.Linq.Expressions;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.API.Utils;
+    using Zetbox.API.Async;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
-    using Zetbox.Client.Presentables.ValueViewModels;
-    using System.Linq.Dynamic;
-    using System.Linq.Expressions;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
-        : ValueViewModel<DataObjectViewModel, IDataObject>
+        : ValueViewModel<DataObjectViewModel, IDataObject>, INewCommandParameter, IOpenCommandParameter
     {
         public new delegate ObjectReferenceViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -52,7 +50,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 // could be e.g. a calculated object ref property
                 _allowClear = false;
                 _allowCreateNewItem = false;
-                _allowDelete = false;
+                _allowCreateNewItemOnSelect = false;
                 _allowSelectValue = false;
             }
             else if (relEnd == null && !mdl.IsReadOnly)
@@ -60,7 +58,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 // could be e.g. a filter
                 _allowClear = true;
                 _allowCreateNewItem = false;
-                _allowDelete = false;
+                _allowCreateNewItemOnSelect = false;
                 _allowSelectValue = true;
             }
             else
@@ -72,6 +70,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     if (relType == RelationType.one_n && rel.Containment == ContainmentSpecification.Independent)
                     {
                         _allowCreateNewItem = false; // search first
+                        _allowCreateNewItemOnSelect = true;
                     }
                     else if (relType == RelationType.one_one)
                     {
@@ -83,6 +82,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         else
                         {
                             _allowCreateNewItem = false; // possibility to change parent, but do not create a new one
+                            _allowCreateNewItemOnSelect = false;
                         }
                     }
                 }
@@ -112,6 +112,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 if (_allowCreateNewItem != value)
                 {
                     _allowCreateNewItem = value;
+                    OnPropertyChanged("AllowAddNew");
                     OnPropertyChanged("AllowCreateNewItem");
                 }
             }
@@ -133,6 +134,22 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
             }
         }
+        private bool _allowCreateNewItemOnSelect = true;
+        public bool AllowCreateNewItemOnSelect
+        {
+            get
+            {
+                return _allowCreateNewItemOnSelect;
+            }
+            set
+            {
+                if (_allowCreateNewItemOnSelect != value)
+                {
+                    _allowCreateNewItemOnSelect = value;
+                    OnPropertyChanged("AllowCreateNewItemOnSelect");
+                }
+            }
+        }
 
         private bool _allowClear = true;
         public bool AllowClear
@@ -147,25 +164,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     _allowClear = value;
                     OnPropertyChanged("Clear");
-                }
-            }
-        }
-
-        // Not supported by any command yet
-        private bool _allowDelete = false;
-        public bool AllowDelete
-        {
-            get
-            {
-                if (DataContext.IsElevatedMode) return true;
-                return _allowDelete;
-            }
-            set
-            {
-                if (_allowDelete != value)
-                {
-                    _allowDelete = value;
-                    OnPropertyChanged("AllowDelete");
                 }
             }
         }
@@ -199,111 +197,59 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region OpenReference
 
-        private bool CanOpen
-        {
-            get
-            {
-                return Value != null ? ViewModelFactory.CanShowModel(Value) : false;
-            }
-        }
-
         public void OpenReference()
         {
-            if (CanOpen)
-                ViewModelFactory.ShowModel(Value, true);
+            if (OpenReferenceCommand.CanExecute(null))
+                OpenReferenceCommand.Execute(null);
         }
 
-        private ICommandViewModel _openReferenceCommand;
+        private OpenDataObjectCommand _openReferenceCommand;
         public ICommandViewModel OpenReferenceCommand
         {
             get
             {
                 if (_openReferenceCommand == null)
                 {
-                    _openReferenceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    _openReferenceCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
-                        this,
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Name,
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip,
-                        () => OpenReference(),
-                        () => CanOpen,
-                        null);
-                    _openReferenceCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
+                        this);
                 }
                 return _openReferenceCommand;
             }
         }
+
+        bool IOpenCommandParameter.AllowOpen { get { return true; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return ValueAsync == null ? null : new[] { ValueAsync }; } }
+
         #endregion
 
         #region CreateNewItemAndSetValue
 
-        /// <summary>
-        /// creates a new target and references it
-        /// </summary>
-        public void CreateNewItemAndSetValue()
-        {
-            ObjectClass baseclass = ObjectReferenceModel.ReferencedClass;
-
-            var children = new List<ObjectClass>();
-            if (baseclass.IsAbstract == false)
-            {
-                children.Add(baseclass);
-            }
-            baseclass.CollectChildClasses(FrozenContext, children, false);
-
-            if (children.Count == 1)
-            {
-                var targetType = children.Single().GetDescribedInterfaceType();
-                var item = this.DataContext.Create(targetType);
-                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
-
-                Value = model;
-                ViewModelFactory.ShowModel(model, true);
-            }
-            else
-            {
-                var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
-                        DataContext, this,
-                        typeof(ObjectClass).GetObjectClass(FrozenContext),
-                        () => children.AsQueryable(),
-                        (chosen) =>
-                        {
-                            if (chosen != null)
-                            {
-                                var targetType = ((ObjectClass)chosen.First().Object).GetDescribedInterfaceType();
-                                var item = this.DataContext.Create(targetType);
-                                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
-
-                                Value = model;
-                                ViewModelFactory.ShowModel(model, true);
-                            }
-                        }, null);
-                lstMdl.ListViewModel.ShowCommands = false;
-
-                ViewModelFactory.ShowDialog(lstMdl);
-            }
-        }
-
-        private ICommandViewModel _createNewItemAndSetValueCommand;
+        private NewDataObjectCommand _createNewItemAndSetValueCommand;
         public ICommandViewModel CreateNewItemAndSetValueCommand
         {
             get
             {
                 if (_createNewItemAndSetValueCommand == null)
                 {
-                    _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(
                         DataContext,
                         this,
-                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Name,
-                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip,
-                        CreateNewItemAndSetValue,
-                        () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly,
-                        null);
-                    _createNewItemAndSetValueCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
+                        ReferencedClass);
+                    _createNewItemAndSetValueCommand.LocalModelCreated += vm => Value = vm;
                 }
                 return _createNewItemAndSetValueCommand;
             }
         }
+
+        public void CreateNewItemAndSetValue()
+        {
+            if (CreateNewItemAndSetValueCommand.CanExecute(null))
+                CreateNewItemAndSetValueCommand.Execute(null);
+        }
+
+        bool INewCommandParameter.AllowAddNew { get { return AllowCreateNewItem; } }
+
         #endregion
 
         #region SelectValue
@@ -324,10 +270,21 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 },
                 null);
             selectionTask.ListViewModel.AllowDelete = false;
-            selectionTask.ListViewModel.ShowOpenCommand = false;
-            selectionTask.ListViewModel.AllowAddNew = true;
+            selectionTask.ListViewModel.AllowOpen = false;
+            selectionTask.ListViewModel.AllowAddNew = AllowCreateNewItemOnSelect;
+            OnDataObjectSelectionTaskCreated(selectionTask);
 
             ViewModelFactory.ShowDialog(selectionTask);
+        }
+
+        public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
+        protected virtual void OnDataObjectSelectionTaskCreated(DataObjectSelectionTaskViewModel vmdl)
+        {
+            var temp = DataObjectSelectionTaskCreated;
+            if (temp != null)
+            {
+                temp(this, new DataObjectSelectionTaskEventArgs(vmdl));
+            }
         }
 
         private ICommandViewModel _SelectValueCommand;
@@ -344,9 +301,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.SelectValueCommand_Name,
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
                         () => SelectValue(),
-                        () => AllowSelectValue && !DataContext.IsReadonly && !IsReadOnly,
+                        () => AllowSelectValue && !IsReadOnly,
                         null);
-                    _SelectValueCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext);
+                    _SelectValueCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext));
                 }
                 return _SelectValueCommand;
             }
@@ -371,20 +328,47 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected override void OnPropertyChanged(string propertyName)
         {
-            if (propertyName == "Value")
+            switch (propertyName)
             {
-                ClearValueCache();
+                case "ValueAsync":
+                    OnPropertyChanged("SelectedItems");
+                    break;
+                case "Value":
+                    ClearValueCache();
+                    break;
+                default:
+                    break;
             }
             base.OnPropertyChanged(propertyName);
         }
 
-        protected override DataObjectViewModel GetValueFromModel()
+        private ZbTask<DataObjectViewModel> _fetchValueTask;
+        protected override ZbTask<DataObjectViewModel> GetValueFromModel()
         {
-            if (!_valueCacheInititalized)
+            if (_fetchValueTask == null)
             {
-                UpdateValueCache();
+                SetBusy();
+                _fetchValueTask = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync());
+                // Avoid stackoverflow
+                _fetchValueTask.OnResult(t =>
+                {
+                    if (!_valueCacheInititalized)
+                    {
+                        var obj = ValueModel.Value;
+                        if (obj != null)
+                        {
+                            _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), ValueModel.Value);
+                            EnsureValuePossible(_valueCache);
+                        }
+                        _valueCacheInititalized = true;
+                        OnPropertyChanged("ValueAsync");
+                    }
+                    t.Result = _valueCache;
+                    ClearBusy();
+                });
             }
-            return _valueCache;
+
+            return _fetchValueTask;
         }
 
         protected override void SetValueToModel(DataObjectViewModel value)
@@ -413,17 +397,25 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             _valueCache = null;
             _valueCacheInititalized = false;
+
+            // TODO: cancel running task
+            try
+            {
+                if (_fetchValueTask != null) _fetchValueTask.Wait();
+            }
+            finally
+            {
+                _fetchValueTask = null;
+            }
         }
 
-        private void UpdateValueCache()
+        public override DataObjectViewModel ValueAsync
         {
-            var obj = ValueModel.Value;
-            if (obj != null)
+            get
             {
-                _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), ValueModel.Value);
-                EnsureValuePossible(_valueCache);
+                GetValueFromModel();
+                return _valueCache;
             }
-            _valueCacheInititalized = true;
         }
         #endregion
 
@@ -447,17 +439,37 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
+        private ZbTask<ReadOnlyObservableCollection<ViewModel>> _getPossibleValuesROTask;
         private ReadOnlyObservableCollection<ViewModel> _possibleValuesRO;
         private ObservableCollection<ViewModel> _possibleValues;
         public ReadOnlyObservableCollection<ViewModel> PossibleValues
         {
             get
             {
-                if (_possibleValues == null)
+                TriggerPossibleValuesROAsync();
+                _getPossibleValuesROTask.Wait();
+                return _possibleValuesRO;
+            }
+        }
+
+        public ReadOnlyObservableCollection<ViewModel> PossibleValuesAsync
+        {
+            get
+            {
+                TriggerPossibleValuesROAsync();
+                return _possibleValuesRO;
+            }
+        }
+
+        private void TriggerPossibleValuesROAsync()
+        {
+            if (_getPossibleValuesROTask == null)
+            {
+                var task = GetPossibleValuesAsync();
+                _getPossibleValuesROTask = new ZbTask<ReadOnlyObservableCollection<ViewModel>>(task);
+                _getPossibleValuesROTask.OnResult(t =>
                 {
-                    bool needMoreButton;
-                    var mdlList = GetPossibleValues(out needMoreButton);
-                    if (needMoreButton)
+                    if (task.Result.Item2)
                     {
                         var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                             DataContext,
@@ -468,13 +480,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                             null,
                             null);
                         cmdMdl.RequestedKind = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_CommandLinkKind.Find(FrozenContext);
-                        mdlList.Add(cmdMdl);
+                        task.Result.Item1.Add(cmdMdl);
                     }
-                    _possibleValues = new ObservableCollection<ViewModel>(mdlList);
+                    _possibleValues = new ObservableCollection<ViewModel>(task.Result.Item1);
                     _possibleValuesRO = new ReadOnlyObservableCollection<ViewModel>(_possibleValues);
                     EnsureValuePossible(Value);
-                }
-                return _possibleValuesRO;
+                    OnPropertyChanged("PossibleValuesAsync");
+                });
             }
         }
 
@@ -490,14 +502,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             return (IQueryable)mi.Invoke(this, new object[0]);
         }
 
-        private static readonly List<ViewModel> _emptyPossibleValuesList = new List<ViewModel>();
-        protected virtual List<ViewModel> GetPossibleValues(out bool needMoreButton)
+        protected virtual ZbTask<Tuple<List<ViewModel>, bool>> GetPossibleValuesAsync()
         {
             // No selection allowed -> no inline search allowed
             if (!AllowSelectValue)
             {
-                needMoreButton = false;
-                return _emptyPossibleValuesList;
+                return new ZbTask<Tuple<List<ViewModel>, bool>>(new Tuple<List<ViewModel>, bool>(new List<ViewModel>(), false));
             }
 
             var qry = GetUntypedQuery(ReferencedClass);
@@ -505,28 +515,31 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             // Abort query of null was returned
             if (qry == null)
             {
-                needMoreButton = false;
-                return new List<ViewModel>();
+                return new ZbTask<Tuple<List<ViewModel>, bool>>(new Tuple<List<ViewModel>, bool>(new List<ViewModel>(), false));
             }
 
-            var lst = qry.Take(PossibleValuesLimit + 1).OfType<IDataObject>().ToList();
+            var fetchTask = qry.Take(PossibleValuesLimit + 1).OfType<IDataObject>().ToListAsync();
 
-            var mdlList = lst
-                        .Take(PossibleValuesLimit)
-                        .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), i))
-                        .Cast<ViewModel>()
-                        .OrderBy(v => v.Name)
-                        .ToList();
+            var lstTask = new ZbTask<Tuple<List<ViewModel>, bool>>(fetchTask)
+                .OnResult(t =>
+                {
+                    var mdlList = fetchTask.Result
+                                .Take(PossibleValuesLimit)
+                                .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), i))
+                                .Cast<ViewModel>()
+                                .OrderBy(v => v.Name)
+                                .ToList();
 
-            needMoreButton = lst.Count > PossibleValuesLimit;
+                    t.Result = new Tuple<List<ViewModel>, bool>(mdlList, mdlList.Count > PossibleValuesLimit);
 
-            // Add current value if not already present
-            if (Value != null && !mdlList.Contains(Value))
-            {
-                mdlList.Add(Value);
-            }
+                    // Add current value if not already present
+                    if (Value != null && !mdlList.Contains(Value))
+                    {
+                        mdlList.Add(Value);
+                    }
+                });
 
-            return mdlList;
+            return lstTask;
         }
 
         /// <summary>
@@ -554,7 +567,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             foreach (FilterModel f in _filterModels)
             {
-                var valMdl = f.FilterArgument.Value as ClassValueModel<string>;
+                var valMdl = f.FilterArguments.First().Value as ClassValueModel<string>;
                 if (valMdl != null)
                 {
                     valMdl.Value = SearchString;
@@ -583,13 +596,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     // Add ObjectClass filter expressions
                     foreach (var cfc in t.FilterConfigurations)
                     {
-                        _filterModels.Add(cfc.CreateFilterModel());
+                        _filterModels.Add(cfc.CreateFilterModel(DataContext));
                     }
 
                     // Add Property filter expressions
                     foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                     {
-                        _filterModels.Add(prop.FilterConfiguration.CreateFilterModel());
+                        _filterModels.Add(prop.FilterConfiguration.CreateFilterModel(DataContext));
                     }
                     t = t.BaseObjectClass;
                 }
@@ -618,14 +631,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             _possibleValues = null;
             _possibleValuesRO = null;
+            _getPossibleValuesROTask = null;
             OnPropertyChanged("PossibleValues");
+            OnPropertyChanged("PossibleValuesAsync");
         }
 
         public override string Error
         {
             get
             {
-                if (Value == null && !string.IsNullOrEmpty(SearchString))
+                if (!string.IsNullOrEmpty(SearchString) && Value == null)
                 {
                     return ObjectReferenceViewModelResources.Error_SearchString_NoValue;
                 }
@@ -657,13 +672,37 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region Highlight
+
+        private PropertyTask<Highlight> _HighlightTask;
+        private PropertyTask<Highlight> EnsureHighlightTask()
+        {
+            if (_HighlightTask != null) return _HighlightTask;
+
+            return _HighlightTask = new PropertyTask<Highlight>(
+                notifier: () =>
+                {
+                    OnHighlightChanged();
+                },
+                createTask: () =>
+                {
+                    return new ZbTask<Highlight>(GetValueFromModel(), () => Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight);
+                },
+                set: (Highlight value) =>
+                {
+                    throw new NotImplementedException();
+                });
+        }
+
         public override Highlight Highlight
         {
-            get
-            {
-                return (Value != null ? Value.Highlight : null) ?? base.Highlight;
-            }
+            get { return EnsureHighlightTask().Get(); }
         }
+
+        public override Highlight HighlightAsync
+        {
+            get { return EnsureHighlightTask().GetAsync(); }
+        }
+
         #endregion
     }
 }

@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The default ControlKind to use for displaying this Presentable readonly. Defaults to DefaultKind with editing disabled.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
         // fkBackingName=_fk_DefaultDisplayKind; fkGuidBackingName=_fk_guid_DefaultDisplayKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultDisplayKind;
+        private int? __fk_DefaultDisplayKindCache;
+
+        private int? _fk_DefaultDisplayKind {
+            get
+            {
+                return __fk_DefaultDisplayKindCache;
+            }
+            set
+            {
+                __fk_DefaultDisplayKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultDisplayKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultDisplayKind = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultDisplayKindTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultDisplayKindAsync()
+        {
+            if (_triggerFetchDefaultDisplayKindTask != null) return _triggerFetchDefaultDisplayKindTask;
+
+            if (_fk_DefaultDisplayKind.HasValue)
+                _triggerFetchDefaultDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value);
+            else
+                _triggerFetchDefaultDisplayKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchDefaultDisplayKindTask.OnResult(t =>
+            {
+                if (OnDefaultDisplayKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
+                    OnDefaultDisplayKind_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDefaultDisplayKindTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.GUI.ControlKindMemoryImpl __value;
-                if (_fk_DefaultDisplayKind.HasValue)
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value);
-                else
-                    __value = null;
-
-                if (OnDefaultDisplayKind_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(__value);
-                    OnDefaultDisplayKind_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultDisplayKindAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultDisplayKind == null) || (value != null && value.ID == _fk_DefaultDisplayKind))
-				{
-					SetInitializedProperty("DefaultDisplayKind");
+                {
+                    SetInitializedProperty("DefaultDisplayKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultDisplayKindImpl;
@@ -114,6 +137,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultDisplayKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultDisplayKind_PostSetter != null && IsAttached)
                 {
@@ -132,7 +156,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The default ControlKind to use for this Presentable.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
         // fkBackingName=_fk_DefaultEditorKind; fkGuidBackingName=_fk_guid_DefaultEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -150,9 +174,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultEditorKind;
+        private int? __fk_DefaultEditorKindCache;
+
+        private int? _fk_DefaultEditorKind {
+            get
+            {
+                return __fk_DefaultEditorKindCache;
+            }
+            set
+            {
+                __fk_DefaultEditorKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultEditorKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultEditorKind = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultEditorKindTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultEditorKindAsync()
+        {
+            if (_triggerFetchDefaultEditorKindTask != null) return _triggerFetchDefaultEditorKindTask;
+
+            if (_fk_DefaultEditorKind.HasValue)
+                _triggerFetchDefaultEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value);
+            else
+                _triggerFetchDefaultEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchDefaultEditorKindTask.OnResult(t =>
+            {
+                if (OnDefaultEditorKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
+                    OnDefaultEditorKind_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDefaultEditorKindTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -160,32 +220,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.GUI.ControlKindMemoryImpl __value;
-                if (_fk_DefaultEditorKind.HasValue)
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value);
-                else
-                    __value = null;
-
-                if (OnDefaultEditorKind_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(__value);
-                    OnDefaultEditorKind_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultEditorKindAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultEditorKind == null) || (value != null && value.ID == _fk_DefaultEditorKind))
-				{
-					SetInitializedProperty("DefaultEditorKind");
+                {
+                    SetInitializedProperty("DefaultEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultEditorKindImpl;
@@ -206,6 +253,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultEditorKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultEditorKind_PostSetter != null && IsAttached)
                 {
@@ -224,7 +272,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The default ControlKind to use for displaying this Presentable readonly in a GridCell. Defaults to DefaultDisplayKind.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
         // fkBackingName=_fk_DefaultGridCellDisplayKind; fkGuidBackingName=_fk_guid_DefaultGridCellDisplayKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -242,9 +290,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultGridCellDisplayKind;
+        private int? __fk_DefaultGridCellDisplayKindCache;
+
+        private int? _fk_DefaultGridCellDisplayKind {
+            get
+            {
+                return __fk_DefaultGridCellDisplayKindCache;
+            }
+            set
+            {
+                __fk_DefaultGridCellDisplayKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultGridCellDisplayKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultGridCellDisplayKind = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellDisplayKindTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellDisplayKindAsync()
+        {
+            if (_triggerFetchDefaultGridCellDisplayKindTask != null) return _triggerFetchDefaultGridCellDisplayKindTask;
+
+            if (_fk_DefaultGridCellDisplayKind.HasValue)
+                _triggerFetchDefaultGridCellDisplayKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value);
+            else
+                _triggerFetchDefaultGridCellDisplayKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchDefaultGridCellDisplayKindTask.OnResult(t =>
+            {
+                if (OnDefaultGridCellDisplayKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
+                    OnDefaultGridCellDisplayKind_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDefaultGridCellDisplayKindTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -252,32 +336,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.GUI.ControlKindMemoryImpl __value;
-                if (_fk_DefaultGridCellDisplayKind.HasValue)
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value);
-                else
-                    __value = null;
-
-                if (OnDefaultGridCellDisplayKind_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(__value);
-                    OnDefaultGridCellDisplayKind_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellDisplayKindAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultGridCellDisplayKind == null) || (value != null && value.ID == _fk_DefaultGridCellDisplayKind))
-				{
-					SetInitializedProperty("DefaultGridCellDisplayKind");
+                {
+                    SetInitializedProperty("DefaultGridCellDisplayKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultGridCellDisplayKindImpl;
@@ -298,6 +369,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultGridCellDisplayKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultGridCellDisplayKind_PostSetter != null && IsAttached)
                 {
@@ -316,7 +388,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The default ControlKind for displaying this model in a GridCell in editing mode. Defaults to DefaultKind.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
         // fkBackingName=_fk_DefaultGridCellEditorKind; fkGuidBackingName=_fk_guid_DefaultGridCellEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -334,9 +406,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultGridCellEditorKind;
+        private int? __fk_DefaultGridCellEditorKindCache;
+
+        private int? _fk_DefaultGridCellEditorKind {
+            get
+            {
+                return __fk_DefaultGridCellEditorKindCache;
+            }
+            set
+            {
+                __fk_DefaultGridCellEditorKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultGridCellEditorKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultGridCellEditorKind = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellEditorKindTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellEditorKindAsync()
+        {
+            if (_triggerFetchDefaultGridCellEditorKindTask != null) return _triggerFetchDefaultGridCellEditorKindTask;
+
+            if (_fk_DefaultGridCellEditorKind.HasValue)
+                _triggerFetchDefaultGridCellEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value);
+            else
+                _triggerFetchDefaultGridCellEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchDefaultGridCellEditorKindTask.OnResult(t =>
+            {
+                if (OnDefaultGridCellEditorKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
+                    OnDefaultGridCellEditorKind_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDefaultGridCellEditorKindTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -344,32 +452,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.GUI.ControlKindMemoryImpl __value;
-                if (_fk_DefaultGridCellEditorKind.HasValue)
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value);
-                else
-                    __value = null;
-
-                if (OnDefaultGridCellEditorKind_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(__value);
-                    OnDefaultGridCellEditorKind_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellEditorKindAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultGridCellEditorKind == null) || (value != null && value.ID == _fk_DefaultGridCellEditorKind))
-				{
-					SetInitializedProperty("DefaultGridCellEditorKind");
+                {
+                    SetInitializedProperty("DefaultGridCellEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultGridCellEditorKindImpl;
@@ -390,6 +485,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultGridCellEditorKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultGridCellEditorKind_PostSetter != null && IsAttached)
                 {
@@ -408,7 +504,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// .The default ControlKind for displaying this model in a GridCell befor editing starts. Defaults to DefaultGridCellDisplayKind.
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
         // fkBackingName=_fk_DefaultGridCellPreEditorKind; fkGuidBackingName=_fk_guid_DefaultGridCellPreEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -426,9 +522,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_DefaultGridCellPreEditorKind;
+        private int? __fk_DefaultGridCellPreEditorKindCache;
+
+        private int? _fk_DefaultGridCellPreEditorKind {
+            get
+            {
+                return __fk_DefaultGridCellPreEditorKindCache;
+            }
+            set
+            {
+                __fk_DefaultGridCellPreEditorKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultGridCellPreEditorKindTask = null;
+            }
+        }
 
         private Guid? _fk_guid_DefaultGridCellPreEditorKind = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchDefaultGridCellPreEditorKindTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchDefaultGridCellPreEditorKindAsync()
+        {
+            if (_triggerFetchDefaultGridCellPreEditorKindTask != null) return _triggerFetchDefaultGridCellPreEditorKindTask;
+
+            if (_fk_DefaultGridCellPreEditorKind.HasValue)
+                _triggerFetchDefaultGridCellPreEditorKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value);
+            else
+                _triggerFetchDefaultGridCellPreEditorKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchDefaultGridCellPreEditorKindTask.OnResult(t =>
+            {
+                if (OnDefaultGridCellPreEditorKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
+                    OnDefaultGridCellPreEditorKind_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDefaultGridCellPreEditorKindTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -436,32 +568,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.GUI.ControlKindMemoryImpl __value;
-                if (_fk_DefaultGridCellPreEditorKind.HasValue)
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value);
-                else
-                    __value = null;
-
-                if (OnDefaultGridCellPreEditorKind_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(__value);
-                    OnDefaultGridCellPreEditorKind_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ControlKindMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchDefaultGridCellPreEditorKindAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_DefaultGridCellPreEditorKind == null) || (value != null && value.ID == _fk_DefaultGridCellPreEditorKind))
-				{
-					SetInitializedProperty("DefaultGridCellPreEditorKind");
+                {
+                    SetInitializedProperty("DefaultGridCellPreEditorKind");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultGridCellPreEditorKindImpl;
@@ -482,6 +601,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultGridCellPreEditorKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnDefaultGridCellPreEditorKind_PostSetter != null && IsAttached)
                 {
@@ -533,6 +653,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -540,10 +661,10 @@ namespace Zetbox.App.GUI
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description;
@@ -602,6 +723,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -609,10 +731,10 @@ namespace Zetbox.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -627,7 +749,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -645,9 +767,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Module;
+        private int? __fk_ModuleCache;
+
+        private int? _fk_Module {
+            get
+            {
+                return __fk_ModuleCache;
+            }
+            set
+            {
+                __fk_ModuleCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchModuleTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Module = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
+        {
+            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+
+            if (_fk_Module.HasValue)
+                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchModuleTask.OnResult(t =>
+            {
+                if (OnModule_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Module>(t.Result);
+                    OnModule_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchModuleTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -655,32 +813,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.Base.ModuleMemoryImpl __value;
-                if (_fk_Module.HasValue)
-                    __value = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
-                else
-                    __value = null;
-
-                if (OnModule_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Module>(__value);
-                    OnModule_Getter(this, e);
-                    __value = (Zetbox.App.Base.ModuleMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -701,6 +846,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -727,15 +873,26 @@ namespace Zetbox.App.GUI
 			{
 				if (_SecondaryControlKinds == null)
 				{
-					Context.FetchRelation<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47"), RelationEndRole.A, this);
-					_SecondaryControlKinds 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchSecondaryControlKindsAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.GUI.ControlKind>)_SecondaryControlKinds;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchSecondaryControlKindsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchSecondaryControlKindsAsync()
+        {
+            if (_triggerFetchSecondaryControlKindsTask != null) return _triggerFetchSecondaryControlKindsTask;
+			_triggerFetchSecondaryControlKindsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47"), RelationEndRole.A, this);
+			_triggerFetchSecondaryControlKindsTask.OnResult(r => 
+            {
+                _SecondaryControlKinds 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchSecondaryControlKindsTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>> _SecondaryControlKinds;
 
@@ -744,7 +901,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The described CLR class&amp;apos; reference
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
         // fkBackingName=_fk_ViewModelRef; fkGuidBackingName=_fk_guid_ViewModelRef;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -762,9 +919,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ViewModelRef;
+        private int? __fk_ViewModelRefCache;
+
+        private int? _fk_ViewModelRef {
+            get
+            {
+                return __fk_ViewModelRefCache;
+            }
+            set
+            {
+                __fk_ViewModelRefCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchViewModelRefTask = null;
+            }
+        }
 
         private Guid? _fk_guid_ViewModelRef = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchViewModelRefTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchViewModelRefAsync()
+        {
+            if (_triggerFetchViewModelRefTask != null) return _triggerFetchViewModelRefTask;
+
+            if (_fk_ViewModelRef.HasValue)
+                _triggerFetchViewModelRefTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value);
+            else
+                _triggerFetchViewModelRefTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchViewModelRefTask.OnResult(t =>
+            {
+                if (OnViewModelRef_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(t.Result);
+                    OnViewModelRef_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchViewModelRefTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -772,32 +965,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.Base.TypeRefMemoryImpl __value;
-                if (_fk_ViewModelRef.HasValue)
-                    __value = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value);
-                else
-                    __value = null;
-
-                if (OnViewModelRef_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(__value);
-                    OnViewModelRef_Getter(this, e);
-                    __value = (Zetbox.App.Base.TypeRefMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchViewModelRefAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_ViewModelRef == null) || (value != null && value.ID == _fk_ViewModelRef))
-				{
-					SetInitializedProperty("ViewModelRef");
+                {
+                    SetInitializedProperty("ViewModelRef");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ViewModelRefImpl;
@@ -818,6 +998,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnViewModelRef_PostSetter != null && IsAttached)
                 {
@@ -918,11 +1099,6 @@ namespace Zetbox.App.GUI
             this._fk_DefaultGridCellPreEditorKind = otherImpl._fk_DefaultGridCellPreEditorKind;
             this._fk_Module = otherImpl._fk_Module;
             this._fk_ViewModelRef = otherImpl._fk_ViewModelRef;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1035,6 +1211,31 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DefaultDisplayKind":
+                return TriggerFetchDefaultDisplayKindAsync();
+            case "DefaultEditorKind":
+                return TriggerFetchDefaultEditorKindAsync();
+            case "DefaultGridCellDisplayKind":
+                return TriggerFetchDefaultGridCellDisplayKindAsync();
+            case "DefaultGridCellEditorKind":
+                return TriggerFetchDefaultGridCellEditorKindAsync();
+            case "DefaultGridCellPreEditorKind":
+                return TriggerFetchDefaultGridCellPreEditorKindAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "SecondaryControlKinds":
+                return TriggerFetchSecondaryControlKindsAsync();
+            case "ViewModelRef":
+                return TriggerFetchViewModelRefAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -1291,6 +1492,8 @@ namespace Zetbox.App.GUI
             DefaultGridCellDisplayKind = null;
             DefaultGridCellEditorKind = null;
             DefaultGridCellPreEditorKind = null;
+            Module = null;
+            ViewModelRef = null;
         }
         public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyDeleting_ViewModelDescriptor;
 

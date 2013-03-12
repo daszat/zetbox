@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Definition of this Compound Object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObjectDefinition
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObjectDefinition
         // fkBackingName=_fk_CompoundObjectDefinition; fkGuidBackingName=_fk_guid_CompoundObjectDefinition;
         // referencedInterface=Zetbox.App.Base.CompoundObject; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CompoundObjectDefinition;
+        private int? __fk_CompoundObjectDefinitionCache;
+
+        private int? _fk_CompoundObjectDefinition {
+            get
+            {
+                return __fk_CompoundObjectDefinitionCache;
+            }
+            set
+            {
+                __fk_CompoundObjectDefinitionCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCompoundObjectDefinitionTask = null;
+            }
+        }
 
         private Guid? _fk_guid_CompoundObjectDefinition = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject> _triggerFetchCompoundObjectDefinitionTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject> TriggerFetchCompoundObjectDefinitionAsync()
+        {
+            if (_triggerFetchCompoundObjectDefinitionTask != null) return _triggerFetchCompoundObjectDefinitionTask;
+
+            if (_fk_CompoundObjectDefinition.HasValue)
+                _triggerFetchCompoundObjectDefinitionTask = Context.FindAsync<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
+            else
+                _triggerFetchCompoundObjectDefinitionTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchCompoundObjectDefinitionTask.OnResult(t =>
+            {
+                if (OnCompoundObjectDefinition_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.CompoundObject>(t.Result);
+                    OnCompoundObjectDefinition_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCompoundObjectDefinitionTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.CompoundObjectMemoryImpl __value;
-                if (_fk_CompoundObjectDefinition.HasValue)
-                    __value = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
-                else
-                    __value = null;
-
-                if (OnCompoundObjectDefinition_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.CompoundObject>(__value);
-                    OnCompoundObjectDefinition_Getter(this, e);
-                    __value = (Zetbox.App.Base.CompoundObjectMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.CompoundObjectMemoryImpl)TriggerFetchCompoundObjectDefinitionAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_CompoundObjectDefinition == null) || (value != null && value.ID == _fk_CompoundObjectDefinition))
-				{
-					SetInitializedProperty("CompoundObjectDefinition");
+                {
+                    SetInitializedProperty("CompoundObjectDefinition");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CompoundObjectDefinitionImpl;
@@ -114,6 +137,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CompoundObjectDefinition", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCompoundObjectDefinition_PostSetter != null && IsAttached)
                 {
@@ -165,6 +189,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     _HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -172,10 +197,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
         private bool _HasPersistentOrder;
@@ -222,6 +247,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -229,10 +255,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
         private bool _IsList;
@@ -574,11 +600,6 @@ namespace Zetbox.App.Base
             me.IsList = other.IsList;
             this._fk_CompoundObjectDefinition = otherImpl._fk_CompoundObjectDefinition;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -619,6 +640,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "CompoundObjectDefinition":
+                return TriggerFetchCompoundObjectDefinitionAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -753,6 +785,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObjectProperty != null) OnNotifyDeleting_CompoundObjectProperty(this);
+            CompoundObjectDefinition = null;
         }
         public static event ObjectEventHandler<CompoundObjectProperty> OnNotifyDeleting_CompoundObjectProperty;
 

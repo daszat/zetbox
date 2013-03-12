@@ -440,12 +440,6 @@ namespace at.dasz.DocumentManagement
             var me = (ImportedFile)this;
 
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();

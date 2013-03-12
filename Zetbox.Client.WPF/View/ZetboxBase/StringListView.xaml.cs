@@ -30,6 +30,7 @@ using Zetbox.API.Utils;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.ValueViewModels;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 using Zetbox.Client.WPF.View.ZetboxBase;
 
 namespace Zetbox.Client.WPF.View
@@ -47,15 +48,15 @@ namespace Zetbox.Client.WPF.View
 
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
-            var model = (IValueListViewModel<string, IReadOnlyList<string>>)DataContext;
-            model.AddItem(String.Empty);
+            var model = (IValueListViewModel<string, IReadOnlyList<string>>)WPFHelper.SanitizeDataContext(DataContext);
+            model.Add(String.Empty);
             PART_ItemEditBox.Focus();
         }
 
         private void RemoveHandler(object sender, RoutedEventArgs e)
         {
-            var model = (IValueListViewModel<string, IReadOnlyList<string>>)DataContext;
-            model.RemoveItem(model.SelectedItem);
+            var model = (IValueListViewModel<string, IReadOnlyList<string>>)WPFHelper.SanitizeDataContext(DataContext);
+            model.Remove();
         }
 
 

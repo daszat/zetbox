@@ -16,29 +16,31 @@ namespace Zetbox.Generator.Templates.Properties
 		protected string implementationTypeName;
 		protected string propertyName;
 		protected string backingStoreName;
+		protected string lazyCtxParam;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string implementationTypeName, string propertyName, string backingStoreName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string implementationTypeName, string propertyName, string backingStoreName, string lazyCtxParam)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Properties.CompoundObjectPropertyInitialisation", ctx, implementationTypeName, propertyName, backingStoreName);
+            _host.CallTemplate("Properties.CompoundObjectPropertyInitialisation", ctx, implementationTypeName, propertyName, backingStoreName, lazyCtxParam);
         }
 
-        public CompoundObjectPropertyInitialisation(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string implementationTypeName, string propertyName, string backingStoreName)
+        public CompoundObjectPropertyInitialisation(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string implementationTypeName, string propertyName, string backingStoreName, string lazyCtxParam)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.implementationTypeName = implementationTypeName;
 			this.propertyName = propertyName;
 			this.backingStoreName = backingStoreName;
+			this.lazyCtxParam = lazyCtxParam;
 
         }
 
         public override void Generate()
         {
-#line 32 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
-this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(this, \"",  propertyName , "\");\r\n");
+#line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
+this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(",  lazyCtxParam , ", this, \"",  propertyName , "\");\r\n");
 
         }
 

@@ -32,7 +32,7 @@ namespace Zetbox.App.GUI
     public static class RangeFilterConfigurationActions
     {
         [Invocation]
-        public static void CreateFilterModel(Zetbox.App.GUI.RangeFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e)
+        public static void CreateFilterModel(Zetbox.App.GUI.RangeFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
             var mdl = new RangeFilterModel();
             mdl.Label = obj.GetLabel();
@@ -42,8 +42,8 @@ namespace Zetbox.App.GUI
             mdl.ViewModelType = obj.ViewModelDescriptor;
             mdl.RequestedKind = obj.RequestedKind;
 
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(ctx, true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
             e.Result = mdl;
         }
 

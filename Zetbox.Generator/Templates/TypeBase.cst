@@ -121,6 +121,14 @@ namespace <%= DataType.Module.Namespace %>
             
             Serialization.SerializerTemplate.Call(Host, ctx,
                 Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, GetExportGuidBackingStoreReference());
+        } 
+        else if (DataType is CompoundObject)
+        {
+            Serialization.SerializerTemplate.Call(Host, ctx,
+                Serialization.SerializerDirection.Export, this.MembersToSerialize, true, null);
+            
+            Serialization.SerializerTemplate.Call(Host, ctx,
+                Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, true, null);
         }
 %>
 

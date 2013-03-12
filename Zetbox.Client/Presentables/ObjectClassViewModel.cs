@@ -47,22 +47,24 @@ namespace Zetbox.Client.Presentables
 
         private ObjectClass _class;
 
-        public override Zetbox.App.GUI.Icon Icon
+        public override System.Drawing.Image Icon
         {
-            get { return _class.DefaultIcon; }
+            get { return IconConverter.ToImage(_class.DefaultIcon); }
         }
 
         protected override List<PropertyGroupViewModel> CreatePropertyGroups()
         {
             var result = base.CreatePropertyGroups();
 
-            var relListMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, this, () => DataContext, typeof(Relation).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Relation>());
+            var relListMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(
+                DataContext,
+                this,
+                typeof(Relation).GetObjectClass(FrozenContext),
+                () => DataContext.GetQuery<Relation>().Where(i => i.A.Type == Object || i.B.Type == Object));
             relListMdl.EnableAutoFilter = false;
-            relListMdl.AddFilter(new ConstantValueFilterModel("A.Type = @0 || B.Type = @0", this.Object));
             relListMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Relation", "Creates a new Relation", CreateRelation, null, null));
 
-            var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Relations", "", relListMdl);
-            var propGrpMdl = ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Relations", new ViewModel[] { lblMdl });
+            var propGrpMdl = ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Relations", new ViewModel[] { relListMdl });
             result.Add(propGrpMdl);
             return result;
         }

@@ -12,16 +12,17 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace Zetbox.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Text;
+    
     /// <summary>
     /// Baseclass for a Expressiontree Visitor. This Visitor does _not_ translate the Expression Tree.
     /// </summary>
@@ -43,9 +44,14 @@ namespace Zetbox.API
                 case ExpressionType.Not:
                 case ExpressionType.Convert:
                 case ExpressionType.ConvertChecked:
+                case ExpressionType.Decrement:
+                case ExpressionType.Increment:
+                case ExpressionType.OnesComplement:
                 case ExpressionType.ArrayLength:
                 case ExpressionType.Quote:
                 case ExpressionType.TypeAs:
+                case ExpressionType.UnaryPlus:
+                case ExpressionType.Unbox:
                     {
                         VisitUnary((UnaryExpression)e);
                         break;

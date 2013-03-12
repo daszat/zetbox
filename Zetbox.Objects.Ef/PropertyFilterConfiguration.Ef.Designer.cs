@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// Abstract base class for Property Filter
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="PropertyFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="PropertyFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("PropertyFilterConfiguration")]
     public abstract class PropertyFilterConfigurationEfImpl : Zetbox.App.GUI.FilterConfigurationEfImpl, PropertyFilterConfiguration
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.GUI
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnProperty_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.PropertyEfImpl> r
@@ -145,6 +144,7 @@ namespace Zetbox.App.GUI
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("FilterConfiguration", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -160,16 +160,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_PropertyFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_PropertyFilterConfiguration != null)
             {
-                OnCreateFilterModel_PropertyFilterConfiguration(this, e);
+                OnCreateFilterModel_PropertyFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -294,11 +294,6 @@ namespace Zetbox.App.GUI
             var me = (PropertyFilterConfiguration)this;
 
             this._fk_Property = otherImpl._fk_Property;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -433,6 +428,7 @@ namespace Zetbox.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_PropertyFilterConfiguration != null) OnNotifyDeleting_PropertyFilterConfiguration(this);
+            Property = null;
         }
         public static event ObjectEventHandler<PropertyFilterConfiguration> OnNotifyDeleting_PropertyFilterConfiguration;
 
@@ -447,8 +443,9 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_Property_Has_PropertyFilterConfiguration", "Property").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_Property_Has_PropertyFilterConfiguration", "Property");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 

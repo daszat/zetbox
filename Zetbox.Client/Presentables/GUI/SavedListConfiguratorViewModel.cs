@@ -17,22 +17,23 @@ namespace Zetbox.Client.Presentables.GUI
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Zetbox.Client.Presentables;
     using Zetbox.API;
-    using Zetbox.Client.Presentables.ZetboxBase;
-    using System.Collections.ObjectModel;
-    using Zetbox.API.Utils;
-    using Zetbox.App.GUI;
+    using Zetbox.API.Async;
     using Zetbox.API.Common.GUI;
-    using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.Client.Models;
-    using Zetbox.Client.GUI;
+    using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     // No ViewModelDescriptor -> internal
-    public class SavedListConfiguratorViewModel : ViewModel
+    public partial class SavedListConfiguratorViewModel : ViewModel
     {
         public new delegate SavedListConfiguratorViewModel Factory(IZetboxContext dataCtx, InstanceListViewModel parent);
 
@@ -67,30 +68,55 @@ namespace Zetbox.Client.Presentables.GUI
             get { return "SavedListConfiguratorViewModel"; }
         }
 
-        private ReadOnlyCollectionShortcut<SavedListConfigViewModel> _configs;
+        private PropertyTask<ReadOnlyCollectionShortcut<SavedListConfigViewModel>> _configsTask;
+        private PropertyTask<ReadOnlyCollectionShortcut<SavedListConfigViewModel>> EnsureConfigsTask()
+        {
+            if (_configsTask != null) return _configsTask;
+
+            return _configsTask = new PropertyTask<ReadOnlyCollectionShortcut<SavedListConfigViewModel>>(
+                notifier: () =>
+                {
+                    OnPropertyChanged("Configs");
+                    OnPropertyChanged("ConfigsAsync");
+                },
+                createTask: () =>
+                {
+                    var ctx = ctxFactory();
+                    var qryTask = ctx.GetQuery<SavedListConfiguration>()
+                            .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
+                            .Where(i => i.Owner == null || i.Owner == this.CurrentIdentity)
+                            .ToListAsync();
+
+                    var result = new ZbTask<ReadOnlyCollectionShortcut<SavedListConfigViewModel>>(qryTask);
+                    result
+                        .OnResult(t =>
+                        {
+                            t.Result = new ReadOnlyCollectionShortcut<SavedListConfigViewModel>();
+                            foreach (var cfg in qryTask.Result)
+                            {
+                                var obj = cfg.Configuration.FromXmlString<SavedListConfigurationList>();
+                                foreach (var item in obj.Configs)
+                                {
+                                    t.Result.Rw.Add(ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, cfg.Owner != null));
+                                }
+                            }
+                        });
+                    return result;
+                },
+                set: null);
+        }
+
         public ReadOnlyObservableCollection<SavedListConfigViewModel> Configs
+        {
+            get { return EnsureConfigsTask().Get().Ro; }
+        }
+
+        public ReadOnlyObservableCollection<SavedListConfigViewModel> ConfigsAsync
         {
             get
             {
-                if (_configs == null)
-                {
-                    _configs = new ReadOnlyCollectionShortcut<SavedListConfigViewModel>();
-                    using (var ctx = ctxFactory())
-                    {
-                        var configs = ctx.GetQuery<SavedListConfiguration>()
-                            .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
-                            .Where(i => i.Owner == null || i.Owner == this.CurrentIdentity);
-                        foreach (var cfg in configs)
-                        {
-                            var obj = cfg.Configuration.FromXmlString<SavedListConfigurationList>();
-                            foreach (var item in obj.Configs)
-                            {
-                                _configs.Rw.Add(ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, cfg.Owner != null));
-                            }
-                        }
-                    }
-                }
-                return _configs.Ro;
+                var result = EnsureConfigsTask().GetAsync();
+                return result != null ? result.Ro : null;
             }
         }
 
@@ -108,42 +134,29 @@ namespace Zetbox.Client.Presentables.GUI
                     _selectedItem = value;
                     OnPropertyChanged("SelectedItem");
                     Load();
+                    Parent.Refresh();
                 }
             }
         }
 
-        private void Load()
+        public class ColumnInformation
         {
-            Parent.FilterList.ResetUserFilter();
-            if (_selectedItem != null)
-            {
-                // Filter
-                foreach (var f in _selectedItem.Object.Filter)
-                {
-                    var props = f.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToList();
-                    var mdl = FilterModel.FromProperty(FrozenContext, props);
-                    int idx = 0;
-                    foreach (var val in f.Values ?? new object[] { })
-                    {
-                        if (idx >= mdl.FilterArguments.Count) break;
-                        var valueMdl = mdl.FilterArguments[idx].Value;
-                        valueMdl.SetUntypedValue(ResolveUntypedValue(val, valueMdl));
-                        idx++;
-                    }
-                    Parent.FilterList.AddFilter(mdl, true, props);
-                }
+            public string Path { get; set; }
+            public int Width { get; set; }
+        }
 
-                // Cols
-                if (_selectedItem.Object.Columns != null && _selectedItem.Object.Columns.Count > 0)
-                {
-                    Parent.DisplayedColumns.Columns.Clear();
-                    foreach (var col in _selectedItem.Object.Columns)
-                    {
-                        var props = col.Properties.Select(i => FrozenContext.FindPersistenceObject<Property>(i)).ToArray();
-                        Parent.DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, props));
-                    }
-                }
+        public delegate List<ColumnInformation> GetColumnInformationEventHandler();
+        public event GetColumnInformationEventHandler GetColumnInformation;
+
+        protected List<ColumnInformation> OnGetColumnInformation()
+        {
+            List<ColumnInformation> result = null;
+            var temp = GetColumnInformation;
+            if (temp != null)
+            {
+                result = temp();
             }
+            return result ?? Parent.DisplayedColumns.Columns.Select(i => new ColumnInformation() { Path = i.Path, Width = 0 }).ToList();
         }
 
         #region Commands
@@ -156,7 +169,7 @@ namespace Zetbox.Client.Presentables.GUI
                 {
                     _SaveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         SavedListConfiguratorViewModelResources.SaveCommandName,
-                        SavedListConfiguratorViewModelResources.SaveCommandTooltip, 
+                        SavedListConfiguratorViewModelResources.SaveCommandTooltip,
                         Save, null, null);
                     //_SaveCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save.Find(FrozenContext);
                 }
@@ -173,7 +186,7 @@ namespace Zetbox.Client.Presentables.GUI
                 {
                     _SaveAsCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         SavedListConfiguratorViewModelResources.SaveAsCommandName,
-                        SavedListConfiguratorViewModelResources.SaveAsCommandTooltip, 
+                        SavedListConfiguratorViewModelResources.SaveAsCommandTooltip,
                         SaveAs, null, null);
                     //_SaveCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save.Find(FrozenContext);
                 }
@@ -184,7 +197,7 @@ namespace Zetbox.Client.Presentables.GUI
         public void SaveAs()
         {
             string name = string.Empty;
-            ViewModelFactory.CreateDialog(SavedListConfiguratorViewModelResources.SaveDlgTitle)
+            ViewModelFactory.CreateDialog(DataContext, SavedListConfiguratorViewModelResources.SaveDlgTitle)
                 .AddString(SavedListConfiguratorViewModelResources.SaveDlgNameLabel)
                 .Show((p) => { name = p[0] as string; });
             if (string.IsNullOrEmpty(name)) return;
@@ -197,7 +210,7 @@ namespace Zetbox.Client.Presentables.GUI
             if (SelectedItem == null || !SelectedItem.IsMyOwn)
             {
                 // Create new
-                ViewModelFactory.CreateDialog(SavedListConfiguratorViewModelResources.SaveDlgTitle)
+                ViewModelFactory.CreateDialog(DataContext, SavedListConfiguratorViewModelResources.SaveDlgTitle)
                     .AddString(SavedListConfiguratorViewModelResources.SaveDlgNameLabel)
                     .Show((p) => { name = p[0] as string; });
                 if (string.IsNullOrEmpty(name)) return;
@@ -211,43 +224,6 @@ namespace Zetbox.Client.Presentables.GUI
             Save(name);
         }
 
-        private void Save(string name)
-        {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            using (var ctx = ctxFactory())
-            {
-                var config = GetSavedConfig(ctx);
-                var obj = ExtractConfigurationObject(config);
-                var item = ExtractItem(name, obj);
-
-                // Do the update
-                item.Filter = new List<SavedListConfig.FilterConfig>();
-                foreach (var fvm in Parent.FilterList.FilterListEntryViewModels.Where(f => f.SourceProperties != null))
-                {
-                    item.Filter.Add(new SavedListConfig.FilterConfig()
-                    {
-                        Properties = fvm.SourceProperties.Select(i => i.ExportGuid).ToArray(),
-                        Values = fvm.FilterViewModel.Arguments.Select(i => ExtractUntypedValue(i.UntypedValue)).ToArray()
-                    });
-                }
-
-                item.Columns = new List<SavedListConfig.ColumnConfig>();
-                foreach (var col in Parent.DisplayedColumns.Columns)
-                {
-                    item.Columns.Add(new SavedListConfig.ColumnConfig()
-                    {
-                        Properties = col.Properties.Select(i => i.ExportGuid).ToArray(),
-                        Width = 0
-                    });
-                }
-
-                config.Configuration = obj.ToXmlString();
-                ctx.SubmitChanges();
-
-                UpdateViewModel(name, item);
-            }
-        }
-
         private ICommandViewModel _ResetCommand = null;
         public ICommandViewModel ResetCommand
         {
@@ -255,11 +231,11 @@ namespace Zetbox.Client.Presentables.GUI
             {
                 if (_ResetCommand == null)
                 {
-                    _ResetCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
-                        SavedListConfiguratorViewModelResources.ResetCommandName, 
-                        SavedListConfiguratorViewModelResources.ResetCommandTooltip, 
+                    _ResetCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        SavedListConfiguratorViewModelResources.ResetCommandName,
+                        SavedListConfiguratorViewModelResources.ResetCommandTooltip,
                         Reset, null, null);
-                    _ResetCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext);
+                    _ResetCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
                 }
                 return _ResetCommand;
             }
@@ -279,12 +255,12 @@ namespace Zetbox.Client.Presentables.GUI
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
-                        SavedListConfiguratorViewModelResources.DeleteCommandName, 
-                        SavedListConfiguratorViewModelResources.DeleteCommandTooltip, 
-                        Delete, () => SelectedItem != null, 
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        SavedListConfiguratorViewModelResources.DeleteCommandName,
+                        SavedListConfiguratorViewModelResources.DeleteCommandTooltip,
+                        Delete, () => SelectedItem != null,
                         () => SavedListConfiguratorViewModelResources.DeleteCommandReason);
-                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
+                    _DeleteCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
                 }
                 return _DeleteCommand;
             }
@@ -327,10 +303,10 @@ namespace Zetbox.Client.Presentables.GUI
             {
                 if (_RenameCommand == null)
                 {
-                    _RenameCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
-                        SavedListConfiguratorViewModelResources.RenameCommandName, 
-                        SavedListConfiguratorViewModelResources.RenameCommandTooltip, 
-                        Rename, () => SelectedItem != null, 
+                    _RenameCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        SavedListConfiguratorViewModelResources.RenameCommandName,
+                        SavedListConfiguratorViewModelResources.RenameCommandTooltip,
+                        Rename, () => SelectedItem != null,
                         () => SavedListConfiguratorViewModelResources.RenameCommandReason);
                 }
                 return _RenameCommand;
@@ -352,9 +328,9 @@ namespace Zetbox.Client.Presentables.GUI
             string newName = null;
             string oldName = itemToRename.Name;
 
-            ViewModelFactory.CreateDialog(SavedListConfiguratorViewModelResources.SaveDlgTitle)
+            ViewModelFactory.CreateDialog(DataContext, SavedListConfiguratorViewModelResources.SaveDlgTitle)
                 .AddString(SavedListConfiguratorViewModelResources.SaveDlgNameLabel)
-                .Show((p) => { newName = p[0] as string; });
+                .Show(p => { newName = p[0] as string; });
             if (string.IsNullOrEmpty(newName)) return;
 
             using (var ctx = ctxFactory())
@@ -423,13 +399,14 @@ namespace Zetbox.Client.Presentables.GUI
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             if (item == null) throw new ArgumentNullException("item");
 
-            if (_configs != null)
+            var configs = EnsureConfigsTask().Get();
+            if (configs != null)
             {
-                SavedListConfigViewModel vmdl = this._configs.Rw.SingleOrDefault(i => i.Object.Name == name && i.IsMyOwn);
+                SavedListConfigViewModel vmdl = configs.Rw.SingleOrDefault(i => i.Object.Name == name && i.IsMyOwn);
                 if (vmdl == null)
                 {
                     vmdl = ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, true);
-                    _configs.Rw.Add(vmdl);
+                    configs.Rw.Add(vmdl);
                     SelectedItem = vmdl;
                 }
                 else
@@ -442,12 +419,14 @@ namespace Zetbox.Client.Presentables.GUI
         protected void RemoveViewModel(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            if (_configs != null)
+            var configs = EnsureConfigsTask().Get();
+
+            if (configs != null)
             {
-                SavedListConfigViewModel vmdl = this._configs.Rw.SingleOrDefault(i => i.Object.Name == name && i.IsMyOwn);
+                SavedListConfigViewModel vmdl = configs.Rw.SingleOrDefault(i => i.Object.Name == name && i.IsMyOwn);
                 if (vmdl != null)
                 {
-                    _configs.Rw.Remove(vmdl);
+                    configs.Rw.Remove(vmdl);
                     SelectedItem = null;
                 }
             }
@@ -555,10 +534,11 @@ namespace Zetbox.Client.Presentables.GUI
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
-                        SavedListConfiguratorViewModelResources.DeleteCommandName, 
-                        SavedListConfiguratorViewModelResources.DeleteCommandTooltip, 
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        SavedListConfiguratorViewModelResources.DeleteCommandName,
+                        SavedListConfiguratorViewModelResources.DeleteCommandTooltip,
                         Delete, null, null);
+                    _DeleteCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext));
                 }
                 return _DeleteCommand;
             }
@@ -576,10 +556,11 @@ namespace Zetbox.Client.Presentables.GUI
             {
                 if (_RenameCommand == null)
                 {
-                    _RenameCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
-                        SavedListConfiguratorViewModelResources.RenameCommandName, 
-                        SavedListConfiguratorViewModelResources.RenameCommandTooltip, 
+                    _RenameCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        SavedListConfiguratorViewModelResources.RenameCommandName,
+                        SavedListConfiguratorViewModelResources.RenameCommandTooltip,
                         Rename, null, null);
+                    _RenameCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext));
                 }
                 return _RenameCommand;
             }

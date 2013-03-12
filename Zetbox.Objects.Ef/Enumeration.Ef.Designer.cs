@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Enumerations.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Enumeration")]
+    [EdmEntityType(NamespaceName="Model", Name="EnumerationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Enumeration")]
     public class EnumerationEfImpl : Zetbox.App.Base.DataTypeEfImpl, Enumeration
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("AreFlags", __oldValue, __newValue);
                     _AreFlags = __newValue;
                     NotifyPropertyChanged("AreFlags", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnAreFlags_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnAreFlags_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("AreFlags");
-				}
+                else
+                {
+                    SetInitializedProperty("AreFlags");
+                }
             }
         }
         private bool _AreFlags_store;
@@ -154,7 +155,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -622,11 +622,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             var me = (Enumeration)this;
 
             me.AreFlags = other.AreFlags;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

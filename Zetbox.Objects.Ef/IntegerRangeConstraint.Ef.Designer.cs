@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IntegerRangeConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="IntegerRangeConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IntegerRangeConstraint")]
     public class IntegerRangeConstraintEfImpl : Zetbox.App.Base.ConstraintEfImpl, IntegerRangeConstraint
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Max", __oldValue, __newValue);
                     _Max = __newValue;
                     NotifyPropertyChanged("Max", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMax_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnMax_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Max");
-				}
+                else
+                {
+                    SetInitializedProperty("Max");
+                }
             }
         }
         private int _Max_store;
@@ -147,6 +148,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Min", __oldValue, __newValue);
                     _Min = __newValue;
                     NotifyPropertyChanged("Min", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMin_PostSetter != null && IsAttached)
                     {
@@ -154,10 +156,10 @@ namespace Zetbox.App.Base
                         OnMin_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Min");
-				}
+                else
+                {
+                    SetInitializedProperty("Min");
+                }
             }
         }
         private int _Min_store;
@@ -316,11 +318,6 @@ namespace Zetbox.App.Base
 
             me.Max = other.Max;
             me.Min = other.Min;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

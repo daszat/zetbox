@@ -119,6 +119,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -126,10 +127,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
 
@@ -153,12 +154,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
             var me = (SecurityTestParent)this;
 
             me.Name = other.Name;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

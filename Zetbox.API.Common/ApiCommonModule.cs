@@ -20,6 +20,7 @@ namespace Zetbox.API.Common
     using System.Linq;
     using System.Text;
     using Autofac;
+    using Zetbox.API.Common.GUI;
 
     public class ApiCommonModule : Autofac.Module
     {
@@ -28,10 +29,31 @@ namespace Zetbox.API.Common
             base.Load(builder);
 
             builder
+                .RegisterModule<Zetbox.API.ApiModule>();
+
+            builder
+                .RegisterType<Zetbox.API.Common.Reporting.LoggingErrorReporter>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder
                 .RegisterType<CachingMetaDataResolver>()
                 .As<CachingMetaDataResolver>()
                 .As<IMetaDataResolver>()
                 .SingleInstance();
+
+            builder
+                .RegisterType<InvocationExecutor>()
+                .As<IInvocationExecutor>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<IconConverter>()
+                .As<IIconConverter>()
+                .SingleInstance();
+
+            builder.RegisterModule<Zetbox.Objects.InterfaceModule>();
+            builder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory", true)));
         }
     }
 }

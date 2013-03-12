@@ -1,4 +1,7 @@
-﻿R: Gendarme.Rules.Performance.AvoidConcatenatingCharsRule
+﻿R: Gendarme.Rules.Naming.AvoidTypeInterfaceInconsistencyRule
+T: Zetbox.API.IAppDomainInitializer
+
+R: Gendarme.Rules.Performance.AvoidConcatenatingCharsRule
 # This rule will warn you if boxing is used to concatenate a string since this will slow down your code and can be easily avoided.
 # external code
 M: System.Type System.Linq.Dynamic.ClassFactory::CreateDynamicClass(System.Linq.Dynamic.DynamicProperty[])
@@ -15,10 +18,16 @@ M: System.Boolean Zetbox.API.Utils.OptionSet::GetOptionParts(System.String,Syste
 # false positive, the referenced object changes beneath the access
 M: System.Collections.ObjectModel.ReadOnlyObservableCollection`1<Zetbox.Client.Presentables.ViewModel> Zetbox.Client.Presentables.ModuleEditor.WorkspaceViewModel::get_TreeItems()
 M: System.Void Zetbox.App.SchemaMigration.MigrationProjectMappingReport::RenderFirstPage()
+M: System.Linq.Expressions.Expression System.Linq.Dynamic.ExpressionParser::ParseComparison()
 # meh
 M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.AssociationSetAttributes::Generate()
 M: System.Void Zetbox.Client.Presentables.GUI.NavigationSearchScreenViewModel::InitializeListViewModel(Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel)
 M: Zetbox.Client.Presentables.DtoViewModels.DtoTableViewModel Zetbox.Client.Presentables.DtoViewModels.DtoBuilder::BuildTableFrom(System.Object,System.Reflection.PropertyInfo,System.Object,Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel)
+# False positive: calls happen in loops, depending on the loop var
+M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdl::Generate()
+M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelSsdl::Generate()
+M: System.Void Zetbox.Server.SchemaManagement.Cases::DoChangeRelationEndTypes(Zetbox.App.Base.Relation)
+M: System.Void Zetbox.Server.SchemaManagement.Cases::DoChangeTptToTph(Zetbox.App.Base.ObjectClass)
 
 R: Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule
 # This method has a parameter whose type is more specialized than necessary. This can make it difficult to reuse the method in other contexts.
@@ -81,29 +90,16 @@ M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.BaseMemo
 M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.Server.BaseZetboxDataContext::GetAllHack()
 # Helper method which is only called by reflection from GetParcel
 M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.Server.Server::GetParcelHack(Zetbox.API.Server.IZetboxServerContext,System.Int32,System.Int32)
+# Helper method which is only called by reflection
+M: Zetbox.API.Async.ZbTask`1<Zetbox.API.IDataObject> Zetbox.DalProvider.Client.ZetboxContextImpl::FindAsyncGenericHelper(System.Int32)
 
 # generated code (wpf)
 M: System.Delegate Zetbox.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.Calendar.WeekCalendar::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.EnumSelectionView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.GridCells.MultilineStringValue::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.Filters.RangeFilterEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ActionDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.CommandDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.CompoundObjectPropertyEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.DataObjectLineDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceGridDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceGridHorizontalDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceListHorizontalDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceCollectionEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceCollectionGridEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceDropdownEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceListEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceListGridEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.StringDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.GridCells.MultilineStringValue::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.LabeledView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.ModuleEditor.DiagramDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.ModuleEditor.ObjectClassInstanceList::_CreateDelegate(System.Type,System.String)
@@ -122,8 +118,27 @@ M: System.Delegate Zetbox.Client.WPF.View.Relations.RelationEditor::_CreateDeleg
 M: System.Delegate Zetbox.Client.WPF.View.Relations.RelationEndEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.SchemaMigration.DestinationPropertyEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.SelectionDialog::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.TestModule.InstanceListTestDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Zetbox.Client.WPF.View.TimeRecords.WorkEffortRecorderView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ActionDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.AnyReferencePropertyEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.CommandDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.CompoundObjectPropertyEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.DataObjectLineDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceGridDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceGridHorizontalDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceListHeader::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceListHorizontalDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceCollectionEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceCollectionGridEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceDropdownEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceListEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceListGridEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.StringDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
 
 # Called by a lambda
 M: System.Boolean System.Linq.Dynamic.ExpressionParser::IsBetterThan(System.Linq.Expressions.Expression[],System.Linq.Dynamic.ExpressionParser/MethodData,System.Linq.Dynamic.ExpressionParser/MethodData)
@@ -133,6 +148,9 @@ R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
 A: Zetbox.App.Projekte.Common
 A: Zetbox.App.Projekte.Client
 A: Zetbox.App.Projekte.Server
+# WPF infrastructure doesn't require null check
+T: Zetbox.Client.WPF.Styles.Controls
+T: Zetbox.Client.WPF.Styles.Margin
 # False positives
 M: System.Void Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Add(TInterface)
 M: System.Boolean Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Contains(TInterface)

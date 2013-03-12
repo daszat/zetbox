@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ZetboxConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>CI Test Server Configuration</ConfigName>
+  <Server StartServer="true">
+    <DocumentStore>../DocumentStore/Server/</DocumentStore>
+    <Modules>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
+      <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>
+      <Module>Zetbox.Unix.Module, Zetbox.Unix</Module>
+    </Modules>
+  </Server>
+</ZetboxConfig>

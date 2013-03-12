@@ -36,9 +36,9 @@ namespace Zetbox.App.Base
             : base(lazyCtx)
         {
         }
-        public AuditEntryMemoryImpl(IPersistenceObject parent, string property) : this(false, parent, property) {}
-        public AuditEntryMemoryImpl(bool ignore, IPersistenceObject parent, string property)
-            : base(null) // TODO: pass parent's lazyCtx
+        public AuditEntryMemoryImpl(IPersistenceObject parent, string property) : this(null, parent, property) {} // TODO: pass parent's lazyCtx
+        public AuditEntryMemoryImpl(Func<IFrozenContext> lazyCtx, IPersistenceObject parent, string property)
+            : base(lazyCtx)
         {
             AttachToObject(parent, property);
         }
@@ -79,6 +79,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Identity", __oldValue, __newValue);
                     _Identity = __newValue;
                     NotifyPropertyChanged("Identity", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIdentity_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.Base
                         OnIdentity_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Identity");
-				}
+                else
+                {
+                    SetInitializedProperty("Identity");
+                }
             }
         }
         private string _Identity;
@@ -134,6 +135,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("MessageFormat", __oldValue, __newValue);
                     _MessageFormat = __newValue;
                     NotifyPropertyChanged("MessageFormat", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnMessageFormat_PostSetter != null && IsAttached)
                     {
@@ -141,10 +143,10 @@ namespace Zetbox.App.Base
                         OnMessageFormat_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("MessageFormat");
-				}
+                else
+                {
+                    SetInitializedProperty("MessageFormat");
+                }
             }
         }
         private string _MessageFormat;
@@ -189,6 +191,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("NewValue", __oldValue, __newValue);
                     _NewValue = __newValue;
                     NotifyPropertyChanged("NewValue", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnNewValue_PostSetter != null && IsAttached)
                     {
@@ -196,10 +199,10 @@ namespace Zetbox.App.Base
                         OnNewValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NewValue");
-				}
+                else
+                {
+                    SetInitializedProperty("NewValue");
+                }
             }
         }
         private string _NewValue;
@@ -244,6 +247,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("OldValue", __oldValue, __newValue);
                     _OldValue = __newValue;
                     NotifyPropertyChanged("OldValue", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnOldValue_PostSetter != null && IsAttached)
                     {
@@ -251,10 +255,10 @@ namespace Zetbox.App.Base
                         OnOldValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("OldValue");
-				}
+                else
+                {
+                    SetInitializedProperty("OldValue");
+                }
             }
         }
         private string _OldValue;
@@ -299,6 +303,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("PropertyName", __oldValue, __newValue);
                     _PropertyName = __newValue;
                     NotifyPropertyChanged("PropertyName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPropertyName_PostSetter != null && IsAttached)
                     {
@@ -306,10 +311,10 @@ namespace Zetbox.App.Base
                         OnPropertyName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("PropertyName");
-				}
+                else
+                {
+                    SetInitializedProperty("PropertyName");
+                }
             }
         }
         private string _PropertyName;
@@ -360,6 +365,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _Timestamp;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnTimestamp_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -369,6 +376,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Timestamp", __oldValue, __newValue);
                     _Timestamp = __newValue;
                     NotifyPropertyChanged("Timestamp", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTimestamp_PostSetter != null && IsAttached)
                     {
@@ -376,10 +384,10 @@ namespace Zetbox.App.Base
                         OnTimestamp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Timestamp");
-				}
+                else
+                {
+                    SetInitializedProperty("Timestamp");
+                }
             }
         }
         private DateTime? _Timestamp;
@@ -482,6 +490,49 @@ namespace Zetbox.App.Base
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.Export(xml, modules);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Identity, xml, "Identity", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._MessageFormat, xml, "MessageFormat", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._NewValue, xml, "NewValue", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._OldValue, xml, "OldValue", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isTimestampSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Timestamp, xml, "Timestamp", "Zetbox.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+            base.MergeImport(xml);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|Identity":
+                this._Identity = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|MessageFormat":
+                this._MessageFormat = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|NewValue":
+                this._NewValue = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|OldValue":
+                this._OldValue = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|PropertyName":
+                this._PropertyName = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|Timestamp":
+                // Import must have default value set
+                this._Timestamp = XmlStreamer.ReadNullableDateTime(xml);
+                this._isTimestampSet = true;
+                break;
+            }
         }
 
         #endregion

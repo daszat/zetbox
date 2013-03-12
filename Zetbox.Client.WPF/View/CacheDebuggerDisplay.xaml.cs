@@ -28,6 +28,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View
 {
@@ -44,7 +45,7 @@ namespace Zetbox.Client.WPF.View
 
         public CacheDebuggerViewModel ViewModel
         {
-            get { return (CacheDebuggerViewModel)DataContext; }
+            get { return (CacheDebuggerViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

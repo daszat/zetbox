@@ -17,6 +17,13 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
+
+        [Zetbox.API.DefinitionGuid("b89fc0d2-8603-40d7-8649-61431a9fb09b")]
+        ICollection<string> StringCollection { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Zetbox.API.DefinitionGuid("9206e71e-85ea-4d74-85ea-59ee2484ed2a")]
         bool? TestBool {
             get;

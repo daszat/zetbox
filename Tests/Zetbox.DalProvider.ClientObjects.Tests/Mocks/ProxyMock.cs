@@ -26,24 +26,28 @@ namespace Zetbox.DalProvider.Client.Mocks
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
     using Zetbox.App.Packaging;
     using Zetbox.App.Test;
     using Zetbox.DalProvider.Memory;
-    using Zetbox.App.Base;
-    using Zetbox.API.Utils;
 
     public class ProxyMock
         : IProxy
     {
         private readonly InterfaceType.Factory _iftFactory;
+        private readonly UnattachedObjectFactory _unattachedObjectFactory;
         private readonly BaseMemoryContext _backingStore;
         private readonly MemoryObjectHandlerFactory _memoryFactory;
         private readonly TypeMap _map;
+        private readonly IFrozenContext _frozenCtx;
 
-        public ProxyMock(InterfaceType.Factory iftFactory, BaseMemoryContext backingStore, IFrozenContext frozen, TypeMap map)
+        public ProxyMock(InterfaceType.Factory iftFactory, UnattachedObjectFactory unattachedObjectFactory, BaseMemoryContext backingStore, IFrozenContext frozen, TypeMap map)
         {
             _iftFactory = iftFactory;
+            _unattachedObjectFactory = unattachedObjectFactory;
             _backingStore = backingStore;
+            _frozenCtx = frozen;
             _memoryFactory = new MemoryObjectHandlerFactory();
             _map = map;
 
@@ -70,7 +74,7 @@ namespace Zetbox.DalProvider.Client.Mocks
             _backingStore.SubmitChanges();
         }
 
-        public IEnumerable<IDataObject> GetList(IZetboxContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             List<IStreamable> tmpAuxObjects = null;
             IEnumerable<IDataObject> result = null;
@@ -86,13 +90,13 @@ namespace Zetbox.DalProvider.Client.Mocks
 
             using (var sr = new ZetboxStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
             {
-                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+                result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
             }
             auxObjects = tmpAuxObjects;
             return result;
         }
 
-        public IEnumerable<IDataObject> GetListOf(IZetboxContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             List<IStreamable> tmpAuxObjects = null;
             IEnumerable<IDataObject> result = null;
@@ -103,14 +107,14 @@ namespace Zetbox.DalProvider.Client.Mocks
 
             using (var sr = new ZetboxStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
             {
-                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+                result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
             }
 
             auxObjects = tmpAuxObjects;
             return result;
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
+        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
             IEnumerable<IPersistenceObject> result = null;
 
@@ -130,7 +134,7 @@ namespace Zetbox.DalProvider.Client.Mocks
                 {
                     // merge auxiliary objects into primary set objects result
                     List<IStreamable> auxObjects;
-                    var receivedObjects = ReceiveObjects(ctx, sr, out auxObjects);
+                    var receivedObjects = ReceiveObjects(sr, out auxObjects);
                     result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
                 }
             }
@@ -138,17 +142,17 @@ namespace Zetbox.DalProvider.Client.Mocks
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<T>(IZetboxContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType, out List<IStreamable> auxObjects)
             where T : class, IRelationEntry
         {
             // TODO: could be implemented in generated properties
-            if (parent.ObjectState == DataObjectState.New)
+            if (parentId <= Helper.INVALIDID)
             {
                 auxObjects = new List<IStreamable>();
                 return new List<T>();
             }
 
-            Relation rel = ctx.FindPersistenceObject<Relation>(relationId);
+            Relation rel = _frozenCtx.FindPersistenceObject<Relation>(relationId);
 
             IEnumerable<T> result = null;
             List<IStreamable> tmpAuxObjects = null;
@@ -160,14 +164,14 @@ namespace Zetbox.DalProvider.Client.Mocks
                     _iftFactory(rel.B.Type.GetDataType()),
                     role);
             var objects = handler
-                .GetCollectionEntries(ZetboxGeneratedVersionAttribute.Current, _backingStore, relationId, role, parent.ID)
+                .GetCollectionEntries(ZetboxGeneratedVersionAttribute.Current, _backingStore, relationId, role, parentId)
                 .Cast<IStreamable>();
             var bytes = SendObjects(objects, true).ToArray();
 
             using (MemoryStream s = new MemoryStream(bytes))
             using (var sr = new ZetboxStreamReader(_map, new BinaryReader(s)))
             {
-                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
+                result = ReceiveObjects(sr, out tmpAuxObjects).Cast<T>();
             }
 
             auxObjects = tmpAuxObjects;
@@ -182,7 +186,7 @@ namespace Zetbox.DalProvider.Client.Mocks
             return result;
         }
 
-        public Zetbox.App.Base.Blob SetBlobStream(IZetboxContext ctx, Stream stream, string filename, string mimetype)
+        public Zetbox.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype)
         {
             Zetbox.App.Base.Blob result = null;
             var handler = _memoryFactory.GetServerDocumentHandler();
@@ -194,12 +198,12 @@ namespace Zetbox.DalProvider.Client.Mocks
 
             using (var sr = new ZetboxStreamReader(_map, new BinaryReader(resp.BlobInstance)))
             {
-                result = ReceiveObjectList(ctx, sr).Cast<Zetbox.App.Base.Blob>().Single();
+                result = ReceiveObjectList(sr).Cast<Zetbox.App.Base.Blob>().Single();
             }
             return result;
         }
 
-        public object InvokeServerMethod(IZetboxContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public object InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
         {
             throw new NotImplementedException();
         }
@@ -281,14 +285,14 @@ namespace Zetbox.DalProvider.Client.Mocks
             sw.Write(false);
         }
 
-        private IEnumerable<IStreamable> ReceiveObjects(IZetboxContext ctx, ZetboxStreamReader sr, out List<IStreamable> auxObjects)
+        private IEnumerable<IStreamable> ReceiveObjects(ZetboxStreamReader sr, out List<IStreamable> auxObjects)
         {
-            var result = ReceiveObjectList(ctx, sr);
-            auxObjects = ReceiveObjectList(ctx, sr);
+            var result = ReceiveObjectList(sr);
+            auxObjects = ReceiveObjectList(sr);
             return result;
         }
 
-        private List<IStreamable> ReceiveObjectList(IZetboxContext ctx, ZetboxStreamReader sr)
+        private List<IStreamable> ReceiveObjectList(ZetboxStreamReader sr)
         {
             List<IStreamable> result = new List<IStreamable>();
             var cont = sr.ReadBoolean();
@@ -296,7 +300,7 @@ namespace Zetbox.DalProvider.Client.Mocks
             {
                 var objType = sr.ReadSerializableType();
 
-                IStreamable obj = (IStreamable)ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
+                IStreamable obj = (IStreamable)_unattachedObjectFactory(_iftFactory(objType.GetSystemType()));
                 obj.FromStream(sr);
 
                 result.Add((IStreamable)obj);

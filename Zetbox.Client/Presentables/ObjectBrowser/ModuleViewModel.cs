@@ -43,14 +43,10 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         public new delegate ModuleViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module mdl);
 
-        private Func<IZetboxContext> _ctxFactory;
-
-        public ModuleViewModel(
-            IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory, IZetboxContext dataCtx, ViewModel parent,
-            Module mdl)
+        public ModuleViewModel(IViewModelDependencies appCtx,
+            IZetboxContext dataCtx, ViewModel parent, Module mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
-            _ctxFactory = ctxFactory;
             _module = mdl;
             _module.PropertyChanged += ModulePropertyChanged;
         }
@@ -74,7 +70,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 if (_objectClassesCache == null)
                 {
-                    _objectClassesCache = LoadObjectClasses(false);                    
+                    _objectClassesCache = LoadObjectClasses(false);
                 }
                 return _objectClassesCache;
             }
@@ -87,7 +83,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 if (_simpleObjectClassesCache == null)
                 {
-                    _simpleObjectClassesCache = LoadObjectClasses(true);                    
+                    _simpleObjectClassesCache = LoadObjectClasses(true);
                 }
                 return _simpleObjectClassesCache;
             }
@@ -106,7 +102,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                 .ToList();
             foreach (var cls in datatypes)
             {
-                var mdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, this, _ctxFactory, cls, null);
+                var mdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, this, cls, null);
                 mdl.AllowAddNew = true;
                 mdl.AllowDelete = true;
                 mdl.ViewMethod = Zetbox.App.GUI.InstanceListViewMethod.Details;

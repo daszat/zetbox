@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Precision", __oldValue, __newValue);
                     Proxy.Precision = __newValue;
                     NotifyPropertyChanged("Precision", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPrecision_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnPrecision_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Precision");
-				}
+                else
+                {
+                    SetInitializedProperty("Precision");
+                }
             }
         }
 
@@ -141,6 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Scale", __oldValue, __newValue);
                     Proxy.Scale = __newValue;
                     NotifyPropertyChanged("Scale", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnScale_PostSetter != null && IsAttached)
                     {
@@ -148,10 +150,10 @@ namespace Zetbox.App.Base
                         OnScale_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Scale");
-				}
+                else
+                {
+                    SetInitializedProperty("Scale");
+                }
             }
         }
 
@@ -491,12 +493,6 @@ namespace Zetbox.App.Base
 
             me.Precision = other.Precision;
             me.Scale = other.Scale;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

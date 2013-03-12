@@ -21,6 +21,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
     using System.Text;
     using Arebis.CodeGeneration;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -75,12 +76,12 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
         {
             var otherEnd = rel.GetOtherEnd(relEnd);
 
-            string propertyName = rel.GetRelationFkNameToEnd(otherEnd);
+            string columnName = Construct.ForeignKeyColumnName(otherEnd, prefix);
             bool needPositionStorage = rel.NeedsPositionStorage(relEnd.GetRole());
             string positionColumnName = Construct.ListPositionColumnName(otherEnd, prefix);
 
             GenerateProperty(
-                propertyName,
+                columnName,
                 needPositionStorage,
                 positionColumnName);
         }

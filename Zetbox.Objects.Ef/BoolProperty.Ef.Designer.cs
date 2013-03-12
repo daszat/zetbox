@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Bool Properties.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="BoolProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="BoolPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("BoolProperty")]
     public class BoolPropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, BoolProperty
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnFalseIcon_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.IconEfImpl> r
@@ -133,6 +132,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("FalseIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -182,6 +182,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("FalseLabel", __oldValue, __newValue);
                     _FalseLabel = __newValue;
                     NotifyPropertyChanged("FalseLabel", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFalseLabel_PostSetter != null && IsAttached)
                     {
@@ -189,10 +190,10 @@ namespace Zetbox.App.Base
                         OnFalseLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FalseLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("FalseLabel");
+                }
             }
         }
         private string _FalseLabel_store;
@@ -257,7 +258,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnNullIcon_Getter != null)
                 {
@@ -269,7 +269,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.IconEfImpl> r
@@ -304,6 +304,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("NullIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -353,6 +354,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("NullLabel", __oldValue, __newValue);
                     _NullLabel = __newValue;
                     NotifyPropertyChanged("NullLabel", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnNullLabel_PostSetter != null && IsAttached)
                     {
@@ -360,10 +362,10 @@ namespace Zetbox.App.Base
                         OnNullLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NullLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("NullLabel");
+                }
             }
         }
         private string _NullLabel_store;
@@ -428,7 +430,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnTrueIcon_Getter != null)
                 {
@@ -440,7 +441,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.IconEfImpl> r
@@ -475,6 +476,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TrueIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -524,6 +526,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("TrueLabel", __oldValue, __newValue);
                     _TrueLabel = __newValue;
                     NotifyPropertyChanged("TrueLabel", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTrueLabel_PostSetter != null && IsAttached)
                     {
@@ -531,10 +534,10 @@ namespace Zetbox.App.Base
                         OnTrueLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TrueLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("TrueLabel");
+                }
             }
         }
         private string _TrueLabel_store;
@@ -887,11 +890,6 @@ namespace Zetbox.App.Base
             this._fk_NullIcon = otherImpl._fk_NullIcon;
             this._fk_TrueIcon = otherImpl._fk_TrueIcon;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -1113,18 +1111,21 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_FalseIcon", "FalseIcon").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_FalseIcon", "FalseIcon");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._FalseLabel);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_NullIcon", "NullIcon").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_NullIcon", "NullIcon");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._NullLabel);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_TrueIcon", "TrueIcon").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_TrueIcon", "TrueIcon");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._TrueLabel);
         }

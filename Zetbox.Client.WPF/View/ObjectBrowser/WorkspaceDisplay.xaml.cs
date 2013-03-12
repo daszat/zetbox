@@ -34,6 +34,7 @@ namespace Zetbox.Client.WPF.View.ObjectBrowser
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ObjectBrowser;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Zetbox.Client.Presentables.ObjectBrowser.WorkspaceViewModel"/>.
@@ -63,7 +64,7 @@ namespace Zetbox.Client.WPF.View.ObjectBrowser
         /// </summary>
         public WorkspaceViewModel ViewModel
         {
-            get { return (WorkspaceViewModel)DataContext; }
+            get { return (WorkspaceViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

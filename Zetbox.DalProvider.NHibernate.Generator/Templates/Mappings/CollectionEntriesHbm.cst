@@ -22,6 +22,7 @@
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.SchemaManagement" %>
 <%@ Import Namespace="Zetbox.API.Server" %>
 <%@ Import Namespace="Zetbox.App.Base" %>
 <%@ Import Namespace="Zetbox.App.Extensions" %>
@@ -54,9 +55,9 @@
 <% IdGeneratorHbm.Call(Host, "id", schemaName, tableName); %>
 
         <many-to-one name="A"
-                     column="`<%= rel.GetRelationFkColumnName(RelationEndRole.A) %>`" />
+                     column="`<%= Construct.ForeignKeyColumnName(rel.A) %>`" />
         <many-to-one name="B"
-                     column="`<%= rel.GetRelationFkColumnName(RelationEndRole.B) %>`" />
+                     column="`<%= Construct.ForeignKeyColumnName(rel.B) %>`" />
 <% if (rel.NeedsPositionStorage(RelationEndRole.A)) { %>
         <property name="A<%= Zetbox.API.Helper.PositionSuffix %>"
                     column="`<%= Construct.ListPositionColumnName(rel.B) %>`" />
@@ -85,7 +86,7 @@
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
         var tableName = prop.GetCollectionEntryTable();
-        var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
+        var ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
 %>
     <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
            proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
@@ -123,7 +124,7 @@
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
         var tableName = prop.GetCollectionEntryTable();
-        var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
+        var ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
 %>
     <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
            proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"

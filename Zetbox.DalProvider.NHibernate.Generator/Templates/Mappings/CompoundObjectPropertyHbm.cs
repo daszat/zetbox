@@ -19,6 +19,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
     using System.Collections.Generic;
     using System.Linq;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -37,7 +38,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             bool forceDefinition,
             string implementationSuffix)
         {
-            if (_host == null) { throw new ArgumentNullException("_host"); }
+            if (_host == null) throw new ArgumentNullException("_host");
+            if (prop == null) throw new ArgumentNullException("prop");
+            if (prop.CompoundObjectDefinition == null) throw new ArgumentException("CompoundObjectProperty has no definition", "prop");
+            if (prop.CompoundObjectDefinition.Module == null) throw new ArgumentException("CompoundObjectProperty.CompoundObjectDefinition has no module", "prop");
 
             // shortcut unmapped properties
             //if (prop.IsCalculated)
@@ -47,7 +51,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             //}
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
-            columnName = string.IsNullOrEmpty(columnName) ? propName : columnName;
+            columnName = string.IsNullOrEmpty(columnName) ? Construct.ColumnName(prop, prefix) : prefix + columnName;
             string valueClassAttr = String.Format("class=\"{0}.{1}{2},Zetbox.Objects.NHibernateImpl\"",
                 prop.CompoundObjectDefinition.Module.Namespace,
                 prop.CompoundObjectDefinition.Name,
@@ -68,7 +72,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                 // not needed
                 ceClassAttr = String.Empty;
             }
-            string ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
+            string ceReverseKeyColumnName = Construct.ForeignKeyColumnName(prop);
             Call(_host,
                 ctx,
                 prefix,

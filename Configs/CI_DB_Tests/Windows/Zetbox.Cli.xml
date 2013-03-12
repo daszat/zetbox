@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>CI Server Configuration</ConfigName>
+  <Server StartServer="true">
+    <DocumentStore>..\DocumentStore\Server</DocumentStore>
+    <Modules>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
+      <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
+    </Modules>
+  </Server>
+</ZetboxConfig>

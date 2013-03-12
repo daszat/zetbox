@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Schema", __oldValue, __newValue);
                     Proxy.Schema = __newValue;
                     NotifyPropertyChanged("Schema", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSchema_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnSchema_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Schema");
-				}
+                else
+                {
+                    SetInitializedProperty("Schema");
+                }
             }
         }
 
@@ -141,6 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Version", __oldValue, __newValue);
                     Proxy.Version = __newValue;
                     NotifyPropertyChanged("Version", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVersion_PostSetter != null && IsAttached)
                     {
@@ -148,10 +150,10 @@ namespace Zetbox.App.Base
                         OnVersion_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Version");
-				}
+                else
+                {
+                    SetInitializedProperty("Version");
+                }
             }
         }
 
@@ -176,12 +178,6 @@ namespace Zetbox.App.Base
 
             me.Schema = other.Schema;
             me.Version = other.Version;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

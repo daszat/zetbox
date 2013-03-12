@@ -4,7 +4,8 @@ echo '**************************************************************************
 echo 'Reset the database to what is defined in the database.xml'
 echo '********************************************************************************'
 
-mono --debug bin/Debug/Zetbox.Server.Service.exe Configs/$zenv/Zetbox.Server.Service.xml \
+mono --debug bin/Debug/Zetbox.Cli.exe Configs/$zenv/Zetbox.Cli.xml \
+    -fallback \
 	-wipe \
 	-deploy-update \
 	-generate

@@ -45,7 +45,7 @@ namespace Zetbox.App.Test
             this.Proxy = proxy;
             if (this.Proxy.PhoneNumberMobile == null)
             {
-                this.Proxy.PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberMobile", null, null);
+                this.Proxy.PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberMobile", lazyCtx, null);
             }
             else
             {
@@ -54,7 +54,7 @@ namespace Zetbox.App.Test
 
             if (this.Proxy.PhoneNumberOffice == null)
             {
-                this.Proxy.PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberOffice", null, null);
+                this.Proxy.PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberOffice", lazyCtx, null);
             }
             else
             {
@@ -102,6 +102,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Birthday", __oldValue, __newValue);
                     Proxy.Birthday = __newValue;
                     NotifyPropertyChanged("Birthday", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBirthday_PostSetter != null && IsAttached)
                     {
@@ -109,10 +110,10 @@ namespace Zetbox.App.Test
                         OnBirthday_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Birthday");
-				}
+                else
+                {
+                    SetInitializedProperty("Birthday");
+                }
             }
         }
 
@@ -186,15 +187,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.MubBlah_Nav == null)
-				{
-					SetInitializedProperty("MubBlah_Nav");
+                {
+                    SetInitializedProperty("MubBlah_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MubBlah_Nav);
@@ -203,10 +204,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("MubBlah_Nav");
+                {
+                    SetInitializedProperty("MubBlah_Nav");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("MubBlah_Nav", __oldValue, __newValue);
@@ -253,6 +254,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("MubBlah_Nav", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnMubBlah_Nav_PostSetter != null && IsAttached)
                 {
@@ -332,15 +334,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.MuhBlah_One_Nav == null)
-				{
-					SetInitializedProperty("MuhBlah_One_Nav");
+                {
+                    SetInitializedProperty("MuhBlah_One_Nav");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MuhBlah_One_Nav);
@@ -349,10 +351,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("MuhBlah_One_Nav");
+                {
+                    SetInitializedProperty("MuhBlah_One_Nav");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("MuhBlah_One_Nav", __oldValue, __newValue);
@@ -392,6 +394,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("MuhBlah_One_Nav", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnMuhBlah_One_Nav_PostSetter != null && IsAttached)
                 {
@@ -448,6 +451,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     NotifyPropertyChanging("PersonName", __oldValue, __newValue);
                     Proxy.PersonName = __newValue;
                     NotifyPropertyChanged("PersonName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPersonName_PostSetter != null && IsAttached)
                     {
@@ -455,10 +459,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                         OnPersonName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("PersonName");
-				}
+                else
+                {
+                    SetInitializedProperty("PersonName");
+                }
             }
         }
 
@@ -484,36 +488,37 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values</summary>
         public Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl PhoneNumberMobileImpl
         {
-            get 
-			{ 
-				return this.Proxy.PhoneNumberMobile; 
-			}
+            get
+            {
+                return this.Proxy.PhoneNumberMobile;
+            }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if (!object.Equals(this.Proxy.PhoneNumberMobile, value))
                 {
-					var __oldValue = this.Proxy.PhoneNumberMobile;
-					var __newValue = value;
+                    var __oldValue = this.Proxy.PhoneNumberMobile;
+                    var __newValue = value;
 
-					NotifyPropertyChanging("PhoneNumberMobile", __oldValue, __newValue);
+                    NotifyPropertyChanging("PhoneNumberMobile", __oldValue, __newValue);
 
-					if (this.Proxy.PhoneNumberMobile != null)
-					{ 
-						this.Proxy.PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
-					}
-					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
-					this.Proxy.PhoneNumberMobile = __newValue;
-					this.Proxy.PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
+                    if (this.Proxy.PhoneNumberMobile != null)
+                    {
+                        this.Proxy.PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
+                    }
+                    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
+                    this.Proxy.PhoneNumberMobile = __newValue;
+                    this.Proxy.PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
 
-					NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
-				}
-				else
-				{
-					SetInitializedProperty("PhoneNumberMobile");
-				}
+                    NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+                else
+                {
+                    SetInitializedProperty("PhoneNumberMobile");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -534,36 +539,37 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values</summary>
         public Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl PhoneNumberOfficeImpl
         {
-            get 
-			{ 
-				return this.Proxy.PhoneNumberOffice; 
-			}
+            get
+            {
+                return this.Proxy.PhoneNumberOffice;
+            }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if (!object.Equals(this.Proxy.PhoneNumberOffice, value))
                 {
-					var __oldValue = this.Proxy.PhoneNumberOffice;
-					var __newValue = value;
+                    var __oldValue = this.Proxy.PhoneNumberOffice;
+                    var __newValue = value;
 
-					NotifyPropertyChanging("PhoneNumberOffice", __oldValue, __newValue);
+                    NotifyPropertyChanging("PhoneNumberOffice", __oldValue, __newValue);
 
-					if (this.Proxy.PhoneNumberOffice != null)
-					{ 
-						this.Proxy.PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
-					}
-					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
-					this.Proxy.PhoneNumberOffice = __newValue;
-					this.Proxy.PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
+                    if (this.Proxy.PhoneNumberOffice != null)
+                    {
+                        this.Proxy.PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
+                    }
+                    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
+                    this.Proxy.PhoneNumberOffice = __newValue;
+                    this.Proxy.PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
 
-					NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
-				}
-				else
-				{
-					SetInitializedProperty("PhoneNumberOffice");
-				}
+                    NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+                else
+                {
+                    SetInitializedProperty("PhoneNumberOffice");
+                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -642,14 +648,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
             this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
-            if (_PhoneNumbersOther != null)
-                this.Proxy.PhoneNumbersOther.ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));
         }
         public override void SetNew()
         {

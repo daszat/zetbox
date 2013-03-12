@@ -52,15 +52,6 @@ namespace Zetbox.App.Extensions
             return String.Format("FK_{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
         }
 
-        /// <summary>
-        /// Returns the name for the foreign key <strong>to</strong> the specified role.
-        /// </summary>
-        public static string GetRelationFkNameToEnd(this Relation rel, RelationEnd relEnd)
-        {
-            if (relEnd == null) { throw new ArgumentNullException("relEnd"); }
-            return String.Format("fk_{0}", relEnd.RoleName);
-        }
-
         public static RelationEndRole GetRole(this RelationEnd relEnd)
         {
             if (relEnd == null) { throw new ArgumentNullException("relEnd"); }
@@ -121,17 +112,19 @@ namespace Zetbox.App.Extensions
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
-            if (rel.Storage == StorageType.Replicate)
+            var storage = rel.Storage;
+
+            if (storage == StorageType.Replicate)
                 throw new NotImplementedException();
 
-            RelationType type = rel.GetRelationType();
+            var type = rel.GetRelationType();
             // n:m has no storage on A or B
             return
-                   (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
-                || (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
-                || (type == RelationType.one_one && rel.Storage == StorageType.Replicate)
-                || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
-                || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B);
+                   (type == RelationType.one_n && storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+                || (type == RelationType.one_n && storage == StorageType.MergeIntoB && role == RelationEndRole.B)
+                || (type == RelationType.one_one && storage == StorageType.Replicate)
+                || (type == RelationType.one_one && storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+                || (type == RelationType.one_one && storage == StorageType.MergeIntoB && role == RelationEndRole.B);
         }
     }
 }

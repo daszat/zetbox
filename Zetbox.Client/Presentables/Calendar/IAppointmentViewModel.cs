@@ -25,6 +25,9 @@ namespace Zetbox.Client.Presentables.Calendar
     public interface IAppointmentViewModel : INotifyPropertyChanged
     {
         string Subject { get; }
+
+        string SubjectAsync { get; }
+
         /// <summary>
         /// Start date and time of the appointment. This has to be a specific point in time.
         /// </summary>

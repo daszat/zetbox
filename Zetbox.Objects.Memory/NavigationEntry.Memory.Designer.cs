@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -58,8 +58,44 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ChangedBy;
+        private int? __fk_ChangedByCache;
 
+        private int? _fk_ChangedBy {
+            get
+            {
+                return __fk_ChangedByCache;
+            }
+            set
+            {
+                __fk_ChangedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        {
+            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+
+            if (_fk_ChangedBy.HasValue)
+                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchChangedByTask.OnResult(t =>
+            {
+                if (OnChangedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnChangedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchChangedByTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -67,32 +103,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_ChangedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-                else
-                    __value = null;
-
-                if (OnChangedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnChangedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -113,6 +136,7 @@ namespace Zetbox.App.GUI
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -167,6 +191,8 @@ namespace Zetbox.App.GUI
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -176,6 +202,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -183,10 +210,10 @@ namespace Zetbox.App.GUI
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn;
@@ -212,25 +239,44 @@ namespace Zetbox.App.GUI
             {
                 if (_Children == null)
                 {
-                    List<Zetbox.App.GUI.NavigationEntry> serverList;
-                    if (Helper.IsPersistedObject(this))
-                    {
-                        serverList = Context.GetListOf<Zetbox.App.GUI.NavigationEntry>(this, "Children");
-                    }
-                    else
-                    {
-                        serverList = new List<Zetbox.App.GUI.NavigationEntry>();
-                    }
-    
-                    _Children = new OneNRelationList<Zetbox.App.GUI.NavigationEntry>(
-                        "Parent",
-                        "Children_pos",
-                        this,
-                        () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
-                        serverList);
+                    TriggerFetchChildrenAsync().Wait();
                 }
                 return _Children;
             }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchChildrenTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            if (_triggerFetchChildrenTask != null) return _triggerFetchChildrenTask;
+
+            List<Zetbox.App.GUI.NavigationEntry> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchChildrenTask = Context.GetListOfAsync<Zetbox.App.GUI.NavigationEntry>(this, "Children")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchChildrenTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.GUI.NavigationEntry>();
+                });
+            }
+    
+            _triggerFetchChildrenTask.OnResult(t =>
+            {
+                _Children = new OneNRelationList<Zetbox.App.GUI.NavigationEntry>(
+                    "Parent",
+                    "Children_pos",
+                    this,
+                    () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
+                    serverList);    
+            });
+            return _triggerFetchChildrenTask;    
         }
     
         private OneNRelationList<Zetbox.App.GUI.NavigationEntry> _Children;
@@ -275,6 +321,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Color", __oldValue, __newValue);
                     _Color = __newValue;
                     NotifyPropertyChanged("Color", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnColor_PostSetter != null && IsAttached)
                     {
@@ -282,10 +329,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnColor_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Color");
-				}
+                else
+                {
+                    SetInitializedProperty("Color");
+                }
             }
         }
         private string _Color;
@@ -299,7 +346,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>
         /// Identity which created this object
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -317,8 +364,44 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_CreatedBy;
+        private int? __fk_CreatedByCache;
 
+        private int? _fk_CreatedBy {
+            get
+            {
+                return __fk_CreatedByCache;
+            }
+            set
+            {
+                __fk_CreatedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        {
+            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+
+            if (_fk_CreatedBy.HasValue)
+                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchCreatedByTask.OnResult(t =>
+            {
+                if (OnCreatedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnCreatedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCreatedByTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -326,32 +409,19 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_CreatedBy.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-                else
-                    __value = null;
-
-                if (OnCreatedBy_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnCreatedBy_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -372,6 +442,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -426,6 +497,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -435,6 +508,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -442,10 +516,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn;
@@ -505,6 +579,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -512,10 +587,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -538,15 +613,27 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 			{
 				if (_Groups == null)
 				{
-					if (!Groups_was_eagerLoaded) Context.FetchRelation<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
-					_Groups 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchGroupsAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Base.Group>)_Groups;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchGroupsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
+        {
+            if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
+			if (!Groups_was_eagerLoaded) _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
+            else _triggerFetchGroupsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
+			_triggerFetchGroupsTask.OnResult(r => 
+            {
+                _Groups 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchGroupsTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>> _Groups;
 		
@@ -557,7 +644,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -575,9 +662,45 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Module;
+        private int? __fk_ModuleCache;
+
+        private int? _fk_Module {
+            get
+            {
+                return __fk_ModuleCache;
+            }
+            set
+            {
+                __fk_ModuleCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchModuleTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Module = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
+        {
+            if (_triggerFetchModuleTask != null) return _triggerFetchModuleTask;
+
+            if (_fk_Module.HasValue)
+                _triggerFetchModuleTask = Context.FindAsync<Zetbox.App.Base.Module>(_fk_Module.Value);
+            else
+                _triggerFetchModuleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchModuleTask.OnResult(t =>
+            {
+                if (OnModule_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Module>(t.Result);
+                    OnModule_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchModuleTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -585,32 +708,19 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                Zetbox.App.Base.ModuleMemoryImpl __value;
-                if (_fk_Module.HasValue)
-                    __value = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
-                else
-                    __value = null;
-
-                if (OnModule_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Module>(__value);
-                    OnModule_Getter(this, e);
-                    __value = (Zetbox.App.Base.ModuleMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.ModuleMemoryImpl)TriggerFetchModuleAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
-				{
-					SetInitializedProperty("Module");
+                {
+                    SetInitializedProperty("Module");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -631,6 +741,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnModule_PostSetter != null && IsAttached)
                 {
@@ -649,7 +760,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Zetbox.App.GUI.NavigationEntry; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=Children; is list;
@@ -667,9 +778,45 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Parent;
+        private int? __fk_ParentCache;
+
+        private int? _fk_Parent {
+            get
+            {
+                return __fk_ParentCache;
+            }
+            set
+            {
+                __fk_ParentCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchParentTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Parent = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry> _triggerFetchParentTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry> TriggerFetchParentAsync()
+        {
+            if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
+
+            if (_fk_Parent.HasValue)
+                _triggerFetchParentTask = Context.FindAsync<Zetbox.App.GUI.NavigationEntry>(_fk_Parent.Value);
+            else
+                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchParentTask.OnResult(t =>
+            {
+                if (OnParent_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.NavigationEntry>(t.Result);
+                    OnParent_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchParentTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -677,32 +824,19 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                Zetbox.App.GUI.NavigationEntryMemoryImpl __value;
-                if (_fk_Parent.HasValue)
-                    __value = (Zetbox.App.GUI.NavigationEntryMemoryImpl)Context.Find<Zetbox.App.GUI.NavigationEntry>(_fk_Parent.Value);
-                else
-                    __value = null;
-
-                if (OnParent_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.NavigationEntry>(__value);
-                    OnParent_Getter(this, e);
-                    __value = (Zetbox.App.GUI.NavigationEntryMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.NavigationEntryMemoryImpl)TriggerFetchParentAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Parent == null) || (value != null && value.ID == _fk_Parent))
-				{
-					SetInitializedProperty("Parent");
+                {
+                    SetInitializedProperty("Parent");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ParentImpl;
@@ -739,6 +873,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnParent_PostSetter != null && IsAttached)
                 {
@@ -767,12 +902,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Children_pos", __oldValue, __newValue);
                     _Children_pos = __newValue;
                     NotifyPropertyChanged("Children_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("Children_pos");
-				}
+                else
+                {
+                    SetInitializedProperty("Children_pos");
+                }
             }
         }
         private int? _Children_pos;
@@ -783,6 +919,122 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntry> OnParent_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnParent_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+        // fkBackingName=_fk_RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
+        // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable; does call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.GUI.ControlKind RequestedKind
+        {
+            get { return RequestedKindImpl; }
+            set { RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_RequestedKindCache;
+
+        private int? _fk_RequestedKind {
+            get
+            {
+                return __fk_RequestedKindCache;
+            }
+            set
+            {
+                __fk_RequestedKindCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchRequestedKindTask = null;
+            }
+        }
+
+        private Guid? _fk_guid_RequestedKind = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchRequestedKindTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchRequestedKindAsync()
+        {
+            if (_triggerFetchRequestedKindTask != null) return _triggerFetchRequestedKindTask;
+
+            if (_fk_RequestedKind.HasValue)
+                _triggerFetchRequestedKindTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
+            else
+                _triggerFetchRequestedKindTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchRequestedKindTask.OnResult(t =>
+            {
+                if (OnRequestedKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ControlKind>(t.Result);
+                    OnRequestedKind_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchRequestedKindTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.GUI.ControlKindMemoryImpl RequestedKindImpl
+        {
+            get
+            {
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchRequestedKindAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_RequestedKind == null) || (value != null && value.ID == _fk_RequestedKind))
+                {
+                    SetInitializedProperty("RequestedKind");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = RequestedKindImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("RequestedKind", __oldValue, __newValue);
+
+                if (OnRequestedKind_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedKind_PreSetter(this, e);
+                    __newValue = (Zetbox.App.GUI.ControlKindMemoryImpl)e.Result;
+                }
+
+                // next, set the local reference
+                _fk_RequestedKind = __newValue == null ? (int?)null : __newValue.ID;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+                if (OnRequestedKind_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedKind_PostSetter(this, e);
+                }
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.ControlKind> OnRequestedKind_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.ControlKind> OnRequestedKind_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.ControlKind> OnRequestedKind_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnRequestedKind_IsValid;
 
         /// <summary>
         /// The title of this screen
@@ -820,6 +1072,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     NotifyPropertyChanging("Title", __oldValue, __newValue);
                     _Title = __newValue;
                     NotifyPropertyChanged("Title", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTitle_PostSetter != null && IsAttached)
                     {
@@ -827,10 +1080,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         OnTitle_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Title");
-				}
+                else
+                {
+                    SetInitializedProperty("Title");
+                }
             }
         }
         private string _Title;
@@ -844,7 +1097,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelDescriptor
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelDescriptor
         // fkBackingName=_fk_ViewModelDescriptor; fkGuidBackingName=_fk_guid_ViewModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
@@ -862,9 +1115,45 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ViewModelDescriptor;
+        private int? __fk_ViewModelDescriptorCache;
+
+        private int? _fk_ViewModelDescriptor {
+            get
+            {
+                return __fk_ViewModelDescriptorCache;
+            }
+            set
+            {
+                __fk_ViewModelDescriptorCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchViewModelDescriptorTask = null;
+            }
+        }
 
         private Guid? _fk_guid_ViewModelDescriptor = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchViewModelDescriptorTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> TriggerFetchViewModelDescriptorAsync()
+        {
+            if (_triggerFetchViewModelDescriptorTask != null) return _triggerFetchViewModelDescriptorTask;
+
+            if (_fk_ViewModelDescriptor.HasValue)
+                _triggerFetchViewModelDescriptorTask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ViewModelDescriptor.Value);
+            else
+                _triggerFetchViewModelDescriptorTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchViewModelDescriptorTask.OnResult(t =>
+            {
+                if (OnViewModelDescriptor_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(t.Result);
+                    OnViewModelDescriptor_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchViewModelDescriptorTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -872,32 +1161,19 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                Zetbox.App.GUI.ViewModelDescriptorMemoryImpl __value;
-                if (_fk_ViewModelDescriptor.HasValue)
-                    __value = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ViewModelDescriptor.Value);
-                else
-                    __value = null;
-
-                if (OnViewModelDescriptor_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(__value);
-                    OnViewModelDescriptor_Getter(this, e);
-                    __value = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchViewModelDescriptorAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_ViewModelDescriptor == null) || (value != null && value.ID == _fk_ViewModelDescriptor))
-				{
-					SetInitializedProperty("ViewModelDescriptor");
+                {
+                    SetInitializedProperty("ViewModelDescriptor");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ViewModelDescriptorImpl;
@@ -918,6 +1194,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ViewModelDescriptor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnViewModelDescriptor_PostSetter != null && IsAttached)
                 {
@@ -1019,12 +1296,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             this._fk_Module = otherImpl._fk_Module;
             this.Children_pos = otherImpl.Children_pos;
             this._fk_Parent = otherImpl._fk_Parent;
+            this._fk_RequestedKind = otherImpl._fk_RequestedKind;
             this._fk_ViewModelDescriptor = otherImpl._fk_ViewModelDescriptor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1071,6 +1344,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         NotifyPropertyChanged("Parent", __oldValue, __newValue);
                     }
                     break;
+                case "RequestedKind":
+                    {
+                        var __oldValue = _fk_RequestedKind;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("RequestedKind", __oldValue, __newValue);
+                        _fk_RequestedKind = __newValue;
+                        NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
+                    }
+                    break;
                 case "ViewModelDescriptor":
                     {
                         var __oldValue = _fk_ViewModelDescriptor;
@@ -1102,6 +1384,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 case "ExportGuid":
                 case "Module":
                 case "Parent":
+                case "RequestedKind":
                 case "Title":
                 case "ViewModelDescriptor":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1121,6 +1404,31 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Groups":
+                return TriggerFetchGroupsAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            case "RequestedKind":
+                return TriggerFetchRequestedKindAsync();
+            case "ViewModelDescriptor":
+                return TriggerFetchViewModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -1156,6 +1464,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 ParentImpl = (Zetbox.App.GUI.NavigationEntryMemoryImpl)Context.Find<Zetbox.App.GUI.NavigationEntry>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+
+            if (_fk_guid_RequestedKind.HasValue)
+                RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value);
+            else
+            if (_fk_RequestedKind.HasValue)
+                RequestedKindImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
+            else
+                RequestedKindImpl = null;
 
             if (_fk_guid_ViewModelDescriptor.HasValue)
                 ViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_ViewModelDescriptor.Value);
@@ -1269,6 +1585,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         (obj, val) => obj.Parent = val,
 						obj => OnParent_IsValid), 
                     // else
+                    new PropertyDescriptorMemoryImpl<NavigationEntry, Zetbox.App.GUI.ControlKind>(
+                        lazyCtx,
+                        new Guid("9355f2c4-5b4f-47cc-b767-161548d79478"),
+                        "RequestedKind",
+                        null,
+                        obj => obj.RequestedKind,
+                        (obj, val) => obj.RequestedKind = val,
+						obj => OnRequestedKind_IsValid), 
+                    // else
                     new PropertyDescriptorMemoryImpl<NavigationEntry, string>(
                         lazyCtx,
                         new Guid("3d5d6b12-ab8a-4bda-8487-6f987cee1fae"),
@@ -1364,6 +1689,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Parent");
+            SetNotInitializedProperty("RequestedKind");
             SetNotInitializedProperty("Title");
             SetNotInitializedProperty("ViewModelDescriptor");
             base.NotifyCreated();
@@ -1380,7 +1706,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             Groups.Clear();
             ChangedBy = null;
             CreatedBy = null;
+            Module = null;
             Parent = null;
+            RequestedKind = null;
             ViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<NavigationEntry> OnNotifyDeleting_NavigationEntry;
@@ -1422,6 +1750,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             binStream.Write(Module != null ? Module.ID : (int?)null);
             binStream.Write(Parent != null ? Parent.ID : (int?)null);
             binStream.Write(this._Children_pos);
+            binStream.Write(RequestedKind != null ? RequestedKind.ID : (int?)null);
             binStream.Write(this._Title);
             binStream.Write(ViewModelDescriptor != null ? ViewModelDescriptor.ID : (int?)null);
         }
@@ -1452,6 +1781,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             this._fk_Module = binStream.ReadNullableInt32();
             this._fk_Parent = binStream.ReadNullableInt32();
             this._Children_pos = binStream.ReadNullableInt32();
+            this._fk_RequestedKind = binStream.ReadNullableInt32();
             this._Title = binStream.ReadString();
             this._fk_ViewModelDescriptor = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1475,6 +1805,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Parent != null ? Parent.ExportGuid : (Guid?)null, xml, "Parent", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Children_pos, xml, "Children_pos", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedKind != null ? RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Title, xml, "Title", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ViewModelDescriptor != null ? ViewModelDescriptor.ExportGuid : (Guid?)null, xml, "ViewModelDescriptor", "Zetbox.App.GUI");
         }
@@ -1510,6 +1841,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 break;
             case "Zetbox.App.GUI|Children_pos":
                 this._Children_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Zetbox.App.GUI|RequestedKind":
+                this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|Title":
                 this._Title = XmlStreamer.ReadString(xml);

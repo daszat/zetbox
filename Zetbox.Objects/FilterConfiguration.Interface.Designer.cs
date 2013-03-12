@@ -62,7 +62,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        Zetbox.API.IFilterModel CreateFilterModel();
+        Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx);
 
         /// <summary>
         /// 

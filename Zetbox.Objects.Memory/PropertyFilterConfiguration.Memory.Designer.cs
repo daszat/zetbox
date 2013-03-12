@@ -40,7 +40,7 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
         // fkBackingName=_fk_Property; fkGuidBackingName=_fk_guid_Property;
         // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=FilterConfiguration; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.GUI
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Property;
+        private int? __fk_PropertyCache;
+
+        private int? _fk_Property {
+            get
+            {
+                return __fk_PropertyCache;
+            }
+            set
+            {
+                __fk_PropertyCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchPropertyTask = null;
+            }
+        }
 
         private Guid? _fk_guid_Property = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> _triggerFetchPropertyTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> TriggerFetchPropertyAsync()
+        {
+            if (_triggerFetchPropertyTask != null) return _triggerFetchPropertyTask;
+
+            if (_fk_Property.HasValue)
+                _triggerFetchPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_Property.Value);
+            else
+                _triggerFetchPropertyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchPropertyTask.OnResult(t =>
+            {
+                if (OnProperty_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Property>(t.Result);
+                    OnProperty_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchPropertyTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                Zetbox.App.Base.PropertyMemoryImpl __value;
-                if (_fk_Property.HasValue)
-                    __value = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_Property.Value);
-                else
-                    __value = null;
-
-                if (OnProperty_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Property>(__value);
-                    OnProperty_Getter(this, e);
-                    __value = (Zetbox.App.Base.PropertyMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchPropertyAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Property == null) || (value != null && value.ID == _fk_Property))
-				{
-					SetInitializedProperty("Property");
+                {
+                    SetInitializedProperty("Property");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = PropertyImpl;
@@ -130,6 +153,7 @@ namespace Zetbox.App.GUI
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Property", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnProperty_PostSetter != null && IsAttached)
                 {
@@ -150,16 +174,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_PropertyFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_PropertyFilterConfiguration != null)
             {
-                OnCreateFilterModel_PropertyFilterConfiguration(this, e);
+                OnCreateFilterModel_PropertyFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -285,11 +309,6 @@ namespace Zetbox.App.GUI
 
             this._fk_Property = otherImpl._fk_Property;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -328,6 +347,17 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Property":
+                return TriggerFetchPropertyAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -442,6 +472,7 @@ namespace Zetbox.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_PropertyFilterConfiguration != null) OnNotifyDeleting_PropertyFilterConfiguration(this);
+            Property = null;
         }
         public static event ObjectEventHandler<PropertyFilterConfiguration> OnNotifyDeleting_PropertyFilterConfiguration;
 

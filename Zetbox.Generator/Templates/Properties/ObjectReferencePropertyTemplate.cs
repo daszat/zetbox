@@ -22,6 +22,7 @@ namespace Zetbox.Generator.Templates.Properties
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
 

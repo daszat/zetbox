@@ -99,15 +99,11 @@
     <EmbeddedResource Include="SolutionItems\ZbResetAll.cmd" />
     <EmbeddedResource Include="SolutionItems\StartClient.cmd" />
     <EmbeddedResource Include="SolutionItems\StartServer.cmd" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Server___Service___exe.config">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\HttpService___Web.config" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Server___Service___exe.config" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\HttpService___Web.config" />
     <EmbeddedResource Include="SolutionItems\___nuget\nuget.Config" />
     <EmbeddedResource Include="SolutionItems\___nuget\nuget.targets" />
-    <EmbeddedResource Include="SolutionItems\___nuget\packages.config" />
     <EmbeddedResource Include="SolutionItems\___zetbox\client.targets">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -125,6 +121,12 @@
     <EmbeddedResource Include="SolutionItems\___zetbox\wpf.targets">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="SolutionItems\___gitattributes" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Cli___exe.config" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Cli___exe.config" />
+    <EmbeddedResource Include="SolutionItems\___zetbox\fallback.targets">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="TemplateWizard.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -140,17 +142,13 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\env.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Server___Service.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\env.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\Zetbox___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\env.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\%24safesolutionname%24___WPF.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Server___HttpService.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\env.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Zetbox___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\%24safesolutionname%24___WPF.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Zetbox___Server___HttpService.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Zetbox___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Tests\Windows\%24safesolutionname%24___Client___Tests.xml" />
@@ -167,27 +165,6 @@
     <EmbeddedResource Include="SolutionItems\___zetbox\PrepareEnv.exe" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___WPF.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Fallback\Zetbox___Server___Service.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___HttpService.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___Service.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\Fallback\Zetbox___Server___Service.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___Server___HttpService.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -198,9 +175,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___WPF.xml">
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\%24safesolutionname%24___WPF.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Cli.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\Zetbox___Cli.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Cli.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Zetbox___Cli.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___Cli.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

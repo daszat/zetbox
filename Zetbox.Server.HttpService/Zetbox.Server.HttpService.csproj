@@ -12,10 +12,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zetbox.Server.HttpService</RootNamespace>
     <AssemblyName>Zetbox.Server.HttpService</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <UseIISExpress>false</UseIISExpress>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,32 +36,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=2.6.1.841, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Autofac.Configuration, Version=2.6.1.841, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac.Integration.Wcf, Version=2.6.1.841, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+    <Reference Include="Autofac, Version=2.6.3.862, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.Wcf.2.6.1.841\lib\NET35\Autofac.Integration.Wcf.dll</HintPath>
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Integration.Web, Version=2.6.1.841, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+    <Reference Include="Autofac.Configuration, Version=2.6.3.862, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.Web.2.6.1.841\lib\NET35\Autofac.Integration.Web.dll</HintPath>
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Web">
+      <HintPath>..\packages\Autofac.Web.2.6.3.862\lib\NET40\Autofac.Integration.Web.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -68,6 +66,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\BasicTheme\dasz_sidebar_blauebox.png" />
@@ -141,11 +140,11 @@
     <ProjectReference Include="..\Zetbox.API.Server\Zetbox.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
       <Name>Zetbox.API.Server</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Zetbox.API</Name>
-      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
@@ -204,13 +203,16 @@
   <PropertyGroup>
     <!-- deploys the compiled binaries into the local inetpub for debugging -->
     <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\Common"
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\Server"
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin\Common"
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin\Server"
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\Client"
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Bootstrapper" "$(ProjectDir)\Bootstrapper"
+del "$(ProjectDir)\bin\Zetbox.Objects.*"
     </PostBuildEvent>
     <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
-bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Bootstrapper} "$(ProjectDir)"'
+bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server} "$(ProjectDir)/bin"'
+bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Client,Bootstrapper} "$(ProjectDir)"'
+bash -c 'rm -f "$(ProjectDir)"/bin/Zetbox.Objects.*'
      </PostBuildEvent>
   </PropertyGroup>
   <!--
@@ -226,8 +228,12 @@ bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Boots
     <Copy SourceFiles="@(WebBinaries)" DestinationFolder="$(SolutionDir)\bin\$(Configuration)\HttpService\bin" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MSBuildVersioning.targets" />
+  <Import Project="..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

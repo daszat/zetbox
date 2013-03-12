@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Creates a new Guid
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NewGuidDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="NewGuidDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NewGuidDefaultValue")]
     public class NewGuidDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, NewGuidDefaultValue
     {
@@ -115,11 +115,6 @@ namespace Zetbox.App.Base
             var otherImpl = (NewGuidDefaultValueEfImpl)obj;
             var me = (NewGuidDefaultValue)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

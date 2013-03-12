@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DefaultValue", __oldValue, __newValue);
                     _DefaultValue = __newValue;
                     NotifyPropertyChanged("DefaultValue", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDefaultValue_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Base
                         OnDefaultValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DefaultValue");
-				}
+                else
+                {
+                    SetInitializedProperty("DefaultValue");
+                }
             }
         }
         private string _DefaultValue;
@@ -171,11 +172,6 @@ namespace Zetbox.App.Base
 
             me.DefaultValue = other.DefaultValue;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -196,6 +192,15 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

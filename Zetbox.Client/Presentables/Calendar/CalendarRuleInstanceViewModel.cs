@@ -25,18 +25,18 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables;
 
     [ViewModelDescriptor]
-    public class CalendarRuleInstanceViewModel : ViewModel, IAppointmentViewModel
+    public class WorkScheduleRuleInstanceViewModel : ViewModel, IAppointmentViewModel
     {
-        public new delegate CalendarRuleInstanceViewModel Factory(IZetboxContext dataCtx, ViewModel parent, CalendarRule rule, DateTime dt);
+        public new delegate WorkScheduleRuleInstanceViewModel Factory(IZetboxContext dataCtx, ViewModel parent, WorkScheduleRule rule, DateTime dt);
 
-        public CalendarRuleInstanceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, CalendarRule rule, DateTime dt)
+        public WorkScheduleRuleInstanceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, WorkScheduleRule rule, DateTime dt)
             : base(appCtx, dataCtx, parent)
         {
             this.Rule = rule;
             this.Date = dt.Date;
         }
 
-        public CalendarRule Rule { get; private set; }
+        public WorkScheduleRule Rule { get; private set; }
         public DateTime Date { get; private set; }
 
         public override string Name
@@ -45,6 +45,11 @@ namespace Zetbox.Client.Presentables.Calendar
         }
 
         string IAppointmentViewModel.Subject
+        {
+            get { return Rule.Name; }
+        }
+
+        string IAppointmentViewModel.SubjectAsync
         {
             get { return Rule.Name; }
         }

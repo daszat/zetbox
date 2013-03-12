@@ -67,24 +67,15 @@ namespace Zetbox.App.Extensions
             return cls;
         }
 
-        public static void CollectChildClasses(this ObjectClass cls, IReadOnlyZetboxContext ctx, List<ObjectClass> children, bool includeAbstract)
+        public static void CollectChildClasses(this ObjectClass cls, List<ObjectClass> children, bool includeAbstract)
         {
             if (cls == null) throw new ArgumentNullException("cls");
-            if (ctx == null) throw new ArgumentNullException("ctx");
             if (children == null) throw new ArgumentNullException("children");
 
-            var nextChildren = ctx
-                .GetQuery<ObjectClass>()
-                .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == cls.ID)
-                .ToList();
-
-            if (nextChildren.Count() > 0)
+            foreach (ObjectClass oc in cls.SubClasses)
             {
-                foreach (ObjectClass oc in nextChildren)
-                {
-                    if (includeAbstract || !oc.IsAbstract) children.Add(oc);
-                    CollectChildClasses(oc, ctx, children, includeAbstract);
-                };
+                if (includeAbstract || !oc.IsAbstract) children.Add(oc);
+                CollectChildClasses(oc, children, includeAbstract);
             }
         }
 
@@ -174,6 +165,12 @@ namespace Zetbox.App.Extensions
             return (Zetbox.API.AccessRights?)result;
         }
 
+        public static TableMapping GetTableMapping(this ObjectClass objClass)
+        {
+            var root = objClass.GetRootClass();
+            return root.TableMapping.HasValue ? root.TableMapping.Value : TableMapping.TPT;
+        }
+
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
@@ -239,6 +236,26 @@ namespace Zetbox.App.Extensions
             {
                 // TODO: use named objects
                 if (cls.ImplementsInterfaces.Count(o => o.Name == "IChangedBy" && o.Module.Name == "ZetboxBase") == 1)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
+
+        public static bool ImplementsIDeactivatable(this ObjectClass cls)
+        {
+            return ImplementsIDeactivatable(cls, true);
+        }
+
+        public static bool ImplementsIDeactivatable(this ObjectClass cls, bool lookupInBase)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            while (cls != null)
+            {
+                // TODO: use named objects
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IDeactivatable" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;
@@ -322,6 +339,30 @@ namespace Zetbox.App.Extensions
                     .Where(r => (r.B.Type.ID == cls.ID && r.Storage == StorageType.MergeIntoB))
                     .Select(r => r.B))
                     .ToList();
+        }
+
+        public static Type GetPropertyType(this Type type, string propertyName)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+            foreach (var t in type.AndChildren(t =>
+                t.BaseType == null
+                    ? t.GetInterfaces()
+                    : t.GetInterfaces().Concat(new[] { t.BaseType }))
+                )
+            {
+                var property = t.GetProperty(propertyName);
+                if (property != null)
+                {
+                    return property.PropertyType;
+                }
+            }
+            return null;
+        }
+
+        public static Type GetPropertyType(this Type t, Property property)
+        {
+            if (property == null) throw new ArgumentNullException("property");
+            return GetPropertyType(t, property.Name);
         }
     }
 }

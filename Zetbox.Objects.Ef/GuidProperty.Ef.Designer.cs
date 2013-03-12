@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Guid Property
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="GuidProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="GuidPropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("GuidProperty")]
     public class GuidPropertyEfImpl : Zetbox.App.Base.ValueTypePropertyEfImpl, GuidProperty
     {
@@ -367,11 +367,6 @@ namespace Zetbox.App.Base
             var otherImpl = (GuidPropertyEfImpl)obj;
             var me = (GuidProperty)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

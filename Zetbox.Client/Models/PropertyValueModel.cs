@@ -28,6 +28,7 @@ namespace Zetbox.Client.Models
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables;
+    using Zetbox.API.Async;
 
     public static class PropertyExtensionsThisShouldBeMovedToAZetboxMethod
     {
@@ -113,45 +114,47 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public static IValueModel GetDetachedValueModel(this Property prop, bool allowNullInput)
+        public static IValueModel GetDetachedValueModel(this Property prop, IZetboxContext ctx, bool allowNullInput)
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
 
             var lb = prop.GetLabel();
+            var description = prop.Description;
+            var rk = prop.RequestedKind;
 
             if (prop is IntProperty)
             {
-                return new NullableStructValueModel<int>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new NullableStructValueModel<int>(lb, description, allowNullInput, false, rk);
             }
             else if (prop is BoolProperty)
             {
-                return new BoolValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new BoolValueModel(lb, description, allowNullInput, false, rk);
             }
             else if (prop is DoubleProperty)
             {
-                return new NullableStructValueModel<double>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new NullableStructValueModel<double>(lb, description, allowNullInput, false, rk);
             }
             else if (prop is DecimalProperty)
             {
-                return new DecimalValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new DecimalValueModel(lb, description, allowNullInput, false, rk);
             }
             else if (prop is GuidProperty)
             {
-                return new NullableStructValueModel<Guid>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new NullableStructValueModel<Guid>(lb, description, allowNullInput, false, rk);
             }
             else if (prop is DateTimeProperty)
             {
                 var dtp = (DateTimeProperty)prop;
-                return new DateTimeValueModel(lb, prop.Description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime, prop.RequestedKind);
+                return new DateTimeValueModel(lb, description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime, rk);
             }
             else if (prop is EnumerationProperty)
             {
-                return new EnumerationValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind, ((EnumerationProperty)prop).Enumeration);
+                return new EnumerationValueModel(lb, description, allowNullInput, false, rk, ((EnumerationProperty)prop).Enumeration);
             }
             else if (prop is StringProperty)
             {
-                return new ClassValueModel<string>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new ClassValueModel<string>(lb, description, allowNullInput, false, rk);
             }
             else if (prop is ObjectReferenceProperty)
             {
@@ -170,12 +173,12 @@ namespace Zetbox.Client.Models
                 }
                 else
                 {
-                    return new ObjectReferenceValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind, objRefProp.GetReferencedObjectClass());
+                    return new ObjectReferenceValueModel(lb, description, allowNullInput, false, rk, objRefProp.GetReferencedObjectClass());
                 }
             }
             else if (prop is CompoundObjectProperty)
             {
-                return new CompoundObjectValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
+                return new CompoundObjectValueModel(ctx, lb, description, allowNullInput, false, rk, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
             }
 
             throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
@@ -215,12 +218,16 @@ namespace Zetbox.Client.Models
         {
             if (e.PropertyName == Property.Name)
             {
-                UpdateValueCache();
+                InvalidateValueCache();
                 NotifyValueChanged();
             }
         }
 
-        protected abstract void UpdateValueCache();
+        /// <summary>
+        /// This method is called if a change in the underlying property is detected.
+        /// It must invalidate all caches so that the next call to GetUntypedValue will return the new underlying value.
+        /// </summary>
+        protected abstract void InvalidateValueCache();
 
         public Property Property { get; private set; }
         public INotifyingObject Object { get; private set; }
@@ -270,6 +277,19 @@ namespace Zetbox.Client.Models
         public abstract object GetUntypedValue();
 
         public abstract void SetUntypedValue(object val);
+
+        public virtual bool ReportErrors
+        {
+            get
+            {
+                if (Object is IDataObject)
+                {
+                    var dataObj = (IDataObject)Object;
+                    return dataObj.ObjectState != DataObjectState.Deleted;
+                }
+                return true;
+            }
+        }
 
         public ControlKind RequestedKind { get { return Property.RequestedKind; } }
         #endregion
@@ -370,22 +390,24 @@ namespace Zetbox.Client.Models
 
         public abstract TValue Value { get; set; }
 
+        public abstract ZbTask<TValue> GetValueAsync();
+
         #endregion
 
         #region IValueModel Members
-        public override object GetUntypedValue()
+        public sealed override object GetUntypedValue()
         {
             return this.Value;
         }
 
-        public override void SetUntypedValue(object val)
+        public sealed override void SetUntypedValue(object val)
         {
             this.Value = (TValue)val;
         }
         #endregion
     }
 
-    public class NullableStructPropertyValueModel<TValue> : PropertyValueModel<Nullable<TValue>>
+    public class NullableStructPropertyValueModel<TValue> : PropertyValueModel<TValue?>
         where TValue : struct
     {
         public NullableStructPropertyValueModel(INotifyingObject obj, Property prop)
@@ -395,18 +417,19 @@ namespace Zetbox.Client.Models
 
         #region IValueModel<TValue> Members
         private bool _valueCacheInitialized = false;
-        private Nullable<TValue> _valueCache;
+        private TValue? _valueCache;
 
         /// <summary>
         /// Gets or sets the value of the property presented by this model.
         /// </summary>
-        public override Nullable<TValue> Value
+        public override TValue? Value
         {
             get
             {
                 if (!_valueCacheInitialized)
                 {
-                    UpdateValueCache();
+                    _valueCache = GetPropertyValue();
+                    _valueCacheInitialized = true;
                 }
                 return _valueCache;
             }
@@ -418,6 +441,7 @@ namespace Zetbox.Client.Models
                 if (!this.AllowNullInput && value == null)
                     throw new InvalidOperationException("\"null\" input not allowed");
 
+                _valueCacheInitialized = true;
                 _valueCache = value;
 
                 if (!IsPropertyInitialized() || !object.Equals(GetPropertyValue(), value))
@@ -429,45 +453,21 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected override void UpdateValueCache()
+        public sealed override ZbTask<TValue?> GetValueAsync()
         {
-            _valueCache = GetPropertyValue();
-            _valueCacheInitialized = true;
+            return new ZbTask<TValue?>(Value);
         }
+
         #endregion
 
         #region Value Handling
+
         public override void ClearValue()
         {
             if (this.AllowNullInput)
                 this.Value = null;
             else
                 throw new InvalidOperationException("Property does not allow null values");
-        }
-
-        /// <summary>
-        /// Loads the Value from the object.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual TValue? GetPropertyValue()
-        {
-            if (IsPropertyInitialized())
-            {
-                return Object.GetPropertyValue<Nullable<TValue>>(Property.Name);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Loads the Value from the object.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual void SetPropertyValue(TValue? val)
-        {
-            Object.SetPropertyValue<Nullable<TValue>>(Property.Name, val);
         }
 
         protected virtual bool IsPropertyInitialized()
@@ -478,6 +478,32 @@ namespace Zetbox.Client.Models
                 return obj.IsInitialized(Property.Name);
             }
             return true;
+        }
+
+        /// <summary>
+        /// Loads the Value from the object.
+        /// </summary>
+        protected virtual TValue? GetPropertyValue()
+        {
+            if (IsPropertyInitialized())
+            {
+                return Object.GetPropertyValue<TValue?>(Property.Name);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        protected virtual void SetPropertyValue(TValue? value)
+        {
+            Object.SetPropertyValue<Nullable<TValue>>(Property.Name, value);
+        }
+
+        protected override void InvalidateValueCache()
+        {
+            _valueCacheInitialized = false;
+            _valueCache = null;
         }
         #endregion
     }
@@ -492,8 +518,8 @@ namespace Zetbox.Client.Models
         }
 
         #region IValueModel<TValue> Members
-        private bool _valueCacheInitialized = false;
-        private TValue _valueCache;
+
+        protected ZbTask<TValue> getValueTask = null;
 
         /// <summary>
         /// Gets or sets the value of the property presented by this model
@@ -502,19 +528,20 @@ namespace Zetbox.Client.Models
         {
             get
             {
-                if (!_valueCacheInitialized)
+                if (getValueTask == null)
                 {
-                    UpdateValueCache();
+                    getValueTask = GetValueAsync();
                 }
-                return _valueCache;
+                return getValueTask.Result;
             }
             set
             {
-                _valueCache = value;
-
                 if (!object.Equals(Object.GetPropertyValue<TValue>(Property.Name), value))
                 {
+                    InvalidateValueCache();
+
                     Object.SetPropertyValue<TValue>(Property.Name, value);
+
                     CheckConstraints();
 
                     NotifyValueChanged();
@@ -522,11 +549,32 @@ namespace Zetbox.Client.Models
             }
         }
 
-        protected override void UpdateValueCache()
+        public override ZbTask<TValue> GetValueAsync()
         {
-            _valueCache = Object.GetPropertyValue<TValue>(Property.Name);
-            _valueCacheInitialized = true;
+            return new ZbTask<TValue>(Object.GetPropertyValue<TValue>(Property.Name));
         }
+
+        protected override void InvalidateValueCache()
+        {
+            getValueTask = null;
+        }
+
+        /// <summary>
+        /// Get the ZbTask from TriggerFetch*Async for the presented Property.
+        /// </summary>
+        /// <returns>The ZbTask from TriggerFetch</returns>
+        protected ZbTask GetTriggerFetchTask()
+        {
+            if (Object is IDataObject)
+            {
+                return ((IDataObject)Object).TriggerFetch(Property.Name);
+            }
+            else
+            {
+                throw new InvalidOperationException("Object is not an IDataObject - unable to call TriggerFetch");
+            }
+        }
+
         #endregion
 
         #region Value Handling
@@ -552,37 +600,13 @@ namespace Zetbox.Client.Models
         }
 
         #region IValueModel<TValue> Members
-        private bool _valueCacheInititalized = false;
-        private IDataObject _valueCache;
 
-        /// <summary>
-        /// Gets or sets the value of the property presented by this model
-        /// </summary>
-        public override IDataObject Value
+        public override ZbTask<IDataObject> GetValueAsync()
         {
-            get
-            {
-                if (!_valueCacheInititalized)
-                {
-                    UpdateValueCache();
-                }
-                return _valueCache;
-            }
-            set
-            {
-                _valueCache = value;
-                _valueCacheInititalized = true;
-                Object.SetPropertyValue<IDataObject>(Property.Name, value);
-                CheckConstraints();
-                NotifyValueChanged();
-            }
+            return new ZbTask<IDataObject>(GetTriggerFetchTask())
+                .OnResult(t => t.Result = Object.GetPropertyValue<IDataObject>(Property.Name));
         }
 
-        protected override void UpdateValueCache()
-        {
-            _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
-            _valueCacheInititalized = true;
-        }
         #endregion
 
         #region IObjectReferenceValueModel Members
@@ -627,40 +651,6 @@ namespace Zetbox.Client.Models
             this.objRefProp = prop;
         }
 
-        #region IValueModel<TValue> Members
-        private bool _valueCacheInititalized = false;
-        private IDataObject _valueCache;
-
-        /// <summary>
-        /// Gets or sets the value of the property presented by this model
-        /// </summary>
-        public override IDataObject Value
-        {
-            get
-            {
-                if (!_valueCacheInititalized)
-                {
-                    UpdateValueCache();
-                }
-                return _valueCache;
-            }
-            set
-            {
-                _valueCache = value;
-                _valueCacheInititalized = true;
-                Object.SetPropertyValue<IDataObject>(Property.Name, value);
-                CheckConstraints();
-                NotifyValueChanged();
-            }
-        }
-
-        protected override void UpdateValueCache()
-        {
-            _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
-            _valueCacheInititalized = true;
-        }
-        #endregion
-
         #region IObjectReferenceValueModel Members
 
         public ObjectClass ReferencedClass { get { return this.objRefProp.ReferencedClass; } }
@@ -671,7 +661,7 @@ namespace Zetbox.Client.Models
     }
 
     public class CompoundObjectPropertyValueModel
-    : ClassPropertyValueModel<ICompoundObject>, ICompoundObjectValueModel
+        : ClassPropertyValueModel<ICompoundObject>, ICompoundObjectValueModel
     {
         protected readonly CompoundObjectProperty cProp;
 
@@ -681,41 +671,7 @@ namespace Zetbox.Client.Models
             this.cProp = prop;
         }
 
-        #region IValueModel<TValue> Members
-        private bool _valueCacheInititalized = false;
-        private ICompoundObject _valueCache;
-
-        /// <summary>
-        /// Gets or sets the value of the property presented by this model
-        /// </summary>
-        public override ICompoundObject Value
-        {
-            get
-            {
-                if (!_valueCacheInititalized)
-                {
-                    UpdateValueCache();
-                }
-                return _valueCache;
-            }
-            set
-            {
-                _valueCache = value;
-                _valueCacheInititalized = true;
-                Object.SetPropertyValue<ICompoundObject>(Property.Name, value);
-                CheckConstraints();
-                NotifyValueChanged();
-            }
-        }
-
-        protected override void UpdateValueCache()
-        {
-            _valueCache = Object.GetPropertyValue<ICompoundObject>(Property.Name);
-            _valueCacheInititalized = true;
-        }
-        #endregion
-
-        #region IObjectReferenceValueModel Members
+        #region ICompoundObjectValueModel Members
 
         public CompoundObject CompoundObjectDefinition
         {
@@ -750,22 +706,11 @@ namespace Zetbox.Client.Models
         {
             get
             {
-                UpdateValueCache();
-                return valueCache;
+                return base.Value;
             }
             set
             {
                 throw new NotSupportedException();
-            }
-        }
-
-        protected IEnumerable underlyingCollectionCache = null;
-        public IEnumerable UnderlyingCollection
-        {
-            get
-            {
-                UpdateValueCache();
-                return underlyingCollectionCache;
             }
         }
 
@@ -797,17 +742,25 @@ namespace Zetbox.Client.Models
 
         #endregion
 
-        protected override void UpdateValueCache()
+        private ZbTask<IList<ICompoundObject>> _getValueTask;
+        public override ZbTask<IList<ICompoundObject>> GetValueAsync()
         {
-            if (valueCache == null) // Once is OK
+            if (_getValueTask == null)
             {
-                var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                lst.CollectionChanged += ValueCollectionChanged;
-
-                underlyingCollectionCache = (IEnumerable)lst;
-
-                valueCache = MagicCollectionFactory.WrapAsList<ICompoundObject>(lst);
+                _getValueTask = new ZbTask<IList<ICompoundObject>>(new ZbTask<INotifyCollectionChanged>(Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name)))
+                    .OnResult(t =>
+                    {
+                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                        notifier.CollectionChanged += ValueCollectionChanged;
+                        t.Result = MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier);
+                    });
             }
+            return _getValueTask;
+        }
+
+        protected override void InvalidateValueCache()
+        {
+            // Do not delete trigger fetch task as the underlying collection is const
         }
 
         public CompoundObject CompoundObjectDefinition
@@ -828,43 +781,6 @@ namespace Zetbox.Client.Models
             this.objRefProp = prop;
         }
 
-        #region IValueModel<TValue> Members
-
-        protected bool valueCacheInititalized = false;
-        protected TCollection valueCache;
-
-        /// <summary>
-        /// Gets or sets the value of the property presented by this model
-        /// </summary>
-        public override TCollection Value
-        {
-            get
-            {
-                if (!valueCacheInititalized)
-                {
-                    UpdateValueCache();
-                }
-                return valueCache;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
-        }
-
-        protected IEnumerable underlyingCollectionCache = null;
-        public IEnumerable UnderlyingCollection
-        {
-            get
-            {
-                if (!valueCacheInititalized)
-                {
-                    UpdateValueCache();
-                }
-                return underlyingCollectionCache;
-            }
-        }
-
         protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             NotifyCollectionChangedEventHandler temp = _CollectionChanged;
@@ -873,8 +789,6 @@ namespace Zetbox.Client.Models
                 temp(sender, e);
             }
         }
-
-        #endregion
 
         #region IObjectCollectionValueModel<TCollection> Members
 
@@ -908,6 +822,7 @@ namespace Zetbox.Client.Models
         {
             get { return this.objRefProp.IsInlineEditable; }
         }
+
         #endregion
 
         #region INotifyCollectionChanged Members
@@ -926,7 +841,6 @@ namespace Zetbox.Client.Models
         }
 
         #endregion
-
     }
 
     public class ObjectCollectionPropertyValueModel
@@ -937,18 +851,25 @@ namespace Zetbox.Client.Models
         {
         }
 
-        protected override void UpdateValueCache()
+        private ZbTask<ICollection<IDataObject>> _getValueTask;
+        public override ZbTask<ICollection<IDataObject>> GetValueAsync()
         {
-            if (valueCache == null) // Once is OK
+            if (_getValueTask == null)
             {
-                var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                lst.CollectionChanged += ValueCollectionChanged;
-
-                underlyingCollectionCache = (IEnumerable)lst;
-
-                valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
+                _getValueTask = new ZbTask<ICollection<IDataObject>>(GetTriggerFetchTask())
+                    .OnResult(t =>
+                    {
+                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                        notifier.CollectionChanged += ValueCollectionChanged;
+                        t.Result = MagicCollectionFactory.WrapAsCollection<IDataObject>(notifier);
+                    });
             }
-            valueCacheInititalized = true;
+            return _getValueTask;
+        }
+
+        protected override void InvalidateValueCache()
+        {
+            // Do not delete trigger fetch task as the underlying collection is const
         }
     }
 
@@ -960,18 +881,25 @@ namespace Zetbox.Client.Models
         {
         }
 
-        protected override void UpdateValueCache()
+        private ZbTask<IList<IDataObject>> _getValueTask;
+        public override ZbTask<IList<IDataObject>> GetValueAsync()
         {
-            if (valueCache == null) // Once is OK
+            if (_getValueTask == null)
             {
-                var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                lst.CollectionChanged += ValueCollectionChanged;
-
-                underlyingCollectionCache = (IEnumerable)lst;
-
-                valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
+                _getValueTask = new ZbTask<IList<IDataObject>>(GetTriggerFetchTask())
+                    .OnResult(t =>
+                    {
+                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                        notifier.CollectionChanged += ValueCollectionChanged;
+                        t.Result = MagicCollectionFactory.WrapAsList<IDataObject>(notifier);
+                    });
             }
-            valueCacheInititalized = true;
+            return _getValueTask;
+        }
+
+        protected override void InvalidateValueCache()
+        {
+            // Do not delete trigger fetch task as the underlying collection is const
         }
     }
 
@@ -987,6 +915,9 @@ namespace Zetbox.Client.Models
 
         protected override int? GetPropertyValue()
         {
+            if (!IsPropertyInitialized())
+                return null;
+
             // Work around the fact that the conversion from enumeration to int? is not possible.
             object val = Object.GetPropertyValue<object>(Property.Name);
             if (val == null)
@@ -1074,6 +1005,11 @@ namespace Zetbox.Client.Models
                     this.Value = DateTime.MinValue.Add(value.Value);
                 }
             }
+        }
+
+        ZbTask<TimeSpan?> IValueModel<TimeSpan?>.GetValueAsync()
+        {
+            return new ZbTask<TimeSpan?>(ZbTask.Synchron, () => ((IValueModel<TimeSpan?>)this).Value);
         }
     }
 

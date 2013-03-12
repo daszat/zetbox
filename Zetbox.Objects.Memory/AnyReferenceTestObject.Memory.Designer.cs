@@ -30,13 +30,13 @@ namespace Zetbox.App.Test
         public AnyReferenceTestObjectMemoryImpl()
             : base(null)
         {
-            AnyImpl = new Zetbox.App.Base.AnyReferenceMemoryImpl(this, "Any");
+            AnyImpl = new Zetbox.App.Base.AnyReferenceMemoryImpl(null, this, "Any");
         }
 
         public AnyReferenceTestObjectMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            AnyImpl = new Zetbox.App.Base.AnyReferenceMemoryImpl(this, "Any");
+            AnyImpl = new Zetbox.App.Base.AnyReferenceMemoryImpl(lazyCtx, this, "Any");
         }
 
         /// <summary>
@@ -59,36 +59,37 @@ namespace Zetbox.App.Test
         /// <summary>backing property for Any, takes care of attaching/detaching the values</summary>
         public Zetbox.App.Base.AnyReferenceMemoryImpl AnyImpl
         {
-            get 
-			{ 
-				return _Any; 
-			}
+            get
+            {
+                return _Any;
+            }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if (!object.Equals(_Any, value))
                 {
-					var __oldValue = _Any;
-					var __newValue = value;
+                    var __oldValue = _Any;
+                    var __newValue = value;
 
-					NotifyPropertyChanging("Any", __oldValue, __newValue);
+                    NotifyPropertyChanging("Any", __oldValue, __newValue);
 
-					if (_Any != null)
-					{ 
-						_Any.DetachFromObject(this, "Any");
-					}
-					__newValue = (Zetbox.App.Base.AnyReferenceMemoryImpl)__newValue.Clone();
-					_Any = __newValue;
-					_Any.AttachToObject(this, "Any");
+                    if (_Any != null)
+                    {
+                        _Any.DetachFromObject(this, "Any");
+                    }
+                    __newValue = (Zetbox.App.Base.AnyReferenceMemoryImpl)__newValue.Clone();
+                    _Any = __newValue;
+                    _Any.AttachToObject(this, "Any");
 
-					NotifyPropertyChanged("Any", __oldValue, __newValue);
-				}
-				else
-				{
-					SetInitializedProperty("Any");
-				}
+                    NotifyPropertyChanged("Any", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+                else
+                {
+                    SetInitializedProperty("Any");
+                }
             }
         }
         // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -130,6 +131,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -137,10 +139,10 @@ namespace Zetbox.App.Test
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
         private string _DisplayName;
@@ -199,6 +201,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -206,10 +209,10 @@ namespace Zetbox.App.Test
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid;
@@ -243,11 +246,6 @@ namespace Zetbox.App.Test
                 me.Any.ApplyChangesFrom(other.Any);
             }
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -270,6 +268,15 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -445,7 +452,7 @@ namespace Zetbox.App.Test
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this.Any, xml, "Any", "Zetbox.App.Test");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ExportCompoundObject(this.Any, xml, "Any", "Zetbox.App.Test");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Test")) XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "Zetbox.App.Test");
         }
 
@@ -455,7 +462,7 @@ namespace Zetbox.App.Test
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Test|Any":
-                XmlStreamer.FromStream(this.AnyImpl, xml);
+                XmlStreamer.MergeImportCompoundObject(this.AnyImpl, xml);
                 break;
             case "Zetbox.App.Test|DisplayName":
                 this._DisplayName = XmlStreamer.ReadString(xml);

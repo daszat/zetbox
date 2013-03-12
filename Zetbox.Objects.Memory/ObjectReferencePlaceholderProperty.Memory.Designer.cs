@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     _HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
         private bool _HasPersistentOrder;
@@ -130,6 +131,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ImplementorRoleName", __oldValue, __newValue);
                     _ImplementorRoleName = __newValue;
                     NotifyPropertyChanged("ImplementorRoleName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnImplementorRoleName_PostSetter != null && IsAttached)
                     {
@@ -137,10 +139,10 @@ namespace Zetbox.App.Base
                         OnImplementorRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ImplementorRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ImplementorRoleName");
+                }
             }
         }
         private string _ImplementorRoleName;
@@ -187,6 +189,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -194,10 +197,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
         private bool _IsList;
@@ -244,6 +247,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ItemRoleName", __oldValue, __newValue);
                     _ItemRoleName = __newValue;
                     NotifyPropertyChanged("ItemRoleName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnItemRoleName_PostSetter != null && IsAttached)
                     {
@@ -251,10 +255,10 @@ namespace Zetbox.App.Base
                         OnItemRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ItemRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ItemRoleName");
+                }
             }
         }
         private string _ItemRoleName;
@@ -268,7 +272,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedObjectClass
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedObjectClass
         // fkBackingName=_fk_ReferencedObjectClass; fkGuidBackingName=_fk_guid_ReferencedObjectClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -286,9 +290,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_ReferencedObjectClass;
+        private int? __fk_ReferencedObjectClassCache;
+
+        private int? _fk_ReferencedObjectClass {
+            get
+            {
+                return __fk_ReferencedObjectClassCache;
+            }
+            set
+            {
+                __fk_ReferencedObjectClassCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchReferencedObjectClassTask = null;
+            }
+        }
 
         private Guid? _fk_guid_ReferencedObjectClass = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchReferencedObjectClassTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> TriggerFetchReferencedObjectClassAsync()
+        {
+            if (_triggerFetchReferencedObjectClassTask != null) return _triggerFetchReferencedObjectClassTask;
+
+            if (_fk_ReferencedObjectClass.HasValue)
+                _triggerFetchReferencedObjectClassTask = Context.FindAsync<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
+            else
+                _triggerFetchReferencedObjectClassTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchReferencedObjectClassTask.OnResult(t =>
+            {
+                if (OnReferencedObjectClass_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(t.Result);
+                    OnReferencedObjectClass_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchReferencedObjectClassTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -296,32 +336,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.ObjectClassMemoryImpl __value;
-                if (_fk_ReferencedObjectClass.HasValue)
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
-                else
-                    __value = null;
-
-                if (OnReferencedObjectClass_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ObjectClass>(__value);
-                    OnReferencedObjectClass_Getter(this, e);
-                    __value = (Zetbox.App.Base.ObjectClassMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.ObjectClassMemoryImpl)TriggerFetchReferencedObjectClassAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_ReferencedObjectClass == null) || (value != null && value.ID == _fk_ReferencedObjectClass))
-				{
-					SetInitializedProperty("ReferencedObjectClass");
+                {
+                    SetInitializedProperty("ReferencedObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ReferencedObjectClassImpl;
@@ -342,6 +369,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ReferencedObjectClass", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnReferencedObjectClass_PostSetter != null && IsAttached)
                 {
@@ -393,6 +421,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Verb", __oldValue, __newValue);
                     _Verb = __newValue;
                     NotifyPropertyChanged("Verb", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVerb_PostSetter != null && IsAttached)
                     {
@@ -400,10 +429,10 @@ namespace Zetbox.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Verb");
-				}
+                else
+                {
+                    SetInitializedProperty("Verb");
+                }
             }
         }
         private string _Verb;
@@ -748,11 +777,6 @@ namespace Zetbox.App.Base
             me.Verb = other.Verb;
             this._fk_ReferencedObjectClass = otherImpl._fk_ReferencedObjectClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -796,6 +820,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ReferencedObjectClass":
+                return TriggerFetchReferencedObjectClassAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -960,6 +995,7 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferencePlaceholderProperty != null) OnNotifyDeleting_ObjectReferencePlaceholderProperty(this);
+            ReferencedObjectClass = null;
         }
         public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnNotifyDeleting_ObjectReferencePlaceholderProperty;
 

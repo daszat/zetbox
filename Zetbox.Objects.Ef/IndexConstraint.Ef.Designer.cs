@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="IndexConstraint")]
+    [EdmEntityType(NamespaceName="Model", Name="IndexConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("IndexConstraint")]
     public class IndexConstraintEfImpl : Zetbox.App.Base.InstanceConstraintEfImpl, IndexConstraint
     {
@@ -91,6 +91,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsUnique", __oldValue, __newValue);
                     _IsUnique = __newValue;
                     NotifyPropertyChanged("IsUnique", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsUnique_PostSetter != null && IsAttached)
                     {
@@ -98,10 +99,10 @@ namespace Zetbox.App.Base
                         OnIsUnique_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsUnique");
-				}
+                else
+                {
+                    SetInitializedProperty("IsUnique");
+                }
             }
         }
         private bool _IsUnique_store;
@@ -163,7 +164,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -310,11 +310,6 @@ namespace Zetbox.App.Base
             var me = (IndexConstraint)this;
 
             me.IsUnique = other.IsUnique;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

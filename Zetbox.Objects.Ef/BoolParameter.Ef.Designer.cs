@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for Bool Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="BoolParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="BoolParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("BoolParameter")]
     public class BoolParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, BoolParameter
     {
@@ -241,11 +241,6 @@ namespace Zetbox.App.Base
             var otherImpl = (BoolParameterEfImpl)obj;
             var me = (BoolParameter)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

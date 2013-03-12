@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Muhblah")]
+    [EdmEntityType(NamespaceName="Model", Name="MuhblahEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Muhblah")]
     public class MuhblahEfImpl : BaseServerDataObject_EntityFramework, Muhblah
     {
@@ -39,6 +39,52 @@ namespace Zetbox.App.Test
             : base(lazyCtx)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value list property
+   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<string> StringCollection
+        {
+            get
+            {
+                if (_StringCollection == null)
+                {
+                    _StringCollection = new EfValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>>(
+						this.Context,
+                        this,
+              			() => { this.NotifyPropertyChanged("StringCollection", null, null); if(OnStringCollection_PostSetter != null && IsAttached) OnStringCollection_PostSetter(this); },
+          	            StringCollectionImpl);
+                }
+                return _StringCollection;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_value_StringCollection", "CollectionEntry")]
+        public EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl> StringCollectionImpl
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>(
+                        "Model.FK_Muhblah_value_StringCollection",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EfValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>> _StringCollection;
+public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnStringCollection_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.Muhblah> OnStringCollection_IsValid;
 
         /// <summary>
         /// 
@@ -79,6 +125,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("TestBool", __oldValue, __newValue);
                     _TestBool = __newValue;
                     NotifyPropertyChanged("TestBool", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestBool_PostSetter != null && IsAttached)
                     {
@@ -86,10 +133,10 @@ namespace Zetbox.App.Test
                         OnTestBool_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestBool");
-				}
+                else
+                {
+                    SetInitializedProperty("TestBool");
+                }
             }
         }
         private bool? _TestBool_store;
@@ -154,7 +201,6 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -207,7 +253,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -260,7 +305,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnTestCustomObjects_Nav_Getter != null)
                 {
@@ -272,7 +316,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.TestCustomObjectEfImpl> r
@@ -319,6 +363,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("MubBlah_List_Nav", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -374,7 +419,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnTestCustomObjects_One_Nav_Getter != null)
                 {
@@ -386,7 +430,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.TestCustomObjectEfImpl> r
@@ -433,6 +477,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("MuhBlah_One_Nav", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -473,6 +518,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 {
                     var __oldValue = _TestDateTime;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnTestDateTime_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -482,6 +529,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestDateTime", __oldValue, __newValue);
                     _TestDateTime = __newValue;
                     NotifyPropertyChanged("TestDateTime", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestDateTime_PostSetter != null && IsAttached)
                     {
@@ -489,10 +537,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestDateTime_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestDateTime");
-				}
+                else
+                {
+                    SetInitializedProperty("TestDateTime");
+                }
             }
         }
         private DateTime? _TestDateTime_store;
@@ -500,7 +548,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             get { return _TestDateTime_store; }
             set {
                 ReportEfPropertyChanging("TestDateTime");
-                _TestDateTime_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _TestDateTime_store = value;
                 ReportEfPropertyChanged("TestDateTime");
             }
         }
@@ -515,48 +563,52 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         /// 
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Test.TestEnum TestEnum
         {
             get
             {
-				var __value = _TestEnum;
-				if(OnTestEnum_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__value);
-					OnTestEnum_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _TestEnum;
+                if (OnTestEnum_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__result);
+                    OnTestEnum_Getter(this, __e);
+                    __result = _TestEnum = __e.Result;
+                }
+                return __result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_TestEnum != value)
                 {
-					var __oldValue = _TestEnum;
-					var __newValue = value;
-                    if(OnTestEnum_PreSetter != null)
+                    var __oldValue = _TestEnum;
+                    var __newValue = value;
+                    if (OnTestEnum_PreSetter != null && IsAttached)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
-						OnTestEnum_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+                        OnTestEnum_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
-					
                     NotifyPropertyChanging("TestEnum", __oldValue, __newValue);
-                    _TestEnum = value;
+                    _TestEnum = __newValue;
                     NotifyPropertyChanged("TestEnum", __oldValue, __newValue);
-                    if(OnTestEnum_PostSetter != null)
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTestEnum_PostSetter != null && IsAttached)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
-						OnTestEnum_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
+                        OnTestEnum_PostSetter(this, __e);
                     }
-                    
+                }
+                else
+                {
+                    SetInitializedProperty("TestEnum");
                 }
             }
         }
-
         private Zetbox.App.Test.TestEnum _TestEnum_store;
         private Zetbox.App.Test.TestEnum _TestEnum {
             get { return _TestEnum_store; }
@@ -566,7 +618,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 ReportEfPropertyChanged("TestEnumImpl");
             }
         }
-        
+
         /// <summary>EF sees only this property, for TestEnum</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -581,7 +633,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 this.TestEnum = (Zetbox.App.Test.TestEnum)value;
             }
         }
-        
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestEnum> OnTestEnum_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestEnum> OnTestEnum_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestEnum> OnTestEnum_PostSetter;
@@ -627,6 +679,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     _TestString = __newValue;
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTestString_PostSetter != null && IsAttached)
                     {
@@ -634,10 +687,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         OnTestString_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TestString");
-				}
+                else
+                {
+                    SetInitializedProperty("TestString");
+                }
             }
         }
         private string _TestString_store;
@@ -674,11 +727,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             me.TestString = other.TestString;
             this._fk_TestCustomObjects_Nav = otherImpl._fk_TestCustomObjects_Nav;
             this._fk_TestCustomObjects_One_Nav = otherImpl._fk_TestCustomObjects_One_Nav;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -749,6 +797,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorEfImpl<Muhblah, ICollection<string>>(
+                        lazyCtx,
+                        new Guid("b89fc0d2-8603-40d7-8649-61431a9fb09b"),
+                        "StringCollection",
+                        null,
+                        obj => obj.StringCollection,
+                        null, // lists are read-only properties
+                        obj => OnStringCollection_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Muhblah, bool?>(
                         lazyCtx,
@@ -900,6 +957,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
+            StringCollection.Clear();
             TestCustomObjects_List_Nav.Clear();
             TestCustomObjects_ManyList_Nav.Clear();
             TestCustomObjects_Nav = null;
@@ -929,12 +987,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -948,17 +1007,20 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.WriteCollectionEntries(this.StringCollectionImpl);
             binStream.Write(this._TestBool);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_Lst_Role_hasOther_TCO_Role", "TCO_Role").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_Lst_Role_hasOther_TCO_Role", "TCO_Role");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "TCO_One_Role").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "TCO_One_Role");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._TestDateTime);
-            binStream.Write((int?)((Zetbox.App.Test.Muhblah)this).TestEnum);
+            binStream.Write((int?)_TestEnum);
             binStream.Write(this._TestString);
         }
 
@@ -972,7 +1034,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             binStream.Read(out this._fk_TestCustomObjects_Nav);
             binStream.Read(out this._fk_TestCustomObjects_One_Nav);
             this._TestDateTime = binStream.ReadNullableDateTime();
-            ((Zetbox.App.Test.Muhblah)this).TestEnum = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
+            _TestEnum = (Zetbox.App.Test.TestEnum)binStream.ReadNullableInt32();
             this._TestString = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null

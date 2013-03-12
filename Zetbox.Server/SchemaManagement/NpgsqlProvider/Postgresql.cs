@@ -21,13 +21,15 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using System.Text.RegularExpressions;
+    using Npgsql;
     using Zetbox.API;
     using Zetbox.API.Configuration;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
-    using Npgsql;
 
     public class Postgresql
         : AdoNetSchemaProvider<NpgsqlConnection, NpgsqlTransaction, NpgsqlCommand>
@@ -172,10 +174,23 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         #endregion
 
         #region SQL Infrastructure
-
-        protected override string QuoteIdentifier(string name)
+        public static readonly int PG_MAX_IDENTIFIER_LENGTH = 63;
+        public override string QuoteIdentifier(string name)
         {
-            return "\"" + name + "\"";
+            return "\"" + name.MaxLength(PG_MAX_IDENTIFIER_LENGTH) + "\"";
+        }
+
+        protected void CheckMaxIdentifierLength(string id)
+        {
+            if (id.Length > PG_MAX_IDENTIFIER_LENGTH)
+            {
+                throw new InvalidOperationException(string.Format("PG does not support Identifiers with a length more than {0} chars.", PG_MAX_IDENTIFIER_LENGTH));
+            }
+        }
+
+        protected override string FormatBool(bool p)
+        {
+            return p ? "'t'" : "'f'";
         }
 
         private string GetColumnDefinition(Column col)
@@ -228,6 +243,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void CreateDatabase(string dbName)
         {
+            CheckMaxIdentifierLength(dbName);
             ExecuteNonQuery(string.Format("CREATE DATABASE {0} WITH TEMPLATE template0", QuoteIdentifier(dbName)));
         }
 
@@ -252,6 +268,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         public override void CreateSchema(string schemaName)
         {
             if (string.IsNullOrEmpty(schemaName)) throw new ArgumentNullException("schemaName");
+            CheckMaxIdentifierLength(schemaName);
 
             ExecuteNonQuery(String.Format("CREATE SCHEMA {0}", QuoteIdentifier(schemaName)));
         }
@@ -313,8 +330,9 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
         {
-            if (cols == null)
-                throw new ArgumentNullException("cols");
+            if (cols == null) throw new ArgumentNullException("cols");
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            CheckMaxIdentifierLength(tblName.Name);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE {0} (", FormatSchemaName(tblName));
@@ -330,6 +348,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
             if (tblName == null)
                 throw new ArgumentNullException("tblName");
+            CheckMaxIdentifierLength(tblName.Name);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE {0} ( ", FormatSchemaName(tblName));
@@ -440,6 +459,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
+            CheckMaxIdentifierLength(colName);
             StringBuilder sb = new StringBuilder();
 
             if (add)
@@ -481,6 +501,10 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 else if (defConstraint is IntDefaultConstraint)
                 {
                     defValue = ((IntDefaultConstraint)defConstraint).Value.ToString();
+                }
+                else if (defConstraint is DecimalDefaultConstraint)
+                {
+                    defValue = ((DecimalDefaultConstraint)defConstraint).Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
                 }
                 else if (defConstraint is BoolDefaultConstraint)
                 {
@@ -601,6 +625,25 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 FormatSchemaName(tbl)));
         }
 
+        public override bool CheckTableContainsData(TableRef tbl, IEnumerable<string> discriminatorFilter)
+        {
+            if (discriminatorFilter == null)
+            {
+                return CheckTableContainsData(tbl);
+            }
+            else
+            {
+                var parameters = ToAdoParameters(discriminatorFilter);
+
+                return (bool)ExecuteScalar(String.Format(
+                    "SELECT COUNT(*) > 0 FROM (SELECT * FROM {0} WHERE {1} IN ({2}) LIMIT 1) AS data",
+                    FormatSchemaName(tbl),
+                    QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                    string.Join(",", parameters.Keys)),
+                    parameters);
+            }
+        }
+
         public override bool CheckColumnContainsNulls(TableRef tbl, string colName)
         {
             return (bool)ExecuteScalar(String.Format(
@@ -647,7 +690,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_constraint JOIN pg_namespace n ON (connamespace = n.oid) WHERE n.nspname = @schema AND conname = @constraint_name AND contype = 'f'",
                 new Dictionary<string, object>(){
                     { "@schema", tblName.Schema },
-                    { "@constraint_name", fkName }
+                    { "@constraint_name", fkName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) }
                 });
         }
 
@@ -723,7 +766,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 new Dictionary<string, object>(){
                     { "@schema", tblName.Schema },
                     { "@table", tblName.Name },
-                    { "@index", idxName },
+                    { "@index", idxName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
 
@@ -757,6 +800,26 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier(idxName)));
         }
 
+        public override bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            return (bool)ExecuteScalar(string.Format(
+                "SELECT Count(*) = 0 FROM (SELECT * FROM {0} WHERE NOT {1} LIMIT 1) AS data",
+                FormatSchemaName(tblName),
+                FormatCheckExpression(colName, checkExpressions)));
+        }
+
+        public override bool CheckCheckConstraintExists(TableRef tblName, string constraintName)
+        {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (string.IsNullOrEmpty(constraintName)) throw new ArgumentNullException("constraintName");
+
+            return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_constraint JOIN pg_namespace n ON (connamespace = n.oid) WHERE n.nspname = @schema AND conname = @constraint_name AND contype = 'c'",
+                new Dictionary<string, object>(){
+                    { "@schema", tblName.Schema },
+                    { "@constraint_name", constraintName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) }
+                });
+        }
+
         #endregion
 
         #region Other DB Objects (Views, Triggers, Procedures)
@@ -788,7 +851,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 WHERE t.typname = 'trigger' AND n.nspname = @schema AND p.proname = @trigger",
                 new Dictionary<string, object>(){
                     { "@schema", objName.Schema },
-                    { "@trigger", triggerName },
+                    { "@trigger", triggerName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
 
@@ -812,7 +875,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 WHERE n.nspname = @schema AND p.proname = @proc",
                 new Dictionary<string, object>() {
                     { "@schema", procName.Schema },
-                    { "@proc", procName.Name },
+                    { "@proc", procName.Name.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
 
@@ -988,6 +1051,54 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 FormatSchemaName(tblName),        // 2
                 QuoteIdentifier(colName),       // 3
                 QuoteIdentifier("ID")));        // 4
+        }
+
+        public override void CopyColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, string discriminatorValue)
+        {
+            if (srcColNames == null) throw new ArgumentNullException("srcColNames");
+            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (srcColNames.Length != colNames.Length) throw new ArgumentOutOfRangeException("colNames", "need the same number of columns in srcColNames and colNames");
+
+            var assignments = srcColNames.Zip(colNames, (src, dst) => string.Format("{1} = src.{0}", QuoteIdentifier(src), QuoteIdentifier(dst))).ToList();
+            if (discriminatorValue != null)
+            {
+                assignments.Add(string.Format("{0} = '{1}'", QuoteIdentifier(TableMapper.DiscriminatorColumnName), discriminatorValue));
+            }
+
+            if (assignments.Count > 0)
+            {
+                ExecuteNonQuery(string.Format(
+                    "UPDATE {1} dest SET {2} FROM {0} src WHERE dest.{3} = src.{3}",
+                    FormatSchemaName(srcTblName),     // 0
+                    FormatSchemaName(tblName),        // 1
+                    string.Join(", ", assignments),   // 2
+                    QuoteIdentifier("ID")));          // 3
+            }
+        }
+
+        public override void MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings)
+        {
+            if (srcColNames == null) throw new ArgumentNullException("srcColNames");
+            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (srcColNames.Length != colNames.Length) throw new ArgumentOutOfRangeException("colNames", "need the same number of columns in srcColNames and colNames");
+            if (mappings == null) mappings = new Dictionary<object, object>[srcColNames.Length];
+            if (mappings.Length != srcColNames.Length) throw new ArgumentOutOfRangeException("mappings", "need the same number of columns in srcColNames and mappings");
+
+            var assignments = new List<string>();
+            for (int i = 0; i < srcColNames.Length; i++)
+            {
+                assignments.Add(string.Format("{1} = {0}", CreateMappingMap("src." + QuoteIdentifier(srcColNames[i]), mappings[i]), QuoteIdentifier(colNames[i])));
+            }
+
+            if (assignments.Count > 0)
+            {
+                ExecuteNonQuery(string.Format(
+                    "UPDATE {1} dest SET {2} FROM {0} src WHERE dest.{3} = src.{3}",
+                    FormatSchemaName(srcTblName),     // 0
+                    FormatSchemaName(tblName),        // 1
+                    string.Join(", ", assignments),   // 2
+                    QuoteIdentifier("ID")));          // 3
+            }
         }
 
         public override void MigrateFKs(
@@ -1240,13 +1351,13 @@ LANGUAGE 'plpgsql' VOLATILE",
         public override void ExecRefreshAllRightsProcedure()
         {
             Log.DebugFormat("Refreshing all rights");
-            ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
+            ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
         public override void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
+            sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName())));
             sb.AppendLine();
             sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("PERFORM {0}(refreshID);", FormatSchemaName(i))).ToArray()));
             sb.AppendLine();
@@ -1519,94 +1630,97 @@ END$BODY$
             try
             {
                 bulkCopy.Start();
-                var dst = new StreamWriter(bulkCopy.CopyStream, new System.Text.UTF8Encoding(false)); // explicitly use Npgsql's default encoding, without BOM
-                // normal windows newline confuses npgsql
-                dst.NewLine = "\n";
-
-                while (source.Read())
+                // explicitly use Npgsql's default encoding, without BOM
+                using (var dst = new StreamWriter(bulkCopy.CopyStream, new System.Text.UTF8Encoding(false)))
                 {
-                    var vals = new string[cols.Length];
+                    // normal windows newline confuses npgsql
+                    dst.NewLine = "\n";
 
-                    for (int srcIdx = 0; srcIdx < cols.Length; srcIdx++)
+                    while (source.Read())
                     {
-                        object val = null;
-                        if (source.IsDBNull(srcIdx) || (val = source.GetValue(srcIdx)) == null)
+                        var vals = new string[cols.Length];
+
+                        for (int srcIdx = 0; srcIdx < cols.Length; srcIdx++)
                         {
-                            vals[srcIdx] = COPY_NULL;
-                        }
-                        else
-                        {
-                            var date = val as DateTime?;
-                            if (date != null)
+                            object val = null;
+                            if (source.IsDBNull(srcIdx) || (val = source.GetValue(srcIdx)) == null)
                             {
-                                vals[srcIdx] = date.Value.ToString("s", CultureInfo.InvariantCulture);
+                                vals[srcIdx] = COPY_NULL;
                             }
                             else
                             {
-                                var dec = val as decimal?;
-                                if (dec != null)
+                                var date = val as DateTime?;
+                                if (date != null)
                                 {
-                                    vals[srcIdx] = dec.Value.ToString(CultureInfo.InvariantCulture);
+                                    vals[srcIdx] = date.Value.ToString("s", CultureInfo.InvariantCulture);
                                 }
                                 else
                                 {
-                                    var dbl = val as double?;
-                                    if (dbl != null)
+                                    var dec = val as decimal?;
+                                    if (dec != null)
                                     {
-                                        vals[srcIdx] = dbl.Value.ToString(CultureInfo.InvariantCulture);
+                                        vals[srcIdx] = dec.Value.ToString(CultureInfo.InvariantCulture);
                                     }
                                     else
                                     {
-                                        var flt = val as float?;
-                                        if (flt != null)
+                                        var dbl = val as double?;
+                                        if (dbl != null)
                                         {
-                                            vals[srcIdx] = flt.Value.ToString(CultureInfo.InvariantCulture);
+                                            vals[srcIdx] = dbl.Value.ToString(CultureInfo.InvariantCulture);
                                         }
                                         else
                                         {
-                                            var lng = val as long?;
-                                            if (lng != null)
+                                            var flt = val as float?;
+                                            if (flt != null)
                                             {
-                                                vals[srcIdx] = lng.Value.ToString(CultureInfo.InvariantCulture);
+                                                vals[srcIdx] = flt.Value.ToString(CultureInfo.InvariantCulture);
                                             }
                                             else
                                             {
-                                                var integ = val as int?;
-                                                if (integ != null)
+                                                var lng = val as long?;
+                                                if (lng != null)
                                                 {
-                                                    vals[srcIdx] = integ.Value.ToString(CultureInfo.InvariantCulture);
+                                                    vals[srcIdx] = lng.Value.ToString(CultureInfo.InvariantCulture);
                                                 }
                                                 else
                                                 {
-                                                    var shrt = val as short?;
-                                                    if (shrt != null)
+                                                    var integ = val as int?;
+                                                    if (integ != null)
                                                     {
-                                                        vals[srcIdx] = shrt.Value.ToString(CultureInfo.InvariantCulture);
+                                                        vals[srcIdx] = integ.Value.ToString(CultureInfo.InvariantCulture);
                                                     }
                                                     else
                                                     {
-                                                        var boolean = val as bool?;
-                                                        if (boolean != null)
+                                                        var shrt = val as short?;
+                                                        if (shrt != null)
                                                         {
-                                                            vals[srcIdx] = boolean.Value.ToString(CultureInfo.InvariantCulture);
+                                                            vals[srcIdx] = shrt.Value.ToString(CultureInfo.InvariantCulture);
                                                         }
                                                         else
                                                         {
-                                                            var str = val as string;
-                                                            if (str != null)
+                                                            var boolean = val as bool?;
+                                                            if (boolean != null)
                                                             {
-                                                                vals[srcIdx] = str;
+                                                                vals[srcIdx] = boolean.Value.ToString(CultureInfo.InvariantCulture);
                                                             }
                                                             else
                                                             {
-                                                                // error out
-                                                                var strVal = val.ToString();
-                                                                if (strVal.Length > 100)
+                                                                var str = val as string;
+                                                                if (str != null)
                                                                 {
-                                                                    str = str.Substring(0, 100);
-                                                                    str += " ...";
+                                                                    vals[srcIdx] = str;
                                                                 }
-                                                                throw new NotSupportedException(String.Format("Cannot transform [{0}] of Type [{1}] for WriteTableData", strVal, val.GetType()));
+                                                                else
+                                                                {
+                                                                    // error out
+                                                                    var strVal = val.ToString();
+                                                                    if (strVal.Length > 100)
+                                                                    {
+                                                                        str = str.Substring(0, 100);
+                                                                        str += " ...";
+                                                                    }
+                                                                    throw new NotSupportedException(String.Format("Cannot transform [{0}] of Type [{1}] for WriteTableData", strVal, val.GetType()));
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -1615,16 +1729,15 @@ END$BODY$
                                         }
                                     }
                                 }
-                            }
 
-                            vals[srcIdx] = CopyEscape(vals[srcIdx]);
+                                vals[srcIdx] = CopyEscape(vals[srcIdx]);
+                            }
                         }
+                        string line = String.Join(COPY_SEPARATOR, vals);
+                        _copyLog.Debug(line);
+                        dst.WriteLine(line);
                     }
-                    string line = String.Join(COPY_SEPARATOR, vals);
-                    _copyLog.Debug(line);
-                    dst.WriteLine(line);
                 }
-                dst.Close();
                 bulkCopy.End();
             }
             catch (Exception ex)
@@ -1648,6 +1761,63 @@ END$BODY$
         public override void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, System.Collections.IEnumerable values)
         {
             throw new NotImplementedException();
+        }
+
+        public override void WriteDefaultValue(TableRef tblName, string colName, object value)
+        {
+            ExecuteNonQuery(String.Format("UPDATE {0} SET {1} = @val WHERE {1} IS NULL;",
+                                FormatSchemaName(tblName),
+                                QuoteIdentifier(colName)),
+                             new Dictionary<string, object>() { { "@val", value } });
+        }
+
+        public override void WriteDefaultValue(TableRef tblName, string colName, object value, IEnumerable<string> discriminatorFilter)
+        {
+            if (discriminatorFilter == null)
+            {
+                WriteDefaultValue(tblName, colName, value);
+            }
+            else
+            {
+                var parameters = ToAdoParameters(discriminatorFilter);
+                var discriminatorParams = string.Join(",", parameters.Keys);
+                parameters["@val"] = value;
+
+                ExecuteNonQuery(String.Format(
+                    "UPDATE {0} SET {1} = @val WHERE {1} IS NULL AND {2} IN ({3})",
+                        FormatSchemaName(tblName),
+                        QuoteIdentifier(colName),
+                        QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                        discriminatorParams),
+                    parameters);
+            }
+        }
+
+        public override void WriteGuidDefaultValue(TableRef tblName, string colName)
+        {
+            ExecuteNonQuery(String.Format("UPDATE {0} SET {1} = uuid_generate_v4() WHERE {1} IS NULL;",
+                                FormatSchemaName(tblName),
+                                QuoteIdentifier(colName)));
+        }
+
+        public override void WriteGuidDefaultValue(TableRef tblName, string colName, IEnumerable<string> discriminatorFilter)
+        {
+            if (discriminatorFilter == null)
+            {
+                WriteGuidDefaultValue(tblName, colName);
+            }
+            else
+            {
+                var parameters = ToAdoParameters(discriminatorFilter);
+
+                ExecuteNonQuery(String.Format(
+                    "UPDATE {0} SET {1} = uuid_generate_v4() WHERE {1} IS NULL AND {2} IN ({3})",
+                        FormatSchemaName(tblName),
+                        QuoteIdentifier(colName),
+                        QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                        string.Join(",", parameters.Keys)),
+                    parameters);
+            }
         }
 
         public override void RefreshDbStats()

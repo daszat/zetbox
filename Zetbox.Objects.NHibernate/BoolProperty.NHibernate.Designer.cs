@@ -76,15 +76,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.FalseIcon == null)
-				{
-					SetInitializedProperty("FalseIcon");
+                {
+                    SetInitializedProperty("FalseIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FalseIcon);
@@ -93,10 +93,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("FalseIcon");
+                {
+                    SetInitializedProperty("FalseIcon");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("FalseIcon", __oldValue, __newValue);
@@ -120,6 +120,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("FalseIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnFalseIcon_PostSetter != null && IsAttached)
                 {
@@ -178,6 +179,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("FalseLabel", __oldValue, __newValue);
                     Proxy.FalseLabel = __newValue;
                     NotifyPropertyChanged("FalseLabel", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnFalseLabel_PostSetter != null && IsAttached)
                     {
@@ -185,10 +187,10 @@ namespace Zetbox.App.Base
                         OnFalseLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("FalseLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("FalseLabel");
+                }
             }
         }
 
@@ -227,15 +229,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.NullIcon == null)
-				{
-					SetInitializedProperty("NullIcon");
+                {
+                    SetInitializedProperty("NullIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.NullIcon);
@@ -244,10 +246,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("NullIcon");
+                {
+                    SetInitializedProperty("NullIcon");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("NullIcon", __oldValue, __newValue);
@@ -271,6 +273,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("NullIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnNullIcon_PostSetter != null && IsAttached)
                 {
@@ -329,6 +332,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("NullLabel", __oldValue, __newValue);
                     Proxy.NullLabel = __newValue;
                     NotifyPropertyChanged("NullLabel", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnNullLabel_PostSetter != null && IsAttached)
                     {
@@ -336,10 +340,10 @@ namespace Zetbox.App.Base
                         OnNullLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NullLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("NullLabel");
+                }
             }
         }
 
@@ -378,15 +382,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.TrueIcon == null)
-				{
-					SetInitializedProperty("TrueIcon");
+                {
+                    SetInitializedProperty("TrueIcon");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TrueIcon);
@@ -395,10 +399,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("TrueIcon");
+                {
+                    SetInitializedProperty("TrueIcon");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("TrueIcon", __oldValue, __newValue);
@@ -422,6 +426,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("TrueIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnTrueIcon_PostSetter != null && IsAttached)
                 {
@@ -480,6 +485,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("TrueLabel", __oldValue, __newValue);
                     Proxy.TrueLabel = __newValue;
                     NotifyPropertyChanged("TrueLabel", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTrueLabel_PostSetter != null && IsAttached)
                     {
@@ -487,10 +493,10 @@ namespace Zetbox.App.Base
                         OnTrueLabel_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TrueLabel");
-				}
+                else
+                {
+                    SetInitializedProperty("TrueLabel");
+                }
             }
         }
 
@@ -834,12 +840,6 @@ namespace Zetbox.App.Base
             this._fk_FalseIcon = otherImpl._fk_FalseIcon;
             this._fk_NullIcon = otherImpl._fk_NullIcon;
             this._fk_TrueIcon = otherImpl._fk_TrueIcon;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for ObjectClasses.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ObjectClass")]
+    [EdmEntityType(NamespaceName="Model", Name="ObjectClassEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ObjectClass")]
     public class ObjectClassEfImpl : Zetbox.App.Base.DataTypeEfImpl, ObjectClass
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -143,7 +142,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnBaseObjectClass_Getter != null)
                 {
@@ -155,7 +153,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
@@ -202,6 +200,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("SubClasses", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -246,13 +245,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
                     _CodeTemplate = __newValue;
                     NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
-			        _CodeTemplate_IsDirty = false;
+                    _CodeTemplate_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("CodeTemplate");
-				}
+                else
+                {
+                    SetInitializedProperty("CodeTemplate");
+                }
             }
         }
         private string _CodeTemplate_store;
@@ -314,7 +313,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnDefaultViewModelDescriptor_Getter != null)
                 {
@@ -326,7 +324,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r
@@ -361,6 +359,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultViewModelDescriptor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -417,7 +416,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -479,6 +477,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                     NotifyPropertyChanging("IsAbstract", __oldValue, __newValue);
                     _IsAbstract = __newValue;
                     NotifyPropertyChanged("IsAbstract", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsAbstract_PostSetter != null && IsAttached)
                     {
@@ -486,10 +485,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsAbstract_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsAbstract");
-				}
+                else
+                {
+                    SetInitializedProperty("IsAbstract");
+                }
             }
         }
         private bool _IsAbstract_store;
@@ -560,6 +559,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                     NotifyPropertyChanging("IsFrozenObject", __oldValue, __newValue);
                     _IsFrozenObject = __newValue;
                     NotifyPropertyChanged("IsFrozenObject", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsFrozenObject_PostSetter != null && IsAttached)
                     {
@@ -567,10 +567,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsFrozenObject_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsFrozenObject");
-				}
+                else
+                {
+                    SetInitializedProperty("IsFrozenObject");
+                }
             }
         }
         private bool _IsFrozenObject_store;
@@ -641,6 +641,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                     NotifyPropertyChanging("IsSimpleObject", __oldValue, __newValue);
                     _IsSimpleObject = __newValue;
                     NotifyPropertyChanged("IsSimpleObject", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsSimpleObject_PostSetter != null && IsAttached)
                     {
@@ -648,10 +649,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                         OnIsSimpleObject_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsSimpleObject");
-				}
+                else
+                {
+                    SetInitializedProperty("IsSimpleObject");
+                }
             }
         }
         private bool _IsSimpleObject_store;
@@ -717,7 +718,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -727,6 +727,87 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_IsValid;
+
+        /// <summary>
+        /// Kind of table mapping. Only valid on base classes. Default is TPT.
+        /// </summary>
+        // enumeration property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
+        public Zetbox.App.Base.TableMapping? TableMapping
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _TableMapping;
+                if (OnTableMapping_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.TableMapping?>(__result);
+                    OnTableMapping_Getter(this, __e);
+                    __result = _TableMapping = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_TableMapping != value)
+                {
+                    var __oldValue = _TableMapping;
+                    var __newValue = value;
+                    if (OnTableMapping_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TableMapping?>(__oldValue, __newValue);
+                        OnTableMapping_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("TableMapping", __oldValue, __newValue);
+                    _TableMapping = __newValue;
+                    NotifyPropertyChanged("TableMapping", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTableMapping_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TableMapping?>(__oldValue, __newValue);
+                        OnTableMapping_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("TableMapping");
+                }
+            }
+        }
+        private Zetbox.App.Base.TableMapping? _TableMapping_store;
+        private Zetbox.App.Base.TableMapping? _TableMapping {
+            get { return _TableMapping_store; }
+            set {
+                ReportEfPropertyChanging("TableMappingImpl");
+                _TableMapping_store = value;
+                ReportEfPropertyChanged("TableMappingImpl");
+            }
+        }
+
+        /// <summary>EF sees only this property, for TableMapping</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int? TableMappingImpl
+        {
+            get
+            {
+                return (int?)this.TableMapping;
+            }
+            set
+            {
+                this.TableMapping = (Zetbox.App.Base.TableMapping?)value;
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.TableMapping?> OnTableMapping_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.TableMapping?> OnTableMapping_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.TableMapping?> OnTableMapping_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnTableMapping_IsValid;
 
         /// <summary>
         /// Tabellenname in der Datenbank
@@ -767,6 +848,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                     NotifyPropertyChanging("TableName", __oldValue, __newValue);
                     _TableName = __newValue;
                     NotifyPropertyChanged("TableName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTableName_PostSetter != null && IsAttached)
                     {
@@ -774,10 +856,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         OnTableName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("TableName");
-				}
+                else
+                {
+                    SetInitializedProperty("TableName");
+                }
             }
         }
         private string _TableName_store;
@@ -1255,14 +1337,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             me.IsAbstract = other.IsAbstract;
             me.IsFrozenObject = other.IsFrozenObject;
             me.IsSimpleObject = other.IsSimpleObject;
+            me.TableMapping = other.TableMapping;
             me.TableName = other.TableName;
             this._fk_BaseObjectClass = otherImpl._fk_BaseObjectClass;
             this._fk_DefaultViewModelDescriptor = otherImpl._fk_DefaultViewModelDescriptor;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1283,6 +1361,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 case "IsAbstract":
                 case "IsFrozenObject":
                 case "IsSimpleObject":
+                case "TableMapping":
                 case "TableName":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
@@ -1439,6 +1518,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         null, // lists are read-only properties
                         obj => OnSubClasses_IsValid), 
                     // else
+                    new PropertyDescriptorEfImpl<ObjectClass, Zetbox.App.Base.TableMapping?>(
+                        lazyCtx,
+                        new Guid("8002bbe3-68b6-475b-b929-398744cc2398"),
+                        "TableMapping",
+                        null,
+                        obj => obj.TableMapping,
+                        (obj, val) => obj.TableMapping = val,
+						obj => OnTableMapping_IsValid), 
+                    // else
                     new PropertyDescriptorEfImpl<ObjectClass, string>(
                         lazyCtx,
                         new Guid("2a5e5111-199c-4dce-8369-ce35ee741568"),
@@ -1512,6 +1600,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         {
             SetNotInitializedProperty("BaseObjectClass");
             SetNotInitializedProperty("DefaultViewModelDescriptor");
+            SetNotInitializedProperty("TableMapping");
             SetNotInitializedProperty("TableName");
             _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
@@ -1528,6 +1617,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             FilterConfigurations.Clear();
             SubClasses.Clear();
             BaseObjectClass = null;
+            DefaultViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<ObjectClass> OnNotifyDeleting_ObjectClass;
 
@@ -1542,13 +1632,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_BaseObjectClass_has_SubClasses", "BaseObjectClass").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_BaseObjectClass_has_SubClasses", "BaseObjectClass");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._CodeTemplate);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_Presentable_has_DefaultViewModelDescriptor", "DefaultViewModelDescriptor").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_Presentable_has_DefaultViewModelDescriptor", "DefaultViewModelDescriptor");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isIsAbstractSet);
             if (this._isIsAbstractSet) {
@@ -1562,6 +1654,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (this._isIsSimpleObjectSet) {
                 binStream.Write(this._IsSimpleObject);
             }
+            binStream.Write((int?)_TableMapping);
             binStream.Write(this._TableName);
         }
 
@@ -1586,6 +1679,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (this._isIsSimpleObjectSet) {
                 this._IsSimpleObject = binStream.ReadBoolean();
             }
+            _TableMapping = (Zetbox.App.Base.TableMapping?)binStream.ReadNullableInt32();
             this._TableName = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -1609,6 +1703,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isIsSimpleObjectSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_TableMapping, xml, "TableMapping", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._TableName, xml, "TableName", "Zetbox.App.Base");
         }
 
@@ -1642,6 +1737,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 this._IsSimpleObject = XmlStreamer.ReadBoolean(xml);
                 this._isIsSimpleObjectSet = true;
                 break;
+            case "Zetbox.App.Base|TableMapping":
+                _TableMapping = (Zetbox.App.Base.TableMapping?)XmlStreamer.ReadNullableInt32(xml);
+               break;
             case "Zetbox.App.Base|TableName":
                 this._TableName = XmlStreamer.ReadString(xml);
                 break;

@@ -19,6 +19,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.Generator;
@@ -251,12 +252,12 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
             Properties.ProxyProperty.Call(Host, ctx,
                 serList, prop.Module.Namespace, prop.GetElementTypeString(), prop.Name, false, true,
-                prop.DefaultValue != null, prop.ObjectClass.GetDataTypeString(), 
-                prop.GetClassName(), 
-                prop.IsNullable(), 
-                "_is" + prop.Name + "Set", 
-                prop.ExportGuid, 
-                prop.GetElementTypeString(), 
+                prop.DefaultValue != null, prop.ObjectClass.GetDataTypeString(),
+                prop.GetClassName(),
+                prop.IsNullable(),
+                "_is" + prop.Name + "Set",
+                prop.ExportGuid,
+                prop.GetElementTypeString(),
                 "Proxy." + prop.Name,
                 prop.IsCalculated(),
                 prop.DisableExport == true);
@@ -295,12 +296,25 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
         {
             ApplyNotifyingValueProperty(prop, null);
-            Templates.Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize,
-                prop.DisableExport == true ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All,
-                prop.Module.Namespace,
-                prop.Name,
-                "Proxy." + prop.Name,
-                prop.GetElementTypeString());
+            if (prop.DefaultValue != null)
+            {
+                Templates.Serialization.EnumWithDefaultBinarySerialization.AddToSerializers(MembersToSerialize,
+                    prop.DisableExport == true ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All,
+                    prop.Module.Namespace,
+                    prop.Name,
+                    "Proxy." + prop.Name,
+                    prop.GetElementTypeString(),
+                    "_is" + prop.Name + "Set");
+            }
+            else
+            {
+                Templates.Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize,
+                    prop.DisableExport == true ? Templates.Serialization.SerializerType.Binary : Templates.Serialization.SerializerType.All,
+                    prop.Module.Namespace,
+                    prop.Name,
+                    "Proxy." + prop.Name,
+                    prop.GetElementTypeString());
+            }
         }
 
         protected override void ApplyListProperty(Property prop, Templates.Serialization.SerializationMembersList serList)

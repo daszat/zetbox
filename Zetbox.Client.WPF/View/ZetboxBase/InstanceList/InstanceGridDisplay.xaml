@@ -1,0 +1,76 @@
+﻿<local:InstanceGridBaseDisplay x:Class="Zetbox.Client.WPF.View.ZetboxBase.InstanceGridDisplay"
+                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
+                               xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                               xmlns:client="clr-namespace:Zetbox.Client.WPF.View"
+                               xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                               xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
+                               xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+                               commands:SmartRoutedUICommand.IsCommandSink="True">
+    <!--
+    This file is part of zetbox.
+
+    Zetbox is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    Zetbox is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+    -->
+
+    <local:InstanceGridBaseDisplay.Resources>
+        <!-- implement workaround for DeferRefresh exception as described on http://stackoverflow.com/questions/3461714/wpf-datagrid-combobox-causes-invalidoperationexception -->
+        <CollectionViewSource x:Key="itemsSource"
+                              Source="{Binding ProxyInstancesAsync}" />
+    </local:InstanceGridBaseDisplay.Resources>
+    <local:InstanceGridBaseDisplay.CommandBindings>
+        <CommandBinding Command="NavigationCommands.Refresh"
+                        Executed="RefreshCommand_Executed" />
+    </local:InstanceGridBaseDisplay.CommandBindings>
+    <DockPanel x:Name="ctrlInstanceList">
+        <ContentPresenter DockPanel.Dock="Top"
+                          Content="{Binding FilterList}"
+                          Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                          Focusable="False"
+                          Margin="0 0 0 5" />
+        <Border Style="{StaticResource ItemGroup1BorderStyle}"
+                Margin="{StaticResource ItemGroup1Margin}">
+            <DockPanel>
+                <local:InstanceListToolBar DockPanel.Dock="Top"
+                                           Margin="0 0 0 5" />
+                <GroupBox DockPanel.Dock="Top"
+                          Style="{StaticResource ItemGroup1GroupBox}"
+                          Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Header="Details"
+                          Margin="0 0 0 5"
+                          Height="{Binding RequestedDetailHeight, Converter={StaticResource WidthHintConverter}}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ContentPresenter Content="{Binding SelectedDetailItem}"
+                                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                    </ScrollViewer>
+                </GroupBox>
+                <local:InstanceListHeader DockPanel.Dock="Top"
+                                          Margin="0 0 0 5" />
+                <ctrls:ZetboxDataGrid x:Name="lst"
+                                      BorderThickness="0"
+                                      ItemsSource="{Binding Source={StaticResource itemsSource}}"
+                                      CanUserAddRows="{Binding AllowAddNew}"
+                                      CanUserDeleteRows="false"
+                                      AutoGenerateColumns="False"
+                                      SelectedZetboxItems="{Binding SelectedProxies}"
+                                      SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
+                                      MouseDoubleClick="ItemActivatedHandler"
+                                      GridViewColumnHeader.Click="ListView_HeaderClick" />
+            </DockPanel>
+        </Border>
+    </DockPanel>
+</local:InstanceGridBaseDisplay>

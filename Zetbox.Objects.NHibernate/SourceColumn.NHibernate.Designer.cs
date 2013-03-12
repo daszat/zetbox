@@ -43,9 +43,9 @@ namespace Zetbox.App.SchemaMigration
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            _isChangedOnSet = Proxy.ID > 0;
             _isCompareNullsSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
-            _isChangedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
         }
 
@@ -80,15 +80,15 @@ namespace Zetbox.App.SchemaMigration
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -97,10 +97,10 @@ namespace Zetbox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ChangedBy");
+                {
+                    SetInitializedProperty("ChangedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -124,6 +124,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
@@ -181,6 +182,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -188,10 +190,10 @@ namespace Zetbox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
 
@@ -257,6 +259,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Comment", __oldValue, __newValue);
                     Proxy.Comment = __newValue;
                     NotifyPropertyChanged("Comment", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnComment_PostSetter != null && IsAttached)
                     {
@@ -264,10 +267,10 @@ namespace Zetbox.App.SchemaMigration
                         OnComment_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Comment");
-				}
+                else
+                {
+                    SetInitializedProperty("Comment");
+                }
             }
         }
 
@@ -315,6 +318,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("CompareNulls", __oldValue, __newValue);
                     Proxy.CompareNulls = __newValue;
                     NotifyPropertyChanged("CompareNulls", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCompareNulls_PostSetter != null && IsAttached)
                     {
@@ -322,10 +326,10 @@ namespace Zetbox.App.SchemaMigration
                         OnCompareNulls_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CompareNulls");
-				}
+                else
+                {
+                    SetInitializedProperty("CompareNulls");
+                }
             }
         }
 
@@ -383,15 +387,15 @@ namespace Zetbox.App.SchemaMigration
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -400,10 +404,10 @@ namespace Zetbox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("CreatedBy");
+                {
+                    SetInitializedProperty("CreatedBy");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -427,6 +431,7 @@ namespace Zetbox.App.SchemaMigration
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
@@ -484,6 +489,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -491,10 +497,10 @@ namespace Zetbox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
 
@@ -560,6 +566,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("DbType", __oldValue, __newValue);
                     Proxy.DbType = __newValue;
                     NotifyPropertyChanged("DbType", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDbType_PostSetter != null && IsAttached)
                     {
@@ -567,10 +574,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDbType_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DbType");
-				}
+                else
+                {
+                    SetInitializedProperty("DbType");
+                }
             }
         }
 
@@ -617,6 +624,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -624,10 +632,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
 
@@ -741,6 +749,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -748,10 +757,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
 
@@ -817,6 +826,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     NotifyPropertyChanging("IsNullable", __oldValue, __newValue);
                     Proxy.IsNullable = __newValue;
                     NotifyPropertyChanged("IsNullable", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsNullable_PostSetter != null && IsAttached)
                     {
@@ -824,10 +834,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnIsNullable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsNullable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsNullable");
+                }
             }
         }
 
@@ -874,6 +884,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -881,10 +892,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
 
@@ -923,15 +934,15 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.References == null)
-				{
-					SetInitializedProperty("References");
+                {
+                    SetInitializedProperty("References");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.References);
@@ -940,10 +951,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("References");
+                {
+                    SetInitializedProperty("References");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("References", __oldValue, __newValue);
@@ -990,6 +1001,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("References", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnReferences_PostSetter != null && IsAttached)
                 {
@@ -1083,6 +1095,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     NotifyPropertyChanging("Size", __oldValue, __newValue);
                     Proxy.Size = __newValue;
                     NotifyPropertyChanged("Size", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSize_PostSetter != null && IsAttached)
                     {
@@ -1090,10 +1103,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnSize_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Size");
-				}
+                else
+                {
+                    SetInitializedProperty("Size");
+                }
             }
         }
 
@@ -1132,15 +1145,15 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.SourceTable == null)
-				{
-					SetInitializedProperty("SourceTable");
+                {
+                    SetInitializedProperty("SourceTable");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.SchemaMigration.SourceTableNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.SourceTable);
@@ -1149,10 +1162,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("SourceTable");
+                {
+                    SetInitializedProperty("SourceTable");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("SourceTable", __oldValue, __newValue);
@@ -1199,6 +1212,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("SourceTable", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnSourceTable_PostSetter != null && IsAttached)
                 {
@@ -1257,6 +1271,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     NotifyPropertyChanging("Status", __oldValue, __newValue);
                     Proxy.Status = __newValue;
                     NotifyPropertyChanged("Status", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnStatus_PostSetter != null && IsAttached)
                     {
@@ -1264,10 +1279,10 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                         OnStatus_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Status");
-				}
+                else
+                {
+                    SetInitializedProperty("Status");
+                }
             }
         }
 
@@ -1368,12 +1383,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_References = otherImpl._fk_References;
             this._fk_SourceTable = otherImpl._fk_SourceTable;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -1799,6 +1808,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             ChangedBy = null;
             CreatedBy = null;
             References = null;
+            SourceTable = null;
         }
         public static event ObjectEventHandler<SourceColumn> OnNotifyDeleting_SourceColumn;
 

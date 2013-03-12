@@ -143,16 +143,24 @@ Serialization.SerializerTemplate.Call(Host, ctx,
             
             Serialization.SerializerTemplate.Call(Host, ctx,
                 Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, GetExportGuidBackingStoreReference());
+        } 
+        else if (DataType is CompoundObject)
+        {
+            Serialization.SerializerTemplate.Call(Host, ctx,
+                Serialization.SerializerDirection.Export, this.MembersToSerialize, true, null);
+            
+            Serialization.SerializerTemplate.Call(Host, ctx,
+                Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, true, null);
         }
 
-#line 126 "P:\zetbox\Zetbox.Generator\Templates\TypeBase.cst"
+#line 134 "P:\zetbox\Zetbox.Generator\Templates\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
-#line 130 "P:\zetbox\Zetbox.Generator\Templates\TypeBase.cst"
+#line 138 "P:\zetbox\Zetbox.Generator\Templates\TypeBase.cst"
 ApplyNamespaceTailTemplate(); 
-#line 131 "P:\zetbox\Zetbox.Generator\Templates\TypeBase.cst"
+#line 139 "P:\zetbox\Zetbox.Generator\Templates\TypeBase.cst"
 this.WriteObjects("}");
 
         }

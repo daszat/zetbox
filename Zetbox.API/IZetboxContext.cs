@@ -18,132 +18,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
+using Zetbox.API.Async;
+using System.Xml.Serialization;
 
 namespace Zetbox.API
 {
-    [Serializable]
-    public class ZetboxContextException
-        : Exception
-    {
-        public ZetboxContextException()
-            : base()
-        {
-        }
-
-        public ZetboxContextException(string message)
-            : base(message)
-        {
-        }
-
-        public ZetboxContextException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
-
-        protected ZetboxContextException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-    }
-
-    [Serializable]
-    public class ZetboxContextDisposedException
-        : ZetboxContextException
-    {
-        public ZetboxContextDisposedException()
-            : base("Context has been disposed. Reusing is not allowed.")
-        {
-        }
-
-        public ZetboxContextDisposedException(string message)
-            : base(message)
-        {
-        }
-
-        public ZetboxContextDisposedException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
-
-        protected ZetboxContextDisposedException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-    }
-
-    [Serializable]
-    public class WrongZetboxContextException
-        : ZetboxContextException
-    {
-        public WrongZetboxContextException()
-            : base("Operation on a Context, where the IPersistanceObject does not belong to is not allowed")
-        {
-        }
-
-        public WrongZetboxContextException(string message)
-            : base(message)
-        {
-        }
-
-        public WrongZetboxContextException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
-
-        protected WrongZetboxContextException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-    }
-
-    [Serializable]
-    public class ConcurrencyException
-        : ZetboxContextException
-    {
-        private const string DEFAULT_MESSAGE = "At least one object has changed between fetch and submit changes";
-
-        [NonSerialized]
-        private IEnumerable<IDataObject> objects;
-        public IEnumerable<IDataObject> Objects
-        {
-            get
-            {
-                return objects;
-            }
-        }
-
-        public ConcurrencyException()
-            : base(DEFAULT_MESSAGE)
-        {
-        }
-
-        public ConcurrencyException(string message)
-            : base(message)
-        {
-        }
-
-        public ConcurrencyException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
-
-        public ConcurrencyException(Exception inner)
-            : base(DEFAULT_MESSAGE, inner)
-        {
-        }
-
-        protected ConcurrencyException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
-        public ConcurrencyException(IEnumerable<IDataObject> objects)
-            : base(string.Format("{0} object(s) has changed between fetch and submit changes", objects != null ? objects.Count().ToString() : "?"))
-        {
-            this.objects = objects;
-        }
-    }
-
     public interface IZetboxContextDebugger
     {
         void Created(IZetboxContext ctx);
@@ -183,6 +63,16 @@ namespace Zetbox.API
         /// <returns>A List of Objects</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
+        /// <summary>
+        /// Returns the List referenced by the given Name.
+        /// TODO: Move to IZetboxContextInternals interface
+        /// </summary>
+        /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
+        /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
+        /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
+        /// <returns>A List of Objects</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ZbTask<List<T>> GetListOfAsync<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
 
         /// <summary>
         /// Fetches all collection entries of a given Relation (specified by <paramref name="relationId"/>)
@@ -197,6 +87,20 @@ namespace Zetbox.API
         /// <returns></returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry;
+
+        /// <summary>
+        /// Fetches all collection entries of a given Relation (specified by <paramref name="relationId"/>)
+        /// which reference the given <paramref name="container"/> on the side <paramref name="role"/>
+        /// of the relation. Mostly for internal use.
+        /// TODO: Move to IZetboxContextInternals interface
+        /// </summary>
+        /// <typeparam name="T">Type of the IRelationEntry element</typeparam>
+        /// <param name="relationId">Specifies which relation to fetch</param>
+        /// <param name="role">Specifies how to interpret the container</param>
+        /// <param name="container">The container of the requested collection</param>
+        /// <returns></returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -221,6 +125,16 @@ namespace Zetbox.API
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         IDataObject Find(InterfaceType ifType, int ID);
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID);
         /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
@@ -230,6 +144,16 @@ namespace Zetbox.API
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         T Find<T>(int ID) where T : class, IDataObject;
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        ZbTask<T> FindAsync<T>(int ID) where T : class, IDataObject;
 
         /// <summary>
         /// Find the Persistence Object of the given type by ID
@@ -290,6 +214,8 @@ namespace Zetbox.API
 
         System.IO.Stream GetStream(int ID);
         System.IO.FileInfo GetFileInfo(int ID);
+        ZbTask<System.IO.Stream> GetStreamAsync(int ID);
+        ZbTask<System.IO.FileInfo> GetFileInfoAsync(int ID);
 
         /// <summary>
         /// IsDisposed can be used to detect whether this IZetboxContext was aborted with Dispose()
@@ -455,7 +381,7 @@ namespace Zetbox.API
         /// Begins a transaction.
         /// </summary>
         /// <remarks>
-        /// Neested transactions are not supported.
+        /// Nested transactions are not supported.
         /// </remarks>
         /// <exception cref="InvalidOperationException">
         /// InvalidOperationException is thrown if a transaction is already running.
@@ -608,6 +534,48 @@ namespace Zetbox.API
             {
                 return query.Provider.CreateQuery<T>(
                     System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithEagerLoading", new Type[] { typeof(T) }, query.Expression));
+            }
+            else
+            {
+                return query;
+            }
+        }
+
+        public static IQueryable WithEagerLoading(this IQueryable query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                return query.Provider.CreateQuery(
+                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithEagerLoading", new Type[] { query.ElementType }, query.Expression));
+            }
+            else
+            {
+                return query;
+            }
+        }
+
+        public static IQueryable<T> WithDeactivated<T>(this IQueryable<T> query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                return query.Provider.CreateQuery<T>(
+                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { typeof(T) }, query.Expression));
+            }
+            else
+            {
+                return query;
+            }
+        }
+
+        public static IQueryable WithDeactivated(this IQueryable query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                return query.Provider.CreateQuery(
+                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { query.ElementType }, query.Expression));
             }
             else
             {

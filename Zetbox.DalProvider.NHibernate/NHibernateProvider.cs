@@ -28,7 +28,10 @@ namespace Zetbox.DalProvider.NHibernate
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using System.ComponentModel;
 
+    [Feature]
+    [Description("nHibernate (NH) provider")]
     public class NHibernateProvider
         : Autofac.Module
     {
@@ -60,16 +63,18 @@ namespace Zetbox.DalProvider.NHibernate
                 .Register((c, p) =>
                 {
                     var param = p.OfType<ConstantParameter>().FirstOrDefault();
+                    var cfg = c.Resolve<ZetboxConfig>();
                     return new NHibernateContext(
                         c.Resolve<IMetaDataResolver>(),
                         param != null ? (Zetbox.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
-                        c.Resolve<ZetboxConfig>(),
+                        cfg,
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
-                        c.Resolve<global::NHibernate.ISession>(),
+                        c.Resolve<global::NHibernate.ISessionFactory>(),
                         c.Resolve<INHibernateImplementationTypeChecker>(),
-                        c.Resolve<IPerfCounter>()
+                        c.Resolve<IPerfCounter>(),
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
                         );
                 })
                 .As<IZetboxContext>()
@@ -98,7 +103,7 @@ namespace Zetbox.DalProvider.NHibernate
                 .As(typeof(IServerObjectHandlerFactory));
 
             moduleBuilder
-                .RegisterType<LocalDateTimeInterceptor>()
+                .RegisterType<NHInterceptor>()
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 
@@ -106,6 +111,8 @@ namespace Zetbox.DalProvider.NHibernate
             //    .RegisterType<AutofacBytecodeProvider>()
             //    .As<global::NHibernate.Bytecode.IBytecodeProvider>()
             //    .InstancePerDependency();
+
+            moduleBuilder.RegisterModule((Autofac.Module)Activator.CreateInstance(Type.GetType("Zetbox.Objects.NHibernateModule, Zetbox.Objects.NHibernateImpl", true)));
         }
 
         private static Autofac.Builder.IRegistrationBuilder<NHibernateContext, Autofac.Builder.SimpleActivatorData, Autofac.Builder.SingleRegistrationStyle> RegisterContext<TInterface>(ContainerBuilder moduleBuilder)
@@ -114,16 +121,18 @@ namespace Zetbox.DalProvider.NHibernate
             return moduleBuilder
                 .Register(c =>
                 {
+                    var cfg = c.Resolve<ZetboxConfig>();
                     return new NHibernateContext(
                         c.Resolve<IMetaDataResolver>(),
                         null,
-                        c.Resolve<ZetboxConfig>(),
+                        cfg,
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
-                        c.Resolve<global::NHibernate.ISession>(),
+                        c.Resolve<global::NHibernate.ISessionFactory>(),
                         c.Resolve<INHibernateImplementationTypeChecker>(),
-                        c.Resolve<IPerfCounter>()
+                        c.Resolve<IPerfCounter>(),
+                        c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
                         );
                 })
                 .As<TInterface>()

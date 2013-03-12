@@ -35,7 +35,7 @@ namespace Zetbox.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(IZetboxContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList( InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
@@ -80,7 +80,7 @@ namespace Zetbox.Client.Mocks
             return result.Cast<IDataObject>();
         }
 
-        public IEnumerable<IDataObject> GetListOf(IZetboxContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
             auxObjects = new List<IStreamable>();
@@ -102,7 +102,7 @@ namespace Zetbox.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             var result = new List<IPersistenceObject>();
             foreach (var obj in objects)
@@ -151,7 +151,7 @@ namespace Zetbox.Client.Mocks
             fi.SetValue(obj, val);
         }
 
-        public IEnumerable<T> FetchRelation<T>(IZetboxContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationEntry
+        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, int parentId, InterfaceType parentIfType, out List<IStreamable> auxObjects) where T : class, IRelationEntry
         {
             auxObjects = new List<IStreamable>();
             return new List<T>();
@@ -166,12 +166,12 @@ namespace Zetbox.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public Zetbox.App.Base.Blob SetBlobStream(IZetboxContext ctx, System.IO.Stream stream, string filename, string mimetype)
+        public Zetbox.App.Base.Blob SetBlobStream(System.IO.Stream stream, string filename, string mimetype)
         {
             throw new NotImplementedException();
         }
 
-        public object InvokeServerMethod(IZetboxContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public object InvokeServerMethod(InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
         {
             throw new NotImplementedException();
         }

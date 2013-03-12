@@ -25,6 +25,18 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
 
+    public class DataObjectSelectionTaskEventArgs : EventArgs
+    {
+        public DataObjectSelectionTaskEventArgs(DataObjectSelectionTaskViewModel vmdl)
+        {
+            TaskViewModel = vmdl;
+        }
+
+        public DataObjectSelectionTaskViewModel TaskViewModel { get; private set; }
+    }
+
+    public delegate void DataObjectSelectionTaskCreatedEventHandler(object sender, DataObjectSelectionTaskEventArgs e);
+
     public class DataObjectSelectionTaskViewModel
         : WindowViewModel, IRefreshCommandListener
     {
@@ -57,11 +69,12 @@ namespace Zetbox.Client.Presentables
         {
             _callback = callback;
             _additionalActions = new ReadOnlyCollection<CommandViewModel>(additionalActions ?? new CommandViewModel[] { });
-            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, this, () => dataCtx, type, qry);
+            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, this, type, qry);
             ListViewModel.AllowAddNew = true;
             ListViewModel.ObjectCreated += ListViewModel_ObjectCreated;
-            ListViewModel.ItemsDefaultAction += ListViewModel_ItemsDefaultAction;
             ListViewModel.ViewMethod = InstanceListViewMethod.Details;
+
+            ListViewModel.DefaultCommand = this.ChooseCommand;
 
             foreach (var cmd in _additionalActions)
             {
@@ -76,11 +89,6 @@ namespace Zetbox.Client.Presentables
             // Same like choose
             var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
             Choose(new[] { mdl });
-        }
-
-        void ListViewModel_ItemsDefaultAction(InstanceListViewModel sender, IEnumerable<DataObjectViewModel> objects)
-        {
-            if (objects != null && objects.Count() > 0) Choose(objects);
         }
 
         public InstanceListViewModel ListViewModel { get; private set; }
@@ -149,7 +157,7 @@ namespace Zetbox.Client.Presentables
 
         public void Refresh()
         {
-            ListViewModel.ReloadInstances();
+            ListViewModel.Refresh();
         }
 
         public IEnumerable<DataObjectViewModel> SelectedItems
@@ -167,7 +175,7 @@ namespace Zetbox.Client.Presentables
 
         public override string Name
         {
-            get { return string.Format(DataObjectSelectionTaskViewModelResources.Name, ListViewModel.DataTypeViewModel.Name); }
+            get { return string.Format(DataObjectSelectionTaskViewModelResources.Name, ListViewModel.DataTypeViewModel.DescribedType); }
         }
     }
 }

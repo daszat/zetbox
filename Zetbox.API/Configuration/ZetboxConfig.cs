@@ -12,19 +12,20 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-using Zetbox.API.Utils;
 
 namespace Zetbox.API.Configuration
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
+    using Zetbox.API.Utils;
+
     [Serializable]
     public class ConfigurationException
         : Exception
@@ -61,6 +62,7 @@ namespace Zetbox.API.Configuration
         {
             this.AdditionalCommandlineOptions = new Dictionary<object, List<string>>();
             this.AdditionalCommandlineActions = new List<Action<Autofac.ILifetimeScope>>();
+            this.EnableShadowCopy = true;
         }
 
         /// <summary>
@@ -78,41 +80,30 @@ namespace Zetbox.API.Configuration
         /// <summary>
         /// Server Configuration
         /// </summary>
-        [XmlElement(IsNullable = false)]
+        [XmlElement(IsNullable = true)]
         public ServerConfig Server { get; set; }
 
         [XmlIgnore]
-        public bool ServerSpecified { get; set; }
+        public bool ServerSpecified { get { return Server != null; } }
 
         /// <summary>
         /// Client Configuration
         /// </summary>
-        [XmlElement(IsNullable = false)]
+        [XmlElement(IsNullable = true)]
         public ClientConfig Client { get; set; }
 
         [XmlIgnore]
-        public bool ClientSpecified { get; set; }
+        public bool ClientSpecified { get { return Client != null; } }
 
-        /// <summary>
-        /// Location (Path) to Assemblies
-        /// <see cref="AssemblyLoader.SearchPath"/>
-        /// </summary>
-        [XmlElement(IsNullable = false)]
-        public AssemblySearchPathArray AssemblySearchPaths { get; set; }
+        [XmlElement("EnableShadowCopy")]
+        [DefaultValue(true)]
+        public bool EnableShadowCopy { get; set; }
 
-        [XmlType("AssemblySearchPaths")]
         [Serializable]
-        public class AssemblySearchPathArray
+        public class Module
         {
-            public AssemblySearchPathArray()
-            {
-                EnableShadowCopy = true;
-            }
-
-            [XmlAttribute("EnableShadowCopy")]
-            public bool EnableShadowCopy { get; set; }
-            [XmlElement("string")]
-            public string[] Paths { get; set; }
+            [XmlText]
+            public string TypeName { get; set; }
         }
 
         /// <summary>
@@ -126,6 +117,13 @@ namespace Zetbox.API.Configuration
         /// </summary>
         [XmlIgnore]
         public List<Action<Autofac.ILifetimeScope>> AdditionalCommandlineActions { get; set; }
+
+        [XmlIgnore]
+        [DefaultValue(false)]
+        public bool IsFallback { get; set; }
+
+        [XmlIgnore]
+        public HostType HostType { get; set; }
 
         /// <summary>
         /// Server Configuration
@@ -188,7 +186,7 @@ namespace Zetbox.API.Configuration
             /// Collection of connection strings
             /// </summary>
             [XmlArray(IsNullable = false)]
-            public Database[] ConnectionStrings { get; set; }
+            public List<Database> ConnectionStrings { get; set; }
 
             /// <summary>
             /// Path of the Document Store
@@ -228,15 +226,15 @@ namespace Zetbox.API.Configuration
             /// AutoFac modules to load
             /// </summary>
             [XmlArray("Modules")]
-            [XmlArrayItem("Module", typeof(string))]
-            public string[] Modules { get; set; }
+            [XmlArrayItem("Module", typeof(Module))]
+            public List<Module> Modules { get; set; }
 
             /// <summary>
             /// Client Files
             /// </summary>
             [XmlArray("ClientFilesLocations")]
             [XmlArrayItem("Location")]
-            public ClientFilesLocation[] ClientFilesLocations { get; set; }
+            public List<ClientFilesLocation> ClientFilesLocations { get; set; }
 
             [Serializable]
             public class ClientFilesLocation
@@ -266,22 +264,13 @@ namespace Zetbox.API.Configuration
         public class ClientConfig
         {
             /// <summary>
-            /// Should a Client be started.
-            /// </summary>
-            [XmlAttribute]
-            public bool StartClient { get; set; }
-
-            /// <summary>
-            /// Used in Debug Mode - should Exceptions be thrown.
-            /// </summary>
-            [XmlAttribute]
-            public bool ThrowErrors { get; set; }
-
-            /// <summary>
             /// If a Guid is specified, the given Application is launched
             /// </summary>
             [XmlElement(IsNullable = true)]
             public Guid? Application { get; set; }
+
+            [XmlIgnore]
+            public bool ApplicationSpecified { get { return Application.HasValue; } }
 
             /// <summary>
             /// Overrides the current system culture
@@ -289,26 +278,24 @@ namespace Zetbox.API.Configuration
             [XmlElement(IsNullable = true)]
             public string Culture { get; set; }
 
+            [XmlIgnore]
+            public bool CultureSpecified { get { return !string.IsNullOrWhiteSpace(Culture); } }
+
             /// <summary>
             /// Overrides the current system ui culture
             /// </summary>
             [XmlElement(IsNullable = true)]
             public string UICulture { get; set; }
 
-            /// <summary>
-            /// </summary>
-            [XmlElement(IsNullable = true)]
-            public bool? DevelopmentEnvironment { get; set; }
-
             [XmlIgnore]
-            public bool DevelopmentEnvironmentSpecified { get; set; }
+            public bool UICultureSpecified { get { return !string.IsNullOrWhiteSpace(UICulture); } }
 
             /// <summary>
             /// AutoFac modules to load
             /// </summary>
             [XmlArray("Modules")]
-            [XmlArrayItem("Module", typeof(string))]
-            public string[] Modules { get; set; }
+            [XmlArrayItem("Module", typeof(Module))]
+            public List<Module> Modules { get; set; }
         }
 
         /// <summary>
@@ -333,37 +320,19 @@ namespace Zetbox.API.Configuration
         {
             using (XmlTextWriter w = new XmlTextWriter(filename, Encoding.Default))
             {
+                w.Formatting = Formatting.Indented;
                 xml.Serialize(w, this);
             }
         }
 
         /// <summary>
-        /// Deserialize from a Stream
-        /// </summary>
-        /// <param name="s">Stream with XML</param>
-        /// <returns>Current Configuration</returns>
-        public static ZetboxConfig FromStream(Stream s)
-        {
-            return (ZetboxConfig)xml.Deserialize(s);
-        }
-
-        /// <summary>
         /// Deserialize from a TextReader
         /// </summary>
-        /// <param name="s">Stream with XML</param>
-        /// <returns>Current Configuration</returns>
-        public static ZetboxConfig FromStream(TextReader s)
-        {
-            return (ZetboxConfig)xml.Deserialize(s);
-        }
-
-        /// <summary>
-        /// Deserialize from a TextReader
-        /// </summary>
+        /// <param name="type">The current host type. Determines where we look for assemblies.</param>
         /// <param name="filename">configuration file w/ or w/o path</param>
         /// <param name="fallbackBaseName">A configuration name to search in the %zenv% environmentvariable, if none is specified in the first parameter</param>
         /// <returns>Current Configuration</returns>
-        public static ZetboxConfig FromFile(string filename, string fallbackBaseName)
+        public static ZetboxConfig FromFile(HostType type, string filename, string fallbackBaseName)
         {
             filename = String.IsNullOrEmpty(filename) ? GetDefaultConfigName(fallbackBaseName) : filename;
 
@@ -374,6 +343,7 @@ namespace Zetbox.API.Configuration
             {
                 ZetboxConfig result = (ZetboxConfig)xml.Deserialize(r);
                 result.ConfigFilePath = filename;
+                result.HostType = type;
                 return result;
             }
         }

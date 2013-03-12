@@ -10,14 +10,4 @@
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
   </Server>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>..\..\..\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>..\Common</string>
-    <!-- Fallback path for local development -->
-    <string>..\Server\fallback</string>
-    <!-- All other assemblies -->
-    <string>..\Server</string>
-  </SourceFileLocation>
 </ZetboxConfig>

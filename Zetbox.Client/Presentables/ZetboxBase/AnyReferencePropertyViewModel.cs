@@ -4,14 +4,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Zetbox.Client.Presentables;
     using Zetbox.API;
-    using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.Client.Models;
     using Zetbox.App.Base;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
-    public class AnyReferencePropertyViewModel : CompoundObjectPropertyViewModel
+    public class AnyReferencePropertyViewModel : CompoundObjectPropertyViewModel, IOpenCommandParameter
     {
         public new delegate AnyReferencePropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -71,36 +71,22 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             return cmds;
         }
 
-        private bool CanOpen
-        {
-            get
-            {
-                return ReferencedObject != null ? ViewModelFactory.CanShowModel(ReferencedObject) : false;
-            }
-        }
-
         public void OpenReference()
         {
-            if (CanOpen)
-                ViewModelFactory.ShowModel(ReferencedObject, true);
+            if (OpenReferenceCommand.CanExecute(null))
+                OpenReferenceCommand.Execute(null);
         }
 
-        private ICommandViewModel _openReferenceCommand;
+        private OpenDataObjectCommand _openReferenceCommand;
         public ICommandViewModel OpenReferenceCommand
         {
             get
             {
                 if (_openReferenceCommand == null)
                 {
-                    _openReferenceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    _openReferenceCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(
                         DataContext,
-                        this,
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Name,
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip,
-                        () => OpenReference(),
-                        () => CanOpen,
-                        null);
-                    _openReferenceCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
+                        this);
                 }
                 return _openReferenceCommand;
             }
@@ -133,14 +119,25 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                             },
                             null);
                         selectionTask.ListViewModel.AllowDelete = false;
-                        selectionTask.ListViewModel.ShowOpenCommand = false;
+                        selectionTask.ListViewModel.AllowOpen = false;
                         selectionTask.ListViewModel.AllowAddNew = true;
+                        OnDataObjectSelectionTaskCreated(selectionTask);
 
                         ViewModelFactory.ShowDialog(selectionTask);
                     }
                 },
                 null);
             ViewModelFactory.ShowDialog(selectClass);
+        }
+
+        public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
+        protected virtual void OnDataObjectSelectionTaskCreated(DataObjectSelectionTaskViewModel vmdl)
+        {
+            var temp = DataObjectSelectionTaskCreated;
+            if (temp != null)
+            {
+                temp(this, new DataObjectSelectionTaskEventArgs(vmdl));
+            }
         }
 
         private ICommandViewModel _SelectValueCommand;
@@ -157,9 +154,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         ObjectReferenceViewModelResources.SelectValueCommand_Name,
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
                         () => SelectValue(),
-                        () => AllowSelectValue && !DataContext.IsReadonly && !IsReadOnly,
+                        () => AllowSelectValue && !IsReadOnly,
                         null);
-                    _SelectValueCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext);
+                    _SelectValueCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext));
                 }
                 return _SelectValueCommand;
             }
@@ -181,6 +178,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             return Name;
         }
+        #endregion
+
+        #region IOpenCommandParameter members
+        bool IOpenCommandParameter.AllowOpen { get { return true; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return ReferencedObject == null ? null : new[] { ReferencedObject }; } }
         #endregion
     }
 }

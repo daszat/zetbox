@@ -17,11 +17,12 @@ namespace Zetbox.API.Utils
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
-
     using Autofac;
     using Autofac.Core;
+    using Mono.Cecil;
     using Zetbox.API.Configuration;
 
     public static class AutoFacBuilder
@@ -31,7 +32,7 @@ namespace Zetbox.API.Utils
             return CreateContainerBuilder(config, null);
         }
 
-        public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config, string[] modules)
+        public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config, IEnumerable<ZetboxConfig.Module> modules)
         {
             if (config == null) throw new ArgumentNullException("config");
 
@@ -43,29 +44,194 @@ namespace Zetbox.API.Utils
                 .ExternallyOwned()
                 .SingleInstance();
 
-            foreach (var m in modules ?? new string[] { })
+            foreach (var m in (modules ?? new ZetboxConfig.Module[] { }))
             {
                 try
                 {
-                    Logging.Log.InfoFormat("Adding module [{0}]", m);
-#if MONO
-                    // workaround for https://bugzilla.novell.com/show_bug.cgi?id=661461
-                    var parts = m.Split(",".ToCharArray(), 2);
-                    if (parts.Length == 2)
+                    var moduleDescriptor = FindModule(config, m.TypeName);
+
+                    if (moduleDescriptor == null)
                     {
-                        var assemblyName = parts[1];
-                        System.Reflection.Assembly.Load(assemblyName);
+                        if (config.IsFallback)
+                        {
+                            // Don't report an error - fallback case. Dev Environments require this! Directory may not exits yet. 
+                            Logging.Log.WarnFormat(string.Format("Fallback, ignoring error: Module loading aborted: cannot find '{0}'", m.TypeName));
+                            continue;
+                        }
+                        else
+                        {
+                            throw new ConfigurationException(string.Format("Module loading aborted: cannot find '{0}'", m.TypeName));
+                        }
                     }
-#endif
-                    builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(m, true)));
+
+                    if (config.IsFallback && moduleDescriptor.NotOnFallback)
+                    {
+                        Logging.Log.InfoFormat("Skipped module [{0}] in fallback mode", m.TypeName);
+                    }
+                    else
+                    {
+                        Logging.Log.InfoFormat("Adding module [{0}]", m.TypeName);
+                        builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(moduleDescriptor.TypeName, true)));
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Logging.Log.Error(String.Format("Unable to register Module [{0}] from Config", m), ex);
+                    Logging.Log.Error(String.Format("Unable to register Module [{0}] from Config", m.TypeName), ex);
                     throw;
+                }
+            }
+
+            foreach (var file in GetAssemblyFiles(config))
+            {
+                foreach (var m in FindModules(ModuleDefinition.ReadModule(file)).Where(m => m.IsAutoloaded))
+                {
+                    Logging.Log.InfoFormat("Adding autoloaded module [{0}]", m.TypeName);
+                    builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(m.TypeName, true)));
                 }
             }
             return builder;
         }
+
+        private static IEnumerable<string> GetAssemblyFiles(ZetboxConfig config)
+        {
+            string hostTypeDir = string.Empty;
+            switch (config.HostType)
+            {
+                case HostType.AspNet:
+                    hostTypeDir = "bin";
+                    break;
+                case HostType.Client:
+                case HostType.Server:
+                case HostType.None:
+                default:
+                    break;
+            }
+
+            var basePath = string.IsNullOrWhiteSpace(hostTypeDir)
+                ? AppDomain.CurrentDomain.BaseDirectory
+                : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, hostTypeDir);
+
+            // searches first in the AppBase and then in the configured search path
+            foreach (var searchPath in new[] { basePath }.Concat(AssemblyLoader.SearchPath).Select(p => AssemblyLoader.QualifySearchPath(p)))
+            {
+                // Ignore unknown directories
+                // Tests, bootstrapping, fallback and other situations might not have a full set of DLLs
+                if (!Directory.Exists(searchPath))
+                    continue;
+
+                foreach (var file in Directory.GetFiles(searchPath, "*.dll").Where(f => !f.ToLowerInvariant().EndsWith(".resources.dll")))
+                {
+                    yield return file;
+                }
+            }
+        }
+
+        [CLSCompliant(false)]
+        public static IEnumerable<ModuleDescriptor> FindModules(ModuleDefinition module)
+        {
+            if (module == null) throw new ArgumentNullException("module");
+
+            return module.Types
+                .SelectMany(t => t.AndChildren(p => p.NestedTypes))
+                .Where(type => type.BaseType != null && type.BaseType.FullName == "Autofac.Module") // By string, as we do not want to rely on a specific autofac version
+                .Select(type => CreateModuleDescriptor(type));
+        }
+
+        private static ModuleDescriptor CreateModuleDescriptor(TypeDefinition type)
+        {
+            return new ModuleDescriptor()
+            {
+                Type = type,
+                TypeName = string.Format("{0}, {1}", type.FullName.Replace('/', '+'), type.Module.Assembly.Name.Name),
+                Description = ExtractDescription(type),
+                IsFeature = ExtractIsFeature(type),
+                IsAutoloaded = ExtractIsAutoloaded(type),
+                NotOnFallback = ExtractNotOnFallback(type)
+            };
+        }
+
+        [CLSCompliant(false)]
+        public static ModuleDescriptor FindModule(ZetboxConfig config, string typeName)
+        {
+            if (config == null) throw new ArgumentNullException("config");
+            if (string.IsNullOrWhiteSpace(typeName)) throw new ArgumentNullException("typeName");
+
+            var parts = typeName.Split(new[] { ',' }, 2);
+
+            if (parts.Length != 2)
+            {
+                throw new ConfigurationException(string.Format("need an assembly qualified typename, not '{0}'", typeName));
+            }
+
+            parts[1] = parts[1].Trim().ToLowerInvariant();
+
+            foreach (var file in GetAssemblyFiles(config))
+            {
+                if (Path.GetFileNameWithoutExtension(file).ToLowerInvariant() != parts[1])
+                    continue;
+
+                var module = ModuleDefinition.ReadModule(file);
+
+                var typeDef = module.GetType(parts[0], true).Resolve();
+                if (typeDef == null)
+                {
+                    throw new ConfigurationException(string.Format("Cannot find module '{0}'", typeName));
+                }
+                return CreateModuleDescriptor(typeDef);
+            }
+
+            return null;
+        }
+
+        private static string ExtractDescription(ICustomAttributeProvider type)
+        {
+            var attr = type.CustomAttributes.FirstOrDefault(i => i.AttributeType.FullName == typeof(System.ComponentModel.DescriptionAttribute).FullName);
+
+            if (attr != null && attr.ConstructorArguments.Count > 0)
+            {
+                return (string)attr.ConstructorArguments.First().Value;
+            }
+            return string.Empty;
+        }
+
+        private static bool ExtractIsFeature(ICustomAttributeProvider type)
+        {
+            var attr = type.CustomAttributes.FirstOrDefault(i => i.AttributeType.FullName == typeof(Zetbox.API.Configuration.FeatureAttribute).FullName);
+            return attr != null;
+        }
+
+        private static bool ExtractIsAutoloaded(ICustomAttributeProvider type)
+        {
+            var attr = type.CustomAttributes.FirstOrDefault(i => i.AttributeType.FullName == typeof(Zetbox.API.Configuration.AutoLoadAttribute).FullName);
+            return attr != null;
+        }
+
+        private static bool ExtractNotOnFallback(ICustomAttributeProvider type)
+        {
+            bool notOnFallback = false;
+            var attr = type.CustomAttributes
+                .FirstOrDefault(i => i.AttributeType.FullName == typeof(Zetbox.API.Configuration.FeatureAttribute).FullName
+                                  || i.AttributeType.FullName == typeof(Zetbox.API.Configuration.AutoLoadAttribute).FullName);
+            if (attr != null)
+            {
+                var namedArg = attr.Properties.Where(i => i.Name == "NotOnFallback").ToArray();
+                if (namedArg.Length > 0)
+                {
+                    notOnFallback = namedArg[0].Argument.Value as bool? == true;
+                }
+            }
+            return notOnFallback;
+        }
+    }
+
+    [CLSCompliant(false)]
+    public class ModuleDescriptor
+    {
+        public TypeDefinition Type { get; set; }
+        public string TypeName { get; set; }
+        public string Description { get; set; }
+        public bool IsFeature { get; set; }
+        public bool IsAutoloaded { get; set; }
+        public bool NotOnFallback { get; set; }
     }
 }

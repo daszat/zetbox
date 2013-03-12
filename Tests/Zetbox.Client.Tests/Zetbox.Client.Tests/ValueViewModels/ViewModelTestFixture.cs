@@ -26,6 +26,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
     using Zetbox.Client.Presentables.ValueViewModels;
     using Moq;
     using NUnit.Framework;
+    using Zetbox.API.Async;
 
     public abstract class ViewModelTestFixture
         : AbstractClientTestFixture
@@ -40,6 +41,11 @@ namespace Zetbox.Client.Tests.ValueViewModels
             public override bool HasValue
             {
                 get { throw new NotImplementedException(); }
+            }
+
+            public override object ValueAsync
+            {
+                get { return Value; }
             }
 
             protected override string FormatValue(object value)
@@ -84,9 +90,9 @@ namespace Zetbox.Client.Tests.ValueViewModels
                 return State;
             }
 
-            protected override object GetValueFromModel()
+            protected override ZbTask<object> GetValueFromModel()
             {
-                return ValueModel.Value;
+                return new ZbTask<object>(ZbTask.Synchron, () => ValueModel.Value);
             }
 
             protected override void SetValueToModel(object value)
@@ -107,6 +113,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             valueModelMock.SetupProperty(o => o.Value);
             valueModelMock.SetupGet(o => o.Label).Returns("ValueLabel");
             valueModelMock.SetupGet(o => o.AllowNullInput).Returns(true);
+            valueModelMock.SetupGet(o => o.ReportErrors).Returns(true);
             obj = new TestValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), null, valueModelMock.Object);
         }
     }

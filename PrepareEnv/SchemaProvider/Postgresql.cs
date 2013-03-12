@@ -27,11 +27,12 @@ namespace PrepareEnv.SchemaProvider
         public override void Copy(string source, string dest)
         {
             var srcBuilder = new NpgsqlConnectionStringBuilder(source);
-            var destBuilder = new NpgsqlConnectionStringBuilder(dest);
+            var srcUserCmdString = string.Format("--host={0} --port={1} --username={2} --no-password", srcBuilder.Host, srcBuilder.Port, srcBuilder.UserName);
             var srcDB = srcBuilder.Database;
+
+            var destBuilder = new NpgsqlConnectionStringBuilder(dest);
+            var destUserCmdString = string.Format("--host={0} --port={1} --username={2} --no-password", destBuilder.Host, destBuilder.Port, destBuilder.UserName);
             var destDB = destBuilder.Database;
-            var srcUserCmdString = "--username=" + srcBuilder.UserName + " --no-password";
-            var destUserCmdString = "--username=" + destBuilder.UserName + " --no-password";
 
             var dumpFile = GetBackupFile();
 

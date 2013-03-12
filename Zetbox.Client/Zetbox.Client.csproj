@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zetbox.Client</RootNamespace>
     <AssemblyName>Zetbox.Client</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <WarningLevel>4</WarningLevel>
     <SignAssembly>true</SignAssembly>
@@ -19,63 +19,69 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Client\Core\</OutputPath>
+    <OutputPath>..\bin\Debug\Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>..\bin\Debug\Client\Core\Zetbox.Client.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Client\Core\</OutputPath>
+    <OutputPath>..\bin\Release\Client\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>..\bin\Release\Client\Core\Zetbox.Client.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Client\Zetbox.Client.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Client\Core\</OutputPath>
+    <OutputPath>..\bin\Debug\Client\</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>..\bin\Debug\Client\Core\Zetbox.Client.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\Zetbox.Client.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <NoWarn>1591,1584,1574</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=2.6.1.841, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration">
+      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.3879.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3879.0\lib\net35\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
     </Reference>
-    <Reference Include="MigraDoc.Rendering, Version=1.32.3879.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3879.0\lib\net35\MigraDoc.Rendering.dll</HintPath>
-    </Reference>
-    <Reference Include="MigraDoc.RtfRendering">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3879.0\lib\net35\MigraDoc.RtfRendering.dll</HintPath>
-    </Reference>
-    <Reference Include="PdfSharp, Version=1.32.2602.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3879.0\lib\net35\PdfSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="PdfSharp.Charting, Version=1.32.2602.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3879.0\lib\net35\PdfSharp.Charting.dll</HintPath>
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -127,7 +133,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ActionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModel.cs" />
     <Compile Include="Models\ColumnDisplayModel.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModelResources.Designer.cs">
@@ -156,13 +161,9 @@
     </Compile>
     <Compile Include="Presentables\DocumentManagement\ImportedFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DynamicFileViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\FileViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FileViewModelResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Presentables\DocumentManagement\StaticFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DocumentViewModel.cs" />
+    <Compile Include="Presentables\DtoViewModels\DtoExporter.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoBuilder.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoBaseViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoGroupedViewModel.cs" />
@@ -171,11 +172,14 @@
     <Compile Include="Presentables\DtoViewModels\DtoTableViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoValueViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationTreeScreenViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationTabbedScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationActionViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationReportScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationSearchScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.cs" />
+    <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.Model.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -183,20 +187,30 @@
     </Compile>
     <Compile Include="Presentables\IContextViewModel.cs" />
     <Compile Include="Presentables\ISortableViewModel.cs" />
+    <Compile Include="Presentables\ModuleEditor\DataTypeViewModels.cs" />
+    <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
+    <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\GroupMembershipViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\AnyReferencePropertyViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\FilterListEntryViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\FilterListEntryViewModelResources.Designer.cs">
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Commands.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.PrintExport.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.GridSupport.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Selection.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Filter.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterListEntryViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\FilterListViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\FilterListViewModelResources.Designer.cs">
+    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterListViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Sorting.cs" />
     <Compile Include="Presentables\ZetboxBase\PropertySelectionTaskViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -252,7 +266,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonCommandsResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ZetboxBase\InstanceListViewModelResources.Designer.cs">
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InstanceListViewModelResources.resx</DependentUpon>
@@ -312,9 +326,8 @@
     <Compile Include="Presentables\DataTypeViewModel.cs" />
     <Compile Include="Presentables\GUI\MultiLineEditorDialogViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\CommonCommands.cs" />
-    <Compile Include="Presentables\ZetboxBase\InstanceListViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.cs" />
     <Compile Include="Presentables\ErrorListViewModel.cs" />
-    <Compile Include="Presentables\IAsyncUiManager.cs" />
     <Compile Include="Presentables\ICommandViewModel.cs" />
     <Compile Include="Presentables\ILabeledViewModel.cs" />
     <Compile Include="Presentables\IViewModelFactory.cs" />
@@ -357,11 +370,23 @@
     <Compile Include="Presentables\DataObjectSelectionTaskViewModel.cs" />
     <Compile Include="Presentables\ObjectEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\WindowViewModel.cs" />
+    <Compile Include="Reporting\ReportingErrorDialog.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="ClientHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ZetboxContextExceptionHandler.cs" />
+    <Compile Include="ZetboxContextExceptionHandlerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZetboxContextExceptionHandlerResources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.de.resx" />
+    <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ZetboxContextExceptionHandlerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
@@ -404,11 +429,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DataObjectViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\DocumentManagement\FileViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\DocumentManagement\FileViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>FileViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -419,15 +439,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SavedListConfiguratorViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\FilterListEntryViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\FilterListEntryViewModelResources.resx">
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FilterListEntryViewModelResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Zetbox.Client.Presentables.ZetboxBase</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\FilterListViewModelResources.de.resx" />
-    <EmbeddedResource Include="Presentables\ZetboxBase\FilterListViewModelResources.resx">
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FilterListViewModelResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Zetbox.Client.Presentables.ZetboxBase</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.resx">
@@ -441,6 +463,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.de.resx">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -488,11 +511,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonCommandsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceListViewModelResources.de.resx">
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.de.resx">
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceListViewModelResources.resx">
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>InstanceListViewModelResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Zetbox.Client.Presentables.ZetboxBase</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ZetboxBase\RelationChainViewModelResources.de.resx">
     </EmbeddedResource>
@@ -505,6 +529,7 @@
     <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WorkspaceViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx">
       <SubType>Designer</SubType>
@@ -526,6 +551,7 @@
       <LastGenOutput>ValueInputTaskViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -564,22 +590,19 @@
     <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
       <Name>Zetbox.API.Client</Name>
-      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Zetbox.API</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>
-      <Private>False</Private>
+      <Private>false</Private>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>Zetbox.API.Common</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
@@ -595,7 +618,7 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MSBuildVersioning.targets" />
+  <Import Project="..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>

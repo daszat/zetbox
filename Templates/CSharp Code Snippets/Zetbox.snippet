@@ -29,22 +29,97 @@
         </Literal>
       </Declarations>
       <Code Language="CSharp" Kind="method body">
-        <![CDATA[private ICommandViewModel _$Name$Command = null;
+        <![CDATA[#region $Name$ command
+		private ICommandViewModel _$Name$Command = null;
         public ICommandViewModel $Name$Command
         {
             get
             {
                 if (_$Name$Command == null)
                 {
-                    _$Name$Command = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "$Label$", "$Tooltip$", $Name$, null, null);
+                    _$Name$Command = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "$Label$", "$Tooltip$", $Name$, Can$Name$, Can$Name$Reason);
                 }
                 return _$Name$Command;
             }
         }			
 
+		public bool Can$Name$()
+		{
+			return true;
+		}
+		
+		public string Can$Name$Reason()
+		{
+			return "TODO: Add error string here";
+		}
+		
 		public void $Name$()
 		{
-		}]]>
+			if(!Can$Name$()) return;
+		}
+		#endregion]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Asynchronous Property snippet</Title>
+      <Author>dasz.at OG</Author>
+      <Description>Inserts a simple asynchronous cached property.</Description>
+      <Shortcut>propasync</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>Name</ID>
+          <Type>String</Type>
+          <ToolTip>Replace with a name.</ToolTip>
+          <Default>Name</Default>
+        </Literal>
+        <Literal>
+          <ID>Type</ID>
+          <Type>String</Type>
+          <ToolTip>Replace with a type.</ToolTip>
+          <Default>string</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="method body">
+        <![CDATA[#region $Name$Async
+
+        private PropertyTask<$Type$> _$Name$Task;
+        private PropertyTask<$Type$> Ensure$Name$Task()
+        {
+            if (_$Name$Task != null) return _$Name$Task;
+
+            return _$Name$Task = new PropertyTask<$Type$>(
+                notifier: () =>
+                {
+                    OnPropertyChanged("$Name$");
+                    OnPropertyChanged("$Name$Async");
+                },
+                createTask: () =>
+                {
+                    return new ZbTask<$Type$>(default($Type$));
+                },
+                set: ($Type$ value) =>
+                {
+					throw new NotImplementedException();
+                });
+        }
+
+        public $Type$ $Name$
+        {
+            get { return Ensure$Name$Task().Get(); }
+            set { Ensure$Name$Task().Set(value); }
+        }
+
+        public $Type$ $Name$Async
+        {
+            get { return Ensure$Name$Task().GetAsync(); }
+            set { $Name$ = value; }
+        }
+
+        #endregion]]>
       </Code>
     </Snippet>
   </CodeSnippet>

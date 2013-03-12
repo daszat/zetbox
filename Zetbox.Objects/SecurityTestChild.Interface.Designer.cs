@@ -11,7 +11,7 @@ namespace Zetbox.App.Test
     /// 
     /// </summary>
     [Zetbox.API.DefinitionGuid("09dfa3cf-4a15-48ed-b76a-c330ac7379e0")]
-    public interface SecurityTestChild : IDataObject 
+    public interface SecurityTestChild : IDataObject, Zetbox.App.Base.IChangedBy 
     {
 
         /// <summary>

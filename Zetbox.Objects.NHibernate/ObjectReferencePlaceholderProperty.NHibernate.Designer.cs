@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
 
@@ -141,6 +142,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ImplementorRoleName", __oldValue, __newValue);
                     Proxy.ImplementorRoleName = __newValue;
                     NotifyPropertyChanged("ImplementorRoleName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnImplementorRoleName_PostSetter != null && IsAttached)
                     {
@@ -148,10 +150,10 @@ namespace Zetbox.App.Base
                         OnImplementorRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ImplementorRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ImplementorRoleName");
+                }
             }
         }
 
@@ -198,6 +200,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     Proxy.IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -205,10 +208,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
 
@@ -255,6 +258,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ItemRoleName", __oldValue, __newValue);
                     Proxy.ItemRoleName = __newValue;
                     NotifyPropertyChanged("ItemRoleName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnItemRoleName_PostSetter != null && IsAttached)
                     {
@@ -262,10 +266,10 @@ namespace Zetbox.App.Base
                         OnItemRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ItemRoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("ItemRoleName");
+                }
             }
         }
 
@@ -304,15 +308,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ReferencedObjectClass == null)
-				{
-					SetInitializedProperty("ReferencedObjectClass");
+                {
+                    SetInitializedProperty("ReferencedObjectClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ReferencedObjectClass);
@@ -321,10 +325,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ReferencedObjectClass");
+                {
+                    SetInitializedProperty("ReferencedObjectClass");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ReferencedObjectClass", __oldValue, __newValue);
@@ -348,6 +352,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ReferencedObjectClass", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnReferencedObjectClass_PostSetter != null && IsAttached)
                 {
@@ -406,6 +411,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Verb", __oldValue, __newValue);
                     Proxy.Verb = __newValue;
                     NotifyPropertyChanged("Verb", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnVerb_PostSetter != null && IsAttached)
                     {
@@ -413,10 +419,10 @@ namespace Zetbox.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Verb");
-				}
+                else
+                {
+                    SetInitializedProperty("Verb");
+                }
             }
         }
 
@@ -761,12 +767,6 @@ namespace Zetbox.App.Base
             me.Verb = other.Verb;
             this._fk_ReferencedObjectClass = otherImpl._fk_ReferencedObjectClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -975,12 +975,13 @@ namespace Zetbox.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferencePlaceholderProperty != null) OnNotifyDeleting_ObjectReferencePlaceholderProperty(this);
 
-            // FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
+            // FK_ObjRefPlaceholderProp_ofType_ReferencedClass
             if (ReferencedObjectClass != null) {
                 ((NHibernatePersistenceObject)ReferencedObjectClass).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ReferencedObjectClass);
             }
 
+            ReferencedObjectClass = null;
         }
         public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnNotifyDeleting_ObjectReferencePlaceholderProperty;
 

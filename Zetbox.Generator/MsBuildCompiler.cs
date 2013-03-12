@@ -21,8 +21,9 @@ namespace Zetbox.Generator
     using System.Linq;
     using System.Text;
     using Autofac;
+    using Microsoft.Build.Evaluation;
     using Zetbox.API;
-    using Microsoft.Build.BuildEngine;
+    using Microsoft.Build.Execution;
     using Microsoft.Build.Framework;
 
     public class MsBuildCompiler : Compiler
@@ -34,28 +35,29 @@ namespace Zetbox.Generator
         {
         }
 
-        protected override void RegisterConsoleLogger(Engine engine, string workingPath)
-        {
-            engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
-            // TODO: implement FileLogger in mono, reenable this
-            var logger = new FileLogger();
-            logger.Parameters = String.Format(@"logfile={0}", Path.Combine(workingPath, "compile.log"));
-            logger.Verbosity = LoggerVerbosity.Minimal; // Normal, Detailed;
-            engine.RegisterLogger(logger);
-        }
-
-        protected override bool CompileSingle(Engine engine, AbstractBaseGenerator gen, string workingPath, string target)
+        protected override bool CompileSingle(AbstractBaseGenerator gen, Dictionary<string, string> buildProps, string workingPath, string target)
         {
             try
             {
                 using (log4net.NDC.Push("Compiling " + gen.Description))
                 {
                     Log.DebugFormat("Loading MsBuild Project");
-                    var proj = new Project(engine);
-                    proj.Load(Helper.PathCombine(workingPath, gen.TargetNameSpace, gen.ProjectFileName));
+                    var projectFile = Helper.PathCombine(workingPath, gen.TargetNameSpace, gen.ProjectFileName);
+                    var req = new BuildRequestData(
+                        projectFile,
+                        buildProps,
+                        null,
+                        new[] { target },
+                        null);
+
+                    var logger = new Microsoft.Build.Logging.ConsoleLogger(LoggerVerbosity.Minimal);
+                    var buildParameter = new BuildParameters();
+                    buildParameter.Loggers = new List<ILogger>() { logger };
 
                     Log.DebugFormat("Compiling");
-                    if (engine.BuildProject(proj, target))
+                    var result = BuildManager.DefaultBuildManager.Build(buildParameter, req);
+
+                    if (result.OverallResult == BuildResultCode.Success)
                     {
                         return true;
                     }

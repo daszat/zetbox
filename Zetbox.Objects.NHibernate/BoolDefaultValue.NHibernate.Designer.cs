@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("BoolValue", __oldValue, __newValue);
                     Proxy.BoolValue = __newValue;
                     NotifyPropertyChanged("BoolValue", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBoolValue_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnBoolValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("BoolValue");
-				}
+                else
+                {
+                    SetInitializedProperty("BoolValue");
+                }
             }
         }
 
@@ -181,12 +182,6 @@ namespace Zetbox.App.Base
             var me = (BoolDefaultValue)this;
 
             me.BoolValue = other.BoolValue;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

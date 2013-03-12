@@ -20,6 +20,7 @@ namespace Zetbox.Server.SchemaManagement
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
@@ -40,6 +41,11 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     db.EnsureInfrastructure();
 
+                    foreach (var gmf in _globalMigrationFragments)
+                    {
+                        gmf.PreMigration(db);
+                    }
+
                     UpdateDatabaseSchemas();
                     UpdateTables();
                     UpdateRelations();
@@ -52,7 +58,14 @@ namespace Zetbox.Server.SchemaManagement
 
                     UpdateProcedures();
 
+                    Workaround_UpdateTPHNotNullCheckConstraint();
+
                     SaveSchema(schema);
+
+                    foreach (var gmf in _globalMigrationFragments)
+                    {
+                        gmf.PostMigration(db);
+                    }
 
                     db.CommitTransaction();
                     db.RefreshDbStats();
@@ -63,6 +76,56 @@ namespace Zetbox.Server.SchemaManagement
                     Log.Debug(String.Empty);
                     Log.Error("An error ocurred while updating the schema", ex);
                     throw;
+                }
+            }
+        }
+
+        private void Workaround_UpdateTPHNotNullCheckConstraint()
+        {
+            foreach (var prop in schema.GetQuery<ValueTypeProperty>())
+            {
+                var cls = prop.ObjectClass as ObjectClass;
+                if (!prop.IsNullable() && cls != null && cls.BaseObjectClass != null && cls.GetTableMapping() == TableMapping.TPH)
+                {
+                    var tblName = cls.GetTableRef(db);
+                    var colName = Construct.ColumnName(prop, string.Empty);
+                    var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+
+                    if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                    {
+                        db.DropCheckConstraint(tblName, checkConstraintName);
+                    }
+
+                    Case.CreateTPHNotNullCheckConstraint(tblName, colName, cls);
+                }
+            }
+
+            foreach (var rel in schema.GetQuery<Relation>())
+            {
+                if (rel.GetRelationType() == RelationType.one_n)
+                {
+                    string assocName, colName, listPosName;
+                    RelationEnd relEnd, otherEnd;
+                    TableRef tblName, refTblName;
+                    bool hasPersistentOrder;
+                    if (Case.TryInspect_1_N_Relation(rel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
+                    {
+                        var isNullable = otherEnd.IsNullable();
+                        var checkNotNull = !isNullable;
+                        if (checkNotNull && (relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null))
+                        {
+                            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+                            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                            {
+                                db.DropCheckConstraint(tblName, checkConstraintName);
+                            }
+                            Case.CreateTPHNotNullCheckConstraint(tblName, colName, relEnd.Type);
+                        }
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.one_one)
+                {
+                    // TODO: ....
                 }
             }
         }
@@ -248,25 +311,62 @@ namespace Zetbox.Server.SchemaManagement
             Log.Info("Updating Tables & Columns");
             Log.Debug("-------------------------");
 
+            // The following actions have to be sequenced separately to avoid stepping on each other.
+
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+                Log.DebugFormat("Deleting Columns in Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
                 // Delete early to avoid collisions with newly created columns (like changing data type)
                 // Note: migration of data types is not supported now. Only chance is to delete and recreate a column
                 UpdateDeletedColumns(objClass, String.Empty);
+            }
+
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass == null).OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
+            {
+                Log.DebugFormat("TPH/TPT migrations for Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+
+                if (Case.IsChangeTphToTpt(objClass))
+                {
+                    Case.DoChangeTphToTpt(objClass);
+                }
+                if (Case.IsChangeTptToTph(objClass))
+                {
+                    Case.DoChangeTptToTph(objClass);
+                }
+            }
+
+            var classes = schema.GetQuery<ObjectClass>()
+                .Select(o => new { Class = o, Generation = o.AndParents(c => c.BaseObjectClass).Count() })
+                .OrderBy(o => o.Generation)
+                .ThenBy(o => o.Class.Module.Namespace)
+                .ThenBy(o => o.Class.Name)
+                .Select(o => o.Class)
+                .ToList();
+
+            foreach (ObjectClass objClass in classes)
+            {
+                if (Case.IsRenameObjectClassTable(objClass))
+                {
+                    Case.DoRenameObjectClassTable(objClass);
+                }
+            }
+
+            foreach (ObjectClass objClass in classes)
+            {
+                Log.DebugFormat("Managing Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
                 if (Case.IsNewObjectClass(objClass))
                 {
                     Case.DoNewObjectClass(objClass);
                 }
-                if (Case.IsRenameObjectClassTable(objClass))
-                {
-                    Case.DoRenameObjectClassTable(objClass);
-                }
+            }
 
+            foreach (ObjectClass objClass in classes)
+            {
                 UpdateColumns(objClass, objClass.Properties, String.Empty);
             }
+
             Log.Debug(String.Empty);
         }
 
@@ -313,7 +413,7 @@ namespace Zetbox.Server.SchemaManagement
                 else
                 {
                     // See if the CompoundObject self has changed
-                    UpdateColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
+                    UpdateColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.ColumnName(sprop, prefix));
                 }
             }
 
@@ -352,11 +452,27 @@ namespace Zetbox.Server.SchemaManagement
 
         private void UpdateDeletedColumns(ObjectClass objClass, string prefix)
         {
-            foreach (ValueTypeProperty prop in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList))
+            foreach (ValueTypeProperty savedProp in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid))
             {
-                if (Case.IsDeleteValueTypeProperty(prop))
+                if (Case.IsDeleteValueTypeProperty(savedProp))
                 {
-                    Case.DoDeleteValueTypeProperty(objClass, prop, prefix);
+                    Case.DoDeleteValueTypeProperty(objClass, savedProp, prefix);
+                }
+                if (Case.IsDeleteValueTypePropertyList(savedProp))
+                {
+                    Case.DoDeleteValueTypePropertyList(objClass, savedProp, prefix);
+                }
+            }
+
+            foreach (CompoundObjectProperty savedCProp in Case.savedSchema.GetQuery<CompoundObjectProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid))
+            {
+                if (Case.IsDeleteCompoundObjectProperty(savedCProp))
+                {
+                    Case.DoDeleteCompoundObjectProperty(objClass, savedCProp, prefix);
+                }
+                if (Case.IsDeleteCompoundObjectPropertyList(savedCProp))
+                {
+                    Case.DoDeleteCompoundObjectPropertyList(objClass, savedCProp, prefix);
                 }
             }
         }
@@ -490,22 +606,22 @@ namespace Zetbox.Server.SchemaManagement
                             Case.DoChange_1_1_Storage(rel);
                         }
 
-                        if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
+                        if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
                         {
-                            Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
+                            Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
                         }
-                        if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
+                        if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
                         {
-                            Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
+                            Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
                         }
 
-                        if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
+                        if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
                         {
-                            Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
+                            Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
                         }
-                        if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
+                        if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
                         {
-                            Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
+                            Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
                         }
                     }
 
@@ -530,18 +646,22 @@ namespace Zetbox.Server.SchemaManagement
 
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-                if (Case.IsNewObjectClassInheritance(objClass))
+                var mapping = objClass.GetTableMapping();
+                Log.DebugFormat("Objectclass: {0}.{1}, {2}", objClass.Module.Namespace, objClass.Name, mapping);
+                if (mapping == TableMapping.TPT)
                 {
-                    Case.DoNewObjectClassInheritance(objClass);
-                }
-                if (Case.IsChangeObjectClassInheritance(objClass))
-                {
-                    Case.DoChangeObjectClassInheritance(objClass);
-                }
-                if (Case.IsRemoveObjectClassInheritance(objClass))
-                {
-                    Case.DoRemoveObjectClassInheritance(objClass);
+                    if (Case.IsNewObjectClassInheritance(objClass))
+                    {
+                        Case.DoNewObjectClassInheritance(objClass);
+                    }
+                    if (Case.IsChangeObjectClassInheritance(objClass))
+                    {
+                        Case.DoChangeObjectClassInheritance(objClass);
+                    }
+                    if (Case.IsRemoveObjectClassInheritance(objClass))
+                    {
+                        Case.DoRemoveObjectClassInheritance(objClass);
+                    }
                 }
             }
             Log.Debug(String.Empty);

@@ -38,9 +38,385 @@ namespace Zetbox.App.Test
         }
 
         /// <summary>
+        /// Identity which changed this object
+        /// </summary>
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target not exportable; does call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.Base.Identity ChangedBy
+        {
+            get { return ChangedByImpl; }
+            set { ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_ChangedByCache;
+
+        private int? _fk_ChangedBy {
+            get
+            {
+                return __fk_ChangedByCache;
+            }
+            set
+            {
+                __fk_ChangedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchChangedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
+        {
+            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
+
+            if (_fk_ChangedBy.HasValue)
+                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchChangedByTask.OnResult(t =>
+            {
+                if (OnChangedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnChangedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchChangedByTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.Base.IdentityMemoryImpl ChangedByImpl
+        {
+            get
+            {
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
+                {
+                    SetInitializedProperty("ChangedBy");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = ChangedByImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+
+                if (OnChangedBy_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnChangedBy_PreSetter(this, e);
+                    __newValue = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
+                }
+
+                // next, set the local reference
+                _fk_ChangedBy = __newValue == null ? (int?)null : __newValue.ID;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+                if (OnChangedBy_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnChangedBy_PostSetter(this, e);
+                }
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnChangedBy_IsValid;
+
+        /// <summary>
+        /// Date and time where this object was changed
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public DateTime ChangedOn
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ChangedOn;
+                if (!_isChangedOnSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("eddba42c-0383-4d31-a318-49d16e1f8016"));
+                    if (__p != null) {
+                        _isChangedOnSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._ChangedOn = (DateTime)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SecurityTestChild.ChangedOn'");
+                    }
+                }
+                if (OnChangedOn_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnChangedOn_Getter(this, __e);
+                    __result = _ChangedOn = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isChangedOnSet = true;
+                if (_ChangedOn != value)
+                {
+                    var __oldValue = _ChangedOn;
+                    var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
+                    if (OnChangedOn_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnChangedOn_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
+                    _ChangedOn = __newValue;
+                    NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnChangedOn_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnChangedOn_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
+            }
+        }
+        private DateTime _ChangedOn;
+        private bool _isChangedOnSet = false;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnChangedOn_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnChangedOn_IsValid;
+
+        /// <summary>
+        /// Identity which created this object
+        /// </summary>
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target not exportable; does call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.Base.Identity CreatedBy
+        {
+            get { return CreatedByImpl; }
+            set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_CreatedByCache;
+
+        private int? _fk_CreatedBy {
+            get
+            {
+                return __fk_CreatedByCache;
+            }
+            set
+            {
+                __fk_CreatedByCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCreatedByTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
+        {
+            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
+
+            if (_fk_CreatedBy.HasValue)
+                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchCreatedByTask.OnResult(t =>
+            {
+                if (OnCreatedBy_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnCreatedBy_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCreatedByTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.Base.IdentityMemoryImpl CreatedByImpl
+        {
+            get
+            {
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
+                {
+                    SetInitializedProperty("CreatedBy");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = CreatedByImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+
+                if (OnCreatedBy_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnCreatedBy_PreSetter(this, e);
+                    __newValue = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
+                }
+
+                // next, set the local reference
+                _fk_CreatedBy = __newValue == null ? (int?)null : __newValue.ID;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+                if (OnCreatedBy_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
+                    OnCreatedBy_PostSetter(this, e);
+                }
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnCreatedBy_IsValid;
+
+        /// <summary>
+        /// Date and time where this object was created
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public DateTime CreatedOn
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CreatedOn;
+                if (!_isCreatedOnSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("e688c806-68a1-4078-b586-04c67daca577"));
+                    if (__p != null) {
+                        _isCreatedOnSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._CreatedOn = (DateTime)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SecurityTestChild.CreatedOn'");
+                    }
+                }
+                if (OnCreatedOn_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnCreatedOn_Getter(this, __e);
+                    __result = _CreatedOn = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isCreatedOnSet = true;
+                if (_CreatedOn != value)
+                {
+                    var __oldValue = _CreatedOn;
+                    var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
+                    if (OnCreatedOn_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnCreatedOn_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
+                    _CreatedOn = __newValue;
+                    NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnCreatedOn_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnCreatedOn_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
+            }
+        }
+        private DateTime _CreatedOn;
+        private bool _isCreatedOnSet = false;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.SecurityTestChild, DateTime> OnCreatedOn_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestChild> OnCreatedOn_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Identity
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Identity
         // fkBackingName=_fk_Identity; fkGuidBackingName=_fk_guid_Identity;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
@@ -58,8 +434,44 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Identity;
+        private int? __fk_IdentityCache;
 
+        private int? _fk_Identity {
+            get
+            {
+                return __fk_IdentityCache;
+            }
+            set
+            {
+                __fk_IdentityCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchIdentityTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchIdentityTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchIdentityAsync()
+        {
+            if (_triggerFetchIdentityTask != null) return _triggerFetchIdentityTask;
+
+            if (_fk_Identity.HasValue)
+                _triggerFetchIdentityTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_Identity.Value);
+            else
+                _triggerFetchIdentityTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchIdentityTask.OnResult(t =>
+            {
+                if (OnIdentity_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    OnIdentity_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchIdentityTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -67,32 +479,19 @@ namespace Zetbox.App.Test
         {
             get
             {
-                Zetbox.App.Base.IdentityMemoryImpl __value;
-                if (_fk_Identity.HasValue)
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_Identity.Value);
-                else
-                    __value = null;
-
-                if (OnIdentity_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
-                    OnIdentity_Getter(this, e);
-                    __value = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchIdentityAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Identity == null) || (value != null && value.ID == _fk_Identity))
-				{
-					SetInitializedProperty("Identity");
+                {
+                    SetInitializedProperty("Identity");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = IdentityImpl;
@@ -113,6 +512,7 @@ namespace Zetbox.App.Test
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Identity", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnIdentity_PostSetter != null && IsAttached)
                 {
@@ -164,6 +564,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -171,10 +572,10 @@ namespace Zetbox.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name;
@@ -188,7 +589,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Zetbox.App.Test.SecurityTestParent; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=Children; is list;
@@ -206,8 +607,44 @@ namespace Zetbox.App.Test
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_Parent;
+        private int? __fk_ParentCache;
 
+        private int? _fk_Parent {
+            get
+            {
+                return __fk_ParentCache;
+            }
+            set
+            {
+                __fk_ParentCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchParentTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.SecurityTestParent> _triggerFetchParentTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.SecurityTestParent> TriggerFetchParentAsync()
+        {
+            if (_triggerFetchParentTask != null) return _triggerFetchParentTask;
+
+            if (_fk_Parent.HasValue)
+                _triggerFetchParentTask = Context.FindAsync<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value);
+            else
+                _triggerFetchParentTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.SecurityTestParent>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchParentTask.OnResult(t =>
+            {
+                if (OnParent_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.SecurityTestParent>(t.Result);
+                    OnParent_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchParentTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -215,32 +652,19 @@ namespace Zetbox.App.Test
         {
             get
             {
-                Zetbox.App.Test.SecurityTestParentMemoryImpl __value;
-                if (_fk_Parent.HasValue)
-                    __value = (Zetbox.App.Test.SecurityTestParentMemoryImpl)Context.Find<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value);
-                else
-                    __value = null;
-
-                if (OnParent_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Test.SecurityTestParent>(__value);
-                    OnParent_Getter(this, e);
-                    __value = (Zetbox.App.Test.SecurityTestParentMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Test.SecurityTestParentMemoryImpl)TriggerFetchParentAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_Parent == null) || (value != null && value.ID == _fk_Parent))
-				{
-					SetInitializedProperty("Parent");
+                {
+                    SetInitializedProperty("Parent");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = ParentImpl;
@@ -277,6 +701,7 @@ namespace Zetbox.App.Test
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnParent_PostSetter != null && IsAttached)
                 {
@@ -323,13 +748,13 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("ParentName", __oldValue, __newValue);
                     _ParentName = __newValue;
                     NotifyPropertyChanged("ParentName", __oldValue, __newValue);
-			        _ParentName_IsDirty = false;
+                    _ParentName_IsDirty = false;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ParentName");
-				}
+                else
+                {
+                    SetInitializedProperty("ParentName");
+                }
             }
         }
         private string _ParentName;
@@ -349,15 +774,14 @@ namespace Zetbox.App.Test
             var otherImpl = (SecurityTestChildMemoryImpl)obj;
             var me = (SecurityTestChild)this;
 
+            me.ChangedOn = other.ChangedOn;
+            me.CreatedOn = other.CreatedOn;
             me.Name = other.Name;
             this.ParentName = otherImpl.ParentName;
+            this._fk_ChangedBy = otherImpl._fk_ChangedBy;
+            this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Identity = otherImpl._fk_Identity;
             this._fk_Parent = otherImpl._fk_Parent;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -369,6 +793,24 @@ namespace Zetbox.App.Test
         {
             switch(propertyName)
             {
+                case "ChangedBy":
+                    {
+                        var __oldValue = _fk_ChangedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+                        _fk_ChangedBy = __newValue;
+                        NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    }
+                    break;
+                case "CreatedBy":
+                    {
+                        var __oldValue = _fk_CreatedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+                        _fk_CreatedBy = __newValue;
+                        NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    }
+                    break;
                 case "Identity":
                     {
                         var __oldValue = _fk_Identity;
@@ -401,6 +843,10 @@ namespace Zetbox.App.Test
             // Do not audit calculated properties
             switch (property)
             {
+                case "ChangedBy":
+                case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
                 case "Identity":
                 case "Name":
                 case "Parent":
@@ -424,6 +870,23 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Identity":
+                return TriggerFetchIdentityAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -432,6 +895,16 @@ namespace Zetbox.App.Test
             base.ReloadReferences();
 
             // fix direct object references
+
+            if (_fk_ChangedBy.HasValue)
+                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+            else
+                ChangedByImpl = null;
+
+            if (_fk_CreatedBy.HasValue)
+                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+            else
+                CreatedByImpl = null;
 
             if (_fk_Identity.HasValue)
                 IdentityImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_Identity.Value);
@@ -456,6 +929,42 @@ namespace Zetbox.App.Test
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorMemoryImpl<SecurityTestChild, Zetbox.App.Base.Identity>(
+                        lazyCtx,
+                        new Guid("d8f28d99-381c-4f66-ad18-07fa56c17b41"),
+                        "ChangedBy",
+                        null,
+                        obj => obj.ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => OnChangedBy_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<SecurityTestChild, DateTime>(
+                        lazyCtx,
+                        new Guid("eddba42c-0383-4d31-a318-49d16e1f8016"),
+                        "ChangedOn",
+                        null,
+                        obj => obj.ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => OnChangedOn_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<SecurityTestChild, Zetbox.App.Base.Identity>(
+                        lazyCtx,
+                        new Guid("ab1ac0d6-3478-4363-a3ce-d936e3724f4b"),
+                        "CreatedBy",
+                        null,
+                        obj => obj.CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => OnCreatedBy_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<SecurityTestChild, DateTime>(
+                        lazyCtx,
+                        new Guid("e688c806-68a1-4078-b586-04c67daca577"),
+                        "CreatedOn",
+                        null,
+                        obj => obj.CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<SecurityTestChild, Zetbox.App.Base.Identity>(
                         lazyCtx,
@@ -555,6 +1064,8 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_SecurityTestChild")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Identity");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("Parent");
@@ -569,6 +1080,9 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SecurityTestChild != null) OnNotifyDeleting_SecurityTestChild(this);
+            ChangedBy = null;
+            CreatedBy = null;
+            Identity = null;
             Parent = null;
         }
         public static event ObjectEventHandler<SecurityTestChild> OnNotifyDeleting_SecurityTestChild;
@@ -583,6 +1097,16 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(this._isChangedOnSet);
+            if (this._isChangedOnSet) {
+                binStream.Write(this._ChangedOn);
+            }
+            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(this._isCreatedOnSet);
+            if (this._isCreatedOnSet) {
+                binStream.Write(this._CreatedOn);
+            }
             binStream.Write(Identity != null ? Identity.ID : (int?)null);
             binStream.Write(this._Name);
             binStream.Write(Parent != null ? Parent.ID : (int?)null);
@@ -595,6 +1119,16 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._fk_ChangedBy = binStream.ReadNullableInt32();
+            this._isChangedOnSet = binStream.ReadBoolean();
+            if (this._isChangedOnSet) {
+                this._ChangedOn = binStream.ReadDateTime();
+            }
+            this._fk_CreatedBy = binStream.ReadNullableInt32();
+            this._isCreatedOnSet = binStream.ReadBoolean();
+            if (this._isCreatedOnSet) {
+                this._CreatedOn = binStream.ReadDateTime();
+            }
             this._fk_Identity = binStream.ReadNullableInt32();
             this._Name = binStream.ReadString();
             this._fk_Parent = binStream.ReadNullableInt32();

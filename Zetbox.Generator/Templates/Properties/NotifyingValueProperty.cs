@@ -60,7 +60,29 @@ namespace Zetbox.Generator.Templates.Properties
 
         protected virtual void ApplyOnGetTemplate() { }
         protected virtual void ApplyOnAllSetTemplate() { }
-        protected virtual void ApplyPreSetTemplate() { }
+        protected virtual void ApplyPreSetTemplate()
+        {
+            ApplyDateTimeKindSpecifier();
+        }
+
+        /// <summary>
+        /// Forces all DateTimeKind.Unspecified values into local time, without changing the actual value.
+        /// </summary>
+        protected virtual void ApplyDateTimeKindSpecifier()
+        {
+            switch (type)
+            {
+                case "DateTime":
+                    this.WriteObjects("                    if (__newValue.Kind == DateTimeKind.Unspecified)\r\n");
+                    this.WriteObjects("                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);\r\n");
+                    break;
+                case "DateTime?":
+                case "Nullable<DateTime>":
+                    this.WriteObjects("                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)\r\n");
+                    this.WriteObjects("                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);\r\n");
+                    break;
+            }
+        }
         protected virtual void ApplyPostSetTemplate() { }
 
         protected virtual void ApplyBackingStoreDefinition()

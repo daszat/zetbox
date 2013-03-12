@@ -41,6 +41,17 @@ namespace Zetbox.Generator.Extensions
             return ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass != null);
         }
 
+        public static IQueryable<ObjectClass> GetDerivedTPTClasses(this IZetboxContext ctx)
+        {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
+            return ctx.GetQuery<ObjectClass>()
+                .Where(cls => cls.BaseObjectClass != null)
+                .ToList()
+                .Where(cls => cls.GetTableMapping() == TableMapping.TPT)
+                .AsQueryable();
+        }
+
         public static IEnumerable<Relation> GetRelationsWithSeparateStorage(this IZetboxContext ctx)
         {
             return ctx.GetQuery<Relation>()

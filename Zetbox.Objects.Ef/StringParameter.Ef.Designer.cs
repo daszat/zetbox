@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Metadefinition Object for String Parameter.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="StringParameter")]
+    [EdmEntityType(NamespaceName="Model", Name="StringParameterEfImpl")]
     [System.Diagnostics.DebuggerDisplay("StringParameter")]
     public class StringParameterEfImpl : Zetbox.App.Base.BaseParameterEfImpl, StringParameter
     {
@@ -241,11 +241,6 @@ namespace Zetbox.App.Base
             var otherImpl = (StringParameterEfImpl)obj;
             var me = (StringParameter)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

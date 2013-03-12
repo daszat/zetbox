@@ -22,6 +22,7 @@ namespace Zetbox.API.Mocks
     using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
+using Zetbox.API.Async;
 
     public interface TestDataObject : IDataObject
     {
@@ -96,19 +97,13 @@ namespace Zetbox.API.Mocks
             return null;
         }
 
-        public virtual void ToStream(System.Xml.XmlWriter xml)
-        {
-            if (xml == null) throw new ArgumentNullException("xml");
-        }
-
-        public IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            if (xml == null) throw new ArgumentNullException("xml");
-            return null;
-        }
-
         public void ReloadReferences()
         {
+        }
+
+        public ZbTask TriggerFetch(string propName)
+        {
+            throw new NotImplementedException();
         }
 
         public override int GetHashCode()
@@ -164,7 +159,7 @@ namespace Zetbox.API.Mocks
                 return _context;
             }
         }
-        public void AttachToContext(IZetboxContext ctx)
+        public void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
             _context = ctx;
         }

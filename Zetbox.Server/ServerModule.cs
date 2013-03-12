@@ -18,24 +18,27 @@ namespace Zetbox.Server
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.ServiceModel;
-    using System.ServiceModel.Activation;
     using System.Text;
     using Autofac;
-    using Autofac.Integration.Wcf;
     using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
+    using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
+    using System.ComponentModel;
+    using Zetbox.API.SchemaManagement;
 
+    [Feature]
+    [Description("The Server Module")]
     public class ServerModule : Module
     {
-        public static object NoWcfKey { get { return "nowcf"; } }
-
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+
+            builder.RegisterModule<Zetbox.API.Common.ApiCommonModule>();
+            builder.RegisterModule<Zetbox.API.Server.ServerApiModule>();
 
             builder
                 .RegisterType<Server>()
@@ -43,22 +46,9 @@ namespace Zetbox.Server
                 .SingleInstance();
 
             builder
-                .RegisterType<WcfServer>()
-                .AsImplementedInterfaces()
-                .SingleInstance();
-
-            builder
-                .RegisterCmdLineFlag("nowcf", "Do not run the embedded WCF Server; running it is the default when no action parameter is specified", NoWcfKey);
-
-            builder
-                .Register(c => new AutofacServiceHostFactory())
-                .As<AutofacServiceHostFactory>()
-                .SingleInstance();
-
-            builder
-                .Register(c => new AutofacWebServiceHostFactory())
-                .As<AutofacWebServiceHostFactory>()
-                .SingleInstance();
+                .RegisterType<ThreadPrincipalResolver>()
+                .As<IIdentityResolver>()
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<ZetboxService>()
@@ -71,11 +61,6 @@ namespace Zetbox.Server
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterType<ThreadPrincipalResolver>()
-                .As<IIdentityResolver>()
-                .InstancePerLifetimeScope();
-
-            builder
                 .RegisterModule(new SchemaManagement.SchemaModule());
 
 #if !MONO
@@ -84,6 +69,9 @@ namespace Zetbox.Server
                 .As<IIdentitySource>()
                 .InstancePerLifetimeScope();
 #endif
+            builder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server", true)));
+
+            builder.RegisterMigrationFragments(typeof(ServerModule).Assembly);
         }
     }
 }

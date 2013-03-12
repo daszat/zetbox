@@ -30,6 +30,7 @@ namespace Zetbox.Client.WPF.CustomControls
     using System.Windows.Input;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.Converter;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties
@@ -41,7 +42,8 @@ namespace Zetbox.Client.WPF.CustomControls
         {
             // by default the PropertyEditor itself should not take part 
             // in focus-stuff
-            FocusableProperty.OverrideMetadata(typeof(PropertyEditor),
+            FocusableProperty.OverrideMetadata(
+                typeof(PropertyEditor),
                 new FrameworkPropertyMetadata(false));
         }
 
@@ -51,71 +53,7 @@ namespace Zetbox.Client.WPF.CustomControls
             MinWidth = 100;
 
             this.GotFocus += new RoutedEventHandler(PropertyEditor_GotFocus);
-
-            var b = new Binding("Highlight");
-            b.Mode = BindingMode.OneWay;
-            BindingOperations.SetBinding(this, HighlightProperty, b);
-        }
-
-
-        public Highlight Highlight
-        {
-            get { return (Highlight)GetValue(HighlightProperty); }
-            set { SetValue(HighlightProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Highlight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HighlightProperty =
-            DependencyProperty.Register("Highlight", typeof(Highlight), typeof(PropertyEditor), new UIPropertyMetadata(null, _OnHighlightChanged));
-
-        private static void _OnHighlightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            PropertyEditor editor = (PropertyEditor)d;
-            editor.OnHighlightChanged();
-        }
-
-        private static readonly BrushConverter _brushConverter = new BrushConverter();
-        private static readonly FontStyleConverter _fontStyleConverter = new FontStyleConverter();
-        private static readonly FontWeightConverter _fontWeightConverter = new FontWeightConverter();
-
-        private static readonly HighlightGridBackgroundConverter _highlightGridBackgroundConverter = new HighlightGridBackgroundConverter();
-        private static readonly HighlightGridForegroundConverter _highlightGridForegroundConverter = new HighlightGridForegroundConverter();
-        private static readonly HighlightGridFontStyleConverter _highlightGridFontStyleConverter = new HighlightGridFontStyleConverter();
-        private static readonly HighlightGridFontWeightConverter _highlightGridFontWeightConverter = new HighlightGridFontWeightConverter();
-
-        protected virtual void OnHighlightChanged()
-        {
-            if (MainControl != null)
-            {
-                SetHighlightValue(MainControl);
-            }
-        }
-
-        protected virtual void SetHighlightValue(FrameworkElement ctrl)
-        {
-            if (ctrl != null)
-            {
-                SetHighlightValue(ctrl, BackgroundProperty, Highlight, _highlightGridBackgroundConverter, _brushConverter);
-                SetHighlightValue(ctrl, ForegroundProperty, Highlight, _highlightGridForegroundConverter, _brushConverter);
-                SetHighlightValue(ctrl, FontStyleProperty, Highlight, _highlightGridFontStyleConverter, _fontStyleConverter);
-                SetHighlightValue(ctrl, FontWeightProperty, Highlight, _highlightGridFontWeightConverter, _fontWeightConverter);
-            }
-        }
-
-        protected virtual void SetHighlightValue(FrameworkElement ctrl, DependencyProperty dpProp, Highlight h, HighlightConverter converter, TypeConverter finalConverter)
-        {
-            if (converter == null) throw new ArgumentNullException("converter");
-            if (finalConverter == null) throw new ArgumentNullException("finalConverter");
-
-            var value = converter.Convert(h, null, null, null);
-            if (value == Binding.DoNothing)
-                ctrl.SetValue(dpProp, DependencyProperty.UnsetValue);
-            else if (value == null)
-                ctrl.SetValue(dpProp, null);
-            else if (dpProp.PropertyType.IsAssignableFrom(value.GetType()))
-                ctrl.SetValue(dpProp, value);
-            else
-                ctrl.SetValue(dpProp, finalConverter.ConvertFrom(value));
+            BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("HighlightAsync") { Mode = BindingMode.OneWay });
         }
 
         protected abstract FrameworkElement MainControl { get; }
@@ -148,5 +86,41 @@ namespace Zetbox.Client.WPF.CustomControls
                 }
             }
         }
+
+        #region Focus Management for BaseValueViewModels
+
+        /// <summary>
+        /// Use this method to *properly* implement Focusmanagement for .NET 4.0. This contains hacks to make that work, so nobody else has do pull his/her hair out.
+        /// </summary>
+        /// <param name="element">the FrameworkElement whose keyboard focus should be managed</param>
+        /// <param name="vmGetter">a functor yielding the current BaseValueViewModel whose focus is tied to this view</param>
+        protected void SetupFocusManagement(FrameworkElement element, Func<BaseValueViewModel> vmGetter)
+        {
+            element.GotKeyboardFocus += (s, e) => FocusViewModel(element, vmGetter);
+            element.LostKeyboardFocus += (s, e) => BlurViewModel(element);
+            // when the control is unbound, DataContextChanged is fired BEFORE LostKeyboardFocus
+            // therefore we need to conditionally blur the ViewModel
+            element.DataContextChanged += (s, e) => BlurViewModel(element);
+        }
+
+        private Dictionary<FrameworkElement, BaseValueViewModel> _focusedModel = new Dictionary<FrameworkElement, BaseValueViewModel>();
+
+        private void FocusViewModel(FrameworkElement element, Func<BaseValueViewModel> vmGetter)
+        {
+            _focusedModel[element] = vmGetter();
+            _focusedModel[element].Focus();
+        }
+
+        private void BlurViewModel(FrameworkElement element)
+        {
+            BaseValueViewModel vm;
+            if (_focusedModel.TryGetValue(element, out vm))
+            {
+                try { vm.Blur(); }
+                finally { _focusedModel.Remove(element); }
+            }
+        }
+
+        #endregion
     }
 }

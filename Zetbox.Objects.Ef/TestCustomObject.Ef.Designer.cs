@@ -22,7 +22,7 @@ namespace Zetbox.App.Test
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="TestCustomObject")]
+    [EdmEntityType(NamespaceName="Model", Name="TestCustomObjectEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TestCustomObject")]
     public class TestCustomObjectEfImpl : BaseServerDataObject_EntityFramework, TestCustomObject
     {
@@ -33,15 +33,15 @@ namespace Zetbox.App.Test
         public TestCustomObjectEfImpl()
             : base(null)
         {
-            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "PhoneNumberMobile");
-            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "PhoneNumberOffice");
+            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(null, this, "PhoneNumberMobile");
+            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(null, this, "PhoneNumberOffice");
         }
 
         public TestCustomObjectEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "PhoneNumberMobile");
-            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(this, "PhoneNumberOffice");
+            PhoneNumberMobileImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(lazyCtx, this, "PhoneNumberMobile");
+            PhoneNumberOfficeImpl = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(lazyCtx, this, "PhoneNumberOffice");
         }
 
         /// <summary>
@@ -74,6 +74,8 @@ namespace Zetbox.App.Test
                 {
                     var __oldValue = _Birthday;
                     var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
                     if (OnBirthday_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -83,6 +85,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Birthday", __oldValue, __newValue);
                     _Birthday = __newValue;
                     NotifyPropertyChanged("Birthday", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnBirthday_PostSetter != null && IsAttached)
                     {
@@ -90,10 +93,10 @@ namespace Zetbox.App.Test
                         OnBirthday_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Birthday");
-				}
+                else
+                {
+                    SetInitializedProperty("Birthday");
+                }
             }
         }
         private DateTime? _Birthday_store;
@@ -101,7 +104,7 @@ namespace Zetbox.App.Test
             get { return _Birthday_store; }
             set {
                 ReportEfPropertyChanging("Birthday");
-                _Birthday_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
+                _Birthday_store = value;
                 ReportEfPropertyChanged("Birthday");
             }
         }
@@ -158,7 +161,6 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -214,7 +216,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnMubBlah_Nav_Getter != null)
                 {
@@ -226,7 +227,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
@@ -273,6 +274,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -325,7 +327,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -378,7 +379,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnMuhBlah_One_Nav_Getter != null)
                 {
@@ -390,7 +390,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
@@ -437,6 +437,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("TestCustomObjects_One_Nav", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -486,6 +487,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     NotifyPropertyChanging("PersonName", __oldValue, __newValue);
                     _PersonName = __newValue;
                     NotifyPropertyChanged("PersonName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPersonName_PostSetter != null && IsAttached)
                     {
@@ -493,10 +495,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                         OnPersonName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("PersonName");
-				}
+                else
+                {
+                    SetInitializedProperty("PersonName");
+                }
             }
         }
         private string _PersonName_store;
@@ -543,19 +545,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         [EdmComplexProperty()]
         public Zetbox.App.Test.TestPhoneCompoundObjectEfImpl PhoneNumberMobileImpl
         {
-            get 
-			{ 
-				return _PhoneNumberMobile; 
-			}
+            get
+            {
+                return _PhoneNumberMobile;
+            }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if (!object.Equals(_PhoneNumberMobile, value))
                 {
                     var __oldValue = _PhoneNumberMobile;
-					var __newValue = value;
+                    var __newValue = value;
 
                     NotifyPropertyChanging("PhoneNumberMobile", __oldValue, __newValue);
 
@@ -563,16 +565,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     {
                         _PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
                     }
-					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
+                    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
                     _PhoneNumberMobile = __newValue;
                     _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
 
                     NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
                 }
-				else
-				{
-					SetInitializedProperty("PhoneNumberMobile");
-				}
+                else
+                {
+                    SetInitializedProperty("PhoneNumberMobile");
+                }
             }
         }
            // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -606,19 +609,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         [EdmComplexProperty()]
         public Zetbox.App.Test.TestPhoneCompoundObjectEfImpl PhoneNumberOfficeImpl
         {
-            get 
-			{ 
-				return _PhoneNumberOffice; 
-			}
+            get
+            {
+                return _PhoneNumberOffice;
+            }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value == null)
                     throw new ArgumentNullException("value");
                 if (!object.Equals(_PhoneNumberOffice, value))
                 {
                     var __oldValue = _PhoneNumberOffice;
-					var __newValue = value;
+                    var __newValue = value;
 
                     NotifyPropertyChanging("PhoneNumberOffice", __oldValue, __newValue);
 
@@ -626,16 +629,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     {
                         _PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
                     }
-					__newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
+                    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
                     _PhoneNumberOffice = __newValue;
                     _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
 
                     NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
                 }
-				else
-				{
-					SetInitializedProperty("PhoneNumberOffice");
-				}
+                else
+                {
+                    SetInitializedProperty("PhoneNumberOffice");
+                }
             }
         }
            // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -679,7 +683,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -718,13 +721,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
             this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            if (_PhoneNumbersOther != null)
-                PhoneNumbersOtherImpl.ForEach<IPersistenceObject>(i => ctx.Attach(i));
         }
         public override void SetNew()
         {
@@ -986,12 +982,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -1007,12 +1004,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._Birthday);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_MB_Role_has_TCO_Lst_Role", "MB_Role").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_MB_Role_has_TCO_Lst_Role", "MB_Role");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "MB_One_Role").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "MB_One_Role");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._PersonName);
             binStream.Write(this.PhoneNumberMobile);

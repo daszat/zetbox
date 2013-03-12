@@ -30,6 +30,7 @@ namespace Zetbox.DalProvider.NHibernate
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.API.Async;
 
     public sealed class NHibernateContext
         : BaseZetboxDataContext, IZetboxServerContext
@@ -41,7 +42,8 @@ namespace Zetbox.DalProvider.NHibernate
         private readonly ContextCache<int> _attachedObjects;
         private readonly ContextCache<IProxyObject> _attachedObjectsByProxy;
 
-        private IPerfCounter _perfCounter;
+        private readonly IPerfCounter _perfCounter;
+        private readonly ISqlErrorTranslator _sqlErrorTranslator;
 
         /// <summary>
         /// Counter for newly created Objects to give them a valid ID for the ContextCache
@@ -56,20 +58,24 @@ namespace Zetbox.DalProvider.NHibernate
             Func<IFrozenContext> lazyCtx,
             InterfaceType.Factory iftFactory,
             NHibernateImplementationType.Factory implTypeFactory,
-            global::NHibernate.ISession nhSession,
+            global::NHibernate.ISessionFactory nhSessionFactory,
             INHibernateImplementationTypeChecker implChecker,
-            IPerfCounter perfCounter)
+            IPerfCounter perfCounter,
+            ISqlErrorTranslator sqlErrorTranslator)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
+            if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
             _implTypeFactory = implTypeFactory;
-            _nhSession = nhSession;
             _implChecker = implChecker;
 
             _attachedObjects = new ContextCache<int>(this, item => item.ID);
             _attachedObjectsByProxy = new ContextCache<IProxyObject>(this, item => ((NHibernatePersistenceObject)item).NHibernateProxy);
 
             _perfCounter = perfCounter;
+            _sqlErrorTranslator = sqlErrorTranslator;
+
+            _nhSession = nhSessionFactory.OpenSession(new NHInterceptor(this, lazyCtx));
         }
 
         public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Tproxy>()
@@ -161,25 +167,28 @@ namespace Zetbox.DalProvider.NHibernate
             return PrepareQueryable(ifType).Cast<Tinterface>();
         }
 
-        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
+        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
         {
-            CheckDisposed();
-            if (parent == null)
+            return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
-                return this.GetPersistenceObjectQuery<T>().ToList();
-            }
-            else
-            {
-                switch (endRole)
+                CheckDisposed();
+                if (parent == null)
                 {
-                    case RelationEndRole.A:
-                        return GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
-                    case RelationEndRole.B:
-                        return GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
-                    default:
-                        throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                    return this.GetPersistenceObjectQuery<T>().ToList();
                 }
-            }
+                else
+                {
+                    switch (endRole)
+                    {
+                        case RelationEndRole.A:
+                            return GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
+                        case RelationEndRole.B:
+                            return GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
+                        default:
+                            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                    }
+                }
+            });
         }
 
         public override IPersistenceObject ContainsObject(InterfaceType type, int ID)
@@ -341,6 +350,15 @@ namespace Zetbox.DalProvider.NHibernate
                 var error = string.Format("Failed saving transaction: Concurrent modification on {0}#{1}", ex.EntityName, ex.Identifier);
                 throw new ConcurrencyException(error, ex);
             }
+            catch (global::NHibernate.Exceptions.GenericADOException ex)
+            {
+                if (isItMyTransaction)
+                    RollbackTransaction();
+
+                Logging.Log.Error("Failed saving transaction", ex);
+                if (ex.InnerException == null) throw;
+                throw _sqlErrorTranslator.Translate(ex.InnerException);
+            }
             catch (Exception ex)
             {
                 if (isItMyTransaction)
@@ -433,39 +451,45 @@ namespace Zetbox.DalProvider.NHibernate
             nhObj.Delete();
         }
 
-        public override IDataObject Find(InterfaceType ifType, int ID)
+        public override ZbTask<IDataObject> FindAsync(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            try
+            return new ZbTask<IDataObject>(ZbTask.Synchron, () =>
             {
-                return (IDataObject)this.GetType()
-                    .FindGenericMethod("Find",
-                        new Type[] { ifType.Type },
-                        new Type[] { typeof(int) })
-                    .Invoke(this, new object[] { ID });
-            }
-            catch (System.Reflection.TargetInvocationException ex)
-            {
-                if (ex.InnerException is ArgumentOutOfRangeException)
+                try
                 {
-                    // wrap in new AOORE, to preserve all stack traces
-                    throw new ArgumentOutOfRangeException("ID", ex);
+                    return (IDataObject)this.GetType()
+                        .FindGenericMethod("Find",
+                            new Type[] { ifType.Type },
+                            new Type[] { typeof(int) })
+                        .Invoke(this, new object[] { ID });
                 }
-                else
+                catch (System.Reflection.TargetInvocationException ex)
                 {
-                    // huhu, something bad happened
-                    throw;
+                    if (ex.InnerException is ArgumentOutOfRangeException)
+                    {
+                        // wrap in new AOORE, to preserve all stack traces
+                        throw new ArgumentOutOfRangeException("ID", ex);
+                    }
+                    else
+                    {
+                        // huhu, something bad happened
+                        throw;
+                    }
                 }
-            }
+            });
         }
 
-        public override T Find<T>(int ID)
+        public override ZbTask<T> FindAsync<T>(int ID)
         {
             CheckDisposed();
 
-            var result = FindPersistenceObject<T>(ID);
-            if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
-            return result;
+            return new ZbTask<T>(ZbTask.Synchron, () =>
+            {
+                var result = FindPersistenceObject<T>(ID);
+                if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
+                return result;
+            });
         }
 
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
@@ -680,7 +704,7 @@ namespace Zetbox.DalProvider.NHibernate
                 if (proxy.ID > Zetbox.API.Helper.INVALIDID)
                 {
                     var objClass = metaDataResolver.GetObjectClass(ift);
-                    if (objClass != null && metaDataResolver.GetObjectClass(ift).SubClasses.Count > 0)
+                    if (objClass != null && objClass.SubClasses.Count > 0)
                     {
                         proxy = (IProxyObject)_nhSession.Load(proxy.ZetboxProxy, proxy.ID);
                         item = (NHibernatePersistenceObject)ContainsObject(ift, proxy.ID);

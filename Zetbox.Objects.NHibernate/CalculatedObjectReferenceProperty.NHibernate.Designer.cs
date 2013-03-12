@@ -107,15 +107,15 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ReferencedClass == null)
-				{
-					SetInitializedProperty("ReferencedClass");
+                {
+                    SetInitializedProperty("ReferencedClass");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ReferencedClass);
@@ -124,10 +124,10 @@ namespace Zetbox.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
-				{
-					SetInitializedProperty("ReferencedClass");
+                {
+                    SetInitializedProperty("ReferencedClass");
                     return;
-				}
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ReferencedClass", __oldValue, __newValue);
@@ -151,6 +151,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ReferencedClass", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnReferencedClass_PostSetter != null && IsAttached)
                 {
@@ -502,12 +503,6 @@ namespace Zetbox.App.Base
 
             this._fk_ReferencedClass = otherImpl._fk_ReferencedClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -688,6 +683,7 @@ namespace Zetbox.App.Base
             }
 
             Inputs.Clear();
+            ReferencedClass = null;
         }
         public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnNotifyDeleting_CalculatedObjectReferenceProperty;
 

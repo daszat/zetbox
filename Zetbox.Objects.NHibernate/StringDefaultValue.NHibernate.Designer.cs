@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DefaultValue", __oldValue, __newValue);
                     Proxy.DefaultValue = __newValue;
                     NotifyPropertyChanged("DefaultValue", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDefaultValue_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnDefaultValue_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DefaultValue");
-				}
+                else
+                {
+                    SetInitializedProperty("DefaultValue");
+                }
             }
         }
 
@@ -181,12 +182,6 @@ namespace Zetbox.App.Base
             var me = (StringDefaultValue)this;
 
             me.DefaultValue = other.DefaultValue;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

@@ -31,13 +31,16 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void ToString(Relation obj, MethodReturnEventArgs<string> e)
         {
-            if (obj.A == null ||
-                obj.B == null ||
-                obj.A.Type == null ||
-                obj.B.Type == null)
+            if (obj == null) { e.Result = ""; return; }
+            var a = obj.A;
+            var b = obj.B;
+            if (a == null ||
+                b == null ||
+                a.Type == null ||
+                b.Type == null)
             {
                 e.Result = "incomplete relation:";
-                if (obj.A == null)
+                if (a == null)
                 {
                     e.Result += " A missing";
                 }
@@ -46,7 +49,7 @@ namespace Zetbox.App.Base
                     e.Result += " A.Type missing";
                 }
 
-                if (obj.B == null)
+                if (b == null)
                 {
                     e.Result += " B missing";
                 }
@@ -57,13 +60,13 @@ namespace Zetbox.App.Base
             }
             else
             {
-                string aDesc = (obj.A.RoleName ?? String.Empty).Equals(obj.A.Type.Name)
-                    ? obj.A.RoleName
-                    : String.Format("{0}({1})", obj.A.RoleName, obj.A.Type.Name);
+                string aDesc = (a.RoleName ?? String.Empty).Equals(a.Type.Name)
+                    ? a.RoleName
+                    : String.Format("{0}({1})", a.RoleName, a.Type.Name);
 
-                string bDesc = (obj.B.RoleName ?? String.Empty).Equals(obj.B.Type.Name)
-                    ? obj.B.RoleName
-                    : String.Format("{0}({1})", obj.B.RoleName, obj.B.Type.Name);
+                string bDesc = (b.RoleName ?? String.Empty).Equals(b.Type.Name)
+                    ? b.RoleName
+                    : String.Format("{0}({1})", b.RoleName, b.Type.Name);
 
                 e.Result = String.Format("Relation: {0} {1} {2}",
                     aDesc,
@@ -73,6 +76,17 @@ namespace Zetbox.App.Base
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
+
+        [Invocation]
+        public static void ObjectIsValid(Relation obj, ObjectIsValidEventArgs e)
+        {
+            if (obj.A != null && obj.B != null && obj.GetAssociationName().Length > 60)
+            {
+                e.IsValid = false;
+                e.Errors.Add(string.Format("The relation name '{0}' (FK_<a>_<verb>_<b>) exceed 60 chars. This could violate a database (Postgres) max identifier length.", obj.GetAssociationName()));
+            }
+        }
+
         [Invocation]
         public static void GetOtherEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEnd relEnd)
         {
@@ -127,16 +141,19 @@ namespace Zetbox.App.Base
                 throw new ArgumentNullException("rel", "rel.B is null");
             }
 
-            if ((rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() > 1)
-                || (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() == 1))
+            var aUpper = rel.A.Multiplicity.UpperBound();
+            var bUpper = rel.B.Multiplicity.UpperBound();
+
+            if ((aUpper == 1 && bUpper > 1)
+                || (aUpper > 1 && bUpper == 1))
             {
                 e.Result = RelationType.one_n;
             }
-            else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() > 1)
+            else if (aUpper > 1 && bUpper > 1)
             {
                 e.Result = RelationType.n_m;
             }
-            else if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() == 1)
+            else if (aUpper == 1 && bUpper == 1)
             {
                 e.Result = RelationType.one_one;
             }
@@ -186,7 +203,7 @@ namespace Zetbox.App.Base
             obj.A = obj.B;
             obj.B = tmp;
 
-            switch(obj.Containment)
+            switch (obj.Containment)
             {
                 case ContainmentSpecification.AContainsB:
                     obj.Containment = ContainmentSpecification.BContainsA;
@@ -196,7 +213,7 @@ namespace Zetbox.App.Base
                     break;
             }
 
-            switch(obj.Storage)
+            switch (obj.Storage)
             {
                 case StorageType.MergeIntoA:
                     obj.Storage = StorageType.MergeIntoB;
@@ -204,6 +221,140 @@ namespace Zetbox.App.Base
                 case StorageType.MergeIntoB:
                     obj.Storage = StorageType.MergeIntoA;
                     break;
+            }
+        }
+
+        [Invocation]
+        public static void isValid_Containment(Relation obj, PropertyIsValidEventArgs e)
+        {
+            var rel = obj;
+            if (rel.A != null && rel.B != null)
+            {
+                if (rel.A.Multiplicity == 0 || rel.B.Multiplicity == 0)
+                {
+                    e.IsValid = false;
+                    e.Error = "Incomplete Relation (A.Multiplicity or B.Multiplicity missing)";
+                    return;
+                }
+
+                var relType = rel.GetRelationType();
+
+                switch (rel.Containment)
+                {
+                    case ContainmentSpecification.AContainsB:
+                        if (relType == RelationType.n_m)
+                        {
+                            e.IsValid = false;
+                            e.Error = "N:M relations cannot be containment relations";
+                        }
+                        else if (relType == RelationType.one_n)
+                        {
+                            e.IsValid = rel.B.Multiplicity.UpperBound() > 1;
+                            if (!e.IsValid) e.Error = "Can only contain the N-side of a 1:N relationship (which is A).";
+                        }
+                        else if (relType == RelationType.one_one)
+                        {
+                            e.IsValid = true;
+                        }
+                        else
+                        {
+                            e.IsValid = false;
+                            e.Error = String.Format("RelationType.{0} not implemented.", relType);
+                        }
+                        break;
+                    case ContainmentSpecification.BContainsA:
+                        if (relType == RelationType.n_m)
+                        {
+                            e.IsValid = false;
+                            e.Error = "N:M relations cannot be containment relations";
+                        }
+                        else if (relType == RelationType.one_n)
+                        {
+                            e.IsValid = rel.A.Multiplicity.UpperBound() > 1;
+                            if (!e.IsValid) e.Error = "Can only contain the N-side of a 1:N relationship (which is B).";
+                        }
+                        else if (relType == RelationType.one_one)
+                        {
+                            e.IsValid = true;
+                        }
+                        else
+                        {
+                            e.IsValid = false;
+                            e.Error = String.Format("RelationType.{0} not implemented.", relType);
+                        }
+                        break;
+                    case ContainmentSpecification.Independent:
+                        e.IsValid = true;
+                        break;
+                    default:
+                        {
+                            e.IsValid = false;
+                            e.Error = String.Format("ContainmentType.{0} not implemented.", rel.Containment);
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                e.IsValid = false;
+                e.Error = "Incomplete Relation (A or B missing)";
+            }
+        }
+
+        [Invocation]
+        public static void isValid_Storage(Relation obj, PropertyIsValidEventArgs e)
+        {
+            var rel = obj;
+            if (rel.A != null && rel.B != null)
+            {
+                if (rel.A.Multiplicity == 0 || rel.B.Multiplicity == 0)
+                {
+                    e.IsValid = false;
+                    e.Error = "Incomplete Relation (Multiplicity is missing)";
+                    return;
+                }
+                var aUpper = rel.A.Multiplicity.UpperBound();
+                var bUpper = rel.B.Multiplicity.UpperBound();
+
+                switch (rel.Storage)
+                {
+                    case StorageType.MergeIntoA:
+                        e.IsValid = bUpper <= 1;
+                        if (!e.IsValid) e.Error = "B side could be more than one. Not able to merge foreign key into A";
+                        break;
+                    case StorageType.MergeIntoB:
+                        e.IsValid = aUpper <= 1;
+                        if (!e.IsValid) e.Error = "A side could be more than one. Not able to merge foreign key into B";
+                        break;
+                    case StorageType.Separate:
+                        e.IsValid = aUpper > 1 && bUpper > 1;
+                        if (!e.IsValid)
+                        {
+                            if (aUpper <= 1 && bUpper <= 1)
+                            {
+                                e.Error = "A side is only one-ary. Please use MergeIntoA or MergeIntoB";
+                            }
+                            else if (aUpper <= 1)
+                            {
+                                e.Error = "A side is only one-ary. Please use MergeIntoB";
+                            }
+                            else if (bUpper <= 1)
+                            {
+                                e.Error = "B side is only one-ary. Please use MergeIntoA";
+                            }
+                        }
+                        break;
+                    case StorageType.Replicate:
+                    default:
+                        e.IsValid = false;
+                        e.Error = String.Format("StorageType.{0} not implemented.", rel.Storage);
+                        break;
+                }
+            }
+            else
+            {
+                e.IsValid = false;
+                e.Error = "Incomplete Relation (A or B missing)";
             }
         }
     }

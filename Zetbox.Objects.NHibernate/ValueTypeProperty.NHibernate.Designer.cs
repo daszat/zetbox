@@ -44,8 +44,8 @@ namespace Zetbox.App.Base
         {
             this.Proxy = proxy;
             _isHasPersistentOrderSet = Proxy.ID > 0;
-            _isIsListSet = Proxy.ID > 0;
             _isIsCalculatedSet = Proxy.ID > 0;
+            _isIsListSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -88,6 +88,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -95,10 +96,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
 
@@ -165,6 +166,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsCalculated", __oldValue, __newValue);
                     Proxy.IsCalculated = __newValue;
                     NotifyPropertyChanged("IsCalculated", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCalculated_PostSetter != null && IsAttached)
                     {
@@ -172,10 +174,10 @@ namespace Zetbox.App.Base
                         OnIsCalculated_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCalculated");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCalculated");
+                }
             }
         }
 
@@ -242,6 +244,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     Proxy.IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -249,10 +252,10 @@ namespace Zetbox.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsList");
-				}
+                else
+                {
+                    SetInitializedProperty("IsList");
+                }
             }
         }
 
@@ -612,12 +615,6 @@ namespace Zetbox.App.Base
             me.HasPersistentOrder = other.HasPersistentOrder;
             me.IsCalculated = other.IsCalculated;
             me.IsList = other.IsList;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

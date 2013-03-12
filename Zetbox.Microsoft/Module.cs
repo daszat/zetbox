@@ -17,11 +17,15 @@ namespace Zetbox.Microsoft
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Autofac;
     using Zetbox.API.Client;
+    using Zetbox.API.Configuration;
 
+    [Feature]
+    [Description("Modules that only run on Micorosoft Windows (namely a ScreenshotTool)")]
     public class Module : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)

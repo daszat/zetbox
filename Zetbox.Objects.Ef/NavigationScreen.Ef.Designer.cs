@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NavigationScreen")]
+    [EdmEntityType(NamespaceName="Model", Name="NavigationScreenEfImpl")]
     [System.Diagnostics.DebuggerDisplay("NavigationScreen")]
     public class NavigationScreenEfImpl : Zetbox.App.GUI.NavigationEntryEfImpl, NavigationScreen
     {
@@ -115,11 +115,6 @@ namespace Zetbox.App.GUI
             var otherImpl = (NavigationScreenEfImpl)obj;
             var me = (NavigationScreen)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

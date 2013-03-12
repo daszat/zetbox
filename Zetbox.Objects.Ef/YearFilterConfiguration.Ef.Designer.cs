@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="YearFilterConfiguration")]
+    [EdmEntityType(NamespaceName="Model", Name="YearFilterConfigurationEfImpl")]
     [System.Diagnostics.DebuggerDisplay("YearFilterConfiguration")]
     public class YearFilterConfigurationEfImpl : Zetbox.App.GUI.PropertyFilterConfigurationEfImpl, YearFilterConfiguration
     {
@@ -79,6 +79,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("IsCurrentYearDefault", __oldValue, __newValue);
                     _IsCurrentYearDefault = __newValue;
                     NotifyPropertyChanged("IsCurrentYearDefault", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsCurrentYearDefault_PostSetter != null && IsAttached)
                     {
@@ -86,10 +87,10 @@ namespace Zetbox.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsCurrentYearDefault");
-				}
+                else
+                {
+                    SetInitializedProperty("IsCurrentYearDefault");
+                }
             }
         }
         private bool? _IsCurrentYearDefault_store;
@@ -113,16 +114,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_YearFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_YearFilterConfiguration != null)
             {
-                OnCreateFilterModel_YearFilterConfiguration(this, e);
+                OnCreateFilterModel_YearFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -247,11 +248,6 @@ namespace Zetbox.App.GUI
             var me = (YearFilterConfiguration)this;
 
             me.IsCurrentYearDefault = other.IsCurrentYearDefault;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

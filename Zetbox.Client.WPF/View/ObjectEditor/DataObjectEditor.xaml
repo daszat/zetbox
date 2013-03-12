@@ -2,6 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
              xmlns:viewZetboxBase="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
              xmlns:doeview="clr-namespace:Zetbox.Client.WPF.View.ObjectEditor"
              xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client">
@@ -22,105 +24,99 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-
-    <!-- Use this for Design Mode support 
-    <UserControl.Resources>
-        <ObjectDataProvider x:Key="DataObjectViewModelDesignProvider"
-                            ObjectType="{x:Type client:DataObjectViewModel}"
-                            MethodName="CreateDesignMock">
-        </ObjectDataProvider>
-    </UserControl.Resources>
-    <UserControl.DataContext>
-        <Binding Source="{StaticResource DataObjectViewModelDesignProvider}" />
-    </UserControl.DataContext> -->
-
-    <DockPanel Style="{StaticResource DataObjectEditor_MainPanel}">
-        <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                                 ItemsSource="{Binding Actions}">
-            <ctrls:WorkaroundToolBar.Resources>
-              <DataTemplate DataType="{x:Type client:ActionViewModel}">
-                <ctrls:CommandButton CommandViewModel="{Binding}"
-                                     Style="{StaticResource ImageToolbarButton}"/>
-              </DataTemplate>
-            </ctrls:WorkaroundToolBar.Resources>
-          </ctrls:WorkaroundToolBar>
-        <DockPanel DockPanel.Dock="Top">
+    <!-- TODO: Background="{Binding HighlightAsync, Converter={StaticResource HighlightPanelBackgroundConverter}}"-->
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top"
+                   Margin="{StaticResource AreaGroup1Margin}">
             <Image DockPanel.Dock="Left"
-                   Source="{Binding Converter={StaticResource IconConverter}}"
-                   Margin="4,2,2,2"
-                   Width="14"
-                   Height="14" />
-            <TextBlock Text="{Binding LongName}"
-                       HorizontalAlignment="Center" />
+                   Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
+                   Width="{StaticResource BigControlHeight}"
+                   Height="{StaticResource BigControlHeight}" />
+            <TextBlock Text="{Binding Name}"
+                       Style="{StaticResource zbTitle}"
+                       Margin="10 0 0 0"
+                       HorizontalAlignment="Left" />
         </DockPanel>
 
-        <Grid Style="{StaticResource DataObjectEditor_PropertyPanel}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ctrls:WorkaroundToolBar ItemsSource="{Binding Actions}">
+                <ctrls:WorkaroundToolBar.Resources>
+                    <DataTemplate DataType="{x:Type client:ActionViewModel}">
+                        <ctrls:CommandButton CommandViewModel="{Binding}"
+                                             Style="{StaticResource ImageToolbarButton}" />
+                    </DataTemplate>
+                </ctrls:WorkaroundToolBar.Resources>
+            </ctrls:WorkaroundToolBar>
+        </ToolBarTray>
 
-            <TabControl x:Name="PropertyGroupTabs"
-                        Grid.Row="0"
-                        ItemsSource="{Binding PropertyGroups, ValidatesOnDataErrors=true}"
-                        SelectedValue="{Binding SelectedPropertyGroup}"
-                        BorderThickness="0"
-                        HorizontalContentAlignment="Stretch">
-                <TabControl.Resources>
-                    <DataTemplate DataType="{x:Type client:SinglePropertyGroupViewModel}">
+        <TabControl x:Name="PropertyGroupTabs"
+                    Style="{StaticResource AreaGroup1TabControl}"
+                    ItemsSource="{Binding PropertyGroups, ValidatesOnDataErrors=true}"
+                    SelectedValue="{Binding SelectedPropertyGroup}"
+                    HorizontalContentAlignment="Stretch">
+            <TabControl.Resources>
+                <DataTemplate DataType="{x:Type client:CustomPropertyGroupViewModel}">
+                    <ContentPresenter Content="{Binding CustomModel}"
+                                      VerticalAlignment="Stretch"
+                                      tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
+                                      ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type client:SinglePropertyGroupViewModel}">
+                    <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
+                                  BorderThickness="0"
+                                  IsTabStop="False"
+                                  HorizontalContentAlignment="Stretch">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid IsItemsHost="True" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type client:ViewModel}">
+                                <ctrls:LabeledView VerticalContentAlignment="Stretch"
+                                                   VerticalAlignment="Stretch"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type client:MultiplePropertyGroupViewModel}">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible">
                         <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
                                       BorderThickness="0"
-                                      HorizontalContentAlignment="Stretch">
+                                      IsTabStop="False"
+                                      HorizontalContentAlignment="Stretch"
+                                      VerticalContentAlignment="Stretch"
+                                      VerticalAlignment="Top">
+
+                            <!-- use the whole horizontal space, but no more -->
+                            <ItemsControl.ItemContainerStyle>
+                                <Style>
+                                    <Setter Property="DockPanel.Dock"
+                                            Value="Top" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
+
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <Grid IsItemsHost="True" />
+                                    <DockPanel IsItemsHost="True" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
+
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="{x:Type client:ViewModel}">
-                                    <ctrls:LabeledView VerticalContentAlignment="Stretch" />
+                                    <ctrls:LabeledView MaxHeight="300" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type client:MultiplePropertyGroupViewModel}">
-                        <ScrollViewer VerticalScrollBarVisibility="Visible">
-                            <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
-                                          BorderThickness="0"
-                                          HorizontalContentAlignment="Stretch"
-                                          VerticalContentAlignment="Stretch"
-                                          VerticalAlignment="Top">
+                    </ScrollViewer>
+                </DataTemplate>
+            </TabControl.Resources>
 
-                                <!-- use the whole horizontal space, but no more -->
-                                <ItemsControl.ItemContainerStyle>
-                                    <Style>
-                                        <Setter Property="DockPanel.Dock"
-                                                Value="Top" />
-                                    </Style>
-                                </ItemsControl.ItemContainerStyle>
-
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <DockPanel IsItemsHost="True" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type client:ViewModel}">
-                                        <ctrls:LabeledView />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </ScrollViewer>
-                    </DataTemplate>
-                </TabControl.Resources>
-
-                <TabControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Title, Mode=OneWay, ValidatesOnDataErrors=true}" />
-                    </DataTemplate>
-                </TabControl.ItemTemplate>
-            </TabControl>
-        </Grid>
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title, Mode=OneWay, ValidatesOnDataErrors=true}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+        </TabControl>
     </DockPanel>
 </UserControl>

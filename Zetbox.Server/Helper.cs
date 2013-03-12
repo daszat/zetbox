@@ -20,9 +20,9 @@ namespace Zetbox.Server
     using System.Linq;
     using System.ServiceModel;
     using System.Text;
-
-    using Zetbox.API.Utils;
+    using Autofac;
     using Zetbox.API;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// Server Helper
@@ -36,15 +36,13 @@ namespace Zetbox.Server
         public static void ThrowFaultException(Exception ex)
         {
             if (ex == null) throw new ArgumentNullException("ex");
-            Logging.Log.Error("Error in Facade: " + ex.Message, ex);
+            var msg = ex.Message;
+            Logging.Log.Error("Error in Facade: " + msg, ex);
 
-            if (ex is ConcurrencyException)
+            if (ex is ZetboxContextErrorException)
             {
-                throw new FaultException<ConcurrencyException>((ConcurrencyException)ex);
-            }
-            else if (ex is InvalidZetboxGeneratedVersionException)
-            {
-                throw new FaultException<InvalidZetboxGeneratedVersionException>((InvalidZetboxGeneratedVersionException)ex);
+                var error = (ZetboxContextErrorException)ex;
+                throw new FaultException<ZetboxContextExceptionMessage>(error.ToExceptionMessage(), msg);
             }
             else
             {
@@ -55,7 +53,7 @@ namespace Zetbox.Server
                 }
                 else
                 {
-                    throw new FaultException(ex.Message);
+                    throw new FaultException(msg);
                 }
 #else
                 throw new FaultException("An error ocurred while processing this request.");

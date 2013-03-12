@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Base
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
         private string _DisplayName;
@@ -105,15 +106,26 @@ namespace Zetbox.App.Base
 			{
 				if (_Groups == null)
 				{
-					Context.FetchRelation<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
-					_Groups 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchGroupsAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Base.Group>)_Groups;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchGroupsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
+        {
+            if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
+			_triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
+			_triggerFetchGroupsTask.OnResult(r => 
+            {
+                _Groups 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchGroupsTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Groups;
 
@@ -155,6 +167,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Password", __oldValue, __newValue);
                     _Password = __newValue;
                     NotifyPropertyChanged("Password", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPassword_PostSetter != null && IsAttached)
                     {
@@ -162,10 +175,10 @@ namespace Zetbox.App.Base
                         OnPassword_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Password");
-				}
+                else
+                {
+                    SetInitializedProperty("Password");
+                }
             }
         }
         private string _Password;
@@ -212,6 +225,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("UserName", __oldValue, __newValue);
                     _UserName = __newValue;
                     NotifyPropertyChanged("UserName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnUserName_PostSetter != null && IsAttached)
                     {
@@ -219,10 +233,10 @@ namespace Zetbox.App.Base
                         OnUserName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("UserName");
-				}
+                else
+                {
+                    SetInitializedProperty("UserName");
+                }
             }
         }
         private string _UserName;
@@ -248,11 +262,6 @@ namespace Zetbox.App.Base
             me.DisplayName = other.DisplayName;
             me.Password = other.Password;
             me.UserName = other.UserName;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -287,6 +296,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Groups":
+                return TriggerFetchGroupsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

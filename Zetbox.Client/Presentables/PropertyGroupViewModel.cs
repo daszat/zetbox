@@ -34,8 +34,8 @@ namespace Zetbox.Client.Presentables
     {
         public new delegate PropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
 
-        private string _title;
-        protected ObservableCollection<ViewModel> properties;
+        private readonly string _title;
+        protected readonly ObservableCollection<ViewModel> properties;
 
         public PropertyGroupViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
@@ -48,7 +48,7 @@ namespace Zetbox.Client.Presentables
             properties.CollectionChanged += PropertyListChanged;
             foreach (var prop in properties)
             {
-                prop.PropertyChanged += AnyPropertyChangedHandler;
+                prop.PropertyChanged += ErrorPropertyChangedHandler;
             }
         }
 
@@ -80,7 +80,7 @@ namespace Zetbox.Client.Presentables
 
         public string Error
         {
-            get { return this["PropertyModels"]; }
+            get { return this["Title"]; }
         }
 
         public string this[string columnName]
@@ -90,7 +90,6 @@ namespace Zetbox.Client.Presentables
                 switch (columnName)
                 {
                     case "Title":
-                    case "PropertyModels":
                         return String.Join("\n", properties.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
                     default:
                         return null;
@@ -108,7 +107,7 @@ namespace Zetbox.Client.Presentables
             {
                 foreach (var prop in e.NewItems.OfType<INotifyPropertyChanged>())
                 {
-                    prop.PropertyChanged += AnyPropertyChangedHandler;
+                    prop.PropertyChanged += ErrorPropertyChangedHandler;
                 }
             }
 
@@ -116,15 +115,18 @@ namespace Zetbox.Client.Presentables
             {
                 foreach (var prop in e.OldItems.OfType<INotifyPropertyChanged>())
                 {
-                    prop.PropertyChanged -= AnyPropertyChangedHandler;
+                    prop.PropertyChanged -= ErrorPropertyChangedHandler;
                 }
             }
         }
 
-        private void AnyPropertyChangedHandler(object sender, EventArgs e)
+        private void ErrorPropertyChangedHandler(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("Title");
-            OnPropertyChanged("PropertyModels");
+            if (e.PropertyName == "Error")
+            {
+                OnPropertyChanged("Title");
+                OnPropertyChanged("Error");
+            }
         }
 
         #endregion
@@ -163,5 +165,27 @@ namespace Zetbox.Client.Presentables
             : base(appCtx, dataCtx, parent, title, obj)
         {
         }
+    }
+
+    public class CustomPropertyGroupViewModel : PropertyGroupViewModel
+    {
+        public new delegate CustomPropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
+
+        public CustomPropertyGroupViewModel(
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            string title,
+            IEnumerable<ViewModel> obj)
+            : base(appCtx, dataCtx, parent, title, obj)
+        {
+        }
+
+        public ViewModel CustomModel
+        {
+            get
+            {
+                return PropertyModels.Single();
+            }
+        }
+
     }
 }

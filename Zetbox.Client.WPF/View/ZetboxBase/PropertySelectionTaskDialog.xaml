@@ -62,7 +62,7 @@
             <CheckBox IsChecked="{Binding IsSelected}"
                       IsThreeState="false"
                       Visibility="{Binding Parent.MultiSelect, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                        <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                    Width="14"
                    Height="14" />
             <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"

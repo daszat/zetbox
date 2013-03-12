@@ -73,6 +73,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Precision", __oldValue, __newValue);
                     _Precision = __newValue;
                     NotifyPropertyChanged("Precision", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPrecision_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Base
                         OnPrecision_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Precision");
-				}
+                else
+                {
+                    SetInitializedProperty("Precision");
+                }
             }
         }
         private int _Precision;
@@ -130,6 +131,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Scale", __oldValue, __newValue);
                     _Scale = __newValue;
                     NotifyPropertyChanged("Scale", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnScale_PostSetter != null && IsAttached)
                     {
@@ -137,10 +139,10 @@ namespace Zetbox.App.Base
                         OnScale_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Scale");
-				}
+                else
+                {
+                    SetInitializedProperty("Scale");
+                }
             }
         }
         private int _Scale;
@@ -481,11 +483,6 @@ namespace Zetbox.App.Base
             me.Precision = other.Precision;
             me.Scale = other.Scale;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -507,6 +504,15 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

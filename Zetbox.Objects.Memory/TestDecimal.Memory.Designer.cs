@@ -73,6 +73,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("Large", __oldValue, __newValue);
                     _Large = __newValue;
                     NotifyPropertyChanged("Large", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnLarge_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.Test
                         OnLarge_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Large");
-				}
+                else
+                {
+                    SetInitializedProperty("Large");
+                }
             }
         }
         private decimal? _Large;
@@ -130,6 +131,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("NoScale", __oldValue, __newValue);
                     _NoScale = __newValue;
                     NotifyPropertyChanged("NoScale", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnNoScale_PostSetter != null && IsAttached)
                     {
@@ -137,10 +139,10 @@ namespace Zetbox.App.Test
                         OnNoScale_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("NoScale");
-				}
+                else
+                {
+                    SetInitializedProperty("NoScale");
+                }
             }
         }
         private decimal? _NoScale;
@@ -187,6 +189,7 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanging("SmallDecimal", __oldValue, __newValue);
                     _SmallDecimal = __newValue;
                     NotifyPropertyChanged("SmallDecimal", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSmallDecimal_PostSetter != null && IsAttached)
                     {
@@ -194,10 +197,10 @@ namespace Zetbox.App.Test
                         OnSmallDecimal_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SmallDecimal");
-				}
+                else
+                {
+                    SetInitializedProperty("SmallDecimal");
+                }
             }
         }
         private decimal? _SmallDecimal;
@@ -224,11 +227,6 @@ namespace Zetbox.App.Test
             me.NoScale = other.NoScale;
             me.SmallDecimal = other.SmallDecimal;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -251,6 +249,15 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// a object reference that is calculated from the contents of the containing class
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CalculatedObjectReferenceProperty")]
+    [EdmEntityType(NamespaceName="Model", Name="CalculatedObjectReferencePropertyEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty")]
     public class CalculatedObjectReferencePropertyEfImpl : Zetbox.App.Base.PropertyEfImpl, CalculatedObjectReferenceProperty
     {
@@ -82,7 +82,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -137,7 +136,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnReferencedClass_Getter != null)
                 {
@@ -149,7 +147,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
@@ -184,6 +182,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ReferencedClass", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -523,11 +522,6 @@ namespace Zetbox.App.Base
 
             this._fk_ReferencedClass = otherImpl._fk_ReferencedClass;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -682,6 +676,7 @@ namespace Zetbox.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalculatedObjectReferenceProperty != null) OnNotifyDeleting_CalculatedObjectReferenceProperty(this);
             Inputs.Clear();
+            ReferencedClass = null;
         }
         public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnNotifyDeleting_CalculatedObjectReferenceProperty;
 
@@ -709,8 +704,9 @@ namespace Zetbox.App.Base
 				}
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_CalculatedReference_references_ReferencedClass", "ReferencedClass").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_CalculatedReference_references_ReferencedClass", "ReferencedClass");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(ReferencedClass);

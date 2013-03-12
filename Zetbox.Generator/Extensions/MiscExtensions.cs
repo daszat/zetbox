@@ -23,6 +23,7 @@ namespace Zetbox.Generator.Extensions
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.API.SchemaManagement;
 
     public static class MiscExtensions
     {
@@ -75,8 +76,7 @@ namespace Zetbox.Generator.Extensions
 
         public static string GetRelationTableName(this Relation rel)
         {
-            if (rel == null) { throw new ArgumentNullException("rel"); }
-            return String.Format("{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
+            return Construct.RelationTableName(rel);
         }
 
         public static string GetRelationFullName(this Relation rel)
@@ -85,11 +85,12 @@ namespace Zetbox.Generator.Extensions
             return String.Format("{0}.{1}", rel.Module.Namespace, rel.GetRelationClassName());
         }
 
+        [Obsolete]
         public static string GetRelationFkColumnName(this Relation rel, RelationEndRole endRole)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
             var relEnd = rel.GetEndFromRole(endRole);
-            return "fk_" + relEnd.RoleName;
+            return Construct.ForeignKeyColumnName(relEnd);
         }
         #endregion
 
@@ -127,6 +128,7 @@ namespace Zetbox.Generator.Extensions
             return String.Format("{0}.{1}", prop.GetCollectionEntryNamespace(), prop.GetCollectionEntryClassName());
         }
 
+        [Obsolete]
         public static string GetCollectionEntryReverseKeyColumnName(this Property prop)
         {
             return "fk_" + prop.ObjectClass.Name;

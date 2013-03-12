@@ -84,6 +84,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Destination", __oldValue, __newValue);
                     Proxy.Destination = __newValue;
                     NotifyPropertyChanged("Destination", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDestination_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDestination_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Destination");
-				}
+                else
+                {
+                    SetInitializedProperty("Destination");
+                }
             }
         }
 
@@ -141,6 +142,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("DestinationRows", __oldValue, __newValue);
                     Proxy.DestinationRows = __newValue;
                     NotifyPropertyChanged("DestinationRows", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDestinationRows_PostSetter != null && IsAttached)
                     {
@@ -148,10 +150,10 @@ namespace Zetbox.App.SchemaMigration
                         OnDestinationRows_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DestinationRows");
-				}
+                else
+                {
+                    SetInitializedProperty("DestinationRows");
+                }
             }
         }
 
@@ -198,6 +200,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Source", __oldValue, __newValue);
                     Proxy.Source = __newValue;
                     NotifyPropertyChanged("Source", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSource_PostSetter != null && IsAttached)
                     {
@@ -205,10 +208,10 @@ namespace Zetbox.App.SchemaMigration
                         OnSource_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Source");
-				}
+                else
+                {
+                    SetInitializedProperty("Source");
+                }
             }
         }
 
@@ -255,6 +258,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("SourceRows", __oldValue, __newValue);
                     Proxy.SourceRows = __newValue;
                     NotifyPropertyChanged("SourceRows", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnSourceRows_PostSetter != null && IsAttached)
                     {
@@ -262,10 +266,10 @@ namespace Zetbox.App.SchemaMigration
                         OnSourceRows_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("SourceRows");
-				}
+                else
+                {
+                    SetInitializedProperty("SourceRows");
+                }
             }
         }
 
@@ -312,6 +316,7 @@ namespace Zetbox.App.SchemaMigration
                     NotifyPropertyChanging("Timestamp", __oldValue, __newValue);
                     Proxy.Timestamp = __newValue;
                     NotifyPropertyChanged("Timestamp", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnTimestamp_PostSetter != null && IsAttached)
                     {
@@ -319,10 +324,10 @@ namespace Zetbox.App.SchemaMigration
                         OnTimestamp_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Timestamp");
-				}
+                else
+                {
+                    SetInitializedProperty("Timestamp");
+                }
             }
         }
 
@@ -350,12 +355,6 @@ namespace Zetbox.App.SchemaMigration
             me.Source = other.Source;
             me.SourceRows = other.SourceRows;
             me.Timestamp = other.Timestamp;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {

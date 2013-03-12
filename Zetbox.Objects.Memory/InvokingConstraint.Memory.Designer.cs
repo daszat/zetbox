@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
         // fkBackingName=_fk_GetErrorTextInvocation; fkGuidBackingName=_fk_guid_GetErrorTextInvocation;
         // referencedInterface=Zetbox.App.Base.ConstraintInvocation; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -58,9 +58,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_GetErrorTextInvocation;
+        private int? __fk_GetErrorTextInvocationCache;
+
+        private int? _fk_GetErrorTextInvocation {
+            get
+            {
+                return __fk_GetErrorTextInvocationCache;
+            }
+            set
+            {
+                __fk_GetErrorTextInvocationCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchGetErrorTextInvocationTask = null;
+            }
+        }
 
         private Guid? _fk_guid_GetErrorTextInvocation = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> _triggerFetchGetErrorTextInvocationTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> TriggerFetchGetErrorTextInvocationAsync()
+        {
+            if (_triggerFetchGetErrorTextInvocationTask != null) return _triggerFetchGetErrorTextInvocationTask;
+
+            if (_fk_GetErrorTextInvocation.HasValue)
+                _triggerFetchGetErrorTextInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
+            else
+                _triggerFetchGetErrorTextInvocationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchGetErrorTextInvocationTask.OnResult(t =>
+            {
+                if (OnGetErrorTextInvocation_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(t.Result);
+                    OnGetErrorTextInvocation_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchGetErrorTextInvocationTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -68,32 +104,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.ConstraintInvocationMemoryImpl __value;
-                if (_fk_GetErrorTextInvocation.HasValue)
-                    __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)Context.Find<Zetbox.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
-                else
-                    __value = null;
-
-                if (OnGetErrorTextInvocation_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__value);
-                    OnGetErrorTextInvocation_Getter(this, e);
-                    __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.ConstraintInvocationMemoryImpl)TriggerFetchGetErrorTextInvocationAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_GetErrorTextInvocation == null) || (value != null && value.ID == _fk_GetErrorTextInvocation))
-				{
-					SetInitializedProperty("GetErrorTextInvocation");
+                {
+                    SetInitializedProperty("GetErrorTextInvocation");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = GetErrorTextInvocationImpl;
@@ -114,6 +137,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("GetErrorTextInvocation", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnGetErrorTextInvocation_PostSetter != null && IsAttached)
                 {
@@ -132,7 +156,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation
         // fkBackingName=_fk_IsValidInvocation; fkGuidBackingName=_fk_guid_IsValidInvocation;
         // referencedInterface=Zetbox.App.Base.ConstraintInvocation; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
@@ -150,9 +174,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_IsValidInvocation;
+        private int? __fk_IsValidInvocationCache;
+
+        private int? _fk_IsValidInvocation {
+            get
+            {
+                return __fk_IsValidInvocationCache;
+            }
+            set
+            {
+                __fk_IsValidInvocationCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchIsValidInvocationTask = null;
+            }
+        }
 
         private Guid? _fk_guid_IsValidInvocation = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> _triggerFetchIsValidInvocationTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation> TriggerFetchIsValidInvocationAsync()
+        {
+            if (_triggerFetchIsValidInvocationTask != null) return _triggerFetchIsValidInvocationTask;
+
+            if (_fk_IsValidInvocation.HasValue)
+                _triggerFetchIsValidInvocationTask = Context.FindAsync<Zetbox.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
+            else
+                _triggerFetchIsValidInvocationTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ConstraintInvocation>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchIsValidInvocationTask.OnResult(t =>
+            {
+                if (OnIsValidInvocation_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(t.Result);
+                    OnIsValidInvocation_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchIsValidInvocationTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -160,32 +220,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.ConstraintInvocationMemoryImpl __value;
-                if (_fk_IsValidInvocation.HasValue)
-                    __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)Context.Find<Zetbox.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
-                else
-                    __value = null;
-
-                if (OnIsValidInvocation_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__value);
-                    OnIsValidInvocation_Getter(this, e);
-                    __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.ConstraintInvocationMemoryImpl)TriggerFetchIsValidInvocationAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_IsValidInvocation == null) || (value != null && value.ID == _fk_IsValidInvocation))
-				{
-					SetInitializedProperty("IsValidInvocation");
+                {
+                    SetInitializedProperty("IsValidInvocation");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = IsValidInvocationImpl;
@@ -206,6 +253,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("IsValidInvocation", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnIsValidInvocation_PostSetter != null && IsAttached)
                 {
@@ -362,11 +410,6 @@ namespace Zetbox.App.Base
             this._fk_GetErrorTextInvocation = otherImpl._fk_GetErrorTextInvocation;
             this._fk_IsValidInvocation = otherImpl._fk_IsValidInvocation;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -415,6 +458,19 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "GetErrorTextInvocation":
+                return TriggerFetchGetErrorTextInvocationAsync();
+            case "IsValidInvocation":
+                return TriggerFetchIsValidInvocationAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -547,6 +603,8 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_InvokingConstraint != null) OnNotifyDeleting_InvokingConstraint(this);
+            GetErrorTextInvocation = null;
+            IsValidInvocation = null;
         }
         public static event ObjectEventHandler<InvokingConstraint> OnNotifyDeleting_InvokingConstraint;
 

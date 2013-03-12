@@ -21,6 +21,7 @@ namespace Zetbox.API
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Xml;
 
     /// <summary>
     /// Implements basic (serialisation) infrastructure of ICompoundObject objects
@@ -46,6 +47,11 @@ namespace Zetbox.API
 
             ParentProperty = property;
             ParentObject = obj;
+
+            if (_frozenContext == null && obj is BasePersistenceObject)
+            {
+                _frozenContext = ((BasePersistenceObject)obj).FrozenContext;
+            }
         }
 
         public virtual void DetachFromObject(IPersistenceObject obj, string property)
@@ -113,16 +119,21 @@ namespace Zetbox.API
             return null;
         }
 
-        public virtual void ToStream(System.Xml.XmlWriter xml)
+        /// <summary>
+        /// Serialize this Object to a XmlWriter
+        /// </summary>
+        /// <param name="xml">XmlWriter to serialize to</param>
+        /// <param name="modules">a list of modules to filter the output</param>
+        public virtual void Export(XmlWriter xml, string[] modules)
         {
-            if (xml == null) throw new ArgumentNullException("xml");
         }
 
-        public virtual IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
+        /// <summary>
+        /// Deserialize this Object from a XmlReader
+        /// </summary>
+        /// <param name="xml">XmlReader to deserialize to.</param>
+        public virtual void MergeImport(XmlReader xml)
         {
-            if (xml == null) throw new ArgumentNullException("xml");
-
-            return null;
         }
 
         /// <summary>
@@ -176,8 +187,19 @@ namespace Zetbox.API
 
         public bool IsAttached { get { return ParentObject != null && ParentObject.IsAttached; } }
 
-        protected DataObjectState ObjectState { get { return ParentObject != null ?  ParentObject.ObjectState:DataObjectState.Detached ; } }
-        protected IFrozenContext FrozenContext { get { return _lazyCtx(); } }
+        protected DataObjectState ObjectState { get { return ParentObject != null ? ParentObject.ObjectState : DataObjectState.Detached; } }
+        private IFrozenContext _frozenContext;
+        protected IFrozenContext FrozenContext
+        {
+            get
+            {
+                if (_frozenContext == null)
+                {
+                    _frozenContext = _lazyCtx();
+                }
+                return _frozenContext;
+            }
+        }
 
         protected override void AuditPropertyChange(string property, object oldValue, object newValue)
         {

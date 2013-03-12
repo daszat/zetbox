@@ -19,8 +19,10 @@ namespace Zetbox.Server.SchemaManagement
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API.Server;
@@ -181,6 +183,18 @@ namespace Zetbox.Server.SchemaManagement
             }
         }
 
+        protected static Dictionary<string, object> ToAdoParameters(IEnumerable<string> discriminatorFilter)
+        {
+            var parameters = new Dictionary<string, object>();
+            int i = 0;
+            foreach (var val in discriminatorFilter)
+            {
+                parameters["@p" + i.ToString(CultureInfo.InvariantCulture)] = val;
+                i += 1;
+            }
+            return parameters;
+        }
+
         #endregion
 
         #region Meta data
@@ -306,7 +320,12 @@ namespace Zetbox.Server.SchemaManagement
 
         #region SQL Infrastructure
 
-        protected abstract string QuoteIdentifier(string name);
+        public abstract string QuoteIdentifier(string name);
+
+        protected virtual string QuoteString(string value)
+        {
+            return "'" + value.Replace("'", "''") + "'";
+        }
 
         protected virtual string BuildSelect(TableRef tbl, params string[] columns)
         {
@@ -324,7 +343,7 @@ namespace Zetbox.Server.SchemaManagement
         protected static string ConstructCheckConstraintName(TableRef tblName, string colName)
         {
             return String.Format("check_{0}_{1}", tblName.Name, colName);
-        }        
+        }
 
         #endregion
 
@@ -357,6 +376,36 @@ namespace Zetbox.Server.SchemaManagement
 
         protected abstract string FormatFullName(DboRef tblName);
         protected abstract string FormatSchemaName(DboRef tblName);
+
+        protected virtual string FormatValue(object val)
+        {
+            if (val == null)
+                return "NULL";
+
+            var exprType = val.GetType();
+            if (exprType == typeof(bool) || exprType == typeof(bool?))
+            {
+                return FormatBool((bool)val);
+            }
+            else if (exprType == typeof(int) || exprType == typeof(int?))
+            {
+                return ((int)val).ToString(CultureInfo.InvariantCulture);
+            }
+            else if (exprType == typeof(double) || exprType == typeof(double?))
+            {
+                return ((double)val).ToString(CultureInfo.InvariantCulture);
+            }
+            else if (exprType == typeof(string))
+            {
+                return QuoteString((string)val);
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format("Cannot evaluate constant of type {0}: \'{1}\'", exprType.AssemblyQualifiedName, val));
+            }
+        }
+
+        protected abstract string FormatBool(bool p);
 
         public TableRef GetTableName(string schemaName, string tblName)
         {
@@ -432,6 +481,8 @@ namespace Zetbox.Server.SchemaManagement
 
         public abstract bool CheckTableContainsData(TableRef tblName);
 
+        public abstract bool CheckTableContainsData(TableRef tblName, IEnumerable<string> discriminatorFilter);
+
         public abstract bool CheckColumnContainsNulls(TableRef tblName, string colName);
 
         public abstract bool CheckFKColumnContainsUniqueValues(TableRef tblName, string colName);
@@ -467,6 +518,41 @@ namespace Zetbox.Server.SchemaManagement
         public abstract void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         public abstract void DropIndex(TableRef tblName, string idxName);
 
+
+        private static CheckExpressionVisitor _checkExpressionVisitor = new CheckExpressionVisitor();
+        protected string FormatCheckExpression(string colName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            var clauses = string.Join(" OR ",
+                checkExpressions.Select(kvp => string.Format("(({0} IN ({1})) AND ({2}))",
+                    QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                    string.Join(", ", kvp.Key.Select(s => QuoteString(s))),
+                    string.Format(_checkExpressionVisitor.TranslateCheckExpression(kvp.Value), QuoteIdentifier(colName)))));
+
+            if (string.IsNullOrWhiteSpace(clauses))
+                return "(0=0)";
+            else
+                return "(" + clauses + ")";
+        }
+
+        public abstract bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions);
+
+        public virtual void CreateCheckConstraint(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
+        {
+            ExecuteNonQuery(string.Format("ALTER TABLE {0} ADD CONSTRAINT {1} CHECK ( {2} )",
+                FormatSchemaName(tblName),
+                QuoteIdentifier(newConstraintName),
+                FormatCheckExpression(colName, checkExpressions)));
+        }
+
+        public virtual void DropCheckConstraint(TableRef tblName, string constraintName)
+        {
+            ExecuteNonQuery(string.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",
+                            FormatSchemaName(tblName),
+                            QuoteIdentifier(constraintName)));
+        }
+
+        public abstract bool CheckCheckConstraintExists(TableRef tblName, string constraintName);
+
         #endregion
 
         #region Other DB Objects (Views, Triggers, Procedures)
@@ -501,7 +587,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             if (db == null)
                 throw new InvalidOperationException("cannot qualify table name without database connection");
-            
+
             return new ProcRef(db.Database, schemaName, funcName);
         }
 
@@ -605,6 +691,49 @@ namespace Zetbox.Server.SchemaManagement
 
 
         public abstract void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
+        public abstract void CopyColumnData(TableRef srcTblName, string[] srcColName, TableRef tblName, string[] colName, string discriminatorValue);
+        public abstract void MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings);
+
+        private static readonly object _MappingDefaultSourceValue = new object();
+        public object MappingDefaultSourceValue { get { return _MappingDefaultSourceValue; } }
+
+        /// <summary>
+        /// Creates "CASE x WHEN y THEN z ELSE a END" fragments for MapColumnData.
+        /// </summary>
+        protected string CreateMappingMap(string srcColNameQuoted, Dictionary<object, object> mapping)
+        {
+            if (mapping == null || mapping.Count == 0) return srcColNameQuoted;
+
+            object defaultValue;
+            var haveDefaultValue = mapping.TryGetValue(MappingDefaultSourceValue, out defaultValue);
+            var formattedDefaultValue = FormatValue(defaultValue);
+
+            var whens = mapping
+                .Where(kvp => kvp.Key != MappingDefaultSourceValue)
+                .Select(kvp => string.Format(CultureInfo.InvariantCulture, "WHEN {0} THEN {1}",
+                    kvp.Key == null
+                        ? srcColNameQuoted + " IS NULL"
+                        : string.Format(CultureInfo.InvariantCulture, "{0} = {1}", srcColNameQuoted, FormatValue(kvp.Key)),
+                    kvp.Value == null
+                        ? "NULL"
+                        : FormatValue(kvp.Value)))
+                .ToList();
+
+            if (haveDefaultValue)
+            {
+                if (whens.Count == 0)
+                {
+                    return formattedDefaultValue;
+                }
+                else
+                {
+                    whens.Add("ELSE " + formattedDefaultValue);
+                }
+            }
+
+            return string.Format("CASE {0} END", string.Join(" ", whens));
+        }
+
         public abstract void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
         public abstract void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName);
         public abstract void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName);
@@ -632,6 +761,11 @@ namespace Zetbox.Server.SchemaManagement
 
         public abstract void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames);
         public abstract void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values);
+
+        public abstract void WriteDefaultValue(TableRef tblNametblName, string colName, object value);
+        public abstract void WriteDefaultValue(TableRef tblNametblName, string colName, object value, IEnumerable<string> discriminatorFilter);
+        public abstract void WriteGuidDefaultValue(TableRef destTblName, string colName);
+        public abstract void WriteGuidDefaultValue(TableRef destTblName, string colName, IEnumerable<string> discriminatorFilter);
 
         /// <summary>
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.

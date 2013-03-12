@@ -22,6 +22,7 @@
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.SchemaManagement" %>
 <%@ Import Namespace="Zetbox.API.Server" %>
 <%@ Import Namespace="Zetbox.App.Base" %>
 <%@ Import Namespace="Zetbox.App.Extensions" %>
@@ -36,8 +37,9 @@
 <%
     foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
+        var clsName = cls.Name;
 %>
-    <EntitySetMapping Name="<%= cls.Name %>">
+    <EntitySetMapping Name="<%= clsName %>EfImpl">
 <% ApplyEntityTypeMapping(cls); %>
     </EntitySetMapping>
 <%
@@ -45,7 +47,7 @@
 		{
 %>
     <EntitySetMapping Name="<%= Construct.SecurityRulesClassName(cls) %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= Construct.SecurityRulesClassName(cls) %>)">
+      <EntityTypeMapping TypeName="Model.<%= Construct.SecurityRulesClassName(cls) %>">
         <MappingFragment StoreEntitySet="<%= Construct.SecurityRulesClassName(cls) %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Identity" ColumnName="Identity" />
@@ -54,7 +56,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="<%= Construct.SecurityRulesFKName(cls) %>" TypeName="Model.<%= Construct.SecurityRulesFKName(cls) %>" StoreEntitySet="<%= Construct.SecurityRulesClassName(cls) %>">
-      <EndProperty Name="<%= cls.Name %>">
+      <EndProperty Name="<%= clsName %>">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <EndProperty Name="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -72,16 +74,16 @@
 <%
     foreach(var rel in ctx.GetRelationsWithSeparateStorage())
     {
-        string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
-        string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+        string fkAName = Construct.ForeignKeyColumnName(rel.A);
+        string fkBName = Construct.ForeignKeyColumnName(rel.B);
 %>
     <!--
 <%
     RelationDebugTemplate.Call(Host, ctx, rel);
 %>
     -->
-    <EntitySetMapping Name="<%= rel.GetRelationClassName() %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetRelationClassName() %>)">
+    <EntitySetMapping Name="<%= rel.GetRelationClassName() %>EfImpl">
+      <EntityTypeMapping TypeName="Model.<%= rel.GetRelationClassName() %>EfImpl">
         <MappingFragment StoreEntitySet="<%= rel.GetRelationClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
 <% 
@@ -166,14 +168,14 @@
     -->
     <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"
                            TypeName="Model.<%= rel.GetAssociationName() %>"
-                           StoreEntitySet="<%= dependent.Type.Name %>" >
+                           StoreEntitySet="<%= dependent.Type.GetEntitySetName() %>" >
       <EndProperty Name="<%= principal.RoleName %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= principal.RoleName %>"/>
+        <ScalarProperty Name="ID" ColumnName="<%= Construct.ForeignKeyColumnName(principal) %>"/>
       </EndProperty>
       <EndProperty Name="<%= dependent.RoleName %>">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= principal.RoleName %>" IsNull="false"/>
+      <Condition ColumnName="<%= Construct.ForeignKeyColumnName(principal) %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }
@@ -188,9 +190,10 @@
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     { 
+        var propClsName = prop.ObjectClass.Name;
 %>
-    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
+    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>EfImpl">
+      <EntityTypeMapping TypeName="Model.<%= prop.GetCollectionEntryClassName() %>EfImpl">
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Value" ColumnName="<%= prop.Name %>" />
@@ -209,12 +212,12 @@
                            TypeName="Model.<%= prop.GetAssociationName() %>"
                            StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= prop.ObjectClass.Name %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.Name %>"/>
+        <ScalarProperty Name="ID" ColumnName="<%= Construct.ForeignKeyColumnName(prop) %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= prop.ObjectClass.Name %>" IsNull="false"/>
+      <Condition ColumnName="<%= Construct.ForeignKeyColumnName(prop)  %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }
@@ -229,9 +232,10 @@
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     { 
+        var propClsName = prop.ObjectClass.Name;
 %>
-    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
+    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>EfImpl">
+      <EntityTypeMapping TypeName="Model.<%= prop.GetCollectionEntryClassName() %>EfImpl">
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <% ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "Value", string.Empty); %>
@@ -250,12 +254,12 @@
                            TypeName="Model.<%= prop.GetAssociationName() %>"
                            StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= prop.ObjectClass.Name %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.Name %>"/>
+        <ScalarProperty Name="ID" ColumnName="<%= Construct.ForeignKeyColumnName(prop) %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= prop.ObjectClass.Name %>" IsNull="false"/>
+      <Condition ColumnName="<%= Construct.ForeignKeyColumnName(prop) %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }

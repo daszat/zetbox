@@ -85,6 +85,8 @@ namespace Zetbox.API.Migration
 
             _container = CreateMasterContainer(_config);
 
+            API.AppDomainInitializer.InitializeFrom(_container);
+
             _applicationScope = _container.BeginLifetimeScope();
 
             ValidateConfig();
@@ -134,7 +136,7 @@ namespace Zetbox.API.Migration
 
             try
             {
-                return ZetboxConfig.FromFile(configFilePath, "");
+                return ZetboxConfig.FromFile(HostType.Server, configFilePath, "");
             }
             catch (Exception ex)
             {
@@ -254,7 +256,7 @@ namespace Zetbox.API.Migration
         protected void WriteLog(string srcTbl, long srcRows, string dstTbl, long dstRows)
         {
             using (var logScope = _applicationScope.BeginLifetimeScope())
-            using (var logCtx = logScope.Resolve<IZetboxContext>())
+            using (var logCtx = logScope.Resolve<IZetboxServerContext>())
             {
                 var log = logCtx.Create<MigrationLog>();
                 log.Timestamp = DateTime.Now;

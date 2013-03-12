@@ -21,11 +21,15 @@ namespace Zetbox.API.Client.PerfCounter
     using System.Text;
     using Autofac;
     using Zetbox.API.PerfCounter;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
 
     // client-side clone of Zetbox.API.Server.PerfCounter.Log4NetAppender
     public class Log4NetAppender : MemoryAppender
     {
         #region Autofac Module
+        [Feature]
+        [Description("PerfCounter writing to log4net")]
         public class Module : Autofac.Module
         {
             protected override void Load(ContainerBuilder moduleBuilder)

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Describes one end of a relation between two object classes
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="RelationEnd")]
+    [EdmEntityType(NamespaceName="Model", Name="RelationEndEfImpl")]
     [System.Diagnostics.DebuggerDisplay("RelationEnd")]
     public class RelationEndEfImpl : BaseServerDataObject_EntityFramework, RelationEnd, Zetbox.API.IExportableInternal
     {
@@ -86,7 +86,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnAParent_Getter != null)
                 {
@@ -98,7 +97,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.RelationEfImpl> r
@@ -145,6 +144,7 @@ namespace Zetbox.App.Base
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("A", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -201,7 +201,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnBParent_Getter != null)
                 {
@@ -213,7 +212,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.RelationEfImpl> r
@@ -260,6 +259,7 @@ namespace Zetbox.App.Base
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("B", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -315,7 +315,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -327,7 +326,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -362,6 +361,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -414,6 +414,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -423,6 +425,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -430,10 +433,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -441,7 +444,7 @@ namespace Zetbox.App.Base
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _ChangedOn_store = value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -498,7 +501,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -510,7 +512,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -545,6 +547,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -597,6 +600,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -606,6 +611,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -613,10 +619,10 @@ namespace Zetbox.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -624,7 +630,7 @@ namespace Zetbox.App.Base
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _CreatedOn_store = value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -687,6 +693,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -694,10 +701,10 @@ namespace Zetbox.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -732,6 +739,17 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _HasPersistentOrder;
+                if (!_isHasPersistentOrderSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("edd8d122-7b58-4bbb-bf00-33caa8b69cc2"));
+                    if (__p != null) {
+                        _isHasPersistentOrderSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._HasPersistentOrder = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'RelationEnd.HasPersistentOrder'");
+                    }
+                }
                 if (OnHasPersistentOrder_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -743,6 +761,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isHasPersistentOrderSet = true;
                 if (_HasPersistentOrder != value)
                 {
                     var __oldValue = _HasPersistentOrder;
@@ -756,6 +775,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     _HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -763,10 +783,10 @@ namespace Zetbox.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("HasPersistentOrder");
-				}
+                else
+                {
+                    SetInitializedProperty("HasPersistentOrder");
+                }
             }
         }
         private bool _HasPersistentOrder_store;
@@ -778,6 +798,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("HasPersistentOrder");
             }
         }
+        private bool _isHasPersistentOrderSet = false;
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, bool> OnHasPersistentOrder_PreSetter;
@@ -789,48 +810,52 @@ namespace Zetbox.App.Base
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
         // enumeration property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
-        // implement the user-visible interface
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
         public Zetbox.App.Base.Multiplicity Multiplicity
         {
             get
             {
-				var __value = _Multiplicity;
-				if(OnMultiplicity_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Zetbox.App.Base.Multiplicity>(__value);
-					OnMultiplicity_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Multiplicity;
+                if (OnMultiplicity_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.Multiplicity>(__result);
+                    OnMultiplicity_Getter(this, __e);
+                    __result = _Multiplicity = __e.Result;
+                }
+                return __result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Multiplicity != value)
                 {
-					var __oldValue = _Multiplicity;
-					var __newValue = value;
-                    if(OnMultiplicity_PreSetter != null)
+                    var __oldValue = _Multiplicity;
+                    var __newValue = value;
+                    if (OnMultiplicity_PreSetter != null && IsAttached)
                     {
-						var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
-						OnMultiplicity_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
+                        OnMultiplicity_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
-					
                     NotifyPropertyChanging("Multiplicity", __oldValue, __newValue);
-                    _Multiplicity = value;
+                    _Multiplicity = __newValue;
                     NotifyPropertyChanged("Multiplicity", __oldValue, __newValue);
-                    if(OnMultiplicity_PostSetter != null)
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnMultiplicity_PostSetter != null && IsAttached)
                     {
-						var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
-						OnMultiplicity_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Multiplicity>(__oldValue, __newValue);
+                        OnMultiplicity_PostSetter(this, __e);
                     }
-                    
+                }
+                else
+                {
+                    SetInitializedProperty("Multiplicity");
                 }
             }
         }
-
         private Zetbox.App.Base.Multiplicity _Multiplicity_store;
         private Zetbox.App.Base.Multiplicity _Multiplicity {
             get { return _Multiplicity_store; }
@@ -840,7 +865,7 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("MultiplicityImpl");
             }
         }
-        
+
         /// <summary>EF sees only this property, for Multiplicity</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
@@ -855,7 +880,7 @@ namespace Zetbox.App.Base
                 this.Multiplicity = (Zetbox.App.Base.Multiplicity)value;
             }
         }
-        
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingEnumProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Multiplicity> OnMultiplicity_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Multiplicity> OnMultiplicity_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Multiplicity> OnMultiplicity_PostSetter;
@@ -908,7 +933,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnNavigator_Getter != null)
                 {
@@ -920,7 +944,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ObjectReferencePropertyEfImpl> r
@@ -967,6 +991,7 @@ namespace Zetbox.App.Base
                 if (__newValue != null) {
                     __newValue.NotifyPropertyChanged("RelationEnd", null, null);
                 }
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -1044,6 +1069,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("RoleName", __oldValue, __newValue);
                     _RoleName = __newValue;
                     NotifyPropertyChanged("RoleName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnRoleName_PostSetter != null && IsAttached)
                     {
@@ -1051,10 +1077,10 @@ namespace Zetbox.App.Base
                         OnRoleName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("RoleName");
-				}
+                else
+                {
+                    SetInitializedProperty("RoleName");
+                }
             }
         }
         private string _RoleName_store;
@@ -1119,7 +1145,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnType_Getter != null)
                 {
@@ -1131,7 +1156,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
@@ -1166,6 +1191,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Type", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -1264,11 +1290,6 @@ namespace Zetbox.App.Base
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Navigator = otherImpl._fk_Navigator;
             this._fk_Type = otherImpl._fk_Type;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1577,7 +1598,6 @@ namespace Zetbox.App.Base
             SetNotInitializedProperty("BParent");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
-            SetNotInitializedProperty("HasPersistentOrder");
             SetNotInitializedProperty("Multiplicity");
             SetNotInitializedProperty("Navigator");
             SetNotInitializedProperty("RoleName");
@@ -1593,9 +1613,12 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_RelationEnd != null) OnNotifyDeleting_RelationEnd(this);
+            AParent = null;
+            BParent = null;
             ChangedBy = null;
             CreatedBy = null;
             Navigator = null;
+            Type = null;
         }
         public static event ObjectEventHandler<RelationEnd> OnNotifyDeleting_RelationEnd;
 
@@ -1621,12 +1644,13 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -1641,24 +1665,28 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.RelationEfImpl>("Model.FK_Relation_hasA_A", "Relation").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.RelationEfImpl>("Model.FK_Relation_hasA_A", "Relation");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.RelationEfImpl>("Model.FK_Relation_hasB_B", "Relation").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.RelationEfImpl>("Model.FK_Relation_hasB_B", "Relation");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_RelationEnd_was_ChangedBy", "ChangedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_RelationEnd_was_ChangedBy", "ChangedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 binStream.Write(this._ChangedOn);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_RelationEnd_was_CreatedBy", "CreatedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_RelationEnd_was_CreatedBy", "CreatedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1668,19 +1696,24 @@ namespace Zetbox.App.Base
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
-            binStream.Write(this._HasPersistentOrder);
-            binStream.Write((int?)((Zetbox.App.Base.RelationEnd)this).Multiplicity);
+            binStream.Write(this._isHasPersistentOrderSet);
+            if (this._isHasPersistentOrderSet) {
+                binStream.Write(this._HasPersistentOrder);
+            }
+            binStream.Write((int?)_Multiplicity);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectReferencePropertyEfImpl>("Model.FK_RelationEnd_has_Navigator", "Navigator").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectReferencePropertyEfImpl>("Model.FK_RelationEnd_has_Navigator", "Navigator");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(Navigator);
             }
             binStream.Write(this._RoleName);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_RelationEnd_has_Type", "Type").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>("Model.FK_RelationEnd_has_Type", "Type");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
         }
 
@@ -1706,8 +1739,11 @@ namespace Zetbox.App.Base
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
-            this._HasPersistentOrder = binStream.ReadBoolean();
-            ((Zetbox.App.Base.RelationEnd)this).Multiplicity = (Zetbox.App.Base.Multiplicity)binStream.ReadNullableInt32();
+            this._isHasPersistentOrderSet = binStream.ReadBoolean();
+            if (this._isHasPersistentOrderSet) {
+                this._HasPersistentOrder = binStream.ReadBoolean();
+            }
+            _Multiplicity = (Zetbox.App.Base.Multiplicity)binStream.ReadNullableInt32();
             binStream.Read(out this._fk_Navigator);
             this._RoleName = binStream.ReadString();
             binStream.Read(out this._fk_Type);
@@ -1730,8 +1766,9 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isHasPersistentOrderSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)((Zetbox.App.Base.RelationEnd)this).Multiplicity, xml, "Multiplicity", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_Multiplicity, xml, "Multiplicity", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Navigator != null ? Navigator.ExportGuid : (Guid?)null, xml, "Navigator", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.Base");
@@ -1764,10 +1801,12 @@ namespace Zetbox.App.Base
                 this._isExportGuidSet = true;
                 break;
             case "Zetbox.App.Base|HasPersistentOrder":
+                // Import must have default value set
                 this._HasPersistentOrder = XmlStreamer.ReadBoolean(xml);
+                this._isHasPersistentOrderSet = true;
                 break;
             case "Zetbox.App.Base|Multiplicity":
-                ((Zetbox.App.Base.RelationEnd)this).Multiplicity = (Zetbox.App.Base.Multiplicity)XmlStreamer.ReadNullableInt32(xml);
+                _Multiplicity = (Zetbox.App.Base.Multiplicity)XmlStreamer.ReadNullableInt32(xml);
                break;
             case "Zetbox.App.Base|Navigator":
                 this._fk_guid_Navigator = XmlStreamer.ReadNullableGuid(xml);

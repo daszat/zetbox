@@ -81,7 +81,7 @@ namespace Zetbox.Client.Presentables
                 FetchParameterList();
                 _parameterModels = new LookupDictionary<BaseParameter, BaseParameter, BaseValueViewModel>(_parameterList, k => k, v =>
                 {
-                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetValueModel(v.IsNullable));
+                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetValueModel(DataContext, v.IsNullable));
                     return result;
                 });
             }

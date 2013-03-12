@@ -35,9 +35,8 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.WPF.Commands;
-    using Zetbox.Client.WPF.Toolkit;
     using Zetbox.Client.WPF.CustomControls;
-    using Microsoft.Windows.Controls;
+    using Zetbox.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
@@ -55,9 +54,9 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         #region Item Management
         private void ItemActivatedHandler(object sender, RoutedEventArgs e)
         {
-            if (ViewModel != null && ViewModel.SelectedItem != null)
+            if (ViewModel != null)
             {
-                ViewModel.ActivateItem(ViewModel.SelectedItem, true);
+                ViewModel.Open();
             }
             e.Handled = true;
         }
@@ -77,7 +76,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         private void ApplyColumns()
         {
             WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
-        }        
+        }
 
         #region HeaderClickManagement
 
@@ -115,7 +114,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
 
         public ObjectCollectionViewModel ViewModel
         {
-            get { return (ObjectCollectionViewModel)DataContext; }
+            get { return (ObjectCollectionViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

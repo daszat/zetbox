@@ -65,6 +65,21 @@ namespace Zetbox.App.Test
         void Parameterless();
 
         /// <summary>
+        /// Does nothing, on the server
+        /// </summary>
+        void ServerMethod();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Zetbox.App.Test.TestObjClass ServerObjParameter(Zetbox.App.Test.TestObjClass input);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void ServerParameterless();
+
+        /// <summary>
         /// 
         /// </summary>
         void StringParameter(string str);

@@ -84,6 +84,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     Proxy.DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -91,10 +92,10 @@ namespace Zetbox.App.Base
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("DisplayName");
-				}
+                else
+                {
+                    SetInitializedProperty("DisplayName");
+                }
             }
         }
 
@@ -172,6 +173,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("Password", __oldValue, __newValue);
                     Proxy.Password = __newValue;
                     NotifyPropertyChanged("Password", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPassword_PostSetter != null && IsAttached)
                     {
@@ -179,10 +181,10 @@ namespace Zetbox.App.Base
                         OnPassword_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Password");
-				}
+                else
+                {
+                    SetInitializedProperty("Password");
+                }
             }
         }
 
@@ -229,6 +231,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("UserName", __oldValue, __newValue);
                     Proxy.UserName = __newValue;
                     NotifyPropertyChanged("UserName", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnUserName_PostSetter != null && IsAttached)
                     {
@@ -236,10 +239,10 @@ namespace Zetbox.App.Base
                         OnUserName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("UserName");
-				}
+                else
+                {
+                    SetInitializedProperty("UserName");
+                }
             }
         }
 
@@ -265,12 +268,6 @@ namespace Zetbox.App.Base
             me.DisplayName = other.DisplayName;
             me.Password = other.Password;
             me.UserName = other.UserName;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-            var nhCtx = (NHibernateContext)ctx;
         }
         public override void SetNew()
         {
@@ -453,10 +450,6 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for Auftrag_CreatedBy_Identity_RelationEntry
             // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
             // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
-            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
-            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
-            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
-            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
             // should fetch && remember parent for SecurityTestChild_allow_Identity_RelationEntry
             // should fetch && remember parent for FileImportConfiguration_of_Identity_RelationEntry
             // should fetch && remember parent for Constraint_was_Identity_RelationEntry
@@ -497,6 +490,8 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for Relation_was_Identity_RelationEntry
             // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
             // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
+            // should fetch && remember parent for SecurityTestChild_was_Identity_RelationEntry
+            // should fetch && remember parent for SecurityTestChild_was_Identity_RelationEntry
             // should fetch && remember parent for Sequence_was_Identity_RelationEntry
             // should fetch && remember parent for Sequence_was_Identity_RelationEntry
             // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
@@ -511,8 +506,14 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
             // should fetch && remember parent for Task_was_Identity_RelationEntry
             // should fetch && remember parent for Task_was_Identity_RelationEntry
+            // should fetch && remember parent for TPHBaseObj_was_Identity_RelationEntry
+            // should fetch && remember parent for TPHBaseObj_was_Identity_RelationEntry
             // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
             // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
+            // should fetch && remember parent for WorkSchedule_was_Identity_RelationEntry
+            // should fetch && remember parent for WorkSchedule_was_Identity_RelationEntry
+            // should fetch && remember parent for WorkScheduleRule_was_Identity_RelationEntry
+            // should fetch && remember parent for WorkScheduleRule_was_Identity_RelationEntry
 
             Groups.Clear();
         }

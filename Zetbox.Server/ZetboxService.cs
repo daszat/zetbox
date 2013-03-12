@@ -216,6 +216,7 @@ namespace Zetbox.Server
             sw.Write(false);
             sw.Write(false);
             sw.Write(false);
+            sw.Flush();
 
             Logging.Facade.DebugFormat("Sending {0} Objects with {1} with AuxObjects and EagerLoadLists = {2}", sentObjects.Count, auxObjects.Count, eagerLoadLists);
 
@@ -356,9 +357,19 @@ namespace Zetbox.Server
 
                     using (IZetboxContext ctx = _ctxFactory())
                     {
-                        return _sohFactory
+                        var result = _sohFactory
                             .GetServerDocumentHandler()
                             .GetBlobStream(version, ctx, ID);
+
+                        if (result == null)
+                        {
+                            Logging.Facade.Debug("GetBlobStream returns null");
+                        }
+                        else
+                        {
+                            Logging.Facade.DebugFormat("GetBlobStream returns {0} of {1} bytes.", result.GetType().FullName, result.Length);
+                        }
+                        return result;
                     }
                 }
                 catch (Exception ex)
@@ -384,16 +395,44 @@ namespace Zetbox.Server
                 try
                 {
                     DebugLogIdentity();
+                    if (Logging.Facade.IsDebugEnabled)
+                    {
+                        long length = -1;
+                        try { length = blob.Stream.Length; }
+                        catch (NotSupportedException)
+                        {
+                            // ignore missing support for accessing the stream's length
+                            length = -2;
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Facade.Debug(string.Format("SetBlobStream failed to access {0}.Length", blob.Stream.GetType()), ex);
+                            length = -3;
+                        }
+
+                        Logging.Facade.DebugFormat("SetBlobStream started with BlobMessage ( FileName='{0}', MimeType='{1}', Stream='{2}' of length={3} )",
+                            blob.FileName,
+                            blob.MimeType,
+                            blob.Stream.GetType().FullName,
+                            length);
+                    }
 
                     using (IZetboxContext ctx = _ctxFactory())
                     {
                         var result = _sohFactory
                             .GetServerDocumentHandler()
                             .SetBlobStream(blob.Version, ctx, blob.Stream, blob.FileName, blob.MimeType);
-                        BlobResponse resp = new BlobResponse();
-                        resp.ID = result.ID;
-                        resp.BlobInstance = SendObjects(new IDataObject[] { result }, true);
-                        return resp;
+
+                        if (Logging.Facade.IsDebugEnabled)
+                        {
+                            using (var stream = result.GetStream())
+                                Logging.Facade.DebugFormat("SetBlobStream created Blob with ID=#{0}, length={1}.", result.ID, stream.Length);
+                        }
+                        return new BlobResponse()
+                        {
+                            ID = result.ID,
+                            BlobInstance = SendObjects(new IDataObject[] { result }, true)
+                        };
                     }
                 }
                 catch (Exception ex)

@@ -73,6 +73,7 @@ namespace Zetbox.App.GUI
                     NotifyPropertyChanging("Predicate", __oldValue, __newValue);
                     _Predicate = __newValue;
                     NotifyPropertyChanged("Predicate", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnPredicate_PostSetter != null && IsAttached)
                     {
@@ -80,10 +81,10 @@ namespace Zetbox.App.GUI
                         OnPredicate_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Predicate");
-				}
+                else
+                {
+                    SetInitializedProperty("Predicate");
+                }
             }
         }
         private string _Predicate;
@@ -99,16 +100,16 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnCreateFilterModel_OptionalPredicateFilterConfiguration")]
-        public override Zetbox.API.IFilterModel CreateFilterModel()
+        public override Zetbox.API.IFilterModel CreateFilterModel(Zetbox.API.IZetboxContext ctx)
         {
             var e = new MethodReturnEventArgs<Zetbox.API.IFilterModel>();
             if (OnCreateFilterModel_OptionalPredicateFilterConfiguration != null)
             {
-                OnCreateFilterModel_OptionalPredicateFilterConfiguration(this, e);
+                OnCreateFilterModel_OptionalPredicateFilterConfiguration(this, e, ctx);
             }
             else
             {
-                e.Result = base.CreateFilterModel();
+                e.Result = base.CreateFilterModel(ctx);
             }
             return e.Result;
         }
@@ -234,11 +235,6 @@ namespace Zetbox.App.GUI
 
             me.Predicate = other.Predicate;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -259,6 +255,15 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

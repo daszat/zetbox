@@ -9,12 +9,13 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Zetbox.Objects.MemoryImpl</RootNamespace>
     <AssemblyName>Zetbox.Objects.MemoryImpl</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->
-    <RelativeOutputPath>Common\Core</RelativeOutputPath>
+    <RelativeOutputPath>Common</RelativeOutputPath>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,8 +27,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Core.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Core.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -40,8 +41,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Common\Core.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Core.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Common\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -56,8 +57,8 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Core.Fallback\</OutputPath>
-    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Core.Generated\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Common\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
@@ -73,17 +74,17 @@
     <Reference Include="System.Xml" />
     <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\log4net.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Autofac.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase">
@@ -97,12 +98,12 @@
     </ProjectReference>
     <Reference Include="Zetbox.DalProvider.Base">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Base.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Common">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.Common.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Data.Linq">
@@ -113,7 +114,7 @@
     </Reference>
     <Reference Include="Zetbox.DalProvider.Memory">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Memory.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Memory.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -133,11 +134,9 @@
     <Compile Include="BoolParameter.Memory.Designer.cs" />
     <Compile Include="BoolProperty.Memory.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Memory.Designer.cs" />
-    <Compile Include="Calendar.Memory.Designer.cs" />
-    <Compile Include="CalendarRule.Memory.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="CLRObjectParameter.Memory.Designer.cs" />
-    <Compile Include="CommonCalendarRule.Memory.Designer.cs" />
+    <Compile Include="CommonWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="Company.Memory.Designer.cs" />
     <Compile Include="CompoundObject.Memory.Designer.cs" />
     <Compile Include="CompoundObjectParameter.Memory.Designer.cs" />
@@ -151,15 +150,18 @@
     <Compile Include="DateRangeFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="DateTimeParameter.Memory.Designer.cs" />
     <Compile Include="DateTimeProperty.Memory.Designer.cs" />
-    <Compile Include="DayOfWeekCalendarRule.Memory.Designer.cs" />
+    <Compile Include="DayOfWeekWorkScheduleRule.Memory.Designer.cs" />
+    <Compile Include="DeactivatableTestObject.Memory.Designer.cs" />
+    <Compile Include="DecimalDefaultValue.Memory.Designer.cs" />
     <Compile Include="DecimalParameter.Memory.Designer.cs" />
     <Compile Include="DecimalProperty.Memory.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Memory.Designer.cs" />
     <Compile Include="Document.Memory.Designer.cs" />
+    <Compile Include="DoubleDefaultValue.Memory.Designer.cs" />
     <Compile Include="DoubleParameter.Memory.Designer.cs" />
     <Compile Include="DoubleProperty.Memory.Designer.cs" />
     <Compile Include="DynamicFile.Memory.Designer.cs" />
-    <Compile Include="EasterCalendarRule.Memory.Designer.cs" />
+    <Compile Include="EasterWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="EnumDefaultValue.Memory.Designer.cs" />
     <Compile Include="Enumeration.Memory.Designer.cs" />
     <Compile Include="EnumerationEntry.Memory.Designer.cs" />
@@ -169,7 +171,7 @@
     <Compile Include="File.Memory.Designer.cs" />
     <Compile Include="FileImportConfiguration.Memory.Designer.cs" />
     <Compile Include="FilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="FixedYearlyCalendarRule.Memory.Designer.cs" />
+    <Compile Include="FixedYearlyWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="Fragebogen.Memory.Designer.cs" />
     <Compile Include="Group.Memory.Designer.cs" />
     <Compile Include="GroupMembership.Memory.Designer.cs" />
@@ -218,9 +220,19 @@
     <Compile Include="OrderedOneEnd.Memory.Designer.cs" />
     <Compile Include="Projekt.Memory.Designer.cs" />
     <Compile Include="Property.Memory.Designer.cs" />
+    <Compile Include="PropertyBoolTest.Memory.Designer.cs" />
+    <Compile Include="PropertyDateTimeTest.Memory.Designer.cs" />
+    <Compile Include="PropertyDecimalTest.Memory.Designer.cs" />
+    <Compile Include="PropertyDoubleTest.Memory.Designer.cs" />
+    <Compile Include="PropertyEnumTest.Memory.Designer.cs" />
     <Compile Include="PropertyFilterConfiguration.Memory.Designer.cs" />
+    <Compile Include="PropertyGuidTest.Memory.Designer.cs" />
+    <Compile Include="PropertyIntTest.Memory.Designer.cs" />
+    <Compile Include="PropertyStringTest.Memory.Designer.cs" />
+    <Compile Include="PropertyTestBase.Memory.Designer.cs" />
     <Compile Include="RangeFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="ReadOnlyConstraint.Memory.Designer.cs" />
+    <Compile Include="RecurrenceRuleTester.Memory.Designer.cs" />
     <Compile Include="Relation.Memory.Designer.cs" />
     <Compile Include="RelationEnd.Memory.Designer.cs" />
     <Compile Include="RequiredParent.Memory.Designer.cs" />
@@ -248,18 +260,24 @@
     <Compile Include="TestDecimal.Memory.Designer.cs" />
     <Compile Include="TestObjClass.Memory.Designer.cs" />
     <Compile Include="TestStudent.Memory.Designer.cs" />
+    <Compile Include="TPHBaseObj.Memory.Designer.cs" />
+    <Compile Include="TPHDerivedAObj.Memory.Designer.cs" />
+    <Compile Include="TPHDerivedBObj.Memory.Designer.cs" />
     <Compile Include="TypeRef.Memory.Designer.cs" />
     <Compile Include="ValueTypeProperty.Memory.Designer.cs" />
     <Compile Include="ViewDescriptor.Memory.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Memory.Designer.cs" />
     <Compile Include="ViewReadOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="Visual.Memory.Designer.cs" />
+    <Compile Include="WorkSchedule.Memory.Designer.cs" />
+    <Compile Include="WorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Memory.Designer.cs" />
-    <Compile Include="YearlyCalendarRule.Memory.Designer.cs" />
+    <Compile Include="YearlyWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="CollectionEntries.Memory.Designer.cs" />
     <Compile Include="AnyReference.Memory.Designer.cs" />
     <Compile Include="AuditEntry.Memory.Designer.cs" />
     <Compile Include="DateTimeRange.Memory.Designer.cs" />
+    <Compile Include="RecurrenceRule.Memory.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Memory.Designer.cs" />
     <Compile Include="AssemblyInfo.Memory.cs" />
     <Compile Include="Module.Memory.cs" />
@@ -268,7 +286,7 @@
     <None Include="Zetbox.Objects.snk" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FrozenObjects.xml"/>
+    <EmbeddedResource Include="FrozenObjects.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Sets the newly created DatetTme Property to DateTime.Now
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="CurrentDateTimeDefaultValue")]
+    [EdmEntityType(NamespaceName="Model", Name="CurrentDateTimeDefaultValueEfImpl")]
     [System.Diagnostics.DebuggerDisplay("CurrentDateTimeDefaultValue")]
     public class CurrentDateTimeDefaultValueEfImpl : Zetbox.App.Base.DefaultPropertyValueEfImpl, CurrentDateTimeDefaultValue
     {
@@ -115,11 +115,6 @@ namespace Zetbox.App.Base
             var otherImpl = (CurrentDateTimeDefaultValueEfImpl)obj;
             var me = (CurrentDateTimeDefaultValue)this;
 
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {

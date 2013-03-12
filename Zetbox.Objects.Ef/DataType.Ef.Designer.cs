@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// <summary>
     /// Base Metadefinition Object for Objectclasses, Interfaces, CompoundObjects and Enumerations.
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DataType")]
+    [EdmEntityType(NamespaceName="Model", Name="DataTypeEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DataType")]
     public abstract class DataTypeEfImpl : BaseServerDataObject_EntityFramework, DataType, Zetbox.API.IExportableInternal
     {
@@ -85,7 +85,6 @@ namespace Zetbox.App.Base
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
@@ -97,7 +96,7 @@ namespace Zetbox.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -132,6 +131,7 @@ namespace Zetbox.App.Base
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -184,6 +184,8 @@ namespace Zetbox.App.Base
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -193,6 +195,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -200,10 +203,10 @@ namespace Zetbox.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ChangedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("ChangedOn");
+                }
             }
         }
         private DateTime _ChangedOn_store;
@@ -211,7 +214,7 @@ namespace Zetbox.App.Base
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _ChangedOn_store = value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -269,7 +272,6 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -327,7 +329,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
@@ -339,7 +340,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
@@ -374,6 +375,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -426,6 +428,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
+                    if (__newValue.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -435,6 +439,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -442,10 +447,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("CreatedOn");
-				}
+                else
+                {
+                    SetInitializedProperty("CreatedOn");
+                }
             }
         }
         private DateTime _CreatedOn_store;
@@ -453,7 +458,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
+                _CreatedOn_store = value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -511,7 +516,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnDefaultIcon_Getter != null)
                 {
@@ -523,7 +527,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.IconEfImpl> r
@@ -558,6 +562,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("DefaultIcon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -607,6 +612,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -614,10 +620,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                         OnDescription_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Description");
-				}
+                else
+                {
+                    SetInitializedProperty("Description");
+                }
             }
         }
         private string _Description_store;
@@ -687,6 +693,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -694,10 +701,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ExportGuid");
-				}
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
             }
         }
         private Guid _ExportGuid_store;
@@ -759,7 +766,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -813,7 +819,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -872,7 +877,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnModule_Getter != null)
                 {
@@ -884,7 +888,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
@@ -919,6 +923,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -968,6 +973,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -975,10 +981,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                         OnName_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("Name");
-				}
+                else
+                {
+                    SetInitializedProperty("Name");
+                }
             }
         }
         private string _Name_store;
@@ -1043,7 +1049,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                 {
                     c.Load();
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }
@@ -1102,7 +1107,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 {
                     r.Load();
                 }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
                 __value = r.Value;
                 if (OnRequestedKind_Getter != null)
                 {
@@ -1114,7 +1118,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
@@ -1149,6 +1153,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
             }
         }
 
@@ -1210,6 +1215,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                     NotifyPropertyChanging("ShowIconInLists", __oldValue, __newValue);
                     _ShowIconInLists = __newValue;
                     NotifyPropertyChanged("ShowIconInLists", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowIconInLists_PostSetter != null && IsAttached)
                     {
@@ -1217,10 +1223,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                         OnShowIconInLists_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowIconInLists");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowIconInLists");
+                }
             }
         }
         private bool _ShowIconInLists_store;
@@ -1291,6 +1297,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                     NotifyPropertyChanging("ShowIdInLists", __oldValue, __newValue);
                     _ShowIdInLists = __newValue;
                     NotifyPropertyChanged("ShowIdInLists", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowIdInLists_PostSetter != null && IsAttached)
                     {
@@ -1298,10 +1305,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                         OnShowIdInLists_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowIdInLists");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowIdInLists");
+                }
             }
         }
         private bool _ShowIdInLists_store;
@@ -1372,6 +1379,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                     NotifyPropertyChanging("ShowNameInLists", __oldValue, __newValue);
                     _ShowNameInLists = __newValue;
                     NotifyPropertyChanged("ShowNameInLists", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnShowNameInLists_PostSetter != null && IsAttached)
                     {
@@ -1379,10 +1387,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                         OnShowNameInLists_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("ShowNameInLists");
-				}
+                else
+                {
+                    SetInitializedProperty("ShowNameInLists");
+                }
             }
         }
         private bool _ShowNameInLists_store;
@@ -1618,11 +1626,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             this._fk_DefaultIcon = otherImpl._fk_DefaultIcon;
             this._fk_Module = otherImpl._fk_Module;
             this._fk_RequestedKind = otherImpl._fk_RequestedKind;
-        }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
         }
         public override void SetNew()
         {
@@ -1966,6 +1969,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             ChangedBy = null;
             CreatedBy = null;
             DefaultIcon = null;
+            Module = null;
             RequestedKind = null;
         }
         public static event ObjectEventHandler<DataType> OnNotifyDeleting_DataType;
@@ -1992,12 +1996,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                 }
-				else 
-				{
-					SetInitializedProperty("ID");
-				}
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
             }
         }
         private int _ID;
@@ -2012,8 +2017,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_DataType_was_ChangedBy", "ChangedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_DataType_was_ChangedBy", "ChangedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
@@ -2036,16 +2042,18 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 binStream.Write(false);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_DataType_was_CreatedBy", "CreatedBy").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_DataType_was_CreatedBy", "CreatedBy");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_DataType_has_DefaultIcon", "DefaultIcon").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_DataType_has_DefaultIcon", "DefaultIcon");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(DefaultIcon);
@@ -2072,8 +2080,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 binStream.Write(false);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_Module_contains_DataTypes", "Module").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_Module_contains_DataTypes", "Module");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             if (auxObjects != null) {
                 auxObjects.Add(Module);
@@ -2096,8 +2105,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 binStream.Write(false);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_DataType_may_request_ControlKind", "ControlKind").EntityKey;
-                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_DataType_may_request_ControlKind", "ControlKind");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._isShowIconInListsSet);
             if (this._isShowIconInListsSet) {

@@ -145,18 +145,14 @@ namespace Zetbox.App.Packaging
                     Log.InfoFormat("  exporting module {0}", module.Name);
                     foreach (var objClass in ctx.GetQuery<ObjectClass>().Where(o => o.Module == module).OrderBy(o => o.Name).ToList())
                     {
-                        if (objClass.SubClasses.Count > 0)
-                        {
-                            Log.DebugFormat("    skipping {0}: not a leaf class", objClass.Name);
-                        }
-                        else if (!objClass.AndParents(cls => new[] { cls }, cls => cls.BaseObjectClass).SelectMany(cls => cls.ImplementsInterfaces).Contains(iexpIf))
+                        if (!objClass.AndParents(cls => new[] { cls }, cls => cls.BaseObjectClass).SelectMany(cls => cls.ImplementsInterfaces).Contains(iexpIf))
                         {
                             Log.DebugFormat("    skipping {0}: not exportable", objClass.Name);
                         }
                         else if (allData)
                         {
                             Log.InfoFormat("    exporting class {0}", objClass.Name);
-                            foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
+                            foreach (var obj in AllExportables(ctx, objClass))
                             {
                                 ExportObject(s, obj, schemaNamespaces);
                             }
@@ -164,8 +160,7 @@ namespace Zetbox.App.Packaging
                         else if (objClass.ImplementsIModuleMember())
                         {
                             Log.InfoFormat("    exporting parts of class {0}", objClass.Name);
-                            foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
-                                .Cast<IModuleMember>()
+                            foreach (var obj in AllModuleMembers(ctx, objClass)
                                 .Where(mm => mm.Module != null && ownerModules.Contains(mm.Module.Name))
                                 .Cast<IExportable>()
                                 .OrderBy(obj => obj.ExportGuid)
@@ -191,23 +186,31 @@ namespace Zetbox.App.Packaging
                         if (!rel.B.Type.ImplementsIExportable())
                             continue;
 
-                        try
+                        var ifType = rel.GetEntryInterfaceType();
+
+                        if (allData)
                         {
-                            var ifType = rel.GetEntryInterfaceType();
-                            Log.InfoFormat("    {0} ", ifType.Type.Name);
-
-                            MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType.Type }, new Type[] { typeof(Guid), typeof(RelationEndRole), typeof(IDataObject) });
-                            var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ExportGuid, RelationEndRole.A, null }));
-
-                            foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
+                            try
                             {
-                                ExportObject(s, obj, schemaNamespaces);
+                                Log.InfoFormat("    exporting relation {0} ", ifType.Type.Name);
+
+                                MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType.Type }, new Type[] { typeof(Guid), typeof(RelationEndRole), typeof(IDataObject) });
+                                var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ExportGuid, RelationEndRole.A, null }));
+
+                                foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
+                                {
+                                    ExportObject(s, obj, schemaNamespaces);
+                                }
+                            }
+                            catch (TypeLoadException ex)
+                            {
+                                var message = String.Format("Failed to load InterfaceType for entries of {0}", rel);
+                                Log.Warn(message, ex);
                             }
                         }
-                        catch (TypeLoadException ex)
+                        else if (rel.A.Type.ImplementsIModuleMember() || rel.B.Type.ImplementsIModuleMember())
                         {
-                            var message = String.Format("Failed to load InterfaceType for entries of {0}", rel);
-                            Log.Warn(message, ex);
+                            Log.WarnFormat("    exporting relation {0} with module filter is not yet implemented: skipping", ifType.Type.Name);
                         }
                     }
                 }
@@ -216,6 +219,20 @@ namespace Zetbox.App.Packaging
 
                 Log.Info("Export finished");
             }
+        }
+
+        // workaround gendarme spinning in a loop when checking ExportFromContext
+        private static IEnumerable<IModuleMember> AllModuleMembers(IReadOnlyZetboxContext ctx, ObjectClass objClass)
+        {
+            return ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
+                                            .Where(o => o.GetObjectClass(ctx) == objClass)
+                                            .Cast<IModuleMember>();
+        }
+
+        // workaround gendarme spinning in a loop when checking ExportFromContext
+        private static IOrderedEnumerable<IDataObject> AllExportables(IReadOnlyZetboxContext ctx, ObjectClass objClass)
+        {
+            return ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).Where(obj => obj.GetObjectClass(ctx) == objClass).OrderBy(obj => ((IExportable)obj).ExportGuid);
         }
 
         #region Xml/Export private Methods

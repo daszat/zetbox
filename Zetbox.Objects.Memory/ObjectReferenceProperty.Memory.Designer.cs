@@ -49,6 +49,17 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _EagerLoading;
+                if (!_isEagerLoadingSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("373f0036-42d6-41e2-a2a4-74462537f426"));
+                    if (__p != null) {
+                        _isEagerLoadingSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._EagerLoading = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ObjectReferenceProperty.EagerLoading'");
+                    }
+                }
                 if (OnEagerLoading_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
@@ -60,6 +71,7 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isEagerLoadingSet = true;
                 if (_EagerLoading != value)
                 {
                     var __oldValue = _EagerLoading;
@@ -73,6 +85,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("EagerLoading", __oldValue, __newValue);
                     _EagerLoading = __newValue;
                     NotifyPropertyChanged("EagerLoading", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnEagerLoading_PostSetter != null && IsAttached)
                     {
@@ -80,13 +93,14 @@ namespace Zetbox.App.Base
                         OnEagerLoading_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("EagerLoading");
-				}
+                else
+                {
+                    SetInitializedProperty("EagerLoading");
+                }
             }
         }
         private bool _EagerLoading;
+        private bool _isEagerLoadingSet = false;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PreSetter;
@@ -130,6 +144,7 @@ namespace Zetbox.App.Base
                     NotifyPropertyChanging("IsInlineEditable", __oldValue, __newValue);
                     _IsInlineEditable = __newValue;
                     NotifyPropertyChanged("IsInlineEditable", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
                     if (OnIsInlineEditable_PostSetter != null && IsAttached)
                     {
@@ -137,10 +152,10 @@ namespace Zetbox.App.Base
                         OnIsInlineEditable_PostSetter(this, __e);
                     }
                 }
-				else 
-				{
-					SetInitializedProperty("IsInlineEditable");
-				}
+                else
+                {
+                    SetInitializedProperty("IsInlineEditable");
+                }
             }
         }
         private bool? _IsInlineEditable;
@@ -162,15 +177,26 @@ namespace Zetbox.App.Base
 			{
 				if (_Methods == null)
 				{
-					Context.FetchRelation<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
-					_Methods 
-						= new ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+                    TriggerFetchMethodsAsync().Wait();
 				}
 				return (ICollection<Zetbox.App.Base.Method>)_Methods;
 			}
 		}
+        
+        Zetbox.API.Async.ZbTask _triggerFetchMethodsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
+        {
+            if (_triggerFetchMethodsTask != null) return _triggerFetchMethodsTask;
+			_triggerFetchMethodsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
+			_triggerFetchMethodsTask.OnResult(r => 
+            {
+                _Methods 
+				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
+					this, 
+					new RelationshipFilterASideCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+            });
+            return _triggerFetchMethodsTask;
+        }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _Methods;
 
@@ -179,7 +205,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
-	        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
         // fkBackingName=_fk_RelationEnd; fkGuidBackingName=_fk_guid_RelationEnd;
         // referencedInterface=Zetbox.App.Base.RelationEnd; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Navigator; is reference;
@@ -197,9 +223,45 @@ namespace Zetbox.App.Base
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
-        private int? _fk_RelationEnd;
+        private int? __fk_RelationEndCache;
+
+        private int? _fk_RelationEnd {
+            get
+            {
+                return __fk_RelationEndCache;
+            }
+            set
+            {
+                __fk_RelationEndCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchRelationEndTask = null;
+            }
+        }
 
         private Guid? _fk_guid_RelationEnd = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd> _triggerFetchRelationEndTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd> TriggerFetchRelationEndAsync()
+        {
+            if (_triggerFetchRelationEndTask != null) return _triggerFetchRelationEndTask;
+
+            if (_fk_RelationEnd.HasValue)
+                _triggerFetchRelationEndTask = Context.FindAsync<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+            else
+                _triggerFetchRelationEndTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchRelationEndTask.OnResult(t =>
+            {
+                if (OnRelationEnd_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.RelationEnd>(t.Result);
+                    OnRelationEnd_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchRelationEndTask;
+        }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -207,32 +269,19 @@ namespace Zetbox.App.Base
         {
             get
             {
-                Zetbox.App.Base.RelationEndMemoryImpl __value;
-                if (_fk_RelationEnd.HasValue)
-                    __value = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
-                else
-                    __value = null;
-
-                if (OnRelationEnd_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.RelationEnd>(__value);
-                    OnRelationEnd_Getter(this, e);
-                    __value = (Zetbox.App.Base.RelationEndMemoryImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Base.RelationEndMemoryImpl)TriggerFetchRelationEndAsync().Result;
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && _fk_RelationEnd == null) || (value != null && value.ID == _fk_RelationEnd))
-				{
-					SetInitializedProperty("RelationEnd");
+                {
+                    SetInitializedProperty("RelationEnd");
                     return;
-				}
+                }
 
                 // cache old value to remove inverse references later
                 var __oldValue = RelationEndImpl;
@@ -269,6 +318,7 @@ namespace Zetbox.App.Base
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("RelationEnd", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
 
                 if (OnRelationEnd_PostSetter != null && IsAttached)
                 {
@@ -679,11 +729,6 @@ namespace Zetbox.App.Base
             me.IsInlineEditable = other.IsInlineEditable;
             this._fk_RelationEnd = otherImpl._fk_RelationEnd;
         }
-
-        public override void AttachToContext(IZetboxContext ctx)
-        {
-            base.AttachToContext(ctx);
-        }
         public override void SetNew()
         {
             base.SetNew();
@@ -735,6 +780,19 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Methods":
+                return TriggerFetchMethodsAsync();
+            case "RelationEnd":
+                return TriggerFetchRelationEndAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -865,7 +923,6 @@ namespace Zetbox.App.Base
         [EventBasedMethod("OnNotifyCreated_ObjectReferenceProperty")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("EagerLoading");
             SetNotInitializedProperty("IsInlineEditable");
             SetNotInitializedProperty("RelationEnd");
             base.NotifyCreated();
@@ -893,7 +950,10 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._EagerLoading);
+            binStream.Write(this._isEagerLoadingSet);
+            if (this._isEagerLoadingSet) {
+                binStream.Write(this._EagerLoading);
+            }
             binStream.Write(this._IsInlineEditable);
             binStream.Write(RelationEnd != null ? RelationEnd.ID : (int?)null);
         }
@@ -904,7 +964,10 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._EagerLoading = binStream.ReadBoolean();
+            this._isEagerLoadingSet = binStream.ReadBoolean();
+            if (this._isEagerLoadingSet) {
+                this._EagerLoading = binStream.ReadBoolean();
+            }
             this._IsInlineEditable = binStream.ReadNullableBoolean();
             this._fk_RelationEnd = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -920,6 +983,7 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            System.Diagnostics.Debug.Assert(this._isEagerLoadingSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._IsInlineEditable, xml, "IsInlineEditable", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ExportGuid : (Guid?)null, xml, "RelationEnd", "Zetbox.App.Base");
@@ -932,7 +996,9 @@ namespace Zetbox.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Base|EagerLoading":
+                // Import must have default value set
                 this._EagerLoading = XmlStreamer.ReadBoolean(xml);
+                this._isEagerLoadingSet = true;
                 break;
             case "Zetbox.App.GUI|IsInlineEditable":
                 this._IsInlineEditable = XmlStreamer.ReadNullableBoolean(xml);

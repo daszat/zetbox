@@ -57,6 +57,14 @@ namespace Zetbox.Client.Presentables.DtoViewModels
             }
         }
 
+        public override bool IsExportable
+        {
+            get
+            {
+                return IsDataTable;
+            }
+        }
+
         protected internal override void ApplyChangesFrom(DtoBaseViewModel otherBase)
         {
             base.ApplyChangesFrom(otherBase);

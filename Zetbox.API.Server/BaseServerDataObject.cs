@@ -24,6 +24,7 @@ namespace Zetbox.API.Server
     using System.Linq;
     using System.Text;
     using Zetbox.App.Base;
+    using Zetbox.API.Async;
 
     /// <summary>
     /// Abstract Base Class for a PersistenceObject on the Server Side
@@ -132,7 +133,7 @@ namespace Zetbox.API.Server
             SetObjectState(DataObjectState.Modified);
         }
 
-        public override void AttachToContext(IZetboxContext ctx)
+        public override void AttachToContext(IZetboxContext ctx, Func<IFrozenContext> lazyFrozenContext)
         {
             // avoid double-attaches
             if (this.Context != null && this.Context == ctx)
@@ -152,7 +153,7 @@ namespace Zetbox.API.Server
             if (ObjectState == DataObjectState.Detached)
                 SetObjectState(DataObjectState.Unmodified);
 
-            base.AttachToContext(ctx);
+            base.AttachToContext(ctx, lazyFrozenContext);
         }
 
         public override void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
@@ -296,6 +297,11 @@ namespace Zetbox.API.Server
             if (aStr == null && bStr == null) return 0;
             if (aStr == null) return -1;
             return aStr.CompareTo(bStr);
+        }
+
+        public virtual ZbTask TriggerFetch(string propName)
+        {
+            throw new NotSupportedException("Fetching properties async is not supported on a server yet.");
         }
     }
 
