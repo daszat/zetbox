@@ -117,18 +117,19 @@ namespace Zetbox.Server.SchemaManagement
 
         private void DropVolatileObjects()
         {
-            foreach (var triggerName in db.GetTriggerNames())
+            // .ToList() -> There is already an open DataReader associated with this Command which must be closed first
+            foreach (var triggerName in db.GetTriggerNames().ToList())
             {
                 db.DropTrigger(triggerName);
             }
 
-            foreach (var viewName in db.GetViewNames())
+            foreach (var viewName in db.GetViewNames().ToList())
             {
                 db.DropView(viewName);
             }
 
             // only drop refreshrights procedures
-            foreach (var procName in db.GetProcedureNames().Where(procRef => procRef.Name.StartsWith(Construct.SecurityRulesRefreshRightsOnProcedurePrefix())))
+            foreach (var procName in db.GetProcedureNames().ToList().Where(procRef => procRef.Name.StartsWith(Construct.SecurityRulesRefreshRightsOnProcedurePrefix())))
             {
                 db.DropProcedure(procName);
             }
