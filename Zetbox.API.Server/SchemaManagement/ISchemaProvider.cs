@@ -291,7 +291,7 @@ namespace Zetbox.API.Server
         }
 
         public TriggerRef(TableRef tblName, string name)
-            : base(tblName.Database, tblName.Schema, name)
+            : base(tblName != null ? tblName.Database : null, tblName != null ? tblName.Schema : null, name)
         {
         }
 
