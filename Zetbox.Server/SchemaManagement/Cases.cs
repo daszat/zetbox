@@ -863,8 +863,12 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var idxName = Construct.IndexName(tblName.Name, colName);
 
+            // MS SQL Server (and Postgres?) cannot alter columns when a index exists
+            if (db.CheckIndexExists(tblName, idxName)) db.DropIndex(tblName, idxName);
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+            db.CreateIndex(tblName, idxName, false, false, colName);
 
             PostMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel);
         }
@@ -907,6 +911,7 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var idxName = Construct.IndexName(tblName.Name, colName);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {
@@ -914,7 +919,10 @@ namespace Zetbox.Server.SchemaManagement
             }
             else
             {
+                // MS SQL Server (and Postgres?) cannot alter columns when a index exists
+                if (db.CheckIndexExists(tblName, idxName)) db.DropIndex(tblName, idxName);
                 db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+                db.CreateIndex(tblName, idxName, false, false, colName);
             }
 
             PostMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel);
@@ -2173,8 +2181,12 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var idxName = Construct.IndexName(tblName.Name, colName);
 
+            // MS SQL Server (and Postgres?) cannot alter columns when a index exists
+            if (db.CheckIndexExists(tblName, idxName)) db.DropIndex(tblName, idxName);
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+            db.CreateIndex(tblName, idxName, false, false, colName);
 
             PostMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel);
         }
@@ -2205,6 +2217,7 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var idxName = Construct.IndexName(tblName.Name, colName);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {
@@ -2212,7 +2225,10 @@ namespace Zetbox.Server.SchemaManagement
             }
             else
             {
+                // MS SQL Server (and Postgres?) cannot alter columns when a index exists
+                if (db.CheckIndexExists(tblName, idxName)) db.DropIndex(tblName, idxName);
                 db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+                db.CreateIndex(tblName, idxName, false, false, colName);
             }
 
             PostMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel);
