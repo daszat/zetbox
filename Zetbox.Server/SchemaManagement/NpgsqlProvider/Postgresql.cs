@@ -845,7 +845,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 FROM pg_proc p
                     JOIN pg_namespace n ON p.pronamespace = n.oid
                     JOIN pg_type t ON p.prorettype = t.oid
-                WHERE t.typname = 'trigger'")
+                WHERE t.typname = 'trigger' AND n.nspname NOT IN ('pg_catalog', 'pg_toast', 'information_schema', 'public')")
                 .Select(rd => new TriggerRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
         }
 
