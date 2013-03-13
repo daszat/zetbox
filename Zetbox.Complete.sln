@@ -238,6 +238,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Cli", "Zetbox.Cli\Zetbox.Cli.csproj", "{951B9511-F3FA-44E1-8676-DE8073600E1A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7} = {FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}
+		{4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545} = {4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.ConfigEditor", "Zetbox.ConfigEditor\Zetbox.ConfigEditor.csproj", "{EBB9E238-741C-455D-9D49-8114F22128FD}"
