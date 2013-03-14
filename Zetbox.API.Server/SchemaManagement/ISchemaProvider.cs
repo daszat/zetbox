@@ -671,6 +671,11 @@ namespace Zetbox.API.Server
         void CreateTable(TableRef tblName, bool idAsIdentityColumn);
         void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey);
 
+        /// <summary>
+        /// Renames the given object. The provider has to detect noop's. The provider must throw an exception, when the object was not found
+        /// </summary>
+        /// <param name="oldTblName"></param>
+        /// <param name="newTblName"></param>
         void RenameTable(TableRef oldTblName, TableRef newTblName);
 
         void DropTable(TableRef tblName);
@@ -682,6 +687,12 @@ namespace Zetbox.API.Server
         void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints);
         void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints);
 
+        /// <summary>
+        /// Renames the given object. The provider has to detect noop's. The provider must throw an exception, when the object was not found
+        /// </summary>
+        /// <param name="tblName"></param>
+        /// <param name="oldColName"></param>
+        /// <param name="newColName"></param>
         void RenameColumn(TableRef tblName, string oldColName, string newColName);
 
         bool GetIsColumnNullable(TableRef tblName, string colName);
@@ -731,6 +742,15 @@ namespace Zetbox.API.Server
         bool CheckFKConstraintExists(TableRef tblName, string fkName);
         IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
         void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade);
+        /// <summary>
+        /// Renames the given object. The provider has to detect noop's. The provider must throw an exception, when the object was not found
+        /// </summary>
+        /// <param name="tblName"></param>
+        /// <param name="oldConstraintName"></param>
+        /// <param name="refTblName"></param>
+        /// <param name="colName"></param>
+        /// <param name="newConstraintName"></param>
+        /// <param name="onDeleteCascade"></param>
         void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade);
         void DropFKConstraint(TableRef tblName, string constraintName);
 
@@ -738,6 +758,12 @@ namespace Zetbox.API.Server
         bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void DropIndex(TableRef tblName, string idxName);
+        /// <summary>
+        /// Renames the given object. The provider has to detect noop's. The provider must throw an exception, when the object was not found
+        /// </summary>
+        /// <param name="tblName"></param>
+        /// <param name="oldIdxName"></param>
+        /// <param name="newIdxName"></param>
         void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName);
 
         /// <summary>
