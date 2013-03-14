@@ -374,6 +374,11 @@ namespace Zetbox.Server.SchemaManagement
             _provider.DropIndex(tblName, idxName);
         }
 
+        public void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
+        {
+            _provider.RenameIndex(tblName, oldIdxName, newIdxName);
+        }
+
         public void DropAllObjects()
         {
             using (Log.InfoTraceMethodCall("Dropping all database objects"))

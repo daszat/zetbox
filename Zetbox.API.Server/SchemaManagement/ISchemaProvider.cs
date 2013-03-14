@@ -738,6 +738,7 @@ namespace Zetbox.API.Server
         bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void DropIndex(TableRef tblName, string idxName);
+        void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName);
 
         /// <summary>
         /// Checks whether a column fulfills certain criteria based on the DiscriminatorColumn

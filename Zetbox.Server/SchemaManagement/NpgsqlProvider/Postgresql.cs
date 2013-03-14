@@ -375,6 +375,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void RenameTable(TableRef oldTblName, TableRef newTblName)
         {
+            if (oldTblName == newTblName) return; // noop
+
             if (oldTblName == null)
                 throw new ArgumentNullException("oldTblName");
             if (newTblName == null)
@@ -551,6 +553,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
         {
+            if (oldColName == newColName) return; // noop
+
             ExecuteNonQuery(String.Format(
                 "ALTER TABLE {0} RENAME COLUMN {1} TO {2}",
                 FormatSchemaName(tblName),
@@ -727,6 +731,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
+            if (oldConstraintName == newConstraintName) return; // noop
+
             if (tblName == null) throw new ArgumentNullException("tblName");
             if (string.IsNullOrEmpty(oldConstraintName)) throw new ArgumentNullException("oldConstraintName");
             if (string.IsNullOrEmpty(newConstraintName)) throw new ArgumentNullException("newConstraintName");
@@ -798,6 +804,17 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 "DROP INDEX {0}.{1}",
                 QuoteIdentifier(tblName.Schema),
                 QuoteIdentifier(idxName)));
+        }
+
+        public override void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
+        {
+            if (oldIdxName == newIdxName) return; // noop
+
+            ExecuteNonQuery(String.Format(
+                "ALTER INDEX {0}.{1} RENAME TO {0}.{2}",
+                QuoteIdentifier(tblName.Schema),
+                QuoteIdentifier(oldIdxName),
+                QuoteIdentifier(newIdxName)));
         }
 
         public override bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)

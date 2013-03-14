@@ -408,6 +408,8 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void RenameTable(TableRef oldTblName, TableRef newTblName)
         {
+            if (oldTblName == newTblName) return; // noop
+
             if (oldTblName == null)
                 throw new ArgumentNullException("oldTblName");
             if (newTblName == null)
@@ -599,6 +601,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
         {
+            if (oldColName == newColName) return; // noop
             // sp_rename cannot cope when check constraints reference the column. wtf?
             // Workaround_UpdateTPHNotNullCheckConstraint will recreate the constraints for us.
             foreach (var constraintName in FindReferencingCheckConstraints(tblName, oldColName))
@@ -762,6 +765,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
+            if (oldConstraintName == newConstraintName) return; // noop
             if (tblName == null) throw new ArgumentNullException("tblName");
             if (string.IsNullOrEmpty(oldConstraintName)) throw new ArgumentNullException("oldConstraintName");
             if (string.IsNullOrEmpty(newConstraintName)) throw new ArgumentNullException("newConstraintName");
@@ -833,6 +837,13 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         public override void DropIndex(TableRef tblName, string idxName)
         {
             ExecuteNonQuery(string.Format("DROP INDEX [{0}] ON {1}", idxName, FormatSchemaName(tblName)));
+        }
+
+        public override void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
+        {
+            if (oldIdxName == newIdxName) return; // noop
+            // Do not qualify new name as it will be part of the name
+            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.[{1}]', '{2}', 'INDEX'", FormatSchemaName(tblName), oldIdxName, newIdxName));
         }
 
         public override bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)

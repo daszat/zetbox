@@ -517,7 +517,7 @@ namespace Zetbox.Server.SchemaManagement
 
         public abstract void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         public abstract void DropIndex(TableRef tblName, string idxName);
-
+        public abstract void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName);
 
         private static CheckExpressionVisitor _checkExpressionVisitor = new CheckExpressionVisitor();
         protected string FormatCheckExpression(string colName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)

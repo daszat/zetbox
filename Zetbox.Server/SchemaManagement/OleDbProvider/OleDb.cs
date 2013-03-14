@@ -723,6 +723,11 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        void ISchemaProvider.RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
+        {
+            throw new NotSupportedException();
+        }
+
         /// <summary>Not supported.</summary>
         void ISchemaProvider.CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {

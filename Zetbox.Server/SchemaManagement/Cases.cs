@@ -963,10 +963,14 @@ namespace Zetbox.Server.SchemaManagement
                 return;
             }
 
+            var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var indexName = Construct.IndexName(tblName.Name, colName);
+
             if (db.CheckFKConstraintExists(tblName, assocName))
                 db.DropFKConstraint(tblName, assocName);
 
-            string colName = Construct.ForeignKeyColumnName(otherEnd);
+            if (db.CheckIndexExists(tblName, indexName))
+                db.DropIndex(tblName, indexName);
 
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
@@ -1638,6 +1642,9 @@ namespace Zetbox.Server.SchemaManagement
             var aType = rel.A.Type;
             var bType = rel.B.Type;
 
+            var old_aType = savedRel.A.Type;
+            var old_bType = savedRel.B.Type;
+
             if (rel.GetRelationType() == RelationType.n_m)
             {
                 var srcRelTbl = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
@@ -1647,32 +1654,32 @@ namespace Zetbox.Server.SchemaManagement
                     aType.GetTableRef(db), old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                 db.RenameFKConstraint(srcRelTbl, savedRel.GetRelationAssociationName(RelationEndRole.B),
                     bType.GetTableRef(db), old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
-                Log.Warn("Renaming indexes for n:m relations is not implemented yet");
 
                 db.RenameTable(srcRelTbl, destRelTbl);
 
                 db.RenameColumn(destRelTbl, old_fkAName, fkAName);
                 db.RenameColumn(destRelTbl, old_fkBName, fkBName);
+
+                db.RenameIndex(srcRelTbl, Construct.IndexName(srcRelTbl.Name, old_fkAName), Construct.IndexName(destRelTbl.Name, fkAName));
+                db.RenameIndex(srcRelTbl, Construct.IndexName(srcRelTbl.Name, old_fkBName), Construct.IndexName(destRelTbl.Name, fkBName));
             }
             else if (rel.GetRelationType() == RelationType.one_n)
             {
-                if (savedRel.HasStorage(RelationEndRole.A) &&
-                    old_fkBName != fkBName)
+                if (savedRel.HasStorage(RelationEndRole.A))
                 {
                     var tbl = aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(),
-                       aType.GetTableRef(db), old_fkBName, rel.GetAssociationName(), false);
-                    Log.Warn("Renaming fk_col index for 1:n relations is not implemented yet");
+                    var old_tbl = old_aType.GetTableRef(db);
+                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(), tbl, old_fkBName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, old_fkBName, fkBName);
+                    db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkBName), Construct.IndexName(tbl.Name, fkBName));
                 }
-                else if (savedRel.HasStorage(RelationEndRole.B) &&
-                    old_fkAName != fkAName)
+                else if (savedRel.HasStorage(RelationEndRole.B))
                 {
                     var tbl = bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(),
-                       bType.GetTableRef(db), old_fkAName, rel.GetAssociationName(), false);
-                    Log.Warn("Renaming fk_col index for 1:n relations is not implemented yet");
+                    var old_tbl = old_bType.GetTableRef(db);
+                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(), tbl, old_fkAName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, old_fkAName, fkAName);
+                    db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkAName), Construct.IndexName(tbl.Name, fkAName));
                 }
             }
             else if (rel.GetRelationType() == RelationType.one_one)
@@ -1680,24 +1687,18 @@ namespace Zetbox.Server.SchemaManagement
                 if (savedRel.HasStorage(RelationEndRole.A))
                 {
                     var tbl = aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.A),
-                        aType.GetTableRef(db), old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
-                    Log.Warn("Renaming fk_col index for 1:1 relations is not implemented yet");
-                    if (old_fkBName != fkBName)
-                    {
-                        db.RenameColumn(tbl, old_fkBName, fkBName);
-                    }
+                    var old_tbl = old_aType.GetTableRef(db);
+                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.A), tbl, old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+                    db.RenameColumn(tbl, old_fkBName, fkBName);
+                    db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkBName), Construct.IndexName(tbl.Name, fkBName));
                 }
                 if (savedRel.HasStorage(RelationEndRole.B))
                 {
                     var tbl = bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.B),
-                        bType.GetTableRef(db), old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
-                    Log.Warn("Renaming fk_col index for 1:1 relations is not implemented yet");
-                    if (old_fkAName != fkAName)
-                    {
-                        db.RenameColumn(tbl, old_fkAName, fkAName);
-                    }
+                    var old_tbl = old_bType.GetTableRef(db);
+                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.B), tbl, old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                    db.RenameColumn(tbl, old_fkAName, fkAName);
+                    db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkAName), Construct.IndexName(tbl.Name, fkAName));
                 }
             }
 
@@ -1967,9 +1968,12 @@ namespace Zetbox.Server.SchemaManagement
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var assocName = rel.GetRelationAssociationName(role);
+            var indexName = Construct.IndexName(tblName.Name, colName);
 
             if (db.CheckFKConstraintExists(tblName, assocName))
                 db.DropFKConstraint(tblName, assocName);
+            if (db.CheckIndexExists(tblName, indexName))
+                db.DropIndex(tblName, indexName);
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
 
@@ -2518,6 +2522,7 @@ namespace Zetbox.Server.SchemaManagement
                                     if (db.CheckFKConstraintExists(tblName, assocName)) db.DropFKConstraint(tblName, assocName);
                                     db.CreateFKConstraint(baseTblName, refTblName, colName, assocName, false);
                                     db.CreateIndex(baseTblName, Construct.IndexName(baseTblName.Name, colName), false, false, colName);
+                                    System.Diagnostics.Debug.WriteLine(Construct.IndexName(baseTblName.Name, colName));
                                 }
                             }
                             break;
