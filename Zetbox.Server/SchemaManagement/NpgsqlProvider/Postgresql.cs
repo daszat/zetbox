@@ -809,6 +809,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         public override void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
         {
             if (oldIdxName == newIdxName) return; // noop
+            if (tblName == null) throw new ArgumentNullException("tblName");
 
             ExecuteNonQuery(String.Format(
                 "ALTER INDEX {0}.{1} RENAME TO {0}.{2}",

@@ -2522,7 +2522,6 @@ namespace Zetbox.Server.SchemaManagement
                                     if (db.CheckFKConstraintExists(tblName, assocName)) db.DropFKConstraint(tblName, assocName);
                                     db.CreateFKConstraint(baseTblName, refTblName, colName, assocName, false);
                                     db.CreateIndex(baseTblName, Construct.IndexName(baseTblName.Name, colName), false, false, colName);
-                                    System.Diagnostics.Debug.WriteLine(Construct.IndexName(baseTblName.Name, colName));
                                 }
                             }
                             break;
