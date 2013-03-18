@@ -41,6 +41,9 @@
 <%@ Parameter Name="serializeRelationEntries" Type="bool" %>
 <%@ Parameter Name="entryProxyType" Type="string" %>
 <%@ Parameter Name="inverseNavigatorName" Type="string" %>
+<%
+   	string eventName = "On" + name + "_PostSetter";
+%>
    		// <%= this.GetType() %>
 		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
 		{
@@ -60,6 +63,7 @@
 <% } else { %>
                             entry => (IRelationListSync<<%= entryType %>>)null);
 <% } %>
+                    <%= backingName %>.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
                     if (<%= name %>_was_eagerLoaded) { <%= name %>_was_eagerLoaded = false; }
 				}
 				return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;

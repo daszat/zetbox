@@ -23,7 +23,7 @@ namespace Zetbox.DalProvider.NHibernate
     using Zetbox.DalProvider.Base.RelationWrappers;
 
     public class NHibernateASideCollectionWrapper<TA, TB, TEntry>
-        : ASideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
+        : ObservableASideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationEntry<TA, TB>
@@ -91,7 +91,7 @@ namespace Zetbox.DalProvider.NHibernate
     }
 
     public class NHibernateBSideCollectionWrapper<TA, TB, TEntry>
-        : BSideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
+        : ObservableBSideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationEntry<TA, TB>
@@ -160,7 +160,7 @@ namespace Zetbox.DalProvider.NHibernate
 
 
     public class NHibernateASideListWrapper<TA, TB, TEntry>
-        : ASideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
+        : ObservableASideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationListEntry<TA, TB>
@@ -240,7 +240,7 @@ namespace Zetbox.DalProvider.NHibernate
     }
 
     public class NHibernateBSideListWrapper<TA, TB, TEntry>
-        : BSideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
+        : ObservableBSideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationListEntry<TA, TB>

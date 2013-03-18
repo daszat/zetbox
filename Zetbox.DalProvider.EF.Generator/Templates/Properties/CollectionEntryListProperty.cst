@@ -92,6 +92,7 @@
     // whether or not the collection will be eagerly loaded
     bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
+   	string eventName = "On" + name + "_PostSetter";
 %>
         // <%= this.GetType() %>
         // implement the user-visible interface
@@ -125,6 +126,7 @@
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
                 return c;
             }
         }

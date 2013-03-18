@@ -40,6 +40,7 @@
 <%@ Parameter Name="eagerLoading" Type="bool" %>
 <%
     string taskName = "_triggerFetch" + name + "Task";
+   	string eventName = "On" + name + "_PostSetter";
 %>
    		// <%= this.GetType() %>
 		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
@@ -80,6 +81,7 @@
 				= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
 					this, 
 					new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
+                    <%= backingName %>.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
             });
             return <%= taskName %>;
         }

@@ -53,11 +53,7 @@ namespace Zetbox.Generator.Templates
                 {
                     ApplyObjectReferenceListTemplate(orp);
                     var rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, orp);
-                    if (rel.GetRelationType() == API.RelationType.one_n)
-                    {
-                        // TODO: No idea how to implement this for n:m Relations
-                        ApplyListChangedEvent(p);
-                    }
+                    ApplyListChangedEvent(p);
                 }
                 else
                 {

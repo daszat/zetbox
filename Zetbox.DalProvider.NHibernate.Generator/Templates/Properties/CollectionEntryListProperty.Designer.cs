@@ -62,7 +62,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 44 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 45 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+string eventName = "On" + name + "_PostSetter";
+
+#line 47 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedInterface , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
@@ -77,17 +80,18 @@ this.WriteObjects("							new ProjectedCollection<",  entryProxyType , ", ",  en
 this.WriteObjects("                                () => this.Proxy.",  name , ",\r\n");
 this.WriteObjects("                                p => (",  entryType , ")OurContext.AttachAndWrap(p),\r\n");
 this.WriteObjects("                                ce => (",  entryProxyType , ")((NHibernatePersistenceObject)ce).NHibernateProxy),\r\n");
-#line 58 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
-#line 59 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("                            entry => (IRelationListSync<",  entryType , ">)entry.",  role == RelationEndRole.A ? "B" : "A" , ".",  inverseNavigatorName , ");\r\n");
-#line 60 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-} else { 
 #line 61 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("                            entry => (IRelationListSync<",  entryType , ">)null);\r\n");
+if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
 #line 62 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-} 
+this.WriteObjects("                            entry => (IRelationListSync<",  entryType , ">)entry.",  role == RelationEndRole.A ? "B" : "A" , ".",  inverseNavigatorName , ");\r\n");
 #line 63 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+} else { 
+#line 64 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+this.WriteObjects("                            entry => (IRelationListSync<",  entryType , ">)null);\r\n");
+#line 65 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+} 
+#line 66 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+this.WriteObjects("                    ",  backingName , ".CollectionChanged += (s, e) => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); };\r\n");
 this.WriteObjects("                    if (",  name , "_was_eagerLoaded) { ",  name , "_was_eagerLoaded = false; }\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				return (",  exposedCollectionInterface , "<",  referencedInterface , ">)",  backingName , ";\r\n");
@@ -97,7 +101,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , "> ",  backingName , ";\r\n");
 this.WriteObjects("		// ignored, but required for Serialization\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 72 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 76 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }
