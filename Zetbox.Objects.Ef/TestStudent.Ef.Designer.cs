@@ -151,10 +151,12 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Testbogen", null, null); if(OnTestbogen_PostSetter != null && IsAttached) OnTestbogen_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>> _Testbogen;
+public static event PropertyListChangedHandler<Zetbox.App.Test.TestStudent> OnTestbogen_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestStudent> OnTestbogen_IsValid;
 

@@ -851,10 +851,12 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SecondaryControlKinds", null, null); if(OnSecondaryControlKinds_PostSetter != null && IsAttached) OnSecondaryControlKinds_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl>> _SecondaryControlKinds;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_IsValid;
 

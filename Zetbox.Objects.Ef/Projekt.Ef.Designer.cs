@@ -976,10 +976,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Mitarbeiter", null, null); if(OnMitarbeiter_PostSetter != null && IsAttached) OnMitarbeiter_PostSetter(this); };
                 return c;
             }
         }
         private BSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>> _Mitarbeiter;
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_IsValid;
 

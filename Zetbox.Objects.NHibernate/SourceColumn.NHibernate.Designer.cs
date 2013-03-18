@@ -665,6 +665,7 @@ namespace Zetbox.App.SchemaMigration
                                 p => (Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>)null);
+                    _DestinationProperty.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("DestinationProperty", null, null); if(OnDestinationProperty_PostSetter != null && IsAttached) OnDestinationProperty_PostSetter(this); };
                     if (DestinationProperty_was_eagerLoaded) { DestinationProperty_was_eagerLoaded = false; }
 				}
 				return (IList<Zetbox.App.Base.Property>)_DestinationProperty;
@@ -674,6 +675,7 @@ namespace Zetbox.App.SchemaMigration
 		private NHibernateBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl> _DestinationProperty;
 		// ignored, but required for Serialization
         private bool DestinationProperty_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_IsValid;
 

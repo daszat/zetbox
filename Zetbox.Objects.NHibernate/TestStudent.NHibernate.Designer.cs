@@ -125,6 +125,7 @@ namespace Zetbox.App.Test
                                 p => (Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>)entry.B.Student);
+                    _Testbogen.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Testbogen", null, null); if(OnTestbogen_PostSetter != null && IsAttached) OnTestbogen_PostSetter(this); };
                     if (Testbogen_was_eagerLoaded) { Testbogen_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Test.Fragebogen>)_Testbogen;
@@ -134,6 +135,7 @@ namespace Zetbox.App.Test
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl> _Testbogen;
 		// ignored, but required for Serialization
         private bool Testbogen_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Test.TestStudent> OnTestbogen_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestStudent> OnTestbogen_IsValid;
 

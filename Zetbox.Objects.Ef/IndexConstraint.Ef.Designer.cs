@@ -164,10 +164,12 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>> _Properties;
+public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> OnProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.IndexConstraint> OnProperties_IsValid;
 

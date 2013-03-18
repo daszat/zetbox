@@ -1329,11 +1329,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
 				= new ObservableASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterBSideCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+                    _ShowByProperties.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ShowByProperties", null, null); if(OnShowByProperties_PostSetter != null && IsAttached) OnShowByProperties_PostSetter(this); };
             });
             return _triggerFetchShowByPropertiesTask;
         }
 
 		private ObservableASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _ShowByProperties;
+public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Method> OnShowByProperties_IsValid;
 

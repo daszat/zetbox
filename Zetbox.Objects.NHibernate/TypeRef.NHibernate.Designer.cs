@@ -701,6 +701,7 @@ namespace Zetbox.App.Base
                                 p => (Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>)null);
+                    _GenericArguments.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("GenericArguments", null, null); if(OnGenericArguments_PostSetter != null && IsAttached) OnGenericArguments_PostSetter(this); };
                     if (GenericArguments_was_eagerLoaded) { GenericArguments_was_eagerLoaded = false; }
 				}
 				return (IList<Zetbox.App.Base.TypeRef>)_GenericArguments;
@@ -710,6 +711,7 @@ namespace Zetbox.App.Base
 		private NHibernateBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl> _GenericArguments;
 		// ignored, but required for Serialization
         private bool GenericArguments_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_IsValid;
 

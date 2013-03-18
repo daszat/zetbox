@@ -65,11 +65,13 @@ namespace at.dasz.DocumentManagement
 				= new ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(this.Context, this));
+                    _Revisions.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
             });
             return _triggerFetchRevisionsTask;
         }
 
 		private ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>> _Revisions;
+public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Document> OnRevisions_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
 

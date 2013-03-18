@@ -294,6 +294,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                                 p => (Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>)entry.A.TestCustomObjects_ManyList_Nav);
+                    _MuhBlah_ManyList_Nav.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("MuhBlah_ManyList_Nav", null, null); if(OnMuhBlah_ManyList_Nav_PostSetter != null && IsAttached) OnMuhBlah_ManyList_Nav_PostSetter(this); };
                     if (MuhBlah_ManyList_Nav_was_eagerLoaded) { MuhBlah_ManyList_Nav_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Test.Muhblah>)_MuhBlah_ManyList_Nav;
@@ -303,6 +304,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 		private NHibernateASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl> _MuhBlah_ManyList_Nav;
 		// ignored, but required for Serialization
         private bool MuhBlah_ManyList_Nav_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_IsValid;
 

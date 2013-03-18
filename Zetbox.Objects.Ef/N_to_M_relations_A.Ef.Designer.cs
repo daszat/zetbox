@@ -82,10 +82,12 @@ namespace Zetbox.App.Test
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("BSide", null, null); if(OnBSide_PostSetter != null && IsAttached) OnBSide_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>> _BSide;
+public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_A> OnBSide_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.N_to_M_relations_A> OnBSide_IsValid;
 

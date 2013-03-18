@@ -65,11 +65,13 @@ namespace Zetbox.App.Test
 				= new ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>(this.Context, this));
+                    _BSide.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("BSide", null, null); if(OnBSide_PostSetter != null && IsAttached) OnBSide_PostSetter(this); };
             });
             return _triggerFetchBSideTask;
         }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>> _BSide;
+public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_A> OnBSide_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.N_to_M_relations_A> OnBSide_IsValid;
 

@@ -296,11 +296,13 @@ namespace Zetbox.App.GUI
 				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                    _Menu.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Menu", null, null); if(OnMenu_PostSetter != null && IsAttached) OnMenu_PostSetter(this); };
             });
             return _triggerFetchMenuTask;
         }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>> _Menu;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Template> OnMenu_IsValid;
 

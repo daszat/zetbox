@@ -67,6 +67,7 @@ namespace Zetbox.App.GUI
                                 p => (Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>)null);
+                    _Children.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
                     if (Children_was_eagerLoaded) { Children_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_Children;
@@ -76,6 +77,7 @@ namespace Zetbox.App.GUI
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl> _Children;
 		// ignored, but required for Serialization
         private bool Children_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnChildren_IsValid;
 
@@ -98,6 +100,7 @@ namespace Zetbox.App.GUI
                                 p => (Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>)null);
+                    _ContextMenu.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ContextMenu", null, null); if(OnContextMenu_PostSetter != null && IsAttached) OnContextMenu_PostSetter(this); };
                     if (ContextMenu_was_eagerLoaded) { ContextMenu_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_ContextMenu;
@@ -107,6 +110,7 @@ namespace Zetbox.App.GUI
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl> _ContextMenu;
 		// ignored, but required for Serialization
         private bool ContextMenu_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnContextMenu_IsValid;
 

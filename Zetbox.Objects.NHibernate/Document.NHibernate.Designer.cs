@@ -67,6 +67,7 @@ namespace at.dasz.DocumentManagement
                                 p => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>)null);
+                    _Revisions.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
                     if (Revisions_was_eagerLoaded) { Revisions_was_eagerLoaded = false; }
 				}
 				return (IList<Zetbox.App.Base.Blob>)_Revisions;
@@ -76,6 +77,7 @@ namespace at.dasz.DocumentManagement
 		private NHibernateBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl> _Revisions;
 		// ignored, but required for Serialization
         private bool Revisions_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Document> OnRevisions_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
 

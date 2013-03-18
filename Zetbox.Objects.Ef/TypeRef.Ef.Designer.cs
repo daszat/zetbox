@@ -777,11 +777,13 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("GenericArguments", null, null); if(OnGenericArguments_PostSetter != null && IsAttached) OnGenericArguments_PostSetter(this); };
                 return c;
             }
         }
         private BSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl>> _GenericArguments;
         private bool GenericArguments_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_IsValid;
 

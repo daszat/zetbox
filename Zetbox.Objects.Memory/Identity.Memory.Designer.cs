@@ -123,11 +123,13 @@ namespace Zetbox.App.Base
 				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+                    _Groups.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
             });
             return _triggerFetchGroupsTask;
         }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Groups;
+public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroups_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnGroups_IsValid;
 

@@ -327,10 +327,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("MuhBlah_ManyList_Nav", null, null); if(OnMuhBlah_ManyList_Nav_PostSetter != null && IsAttached) OnMuhBlah_ManyList_Nav_PostSetter(this); };
                 return c;
             }
         }
         private ASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>> _MuhBlah_ManyList_Nav;
+public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_IsValid;
 

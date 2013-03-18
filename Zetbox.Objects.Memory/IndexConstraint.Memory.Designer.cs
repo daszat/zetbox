@@ -136,11 +136,13 @@ namespace Zetbox.App.Base
 				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(this.Context, this));
+                    _Properties.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
             });
             return _triggerFetchPropertiesTask;
         }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>> _Properties;
+public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> OnProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.IndexConstraint> OnProperties_IsValid;
 

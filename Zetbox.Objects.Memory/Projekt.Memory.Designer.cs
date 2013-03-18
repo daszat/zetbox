@@ -883,11 +883,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 				= new ObservableBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
+                    _Mitarbeiter.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Mitarbeiter", null, null); if(OnMitarbeiter_PostSetter != null && IsAttached) OnMitarbeiter_PostSetter(this); };
             });
             return _triggerFetchMitarbeiterTask;
         }
 
 		private ObservableBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>> _Mitarbeiter;
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_IsValid;
 

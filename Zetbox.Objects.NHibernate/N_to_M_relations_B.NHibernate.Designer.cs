@@ -67,6 +67,7 @@ namespace Zetbox.App.Test
                                 p => (Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl>)entry.A.BSide);
+                    _ASide.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ASide", null, null); if(OnASide_PostSetter != null && IsAttached) OnASide_PostSetter(this); };
                     if (ASide_was_eagerLoaded) { ASide_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Test.N_to_M_relations_A>)_ASide;
@@ -76,6 +77,7 @@ namespace Zetbox.App.Test
 		private NHibernateASideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl> _ASide;
 		// ignored, but required for Serialization
         private bool ASide_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_B> OnASide_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.N_to_M_relations_B> OnASide_IsValid;
 

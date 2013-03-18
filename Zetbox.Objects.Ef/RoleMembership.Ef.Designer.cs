@@ -82,10 +82,12 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
                 return c;
             }
         }
         private BSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>> _Relations;
+public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> OnRelations_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.RoleMembership> OnRelations_IsValid;
 

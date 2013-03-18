@@ -755,11 +755,13 @@ namespace Zetbox.App.SchemaMigration
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("DestinationProperty", null, null); if(OnDestinationProperty_PostSetter != null && IsAttached) OnDestinationProperty_PostSetter(this); };
                 return c;
             }
         }
         private BSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl>> _DestinationProperty;
         private bool DestinationProperty_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_IsValid;
 

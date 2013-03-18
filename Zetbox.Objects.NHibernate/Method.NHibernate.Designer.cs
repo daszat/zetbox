@@ -1234,6 +1234,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
                                 p => (Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.A.Methods);
+                    _ShowByProperties.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ShowByProperties", null, null); if(OnShowByProperties_PostSetter != null && IsAttached) OnShowByProperties_PostSetter(this); };
                     if (ShowByProperties_was_eagerLoaded) { ShowByProperties_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Base.ObjectReferenceProperty>)_ShowByProperties;
@@ -1243,6 +1244,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
 		private NHibernateASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _ShowByProperties;
 		// ignored, but required for Serialization
         private bool ShowByProperties_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Method> OnShowByProperties_IsValid;
 

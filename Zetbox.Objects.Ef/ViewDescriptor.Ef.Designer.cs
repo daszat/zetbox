@@ -473,11 +473,13 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SupportedViewModels", null, null); if(OnSupportedViewModels_PostSetter != null && IsAttached) OnSupportedViewModels_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>> _SupportedViewModels;
         private bool SupportedViewModels_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_IsValid;
 

@@ -1383,10 +1383,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ShowByProperties", null, null); if(OnShowByProperties_PostSetter != null && IsAttached) OnShowByProperties_PostSetter(this); };
                 return c;
             }
         }
         private ASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _ShowByProperties;
+public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Method> OnShowByProperties_IsValid;
 

@@ -745,11 +745,13 @@ namespace Zetbox.App.Projekte
 				= new ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterBSideCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
+                    _Projekte.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Projekte", null, null); if(OnProjekte_PostSetter != null && IsAttached) OnProjekte_PostSetter(this); };
             });
             return _triggerFetchProjekteTask;
         }
 
 		private ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>> _Projekte;
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> OnProjekte_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Mitarbeiter> OnProjekte_IsValid;
 

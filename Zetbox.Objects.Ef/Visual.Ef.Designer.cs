@@ -82,10 +82,12 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl>> _Children;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnChildren_IsValid;
 
@@ -131,10 +133,12 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ContextMenu", null, null); if(OnContextMenu_PostSetter != null && IsAttached) OnContextMenu_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl>> _ContextMenu;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnContextMenu_IsValid;
 

@@ -65,11 +65,13 @@ namespace Zetbox.App.GUI
 				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                    _Children.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
             });
             return _triggerFetchChildrenTask;
         }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>> _Children;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnChildren_IsValid;
 
@@ -101,11 +103,13 @@ namespace Zetbox.App.GUI
 				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                    _ContextMenu.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ContextMenu", null, null); if(OnContextMenu_PostSetter != null && IsAttached) OnContextMenu_PostSetter(this); };
             });
             return _triggerFetchContextMenuTask;
         }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>> _ContextMenu;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnContextMenu_IsValid;
 

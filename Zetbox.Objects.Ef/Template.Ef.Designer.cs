@@ -322,10 +322,12 @@ namespace Zetbox.App.GUI
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Menu", null, null); if(OnMenu_PostSetter != null && IsAttached) OnMenu_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl>> _Menu;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Template> OnMenu_IsValid;
 

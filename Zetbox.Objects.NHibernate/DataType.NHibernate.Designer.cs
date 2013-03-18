@@ -683,6 +683,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                                 p => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>)null);
+                    _ImplementsInterfaces.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ImplementsInterfaces", null, null); if(OnImplementsInterfaces_PostSetter != null && IsAttached) OnImplementsInterfaces_PostSetter(this); };
                     if (ImplementsInterfaces_was_eagerLoaded) { ImplementsInterfaces_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Base.Interface>)_ImplementsInterfaces;
@@ -692,6 +693,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl> _ImplementsInterfaces;
 		// ignored, but required for Serialization
         private bool ImplementsInterfaces_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_IsValid;
 

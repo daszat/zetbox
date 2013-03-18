@@ -699,6 +699,7 @@ namespace Zetbox.App.Projekte
                                 p => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>)entry.A.Mitarbeiter);
+                    _Projekte.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Projekte", null, null); if(OnProjekte_PostSetter != null && IsAttached) OnProjekte_PostSetter(this); };
                     if (Projekte_was_eagerLoaded) { Projekte_was_eagerLoaded = false; }
 				}
 				return (IList<Zetbox.App.Projekte.Projekt>)_Projekte;
@@ -708,6 +709,7 @@ namespace Zetbox.App.Projekte
 		private NHibernateASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Projekte;
 		// ignored, but required for Serialization
         private bool Projekte_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> OnProjekte_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Mitarbeiter> OnProjekte_IsValid;
 

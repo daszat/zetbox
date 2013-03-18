@@ -67,6 +67,7 @@ namespace Zetbox.App.Base
                                 p => (Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>)null);
+                    _Inputs.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Inputs", null, null); if(OnInputs_PostSetter != null && IsAttached) OnInputs_PostSetter(this); };
                     if (Inputs_was_eagerLoaded) { Inputs_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Base.Property>)_Inputs;
@@ -76,6 +77,7 @@ namespace Zetbox.App.Base
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl> _Inputs;
 		// ignored, but required for Serialization
         private bool Inputs_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnInputs_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnInputs_IsValid;
 

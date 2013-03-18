@@ -890,11 +890,13 @@ namespace Zetbox.App.GUI
 				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(this.Context, this));
+                    _SecondaryControlKinds.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("SecondaryControlKinds", null, null); if(OnSecondaryControlKinds_PostSetter != null && IsAttached) OnSecondaryControlKinds_PostSetter(this); };
             });
             return _triggerFetchSecondaryControlKindsTask;
         }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>> _SecondaryControlKinds;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_IsValid;
 

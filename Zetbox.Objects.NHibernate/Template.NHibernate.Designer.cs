@@ -276,6 +276,7 @@ namespace Zetbox.App.GUI
                                 p => (Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>)null);
+                    _Menu.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Menu", null, null); if(OnMenu_PostSetter != null && IsAttached) OnMenu_PostSetter(this); };
                     if (Menu_was_eagerLoaded) { Menu_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_Menu;
@@ -285,6 +286,7 @@ namespace Zetbox.App.GUI
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl> _Menu;
 		// ignored, but required for Serialization
         private bool Menu_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Template> OnMenu_IsValid;
 

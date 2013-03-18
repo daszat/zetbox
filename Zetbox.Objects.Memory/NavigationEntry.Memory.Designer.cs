@@ -631,6 +631,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
+                    _Groups.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
             });
             return _triggerFetchGroupsTask;
         }
@@ -638,6 +639,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>> _Groups;
 		
 		private bool Groups_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_IsValid;
 

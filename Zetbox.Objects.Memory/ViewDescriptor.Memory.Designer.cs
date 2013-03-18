@@ -485,6 +485,7 @@ namespace Zetbox.App.GUI
 				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
+                    _SupportedViewModels.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("SupportedViewModels", null, null); if(OnSupportedViewModels_PostSetter != null && IsAttached) OnSupportedViewModels_PostSetter(this); };
             });
             return _triggerFetchSupportedViewModelsTask;
         }
@@ -492,6 +493,7 @@ namespace Zetbox.App.GUI
 		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>> _SupportedViewModels;
 		
 		private bool SupportedViewModels_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_IsValid;
 

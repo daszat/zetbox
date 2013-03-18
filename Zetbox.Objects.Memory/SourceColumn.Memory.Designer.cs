@@ -687,6 +687,7 @@ namespace Zetbox.App.SchemaMigration
 				= new ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(this.Context, this));
+                    _DestinationProperty.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("DestinationProperty", null, null); if(OnDestinationProperty_PostSetter != null && IsAttached) OnDestinationProperty_PostSetter(this); };
             });
             return _triggerFetchDestinationPropertyTask;
         }
@@ -694,6 +695,7 @@ namespace Zetbox.App.SchemaMigration
 		private ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>> _DestinationProperty;
 		
 		private bool DestinationProperty_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_IsValid;
 

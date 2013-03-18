@@ -583,6 +583,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                                 p => (Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>)null);
+                    _Groups.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
                     if (Groups_was_eagerLoaded) { Groups_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Base.Group>)_Groups;
@@ -592,6 +593,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl> _Groups;
 		// ignored, but required for Serialization
         private bool Groups_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_IsValid;
 

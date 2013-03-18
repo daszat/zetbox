@@ -82,10 +82,12 @@ namespace at.dasz.DocumentManagement
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
                 return c;
             }
         }
         private BSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>> _Revisions;
+public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Document> OnRevisions_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
 

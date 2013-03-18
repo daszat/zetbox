@@ -766,10 +766,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ImplementsInterfaces", null, null); if(OnImplementsInterfaces_PostSetter != null && IsAttached) OnImplementsInterfaces_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl>> _ImplementsInterfaces;
+public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_IsValid;
 

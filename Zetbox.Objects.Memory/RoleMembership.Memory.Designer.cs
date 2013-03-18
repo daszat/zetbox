@@ -65,11 +65,13 @@ namespace Zetbox.App.Base
 				= new ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(this.Context, this));
+                    _Relations.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
             });
             return _triggerFetchRelationsTask;
         }
 
 		private ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>> _Relations;
+public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> OnRelations_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.RoleMembership> OnRelations_IsValid;
 

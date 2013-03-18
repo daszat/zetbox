@@ -745,6 +745,7 @@ namespace Zetbox.App.Base
 				= new ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
+                    _GenericArguments.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("GenericArguments", null, null); if(OnGenericArguments_PostSetter != null && IsAttached) OnGenericArguments_PostSetter(this); };
             });
             return _triggerFetchGenericArgumentsTask;
         }
@@ -752,6 +753,7 @@ namespace Zetbox.App.Base
 		private ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>> _GenericArguments;
 		
 		private bool GenericArguments_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_IsValid;
 

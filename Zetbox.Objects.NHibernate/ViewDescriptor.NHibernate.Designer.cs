@@ -431,6 +431,7 @@ namespace Zetbox.App.GUI
                                 p => (Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>)null);
+                    _SupportedViewModels.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("SupportedViewModels", null, null); if(OnSupportedViewModels_PostSetter != null && IsAttached) OnSupportedViewModels_PostSetter(this); };
                     if (SupportedViewModels_was_eagerLoaded) { SupportedViewModels_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Base.TypeRef>)_SupportedViewModels;
@@ -440,6 +441,7 @@ namespace Zetbox.App.GUI
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl> _SupportedViewModels;
 		// ignored, but required for Serialization
         private bool SupportedViewModels_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_IsValid;
 

@@ -67,6 +67,7 @@ namespace Zetbox.App.Base
                                 p => (Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>)null);
+                    _Relations.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
                     if (Relations_was_eagerLoaded) { Relations_was_eagerLoaded = false; }
 				}
 				return (IList<Zetbox.App.Base.Relation>)_Relations;
@@ -76,6 +77,7 @@ namespace Zetbox.App.Base
 		private NHibernateBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl> _Relations;
 		// ignored, but required for Serialization
         private bool Relations_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> OnRelations_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.RoleMembership> OnRelations_IsValid;
 

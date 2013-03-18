@@ -196,11 +196,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
 				= new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterBSideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+                    _Student.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Student", null, null); if(OnStudent_PostSetter != null && IsAttached) OnStudent_PostSetter(this); };
             });
             return _triggerFetchStudentTask;
         }
 
 		private ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Student;
+public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStudent_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Fragebogen> OnStudent_IsValid;
 

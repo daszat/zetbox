@@ -661,11 +661,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>> _Groups;
         private bool Groups_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_IsValid;
 

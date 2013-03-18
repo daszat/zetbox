@@ -66,6 +66,7 @@ namespace Zetbox.App.Base
 				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(this.Context, this));
+                    _Inputs.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Inputs", null, null); if(OnInputs_PostSetter != null && IsAttached) OnInputs_PostSetter(this); };
             });
             return _triggerFetchInputsTask;
         }
@@ -73,6 +74,7 @@ namespace Zetbox.App.Base
 		private ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>> _Inputs;
 		
 		private bool Inputs_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnInputs_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnInputs_IsValid;
 

@@ -194,11 +194,13 @@ namespace Zetbox.App.Base
 				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
 					this, 
 					new RelationshipFilterASideCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+                    _Methods.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
             });
             return _triggerFetchMethodsTask;
         }
 
 		private ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _Methods;
+public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
 

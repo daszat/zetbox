@@ -209,10 +209,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Student", null, null); if(OnStudent_PostSetter != null && IsAttached) OnStudent_PostSetter(this); };
                 return c;
             }
         }
         private ASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>> _Student;
+public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStudent_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Fragebogen> OnStudent_IsValid;
 

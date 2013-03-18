@@ -233,10 +233,12 @@ namespace Zetbox.App.Base
                 {
                     c.Load();
                 }
+                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
                 return c;
             }
         }
         private BSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _Methods;
+public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
 
