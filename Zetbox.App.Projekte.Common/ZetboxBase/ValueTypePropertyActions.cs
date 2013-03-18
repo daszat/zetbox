@@ -23,5 +23,10 @@ namespace Zetbox.App.Base
     [Implementor]
     public static class ValueTypePropertyActions
     {
+        [Invocation]
+        public static void postSet_IsCalculated(ValueTypeProperty obj, PropertyPostSetterEventArgs<bool> e)
+        {
+            obj.Recalculate("CodeTemplate");
+        }
     }
 }
