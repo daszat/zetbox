@@ -83,6 +83,20 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
                 SubmitAndReload();
                 Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1 }));
             }
+
+            [Test]
+            public void should_notify_right_end()
+            {
+                bool notifiedA = false;
+                aSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "BSide") notifiedA = true; };
+
+                bool notifiedB = false;
+                bSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "ASide") notifiedB = true; };
+                
+                aSide1.BSide.Add(bSide1);
+                Assert.That(notifiedA, Is.True, "A was not notified");
+                Assert.That(notifiedB, Is.False, "B was notified");
+            }
         }
 
         public abstract class on_B_side
@@ -135,14 +149,29 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
                 bSide1.ASide.Add(aSide1);
                 Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
             }
-            [Test]
 
+            [Test]
             public void should_synchronize_other_side_after_persisting()
             {
                 bSide1.ASide.Add(aSide1);
                 SubmitAndReload();
                 Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
             }
+
+            [Test]
+            public void should_notify_right_end()
+            {
+                bool notifiedA = false;
+                aSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "BSide") notifiedA = true; };
+
+                bool notifiedB = false;
+                bSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "ASide") notifiedB = true; };
+
+                bSide1.ASide.Add(aSide1);
+                Assert.That(notifiedA, Is.False, "A was notified");
+                Assert.That(notifiedB, Is.True, "B was not notified");
+            }
+
         }
     }
 }
