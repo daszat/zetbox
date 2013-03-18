@@ -1416,6 +1416,14 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SecurityChangeRightEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityChangeRightEfImpl)">
+	    <MappingFragment StoreEntitySet="SecurityChangeRight">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SecurityTestChildEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestChildEfImpl)">
 	    <MappingFragment StoreEntitySet="SecurityTestChild">

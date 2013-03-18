@@ -2746,6 +2746,31 @@
         <!-- define the subclasses -->
 
     </class>
+    <class name="Zetbox.App.Test.SecurityChangeRightNHibernateImpl+SecurityChangeRightProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.SecurityChangeRightNHibernateImpl+SecurityChangeRightProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`SecurityChangeRights`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`SecurityChangeRights_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
     <class name="Zetbox.App.Test.SecurityTestChildNHibernateImpl+SecurityTestChildProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Test.SecurityTestChildNHibernateImpl+SecurityTestChildProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"

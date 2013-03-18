@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-02-19T16:38:51Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-18T15:50:16Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -29059,6 +29059,52 @@ public static void ObjectIsValid(RequiredParentChild obj, ObjectIsValidEventArgs
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>RequiredParentChildren</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="76098519-a5b2-42fb-b3a8-19a4779f8122">
+    <ZetboxBase:ChangedOn>2013-03-18T14:50:16.267112Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-03-18T14:50:16.267112Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Test if a user has only change rights</ZetboxBase:Description>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>SecurityChangeRight</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(SecurityChangeRight obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(SecurityChangeRight obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(SecurityChangeRight obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(SecurityChangeRight obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(SecurityChangeRight obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(SecurityChangeRight obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>SecurityChangeRights</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="09dfa3cf-4a15-48ed-b76a-c330ac7379e0">
     <ZetboxBase:ChangedOn>2012-06-29T04:49:52.765723Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-06-29T04:49:52.765723Z</ZetboxBase:CreatedOn>
@@ -32313,6 +32359,42 @@ public static void isValid_Parent(RequiredParentChild obj, PropertyIsValidEventA
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>17100244-eeb7-44d8-8c82-c80a08f6d830</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:StringProperty ExportGuid="99a5dc49-9fe5-4b51-b0a4-0b0fe3e2e654">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-18T14:50:16.267112Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Name(SecurityChangeRight obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(SecurityChangeRight obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(SecurityChangeRight obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(SecurityChangeRight obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-18T14:50:16.267112Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Name</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>76098519-a5b2-42fb-b3a8-19a4779f8122</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d8f28d99-381c-4f66-ad18-07fa56c17b41">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
@@ -34964,6 +35046,13 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:ConstrainedProperty>09fb9f88-7a59-4dae-8cad-9fbab99f32c3</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-08-17T10:40:40.760023Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="60922b29-86ed-45ea-b10e-3bc3c88ca40f">
+    <ZetboxBase:ChangedOn>2013-03-18T14:50:16.267112Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>99a5dc49-9fe5-4b51-b0a4-0b0fe3e2e654</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-03-18T14:50:16.267112Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>200</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="88a1bf04-7cf3-4455-9fad-5c2e4aabf242">
     <ZetboxBase:ChangedOn>2012-08-03T11:54:45.292812Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>d8f28d99-381c-4f66-ad18-07fa56c17b41</ZetboxBase:ConstrainedProperty>
@@ -35482,6 +35571,15 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Title>Tree Root</GUI:Title>
     <GUI:ViewModelDescriptor>dc83a83d-6884-493c-8ea4-9473de8222db</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
+  <ZetboxBase:GroupMembership ExportGuid="0516e5fa-df16-44c7-a140-3358de543b92">
+    <ZetboxBase:ChangedOn>2013-03-18T14:51:04.219701Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-03-18T14:51:04.219701Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Group Everyone has Create rights</ZetboxBase:Description>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>76098519-a5b2-42fb-b3a8-19a4779f8122</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>8</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
   <ZetboxBase:RoleMembership ExportGuid="5321160a-9207-4b84-8644-5d6820221ca7">
     <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:CreatedOn>
@@ -35489,6 +35587,15 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:ObjectClass>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>15</ZetboxBase:Rights>
   </ZetboxBase:RoleMembership>
+  <ZetboxBase:GroupMembership ExportGuid="8307104a-8283-4945-9b21-0d5e80ee4156">
+    <ZetboxBase:ChangedOn>2013-03-18T14:51:04.219701Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-03-18T14:51:04.219701Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Group Everyone has Change rights</ZetboxBase:Description>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>76098519-a5b2-42fb-b3a8-19a4779f8122</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>3</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
   <ZetboxBase:GroupMembership ExportGuid="fc40d608-3ae9-4885-84c3-0726de05cdea">
     <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:CreatedOn>

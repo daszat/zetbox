@@ -3427,6 +3427,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("3e7f2f55-ff5c-4a13-ba58-74368e9c8780"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> SecurityChangeRight
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("76098519-a5b2-42fb-b3a8-19a4779f8122"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> SecurityTestChild
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("09dfa3cf-4a15-48ed-b76a-c330ac7379e0"); }
@@ -3890,6 +3894,13 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Parent
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("09fb9f88-7a59-4dae-8cad-9fbab99f32c3"); }
+                                }
+                            }
+                            public static class SecurityChangeRight_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("99a5dc49-9fe5-4b51-b0a4-0b0fe3e2e654"); }
                                 }
                             }
                             public static class SecurityTestChild_Properties

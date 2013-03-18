@@ -66,6 +66,7 @@
     <EntitySet Name="RequiredParentEfImpl" EntityType="Model.RequiredParentEfImpl" />
     <EntitySet Name="RequiredParentChildEfImpl" EntityType="Model.RequiredParentChildEfImpl" />
     <EntitySet Name="SavedListConfigurationEfImpl" EntityType="Model.SavedListConfigurationEfImpl" />
+    <EntitySet Name="SecurityChangeRightEfImpl" EntityType="Model.SecurityChangeRightEfImpl" />
     <EntitySet Name="SecurityTestChildEfImpl" EntityType="Model.SecurityTestChildEfImpl" />
     <EntitySet Name="SecurityTestChild_Rights" EntityType="Model.SecurityTestChild_Rights" />
     <AssociationSet Name="FK_SecurityTestChildren_Rights" Association="Model.FK_SecurityTestChildren_Rights">
@@ -2186,6 +2187,13 @@
                         Relationship="Model.FK_LstCfg_has_Type"
                         FromRole="LstCfg"
                         ToRole="Type" />
+  </EntityType>
+  <EntityType Name="SecurityChangeRightEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
   </EntityType>
   <EntityType Name="SecurityTestChildEfImpl">
     <Key>

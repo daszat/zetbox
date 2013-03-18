@@ -70,6 +70,7 @@
     <EntitySet Name="RequiredParent" EntityType="Model.Store.RequiredParent" Schema="test" Table="RequiredParents"/>
     <EntitySet Name="RequiredParentChild" EntityType="Model.Store.RequiredParentChild" Schema="test" Table="RequiredParentChildren"/>
     <EntitySet Name="SavedListConfiguration" EntityType="Model.Store.SavedListConfiguration" Schema="gui" Table="SavedListConfigurations"/>
+    <EntitySet Name="SecurityChangeRight" EntityType="Model.Store.SecurityChangeRight" Schema="test" Table="SecurityChangeRights"/>
     <EntitySet Name="SecurityTestChild" EntityType="Model.Store.SecurityTestChild" Schema="test" Table="SecurityTestChildren"/>
     <EntitySet Name="SecurityTestChild_Rights" EntityType="Model.Store.SecurityTestChild_Rights" Schema="test" Table="SecurityTestChildren_Rights"/>
     <AssociationSet Name="FK_SecurityTestChildren_Rights" Association="Model.Store.FK_SecurityTestChildren_Rights">
@@ -2227,6 +2228,14 @@
     <Property Name="fk_Owner" Type="int4" />
     <Property Name="Configuration" Type="varchar" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="SecurityChangeRight">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="SecurityTestChild">
