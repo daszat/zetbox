@@ -110,6 +110,9 @@ namespace Zetbox.API.Server
                 throw new InvalidOperationException("Cannot set object to Unmodified when in State " + _ObjectState.ToString());
             }
 
+            // Reset current rights to reflect possible changes
+            ResetCurrentAccessRights();
+
             SetObjectState(DataObjectState.Unmodified);
         }
 

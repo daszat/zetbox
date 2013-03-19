@@ -73,5 +73,12 @@ namespace Zetbox.DalProvider.Client
             base.ApplyRightsFromStream(rights);
             _currentAccessRights = rights;
         }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            // Apply access rights from server
+            _currentAccessRights = obj.CurrentAccessRights;
+        }
     }
 }

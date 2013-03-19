@@ -96,6 +96,11 @@ namespace Zetbox.API
             }
         }
 
+        protected void ResetCurrentAccessRights()
+        {
+            __currentAccessRights = null;
+        }
+
         /// <summary>
         /// Gets the <see cref="IZetboxContext"/> containing this object.
         /// </summary>
