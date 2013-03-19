@@ -106,7 +106,7 @@ namespace Zetbox.Client.Presentables.SchemaMigration
                     }
                 }
             });
-            dlg.FollowCompundObjects = true;
+            dlg.FollowCompoundObjects = true;
 
             ViewModelFactory.ShowDialog(dlg);
         }

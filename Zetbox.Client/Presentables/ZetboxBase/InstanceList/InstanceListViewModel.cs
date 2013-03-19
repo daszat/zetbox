@@ -722,7 +722,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (!string.IsNullOrEmpty(_sortProperty))
             {
-                result = result.OrderBy(string.Format("it.{0} {1}",                // Sorting CompundObjects does not work
+                result = result.OrderBy(string.Format("it.{0} {1}",                // Sorting CompoundObject does not work
                                 _sortProperty,                         // Maybe we should implement a custom comparer
                                 _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
             }
@@ -795,7 +795,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     new List<DataObjectViewModel>(
                         tmp.Select(vm => vm.Object)                            // Back to a plain list of IDataObjects
                            .AsQueryable(this.InterfaceType.Type)               // To a typed List
-                           .OrderBy(string.Format("it.{0} {1}",                // Sorting CompundObjects does not work
+                           .OrderBy(string.Format("it.{0} {1}",                // Sorting CompoundObject does not work
                                         _sortProperty,                         // Maybe we should implement a custom comparer
                                         _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty))
                            .Cast<IDataObject>()

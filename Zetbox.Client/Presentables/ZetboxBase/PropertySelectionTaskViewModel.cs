@@ -50,15 +50,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         #region Configuration
-        private bool _followCompundObjects = false;
+        private bool _followCompoundObjects = false;
 
-        public bool FollowCompundObjects
+        public bool FollowCompoundObjects
         {
-            get { return _followCompundObjects; }
+            get { return _followCompoundObjects; }
             set
             {
-                _followCompundObjects = value;
-                OnPropertyChanged("FollowCompundObjects");
+                _followCompoundObjects = value;
+                OnPropertyChanged("FollowCompoundObjects");
             }
         }
         private bool _followRelationsOne = false;
@@ -364,7 +364,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (_PossibleValues == null)
                 {
                     _PossibleValues = new List<SelectedPropertyViewModel>();
-                    if (Parent.FollowCompundObjects && _prop is CompoundObjectProperty)
+                    if (Parent.FollowCompoundObjects && _prop is CompoundObjectProperty)
                     {
                         foreach (var prop in ((CompoundObjectProperty)_prop).CompoundObjectDefinition.Properties)
                         {
