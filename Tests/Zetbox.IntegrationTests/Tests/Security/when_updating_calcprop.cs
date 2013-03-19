@@ -57,9 +57,14 @@ namespace Zetbox.IntegrationTests.Security
             [Test]
             public void should_have_full_rights()
             {
-                Assert.That(parent.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
-                Assert.That(child1.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
-                Assert.That(child2.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
+                Assert.That(parent.CurrentAccessRights.HasWriteRights(), Is.True);
+                Assert.That(parent.CurrentAccessRights.HasDeleteRights(), Is.True);
+
+                Assert.That(child1.CurrentAccessRights.HasWriteRights(), Is.True);
+                Assert.That(child1.CurrentAccessRights.HasDeleteRights(), Is.True);
+
+                Assert.That(child2.CurrentAccessRights.HasWriteRights(), Is.True);
+                Assert.That(child2.CurrentAccessRights.HasDeleteRights(), Is.True);
             }
 
             [Test]
