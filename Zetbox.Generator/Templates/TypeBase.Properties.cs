@@ -52,7 +52,6 @@ namespace Zetbox.Generator.Templates
                 if (orp.IsList())
                 {
                     ApplyObjectReferenceListTemplate(orp);
-                    var rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, orp);
                     ApplyListChangedEvent(p);
                 }
                 else
