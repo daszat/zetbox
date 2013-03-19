@@ -740,13 +740,9 @@ namespace Zetbox.Client.Models
         {
             if (_getValueTask == null)
             {
-                _getValueTask = new ZbTask<ICollection<ICompoundObject>>(GetTriggerFetchTask())
-                    .OnResult(t =>
-                    {
-                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                        notifier.CollectionChanged += ValueCollectionChanged;
-                        t.Result = MagicCollectionFactory.WrapAsCollection<ICompoundObject>(notifier);
-                    });
+                var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                notifier.CollectionChanged += ValueCollectionChanged;
+                _getValueTask = new ZbTask<ICollection<ICompoundObject>>(MagicCollectionFactory.WrapAsCollection<ICompoundObject>(notifier));
             }
             return _getValueTask;
         }
@@ -770,13 +766,9 @@ namespace Zetbox.Client.Models
         {
             if (_getValueTask == null)
             {
-                _getValueTask = new ZbTask<IList<ICompoundObject>>(GetTriggerFetchTask())
-                    .OnResult(t =>
-                    {
-                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                        notifier.CollectionChanged += ValueCollectionChanged;
-                        t.Result = MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier);
-                    });
+                var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                notifier.CollectionChanged += ValueCollectionChanged;
+                _getValueTask = new ZbTask<IList<ICompoundObject>>(MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier));
             }
             return _getValueTask;
         }

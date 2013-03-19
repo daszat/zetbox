@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-18T15:50:16Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-19T14:35:31Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -9000,7 +9000,7 @@ public static void isValid_PhoneNumberOffice(TestCustomObject obj, PropertyIsVal
   </ZetboxBase:CompoundObjectProperty>
   <ZetboxBase:CompoundObjectProperty ExportGuid="0c0c1101-118a-4ce2-806c-d30a03b19dde">
     <ZetboxBase:CategoryTags>CompoundObjects</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-19T13:35:31.358945Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_PhoneNumbersOther(TestCustomObject obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Test.TestPhoneCompoundObject&gt;&gt; e)
 {
@@ -9029,7 +9029,7 @@ public static void isValid_PhoneNumbersOther(TestCustomObject obj, PropertyIsVal
     <ZetboxBase:Name>PhoneNumbersOther</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>de155110-79cc-4dac-89d6-0916608be1fb</ZetboxBase:ObjectClass>
     <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
-    <GUI:ValueModelDescriptor>a63b9f47-18b7-463d-a06b-7b636de9553f</GUI:ValueModelDescriptor>
+    <GUI:ValueModelDescriptor>856fc0b0-2681-4792-a330-51a35232ee94</GUI:ValueModelDescriptor>
     <ZetboxBase:CompoundObjectDefinition>2510af08-089f-4252-8a98-ec84cb67bcb9</ZetboxBase:CompoundObjectDefinition>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsList>true</ZetboxBase:IsList>

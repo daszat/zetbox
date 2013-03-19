@@ -4175,6 +4175,18 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("1c39f2f9-f4ba-4653-b92f-4672dfc4294a"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_CompoundCollectionGridPropertyKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("354ae12b-6e5f-46e5-91f3-ea9b061083bd"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_CompoundCollectionPropertyKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("89dfb066-b745-4896-9056-d9a47927b9a5"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_CompoundListGridPropertyKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("0bb7189a-aadb-4c56-94be-0492808d923c"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_CompoundListPropertyKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("c87f7018-72b8-4f9a-8c10-9e0b6d10a77d"); }
@@ -4818,6 +4830,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ValueViewModels_ClassValueViewModel_1_System_String_
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("975eee82-e7e1-4a12-ab43-d2e3bc3766e4"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ValueViewModels_CompoundCollectionViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("856fc0b0-2681-4792-a330-51a35232ee94"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ValueViewModels_CompoundListViewModel
                 {

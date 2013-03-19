@@ -26,7 +26,7 @@ namespace Zetbox.API
     /// <summary>
     /// Implements basic (serialisation) infrastructure of ICompoundObject objects
     /// </summary>
-    public abstract class BaseCompoundObject : BaseNotifyingObject, ICompoundObject
+    public abstract class BaseCompoundObject : BaseNotifyingObject, ICompoundObject, ISortKey<int>
     {
         private readonly Func<IFrozenContext> _lazyCtx;
         protected BaseCompoundObject(Func<IFrozenContext> lazyCtx)
@@ -220,6 +220,31 @@ namespace Zetbox.API
             if (aStr == null && bStr == null) return 0;
             if (aStr == null) return -1;
             return aStr.CompareTo(bStr);
+        }
+        #endregion
+
+        #region ISortKey<int> member
+        // used for sorting
+        
+        private static readonly object _ISortKey_ID_current_lock = new object();
+        private static int _ISortKey_ID_current = 0;
+        private int _ISortKey_ID = 0;
+        int ISortKey<int>.ID
+        {
+            get 
+            {
+                if (_ISortKey_ID == 0)
+                {
+                    lock (_ISortKey_ID_current_lock)
+                    {
+                        if (_ISortKey_ID == 0)
+                        {
+                            _ISortKey_ID = ++_ISortKey_ID_current;
+                        }
+                    }
+                }
+                return _ISortKey_ID;
+            }
         }
         #endregion
     }

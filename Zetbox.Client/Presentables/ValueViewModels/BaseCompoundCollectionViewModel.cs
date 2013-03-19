@@ -348,7 +348,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        private OpenDataObjectCommand _OpenCommand;
+        private ICommandViewModel _OpenCommand;
         public ICommandViewModel OpenCommand
         {
             get
@@ -362,14 +362,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             if (_OpenCommand == null)
             {
-                _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this);
+                _OpenCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    DataContext, 
+                    this,
+                    CommonCommandsResources.OpenDataObjectCommand_Name,
+                    CommonCommandsResources.OpenDataObjectCommand_Tooltip,
+                    Open,
+                    CanOpen,
+                    () => CommonCommandsResources.DataObjectCommand_NothingSelected);
             }
+        }
+
+        public bool CanOpen()
+        {
+            return SelectedItems.Count > 0;
         }
 
         public void Open()
         {
-            if (OpenCommand.CanExecute(null))
-                OpenCommand.Execute(null);
+            if (!CanOpen()) return;
+
+            foreach (var cpObj in SelectedItems)
+            {
+            }
         }
 
         private ICommandViewModel _deleteCommand = null;
@@ -429,7 +444,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel> _valueCache;
-        SortedWrapper _wrapper;
+        SortedWrapper<ICompoundObject> _wrapper;
         private ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> _fetchValueTask;
         protected override ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> GetValueFromModel()
         {
@@ -439,7 +454,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 _fetchValueTask = new ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
                     .OnResult(t =>
                     {
-                        _wrapper = new SortedWrapper(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
+                        _wrapper = new SortedWrapper<ICompoundObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
                         _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
                             _wrapper,
                             obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),

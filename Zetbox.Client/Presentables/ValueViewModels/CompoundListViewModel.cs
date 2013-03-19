@@ -37,7 +37,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     public class CompoundListViewModel
         : BaseCompoundCollectionViewModel<IList<ICompoundObject>>, IValueListViewModel<CompoundObjectViewModel, IReadOnlyObservableList<CompoundObjectViewModel>>, ISortableViewModel
     {
-        public new delegate ObjectListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate CompoundListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public CompoundListViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,

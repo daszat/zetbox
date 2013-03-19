@@ -377,7 +377,7 @@ using Zetbox.API.Async;
     /// An ICompoundObject is a simple bag of named values.
     /// </summary>
     /// Supports <see cref="ICloneable"/>, because CompoundObject don't have a independent identity and thus can be copied freely.
-    public interface ICompoundObject : INotifyingObject, ICloneable, IStreamable, IComparable
+    public interface ICompoundObject : INotifyingObject, ICloneable, IStreamable, IComparable, ISortKey<int>
     {
         /// <summary>
         /// Gets a value indicating whether values of this object can be set. This mostly depends on the state of the containing object.

@@ -37,7 +37,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     public class CompoundCollectionViewModel
         : BaseCompoundCollectionViewModel<ICollection<ICompoundObject>>, IValueCollectionViewModel<CompoundObjectViewModel, IReadOnlyObservableList<CompoundObjectViewModel>>, ISortableViewModel
     {
-        public new delegate ObjectCollectionViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate CompoundCollectionViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public CompoundCollectionViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
@@ -48,7 +48,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<CompoundObjectViewModel>> Members
 
-        protected override string InitialSortProperty { get { return "ID"; } }
+        protected override string InitialSortProperty { get { return null; } }
 
         public bool HasPersistentOrder
         {
