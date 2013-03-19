@@ -242,6 +242,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ZetboxBase\CompoundCollectionEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\CompoundCollectionGridEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\CompoundListEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -616,6 +628,15 @@
     </Compile>
     <Compile Include="View\ZetboxBase\ActionDisplay.cs" />
     <Compile Include="View\ZetboxBase\CommandDisplay.cs" />
+    <Compile Include="View\ZetboxBase\CompoundCollectionEditor.xaml.cs">
+      <DependentUpon>CompoundCollectionEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\CompoundCollectionGridEditor.xaml.cs">
+      <DependentUpon>CompoundCollectionGridEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\CompoundListEditor.xaml.cs">
+      <DependentUpon>CompoundListEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ZetboxBase\DataObjectLineDisplay.cs" />
     <Compile Include="View\ZetboxBase\EnumSelectionView.cs" />
     <Compile Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml.cs">
