@@ -191,6 +191,8 @@
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
     <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\CompoundCollectionViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\GroupMembershipViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\AnyReferencePropertyViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Commands.cs" />
@@ -316,7 +318,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseObjectCollectionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\BaseCompoundCollectionViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />

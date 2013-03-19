@@ -25,247 +25,170 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Linq.Dynamic;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.API.Async;
+    using Zetbox.API.Client;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.App.GUI;
     using Zetbox.Client.Models;
 
+    /// <summary>
+    /// </summary>
+    [ViewModelDescriptor]
     public class CompoundListViewModel
-        : ValueViewModel<IReadOnlyObservableList<CompoundObjectViewModel>, IList<ICompoundObject>>, IValueListViewModel<CompoundObjectViewModel, IReadOnlyObservableList<CompoundObjectViewModel>>
+        : BaseCompoundCollectionViewModel<IList<ICompoundObject>>, IValueListViewModel<CompoundObjectViewModel, IReadOnlyObservableList<CompoundObjectViewModel>>, ISortableViewModel
     {
-        public new delegate CompoundListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate ObjectListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public CompoundListViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
-            ICompoundCollectionValueModel mdl)
+            ICompoundCollectionValueModel<IList<ICompoundObject>> mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
-            this.ValueModel = mdl;
         }
 
-        public new ICompoundCollectionValueModel ValueModel { get; private set; }
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var commands = base.CreateCommands();
+            commands.Add(ClearSortCommand);
+            return commands;
+        }
 
-        private ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel> _valueCache;
-        private CompoundObjectViewModel _selectedItem;
+        #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<CompoundObjectViewModel>> Members
+
+        protected override string InitialSortProperty { get { return null; } }
+
+
+        public bool HasPersistentOrder
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        #endregion
+
+        public bool CanMove()
+        {
+            return SelectedItem != null && !IsSorting && !IsReadOnly;
+        }
+
+        private ICommandViewModel _MoveItemUpCommand = null;
+        public ICommandViewModel MoveItemUpCommand
+        {
+            get
+            {
+                if (_MoveItemUpCommand == null)
+                {
+                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Up", "Moves the item up",
+                        MoveItemUp,
+                        CanMove,
+                        null);
+                }
+                return _MoveItemUpCommand;
+            }
+        }
+
+        public void MoveItemUp()
+        {
+            var memories = SelectedItems.ToList();
+            memories.ForEach(i => MoveItemUp(i));
+            SelectedItems.Clear();
+            memories.ForEach(i => SelectedItems.Add(i));
+        }
 
         public void MoveItemUp(CompoundObjectViewModel item)
         {
-            throw new NotSupportedException();
+            if (item == null) { return; }
+
+            var idx = ValueModel.Value.IndexOf(item.Object);
+            if (idx > 0)
+            {
+                ValueModel.Value.RemoveAt(idx);
+                ValueModel.Value.Insert(idx - 1, item.Object);
+                //SelectedItem = item;
+            }
+        }
+
+        private ICommandViewModel _MoveItemDownCommand = null;
+        public ICommandViewModel MoveItemDownCommand
+        {
+            get
+            {
+                if (_MoveItemDownCommand == null)
+                {
+                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Down", "Moves the item down",
+                        MoveItemDown,
+                        CanMove,
+                        null);
+                }
+                return _MoveItemDownCommand;
+            }
+        }
+
+        public void MoveItemDown()
+        {
+            var memories = SelectedItems.ToList();
+            memories.ForEach(i => MoveItemDown(i));
+            SelectedItems.Clear();
+            memories.ForEach(i => SelectedItems.Add(i));
         }
 
         public void MoveItemDown(CompoundObjectViewModel item)
         {
-            throw new NotSupportedException();
+            if (item == null) { return; }
+
+            var idx = ValueModel.Value.IndexOf(item.Object);
+            if (idx != -1 && idx + 1 < Value.Count)
+            {
+                ValueModel.Value.RemoveAt(idx);
+                ValueModel.Value.Insert(idx + 1, item.Object);
+                //SelectedItem = item;
+            }
         }
 
-        public bool HasPersistentOrder
+        protected override void OnPropertyChanged(string propertyName)
         {
-            // TODO: fix this lie
-            get { return false; }
+            base.OnPropertyChanged(propertyName);
+
+            switch (propertyName)
+            {
+                case "SortProperty":
+                    OnPropertyChanged("IsSorting");
+                    break;
+            }
         }
 
-        public void Add(CompoundObjectViewModel item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Open()
-        {
-            throw new NotImplementedException();
-        }
-
-        public CompoundObjectViewModel SelectedItem
+        public bool IsSorting
         {
             get
             {
-                return _selectedItem;
+                return !string.IsNullOrEmpty(SortProperty);
             }
-            set
+        }
+
+        private ICommandViewModel _ClearSortCommand = null;
+        public ICommandViewModel ClearSortCommand
+        {
+            get
             {
-                if (value != _selectedItem)
+                if (_ClearSortCommand == null)
                 {
-                    _selectedItem = value;
-                    OnPropertyChanged("SelectedItem");
+                    _ClearSortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Clear sort", "Clear the current sorting",
+                        ClearSort,
+                        () => IsSorting,
+                        null);
                 }
+                return _ClearSortCommand;
             }
         }
 
-        public new IReadOnlyObservableList<CompoundObjectViewModel> Value
+        public void ClearSort()
         {
-            get
+            if (IsSorting)
             {
-                GetValueFromModel().Wait();
-                return _valueCache;
+                Sort(null, SortDirection);
             }
-            set
-            {
-                throw new NotSupportedException();
-            }
-        }
-
-        public override IReadOnlyObservableList<CompoundObjectViewModel> ValueAsync
-        {
-            get
-            {
-                GetValueFromModel();
-                return _valueCache;
-            }
-        }
-
-        protected override ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> GetValueFromModel()
-        {
-            return new ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>>(ZbTask.Synchron, () =>
-            {
-                if (_valueCache == null)
-                {
-                    _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
-                        ValueModel, ValueModel.Value,
-                        obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj),
-                        mdl => mdl.Object);
-                    //_valueCache.CollectionChanged += ValueListChanged;
-                }
-                return _valueCache;
-            });
-        }
-
-        protected override void SetValueToModel(IReadOnlyObservableList<CompoundObjectViewModel> value)
-        {
-            throw new NotSupportedException();
-        }
-
-        protected override ValueViewModel<IReadOnlyObservableList<CompoundObjectViewModel>, IList<ICompoundObject>>.ParseResult<IReadOnlyObservableList<CompoundObjectViewModel>> ParseValue(string str)
-        {
-            throw new NotSupportedException();
-        }
-
-        private GridDisplayConfiguration _displayedColumns = null;
-        public GridDisplayConfiguration DisplayedColumns
-        {
-            get
-            {
-                if (_displayedColumns == null)
-                {
-                    _displayedColumns = CreateDisplayedColumns();
-                }
-                return _displayedColumns;
-            }
-        }
-        protected virtual GridDisplayConfiguration CreateDisplayedColumns()
-        {
-            var result = new GridDisplayConfiguration();
-            GridDisplayConfiguration.Mode mode = GridDisplayConfiguration.Mode.Editable;
-
-            result.BuildColumns(ValueModel.CompoundObjectDefinition, mode, true);
-            return result;
-        }
-
-        #region Proxy
-        private CompoundObjectViewModel GetObjectFromProxy(CompoundObjectViewModelProxy p)
-        {
-            if (p.Object == null)
-            {
-                var obj = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(this.ValueModel.CompoundObjectDefinition.GetDataType()));
-                p.Object = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
-                _proxyCache[p.Object.Object] = p;
-            }
-            return p.Object;
-        }
-
-        Dictionary<ICompoundObject, CompoundObjectViewModelProxy> _proxyCache = new Dictionary<ICompoundObject, CompoundObjectViewModelProxy>();
-        private CompoundObjectViewModelProxy GetProxy(ICompoundObject obj)
-        {
-            CompoundObjectViewModelProxy result;
-            if (!_proxyCache.TryGetValue(obj, out result))
-            {
-                result = new CompoundObjectViewModelProxy() { Object = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj) };
-                _proxyCache[obj] = result;
-            }
-            return result;
-        }
-
-        private CompoundListViewModelProxyList _proxyInstances = null;
-        /// <summary>
-        /// Allow instances to be added external
-        /// </summary>
-        public CompoundListViewModelProxyList ValueProxies
-        {
-            get
-            {
-                if (_proxyInstances == null)
-                {
-                    //EnsureValueCache();
-                    _proxyInstances = new CompoundListViewModelProxyList(
-                        this.ValueModel,
-                        this.ValueModel.Value,
-                        (vm) => GetProxy(vm),
-                        (p) => GetObjectFromProxy(p).Object);
-                }
-                return _proxyInstances;
-            }
-        }
-
-        //private ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy> _selectedProxies = null;
-        //public ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy> SelectedProxies
-        //{
-        //    get
-        //    {
-        //        if (_selectedProxies == null)
-        //        {
-        //            _selectedProxies = new ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy>(
-        //                SelectedItems,
-        //                (vm) => GetProxy(vm.Object),
-        //                (p) => GetObjectFromProxy(p));
-        //        }
-        //        return _selectedProxies;
-        //    }
-        //}
-        #endregion
-
-    }
-
-    public class CompoundObjectViewModelProxy
-    {
-        public CompoundObjectViewModelProxy()
-        {
-        }
-
-        public CompoundObjectViewModel Object { get; set; }
-        public System.Drawing.Image Icon
-        {
-            get { return Object != null ? Object.Icon : null; }
-        }
-
-        public Highlight Highlight
-        {
-            get
-            {
-                return Object != null ? Object.Highlight : Highlight.None;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Hack for those who do not check element types by traversing from inherited interfaces
-    /// e.g. DataGrid from WPF
-    /// Can't be a inner class, because it's deriving the generic parameter from BaseObjectCollectionViewModel. This confuses the WPF DataGrid
-    /// </summary>
-    public sealed class CompoundListViewModelProxyList : AbstractObservableProjectedList<ICompoundObject, CompoundObjectViewModelProxy>, IList, IList<CompoundObjectViewModelProxy>
-    {
-        public CompoundListViewModelProxyList(INotifyCollectionChanged notifier, object collection, Func<ICompoundObject, CompoundObjectViewModelProxy> select, Func<CompoundObjectViewModelProxy, ICompoundObject> inverter)
-            : base(notifier, collection, select, inverter, false)
-        {
         }
     }
 }

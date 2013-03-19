@@ -39,7 +39,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public AuditJournalViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
-            ICompoundCollectionValueModel mdl)
+            ICompoundCollectionValueModel<IList<ICompoundObject>> mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
             var notifier = mdl.Value as INotifyCollectionChanged;

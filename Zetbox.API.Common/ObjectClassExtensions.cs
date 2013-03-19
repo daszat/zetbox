@@ -183,6 +183,19 @@ namespace Zetbox.App.Extensions
             return cls.Module.Namespace + "." + cls.Name;
         }
 
+        public static InterfaceType GetDescribedInterfaceType(this CompoundObject cls)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            return cls.ReadOnlyContext.GetInterfaceType(GetDescribedInterfaceTypeName(cls));
+        }
+
+        public static string GetDescribedInterfaceTypeName(this CompoundObject cls)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            return cls.Module.Namespace + "." + cls.Name;
+        }
+
+
         public static bool ImplementsIExportable(this ObjectClass cls)
         {
             return ImplementsIExportable(cls, true);
