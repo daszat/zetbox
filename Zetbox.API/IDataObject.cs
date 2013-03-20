@@ -19,7 +19,7 @@ namespace Zetbox.API
     using System.ComponentModel;
     using System.IO;
     using System.Xml;
-using Zetbox.API.Async;
+    using Zetbox.API.Async;
 
     /// <summary>
     /// Data Object State
@@ -95,7 +95,8 @@ using Zetbox.API.Async;
 
         // Aggregations
         Change = Read | Write,
-        Full = Read | Write | Delete | Create,
+        FullInstance = Change | Delete,
+        Full = FullInstance | Create,
 
         // Visible to user
         // UI_Read = Read,
@@ -132,6 +133,11 @@ using Zetbox.API.Async;
             return (r & API.AccessRights.Delete) != 0;
         }
 
+        public static bool HasFullInstanceRights(this AccessRights r)
+        {
+            return (r & (AccessRights.Delete | AccessRights.Write)) != 0;
+        }
+
         public static bool HasCreateRights(this AccessRights r)
         {
             return (r & API.AccessRights.Create) != 0;
@@ -140,7 +146,7 @@ using Zetbox.API.Async;
 
         public static bool HasNoRights(this AccessRights? r)
         {
-            return r.HasValue && r == API.AccessRights.None;
+            return r.HasValue || r == API.AccessRights.None;
         }
         public static bool HasOnlyReadRightsOrNone(this AccessRights? r)
         {
@@ -158,6 +164,11 @@ using Zetbox.API.Async;
         public static bool HasDeleteRights(this AccessRights? r)
         {
             return r.HasValue && (r & API.AccessRights.Delete) != 0;
+        }
+
+        public static bool HasFullInstanceRights(this AccessRights? r)
+        {
+            return r.HasValue && (r & (AccessRights.Delete | AccessRights.Write)) != 0;
         }
 
         public static bool HasCreateRights(this AccessRights? r)

@@ -107,9 +107,9 @@ namespace Zetbox.IntegrationTests.Security
             [Test]
             public void should_have_correct_rights()
             {
-                Assert.That(parent.CurrentAccessRights, Is.EqualTo(API.AccessRights.Change | API.AccessRights.Delete));
-                Assert.That(child1.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
-                Assert.That(child2.CurrentAccessRights, Is.EqualTo(API.AccessRights.None));
+                Assert.That(parent.CurrentAccessRights.HasFullInstanceRights());
+                Assert.That(child1.CurrentAccessRights.HasFullInstanceRights());
+                Assert.That(child2.CurrentAccessRights.HasNoRights());
             }
 
             [Test]
@@ -128,9 +128,9 @@ namespace Zetbox.IntegrationTests.Security
 
                 foreach (var child in parent.Children)
                 {
-                    if (child.CurrentAccessRights == API.AccessRights.Full)
+                    if (child.CurrentAccessRights.HasFullInstanceRights())
                         foundFull = true;
-                    if (child.CurrentAccessRights == API.AccessRights.None)
+                    if (child.CurrentAccessRights.HasNoRights())
                         foundNone = true;
                 }
 

@@ -48,7 +48,7 @@ using Zetbox.API.Async;
 
         private int PrivateIntProperty { get; set; }
 
-        public Zetbox.API.AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
+        public Zetbox.API.AccessRights CurrentAccessRights { get { return AccessRights.FullInstance; } }
 
         public string TestField;
 

@@ -85,7 +85,7 @@ namespace Zetbox.API
         {
             get
             {
-                if (Context == null) return Zetbox.API.AccessRights.Full;
+                if (Context == null) return Zetbox.API.AccessRights.FullInstance;
                 if (__currentAccessRights == null)
                 {
                     __currentAccessRights = Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
@@ -126,7 +126,7 @@ namespace Zetbox.API
         public virtual void SetNew()
         {
             // Newly created objects get full rights
-            __currentAccessRights = Zetbox.API.AccessRights.Full;
+            __currentAccessRights = Zetbox.API.AccessRights.FullInstance;
         }
 
         public abstract void SetUnmodified();

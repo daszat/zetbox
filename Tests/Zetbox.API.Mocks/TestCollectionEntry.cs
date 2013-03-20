@@ -31,7 +31,7 @@ namespace Zetbox.API.Mocks
         /// <summary>
         /// Reflects the current access rights by the current Identity. 
         /// </summary>
-        public AccessRights CurrentAccessRights { get { return Zetbox.API.AccessRights.Full; } }
+        public AccessRights CurrentAccessRights { get { return Zetbox.API.AccessRights.FullInstance; } }
 
         public Guid RelationID { get { return Guid.NewGuid(); } }
         public IDataObject AObject { get; set; }

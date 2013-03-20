@@ -110,9 +110,14 @@ namespace Zetbox.Server.Tests.Security
             [Test]
             public void should_have_full_rights()
             {
-                Assert.That(parent.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
-                Assert.That(child1.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
-                Assert.That(child2.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
+                Assert.That(parent.CurrentAccessRights.HasWriteRights(), Is.True);
+                Assert.That(parent.CurrentAccessRights.HasDeleteRights(), Is.True);
+
+                Assert.That(child1.CurrentAccessRights.HasWriteRights(), Is.True);
+                Assert.That(child1.CurrentAccessRights.HasDeleteRights(), Is.True);
+
+                Assert.That(child2.CurrentAccessRights.HasWriteRights(), Is.True);
+                Assert.That(child2.CurrentAccessRights.HasDeleteRights(), Is.True);
             }
         }
 
@@ -127,15 +132,15 @@ namespace Zetbox.Server.Tests.Security
             [Test]
             public void should_have_correct_rights()
             {
-                Assert.That(parent.CurrentAccessRights, Is.EqualTo(API.AccessRights.Change | API.AccessRights.Delete));
-                Assert.That(child1.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
-                Assert.That(child2.CurrentAccessRights, Is.EqualTo(API.AccessRights.None));
+                Assert.That(parent.CurrentAccessRights.HasFullInstanceRights());
+                Assert.That(child1.CurrentAccessRights.HasFullInstanceRights());
+                Assert.That(child2.CurrentAccessRights.HasNoRights());
             }
 
             [Test]
             public void should_read_with_no_rights()
             {
-                Assert.That(child2.CurrentAccessRights, Is.EqualTo(API.AccessRights.None));
+                Assert.That(child2.CurrentAccessRights.HasNoRights());
                 Assert.That(child2.ParentName, Is.EqualTo("MyParent")); // Big diff. to client impl. -> on the server, there are always read rights
             }
 
@@ -147,9 +152,9 @@ namespace Zetbox.Server.Tests.Security
 
                 foreach (var child in parent.Children)
                 {
-                    if (child.CurrentAccessRights == API.AccessRights.Full)
+                    if (child.CurrentAccessRights.HasFullInstanceRights())
                         foundFull = true;
-                    if (child.CurrentAccessRights == API.AccessRights.None)
+                    if (child.CurrentAccessRights.HasNoRights())
                         foundNone = true;
                 }
 

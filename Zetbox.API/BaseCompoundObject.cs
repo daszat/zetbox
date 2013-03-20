@@ -68,7 +68,7 @@ namespace Zetbox.API
         {
             get
             {
-                return ParentObject != null ? ParentObject.CurrentAccessRights : Zetbox.API.AccessRights.Full;
+                return ParentObject != null ? ParentObject.CurrentAccessRights : Zetbox.API.AccessRights.FullInstance;
             }
         }
 
