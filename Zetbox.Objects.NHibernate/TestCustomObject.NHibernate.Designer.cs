@@ -517,10 +517,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-                else
-                {
-                    SetInitializedProperty("PhoneNumberMobile");
-                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -567,10 +563,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
                     NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                }
-                else
-                {
-                    SetInitializedProperty("PhoneNumberOffice");
                 }
             }
         }
@@ -888,8 +880,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             SetNotInitializedProperty("MubBlah_Nav");
             SetNotInitializedProperty("MuhBlah_One_Nav");
             SetNotInitializedProperty("PersonName");
-            SetNotInitializedProperty("PhoneNumberMobile");
-            SetNotInitializedProperty("PhoneNumberOffice");
             base.NotifyCreated();
             if (OnNotifyCreated_TestCustomObject != null) OnNotifyCreated_TestCustomObject(this);
         }

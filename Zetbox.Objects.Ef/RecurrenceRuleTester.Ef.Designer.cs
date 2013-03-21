@@ -97,10 +97,6 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanged("Rule", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-                else
-                {
-                    SetInitializedProperty("Rule");
-                }
             }
         }
            // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -368,7 +364,6 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_RecurrenceRuleTester")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("Rule");
             base.NotifyCreated();
             if (OnNotifyCreated_RecurrenceRuleTester != null) OnNotifyCreated_RecurrenceRuleTester(this);
         }

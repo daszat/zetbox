@@ -100,10 +100,6 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanged("Any", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-                else
-                {
-                    SetInitializedProperty("Any");
-                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -403,7 +399,6 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_AnyReferenceTestObject")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("Any");
             SetNotInitializedProperty("DisplayName");
             base.NotifyCreated();
             if (OnNotifyCreated_AnyReferenceTestObject != null) OnNotifyCreated_AnyReferenceTestObject(this);

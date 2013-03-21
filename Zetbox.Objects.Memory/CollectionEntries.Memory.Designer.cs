@@ -8832,10 +8832,6 @@ namespace Zetbox.App.Projekte
                     NotifyPropertyChanged("Value", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-                else
-                {
-                    SetInitializedProperty("Value");
-                }
             }
         }
         // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
@@ -9117,10 +9113,6 @@ namespace Zetbox.App.Test
 
                     NotifyPropertyChanged("Value", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                }
-                else
-                {
-                    SetInitializedProperty("Value");
                 }
             }
         }
