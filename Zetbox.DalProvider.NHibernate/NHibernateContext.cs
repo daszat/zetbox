@@ -24,13 +24,13 @@ namespace Zetbox.DalProvider.NHibernate
     using global::NHibernate;
     using global::NHibernate.Linq;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
-    using Zetbox.API.Async;
 
     public sealed class NHibernateContext
         : BaseZetboxDataContext, IZetboxServerContext
@@ -167,7 +167,7 @@ namespace Zetbox.DalProvider.NHibernate
             return PrepareQueryable(ifType).Cast<Tinterface>();
         }
 
-        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
+        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
             return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
@@ -178,14 +178,14 @@ namespace Zetbox.DalProvider.NHibernate
                 }
                 else
                 {
-                    switch (endRole)
+                    switch (role)
                     {
                         case RelationEndRole.A:
                             return GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
                         case RelationEndRole.B:
                             return GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
                         default:
-                            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", role));
                     }
                 }
             });
