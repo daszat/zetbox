@@ -23,10 +23,9 @@ namespace Zetbox.API
     using System.Linq;
     using System.Reflection;
     using System.Text;
-
-    using Zetbox.API.Utils;
     using System.Threading.Tasks;
     using Zetbox.API.Async;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// A temporary data context without permanent backing store.
@@ -181,7 +180,7 @@ namespace Zetbox.API
         /// <summary>Retrieves a new query on top of the attached objects.</summary>
         /// <remarks>Implementors can override this method to modify queries 
         /// according to their provider's needs.</remarks>
-        protected virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        public virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
             //CheckInterfaceAssembly("ifType", ifType.Type);

@@ -23,12 +23,12 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
+    using Zetbox.API.Async;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.API.Async;
 
     public delegate IZetboxContext ServerZetboxContextFactory(Identity identity);
 
@@ -278,6 +278,26 @@ namespace Zetbox.API.Server
         /// <returns>IQueryable</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// Returns a PersistenceObject Query by InterfaceType
+        /// </summary>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            CheckDisposed();
+            try
+            {
+                // See Case 552
+                return (IQueryable<IPersistenceObject>)this.GetType().FindGenericMethod("GetPersistenceObjectQuery", new Type[] { ifType.Type }, new Type[0]).Invoke(this, new object[0]);
+            }
+            catch (System.Reflection.TargetInvocationException tiex)
+            {
+                // unwrap "business" exception
+                throw tiex.InnerException;
+            }
+        }
 
         /// <summary>
         /// Returns the List referenced by the given Name.

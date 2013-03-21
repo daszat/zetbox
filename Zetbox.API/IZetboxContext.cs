@@ -486,6 +486,7 @@ namespace Zetbox.API
         /// <returns>A new IValueCollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry;
+
         /// <summary>
         /// Returns a PersistenceObject Query by T
         /// </summary>
@@ -493,6 +494,13 @@ namespace Zetbox.API
         /// <returns>IQueryable</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// Returns a PersistenceObject Query by InterfaceType
+        /// </summary>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
 
         /// <summary>
         /// Returns a list of all objects of the specified type. This method is marked as internal, because it is used only for very specific use-cases in the guts of the product.

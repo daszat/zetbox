@@ -29,7 +29,7 @@ namespace Zetbox.API.Mocks
         }
     }
 
-    public class MockImplementationType 
+    public class MockImplementationType
         : ImplementationType
     {
         public MockImplementationType(Type t, InterfaceType.Factory iftFactory)
@@ -79,6 +79,10 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
+        public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
 
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
