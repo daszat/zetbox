@@ -256,7 +256,15 @@ namespace Zetbox.DalProvider.Ef
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    switch (role)
+                    {
+                        case RelationEndRole.A:
+                            return GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
+                        case RelationEndRole.B:
+                            return GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
+                        default:
+                            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", role));
+                    }
                 }
             });
         }
