@@ -3584,14 +3584,6 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:Name>Document Management</GUI:Name>
     <GUI:RootScreen>6c3f5c91-7245-479d-aeb3-64ebcdcfc4e0</GUI:RootScreen>
   </GUI:Application>
-  <ZetboxBase:ServiceDescriptor ExportGuid="7fb74796-9341-4c90-bd78-10a92351d25a">
-    <ZetboxBase:ChangedOn>2011-10-29T10:34:33.342477Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-10-29T10:34:33.342477Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:DeploymentRestriction>0</ZetboxBase:DeploymentRestriction>
-    <ZetboxBase:Description>File import service</ZetboxBase:Description>
-    <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
-    <ZetboxBase:TypeRef>d650e7f0-d634-43d2-96ee-4fac74cd23e2</ZetboxBase:TypeRef>
-  </ZetboxBase:ServiceDescriptor>
   <ZetboxBase:Module ExportGuid="0fe1ab38-860a-414f-a599-b0b86a22ce1a">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.660236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-30T06:47:44Z</ZetboxBase:CreatedOn>

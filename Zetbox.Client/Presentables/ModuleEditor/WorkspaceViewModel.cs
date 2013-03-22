@@ -199,13 +199,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
-                    // ServiceDescriptor
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
-                        typeof(ServiceDescriptor).GetObjectClass(FrozenContext),
-                        () => DataContext.GetQuery<ServiceDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
-                    SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
-
                     // ControlKinds
                     var ctrlKindMdl = ViewModelFactory.CreateViewModel<ControlKindHierarchyViewModel.Factory>().Invoke(DataContext, this, CurrentModule);
                     lst.Add(ctrlKindMdl);
