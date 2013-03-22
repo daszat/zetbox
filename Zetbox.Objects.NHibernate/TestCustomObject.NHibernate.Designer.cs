@@ -902,8 +902,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             // FK_MB_One_Role_loves_TCO_One_Role
             if (MuhBlah_One_Nav != null) {
-                ((NHibernatePersistenceObject)MuhBlah_One_Nav).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)MuhBlah_One_Nav);
+                ((NHibernatePersistenceObject)MuhBlah_One_Nav).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)MuhBlah_One_Nav);
             }
             // FK_MB_Role_has_TCO_Lst_Role
             if (MubBlah_Nav != null) {

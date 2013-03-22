@@ -78,13 +78,15 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         private void ApplyRememberToDeleteTemplate(Relation rel, RelationEnd relEnd)
         {
+            var prop = relEnd.Navigator;
+            var propName = prop != null ? prop.Name : string.Empty;
+
             if (rel.GetOtherEnd(relEnd).Multiplicity == Multiplicity.ZeroOrMore)
             {
-                if (relEnd.Navigator != null)
+                if (prop != null)
                 {
-                    var prop = relEnd.Navigator;
                     this.WriteObjects("            // ", rel.GetAssociationName(), " ZeroOrMore\r\n");
-                    this.WriteObjects("            foreach(NHibernatePersistenceObject x in ", prop.Name, ") {\r\n");
+                    this.WriteObjects("            foreach(NHibernatePersistenceObject x in ", propName, ") {\r\n");
                     this.WriteObjects("                x.ParentsToDelete.Add(this);\r\n");
                     this.WriteObjects("                ChildrenToDelete.Add(x);\r\n");
                     this.WriteObjects("            }\r\n");
@@ -96,13 +98,20 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             }
             else
             {
-                if (relEnd.Navigator != null)
+                if (prop != null && rel.HasStorage(relEnd.GetRole()))
                 {
-                    var prop = relEnd.Navigator;
                     this.WriteObjects("            // ", rel.GetAssociationName(), "\r\n");
-                    this.WriteObjects("            if (", prop.Name, " != null) {\r\n");
-                    this.WriteObjects("                ((NHibernatePersistenceObject)", prop.Name, ").ChildrenToDelete.Add(this);\r\n");
-                    this.WriteObjects("                ParentsToDelete.Add((NHibernatePersistenceObject)", prop.Name, ");\r\n");
+                    this.WriteObjects("            if (", propName, " != null) {\r\n");
+                    this.WriteObjects("                ((NHibernatePersistenceObject)", propName, ").ChildrenToDelete.Add(this);\r\n");
+                    this.WriteObjects("                ParentsToDelete.Add((NHibernatePersistenceObject)", propName, ");\r\n");
+                    this.WriteObjects("            }\r\n");
+                }
+                else if (prop != null && !rel.HasStorage(relEnd.GetRole()))
+                {
+                    this.WriteObjects("            // ", rel.GetAssociationName(), "\r\n");
+                    this.WriteObjects("            if (", propName, " != null) {\r\n");
+                    this.WriteObjects("                ((NHibernatePersistenceObject)", propName, ").ParentsToDelete.Add(this);\r\n");
+                    this.WriteObjects("                ChildrenToDelete.Add((NHibernatePersistenceObject)", propName, ");\r\n");
                     this.WriteObjects("            }\r\n");
                 }
                 else
