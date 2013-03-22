@@ -50345,7 +50345,6 @@ public static void isValid_WeekStart(RecurrenceRule obj, PropertyIsValidEventArg
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2013-03-22T10:04:00.972839Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:DefaultValue>b3b38e8d-cf05-4fac-86ea-63c2f6fda3da</ZetboxBase:DefaultValue>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>WeekStart</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3d4ec88b-fe8e-452e-a71d-03143a75aeb0</ZetboxBase:ObjectClass>
@@ -59931,12 +59930,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>ca0a099d-3f4c-4604-8303-d751e57041bb</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
-  <ZetboxBase:EnumDefaultValue ExportGuid="b3b38e8d-cf05-4fac-86ea-63c2f6fda3da">
-    <ZetboxBase:ChangedOn>2013-03-22T10:04:00.972839Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2013-03-22T10:04:00.972839Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Property>be402d16-76bd-4481-b779-dec424802543</ZetboxBase:Property>
-    <ZetboxBase:EnumValue>01aa69a4-f92d-411a-bfee-177055d8e10d</ZetboxBase:EnumValue>
-  </ZetboxBase:EnumDefaultValue>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="fcff2dab-46ef-46ce-a147-b0c7a971e197">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:57.079572Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>

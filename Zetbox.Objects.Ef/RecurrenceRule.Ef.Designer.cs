@@ -947,20 +947,6 @@ namespace Zetbox.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _WeekStart;
-                if (!_isWeekStartSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("be402d16-76bd-4481-b779-dec424802543"));
-                    if (__p != null) {
-                        _isWeekStartSet = true;
-                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
-                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
-                            if (__tmp_value == null)
-                                __result = this._WeekStart = null;
-                            else
-                            __result = this._WeekStart = (Zetbox.App.Base.DayOfWeek)__tmp_value;
-                    } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'RecurrenceRule.WeekStart'");
-                    }
-                }
                 if (OnWeekStart_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__result);
@@ -972,7 +958,6 @@ namespace Zetbox.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                _isWeekStartSet = true;
                 if (_WeekStart != value)
                 {
                     var __oldValue = _WeekStart;
@@ -1009,7 +994,6 @@ namespace Zetbox.App.Base
                 ReportEfPropertyChanged("WeekStartImpl");
             }
         }
-        private bool _isWeekStartSet = false;
 
         /// <summary>EF sees only this property, for WeekStart</summary>
         [XmlIgnore()]
@@ -1346,10 +1330,7 @@ namespace Zetbox.App.Base
             binStream.Write((int?)_Frequency);
             binStream.Write(this._Interval);
             binStream.Write(this._Until);
-            binStream.Write(this._isWeekStartSet);
-            if (this._isWeekStartSet) {
-                binStream.Write((int?)_WeekStart);
-            }
+            binStream.Write((int?)_WeekStart);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1371,10 +1352,7 @@ namespace Zetbox.App.Base
             _Frequency = (Zetbox.App.Base.Frequency?)binStream.ReadNullableInt32();
             this._Interval = binStream.ReadNullableInt32();
             this._Until = binStream.ReadNullableDateTime();
-            this._isWeekStartSet = binStream.ReadBoolean();
-            if (this._isWeekStartSet) {
-                _WeekStart = (Zetbox.App.Base.DayOfWeek?)binStream.ReadNullableInt32();
-            }
+            _WeekStart = (Zetbox.App.Base.DayOfWeek?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1401,7 +1379,6 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_Frequency, xml, "Frequency", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Interval, xml, "Interval", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Until, xml, "Until", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isWeekStartSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_WeekStart, xml, "WeekStart", "Zetbox.App.Base");
         }
 
@@ -1451,10 +1428,8 @@ namespace Zetbox.App.Base
                 this._Until = XmlStreamer.ReadNullableDateTime(xml);
                 break;
             case "Zetbox.App.Base|WeekStart":
-                // Import must have default value set
                 _WeekStart = (Zetbox.App.Base.DayOfWeek?)XmlStreamer.ReadNullableInt32(xml);
-                this._isWeekStartSet = true;
-                break;
+               break;
             }
         }
 
