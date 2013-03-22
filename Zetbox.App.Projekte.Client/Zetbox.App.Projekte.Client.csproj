@@ -122,7 +122,6 @@
     <Compile Include="ZetboxBase\BoolPropertyActions.cs" />
     <Compile Include="ZetboxBase\CalculatedObjectReferencePropertyActions.cs" />
     <Compile Include="ZetboxBase\MethodActions.cs" />
-    <Compile Include="ZetboxBase\IndexConstraintActions.cs" />
     <Compile Include="ZetboxBase\PropertyActions.cs" />
     <Compile Include="ZetboxBase\DataTypeActions.cs" />
     <Compile Include="ZetboxBase\DateTimePropertyActions.cs" />

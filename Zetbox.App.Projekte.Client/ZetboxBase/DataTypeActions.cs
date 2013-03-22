@@ -52,8 +52,6 @@ namespace Zetbox.App.Base
             {
                 ctx.Delete(c);
             }
-
-            obj.ImplementsInterfaces.Clear();
         }
     }
 }
