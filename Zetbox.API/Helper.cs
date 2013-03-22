@@ -239,6 +239,20 @@ namespace Zetbox.API
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) && type.GetGenericArguments().Single().IsEnum;
         }
 
+        public static string GetSimpleName(this Type type)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+
+            var genArgs = string.Empty;
+            if (type.IsGenericType)
+            {
+                var args = type.GetGenericArguments();
+                genArgs = string.Format("`{0}[{1}]", args.Length, string.Join("], [", args.Select(t => t.GetSimpleName())));
+            }
+
+            return type.Namespace + "." + type.Name + genArgs + ", " + type.Assembly.FullName.Split(',').First();
+        }
+
         #region HasGenericDefinition
         // From: http://stackoverflow.com/questions/457676/c-sharp-reflection-check-if-a-class-is-derived-from-a-generic-class/897388#897388
 
