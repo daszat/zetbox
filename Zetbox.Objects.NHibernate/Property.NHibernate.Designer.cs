@@ -2414,13 +2414,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             // FK_Property_has_DefaultValue
             if (DefaultValue != null) {
-                ((NHibernatePersistenceObject)DefaultValue).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultValue);
+                ((NHibernatePersistenceObject)DefaultValue).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)DefaultValue);
             }
             // FK_Property_Has_PropertyFilterConfiguration
             if (FilterConfiguration != null) {
-                ((NHibernatePersistenceObject)FilterConfiguration).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)FilterConfiguration);
+                ((NHibernatePersistenceObject)FilterConfiguration).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)FilterConfiguration);
             }
             // FK_Property_has_ValueModelDescriptor
             if (ValueModelDescriptor != null) {

@@ -376,7 +376,10 @@ namespace Zetbox.DalProvider.NHibernate
         /// Orders the specified input topologically by required relations. The output ordering can be used for deleting objects without violating FKs.
         /// </summary>
         /// <remarks>
+        /// <para>
         /// See http://en.wikipedia.org/wiki/Topological_ordering#CITEREFKahn1962
+        /// </para>
+        /// <para>The result is ordered Children first according to GetChildrenToDelete()/GetParentsToDelete(). That means that everyone that should be deleted BEFORE X must be returned (transitively) by X.GetChildrenToDelete</para>
         /// </remarks>
         private IEnumerable<NHibernatePersistenceObject> RelationTopoSort(IEnumerable<NHibernatePersistenceObject> input)
         {

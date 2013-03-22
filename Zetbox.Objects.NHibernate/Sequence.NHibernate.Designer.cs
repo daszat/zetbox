@@ -1234,8 +1234,8 @@ namespace Zetbox.App.Base
 
             // FK_Sequence_has_Data
             if (Data != null) {
-                ((NHibernatePersistenceObject)Data).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Data);
+                ((NHibernatePersistenceObject)Data).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)Data);
             }
             // FK_Sequence_has_Module
             if (Module != null) {

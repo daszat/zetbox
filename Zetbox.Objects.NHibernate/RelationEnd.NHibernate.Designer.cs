@@ -1577,18 +1577,18 @@ namespace Zetbox.App.Base
 
             // FK_Relation_hasA_A
             if (AParent != null) {
-                ((NHibernatePersistenceObject)AParent).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)AParent);
+                ((NHibernatePersistenceObject)AParent).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)AParent);
             }
             // FK_Relation_hasB_B
             if (BParent != null) {
-                ((NHibernatePersistenceObject)BParent).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)BParent);
+                ((NHibernatePersistenceObject)BParent).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)BParent);
             }
             // FK_RelationEnd_has_Navigator
             if (Navigator != null) {
-                ((NHibernatePersistenceObject)Navigator).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Navigator);
+                ((NHibernatePersistenceObject)Navigator).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)Navigator);
             }
             // FK_RelationEnd_has_Type
             if (Type != null) {
