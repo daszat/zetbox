@@ -29,7 +29,7 @@ namespace Zetbox.Client.Tests
         [Test]
         public void when_empty_should_return_now()
         {
-            var result = rule.GetCurrent(now);
+            var result = rule.GetCurrent(start, now);
 
             Assert.That(result, Is.EqualTo(now));
         }
@@ -118,6 +118,32 @@ namespace Zetbox.Client.Tests
         public void when_weekly_current()
         {
             rule.Frequency = Frequency.Weekly;
+
+            var result = rule.GetCurrent(start, now);
+
+            Assert.That(result.Year, Is.EqualTo(now.Year));
+            Assert.That(result.Month, Is.EqualTo(9));
+            Assert.That(result.Day, Is.EqualTo(23));
+            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
+        }
+
+        [Test]
+        public void when_weekly_next()
+        {
+            rule.Frequency = Frequency.Weekly;
+
+            var result = rule.GetNext(start, now);
+
+            Assert.That(result.Year, Is.EqualTo(now.Year));
+            Assert.That(result.Month, Is.EqualTo(9));
+            Assert.That(result.Day, Is.EqualTo(30));
+            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
+        }
+
+        [Test]
+        public void when_mondays_current()
+        {
+            rule.Frequency = Frequency.Weekly;
             rule.ByDay = "MO";
 
             var result = rule.GetCurrent(start, now);
@@ -129,7 +155,7 @@ namespace Zetbox.Client.Tests
         }
 
         [Test]
-        public void when_weekly_next()
+        public void when_mondays_next()
         {
             rule.Frequency = Frequency.Weekly;
             rule.ByDay = "MO";
@@ -141,6 +167,7 @@ namespace Zetbox.Client.Tests
             Assert.That(result.Day, Is.EqualTo(1));
             Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
         }
+
 
         [Test]
         public void when_daily_current()
