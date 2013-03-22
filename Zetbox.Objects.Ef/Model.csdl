@@ -6046,24 +6046,34 @@
     <Property Name="PropertyName" Type="String" Nullable="true" MaxLength="1000"  />
     <Property Name="Timestamp" Type="DateTime" Nullable="true"  />
   </ComplexType>
+  <ComplexType Name="DateTimeOffsetEfImpl" >
+    <Property Name="Days" Type="Double" Nullable="true"  />
+    <Property Name="Hours" Type="Double" Nullable="true"  />
+    <Property Name="Minutes" Type="Double" Nullable="true"  />
+    <Property Name="Months" Type="Int32" Nullable="true"  />
+    <Property Name="Seconds" Type="Double" Nullable="true"  />
+    <Property Name="Years" Type="Int32" Nullable="true"  />
+  </ComplexType>
   <ComplexType Name="DateTimeRangeEfImpl" >
     <Property Name="From" Type="DateTime" Nullable="true"  />
     <Property Name="Thru" Type="DateTime" Nullable="true"  />
     <Property Name="TotalDays" Type="Int32" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="RecurrenceRuleEfImpl" >
+    <Property Name="ByDay" Type="String" Nullable="true" MaxLength="100"  />
+    <Property Name="ByHour" Type="String" Nullable="true" MaxLength="100"  />
+    <Property Name="ByMinute" Type="String" Nullable="true" MaxLength="100"  />
+    <Property Name="ByMonth" Type="String" Nullable="true" MaxLength="100"  />
+    <Property Name="ByMonthDay" Type="String" Nullable="true" MaxLength="100"  />
+    <Property Name="BySecond" Type="String" Nullable="true" MaxLength="100"  />
+    <Property Name="BySetPos" Type="String" Nullable="true" MaxLength="100"  />
+    <Property Name="ByWeekNumber" Type="String" Nullable="true" MaxLength="100"  />
+    <Property Name="ByYearDay" Type="String" Nullable="true" MaxLength="100"  />
     <Property Name="Count" Type="Int32" Nullable="true"  />
-    <Property Name="DaysOffset" Type="Double" Nullable="true"  />
-    <Property Name="EveryDay" Type="Boolean" Nullable="false"  />
-    <Property Name="EveryDayOfWeekImpl" Type="Int32" Nullable="true"  />
-    <Property Name="EveryMonth" Type="Boolean" Nullable="false"  />
-    <Property Name="EveryQuater" Type="Boolean" Nullable="false"  />
-    <Property Name="EveryYear" Type="Boolean" Nullable="false"  />
-    <Property Name="HoursOffset" Type="Double" Nullable="true"  />
+    <Property Name="FrequencyImpl" Type="Int32" Nullable="true"  />
     <Property Name="Interval" Type="Int32" Nullable="true"  />
-    <Property Name="MinutesOffset" Type="Double" Nullable="true"  />
-    <Property Name="MonthsOffset" Type="Int32" Nullable="true"  />
     <Property Name="Until" Type="DateTime" Nullable="true"  />
+    <Property Name="WeekStartImpl" Type="Int32" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="TestPhoneCompoundObjectEfImpl" >
     <Property Name="AreaCode" Type="String" Nullable="true" MaxLength="50"  />

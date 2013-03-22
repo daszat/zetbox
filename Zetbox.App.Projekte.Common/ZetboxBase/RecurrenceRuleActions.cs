@@ -35,18 +35,15 @@ namespace Zetbox.App.Base
             }
 
             var sb = new StringBuilder();
-            if (obj.EveryYear) sb.AppendFormat("every {0} year", interval);
-            else if (obj.EveryQuater) sb.AppendFormat("every {0} quater", interval);
-            else if (obj.EveryMonth) sb.AppendFormat("every {0} month", interval);
-            else if (obj.EveryDayOfWeek.HasValue) sb.AppendFormat("every {0} {1}", interval, obj.EveryDayOfWeek.ToString());
-            else if (obj.EveryDay) sb.AppendFormat("every {0} day", interval);
-
-            if (obj.MonthsOffset.HasValue || obj.DaysOffset.HasValue || obj.HoursOffset.HasValue || obj.MinutesOffset.HasValue) sb.Append(" + offset:");
-
-            if (obj.MonthsOffset.HasValue) sb.AppendFormat(" {0} months", obj.MonthsOffset.Value);
-            if (obj.DaysOffset.HasValue) sb.AppendFormat(" {0} days", obj.DaysOffset.Value);
-            if (obj.HoursOffset.HasValue) sb.AppendFormat(" {0} hours", obj.HoursOffset.Value);
-            if (obj.MinutesOffset.HasValue) sb.AppendFormat(" {0} minutes", obj.MinutesOffset.Value);
+            if (obj.Frequency.HasValue) sb.AppendFormat("every {0} {1}", interval, ToString(obj.Frequency.Value));
+            if (!string.IsNullOrWhiteSpace(obj.ByMonth)) sb.AppendFormat(" by months {0}", obj.ByMonth);
+            if (!string.IsNullOrWhiteSpace(obj.ByWeekNumber)) sb.AppendFormat(" by week numbers {0}", obj.ByWeekNumber);
+            if (!string.IsNullOrWhiteSpace(obj.ByYearDay)) sb.AppendFormat(" by year days {0}", obj.ByYearDay);
+            if (!string.IsNullOrWhiteSpace(obj.ByMonthDay)) sb.AppendFormat(" by month days {0}", obj.ByMonthDay);
+            if (!string.IsNullOrWhiteSpace(obj.ByDay)) sb.AppendFormat(" by days {0}", obj.ByDay);
+            if (!string.IsNullOrWhiteSpace(obj.ByHour)) sb.AppendFormat(" by hours {0}", obj.ByHour);
+            if (!string.IsNullOrWhiteSpace(obj.ByMinute)) sb.AppendFormat(" by minutes {0}", obj.ByMinute);
+            if (!string.IsNullOrWhiteSpace(obj.BySecond)) sb.AppendFormat(" by seconds {0}", obj.BySecond);
 
             if (obj.Until.HasValue)
             {
@@ -64,14 +61,37 @@ namespace Zetbox.App.Base
             e.Result = sb.ToString();
         }
 
-        [Invocation]
-        public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e)
+        private static string ToString(Frequency f)
         {
-            e.Result = obj.GetNext(DateTime.Now);
+            switch (f)
+            {
+                case Frequency.Yearly:
+                    return "year";
+                case Frequency.Monthly:
+                    return "month";
+                case Frequency.Weekly:
+                    return "week";
+                case Frequency.Daily:
+                    return "day";
+                case Frequency.Hourly:
+                    return "hour";
+                case Frequency.Minutely:
+                    return "minue";
+                case Frequency.Secondly:
+                    return "second";
+                default:
+                    return string.Empty;
+            }
         }
 
         [Invocation]
-        public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
+        public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
+        {
+            e.Result = obj.GetNext(DateTime.Now, start);
+        }
+
+        [Invocation]
+        public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt, DateTime start)
         {
             var interval = obj.Interval ?? 1;
             if(interval <= 0)
@@ -80,71 +100,24 @@ namespace Zetbox.App.Base
                 interval = 1;
             }
 
-            if (obj.EveryYear)
-            {
-                dt = dt.FirstYearDay().AddYears(1 * interval);
-            }
-            else if (obj.EveryQuater)
-            {
-                dt = dt.FirstQuaterDay().AddMonths(3 * interval);
-            }
-            else if (obj.EveryMonth)
-            {
-                dt = dt.FirstMonthDay().AddMonths(1 * interval);
-            }
-            else if (obj.EveryDayOfWeek.HasValue)
-            {
-                // Assuming Monday is the first day of week
-                dt = dt.FirstWeekDay().AddDays((((int)obj.EveryDayOfWeek - 1) % 7)).AddDays(7 * interval);
-            }
-            else if (obj.EveryDay)
-            {
-                dt = dt.Date.AddDays(1 * interval);
-            }
-
-            e.Result = dt
-                .AddMonths(obj.MonthsOffset ?? 0)
-                .AddDays(obj.DaysOffset ?? 0)
-                .AddHours(obj.HoursOffset ?? 0)
-                .AddMinutes(obj.MinutesOffset ?? 0);
+            e.Result = dt;
         }
 
         [Invocation]
-        public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e)
+        public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime start)
         {
-            e.Result = obj.GetCurrent(DateTime.Now);
+            e.Result = obj.GetCurrent(DateTime.Now, start);
         }
 
         [Invocation]
-        public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
+        public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt, DateTime start)
         {
-            if (obj.EveryYear)
-            {
-                dt = dt.FirstYearDay();
-            }
-            else if (obj.EveryQuater)
-            {
-                dt = dt.FirstQuaterDay();
-            }
-            else if (obj.EveryMonth)
-            {
-                dt = dt.FirstMonthDay();
-            }
-            else if (obj.EveryDayOfWeek.HasValue)
-            {
-                // Assuming Monday is the first day of week
-                dt = dt.FirstWeekDay().AddDays((((int)obj.EveryDayOfWeek - 1) % 7));
-            }
-            else if (obj.EveryDay)
-            {
-                dt = dt.Date;
-            }
+            e.Result = dt;
+        }
 
-            e.Result = dt
-                .AddMonths(obj.MonthsOffset ?? 0)
-                .AddDays(obj.DaysOffset ?? 0)
-                .AddHours(obj.HoursOffset ?? 0)
-                .AddMinutes(obj.MinutesOffset ?? 0);
+        [Invocation]
+        public static void GetWithinInterval(RecurrenceRule obj, MethodReturnEventArgs<IEnumerable<DateTime>> e, DateTime start, DateTime from, DateTime until)
+        {
         }
     }
 }

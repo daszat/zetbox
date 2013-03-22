@@ -1778,18 +1778,20 @@
     <Property Name="StartDate" Type="datetime2" Nullable="false" />
     <Property Name="Summary" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="SyncHash" Type="nvarchar" MaxLength="500" Nullable="true" />
+    <Property Name="Recurrence_ByDay" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByHour" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByMinute" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByMonth" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByMonthDay" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_BySecond" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_BySetPos" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByWeekNumber" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByYearDay" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="Recurrence_Count" Type="int" Nullable="true" />
-    <Property Name="Recurrence_DaysOffset" Type="float" Nullable="true" />
-    <Property Name="Recurrence_EveryDay" Type="bit" Nullable="false" />
-    <Property Name="Recurrence_EveryDayOfWeek" Type="int" Nullable="true" />
-    <Property Name="Recurrence_EveryMonth" Type="bit" Nullable="false" />
-    <Property Name="Recurrence_EveryQuater" Type="bit" Nullable="false" />
-    <Property Name="Recurrence_EveryYear" Type="bit" Nullable="false" />
-    <Property Name="Recurrence_HoursOffset" Type="float" Nullable="true" />
+    <Property Name="Recurrence_Frequency" Type="int" Nullable="true" />
     <Property Name="Recurrence_Interval" Type="int" Nullable="true" />
-    <Property Name="Recurrence_MinutesOffset" Type="float" Nullable="true" />
-    <Property Name="Recurrence_MonthsOffset" Type="int" Nullable="true" />
     <Property Name="Recurrence_Until" Type="datetime2" Nullable="true" />
+    <Property Name="Recurrence_WeekStart" Type="int" Nullable="true" />
     <Property Name="Source_ObjClass" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Source_ObjGuid" Type="uniqueidentifier" Nullable="true" />
     <Property Name="Source_ObjID" Type="int" Nullable="true" />
@@ -2358,18 +2360,20 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Rule_ByDay" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByHour" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByMinute" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByMonth" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByMonthDay" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_BySecond" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_BySetPos" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByWeekNumber" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByYearDay" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="Rule_Count" Type="int" Nullable="true" />
-    <Property Name="Rule_DaysOffset" Type="float" Nullable="true" />
-    <Property Name="Rule_EveryDay" Type="bit" Nullable="false" />
-    <Property Name="Rule_EveryDayOfWeek" Type="int" Nullable="true" />
-    <Property Name="Rule_EveryMonth" Type="bit" Nullable="false" />
-    <Property Name="Rule_EveryQuater" Type="bit" Nullable="false" />
-    <Property Name="Rule_EveryYear" Type="bit" Nullable="false" />
-    <Property Name="Rule_HoursOffset" Type="float" Nullable="true" />
+    <Property Name="Rule_Frequency" Type="int" Nullable="true" />
     <Property Name="Rule_Interval" Type="int" Nullable="true" />
-    <Property Name="Rule_MinutesOffset" Type="float" Nullable="true" />
-    <Property Name="Rule_MonthsOffset" Type="int" Nullable="true" />
     <Property Name="Rule_Until" Type="datetime2" Nullable="true" />
+    <Property Name="Rule_WeekStart" Type="int" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Relation">

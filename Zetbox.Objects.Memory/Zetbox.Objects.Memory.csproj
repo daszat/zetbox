@@ -279,6 +279,7 @@
     <Compile Include="CollectionEntries.Memory.Designer.cs" />
     <Compile Include="AnyReference.Memory.Designer.cs" />
     <Compile Include="AuditEntry.Memory.Designer.cs" />
+    <Compile Include="DateTimeOffset.Memory.Designer.cs" />
     <Compile Include="DateTimeRange.Memory.Designer.cs" />
     <Compile Include="RecurrenceRule.Memory.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Memory.Designer.cs" />

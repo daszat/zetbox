@@ -158,52 +158,60 @@
         <!-- CompoundObjectProperty isValue -->
         <component name="Recurrence" class="Zetbox.App.Base.RecurrenceRuleNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
+        <property name="ByDay" 
+                  column="`Recurrence_ByDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByHour" 
+                  column="`Recurrence_ByHour`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByMinute" 
+                  column="`Recurrence_ByMinute`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByMonth" 
+                  column="`Recurrence_ByMonth`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByMonthDay" 
+                  column="`Recurrence_ByMonthDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="BySecond" 
+                  column="`Recurrence_BySecond`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="BySetPos" 
+                  column="`Recurrence_BySetPos`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByWeekNumber" 
+                  column="`Recurrence_ByWeekNumber`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByYearDay" 
+                  column="`Recurrence_ByYearDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Count" 
                   column="`Recurrence_Count`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="DaysOffset" 
-                  column="`Recurrence_DaysOffset`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryDay" 
-                  column="`Recurrence_EveryDay`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryDayOfWeek" 
-                  column="`Recurrence_EveryDayOfWeek`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryMonth" 
-                  column="`Recurrence_EveryMonth`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryQuater" 
-                  column="`Recurrence_EveryQuater`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryYear" 
-                  column="`Recurrence_EveryYear`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="HoursOffset" 
-                  column="`Recurrence_HoursOffset`" 
+        <property name="Frequency" 
+                  column="`Recurrence_Frequency`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="Interval" 
                   column="`Recurrence_Interval`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="MinutesOffset" 
-                  column="`Recurrence_MinutesOffset`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="MonthsOffset" 
-                  column="`Recurrence_MonthsOffset`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
         <property name="Until" type="Timestamp"
                   column="`Recurrence_Until`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="WeekStart" 
+                  column="`Recurrence_WeekStart`" 
                   optimistic-lock="false"/>
         </component>
         <!-- CompoundObjectProperty isValue -->
@@ -2925,52 +2933,60 @@
         <!-- CompoundObjectProperty isValue -->
         <component name="Rule" class="Zetbox.App.Base.RecurrenceRuleNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
+        <property name="ByDay" 
+                  column="`Rule_ByDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByHour" 
+                  column="`Rule_ByHour`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByMinute" 
+                  column="`Rule_ByMinute`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByMonth" 
+                  column="`Rule_ByMonth`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByMonthDay" 
+                  column="`Rule_ByMonthDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="BySecond" 
+                  column="`Rule_BySecond`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="BySetPos" 
+                  column="`Rule_BySetPos`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByWeekNumber" 
+                  column="`Rule_ByWeekNumber`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByYearDay" 
+                  column="`Rule_ByYearDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Count" 
                   column="`Rule_Count`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="DaysOffset" 
-                  column="`Rule_DaysOffset`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryDay" 
-                  column="`Rule_EveryDay`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryDayOfWeek" 
-                  column="`Rule_EveryDayOfWeek`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryMonth" 
-                  column="`Rule_EveryMonth`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryQuater" 
-                  column="`Rule_EveryQuater`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="EveryYear" 
-                  column="`Rule_EveryYear`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="HoursOffset" 
-                  column="`Rule_HoursOffset`" 
+        <property name="Frequency" 
+                  column="`Rule_Frequency`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="Interval" 
                   column="`Rule_Interval`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="MinutesOffset" 
-                  column="`Rule_MinutesOffset`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="MonthsOffset" 
-                  column="`Rule_MonthsOffset`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
         <property name="Until" type="Timestamp"
                   column="`Rule_Until`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="WeekStart" 
+                  column="`Rule_WeekStart`" 
                   optimistic-lock="false"/>
         </component>
 

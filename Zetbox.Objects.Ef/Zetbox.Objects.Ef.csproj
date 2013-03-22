@@ -282,6 +282,7 @@
     <Compile Include="CollectionEntries.Ef.Designer.cs" />
     <Compile Include="AnyReference.Ef.Designer.cs" />
     <Compile Include="AuditEntry.Ef.Designer.cs" />
+    <Compile Include="DateTimeOffset.Ef.Designer.cs" />
     <Compile Include="DateTimeRange.Ef.Designer.cs" />
     <Compile Include="RecurrenceRule.Ef.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Ef.Designer.cs" />

@@ -636,18 +636,20 @@
           <ScalarProperty Name="Summary" ColumnName="Summary" />
           <ScalarProperty Name="SyncHash" ColumnName="SyncHash" />
           <ComplexProperty Name="RecurrenceImpl" TypeName="Model.RecurrenceRuleEfImpl">
+          <ScalarProperty Name="ByDay" ColumnName="Recurrence_ByDay" />
+          <ScalarProperty Name="ByHour" ColumnName="Recurrence_ByHour" />
+          <ScalarProperty Name="ByMinute" ColumnName="Recurrence_ByMinute" />
+          <ScalarProperty Name="ByMonth" ColumnName="Recurrence_ByMonth" />
+          <ScalarProperty Name="ByMonthDay" ColumnName="Recurrence_ByMonthDay" />
+          <ScalarProperty Name="BySecond" ColumnName="Recurrence_BySecond" />
+          <ScalarProperty Name="BySetPos" ColumnName="Recurrence_BySetPos" />
+          <ScalarProperty Name="ByWeekNumber" ColumnName="Recurrence_ByWeekNumber" />
+          <ScalarProperty Name="ByYearDay" ColumnName="Recurrence_ByYearDay" />
           <ScalarProperty Name="Count" ColumnName="Recurrence_Count" />
-          <ScalarProperty Name="DaysOffset" ColumnName="Recurrence_DaysOffset" />
-          <ScalarProperty Name="EveryDay" ColumnName="Recurrence_EveryDay" />
-          <ScalarProperty Name="EveryDayOfWeekImpl" ColumnName="Recurrence_EveryDayOfWeek" />
-          <ScalarProperty Name="EveryMonth" ColumnName="Recurrence_EveryMonth" />
-          <ScalarProperty Name="EveryQuater" ColumnName="Recurrence_EveryQuater" />
-          <ScalarProperty Name="EveryYear" ColumnName="Recurrence_EveryYear" />
-          <ScalarProperty Name="HoursOffset" ColumnName="Recurrence_HoursOffset" />
+          <ScalarProperty Name="FrequencyImpl" ColumnName="Recurrence_Frequency" />
           <ScalarProperty Name="Interval" ColumnName="Recurrence_Interval" />
-          <ScalarProperty Name="MinutesOffset" ColumnName="Recurrence_MinutesOffset" />
-          <ScalarProperty Name="MonthsOffset" ColumnName="Recurrence_MonthsOffset" />
           <ScalarProperty Name="Until" ColumnName="Recurrence_Until" />
+          <ScalarProperty Name="WeekStartImpl" ColumnName="Recurrence_WeekStart" />
           </ComplexProperty>
           <ComplexProperty Name="SourceImpl" TypeName="Model.AnyReferenceEfImpl">
           <ScalarProperty Name="ObjClass" ColumnName="Source_ObjClass" />
@@ -1433,18 +1435,20 @@
 	    <MappingFragment StoreEntitySet="RecurrenceRuleTester">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ComplexProperty Name="RuleImpl" TypeName="Model.RecurrenceRuleEfImpl">
+          <ScalarProperty Name="ByDay" ColumnName="Rule_ByDay" />
+          <ScalarProperty Name="ByHour" ColumnName="Rule_ByHour" />
+          <ScalarProperty Name="ByMinute" ColumnName="Rule_ByMinute" />
+          <ScalarProperty Name="ByMonth" ColumnName="Rule_ByMonth" />
+          <ScalarProperty Name="ByMonthDay" ColumnName="Rule_ByMonthDay" />
+          <ScalarProperty Name="BySecond" ColumnName="Rule_BySecond" />
+          <ScalarProperty Name="BySetPos" ColumnName="Rule_BySetPos" />
+          <ScalarProperty Name="ByWeekNumber" ColumnName="Rule_ByWeekNumber" />
+          <ScalarProperty Name="ByYearDay" ColumnName="Rule_ByYearDay" />
           <ScalarProperty Name="Count" ColumnName="Rule_Count" />
-          <ScalarProperty Name="DaysOffset" ColumnName="Rule_DaysOffset" />
-          <ScalarProperty Name="EveryDay" ColumnName="Rule_EveryDay" />
-          <ScalarProperty Name="EveryDayOfWeekImpl" ColumnName="Rule_EveryDayOfWeek" />
-          <ScalarProperty Name="EveryMonth" ColumnName="Rule_EveryMonth" />
-          <ScalarProperty Name="EveryQuater" ColumnName="Rule_EveryQuater" />
-          <ScalarProperty Name="EveryYear" ColumnName="Rule_EveryYear" />
-          <ScalarProperty Name="HoursOffset" ColumnName="Rule_HoursOffset" />
+          <ScalarProperty Name="FrequencyImpl" ColumnName="Rule_Frequency" />
           <ScalarProperty Name="Interval" ColumnName="Rule_Interval" />
-          <ScalarProperty Name="MinutesOffset" ColumnName="Rule_MinutesOffset" />
-          <ScalarProperty Name="MonthsOffset" ColumnName="Rule_MonthsOffset" />
           <ScalarProperty Name="Until" ColumnName="Rule_Until" />
+          <ScalarProperty Name="WeekStartImpl" ColumnName="Rule_WeekStart" />
           </ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>

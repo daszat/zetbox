@@ -294,6 +294,7 @@
     <Compile Include="CollectionEntries.NHibernate.Designer.cs" />
     <Compile Include="AnyReference.NHibernate.Designer.cs" />
     <Compile Include="AuditEntry.NHibernate.Designer.cs" />
+    <Compile Include="DateTimeOffset.NHibernate.Designer.cs" />
     <Compile Include="DateTimeRange.NHibernate.Designer.cs" />
     <Compile Include="RecurrenceRule.NHibernate.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.NHibernate.Designer.cs" />
