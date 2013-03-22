@@ -137,7 +137,7 @@ namespace Zetbox.App.Base
             if (e.Result == default(DateTime)) e.Result = dt;
         }
 
-        public static IEnumerable<int> ToInt(string val)
+        private static IEnumerable<int> ToInt(string val)
         {
             if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException("val");
             return val
@@ -154,7 +154,7 @@ namespace Zetbox.App.Base
         }
 
         static Regex weekDayRegEx = new Regex(@"([+-]?\d*)(\w{2})");
-        public static IEnumerable<DayOfWeek> ToWeekdays(string val)
+        private static IEnumerable<DayOfWeek> ToWeekdays(string val)
         {
             if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException("val");
             return val
@@ -225,13 +225,15 @@ namespace Zetbox.App.Base
                         {
                             foreach (var day in ToInt(obj.ByMonthDay))
                             {
+                                var first = current.FirstMonthDay().Add(current.TimeOfDay);
+                                var last = current.LastMonthDay().Add(current.TimeOfDay);
                                 if (day >= 0)
                                 {
-                                    AddToResult(result, current.FirstMonthDay().AddDays(day - 1), from, until);
+                                    AddToResult(result, first.AddDays(day - 1), from, until);
                                 }
                                 else
                                 {
-                                    AddToResult(result, current.LastMonthDay().AddDays(day + 1), from, until);
+                                    AddToResult(result, last.AddDays(day + 1), from, until);
                                 }
                             }
                         }
@@ -244,9 +246,10 @@ namespace Zetbox.App.Base
                         current = current.AddDays(interval * 7);
                         if (obj.ByDay != null)
                         {
+                            var first = current.FirstWeekDay().Add(current.TimeOfDay);
                             foreach (var wd in ToWeekdays(obj.ByDay))
                             {
-                                AddToResult(result, current.FirstWeekDay().AddDays((((int)wd - 1) % 7)), from, until);
+                                AddToResult(result, first.AddDays((((int)wd - 1) % 7)), from, until);
                             }
                         }
                         else

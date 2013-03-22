@@ -29,7 +29,7 @@ namespace Zetbox.Client.Presentables.Calendar
         protected override void OnObjectPropertyChanged(string propName)
         {
             base.OnObjectPropertyChanged(propName);
-            switch(propName)
+            switch (propName)
             {
                 case "Calendar":
                     if (_calendarViewModel != null)
@@ -96,10 +96,10 @@ namespace Zetbox.Client.Presentables.Calendar
 
         void _calendarViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case "Color":
-                    if(string.IsNullOrWhiteSpace(_color))
+                    if (string.IsNullOrWhiteSpace(_color))
                         OnPropertyChanged("Color");
                     break;
             }
@@ -127,25 +127,44 @@ namespace Zetbox.Client.Presentables.Calendar
             if (Event.StartDate <= Event.EndDate)
             {
                 List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
-                var from = Event.StartDate;
-                var until = Event.EndDate;
-                if (from < displayFrom) from = displayFrom;
-                if (until > displayTo) until = displayTo;
-                if (Event.IsAllDay)
+                var duration = Event.EndDate - Event.StartDate;
+
+                List<DateTime> occurences;
+                if (Event.Recurrence.Frequency == null)
                 {
-                    until = until.AddDays(1);
+                    occurences = new List<DateTime>() { Event.StartDate };
+                }
+                else
+                {
+                    occurences = Event.Recurrence.GetWithinInterval(Event.StartDate, displayFrom, displayTo).ToList();
                 }
 
-                for (var current = from; current < until; current = current.Date.AddDays(1))
+                foreach (var o in occurences)
                 {
-                    var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
-                    .Invoke(
-                        DataContext,
-                        this,
-                        this);
-                    vmdl.From = current == Event.StartDate ? current : current.Date;
-                    vmdl.Until = current.Date == Event.EndDate.Date ? Event.EndDate : current.Date.AddDays(1);
-                    result.Add(vmdl);
+                    var event_StartDate = o;
+                    var event_EndDate = o + duration;
+
+                    var from = event_StartDate;
+                    var until = event_EndDate;
+
+                    if (from < displayFrom) from = displayFrom;
+                    if (until > displayTo) until = displayTo;
+                    if (Event.IsAllDay)
+                    {
+                        until = until.AddDays(1);
+                    }
+
+                    for (var current = from; current < until; current = current.Date.AddDays(1))
+                    {
+                        var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
+                        .Invoke(
+                            DataContext,
+                            this,
+                            this);
+                        vmdl.From = current == event_StartDate ? current : current.Date;
+                        vmdl.Until = current.Date == event_EndDate.Date ? event_EndDate : current.Date.AddDays(1);
+                        result.Add(vmdl);
+                    }
                 }
                 return result;
             }

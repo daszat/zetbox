@@ -662,6 +662,7 @@ namespace Zetbox.Client.Presentables.Calendar
             /// Remembers all events for the specified day
             /// </summary>
             private readonly SortedList<DateTime, FetchCacheEntry> _cache = new SortedList<DateTime, FetchCacheEntry>();
+            private ZbTask<IEnumerable<EventViewModel>> _recurrenceCache = null;
             private readonly List<int> _calendars = new List<int>();
 
             private readonly IViewModelFactory ViewModelFactory;
@@ -678,6 +679,7 @@ namespace Zetbox.Client.Presentables.Calendar
             public void SetCalendars(IEnumerable<int> ids)
             {
                 // better implementation necessary
+                _recurrenceCache = null;
                 _cache.Clear();
                 _calendars.Clear();
                 _calendars.AddRange(ids);
@@ -685,6 +687,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
             public void Invalidate()
             {
+                _recurrenceCache = null;
                 _cache.Clear();
             }
 
@@ -692,15 +695,24 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_calendars.Count == 0) return new ZbTask<IEnumerable<EventViewModel>>(ZbTask.Synchron, () => new List<EventViewModel>());
 
+                // first -> the recurrence cache
+                if (_recurrenceCache == null)
+                {
+                    _recurrenceCache = MakeFetchTask(DateTime.MinValue, DateTime.MinValue);
+                }
+
                 // make primary task first
                 var result = MakeFetchTask(from, to);
-                result.OnResult(
-                    t =>
-                    {
-                        var range = (to - from);
-                        MakeFetchTask(from - range, to - range);
-                        MakeFetchTask(from + range, to + range);
-                    });
+                result.OnResult(t =>
+                {
+                    var range = (to - from);
+                    MakeFetchTask(from - range, to - range);
+                    MakeFetchTask(from + range, to + range);                        
+                })
+                .OnResult(t => 
+                {                    
+                    t.Result = t.Result.Union(_recurrenceCache.Result);
+                });
 
                 return result;
             }
@@ -744,10 +756,21 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 var predicateCalendars = GetCalendarPredicate();
 
-                var queryTask = _ctx.GetQuery<cal.Event>()
-                    .Where(predicateCalendars)
-                    .Where(e => (e.StartDate >= from && e.StartDate <= to) || (e.EndDate >= from && e.EndDate <= to) || (e.StartDate <= from && e.EndDate >= to))
-                    .ToListAsync();
+                ZbTask<List<cal.Event>> queryTask;
+                if (from != DateTime.MinValue)
+                {
+                    queryTask = _ctx.GetQuery<cal.Event>()
+                        .Where(predicateCalendars)
+                        .Where(e => (e.StartDate >= from && e.StartDate <= to) || (e.EndDate >= from && e.EndDate <= to) || (e.StartDate <= from && e.EndDate >= to))
+                        .ToListAsync();
+                }
+                else
+                {
+                    queryTask = _ctx.GetQuery<cal.Event>()
+                        .Where(predicateCalendars)
+                        .Where(e => e.Recurrence.Frequency != null)
+                        .ToListAsync();
+                }
 
                 return new ZbTask<List<EventViewModel>>(queryTask)
                     .OnResult(t =>
