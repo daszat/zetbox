@@ -84,6 +84,7 @@
     <Compile Include="Zetbox.Client.Mocks\TestObject.cs" />
     <Compile Include="Zetbox.Client.Mocks\TestProxy.cs" />
     <Compile Include="Zetbox.Client.Mocks\TestViewModelFactory.cs" />
+    <Compile Include="Zetbox.Client.Tests\DateTimeOffsetTests.cs" />
     <Compile Include="Zetbox.Client.Tests\DataObjectModelTests.cs" />
     <Compile Include="Zetbox.Client.Tests\ObjectListModelTests.cs" />
     <Compile Include="Zetbox.Client.Tests\PresenterModelTests.cs" />

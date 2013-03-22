@@ -28,12 +28,28 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void ToString(DateTimeOffset obj, MethodReturnEventArgs<string> e)
         {
-            
+            var sb = new StringBuilder();
+
+            if (obj.Years.HasValue) sb.AppendFormat(" {0} years", obj.Years.Value);
+            if (obj.Months.HasValue) sb.AppendFormat(" {0} months", obj.Months.Value);
+            if (obj.Days.HasValue) sb.AppendFormat(" {0} days", obj.Days.Value);
+            if (obj.Hours.HasValue) sb.AppendFormat(" {0} hours", obj.Hours.Value);
+            if (obj.Minutes.HasValue) sb.AppendFormat(" {0} minutes", obj.Minutes.Value);
+            if (obj.Seconds.HasValue) sb.AppendFormat(" {0} seconds", obj.Seconds.Value);
+
+            e.Result = sb.ToString();
         }
 
         [Invocation]
         public static void AddTo(DateTimeOffset obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
         {
+            e.Result = dt
+                .AddYears(obj.Years ?? 0)
+                .AddMonths(obj.Months ?? 0)
+                .AddDays(obj.Days ?? 0.0)
+                .AddHours(obj.Hours ?? 0.0)
+                .AddMinutes(obj.Minutes ?? 0.0)
+                .AddSeconds(obj.Seconds ?? 0.0);
         }
     }
 }
