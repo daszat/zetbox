@@ -186,31 +186,39 @@ namespace Zetbox.App.Packaging
                         if (!rel.B.Type.ImplementsIExportable())
                             continue;
 
-                        var ifType = rel.GetEntryInterfaceType();
-
-                        if (allData)
+                        try
                         {
-                            try
+                            var ifType = rel.GetEntryInterfaceType();
+                            string msgFormat;
+                            IQueryable<IPersistenceObject> entries;
+
+                            if (allData)
                             {
-                                Log.InfoFormat("    exporting relation {0} ", ifType.Type.Name);
-
-                                MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType.Type }, new Type[] { typeof(Guid), typeof(RelationEndRole), typeof(IDataObject) });
-                                var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ExportGuid, RelationEndRole.A, null }));
-
-                                foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
-                                {
-                                    ExportObject(s, obj, schemaNamespaces);
-                                }
+                                msgFormat = "    exporting relation {0}";
+                                entries = ctx.Internals().GetPersistenceObjectQuery(ifType).OrderBy(o => ((IExportable)o).ExportGuid);
                             }
-                            catch (TypeLoadException ex)
+                            else if (rel.A.Type.ImplementsIModuleMember() || rel.B.Type.ImplementsIModuleMember())
                             {
-                                var message = String.Format("Failed to load InterfaceType for entries of {0}", rel);
-                                Log.Warn(message, ex);
+                                msgFormat = "    exporting filtered relation {0}";
+                                entries = FetchRelationEntries(ctx, moduleID, rel).AsQueryable();
+                            }
+                            else
+                            {
+                                Log.DebugFormat("    skipping relation {0}: relation between non-modulemembers cannot be filtered", ifType.Type.Name);
+                                continue;
+                            }
+
+                            Log.InfoFormat(msgFormat, ifType.Type.Name);
+
+                            foreach (var obj in entries)
+                            {
+                                ExportObject(s, obj, schemaNamespaces);
                             }
                         }
-                        else if (rel.A.Type.ImplementsIModuleMember() || rel.B.Type.ImplementsIModuleMember())
+                        catch (TypeLoadException ex)
                         {
-                            Log.WarnFormat("    exporting relation {0} with module filter is not yet implemented: skipping", ifType.Type.Name);
+                            var message = String.Format("Failed to load InterfaceType for entries of {0}", rel);
+                            Log.Warn(message, ex);
                         }
                     }
                 }
@@ -236,6 +244,57 @@ namespace Zetbox.App.Packaging
         }
 
         #region Xml/Export private Methods
+
+        private static List<IPersistenceObject> FetchRelationEntries(IReadOnlyZetboxContext ctx, int moduleID, Relation rel)
+        {
+            var t = rel.GetEntryInterfaceType().Type;
+            var ta = rel.A.Type.GetDescribedInterfaceType().Type;
+            var tb = rel.B.Type.GetDescribedInterfaceType().Type;
+
+            string methodName = "FetchRelationEntries";
+            if (rel.A.Type.ImplementsIModuleMember())
+            {
+                methodName += "A";
+            }
+            if (rel.B.Type.ImplementsIModuleMember())
+            {
+                methodName += "B";
+            }
+
+            MethodInfo mi = typeof(Exporter).FindGenericMethod(methodName, new Type[] { t, ta, tb }, new Type[] { typeof(IReadOnlyZetboxContext), typeof(int) });
+            return ((IQueryable)mi.Invoke(null, new object[] { ctx, moduleID })).Cast<IPersistenceObject>().ToList();
+        }
+
+        private static IQueryable<T> FetchRelationEntriesA<T, TA, TB>(IReadOnlyZetboxContext ctx, int moduleID)
+            where T : class, IPersistenceObject, IRelationEntry<TA, TB>, IExportable
+            where TA : IDataObject, IModuleMember, IExportable
+            where TB : IDataObject, IExportable
+        {
+            return ctx.Internals().GetPersistenceObjectQuery<T>()
+                .Where(o => o.A.Module.ID == moduleID)
+                .OrderBy(o => o.ExportGuid);
+        }
+
+        private static IQueryable<T> FetchRelationEntriesB<T, TA, TB>(IReadOnlyZetboxContext ctx, int moduleID)
+            where T : class, IPersistenceObject, IRelationEntry<TA, TB>, IExportable
+            where TA : IDataObject, IExportable
+            where TB : IDataObject, IModuleMember, IExportable
+        {
+            return ctx.Internals().GetPersistenceObjectQuery<T>()
+                .Where(o => o.B.Module.ID == moduleID)
+                .OrderBy(o => o.ExportGuid);
+        }
+
+        private static IQueryable<T> FetchRelationEntriesAB<T, TA, TB>(IReadOnlyZetboxContext ctx, int moduleID)
+            where T : class, IPersistenceObject, IRelationEntry<TA, TB>, IExportable
+            where TA : IDataObject, IModuleMember, IExportable
+            where TB : IDataObject, IModuleMember, IExportable
+        {
+            return ctx.Internals().GetPersistenceObjectQuery<T>()
+                .Where(o => o.A.Module.ID == moduleID || o.B.Module.ID == moduleID)
+                .OrderBy(o => o.ExportGuid);
+        }
+
         private static void ExportObject(IPackageProvider s, IPersistenceObject obj, string[] propNamespaces)
         {
             XmlWriter writer = s.Writer;

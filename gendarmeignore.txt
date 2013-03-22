@@ -92,6 +92,10 @@ M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.Server.B
 M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.Server.Server::GetParcelHack(Zetbox.API.Server.IZetboxServerContext,System.Int32,System.Int32)
 # Helper method which is only called by reflection
 M: Zetbox.API.Async.ZbTask`1<Zetbox.API.IDataObject> Zetbox.DalProvider.Client.ZetboxContextImpl::FindAsyncGenericHelper(System.Int32)
+M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesA(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
+M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesB(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
+M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesAB(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
+
 
 # generated code (wpf)
 M: System.Delegate Zetbox.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
