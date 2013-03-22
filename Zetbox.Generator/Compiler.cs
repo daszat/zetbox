@@ -118,21 +118,21 @@ namespace Zetbox.Generator
             Log.InfoFormat("Generating Code to [{0}]", workingPath);
             // TODO: use TaskExecutor to optimally use multicores
             // nhibernate on mono triggers a runtime fault with 2.10.x
-            if (Environment.GetEnvironmentVariable("ZETBOX_SERIALIZE_COMPILATION") == "yes")
-            {
-                Log.Warn("Serializing generation threads.");
+            //if (Environment.GetEnvironmentVariable("ZETBOX_SERIALIZE_COMPILATION") == "yes")
+            //{
+            Log.Warn("Serializing generation threads.");
 
-                var ctx = _container.Resolve<IZetboxServerContext>();
-                foreach (var gen in _generatorProviders)
-                {
-                    gen.Generate(ctx, workingPath);
-                }
-
-            }
-            else
+            var ctx = _container.Resolve<IZetboxServerContext>();
+            foreach (var gen in _generatorProviders)
             {
-                GenerateParallelTo(workingPath);
+                gen.Generate(ctx, workingPath);
             }
+
+            //}
+            //else
+            //{
+            //    GenerateParallelTo(workingPath);
+            //}
         }
 
         private void GenerateParallelTo(string workingPath)
