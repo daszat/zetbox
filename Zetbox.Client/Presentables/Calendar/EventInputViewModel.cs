@@ -10,6 +10,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Models;
     using System.ComponentModel;
     using cal = Zetbox.App.Calendar;
+    using Zetbox.App.Base;
 
     public interface IEventInputViewModel : IDataErrorInfo
     {
@@ -130,6 +131,27 @@ namespace Zetbox.Client.Presentables.Calendar
                 return _body;
             }
         }
+
+        private CompoundObjectPropertyViewModel _recurrence = null;
+        public CompoundObjectPropertyViewModel Recurrence
+        {
+            get
+            {
+                if (_recurrence == null)
+                {
+                    _recurrence = ViewModelFactory.CreateViewModel<CompoundObjectPropertyViewModel.Factory>()
+                        .Invoke(DataContext, this, 
+                            new CompoundObjectValueModel(
+                                DataContext, 
+                                "Recurrence", 
+                                "", 
+                                true, 
+                                false, 
+                                FrozenContext.FindPersistenceObject<CompoundObject>(new Guid("3d4ec88b-fe8e-452e-a71d-03143a75aeb0"))));
+                }
+                return _recurrence;
+            }
+        }
         #endregion
 
         public virtual string Error
@@ -161,6 +183,7 @@ namespace Zetbox.Client.Presentables.Calendar
             obj.IsAllDay = IsAllDay.Value.Value;
             obj.Location = Location.Value;
             obj.Body = Body.Value;
+            obj.Recurrence = (RecurrenceRule)Recurrence.Value.Object;
 
             return (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, Parent, obj);
         }
