@@ -308,7 +308,12 @@ namespace Zetbox.DalProvider.NHibernate
                 BeginTransaction();
             try
             {
-                foreach (var obj in RelationTopoSort(notifySaveList.Where(obj => obj.ObjectState == DataObjectState.Deleted)))
+                // ensure that relation entries are always deleted before everyone else.
+                // This is a optimization to avoid having to track Parent/Child on Relations without navigators
+                // Also, we have all objects in hand, so we do not need to risk going to the database again
+                var deletedRelEntries = notifySaveList.Where(obj => obj.ObjectState == DataObjectState.Deleted && obj is IRelationEntry);
+                var otherDeleted = RelationTopoSort(notifySaveList.Where(obj => obj.ObjectState == DataObjectState.Deleted && !(obj is IRelationEntry)));
+                foreach (var obj in deletedRelEntries.Concat(otherDeleted))
                 {
                     _attachedObjects.Remove(obj);
                     _attachedObjectsByProxy.Remove(obj);
