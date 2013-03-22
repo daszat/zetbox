@@ -404,6 +404,29 @@
                   optimistic-lock="false"/>
     </class>
 
+    <class name="Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl+ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy"
+           proxy="Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl+ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy"
+           table="`ViewDescriptors_SupportedViewModelRefsCollection`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`ViewDescriptors_SupportedViewModelRefsCollection_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="Parent"
+                     column="`fk_ViewDescriptor`" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="Value" 
+                  column="`SupportedViewModelRefs`" 
+                  optimistic-lock="false"/>
+        <!-- export guid is not needed since serialization is always "in-place"
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+        -->
+    </class>
+
     <!-- CompoundObjectCollectionEntries -->
     <class name="Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl+Projekt_AuditJournal_CollectionEntryProxy"
            proxy="Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl+Projekt_AuditJournal_CollectionEntryProxy"

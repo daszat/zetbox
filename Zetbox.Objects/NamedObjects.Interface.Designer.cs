@@ -719,6 +719,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("137292ce-4493-451d-a7fa-1b7cc7df03dd"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> TypeRef
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9cb49ab3-72bd-46d0-a3b0-f4b20428aee5"); }
+                                }
                             }
                             public static class CompoundObject_Properties
                             {
@@ -2606,6 +2610,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("eff6276d-975b-4a0d-bd3c-ad76af2189c3"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ControlTypeRef
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("180968cf-8705-433f-9346-e726c8552737"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("94140a56-9fed-4d65-8c2c-cb8e658dff96"); }
@@ -2613,6 +2621,10 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Module
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("25da3568-f362-4441-841e-7c163b10b983"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> SupportedViewModelRefs
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b898a824-578e-45e0-a312-193068a2b139"); }
                                 }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> SupportedViewModels
                                 {
@@ -2671,6 +2683,10 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ViewModelRef
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("554288d1-f5f4-4b22-908b-01525a1d0f9b"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ViewModelTypeRef
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b3cae453-e222-4d24-b6f5-47f47550ad7a"); }
                                 }
                             }
                             public static class Visual_Properties

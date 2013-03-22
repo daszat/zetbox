@@ -22,5 +22,14 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
+        /// <summary>
+        /// The expected argument type.
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("9cb49ab3-72bd-46d0-a3b0-f4b20428aee5")]
+        string TypeRef {
+            get;
+            set;
+        }
     }
 }

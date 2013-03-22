@@ -270,6 +270,64 @@ namespace Zetbox.App.GUI
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnControlRef_IsValid;
 
         /// <summary>
+        /// The control implementing this View.
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string ControlTypeRef
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ControlTypeRef;
+                if (OnControlTypeRef_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnControlTypeRef_Getter(this, __e);
+                    __result = _ControlTypeRef = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ControlTypeRef != value)
+                {
+                    var __oldValue = _ControlTypeRef;
+                    var __newValue = value;
+                    if (OnControlTypeRef_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnControlTypeRef_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ControlTypeRef", __oldValue, __newValue);
+                    _ControlTypeRef = __newValue;
+                    NotifyPropertyChanged("ControlTypeRef", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnControlTypeRef_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnControlTypeRef_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ControlTypeRef");
+                }
+            }
+        }
+        private string _ControlTypeRef;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, string> OnControlTypeRef_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, string> OnControlTypeRef_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewDescriptor, string> OnControlTypeRef_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnControlTypeRef_IsValid;
+
+        /// <summary>
         /// Export Guid
         /// </summary>
         // value type property
@@ -457,6 +515,34 @@ namespace Zetbox.App.GUI
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnModule_IsValid;
 
         /// <summary>
+        /// A View supports one or more ViewModels.
+        /// </summary>
+        // value list property
+		// Zetbox.Generator.Templates.Properties.ValueCollectionProperty
+		public ICollection<string> SupportedViewModelRefs
+		{
+			get
+			{
+				if (_SupportedViewModelRefs == null)
+				{
+				    _SupportedViewModelRefs 
+				        = new ClientValueCollectionWrapper<ViewDescriptor, string, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntry, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl>>(
+							this.Context,
+				            this, 
+				            () => { this.NotifyPropertyChanged("SupportedViewModelRefs", null, null); if(OnSupportedViewModelRefs_PostSetter != null && IsAttached) OnSupportedViewModelRefs_PostSetter(this); },
+				            _SupportedViewModelRefsCollection);
+				}
+				return _SupportedViewModelRefs;
+			}
+		}
+
+		private ClientValueCollectionWrapper<ViewDescriptor, string, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntry, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl, ObservableCollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl>> _SupportedViewModelRefs;
+		private ObservableCollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl> _SupportedViewModelRefsCollection = new ObservableCollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl>();
+public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModelRefs_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModelRefs_IsValid;
+
+        /// <summary>
         /// A View supports one or more ViewModels
         /// </summary>
         // collection entry list property
@@ -567,7 +653,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             var otherImpl = (ViewDescriptorMemoryImpl)obj;
             var me = (ViewDescriptor)this;
 
+            me.ControlTypeRef = other.ControlTypeRef;
             me.ExportGuid = other.ExportGuid;
+            SynchronizeCollections(this._SupportedViewModelRefsCollection, otherImpl._SupportedViewModelRefsCollection);
             me.Toolkit = other.Toolkit;
             this._fk_ControlKind = otherImpl._fk_ControlKind;
             this._fk_ControlRef = otherImpl._fk_ControlRef;
@@ -625,6 +713,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             {
                 case "ControlKind":
                 case "ControlRef":
+                case "ControlTypeRef":
                 case "ExportGuid":
                 case "Module":
                 case "Toolkit":
@@ -727,6 +816,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                         (obj, val) => obj.ControlRef = val,
 						obj => OnControlRef_IsValid), 
                     // else
+                    new PropertyDescriptorMemoryImpl<ViewDescriptor, string>(
+                        lazyCtx,
+                        new Guid("180968cf-8705-433f-9346-e726c8552737"),
+                        "ControlTypeRef",
+                        null,
+                        obj => obj.ControlTypeRef,
+                        (obj, val) => obj.ControlTypeRef = val,
+						obj => OnControlTypeRef_IsValid), 
+                    // else
                     new PropertyDescriptorMemoryImpl<ViewDescriptor, Guid>(
                         lazyCtx,
                         new Guid("94140a56-9fed-4d65-8c2c-cb8e658dff96"),
@@ -744,6 +842,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                         obj => obj.Module,
                         (obj, val) => obj.Module = val,
 						obj => OnModule_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<ViewDescriptor, ICollection<string>>(
+                        lazyCtx,
+                        new Guid("b898a824-578e-45e0-a312-193068a2b139"),
+                        "SupportedViewModelRefs",
+                        null,
+                        obj => obj.SupportedViewModelRefs,
+                        null, // lists are read-only properties
+                        obj => OnSupportedViewModelRefs_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<ViewDescriptor, ICollection<Zetbox.App.Base.TypeRef>>(
                         lazyCtx,
@@ -827,6 +934,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
         {
             SetNotInitializedProperty("ControlKind");
             SetNotInitializedProperty("ControlRef");
+            SetNotInitializedProperty("ControlTypeRef");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Toolkit");
             base.NotifyCreated();
@@ -839,6 +947,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
+            SupportedViewModelRefs.Clear();
             SupportedViewModels.Clear();
             ControlKind = null;
             ControlRef = null;
@@ -858,11 +967,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(ControlKind != null ? ControlKind.ID : (int?)null);
             binStream.Write(ControlRef != null ? ControlRef.ID : (int?)null);
+            binStream.Write(this._ControlTypeRef);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.WriteCollectionEntries(this._SupportedViewModelRefsCollection);
 
             binStream.Write(eagerLoadLists);
             if (eagerLoadLists && auxObjects != null)
@@ -883,11 +994,13 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._fk_ControlKind = binStream.ReadNullableInt32();
             this._fk_ControlRef = binStream.ReadNullableInt32();
+            this._ControlTypeRef = binStream.ReadString();
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
             this._fk_Module = binStream.ReadNullableInt32();
+            binStream.ReadCollectionEntries(this, this._SupportedViewModelRefsCollection);
 
             SupportedViewModels_was_eagerLoaded = binStream.ReadBoolean();
             this._Toolkit = (Zetbox.App.GUI.Toolkit)binStream.ReadNullableInt32();
@@ -906,7 +1019,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlKind != null ? ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ControlTypeRef, xml, "ControlTypeRef", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ExportCollectionEntries(this._SupportedViewModelRefsCollection.OrderBy(i => i.Value), xml, "SupportedViewModelRefs", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)this._Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
         }
 
@@ -921,6 +1036,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             case "Zetbox.App.GUI|ControlRef":
                 this._fk_guid_ControlRef = XmlStreamer.ReadNullableGuid(xml);
                 break;
+            case "Zetbox.App.GUI|ControlTypeRef":
+                this._ControlTypeRef = XmlStreamer.ReadString(xml);
+                break;
             case "Zetbox.App.GUI|ExportGuid":
                 // Import must have default value set
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
@@ -928,6 +1046,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                 break;
             case "Zetbox.App.GUI|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.GUI|SupportedViewModelRefs":
+                XmlStreamer.MergeImportCollectionEntries(this, this._SupportedViewModelRefsCollection, xml);
                 break;
             case "Zetbox.App.GUI|Toolkit":
                 this._Toolkit = (Zetbox.App.GUI.Toolkit)XmlStreamer.ReadNullableInt32(xml);

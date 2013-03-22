@@ -306,12 +306,6 @@ namespace Zetbox.Server
                 //    prj.UpdateFromSourceSchema();
                 //}
 
-
-                //foreach (var tr in ctx.GetQuery<TypeRef>())
-                //{
-                //    tr.UpdateToStringCache();
-                //}
-
                 //foreach (var ck in ctx.GetQuery<ControlKind>())
                 //{
                 //    var ckc = ck.GetObjectClass(ctx);

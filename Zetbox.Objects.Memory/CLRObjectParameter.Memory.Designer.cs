@@ -154,6 +154,64 @@ namespace Zetbox.App.Base
         public static event PropertyIsValidHandler<Zetbox.App.Base.CLRObjectParameter> OnType_IsValid;
 
         /// <summary>
+        /// The expected argument type.
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string TypeRef
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _TypeRef;
+                if (OnTypeRef_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnTypeRef_Getter(this, __e);
+                    __result = _TypeRef = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_TypeRef != value)
+                {
+                    var __oldValue = _TypeRef;
+                    var __newValue = value;
+                    if (OnTypeRef_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTypeRef_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("TypeRef", __oldValue, __newValue);
+                    _TypeRef = __newValue;
+                    NotifyPropertyChanged("TypeRef", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTypeRef_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTypeRef_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("TypeRef");
+                }
+            }
+        }
+        private string _TypeRef;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.CLRObjectParameter, string> OnTypeRef_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.CLRObjectParameter, string> OnTypeRef_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.CLRObjectParameter, string> OnTypeRef_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.CLRObjectParameter> OnTypeRef_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -354,6 +412,7 @@ namespace Zetbox.App.Base
             var otherImpl = (CLRObjectParameterMemoryImpl)obj;
             var me = (CLRObjectParameter)this;
 
+            me.TypeRef = other.TypeRef;
             this._fk_Type = otherImpl._fk_Type;
         }
         public override void SetNew()
@@ -389,6 +448,7 @@ namespace Zetbox.App.Base
             switch (property)
             {
                 case "Type":
+                case "TypeRef":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -445,6 +505,15 @@ namespace Zetbox.App.Base
                         obj => obj.Type,
                         (obj, val) => obj.Type = val,
 						obj => OnType_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<CLRObjectParameter, string>(
+                        lazyCtx,
+                        new Guid("9cb49ab3-72bd-46d0-a3b0-f4b20428aee5"),
+                        "TypeRef",
+                        null,
+                        obj => obj.TypeRef,
+                        (obj, val) => obj.TypeRef = val,
+						obj => OnTypeRef_IsValid), 
                     // position columns
                 };
             }
@@ -509,6 +578,7 @@ namespace Zetbox.App.Base
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("Type");
+            SetNotInitializedProperty("TypeRef");
             base.NotifyCreated();
             if (OnNotifyCreated_CLRObjectParameter != null) OnNotifyCreated_CLRObjectParameter(this);
         }
@@ -534,6 +604,7 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(Type != null ? Type.ID : (int?)null);
+            binStream.Write(this._TypeRef);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -543,6 +614,7 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._fk_Type = binStream.ReadNullableInt32();
+            this._TypeRef = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -557,6 +629,7 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._TypeRef, xml, "TypeRef", "Zetbox.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -567,6 +640,9 @@ namespace Zetbox.App.Base
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Base|Type":
                 this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.Base|TypeRef":
+                this._TypeRef = XmlStreamer.ReadString(xml);
                 break;
             }
         }

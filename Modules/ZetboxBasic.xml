@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-19T14:35:31Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-22T13:19:56Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -4649,7 +4649,7 @@ public static void isValid_VisualTree(Template obj, PropertyIsValidEventArgs e)
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="7720b38c-64af-4607-bc73-d015af6612e3">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ControlKind(ViewDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.ControlKind&gt; e)
 {
@@ -4677,14 +4677,14 @@ public static void isValid_ControlKind(ViewDescriptor obj, PropertyIsValidEventA
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>ControlKind</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>2</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>9d6aa137-d1c8-4527-ae07-681acc503dcd</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="eff6276d-975b-4a0d-bd3c-ad76af2189c3">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ControlRef(ViewDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.TypeRef&gt; e)
 {
@@ -4713,11 +4713,48 @@ public static void isValid_ControlRef(ViewDescriptor obj, PropertyIsValidEventAr
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>ControlRef</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>700</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>3</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>d96d030e-eebe-4b7f-8b55-dca30cbd4bde</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>true</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>cd048a20-cd26-4a12-8208-362a86ed0762</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:StringProperty ExportGuid="180968cf-8705-433f-9346-e726c8552737">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ControlTypeRef(ViewDescriptor obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ControlTypeRef(ViewDescriptor obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ControlTypeRef(ViewDescriptor obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ControlTypeRef(ViewDescriptor obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ControlTypeRef == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The control implementing this View.</ZetboxBase:Description>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>ControlTypeRef</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>4</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:GuidProperty ExportGuid="94140a56-9fed-4d65-8c2c-cb8e658dff96">
     <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
@@ -4758,7 +4795,7 @@ public static void isValid_ExportGuid(ViewDescriptor obj, PropertyIsValidEventAr
   </ZetboxBase:GuidProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="25da3568-f362-4441-841e-7c163b10b983">
     <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Module(ViewDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
 {
@@ -4786,12 +4823,49 @@ public static void isValid_Module(ViewDescriptor obj, PropertyIsValidEventArgs e
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>Module</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
     <GUI:RequestedKind>d30d2676-7f2f-4f0d-895a-e46f19b8f526</GUI:RequestedKind>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>da5e33ac-1df3-4e92-ab2f-ad9cee7c9bd5</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:StringProperty ExportGuid="b898a824-578e-45e0-a312-193068a2b139">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_SupportedViewModelRefs(ViewDescriptor obj, PropertyGetterEventArgs&lt;ICollection&lt;string&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_SupportedViewModelRefs(ViewDescriptor obj, PropertyPreSetterEventArgs&lt;ICollection&lt;string&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_SupportedViewModelRefs(ViewDescriptor obj, PropertyPostSetterEventArgs&lt;ICollection&lt;string&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_SupportedViewModelRefs(ViewDescriptor obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.SupportedViewModelRefs == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A View supports one or more ViewModels.</ZetboxBase:Description>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>SupportedViewModelRefs</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>301</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>true</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="4698cfda-6b1d-4cd7-8350-630a1adab1a8">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
@@ -4830,7 +4904,7 @@ public static void isValid_SupportedViewModels(ViewDescriptor obj, PropertyIsVal
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:EnumerationProperty ExportGuid="2a798728-d79d-471f-be51-1f488beb8dc1">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Toolkit(ViewDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.Toolkit&gt; e)
 {
@@ -4859,7 +4933,7 @@ public static void isValid_Toolkit(ViewDescriptor obj, PropertyIsValidEventArgs 
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>Toolkit</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>600</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>1</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -4868,7 +4942,7 @@ public static void isValid_Toolkit(ViewDescriptor obj, PropertyIsValidEventArgs 
   </ZetboxBase:EnumerationProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="067ed744-cd2c-4c8b-9829-cf7d0b16df60">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_DefaultDisplayKind(ViewModelDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.ControlKind&gt; e)
 {
@@ -4897,14 +4971,14 @@ public static void isValid_DefaultDisplayKind(ViewModelDescriptor obj, PropertyI
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>DefaultDisplayKind</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>404</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>405</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>653a3fb1-71cf-4da0-85b3-b4dc5e1c9f8e</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="b535115c-b847-479d-bdea-a7994ae6eeca">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_DefaultEditorKind(ViewModelDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.ControlKind&gt; e)
 {
@@ -4933,7 +5007,7 @@ public static void isValid_DefaultEditorKind(ViewModelDescriptor obj, PropertyIs
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>DefaultEditorKind</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>403</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>404</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>true</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>5588cece-c696-40be-9142-80053efd4e29</ZetboxBase:RelationEnd>
@@ -4976,7 +5050,7 @@ public static void isValid_DefaultGridCellDisplayKind(ViewModelDescriptor obj, P
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="7a093e89-a9ea-46ca-aeb6-cd3a1740714a">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.961806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_DefaultGridCellEditorKind(ViewModelDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.GUI.ControlKind&gt; e)
 {
@@ -5005,7 +5079,7 @@ public static void isValid_DefaultGridCellEditorKind(ViewModelDescriptor obj, Pr
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>DefaultGridCellEditorKind</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>405</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>406</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>34d53542-53cd-4ef4-a7e5-ef61264969c3</ZetboxBase:RelationEnd>
@@ -5123,8 +5197,8 @@ public static void isValid_ExportGuid(ViewModelDescriptor obj, PropertyIsValidEv
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="0b7135d3-dedc-4091-a0c4-690c1b4a2b6d">
-    <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Module(ViewModelDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
 {
@@ -5161,7 +5235,7 @@ public static void isValid_Module(ViewModelDescriptor obj, PropertyIsValidEventA
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="5e2e007c-2e90-4ba6-9c9d-46e62b662ff9">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_SecondaryControlKinds(ViewModelDescriptor obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.GUI.ControlKind&gt;&gt; e)
 {
@@ -5189,14 +5263,14 @@ public static void isValid_SecondaryControlKinds(ViewModelDescriptor obj, Proper
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>SecondaryControlKinds</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>706</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>707</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>67a49c49-b890-4d35-a8db-1f8e43bfc7df</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>28dfffe3-02cc-402e-a677-77f145346b73</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="554288d1-f5f4-4b22-908b-01525a1d0f9b">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ViewModelRef(ViewModelDescriptor obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.TypeRef&gt; e)
 {
@@ -5225,11 +5299,48 @@ public static void isValid_ViewModelRef(ViewModelDescriptor obj, PropertyIsValid
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
     <ZetboxBase:Name>ViewModelRef</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>402</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>301</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>d96d030e-eebe-4b7f-8b55-dca30cbd4bde</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>true</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>eccb7be2-6c54-4fbb-83f4-dceed3825b65</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:StringProperty ExportGuid="b3cae453-e222-4d24-b6f5-47f47550ad7a">
+    <ZetboxBase:CategoryTags>Summary,Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ViewModelTypeRef(ViewModelDescriptor obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ViewModelTypeRef(ViewModelDescriptor obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ViewModelTypeRef(ViewModelDescriptor obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ViewModelTypeRef(ViewModelDescriptor obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ViewModelTypeRef == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The described CLR class' Type</ZetboxBase:Description>
+    <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
+    <ZetboxBase:Name>ViewModelTypeRef</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>302</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="9f69c3bd-e274-4639-b30c-8d2a9599917b">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -8170,6 +8281,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>eff6276d-975b-4a0d-bd3c-ad76af2189c3</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="e66e885e-f905-4243-b858-b4e920800a4e">
+    <ZetboxBase:ChangedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>180968cf-8705-433f-9346-e726c8552737</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>2000</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>1</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:InitOnlyConstraint ExportGuid="3ab614e6-6b21-48f1-959a-c13c54bb4b94">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.849845Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>94140a56-9fed-4d65-8c2c-cb8e658dff96</ZetboxBase:ConstrainedProperty>
@@ -8186,6 +8304,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>25da3568-f362-4441-841e-7c163b10b983</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="10894e3b-0294-4973-b03b-f5ee5ccb2619">
+    <ZetboxBase:ChangedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>b898a824-578e-45e0-a312-193068a2b139</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-03-22T12:10:22.801806Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>2000</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>1</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="3f15b9a2-5fc3-46fa-91b3-5cbc5dafc98e">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.860845Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>2a798728-d79d-471f-be51-1f488beb8dc1</ZetboxBase:ConstrainedProperty>
@@ -8224,6 +8349,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>554288d1-f5f4-4b22-908b-01525a1d0f9b</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="fe6ffb0e-143d-4ac7-853a-420f2bab6f5d">
+    <ZetboxBase:ChangedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>b3cae453-e222-4d24-b6f5-47f47550ad7a</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-03-22T12:17:26.427806Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>2000</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>1</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="82b789d5-b0e6-4ce8-8e9d-f47488e35aa9">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.883846Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d</ZetboxBase:ConstrainedProperty>
@@ -15894,204 +16026,238 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:ControlKind>7e30f1de-076c-42d3-80b2-9c1111a6cdfb</GUI:ControlKind>
     <GUI:ControlRef>1b1fedf1-8006-41b7-9f3f-186a87825887</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b57689ea-9fb7-40fb-9768-9c1fd25ab707">
     <GUI:ControlKind>c6e426b8-2754-4509-8ad4-9a51938b17a1</GUI:ControlKind>
     <GUI:ControlRef>a971e143-2099-4f52-972c-29fa9934391c</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="52801e0e-2a35-400e-9c3e-699fc2cebb7a">
     <GUI:ControlKind>3824d326-f4d5-477e-ae3e-50d9dd9edaf9</GUI:ControlKind>
     <GUI:ControlRef>f84bbfe1-6234-41a3-b363-05de9ec5eb10</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="f86553e9-b881-4e14-a635-70547e662852">
     <GUI:ControlKind>ace074dc-845d-4796-841e-973939a1e98f</GUI:ControlKind>
     <GUI:ControlRef>6090cbf6-9c04-4529-9eca-b8b9be580d15</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="19a70a92-6a89-4905-a2cb-692fc6249558">
     <GUI:ControlKind>2445ac09-ac5e-4bfd-8bd3-166df6fc5176</GUI:ControlKind>
     <GUI:ControlRef>1837f880-da3e-4036-8538-74237a5b5577</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b111c69a-cece-4033-be35-2c6482d85358">
     <GUI:ControlKind>da264078-444c-4cf4-a018-8dddaa8ed8cd</GUI:ControlKind>
     <GUI:ControlRef>e9cbcbd5-f0a9-4c8f-8d56-852ec44a16d8</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="93c2965e-598a-4bbd-8c37-3f520699ff68">
     <GUI:ControlKind>8cf4c4e6-8c6f-48ac-a879-f09679141298</GUI:ControlKind>
     <GUI:ControlRef>c7059284-7003-426c-8447-1247c39547cb</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="3f530b14-b40e-44a0-9aa9-40676b4162fe">
     <GUI:ControlKind>ac155a59-74bd-46c1-b63a-120f68118af2</GUI:ControlKind>
     <GUI:ControlRef>e3877431-6d33-4de4-9aa5-67a626fe4c61</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="3534470a-1aaf-4bf9-83ae-85abc988e3f1">
     <GUI:ControlKind>ae79eb38-a00c-47be-b886-7bcc2b48020c</GUI:ControlKind>
     <GUI:ControlRef>2f8a7579-7635-4c2b-b548-f8deedc9f0ad</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="9bbbbc00-ec88-4323-a13f-cd05445d7bdc">
     <GUI:ControlKind>b2be0e95-d69e-44ff-8d19-2ccd70da2512</GUI:ControlKind>
     <GUI:ControlRef>5b286939-6ef9-4804-b651-c6429df8f9c5</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c66471de-4edd-4718-b35f-27cf816c9197">
     <GUI:ControlKind>37578c9c-5c1a-4443-acc0-d809a4866c6f</GUI:ControlKind>
     <GUI:ControlRef>3d5d7029-9622-400c-bc17-5105ff4835ee</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="38efeae1-4f95-4545-b240-6b51c45dc0a5">
     <GUI:ControlKind>3166aeb8-215d-4274-a930-e9de6393edc1</GUI:ControlKind>
     <GUI:ControlRef>cd8a2a4b-eae1-4586-a036-66100a2e92a8</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="5d3754d7-b100-44b2-9d03-153f699c5520">
     <GUI:ControlKind>2b8eb3dc-46d8-4036-8434-0474555ec012</GUI:ControlKind>
     <GUI:ControlRef>c563f05a-fc75-44db-9438-60dbea11cf7c</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="aecec56c-ecfd-4c06-bc05-79a41b5ca6f5">
     <GUI:ControlKind>5b3cb902-ef6a-4d70-9b85-824a43bfbb8c</GUI:ControlKind>
     <GUI:ControlRef>eda21add-921b-4493-aa61-2f8342b8acd9</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b18b33f9-fb60-4288-bd9d-67dbe18fd4ce">
     <GUI:ControlKind>90fe1019-7eea-4a90-8c3b-28fa317c9b65</GUI:ControlKind>
     <GUI:ControlRef>793f3c6c-37dc-4ac9-a924-6190929ca7eb</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ce2a7b84-7fc0-4d2a-985f-47231592252c">
     <GUI:ControlKind>974fae02-0f72-4631-bcf3-edbebbafea4f</GUI:ControlKind>
     <GUI:ControlRef>739d962b-2bf9-4c6b-ad2a-df35b9550a67</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="467dddcc-3a3d-44fa-8c07-aea4ab1b8891">
     <GUI:ControlKind>2073aa42-81ce-4beb-a3f5-c76c788247c5</GUI:ControlKind>
     <GUI:ControlRef>67c0280f-6659-4db2-8757-bf5d965d3054</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="168fb814-5d98-425b-9b2c-f2942fd937d5">
     <GUI:ControlKind>a09a78f4-a583-4fef-8ae7-cf7acd95e8b8</GUI:ControlKind>
     <GUI:ControlRef>1829d88f-c322-448f-bbc8-cfc6d6fcb0c3</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="5c6480ea-0a3e-4293-bdb6-677a4ac2a6ad">
     <GUI:ControlKind>2f6233fe-6fd6-4145-b438-64cc85f89fd8</GUI:ControlKind>
     <GUI:ControlRef>8b83873c-495a-4f68-af15-da299b290727</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c15c6bff-3387-4459-a25d-36af70635ff5">
     <GUI:ControlKind>b8391867-7c76-40fe-b387-96ab5597fd0d</GUI:ControlKind>
     <GUI:ControlRef>6c1d55f8-e1c4-4bb0-b9e3-4ce641487b5b</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ce3aa4f3-fd3f-4814-bbce-6c20d3c1461b">
     <GUI:ControlKind>c9253b72-608b-4e3d-b215-49995af78791</GUI:ControlKind>
     <GUI:ControlRef>0c93444a-78b8-475d-bebe-a64f53e41cb1</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b88fd41f-4fdb-4167-8922-cf8efe176294">
     <GUI:ControlKind>ab09eaba-507b-4dce-9fbd-589adbc9580b</GUI:ControlKind>
     <GUI:ControlRef>937a06f5-8bdb-47e7-b30d-ef5e944e2eae</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="808b3acd-0cc1-497f-a4e2-ac51c6037049">
     <GUI:ControlKind>0543033b-ebcb-4fe8-981e-dae5ff195ab8</GUI:ControlKind>
     <GUI:ControlRef>60cb9970-7ba7-4ea6-8f20-c643deb62ab4</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8fd8c847-a453-4cba-8592-f10f035e1ef5">
     <GUI:ControlKind>aa2fb611-a8aa-44b7-9b55-80ef3ef4c4b1</GUI:ControlKind>
     <GUI:ControlRef>d44fd294-28ac-410a-809f-d534bc121992</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="5abc0ce1-3750-498e-b4bd-191ce8050985">
     <GUI:ControlKind>8b4273bc-dee4-4985-926d-40d3833fe4f9</GUI:ControlKind>
     <GUI:ControlRef>1aaab770-7a60-4815-ae76-fcafafd99df4</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="0dc2e725-60f7-4417-9e87-231af5797e17">
     <GUI:ControlKind>1c39f2f9-f4ba-4653-b92f-4672dfc4294a</GUI:ControlKind>
     <GUI:ControlRef>0ed2b27e-92a2-40ca-bc77-a03e3f7a0fcd</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="01d2bbf3-db1c-4199-9f77-862103421f71">
     <GUI:ControlKind>89dfb066-b745-4896-9056-d9a47927b9a5</GUI:ControlKind>
     <GUI:ControlRef>dc73eedf-b5da-49a8-bc4d-839e77d3fc3d</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="bade5303-8c72-48d3-b3c6-0bb825887848">
     <GUI:ControlKind>354ae12b-6e5f-46e5-91f3-ea9b061083bd</GUI:ControlKind>
     <GUI:ControlRef>5fdaa3bb-d5f4-4f53-839a-04fdc33f5160</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2908f303-11cd-4d34-87d6-d1ec9b61f434">
     <GUI:ControlKind>c87f7018-72b8-4f9a-8c10-9e0b6d10a77d</GUI:ControlKind>
     <GUI:ControlRef>095416ff-7c3a-4687-a63f-bec415d9e31d</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a42d3b92-e22c-49f0-9d7f-511542a2e9ab">
     <GUI:ControlKind>0bb7189a-aadb-4c56-94be-0492808d923c</GUI:ControlKind>
     <GUI:ControlRef>d7fe8941-4005-49d1-9e71-8d00013a8433</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4c9dd0eb-ff3b-405e-a066-cf7a9f47f319">
     <GUI:ControlKind>122b23a9-e1ee-4796-ab85-c60527a0060f</GUI:ControlKind>
     <GUI:ControlRef>eba03cc8-2178-4bee-8514-05c8cf17bcde</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="5dbfbd11-efb4-4a2c-a5b8-9eefa4b07a9e">
     <GUI:ControlKind>997f9eb7-084f-4703-b905-2b97be27a9f1</GUI:ControlKind>
     <GUI:ControlRef>ae39d1d3-550b-4cd8-94b1-344e18578855</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="f221b18a-6628-4ad1-b932-645ac37e6033">
     <GUI:ControlKind>d55c9558-4ced-47b0-8eda-81553340fb5b</GUI:ControlKind>
     <GUI:ControlRef>0695b951-f3fe-4bf2-a9b7-f893c5bb7c1c</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c5a5a3c9-da65-4702-bceb-456105d68d4a">
     <GUI:ControlKind>dc5982a3-8b8f-44e1-b860-1400a41c4275</GUI:ControlKind>
     <GUI:ControlRef>a18451e5-bc8e-4bbb-a2b3-923c4610b103</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ControlKind ExportGuid="017abeeb-c2fa-4203-83fb-e64bb418b0a1">
@@ -17206,7 +17372,7 @@ public static void ObjectIsValid(Constraint obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Constraints</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="038230c3-ee0b-4a04-b89b-fe342ac8f069">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:14:19.637806Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-25T02:32:08Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>ConstraintInvocation</ZetboxBase:Name>
@@ -17246,7 +17412,7 @@ public static void ObjectIsValid(ConstraintInvocation obj, ObjectIsValidEventArg
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
-    <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ConstraintInvocations</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
@@ -19704,7 +19870,7 @@ public static void ObjectIsValid(SequenceData obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>SequenceData</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="d1bf8a7e-a8c0-435b-9dfe-b5ab61e71d1a">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-22T12:19:56.342435Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-12-22T20:49:27Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Descriptor Object for Zetbox Services</ZetboxBase:Description>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -19745,7 +19911,7 @@ public static void ObjectIsValid(ServiceDescriptor obj, ObjectIsValidEventArgs e
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
-    <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ServiceDescriptors</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
@@ -22537,6 +22703,43 @@ public static void isValid_Type(CLRObjectParameter obj, PropertyIsValidEventArgs
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>632c4a86-06e5-4ec5-88e7-12e45c0733d9</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:StringProperty ExportGuid="9cb49ab3-72bd-46d0-a3b0-f4b20428aee5">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-22T12:06:58.250806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_TypeRef(CLRObjectParameter obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_TypeRef(CLRObjectParameter obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_TypeRef(CLRObjectParameter obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_TypeRef(CLRObjectParameter obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.TypeRef == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-22T12:06:58.250806Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The expected argument type.</ZetboxBase:Description>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>TypeRef</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>012dfab4-934b-443e-853a-11a5da5b0627</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="908757d2-053b-40c5-89f8-9e5f79b5fe83">
     <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
@@ -35949,6 +36152,13 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:ConstrainedProperty>137292ce-4493-451d-a7fa-1b7cc7df03dd</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-03-15T21:13:48Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="09f9671c-3afc-406a-90ac-060f69a445d6">
+    <ZetboxBase:ChangedOn>2013-03-22T12:06:58.250806Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>9cb49ab3-72bd-46d0-a3b0-f4b20428aee5</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-03-22T12:06:58.250806Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>2000</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>1</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="15d51b1e-d37b-49eb-a1bf-0cfbc475c01d">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.129032Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>43d03fec-b595-46d0-b5d5-cf4c5d21fda7</ZetboxBase:ConstrainedProperty>
@@ -43933,197 +44143,230 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
   <GUI:ViewDescriptor ExportGuid="2509d44a-64df-468b-8980-04fae9bc1e9e">
     <GUI:ControlRef>b318403f-cf3d-4067-a252-01518f3dcd2a</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="192702b5-0c7d-4ff5-a7a7-e74211562580">
     <GUI:ControlKind>9d414225-460a-4c54-8e36-e368804e387f</GUI:ControlKind>
     <GUI:ControlRef>d1ea3d41-384e-4f72-940c-0471f2421082</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="76d4e8f0-558d-4012-af32-4ab52ed48a66">
     <GUI:ControlKind>017abeeb-c2fa-4203-83fb-e64bb418b0a1</GUI:ControlKind>
     <GUI:ControlRef>eb4a56ac-88c3-4f19-85c1-b217e93a2a70</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2699da6a-0fe8-4c91-ac62-00ca6f8359bb">
     <GUI:ControlKind>12b829e1-abab-43f3-99ea-e33cd383d7e6</GUI:ControlKind>
     <GUI:ControlRef>58dc43e8-3fc4-46ce-b233-51459ebe4d2b</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ef91f0f1-4d92-44ba-92b9-bb638bb8fa35">
     <GUI:ControlKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:ControlKind>
     <GUI:ControlRef>852d2841-6918-4faf-a8ef-5d93a1e5d548</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2eaa5517-915d-4242-9ce1-91cff16b6046">
     <GUI:ControlKind>90d5ff7f-0c82-4278-bb8d-49c240f6bc2c</GUI:ControlKind>
     <GUI:ControlRef>857d0acf-6eac-49b5-9940-4f7fb6b81549</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8fa28c18-ee3a-476c-a79d-d9ef61a943d8">
     <GUI:ControlKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:ControlKind>
     <GUI:ControlRef>ba95fc85-c50f-494a-b4f0-5596ef38b7bf</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="02dacd0b-c604-4311-b564-15b1ced9299f">
     <GUI:ControlKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:ControlKind>
     <GUI:ControlRef>28a89148-24d1-4cc9-accc-24cc7eb2dfde</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="af750a10-d57e-4424-a0c7-2257b47c2b23">
     <GUI:ControlKind>d9fb7cec-b71f-48f1-a591-216de253c7d1</GUI:ControlKind>
     <GUI:ControlRef>9c2c3f17-3445-46e0-8b76-fc11f15dfbf5</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8beacc8a-ad78-4b8e-a69e-69ba30057a00">
     <GUI:ControlKind>515e884b-33e0-4db6-b0ad-9755f7543a2b</GUI:ControlKind>
     <GUI:ControlRef>93e472bd-5f0f-4708-a09c-6937ac199ab7</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b1a38e67-9315-454d-812d-9819386968e7">
     <GUI:ControlKind>f7cf3060-5fa5-4077-93e9-5fc681f875fe</GUI:ControlKind>
     <GUI:ControlRef>7364ee0c-a700-430d-9176-e4eef9f51581</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="80506dd7-f307-434b-8824-b7f25ecedc9c">
     <GUI:ControlRef>477259e0-5729-4c10-9fd8-827d2a705e7d</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4b8a4590-690c-4e85-b10a-d0bf8f475c46">
     <GUI:ControlKind>18c0afa2-61bc-4ecb-b1e9-47b33b294573</GUI:ControlKind>
     <GUI:ControlRef>12084abf-1e98-4d04-b66d-fed4ea47d3c2</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="3fd9383c-ca6e-41dc-9dc1-3b24799f6871">
     <GUI:ControlKind>f9092349-b263-4887-b605-cccac6a361bd</GUI:ControlKind>
     <GUI:ControlRef>a4a45766-f3c2-46b9-8f12-dbec57d818d5</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="920c6bf1-5961-4512-9303-7ae9626eda47">
     <GUI:ControlKind>62047263-be4c-4495-bd1e-a32006513537</GUI:ControlKind>
     <GUI:ControlRef>0bfcfbff-feae-485b-a5f5-7cce43c3b2c4</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b8cec662-195f-40ae-8d79-ab9f35540a2e">
     <GUI:ControlKind>364aaaf3-0f61-4642-a0e3-bd812935cf44</GUI:ControlKind>
     <GUI:ControlRef>a7c67d95-c198-47da-ad6d-af90e08137f7</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a17d75a0-d0f9-49ae-a846-a72e65963ea3">
     <GUI:ControlKind>66e080be-471d-4dc5-9850-25bedbdfc76e</GUI:ControlKind>
     <GUI:ControlRef>92fb7c93-822b-41f7-b25b-dd44e0fb3516</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="f0cbf4c5-2175-4b93-8329-882c0468d66c">
     <GUI:ControlKind>8e5c1940-a460-4055-8172-b3a238b298ff</GUI:ControlKind>
     <GUI:ControlRef>fb290a14-69e5-46ec-9b49-2d4b86c6cdb8</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a4d3b745-dc9c-4229-9016-9b6c292d22af">
     <GUI:ControlKind>b056e51c-efcf-4ba5-bb34-3b1204254ef9</GUI:ControlKind>
     <GUI:ControlRef>f1684f1f-e7cc-4f5f-8ea8-3884478dbd28</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="9d3ced69-6831-4809-9191-4158f62d417c">
     <GUI:ControlKind>150c7db0-d068-4fe3-8137-5b23c73e1fc8</GUI:ControlKind>
     <GUI:ControlRef>637a4d0a-a357-415f-800a-d9ccdf479e9d</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="06c466a8-28ec-4b8d-b90b-cdf92f95e776">
     <GUI:ControlKind>601d4613-016a-4b8b-97fb-53f0f0feb51a</GUI:ControlKind>
     <GUI:ControlRef>575d4a53-edf4-4f35-9feb-26fbb6e42a06</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c479b0e0-e199-4905-853a-a2361d38884b">
     <GUI:ControlKind>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:ControlKind>
     <GUI:ControlRef>18c4efb5-c283-44f2-81bf-c0b70e97b79f</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c6534da8-98a1-43fc-80c1-67a3cce7f164">
     <GUI:ControlKind>4f6779a0-46f6-48a0-8880-fc491164d04a</GUI:ControlKind>
     <GUI:ControlRef>a22c963a-f2bd-449d-bb1d-d3c82352de20</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="9c62975e-499c-41df-b987-b53580dfcff8">
     <GUI:ControlKind>70d8ada7-6c9c-4f14-8fbb-d8c6fd3c6491</GUI:ControlKind>
     <GUI:ControlRef>3419dc91-b09f-4322-b2e2-b9e1df851023</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="d50d9d23-fbd3-4006-b36f-8f9a2f0249a0">
     <GUI:ControlKind>d30d2676-7f2f-4f0d-895a-e46f19b8f526</GUI:ControlKind>
     <GUI:ControlRef>c939ebb0-3e66-424c-8e8f-3c6e9905abaa</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="31d8374d-0565-4e4d-a1f8-6053e4832901">
     <GUI:ControlKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:ControlKind>
     <GUI:ControlRef>0695b951-f3fe-4bf2-a9b7-f893c5bb7c1c</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="70669305-0ecf-4806-b1d9-a13e5893afad">
     <GUI:ControlKind>9731f312-8ce4-4c2d-8d95-1923256dc9b8</GUI:ControlKind>
     <GUI:ControlRef>4652082a-202d-4d20-a0d4-81a4f69ffb85</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="760571cb-ec74-46e9-8cfb-5bb54790e90f">
     <GUI:ControlKind>3e933ba6-a890-4114-97f8-595ef0560aee</GUI:ControlKind>
     <GUI:ControlRef>625f240a-c3d9-4dce-a573-ba419d250d96</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b7507acb-9c07-4300-b728-03c5972babbb">
     <GUI:ControlKind>20488fcd-595b-49f6-89f9-e84221586f54</GUI:ControlKind>
     <GUI:ControlRef>fe709bd1-486a-4087-9da0-07692beeaf02</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="1c0f3cdb-459b-4130-8937-999d31f0fd26">
     <GUI:ControlKind>f3ef02a1-2f89-4edf-91c8-0d79b4e6f0c4</GUI:ControlKind>
     <GUI:ControlRef>ca9d1de3-4beb-4b94-b5a7-920ad2919c7c</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="94917bbc-d32a-4c53-a4f6-904567576732">
     <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
     <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="82c0bcbd-2184-4c36-adaf-60ad5e984dee">
     <GUI:ControlKind>6b5093bb-3ac0-4710-b30d-d72a50b09ee8</GUI:ControlKind>
     <GUI:ControlRef>46a2ac8e-1d19-40e1-bca9-37834962ef95</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="074fdde3-165d-452a-84cc-3b2bd35ab4d6">
     <GUI:ControlKind>59253ed1-a3a5-4574-b3bb-3c4fa535d21c</GUI:ControlKind>
     <GUI:ControlRef>e68bbcf2-0d0d-446a-bc1e-4791e904c3fb</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor_supports_TypeRef_RelationEntry ExportGuid="daeb6cfa-e00d-48d1-9a38-8c3482ba3e89">

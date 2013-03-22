@@ -990,12 +990,21 @@
         <many-to-one name="ControlRef" column="`fk_ControlRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
+        <property name="ControlTypeRef" 
+                  column="`ControlTypeRef`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
+        <!-- ValueTypeProperty isList -->
+        <set name="SupportedViewModelRefs"  inverse="true" batch-size="100">
+            <key column="`fk_ViewDescriptor`" />
+            <one-to-many class="Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl+ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=ViewDescriptor_supports_TypeRef_RelationEntry -->
@@ -1068,6 +1077,10 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ViewModelRef" column="`fk_ViewModelRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
 
+        <!-- ValueTypeProperty isValue -->
+        <property name="ViewModelTypeRef" 
+                  column="`ViewModelTypeRef`" 
+                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
 
@@ -3421,6 +3434,10 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Type" column="`CLRObjectParameters_fk_Type`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
 
+        <!-- ValueTypeProperty isValue -->
+        <property name="TypeRef" 
+                  column="`CLRObjectParameters_TypeRef`" 
+                  optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 

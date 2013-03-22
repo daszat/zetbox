@@ -283,6 +283,11 @@
       <End Role="Muhblah" EntitySet="MuhblahEfImpl" />
       <End Role="CollectionEntry" EntitySet="Muhblah_StringCollection_CollectionEntryEfImpl" />
     </AssociationSet>
+    <EntitySet Name="ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl" EntityType="Model.ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl" />
+    <AssociationSet Name="FK_ViewDescriptor_value_SupportedViewModelRefs" Association="Model.FK_ViewDescriptor_value_SupportedViewModelRefs" >
+      <End Role="ViewDescriptor" EntitySet="ViewDescriptorEfImpl" />
+      <End Role="CollectionEntry" EntitySet="ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl" />
+    </AssociationSet>
 
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
     <EntitySet Name="Projekt_AuditJournal_CollectionEntryEfImpl" EntityType="Model.Projekt_AuditJournal_CollectionEntryEfImpl" />
@@ -2656,11 +2661,16 @@
                         Relationship="Model.FK_View_has_ControlRef"
                         FromRole="View"
                         ToRole="ControlRef" />
+    <Property Name="ControlTypeRef" Type="String" Nullable="true" MaxLength="2000"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_ViewDescriptor_has_Module"
                         FromRole="ViewDescriptor"
                         ToRole="Module" />
+    <NavigationProperty Name="SupportedViewModelRefsImpl"
+                        Relationship="Model.FK_ViewDescriptor_value_SupportedViewModelRefs"
+                        FromRole="ViewDescriptor"
+                        ToRole="CollectionEntry" />
     <NavigationProperty Name="SupportedViewModelsImpl"
                         Relationship="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A"
                         FromRole="ViewDescriptor"
@@ -2706,6 +2716,7 @@
                         Relationship="Model.FK_Descriptor_has_ViewModelRef"
                         FromRole="Descriptor"
                         ToRole="ViewModelRef" />
+    <Property Name="ViewModelTypeRef" Type="String" Nullable="true" MaxLength="2000"  />
   </EntityType>
   <EntityType Name="VisualEfImpl">
     <Key>
@@ -2835,6 +2846,7 @@
                         Relationship="Model.FK_ClrObjectParameter_isOf_Type"
                         FromRole="ClrObjectParameter"
                         ToRole="Type" />
+    <Property Name="TypeRef" Type="String" Nullable="true" MaxLength="2000"  />
   </EntityType>
   <EntityType Name="CommonWorkScheduleRuleEfImpl" BaseType="Model.WorkScheduleRuleEfImpl">
   </EntityType>
@@ -4052,6 +4064,29 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.Muhblah_StringCollection_CollectionEntryEfImpl" 
+         Multiplicity="*" />
+  </Association>
+  <!-- ViewDescriptor.SupportedViewModelRefs -->
+  <EntityType Name="ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="ParentImpl"
+                        Relationship="Model.FK_ViewDescriptor_value_SupportedViewModelRefs"
+                        FromRole="CollectionEntry"
+                        ToRole="ViewDescriptor" />
+    <!-- B -->
+    <Property Name="Value" Type="String" Nullable="true" MaxLength="2000"  />
+  </EntityType>
+  <Association Name="FK_ViewDescriptor_value_SupportedViewModelRefs" >
+    <End Role="ViewDescriptor"
+         Type="Model.ViewDescriptorEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl" 
          Multiplicity="*" />
   </Association>
 

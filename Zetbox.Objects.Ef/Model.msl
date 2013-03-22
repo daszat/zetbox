@@ -160,6 +160,7 @@
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TypeRef" ColumnName="CLRObjectParameters_TypeRef" />
           <Condition ColumnName="__Discriminator" Value="base.CLRObjectParameters" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -1691,6 +1692,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptorEfImpl)">
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ControlTypeRef" ColumnName="ControlTypeRef" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="ToolkitImpl" ColumnName="Toolkit" />
 	    </MappingFragment>
@@ -1702,6 +1704,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="ViewModelTypeRef" ColumnName="ViewModelTypeRef" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -5754,6 +5757,25 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Muhblah" IsNull="false"/>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl">
+        <MappingFragment StoreEntitySet="ViewDescriptor_SupportedViewModelRefs_CollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Value" ColumnName="SupportedViewModelRefs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_ViewDescriptor_value_SupportedViewModelRefs"
+                           TypeName="Model.FK_ViewDescriptor_value_SupportedViewModelRefs"
+                           StoreEntitySet="ViewDescriptor_SupportedViewModelRefs_CollectionEntry" >
+      <EndProperty Name="ViewDescriptor">
+        <ScalarProperty Name="ID" ColumnName="fk_ViewDescriptor"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ViewDescriptor" IsNull="false"/>
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->

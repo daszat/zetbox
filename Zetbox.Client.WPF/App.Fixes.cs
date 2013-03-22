@@ -20,58 +20,17 @@ namespace Zetbox.Client.WPF
 {
     using System;
     using System.Linq;
-
+    using System.Windows;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using System.Windows;
     using Zetbox.App.GUI;
 
     /// <content>Contains various and temporary fixes needed to clean the database</content>
     public partial class App
     {
-        ///// <summary>
-        ///// Fix broken TypeRefs.
-        ///// </summary>
-        //private static void FixupTypeRefParents(IZetboxContext ctx)
-        //{
-        //    if (ctx == null) throw new ArgumentNullException("ctx");
-        //    using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
-        //    {
-        //        var typeRefs = ctx.GetQuery<TypeRef>();
-        //        foreach (var tr in typeRefs)
-        //        {
-        //            if (tr.Parent != null)
-        //            {
-        //                continue;
-        //            }
-
-        //            UpdateParent(ctx, tr);
-        //            ctx.SubmitChanges();
-        //        }
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Creates the parent chain for a given TypeRef.
-        ///// </summary>
-        ///// <param name="ctx">the context to use</param>
-        ///// <param name="tr">the <see cref="TypeRef"/> to fix</param>
-        //private static void UpdateParent(IZetboxContext ctx, TypeRef tr)
-        //{
-        //    var type = tr.AsType(false);
-        //    if (type != null
-        //        && type != typeof(object)
-        //        && !type.IsGenericTypeDefinition
-        //        && type.BaseType != null)
-        //    {
-        //        tr.Parent = type.BaseType.ToRef(ctx);
-        //        UpdateParent(ctx, tr.Parent);
-        //    }
-        //}
-
         //private static void PrintEagerLoadingGraphViz()
         //{
         //    using (Logging.Log.DebugTraceMethodCall("PrintEagerLoadingGraphViz"))
@@ -141,12 +100,10 @@ namespace Zetbox.Client.WPF
         {
             //ImportIcons(ctxFactory());
             //FixIcons(ctxFactory());
-            //FixupTypeRefParents(ctxFactory());
             // PrintEagerLoadingGraphViz();
             // CreateTestFragebögen();
             //PrintControlKindTypes();
             //FixupCallImplementInterfaces(ctx);
-            //RegenerateTypeRefs(ctxFactory());
             //CreateTestClasses(ctxFactory);
         }
 
@@ -262,15 +219,6 @@ namespace Zetbox.Client.WPF
         //        i.Blob = ctx.Find<Blob>(ctx.CreateBlob(fi, fi.GetMimeType()));
         //    }
         //    ctx.SubmitChanges();
-        //}
-
-        //private static void RegenerateTypeRefs(IZetboxContext ctx)
-        //{
-        //    foreach (var a in ctx.GetQuery<Assembly>())
-        //    {
-        //        a.RegenerateTypeRefs();
-        //        ctx.SubmitChanges();
-        //    }
         //}
 
         //private static void FixupCallImplementInterfaces(Func<IZetboxContext> ctxFactory)

@@ -884,6 +884,64 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnViewModelRef_IsValid;
 
         /// <summary>
+        /// The described CLR class&apos; Type
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string ViewModelTypeRef
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.ViewModelTypeRef;
+                if (OnViewModelTypeRef_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnViewModelTypeRef_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.ViewModelTypeRef != value)
+                {
+                    var __oldValue = Proxy.ViewModelTypeRef;
+                    var __newValue = value;
+                    if (OnViewModelTypeRef_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnViewModelTypeRef_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ViewModelTypeRef", __oldValue, __newValue);
+                    Proxy.ViewModelTypeRef = __newValue;
+                    NotifyPropertyChanged("ViewModelTypeRef", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnViewModelTypeRef_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnViewModelTypeRef_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ViewModelTypeRef");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, string> OnViewModelTypeRef_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, string> OnViewModelTypeRef_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, string> OnViewModelTypeRef_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnViewModelTypeRef_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -961,6 +1019,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
 
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
+            me.ViewModelTypeRef = other.ViewModelTypeRef;
             this._fk_DefaultDisplayKind = otherImpl._fk_DefaultDisplayKind;
             this._fk_DefaultEditorKind = otherImpl._fk_DefaultEditorKind;
             this._fk_DefaultGridCellDisplayKind = otherImpl._fk_DefaultGridCellDisplayKind;
@@ -1064,6 +1123,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 case "ExportGuid":
                 case "Module":
                 case "ViewModelRef":
+                case "ViewModelTypeRef":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -1249,6 +1309,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                         obj => obj.ViewModelRef,
                         (obj, val) => obj.ViewModelRef = val,
 						obj => OnViewModelRef_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, string>(
+                        lazyCtx,
+                        new Guid("b3cae453-e222-4d24-b6f5-47f47550ad7a"),
+                        "ViewModelTypeRef",
+                        null,
+                        obj => obj.ViewModelTypeRef,
+                        (obj, val) => obj.ViewModelTypeRef = val,
+						obj => OnViewModelTypeRef_IsValid), 
                     // position columns
                 };
             }
@@ -1321,6 +1390,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("ViewModelRef");
+            SetNotInitializedProperty("ViewModelTypeRef");
             base.NotifyCreated();
             if (OnNotifyCreated_ViewModelDescriptor != null) OnNotifyCreated_ViewModelDescriptor(this);
         }
@@ -1420,6 +1490,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
 
             public virtual Zetbox.App.Base.TypeRefNHibernateImpl.TypeRefProxy ViewModelRef { get; set; }
 
+            public virtual string ViewModelTypeRef { get; set; }
+
         }
 
         // make proxy available for the provider
@@ -1444,6 +1516,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             }
             binStream.Write(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null);
             binStream.Write(this.Proxy.ViewModelRef != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelRef) : (int?)null);
+            binStream.Write(this.Proxy.ViewModelTypeRef);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1464,6 +1537,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             }
             binStream.Read(out this._fk_Module);
             binStream.Read(out this._fk_ViewModelRef);
+            this.Proxy.ViewModelTypeRef = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1485,6 +1559,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ViewModelRef != null ? this.Proxy.ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ViewModelTypeRef, xml, "ViewModelTypeRef", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1520,6 +1595,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 break;
             case "Zetbox.App.GUI|ViewModelRef":
                 this._fk_guid_ViewModelRef = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.GUI|ViewModelTypeRef":
+                this.Proxy.ViewModelTypeRef = XmlStreamer.ReadString(xml);
                 break;
             }
         }

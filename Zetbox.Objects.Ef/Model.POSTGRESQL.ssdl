@@ -1260,6 +1260,12 @@
       <End Role="CollectionEntry" EntitySet="Muhblah_StringCollection_CollectionEntry" />
     </AssociationSet>
     
+    <EntitySet Name="ViewDescriptor_SupportedViewModelRefs_CollectionEntry" EntityType="Model.Store.ViewDescriptor_SupportedViewModelRefs_CollectionEntry" Schema="gui" Table="ViewDescriptors_SupportedViewModelRefsCollection" />
+    <AssociationSet Name="FK_ViewDescriptor_value_SupportedViewModelRefs" Association="Model.Store.FK_ViewDescriptor_value_SupportedViewModelRefs" >
+      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
+      <End Role="CollectionEntry" EntitySet="ViewDescriptor_SupportedViewModelRefs_CollectionEntry" />
+    </AssociationSet>
+    
 
     <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
     <EntitySet Name="Projekt_AuditJournal_CollectionEntry" EntityType="Model.Store.Projekt_AuditJournal_CollectionEntry" Schema="projekte" Table="Projekte_AuditJournalCollection" />
@@ -1441,6 +1447,7 @@
     <Property Name="Label" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="CLRObjectParameters_fk_Type" Type="int4" />
+    <Property Name="CLRObjectParameters_TypeRef" Type="varchar" MaxLength="2000" Nullable="true" />
     <Property Name="CompoundObjectParameters_fk_CompoundObject" Type="int4" />
     <Property Name="DateTimeParameters_DateTimeStyle" Type="int4" Nullable="true" />
     <Property Name="EnumParameters_fk_Enumeration" Type="int4" />
@@ -2542,6 +2549,7 @@
     <Property Name="fk_ControlRef" Type="int4" />
     <Property Name="fk_Module" Type="int4" />
     <Property Name="fk_ControlKind" Type="int4" />
+    <Property Name="ControlTypeRef" Type="varchar" MaxLength="2000" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Toolkit" Type="int4" Nullable="false" />
   </EntityType>
@@ -2560,6 +2568,7 @@
     <Property Name="fk_Module" Type="int4" />
     <Property Name="Description" Type="varchar" MaxLength="4000" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="ViewModelTypeRef" Type="varchar" MaxLength="2000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Visual">
@@ -6195,6 +6204,30 @@
         </Principal>
         <Dependent Role="CollectionEntry">
           <PropertyRef Name="fk_Muhblah" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+
+    <EntityType Name="ViewDescriptor_SupportedViewModelRefs_CollectionEntry" >
+      <Key>
+        <PropertyRef Name="ID" />
+      </Key>
+      <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_ViewDescriptor" Type="int4" Nullable="true" />
+      <Property Name="SupportedViewModelRefs" Type="varchar" MaxLength="2000" />
+    </EntityType>
+
+    <Association Name="FK_ViewDescriptor_value_SupportedViewModelRefs">
+      <End Role="ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="0..1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="CollectionEntry" Type="Model.Store.ViewDescriptor_SupportedViewModelRefs_CollectionEntry" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="ViewDescriptor">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CollectionEntry">
+          <PropertyRef Name="fk_ViewDescriptor" />
         </Dependent>
       </ReferentialConstraint>
     </Association>

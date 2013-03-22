@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-19T14:35:31Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-22T13:19:56Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -1995,12 +1995,14 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <GUI:ControlKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:ControlKind>
     <GUI:ControlRef>ff78973f-bb78-47fd-ad8b-da3f1f06d77e</GUI:ControlRef>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4cfc8a24-f512-4f19-82fd-76641535abf5">
     <GUI:ControlKind>f9fc5f32-8dbd-4c86-8e94-2794336da0ac</GUI:ControlKind>
     <GUI:ControlRef>7bd0d3fa-be58-42e5-bdb3-c038be73a345</GUI:ControlRef>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ControlKind ExportGuid="df5134d6-18f1-43b9-96d3-9283bc2b09a8">
@@ -3522,24 +3524,28 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:ControlKind>24338f74-ec90-48a5-90ff-b9830082cb12</GUI:ControlKind>
     <GUI:ControlRef>002642f4-df4f-4204-9051-1abdfd034263</GUI:ControlRef>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="34bc1764-65bd-4ed9-b382-2f80c36f0e83">
     <GUI:ControlKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:ControlKind>
     <GUI:ControlRef>a2e5114e-4b88-4674-ba3a-a25ab15173e1</GUI:ControlRef>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ba118051-6439-4abf-b7ef-51b4cd8403bb">
     <GUI:ControlKind>d414b18f-e90a-4b69-a45a-4224c62f74cb</GUI:ControlKind>
     <GUI:ControlRef>5ad7e1ba-856c-43f9-81ee-6af87f3921cf</GUI:ControlRef>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="6228388d-92e9-42d5-b7c4-07b862f2a5f2">
     <GUI:ControlKind>d72c2283-b956-461f-b47e-93d81c8bf896</GUI:ControlKind>
     <GUI:ControlRef>7c5ab609-fe45-4b83-a72a-ee28f1615b23</GUI:ControlRef>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:NavigationScreen ExportGuid="6c3f5c91-7245-479d-aeb3-64ebcdcfc4e0">
@@ -3619,24 +3625,28 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:ControlKind>1b67c8b9-fd42-4852-b6e4-3b8bd5e853d5</GUI:ControlKind>
     <GUI:ControlRef>69c8b4f1-870f-447c-bbdf-a4f4e6c1cb54</GUI:ControlRef>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="eff0da6d-04b6-4e53-9be6-2b04baad83fb">
     <GUI:ControlKind>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:ControlKind>
     <GUI:ControlRef>3e6cd159-fdaf-48fe-9147-05014ffc0d8e</GUI:ControlRef>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="80142359-337c-4c6f-8932-9d5fc99fd5d9">
     <GUI:ControlKind>f236ecd4-d9dc-4fc3-a4a9-6da8ef1a228e</GUI:ControlKind>
     <GUI:ControlRef>0196e1c9-2471-434e-9427-c9dfbde24561</GUI:ControlRef>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a2d6a70e-093b-4984-8c3a-e2570b7f990f">
     <GUI:ControlKind>66c71e86-39d1-4a19-a3c7-11b03168f598</GUI:ControlKind>
     <GUI:ControlRef>2aabe45d-679f-42c9-adf3-4447e4c9f6f9</GUI:ControlRef>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor_supports_TypeRef_RelationEntry ExportGuid="3006be94-d280-46fe-9781-c1db7a8b2d49">
@@ -7767,12 +7777,14 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
     <GUI:ControlKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:ControlKind>
     <GUI:ControlRef>ee90ef48-be8e-4c5b-8479-b20a94272b2b</GUI:ControlRef>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="720ebbe0-9cce-44c9-8f19-36d374de3721">
     <GUI:ControlKind>42d263e9-0108-4068-a38c-e550299cf966</GUI:ControlKind>
     <GUI:ControlRef>208fa5e1-a3f6-4d4d-a0e0-c013eaea99d6</GUI:ControlRef>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
+    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ControlKind ExportGuid="3b955f8c-4112-4bcf-9a49-20ef05c04518">

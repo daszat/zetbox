@@ -83,5 +83,14 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
+        /// <summary>
+        /// The described CLR class&apos; Type
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("b3cae453-e222-4d24-b6f5-47f47550ad7a")]
+        string ViewModelTypeRef {
+            get;
+            set;
+        }
     }
 }
