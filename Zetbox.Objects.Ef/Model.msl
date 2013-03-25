@@ -1632,6 +1632,22 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SyncAccountEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SyncAccountEfImpl)">
+	    <MappingFragment StoreEntitySet="SyncAccount">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NextSync" ColumnName="NextSync" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkScheduleSyncAccountEfImpl)">
+	    <MappingFragment StoreEntitySet="WorkScheduleSyncAccount">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TaskEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.TaskEfImpl)">
 	    <MappingFragment StoreEntitySet="Task">
@@ -5589,6 +5605,74 @@
         <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
       </EndProperty>
       <EndProperty Name="StagingDatabase">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SyncAccount_for_Calendar
+    A: ZeroOrMore WorkScheduleSyncAccount as SyncAccount
+    B: One Calendar as Calendar
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SyncAccount_for_Calendar"
+                           TypeName="Model.FK_SyncAccount_for_Calendar"
+                           StoreEntitySet="WorkScheduleSyncAccount" >
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
+      </EndProperty>
+      <EndProperty Name="SyncAccount">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Calendar" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SyncAccount_of_WorkSchedule
+    A: ZeroOrMore WorkScheduleSyncAccount as SyncAccount
+    B: One WorkSchedule as WorkSchedule
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SyncAccount_of_WorkSchedule"
+                           TypeName="Model.FK_SyncAccount_of_WorkSchedule"
+                           StoreEntitySet="WorkScheduleSyncAccount" >
+      <EndProperty Name="WorkSchedule">
+        <ScalarProperty Name="ID" ColumnName="fk_WorkSchedule"/>
+      </EndProperty>
+      <EndProperty Name="SyncAccount">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_WorkSchedule" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SyncAccount_was_ChangedBy
+    A: ZeroOrMore SyncAccount as SyncAccount
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SyncAccount_was_ChangedBy"
+                           TypeName="Model.FK_SyncAccount_was_ChangedBy"
+                           StoreEntitySet="SyncAccount" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="SyncAccount">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SyncAccount_was_CreatedBy
+    A: ZeroOrMore SyncAccount as SyncAccount
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SyncAccount_was_CreatedBy"
+                           TypeName="Model.FK_SyncAccount_was_CreatedBy"
+                           StoreEntitySet="SyncAccount" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="SyncAccount">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>

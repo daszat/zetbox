@@ -257,6 +257,7 @@
     <Compile Include="StringParameter.Memory.Designer.cs" />
     <Compile Include="StringProperty.Memory.Designer.cs" />
     <Compile Include="StringRangeConstraint.Memory.Designer.cs" />
+    <Compile Include="SyncAccount.Memory.Designer.cs" />
     <Compile Include="Task.Memory.Designer.cs" />
     <Compile Include="Template.Memory.Designer.cs" />
     <Compile Include="TestCustomObject.Memory.Designer.cs" />
@@ -274,6 +275,7 @@
     <Compile Include="Visual.Memory.Designer.cs" />
     <Compile Include="WorkSchedule.Memory.Designer.cs" />
     <Compile Include="WorkScheduleRule.Memory.Designer.cs" />
+    <Compile Include="WorkScheduleSyncAccount.Memory.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="YearlyWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="CollectionEntries.Memory.Designer.cs" />

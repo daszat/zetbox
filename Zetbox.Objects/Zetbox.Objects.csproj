@@ -231,6 +231,7 @@
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />
     <Compile Include="StringRangeConstraint.Interface.Designer.cs" />
+    <Compile Include="SyncAccount.Interface.Designer.cs" />
     <Compile Include="Task.Interface.Designer.cs" />
     <Compile Include="Template.Interface.Designer.cs" />
     <Compile Include="TestCustomObject.Interface.Designer.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Visual.Interface.Designer.cs" />
     <Compile Include="WorkSchedule.Interface.Designer.cs" />
     <Compile Include="WorkScheduleRule.Interface.Designer.cs" />
+    <Compile Include="WorkScheduleSyncAccount.Interface.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="YearlyWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="CollectionEntries.Interface.Designer.cs" />

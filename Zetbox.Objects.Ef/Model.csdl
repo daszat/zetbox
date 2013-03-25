@@ -93,6 +93,7 @@
     <EntitySet Name="SourceEnumEfImpl" EntityType="Model.SourceEnumEfImpl" />
     <EntitySet Name="SourceTableEfImpl" EntityType="Model.SourceTableEfImpl" />
     <EntitySet Name="StagingDatabaseEfImpl" EntityType="Model.StagingDatabaseEfImpl" />
+    <EntitySet Name="SyncAccountEfImpl" EntityType="Model.SyncAccountEfImpl" />
     <EntitySet Name="TaskEfImpl" EntityType="Model.TaskEfImpl" />
     <EntitySet Name="Task_Rights" EntityType="Model.Task_Rights" />
     <AssociationSet Name="FK_Tasks_Rights" Association="Model.FK_Tasks_Rights">
@@ -1007,6 +1008,22 @@
     </AssociationSet>
     <AssociationSet Name="FK_StagingDatabase_was_CreatedBy" Association="Model.FK_StagingDatabase_was_CreatedBy" >
       <End Role="StagingDatabase" EntitySet="StagingDatabaseEfImpl" />
+      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SyncAccount_for_Calendar" Association="Model.FK_SyncAccount_for_Calendar" >
+      <End Role="SyncAccount" EntitySet="SyncAccountEfImpl" />
+      <End Role="Calendar" EntitySet="CalendarEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SyncAccount_of_WorkSchedule" Association="Model.FK_SyncAccount_of_WorkSchedule" >
+      <End Role="SyncAccount" EntitySet="SyncAccountEfImpl" />
+      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SyncAccount_was_ChangedBy" Association="Model.FK_SyncAccount_was_ChangedBy" >
+      <End Role="SyncAccount" EntitySet="SyncAccountEfImpl" />
+      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SyncAccount_was_CreatedBy" Association="Model.FK_SyncAccount_was_CreatedBy" >
+      <End Role="SyncAccount" EntitySet="SyncAccountEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.FK_Task_was_ChangedBy" >
@@ -2655,6 +2672,24 @@
                         FromRole="StagingDatabase"
                         ToRole="SourceTables" />
   </EntityType>
+  <EntityType Name="SyncAccountEfImpl" Abstract="true">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedByImpl"
+                        Relationship="Model.FK_SyncAccount_was_ChangedBy"
+                        FromRole="SyncAccount"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <NavigationProperty Name="CreatedByImpl"
+                        Relationship="Model.FK_SyncAccount_was_CreatedBy"
+                        FromRole="SyncAccount"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />
+    <Property Name="NextSync" Type="DateTime" Nullable="false"  />
+  </EntityType>
   <EntityType Name="TaskEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -3377,6 +3412,16 @@
     <Property Name="IsList" Type="Boolean" Nullable="false"  />
   </EntityType>
   <EntityType Name="ViewReadOnlyConstraintEfImpl" BaseType="Model.ReadOnlyConstraintEfImpl">
+  </EntityType>
+  <EntityType Name="WorkScheduleSyncAccountEfImpl" BaseType="Model.SyncAccountEfImpl">
+    <NavigationProperty Name="CalendarImpl"
+                        Relationship="Model.FK_SyncAccount_for_Calendar"
+                        FromRole="SyncAccount"
+                        ToRole="Calendar" />
+    <NavigationProperty Name="WorkScheduleImpl"
+                        Relationship="Model.FK_SyncAccount_of_WorkSchedule"
+                        FromRole="SyncAccount"
+                        ToRole="WorkSchedule" />
   </EntityType>
   <EntityType Name="YearFilterConfigurationEfImpl" BaseType="Model.PropertyFilterConfigurationEfImpl">
     <Property Name="IsCurrentYearDefault" Type="Boolean" Nullable="true"  />
@@ -5801,6 +5846,38 @@
   <Association Name="FK_StagingDatabase_was_CreatedBy" >
     <End Role="StagingDatabase"
          Type="Model.StagingDatabaseEfImpl" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SyncAccount_for_Calendar" >
+    <End Role="SyncAccount"
+         Type="Model.WorkScheduleSyncAccountEfImpl" 
+         Multiplicity="*" />
+    <End Role="Calendar"
+         Type="Model.CalendarEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SyncAccount_of_WorkSchedule" >
+    <End Role="SyncAccount"
+         Type="Model.WorkScheduleSyncAccountEfImpl" 
+         Multiplicity="*" />
+    <End Role="WorkSchedule"
+         Type="Model.WorkScheduleEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SyncAccount_was_ChangedBy" >
+    <End Role="SyncAccount"
+         Type="Model.SyncAccountEfImpl" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SyncAccount_was_CreatedBy" >
+    <End Role="SyncAccount"
+         Type="Model.SyncAccountEfImpl" 
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.IdentityEfImpl" 

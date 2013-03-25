@@ -1139,6 +1139,7 @@ namespace Zetbox.App.Calendar
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
             // should fetch && remember parent for Event_of_Calendar_RelationEntry
+            // should fetch && remember parent for WorkScheduleSyncAccount_for_Calendar_RelationEntry
 
             GroupReaders.Clear();
             GroupWriters.Clear();

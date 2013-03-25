@@ -1964,6 +1964,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("632137c7-1cb1-4c60-bda6-31aa2060b39a"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> SyncAccount
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("12ce65c1-e00b-44be-b119-eb520b46616e"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> WorkSchedule
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("901a2ddd-1330-4129-b8a2-92b8e655d168"); }
@@ -1971,6 +1975,10 @@ namespace Zetbox {
                             public static TypedGuid<global::Zetbox.App.Base.DataType> WorkScheduleRule
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("ee70b186-09ae-43a3-afb2-a632c47765b9"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> WorkScheduleSyncAccount
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("ed44a638-a19d-430c-b19f-766a1820fc67"); }
                             }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> YearlyWorkScheduleRule
                             {
@@ -2118,6 +2126,40 @@ namespace Zetbox {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("43be3542-1b21-4423-aeb4-f9e411b2453f"); }
                                 }
                             }
+                            public static class SyncAccount_Methods
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> PerformSync
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("0b0133fc-c380-47bb-a6ba-7102eca96e9f"); }
+                                }
+                            }
+                            public static class SyncAccount_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("f7b630be-ec14-4e53-a1ca-366ab0c8903b"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4fed42c3-ff27-4bcc-8404-2b7bd5b71091"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("7575dccf-9e8f-473d-9276-60b7365e8a3e"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4dc69bd1-64fa-45f6-9899-af44d0e4c2d7"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("1c49698b-a45d-4e84-92a4-b66b334e109d"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> NextSync
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("51751fc9-bc77-4203-bcc1-fc4d5cafa360"); }
+                                }
+                            }
                             public static class WorkSchedule_Methods
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetOffDays
@@ -2232,6 +2274,17 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> WorkSchedule
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("115c1d4c-ddd3-4d33-ae74-a6b676fc0dfa"); }
+                                }
+                            }
+                            public static class WorkScheduleSyncAccount_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Calendar
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("f67558bb-7415-4a41-9196-7c39426746df"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> WorkSchedule
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("72dcb583-17bc-4247-a7c1-39f607b4905c"); }
                                 }
                             }
                         }

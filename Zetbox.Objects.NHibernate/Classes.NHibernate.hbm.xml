@@ -259,6 +259,70 @@
         <!-- define the subclasses -->
 
     </class>
+    <class name="Zetbox.App.Calendar.SyncAccountNHibernateImpl+SyncAccountProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.SyncAccountNHibernateImpl+SyncAccountProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`calendar`"
+           table="`SyncAccounts`"
+           abstract="true"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`SyncAccounts_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NextSync" type="Timestamp"
+                  column="`NextSync`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+        <joined-subclass
+                name="Zetbox.App.Calendar.WorkScheduleSyncAccountNHibernateImpl+WorkScheduleSyncAccountProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Calendar.WorkScheduleSyncAccountNHibernateImpl+WorkScheduleSyncAccountProxy, Zetbox.Objects.NHibernateImpl"
+                schema="`calendar`"
+                table="`WorkScheduleSyncAccounts`"
+                dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="WorkSchedule" column="`fk_WorkSchedule`" class="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl" />
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+    </class>
     <class name="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl"
            schema="`calendar`"

@@ -272,6 +272,7 @@
     <Compile Include="StringParameter.NHibernate.Designer.cs" />
     <Compile Include="StringProperty.NHibernate.Designer.cs" />
     <Compile Include="StringRangeConstraint.NHibernate.Designer.cs" />
+    <Compile Include="SyncAccount.NHibernate.Designer.cs" />
     <Compile Include="Task.NHibernate.Designer.cs" />
     <Compile Include="Template.NHibernate.Designer.cs" />
     <Compile Include="TestCustomObject.NHibernate.Designer.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="Visual.NHibernate.Designer.cs" />
     <Compile Include="WorkSchedule.NHibernate.Designer.cs" />
     <Compile Include="WorkScheduleRule.NHibernate.Designer.cs" />
+    <Compile Include="WorkScheduleSyncAccount.NHibernate.Designer.cs" />
     <Compile Include="YearFilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="YearlyWorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="CollectionEntries.NHibernate.Designer.cs" />
