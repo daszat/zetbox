@@ -290,20 +290,19 @@ namespace Zetbox.API.Server
 
         protected override Expression VisitUnary(UnaryExpression u)
         {
-            // ignore Converts for IExportable objects
-            if (u.NodeType == ExpressionType.Convert && (typeof(Zetbox.App.Base.IExportable).IsAssignableFrom(u.Type) || u.Type.IsIExportableInternal()))
+            // ignore Converts for all IExportable casts. This may happen even if we don't yet know what the underlying type is. The database will catch that.
+            if (u.NodeType == ExpressionType.Convert)
             {
-                return base.Visit(u.Operand);
+                var castToIExportable = typeof(Zetbox.App.Base.IExportable).IsAssignableFrom(u.Type) || u.Type.IsIExportableInternal();
+                var castToIPersistenceObject = u.Type.IsIPersistenceObject();
+                var upCast = u.Type.IsAssignableFrom(u.Operand.Type);
+                if (castToIExportable || castToIPersistenceObject || upCast)
+                {
+                    return base.Visit(u.Operand);
+                }
             }
-            // ignore Converts for persistence objects
-            else if (u.NodeType == ExpressionType.Convert && u.Type.IsIPersistenceObject())
-            {
-                return base.Visit(u.Operand);
-            }
-            else
-            {
-                return Expression.MakeUnary(u.NodeType, base.Visit(u.Operand), TranslateType(u.Type), u.Method);
-            }
+
+            return Expression.MakeUnary(u.NodeType, base.Visit(u.Operand), TranslateType(u.Type), u.Method);
         }
 
         protected override Expression VisitLambda(LambdaExpression lambda)
