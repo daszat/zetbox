@@ -19,7 +19,7 @@ namespace Zetbox.App.Base
     /// ObjectCollectionEntry for on which other properties this one depends (used for change notification)
     /// </summary>
     [Zetbox.API.DefinitionGuid("47595643-e8d0-48ef-82c7-2d24de8a784e")]
-    public interface CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry : IRelationEntry<CalculatedObjectReferenceProperty, Property> 
+    public interface CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry : IRelationEntry<CalculatedObjectReferenceProperty, Property>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -34,7 +34,7 @@ namespace Zetbox.App.Base
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("692c1064-37a2-4be3-a81e-4cb91f673aa3")]
-    public interface DataType_implements_Interface_RelationEntry : IRelationEntry<DataType, Interface> 
+    public interface DataType_implements_Interface_RelationEntry : IRelationEntry<DataType, Interface>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -50,7 +50,7 @@ namespace at.dasz.DocumentManagement
     /// ObjectCollectionEntry for Document has Revisions
     /// </summary>
     [Zetbox.API.DefinitionGuid("69d27812-e981-443b-a94b-dfe1a95f3aad")]
-    public interface Document_has_Blob_RelationEntry : IRelationListEntry<Document, Blob> 
+    public interface Document_has_Blob_RelationEntry : IRelationListEntry<Document, Blob>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -80,7 +80,7 @@ namespace Zetbox.App.Base
     /// ObjectCollectionEntry for UniqueContraints ensures uniqueness on one or more properties
     /// </summary>
     [Zetbox.API.DefinitionGuid("29235ba6-5979-4ed8-8e75-6bd0837c7f28")]
-    public interface IndexConstraint_ensures_unique_on_Property_RelationEntry : IRelationEntry<IndexConstraint, Property> 
+    public interface IndexConstraint_ensures_unique_on_Property_RelationEntry : IRelationEntry<IndexConstraint, Property>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -126,7 +126,7 @@ namespace Zetbox.App.GUI
     /// ObjectCollectionEntry for These Groups are allowed to see this Screen
     /// </summary>
     [Zetbox.API.DefinitionGuid("b88c12ac-eabe-4aee-913e-5edd9d2a193a")]
-    public interface NavigationEntry_accessed_by_Group_RelationEntry : IRelationEntry<NavigationEntry, Group> 
+    public interface NavigationEntry_accessed_by_Group_RelationEntry : IRelationEntry<NavigationEntry, Group>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -141,7 +141,7 @@ namespace Zetbox.App.GUI
     /// ObjectCollectionEntry for An ObjRef Property can show additional methods
     /// </summary>
     [Zetbox.API.DefinitionGuid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc")]
-    public interface ObjectReferenceProperty_shows_Method_RelationEntry : IRelationEntry<ObjectReferenceProperty, Method> 
+    public interface ObjectReferenceProperty_shows_Method_RelationEntry : IRelationEntry<ObjectReferenceProperty, Method>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -156,7 +156,7 @@ namespace Zetbox.App.Projekte
     /// ObjectCollectionEntry for Projekte werden von Mitarbeitern durchgeführt
     /// </summary>
     [Zetbox.API.DefinitionGuid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e")]
-    public interface Projekt_haben_Mitarbeiter_RelationEntry : IRelationListEntry<Projekt, Mitarbeiter> 
+    public interface Projekt_haben_Mitarbeiter_RelationEntry : IRelationListEntry<Projekt, Mitarbeiter>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -171,7 +171,7 @@ namespace Zetbox.App.Base
     /// ObjectCollectionEntry for RoleMembership needs Relations to resolve Roles
     /// </summary>
     [Zetbox.API.DefinitionGuid("f74d425f-e733-4cba-baca-f4a05fbc0a80")]
-    public interface RoleMembership_resolves_Relation_RelationEntry : IRelationListEntry<RoleMembership, Relation> 
+    public interface RoleMembership_resolves_Relation_RelationEntry : IRelationListEntry<RoleMembership, Relation>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -187,7 +187,7 @@ namespace Zetbox.App.SchemaMigration
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27")]
-    public interface SourceColumn_created_Property_RelationEntry : IRelationListEntry<SourceColumn, Property> 
+    public interface SourceColumn_created_Property_RelationEntry : IRelationListEntry<SourceColumn, Property>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -232,7 +232,7 @@ namespace Zetbox.App.Base
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("8b41ffa4-8ffa-4d96-b4e5-708188045c71")]
-    public interface TypeRef_hasGenericArguments_TypeRef_RelationEntry : IRelationListEntry<TypeRef, TypeRef> 
+    public interface TypeRef_hasGenericArguments_TypeRef_RelationEntry : IRelationListEntry<TypeRef, TypeRef>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -248,7 +248,7 @@ namespace Zetbox.App.GUI
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("786dae2f-cb6e-454d-93fd-192541df928d")]
-    public interface ViewDescriptor_supports_TypeRef_RelationEntry : IRelationEntry<ViewDescriptor, TypeRef> 
+    public interface ViewDescriptor_supports_TypeRef_RelationEntry : IRelationEntry<ViewDescriptor, TypeRef>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -263,7 +263,7 @@ namespace Zetbox.App.GUI
     /// ObjectCollectionEntry for a list of additional control kinds for displaying this model
     /// </summary>
     [Zetbox.API.DefinitionGuid("5404456a-4527-4e40-a660-b4a5e96e4a47")]
-    public interface ViewModelDescriptor_displayedBy_ControlKind_RelationEntry : IRelationEntry<ViewModelDescriptor, ControlKind> 
+    public interface ViewModelDescriptor_displayedBy_ControlKind_RelationEntry : IRelationEntry<ViewModelDescriptor, ControlKind>, Zetbox.App.Base.IExportable 
     {
 
     }
