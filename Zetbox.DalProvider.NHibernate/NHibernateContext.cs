@@ -386,7 +386,7 @@ namespace Zetbox.DalProvider.NHibernate
         /// </para>
         /// <para>The result is ordered Children first according to GetChildrenToDelete()/GetParentsToDelete(). That means that everyone that should be deleted BEFORE X must be returned (transitively) by X.GetChildrenToDelete</para>
         /// </remarks>
-        private IEnumerable<NHibernatePersistenceObject> RelationTopoSort(IEnumerable<NHibernatePersistenceObject> input)
+        private List<NHibernatePersistenceObject> RelationTopoSort(IEnumerable<NHibernatePersistenceObject> input)
         {
             List<NHibernatePersistenceObject> result = new List<NHibernatePersistenceObject>();
             var edges = input.ToDictionary(i => i, i => i.GetChildrenToDelete());
