@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calendar\CalendarActions.cs" />
-    <Compile Include="Calendar\SyncAccountActions.cs" />
+    <Compile Include="Calendar\SyncProviderActions.cs" />
     <Compile Include="Calendar\EventActions.cs" />
     <Compile Include="Calendar\WorkScheduleActions.cs" />
     <Compile Include="Calendar\WorkScheduleRuleActions.cs" />

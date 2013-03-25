@@ -8,10 +8,10 @@ namespace Zetbox.App.Calendar
     using Zetbox.API;
 
     /// <summary>
-    /// An abstract base class for sync accounts
+    /// An abstract base class for sync providers
     /// </summary>
     [Zetbox.API.DefinitionGuid("12ce65c1-e00b-44be-b119-eb520b46616e")]
-    public interface SyncAccount : IDataObject, Zetbox.App.Base.IChangedBy 
+    public interface SyncProvider : IDataObject, Zetbox.App.Base.IChangedBy 
     {
 
         /// <summary>

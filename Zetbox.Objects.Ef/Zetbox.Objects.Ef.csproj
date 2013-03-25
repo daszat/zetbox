@@ -260,7 +260,7 @@
     <Compile Include="StringParameter.Ef.Designer.cs" />
     <Compile Include="StringProperty.Ef.Designer.cs" />
     <Compile Include="StringRangeConstraint.Ef.Designer.cs" />
-    <Compile Include="SyncAccount.Ef.Designer.cs" />
+    <Compile Include="SyncProvider.Ef.Designer.cs" />
     <Compile Include="Task.Ef.Designer.cs" />
     <Compile Include="Template.Ef.Designer.cs" />
     <Compile Include="TestCustomObject.Ef.Designer.cs" />
@@ -278,7 +278,7 @@
     <Compile Include="Visual.Ef.Designer.cs" />
     <Compile Include="WorkSchedule.Ef.Designer.cs" />
     <Compile Include="WorkScheduleRule.Ef.Designer.cs" />
-    <Compile Include="WorkScheduleSyncAccount.Ef.Designer.cs" />
+    <Compile Include="WorkScheduleSyncProvider.Ef.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="YearlyWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="CollectionEntries.Ef.Designer.cs" />

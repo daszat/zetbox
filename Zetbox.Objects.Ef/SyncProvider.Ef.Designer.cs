@@ -20,22 +20,22 @@ namespace Zetbox.App.Calendar
     using Zetbox.DalProvider.Ef;
 
     /// <summary>
-    /// An abstract base class for sync accounts
+    /// An abstract base class for sync providers
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="SyncAccountEfImpl")]
-    [System.Diagnostics.DebuggerDisplay("SyncAccount")]
-    public abstract class SyncAccountEfImpl : BaseServerDataObject_EntityFramework, SyncAccount
+    [EdmEntityType(NamespaceName="Model", Name="SyncProviderEfImpl")]
+    [System.Diagnostics.DebuggerDisplay("SyncProvider")]
+    public abstract class SyncProviderEfImpl : BaseServerDataObject_EntityFramework, SyncProvider
     {
         private static readonly Guid _objectClassID = new Guid("12ce65c1-e00b-44be-b119-eb520b46616e");
         public override Guid ObjectClassID { get { return _objectClassID; } }
 
         [Obsolete]
-        public SyncAccountEfImpl()
+        public SyncProviderEfImpl()
             : base(null)
         {
         }
 
-        public SyncAccountEfImpl(Func<IFrozenContext> lazyCtx)
+        public SyncProviderEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -45,7 +45,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
     /*
     Relation: FK_SyncAccount_was_ChangedBy
-    A: ZeroOrMore SyncAccount as SyncAccount
+    A: ZeroOrMore SyncProvider as SyncAccount
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
     */
@@ -136,11 +136,11 @@ namespace Zetbox.App.Calendar
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnChangedBy_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -165,7 +165,7 @@ namespace Zetbox.App.Calendar
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._ChangedOn = (DateTime)__tmp_value;
                     } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SyncAccount.ChangedOn'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SyncProvider.ChangedOn'");
                     }
                 }
                 if (OnChangedOn_Getter != null)
@@ -220,18 +220,18 @@ namespace Zetbox.App.Calendar
         }
         private bool _isChangedOnSet = false;
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnChangedOn_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnChangedOn_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnChangedOn_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
         /// </summary>
     /*
     Relation: FK_SyncAccount_was_CreatedBy
-    A: ZeroOrMore SyncAccount as SyncAccount
+    A: ZeroOrMore SyncProvider as SyncAccount
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
     */
@@ -322,11 +322,11 @@ namespace Zetbox.App.Calendar
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -351,7 +351,7 @@ namespace Zetbox.App.Calendar
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._CreatedOn = (DateTime)__tmp_value;
                     } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SyncAccount.CreatedOn'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SyncProvider.CreatedOn'");
                     }
                 }
                 if (OnCreatedOn_Getter != null)
@@ -406,11 +406,11 @@ namespace Zetbox.App.Calendar
         }
         private bool _isCreatedOnSet = false;
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnCreatedOn_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnCreatedOn_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnCreatedOn_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnCreatedOn_IsValid;
 
         /// <summary>
         /// 
@@ -475,11 +475,11 @@ namespace Zetbox.App.Calendar
             }
         }
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, string> OnName_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, string> OnName_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, string> OnName_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnName_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -504,7 +504,7 @@ namespace Zetbox.App.Calendar
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._NextSync = (DateTime)__tmp_value;
                     } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SyncAccount.NextSync'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SyncProvider.NextSync'");
                     }
                 }
                 if (OnNextSync_Getter != null)
@@ -559,44 +559,44 @@ namespace Zetbox.App.Calendar
         }
         private bool _isNextSyncSet = false;
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnNextSync_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnNextSync_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnNextSync_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnNextSync_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnNextSync_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnNextSync_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnNextSync_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnNextSync_IsValid;
 
         /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnPerformSync_SyncAccount")]
+        [EventBasedMethod("OnPerformSync_SyncProvider")]
         public virtual void PerformSync()
         {
             // base.PerformSync();
-            if (OnPerformSync_SyncAccount != null)
+            if (OnPerformSync_SyncProvider != null)
             {
-                OnPerformSync_SyncAccount(this);
+                OnPerformSync_SyncProvider(this);
             }
             else
             {
-                throw new NotImplementedException("No handler registered on method SyncAccount.PerformSync");
+                throw new NotImplementedException("No handler registered on method SyncProvider.PerformSync");
             }
         }
         public delegate void PerformSync_Handler<T>(T obj);
-        public static event PerformSync_Handler<SyncAccount> OnPerformSync_SyncAccount;
+        public static event PerformSync_Handler<SyncProvider> OnPerformSync_SyncProvider;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
-		public static event CanExecMethodEventHandler<SyncAccount> OnPerformSync_SyncAccount_CanExec;
+		public static event CanExecMethodEventHandler<SyncProvider> OnPerformSync_SyncProvider_CanExec;
 
-        [EventBasedMethod("OnPerformSync_SyncAccount_CanExec")]
+        [EventBasedMethod("OnPerformSync_SyncProvider_CanExec")]
         public virtual bool PerformSyncCanExec
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<bool>();
-				if (OnPerformSync_SyncAccount_CanExec != null)
+				if (OnPerformSync_SyncProvider_CanExec != null)
 				{
-					OnPerformSync_SyncAccount_CanExec(this, e);
+					OnPerformSync_SyncProvider_CanExec(this, e);
 				}
 				else
 				{
@@ -607,17 +607,17 @@ namespace Zetbox.App.Calendar
         }
 
 		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<SyncAccount> OnPerformSync_SyncAccount_CanExecReason;
+		public static event CanExecReasonMethodEventHandler<SyncProvider> OnPerformSync_SyncProvider_CanExecReason;
 
-        [EventBasedMethod("OnPerformSync_SyncAccount_CanExecReason")]
+        [EventBasedMethod("OnPerformSync_SyncProvider_CanExecReason")]
         public virtual string PerformSyncCanExecReason
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<string>();
-				if (OnPerformSync_SyncAccount_CanExecReason != null)
+				if (OnPerformSync_SyncProvider_CanExecReason != null)
 				{
-					OnPerformSync_SyncAccount_CanExecReason(this, e);
+					OnPerformSync_SyncProvider_CanExecReason(this, e);
 				}
 				else
 				{
@@ -630,15 +630,15 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(SyncAccount);
+            return typeof(SyncProvider);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (SyncAccount)obj;
-            var otherImpl = (SyncAccountEfImpl)obj;
-            var me = (SyncAccount)this;
+            var other = (SyncProvider)obj;
+            var otherImpl = (SyncProviderEfImpl)obj;
+            var me = (SyncProvider)this;
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
@@ -705,7 +705,7 @@ namespace Zetbox.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<SyncAccount, Zetbox.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<SyncProvider, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("f7b630be-ec14-4e53-a1ca-366ab0c8903b"),
                         "ChangedBy",
@@ -714,7 +714,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.ChangedBy = val,
 						obj => OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SyncAccount, DateTime>(
+                    new PropertyDescriptorEfImpl<SyncProvider, DateTime>(
                         lazyCtx,
                         new Guid("4fed42c3-ff27-4bcc-8404-2b7bd5b71091"),
                         "ChangedOn",
@@ -723,7 +723,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.ChangedOn = val,
 						obj => OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SyncAccount, Zetbox.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<SyncProvider, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("7575dccf-9e8f-473d-9276-60b7365e8a3e"),
                         "CreatedBy",
@@ -732,7 +732,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.CreatedBy = val,
 						obj => OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SyncAccount, DateTime>(
+                    new PropertyDescriptorEfImpl<SyncProvider, DateTime>(
                         lazyCtx,
                         new Guid("4dc69bd1-64fa-45f6-9899-af44d0e4c2d7"),
                         "CreatedOn",
@@ -741,7 +741,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SyncAccount, string>(
+                    new PropertyDescriptorEfImpl<SyncProvider, string>(
                         lazyCtx,
                         new Guid("1c49698b-a45d-4e84-92a4-b66b334e109d"),
                         "Name",
@@ -750,7 +750,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SyncAccount, DateTime>(
+                    new PropertyDescriptorEfImpl<SyncProvider, DateTime>(
                         lazyCtx,
                         new Guid("51751fc9-bc77-4203-bcc1-fc4d5cafa360"),
                         "NextSync",
@@ -773,71 +773,71 @@ namespace Zetbox.App.Calendar
         #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_SyncAccount")]
+        [EventBasedMethod("OnToString_SyncProvider")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_SyncAccount != null)
+            if (OnToString_SyncProvider != null)
             {
-                OnToString_SyncAccount(this, e);
+                OnToString_SyncProvider(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<SyncAccount> OnToString_SyncAccount;
+        public static event ToStringHandler<SyncProvider> OnToString_SyncProvider;
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnObjectIsValid_SyncAccount")]
+        [EventBasedMethod("OnObjectIsValid_SyncProvider")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
-            if (OnObjectIsValid_SyncAccount != null)
+            if (OnObjectIsValid_SyncProvider != null)
             {
-                OnObjectIsValid_SyncAccount(this, e);
+                OnObjectIsValid_SyncProvider(this, e);
             }
             return new ObjectIsValidResult(e.IsValid, e.Errors);
         }
-        public static event ObjectIsValidHandler<SyncAccount> OnObjectIsValid_SyncAccount;
+        public static event ObjectIsValidHandler<SyncProvider> OnObjectIsValid_SyncProvider;
 
-        [EventBasedMethod("OnNotifyPreSave_SyncAccount")]
+        [EventBasedMethod("OnNotifyPreSave_SyncProvider")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnNotifyPreSave_SyncAccount != null) OnNotifyPreSave_SyncAccount(this);
+            if (OnNotifyPreSave_SyncProvider != null) OnNotifyPreSave_SyncProvider(this);
         }
-        public static event ObjectEventHandler<SyncAccount> OnNotifyPreSave_SyncAccount;
+        public static event ObjectEventHandler<SyncProvider> OnNotifyPreSave_SyncProvider;
 
-        [EventBasedMethod("OnNotifyPostSave_SyncAccount")]
+        [EventBasedMethod("OnNotifyPostSave_SyncProvider")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnNotifyPostSave_SyncAccount != null) OnNotifyPostSave_SyncAccount(this);
+            if (OnNotifyPostSave_SyncProvider != null) OnNotifyPostSave_SyncProvider(this);
         }
-        public static event ObjectEventHandler<SyncAccount> OnNotifyPostSave_SyncAccount;
+        public static event ObjectEventHandler<SyncProvider> OnNotifyPostSave_SyncProvider;
 
-        [EventBasedMethod("OnNotifyCreated_SyncAccount")]
+        [EventBasedMethod("OnNotifyCreated_SyncProvider")]
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Name");
             base.NotifyCreated();
-            if (OnNotifyCreated_SyncAccount != null) OnNotifyCreated_SyncAccount(this);
+            if (OnNotifyCreated_SyncProvider != null) OnNotifyCreated_SyncProvider(this);
         }
-        public static event ObjectEventHandler<SyncAccount> OnNotifyCreated_SyncAccount;
+        public static event ObjectEventHandler<SyncProvider> OnNotifyCreated_SyncProvider;
 
-        [EventBasedMethod("OnNotifyDeleting_SyncAccount")]
+        [EventBasedMethod("OnNotifyDeleting_SyncProvider")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnNotifyDeleting_SyncAccount != null) OnNotifyDeleting_SyncAccount(this);
+            if (OnNotifyDeleting_SyncProvider != null) OnNotifyDeleting_SyncProvider(this);
             ChangedBy = null;
             CreatedBy = null;
         }
-        public static event ObjectEventHandler<SyncAccount> OnNotifyDeleting_SyncAccount;
+        public static event ObjectEventHandler<SyncProvider> OnNotifyDeleting_SyncProvider;
 
         #endregion // Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty

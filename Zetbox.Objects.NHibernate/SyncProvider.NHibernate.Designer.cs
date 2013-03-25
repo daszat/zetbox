@@ -14,112 +14,92 @@ namespace Zetbox.App.Calendar
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
+    using Zetbox.API.Utils;
     using Zetbox.DalProvider.Base;
-    using Zetbox.DalProvider.Memory;
+    using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
-    /// An abstract base class for sync accounts
+    /// An abstract base class for sync providers
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("SyncAccount")]
-    public abstract class SyncAccountMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, SyncAccount
+    [System.Diagnostics.DebuggerDisplay("SyncProvider")]
+    public abstract class SyncProviderNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, SyncProvider
     {
         private static readonly Guid _objectClassID = new Guid("12ce65c1-e00b-44be-b119-eb520b46616e");
         public override Guid ObjectClassID { get { return _objectClassID; } }
 
-        [Obsolete]
-        public SyncAccountMemoryImpl()
-            : base(null)
+        public SyncProviderNHibernateImpl()
+            : this(null)
         {
         }
 
-        public SyncAccountMemoryImpl(Func<IFrozenContext> lazyCtx)
-            : base(lazyCtx)
+        /// <summary>Create a new unattached instance</summary>
+        public SyncProviderNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new SyncProviderProxy())
         {
         }
+
+        /// <summary>Create a instance, wrapping the specified proxy</summary>
+        public SyncProviderNHibernateImpl(Func<IFrozenContext> lazyCtx, SyncProviderProxy proxy)
+            : base(lazyCtx) // do not pass proxy to base data object
+        {
+            this.Proxy = proxy;
+            _isChangedOnSet = Proxy.ID > 0;
+            _isCreatedOnSet = Proxy.ID > 0;
+            _isNextSyncSet = Proxy.ID > 0;
+        }
+
+        /// <summary>the NHibernate proxy of the represented entity</summary>
+        internal readonly SyncProviderProxy Proxy;
 
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
-        // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
 
-        // implement the user-visible interface
-        [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity ChangedBy
         {
-            get { return ChangedByImpl; }
-            set { ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_ChangedByCache;
-
-        private int? _fk_ChangedBy {
             get
             {
-                return __fk_ChangedByCache;
-            }
-            set
-            {
-                __fk_ChangedByCache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchChangedByTask = null;
-            }
-        }
+                Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
-
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
-        {
-            if (_triggerFetchChangedByTask != null) return _triggerFetchChangedByTask;
-
-            if (_fk_ChangedBy.HasValue)
-                _triggerFetchChangedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
-            else
-                _triggerFetchChangedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            _triggerFetchChangedByTask.OnResult(t =>
-            {
                 if (OnChangedBy_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
                     OnChangedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    __value = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
                 }
-            });
 
-            return _triggerFetchChangedByTask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Base.IdentityMemoryImpl ChangedByImpl
-        {
-            get
-            {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchChangedByAsync().Result;
+                return __value;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                // shortcut noops
-                if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.ChangedBy == null)
                 {
                     SetInitializedProperty("ChangedBy");
                     return;
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = ChangedByImpl;
-                var __newValue = value;
+                var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
+                var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                {
+                    SetInitializedProperty("ChangedBy");
+                    return;
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -128,11 +108,18 @@ namespace Zetbox.App.Calendar
                 {
                     var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
+                    __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
                 }
 
                 // next, set the local reference
-                _fk_ChangedBy = __newValue == null ? (int?)null : __newValue.ID;
+                if (__newValue == null)
+                {
+                    this.Proxy.ChangedBy = null;
+                }
+                else
+                {
+                    this.Proxy.ChangedBy = __newValue.Proxy;
+                }
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
@@ -145,41 +132,35 @@ namespace Zetbox.App.Calendar
                 }
             }
         }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnChangedBy_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnChangedBy_IsValid;
+        /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
+        private int? _fk_ChangedBy = null;
+
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public DateTime ChangedOn
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _ChangedOn;
-                if (!_isChangedOnSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("4fed42c3-ff27-4bcc-8404-2b7bd5b71091"));
-                    if (__p != null) {
-                        _isChangedOnSet = true;
-                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
-                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
-                        __result = this._ChangedOn = (DateTime)__tmp_value;
-                    } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SyncAccount.ChangedOn'");
-                    }
-                }
+                var __result = FetchChangedOnOrDefault();
                 if (OnChangedOn_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = _ChangedOn = __e.Result;
+                    __result = __e.Result;
                 }
                 return __result;
             }
@@ -187,12 +168,10 @@ namespace Zetbox.App.Calendar
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 _isChangedOnSet = true;
-                if (_ChangedOn != value)
+                if (Proxy.ChangedOn != value)
                 {
-                    var __oldValue = _ChangedOn;
+                    var __oldValue = Proxy.ChangedOn;
                     var __newValue = value;
-                    if (__newValue.Kind == DateTimeKind.Unspecified)
-                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -200,7 +179,7 @@ namespace Zetbox.App.Calendar
                         __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
-                    _ChangedOn = __newValue;
+                    Proxy.ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
@@ -216,98 +195,82 @@ namespace Zetbox.App.Calendar
                 }
             }
         }
-        private DateTime _ChangedOn;
-        private bool _isChangedOnSet = false;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnChangedOn_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnChangedOn_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnChangedOn_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnChangedOn_IsValid;
+
+        private DateTime FetchChangedOnOrDefault()
+        {
+            var __result = Proxy.ChangedOn;
+                if (!_isChangedOnSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("4fed42c3-ff27-4bcc-8404-2b7bd5b71091"));
+                    if (__p != null) {
+                        _isChangedOnSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.ChangedOn = (DateTime)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.SyncProvider.ChangedOn'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isChangedOnSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnChangedOn_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
-        // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
 
-        // implement the user-visible interface
-        [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Base.Identity CreatedBy
         {
-            get { return CreatedByImpl; }
-            set { CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_CreatedByCache;
-
-        private int? _fk_CreatedBy {
             get
             {
-                return __fk_CreatedByCache;
-            }
-            set
-            {
-                __fk_CreatedByCache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchCreatedByTask = null;
-            }
-        }
+                Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
-
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
-        {
-            if (_triggerFetchCreatedByTask != null) return _triggerFetchCreatedByTask;
-
-            if (_fk_CreatedBy.HasValue)
-                _triggerFetchCreatedByTask = Context.FindAsync<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
-            else
-                _triggerFetchCreatedByTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            _triggerFetchCreatedByTask.OnResult(t =>
-            {
                 if (OnCreatedBy_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(t.Result);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
                     OnCreatedBy_Getter(this, e);
-                    t.Result = e.Result;
+                    __value = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
                 }
-            });
 
-            return _triggerFetchCreatedByTask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Base.IdentityMemoryImpl CreatedByImpl
-        {
-            get
-            {
-                return (Zetbox.App.Base.IdentityMemoryImpl)TriggerFetchCreatedByAsync().Result;
+                return __value;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                // shortcut noops
-                if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.CreatedBy == null)
                 {
                     SetInitializedProperty("CreatedBy");
                     return;
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = CreatedByImpl;
-                var __newValue = value;
+                var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
+                var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                {
+                    SetInitializedProperty("CreatedBy");
+                    return;
+                }
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -316,11 +279,18 @@ namespace Zetbox.App.Calendar
                 {
                     var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.IdentityMemoryImpl)e.Result;
+                    __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
                 }
 
                 // next, set the local reference
-                _fk_CreatedBy = __newValue == null ? (int?)null : __newValue.ID;
+                if (__newValue == null)
+                {
+                    this.Proxy.CreatedBy = null;
+                }
+                else
+                {
+                    this.Proxy.CreatedBy = __newValue.Proxy;
+                }
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
@@ -333,41 +303,35 @@ namespace Zetbox.App.Calendar
                 }
             }
         }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnCreatedBy_IsValid;
+        /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
+        private int? _fk_CreatedBy = null;
+
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public DateTime CreatedOn
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _CreatedOn;
-                if (!_isCreatedOnSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("4dc69bd1-64fa-45f6-9899-af44d0e4c2d7"));
-                    if (__p != null) {
-                        _isCreatedOnSet = true;
-                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
-                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
-                        __result = this._CreatedOn = (DateTime)__tmp_value;
-                    } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SyncAccount.CreatedOn'");
-                    }
-                }
+                var __result = FetchCreatedOnOrDefault();
                 if (OnCreatedOn_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = _CreatedOn = __e.Result;
+                    __result = __e.Result;
                 }
                 return __result;
             }
@@ -375,12 +339,10 @@ namespace Zetbox.App.Calendar
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 _isCreatedOnSet = true;
-                if (_CreatedOn != value)
+                if (Proxy.CreatedOn != value)
                 {
-                    var __oldValue = _CreatedOn;
+                    var __oldValue = Proxy.CreatedOn;
                     var __newValue = value;
-                    if (__newValue.Kind == DateTimeKind.Unspecified)
-                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -388,7 +350,7 @@ namespace Zetbox.App.Calendar
                         __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
-                    _CreatedOn = __newValue;
+                    Proxy.CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
@@ -404,41 +366,59 @@ namespace Zetbox.App.Calendar
                 }
             }
         }
-        private DateTime _CreatedOn;
-        private bool _isCreatedOnSet = false;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnCreatedOn_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnCreatedOn_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnCreatedOn_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnCreatedOn_IsValid;
+
+        private DateTime FetchCreatedOnOrDefault()
+        {
+            var __result = Proxy.CreatedOn;
+                if (!_isCreatedOnSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("4dc69bd1-64fa-45f6-9899-af44d0e4c2d7"));
+                    if (__p != null) {
+                        _isCreatedOnSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.CreatedOn = (DateTime)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.SyncProvider.CreatedOn'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isCreatedOnSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnCreatedOn_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnCreatedOn_IsValid;
 
         /// <summary>
         /// 
         /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public string Name
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _Name;
+                var __result = Proxy.Name;
                 if (OnName_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnName_Getter(this, __e);
-                    __result = _Name = __e.Result;
+                    __result = __e.Result;
                 }
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
+                if (Proxy.Name != value)
                 {
-                    var __oldValue = _Name;
+                    var __oldValue = Proxy.Name;
                     var __newValue = value;
                     if (OnName_PreSetter != null && IsAttached)
                     {
@@ -447,7 +427,7 @@ namespace Zetbox.App.Calendar
                         __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
-                    _Name = __newValue;
+                    Proxy.Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
@@ -463,42 +443,31 @@ namespace Zetbox.App.Calendar
                 }
             }
         }
-        private string _Name;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, string> OnName_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, string> OnName_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, string> OnName_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnName_IsValid;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, string> OnName_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnName_IsValid;
 
         /// <summary>
         /// 
         /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public DateTime NextSync
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _NextSync;
-                if (!_isNextSyncSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("51751fc9-bc77-4203-bcc1-fc4d5cafa360"));
-                    if (__p != null) {
-                        _isNextSyncSet = true;
-                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
-                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
-                        __result = this._NextSync = (DateTime)__tmp_value;
-                    } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SyncAccount.NextSync'");
-                    }
-                }
+                var __result = FetchNextSyncOrDefault();
                 if (OnNextSync_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnNextSync_Getter(this, __e);
-                    __result = _NextSync = __e.Result;
+                    __result = __e.Result;
                 }
                 return __result;
             }
@@ -506,12 +475,10 @@ namespace Zetbox.App.Calendar
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 _isNextSyncSet = true;
-                if (_NextSync != value)
+                if (Proxy.NextSync != value)
                 {
-                    var __oldValue = _NextSync;
+                    var __oldValue = Proxy.NextSync;
                     var __newValue = value;
-                    if (__newValue.Kind == DateTimeKind.Unspecified)
-                        __newValue = DateTime.SpecifyKind(__newValue, DateTimeKind.Local);
                     if (OnNextSync_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -519,7 +486,7 @@ namespace Zetbox.App.Calendar
                         __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("NextSync", __oldValue, __newValue);
-                    _NextSync = __newValue;
+                    Proxy.NextSync = __newValue;
                     NotifyPropertyChanged("NextSync", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
@@ -535,47 +502,65 @@ namespace Zetbox.App.Calendar
                 }
             }
         }
-        private DateTime _NextSync;
-        private bool _isNextSyncSet = false;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnNextSync_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnNextSync_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncAccount, DateTime> OnNextSync_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncAccount> OnNextSync_IsValid;
+
+        private DateTime FetchNextSyncOrDefault()
+        {
+            var __result = Proxy.NextSync;
+                if (!_isNextSyncSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("51751fc9-bc77-4203-bcc1-fc4d5cafa360"));
+                    if (__p != null) {
+                        _isNextSyncSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.NextSync = (DateTime)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.SyncProvider.NextSync'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isNextSyncSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnNextSync_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnNextSync_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.SyncProvider, DateTime> OnNextSync_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.SyncProvider> OnNextSync_IsValid;
 
         /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnPerformSync_SyncAccount")]
+        [EventBasedMethod("OnPerformSync_SyncProvider")]
         public virtual void PerformSync()
         {
             // base.PerformSync();
-            if (OnPerformSync_SyncAccount != null)
+            if (OnPerformSync_SyncProvider != null)
             {
-                OnPerformSync_SyncAccount(this);
+                OnPerformSync_SyncProvider(this);
             }
             else
             {
-                throw new NotImplementedException("No handler registered on method SyncAccount.PerformSync");
+                throw new NotImplementedException("No handler registered on method SyncProvider.PerformSync");
             }
         }
         public delegate void PerformSync_Handler<T>(T obj);
-        public static event PerformSync_Handler<SyncAccount> OnPerformSync_SyncAccount;
+        public static event PerformSync_Handler<SyncProvider> OnPerformSync_SyncProvider;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
-		public static event CanExecMethodEventHandler<SyncAccount> OnPerformSync_SyncAccount_CanExec;
+		public static event CanExecMethodEventHandler<SyncProvider> OnPerformSync_SyncProvider_CanExec;
 
-        [EventBasedMethod("OnPerformSync_SyncAccount_CanExec")]
+        [EventBasedMethod("OnPerformSync_SyncProvider_CanExec")]
         public virtual bool PerformSyncCanExec
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<bool>();
-				if (OnPerformSync_SyncAccount_CanExec != null)
+				if (OnPerformSync_SyncProvider_CanExec != null)
 				{
-					OnPerformSync_SyncAccount_CanExec(this, e);
+					OnPerformSync_SyncProvider_CanExec(this, e);
 				}
 				else
 				{
@@ -586,17 +571,17 @@ namespace Zetbox.App.Calendar
         }
 
 		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<SyncAccount> OnPerformSync_SyncAccount_CanExecReason;
+		public static event CanExecReasonMethodEventHandler<SyncProvider> OnPerformSync_SyncProvider_CanExecReason;
 
-        [EventBasedMethod("OnPerformSync_SyncAccount_CanExecReason")]
+        [EventBasedMethod("OnPerformSync_SyncProvider_CanExecReason")]
         public virtual string PerformSyncCanExecReason
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<string>();
-				if (OnPerformSync_SyncAccount_CanExecReason != null)
+				if (OnPerformSync_SyncProvider_CanExecReason != null)
 				{
-					OnPerformSync_SyncAccount_CanExecReason(this, e);
+					OnPerformSync_SyncProvider_CanExecReason(this, e);
 				}
 				else
 				{
@@ -609,15 +594,15 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(SyncAccount);
+            return typeof(SyncProvider);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (SyncAccount)obj;
-            var otherImpl = (SyncAccountMemoryImpl)obj;
-            var me = (SyncAccount)this;
+            var other = (SyncProvider)obj;
+            var otherImpl = (SyncProviderNHibernateImpl)obj;
+            var me = (SyncProvider)this;
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
@@ -637,19 +622,19 @@ namespace Zetbox.App.Calendar
             {
                 case "ChangedBy":
                     {
-                        var __oldValue = _fk_ChangedBy;
-                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
+                        var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
-                        _fk_ChangedBy = __newValue;
+                        this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                     }
                     break;
                 case "CreatedBy":
                     {
-                        var __oldValue = _fk_CreatedBy;
-                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
+                        var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
-                        _fk_CreatedBy = __newValue;
+                        this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                     }
                     break;
@@ -679,19 +664,6 @@ namespace Zetbox.App.Calendar
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
-        {
-            switch(propName)
-            {
-            case "ChangedBy":
-                return TriggerFetchChangedByAsync();
-            case "CreatedBy":
-                return TriggerFetchCreatedByAsync();
-            default:
-                return base.TriggerFetch(propName);
-            }
-        }
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -702,14 +674,14 @@ namespace Zetbox.App.Calendar
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
-                ChangedByImpl = null;
+                this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
-                CreatedByImpl = null;
+                this.CreatedBy = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -725,7 +697,7 @@ namespace Zetbox.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<SyncAccount, Zetbox.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<SyncProvider, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("f7b630be-ec14-4e53-a1ca-366ab0c8903b"),
                         "ChangedBy",
@@ -734,7 +706,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.ChangedBy = val,
 						obj => OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SyncAccount, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<SyncProvider, DateTime>(
                         lazyCtx,
                         new Guid("4fed42c3-ff27-4bcc-8404-2b7bd5b71091"),
                         "ChangedOn",
@@ -743,7 +715,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.ChangedOn = val,
 						obj => OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SyncAccount, Zetbox.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<SyncProvider, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("7575dccf-9e8f-473d-9276-60b7365e8a3e"),
                         "CreatedBy",
@@ -752,7 +724,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.CreatedBy = val,
 						obj => OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SyncAccount, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<SyncProvider, DateTime>(
                         lazyCtx,
                         new Guid("4dc69bd1-64fa-45f6-9899-af44d0e4c2d7"),
                         "CreatedOn",
@@ -761,7 +733,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SyncAccount, string>(
+                    new PropertyDescriptorNHibernateImpl<SyncProvider, string>(
                         lazyCtx,
                         new Guid("1c49698b-a45d-4e84-92a4-b66b334e109d"),
                         "Name",
@@ -770,7 +742,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SyncAccount, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<SyncProvider, DateTime>(
                         lazyCtx,
                         new Guid("51751fc9-bc77-4203-bcc1-fc4d5cafa360"),
                         "NextSync",
@@ -790,77 +762,120 @@ namespace Zetbox.App.Calendar
             props.AddRange(_properties);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
+        #region Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_SyncAccount")]
+        [EventBasedMethod("OnToString_SyncProvider")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_SyncAccount != null)
+            if (OnToString_SyncProvider != null)
             {
-                OnToString_SyncAccount(this, e);
+                OnToString_SyncProvider(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<SyncAccount> OnToString_SyncAccount;
+        public static event ToStringHandler<SyncProvider> OnToString_SyncProvider;
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnObjectIsValid_SyncAccount")]
+        [EventBasedMethod("OnObjectIsValid_SyncProvider")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
-            if (OnObjectIsValid_SyncAccount != null)
+            if (OnObjectIsValid_SyncProvider != null)
             {
-                OnObjectIsValid_SyncAccount(this, e);
+                OnObjectIsValid_SyncProvider(this, e);
             }
             return new ObjectIsValidResult(e.IsValid, e.Errors);
         }
-        public static event ObjectIsValidHandler<SyncAccount> OnObjectIsValid_SyncAccount;
+        public static event ObjectIsValidHandler<SyncProvider> OnObjectIsValid_SyncProvider;
 
-        [EventBasedMethod("OnNotifyPreSave_SyncAccount")]
+        [EventBasedMethod("OnNotifyPreSave_SyncProvider")]
         public override void NotifyPreSave()
         {
+            FetchChangedOnOrDefault();
+            FetchCreatedOnOrDefault();
+            FetchNextSyncOrDefault();
             base.NotifyPreSave();
-            if (OnNotifyPreSave_SyncAccount != null) OnNotifyPreSave_SyncAccount(this);
+            if (OnNotifyPreSave_SyncProvider != null) OnNotifyPreSave_SyncProvider(this);
         }
-        public static event ObjectEventHandler<SyncAccount> OnNotifyPreSave_SyncAccount;
+        public static event ObjectEventHandler<SyncProvider> OnNotifyPreSave_SyncProvider;
 
-        [EventBasedMethod("OnNotifyPostSave_SyncAccount")]
+        [EventBasedMethod("OnNotifyPostSave_SyncProvider")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnNotifyPostSave_SyncAccount != null) OnNotifyPostSave_SyncAccount(this);
+            if (OnNotifyPostSave_SyncProvider != null) OnNotifyPostSave_SyncProvider(this);
         }
-        public static event ObjectEventHandler<SyncAccount> OnNotifyPostSave_SyncAccount;
+        public static event ObjectEventHandler<SyncProvider> OnNotifyPostSave_SyncProvider;
 
-        [EventBasedMethod("OnNotifyCreated_SyncAccount")]
+        [EventBasedMethod("OnNotifyCreated_SyncProvider")]
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Name");
             base.NotifyCreated();
-            if (OnNotifyCreated_SyncAccount != null) OnNotifyCreated_SyncAccount(this);
+            if (OnNotifyCreated_SyncProvider != null) OnNotifyCreated_SyncProvider(this);
         }
-        public static event ObjectEventHandler<SyncAccount> OnNotifyCreated_SyncAccount;
+        public static event ObjectEventHandler<SyncProvider> OnNotifyCreated_SyncProvider;
 
-        [EventBasedMethod("OnNotifyDeleting_SyncAccount")]
+        [EventBasedMethod("OnNotifyDeleting_SyncProvider")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnNotifyDeleting_SyncAccount != null) OnNotifyDeleting_SyncAccount(this);
+            if (OnNotifyDeleting_SyncProvider != null) OnNotifyDeleting_SyncProvider(this);
+
+            // FK_SyncAccount_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_SyncAccount_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+
             ChangedBy = null;
             CreatedBy = null;
         }
-        public static event ObjectEventHandler<SyncAccount> OnNotifyDeleting_SyncAccount;
+        public static event ObjectEventHandler<SyncProvider> OnNotifyDeleting_SyncProvider;
 
-        #endregion // Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
+        #endregion // Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
+        public class SyncProviderProxy
+            : IProxyObject, ISortKey<int>
+        {
+            public SyncProviderProxy()
+            {
+            }
+
+            public virtual int ID { get; set; }
+
+            public virtual Type ZetboxWrapper { get { return typeof(SyncProviderNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(SyncProviderProxy); } }
+
+            public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy ChangedBy { get; set; }
+
+            public virtual DateTime ChangedOn { get; set; }
+
+            public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy CreatedBy { get; set; }
+
+            public virtual DateTime CreatedOn { get; set; }
+
+            public virtual string Name { get; set; }
+
+            public virtual DateTime NextSync { get; set; }
+
+        }
+
+        // make proxy available for the provider
+        public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 
 
@@ -869,20 +884,20 @@ namespace Zetbox.App.Calendar
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
             binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                binStream.Write(this._ChangedOn);
+                binStream.Write(this.Proxy.ChangedOn);
             }
-            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                binStream.Write(this._CreatedOn);
+                binStream.Write(this.Proxy.CreatedOn);
             }
-            binStream.Write(this._Name);
+            binStream.Write(this.Proxy.Name);
             binStream.Write(this._isNextSyncSet);
             if (this._isNextSyncSet) {
-                binStream.Write(this._NextSync);
+                binStream.Write(this.Proxy.NextSync);
             }
         }
 
@@ -892,20 +907,20 @@ namespace Zetbox.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._fk_ChangedBy = binStream.ReadNullableInt32();
+            binStream.Read(out this._fk_ChangedBy);
             this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                this._ChangedOn = binStream.ReadDateTime();
+                this.Proxy.ChangedOn = binStream.ReadDateTime();
             }
-            this._fk_CreatedBy = binStream.ReadNullableInt32();
+            binStream.Read(out this._fk_CreatedBy);
             this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                this._CreatedOn = binStream.ReadDateTime();
+                this.Proxy.CreatedOn = binStream.ReadDateTime();
             }
-            this._Name = binStream.ReadString();
+            this.Proxy.Name = binStream.ReadString();
             this._isNextSyncSet = binStream.ReadBoolean();
             if (this._isNextSyncSet) {
-                this._NextSync = binStream.ReadDateTime();
+                this.Proxy.NextSync = binStream.ReadDateTime();
             }
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null

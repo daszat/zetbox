@@ -1632,9 +1632,9 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SyncAccountEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SyncAccountEfImpl)">
-	    <MappingFragment StoreEntitySet="SyncAccount">
+    <EntitySetMapping Name="SyncProviderEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SyncProviderEfImpl)">
+	    <MappingFragment StoreEntitySet="SyncProvider">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -1642,8 +1642,8 @@
           <ScalarProperty Name="NextSync" ColumnName="NextSync" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkScheduleSyncAccountEfImpl)">
-	    <MappingFragment StoreEntitySet="WorkScheduleSyncAccount">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkScheduleSyncProviderEfImpl)">
+	    <MappingFragment StoreEntitySet="WorkScheduleSyncProvider">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -5611,13 +5611,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_SyncAccount_for_Calendar
-    A: ZeroOrMore WorkScheduleSyncAccount as SyncAccount
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
     B: One Calendar as Calendar
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_SyncAccount_for_Calendar"
                            TypeName="Model.FK_SyncAccount_for_Calendar"
-                           StoreEntitySet="WorkScheduleSyncAccount" >
+                           StoreEntitySet="WorkScheduleSyncProvider" >
       <EndProperty Name="Calendar">
         <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
       </EndProperty>
@@ -5628,13 +5628,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_SyncAccount_of_WorkSchedule
-    A: ZeroOrMore WorkScheduleSyncAccount as SyncAccount
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
     B: One WorkSchedule as WorkSchedule
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_SyncAccount_of_WorkSchedule"
                            TypeName="Model.FK_SyncAccount_of_WorkSchedule"
-                           StoreEntitySet="WorkScheduleSyncAccount" >
+                           StoreEntitySet="WorkScheduleSyncProvider" >
       <EndProperty Name="WorkSchedule">
         <ScalarProperty Name="ID" ColumnName="fk_WorkSchedule"/>
       </EndProperty>
@@ -5645,13 +5645,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_SyncAccount_was_ChangedBy
-    A: ZeroOrMore SyncAccount as SyncAccount
+    A: ZeroOrMore SyncProvider as SyncAccount
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_SyncAccount_was_ChangedBy"
                            TypeName="Model.FK_SyncAccount_was_ChangedBy"
-                           StoreEntitySet="SyncAccount" >
+                           StoreEntitySet="SyncProvider" >
       <EndProperty Name="ChangedBy">
         <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
       </EndProperty>
@@ -5662,13 +5662,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_SyncAccount_was_CreatedBy
-    A: ZeroOrMore SyncAccount as SyncAccount
+    A: ZeroOrMore SyncProvider as SyncAccount
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_SyncAccount_was_CreatedBy"
                            TypeName="Model.FK_SyncAccount_was_CreatedBy"
-                           StoreEntitySet="SyncAccount" >
+                           StoreEntitySet="SyncProvider" >
       <EndProperty Name="CreatedBy">
         <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
       </EndProperty>

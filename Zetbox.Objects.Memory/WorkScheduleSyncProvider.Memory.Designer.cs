@@ -14,89 +14,112 @@ namespace Zetbox.App.Calendar
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Utils;
     using Zetbox.DalProvider.Base;
-    using Zetbox.DalProvider.NHibernate;
+    using Zetbox.DalProvider.Memory;
 
     /// <summary>
-    /// Sync account for work schedules
+    /// Sync provider for work schedules
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("WorkScheduleSyncAccount")]
-    public class WorkScheduleSyncAccountNHibernateImpl : Zetbox.App.Calendar.SyncAccountNHibernateImpl, WorkScheduleSyncAccount
+    [System.Diagnostics.DebuggerDisplay("WorkScheduleSyncProvider")]
+    public class WorkScheduleSyncProviderMemoryImpl : Zetbox.App.Calendar.SyncProviderMemoryImpl, WorkScheduleSyncProvider
     {
         private static readonly Guid _objectClassID = new Guid("ed44a638-a19d-430c-b19f-766a1820fc67");
         public override Guid ObjectClassID { get { return _objectClassID; } }
 
-        public WorkScheduleSyncAccountNHibernateImpl()
-            : this(null)
+        [Obsolete]
+        public WorkScheduleSyncProviderMemoryImpl()
+            : base(null)
         {
         }
 
-        /// <summary>Create a new unattached instance</summary>
-        public WorkScheduleSyncAccountNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new WorkScheduleSyncAccountProxy())
+        public WorkScheduleSyncProviderMemoryImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
         {
         }
-
-        /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public WorkScheduleSyncAccountNHibernateImpl(Func<IFrozenContext> lazyCtx, WorkScheduleSyncAccountProxy proxy)
-            : base(lazyCtx, proxy) // pass proxy to parent
-        {
-            this.Proxy = proxy;
-        }
-
-        /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal new readonly WorkScheduleSyncAccountProxy Proxy;
 
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
-        // fkBackingName=this.Proxy.Calendar; fkGuidBackingName=_fk_guid_Calendar;
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
+        // fkBackingName=_fk_Calendar; fkGuidBackingName=_fk_guid_Calendar;
         // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
 
+        // implement the user-visible interface
+        [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.Calendar Calendar
+        {
+            get { return CalendarImpl; }
+            set { CalendarImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_CalendarCache;
+
+        private int? _fk_Calendar {
+            get
+            {
+                return __fk_CalendarCache;
+            }
+            set
+            {
+                __fk_CalendarCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchCalendarTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> _triggerFetchCalendarTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> TriggerFetchCalendarAsync()
+        {
+            if (_triggerFetchCalendarTask != null) return _triggerFetchCalendarTask;
+
+            if (_fk_Calendar.HasValue)
+                _triggerFetchCalendarTask = Context.FindAsync<Zetbox.App.Calendar.Calendar>(_fk_Calendar.Value);
+            else
+                _triggerFetchCalendarTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchCalendarTask.OnResult(t =>
+            {
+                if (OnCalendar_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.Calendar>(t.Result);
+                    OnCalendar_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchCalendarTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.Calendar.CalendarMemoryImpl CalendarImpl
         {
             get
             {
-                Zetbox.App.Calendar.CalendarNHibernateImpl __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
-
-                if (OnCalendar_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.Calendar>(__value);
-                    OnCalendar_Getter(this, e);
-                    __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Calendar.CalendarMemoryImpl)TriggerFetchCalendarAsync().Result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                // shortcut noop with nulls
-                if (value == null && this.Proxy.Calendar == null)
+                // shortcut noops
+                if ((value == null && _fk_Calendar == null) || (value != null && value.ID == _fk_Calendar))
                 {
                     SetInitializedProperty("Calendar");
                     return;
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
-                var __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)value;
-
-                // shortcut noop on objects
-                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
-                if (__oldValue == __newValue)
-                {
-                    SetInitializedProperty("Calendar");
-                    return;
-                }
+                var __oldValue = CalendarImpl;
+                var __newValue = value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Calendar", __oldValue, __newValue);
@@ -105,18 +128,11 @@ namespace Zetbox.App.Calendar
                 {
                     var e = new PropertyPreSetterEventArgs<Zetbox.App.Calendar.Calendar>(__oldValue, __newValue);
                     OnCalendar_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)e.Result;
+                    __newValue = (Zetbox.App.Calendar.CalendarMemoryImpl)e.Result;
                 }
 
                 // next, set the local reference
-                if (__newValue == null)
-                {
-                    this.Proxy.Calendar = null;
-                }
-                else
-                {
-                    this.Proxy.Calendar = __newValue.Proxy;
-                }
+                _fk_Calendar = __newValue == null ? (int?)null : __newValue.ID;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Calendar", __oldValue, __newValue);
@@ -129,67 +145,96 @@ namespace Zetbox.App.Calendar
                 }
             }
         }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PostSetter;
 
-        /// <summary>Backing store for Calendar's id, used on dehydration only</summary>
-        private int? _fk_Calendar = null;
-
-
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.Calendar> OnCalendar_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount> OnCalendar_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider> OnCalendar_IsValid;
 
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
-        // fkBackingName=this.Proxy.WorkSchedule; fkGuidBackingName=_fk_guid_WorkSchedule;
+            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
+        // fkBackingName=_fk_WorkSchedule; fkGuidBackingName=_fk_guid_WorkSchedule;
         // referencedInterface=Zetbox.App.Calendar.WorkSchedule; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
 
+        // implement the user-visible interface
+        [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.App.Calendar.WorkSchedule WorkSchedule
+        {
+            get { return WorkScheduleImpl; }
+            set { WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_WorkScheduleCache;
+
+        private int? _fk_WorkSchedule {
+            get
+            {
+                return __fk_WorkScheduleCache;
+            }
+            set
+            {
+                __fk_WorkScheduleCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchWorkScheduleTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule> _triggerFetchWorkScheduleTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule> TriggerFetchWorkScheduleAsync()
+        {
+            if (_triggerFetchWorkScheduleTask != null) return _triggerFetchWorkScheduleTask;
+
+            if (_fk_WorkSchedule.HasValue)
+                _triggerFetchWorkScheduleTask = Context.FindAsync<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value);
+            else
+                _triggerFetchWorkScheduleTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchWorkScheduleTask.OnResult(t =>
+            {
+                if (OnWorkSchedule_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.WorkSchedule>(t.Result);
+                    OnWorkSchedule_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchWorkScheduleTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.Calendar.WorkScheduleMemoryImpl WorkScheduleImpl
         {
             get
             {
-                Zetbox.App.Calendar.WorkScheduleNHibernateImpl __value = (Zetbox.App.Calendar.WorkScheduleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.WorkSchedule);
-
-                if (OnWorkSchedule_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.WorkSchedule>(__value);
-                    OnWorkSchedule_Getter(this, e);
-                    __value = (Zetbox.App.Calendar.WorkScheduleNHibernateImpl)e.Result;
-                }
-
-                return __value;
+                return (Zetbox.App.Calendar.WorkScheduleMemoryImpl)TriggerFetchWorkScheduleAsync().Result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                // shortcut noop with nulls
-                if (value == null && this.Proxy.WorkSchedule == null)
+                // shortcut noops
+                if ((value == null && _fk_WorkSchedule == null) || (value != null && value.ID == _fk_WorkSchedule))
                 {
                     SetInitializedProperty("WorkSchedule");
                     return;
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Zetbox.App.Calendar.WorkScheduleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.WorkSchedule);
-                var __newValue = (Zetbox.App.Calendar.WorkScheduleNHibernateImpl)value;
-
-                // shortcut noop on objects
-                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
-                if (__oldValue == __newValue)
-                {
-                    SetInitializedProperty("WorkSchedule");
-                    return;
-                }
+                var __oldValue = WorkScheduleImpl;
+                var __newValue = value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("WorkSchedule", __oldValue, __newValue);
@@ -198,18 +243,11 @@ namespace Zetbox.App.Calendar
                 {
                     var e = new PropertyPreSetterEventArgs<Zetbox.App.Calendar.WorkSchedule>(__oldValue, __newValue);
                     OnWorkSchedule_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Calendar.WorkScheduleNHibernateImpl)e.Result;
+                    __newValue = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)e.Result;
                 }
 
                 // next, set the local reference
-                if (__newValue == null)
-                {
-                    this.Proxy.WorkSchedule = null;
-                }
-                else
-                {
-                    this.Proxy.WorkSchedule = __newValue.Proxy;
-                }
+                _fk_WorkSchedule = __newValue == null ? (int?)null : __newValue.ID;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("WorkSchedule", __oldValue, __newValue);
@@ -222,49 +260,44 @@ namespace Zetbox.App.Calendar
                 }
             }
         }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_PostSetter;
 
-        /// <summary>Backing store for WorkSchedule's id, used on dehydration only</summary>
-        private int? _fk_WorkSchedule = null;
-
-
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount> OnWorkSchedule_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider> OnWorkSchedule_IsValid;
 
         /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnPerformSync_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnPerformSync_WorkScheduleSyncProvider")]
         public override void PerformSync()
         {
             // base.PerformSync();
-            if (OnPerformSync_WorkScheduleSyncAccount != null)
+            if (OnPerformSync_WorkScheduleSyncProvider != null)
             {
-                OnPerformSync_WorkScheduleSyncAccount(this);
+                OnPerformSync_WorkScheduleSyncProvider(this);
             }
             else
             {
                 base.PerformSync();
             }
         }
-        public static event PerformSync_Handler<WorkScheduleSyncAccount> OnPerformSync_WorkScheduleSyncAccount;
+        public static event PerformSync_Handler<WorkScheduleSyncProvider> OnPerformSync_WorkScheduleSyncProvider;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
-		public static event CanExecMethodEventHandler<WorkScheduleSyncAccount> OnPerformSync_WorkScheduleSyncAccount_CanExec;
+		public static event CanExecMethodEventHandler<WorkScheduleSyncProvider> OnPerformSync_WorkScheduleSyncProvider_CanExec;
 
-        [EventBasedMethod("OnPerformSync_WorkScheduleSyncAccount_CanExec")]
+        [EventBasedMethod("OnPerformSync_WorkScheduleSyncProvider_CanExec")]
         public override bool PerformSyncCanExec
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<bool>();
-				if (OnPerformSync_WorkScheduleSyncAccount_CanExec != null)
+				if (OnPerformSync_WorkScheduleSyncProvider_CanExec != null)
 				{
-					OnPerformSync_WorkScheduleSyncAccount_CanExec(this, e);
+					OnPerformSync_WorkScheduleSyncProvider_CanExec(this, e);
 				}
 				else
 				{
@@ -275,17 +308,17 @@ namespace Zetbox.App.Calendar
         }
 
 		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<WorkScheduleSyncAccount> OnPerformSync_WorkScheduleSyncAccount_CanExecReason;
+		public static event CanExecReasonMethodEventHandler<WorkScheduleSyncProvider> OnPerformSync_WorkScheduleSyncProvider_CanExecReason;
 
-        [EventBasedMethod("OnPerformSync_WorkScheduleSyncAccount_CanExecReason")]
+        [EventBasedMethod("OnPerformSync_WorkScheduleSyncProvider_CanExecReason")]
         public override string PerformSyncCanExecReason
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<string>();
-				if (OnPerformSync_WorkScheduleSyncAccount_CanExecReason != null)
+				if (OnPerformSync_WorkScheduleSyncProvider_CanExecReason != null)
 				{
-					OnPerformSync_WorkScheduleSyncAccount_CanExecReason(this, e);
+					OnPerformSync_WorkScheduleSyncProvider_CanExecReason(this, e);
 				}
 				else
 				{
@@ -298,15 +331,15 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(WorkScheduleSyncAccount);
+            return typeof(WorkScheduleSyncProvider);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (WorkScheduleSyncAccount)obj;
-            var otherImpl = (WorkScheduleSyncAccountNHibernateImpl)obj;
-            var me = (WorkScheduleSyncAccount)this;
+            var other = (WorkScheduleSyncProvider)obj;
+            var otherImpl = (WorkScheduleSyncProviderMemoryImpl)obj;
+            var me = (WorkScheduleSyncProvider)this;
 
             this._fk_Calendar = otherImpl._fk_Calendar;
             this._fk_WorkSchedule = otherImpl._fk_WorkSchedule;
@@ -322,19 +355,19 @@ namespace Zetbox.App.Calendar
             {
                 case "Calendar":
                     {
-                        var __oldValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
-                        var __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)parentObj;
+                        var __oldValue = _fk_Calendar;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
                         NotifyPropertyChanging("Calendar", __oldValue, __newValue);
-                        this.Proxy.Calendar = __newValue == null ? null : __newValue.Proxy;
+                        _fk_Calendar = __newValue;
                         NotifyPropertyChanged("Calendar", __oldValue, __newValue);
                     }
                     break;
                 case "WorkSchedule":
                     {
-                        var __oldValue = (Zetbox.App.Calendar.WorkScheduleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.WorkSchedule);
-                        var __newValue = (Zetbox.App.Calendar.WorkScheduleNHibernateImpl)parentObj;
+                        var __oldValue = _fk_WorkSchedule;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
                         NotifyPropertyChanging("WorkSchedule", __oldValue, __newValue);
-                        this.Proxy.WorkSchedule = __newValue == null ? null : __newValue.Proxy;
+                        _fk_WorkSchedule = __newValue;
                         NotifyPropertyChanged("WorkSchedule", __oldValue, __newValue);
                     }
                     break;
@@ -360,6 +393,19 @@ namespace Zetbox.App.Calendar
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Calendar":
+                return TriggerFetchCalendarAsync();
+            case "WorkSchedule":
+                return TriggerFetchWorkScheduleAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -370,14 +416,14 @@ namespace Zetbox.App.Calendar
             // fix direct object references
 
             if (_fk_Calendar.HasValue)
-                this.Calendar = ((Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_Calendar.Value));
+                CalendarImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)Context.Find<Zetbox.App.Calendar.Calendar>(_fk_Calendar.Value);
             else
-                this.Calendar = null;
+                CalendarImpl = null;
 
             if (_fk_WorkSchedule.HasValue)
-                this.WorkSchedule = ((Zetbox.App.Calendar.WorkScheduleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value));
+                WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)Context.Find<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value);
             else
-                this.WorkSchedule = null;
+                WorkScheduleImpl = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -393,7 +439,7 @@ namespace Zetbox.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<WorkScheduleSyncAccount, Zetbox.App.Calendar.Calendar>(
+                    new PropertyDescriptorMemoryImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar>(
                         lazyCtx,
                         new Guid("f67558bb-7415-4a41-9196-7c39426746df"),
                         "Calendar",
@@ -402,7 +448,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.Calendar = val,
 						obj => OnCalendar_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<WorkScheduleSyncAccount, Zetbox.App.Calendar.WorkSchedule>(
+                    new PropertyDescriptorMemoryImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.WorkSchedule>(
                         lazyCtx,
                         new Guid("72dcb583-17bc-4247-a7c1-39f607b4905c"),
                         "WorkSchedule",
@@ -422,104 +468,75 @@ namespace Zetbox.App.Calendar
             props.AddRange(_properties);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #region Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
+        #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnToString_WorkScheduleSyncProvider")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_WorkScheduleSyncAccount != null)
+            if (OnToString_WorkScheduleSyncProvider != null)
             {
-                OnToString_WorkScheduleSyncAccount(this, e);
+                OnToString_WorkScheduleSyncProvider(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<WorkScheduleSyncAccount> OnToString_WorkScheduleSyncAccount;
+        public static event ToStringHandler<WorkScheduleSyncProvider> OnToString_WorkScheduleSyncProvider;
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnObjectIsValid_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnObjectIsValid_WorkScheduleSyncProvider")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
-            if (OnObjectIsValid_WorkScheduleSyncAccount != null)
+            if (OnObjectIsValid_WorkScheduleSyncProvider != null)
             {
-                OnObjectIsValid_WorkScheduleSyncAccount(this, e);
+                OnObjectIsValid_WorkScheduleSyncProvider(this, e);
             }
             return new ObjectIsValidResult(e.IsValid, e.Errors);
         }
-        public static event ObjectIsValidHandler<WorkScheduleSyncAccount> OnObjectIsValid_WorkScheduleSyncAccount;
+        public static event ObjectIsValidHandler<WorkScheduleSyncProvider> OnObjectIsValid_WorkScheduleSyncProvider;
 
-        [EventBasedMethod("OnNotifyPreSave_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnNotifyPreSave_WorkScheduleSyncProvider")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnNotifyPreSave_WorkScheduleSyncAccount != null) OnNotifyPreSave_WorkScheduleSyncAccount(this);
+            if (OnNotifyPreSave_WorkScheduleSyncProvider != null) OnNotifyPreSave_WorkScheduleSyncProvider(this);
         }
-        public static event ObjectEventHandler<WorkScheduleSyncAccount> OnNotifyPreSave_WorkScheduleSyncAccount;
+        public static event ObjectEventHandler<WorkScheduleSyncProvider> OnNotifyPreSave_WorkScheduleSyncProvider;
 
-        [EventBasedMethod("OnNotifyPostSave_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnNotifyPostSave_WorkScheduleSyncProvider")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnNotifyPostSave_WorkScheduleSyncAccount != null) OnNotifyPostSave_WorkScheduleSyncAccount(this);
+            if (OnNotifyPostSave_WorkScheduleSyncProvider != null) OnNotifyPostSave_WorkScheduleSyncProvider(this);
         }
-        public static event ObjectEventHandler<WorkScheduleSyncAccount> OnNotifyPostSave_WorkScheduleSyncAccount;
+        public static event ObjectEventHandler<WorkScheduleSyncProvider> OnNotifyPostSave_WorkScheduleSyncProvider;
 
-        [EventBasedMethod("OnNotifyCreated_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnNotifyCreated_WorkScheduleSyncProvider")]
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("Calendar");
             SetNotInitializedProperty("WorkSchedule");
             base.NotifyCreated();
-            if (OnNotifyCreated_WorkScheduleSyncAccount != null) OnNotifyCreated_WorkScheduleSyncAccount(this);
+            if (OnNotifyCreated_WorkScheduleSyncProvider != null) OnNotifyCreated_WorkScheduleSyncProvider(this);
         }
-        public static event ObjectEventHandler<WorkScheduleSyncAccount> OnNotifyCreated_WorkScheduleSyncAccount;
+        public static event ObjectEventHandler<WorkScheduleSyncProvider> OnNotifyCreated_WorkScheduleSyncProvider;
 
-        [EventBasedMethod("OnNotifyDeleting_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnNotifyDeleting_WorkScheduleSyncProvider")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnNotifyDeleting_WorkScheduleSyncAccount != null) OnNotifyDeleting_WorkScheduleSyncAccount(this);
-
-            // FK_SyncAccount_for_Calendar
-            if (Calendar != null) {
-                ((NHibernatePersistenceObject)Calendar).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Calendar);
-            }
-            // FK_SyncAccount_of_WorkSchedule
-            if (WorkSchedule != null) {
-                ((NHibernatePersistenceObject)WorkSchedule).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)WorkSchedule);
-            }
-
+            if (OnNotifyDeleting_WorkScheduleSyncProvider != null) OnNotifyDeleting_WorkScheduleSyncProvider(this);
             Calendar = null;
             WorkSchedule = null;
         }
-        public static event ObjectEventHandler<WorkScheduleSyncAccount> OnNotifyDeleting_WorkScheduleSyncAccount;
+        public static event ObjectEventHandler<WorkScheduleSyncProvider> OnNotifyDeleting_WorkScheduleSyncProvider;
 
-        #endregion // Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-
-        public class WorkScheduleSyncAccountProxy
-            : Zetbox.App.Calendar.SyncAccountNHibernateImpl.SyncAccountProxy
-        {
-            public WorkScheduleSyncAccountProxy()
-            {
-            }
-
-            public override Type ZetboxWrapper { get { return typeof(WorkScheduleSyncAccountNHibernateImpl); } }
-
-            public override Type ZetboxProxy { get { return typeof(WorkScheduleSyncAccountProxy); } }
-
-            public virtual Zetbox.App.Calendar.CalendarNHibernateImpl.CalendarProxy Calendar { get; set; }
-
-            public virtual Zetbox.App.Calendar.WorkScheduleNHibernateImpl.WorkScheduleProxy WorkSchedule { get; set; }
-
-        }
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
         #region Serializer
 
@@ -529,8 +546,8 @@ namespace Zetbox.App.Calendar
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this.Proxy.Calendar != null ? OurContext.GetIdFromProxy(this.Proxy.Calendar) : (int?)null);
-            binStream.Write(this.Proxy.WorkSchedule != null ? OurContext.GetIdFromProxy(this.Proxy.WorkSchedule) : (int?)null);
+            binStream.Write(Calendar != null ? Calendar.ID : (int?)null);
+            binStream.Write(WorkSchedule != null ? WorkSchedule.ID : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -539,8 +556,8 @@ namespace Zetbox.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            binStream.Read(out this._fk_Calendar);
-            binStream.Read(out this._fk_WorkSchedule);
+            this._fk_Calendar = binStream.ReadNullableInt32();
+            this._fk_WorkSchedule = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

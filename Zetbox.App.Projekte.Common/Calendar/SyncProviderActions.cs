@@ -22,10 +22,10 @@ namespace Zetbox.App.Calendar
     using Zetbox.API;
 
     [Implementor]
-    public static class SyncAccountActions
+    public static class SyncProviderActions
     {
         [Invocation]
-        public static void ToString(SyncAccount obj, MethodReturnEventArgs<System.String> e)
+        public static void ToString(SyncProvider obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = obj.Name;
         }

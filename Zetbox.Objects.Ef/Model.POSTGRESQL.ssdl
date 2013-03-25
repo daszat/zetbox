@@ -97,7 +97,7 @@
     <EntitySet Name="SourceEnum" EntityType="Model.Store.SourceEnum" Schema="migration" Table="SourceEnums"/>
     <EntitySet Name="SourceTable" EntityType="Model.Store.SourceTable" Schema="migration" Table="SourceTables"/>
     <EntitySet Name="StagingDatabase" EntityType="Model.Store.StagingDatabase" Schema="migration" Table="StagingDatabases"/>
-    <EntitySet Name="SyncAccount" EntityType="Model.Store.SyncAccount" Schema="calendar" Table="SyncAccounts"/>
+    <EntitySet Name="SyncProvider" EntityType="Model.Store.SyncProvider" Schema="calendar" Table="SyncProviders"/>
     <EntitySet Name="Task" EntityType="Model.Store.Task" Schema="projekte" Table="Tasks"/>
     <EntitySet Name="Task_Rights" EntityType="Model.Store.Task_Rights" Schema="projekte" Table="Tasks_Rights"/>
     <AssociationSet Name="FK_Tasks_Rights" Association="Model.Store.FK_Tasks_Rights">
@@ -202,11 +202,11 @@
       <End Role="A_File" EntitySet="File" />
       <End Role="B_StaticFile" EntitySet="StaticFile" />
     </AssociationSet>
-    <EntitySet Name="WorkScheduleSyncAccount" EntityType="Model.Store.WorkScheduleSyncAccount" Schema="calendar" Table="WorkScheduleSyncAccounts"/>
-    <!-- inherits from SyncAccount -->
-    <AssociationSet Name="FK_WorkScheduleSyncAccount_SyncAccount_ID" Association="Model.Store.FK_WorkScheduleSyncAccount_SyncAccount_ID" >
-      <End Role="A_SyncAccount" EntitySet="SyncAccount" />
-      <End Role="B_WorkScheduleSyncAccount" EntitySet="WorkScheduleSyncAccount" />
+    <EntitySet Name="WorkScheduleSyncProvider" EntityType="Model.Store.WorkScheduleSyncProvider" Schema="calendar" Table="WorkScheduleSyncProvider"/>
+    <!-- inherits from SyncProvider -->
+    <AssociationSet Name="FK_WorkScheduleSyncProvider_SyncProvider_ID" Association="Model.Store.FK_WorkScheduleSyncProvider_SyncProvider_ID" >
+      <End Role="A_SyncProvider" EntitySet="SyncProvider" />
+      <End Role="B_WorkScheduleSyncProvider" EntitySet="WorkScheduleSyncProvider" />
     </AssociationSet>
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
@@ -1246,19 +1246,19 @@
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_SyncAccount_for_Calendar" Association="Model.Store.FK_SyncAccount_for_Calendar" >
-      <End Role="SyncAccount" EntitySet="WorkScheduleSyncAccount" />
+      <End Role="SyncAccount" EntitySet="WorkScheduleSyncProvider" />
       <End Role="Calendar" EntitySet="Calendar" />
     </AssociationSet>
     <AssociationSet Name="FK_SyncAccount_of_WorkSchedule" Association="Model.Store.FK_SyncAccount_of_WorkSchedule" >
-      <End Role="SyncAccount" EntitySet="WorkScheduleSyncAccount" />
+      <End Role="SyncAccount" EntitySet="WorkScheduleSyncProvider" />
       <End Role="WorkSchedule" EntitySet="WorkSchedule" />
     </AssociationSet>
     <AssociationSet Name="FK_SyncAccount_was_ChangedBy" Association="Model.Store.FK_SyncAccount_was_ChangedBy" >
-      <End Role="SyncAccount" EntitySet="SyncAccount" />
+      <End Role="SyncAccount" EntitySet="SyncProvider" />
       <End Role="ChangedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_SyncAccount_was_CreatedBy" Association="Model.Store.FK_SyncAccount_was_CreatedBy" >
-      <End Role="SyncAccount" EntitySet="SyncAccount" />
+      <End Role="SyncAccount" EntitySet="SyncProvider" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.Store.FK_Task_was_ChangedBy" >
@@ -2635,7 +2635,7 @@
     <Property Name="ID" Type="int4" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="SyncAccount">
+  <EntityType Name="SyncProvider">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2855,7 +2855,7 @@
     <Property Name="FixedYearlyWorkScheduleRules_Month" Type="int4" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="WorkScheduleSyncAccount">
+  <EntityType Name="WorkScheduleSyncProvider">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -6093,7 +6093,7 @@
 
   <Association Name="FK_SyncAccount_for_Calendar">
     <End Role="Calendar" Type="Model.Store.Calendar" Multiplicity="0..1" />
-    <End Role="SyncAccount" Type="Model.Store.WorkScheduleSyncAccount" Multiplicity="*" />
+    <End Role="SyncAccount" Type="Model.Store.WorkScheduleSyncProvider" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Calendar">
         <PropertyRef Name="ID" />
@@ -6107,7 +6107,7 @@
 
   <Association Name="FK_SyncAccount_of_WorkSchedule">
     <End Role="WorkSchedule" Type="Model.Store.WorkSchedule" Multiplicity="0..1" />
-    <End Role="SyncAccount" Type="Model.Store.WorkScheduleSyncAccount" Multiplicity="*" />
+    <End Role="SyncAccount" Type="Model.Store.WorkScheduleSyncProvider" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="WorkSchedule">
         <PropertyRef Name="ID" />
@@ -6121,7 +6121,7 @@
 
   <Association Name="FK_SyncAccount_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="SyncAccount" Type="Model.Store.SyncAccount" Multiplicity="*" />
+    <End Role="SyncAccount" Type="Model.Store.SyncProvider" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
         <PropertyRef Name="ID" />
@@ -6135,7 +6135,7 @@
 
   <Association Name="FK_SyncAccount_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="SyncAccount" Type="Model.Store.SyncAccount" Multiplicity="*" />
+    <End Role="SyncAccount" Type="Model.Store.SyncProvider" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
         <PropertyRef Name="ID" />
@@ -6709,14 +6709,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_WorkScheduleSyncAccount_SyncAccount_ID">
-    <End Role="A_SyncAccount" Type="Model.Store.SyncAccount" Multiplicity="1" />
-    <End Role="B_WorkScheduleSyncAccount" Type="Model.Store.WorkScheduleSyncAccount" Multiplicity="0..1" />
+  <Association Name="FK_WorkScheduleSyncProvider_SyncProvider_ID">
+    <End Role="A_SyncProvider" Type="Model.Store.SyncProvider" Multiplicity="1" />
+    <End Role="B_WorkScheduleSyncProvider" Type="Model.Store.WorkScheduleSyncProvider" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="A_SyncAccount">
+      <Principal Role="A_SyncProvider">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_WorkScheduleSyncAccount">
+      <Dependent Role="B_WorkScheduleSyncProvider">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

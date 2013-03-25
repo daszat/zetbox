@@ -2805,7 +2805,7 @@ using Zetbox.DalProvider.Ef;
 
 	/*
     Relation: FK_SyncAccount_for_Calendar
-    A: ZeroOrMore WorkScheduleSyncAccount as SyncAccount
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
     B: One Calendar as Calendar
     Preferred Storage: MergeIntoA
 	*/
@@ -2813,14 +2813,14 @@ using Zetbox.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SyncAccount_for_Calendar",
-    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleSyncAccountEfImpl),
+    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleSyncProviderEfImpl),
     "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl)
     )]
 
 
 	/*
     Relation: FK_SyncAccount_of_WorkSchedule
-    A: ZeroOrMore WorkScheduleSyncAccount as SyncAccount
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
     B: One WorkSchedule as WorkSchedule
     Preferred Storage: MergeIntoA
 	*/
@@ -2828,14 +2828,14 @@ using Zetbox.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SyncAccount_of_WorkSchedule",
-    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleSyncAccountEfImpl),
+    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleSyncProviderEfImpl),
     "WorkSchedule", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.WorkScheduleEfImpl)
     )]
 
 
 	/*
     Relation: FK_SyncAccount_was_ChangedBy
-    A: ZeroOrMore SyncAccount as SyncAccount
+    A: ZeroOrMore SyncProvider as SyncAccount
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
 	*/
@@ -2843,14 +2843,14 @@ using Zetbox.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SyncAccount_was_ChangedBy",
-    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.SyncAccountEfImpl),
+    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.SyncProviderEfImpl),
     "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
 	/*
     Relation: FK_SyncAccount_was_CreatedBy
-    A: ZeroOrMore SyncAccount as SyncAccount
+    A: ZeroOrMore SyncProvider as SyncAccount
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
 	*/
@@ -2858,7 +2858,7 @@ using Zetbox.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SyncAccount_was_CreatedBy",
-    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.SyncAccountEfImpl),
+    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.SyncProviderEfImpl),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 

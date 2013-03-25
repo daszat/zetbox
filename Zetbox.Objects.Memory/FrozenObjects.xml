@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-25T14:49:21Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-25T15:16:13Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -296,12 +296,12 @@ public static void ObjectIsValid(FixedYearlyCalendarRule obj, ObjectIsValidEvent
     <ZetboxBase:TableName>FixedYearlyWorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="12ce65c1-e00b-44be-b119-eb520b46616e">
-    <ZetboxBase:ChangedOn>2013-03-25T13:39:08.703081Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-25T14:16:13.662341Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-03-25T12:59:55.685496Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>bbfd9a59-257a-42e6-a1f4-90de28bd7f7a</GUI:DefaultIcon>
-    <ZetboxBase:Description>An abstract base class for sync accounts</ZetboxBase:Description>
+    <ZetboxBase:Description>An abstract base class for sync providers</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:Name>SyncAccount</ZetboxBase:Name>
+    <ZetboxBase:Name>SyncProvider</ZetboxBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -340,7 +340,7 @@ public static void ObjectIsValid(SyncAccount obj, ObjectIsValidEventArgs e)
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <ZetboxBase:TableName>SyncAccounts</ZetboxBase:TableName>
+    <ZetboxBase:TableName>SyncProviders</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="901a2ddd-1330-4129-b8a2-92b8e655d168">
     <ZetboxBase:ChangedOn>2013-02-26T14:11:45.762543Z</ZetboxBase:ChangedOn>
@@ -438,12 +438,12 @@ public static void ObjectIsValid(CalendarRule obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>WorkScheduleRules</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="ed44a638-a19d-430c-b19f-766a1820fc67">
-    <ZetboxBase:ChangedOn>2013-03-25T13:40:10.393609Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-25T14:16:13.662341Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-03-25T13:10:46.195703Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>bbfd9a59-257a-42e6-a1f4-90de28bd7f7a</GUI:DefaultIcon>
-    <ZetboxBase:Description>Sync account for work schedules</ZetboxBase:Description>
+    <ZetboxBase:Description>Sync provider for work schedules</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:Name>WorkScheduleSyncAccount</ZetboxBase:Name>
+    <ZetboxBase:Name>WorkScheduleSyncProvider</ZetboxBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -483,7 +483,7 @@ public static void ObjectIsValid(WorkScheduleSyncAccount obj, ObjectIsValidEvent
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <ZetboxBase:TableName>WorkScheduleSyncAccounts</ZetboxBase:TableName>
+    <ZetboxBase:TableName>WorkScheduleSyncProvider</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc">
     <ZetboxBase:ChangedOn>2013-02-26T14:14:24.387616Z</ZetboxBase:ChangedOn>

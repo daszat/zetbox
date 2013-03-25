@@ -1964,7 +1964,7 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("632137c7-1cb1-4c60-bda6-31aa2060b39a"); }
                             }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> SyncAccount
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> SyncProvider
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("12ce65c1-e00b-44be-b119-eb520b46616e"); }
                             }
@@ -1976,7 +1976,7 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("ee70b186-09ae-43a3-afb2-a632c47765b9"); }
                             }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> WorkScheduleSyncAccount
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> WorkScheduleSyncProvider
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("ed44a638-a19d-430c-b19f-766a1820fc67"); }
                             }
@@ -2126,14 +2126,14 @@ namespace Zetbox {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("43be3542-1b21-4423-aeb4-f9e411b2453f"); }
                                 }
                             }
-                            public static class SyncAccount_Methods
+                            public static class SyncProvider_Methods
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Method> PerformSync
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("0b0133fc-c380-47bb-a6ba-7102eca96e9f"); }
                                 }
                             }
-                            public static class SyncAccount_Properties
+                            public static class SyncProvider_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
                                 {
@@ -2276,7 +2276,7 @@ namespace Zetbox {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("115c1d4c-ddd3-4d33-ae74-a6b676fc0dfa"); }
                                 }
                             }
-                            public static class WorkScheduleSyncAccount_Properties
+                            public static class WorkScheduleSyncProvider_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Calendar
                                 {

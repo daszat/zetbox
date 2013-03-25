@@ -78,7 +78,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calendar\WorkScheduleSyncAccountActions.cs" />
+    <Compile Include="Calendar\SyncProviderService.cs" />
+    <Compile Include="Calendar\WorkScheduleSyncProviderActions.cs" />
     <Compile Include="CustomServerActionsModule.cs" />
     <Compile Include="TestModule\MethodTestActions.cs" />
     <Compile Include="ZetboxBase\BaseParameterActions.cs" />

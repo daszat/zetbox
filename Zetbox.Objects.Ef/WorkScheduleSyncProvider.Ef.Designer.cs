@@ -20,22 +20,22 @@ namespace Zetbox.App.Calendar
     using Zetbox.DalProvider.Ef;
 
     /// <summary>
-    /// Sync account for work schedules
+    /// Sync provider for work schedules
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="WorkScheduleSyncAccountEfImpl")]
-    [System.Diagnostics.DebuggerDisplay("WorkScheduleSyncAccount")]
-    public class WorkScheduleSyncAccountEfImpl : Zetbox.App.Calendar.SyncAccountEfImpl, WorkScheduleSyncAccount
+    [EdmEntityType(NamespaceName="Model", Name="WorkScheduleSyncProviderEfImpl")]
+    [System.Diagnostics.DebuggerDisplay("WorkScheduleSyncProvider")]
+    public class WorkScheduleSyncProviderEfImpl : Zetbox.App.Calendar.SyncProviderEfImpl, WorkScheduleSyncProvider
     {
         private static readonly Guid _objectClassID = new Guid("ed44a638-a19d-430c-b19f-766a1820fc67");
         public override Guid ObjectClassID { get { return _objectClassID; } }
 
         [Obsolete]
-        public WorkScheduleSyncAccountEfImpl()
+        public WorkScheduleSyncProviderEfImpl()
             : base(null)
         {
         }
 
-        public WorkScheduleSyncAccountEfImpl(Func<IFrozenContext> lazyCtx)
+        public WorkScheduleSyncProviderEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -45,7 +45,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
     /*
     Relation: FK_SyncAccount_for_Calendar
-    A: ZeroOrMore WorkScheduleSyncAccount as SyncAccount
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
     B: One Calendar as Calendar
     Preferred Storage: MergeIntoA
     */
@@ -136,18 +136,18 @@ namespace Zetbox.App.Calendar
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.Calendar> OnCalendar_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount> OnCalendar_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider> OnCalendar_IsValid;
 
         /// <summary>
         /// 
         /// </summary>
     /*
     Relation: FK_SyncAccount_of_WorkSchedule
-    A: ZeroOrMore WorkScheduleSyncAccount as SyncAccount
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
     B: One WorkSchedule as WorkSchedule
     Preferred Storage: MergeIntoA
     */
@@ -238,43 +238,43 @@ namespace Zetbox.App.Calendar
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncAccount> OnWorkSchedule_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider> OnWorkSchedule_IsValid;
 
         /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnPerformSync_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnPerformSync_WorkScheduleSyncProvider")]
         public override void PerformSync()
         {
             // base.PerformSync();
-            if (OnPerformSync_WorkScheduleSyncAccount != null)
+            if (OnPerformSync_WorkScheduleSyncProvider != null)
             {
-                OnPerformSync_WorkScheduleSyncAccount(this);
+                OnPerformSync_WorkScheduleSyncProvider(this);
             }
             else
             {
                 base.PerformSync();
             }
         }
-        public static event PerformSync_Handler<WorkScheduleSyncAccount> OnPerformSync_WorkScheduleSyncAccount;
+        public static event PerformSync_Handler<WorkScheduleSyncProvider> OnPerformSync_WorkScheduleSyncProvider;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
-		public static event CanExecMethodEventHandler<WorkScheduleSyncAccount> OnPerformSync_WorkScheduleSyncAccount_CanExec;
+		public static event CanExecMethodEventHandler<WorkScheduleSyncProvider> OnPerformSync_WorkScheduleSyncProvider_CanExec;
 
-        [EventBasedMethod("OnPerformSync_WorkScheduleSyncAccount_CanExec")]
+        [EventBasedMethod("OnPerformSync_WorkScheduleSyncProvider_CanExec")]
         public override bool PerformSyncCanExec
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<bool>();
-				if (OnPerformSync_WorkScheduleSyncAccount_CanExec != null)
+				if (OnPerformSync_WorkScheduleSyncProvider_CanExec != null)
 				{
-					OnPerformSync_WorkScheduleSyncAccount_CanExec(this, e);
+					OnPerformSync_WorkScheduleSyncProvider_CanExec(this, e);
 				}
 				else
 				{
@@ -285,17 +285,17 @@ namespace Zetbox.App.Calendar
         }
 
 		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<WorkScheduleSyncAccount> OnPerformSync_WorkScheduleSyncAccount_CanExecReason;
+		public static event CanExecReasonMethodEventHandler<WorkScheduleSyncProvider> OnPerformSync_WorkScheduleSyncProvider_CanExecReason;
 
-        [EventBasedMethod("OnPerformSync_WorkScheduleSyncAccount_CanExecReason")]
+        [EventBasedMethod("OnPerformSync_WorkScheduleSyncProvider_CanExecReason")]
         public override string PerformSyncCanExecReason
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<string>();
-				if (OnPerformSync_WorkScheduleSyncAccount_CanExecReason != null)
+				if (OnPerformSync_WorkScheduleSyncProvider_CanExecReason != null)
 				{
-					OnPerformSync_WorkScheduleSyncAccount_CanExecReason(this, e);
+					OnPerformSync_WorkScheduleSyncProvider_CanExecReason(this, e);
 				}
 				else
 				{
@@ -308,15 +308,15 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(WorkScheduleSyncAccount);
+            return typeof(WorkScheduleSyncProvider);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (WorkScheduleSyncAccount)obj;
-            var otherImpl = (WorkScheduleSyncAccountEfImpl)obj;
-            var me = (WorkScheduleSyncAccount)this;
+            var other = (WorkScheduleSyncProvider)obj;
+            var otherImpl = (WorkScheduleSyncProviderEfImpl)obj;
+            var me = (WorkScheduleSyncProvider)this;
 
             this._fk_Calendar = otherImpl._fk_Calendar;
             this._fk_WorkSchedule = otherImpl._fk_WorkSchedule;
@@ -375,7 +375,7 @@ namespace Zetbox.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<WorkScheduleSyncAccount, Zetbox.App.Calendar.Calendar>(
+                    new PropertyDescriptorEfImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar>(
                         lazyCtx,
                         new Guid("f67558bb-7415-4a41-9196-7c39426746df"),
                         "Calendar",
@@ -384,7 +384,7 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.Calendar = val,
 						obj => OnCalendar_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<WorkScheduleSyncAccount, Zetbox.App.Calendar.WorkSchedule>(
+                    new PropertyDescriptorEfImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.WorkSchedule>(
                         lazyCtx,
                         new Guid("72dcb583-17bc-4247-a7c1-39f607b4905c"),
                         "WorkSchedule",
@@ -407,70 +407,70 @@ namespace Zetbox.App.Calendar
         #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnToString_WorkScheduleSyncProvider")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_WorkScheduleSyncAccount != null)
+            if (OnToString_WorkScheduleSyncProvider != null)
             {
-                OnToString_WorkScheduleSyncAccount(this, e);
+                OnToString_WorkScheduleSyncProvider(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<WorkScheduleSyncAccount> OnToString_WorkScheduleSyncAccount;
+        public static event ToStringHandler<WorkScheduleSyncProvider> OnToString_WorkScheduleSyncProvider;
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnObjectIsValid_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnObjectIsValid_WorkScheduleSyncProvider")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
-            if (OnObjectIsValid_WorkScheduleSyncAccount != null)
+            if (OnObjectIsValid_WorkScheduleSyncProvider != null)
             {
-                OnObjectIsValid_WorkScheduleSyncAccount(this, e);
+                OnObjectIsValid_WorkScheduleSyncProvider(this, e);
             }
             return new ObjectIsValidResult(e.IsValid, e.Errors);
         }
-        public static event ObjectIsValidHandler<WorkScheduleSyncAccount> OnObjectIsValid_WorkScheduleSyncAccount;
+        public static event ObjectIsValidHandler<WorkScheduleSyncProvider> OnObjectIsValid_WorkScheduleSyncProvider;
 
-        [EventBasedMethod("OnNotifyPreSave_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnNotifyPreSave_WorkScheduleSyncProvider")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnNotifyPreSave_WorkScheduleSyncAccount != null) OnNotifyPreSave_WorkScheduleSyncAccount(this);
+            if (OnNotifyPreSave_WorkScheduleSyncProvider != null) OnNotifyPreSave_WorkScheduleSyncProvider(this);
         }
-        public static event ObjectEventHandler<WorkScheduleSyncAccount> OnNotifyPreSave_WorkScheduleSyncAccount;
+        public static event ObjectEventHandler<WorkScheduleSyncProvider> OnNotifyPreSave_WorkScheduleSyncProvider;
 
-        [EventBasedMethod("OnNotifyPostSave_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnNotifyPostSave_WorkScheduleSyncProvider")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnNotifyPostSave_WorkScheduleSyncAccount != null) OnNotifyPostSave_WorkScheduleSyncAccount(this);
+            if (OnNotifyPostSave_WorkScheduleSyncProvider != null) OnNotifyPostSave_WorkScheduleSyncProvider(this);
         }
-        public static event ObjectEventHandler<WorkScheduleSyncAccount> OnNotifyPostSave_WorkScheduleSyncAccount;
+        public static event ObjectEventHandler<WorkScheduleSyncProvider> OnNotifyPostSave_WorkScheduleSyncProvider;
 
-        [EventBasedMethod("OnNotifyCreated_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnNotifyCreated_WorkScheduleSyncProvider")]
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("Calendar");
             SetNotInitializedProperty("WorkSchedule");
             base.NotifyCreated();
-            if (OnNotifyCreated_WorkScheduleSyncAccount != null) OnNotifyCreated_WorkScheduleSyncAccount(this);
+            if (OnNotifyCreated_WorkScheduleSyncProvider != null) OnNotifyCreated_WorkScheduleSyncProvider(this);
         }
-        public static event ObjectEventHandler<WorkScheduleSyncAccount> OnNotifyCreated_WorkScheduleSyncAccount;
+        public static event ObjectEventHandler<WorkScheduleSyncProvider> OnNotifyCreated_WorkScheduleSyncProvider;
 
-        [EventBasedMethod("OnNotifyDeleting_WorkScheduleSyncAccount")]
+        [EventBasedMethod("OnNotifyDeleting_WorkScheduleSyncProvider")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnNotifyDeleting_WorkScheduleSyncAccount != null) OnNotifyDeleting_WorkScheduleSyncAccount(this);
+            if (OnNotifyDeleting_WorkScheduleSyncProvider != null) OnNotifyDeleting_WorkScheduleSyncProvider(this);
             Calendar = null;
             WorkSchedule = null;
         }
-        public static event ObjectEventHandler<WorkScheduleSyncAccount> OnNotifyDeleting_WorkScheduleSyncAccount;
+        public static event ObjectEventHandler<WorkScheduleSyncProvider> OnNotifyDeleting_WorkScheduleSyncProvider;
 
         #endregion // Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 

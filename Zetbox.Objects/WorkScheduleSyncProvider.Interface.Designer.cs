@@ -8,10 +8,10 @@ namespace Zetbox.App.Calendar
     using Zetbox.API;
 
     /// <summary>
-    /// Sync account for work schedules
+    /// Sync provider for work schedules
     /// </summary>
     [Zetbox.API.DefinitionGuid("ed44a638-a19d-430c-b19f-766a1820fc67")]
-    public interface WorkScheduleSyncAccount : Zetbox.App.Calendar.SyncAccount 
+    public interface WorkScheduleSyncProvider : Zetbox.App.Calendar.SyncProvider 
     {
 
         /// <summary>

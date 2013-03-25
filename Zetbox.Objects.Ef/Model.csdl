@@ -93,7 +93,7 @@
     <EntitySet Name="SourceEnumEfImpl" EntityType="Model.SourceEnumEfImpl" />
     <EntitySet Name="SourceTableEfImpl" EntityType="Model.SourceTableEfImpl" />
     <EntitySet Name="StagingDatabaseEfImpl" EntityType="Model.StagingDatabaseEfImpl" />
-    <EntitySet Name="SyncAccountEfImpl" EntityType="Model.SyncAccountEfImpl" />
+    <EntitySet Name="SyncProviderEfImpl" EntityType="Model.SyncProviderEfImpl" />
     <EntitySet Name="TaskEfImpl" EntityType="Model.TaskEfImpl" />
     <EntitySet Name="Task_Rights" EntityType="Model.Task_Rights" />
     <AssociationSet Name="FK_Tasks_Rights" Association="Model.FK_Tasks_Rights">
@@ -1011,19 +1011,19 @@
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_SyncAccount_for_Calendar" Association="Model.FK_SyncAccount_for_Calendar" >
-      <End Role="SyncAccount" EntitySet="SyncAccountEfImpl" />
+      <End Role="SyncAccount" EntitySet="SyncProviderEfImpl" />
       <End Role="Calendar" EntitySet="CalendarEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_SyncAccount_of_WorkSchedule" Association="Model.FK_SyncAccount_of_WorkSchedule" >
-      <End Role="SyncAccount" EntitySet="SyncAccountEfImpl" />
+      <End Role="SyncAccount" EntitySet="SyncProviderEfImpl" />
       <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_SyncAccount_was_ChangedBy" Association="Model.FK_SyncAccount_was_ChangedBy" >
-      <End Role="SyncAccount" EntitySet="SyncAccountEfImpl" />
+      <End Role="SyncAccount" EntitySet="SyncProviderEfImpl" />
       <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_SyncAccount_was_CreatedBy" Association="Model.FK_SyncAccount_was_CreatedBy" >
-      <End Role="SyncAccount" EntitySet="SyncAccountEfImpl" />
+      <End Role="SyncAccount" EntitySet="SyncProviderEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.FK_Task_was_ChangedBy" >
@@ -2672,7 +2672,7 @@
                         FromRole="StagingDatabase"
                         ToRole="SourceTables" />
   </EntityType>
-  <EntityType Name="SyncAccountEfImpl" Abstract="true">
+  <EntityType Name="SyncProviderEfImpl" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3413,7 +3413,7 @@
   </EntityType>
   <EntityType Name="ViewReadOnlyConstraintEfImpl" BaseType="Model.ReadOnlyConstraintEfImpl">
   </EntityType>
-  <EntityType Name="WorkScheduleSyncAccountEfImpl" BaseType="Model.SyncAccountEfImpl">
+  <EntityType Name="WorkScheduleSyncProviderEfImpl" BaseType="Model.SyncProviderEfImpl">
     <NavigationProperty Name="CalendarImpl"
                         Relationship="Model.FK_SyncAccount_for_Calendar"
                         FromRole="SyncAccount"
@@ -5853,7 +5853,7 @@
   </Association>
   <Association Name="FK_SyncAccount_for_Calendar" >
     <End Role="SyncAccount"
-         Type="Model.WorkScheduleSyncAccountEfImpl" 
+         Type="Model.WorkScheduleSyncProviderEfImpl" 
          Multiplicity="*" />
     <End Role="Calendar"
          Type="Model.CalendarEfImpl" 
@@ -5861,7 +5861,7 @@
   </Association>
   <Association Name="FK_SyncAccount_of_WorkSchedule" >
     <End Role="SyncAccount"
-         Type="Model.WorkScheduleSyncAccountEfImpl" 
+         Type="Model.WorkScheduleSyncProviderEfImpl" 
          Multiplicity="*" />
     <End Role="WorkSchedule"
          Type="Model.WorkScheduleEfImpl" 
@@ -5869,7 +5869,7 @@
   </Association>
   <Association Name="FK_SyncAccount_was_ChangedBy" >
     <End Role="SyncAccount"
-         Type="Model.SyncAccountEfImpl" 
+         Type="Model.SyncProviderEfImpl" 
          Multiplicity="*" />
     <End Role="ChangedBy"
          Type="Model.IdentityEfImpl" 
@@ -5877,7 +5877,7 @@
   </Association>
   <Association Name="FK_SyncAccount_was_CreatedBy" >
     <End Role="SyncAccount"
-         Type="Model.SyncAccountEfImpl" 
+         Type="Model.SyncProviderEfImpl" 
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.IdentityEfImpl" 

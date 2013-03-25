@@ -259,10 +259,10 @@
         <!-- define the subclasses -->
 
     </class>
-    <class name="Zetbox.App.Calendar.SyncAccountNHibernateImpl+SyncAccountProxy, Zetbox.Objects.NHibernateImpl"
-           proxy="Zetbox.App.Calendar.SyncAccountNHibernateImpl+SyncAccountProxy, Zetbox.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Calendar.SyncProviderNHibernateImpl+SyncProviderProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.SyncProviderNHibernateImpl+SyncProviderProxy, Zetbox.Objects.NHibernateImpl"
            schema="`calendar`"
-           table="`SyncAccounts`"
+           table="`SyncProviders`"
            abstract="true"
            dynamic-update="true"
            optimistic-lock="dirty"
@@ -271,7 +271,7 @@
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
                 <param name="schema">`calendar`</param>
-                <param name="sequence">`SyncAccounts_ID_seq`</param>
+                <param name="sequence">`SyncProviders_ID_seq`</param>
             </generator>
         </id>
 
@@ -301,10 +301,10 @@
 
         <!-- define the subclasses -->
         <joined-subclass
-                name="Zetbox.App.Calendar.WorkScheduleSyncAccountNHibernateImpl+WorkScheduleSyncAccountProxy, Zetbox.Objects.NHibernateImpl"
-                proxy="Zetbox.App.Calendar.WorkScheduleSyncAccountNHibernateImpl+WorkScheduleSyncAccountProxy, Zetbox.Objects.NHibernateImpl"
+                name="Zetbox.App.Calendar.WorkScheduleSyncProviderNHibernateImpl+WorkScheduleSyncProviderProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Calendar.WorkScheduleSyncProviderNHibernateImpl+WorkScheduleSyncProviderProxy, Zetbox.Objects.NHibernateImpl"
                 schema="`calendar`"
-                table="`WorkScheduleSyncAccounts`"
+                table="`WorkScheduleSyncProvider`"
                 dynamic-update="true">
             
             <!-- base class reference -->
