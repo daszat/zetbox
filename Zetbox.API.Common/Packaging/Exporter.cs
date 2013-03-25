@@ -261,7 +261,7 @@ namespace Zetbox.App.Packaging
                 methodName += "B";
             }
 
-            MethodInfo mi = typeof(Exporter).FindGenericMethod(methodName, new Type[] { t, ta, tb }, new Type[] { typeof(IReadOnlyZetboxContext), typeof(int) });
+            MethodInfo mi = typeof(Exporter).FindGenericMethod(methodName, new Type[] { t, ta, tb }, new Type[] { typeof(IReadOnlyZetboxContext), typeof(int) }, isPrivate: true);
             return ((IQueryable)mi.Invoke(null, new object[] { ctx, moduleID })).Cast<IPersistenceObject>().ToList();
         }
 
