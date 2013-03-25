@@ -25,7 +25,11 @@
   </metadata>
   <files>
     <file src="Common\Zetbox.API.dll" target="lib\net40" />
+    <file src="Common\Zetbox.API.pdb" target="lib\net40" />
+    <file src="Common\Zetbox.API.xml" target="lib\net40" />
     <file src="Common\Zetbox.API.Common.dll" target="lib\net40" />
+    <file src="Common\Zetbox.API.Common.pdb" target="lib\net40" />
+    <file src="Common\Zetbox.API.Common.xml" target="lib\net40" />
 
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>
