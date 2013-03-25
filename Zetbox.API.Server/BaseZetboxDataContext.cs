@@ -267,7 +267,7 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public List<IDataObject> GetAll(InterfaceType t)
         {
-            var mi = this.GetType().FindGenericMethod(true, "GetAllHack", new[] { t.Type }, new Type[0]);
+            var mi = this.GetType().FindGenericMethod("GetAllHack", new[] { t.Type }, new Type[0], isPrivate: true);
             return (List<IDataObject>)mi.Invoke(this, new object[0]);
         }
 

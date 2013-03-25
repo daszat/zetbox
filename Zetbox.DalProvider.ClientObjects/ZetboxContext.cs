@@ -812,9 +812,10 @@ namespace Zetbox.DalProvider.Client
             // See Case 552
             // return GetQuery(type).Single(o => o.ID == ID);
 
-            return (ZbTask<IDataObject>)this.GetType().FindGenericMethod(true, "FindAsyncGenericHelper",
+            return (ZbTask<IDataObject>)this.GetType().FindGenericMethod("FindAsyncGenericHelper",
                 new Type[] { ifType.Type },
-                new Type[] { typeof(int) })
+                new Type[] { typeof(int) },
+                isPrivate: true)
                 .Invoke(this, new object[] { ID });
         }
 

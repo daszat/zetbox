@@ -18,12 +18,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
-using Zetbox.API.Utils;
 using Zetbox.API.Async;
-using System.Linq.Expressions;
+using Zetbox.API.Utils;
 
 namespace Zetbox.API
 {
@@ -992,25 +992,12 @@ namespace Zetbox.API
         /// Finds a Method with the given method parameter.
         /// </summary>
         /// <param name="type">Type to search in</param>
-        /// <param name="methodName">Methodname to search for</param>
-        /// <param name="typeArguments">type arguments to match</param>
-        /// <param name="parameterTypes">parameter types to match</param>
-        /// <returns>MethodInfo or null if the method was not found</returns>
-        public static MethodInfo FindGenericMethod(this Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)
-        {
-            return type.FindGenericMethod(false, methodName, typeArguments, parameterTypes);
-        }
-
-        /// <summary>
-        /// Finds a Method with the given method parameter.
-        /// </summary>
-        /// <param name="type">Type to search in</param>
         /// <param name="isPrivate">whether or not the method is private</param>
         /// <param name="methodName">Methodname to search for</param>
         /// <param name="typeArguments">type arguments to match</param>
         /// <param name="parameterTypes">parameter types to match</param>
         /// <returns>MethodInfo or null if the method was not found</returns>
-        public static MethodInfo FindGenericMethod(this Type type, bool isPrivate, string methodName, Type[] typeArguments, Type[] parameterTypes)
+        public static MethodInfo FindGenericMethod(this Type type, string methodName, Type[] typeArguments, Type[] parameterTypes, bool isPrivate = false)
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
@@ -1059,14 +1046,14 @@ namespace Zetbox.API
             // Look in Basetypes
             if (type.BaseType != null)
             {
-                MethodInfo mi = type.BaseType.FindGenericMethod(isPrivate, methodName, typeArguments, parameterTypes);
+                MethodInfo mi = type.BaseType.FindGenericMethod(methodName, typeArguments, parameterTypes, isPrivate);
                 if (mi != null) return mi;
             }
 
             // Look in Interfaces
             foreach (Type i in type.GetInterfaces())
             {
-                MethodInfo mi = i.FindGenericMethod(isPrivate, methodName, typeArguments, parameterTypes);
+                MethodInfo mi = i.FindGenericMethod(methodName, typeArguments, parameterTypes, isPrivate);
                 if (mi != null) return mi;
             }
 

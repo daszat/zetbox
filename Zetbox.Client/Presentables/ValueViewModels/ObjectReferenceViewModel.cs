@@ -498,7 +498,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public IQueryable GetUntypedQuery(ObjectClass cls)
         {
-            var mi = this.GetType().FindGenericMethod(true, "GetUntypedQueryHack", new[] { cls.GetDescribedInterfaceType().Type }, new Type[0]);
+            var mi = this.GetType().FindGenericMethod("GetUntypedQueryHack", new[] { cls.GetDescribedInterfaceType().Type }, new Type[0], isPrivate: true);
             return (IQueryable)mi.Invoke(this, new object[0]);
         }
 
