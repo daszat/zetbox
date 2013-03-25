@@ -1004,7 +1004,7 @@ namespace Zetbox.API
             if (parameterTypes == null)
             {
                 MethodInfo mi = isPrivate
-                    ? type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
+                    ? type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
                     : type.GetMethod(methodName);
 
                 if (mi != null)
@@ -1015,7 +1015,7 @@ namespace Zetbox.API
             else
             {
                 MethodInfo[] methods = isPrivate
-                    ? type.GetMethods(BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
+                    ? type.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
                     : type.GetMethods();
 
                 foreach (MethodInfo method in methods)
