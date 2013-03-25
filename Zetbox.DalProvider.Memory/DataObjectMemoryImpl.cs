@@ -35,19 +35,14 @@ namespace Zetbox.DalProvider.Memory
         /// <inheritdoc />
         public virtual void NotifyPostSave() { }
 
-        /// <inheritdoc />
-        public virtual void NotifyCreated() { }
-        /// <inheritdoc />
-        public virtual void NotifyDeleting() { }
-
         public abstract Guid ObjectClassID { get; }
-
-        #endregion
 
         public virtual void UpdateParent(string propertyName, IDataObject parentObj)
         {
             throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }
+
+        #endregion
 
         int System.IComparable.CompareTo(object other)
         {

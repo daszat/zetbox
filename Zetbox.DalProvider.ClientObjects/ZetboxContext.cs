@@ -386,10 +386,7 @@ namespace Zetbox.DalProvider.Client
             IsModified = true;
 
             OnObjectCreated(obj);
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyCreated();
-            }
+            obj.NotifyCreated();
             return obj;
         }
 
@@ -562,11 +559,7 @@ namespace Zetbox.DalProvider.Client
 
             IsModified = true;
             OnObjectDeleted(obj);
-
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyDeleting();
-            }
+            obj.NotifyDeleting();
         }
 
         private abstract class ExchangeObjectsHandler

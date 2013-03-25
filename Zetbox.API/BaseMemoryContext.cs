@@ -135,10 +135,7 @@ namespace Zetbox.API
             //((BasePersistenceObject)obj).SetDeleted();
 
             OnObjectDeleted(obj);
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyDeleting();
-            }
+            obj.NotifyDeleting();
         }
 
         /// <inheritdoc />
@@ -356,10 +353,7 @@ namespace Zetbox.API
             }
             Attach(obj);
             OnObjectCreated(obj);
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyCreated();
-            }
+            obj.NotifyCreated();
             return obj;
         }
 

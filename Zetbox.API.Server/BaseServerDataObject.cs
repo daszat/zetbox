@@ -23,8 +23,8 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Zetbox.App.Base;
     using Zetbox.API.Async;
+    using Zetbox.App.Base;
 
     /// <summary>
     /// Abstract Base Class for a PersistenceObject on the Server Side
@@ -278,15 +278,6 @@ namespace Zetbox.API.Server
         /// Fires an Event after an Object is saved.
         /// </summary>
         public virtual void NotifyPostSave() { }
-
-        /// <summary>
-        /// Fires an Event after an Object is created.
-        /// </summary>
-        public virtual void NotifyCreated() { }
-        /// <summary>
-        /// Fires an Event before an Object is deleted.
-        /// </summary>
-        public virtual void NotifyDeleting() { }
 
         public abstract Guid ObjectClassID { get; }
 

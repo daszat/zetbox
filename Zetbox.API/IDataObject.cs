@@ -322,6 +322,16 @@ namespace Zetbox.API
         /// </summary>
         /// <param name="obj">the object to copy from</param>
         void ApplyChangesFrom(IPersistenceObject obj);
+
+        /// <summary>
+        /// Fires an Event after an Object is created.
+        /// </summary>
+        void NotifyCreated();
+
+        /// <summary>
+        /// Fires an Event before an Object is deleted.
+        /// </summary>
+        void NotifyDeleting();
         #endregion
     }
 
@@ -362,16 +372,6 @@ namespace Zetbox.API
         /// Fires an Event after an Object is saved.
         /// </summary>
         void NotifyPostSave();
-
-        /// <summary>
-        /// Fires an Event after an Object is created.
-        /// </summary>
-        void NotifyCreated();
-
-        /// <summary>
-        /// Fires an Event before an Object is deleted.
-        /// </summary>
-        void NotifyDeleting();
 
         /// <summary>
         /// Update to-one navigators when fixing 1:N relations from the collection

@@ -229,10 +229,8 @@ namespace Zetbox.API.Server
             }
 
             IsModified = true;
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyDeleting();
-            }
+
+            obj.NotifyDeleting();
 
             DoDeleteObject(obj);
 
@@ -450,10 +448,7 @@ namespace Zetbox.API.Server
             AttachAsNew(obj);
             IsModified = true;
             OnObjectCreated(obj);
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyCreated();
-            }
+            obj.NotifyCreated();
             return obj;
         }
 

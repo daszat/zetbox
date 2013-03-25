@@ -90,7 +90,7 @@ namespace Zetbox.API
                 {
                     __currentAccessRights = Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
                     // exclude create rights - not instance specific
-                    __currentAccessRights &= ~Zetbox.API.AccessRights.Create; 
+                    __currentAccessRights &= ~Zetbox.API.AccessRights.Create;
                 }
                 return __currentAccessRights.Value;
             }
@@ -248,12 +248,24 @@ namespace Zetbox.API
             }
         }
 
-
         /// <summary>
         /// Returns the most specific System.Type implemented by this object.
         /// </summary>
         /// <returns>the System.Type of this object</returns>
         public abstract Type GetImplementedInterface();
+
+        #region Lifecycle Events
+
+        /// <summary>
+        /// Fires an Event after an Object is created.
+        /// </summary>
+        public virtual void NotifyCreated() { }
+        /// <summary>
+        /// Fires an Event before an Object is deleted.
+        /// </summary>
+        public virtual void NotifyDeleting() { }
+
+        #endregion
 
         #region IStreamable Members
 
