@@ -99,8 +99,6 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         protected virtual void OnEntryRemoved(TEntry entry)
         {
             NotifyOwner();
-            // also kill other side of relation
-            entry.UpdateParent("Parent", null);
         }
 
         #endregion
