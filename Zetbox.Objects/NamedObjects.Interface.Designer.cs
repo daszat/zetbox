@@ -2132,6 +2132,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("0b0133fc-c380-47bb-a6ba-7102eca96e9f"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> ScheduleSyncNow
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("97570340-893f-4a2d-9a98-6ce235a68973"); }
+                                }
                             }
                             public static class SyncProvider_Properties
                             {

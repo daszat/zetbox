@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-25T15:16:13Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-25T16:55:34Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -3450,7 +3450,7 @@ public static void GetNewEventViewModelsCanExecReason(Calendar obj, MethodReturn
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="0b0133fc-c380-47bb-a6ba-7102eca96e9f">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-03-25T13:41:41.006792Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void PerformSync(SyncAccount obj)
 {
@@ -3469,10 +3469,37 @@ public static void PerformSyncCanExecReason(SyncAccount obj, MethodReturnEventAr
     <ZetboxBase:CreatedOn>2013-03-25T13:05:10.265489Z</ZetboxBase:CreatedOn>
     <GUI:Icon>bbfd9a59-257a-42e6-a1f4-90de28bd7f7a</GUI:Icon>
     <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <ZetboxBase:Label>Perform sync</ZetboxBase:Label>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>PerformSync</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>12ce65c1-e00b-44be-b119-eb520b46616e</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="97570340-893f-4a2d-9a98-6ce235a68973">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ScheduleSyncNow(SyncProvider obj)
+{
+}
+
+[Invocation]
+public static void ScheduleSyncNowCanExec(SyncProvider obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ScheduleSyncNowCanExecReason(SyncProvider obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Schedules the next sync immediately</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Label>Schedule sync now</ZetboxBase:Label>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>ScheduleSyncNow</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>12ce65c1-e00b-44be-b119-eb520b46616e</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="79e9a145-8d0d-400c-a3b8-875c9bda44e8">
@@ -3920,6 +3947,11 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:ConstrainedProperty>51751fc9-bc77-4203-bcc1-fc4d5cafa360</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2013-03-25T13:01:46.011806Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:ViewReadOnlyConstraint ExportGuid="61a79fb6-9059-4cd3-9a77-0eced2256422">
+    <ZetboxBase:ChangedOn>2013-03-25T15:55:34.578286Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>51751fc9-bc77-4203-bcc1-fc4d5cafa360</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-03-25T15:55:34.578286Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ViewReadOnlyConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="ee65f249-2f25-49d3-8264-8c06b97bd844">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.41482Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>34eb524b-3f24-4972-b0e5-a64c9f27838a</ZetboxBase:ConstrainedProperty>

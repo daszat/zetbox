@@ -306,6 +306,68 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
+        /// <summary>
+        /// Schedules the next sync immediately
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnScheduleSyncNow_WorkScheduleSyncProvider")]
+        public override void ScheduleSyncNow()
+        {
+            // base.ScheduleSyncNow();
+            if (OnScheduleSyncNow_WorkScheduleSyncProvider != null)
+            {
+                OnScheduleSyncNow_WorkScheduleSyncProvider(this);
+            }
+            else
+            {
+                base.ScheduleSyncNow();
+            }
+        }
+        public static event ScheduleSyncNow_Handler<WorkScheduleSyncProvider> OnScheduleSyncNow_WorkScheduleSyncProvider;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<WorkScheduleSyncProvider> OnScheduleSyncNow_WorkScheduleSyncProvider_CanExec;
+
+        [EventBasedMethod("OnScheduleSyncNow_WorkScheduleSyncProvider_CanExec")]
+        public override bool ScheduleSyncNowCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnScheduleSyncNow_WorkScheduleSyncProvider_CanExec != null)
+				{
+					OnScheduleSyncNow_WorkScheduleSyncProvider_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ScheduleSyncNowCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<WorkScheduleSyncProvider> OnScheduleSyncNow_WorkScheduleSyncProvider_CanExecReason;
+
+        [EventBasedMethod("OnScheduleSyncNow_WorkScheduleSyncProvider_CanExecReason")]
+        public override string ScheduleSyncNowCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnScheduleSyncNow_WorkScheduleSyncProvider_CanExecReason != null)
+				{
+					OnScheduleSyncNow_WorkScheduleSyncProvider_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ScheduleSyncNowCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
         public override Type GetImplementedInterface()
         {
             return typeof(WorkScheduleSyncProvider);

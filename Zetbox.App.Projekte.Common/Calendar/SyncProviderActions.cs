@@ -29,5 +29,11 @@ namespace Zetbox.App.Calendar
         {
             e.Result = obj.Name;
         }
+
+        [Invocation]
+        public static void ScheduleSyncNow(SyncProvider obj)
+        {
+            obj.NextSync = DateTime.Now;
+        }
     }
 }

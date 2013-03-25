@@ -592,6 +592,69 @@ namespace Zetbox.App.Calendar
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
+        /// <summary>
+        /// Schedules the next sync immediately
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnScheduleSyncNow_SyncProvider")]
+        public virtual void ScheduleSyncNow()
+        {
+            // base.ScheduleSyncNow();
+            if (OnScheduleSyncNow_SyncProvider != null)
+            {
+                OnScheduleSyncNow_SyncProvider(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method SyncProvider.ScheduleSyncNow");
+            }
+        }
+        public delegate void ScheduleSyncNow_Handler<T>(T obj);
+        public static event ScheduleSyncNow_Handler<SyncProvider> OnScheduleSyncNow_SyncProvider;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<SyncProvider> OnScheduleSyncNow_SyncProvider_CanExec;
+
+        [EventBasedMethod("OnScheduleSyncNow_SyncProvider_CanExec")]
+        public virtual bool ScheduleSyncNowCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnScheduleSyncNow_SyncProvider_CanExec != null)
+				{
+					OnScheduleSyncNow_SyncProvider_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<SyncProvider> OnScheduleSyncNow_SyncProvider_CanExecReason;
+
+        [EventBasedMethod("OnScheduleSyncNow_SyncProvider_CanExecReason")]
+        public virtual string ScheduleSyncNowCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnScheduleSyncNow_SyncProvider_CanExecReason != null)
+				{
+					OnScheduleSyncNow_SyncProvider_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
         public override Type GetImplementedInterface()
         {
             return typeof(SyncProvider);

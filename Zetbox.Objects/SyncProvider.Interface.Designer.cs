@@ -36,5 +36,10 @@ namespace Zetbox.App.Calendar
         /// 
         /// </summary>
         void PerformSync();
+
+        /// <summary>
+        /// Schedules the next sync immediately
+        /// </summary>
+        void ScheduleSyncNow();
     }
 }
