@@ -4502,6 +4502,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("2445ac09-ac5e-4bfd-8bd3-166df6fc5176"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_RecurrenceRuleKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("875129cf-2a2f-4478-ae37-77a7d547be10"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_RelationEditorKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("f7cf3060-5fa5-4077-93e9-5fc681f875fe"); }
@@ -5122,6 +5126,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_PropertySelectionTaskViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("c5020414-f8cb-4e19-a0d7-c429dfdcdd5b"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_RecurrenceRulePropertyViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("352a7161-e203-447a-8f3e-b1d61547651c"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_RelationChainViewModel
                 {

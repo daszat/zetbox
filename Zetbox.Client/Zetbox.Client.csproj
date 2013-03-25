@@ -290,6 +290,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InstanceListViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\ZetboxBase\RecurrenceRulePropertyViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\RelationChainViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-22T11:27:44Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-25T11:14:45Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -1321,7 +1321,7 @@ public static void isValid_Location(Event obj, PropertyIsValidEventArgs e)
   </ZetboxBase:StringProperty>
   <ZetboxBase:CompoundObjectProperty ExportGuid="2eb0c6f4-c5bc-4b9a-8677-ec2598c74beb">
     <ZetboxBase:CategoryTags>Recurrence</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-03-06T09:32:09.348441Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-03-25T10:14:45.971693Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Recurrence(Event obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.RecurrenceRule&gt; e)
 {
@@ -1350,7 +1350,7 @@ public static void isValid_Recurrence(Event obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Name>Recurrence</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>fd0b9bf4-0891-4317-9d2e-d08a410d5c4c</ZetboxBase:ObjectClass>
     <ZetboxBase:Properties_pos>13</ZetboxBase:Properties_pos>
-    <GUI:ValueModelDescriptor>a63b9f47-18b7-463d-a06b-7b636de9553f</GUI:ValueModelDescriptor>
+    <GUI:ValueModelDescriptor>352a7161-e203-447a-8f3e-b1d61547651c</GUI:ValueModelDescriptor>
     <ZetboxBase:CompoundObjectDefinition>3d4ec88b-fe8e-452e-a71d-03143a75aeb0</ZetboxBase:CompoundObjectDefinition>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
