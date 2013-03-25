@@ -1,4 +1,4 @@
-<%--
+﻿<%--
     This file is part of zetbox.
 
     Zetbox is free software: you can redistribute it and/or modify
@@ -15,8 +15,8 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
 <%@ CodeTemplate Language="C#" 
-    Name="CollectionEntries.GetDeletedRelatives"
-    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.GetDeletedRelatives" 
+    Name="CollectionEntries.RememberToDeleteTemplate"
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RememberToDeleteTemplate" 
     Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -30,21 +30,27 @@
 <%@ Parameter Name="aName" Type="string" %>
 <%@ Parameter Name="bName" Type="string" %>
 
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        public override void NotifyDeleting()
         {
-            var result = base.GetParentsToDelete();
-
+            base.NotifyDeleting();
 <% if (!string.IsNullOrEmpty(aName)) { %>
+
             // Follow <%= aName %>
             if (this.<%= aName %> != null && this.<%= aName %>.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.<%= aName %>);
+            {
+                ParentsToDelete.Add((NHibernatePersistenceObject)this.<%= aName %>);
+                ((NHibernatePersistenceObject)this.<%= aName %>).ChildrenToDelete.Add(this);
+                this.<%= aName %> = null;
+            }
 <% } %>
-
 <% if (!string.IsNullOrEmpty(bName)) { %>
+
             // Follow <%= bName %>
             if (this.<%= bName %> != null && this.<%= bName %>.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.<%= bName %>);
-
+            {
+                ParentsToDelete.Add((NHibernatePersistenceObject)this.<%= bName %>);
+                ((NHibernatePersistenceObject)this.<%= bName %>).ChildrenToDelete.Add(this);
+                this.<%= bName %> = null;
+            }
 <% } %>
-            return result;
         }
