@@ -234,8 +234,10 @@ namespace Zetbox.API.Server
                 var type = source.Type.FindElementTypes().Single(t => t != typeof(object));
                 return AddFilter(source, Ctx.GetImplementationType(type).ToInterfaceType());
             }
-            else if (m.Method.DeclaringType == typeof(Queryable))
+            // Methods requiring special translation
+            else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.GetParameters().Length > 1)
             {
+
                 var source = Visit(m.Arguments[0]);
                 // unpack IQueryable<T>
                 var sourceType = source.Type.GetGenericArguments().Single();
