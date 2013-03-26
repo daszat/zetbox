@@ -245,17 +245,15 @@ namespace Zetbox.API.Server
                     case "Single": // Single<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
                     case "SingleOrDefault": // SingleOrDefault<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
 
-                    case "Average": // Average<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, (decimal?|decimal|double?|double|float?|float|int?|int|long?|long)>> selector); 
-                    case "Sum": // Sum<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, (decimal?|decimal|double?|double|float?|float|int?|int|long?|long)>> selector);
-
-                    case "Select": // Select<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector);
-                    // case "Select": // Select<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, int, TResult>> selector);
                     case "SkipWhile": // SkipWhile<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
                     // case "SkipWhile": // SkipWhile<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, int, bool>> predicate);
                     case "TakeWhile": // TakeWhile<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
                     // case "TakeWhile": // TakeWhile<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, int, bool>> predicate);
                     case "Where": // Where<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
-                        // case "Where": // Where<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, int, bool>> predicate);
+                    // case "Where": // Where<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, int, bool>> predicate);
+
+                    case "Average": // Average<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, (decimal?|decimal|double?|double|float?|float|int?|int|long?|long)>> selector); 
+                    case "Sum": // Sum<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, (decimal?|decimal|double?|double|float?|float|int?|int|long?|long)>> selector);
                         if (m.Arguments.Count > 2)
                         {
                             throw new InvalidOperationException(string.Format("Cannot translate Queryable.{0} call with custom comparer", m.Method.Name));
@@ -279,6 +277,9 @@ namespace Zetbox.API.Server
                     case "Max": // Max<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector);
                     case "Min": // Min<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector);
 
+                    case "Select": // Select<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector);
+                    // case "Select": // Select<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, int, TResult>> selector);
+
                     case "OrderBy": // OrderBy<TSource, TKey>(this IQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector);
                     case "OrderByDescending": // OrderByDescending<TSource, TKey>(this IQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector);
                     case "ThenBy": // ThenBy<TSource, TKey>(this IOrderedQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector);
@@ -291,14 +292,19 @@ namespace Zetbox.API.Server
                         {
                             var newKeySelector = VisitQueryArgument(m.Arguments[1], sourceType);
 
-                            if (newKeySelector.Body.Type.IsICompoundObject())
+                            if (newKeySelector.Body.Type.IsICompoundObject() && new[] { "OrderBy", "OrderByDescending", "ThenBy", "ThenByDescending" }.Contains(m.Method.Name))
                             {
                                 return CreateCompoundOrderByExpression(m, source, sourceType, newKeySelector);
                             }
                             else
                             {
+                                // the number of generic arguments to the predicate
+                                var predicateArgCount = ExtractArgCount(newKeySelector.Type);
+
                                 MethodInfo newMethod = typeof(Queryable).GetMethods()
-                                    .Single(mi => mi.Name == m.Method.Name && mi.GetParameters().Length == 2)
+                                    .Single(mi => mi.Name == m.Method.Name
+                                        && mi.GetParameters().Length == 2
+                                       && ExtractArgCount(mi.GetParameters()[1].ParameterType.GetGenericArguments().Single()) == predicateArgCount)
                                     .MakeGenericMethod(sourceType, newKeySelector.Body.Type);
 
                                 return Expression.Call(null, newMethod, new[] { source, newKeySelector });
