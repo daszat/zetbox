@@ -852,6 +852,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.IdentityEfImpl)">
 	    <MappingFragment StoreEntitySet="Identity">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CalendarConfiguration" ColumnName="CalendarConfiguration" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />

@@ -49,6 +49,64 @@ namespace Zetbox.App.Base
         internal readonly IdentityProxy Proxy;
 
         /// <summary>
+        /// Storage for the users calendar configuration
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string CalendarConfiguration
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.CalendarConfiguration;
+                if (OnCalendarConfiguration_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnCalendarConfiguration_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.CalendarConfiguration != value)
+                {
+                    var __oldValue = Proxy.CalendarConfiguration;
+                    var __newValue = value;
+                    if (OnCalendarConfiguration_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnCalendarConfiguration_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("CalendarConfiguration", __oldValue, __newValue);
+                    Proxy.CalendarConfiguration = __newValue;
+                    NotifyPropertyChanged("CalendarConfiguration", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnCalendarConfiguration_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnCalendarConfiguration_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("CalendarConfiguration");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Identity, string> OnCalendarConfiguration_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Identity, string> OnCalendarConfiguration_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Identity, string> OnCalendarConfiguration_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnCalendarConfiguration_IsValid;
+
+        /// <summary>
         /// Displayname of this identity
         /// </summary>
 
@@ -265,6 +323,7 @@ namespace Zetbox.App.Base
             var otherImpl = (IdentityNHibernateImpl)obj;
             var me = (Identity)this;
 
+            me.CalendarConfiguration = other.CalendarConfiguration;
             me.DisplayName = other.DisplayName;
             me.Password = other.Password;
             me.UserName = other.UserName;
@@ -283,6 +342,7 @@ namespace Zetbox.App.Base
             // Do not audit calculated properties
             switch (property)
             {
+                case "CalendarConfiguration":
                 case "DisplayName":
                 case "Password":
                 case "UserName":
@@ -325,6 +385,15 @@ namespace Zetbox.App.Base
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorNHibernateImpl<Identity, string>(
+                        lazyCtx,
+                        new Guid("733a16fe-b741-4e7e-9b52-f306c6e1f559"),
+                        "CalendarConfiguration",
+                        null,
+                        obj => obj.CalendarConfiguration,
+                        (obj, val) => obj.CalendarConfiguration = val,
+						obj => OnCalendarConfiguration_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Identity, string>(
                         lazyCtx,
@@ -424,6 +493,7 @@ namespace Zetbox.App.Base
         [EventBasedMethod("OnNotifyCreated_Identity")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CalendarConfiguration");
             SetNotInitializedProperty("DisplayName");
             SetNotInitializedProperty("Password");
             SetNotInitializedProperty("UserName");
@@ -541,6 +611,8 @@ namespace Zetbox.App.Base
             public virtual Type ZetboxWrapper { get { return typeof(IdentityNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(IdentityProxy); } }
 
+            public virtual string CalendarConfiguration { get; set; }
+
             public virtual string DisplayName { get; set; }
 
             public virtual ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy> Groups { get; set; }
@@ -561,6 +633,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this.Proxy.CalendarConfiguration);
             binStream.Write(this.Proxy.DisplayName);
             binStream.Write(this.Proxy.Password);
             binStream.Write(this.Proxy.UserName);
@@ -572,6 +645,7 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this.Proxy.CalendarConfiguration = binStream.ReadString();
             this.Proxy.DisplayName = binStream.ReadString();
             this.Proxy.Password = binStream.ReadString();
             this.Proxy.UserName = binStream.ReadString();

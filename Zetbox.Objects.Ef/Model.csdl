@@ -1840,6 +1840,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="CalendarConfiguration" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="DisplayName" Type="String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="GroupsImpl"
                         Relationship="Model.FK_Identities_memberOf_Groups_A"

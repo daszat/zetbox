@@ -41,6 +41,75 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// Storage for the users calendar configuration
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public string CalendarConfiguration
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CalendarConfiguration;
+                if (OnCalendarConfiguration_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnCalendarConfiguration_Getter(this, __e);
+                    __result = _CalendarConfiguration = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_CalendarConfiguration != value)
+                {
+                    var __oldValue = _CalendarConfiguration;
+                    var __newValue = value;
+                    if (OnCalendarConfiguration_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnCalendarConfiguration_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("CalendarConfiguration", __oldValue, __newValue);
+                    _CalendarConfiguration = __newValue;
+                    NotifyPropertyChanged("CalendarConfiguration", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnCalendarConfiguration_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnCalendarConfiguration_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("CalendarConfiguration");
+                }
+            }
+        }
+        private string _CalendarConfiguration_store;
+        private string _CalendarConfiguration {
+            get { return _CalendarConfiguration_store; }
+            set {
+                ReportEfPropertyChanging("CalendarConfiguration");
+                _CalendarConfiguration_store = value;
+                ReportEfPropertyChanged("CalendarConfiguration");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Identity, string> OnCalendarConfiguration_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Identity, string> OnCalendarConfiguration_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Identity, string> OnCalendarConfiguration_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnCalendarConfiguration_IsValid;
+
+        /// <summary>
         /// Displayname of this identity
         /// </summary>
         // value type property
@@ -308,6 +377,7 @@ namespace Zetbox.App.Base
             var otherImpl = (IdentityEfImpl)obj;
             var me = (Identity)this;
 
+            me.CalendarConfiguration = other.CalendarConfiguration;
             me.DisplayName = other.DisplayName;
             me.Password = other.Password;
             me.UserName = other.UserName;
@@ -325,6 +395,7 @@ namespace Zetbox.App.Base
             // Do not audit calculated properties
             switch (property)
             {
+                case "CalendarConfiguration":
                 case "DisplayName":
                 case "Password":
                 case "UserName":
@@ -367,6 +438,15 @@ namespace Zetbox.App.Base
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorEfImpl<Identity, string>(
+                        lazyCtx,
+                        new Guid("733a16fe-b741-4e7e-9b52-f306c6e1f559"),
+                        "CalendarConfiguration",
+                        null,
+                        obj => obj.CalendarConfiguration,
+                        (obj, val) => obj.CalendarConfiguration = val,
+						obj => OnCalendarConfiguration_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Identity, string>(
                         lazyCtx,
@@ -466,6 +546,7 @@ namespace Zetbox.App.Base
         [EventBasedMethod("OnNotifyCreated_Identity")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CalendarConfiguration");
             SetNotInitializedProperty("DisplayName");
             SetNotInitializedProperty("Password");
             SetNotInitializedProperty("UserName");
@@ -525,6 +606,7 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this._CalendarConfiguration);
             binStream.Write(this._DisplayName);
             binStream.Write(this._Password);
             binStream.Write(this._UserName);
@@ -536,6 +618,7 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._CalendarConfiguration = binStream.ReadString();
             this._DisplayName = binStream.ReadString();
             this._Password = binStream.ReadString();
             this._UserName = binStream.ReadString();

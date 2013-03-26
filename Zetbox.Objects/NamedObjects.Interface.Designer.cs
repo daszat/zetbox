@@ -1146,6 +1146,10 @@ namespace Zetbox {
                             }
                             public static class Identity_Properties
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CalendarConfiguration
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("733a16fe-b741-4e7e-9b52-f306c6e1f559"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> DisplayName
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("f93e6dbb-a704-460c-8183-ce8b1c2c47a2"); }

@@ -4742,6 +4742,10 @@
 
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
+        <property name="CalendarConfiguration" 
+                  column="`CalendarConfiguration`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="DisplayName" 
                   column="`DisplayName`" 
                   optimistic-lock="false"/>

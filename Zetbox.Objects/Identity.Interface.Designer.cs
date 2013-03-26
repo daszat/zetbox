@@ -15,6 +15,15 @@ namespace Zetbox.App.Base
     {
 
         /// <summary>
+        /// Storage for the users calendar configuration
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("733a16fe-b741-4e7e-9b52-f306c6e1f559")]
+        string CalendarConfiguration {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Displayname of this identity
         /// </summary>
         [Zetbox.API.DefinitionGuid("f93e6dbb-a704-460c-8183-ce8b1c2c47a2")]
