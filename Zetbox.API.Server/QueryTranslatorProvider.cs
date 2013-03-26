@@ -226,6 +226,14 @@ namespace Zetbox.API.Server
                 WithDeactivated = true;
                 return Visit(m.Arguments.Single());
             }
+            else if (m.IsMethodCallExpression("OfType"))
+            {
+                var source = Visit(m.Arguments.Single());
+                source = Expression.Call(null, GetMethodInfo(m.Method), source);
+
+                var type = source.Type.FindElementTypes().Single(t => t != typeof(object));
+                return AddFilter(source, Ctx.GetImplementationType(type).ToInterfaceType());
+            }
             else if (m.Method.DeclaringType == typeof(Queryable))
             {
                 var source = Visit(m.Arguments[0]);
@@ -348,14 +356,6 @@ namespace Zetbox.API.Server
                     default:
                         throw new InvalidOperationException(string.Format("Cannot translate Queryable.{0} call", m.Method.Name));
                 }
-            }
-            else if (m.IsMethodCallExpression("OfType"))
-            {
-                var source = Visit(m.Arguments.Single());
-                source = Expression.Call(null, GetMethodInfo(m.Method), source);
-
-                var type = source.Type.FindElementTypes().Single(t => t != typeof(object));
-                return AddFilter(source, Ctx.GetImplementationType(type).ToInterfaceType());
             }
             else
             {
