@@ -147,7 +147,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     var from = event_StartDate;
                     var until = event_EndDate;
 
-                    if (from < displayFrom) from = displayFrom;
+                    if (from < displayFrom) from = displayFrom.Date + from.TimeOfDay;
                     if (until > displayTo) until = displayTo;
                     if (Event.IsAllDay)
                     {
@@ -161,7 +161,7 @@ namespace Zetbox.Client.Presentables.Calendar
                             DataContext,
                             this,
                             this);
-                        vmdl.From = current == event_StartDate ? current : current.Date;
+                        vmdl.From = current.Date == event_StartDate.Date ? current : current.Date;
                         vmdl.Until = current.Date == event_EndDate.Date ? event_EndDate : current.Date.AddDays(1);
                         result.Add(vmdl);
                     }
