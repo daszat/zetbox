@@ -404,7 +404,7 @@ namespace Zetbox.Server.Tests
             {
                 var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
                 Assert.That(module, Is.Not.Null);
-                var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<ObjectClass>().Where(i => i.Name == "DataType").ToList();
+                var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<IList<int>>().Where(i => i.Count > 10).ToList();
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.Count, Is.GreaterThan(0));
             }
