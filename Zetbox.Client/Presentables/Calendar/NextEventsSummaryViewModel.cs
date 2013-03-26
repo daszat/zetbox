@@ -82,7 +82,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 createTask: () =>
                 {
                     var now = DateTime.Now;
-                    var tomorrow = now.AddDays(1);
+                    var tomorrow = now.Date.AddDays(2).AddSeconds(-1); // I know.... :-(
 
                     var fetchCalendar = FetchCalendar();
                     var fetchTaskFactory = new ZbTask<ZbTask<IEnumerable<EventViewModel>>>(fetchCalendar)
