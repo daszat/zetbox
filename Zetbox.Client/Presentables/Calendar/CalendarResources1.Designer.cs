@@ -70,11 +70,56 @@ namespace Zetbox.Client.Presentables.Calendar {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only self.
+        /// </summary>
+        internal static string ClearAllCommand_Label {
+            get {
+                return ResourceManager.GetString("ClearAllCommand_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select only self.
+        /// </summary>
+        internal static string ClearAllCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("ClearAllCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string DateLabel {
+            get {
+                return ResourceManager.GetString("DateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         internal static string DetailsLabel {
             get {
                 return ResourceManager.GetString("DetailsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        internal static string FromLabel {
+            get {
+                return ResourceManager.GetString("FromLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        internal static string LocationLabel {
+            get {
+                return ResourceManager.GetString("LocationLabel", resourceCulture);
             }
         }
         
@@ -174,6 +219,42 @@ namespace Zetbox.Client.Presentables.Calendar {
         internal static string PrintTwoWeeksCommand_Tooltip {
             get {
                 return ResourceManager.GetString("PrintTwoWeeksCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        internal static string SelectAllCommand_Label {
+            get {
+                return ResourceManager.GetString("SelectAllCommand_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select all.
+        /// </summary>
+        internal static string SelectAllCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("SelectAllCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        internal static string SummaryLabel {
+            get {
+                return ResourceManager.GetString("SummaryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Until.
+        /// </summary>
+        internal static string UntilLabel {
+            get {
+                return ResourceManager.GetString("UntilLabel", resourceCulture);
             }
         }
         

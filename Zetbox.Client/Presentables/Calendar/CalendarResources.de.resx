@@ -120,8 +120,23 @@
   <data name="CalendarItemsLabel" xml:space="preserve">
     <value>Kalender</value>
   </data>
+  <data name="ClearAllCommand_Label" xml:space="preserve">
+    <value>Nur selbst</value>
+  </data>
+  <data name="ClearAllCommand_Tooltip" xml:space="preserve">
+    <value>Nur sich selbst auswählen</value>
+  </data>
+  <data name="DateLabel" xml:space="preserve">
+    <value>Datum</value>
+  </data>
   <data name="DetailsLabel" xml:space="preserve">
     <value>Details</value>
+  </data>
+  <data name="FromLabel" xml:space="preserve">
+    <value>Von</value>
+  </data>
+  <data name="LocationLabel" xml:space="preserve">
+    <value>Ort</value>
   </data>
   <data name="NextEventsLabel" xml:space="preserve">
     <value>Nächste Termine</value>
@@ -155,6 +170,18 @@
   </data>
   <data name="PrintTwoWeeksCommand_Tooltip" xml:space="preserve">
     <value />
+  </data>
+  <data name="SelectAllCommand_Label" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="SelectAllCommand_Tooltip" xml:space="preserve">
+    <value>Alle auswählen</value>
+  </data>
+  <data name="SummaryLabel" xml:space="preserve">
+    <value>Betreff</value>
+  </data>
+  <data name="UntilLabel" xml:space="preserve">
+    <value>Bis</value>
   </data>
   <data name="WorkspaceName" xml:space="preserve">
     <value>Kalender</value>

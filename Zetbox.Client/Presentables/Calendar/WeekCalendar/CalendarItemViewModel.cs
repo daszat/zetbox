@@ -103,7 +103,10 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     _From = value;
                     OnPropertyChanged("From");
+                    OnPropertyChanged("FromText");
+                    OnPropertyChanged("DateText");
                     OnPropertyChanged("FromToText");
+                    OnPropertyChanged("IsAllDay");
                 }
             }
         }
@@ -121,7 +124,9 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     _until = value;
                     OnPropertyChanged("Until");
+                    OnPropertyChanged("UntilText");
                     OnPropertyChanged("FromToText");
+                    OnPropertyChanged("IsAllDay");
                 }
             }
         }
@@ -131,6 +136,30 @@ namespace Zetbox.Client.Presentables.Calendar
             get
             {
                 return string.Format("{0} - {1}", From.ToShortTimeString(), Until.ToShortTimeString());
+            }
+        }
+
+        public string DateText
+        {
+            get
+            {
+                return From.ToShortDateString();
+            }
+        }
+
+        public string FromText
+        {
+            get
+            {
+                return IsAllDay ? "" : From.ToShortTimeString();
+            }
+        }
+
+        public string UntilText
+        {
+            get
+            {
+                return IsAllDay ? "" : Until.ToShortTimeString();
             }
         }
 

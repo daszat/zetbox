@@ -10,15 +10,23 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.App.Calendar;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
+    using Zetbox.API.Async;
+    using Zetbox.App.Base;
+    using Zetbox.API.Utils;
 
     [ViewModelDescriptor]
     public class NextEventsSummaryViewModel : ViewModel, IRefreshCommandListener
     {
         public new delegate NextEventsSummaryViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public NextEventsSummaryViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        private FetchCache _fetchCache;
+        private Func<IZetboxContext> _ctxFactory;
+
+        public NextEventsSummaryViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent)
         {
+            _ctxFactory = ctxFactory;
+            _fetchCache = new FetchCache(ViewModelFactory, DataContext, this);
         }
 
         public override string Name
@@ -26,13 +34,14 @@ namespace Zetbox.Client.Presentables.Calendar
             get { return "NextEventsSummaryViewModel"; }
         }
 
-        public string NextEventsLabel
-        {
-            get
-            {
-                return CalendarResources.NextEventsLabel;
-            }
-        }
+        #region Labels
+        public string NextEventsLabel { get { return CalendarResources.NextEventsLabel; } }
+        public string DateLabel { get { return CalendarResources.DateLabel; } }
+        public string FromLabel { get { return CalendarResources.FromLabel; } }
+        public string UntilLabel { get { return CalendarResources.UntilLabel; } }
+        public string SummaryLabel { get { return CalendarResources.SummaryLabel; } }
+        public string LocationLabel { get { return CalendarResources.LocationLabel; } }
+        #endregion
 
         private RefreshCommand _refreshCommand;
         public ICommandViewModel RefreshCommand
@@ -51,39 +60,115 @@ namespace Zetbox.Client.Presentables.Calendar
 
         void IRefreshCommandListener.Refresh()
         {
-            if (_nextEvents != null)
-            {
-                _nextEvents.Refresh();
-            }
+            if (_NextEventsTask != null)
+                _NextEventsTask.Invalidate();
+            OnPropertyChanged("NextEvents");
+            OnPropertyChanged("NextEventsAsync");
         }
 
-        private InstanceListViewModel _nextEvents = null;
-        public InstanceListViewModel NextEvents
+        #region NextEventsAsync
+
+        private PropertyTask<IEnumerable<CalendarItemViewModel>> _NextEventsTask;
+        private PropertyTask<IEnumerable<CalendarItemViewModel>> EnsureNextEventsTask()
         {
-            get
-            {
-                if (_nextEvents == null)
+            if (_NextEventsTask != null) return _NextEventsTask;
+
+            return _NextEventsTask = new PropertyTask<IEnumerable<CalendarItemViewModel>>(
+                notifier: () =>
+                {
+                    OnPropertyChanged("NextEvents");
+                    OnPropertyChanged("NextEventsAsync");
+                },
+                createTask: () =>
                 {
                     var now = DateTime.Now;
                     var tomorrow = now.AddDays(1);
-                    var qry = DataContext.GetQuery<Event>()
-                                    .Where(i => i.Calendar.Owner == CurrentIdentity)
-                                    .Where(i => i.StartDate >= now && i.StartDate < tomorrow)
-                                    .OrderBy(i => i.StartDate);
-                    _nextEvents = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        typeof(Event).GetObjectClass(FrozenContext),
-                        () => qry);
-                    _nextEvents.EnableAutoFilter = false;
-                    _nextEvents.ShowCommands = false;
-                    _nextEvents.AllowFilter = false;
-                    _nextEvents.AllowUserFilter = false;
-                    _nextEvents.AllowSelectColumns = false;
-                    _nextEvents.ViewMethod = InstanceListViewMethod.Details;
-                }
-                return _nextEvents;
-            }
+
+                    var fetchCalendar = FetchCalendar();
+                    var fetchTaskFactory = new ZbTask<ZbTask<IEnumerable<EventViewModel>>>(fetchCalendar)
+                        .OnResult(t =>
+                        {
+                            _fetchCache.SetCalendars(fetchCalendar.Result);
+                            t.Result = _fetchCache.FetchEventsAsync(now, tomorrow);
+                        });
+                    return new ZbFutureTask<IEnumerable<EventViewModel>, IEnumerable<CalendarItemViewModel>>(fetchTaskFactory)
+                        .OnResult(t =>
+                        {
+                            t.Result = fetchTaskFactory
+                                .Result
+                                .Result
+                                .SelectMany(e => e.CreateCalendarItemViewModels(now, tomorrow))
+                                .OrderBy(i => i.From.Date)
+                                .ThenByDescending(i => i.IsAllDay)
+                                .ThenBy(i => i.From.TimeOfDay)
+                                .ToList();
+                        });
+                },
+                set: (IEnumerable<CalendarItemViewModel> value) =>
+                {
+                    throw new NotImplementedException();
+                });
         }
+
+        private ZbTask<List<int>> FetchCalendar()
+        {
+            var myCalendarsTask = DataContext
+                .GetQuery<Calendar>().Where(i => i.Owner == CurrentIdentity)
+                .ToListAsync();
+            var configTask = GetSavedConfigAsync();
+            return new ZbTask<List<int>>(new ZbTask[] { myCalendarsTask, configTask })
+                .OnResult(t =>
+                {
+                    t.Result = myCalendarsTask.Result
+                        .Select(i => i.ID)
+                        .ToList()
+                        .Union(configTask.Result.Configs
+                        .Select(c => c.Calendar))
+                        .ToList();
+                });
+        }
+
+        protected ZbTask<CalendarConfigurationList> GetSavedConfigAsync()
+        {
+            if (CurrentIdentity == null) return new ZbTask<CalendarConfigurationList>(new CalendarConfigurationList());
+            var ctx = _ctxFactory();
+            var idenityTask = ctx.FindAsync<Identity>(CurrentIdentity.ID);
+            return new ZbTask<CalendarConfigurationList>(idenityTask)
+                .OnResult(t =>
+                {
+                    try
+                    {
+                        CalendarConfigurationList obj;
+                        var identity = idenityTask.Result;
+                        try
+                        {
+                            obj = !string.IsNullOrEmpty(identity.CalendarConfiguration) ? identity.CalendarConfiguration.FromXmlString<CalendarConfigurationList>() : new CalendarConfigurationList();
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Client.Warn("Error during deserializing CalendarConfigurationList, creating a new one", ex);
+                            obj = new CalendarConfigurationList();
+                        }
+                        t.Result = obj;
+                    }
+                    finally
+                    {
+                        ctx.Dispose();
+                    }
+                });
+        }
+
+
+        public IEnumerable<CalendarItemViewModel> NextEvents
+        {
+            get { return EnsureNextEventsTask().Get(); }
+        }
+
+        public IEnumerable<CalendarItemViewModel> NextEventsAsync
+        {
+            get { return EnsureNextEventsTask().GetAsync(); }
+        }
+
+        #endregion
     }
 }

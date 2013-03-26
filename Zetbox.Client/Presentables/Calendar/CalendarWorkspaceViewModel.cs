@@ -465,7 +465,10 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_SelectAllCommand == null)
                 {
-                    _SelectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Alle", "Alle auswählen", SelectAll, null, null);
+                    _SelectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                        CalendarResources.SelectAllCommand_Label,
+                        CalendarResources.SelectAllCommand_Tooltip, 
+                        SelectAll, null, null);
                 }
                 return _SelectAllCommand;
             }
@@ -495,7 +498,10 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_ClearAllCommand == null)
                 {
-                    _ClearAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Nur selbst", "Nur sich selbst auswählen", ClearAll, null, null);
+                    _ClearAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        CalendarResources.ClearAllCommand_Label,
+                        CalendarResources.ClearAllCommand_Tooltip,
+                        ClearAll, null, null);
                 }
                 return _ClearAllCommand;
             }
@@ -525,7 +531,7 @@ namespace Zetbox.Client.Presentables.Calendar
             var events = _fetchCache.FetchEventsAsync(from, to).Result;
             using (var rpt = _rptFactory())
             {
-                Reporting.Calendar.Events.Call(rpt, events.SelectMany(e => e.CreateCalendarItemViewModels(from, to)) , from, to);
+                Reporting.Calendar.Events.Call(rpt, events.SelectMany(e => e.CreateCalendarItemViewModels(from, to)), from, to);
                 rpt.Open("Events.pdf");
             }
         }
@@ -699,190 +705,9 @@ namespace Zetbox.Client.Presentables.Calendar
 
         #region Cache
         private readonly FetchCache _fetchCache;
-        private sealed class FetchCache
-        {
-            private struct FetchCacheEntry
-            {
-                public static FetchCacheEntry None = default(FetchCacheEntry);
-
-                public readonly DateTime FetchTime;
-                public readonly ZbTask<List<EventViewModel>> EventsTask;
-
-                public FetchCacheEntry(ZbTask<List<EventViewModel>> events)
-                {
-                    this.FetchTime = DateTime.Now;
-                    this.EventsTask = events;
-                }
-
-                public static bool operator ==(FetchCacheEntry a, FetchCacheEntry b)
-                {
-                    return a.FetchTime == b.FetchTime && a.EventsTask == b.EventsTask;
-                }
-
-                public static bool operator !=(FetchCacheEntry a, FetchCacheEntry b)
-                {
-                    return !(a == b);
-                }
-
-                public override bool Equals(object obj)
-                {
-                    if (obj is FetchCacheEntry)
-                    {
-                        return this == (FetchCacheEntry)obj;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-
-                public override int GetHashCode()
-                {
-                    return FetchTime.GetHashCode();
-                }
-            }
-
-            /// <summary>
-            /// Remembers all events for the specified day
-            /// </summary>
-            private readonly SortedList<DateTime, FetchCacheEntry> _cache = new SortedList<DateTime, FetchCacheEntry>();
-            private ZbTask<IEnumerable<EventViewModel>> _recurrenceCache = null;
-            private readonly List<int> _calendars = new List<int>();
-
-            private readonly IViewModelFactory ViewModelFactory;
-            private readonly IZetboxContext _ctx;
-            private readonly ViewModel _parent;
-
-            public FetchCache(IViewModelFactory vmf, IZetboxContext ctx, ViewModel parent)
-            {
-                this.ViewModelFactory = vmf;
-                this._ctx = ctx;
-                this._parent = parent;
-            }
-
-            public void SetCalendars(IEnumerable<int> ids)
-            {
-                // better implementation necessary
-                _recurrenceCache = null;
-                _cache.Clear();
-                _calendars.Clear();
-                _calendars.AddRange(ids);
-            }
-
-            public void Invalidate()
-            {
-                _recurrenceCache = null;
-                _cache.Clear();
-            }
-
-            public ZbTask<IEnumerable<EventViewModel>> FetchEventsAsync(DateTime from, DateTime to)
-            {
-                if (_calendars.Count == 0) return new ZbTask<IEnumerable<EventViewModel>>(ZbTask.Synchron, () => new List<EventViewModel>());
-
-                // first -> the recurrence cache
-                if (_recurrenceCache == null)
-                {
-                    _recurrenceCache = MakeFetchTask(DateTime.MinValue, DateTime.MinValue);
-                }
-
-                // make primary task first
-                var result = MakeFetchTask(from, to);
-                result.OnResult(t =>
-                {
-                    var range = (to - from);
-                    MakeFetchTask(from - range, to - range);
-                    MakeFetchTask(from + range, to + range);                        
-                })
-                .OnResult(t => 
-                {                    
-                    t.Result = t.Result.Union(_recurrenceCache.Result);
-                });
-
-                return result;
-            }
-
-            private ZbTask<IEnumerable<EventViewModel>> MakeFetchTask(DateTime from, DateTime to)
-            {
-                var result = new List<ZbTask<List<EventViewModel>>>();
-
-                for (var curDay = from.Date; curDay <= to; curDay = curDay.AddDays(1))
-                {
-                    FetchCacheEntry entry;
-                    if (_cache.TryGetValue(curDay, out entry))
-                    {
-                        if (entry.FetchTime.AddMinutes(5) > DateTime.Now)
-                        {
-                            result.Add(entry.EventsTask);
-                        }
-                        else
-                        {
-                            _cache.Remove(curDay);
-                            entry = FetchCacheEntry.None;
-                        }
-                    }
-
-                    if (entry == FetchCacheEntry.None)
-                    {
-                        entry = new FetchCacheEntry(QueryContextAsync(curDay, curDay.AddDays(1)));
-                        _cache.Add(curDay, entry);
-                        result.Add(entry.EventsTask);
-                    }
-                }
-
-                return new ZbTask<IEnumerable<EventViewModel>>(result)
-                    .OnResult(t =>
-                    {
-                        t.Result = result.Distinct().SelectMany(r => r.Result).Distinct();
-                    });
-            }
-
-            private ZbTask<List<EventViewModel>> QueryContextAsync(DateTime from, DateTime to)
-            {
-                var predicateCalendars = GetCalendarPredicate();
-
-                ZbTask<List<cal.Event>> queryTask;
-                if (from != DateTime.MinValue)
-                {
-                    queryTask = _ctx.GetQuery<cal.Event>()
-                        .Where(predicateCalendars)
-                        .Where(e => (e.StartDate >= from && e.StartDate <= to) || (e.EndDate >= from && e.EndDate <= to) || (e.StartDate <= from && e.EndDate >= to))
-                        .ToListAsync();
-                }
-                else
-                {
-                    queryTask = _ctx.GetQuery<cal.Event>()
-                        .Where(predicateCalendars)
-                        .Where(e => e.Recurrence.Frequency != null)
-                        .ToListAsync();
-                }
-
-                return new ZbTask<List<EventViewModel>>(queryTask)
-                    .OnResult(t =>
-                    {
-                        t.Result = queryTask.Result
-                            .Select(obj =>
-                            {
-                                var vmdl = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, _ctx, _parent, obj);
-                                vmdl.IsReadOnly = true; // Not changeable. TODO: This should be be implicit. This is a merge server data context
-                                return vmdl;
-                            })
-                            .ToList();
-                    });
-            }
-
-            private System.Linq.Expressions.Expression<Func<cal.Event, bool>> GetCalendarPredicate()
-            {
-                var predicateCalendars = LinqExtensions.False<cal.Event>();
-                foreach (var id in _calendars)
-                {
-                    var localID = id;
-                    predicateCalendars = predicateCalendars.OrElse<cal.Event>(i => i.Calendar.ID == localID);
-                }
-                return predicateCalendars;
-            }
-        }
         #endregion
 
+        #region Misc
         public bool IsReadOnly { get { return false; } }
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
         IEnumerable<ViewModel> ICommandParameter.SelectedItems
@@ -898,5 +723,6 @@ namespace Zetbox.Client.Presentables.Calendar
             _fetchCache.Invalidate();
             CurrentView.Refresh();
         }
+        #endregion
     }
 }

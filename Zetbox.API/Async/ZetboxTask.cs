@@ -494,7 +494,7 @@ namespace Zetbox.API.Async
         /// </summary>
         /// <param name="innerTaskFactory">The task which will create the task we'll be acting on.</param>
         /// <param name="task">the transformation we have to do.</param>
-        public ZbFutureTask(ZbTask<ZbTask<TIntermediate>> innerTaskFactory, Func<TIntermediate, TResult> task)
+        public ZbFutureTask(ZbTask<ZbTask<TIntermediate>> innerTaskFactory, Func<TIntermediate, TResult> task = null)
             : base(innerTaskFactory != null ? innerTaskFactory.SyncContext : Synchron, new[] { innerTaskFactory })
         {
             if (innerTaskFactory == null) throw new ArgumentNullException("innerTaskFactory");
