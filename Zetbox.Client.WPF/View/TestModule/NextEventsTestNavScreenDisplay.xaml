@@ -38,8 +38,14 @@
     <ScrollViewer Margin="50"
                   HorizontalScrollBarVisibility="Disabled"
                   VerticalScrollBarVisibility="Auto">
-        <StackPanel>
-            <Border Padding="20"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="300" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0"
+                    Padding="20"
                     HorizontalAlignment="Center">
                 <StackPanel>
                     <ItemsControl ItemsSource="{Binding Children}">
@@ -83,8 +89,16 @@
                     </ItemsControl>
                 </StackPanel>
             </Border>
-            <ContentPresenter Content="{Binding NextEvents}"
+
+            <ContentPresenter Grid.Row="1"
+                              Content="{Binding NextEvents}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-        </StackPanel>
+            <Border Grid.Row="2"
+                    BorderThickness="2"
+                    Background="LightBlue">
+                <TextBlock Text="Hello World" />
+            </Border>
+                    
+        </Grid>
     </ScrollViewer>
 </UserControl>
