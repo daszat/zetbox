@@ -186,7 +186,7 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_Items == null)
                 {
-                    var configList = GetSavedConfig();
+                    var config = GetSavedConfig();
 
                     var myID = CurrentIdentity != null ? CurrentIdentity.ID : 0;
                     _Items = DataContext.GetQuery<cal.Calendar>()
@@ -195,7 +195,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         .ThenBy(i => i.Name)
                         .Select((i, idx) =>
                         {
-                            var configItem = ExtractItem(i, configList);
+                            var configItem = ExtractItem(i, config);
                             var isSelf = i.Owner != null ? i.Owner.ID == myID : false;
 
                             var mdl = ViewModelFactory.CreateViewModel<CalendarSelectionViewModel.Factory>().Invoke(DataContext, this, i, isSelf || configItem != null);
@@ -223,12 +223,13 @@ namespace Zetbox.Client.Presentables.Calendar
             }
             else if (e.PropertyName == "IsFavorite")
             {
-                var configList = new CalendarConfigurationList();
+                var config = GetSavedConfig();
+                config.Configs = new List<CalendarConfiguration>();
                 foreach (var item in Items.Where(i => i.IsFavorite))
                 {
-                    configList.Configs.Add(new CalendarConfiguration() { Calendar = item.Calendar.ID, Color = item.Color });
+                    config.Configs.Add(new CalendarConfiguration() { Calendar = item.Calendar.ID, Color = item.Color });
                 }
-                SaveConfig(configList);
+                SaveConfig(config);
             }
         }
 
@@ -271,19 +272,21 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        protected void SaveConfig(CalendarConfigurationList configList)
+        protected void SaveConfig(CalendarConfigurationList config)
         {
+            if (config == null) throw new ArgumentNullException("config");
             using (var ctx = _ctxFactory())
             {
                 var idenity = ctx.Find<Identity>(CurrentIdentity.ID);
-                idenity.CalendarConfiguration = configList.ToXmlString();
+                idenity.CalendarConfiguration = config.ToXmlString();
                 ctx.SubmitChanges();
             }
         }
 
-        protected CalendarConfiguration ExtractItem(cal.Calendar cal, CalendarConfigurationList configList)
+        protected CalendarConfiguration ExtractItem(cal.Calendar cal, CalendarConfigurationList config)
         {
-            return configList.Configs.FirstOrDefault(i => i.Calendar == cal.ID);
+            if (config == null) return null;
+            return config.Configs.FirstOrDefault(i => i.Calendar == cal.ID);
         }
         #endregion
 
@@ -662,11 +665,14 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_weekCalender == null)
                 {
+                    var config = GetSavedConfig();
+
                     _weekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
                         .Invoke(DataContext, this, _fetchCache.FetchEventsAsync);
                     _weekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
                     _weekCalender.New += (s, e) => New(e.Date);
                     _weekCalender.Open += (s, e) => Open(e.Event);
+                    _weekCalender.ShowFullWeek = config != null && config.ShowFullWeek;
                     // Initial refresh
                     _fetchCache.SetCalendars(Items.Where(i => i.Selected).Select(i => i.Calendar.ID));
                     _weekCalender.Refresh();
@@ -681,6 +687,12 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 // Me too
                 OnPropertyChanged("SelectedItems");
+            } 
+            else if(e.PropertyName == "ShowFullWeek")
+            {
+                var config = GetSavedConfig();
+                config.ShowFullWeek = _weekCalender.ShowFullWeek;
+                SaveConfig(config);
             }
         }
         #endregion

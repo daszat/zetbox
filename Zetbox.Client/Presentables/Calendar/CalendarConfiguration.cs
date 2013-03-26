@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables.Calendar
         }
 
         public List<CalendarConfiguration> Configs { get; set; }
+        public bool ShowFullWeek { get; set; }
     }
 
     public class CalendarConfiguration
