@@ -79,7 +79,26 @@
                         <ListView.ItemTemplate>
                             <DataTemplate DataType="{x:Type calendar:CalendarSelectionViewModel}">
                                 <StackPanel Orientation="Horizontal">
-                                    <CheckBox IsChecked="{Binding Selected}" />
+                                    <CheckBox IsChecked="{Binding IsFavorite}"
+                                              Width="16"
+                                              Height="16">
+                                        <CheckBox.Template>
+                                            <ControlTemplate TargetType="CheckBox">
+                                                <Image Name="CheckImage"
+                                                       Source="/Zetbox.Client.WPF;component/Images/FavoritesDisabled.png" />
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked"
+                                                             Value="True">
+                                                        <Setter TargetName="CheckImage"
+                                                                Property="Source"
+                                                                Value="/Zetbox.Client.WPF;component/Images/Favorites.png" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </CheckBox.Template>
+                                    </CheckBox>
+                                    <CheckBox Margin="5,0,0,0"
+                                              IsChecked="{Binding Selected}" />
                                     <Border Width="{StaticResource SmallControlHeight}"
                                             Height="{StaticResource SmallControlHeight}"
                                             Margin="5,0,0,0"

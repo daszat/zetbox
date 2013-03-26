@@ -32,16 +32,16 @@ namespace Zetbox.Client.Presentables.Calendar
     #region CalendarSelectionViewModel
     public class CalendarSelectionViewModel : ViewModel
     {
-        public new delegate CalendarSelectionViewModel Factory(IZetboxContext dataCtx, Zetbox.Client.Presentables.ViewModel parent, cal.Calendar calendar, bool isSelf);
+        public new delegate CalendarSelectionViewModel Factory(IZetboxContext dataCtx, Zetbox.Client.Presentables.ViewModel parent, cal.Calendar calendar, bool isFavorite);
 
-        public CalendarSelectionViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, Zetbox.Client.Presentables.ViewModel parent, cal.Calendar calendar, bool isSelf)
+        public CalendarSelectionViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, Zetbox.Client.Presentables.ViewModel parent, cal.Calendar calendar, bool isFavorite)
             : base(appCtx, dataCtx, parent)
         {
             if (calendar == null) throw new ArgumentNullException("calendar");
 
             this.Calendar = calendar;
-            this._Selected = isSelf;
-            this.IsSelf = isSelf;
+            this._Selected = isFavorite;
+            this.IsFavorite = isFavorite;
         }
 
 
@@ -69,7 +69,28 @@ namespace Zetbox.Client.Presentables.Calendar
                     break;
             }
         }
-        public bool IsSelf { get; private set; }
+
+        private bool _IsFavorite = false;
+        public bool IsFavorite
+        {
+            get
+            {
+                return _IsFavorite;
+            }
+            set
+            {
+                if (_IsFavorite != value)
+                {
+                    _IsFavorite = value;
+                    if (_IsFavorite)
+                    {
+                        // also select
+                        Selected = true;
+                    }
+                    OnPropertyChanged("IsFavorite");
+                }
+            }
+        }
 
         private bool _Selected = false;
         public bool Selected
@@ -165,6 +186,8 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_Items == null)
                 {
+                    var configList = GetSavedConfig();
+
                     var myID = CurrentIdentity != null ? CurrentIdentity.ID : 0;
                     _Items = DataContext.GetQuery<cal.Calendar>()
                         .ToList()
@@ -172,13 +195,16 @@ namespace Zetbox.Client.Presentables.Calendar
                         .ThenBy(i => i.Name)
                         .Select((i, idx) =>
                         {
-                            var mdl = ViewModelFactory.CreateViewModel<CalendarSelectionViewModel.Factory>().Invoke(DataContext, this, i, i.Owner != null ? i.Owner.ID == myID : false);
-                            mdl.CalendarViewModel.Color = Colors[idx % Colors.Length];
+                            var configItem = ExtractItem(i, configList);
+                            var isSelf = i.Owner != null ? i.Owner.ID == myID : false;
+
+                            var mdl = ViewModelFactory.CreateViewModel<CalendarSelectionViewModel.Factory>().Invoke(DataContext, this, i, isSelf || configItem != null);
+                            mdl.CalendarViewModel.Color = (configItem != null && !string.IsNullOrWhiteSpace(configItem.Color)) ? configItem.Color : Colors[idx % Colors.Length];
                             mdl.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(calendarItem_PropertyChanged);
                             return mdl;
                         })
                         .ToList();
-                    SelectedItem = _Items.FirstOrDefault(i => i.IsSelf);
+                    SelectedItem = _Items.FirstOrDefault(i => i.IsFavorite);
                     _fetchCache.SetCalendars(_Items.Where(i => i.Selected).Select(i => i.Calendar.ID));
                 }
                 return _Items;
@@ -194,6 +220,15 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     CurrentView.Refresh();
                 }
+            }
+            else if (e.PropertyName == "IsFavorite")
+            {
+                var configList = new CalendarConfigurationList();
+                foreach (var item in Items.Where(i => i.IsFavorite))
+                {
+                    configList.Configs.Add(new CalendarConfiguration() { Calendar = item.Calendar.ID, Color = item.Color });
+                }
+                SaveConfig(configList);
             }
         }
 
@@ -212,6 +247,43 @@ namespace Zetbox.Client.Presentables.Calendar
                     OnPropertyChanged("SelectedItem");
                 }
             }
+        }
+        #endregion
+
+        #region Configuration
+        protected CalendarConfigurationList GetSavedConfig()
+        {
+            if (CurrentIdentity == null) return new CalendarConfigurationList();
+            using (var ctx = _ctxFactory())
+            {
+                var idenity = ctx.Find<Identity>(CurrentIdentity.ID);
+                CalendarConfigurationList obj;
+                try
+                {
+                    obj = !string.IsNullOrEmpty(idenity.CalendarConfiguration) ? idenity.CalendarConfiguration.FromXmlString<CalendarConfigurationList>() : new CalendarConfigurationList();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Client.Warn("Error during deserializing CalendarConfigurationList, creating a new one", ex);
+                    obj = new CalendarConfigurationList();
+                }
+                return obj;
+            }
+        }
+
+        protected void SaveConfig(CalendarConfigurationList configList)
+        {
+            using (var ctx = _ctxFactory())
+            {
+                var idenity = ctx.Find<Identity>(CurrentIdentity.ID);
+                idenity.CalendarConfiguration = configList.ToXmlString();
+                ctx.SubmitChanges();
+            }
+        }
+
+        protected CalendarConfiguration ExtractItem(cal.Calendar cal, CalendarConfigurationList configList)
+        {
+            return configList.Configs.FirstOrDefault(i => i.Calendar == cal.ID);
         }
         #endregion
 
@@ -433,7 +505,7 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 foreach (var p in Items)
                 {
-                    if (!p.IsSelf)
+                    if (!p.IsFavorite)
                         p.Selected = false;
                 }
             }

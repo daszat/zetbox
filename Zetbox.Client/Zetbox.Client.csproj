@@ -146,6 +146,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\Calendar\CalendarConfiguration.cs" />
     <Compile Include="Presentables\Calendar\CalendarResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
