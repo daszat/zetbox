@@ -251,7 +251,12 @@ namespace Zetbox.Server
         public void RunFixes()
         {
             using (Log.InfoTraceMethodCall("RunFixes"))
+            //using (var subContainer = container.BeginLifetimeScope())
             {
+                //var ctx = subContainer.Resolve<IZetboxServerContext>();
+                //var entries = ctx.Internals().GetPersistenceObjectQuery(ctx.GetInterfaceType(typeof(Assembly))).Cast<Type>().Where(o => ((IExportable)o).ExportGuid == Guid.Empty).ToList();
+
+
                 //var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
 
                 //using (var db = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider))

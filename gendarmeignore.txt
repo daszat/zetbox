@@ -95,7 +95,8 @@ M: Zetbox.API.Async.ZbTask`1<Zetbox.API.IDataObject> Zetbox.DalProvider.Client.Z
 M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesA(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
 M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesB(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
 M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesAB(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
-
+# false positive
+M: System.Linq.Expressions.ParameterExpression Zetbox.API.Server.QueryTranslatorProvider`1::VisitParameter(System.Linq.Expressions.ParameterExpression,System.Type)
 
 # generated code (wpf)
 M: System.Delegate Zetbox.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
