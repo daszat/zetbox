@@ -40,7 +40,6 @@
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.<%= aName %>);
                 ((NHibernatePersistenceObject)this.<%= aName %>).ChildrenToDelete.Add(this);
-                this.<%= aName %> = null;
             }
 <% } %>
 <% if (!string.IsNullOrEmpty(bName)) { %>
@@ -50,7 +49,15 @@
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.<%= bName %>);
                 ((NHibernatePersistenceObject)this.<%= bName %>).ChildrenToDelete.Add(this);
-                this.<%= bName %> = null;
             }
+<% } %>
+<% if (!string.IsNullOrEmpty(aName)) { %>
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.<%= aName %> = null;
+<% } %>
+<% if (!string.IsNullOrEmpty(bName)) { %>
+            this.<%= bName %> = null;
 <% } %>
         }

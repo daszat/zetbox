@@ -395,7 +395,6 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -403,8 +402,12 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy
@@ -813,7 +816,6 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -821,8 +823,12 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class DataType_implements_Interface_RelationEntryProxy
@@ -1327,7 +1333,6 @@ namespace at.dasz.DocumentManagement
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -1335,8 +1340,12 @@ namespace at.dasz.DocumentManagement
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class Document_has_Blob_RelationEntryProxy
@@ -1676,7 +1685,6 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -1684,8 +1692,12 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class Identity_memberOf_Group_RelationEntryProxy
@@ -2092,7 +2104,6 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -2100,8 +2111,12 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class IndexConstraint_ensures_unique_on_Property_RelationEntryProxy
@@ -2437,7 +2452,6 @@ namespace Zetbox.App.Test
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -2445,8 +2459,12 @@ namespace Zetbox.App.Test
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class Muhblah_has_TestCustomObject_RelationEntryProxy
@@ -2780,7 +2798,6 @@ namespace Zetbox.App.Test
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -2788,8 +2805,12 @@ namespace Zetbox.App.Test
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy
@@ -3196,7 +3217,6 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -3204,8 +3224,12 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class NavigationEntry_accessed_by_Group_RelationEntryProxy
@@ -3614,7 +3638,6 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -3622,8 +3645,12 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class ObjectReferenceProperty_shows_Method_RelationEntryProxy
@@ -4128,7 +4155,6 @@ namespace Zetbox.App.Projekte
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -4136,8 +4162,12 @@ namespace Zetbox.App.Projekte
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class Projekt_haben_Mitarbeiter_RelationEntryProxy
@@ -4646,7 +4676,6 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -4654,8 +4683,12 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class RoleMembership_resolves_Relation_RelationEntryProxy
@@ -5164,7 +5197,6 @@ namespace Zetbox.App.SchemaMigration
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -5172,8 +5204,12 @@ namespace Zetbox.App.SchemaMigration
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class SourceColumn_created_Property_RelationEntryProxy
@@ -5513,7 +5549,6 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -5521,8 +5556,12 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class Template_hasMenu_Visual_RelationEntryProxy
@@ -5856,7 +5895,6 @@ namespace Zetbox.App.Test
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -5864,8 +5902,12 @@ namespace Zetbox.App.Test
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class TestStudent_füllt_aus_Fragebogen_RelationEntryProxy
@@ -6368,7 +6410,6 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -6376,8 +6417,12 @@ namespace Zetbox.App.Base
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy
@@ -6790,7 +6835,6 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -6798,8 +6842,12 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class ViewDescriptor_supports_TypeRef_RelationEntryProxy
@@ -7208,7 +7256,6 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -7216,8 +7263,12 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy
@@ -7553,7 +7604,6 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -7561,8 +7611,12 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class Visual_contains_Visual_RelationEntryProxy
@@ -7896,7 +7950,6 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
                 ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
-                this.A = null;
             }
 
             // Follow B
@@ -7904,8 +7957,12 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
-                this.B = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
         }
 
         public class Visual_hasContextMenu_Visual_RelationEntryProxy
@@ -8214,8 +8271,11 @@ namespace Zetbox.App.Projekte
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.Parent);
                 ((NHibernatePersistenceObject)this.Parent).ChildrenToDelete.Add(this);
-                this.Parent = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.Parent = null;
         }
 
         public class Kunde_EMails_CollectionEntryProxy
@@ -8508,8 +8568,11 @@ namespace Zetbox.App.Test
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.Parent);
                 ((NHibernatePersistenceObject)this.Parent).ChildrenToDelete.Add(this);
-                this.Parent = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.Parent = null;
         }
 
         public class Muhblah_StringCollection_CollectionEntryProxy
@@ -8820,8 +8883,11 @@ namespace Zetbox.App.GUI
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.Parent);
                 ((NHibernatePersistenceObject)this.Parent).ChildrenToDelete.Add(this);
-                this.Parent = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.Parent = null;
         }
 
         public class ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy
@@ -9161,8 +9227,11 @@ namespace Zetbox.App.Projekte
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.Parent);
                 ((NHibernatePersistenceObject)this.Parent).ChildrenToDelete.Add(this);
-                this.Parent = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.Parent = null;
         }
 
         public class Projekt_AuditJournal_CollectionEntryProxy
@@ -9484,8 +9553,11 @@ namespace Zetbox.App.Test
             {
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.Parent);
                 ((NHibernatePersistenceObject)this.Parent).ChildrenToDelete.Add(this);
-                this.Parent = null;
             }
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.Parent = null;
         }
 
         public class TestCustomObject_PhoneNumbersOther_CollectionEntryProxy
