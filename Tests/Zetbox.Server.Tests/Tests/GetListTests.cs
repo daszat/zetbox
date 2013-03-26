@@ -397,6 +397,19 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
+        public void GetListWithInvalidButExcusedCast()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+                Assert.That(module, Is.Not.Null);
+                var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<ObjectClass>().Where(cls => cls.Name == "DataType").ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result, Has.All.Property("Name").EqualTo("DataType"));
+            }
+        }
+
+        [Test]
         [ExpectedException]
         public void GetListWithInvalidCast()
         {
@@ -405,8 +418,24 @@ namespace Zetbox.Server.Tests
                 var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
                 Assert.That(module, Is.Not.Null);
                 var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<IList<int>>().Where(i => i.Count > 10).ToList();
+
+                // never reached
                 Assert.That(result, Is.Not.Null);
-                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+
+        [Test]
+        [ExpectedException]
+        public void GetListWithSemivalidCast()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+                Assert.That(module, Is.Not.Null);
+                var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<ObjectClass>().Where(cls => cls.TableName == "SomeTable").ToList();
+
+                // never reached
+                Assert.That(result, Is.Not.Null);
             }
         }
     }
