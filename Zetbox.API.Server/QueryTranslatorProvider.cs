@@ -237,7 +237,6 @@ namespace Zetbox.API.Server
             // Methods requiring special translation
             else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.GetParameters().Length > 1)
             {
-
                 var source = Visit(m.Arguments[0]);
                 // unpack IQueryable<T>
                 var sourceType = source.Type.GetGenericArguments().Single();
@@ -282,6 +281,19 @@ namespace Zetbox.API.Server
                                    .MakeGenericMethod(sourceType);
 
                             return Expression.Call(null, newMethod, new[] { source, newPredicate });
+                        }
+
+                    case "Skip": // Skip<TSource>(this IQueryable<TSource> source, int count);
+                    case "Take": // Take<TSource>(this IQueryable<TSource> source, int count);
+                        {
+                            var newCount = Visit(m.Arguments[1]);
+
+                            MethodInfo newMethod = typeof(Queryable).GetMethods()
+                                   .Single(mi => mi.Name == m.Method.Name
+                                       && mi.GetParameters().Length == 2)
+                                   .MakeGenericMethod(sourceType);
+
+                            return Expression.Call(null, newMethod, new[] { source, newCount });
                         }
 
                     case "Max": // Max<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector);
