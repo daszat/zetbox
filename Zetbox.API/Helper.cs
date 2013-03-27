@@ -239,18 +239,23 @@ namespace Zetbox.API
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) && type.GetGenericArguments().Single().IsEnum;
         }
 
-        public static string GetSimpleName(this Type type)
+        public static string GetSimpleName(this Type type, bool addAssemblyNames = true)
         {
             if (type == null) throw new ArgumentNullException("type");
 
-            var genArgs = string.Empty;
+            var result = type.Namespace + "." + type.Name;
+
             if (type.IsGenericType)
             {
-                var args = type.GetGenericArguments();
-                genArgs = string.Format("`{0}[{1}]", args.Length, string.Join("], [", args.Select(t => t.GetSimpleName())));
+                result += string.Format("[[{0}]]", string.Join("], [", type.GetGenericArguments().Select(t => t.GetSimpleName(addAssemblyNames))));
             }
 
-            return type.Namespace + "." + type.Name + genArgs + ", " + type.Assembly.FullName.Split(',').First();
+            if (addAssemblyNames)
+            {
+                result += ", " + type.Assembly.FullName.Split(',').First();
+            }
+
+            return result;
         }
 
         #region HasGenericDefinition

@@ -44095,7 +44095,7 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:Description>A string attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>006ae4fa-804d-47a7-97d5-33d99a0ebb51</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.ClassValueViewModel`1`1[System.String, mscorlib], Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.ClassValueViewModel`1[[System.String, mscorlib]], Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="a6ff986c-a485-4c4d-947c-e59d14112ec2">
     <GUI:DefaultEditorKind>9d414225-460a-4c54-8e36-e368804e387f</GUI:DefaultEditorKind>
@@ -44161,7 +44161,7 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:Description>A floating point attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>f223c178-c447-40a8-960e-ffba6b8423af</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableStructValueViewModel`1`1[System.Double, mscorlib], Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableStructValueViewModel`1[[System.Double, mscorlib]], Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="edaf9334-dc36-4778-aa33-1e5cdaeeb767">
     <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
@@ -44169,7 +44169,7 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:Description>An integer attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>2f35b21a-73c2-4e38-ab28-7ee2404684be</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableStructValueViewModel`1`1[System.Int32, mscorlib], Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableStructValueViewModel`1[[System.Int32, mscorlib]], Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="67a49c49-b890-4d35-a8db-1f8e43bfc7df">
     <GUI:DefaultEditorKind>4f6779a0-46f6-48a0-8880-fc491164d04a</GUI:DefaultEditorKind>
