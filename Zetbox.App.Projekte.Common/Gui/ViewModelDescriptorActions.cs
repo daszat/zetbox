@@ -30,15 +30,20 @@ namespace Zetbox.App.GUI
             e.Result = string.Format("{0} (default: {1}) [{2}]",
                 obj.Description,
                 obj.DefaultEditorKind,
-                obj.ViewModelRef == null ? "(no type)" : obj.ViewModelRef.ToString());
+                string.IsNullOrWhiteSpace(obj.ViewModelTypeRef) ? "(no type)" : obj.ViewModelTypeRef);
         }
 
         [Invocation]
         public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
-            if (obj.ViewModelRef != null)
+            if (!string.IsNullOrWhiteSpace(obj.ViewModelTypeRef) && obj.ViewModelTypeRef != "ERROR")
             {
-                e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(obj.ViewModelRef.ToTypeName(), @"\W", "_"));
+                var type = Type.GetType(obj.ViewModelTypeRef, throwOnError: false);
+
+                // do not create a name for unresolvable types
+                if (type == null) return;
+
+                e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(type.GetSimpleName(addAssemblyNames: false), @"\W+", "_"));
             }
         }
     }

@@ -72,7 +72,7 @@ namespace Zetbox.App.Extensions
             #region Cache Management
             PrimeCaches(tk, self.ReadOnlyContext);
 
-            var key = new ViewDescriptorCache.Key(self.ViewModelRef, tk, requestedControlKind);
+            var key = new ViewDescriptorCache.Key(self.ViewModelTypeRef, tk, requestedControlKind);
             if (_viewDescriptorCache.ContainsKey(key)) return _viewDescriptorCache[key];
             #endregion
 
@@ -112,14 +112,15 @@ namespace Zetbox.App.Extensions
             if (candidates.Count == 0)
             {
                 // Try parent
-                var parent =  self.ViewModelRef.Parent != null ? self.ViewModelRef.Parent.GetViewModelDescriptor() : null;
+                var type = Type.GetType(self.ViewModelTypeRef);
+                var parent = type != null && type.BaseType != null ? type.BaseType.GetViewModelDescriptor(self.ReadOnlyContext) : null;
                 if (parent != null)
                 {
                     result = GetViewDescriptor(parent, tk, requestedControlKind);
                 }
                 else
                 {
-                    Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.ViewModelRef);
+                    Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.ViewModelTypeRef);
                 }
             }
             else if (candidates.Count == 1)
@@ -129,13 +130,13 @@ namespace Zetbox.App.Extensions
             else
             {
                 var allTypes = GetAllTypes(self);
-                // As allTypes is sorted from most specific to least specific first or default is perfect.
-                var match = allTypes.SelectMany(t => candidates.Where(c => c.SupportedViewModels.Contains(t))).FirstOrDefault();
+                // As allTypes is sorted from most specific to least specific, so first or default is perfect.
+                var match = allTypes.SelectMany(t => candidates.Where(c => c.SupportedViewModelRefs.Contains(t.GetSimpleName()))).FirstOrDefault();
 
                 // Try the most common
                 if (match == null)
                 {
-                    match = allTypes.SelectMany(t => candidates.Where(c => c.SupportedViewModels.Count == 0)).FirstOrDefault();
+                    match = allTypes.SelectMany(t => candidates.Where(c => c.SupportedViewModelRefs.Count == 0)).FirstOrDefault();
                 }
 
                 // Log a warning if nothing found
@@ -150,22 +151,17 @@ namespace Zetbox.App.Extensions
             return result;
         }
 
-        private static IList<TypeRef> GetAllTypes(ViewModelDescriptor self)
+        private static IList<Type> GetAllTypes(ViewModelDescriptor self)
         {
-            var allTypes = new List<TypeRef>();
-            var type = self.ViewModelRef;
+            var allTypes = new List<Type>();
+            var type = Type.GetType(self.ViewModelTypeRef);
             while (type != null)
             {
                 allTypes.Add(type);
-                type = type.Parent;
+                type = type.BaseType;
             }
 
-            allTypes.AddRange(
-                self.ViewModelRef.AsType(false).GetInterfaces()
-                    .OrderBy(i => i.FullName)
-                    .Select(i => i.ToRef(self.ReadOnlyContext))
-                    .Where(i => i != null)
-            );
+            allTypes.AddRange(Type.GetType(self.ViewModelTypeRef).GetInterfaces().OrderBy(i => i.FullName));
             return allTypes;
         }
 
@@ -228,15 +224,18 @@ namespace Zetbox.App.Extensions
         {
             var result = new List<ViewModelDescriptor>();
             result.Add(pmd);
-            var parent = pmd.ViewModelRef.Parent;
+            var parent = Type.GetType(pmd.ViewModelTypeRef);
+
+            if (parent != null) parent = parent.BaseType;
+
             while (parent != null)
             {
-                var parentDescriptor = parent.GetViewModelDescriptor();
+                var parentDescriptor = parent.GetViewModelDescriptor(pmd.ReadOnlyContext);
                 if (parentDescriptor != null)
                 {
                     result.Add(parentDescriptor);
                 }
-                parent = parent.Parent;
+                parent = parent.BaseType;
             }
             return result;
         }
@@ -254,20 +253,22 @@ namespace Zetbox.App.Extensions
             return result;
         }
 
-        private static ViewModelDescriptor GetViewModelDescriptor(this TypeRef tr)
+        private static ViewModelDescriptor GetViewModelDescriptor(this Type type, IReadOnlyZetboxContext ctx)
         {
-            if (tr == null) { throw new ArgumentNullException("tr"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (type == null) { throw new ArgumentNullException("type"); }
 
-            PrimeCaches(null, tr.ReadOnlyContext);
+            PrimeCaches(null, ctx);
 
             ViewModelDescriptor result = null;
-            while (result == null && tr != null)
+            while (result == null && type != null)
             {
-                if (_pmdCache.ContainsKey(tr.ExportGuid))
+                var name = type.GetSimpleName();
+                if (_pmdCache.ContainsKey(name))
                 {
-                    result = _pmdCache[tr.ExportGuid];
+                    result = _pmdCache[name];
                 }
-                tr = tr.Parent;
+                type = type.BaseType;
             }
             return result;
         }
@@ -278,25 +279,14 @@ namespace Zetbox.App.Extensions
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
             Type mdlType = mdl.GetType();
-            while (mdlType != null)
-            {
-                var typeRef = mdlType.ToRef(frozenCtx);
-                if (typeRef != null)
-                    return typeRef.GetViewModelDescriptor();
+            var result = mdlType.GetViewModelDescriptor(frozenCtx);
 
-                mdlType = mdlType.BaseType;
+            if (result == null)
+            {
+                Logging.Log.ErrorFormat("Unable to resolve the ViewModel '{0}'.", mdl.GetType());
             }
 
-            if (mdl.GetType().IsGenericType)
-            {
-                Logging.Log.ErrorFormat("Unable to resolve TypeRef of given ViewModel '{0}'. You have to manually create a generic TypeRef.", mdl.GetType());
-            }
-            else
-            {
-                Logging.Log.ErrorFormat("Unable to resolve TypeRef of given ViewModel '{0}'. Regenerate Assembly Refs.", mdl.GetType());
-            }
-
-            return null;
+            return result;
         }
 
 
@@ -358,15 +348,15 @@ namespace Zetbox.App.Extensions
             public static Content CreateCache(Toolkit tk, IReadOnlyZetboxContext ctx)
             {
                 var result = new Content();
-                
+
                 // All View Descriptors for the given Toolkit
                 result._allVDCache = new ReadOnlyCollection<ViewDescriptor>(
                     ctx.GetQuery<ViewDescriptor>().WithEagerLoading().Where(obj => obj.Toolkit == tk).ToList());
-                
+
                 // Dictionary by Kind
                 result._vdCache = result._allVDCache.Where(obj => obj.ControlKind != null).GroupBy(obj => obj.ControlKind)
                     .ToDictionary(g => g.Key.ExportGuid, g => new ReadOnlyCollection<ViewDescriptor>(g.ToList()));
-                
+
                 return result;
             }
 
@@ -423,16 +413,16 @@ namespace Zetbox.App.Extensions
 
         internal sealed class Key
         {
-            public Key( TypeRef vmd,
+            public Key(string vmd,
                         Toolkit tk,
                         ControlKind ck)
             {
-                this.vmd = vmd.ExportGuid;
+                this.vmd = vmd;
                 this.tk = tk;
                 this.ck = ck != null ? ck.ExportGuid : Guid.Empty;
             }
 
-            private readonly Guid vmd;
+            private readonly string vmd;
             private readonly Toolkit tk;
             private readonly Guid ck;
 
@@ -457,7 +447,7 @@ namespace Zetbox.App.Extensions
 
     internal class ViewModelDescriptorCache : Cache
     {
-        private Dictionary<Guid, ViewModelDescriptor> _cache = null;
+        private Dictionary<string, ViewModelDescriptor> _cache = null;
         private IReadOnlyZetboxContext _context = null;
 
         public ViewModelDescriptorCache(IReadOnlyZetboxContext ctx)
@@ -470,15 +460,16 @@ namespace Zetbox.App.Extensions
         {
             _cache = _context
                 .GetQuery<ViewModelDescriptor>()
-                .ToDictionary(obj => obj.ViewModelRef.ExportGuid);
+                .Where(obj => obj.ViewModelTypeRef != "ERROR")
+                .ToDictionary(obj => obj.ViewModelTypeRef);
         }
 
-        public bool ContainsKey(Guid key)
+        public bool ContainsKey(string key)
         {
             return _cache.ContainsKey(key);
         }
 
-        public ViewModelDescriptor this[Guid key]
+        public ViewModelDescriptor this[string key]
         {
             get
             {

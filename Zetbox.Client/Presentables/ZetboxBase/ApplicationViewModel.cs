@@ -42,7 +42,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             this.app = app;
             _name = app.Name;
             _wndMdlType = app.WorkspaceViewModel != null
-                ? app.WorkspaceViewModel.ViewModelRef.AsType(true)
+                ? Type.GetType(app.WorkspaceViewModel.ViewModelTypeRef, true)
                 : null;
         }
 

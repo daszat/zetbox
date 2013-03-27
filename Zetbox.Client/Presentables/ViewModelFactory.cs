@@ -255,7 +255,7 @@ namespace Zetbox.Client.Presentables
                 var compObj = ((CompoundObjectParameter)param).CompoundObject;
                 if (compObj.DefaultPropertyViewModelDescriptor != null)
                 {
-                    t = compObj.DefaultPropertyViewModelDescriptor.ViewModelRef.AsType(true);
+                    t = Type.GetType(compObj.DefaultPropertyViewModelDescriptor.ViewModelTypeRef, true);
                 }
                 else
                 {
@@ -273,7 +273,7 @@ namespace Zetbox.Client.Presentables
         public TModelFactory CreateViewModel<TModelFactory>(ViewModelDescriptor desc) where TModelFactory : class
         {
             if (desc == null) throw new ArgumentNullException("desc");
-            return CreateViewModel<TModelFactory>(ResolveFactory(desc.ViewModelRef.AsType(true)));
+            return CreateViewModel<TModelFactory>(ResolveFactory(Type.GetType(desc.ViewModelTypeRef, true)));
         }
 
         private static int _resolveCounter = 0;
@@ -492,7 +492,7 @@ namespace Zetbox.Client.Presentables
         /// <returns>a newly created view</returns>
         protected virtual object CreateView(ViewDescriptor vDesc)
         {
-            return vDesc.ControlRef.Create();
+            return Activator.CreateInstance(Type.GetType(vDesc.ControlTypeRef));
         }
 
         public void ShowModel(ViewModel mdl, ControlKind kind, bool activate)

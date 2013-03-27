@@ -44,7 +44,7 @@ namespace Zetbox.Client.Presentables.GUI
                 {
                     try
                     {
-                        var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
+                        var t = Type.GetType(screen.ViewModelDescriptor.ViewModelTypeRef, true);
                         return ModelFactory.CreateViewModel<NavigationEntryViewModel.Factory>(t).Invoke(dataCtx, parent, screen);
                     }
                     catch (Exception ex)

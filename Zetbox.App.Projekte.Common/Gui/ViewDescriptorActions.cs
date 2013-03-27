@@ -29,9 +29,9 @@ namespace Zetbox.App.GUI
             e.Result = String.Format("{0}/{1}: {2}",
                 obj.Toolkit,
                 obj.ControlKind != null ? obj.ControlKind.Name : "(unknown kind)",
-                obj.ControlRef == null
+                string.IsNullOrWhiteSpace(obj.ControlTypeRef)
                     ? "(none)"
-                    : obj.ControlRef.ToString());
+                    : obj.ControlTypeRef);
         }
 
     }
