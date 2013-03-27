@@ -26,14 +26,14 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void GetParameterType(CLRObjectParameter obj, MethodReturnEventArgs<Type> e)
         {
-            e.Result = obj.Type.AsType(true);
+            e.Result = Type.GetType(obj.TypeRef, true);
             BaseParameterActions.DecorateParameterType(obj, e, false);
         }
 
         [Invocation]
         public static void GetParameterTypeString(CLRObjectParameter obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.Type != null ? obj.Type.FullName : "<no type set>";
+            e.Result = string.IsNullOrWhiteSpace(obj.TypeRef) ? "<no type set>" : obj.TypeRef;
             BaseParameterActions.DecorateParameterType(obj, e, false);
         }
     }

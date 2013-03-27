@@ -107,11 +107,11 @@ namespace Zetbox.App.Packaging
                 AddMetaObjects(result, () => icons.AsQueryable());
                 AddMetaObjects(result, () => icons.Select(i => i.Blob).AsQueryable());
                 AddMetaObjects(result, () => ctx.GetQuery<ViewModelDescriptor>().Where(i => i.Module.ID == moduleID)
-                    .ToList().OrderBy(i => i.ViewModelRef.Assembly.Name).ThenBy(i => i.ViewModelRef.FullName).ThenBy(i => i.ExportGuid));
+                    .ToList().OrderBy(i => i.ViewModelTypeRef).ThenBy(i => i.ExportGuid));
                 AddMetaObjects(result, () => ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
-                    .ToList().OrderBy(i => i.ControlRef.Assembly.Name).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
+                    .ToList().OrderBy(i => i.ControlTypeRef).ThenBy(i => i.ExportGuid));
                 AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ViewDescriptor_supports_TypeRef_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
-                    .ToList().OrderBy(i => i.A.ControlRef.Assembly.Name).ThenBy(i => i.A.ControlRef.FullName).ThenBy(i => i.A.ExportGuid));
+                    .ToList().OrderBy(i => i.A.ControlTypeRef).ThenBy(i => i.A.ExportGuid));
 
                 AddMetaObjects(result, () => ctx.GetQuery<NavigationEntry>()
                     .Where(i => i.Module.ID == moduleID)
@@ -143,8 +143,7 @@ namespace Zetbox.App.Packaging
                     .ThenBy(i => i.ExportGuid));
                 AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>()
                     .Where(i => i.A.Module.ID == moduleID)
-                    .ToList().OrderBy(i => i.A.ViewModelRef.Assembly.Name)
-                    .ThenBy(i => i.A.ViewModelRef.FullName)
+                    .ToList().OrderBy(i => i.A.ViewModelTypeRef)
                     .ThenBy(i => i.A.ExportGuid)
                     .ThenBy(i => i.B.ExportGuid));
                 AddMetaObjects(result, () => ctx.GetQuery<FilterConfiguration>().Where(i => i.Module.ID == moduleID)
