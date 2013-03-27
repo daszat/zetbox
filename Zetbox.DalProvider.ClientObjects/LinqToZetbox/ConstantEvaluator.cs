@@ -142,7 +142,37 @@ namespace Zetbox.DalProvider.Client
                     switch (e.NodeType)
                     {
                         case ExpressionType.Convert:
-                            return EvaluateToValue(e.Operand);
+                            var result = EvaluateToValue(e.Operand);
+                            // sometimes we manually need to convert, as boxed value types don't convert voluntarily
+                            if (e.Type == typeof(bool)) return (bool)result;
+                            else if (e.Type == typeof(bool?)) return (bool?)result;
+                            else if (e.Type == typeof(byte)) return (byte)result;
+                            else if (e.Type == typeof(byte?)) return (byte?)result;
+                            else if (e.Type == typeof(char)) return (char)result;
+                            else if (e.Type == typeof(char?)) return (char?)result;
+                            else if (e.Type == typeof(decimal)) return (decimal)result;
+                            else if (e.Type == typeof(decimal?)) return (decimal?)result;
+                            else if (e.Type == typeof(double)) return (double)result;
+                            else if (e.Type == typeof(double?)) return (double?)result;
+                            // enum
+                            else if (e.Type == typeof(float)) return (float)result;
+                            else if (e.Type == typeof(float?)) return (float?)result;
+                            else if (e.Type == typeof(int)) return (int)result;
+                            else if (e.Type == typeof(int?)) return (int?)result;
+                            else if (e.Type == typeof(long)) return (long)result;
+                            else if (e.Type == typeof(long?)) return (long?)result;
+                            else if (e.Type == typeof(sbyte)) return (sbyte)result;
+                            else if (e.Type == typeof(sbyte?)) return (sbyte?)result;
+                            else if (e.Type == typeof(short)) return (short)result;
+                            else if (e.Type == typeof(short?)) return (short?)result;
+                            // struct
+                            else if (e.Type == typeof(uint)) return (uint)result;
+                            else if (e.Type == typeof(uint?)) return (uint?)result;
+                            else if (e.Type == typeof(ulong)) return (ulong)result;
+                            else if (e.Type == typeof(ulong?)) return (ulong?)result;
+                            else if (e.Type == typeof(ushort)) return (ushort)result;
+                            else if (e.Type == typeof(ushort?)) return (ushort?)result;
+                            else return result;
                         case ExpressionType.Decrement:
                             return ((dynamic)(EvaluateToValue(e.Operand))) - 1;
                         case ExpressionType.Increment:
