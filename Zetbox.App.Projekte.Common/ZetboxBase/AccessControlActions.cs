@@ -20,6 +20,7 @@ namespace Zetbox.App.Base
     using System.Text;
     using Zetbox.App.Extensions;
     using Zetbox.API;
+    using Zetbox.API.Utils;
 
     [Implementor]
     public static class AccessControlActions
@@ -51,7 +52,12 @@ namespace Zetbox.App.Base
                 var navigators = new List<string>();
                 ObjectClass nextType = obj.ObjectClass;
                 foreach (var rel in role.Relations)
-                {                    
+                {
+                    if (rel == null)
+                    {
+                        Logging.Log.WarnFormat("Found a null relation in RoleMembership {0}", obj);
+                        continue;
+                    }
                     if (rel.A != null && rel.A.Type == nextType)
                     {
                         navigators.Add(rel.A.Navigator != null ? rel.A.Navigator.Name : "<?>");
