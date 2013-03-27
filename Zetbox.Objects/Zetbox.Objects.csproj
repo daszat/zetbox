@@ -108,6 +108,7 @@
     <Compile Include="BoolParameter.Interface.Designer.cs" />
     <Compile Include="BoolProperty.Interface.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Interface.Designer.cs" />
+    <Compile Include="Calendar.Interface.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Interface.Designer.cs" />
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.Interface.Designer.cs" />
@@ -141,6 +142,8 @@
     <Compile Include="EnumerationEntry.Interface.Designer.cs" />
     <Compile Include="EnumerationProperty.Interface.Designer.cs" />
     <Compile Include="EnumParameter.Interface.Designer.cs" />
+    <Compile Include="Event.Interface.Designer.cs" />
+    <Compile Include="EventTestObject.Interface.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Interface.Designer.cs" />
     <Compile Include="File.Interface.Designer.cs" />
     <Compile Include="FileImportConfiguration.Interface.Designer.cs" />
@@ -229,6 +232,7 @@
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />
     <Compile Include="StringRangeConstraint.Interface.Designer.cs" />
+    <Compile Include="SyncProvider.Interface.Designer.cs" />
     <Compile Include="Task.Interface.Designer.cs" />
     <Compile Include="Template.Interface.Designer.cs" />
     <Compile Include="TestCustomObject.Interface.Designer.cs" />
@@ -246,6 +250,7 @@
     <Compile Include="Visual.Interface.Designer.cs" />
     <Compile Include="WorkSchedule.Interface.Designer.cs" />
     <Compile Include="WorkScheduleRule.Interface.Designer.cs" />
+    <Compile Include="WorkScheduleSyncProvider.Interface.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="YearlyWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="CollectionEntries.Interface.Designer.cs" />
@@ -265,6 +270,7 @@
     <Compile Include="DateTimeStyles.Interface.Designer.cs" />
     <Compile Include="DayOfWeek.Interface.Designer.cs" />
     <Compile Include="DeploymentRestriction.Interface.Designer.cs" />
+    <Compile Include="Frequency.Interface.Designer.cs" />
     <Compile Include="HighlightState.Interface.Designer.cs" />
     <Compile Include="InstanceListViewMethod.Interface.Designer.cs" />
     <Compile Include="ListSortDirection.Interface.Designer.cs" />
@@ -277,6 +283,7 @@
     <Compile Include="WidthHint.Interface.Designer.cs" />
     <Compile Include="AnyReference.Interface.Designer.cs" />
     <Compile Include="AuditEntry.Interface.Designer.cs" />
+    <Compile Include="DateTimeOffset.Interface.Designer.cs" />
     <Compile Include="DateTimeRange.Interface.Designer.cs" />
     <Compile Include="RecurrenceRule.Interface.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Interface.Designer.cs" />

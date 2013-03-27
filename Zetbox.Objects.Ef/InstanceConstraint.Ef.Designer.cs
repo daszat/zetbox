@@ -24,7 +24,7 @@ namespace Zetbox.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="InstanceConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("InstanceConstraint")]
-    public class InstanceConstraintEfImpl : BaseServerDataObject_EntityFramework, InstanceConstraint, Zetbox.API.IExportableInternal
+    public abstract class InstanceConstraintEfImpl : BaseServerDataObject_EntityFramework, InstanceConstraint, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("25a83f49-3cff-4baf-850d-8d185bb329ec");
         public override Guid ObjectClassID { get { return _objectClassID; } }

@@ -2369,6 +2369,7 @@
             </Menu.Resources>
             <MenuItem ItemsSource="{Binding Commands}"
                       Header="{Binding Name}"
+                      Icon="{Binding Icon, Converter={StaticResource ImageCtrlConverter}, ConverterParameter='16,16'}"
                       ItemContainerStyle="{StaticResource CommandMenuItem}">
             </MenuItem>
         </Menu>

@@ -28,6 +28,7 @@ namespace Zetbox.Client
     using Zetbox.Client.Presentables;
     using Zetbox.API.Common.GUI;
     using System.ComponentModel;
+    using Zetbox.API.Common.Reporting;
 
     [Feature]
     [Description("The Client Module")]
@@ -116,6 +117,17 @@ namespace Zetbox.Client
             moduleBuilder
                 .RegisterType<Zetbox.Client.Reporting.ReportingErrorDialog>()
                 .AsImplementedInterfaces()
+                .InstancePerDependency();
+
+            moduleBuilder
+                .Register<Zetbox.Client.Reporting.ReportingHost>(c => new Zetbox.Client.Reporting.ReportingHost(
+                        "Zetbox.App.Projekte.Client.DerivedReportTest",
+                        typeof(ClientModule).Assembly,
+                        c.Resolve<IFileOpener>(),
+                        c.Resolve<ITempFileService>(),
+                        c.Resolve<IReportingErrorReporter>()
+                    )
+                )
                 .InstancePerDependency();
 
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);

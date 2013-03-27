@@ -44,572 +44,802 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
-        /// 
+        /// Specifies a comma separated list of days of the week. Also it may indicate the nth occurrence of the specific day within a month. (MO,TU,1SA,-2SU)
         /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public double? DaysOffset
+        public string ByDay
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _DaysOffset;
-                if (OnDaysOffset_Getter != null)
+                var __result = _ByDay;
+                if (OnByDay_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<double?>(__result);
-                    OnDaysOffset_Getter(this, __e);
-                    __result = _DaysOffset = __e.Result;
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnByDay_Getter(this, __e);
+                    __result = _ByDay = __e.Result;
                 }
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_DaysOffset != value)
+                if (_ByDay != value)
                 {
-                    var __oldValue = _DaysOffset;
+                    var __oldValue = _ByDay;
                     var __newValue = value;
-                    if (OnDaysOffset_PreSetter != null && IsAttached)
+                    if (OnByDay_PreSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnDaysOffset_PreSetter(this, __e);
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByDay_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("DaysOffset", __oldValue, __newValue);
-                    _DaysOffset = __newValue;
-                    NotifyPropertyChanged("DaysOffset", __oldValue, __newValue);
+                    NotifyPropertyChanging("ByDay", __oldValue, __newValue);
+                    _ByDay = __newValue;
+                    NotifyPropertyChanged("ByDay", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
-                    if (OnDaysOffset_PostSetter != null && IsAttached)
+                    if (OnByDay_PostSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnDaysOffset_PostSetter(this, __e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByDay_PostSetter(this, __e);
                     }
                 }
                 else
                 {
-                    SetInitializedProperty("DaysOffset");
+                    SetInitializedProperty("ByDay");
                 }
             }
         }
-        private double? _DaysOffset;
+        private string _ByDay;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, double?> OnDaysOffset_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, double?> OnDaysOffset_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, double?> OnDaysOffset_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByDay_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByDay_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByDay_PostSetter;
 
         /// <summary>
-        /// 
+        /// Specifies a comma separated list of hours. (0,1,22,23)
         /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public bool EveryDay
+        public string ByHour
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _EveryDay;
-                if (!_isEveryDaySet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("aa9da83f-fbbf-44d0-8e7c-71f306e3481b"));
-                    if (__p != null) {
-                        _isEveryDaySet = true;
-                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
-                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
-                        __result = this._EveryDay = (bool)__tmp_value;
-                    } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'RecurrenceRule.EveryDay'");
-                    }
-                }
-                if (OnEveryDay_Getter != null)
+                var __result = _ByHour;
+                if (OnByHour_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<bool>(__result);
-                    OnEveryDay_Getter(this, __e);
-                    __result = _EveryDay = __e.Result;
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnByHour_Getter(this, __e);
+                    __result = _ByHour = __e.Result;
                 }
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                _isEveryDaySet = true;
-                if (_EveryDay != value)
+                if (_ByHour != value)
                 {
-                    var __oldValue = _EveryDay;
+                    var __oldValue = _ByHour;
                     var __newValue = value;
-                    if (OnEveryDay_PreSetter != null && IsAttached)
+                    if (OnByHour_PreSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnEveryDay_PreSetter(this, __e);
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByHour_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("EveryDay", __oldValue, __newValue);
-                    _EveryDay = __newValue;
-                    NotifyPropertyChanged("EveryDay", __oldValue, __newValue);
+                    NotifyPropertyChanging("ByHour", __oldValue, __newValue);
+                    _ByHour = __newValue;
+                    NotifyPropertyChanged("ByHour", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
-                    if (OnEveryDay_PostSetter != null && IsAttached)
+                    if (OnByHour_PostSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnEveryDay_PostSetter(this, __e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByHour_PostSetter(this, __e);
                     }
                 }
                 else
                 {
-                    SetInitializedProperty("EveryDay");
+                    SetInitializedProperty("ByHour");
                 }
             }
         }
-        private bool _EveryDay;
-        private bool _isEveryDaySet = false;
+        private string _ByHour;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryDay_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryDay_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryDay_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByHour_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByHour_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByHour_PostSetter;
+
+        /// <summary>
+        /// Specifies a comma separated list of minutes. (0,1,58,59)
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string ByMinute
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ByMinute;
+                if (OnByMinute_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnByMinute_Getter(this, __e);
+                    __result = _ByMinute = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ByMinute != value)
+                {
+                    var __oldValue = _ByMinute;
+                    var __newValue = value;
+                    if (OnByMinute_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByMinute_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ByMinute", __oldValue, __newValue);
+                    _ByMinute = __newValue;
+                    NotifyPropertyChanged("ByMinute", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnByMinute_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByMinute_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ByMinute");
+                }
+            }
+        }
+        private string _ByMinute;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByMinute_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByMinute_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByMinute_PostSetter;
+
+        /// <summary>
+        /// Specifies a comma separated list of months of the year (1,2,3,4,11,12)
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string ByMonth
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ByMonth;
+                if (OnByMonth_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnByMonth_Getter(this, __e);
+                    __result = _ByMonth = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ByMonth != value)
+                {
+                    var __oldValue = _ByMonth;
+                    var __newValue = value;
+                    if (OnByMonth_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByMonth_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ByMonth", __oldValue, __newValue);
+                    _ByMonth = __newValue;
+                    NotifyPropertyChanged("ByMonth", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnByMonth_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByMonth_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ByMonth");
+                }
+            }
+        }
+        private string _ByMonth;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByMonth_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByMonth_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByMonth_PostSetter;
+
+        /// <summary>
+        /// Specifies a comma separated list of days of the month. (1,2,30,31,-1,-2,-31)
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string ByMonthDay
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ByMonthDay;
+                if (OnByMonthDay_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnByMonthDay_Getter(this, __e);
+                    __result = _ByMonthDay = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ByMonthDay != value)
+                {
+                    var __oldValue = _ByMonthDay;
+                    var __newValue = value;
+                    if (OnByMonthDay_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByMonthDay_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ByMonthDay", __oldValue, __newValue);
+                    _ByMonthDay = __newValue;
+                    NotifyPropertyChanged("ByMonthDay", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnByMonthDay_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByMonthDay_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ByMonthDay");
+                }
+            }
+        }
+        private string _ByMonthDay;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByMonthDay_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByMonthDay_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByMonthDay_PostSetter;
+
+        /// <summary>
+        /// Specifies a comma separated list of seconds. (0,1,58,59)
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string BySecond
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _BySecond;
+                if (OnBySecond_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnBySecond_Getter(this, __e);
+                    __result = _BySecond = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_BySecond != value)
+                {
+                    var __oldValue = _BySecond;
+                    var __newValue = value;
+                    if (OnBySecond_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnBySecond_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("BySecond", __oldValue, __newValue);
+                    _BySecond = __newValue;
+                    NotifyPropertyChanged("BySecond", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnBySecond_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnBySecond_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("BySecond");
+                }
+            }
+        }
+        private string _BySecond;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnBySecond_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnBySecond_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnBySecond_PostSetter;
+
+        /// <summary>
+        /// Specifies a comma separated list of nth occurrences
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string BySetPos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _BySetPos;
+                if (OnBySetPos_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnBySetPos_Getter(this, __e);
+                    __result = _BySetPos = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_BySetPos != value)
+                {
+                    var __oldValue = _BySetPos;
+                    var __newValue = value;
+                    if (OnBySetPos_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnBySetPos_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("BySetPos", __oldValue, __newValue);
+                    _BySetPos = __newValue;
+                    NotifyPropertyChanged("BySetPos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnBySetPos_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnBySetPos_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("BySetPos");
+                }
+            }
+        }
+        private string _BySetPos;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnBySetPos_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnBySetPos_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnBySetPos_PostSetter;
+
+        /// <summary>
+        /// Specifies a comma separated list of weeks of the year. Valid values are 1 to 53 or -53 to -1. (1,5,-2)
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string ByWeekNumber
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ByWeekNumber;
+                if (OnByWeekNumber_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnByWeekNumber_Getter(this, __e);
+                    __result = _ByWeekNumber = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ByWeekNumber != value)
+                {
+                    var __oldValue = _ByWeekNumber;
+                    var __newValue = value;
+                    if (OnByWeekNumber_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByWeekNumber_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ByWeekNumber", __oldValue, __newValue);
+                    _ByWeekNumber = __newValue;
+                    NotifyPropertyChanged("ByWeekNumber", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnByWeekNumber_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByWeekNumber_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ByWeekNumber");
+                }
+            }
+        }
+        private string _ByWeekNumber;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByWeekNumber_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByWeekNumber_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByWeekNumber_PostSetter;
+
+        /// <summary>
+        /// Specifies a comma separated list of days of the year. (1,2,365,366,-1,-2,-366)
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string ByYearDay
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ByYearDay;
+                if (OnByYearDay_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnByYearDay_Getter(this, __e);
+                    __result = _ByYearDay = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ByYearDay != value)
+                {
+                    var __oldValue = _ByYearDay;
+                    var __newValue = value;
+                    if (OnByYearDay_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByYearDay_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ByYearDay", __oldValue, __newValue);
+                    _ByYearDay = __newValue;
+                    NotifyPropertyChanged("ByYearDay", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnByYearDay_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnByYearDay_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("ByYearDay");
+                }
+            }
+        }
+        private string _ByYearDay;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByYearDay_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByYearDay_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, string> OnByYearDay_PostSetter;
+
+        /// <summary>
+        /// Specifies how often the recurrence will be repeated. The start date counts as the first one
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public int? Count
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Count;
+                if (OnCount_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<int?>(__result);
+                    OnCount_Getter(this, __e);
+                    __result = _Count = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Count != value)
+                {
+                    var __oldValue = _Count;
+                    var __newValue = value;
+                    if (OnCount_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<int?>(__oldValue, __newValue);
+                        OnCount_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Count", __oldValue, __newValue);
+                    _Count = __newValue;
+                    NotifyPropertyChanged("Count", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnCount_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
+                        OnCount_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Count");
+                }
+            }
+        }
+        private int? _Count;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, int?> OnCount_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, int?> OnCount_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, int?> OnCount_PostSetter;
 
         /// <summary>
         /// 
         /// </summary>
         // enumeration property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public Zetbox.App.Base.DayOfWeek? EveryDayOfWeek
+        public Zetbox.App.Base.Frequency? Frequency
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _EveryDayOfWeek;
-                if (OnEveryDayOfWeek_Getter != null)
+                var __result = _Frequency;
+                if (OnFrequency_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__result);
-                    OnEveryDayOfWeek_Getter(this, __e);
-                    __result = _EveryDayOfWeek = __e.Result;
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.Frequency?>(__result);
+                    OnFrequency_Getter(this, __e);
+                    __result = _Frequency = __e.Result;
                 }
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_EveryDayOfWeek != value)
+                if (_Frequency != value)
                 {
-                    var __oldValue = _EveryDayOfWeek;
+                    var __oldValue = _Frequency;
                     var __newValue = value;
-                    if (OnEveryDayOfWeek_PreSetter != null && IsAttached)
+                    if (OnFrequency_PreSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__oldValue, __newValue);
-                        OnEveryDayOfWeek_PreSetter(this, __e);
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Frequency?>(__oldValue, __newValue);
+                        OnFrequency_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("EveryDayOfWeek", __oldValue, __newValue);
-                    _EveryDayOfWeek = __newValue;
-                    NotifyPropertyChanged("EveryDayOfWeek", __oldValue, __newValue);
+                    NotifyPropertyChanging("Frequency", __oldValue, __newValue);
+                    _Frequency = __newValue;
+                    NotifyPropertyChanged("Frequency", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
-                    if (OnEveryDayOfWeek_PostSetter != null && IsAttached)
+                    if (OnFrequency_PostSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__oldValue, __newValue);
-                        OnEveryDayOfWeek_PostSetter(this, __e);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Frequency?>(__oldValue, __newValue);
+                        OnFrequency_PostSetter(this, __e);
                     }
                 }
                 else
                 {
-                    SetInitializedProperty("EveryDayOfWeek");
+                    SetInitializedProperty("Frequency");
                 }
             }
         }
-        private Zetbox.App.Base.DayOfWeek? _EveryDayOfWeek;
+        private Zetbox.App.Base.Frequency? _Frequency;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.DayOfWeek?> OnEveryDayOfWeek_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.DayOfWeek?> OnEveryDayOfWeek_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.DayOfWeek?> OnEveryDayOfWeek_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.Frequency?> OnFrequency_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.Frequency?> OnFrequency_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.Frequency?> OnFrequency_PostSetter;
 
         /// <summary>
-        /// 
+        /// Specifies how often the recurrence rule repeats, null is equivalent to 1
         /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public bool EveryMonth
+        public int? Interval
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _EveryMonth;
-                if (!_isEveryMonthSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("7681ae11-bc74-48af-ae6d-76fdcac54489"));
-                    if (__p != null) {
-                        _isEveryMonthSet = true;
-                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
-                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
-                        __result = this._EveryMonth = (bool)__tmp_value;
-                    } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'RecurrenceRule.EveryMonth'");
-                    }
-                }
-                if (OnEveryMonth_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<bool>(__result);
-                    OnEveryMonth_Getter(this, __e);
-                    __result = _EveryMonth = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                _isEveryMonthSet = true;
-                if (_EveryMonth != value)
-                {
-                    var __oldValue = _EveryMonth;
-                    var __newValue = value;
-                    if (OnEveryMonth_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnEveryMonth_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("EveryMonth", __oldValue, __newValue);
-                    _EveryMonth = __newValue;
-                    NotifyPropertyChanged("EveryMonth", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                    if (OnEveryMonth_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnEveryMonth_PostSetter(this, __e);
-                    }
-                }
-                else
-                {
-                    SetInitializedProperty("EveryMonth");
-                }
-            }
-        }
-        private bool _EveryMonth;
-        private bool _isEveryMonthSet = false;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryMonth_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryMonth_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryMonth_PostSetter;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public bool EveryQuater
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _EveryQuater;
-                if (!_isEveryQuaterSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("ed292ca2-3da3-4004-a8c2-06c746e3a49e"));
-                    if (__p != null) {
-                        _isEveryQuaterSet = true;
-                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
-                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
-                        __result = this._EveryQuater = (bool)__tmp_value;
-                    } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'RecurrenceRule.EveryQuater'");
-                    }
-                }
-                if (OnEveryQuater_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<bool>(__result);
-                    OnEveryQuater_Getter(this, __e);
-                    __result = _EveryQuater = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                _isEveryQuaterSet = true;
-                if (_EveryQuater != value)
-                {
-                    var __oldValue = _EveryQuater;
-                    var __newValue = value;
-                    if (OnEveryQuater_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnEveryQuater_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("EveryQuater", __oldValue, __newValue);
-                    _EveryQuater = __newValue;
-                    NotifyPropertyChanged("EveryQuater", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                    if (OnEveryQuater_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnEveryQuater_PostSetter(this, __e);
-                    }
-                }
-                else
-                {
-                    SetInitializedProperty("EveryQuater");
-                }
-            }
-        }
-        private bool _EveryQuater;
-        private bool _isEveryQuaterSet = false;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryQuater_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryQuater_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryQuater_PostSetter;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public bool EveryYear
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _EveryYear;
-                if (!_isEveryYearSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("4638ca9a-aa2b-4ef2-9450-9b5bb39f0de4"));
-                    if (__p != null) {
-                        _isEveryYearSet = true;
-                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
-                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
-                        __result = this._EveryYear = (bool)__tmp_value;
-                    } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'RecurrenceRule.EveryYear'");
-                    }
-                }
-                if (OnEveryYear_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<bool>(__result);
-                    OnEveryYear_Getter(this, __e);
-                    __result = _EveryYear = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                _isEveryYearSet = true;
-                if (_EveryYear != value)
-                {
-                    var __oldValue = _EveryYear;
-                    var __newValue = value;
-                    if (OnEveryYear_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnEveryYear_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("EveryYear", __oldValue, __newValue);
-                    _EveryYear = __newValue;
-                    NotifyPropertyChanged("EveryYear", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                    if (OnEveryYear_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnEveryYear_PostSetter(this, __e);
-                    }
-                }
-                else
-                {
-                    SetInitializedProperty("EveryYear");
-                }
-            }
-        }
-        private bool _EveryYear;
-        private bool _isEveryYearSet = false;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryYear_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryYear_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, bool> OnEveryYear_PostSetter;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public double? HoursOffset
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _HoursOffset;
-                if (OnHoursOffset_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<double?>(__result);
-                    OnHoursOffset_Getter(this, __e);
-                    __result = _HoursOffset = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_HoursOffset != value)
-                {
-                    var __oldValue = _HoursOffset;
-                    var __newValue = value;
-                    if (OnHoursOffset_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnHoursOffset_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("HoursOffset", __oldValue, __newValue);
-                    _HoursOffset = __newValue;
-                    NotifyPropertyChanged("HoursOffset", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                    if (OnHoursOffset_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnHoursOffset_PostSetter(this, __e);
-                    }
-                }
-                else
-                {
-                    SetInitializedProperty("HoursOffset");
-                }
-            }
-        }
-        private double? _HoursOffset;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, double?> OnHoursOffset_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, double?> OnHoursOffset_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, double?> OnHoursOffset_PostSetter;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public double? MinutesOffset
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _MinutesOffset;
-                if (OnMinutesOffset_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<double?>(__result);
-                    OnMinutesOffset_Getter(this, __e);
-                    __result = _MinutesOffset = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_MinutesOffset != value)
-                {
-                    var __oldValue = _MinutesOffset;
-                    var __newValue = value;
-                    if (OnMinutesOffset_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnMinutesOffset_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("MinutesOffset", __oldValue, __newValue);
-                    _MinutesOffset = __newValue;
-                    NotifyPropertyChanged("MinutesOffset", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                    if (OnMinutesOffset_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnMinutesOffset_PostSetter(this, __e);
-                    }
-                }
-                else
-                {
-                    SetInitializedProperty("MinutesOffset");
-                }
-            }
-        }
-        private double? _MinutesOffset;
-        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, double?> OnMinutesOffset_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, double?> OnMinutesOffset_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, double?> OnMinutesOffset_PostSetter;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-        public int? MonthsOffset
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _MonthsOffset;
-                if (OnMonthsOffset_Getter != null)
+                var __result = _Interval;
+                if (OnInterval_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<int?>(__result);
-                    OnMonthsOffset_Getter(this, __e);
-                    __result = _MonthsOffset = __e.Result;
+                    OnInterval_Getter(this, __e);
+                    __result = _Interval = __e.Result;
                 }
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_MonthsOffset != value)
+                if (_Interval != value)
                 {
-                    var __oldValue = _MonthsOffset;
+                    var __oldValue = _Interval;
                     var __newValue = value;
-                    if (OnMonthsOffset_PreSetter != null && IsAttached)
+                    if (OnInterval_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<int?>(__oldValue, __newValue);
-                        OnMonthsOffset_PreSetter(this, __e);
+                        OnInterval_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("MonthsOffset", __oldValue, __newValue);
-                    _MonthsOffset = __newValue;
-                    NotifyPropertyChanged("MonthsOffset", __oldValue, __newValue);
+                    NotifyPropertyChanging("Interval", __oldValue, __newValue);
+                    _Interval = __newValue;
+                    NotifyPropertyChanged("Interval", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
 
-                    if (OnMonthsOffset_PostSetter != null && IsAttached)
+                    if (OnInterval_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
-                        OnMonthsOffset_PostSetter(this, __e);
+                        OnInterval_PostSetter(this, __e);
                     }
                 }
                 else
                 {
-                    SetInitializedProperty("MonthsOffset");
+                    SetInitializedProperty("Interval");
                 }
             }
         }
-        private int? _MonthsOffset;
+        private int? _Interval;
         // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, int?> OnMonthsOffset_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, int?> OnMonthsOffset_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, int?> OnMonthsOffset_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, int?> OnInterval_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, int?> OnInterval_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, int?> OnInterval_PostSetter;
+
+        /// <summary>
+        /// Recurrents ends at this date, including this date
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public DateTime? Until
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Until;
+                if (OnUntil_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    OnUntil_Getter(this, __e);
+                    __result = _Until = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Until != value)
+                {
+                    var __oldValue = _Until;
+                    var __newValue = value;
+                    if (__newValue.HasValue && __newValue.Value.Kind == DateTimeKind.Unspecified)
+                        __newValue = DateTime.SpecifyKind(__newValue.Value, DateTimeKind.Local);
+                    if (OnUntil_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnUntil_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Until", __oldValue, __newValue);
+                    _Until = __newValue;
+                    NotifyPropertyChanged("Until", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnUntil_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnUntil_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Until");
+                }
+            }
+        }
+        private DateTime? _Until;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, DateTime?> OnUntil_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, DateTime?> OnUntil_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, DateTime?> OnUntil_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // enumeration property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public Zetbox.App.Base.DayOfWeek? WeekStart
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _WeekStart;
+                if (OnWeekStart_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__result);
+                    OnWeekStart_Getter(this, __e);
+                    __result = _WeekStart = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_WeekStart != value)
+                {
+                    var __oldValue = _WeekStart;
+                    var __newValue = value;
+                    if (OnWeekStart_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__oldValue, __newValue);
+                        OnWeekStart_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("WeekStart", __oldValue, __newValue);
+                    _WeekStart = __newValue;
+                    NotifyPropertyChanged("WeekStart", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnWeekStart_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Base.DayOfWeek?>(__oldValue, __newValue);
+                        OnWeekStart_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("WeekStart");
+                }
+            }
+        }
+        private Zetbox.App.Base.DayOfWeek? _WeekStart;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.DayOfWeek?> OnWeekStart_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.DayOfWeek?> OnWeekStart_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.RecurrenceRule, Zetbox.App.Base.DayOfWeek?> OnWeekStart_PostSetter;
 
         /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetCurrent_RecurrenceRule")]
-        public virtual DateTime GetCurrent()
+        public virtual DateTime GetCurrent(DateTime start)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetCurrent_RecurrenceRule != null)
             {
-                OnGetCurrent_RecurrenceRule(this, e);
+                OnGetCurrent_RecurrenceRule(this, e, start);
             }
             else
             {
@@ -617,7 +847,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetCurrent_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret);
+        public delegate void GetCurrent_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start);
         public static event GetCurrent_Handler<RecurrenceRule> OnGetCurrent_RecurrenceRule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -668,12 +898,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetCurrent1_RecurrenceRule")]
-        public virtual DateTime GetCurrent(DateTime dt)
+        public virtual DateTime GetCurrent(DateTime start, DateTime dt)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetCurrent1_RecurrenceRule != null)
             {
-                OnGetCurrent1_RecurrenceRule(this, e, dt);
+                OnGetCurrent1_RecurrenceRule(this, e, start, dt);
             }
             else
             {
@@ -681,7 +911,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetCurrent1_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime dt);
+        public delegate void GetCurrent1_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start, DateTime dt);
         public static event GetCurrent1_Handler<RecurrenceRule> OnGetCurrent1_RecurrenceRule;
 
         /// <summary>
@@ -689,12 +919,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetNext_RecurrenceRule")]
-        public virtual DateTime GetNext()
+        public virtual DateTime GetNext(DateTime start)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetNext_RecurrenceRule != null)
             {
-                OnGetNext_RecurrenceRule(this, e);
+                OnGetNext_RecurrenceRule(this, e, start);
             }
             else
             {
@@ -702,7 +932,7 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetNext_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret);
+        public delegate void GetNext_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start);
         public static event GetNext_Handler<RecurrenceRule> OnGetNext_RecurrenceRule;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
@@ -753,12 +983,12 @@ namespace Zetbox.App.Base
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetNext1_RecurrenceRule")]
-        public virtual DateTime GetNext(DateTime dt)
+        public virtual DateTime GetNext(DateTime start, DateTime dt)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnGetNext1_RecurrenceRule != null)
             {
-                OnGetNext1_RecurrenceRule(this, e, dt);
+                OnGetNext1_RecurrenceRule(this, e, start, dt);
             }
             else
             {
@@ -766,8 +996,72 @@ namespace Zetbox.App.Base
             }
             return e.Result;
         }
-        public delegate void GetNext1_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime dt);
+        public delegate void GetNext1_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime start, DateTime dt);
         public static event GetNext1_Handler<RecurrenceRule> OnGetNext1_RecurrenceRule;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetWithinInterval_RecurrenceRule")]
+        public virtual IEnumerable<DateTime> GetWithinInterval(DateTime start, DateTime from, DateTime until)
+        {
+            var e = new MethodReturnEventArgs<IEnumerable<DateTime>>();
+            if (OnGetWithinInterval_RecurrenceRule != null)
+            {
+                OnGetWithinInterval_RecurrenceRule(this, e, start, from, until);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on RecurrenceRule.GetWithinInterval");
+            }
+            return e.Result;
+        }
+        public delegate void GetWithinInterval_Handler<T>(T obj, MethodReturnEventArgs<IEnumerable<DateTime>> ret, DateTime start, DateTime from, DateTime until);
+        public static event GetWithinInterval_Handler<RecurrenceRule> OnGetWithinInterval_RecurrenceRule;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<RecurrenceRule> OnGetWithinInterval_RecurrenceRule_CanExec;
+
+        [EventBasedMethod("OnGetWithinInterval_RecurrenceRule_CanExec")]
+        public virtual bool GetWithinIntervalCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetWithinInterval_RecurrenceRule_CanExec != null)
+				{
+					OnGetWithinInterval_RecurrenceRule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<RecurrenceRule> OnGetWithinInterval_RecurrenceRule_CanExecReason;
+
+        [EventBasedMethod("OnGetWithinInterval_RecurrenceRule_CanExecReason")]
+        public virtual string GetWithinIntervalCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetWithinInterval_RecurrenceRule_CanExecReason != null)
+				{
+					OnGetWithinInterval_RecurrenceRule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -781,15 +1075,20 @@ namespace Zetbox.App.Base
             var otherImpl = (RecurrenceRuleMemoryImpl)obj;
             var me = (RecurrenceRule)this;
 
-            me.DaysOffset = other.DaysOffset;
-            me.EveryDay = other.EveryDay;
-            me.EveryDayOfWeek = other.EveryDayOfWeek;
-            me.EveryMonth = other.EveryMonth;
-            me.EveryQuater = other.EveryQuater;
-            me.EveryYear = other.EveryYear;
-            me.HoursOffset = other.HoursOffset;
-            me.MinutesOffset = other.MinutesOffset;
-            me.MonthsOffset = other.MonthsOffset;
+            me.ByDay = other.ByDay;
+            me.ByHour = other.ByHour;
+            me.ByMinute = other.ByMinute;
+            me.ByMonth = other.ByMonth;
+            me.ByMonthDay = other.ByMonthDay;
+            me.BySecond = other.BySecond;
+            me.BySetPos = other.BySetPos;
+            me.ByWeekNumber = other.ByWeekNumber;
+            me.ByYearDay = other.ByYearDay;
+            me.Count = other.Count;
+            me.Frequency = other.Frequency;
+            me.Interval = other.Interval;
+            me.Until = other.Until;
+            me.WeekStart = other.WeekStart;
         }
         #region Zetbox.Generator.Templates.CompoundObjects.DefaultMethods
 
@@ -833,27 +1132,20 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._DaysOffset);
-            binStream.Write(this._isEveryDaySet);
-            if (this._isEveryDaySet) {
-                binStream.Write(this._EveryDay);
-            }
-            binStream.Write((int?)this._EveryDayOfWeek);
-            binStream.Write(this._isEveryMonthSet);
-            if (this._isEveryMonthSet) {
-                binStream.Write(this._EveryMonth);
-            }
-            binStream.Write(this._isEveryQuaterSet);
-            if (this._isEveryQuaterSet) {
-                binStream.Write(this._EveryQuater);
-            }
-            binStream.Write(this._isEveryYearSet);
-            if (this._isEveryYearSet) {
-                binStream.Write(this._EveryYear);
-            }
-            binStream.Write(this._HoursOffset);
-            binStream.Write(this._MinutesOffset);
-            binStream.Write(this._MonthsOffset);
+            binStream.Write(this._ByDay);
+            binStream.Write(this._ByHour);
+            binStream.Write(this._ByMinute);
+            binStream.Write(this._ByMonth);
+            binStream.Write(this._ByMonthDay);
+            binStream.Write(this._BySecond);
+            binStream.Write(this._BySetPos);
+            binStream.Write(this._ByWeekNumber);
+            binStream.Write(this._ByYearDay);
+            binStream.Write(this._Count);
+            binStream.Write((int?)this._Frequency);
+            binStream.Write(this._Interval);
+            binStream.Write(this._Until);
+            binStream.Write((int?)this._WeekStart);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -862,27 +1154,20 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._DaysOffset = binStream.ReadNullableDouble();
-            this._isEveryDaySet = binStream.ReadBoolean();
-            if (this._isEveryDaySet) {
-                this._EveryDay = binStream.ReadBoolean();
-            }
-            this._EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)binStream.ReadNullableInt32();
-            this._isEveryMonthSet = binStream.ReadBoolean();
-            if (this._isEveryMonthSet) {
-                this._EveryMonth = binStream.ReadBoolean();
-            }
-            this._isEveryQuaterSet = binStream.ReadBoolean();
-            if (this._isEveryQuaterSet) {
-                this._EveryQuater = binStream.ReadBoolean();
-            }
-            this._isEveryYearSet = binStream.ReadBoolean();
-            if (this._isEveryYearSet) {
-                this._EveryYear = binStream.ReadBoolean();
-            }
-            this._HoursOffset = binStream.ReadNullableDouble();
-            this._MinutesOffset = binStream.ReadNullableDouble();
-            this._MonthsOffset = binStream.ReadNullableInt32();
+            this._ByDay = binStream.ReadString();
+            this._ByHour = binStream.ReadString();
+            this._ByMinute = binStream.ReadString();
+            this._ByMonth = binStream.ReadString();
+            this._ByMonthDay = binStream.ReadString();
+            this._BySecond = binStream.ReadString();
+            this._BySetPos = binStream.ReadString();
+            this._ByWeekNumber = binStream.ReadString();
+            this._ByYearDay = binStream.ReadString();
+            this._Count = binStream.ReadNullableInt32();
+            this._Frequency = (Zetbox.App.Base.Frequency?)binStream.ReadNullableInt32();
+            this._Interval = binStream.ReadNullableInt32();
+            this._Until = binStream.ReadNullableDateTime();
+            this._WeekStart = (Zetbox.App.Base.DayOfWeek?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -896,19 +1181,20 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._DaysOffset, xml, "DaysOffset", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isEveryDaySet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryDay, xml, "EveryDay", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._EveryDayOfWeek, xml, "EveryDayOfWeek", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isEveryMonthSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryMonth, xml, "EveryMonth", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isEveryQuaterSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryQuater, xml, "EveryQuater", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isEveryYearSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._EveryYear, xml, "EveryYear", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._HoursOffset, xml, "HoursOffset", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._MinutesOffset, xml, "MinutesOffset", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._MonthsOffset, xml, "MonthsOffset", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ByDay, xml, "ByDay", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ByHour, xml, "ByHour", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ByMinute, xml, "ByMinute", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ByMonth, xml, "ByMonth", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ByMonthDay, xml, "ByMonthDay", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._BySecond, xml, "BySecond", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._BySetPos, xml, "BySetPos", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ByWeekNumber, xml, "ByWeekNumber", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ByYearDay, xml, "ByYearDay", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Count, xml, "Count", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._Frequency, xml, "Frequency", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Interval, xml, "Interval", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Until, xml, "Until", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._WeekStart, xml, "WeekStart", "Zetbox.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -917,41 +1203,48 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.Base|DaysOffset":
-                this._DaysOffset = XmlStreamer.ReadNullableDouble(xml);
+            case "Zetbox.App.Base|ByDay":
+                this._ByDay = XmlStreamer.ReadString(xml);
                 break;
-            case "Zetbox.App.Base|EveryDay":
-                // Import must have default value set
-                this._EveryDay = XmlStreamer.ReadBoolean(xml);
-                this._isEveryDaySet = true;
+            case "Zetbox.App.Base|ByHour":
+                this._ByHour = XmlStreamer.ReadString(xml);
                 break;
-            case "Zetbox.App.Base|EveryDayOfWeek":
-                this._EveryDayOfWeek = (Zetbox.App.Base.DayOfWeek?)XmlStreamer.ReadNullableInt32(xml);
+            case "Zetbox.App.Base|ByMinute":
+                this._ByMinute = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|ByMonth":
+                this._ByMonth = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|ByMonthDay":
+                this._ByMonthDay = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|BySecond":
+                this._BySecond = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|BySetPos":
+                this._BySetPos = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|ByWeekNumber":
+                this._ByWeekNumber = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|ByYearDay":
+                this._ByYearDay = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|Count":
+                this._Count = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Zetbox.App.Base|Frequency":
+                this._Frequency = (Zetbox.App.Base.Frequency?)XmlStreamer.ReadNullableInt32(xml);
                break;
-            case "Zetbox.App.Base|EveryMonth":
-                // Import must have default value set
-                this._EveryMonth = XmlStreamer.ReadBoolean(xml);
-                this._isEveryMonthSet = true;
+            case "Zetbox.App.Base|Interval":
+                this._Interval = XmlStreamer.ReadNullableInt32(xml);
                 break;
-            case "Zetbox.App.Base|EveryQuater":
-                // Import must have default value set
-                this._EveryQuater = XmlStreamer.ReadBoolean(xml);
-                this._isEveryQuaterSet = true;
+            case "Zetbox.App.Base|Until":
+                this._Until = XmlStreamer.ReadNullableDateTime(xml);
                 break;
-            case "Zetbox.App.Base|EveryYear":
-                // Import must have default value set
-                this._EveryYear = XmlStreamer.ReadBoolean(xml);
-                this._isEveryYearSet = true;
-                break;
-            case "Zetbox.App.Base|HoursOffset":
-                this._HoursOffset = XmlStreamer.ReadNullableDouble(xml);
-                break;
-            case "Zetbox.App.Base|MinutesOffset":
-                this._MinutesOffset = XmlStreamer.ReadNullableDouble(xml);
-                break;
-            case "Zetbox.App.Base|MonthsOffset":
-                this._MonthsOffset = XmlStreamer.ReadNullableInt32(xml);
-                break;
+            case "Zetbox.App.Base|WeekStart":
+                this._WeekStart = (Zetbox.App.Base.DayOfWeek?)XmlStreamer.ReadNullableInt32(xml);
+               break;
             }
         }
 

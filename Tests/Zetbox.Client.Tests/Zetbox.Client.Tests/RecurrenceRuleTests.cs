@@ -15,6 +15,7 @@ namespace Zetbox.Client.Tests
         private IZetboxContext ctx;
         private RecurrenceRule rule;
         private DateTime now;
+        private DateTime start;
 
         public override void SetUp()
         {
@@ -22,12 +23,13 @@ namespace Zetbox.Client.Tests
             ctx = GetContext();
             rule = ctx.CreateCompoundObject<RecurrenceRule>();
             now = new DateTime(2012, 9, 26);
+            start = new DateTime(2012, 1, 1);
         }
 
         [Test]
         public void when_empty_should_return_now()
         {
-            var result = rule.GetCurrent(now);
+            var result = rule.GetCurrent(start, now);
 
             Assert.That(result, Is.EqualTo(now));
         }
@@ -35,9 +37,9 @@ namespace Zetbox.Client.Tests
         [Test]
         public void when_yearly_current()
         {
-            rule.EveryYear = true;
+            rule.Frequency = Frequency.Yearly;
 
-            var result = rule.GetCurrent(now);
+            var result = rule.GetCurrent(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year));
             Assert.That(result.Month, Is.EqualTo(1));
@@ -48,9 +50,9 @@ namespace Zetbox.Client.Tests
         [Test]
         public void when_yearly_next()
         {
-            rule.EveryYear = true;
+            rule.Frequency = Frequency.Yearly;
 
-            var result = rule.GetNext(now);
+            var result = rule.GetNext(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year + 1));
             Assert.That(result.Month, Is.EqualTo(1));
@@ -61,9 +63,10 @@ namespace Zetbox.Client.Tests
         [Test]
         public void when_quaterly_current()
         {
-            rule.EveryQuater = true;
+            rule.Frequency = Frequency.Monthly;
+            rule.Interval = 3;
 
-            var result = rule.GetCurrent(now);
+            var result = rule.GetCurrent(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year));
             Assert.That(result.Month, Is.EqualTo(7));
@@ -74,9 +77,10 @@ namespace Zetbox.Client.Tests
         [Test]
         public void when_quaterly_next()
         {
-            rule.EveryQuater = true;
+            rule.Frequency = Frequency.Monthly;
+            rule.Interval = 3;
 
-            var result = rule.GetNext(now);
+            var result = rule.GetNext(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year));
             Assert.That(result.Month, Is.EqualTo(10));
@@ -87,9 +91,9 @@ namespace Zetbox.Client.Tests
         [Test]
         public void when_monthly_current()
         {
-            rule.EveryMonth = true;
+            rule.Frequency = Frequency.Monthly;
 
-            var result = rule.GetCurrent(now);
+            var result = rule.GetCurrent(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year));
             Assert.That(result.Month, Is.EqualTo(9));
@@ -100,9 +104,9 @@ namespace Zetbox.Client.Tests
         [Test]
         public void when_monthly_next()
         {
-            rule.EveryMonth = true;
+            rule.Frequency = Frequency.Monthly;
 
-            var result = rule.GetNext(now);
+            var result = rule.GetNext(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year));
             Assert.That(result.Month, Is.EqualTo(10));
@@ -113,9 +117,36 @@ namespace Zetbox.Client.Tests
         [Test]
         public void when_weekly_current()
         {
-            rule.EveryDayOfWeek = App.Base.DayOfWeek.Monday;
+            rule.Frequency = Frequency.Weekly;
 
-            var result = rule.GetCurrent(now);
+            var result = rule.GetCurrent(start, now);
+
+            Assert.That(result.Year, Is.EqualTo(now.Year));
+            Assert.That(result.Month, Is.EqualTo(9));
+            Assert.That(result.Day, Is.EqualTo(23));
+            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
+        }
+
+        [Test]
+        public void when_weekly_next()
+        {
+            rule.Frequency = Frequency.Weekly;
+
+            var result = rule.GetNext(start, now);
+
+            Assert.That(result.Year, Is.EqualTo(now.Year));
+            Assert.That(result.Month, Is.EqualTo(9));
+            Assert.That(result.Day, Is.EqualTo(30));
+            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
+        }
+
+        [Test]
+        public void when_mondays_current()
+        {
+            rule.Frequency = Frequency.Weekly;
+            rule.ByDay = "MO";
+
+            var result = rule.GetCurrent(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year));
             Assert.That(result.Month, Is.EqualTo(9));
@@ -124,11 +155,12 @@ namespace Zetbox.Client.Tests
         }
 
         [Test]
-        public void when_weekly_next()
+        public void when_mondays_next()
         {
-            rule.EveryDayOfWeek = App.Base.DayOfWeek.Monday;
+            rule.Frequency = Frequency.Weekly;
+            rule.ByDay = "MO";
 
-            var result = rule.GetNext(now);
+            var result = rule.GetNext(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year));
             Assert.That(result.Month, Is.EqualTo(10));
@@ -136,12 +168,13 @@ namespace Zetbox.Client.Tests
             Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
         }
 
+
         [Test]
         public void when_daily_current()
         {
-            rule.EveryDay = true;
+            rule.Frequency = Frequency.Daily;
 
-            var result = rule.GetCurrent(now);
+            var result = rule.GetCurrent(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year));
             Assert.That(result.Month, Is.EqualTo(9));
@@ -152,146 +185,14 @@ namespace Zetbox.Client.Tests
         [Test]
         public void when_daily_next()
         {
-            rule.EveryDay = true;
+            rule.Frequency = Frequency.Daily;
 
-            var result = rule.GetNext(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(9));
-            Assert.That(result.Day, Is.EqualTo(27));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
-        }
-
-        [Test]
-        public void when_months_offset_current()
-        {
-            rule.MonthsOffset = 1;
-
-            var result = rule.GetCurrent(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(10));
-            Assert.That(result.Day, Is.EqualTo(26));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
-        }
-
-        [Test]
-        public void when_months_offset_next()
-        {
-            rule.MonthsOffset = 1;
-
-            var result = rule.GetNext(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(10));
-            Assert.That(result.Day, Is.EqualTo(26));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
-        }
-
-        [Test]
-        public void when_days_offset_current()
-        {
-            rule.DaysOffset = 1;
-
-            var result = rule.GetCurrent(now);
+            var result = rule.GetNext(start, now);
 
             Assert.That(result.Year, Is.EqualTo(now.Year));
             Assert.That(result.Month, Is.EqualTo(9));
             Assert.That(result.Day, Is.EqualTo(27));
             Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
-        }
-
-        [Test]
-        public void when_days_offset_next()
-        {
-            rule.DaysOffset = 1;
-
-            var result = rule.GetNext(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(9));
-            Assert.That(result.Day, Is.EqualTo(27));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.Zero));
-        }
-
-        [Test]
-        public void when_hours_offset_current()
-        {
-            rule.HoursOffset = 1;
-
-            var result = rule.GetCurrent(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(9));
-            Assert.That(result.Day, Is.EqualTo(26));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.FromHours(1)));
-        }
-
-        [Test]
-        public void when_hours_offset_next()
-        {
-            rule.HoursOffset = 1;
-
-            var result = rule.GetNext(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(9));
-            Assert.That(result.Day, Is.EqualTo(26));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.FromHours(1)));
-        }
-
-        [Test]
-        public void when_minutes_offset_current()
-        {
-            rule.MinutesOffset = 1;
-
-            var result = rule.GetCurrent(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(9));
-            Assert.That(result.Day, Is.EqualTo(26));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.FromMinutes(1)));
-        }
-
-        [Test]
-        public void when_minutes_offset_next()
-        {
-            rule.MinutesOffset = 1;
-
-            var result = rule.GetNext(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(9));
-            Assert.That(result.Day, Is.EqualTo(26));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.FromMinutes(1)));
-        }
-
-        [Test]
-        public void when_monthly_and_minutes_offset_current()
-        {
-            rule.EveryMonth = true;
-            rule.MinutesOffset = 1;
-
-            var result = rule.GetCurrent(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(9));
-            Assert.That(result.Day, Is.EqualTo(1));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.FromMinutes(1)));
-        }
-
-        [Test]
-        public void when_monthly_and_minutes_offset_next()
-        {
-            rule.EveryMonth = true;
-            rule.MinutesOffset = 1;
-
-            var result = rule.GetNext(now);
-
-            Assert.That(result.Year, Is.EqualTo(now.Year));
-            Assert.That(result.Month, Is.EqualTo(10));
-            Assert.That(result.Day, Is.EqualTo(1));
-            Assert.That(result.TimeOfDay, Is.EqualTo(TimeSpan.FromMinutes(1)));
         }
     }
 }

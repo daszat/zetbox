@@ -121,7 +121,7 @@
     <value>Dieser Bereich ist schreibgeschützt.</value>
   </data>
   <data name="DataObjectCommand_NotAllowed" xml:space="preserve">
-    <value>Datensätze löschen ist hier nicht erlaubt.</value>
+    <value>Nicht erlaubt.</value>
   </data>
   <data name="DataObjectCommand_NothingSelected" xml:space="preserve">
     <value>Keine Auswahl.</value>

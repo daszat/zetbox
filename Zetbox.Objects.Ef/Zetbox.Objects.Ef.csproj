@@ -137,6 +137,7 @@
     <Compile Include="BoolParameter.Ef.Designer.cs" />
     <Compile Include="BoolProperty.Ef.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Ef.Designer.cs" />
+    <Compile Include="Calendar.Ef.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="CLRObjectParameter.Ef.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.Ef.Designer.cs" />
@@ -170,6 +171,8 @@
     <Compile Include="EnumerationEntry.Ef.Designer.cs" />
     <Compile Include="EnumerationProperty.Ef.Designer.cs" />
     <Compile Include="EnumParameter.Ef.Designer.cs" />
+    <Compile Include="Event.Ef.Designer.cs" />
+    <Compile Include="EventTestObject.Ef.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Ef.Designer.cs" />
     <Compile Include="File.Ef.Designer.cs" />
     <Compile Include="FileImportConfiguration.Ef.Designer.cs" />
@@ -258,6 +261,7 @@
     <Compile Include="StringParameter.Ef.Designer.cs" />
     <Compile Include="StringProperty.Ef.Designer.cs" />
     <Compile Include="StringRangeConstraint.Ef.Designer.cs" />
+    <Compile Include="SyncProvider.Ef.Designer.cs" />
     <Compile Include="Task.Ef.Designer.cs" />
     <Compile Include="Template.Ef.Designer.cs" />
     <Compile Include="TestCustomObject.Ef.Designer.cs" />
@@ -275,11 +279,13 @@
     <Compile Include="Visual.Ef.Designer.cs" />
     <Compile Include="WorkSchedule.Ef.Designer.cs" />
     <Compile Include="WorkScheduleRule.Ef.Designer.cs" />
+    <Compile Include="WorkScheduleSyncProvider.Ef.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="YearlyWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="CollectionEntries.Ef.Designer.cs" />
     <Compile Include="AnyReference.Ef.Designer.cs" />
     <Compile Include="AuditEntry.Ef.Designer.cs" />
+    <Compile Include="DateTimeOffset.Ef.Designer.cs" />
     <Compile Include="DateTimeRange.Ef.Designer.cs" />
     <Compile Include="RecurrenceRule.Ef.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Ef.Designer.cs" />

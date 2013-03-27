@@ -108,6 +108,9 @@ namespace Zetbox.Client.Presentables
         protected IZetboxContext DataContext { get; private set; }
 
         private Identity _CurrentIdentity = null;
+        /// <summary>
+        /// Returns the current identity using the IIdentityResolver. Thus, the Identity object does not belong to the current context!
+        /// </summary>
         public Identity CurrentIdentity
         {
             get

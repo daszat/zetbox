@@ -26,7 +26,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
     using Zetbox.Client.Presentables.Calendar;
 
     [ViewModelDescriptor]
-    public class TaskViewModel : DataObjectViewModel, IAppointmentViewModel
+    public class TaskViewModel : DataObjectViewModel
     {
         public new delegate TaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Task obj);
 
@@ -43,70 +43,9 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
             }
         }
 
-        protected override void OnObjectPropertyChanged(string propName)
-        {
-            base.OnObjectPropertyChanged(propName);
-            switch (propName)
-            {
-                case "Name":
-                    OnPropertyChanged("Name");
-                    OnPropertyChanged("Subject");
-                    break;
-                case "DatumVon":
-                    OnPropertyChanged("From");
-                    break;
-                case "DatumBis":
-                    OnPropertyChanged("Until");
-                    break;
-            }
-        }
-
         public override string Name
         {
             get { return Task.Name; }
         }
-
-        string IAppointmentViewModel.Subject
-        {
-            get { return Name; }
-        }
-
-        string IAppointmentViewModel.SubjectAsync
-        {
-            get { return Name; }
-        }
-
-        DateTime IAppointmentViewModel.From
-        {
-            get { return Task.DatumVon; }
-        }
-
-        DateTime IAppointmentViewModel.Until
-        {
-            get { return Task.DatumBis ?? Task.DatumVon.AddDays(1); }
-        }
-
-        string IAppointmentViewModel.Location
-        {
-            get { return string.Empty; }
-        }
-
-        string IAppointmentViewModel.Body
-        {
-            get { return string.Empty; }
-        }
-
-        private string _color;
-        string IAppointmentViewModel.Color
-        {
-            get { return !string.IsNullOrEmpty(_color) ? _color : WeekCalendarViewModel.DefaultColor; }
-            set { _color = value; OnPropertyChanged("Color"); }
-        }
-
-        ControlKind IAppointmentViewModel.RequestedCalendarKind
-        {
-            get { return null; } // default
-        }
-
     }
 }

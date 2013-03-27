@@ -569,7 +569,7 @@ namespace Zetbox.App.GUI
     /*
     Relation: FK_Application_has_Module
     A: ZeroOrMore Application as Application
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     */
         // object reference property

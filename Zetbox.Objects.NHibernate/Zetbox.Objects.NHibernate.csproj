@@ -149,6 +149,7 @@
     <Compile Include="BoolParameter.NHibernate.Designer.cs" />
     <Compile Include="BoolProperty.NHibernate.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.NHibernate.Designer.cs" />
+    <Compile Include="Calendar.NHibernate.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.NHibernate.Designer.cs" />
     <Compile Include="CLRObjectParameter.NHibernate.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.NHibernate.Designer.cs" />
@@ -182,6 +183,8 @@
     <Compile Include="EnumerationEntry.NHibernate.Designer.cs" />
     <Compile Include="EnumerationProperty.NHibernate.Designer.cs" />
     <Compile Include="EnumParameter.NHibernate.Designer.cs" />
+    <Compile Include="Event.NHibernate.Designer.cs" />
+    <Compile Include="EventTestObject.NHibernate.Designer.cs" />
     <Compile Include="ExceptionLogEntry.NHibernate.Designer.cs" />
     <Compile Include="File.NHibernate.Designer.cs" />
     <Compile Include="FileImportConfiguration.NHibernate.Designer.cs" />
@@ -270,6 +273,7 @@
     <Compile Include="StringParameter.NHibernate.Designer.cs" />
     <Compile Include="StringProperty.NHibernate.Designer.cs" />
     <Compile Include="StringRangeConstraint.NHibernate.Designer.cs" />
+    <Compile Include="SyncProvider.NHibernate.Designer.cs" />
     <Compile Include="Task.NHibernate.Designer.cs" />
     <Compile Include="Template.NHibernate.Designer.cs" />
     <Compile Include="TestCustomObject.NHibernate.Designer.cs" />
@@ -287,11 +291,13 @@
     <Compile Include="Visual.NHibernate.Designer.cs" />
     <Compile Include="WorkSchedule.NHibernate.Designer.cs" />
     <Compile Include="WorkScheduleRule.NHibernate.Designer.cs" />
+    <Compile Include="WorkScheduleSyncProvider.NHibernate.Designer.cs" />
     <Compile Include="YearFilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="YearlyWorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="CollectionEntries.NHibernate.Designer.cs" />
     <Compile Include="AnyReference.NHibernate.Designer.cs" />
     <Compile Include="AuditEntry.NHibernate.Designer.cs" />
+    <Compile Include="DateTimeOffset.NHibernate.Designer.cs" />
     <Compile Include="DateTimeRange.NHibernate.Designer.cs" />
     <Compile Include="RecurrenceRule.NHibernate.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.NHibernate.Designer.cs" />

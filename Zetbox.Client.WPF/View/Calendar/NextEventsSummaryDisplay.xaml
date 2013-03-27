@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.Calendar.NextEventsSummaryDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <ctrls:CommandButton DockPanel.Dock="Right"
+                                 CommandViewModel="{Binding RefreshCommand}"
+                                 Style="{StaticResource ImageButton}" />
+            <TextBlock Text="{Binding NextEventsLabel}" />
+        </DockPanel>
+        <ctrls:ZetboxListView ItemsSource="{Binding NextEventsAsync, Mode=OneWay, ValidatesOnDataErrors=true}">
+            <ctrls:ZetboxListView.View>
+                <GridView>
+                    <GridViewColumn Header="{Binding DateLabel}"
+                                    DisplayMemberBinding="{Binding DateText}" />
+                    <GridViewColumn Header="{Binding FromLabel}"
+                                    DisplayMemberBinding="{Binding FromText}" />
+                    <GridViewColumn Header="{Binding UntilLabel}"
+                                    DisplayMemberBinding="{Binding UntilText}" />
+                    <GridViewColumn Header="{Binding SummaryLabel}"
+                                    Width="300"
+                                    DisplayMemberBinding="{Binding Summary}" />
+                    <GridViewColumn Header="{Binding LocationLabel}"
+                                    Width="200"
+                                    DisplayMemberBinding="{Binding Location}" />
+                </GridView>
+            </ctrls:ZetboxListView.View>
+        </ctrls:ZetboxListView>
+    </DockPanel>
+</UserControl>

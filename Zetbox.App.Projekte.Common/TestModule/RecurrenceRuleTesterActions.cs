@@ -36,11 +36,11 @@ namespace Zetbox.App.Test
         {
             if (dt.HasValue)
             {
-                e.Result = obj.Rule.GetCurrent(dt.Value);
+                e.Result = obj.Rule.GetCurrent(DateTime.Today, dt.Value);
             }
             else
             {
-                e.Result = obj.Rule.GetCurrent();
+                e.Result = obj.Rule.GetCurrent(DateTime.Today);
             }
         }
 
@@ -49,11 +49,11 @@ namespace Zetbox.App.Test
         {
             if (dt.HasValue)
             {
-                e.Result = obj.Rule.GetNext(dt.Value);
+                e.Result = obj.Rule.GetNext(DateTime.Today, dt.Value);
             }
             else
             {
-                e.Result = obj.Rule.GetNext();
+                e.Result = obj.Rule.GetNext(DateTime.Today);
             }
         }
     }

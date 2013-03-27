@@ -134,6 +134,7 @@
     <Compile Include="BoolParameter.Memory.Designer.cs" />
     <Compile Include="BoolProperty.Memory.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Memory.Designer.cs" />
+    <Compile Include="Calendar.Memory.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="CLRObjectParameter.Memory.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.Memory.Designer.cs" />
@@ -167,6 +168,8 @@
     <Compile Include="EnumerationEntry.Memory.Designer.cs" />
     <Compile Include="EnumerationProperty.Memory.Designer.cs" />
     <Compile Include="EnumParameter.Memory.Designer.cs" />
+    <Compile Include="Event.Memory.Designer.cs" />
+    <Compile Include="EventTestObject.Memory.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Memory.Designer.cs" />
     <Compile Include="File.Memory.Designer.cs" />
     <Compile Include="FileImportConfiguration.Memory.Designer.cs" />
@@ -255,6 +258,7 @@
     <Compile Include="StringParameter.Memory.Designer.cs" />
     <Compile Include="StringProperty.Memory.Designer.cs" />
     <Compile Include="StringRangeConstraint.Memory.Designer.cs" />
+    <Compile Include="SyncProvider.Memory.Designer.cs" />
     <Compile Include="Task.Memory.Designer.cs" />
     <Compile Include="Template.Memory.Designer.cs" />
     <Compile Include="TestCustomObject.Memory.Designer.cs" />
@@ -272,11 +276,13 @@
     <Compile Include="Visual.Memory.Designer.cs" />
     <Compile Include="WorkSchedule.Memory.Designer.cs" />
     <Compile Include="WorkScheduleRule.Memory.Designer.cs" />
+    <Compile Include="WorkScheduleSyncProvider.Memory.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="YearlyWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="CollectionEntries.Memory.Designer.cs" />
     <Compile Include="AnyReference.Memory.Designer.cs" />
     <Compile Include="AuditEntry.Memory.Designer.cs" />
+    <Compile Include="DateTimeOffset.Memory.Designer.cs" />
     <Compile Include="DateTimeRange.Memory.Designer.cs" />
     <Compile Include="RecurrenceRule.Memory.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Memory.Designer.cs" />

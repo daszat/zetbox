@@ -307,6 +307,35 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CalendarEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CalendarEfImpl)">
+	    <MappingFragment StoreEntitySet="Calendar">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Calendar_Rights">
+      <EntityTypeMapping TypeName="Model.Calendar_Rights">
+        <MappingFragment StoreEntitySet="Calendar_Rights">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Identity" ColumnName="Identity" />
+          <ScalarProperty Name="Right" ColumnName="Right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Calendars_Rights" TypeName="Model.FK_Calendars_Rights" StoreEntitySet="Calendar_Rights">
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <EndProperty Name="Calendar_Rights">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+        <ScalarProperty Name="Identity" ColumnName="Identity" />
+      </EndProperty>
+    </AssociationSetMapping>
     <EntitySetMapping Name="CompanyEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.CompanyEfImpl)">
 	    <MappingFragment StoreEntitySet="Company">
@@ -316,16 +345,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ConstraintEfImpl">
-      <EntityTypeMapping TypeName="Model.ConstraintEfImpl">
-	    <MappingFragment StoreEntitySet="Constraint">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="Reason" ColumnName="Reason" />
-          <Condition ColumnName="__Discriminator" Value="base.Constraints" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="Model.IntegerRangeConstraintEfImpl">
 	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -603,6 +622,71 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EventEfImpl">
+      <EntityTypeMapping TypeName="Model.EventEfImpl">
+	    <MappingFragment StoreEntitySet="Event">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="SyncHash" ColumnName="SyncHash" />
+          <ComplexProperty Name="RecurrenceImpl" TypeName="Model.RecurrenceRuleEfImpl">
+          <ScalarProperty Name="ByDay" ColumnName="Recurrence_ByDay" />
+          <ScalarProperty Name="ByHour" ColumnName="Recurrence_ByHour" />
+          <ScalarProperty Name="ByMinute" ColumnName="Recurrence_ByMinute" />
+          <ScalarProperty Name="ByMonth" ColumnName="Recurrence_ByMonth" />
+          <ScalarProperty Name="ByMonthDay" ColumnName="Recurrence_ByMonthDay" />
+          <ScalarProperty Name="BySecond" ColumnName="Recurrence_BySecond" />
+          <ScalarProperty Name="BySetPos" ColumnName="Recurrence_BySetPos" />
+          <ScalarProperty Name="ByWeekNumber" ColumnName="Recurrence_ByWeekNumber" />
+          <ScalarProperty Name="ByYearDay" ColumnName="Recurrence_ByYearDay" />
+          <ScalarProperty Name="Count" ColumnName="Recurrence_Count" />
+          <ScalarProperty Name="FrequencyImpl" ColumnName="Recurrence_Frequency" />
+          <ScalarProperty Name="Interval" ColumnName="Recurrence_Interval" />
+          <ScalarProperty Name="Until" ColumnName="Recurrence_Until" />
+          <ScalarProperty Name="WeekStartImpl" ColumnName="Recurrence_WeekStart" />
+          </ComplexProperty>
+          <ComplexProperty Name="SourceImpl" TypeName="Model.AnyReferenceEfImpl">
+          <ScalarProperty Name="ObjClass" ColumnName="Source_ObjClass" />
+          <ScalarProperty Name="ObjGuid" ColumnName="Source_ObjGuid" />
+          <ScalarProperty Name="ObjID" ColumnName="Source_ObjID" />
+          </ComplexProperty>
+          <Condition ColumnName="__Discriminator" Value="calendar.Events" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Event_Rights">
+      <EntityTypeMapping TypeName="Model.Event_Rights">
+        <MappingFragment StoreEntitySet="Event_Rights">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Identity" ColumnName="Identity" />
+          <ScalarProperty Name="Right" ColumnName="Right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Events_Rights" TypeName="Model.FK_Events_Rights" StoreEntitySet="Event_Rights">
+      <EndProperty Name="Event">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <EndProperty Name="Event_Rights">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+        <ScalarProperty Name="Identity" ColumnName="Identity" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="EventTestObjectEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EventTestObjectEfImpl)">
+	    <MappingFragment StoreEntitySet="EventTestObject">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ExceptionLogEntryEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.ExceptionLogEntryEfImpl)">
 	    <MappingFragment StoreEntitySet="ExceptionLogEntry">
@@ -769,6 +853,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.IdentityEfImpl)">
 	    <MappingFragment StoreEntitySet="Identity">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CalendarConfiguration" ColumnName="CalendarConfiguration" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -1352,15 +1437,20 @@
 	    <MappingFragment StoreEntitySet="RecurrenceRuleTester">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ComplexProperty Name="RuleImpl" TypeName="Model.RecurrenceRuleEfImpl">
-          <ScalarProperty Name="DaysOffset" ColumnName="Rule_DaysOffset" />
-          <ScalarProperty Name="EveryDay" ColumnName="Rule_EveryDay" />
-          <ScalarProperty Name="EveryDayOfWeekImpl" ColumnName="Rule_EveryDayOfWeek" />
-          <ScalarProperty Name="EveryMonth" ColumnName="Rule_EveryMonth" />
-          <ScalarProperty Name="EveryQuater" ColumnName="Rule_EveryQuater" />
-          <ScalarProperty Name="EveryYear" ColumnName="Rule_EveryYear" />
-          <ScalarProperty Name="HoursOffset" ColumnName="Rule_HoursOffset" />
-          <ScalarProperty Name="MinutesOffset" ColumnName="Rule_MinutesOffset" />
-          <ScalarProperty Name="MonthsOffset" ColumnName="Rule_MonthsOffset" />
+          <ScalarProperty Name="ByDay" ColumnName="Rule_ByDay" />
+          <ScalarProperty Name="ByHour" ColumnName="Rule_ByHour" />
+          <ScalarProperty Name="ByMinute" ColumnName="Rule_ByMinute" />
+          <ScalarProperty Name="ByMonth" ColumnName="Rule_ByMonth" />
+          <ScalarProperty Name="ByMonthDay" ColumnName="Rule_ByMonthDay" />
+          <ScalarProperty Name="BySecond" ColumnName="Rule_BySecond" />
+          <ScalarProperty Name="BySetPos" ColumnName="Rule_BySetPos" />
+          <ScalarProperty Name="ByWeekNumber" ColumnName="Rule_ByWeekNumber" />
+          <ScalarProperty Name="ByYearDay" ColumnName="Rule_ByYearDay" />
+          <ScalarProperty Name="Count" ColumnName="Rule_Count" />
+          <ScalarProperty Name="FrequencyImpl" ColumnName="Rule_Frequency" />
+          <ScalarProperty Name="Interval" ColumnName="Rule_Interval" />
+          <ScalarProperty Name="Until" ColumnName="Rule_Until" />
+          <ScalarProperty Name="WeekStartImpl" ColumnName="Rule_WeekStart" />
           </ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -1549,6 +1639,22 @@
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="OriginConnectionStringKey" ColumnName="OriginConnectionStringKey" />
           <ScalarProperty Name="Schema" ColumnName="Schema" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SyncProviderEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SyncProviderEfImpl)">
+	    <MappingFragment StoreEntitySet="SyncProvider">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NextSync" ColumnName="NextSync" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkScheduleSyncProviderEfImpl)">
+	    <MappingFragment StoreEntitySet="WorkScheduleSyncProvider">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1867,6 +1973,160 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_InputProperties" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
+    Relation: FK_Calendar_shared_r_GroupReaders
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Group as GroupReaders
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="Calendar_shared_r_Group_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.Calendar_shared_r_Group_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="Calendar_shared_r_Group_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Calendar_shared_r_GroupReaders_A"
+                           TypeName="Model.FK_Calendar_shared_r_GroupReaders_A"
+                           StoreEntitySet="Calendar_shared_r_Group_RelationEntry" >
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Calendar" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Calendar_shared_r_GroupReaders_B"
+                           TypeName="Model.FK_Calendar_shared_r_GroupReaders_B"
+                           StoreEntitySet="Calendar_shared_r_Group_RelationEntry" >
+      <EndProperty Name="GroupReaders">
+        <ScalarProperty Name="ID" ColumnName="fk_GroupReaders"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_GroupReaders" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
+    Relation: FK_Calendar_shared_r_Readers
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Identity as Readers
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="Calendar_shared_r_Identity_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.Calendar_shared_r_Identity_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="Calendar_shared_r_Identity_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Calendar_shared_r_Readers_A"
+                           TypeName="Model.FK_Calendar_shared_r_Readers_A"
+                           StoreEntitySet="Calendar_shared_r_Identity_RelationEntry" >
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Calendar" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Calendar_shared_r_Readers_B"
+                           TypeName="Model.FK_Calendar_shared_r_Readers_B"
+                           StoreEntitySet="Calendar_shared_r_Identity_RelationEntry" >
+      <EndProperty Name="Readers">
+        <ScalarProperty Name="ID" ColumnName="fk_Readers"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Readers" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
+    Relation: FK_Calendar_shared_w_GroupWriters
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Group as GroupWriters
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="Calendar_shared_w_Group_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.Calendar_shared_w_Group_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="Calendar_shared_w_Group_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Calendar_shared_w_GroupWriters_A"
+                           TypeName="Model.FK_Calendar_shared_w_GroupWriters_A"
+                           StoreEntitySet="Calendar_shared_w_Group_RelationEntry" >
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Calendar" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Calendar_shared_w_GroupWriters_B"
+                           TypeName="Model.FK_Calendar_shared_w_GroupWriters_B"
+                           StoreEntitySet="Calendar_shared_w_Group_RelationEntry" >
+      <EndProperty Name="GroupWriters">
+        <ScalarProperty Name="ID" ColumnName="fk_GroupWriters"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_GroupWriters" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
+    Relation: FK_Calendar_shared_w_Writers
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrMore Identity as Writers
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="Calendar_shared_w_Identity_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.Calendar_shared_w_Identity_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="Calendar_shared_w_Identity_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Calendar_shared_w_Writers_A"
+                           TypeName="Model.FK_Calendar_shared_w_Writers_A"
+                           StoreEntitySet="Calendar_shared_w_Identity_RelationEntry" >
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Calendar" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Calendar_shared_w_Writers_B"
+                           TypeName="Model.FK_Calendar_shared_w_Writers_B"
+                           StoreEntitySet="Calendar_shared_w_Identity_RelationEntry" >
+      <EndProperty Name="Writers">
+        <ScalarProperty Name="ID" ColumnName="fk_Writers"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Writers" IsNull="false"/>
     </AssociationSetMapping>
 
     <!--
@@ -2644,7 +2904,7 @@
     <!--
     Relation: FK_Application_has_Module
     A: ZeroOrMore Application as Application
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Application_has_Module"
@@ -2980,6 +3240,57 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="CalculatedObjectReferenceProperties_fk_ReferencedClass" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Calendar_has_Owner
+    A: ZeroOrMore Calendar as Calendar
+    B: One Identity as Owner
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Calendar_has_Owner"
+                           TypeName="Model.FK_Calendar_has_Owner"
+                           StoreEntitySet="Calendar" >
+      <EndProperty Name="Owner">
+        <ScalarProperty Name="ID" ColumnName="fk_Owner"/>
+      </EndProperty>
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Owner" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Calendar_was_ChangedBy
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Calendar_was_ChangedBy"
+                           TypeName="Model.FK_Calendar_was_ChangedBy"
+                           StoreEntitySet="Calendar" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Calendar_was_CreatedBy
+    A: ZeroOrMore Calendar as Calendar
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Calendar_was_CreatedBy"
+                           TypeName="Model.FK_Calendar_was_CreatedBy"
+                           StoreEntitySet="Calendar" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Child_allow_Identity
@@ -3507,6 +3818,57 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="EnumParameters_fk_Enumeration" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Event_of_Calendar
+    A: ZeroOrMore Event as Event
+    B: One Calendar as Calendar
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Event_of_Calendar"
+                           TypeName="Model.FK_Event_of_Calendar"
+                           StoreEntitySet="Event" >
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
+      </EndProperty>
+      <EndProperty Name="Event">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Calendar" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Event_was_ChangedBy
+    A: ZeroOrMore Event as Event
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Event_was_ChangedBy"
+                           TypeName="Model.FK_Event_was_ChangedBy"
+                           StoreEntitySet="Event" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Event">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Event_was_CreatedBy
+    A: ZeroOrMore Event as Event
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Event_was_CreatedBy"
+                           TypeName="Model.FK_Event_was_CreatedBy"
+                           StoreEntitySet="Event" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Event">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_File_has_Blob
@@ -5260,6 +5622,74 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_SyncAccount_for_Calendar
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
+    B: One Calendar as Calendar
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SyncAccount_for_Calendar"
+                           TypeName="Model.FK_SyncAccount_for_Calendar"
+                           StoreEntitySet="WorkScheduleSyncProvider" >
+      <EndProperty Name="Calendar">
+        <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
+      </EndProperty>
+      <EndProperty Name="SyncAccount">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Calendar" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SyncAccount_of_WorkSchedule
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
+    B: One WorkSchedule as WorkSchedule
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SyncAccount_of_WorkSchedule"
+                           TypeName="Model.FK_SyncAccount_of_WorkSchedule"
+                           StoreEntitySet="WorkScheduleSyncProvider" >
+      <EndProperty Name="WorkSchedule">
+        <ScalarProperty Name="ID" ColumnName="fk_WorkSchedule"/>
+      </EndProperty>
+      <EndProperty Name="SyncAccount">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_WorkSchedule" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SyncAccount_was_ChangedBy
+    A: ZeroOrMore SyncProvider as SyncAccount
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SyncAccount_was_ChangedBy"
+                           TypeName="Model.FK_SyncAccount_was_ChangedBy"
+                           StoreEntitySet="SyncProvider" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="SyncAccount">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SyncAccount_was_CreatedBy
+    A: ZeroOrMore SyncProvider as SyncAccount
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SyncAccount_was_CreatedBy"
+                           TypeName="Model.FK_SyncAccount_was_CreatedBy"
+                           StoreEntitySet="SyncProvider" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="SyncAccount">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Task_was_ChangedBy
     A: ZeroOrMore Task as Task
     B: ZeroOrOne Identity as ChangedBy
@@ -5326,6 +5756,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_VisualTree" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Test_of_Event
+    A: ZeroOrMore EventTestObject as Test
+    B: One Event as Event
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Test_of_Event"
+                           TypeName="Model.FK_Test_of_Event"
+                           StoreEntitySet="EventTestObject" >
+      <EndProperty Name="Event">
+        <ScalarProperty Name="ID" ColumnName="fk_Event"/>
+      </EndProperty>
+      <EndProperty Name="Test">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Event" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_TestObjClass_has_ObjectProp
