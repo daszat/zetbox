@@ -144,34 +144,35 @@ namespace Zetbox.DalProvider.Client
                         case ExpressionType.Convert:
                             var result = EvaluateToValue(e.Operand);
                             // sometimes we manually need to convert, as boxed value types don't convert voluntarily
-                            if (e.Type == typeof(bool)) return (bool)result;
-                            else if (e.Type == typeof(bool?)) return (bool?)result;
-                            else if (e.Type == typeof(byte)) return (byte)result;
-                            else if (e.Type == typeof(byte?)) return (byte?)result;
-                            else if (e.Type == typeof(char)) return (char)result;
-                            else if (e.Type == typeof(char?)) return (char?)result;
-                            else if (e.Type == typeof(decimal)) return (decimal)result;
-                            else if (e.Type == typeof(decimal?)) return (decimal?)result;
-                            else if (e.Type == typeof(double)) return (double)result;
-                            else if (e.Type == typeof(double?)) return (double?)result;
-                            // enum
-                            else if (e.Type == typeof(float)) return (float)result;
-                            else if (e.Type == typeof(float?)) return (float?)result;
-                            else if (e.Type == typeof(int)) return (int)result;
-                            else if (e.Type == typeof(int?)) return (int?)result;
-                            else if (e.Type == typeof(long)) return (long)result;
-                            else if (e.Type == typeof(long?)) return (long?)result;
-                            else if (e.Type == typeof(sbyte)) return (sbyte)result;
-                            else if (e.Type == typeof(sbyte?)) return (sbyte?)result;
-                            else if (e.Type == typeof(short)) return (short)result;
-                            else if (e.Type == typeof(short?)) return (short?)result;
-                            // struct
-                            else if (e.Type == typeof(uint)) return (uint)result;
-                            else if (e.Type == typeof(uint?)) return (uint?)result;
-                            else if (e.Type == typeof(ulong)) return (ulong)result;
-                            else if (e.Type == typeof(ulong?)) return (ulong?)result;
-                            else if (e.Type == typeof(ushort)) return (ushort)result;
-                            else if (e.Type == typeof(ushort?)) return (ushort?)result;
+                            var t = e.Type;
+                            if (t == typeof(bool)) return (bool)result;
+                            else if (t == typeof(bool?)) return (bool?)result;
+                            else if (t == typeof(byte)) return (byte)result;
+                            else if (t == typeof(byte?)) return (byte?)result;
+                            else if (t == typeof(char)) return (char)result;
+                            else if (t == typeof(char?)) return (char?)result;
+                            else if (t == typeof(decimal)) return (decimal)result;
+                            else if (t == typeof(decimal?)) return (decimal?)result;
+                            else if (t == typeof(double)) return (double)result;
+                            else if (t == typeof(double?)) return (double?)result;
+                            // enum  t
+                            else if (t == typeof(float)) return (float)result;
+                            else if (t == typeof(float?)) return (float?)result;
+                            else if (t == typeof(int)) return (int)result;
+                            else if (t == typeof(int?)) return (int?)result;
+                            else if (t == typeof(long)) return (long)result;
+                            else if (t == typeof(long?)) return (long?)result;
+                            else if (t == typeof(sbyte)) return (sbyte)result;
+                            else if (t == typeof(sbyte?)) return (sbyte?)result;
+                            else if (t == typeof(short)) return (short)result;
+                            else if (t == typeof(short?)) return (short?)result;
+                            // structt
+                            else if (t == typeof(uint)) return (uint)result;
+                            else if (t == typeof(uint?)) return (uint?)result;
+                            else if (t == typeof(ulong)) return (ulong)result;
+                            else if (t == typeof(ulong?)) return (ulong?)result;
+                            else if (t == typeof(ushort)) return (ushort)result;
+                            else if (t == typeof(ushort?)) return (ushort?)result;
                             else return result;
                         case ExpressionType.Decrement:
                             return ((dynamic)(EvaluateToValue(e.Operand))) - 1;
