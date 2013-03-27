@@ -164,7 +164,7 @@ namespace Zetbox.App.Base
                     var match = weekDayRegEx.Match(s);
                     if (match.Success)
                     {
-                        var n_occurence = match.Groups[1].Value;
+                        // var n_occurence = match.Groups[1].Value; // not used yet
                         var day = match.Groups[2].Value;
                         switch (day)
                         {
