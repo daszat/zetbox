@@ -106,45 +106,45 @@ namespace Zetbox.Client.WPF
             //FixupCallImplementInterfaces(ctx);
             //CreateTestClasses(ctxFactory);
 
-            MigrateTypeRefs(ctxFactory());
+            //MigrateTypeRefs(ctxFactory());
         }
 
-        private static string GetSimpleName(TypeRef tr)
-        {
-            var type = tr.AsType(false);
-            if (type == null)
-                return "ERROR";
-            else
-                return TypeExtensions.GetSimpleName(type);
-        }
+        //private static string GetSimpleName(TypeRef tr)
+        //{
+        //    var type = tr.AsType(false);
+        //    if (type == null)
+        //        return "ERROR";
+        //    else
+        //        return TypeExtensions.GetSimpleName(type);
+        //}
 
-        private static void MigrateTypeRefs(IZetboxContext ctx)
-        {
-            // ViewModelDescriptor
-            foreach (var vmd in ctx.GetQuery<ViewModelDescriptor>())
-            {
-                vmd.ViewModelTypeRef = GetSimpleName(vmd.ViewModelRef);
-            }
+        //private static void MigrateTypeRefs(IZetboxContext ctx)
+        //{
+        //    // ViewModelDescriptor
+        //    foreach (var vmd in ctx.GetQuery<ViewModelDescriptor>())
+        //    {
+        //        vmd.ViewModelTypeRef = GetSimpleName(vmd.ViewModelRef);
+        //    }
 
-            // ViewDescriptor
-            foreach (var vd in ctx.GetQuery<ViewDescriptor>())
-            {
-                vd.ControlTypeRef = GetSimpleName(vd.ControlRef);
-                vd.SupportedViewModelRefs.Clear();
-                foreach (var supported in vd.SupportedViewModels)
-                {
-                    vd.SupportedViewModelRefs.Add(GetSimpleName(supported));
-                }
-            }
+        //    // ViewDescriptor
+        //    foreach (var vd in ctx.GetQuery<ViewDescriptor>())
+        //    {
+        //        vd.ControlTypeRef = GetSimpleName(vd.ControlRef);
+        //        vd.SupportedViewModelRefs.Clear();
+        //        foreach (var supported in vd.SupportedViewModels)
+        //        {
+        //            vd.SupportedViewModelRefs.Add(GetSimpleName(supported));
+        //        }
+        //    }
 
-            // CLRObjectParameter
-            foreach (var clrop in ctx.GetQuery<CLRObjectParameter>())
-            {
-                clrop.TypeRef = GetSimpleName(clrop.Type);
-            }
+        //    // CLRObjectParameter
+        //    foreach (var clrop in ctx.GetQuery<CLRObjectParameter>())
+        //    {
+        //        clrop.TypeRef = GetSimpleName(clrop.Type);
+        //    }
 
-            ctx.SubmitChanges();
-        }
+        //    ctx.SubmitChanges();
+        //}
 
         //private static void CreateTestClasses(Func<IZetboxContext> ctxFactory)
         //{
