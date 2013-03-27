@@ -3537,16 +3537,16 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:CreatedOn>2011-09-14T12:37:05.333827Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>1c8414ef-f164-4f7e-a7bf-5fca894aa4f4</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
-  <GUI:ViewModelDescriptor ExportGuid="b8952a09-fd76-4bd8-a714-7d676ab89126">
-    <GUI:Description>ViewModel for Projekte Calendar Task</GUI:Description>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelRef>b985589e-bfde-47af-ac16-ac276d5f9c38</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="5c674594-0416-4d5f-9d9f-1388a8df629a">
     <GUI:Description>ViewModel for Projekte Calendar Workspace</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:ViewModelRef>42e9d44a-70df-4b32-8e2f-3fd9520ac4e2</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b8952a09-fd76-4bd8-a714-7d676ab89126">
+    <GUI:Description>ViewModel for Projekte Calendar Task</GUI:Description>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:ViewModelRef>b985589e-bfde-47af-ac16-ac276d5f9c38</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="3643897e-b586-493c-9e23-3f37129cca03">

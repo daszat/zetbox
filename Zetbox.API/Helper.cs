@@ -258,6 +258,42 @@ namespace Zetbox.API
             return result;
         }
 
+        public static string GetSimpleName(this TypeSpec type, bool addAssemblyNames = true)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+
+            var result = type.Name;
+
+            if (type.IsGenericType)
+            {
+                result += string.Format("[[{0}]]", string.Join("], [", type.GenericArguments.Select(t => t.GetSimpleName(addAssemblyNames))));
+            }
+
+            if (addAssemblyNames)
+            {
+                result += ", " + type.AssemblyName.Split(',').First();
+            }
+
+            return result;
+        }
+
+        public static string ToCSharpTypeRef(this Type t)
+        {
+            if (t == null) { throw new ArgumentNullException("t"); }
+
+            if (t.IsGenericType)
+            {
+                return String.Format("{0}<{1}>",
+                    t.FullName.Split('`')[0], // TODO: hack to get to class name
+                    String.Join(", ", t.GetGenericArguments().Select(arg => arg.ToCSharpTypeRef()).ToArray())
+                    );
+            }
+            else
+            {
+                return t.FullName;
+            }
+        }
+
         #region HasGenericDefinition
         // From: http://stackoverflow.com/questions/457676/c-sharp-reflection-check-if-a-class-is-derived-from-a-generic-class/897388#897388
 

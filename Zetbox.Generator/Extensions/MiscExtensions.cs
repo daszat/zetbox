@@ -19,31 +19,13 @@ namespace Zetbox.Generator.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Zetbox.API;
+    using Zetbox.API.SchemaManagement;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.API.SchemaManagement;
 
     public static class MiscExtensions
     {
-        public static string ToCSharpTypeRef(this Type t)
-        {
-            if (t == null) { throw new ArgumentNullException("t"); }
-
-            if (t.IsGenericType)
-            {
-                return String.Format("{0}<{1}>",
-                    t.FullName.Split('`')[0], // TODO: hack to get to class name
-                    String.Join(", ", t.GetGenericArguments().Select(arg => arg.ToCSharpTypeRef()).ToArray())
-                    );
-            }
-            else
-            {
-                return t.FullName;
-            }
-        }
-
         public static string SerializerReadMethod(this string typeName)
         {
             var nullable = typeName.EndsWith("?");

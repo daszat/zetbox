@@ -10372,12 +10372,12 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
     <ZetboxBase:CreatedOn>2010-07-13T10:32:08Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>6bc56e55-16c4-4c94-8c20-12861844e053</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
-  <GUI:ViewModelDescriptor ExportGuid="d9b9db3b-7514-4989-96d1-cb9c4d3faa36">
-    <GUI:DefaultEditorKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:DefaultEditorKind>
-    <GUI:Description>ViewModel for selecting a destination property in SourceColumn Mappings</GUI:Description>
+  <GUI:ViewModelDescriptor ExportGuid="2bec34d6-48ed-4fcc-950c-2eacc2f292db">
+    <GUI:DefaultEditorKind>4f6779a0-46f6-48a0-8880-fc491164d04a</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for SourceTable.SourceColumns object list</GUI:Description>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
-    <GUI:ViewModelRef>e3527ef0-6d7b-4879-bde7-65cc4133e783</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.SchemaMigration.DestinationPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelRef>47972a6b-1aea-4572-912b-90704596f71a</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="318e3256-e53a-4d5a-a887-98bd122f38bc">
     <GUI:DefaultEditorKind>42d263e9-0108-4068-a38c-e550299cf966</GUI:DefaultEditorKind>
@@ -10386,25 +10386,25 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
     <GUI:ViewModelRef>356ddc5e-5d9c-46ce-a712-3e48019c6bae</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="2bec34d6-48ed-4fcc-950c-2eacc2f292db">
-    <GUI:DefaultEditorKind>4f6779a0-46f6-48a0-8880-fc491164d04a</GUI:DefaultEditorKind>
-    <GUI:Description>ViewModel for SourceTable.SourceColumns object list</GUI:Description>
+  <GUI:ViewModelDescriptor ExportGuid="d9b9db3b-7514-4989-96d1-cb9c4d3faa36">
+    <GUI:DefaultEditorKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for selecting a destination property in SourceColumn Mappings</GUI:Description>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
-    <GUI:ViewModelRef>47972a6b-1aea-4572-912b-90704596f71a</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+    <GUI:ViewModelRef>e3527ef0-6d7b-4879-bde7-65cc4133e783</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.SchemaMigration.DestinationPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewDescriptor ExportGuid="d6d547ad-d7e6-496a-bba4-8090269598cf">
-    <GUI:ControlKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:ControlKind>
-    <GUI:ControlRef>ee90ef48-be8e-4c5b-8479-b20a94272b2b</GUI:ControlRef>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.SchemaMigration.DestinationPropertyEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
-    <GUI:SupportedViewModelRefs />
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="720ebbe0-9cce-44c9-8f19-36d374de3721">
     <GUI:ControlKind>42d263e9-0108-4068-a38c-e550299cf966</GUI:ControlKind>
     <GUI:ControlRef>208fa5e1-a3f6-4d4d-a0e0-c013eaea99d6</GUI:ControlRef>
     <GUI:ControlTypeRef>ERROR</GUI:ControlTypeRef>
+    <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
+    <GUI:SupportedViewModelRefs />
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="d6d547ad-d7e6-496a-bba4-8090269598cf">
+    <GUI:ControlKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:ControlKind>
+    <GUI:ControlRef>ee90ef48-be8e-4c5b-8479-b20a94272b2b</GUI:ControlRef>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.SchemaMigration.DestinationPropertyEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
     <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>

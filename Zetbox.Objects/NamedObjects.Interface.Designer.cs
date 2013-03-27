@@ -4859,6 +4859,22 @@ namespace Zetbox {
             }
             public static class ViewModelDescriptors
             {
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_App_Projekte_Client_ViewModel_Projekte_ReportScreenViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("3643897e-b586-493c-9e23-3f37129cca03"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_App_Projekte_Client_ViewModel_Projekte_ShowCalendarNavigationActionViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("ec83ad5c-a62a-4407-81d4-6f6ab15ef633"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_App_Projekte_Client_ViewModel_Projekte_TaskViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("4d307461-610a-4403-92b9-bb686dacf276"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_App_Projekte_Client_ViewModel_TestModule_EventTestInputViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("998ed5d2-852d-49e5-82fb-723cd2c034b5"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ActionViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("3d779eaf-1c37-4c3b-822b-0b1af0926802"); }

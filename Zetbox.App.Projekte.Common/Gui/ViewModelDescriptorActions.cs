@@ -20,6 +20,7 @@ namespace Zetbox.App.GUI
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API;
+    using Zetbox.API.Utils;
 
     [Implementor]
     public static class ViewModelDescriptorActions
@@ -38,12 +39,9 @@ namespace Zetbox.App.GUI
         {
             if (!string.IsNullOrWhiteSpace(obj.ViewModelTypeRef) && obj.ViewModelTypeRef != "ERROR")
             {
-                var type = Type.GetType(obj.ViewModelTypeRef, throwOnError: false);
+                var spec = TypeSpec.Parse(obj.ViewModelTypeRef);
 
-                // do not create a name for unresolvable types
-                if (type == null) return;
-
-                e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(type.GetSimpleName(addAssemblyNames: false), @"\W+", "_"));
+                e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(spec.GetSimpleName(addAssemblyNames: false), @"\W+", "_"));
             }
         }
     }

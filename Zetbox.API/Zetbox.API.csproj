@@ -113,6 +113,7 @@
     <Compile Include="IPackageProvider.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Utils\ReadOnlyCollectionShortcut.cs" />
+    <Compile Include="Utils\TypeNameParser.cs" />
     <Compile Include="Utils\Utf8Checker.cs" />
     <Compile Include="ZetboxContextException.cs" />
     <Compile Include="ZetboxStreamWriter.cs" />

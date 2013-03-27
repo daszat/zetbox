@@ -22362,6 +22362,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:B>59136763-5a94-4ae5-b9ab-6d679e86245a</ZetboxBase:B>
     <ZetboxBase:B_pos>2147483647</ZetboxBase:B_pos>
   </ZetboxBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <GUI:ViewModelDescriptor ExportGuid="88ce02bf-fc40-4227-a7b5-28f6385efa1b">
+    <GUI:DefaultEditorKind>f9092349-b263-4887-b605-cccac6a361bd</GUI:DefaultEditorKind>
+    <GUI:Description>A simple string list view</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelRef>617a16ed-37bc-465b-976e-627d0ae4b66c</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="bec5adb5-06fe-4c4f-8d72-69d4c359cb08">
     <GUI:DefaultEditorKind>7e30f1de-076c-42d3-80b2-9c1111a6cdfb</GUI:DefaultEditorKind>
     <GUI:Description>A list of errors from the currently active DataObjects</GUI:Description>
@@ -22469,13 +22476,6 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelRef>7067c901-5c46-4032-b8f9-ae73b32e70b5</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.SimpleDataObjectEditorTaskViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="88ce02bf-fc40-4227-a7b5-28f6385efa1b">
-    <GUI:DefaultEditorKind>f9092349-b263-4887-b605-cccac6a361bd</GUI:DefaultEditorKind>
-    <GUI:Description>A simple string list view</GUI:Description>
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:ViewModelRef>617a16ed-37bc-465b-976e-627d0ae4b66c</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="856fc0b0-2681-4792-a330-51a35232ee94">
     <GUI:DefaultEditorKind>89dfb066-b745-4896-9056-d9a47927b9a5</GUI:DefaultEditorKind>
@@ -26807,16 +26807,16 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:CreatedOn>2011-09-14T12:37:05.333827Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>1c8414ef-f164-4f7e-a7bf-5fca894aa4f4</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
-  <GUI:ViewModelDescriptor ExportGuid="b8952a09-fd76-4bd8-a714-7d676ab89126">
-    <GUI:Description>ViewModel for Projekte Calendar Task</GUI:Description>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelRef>b985589e-bfde-47af-ac16-ac276d5f9c38</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="5c674594-0416-4d5f-9d9f-1388a8df629a">
     <GUI:Description>ViewModel for Projekte Calendar Workspace</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:ViewModelRef>42e9d44a-70df-4b32-8e2f-3fd9520ac4e2</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b8952a09-fd76-4bd8-a714-7d676ab89126">
+    <GUI:Description>ViewModel for Projekte Calendar Task</GUI:Description>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:ViewModelRef>b985589e-bfde-47af-ac16-ac276d5f9c38</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="3643897e-b586-493c-9e23-3f37129cca03">
@@ -31112,12 +31112,12 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
     <ZetboxBase:CreatedOn>2010-07-13T10:32:08Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>6bc56e55-16c4-4c94-8c20-12861844e053</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
-  <GUI:ViewModelDescriptor ExportGuid="d9b9db3b-7514-4989-96d1-cb9c4d3faa36">
-    <GUI:DefaultEditorKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:DefaultEditorKind>
-    <GUI:Description>ViewModel for selecting a destination property in SourceColumn Mappings</GUI:Description>
+  <GUI:ViewModelDescriptor ExportGuid="2bec34d6-48ed-4fcc-950c-2eacc2f292db">
+    <GUI:DefaultEditorKind>4f6779a0-46f6-48a0-8880-fc491164d04a</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for SourceTable.SourceColumns object list</GUI:Description>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
-    <GUI:ViewModelRef>e3527ef0-6d7b-4879-bde7-65cc4133e783</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.SchemaMigration.DestinationPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelRef>47972a6b-1aea-4572-912b-90704596f71a</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="318e3256-e53a-4d5a-a887-98bd122f38bc">
     <GUI:DefaultEditorKind>42d263e9-0108-4068-a38c-e550299cf966</GUI:DefaultEditorKind>
@@ -31126,25 +31126,25 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
     <GUI:ViewModelRef>356ddc5e-5d9c-46ce-a712-3e48019c6bae</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="2bec34d6-48ed-4fcc-950c-2eacc2f292db">
-    <GUI:DefaultEditorKind>4f6779a0-46f6-48a0-8880-fc491164d04a</GUI:DefaultEditorKind>
-    <GUI:Description>ViewModel for SourceTable.SourceColumns object list</GUI:Description>
+  <GUI:ViewModelDescriptor ExportGuid="d9b9db3b-7514-4989-96d1-cb9c4d3faa36">
+    <GUI:DefaultEditorKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for selecting a destination property in SourceColumn Mappings</GUI:Description>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
-    <GUI:ViewModelRef>47972a6b-1aea-4572-912b-90704596f71a</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+    <GUI:ViewModelRef>e3527ef0-6d7b-4879-bde7-65cc4133e783</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.SchemaMigration.DestinationPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewDescriptor ExportGuid="d6d547ad-d7e6-496a-bba4-8090269598cf">
-    <GUI:ControlKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:ControlKind>
-    <GUI:ControlRef>ee90ef48-be8e-4c5b-8479-b20a94272b2b</GUI:ControlRef>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.SchemaMigration.DestinationPropertyEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
-    <GUI:SupportedViewModelRefs />
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="720ebbe0-9cce-44c9-8f19-36d374de3721">
     <GUI:ControlKind>42d263e9-0108-4068-a38c-e550299cf966</GUI:ControlKind>
     <GUI:ControlRef>208fa5e1-a3f6-4d4d-a0e0-c013eaea99d6</GUI:ControlRef>
     <GUI:ControlTypeRef>ERROR</GUI:ControlTypeRef>
+    <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
+    <GUI:SupportedViewModelRefs />
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="d6d547ad-d7e6-496a-bba4-8090269598cf">
+    <GUI:ControlKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:ControlKind>
+    <GUI:ControlRef>ee90ef48-be8e-4c5b-8479-b20a94272b2b</GUI:ControlRef>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.SchemaMigration.DestinationPropertyEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
     <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
@@ -67471,6 +67471,37 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:OriginalName>messagebox_warning.png</ZetboxBase:OriginalName>
     <ZetboxBase:StoragePath>2013\02\26\(0b37d3fe-3f05-4fe0-bf63-b149314a7b42) - messagebox_warning.png</ZetboxBase:StoragePath>
   </ZetboxBase:Blob>
+  <GUI:ViewModelDescriptor ExportGuid="382050bb-706b-4812-b23b-133833d72d55">
+    <GUI:Description>just a wrapper</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>1be9e966-ddec-4d9a-bdce-a3e2a380bfcc</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="8023e937-5827-4056-b0c0-ffb5bf061dfd">
+    <GUI:Description>A dashboard for the TimeRecords module</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>935f01dd-da91-426f-8afa-b469aec0be09</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b4b23681-f63b-4aeb-9ecb-b258bd33be24">
+    <GUI:Description>A workspace for recording work efforts</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>28114689-4fc3-44b6-b7f1-141dab6b78d9</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b6dc8994-6930-4cf4-8cb7-7f18efe9ef68">
+    <GUI:Description>A model for a single work effort</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>4b424049-d2b5-46b2-a88e-7fd330395838</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="caf3e708-2f31-4084-9957-ca11fccc1374">
+    <GUI:DefaultEditorKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:DefaultEditorKind>
+    <GUI:Description>DataObjectViewModel with specific extensions for MethodInvocations</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>68c7ae8c-6fc6-4c67-877b-7a84efd47b55</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="3d779eaf-1c37-4c3b-822b-0b1af0926802">
     <GUI:DefaultEditorKind>364aaaf3-0f61-4642-a0e3-bd812935cf44</GUI:DefaultEditorKind>
     <GUI:Description>An action which can be triggered by the user</GUI:Description>
@@ -67587,30 +67618,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>e4de1cc8-9d31-41e5-96c8-ae99cf725486</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Relations.RelationViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="8023e937-5827-4056-b0c0-ffb5bf061dfd">
-    <GUI:Description>A dashboard for the TimeRecords module</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelRef>935f01dd-da91-426f-8afa-b469aec0be09</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="382050bb-706b-4812-b23b-133833d72d55">
-    <GUI:Description>just a wrapper</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelRef>1be9e966-ddec-4d9a-bdce-a3e2a380bfcc</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="b6dc8994-6930-4cf4-8cb7-7f18efe9ef68">
-    <GUI:Description>A model for a single work effort</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelRef>4b424049-d2b5-46b2-a88e-7fd330395838</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="b4b23681-f63b-4aeb-9ecb-b258bd33be24">
-    <GUI:Description>A workspace for recording work efforts</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelRef>28114689-4fc3-44b6-b7f1-141dab6b78d9</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="3c1858e5-da99-4328-9308-f95cb9e9cb02">
     <GUI:DefaultEditorKind>20488fcd-595b-49f6-89f9-e84221586f54</GUI:DefaultEditorKind>
@@ -67754,13 +67761,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:ViewModelRef>41b6d0a1-a2ae-4c68-8997-503db83319bc</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="caf3e708-2f31-4084-9957-ca11fccc1374">
-    <GUI:DefaultEditorKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:DefaultEditorKind>
-    <GUI:Description>DataObjectViewModel with specific extensions for MethodInvocations</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelRef>68c7ae8c-6fc6-4c67-877b-7a84efd47b55</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="c5020414-f8cb-4e19-a0d7-c429dfdcdd5b">
     <GUI:DefaultEditorKind>515e884b-33e0-4db6-b0ad-9755f7543a2b</GUI:DefaultEditorKind>
     <GUI:Description>TaskViewModel for selecting a Property. Used to select columns or filter</GUI:Description>
@@ -67799,6 +67799,14 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:ViewModelRef>266f79a3-9b2f-4779-a9ae-9702ccf53a5a</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ZetboxDebuggerAsViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewDescriptor ExportGuid="82c0bcbd-2184-4c36-adaf-60ad5e984dee">
+    <GUI:ControlKind>6b5093bb-3ac0-4710-b30d-d72a50b09ee8</GUI:ControlKind>
+    <GUI:ControlRef>46a2ac8e-1d19-40e1-bca9-37834962ef95</GUI:ControlRef>
+    <GUI:ControlTypeRef>ERROR</GUI:ControlTypeRef>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:SupportedViewModelRefs />
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2509d44a-64df-468b-8980-04fae9bc1e9e">
     <GUI:ControlRef>b318403f-cf3d-4067-a252-01518f3dcd2a</GUI:ControlRef>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.CacheDebuggerDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
@@ -68049,14 +68057,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
     <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ZetboxBase.StringDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:SupportedViewModelRefs />
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor ExportGuid="82c0bcbd-2184-4c36-adaf-60ad5e984dee">
-    <GUI:ControlKind>6b5093bb-3ac0-4710-b30d-d72a50b09ee8</GUI:ControlKind>
-    <GUI:ControlRef>46a2ac8e-1d19-40e1-bca9-37834962ef95</GUI:ControlRef>
-    <GUI:ControlTypeRef>ERROR</GUI:ControlTypeRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
