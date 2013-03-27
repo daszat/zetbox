@@ -13,6 +13,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.API.Async;
     using Zetbox.App.Base;
     using Zetbox.API.Utils;
+    using System.Threading;
 
     [ViewModelDescriptor]
     public class NextEventsSummaryViewModel : ViewModel, IRefreshCommandListener
@@ -21,12 +22,20 @@ namespace Zetbox.Client.Presentables.Calendar
 
         private FetchCache _fetchCache;
         private Func<IZetboxContext> _ctxFactory;
+        private System.Timers.Timer _timer;
+        private SynchronizationContext _syncContext;
 
         public NextEventsSummaryViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent)
         {
             _ctxFactory = ctxFactory;
             _fetchCache = new FetchCache(ViewModelFactory, DataContext, this);
+            _syncContext = SynchronizationContext.Current;
+
+            _timer = new System.Timers.Timer();
+            _timer.Interval = 60 * 1000;
+            _timer.Elapsed += new System.Timers.ElapsedEventHandler(_timer_Elapsed);
+            _timer.Start();
         }
 
         public override string Name
@@ -58,7 +67,19 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        void IRefreshCommandListener.Refresh()
+        void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (_syncContext != null)
+            {
+                _syncContext.Post((s) => Refresh(), null);
+            }
+            else
+            {
+                Refresh();
+            }
+        }
+
+        public void Refresh()
         {
             if (_NextEventsTask != null)
                 _NextEventsTask.Invalidate();
