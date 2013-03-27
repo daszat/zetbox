@@ -81,5 +81,21 @@ namespace Zetbox.Client.GUI
             if (c == null) throw new ArgumentNullException("c");
             return AddString(c, label, value, allowNullInput: true, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(c.FrozenCtx));
         }
+
+        public static DialogCreator AddDateTime(this DialogCreator c, string label, DateTime? value = null, App.Base.DateTimeStyles style = App.Base.DateTimeStyles.Date, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
+        {
+            if (c == null) throw new ArgumentNullException("c");
+
+            var mdl = new DateTimeValueModel(label, "", allowNullInput, isReadOnly, style);
+            mdl.Value = value;
+
+            var vmdl = c.ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
+
+            if (requestedKind != null)
+                vmdl.RequestedKind = requestedKind;
+
+            c.ValueModels.Add(vmdl);
+            return c;
+        }
     }
 }

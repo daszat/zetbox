@@ -106,6 +106,15 @@ namespace Zetbox.Client.Presentables.Calendar {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a range.
+        /// </summary>
+        internal static string DlgDateRangeTitle {
+            get {
+                return ResourceManager.GetString("DlgDateRangeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         internal static string FromLabel {
@@ -165,6 +174,24 @@ namespace Zetbox.Client.Presentables.Calendar {
         internal static string PrintMonthCommand_Tooltip {
             get {
                 return ResourceManager.GetString("PrintMonthCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sheets.
+        /// </summary>
+        internal static string PrintSheetCommand_Label {
+            get {
+                return ResourceManager.GetString("PrintSheetCommand_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string PrintSheetCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("PrintSheetCommand_Tooltip", resourceCulture);
             }
         }
         

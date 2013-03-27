@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables.ZetboxBase;
     using cal = Zetbox.App.Calendar;
     using Zetbox.Client.Reporting;
+    using Zetbox.Client.GUI;
 
     #region CalendarSelectionViewModel
     public class CalendarSelectionViewModel : ViewModel
@@ -152,6 +153,7 @@ namespace Zetbox.Client.Presentables.Calendar
         private bool _shouldUpdateCalendarItems = true;
         private Func<IZetboxContext> _ctxFactory;
         private Func<ReportingHost> _rptFactory;
+        private readonly FetchCache _fetchCache;
 
         public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory, Func<ReportingHost> rptFactory)
             : base(appCtx, dataCtx, parent)
@@ -163,6 +165,7 @@ namespace Zetbox.Client.Presentables.Calendar
             _fetchCache = new FetchCache(ViewModelFactory, DataContext, this);
         }
 
+        #region Labels
         public override string Name
         {
             get { return CalendarResources.WorkspaceName; }
@@ -177,6 +180,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get { return CalendarResources.CalendarItemsLabel; }
         }
+        #endregion
 
         #region Items
         private IEnumerable<CalendarSelectionViewModel> _Items = null;
@@ -291,7 +295,6 @@ namespace Zetbox.Client.Presentables.Calendar
         #endregion
 
         #region Commands
-
         protected override System.Collections.ObjectModel.ObservableCollection<ICommandViewModel> CreateCommands()
         {
             var result = base.CreateCommands();
@@ -358,6 +361,7 @@ namespace Zetbox.Client.Presentables.Calendar
         }
         #endregion
 
+        #region NewCommand
         private ICommandViewModel _NewCommand;
         public ICommandViewModel NewCommand
         {
@@ -423,7 +427,9 @@ namespace Zetbox.Client.Presentables.Calendar
                 }
             }
         }
+        #endregion
 
+        #region RefreshCommand
         private RefreshCommand _RefreshCommand = null;
         public ICommandViewModel RefreshCommand
         {
@@ -438,7 +444,9 @@ namespace Zetbox.Client.Presentables.Calendar
                 return _RefreshCommand;
             }
         }
+        #endregion
 
+        #region DeleteCommand
         private DeleteDataObjectCommand _DeleteCommand;
         public ICommandViewModel DeleteCommand
         {
@@ -457,7 +465,9 @@ namespace Zetbox.Client.Presentables.Calendar
             if (DeleteCommand.CanExecute(null))
                 DeleteCommand.Execute(null);
         }
+        #endregion
 
+        #region SelectAllCommand
         private ICommandViewModel _SelectAllCommand = null;
         public ICommandViewModel SelectAllCommand
         {
@@ -490,7 +500,9 @@ namespace Zetbox.Client.Presentables.Calendar
                 CurrentView.Refresh();
             }
         }
+        #endregion
 
+        #region ClearAllCommand
         private ICommandViewModel _ClearAllCommand = null;
         public ICommandViewModel ClearAllCommand
         {
@@ -524,6 +536,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 CurrentView.Refresh();
             }
         }
+        #endregion
 
         #region Print Commands
         protected void Print(DateTime from, DateTime to)
@@ -549,7 +562,8 @@ namespace Zetbox.Client.Presentables.Calendar
                         PrintTodayCommand,
                         PrintThisWeekCommand,
                         PrintTwoWeeksCommand,
-                        PrintMonthCommand);
+                        PrintMonthCommand,
+                        PrintSheetCommand);
                     _printCommandGroup.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
                 return _printCommandGroup;
@@ -660,6 +674,44 @@ namespace Zetbox.Client.Presentables.Calendar
         }
         #endregion
 
+        #region PrintSheet command
+        private ICommandViewModel _PrintSheetCommand = null;
+        public ICommandViewModel PrintSheetCommand
+        {
+            get
+            {
+                if (_PrintSheetCommand == null)
+                {
+                    _PrintSheetCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        CalendarResources.PrintSheetCommand_Label,
+                        CalendarResources.PrintSheetCommand_Tooltip,
+                        PrintSheet,
+                        null, null);
+                    _PrintSheetCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
+                }
+                return _PrintSheetCommand;
+            }
+        }
+
+        public void PrintSheet()
+        {
+            var dlg = ViewModelFactory.CreateDialog(DataContext, CalendarResources.DlgDateRangeTitle)
+                .AddDateTime(CalendarResources.FromLabel, DateTime.Today)
+                .AddDateTime(CalendarResources.UntilLabel, DateTime.Today);
+            dlg.Show((values) =>
+            {
+                var from = ((DateTime)values[0]).Date;
+                var to = ((DateTime)values[1]).Date.AddDays(1);
+                var events = _fetchCache.FetchEventsAsync(from, to).Result;
+                using (var rpt = _rptFactory())
+                {
+                    Reporting.Calendar.SheetDays.Call(rpt, events.SelectMany(e => e.CreateCalendarItemViewModels(from, to)), from, to.AddDays(-1));
+                    rpt.Open("SheetDays.pdf");
+                }
+            });
+        }
+        #endregion
+
         #endregion
         #endregion
 
@@ -701,10 +753,6 @@ namespace Zetbox.Client.Presentables.Calendar
                 SaveConfig(config);
             }
         }
-        #endregion
-
-        #region Cache
-        private readonly FetchCache _fetchCache;
         #endregion
 
         #region Misc

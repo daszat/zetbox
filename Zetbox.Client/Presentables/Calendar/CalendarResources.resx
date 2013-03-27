@@ -132,6 +132,9 @@
   <data name="DetailsLabel" xml:space="preserve">
     <value>Details</value>
   </data>
+  <data name="DlgDateRangeTitle" xml:space="preserve">
+    <value>Enter a range</value>
+  </data>
   <data name="FromLabel" xml:space="preserve">
     <value>From</value>
   </data>
@@ -151,6 +154,12 @@
     <value>Month</value>
   </data>
   <data name="PrintMonthCommand_Tooltip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PrintSheetCommand_Label" xml:space="preserve">
+    <value>Sheets</value>
+  </data>
+  <data name="PrintSheetCommand_Tooltip" xml:space="preserve">
     <value />
   </data>
   <data name="PrintThisWeekCommand_Label" xml:space="preserve">

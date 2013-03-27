@@ -1,0 +1,61 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Calendar.SheetDays"
+    ClassName="Zetbox.Client.Reporting.Calendar.SheetDays"
+    Inherits="Zetbox.API.Common.Reporting.ReportTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Zetbox.Client.Presentables.Calendar" %>
+<%@ Parameter Name="events" Type="IEnumerable<CalendarItemViewModel>" %>
+<%@ Parameter Name="start" Type="DateTime" %>
+<%@ Parameter Name="end" Type="DateTime" %>
+
+\document  {
+<% foreach (var grp in events.Where(e => e.From.Date >= start && e.From.Date <= end).GroupBy(k => k.From.Date).OrderBy(g => g.Key)) { %>
+    \section [
+        PageSetup
+        {
+            Orientation = Landscape
+            PageFormat = A4
+            TopMargin = "1cm"
+            LeftMargin = "1cm"
+            BottomMargin = "1cm"
+            RightMargin = "1cm"
+        }
+    ] {
+        \table [ 
+            Borders { Width = 0.25 Color = 0xFFAAAAAA } 
+        ] {
+            \columns {
+                \column [ Width = "13cm" ]
+                \column [ Width = "1.5cm" ]
+                \column [ Width = "11.5cm" ]
+            }
+            \rows {
+                \row [ Height = "1.2cm" ] {
+                    \cell [ MergeDown = 25 ] { Notizen }
+                    \cell [ 
+                        MergeRight = 1 
+                        Format { Font { Bold = True Size = 20 } }                         
+                    ] { <%= grp.Key.ToString("dddd, dd MMMM yyyy") %> }
+                }
+                \row [ Height = "3cm" ] {
+                    \cell { }
+                    \cell [ Borders { Right { Width = 0 } } ] { }
+                    \cell [ Borders { Left  { Width = 0 } } ] { <%= string.Join(" \\linebreak ", grp.Where(e => e.IsAllDay).Select(e => Format(e.Summary))) %> }
+                }
+<% for(int hour = 0; hour < 24; hour++) { %>
+                \row [ 
+                    Height = "0.6cm" 
+                    VerticalAlignment = Center
+                ] {
+                    \cell { }
+                    \cell [ Borders { Right { Width = 0 } } ] { <%= string.Format("{0:00}:00", hour) %> }
+                    \cell [ Borders { Left  { Width = 0 } } ] { <%= string.Join(", ", grp.Where(e => !e.IsAllDay && e.From.Hour == hour).Select(e => Format(e.Summary))) %> }
+                }
+<% } %>
+            }
+        }
+    }
+<% } %>
+}

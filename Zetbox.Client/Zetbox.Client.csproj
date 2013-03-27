@@ -402,6 +402,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EventsResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Reporting\Calendar\SheetDays.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SheetDays.cst</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\ReportingErrorDialog.cs" />
     <Compile Include="Reporting\ReportingHost.cs" />
     <Compile Include="ServerDomainManager.cs" />
@@ -624,6 +629,10 @@
     <None Include="Reporting\Calendar\Events.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Events.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reporting\Calendar\SheetDays.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SheetDays.Designer.cs</LastGenOutput>
     </None>
     <None Include="Zetbox.snk" />
     <None Include="PresentableModelsDiagram.cd" />
