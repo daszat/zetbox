@@ -20,17 +20,19 @@ namespace Zetbox.Client.Presentables.Calendar
     [ViewModelDescriptor]
     public class EventInputViewModel : ViewModel, IEventInputViewModel
     {
-        public new delegate EventInputViewModel Factory(IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate);
+        public new delegate EventInputViewModel Factory(IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate, bool isAllDay);
 
-        public EventInputViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate)
+        public EventInputViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate, bool isAllDay)
             : base(appCtx, dataCtx, parent)
         {
             if (targetCalendar == null) throw new ArgumentNullException("targetCalendar");
             SelectedStartDate = selectedStartDate;
+            InitialIsAllDay = isAllDay;
             TargetCalendar = targetCalendar;
         }
 
         public DateTime SelectedStartDate { get; private set; }
+        public bool InitialIsAllDay { get; private set; }
         public cal.Calendar TargetCalendar { get; private set; }
 
         public override string Name
@@ -46,7 +48,9 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_startDate == null)
                 {
-                    _startDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this, new DateTimeValueModel("Von", "", false, false) { Value = SelectedStartDate });
+                    _startDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this, 
+                        new DateTimeValueModel(CalendarResources.FromLabel, "", false, false) { Value = SelectedStartDate });
+                    _startDate.DateTimeStyle = InitialIsAllDay == true ? Zetbox.App.Base.DateTimeStyles.Date : App.Base.DateTimeStyles.DateTime;
                     _startDate.InputAccepted += (s, e) =>
                     {
                         if (e.NewValue.HasValue && e.OldValue.HasValue)
@@ -66,7 +70,9 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_endDate == null)
                 {
-                    _endDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this, new DateTimeValueModel("Bis", "", false, false) { Value = SelectedStartDate.AddHours(1) });
+                    _endDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this,
+                        new DateTimeValueModel(CalendarResources.UntilLabel, "", false, false) { Value = SelectedStartDate.AddHours(1) });
+                    _endDate.DateTimeStyle = InitialIsAllDay == true ? Zetbox.App.Base.DateTimeStyles.Date : App.Base.DateTimeStyles.DateTime;
                 }
                 return _endDate;
             }
@@ -79,7 +85,8 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_isAllDay == null)
                 {
-                    _isAllDay = ViewModelFactory.CreateViewModel<NullableBoolPropertyViewModel.Factory>().Invoke(DataContext, this, new BoolValueModel("Ganztägig", "", false, false));
+                    _isAllDay = ViewModelFactory.CreateViewModel<NullableBoolPropertyViewModel.Factory>().Invoke(DataContext, this,
+                        new BoolValueModel(CalendarResources.AllDayLabel, "", false, false) { Value = InitialIsAllDay });
                     _isAllDay.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_isAllDay_PropertyChanged);
                 }
                 return _isAllDay;
@@ -102,7 +109,7 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_summary == null)
                 {
-                    _summary = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, new ClassValueModel<string>("Bemerkung", "", false, false));
+                    _summary = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, new ClassValueModel<string>(CalendarResources.SummaryLabel, "", false, false));
                 }
                 return _summary;
             }
@@ -114,7 +121,7 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_location == null)
                 {
-                    _location = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, new ClassValueModel<string>("Ort", "", true, false));
+                    _location = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, new ClassValueModel<string>(CalendarResources.LocationLabel, "", true, false));
                 }
                 return _location;
             }
@@ -126,7 +133,7 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_body == null)
                 {
-                    _body = ViewModelFactory.CreateViewModel<MultiLineStringValueViewModel.Factory>().Invoke(DataContext, this, new ClassValueModel<string>("Text", "", true, false));
+                    _body = ViewModelFactory.CreateViewModel<MultiLineStringValueViewModel.Factory>().Invoke(DataContext, this, new ClassValueModel<string>(CalendarResources.BodyLabel, "", true, false));
                 }
                 return _body;
             }
@@ -143,7 +150,7 @@ namespace Zetbox.Client.Presentables.Calendar
                         .Invoke(DataContext, this, 
                             new CompoundObjectValueModel(
                                 DataContext, 
-                                "Recurrence", 
+                                CalendarResources.RecurrenceLabel, 
                                 "", 
                                 true, 
                                 false, 

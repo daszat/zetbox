@@ -61,6 +61,24 @@ namespace Zetbox.Client.Presentables.Calendar {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All day.
+        /// </summary>
+        internal static string AllDayLabel {
+            get {
+                return ResourceManager.GetString("AllDayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Body.
+        /// </summary>
+        internal static string BodyLabel {
+            get {
+                return ResourceManager.GetString("BodyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calendars.
         /// </summary>
         internal static string CalendarItemsLabel {
@@ -246,6 +264,15 @@ namespace Zetbox.Client.Presentables.Calendar {
         internal static string PrintTwoWeeksCommand_Tooltip {
             get {
                 return ResourceManager.GetString("PrintTwoWeeksCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recurrence.
+        /// </summary>
+        internal static string RecurrenceLabel {
+            get {
+                return ResourceManager.GetString("RecurrenceLabel", resourceCulture);
             }
         }
         

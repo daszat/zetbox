@@ -284,12 +284,12 @@ namespace Zetbox.Client.Presentables.Calendar
         }
 
         public event EventHandler<NewEventArgs> New;
-        public void NotifyNew(DateTime dt)
+        public void NotifyNew(DateTime dt, bool isAllDay = false)
         {
             var temp = New;
             if (temp != null)
             {
-                temp(this, new NewEventArgs(dt));
+                temp(this, new NewEventArgs(dt, isAllDay));
             }
         }
 
@@ -308,11 +308,13 @@ namespace Zetbox.Client.Presentables.Calendar
 
     public class NewEventArgs : EventArgs
     {
-        public NewEventArgs(DateTime dt)
+        public NewEventArgs(DateTime dt, bool isAllDay)
         {
             Date = dt;
+            IsAllDay = isAllDay;
         }
         public DateTime Date { get; private set; }
+        public bool IsAllDay { get; private set; }
     }
     public class OpenEventArgs : EventArgs
     {

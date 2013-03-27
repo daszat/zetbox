@@ -1,12 +1,13 @@
 ﻿<UserControl x:Class="Zetbox.Client.WPF.View.Calendar.CalendarAllDay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Zetbox.Client.WPF.View.Calendar"
              xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables.Calendar;assembly=Zetbox.Client"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
     <!--
     This file is part of zetbox.
 
@@ -24,51 +25,57 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <Border BorderBrush="#9493CF"
-          BorderThickness="0,0,1,0"
-          SnapsToDevicePixels="true">
-    <ItemsControl ItemsSource="{Binding AllDayItems}">
-      <ItemsControl.ItemsPanel>
-        <ItemsPanelTemplate>
-          <StackPanel IsItemsHost="True"
-                      HorizontalAlignment="Stretch" />
-        </ItemsPanelTemplate>
-      </ItemsControl.ItemsPanel>
-      <ItemsControl.ItemTemplate>
-        <DataTemplate DataType="{x:Type viewmdl:CalendarItemViewModel}">
-          <Border MouseLeftButtonDown="CalendarItem_MouseLeftButtonDown"
-                  BorderThickness="1,1,1,1"
-                  BorderBrush="#5D8CC9"
-                  Margin="-1, -1, 5, 0"
-                  Padding="5,3,3,3"
-                  HorizontalAlignment="Stretch"
-                  x:Name="item">
-            <Border.Background>
-              <LinearGradientBrush>
-                <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}" Offset="-0.5" />
-                <GradientStop Color="{Binding Color}" Offset="1.0" />
-              </LinearGradientBrush>
-            </Border.Background>
-            <StackPanel>
-              <TextBlock Text="{Binding Summary}" FontWeight="Bold" />
-            </StackPanel>
-          </Border>
-          <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding IsSelected}"
-                     Value="True">
-              <Setter Property="BorderThickness"
-                      Value="3,3,3,3"
-                      TargetName="item" />
-              <Setter Property="Padding"
-                      Value="3,1,1,1"
-                      TargetName="item" />
-              <Setter Property="BorderBrush"
-                      Value="Black"
-                      TargetName="item" />
-            </DataTrigger>
-          </DataTemplate.Triggers>
-        </DataTemplate>
-      </ItemsControl.ItemTemplate>
-    </ItemsControl>
-  </Border>
+    <Border BorderBrush="#9493CF"
+            BorderThickness="0,0,1,1"
+            SnapsToDevicePixels="true"
+            x:Name="allDayBorder"
+            Background="#E3EFFF"
+            MouseLeftButtonDown="Empty_MouseLeftButtonDown">
+        <ItemsControl ItemsSource="{Binding AllDayItems}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel IsItemsHost="True"
+                                HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type viewmdl:CalendarItemViewModel}">
+                    <Border MouseLeftButtonDown="CalendarItem_MouseLeftButtonDown"
+                            BorderThickness="1,1,1,1"
+                            BorderBrush="#5D8CC9"
+                            Margin="-1, -1, 5, 0"
+                            Padding="5,3,3,3"
+                            HorizontalAlignment="Stretch"
+                            x:Name="item">
+                        <Border.Background>
+                            <LinearGradientBrush>
+                                <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}"
+                                              Offset="-0.5" />
+                                <GradientStop Color="{Binding Color}"
+                                              Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Summary}"
+                                       FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected}"
+                                     Value="True">
+                            <Setter Property="BorderThickness"
+                                    Value="3,3,3,3"
+                                    TargetName="item" />
+                            <Setter Property="Padding"
+                                    Value="3,1,1,1"
+                                    TargetName="item" />
+                            <Setter Property="BorderBrush"
+                                    Value="Black"
+                                    TargetName="item" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Border>
 </UserControl>

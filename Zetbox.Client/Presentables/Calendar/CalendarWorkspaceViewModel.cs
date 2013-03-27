@@ -397,10 +397,10 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public void New()
         {
-            New(DateTime.Now);
+            New(DateTime.Now, false);
         }
 
-        public void New(DateTime selectedDate)
+        public void New(DateTime selectedDate, bool isAllDay)
         {
             if (!CanNew()) return;
 
@@ -409,7 +409,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 var calendar = ctx.Find<cal.Calendar>(SelectedItem.Calendar.ID);
                 var dlg = ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null);
 
-                var args = new NewEventViewModelsArgs(ctx, ViewModelFactory, dlg, calendar, selectedDate);
+                var args = new NewEventViewModelsArgs(ctx, ViewModelFactory, dlg, calendar, selectedDate, isAllDay);
                 calendar.GetNewEventViewModels(args);
 
                 dlg.InputViewModels = args.ViewModels;
@@ -728,7 +728,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     _weekCalender = ViewModelFactory.CreateViewModel<WeekCalendarViewModel.Factory>()
                         .Invoke(DataContext, this, _fetchCache.FetchEventsAsync);
                     _weekCalender.PropertyChanged += _WeekCalender_PropertyChanged;
-                    _weekCalender.New += (s, e) => New(e.Date);
+                    _weekCalender.New += (s, e) => New(e.Date, e.IsAllDay);
                     _weekCalender.Open += (s, e) => Open(e.Event);
                     _weekCalender.ShowFullWeek = config != null && config.ShowFullWeek;
                     // Initial refresh

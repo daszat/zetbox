@@ -59,6 +59,22 @@ namespace Zetbox.Client.WPF.View.Calendar
                     }
                 }
             }
+            e.Handled = true;
+        }
+
+        private void Empty_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is FrameworkElement)
+            {
+                if (e.ClickCount == 1)
+                {
+                    ViewModel.WeekCalendar.SelectedItem = null;
+                }
+                else if (e.ClickCount == 2)
+                {
+                    ViewModel.WeekCalendar.NotifyNew(ViewModel.Day, true);
+                }
+            }
         }
 
         #region IHasViewModel<DayCalendarViewModel> Members
