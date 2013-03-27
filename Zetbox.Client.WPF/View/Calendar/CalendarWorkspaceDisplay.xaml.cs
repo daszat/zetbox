@@ -46,7 +46,7 @@ namespace Zetbox.Client.WPF.View.Calendar
         private GridLength? _columnWidth;
         private void Expander_Expanded(object sender, RoutedEventArgs e)
         {
-            column0.Width = _columnWidth ?? new GridLength(150);
+            column0.Width = _columnWidth ?? new GridLength(250);
             if (gridSplitter != null) gridSplitter.IsEnabled = true;
         }
 
