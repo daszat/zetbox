@@ -134,11 +134,69 @@ namespace Zetbox.Client.Presentables
             return CreateViewModel<TModelFactory>(ResolveFactory(t));
         }
 
+        private class WorkaroundStringListViewModel : BaseValueViewModel
+        {
+            public new delegate WorkaroundStringListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Zetbox.Client.Models.IValueModel mdl);
+
+            public WorkaroundStringListViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, Zetbox.Client.Models.IValueModel mdl)
+                : base(dependencies, dataCtx, parent, mdl)
+            {
+            }
+
+            public override ControlKind RequestedKind
+            {
+                get
+                {
+                    return NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(FrozenContext);
+                }
+                set
+                {
+                    base.RequestedKind = value;
+                }
+            }
+
+            public override void Focus()
+            {
+            }
+
+            public override void Blur()
+            {
+            }
+
+            public override bool HasValue
+            {
+                get { return true; }
+            }
+
+            public override string FormattedValue
+            {
+                get
+                {
+                    return string.Empty;
+                }
+                set
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            public override string FormattedValueAsync
+            {
+                get { return FormattedValue; }
+            }
+        }
+
         public TModelFactory CreateViewModel<TModelFactory>(Property p) where TModelFactory : class
         {
             if (p == null) { throw new ArgumentNullException("p"); }
 
-            if (p.ValueModelDescriptor != null)
+            // TODO: Bad workaround for string list properties
+            var sp = p as StringProperty;
+            if (sp != null && sp.IsList)
+            {
+                return CreateViewModel<TModelFactory>(ResolveFactory(typeof(WorkaroundStringListViewModel.Factory)));
+            }
+            else if (p.ValueModelDescriptor != null)
             {
                 return CreateViewModel<TModelFactory>(p.ValueModelDescriptor);
             }
