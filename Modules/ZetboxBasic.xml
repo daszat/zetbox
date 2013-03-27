@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-26T12:00:58Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-27T15:24:46Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -16327,6 +16327,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Description>Property ViewModel for a RecurrenceRule</GUI:Description>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelRef>738b05b4-e85c-44d9-8fba-4b3cda6405db</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ZetboxBase.RecurrenceRulePropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="b53bfe42-5122-47b2-8eab-b1e223073186">
     <GUI:ControlKind>7e30f1de-076c-42d3-80b2-9c1111a6cdfb</GUI:ControlKind>
@@ -16603,6 +16604,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ViewDescriptor ExportGuid="9609d543-9716-4414-a73f-6cdd7babce35">
     <GUI:ControlKind>875129cf-2a2f-4478-ae37-77a7d547be10</GUI:ControlKind>
     <GUI:ControlRef>a0e78d99-bf17-4f12-b38b-87b585aaad60</GUI:ControlRef>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ZetboxBase.RecurrenceRulePropertyEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
