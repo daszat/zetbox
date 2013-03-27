@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Text;
     using Zetbox.API;
     using Zetbox.Client.Presentables;
+    using System.Drawing;
 
     public class DayCalendarViewModel : Zetbox.Client.Presentables.ViewModel
     {
@@ -55,6 +56,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     OnPropertyChanged("Day");
                     OnPropertyChanged("DayText");
                     OnPropertyChanged("Name");
+                    OnPropertyChanged("CurrentTimeMarkerVisible");
                     if (_TimeSlotItems != null)
                     {
                         foreach (var ts in _TimeSlotItems)
@@ -170,6 +172,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 OnPropertyChanged("CalendarItems");
                 OnPropertyChanged("DayItems");
                 OnPropertyChanged("AllDayItems");
+                OnPropertyChanged("CurrentTimeMarkerPosition");
             }
         }
 
@@ -322,6 +325,22 @@ namespace Zetbox.Client.Presentables.Calendar
         public override string Name
         {
             get { return DayText; }
+        }
+
+        public bool CurrentTimeMarkerVisible
+        {
+            get
+            {
+                return Day == DateTime.Today;
+            }
+        }
+
+        public PointF CurrentTimeMarkerPosition
+        {
+            get
+            {
+                return new PointF(0.0f, (float)DateTime.Now.TimeOfDay.TotalHours * 44.0f - 1.0f);
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Zetbox.App.Calendar
 
     using Zetbox.API;
     using Zetbox.Client.Presentables.Calendar;
-using Zetbox.API.Common;
+    using Zetbox.API.Common;
     using Zetbox.App.Base;
 
     [Implementor]

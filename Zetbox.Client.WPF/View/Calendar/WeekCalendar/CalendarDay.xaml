@@ -66,6 +66,18 @@
             <Canvas x:Name="items"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch" />
+
+            <Canvas x:Name="currentTimeMarkerCanvas"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Visibility="{Binding CurrentTimeMarkerVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Line X1="0"
+                      Y1="{Binding CurrentTimeMarkerPosition.Y}"
+                      X2="{Binding ActualWidth, ElementName=currentTimeMarkerCanvas}"
+                      Y2="{Binding CurrentTimeMarkerPosition.Y}"
+                      Stroke="Red"
+                      StrokeThickness="1"/>
+            </Canvas>
         </Grid>
     </Border>
 </UserControl>
